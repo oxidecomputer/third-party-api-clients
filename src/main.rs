@@ -52,48 +52,48 @@ where
          * XXX During development we are being very strict, but this should
          * probably be relaxed.
          */
-        bail!("unexpected version {}", api.openapi);
+        println!("unexpected version {}", api.openapi);
     }
 
     if !api.servers.is_empty() {
-        bail!("servers not presently supported");
+        println!("servers not presently supported");
     }
 
-    if !api.security.is_empty() {
-        bail!("security not presently supported");
+    if api.security.is_some() {
+        println!("security not presently supported");
     }
 
     if !api.tags.is_empty() {
-        bail!("tags not presently supported");
+        println!("tags not presently supported");
     }
 
     if let Some(components) = api.components.as_ref() {
         if !components.security_schemes.is_empty() {
-            bail!("component security schemes not supported");
+            println!("component security schemes not supported");
         }
 
         if !components.responses.is_empty() {
-            bail!("component responses not supported");
+            println!("component responses not supported");
         }
 
         if !components.parameters.is_empty() {
-            bail!("component parameters not supported");
+            println!("component parameters not supported");
         }
 
         if !components.request_bodies.is_empty() {
-            bail!("component request bodies not supported");
+            println!("component request bodies not supported");
         }
 
         if !components.headers.is_empty() {
-            bail!("component headers not supported");
+            println!("component headers not supported");
         }
 
         if !components.links.is_empty() {
-            bail!("component links not supported");
+            println!("component links not supported");
         }
 
         if !components.callbacks.is_empty() {
-            bail!("component callbacks not supported");
+            println!("component callbacks not supported");
         }
 
         /*
@@ -126,15 +126,15 @@ where
                             }
 
                             if !o.tags.is_empty() {
-                                bail!("op {}: tags, unsupported", oid);
+                                println!("op {}: tags, unsupported", oid);
                             }
 
                             if !o.servers.is_empty() {
-                                bail!("op {}: servers, unsupported", oid);
+                                println!("op {}: servers, unsupported", oid);
                             }
 
-                            if !o.security.is_empty() {
-                                bail!("op {}: security, unsupported", oid);
+                            if o.security.is_some() {
+                                println!("op {}: security, unsupported", oid);
                             }
 
                             if o.responses.default.is_some() {
@@ -677,7 +677,7 @@ impl TypeSpace {
                     /*
                      * Determine the type of item that will be in this array:
                      */
-                    let itid = self.select_box(None, &at.items)?;
+                    let itid = self.select_box(name, &at.items)?;
                     (None, TypeDetails::Array(itid))
                 }
                 openapiv3::Type::Object(o) => {
@@ -686,17 +686,25 @@ impl TypeSpace {
                      */
                     let name = match (name, s.schema_data.title.as_deref()) {
                         (Some(n), None) => n.to_string(),
+                        (Some(n), Some("")) => n.to_string(),
                         (None, Some(t)) => t.to_string(),
+                        (Some(""), Some(t)) => t.to_string(),
                         (Some(n), Some(t)) if n == t => n.to_string(),
                         (Some(n), Some(t)) => {
-                            bail!("names {} and {} conflict", n, t)
+                            if n.replace('-', " ") == t {
+                                t.to_string()
+                            } else {
+                                bail!("names {} and {} conflict", n, t)
+                            }
                         }
-                        (None, None) => bail!("types need a name? {:?}", s),
+                        (None, None) => {
+                            bail!("types need a name? {:?}", s)
+                        }
                     };
 
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
-                        let itid = self.select_box(None, &rb)?;
+                        let itid = self.select_box(Some(n), &rb)?;
                         if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
                         } else {
@@ -714,7 +722,7 @@ impl TypeSpace {
                 openapiv3::Type::String(st) => {
                     use openapiv3::{
                         StringFormat::DateTime,
-                        VariantOrUnknownOrEmpty::{Empty, Item},
+                        VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
 
                     match &st.format {
@@ -728,6 +736,12 @@ impl TypeSpace {
                         Empty => {
                             (Some("String".to_string()), TypeDetails::Basic)
                         }
+                        Unknown(f) => match f.as_str() {
+                            "float" => {
+                                (Some("f64".to_string()), TypeDetails::Basic)
+                            }
+                            f => bail!("XXX unknown string format {}", f),
+                        },
                         x => {
                             bail!("XXX string format {:?}", x);
                         }
@@ -750,7 +764,8 @@ impl TypeSpace {
                 }
             },
             x => {
-                bail!("unhandled schema kind: {:?}", x);
+                //bail!("unhandled schema kind: {:?} {:?}", name, s);
+                (Some("String".to_string()), TypeDetails::Basic)
             }
         };
 
@@ -767,7 +782,7 @@ impl TypeSpace {
              */
             if let Some(et) = self.id_to_entry.get(&id) {
                 if et.details != details {
-                    bail!("{:?} != {:?}", et.details, details);
+                    //bail!("{:?} != {:?}", et.details, details);
                 }
             } else {
                 self.id_to_entry.insert(
