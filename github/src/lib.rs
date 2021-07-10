@@ -6433,7 +6433,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateGithubAppFromManifestRequest {
+    pub struct CreateGithubAppFromManifestRequest {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6458,7 +6458,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateWebhookConfigurationAppRequest {
+    pub struct UpdateWebhookConfigurationAppRequest {
         pub content_type: Option<String>,
         pub insecure_ssl: Option<String>,
         pub secret: Option<String>,
@@ -6466,34 +6466,34 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateInstallationAccessTokenAppRequest {
+    pub struct CreateInstallationAccessTokenAppRequest {
         pub permissions: Option<AppPermissions>,
         pub repositories: Option<Vec<String>>,
         pub repository_ids: Option<Vec<i64>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteAppAuthorizationRequest {
+    pub struct DeleteAppAuthorizationRequest {
         pub access_token: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCheckTokenRequest {
+    pub struct CheckTokenRequest {
         pub access_token: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteAppTokenRequest {
+    pub struct DeleteAppTokenRequest {
         pub access_token: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchResetTokenRequest {
+    pub struct ResetTokenRequest {
         pub access_token: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateScopedAccessTokenRequest {
+    pub struct CreateScopedAccessTokenRequest {
         pub access_token: String,
         pub permissions: Option<AppPermissions>,
         pub repositories: Option<Vec<String>>,
@@ -6521,7 +6521,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateNewAuthorizationRequest {
+    pub struct CreateNewAuthorizationRequest {
         pub client_id: Option<String>,
         pub client_secret: Option<String>,
         pub fingerprint: Option<String>,
@@ -6531,7 +6531,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutGetorCreateAuthorizationSpecificAppRequest {
+    pub struct GetorCreateAuthorizationSpecificAppRequest {
         pub client_secret: String,
         pub fingerprint: Option<String>,
         pub note: Option<String>,
@@ -6540,7 +6540,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutGetorCreateAuthorizationSpecificAppandFingerprintRequest {
+    pub struct GetorCreateAuthorizationSpecificAppandFingerprintRequest {
         pub client_secret: String,
         pub note: Option<String>,
         pub note_url: Option<String>,
@@ -6548,7 +6548,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateExistingAuthorizationRequest {
+    pub struct UpdateExistingAuthorizationRequest {
         pub add_scopes: Option<Vec<String>>,
         pub fingerprint: Option<String>,
         pub note: Option<String>,
@@ -6558,11 +6558,11 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGetEmojisOkResponse {
+    pub struct GetEmojisOkResponse {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetGithubActionsPermissionsEnterpriseRequest {
+    pub struct SetGithubActionsPermissionsEnterpriseRequest {
         pub allowed_actions: Option<String>,
         pub enabled_organizations: String,
     }
@@ -6574,7 +6574,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetSelectedOrganizationsEnabledGithubActionsinEnterpriseRequest {
+    pub struct SetSelectedOrganizationsEnabledGithubActionsinEnterpriseRequest {
         pub selected_organization_ids: Vec<i64>,
     }
 
@@ -6585,7 +6585,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateSelfHostedRunnerGroupEnterpriseRequest {
+    pub struct CreateSelfHostedRunnerGroupEnterpriseRequest {
         pub name: String,
         pub runners: Option<Vec<i64>>,
         pub selected_organization_ids: Option<Vec<i64>>,
@@ -6593,7 +6593,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateSelfHostedRunnerGroupEnterpriseRequest {
+    pub struct UpdateSelfHostedRunnerGroupEnterpriseRequest {
         pub name: Option<String>,
         pub visibility: Option<String>,
     }
@@ -6605,7 +6605,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetOrganizationAccessSelfHostedRunnerGroupinEnterpriseRequest {
+    pub struct SetOrganizationAccessSelfHostedRunnerGroupinEnterpriseRequest {
         pub selected_organization_ids: Vec<i64>,
     }
 
@@ -6616,7 +6616,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetSelfHostedRunnersinGroupEnterpriseRequest {
+    pub struct SetSelfHostedRunnersinGroupEnterpriseRequest {
         pub runners: Vec<i64>,
     }
 
@@ -6627,25 +6627,25 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateGistRequest {
+    pub struct CreateGistRequest {
         pub description: Option<String>,
         pub files: Files,
         pub public: Option<bool>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateGistRequest {
+    pub struct UpdateGistRequest {
         pub description: Option<String>,
         pub files: Option<Files>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateGistCommentRequest {
+    pub struct CreateGistCommentRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateGistCommentRequest {
+    pub struct UpdateGistCommentRequest {
         pub body: String,
     }
 
@@ -6661,14 +6661,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostRenderMarkdownDocumentRequest {
+    pub struct RenderMarkdownDocumentRequest {
         pub context: Option<String>,
         pub mode: Option<String>,
         pub text: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutMarkNotificationsasReadRequest {
+    pub struct MarkNotificationsasReadRequest {
         pub last_read_at: Option<DateTime<Utc>>,
         pub read: Option<bool>,
     }
@@ -6679,12 +6679,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetThreadSubscriptionRequest {
+    pub struct SetThreadSubscriptionRequest {
         pub ignored: Option<bool>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateOrganizationRequest {
+    pub struct UpdateOrganizationRequest {
         pub billing_email: Option<String>,
         pub blog: Option<String>,
         pub company: Option<String>,
@@ -6714,7 +6714,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetGithubActionsPermissionsOrganizationRequest {
+    pub struct SetGithubActionsPermissionsOrganizationRequest {
         pub allowed_actions: Option<String>,
         pub enabled_repositories: String,
     }
@@ -6726,7 +6726,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetSelectedRepositoriesEnabledGithubActionsinOrganizationRequest {
+    pub struct SetSelectedRepositoriesEnabledGithubActionsinOrganizationRequest {
         pub selected_repository_ids: Vec<i64>,
     }
 
@@ -6737,7 +6737,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateSelfHostedRunnerGroupOrganizationRequest {
+    pub struct CreateSelfHostedRunnerGroupOrganizationRequest {
         pub name: String,
         pub runners: Option<Vec<i64>>,
         pub selected_repository_ids: Option<Vec<i64>>,
@@ -6745,7 +6745,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateSelfHostedRunnerGroupOrganizationRequest {
+    pub struct UpdateSelfHostedRunnerGroupOrganizationRequest {
         pub name: Option<String>,
         pub visibility: Option<String>,
     }
@@ -6757,7 +6757,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetRepositoryAccessSelfHostedRunnerGroupinOrganizationRequest {
+    pub struct SetRepositoryAccessSelfHostedRunnerGroupinOrganizationRequest {
         pub selected_repository_ids: Vec<i64>,
     }
 
@@ -6768,7 +6768,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetSelfHostedRunnersinGroupOrganizationRequest {
+    pub struct SetSelfHostedRunnersinGroupOrganizationRequest {
         pub runners: Vec<i64>,
     }
 
@@ -6785,7 +6785,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateOrganizationSecretRequest {
+    pub struct CreateUpdateOrganizationSecretRequest {
         pub encrypted_value: Option<String>,
         pub key_id: Option<String>,
         pub selected_repository_ids: Option<Vec<String>>,
@@ -6799,12 +6799,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetSelectedRepositoriesOrganizationSecretRequest {
+    pub struct SetSelectedRepositoriesOrganizationSecretRequest {
         pub selected_repository_ids: Option<Vec<i64>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateOrganizationWebhookRequestConfig {
+    pub struct CreateOrganizationWebhookRequestConfig {
         pub content_type: Option<String>,
         pub insecure_ssl: Option<String>,
         pub password: Option<String>,
@@ -6814,7 +6814,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateOrganizationWebhookRequest {
+    pub struct CreateOrganizationWebhookRequest {
         pub active: Option<bool>,
         pub config: Config,
         pub events: Option<Vec<String>>,
@@ -6822,7 +6822,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateOrganizationWebhookRequestConfig {
+    pub struct UpdateOrganizationWebhookRequestConfig {
         pub content_type: Option<String>,
         pub insecure_ssl: Option<String>,
         pub secret: Option<String>,
@@ -6830,7 +6830,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateOrganizationWebhookRequest {
+    pub struct UpdateOrganizationWebhookRequest {
         pub active: Option<bool>,
         pub config: Option<Config>,
         pub events: Option<Vec<String>>,
@@ -6838,7 +6838,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateWebhookConfigurationOrganizationRequest {
+    pub struct UpdateWebhookConfigurationOrganizationRequest {
         pub content_type: Option<String>,
         pub insecure_ssl: Option<String>,
         pub secret: Option<String>,
@@ -6852,14 +6852,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGetInteractionRestrictionsOrganizationOkResponse {
+    pub struct GetInteractionRestrictionsOrganizationOkResponse {
         pub expires_at: DateTime<Utc>,
         pub limit: String,
         pub origin: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateOrganizationInvitationRequest {
+    pub struct CreateOrganizationInvitationRequest {
         pub email: Option<String>,
         pub invitee_id: Option<i64>,
         pub role: Option<String>,
@@ -6867,12 +6867,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetOrganizationMembershipUserRequest {
+    pub struct SetOrganizationMembershipUserRequest {
         pub role: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostStartOrganizationMigrationRequest {
+    pub struct StartOrganizationMigrationRequest {
         pub exclude: Option<Vec<String>>,
         pub exclude_attachments: Option<bool>,
         pub lock_repositories: Option<bool>,
@@ -6890,13 +6890,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateOrganizationProjectRequest {
+    pub struct CreateOrganizationProjectRequest {
         pub body: Option<String>,
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateOrganizationRepositoryRequest {
+    pub struct CreateOrganizationRepositoryRequest {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
         pub allow_squash_merge: Option<bool>,
@@ -6917,7 +6917,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateTeamRequest {
+    pub struct CreateTeamRequest {
         pub description: Option<String>,
         pub maintainers: Option<Vec<String>>,
         pub name: String,
@@ -6928,7 +6928,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateTeamRequest {
+    pub struct UpdateTeamRequest {
         pub description: Option<String>,
         pub name: Option<String>,
         pub parent_team_id: Option<i64>,
@@ -6937,45 +6937,45 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateDiscussionRequest {
+    pub struct CreateDiscussionRequest {
         pub body: String,
         pub private: Option<bool>,
         pub title: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateDiscussionRequest {
+    pub struct UpdateDiscussionRequest {
         pub body: Option<String>,
         pub title: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateDiscussionCommentRequest {
+    pub struct CreateDiscussionCommentRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateDiscussionCommentRequest {
+    pub struct UpdateDiscussionCommentRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReactionTeamDiscussionCommentRequest {
+    pub struct CreateReactionTeamDiscussionCommentRequest {
         pub content: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReactionTeamDiscussionRequest {
+    pub struct CreateReactionTeamDiscussionRequest {
         pub content: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddUpdateTeamMembershipUserRequest {
+    pub struct AddUpdateTeamMembershipUserRequest {
         pub role: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddUpdateTeamProjectPermissionsRequest {
+    pub struct AddUpdateTeamProjectPermissionsRequest {
         pub permission: Option<String>,
     }
 
@@ -6986,37 +6986,37 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddUpdateTeamRepositoryPermissionsRequest {
+    pub struct AddUpdateTeamRepositoryPermissionsRequest {
         pub permission: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchCreateUpdateIdpGroupConnectionsRequestGroups {
+    pub struct CreateUpdateIdpGroupConnectionsRequestGroups {
         pub group_description: String,
         pub group_id: String,
         pub group_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchCreateUpdateIdpGroupConnectionsRequest {
+    pub struct CreateUpdateIdpGroupConnectionsRequest {
         pub groups: Option<Vec<Groups>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteProjectCardForbiddenResponse {
+    pub struct DeleteProjectCardForbiddenResponse {
         pub documentation_url: Option<String>,
         pub errors: Option<Vec<String>>,
         pub message: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateExistingProjectCardRequest {
+    pub struct UpdateExistingProjectCardRequest {
         pub archived: Option<bool>,
         pub note: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectCardRequest {
+    pub struct MoveProjectCardRequest {
         pub column_id: Option<i64>,
         pub position: String,
     }
@@ -7055,17 +7055,17 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateExistingProjectColumnRequest {
+    pub struct UpdateExistingProjectColumnRequest {
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateProjectCardRequest {
+    pub struct CreateProjectCardRequest {
         pub note: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateProjectCardRequest {
+    pub struct CreateProjectCardRequest {
         pub note: String,
     }
 
@@ -7091,7 +7091,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectColumnRequest {
+    pub struct MoveProjectColumnRequest {
         pub position: String,
     }
 
@@ -7100,14 +7100,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteProjectForbiddenResponse {
+    pub struct DeleteProjectForbiddenResponse {
         pub documentation_url: Option<String>,
         pub errors: Option<Vec<String>>,
         pub message: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateProjectRequest {
+    pub struct UpdateProjectRequest {
         pub body: Option<String>,
         pub name: Option<String>,
         pub organization_permission: Option<String>,
@@ -7123,23 +7123,23 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddProjectCollaboratorRequest {
+    pub struct AddProjectCollaboratorRequest {
         pub permission: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateProjectColumnRequest {
+    pub struct CreateProjectColumnRequest {
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteRepositoryForbiddenResponse {
+    pub struct DeleteRepositoryForbiddenResponse {
         pub documentation_url: Option<String>,
         pub message: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateRepositoryRequest {
+    pub struct UpdateRepositoryRequest {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
         pub allow_squash_merge: Option<bool>,
@@ -7165,7 +7165,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetGithubActionsPermissionsRepositoryRequest {
+    pub struct SetGithubActionsPermissionsRepositoryRequest {
         pub allowed_actions: Option<String>,
         pub enabled: bool,
     }
@@ -7199,7 +7199,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostReviewPendingDeploymentsWorkflowRunRequest {
+    pub struct ReviewPendingDeploymentsWorkflowRunRequest {
         pub comment: String,
         pub environment_ids: Vec<i64>,
         pub state: String,
@@ -7216,7 +7216,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateRepositorySecretRequest {
+    pub struct CreateUpdateRepositorySecretRequest {
         pub encrypted_value: Option<String>,
         pub key_id: Option<String>,
     }
@@ -7236,7 +7236,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateWorkflowDispatchEventRequest {
+    pub struct CreateWorkflowDispatchEventRequest {
         pub inputs: Option<Inputs>,
         #[serde(rename = "ref")]
         pub ref_: String,
@@ -7249,19 +7249,19 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateBranchProtectionRequestRequiredStatusChecks {
+    pub struct UpdateBranchProtectionRequestRequiredStatusChecks {
         pub contexts: Vec<String>,
         pub strict: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateBranchProtectionRequestRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
+    pub struct UpdateBranchProtectionRequestRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
         pub teams: Option<Vec<String>>,
         pub users: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateBranchProtectionRequestRequiredPullRequestReviews {
+    pub struct UpdateBranchProtectionRequestRequiredPullRequestReviews {
         pub dismiss_stale_reviews: Option<bool>,
         pub dismissal_restrictions: Option<DismissalRestrictions>,
         pub require_code_owner_reviews: Option<bool>,
@@ -7276,7 +7276,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateBranchProtectionRequest {
+    pub struct UpdateBranchProtectionRequest {
         pub allow_deletions: Option<bool>,
         pub allow_force_pushes: Option<bool>,
         pub enforce_admins: bool,
@@ -7288,13 +7288,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdatePullRequestReviewProtectionRequestDismissalRestrictions {
+    pub struct UpdatePullRequestReviewProtectionRequestDismissalRestrictions {
         pub teams: Option<Vec<String>>,
         pub users: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdatePullRequestReviewProtectionRequest {
+    pub struct UpdatePullRequestReviewProtectionRequest {
         pub dismiss_stale_reviews: Option<bool>,
         pub dismissal_restrictions: Option<DismissalRestrictions>,
         pub require_code_owner_reviews: Option<bool>,
@@ -7302,133 +7302,133 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateStatusCheckProtectionRequest {
+    pub struct UpdateStatusCheckProtectionRequest {
         pub contexts: Option<Vec<String>>,
         pub strict: Option<bool>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddStatusCheckContextsRequest {
+    pub struct AddStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddStatusCheckContextsRequest {
+    pub struct AddStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetStatusCheckContextsRequest {
+    pub struct SetStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetStatusCheckContextsRequest {
+    pub struct SetStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveStatusCheckContextsRequest {
+    pub struct RemoveStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveStatusCheckContextsRequest {
+    pub struct RemoveStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddAppAccessRestrictionsRequest {
+    pub struct AddAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddAppAccessRestrictionsRequest {
+    pub struct AddAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetAppAccessRestrictionsRequest {
+    pub struct SetAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetAppAccessRestrictionsRequest {
+    pub struct SetAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveAppAccessRestrictionsRequest {
+    pub struct RemoveAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveAppAccessRestrictionsRequest {
+    pub struct RemoveAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddTeamAccessRestrictionsRequest {
+    pub struct AddTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddTeamAccessRestrictionsRequest {
+    pub struct AddTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetTeamAccessRestrictionsRequest {
+    pub struct SetTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetTeamAccessRestrictionsRequest {
+    pub struct SetTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveTeamAccessRestrictionsRequest {
+    pub struct RemoveTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveTeamAccessRestrictionsRequest {
+    pub struct RemoveTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddUserAccessRestrictionsRequest {
+    pub struct AddUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddUserAccessRestrictionsRequest {
+    pub struct AddUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetUserAccessRestrictionsRequest {
+    pub struct SetUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetUserAccessRestrictionsRequest {
+    pub struct SetUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveUserAccessRestrictionsRequest {
+    pub struct RemoveUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveUserAccessRestrictionsRequest {
+    pub struct RemoveUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostRenameBranchRequest {
+    pub struct RenameBranchRequest {
         pub new_name: String,
     }
 
@@ -7453,7 +7453,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateCheckRunRequestOutput {
+    pub struct CreateCheckRunRequestOutput {
         pub annotations: Option<Vec<Annotations>>,
         pub images: Option<Vec<Images>>,
         pub summary: String,
@@ -7469,7 +7469,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateCheckRunRequest {
+    pub struct CreateCheckRunRequest {
         pub actions: Option<Vec<Actions>>,
         pub completed_at: Option<DateTime<Utc>>,
         pub conclusion: Option<String>,
@@ -7483,7 +7483,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateCheckRunRequestOutput {
+    pub struct UpdateCheckRunRequestOutput {
         pub annotations: Option<Vec<Annotations>>,
         pub images: Option<Vec<Images>>,
         pub summary: String,
@@ -7492,7 +7492,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateCheckRunRequest {
+    pub struct UpdateCheckRunRequest {
         pub actions: Option<Vec<Actions>>,
         pub completed_at: Option<DateTime<Utc>>,
         pub conclusion: Option<String>,
@@ -7505,12 +7505,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateCheckSuiteRequest {
+    pub struct CreateCheckSuiteRequest {
         pub head_sha: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateRepositoryPreferencesCheckSuitesRequest {
+    pub struct UpdateRepositoryPreferencesCheckSuitesRequest {
         pub auto_trigger_checks: Option<Vec<AutoTriggerChecks>>,
     }
 
@@ -7525,12 +7525,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateCodeScanningAlertRequest {
+    pub struct UpdateCodeScanningAlertRequest {
         pub state: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostUploadAnalysisasSarifDataRequest {
+    pub struct UploadAnalysisasSarifDataRequest {
         pub checkout_uri: Option<String>,
         pub commit_sha: String,
         #[serde(rename = "ref")]
@@ -7541,23 +7541,23 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddRepositoryCollaboratorRequest {
+    pub struct AddRepositoryCollaboratorRequest {
         pub permission: Option<String>,
         pub permissions: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateCommitCommentRequest {
+    pub struct UpdateCommitCommentRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReactionCommitCommentRequest {
+    pub struct CreateReactionCommitCommentRequest {
         pub content: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateCommitCommentRequest {
+    pub struct CreateCommitCommentRequest {
         pub body: String,
         pub line: Option<i64>,
         pub path: Option<String>,
@@ -7577,13 +7577,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateContentAttachmentRequest {
+    pub struct CreateContentAttachmentRequest {
         pub body: String,
         pub title: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGetRepositoryContentOkResponse {
+    pub struct GetRepositoryContentOkResponse {
         pub _links: Links,
         pub content: Option<String>,
         pub download_url: String,
@@ -7599,21 +7599,21 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateFileContentsRequestCommitter {
+    pub struct CreateUpdateFileContentsRequestCommitter {
         pub date: Option<String>,
         pub email: String,
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateFileContentsRequestAuthor {
+    pub struct CreateUpdateFileContentsRequestAuthor {
         pub date: Option<String>,
         pub email: String,
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateFileContentsRequest {
+    pub struct CreateUpdateFileContentsRequest {
         pub author: Option<Author>,
         pub branch: Option<String>,
         pub committer: Option<Committer>,
@@ -7623,19 +7623,19 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteFileRequestCommitter {
+    pub struct DeleteFileRequestCommitter {
         pub email: Option<String>,
         pub name: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteFileRequestAuthor {
+    pub struct DeleteFileRequestAuthor {
         pub email: Option<String>,
         pub name: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteFileRequest {
+    pub struct DeleteFileRequest {
         pub author: Option<Author>,
         pub branch: Option<String>,
         pub committer: Option<Committer>,
@@ -7644,7 +7644,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateDeploymentRequest {
+    pub struct CreateDeploymentRequest {
         pub auto_merge: Option<bool>,
         pub description: Option<String>,
         pub environment: Option<String>,
@@ -7663,7 +7663,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateDeploymentStatusRequest {
+    pub struct CreateDeploymentStatusRequest {
         pub auto_inactive: Option<bool>,
         pub description: Option<String>,
         pub environment: Option<String>,
@@ -7678,57 +7678,57 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateRepositoryDispatchEventRequest {
+    pub struct CreateRepositoryDispatchEventRequest {
         pub client_payload: Option<ClientPayload>,
         pub event_type: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGetAllEnvironmentsOkResponse {
+    pub struct GetAllEnvironmentsOkResponse {
         pub environments: Option<Vec<Environment>>,
         pub total_count: Option<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateEnvironmentRequestReviewers {
+    pub struct CreateUpdateEnvironmentRequestReviewers {
         pub id: Option<i64>,
         #[serde(rename = "type")]
         pub type_: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateEnvironmentRequest {
+    pub struct CreateUpdateEnvironmentRequest {
         pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
         pub reviewers: Option<Vec<Reviewers>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateForkRequest {
+    pub struct CreateForkRequest {
         pub organization: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateBlobRequest {
+    pub struct CreateBlobRequest {
         pub content: String,
         pub encoding: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateCommitRequestAuthor {
+    pub struct CreateCommitRequestAuthor {
         pub date: Option<DateTime<Utc>>,
         pub email: String,
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateCommitRequestCommitter {
+    pub struct CreateCommitRequestCommitter {
         pub date: Option<DateTime<Utc>>,
         pub email: Option<String>,
         pub name: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateCommitRequest {
+    pub struct CreateCommitRequest {
         pub author: Option<Author>,
         pub committer: Option<Committer>,
         pub message: String,
@@ -7738,7 +7738,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReferenceRequest {
+    pub struct CreateReferenceRequest {
         pub key: Option<String>,
         #[serde(rename = "ref")]
         pub ref_: String,
@@ -7746,20 +7746,20 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateReferenceRequest {
+    pub struct UpdateReferenceRequest {
         pub force: Option<bool>,
         pub sha: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateTagObjectRequestTagger {
+    pub struct CreateTagObjectRequestTagger {
         pub date: Option<DateTime<Utc>>,
         pub email: String,
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateTagObjectRequest {
+    pub struct CreateTagObjectRequest {
         pub message: String,
         pub object: String,
         pub tag: String,
@@ -7769,7 +7769,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateTreeRequestTree {
+    pub struct CreateTreeRequestTree {
         pub content: Option<String>,
         pub mode: Option<String>,
         pub path: Option<String>,
@@ -7779,13 +7779,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateTreeRequest {
+    pub struct CreateTreeRequest {
         pub base_tree: Option<String>,
         pub tree: Vec<Tree>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateRepositoryWebhookRequestConfig {
+    pub struct CreateRepositoryWebhookRequestConfig {
         pub content_type: Option<String>,
         pub digest: Option<String>,
         pub insecure_ssl: Option<String>,
@@ -7795,7 +7795,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateRepositoryWebhookRequest {
+    pub struct CreateRepositoryWebhookRequest {
         pub active: Option<bool>,
         pub config: Option<Config>,
         pub events: Option<Vec<String>>,
@@ -7803,7 +7803,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateRepositoryWebhookRequestConfig {
+    pub struct UpdateRepositoryWebhookRequestConfig {
         pub address: Option<String>,
         pub content_type: Option<String>,
         pub insecure_ssl: Option<String>,
@@ -7813,7 +7813,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateRepositoryWebhookRequest {
+    pub struct UpdateRepositoryWebhookRequest {
         pub active: Option<bool>,
         pub add_events: Option<Vec<String>>,
         pub config: Option<Config>,
@@ -7822,7 +7822,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateWebhookConfigurationRepositoryRequest {
+    pub struct UpdateWebhookConfigurationRepositoryRequest {
         pub content_type: Option<String>,
         pub insecure_ssl: Option<String>,
         pub secret: Option<String>,
@@ -7830,7 +7830,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutStartImportRequest {
+    pub struct StartImportRequest {
         pub tfvc_project: Option<String>,
         pub vcs: Option<String>,
         pub vcs_password: Option<String>,
@@ -7839,7 +7839,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateImportRequest {
+    pub struct UpdateImportRequest {
         pub tfvc_project: Option<String>,
         pub vcs: Option<String>,
         pub vcs_password: Option<String>,
@@ -7847,30 +7847,30 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchMapCommitAuthorRequest {
+    pub struct MapCommitAuthorRequest {
         pub email: Option<String>,
         pub name: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateGitLfsPreferenceRequest {
+    pub struct UpdateGitLfsPreferenceRequest {
         pub use_lfs: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGetInteractionRestrictionsRepositoryOkResponse {
+    pub struct GetInteractionRestrictionsRepositoryOkResponse {
         pub expires_at: DateTime<Utc>,
         pub limit: String,
         pub origin: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateRepositoryInvitationRequest {
+    pub struct UpdateRepositoryInvitationRequest {
         pub permissions: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateIssueRequest {
+    pub struct CreateIssueRequest {
         pub assignee: Option<String>,
         pub assignees: Option<Vec<String>>,
         pub body: Option<String>,
@@ -7880,17 +7880,17 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateIssueCommentRequest {
+    pub struct UpdateIssueCommentRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReactionIssueCommentRequest {
+    pub struct CreateReactionIssueCommentRequest {
         pub content: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateIssueRequest {
+    pub struct UpdateIssueRequest {
         pub assignee: Option<String>,
         pub assignees: Option<Vec<String>>,
         pub body: Option<String>,
@@ -7901,80 +7901,80 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddAssigneesIssueRequest {
+    pub struct AddAssigneesIssueRequest {
         pub assignees: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveAssigneesFromIssueRequest {
+    pub struct RemoveAssigneesFromIssueRequest {
         pub assignees: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateIssueCommentRequest {
+    pub struct CreateIssueCommentRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddLabelsIssueRequest {
+    pub struct AddLabelsIssueRequest {
         pub labels: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddLabelsIssueRequest {
+    pub struct AddLabelsIssueRequest {
         pub labels: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetLabelsIssueRequest {
+    pub struct SetLabelsIssueRequest {
         pub labels: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetLabelsIssueRequest {
+    pub struct SetLabelsIssueRequest {
         pub labels: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutLockIssueRequest {
+    pub struct LockIssueRequest {
         pub lock_reason: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReactionIssueRequest {
+    pub struct CreateReactionIssueRequest {
         pub content: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateDeployKeyRequest {
+    pub struct CreateDeployKeyRequest {
         pub key: String,
         pub read_only: Option<bool>,
         pub title: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateLabelRequest {
+    pub struct CreateLabelRequest {
         pub color: Option<String>,
         pub description: Option<String>,
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateLabelRequest {
+    pub struct UpdateLabelRequest {
         pub color: Option<String>,
         pub description: Option<String>,
         pub new_name: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMergeBranchRequest {
+    pub struct MergeBranchRequest {
         pub base: String,
         pub commit_message: Option<String>,
         pub head: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateMilestoneRequest {
+    pub struct CreateMilestoneRequest {
         pub description: Option<String>,
         pub due_on: Option<DateTime<Utc>>,
         pub state: Option<String>,
@@ -7982,7 +7982,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateMilestoneRequest {
+    pub struct UpdateMilestoneRequest {
         pub description: Option<String>,
         pub due_on: Option<DateTime<Utc>>,
         pub state: Option<String>,
@@ -7990,7 +7990,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutMarkRepositoryNotificationsasReadRequest {
+    pub struct MarkRepositoryNotificationsasReadRequest {
         pub last_read_at: Option<DateTime<Utc>>,
     }
 
@@ -8001,18 +8001,18 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateGithubPagesSiteRequestSource {
+    pub struct CreateGithubPagesSiteRequestSource {
         pub branch: String,
         pub path: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateGithubPagesSiteRequest {
+    pub struct CreateGithubPagesSiteRequest {
         pub source: Source,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateInformationAboutGithubPagesSiteRequest {
+    pub struct UpdateInformationAboutGithubPagesSiteRequest {
         pub cname: Option<String>,
         pub https_enforced: Option<bool>,
         pub public: Option<bool>,
@@ -8020,13 +8020,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateRepositoryProjectRequest {
+    pub struct CreateRepositoryProjectRequest {
         pub body: Option<String>,
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreatePullRequestRequest {
+    pub struct CreatePullRequestRequest {
         pub base: String,
         pub body: Option<String>,
         pub draft: Option<bool>,
@@ -8037,17 +8037,17 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateReviewCommentPullRequestRequest {
+    pub struct UpdateReviewCommentPullRequestRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReactionPullRequestReviewCommentRequest {
+    pub struct CreateReactionPullRequestReviewCommentRequest {
         pub content: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdatePullRequestRequest {
+    pub struct UpdatePullRequestRequest {
         pub base: Option<String>,
         pub body: Option<String>,
         pub maintainer_can_modify: Option<bool>,
@@ -8056,7 +8056,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReviewCommentPullRequestRequest {
+    pub struct CreateReviewCommentPullRequestRequest {
         pub body: String,
         pub commit_id: Option<String>,
         pub in_reply_to: Option<i64>,
@@ -8069,12 +8069,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReplyReviewCommentRequest {
+    pub struct CreateReplyReviewCommentRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutMergePullRequestRequest {
+    pub struct MergePullRequestRequest {
         pub commit_message: Option<String>,
         pub commit_title: Option<String>,
         pub merge_method: Option<String>,
@@ -8094,13 +8094,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostRequestReviewersPullRequestRequest {
+    pub struct RequestReviewersPullRequestRequest {
         pub reviewers: Option<Vec<String>>,
         pub team_reviewers: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveRequestedReviewersFromPullRequestRequest {
+    pub struct RemoveRequestedReviewersFromPullRequestRequest {
         pub reviewers: Vec<String>,
         pub team_reviewers: Option<Vec<String>>,
     }
@@ -8117,7 +8117,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReviewPullRequestRequest {
+    pub struct CreateReviewPullRequestRequest {
         pub body: Option<String>,
         pub comments: Option<Vec<Comments>>,
         pub commit_id: Option<String>,
@@ -8125,24 +8125,24 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateReviewPullRequestRequest {
+    pub struct UpdateReviewPullRequestRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutDismissReviewPullRequestRequest {
+    pub struct DismissReviewPullRequestRequest {
         pub event: Option<String>,
         pub message: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostSubmitReviewPullRequestRequest {
+    pub struct SubmitReviewPullRequestRequest {
         pub body: Option<String>,
         pub event: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdatePullRequestBranchRequest {
+    pub struct UpdatePullRequestBranchRequest {
         pub expected_head_sha: Option<String>,
     }
 
@@ -8153,7 +8153,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReleaseRequest {
+    pub struct CreateReleaseRequest {
         pub body: Option<String>,
         pub discussion_category_name: Option<String>,
         pub draft: Option<bool>,
@@ -8164,14 +8164,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateReleaseAssetRequest {
+    pub struct UpdateReleaseAssetRequest {
         pub label: Option<String>,
         pub name: Option<String>,
         pub state: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateReleaseRequest {
+    pub struct UpdateReleaseRequest {
         pub body: Option<String>,
         pub discussion_category_name: Option<String>,
         pub draft: Option<bool>,
@@ -8182,17 +8182,17 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReactionReleaseRequest {
+    pub struct CreateReactionReleaseRequest {
         pub content: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateSecretScanningAlertRequest {
+    pub struct UpdateSecretScanningAlertRequest {
         pub state: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateCommitStatusRequest {
+    pub struct CreateCommitStatusRequest {
         pub context: Option<String>,
         pub description: Option<String>,
         pub state: String,
@@ -8200,24 +8200,24 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetRepositorySubscriptionRequest {
+    pub struct SetRepositorySubscriptionRequest {
         pub ignored: Option<bool>,
         pub subscribed: Option<bool>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutReplaceAllRepositoryTopicsRequest {
+    pub struct ReplaceAllRepositoryTopicsRequest {
         pub names: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostTransferRepositoryRequest {
+    pub struct TransferRepositoryRequest {
         pub new_owner: String,
         pub team_ids: Option<Vec<i64>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateRepositoryUsingTemplateRequest {
+    pub struct CreateRepositoryUsingTemplateRequest {
         pub description: Option<String>,
         pub include_all_branches: Option<bool>,
         pub name: String,
@@ -8232,49 +8232,49 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateEnvironmentSecretRequest {
+    pub struct CreateUpdateEnvironmentSecretRequest {
         pub encrypted_value: Option<String>,
         pub key_id: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProvisionScimEnterpriseGroupandInviteUsersRequestMembers {
+    pub struct ProvisionScimEnterpriseGroupandInviteUsersRequestMembers {
         pub value: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProvisionScimEnterpriseGroupandInviteUsersRequest {
+    pub struct ProvisionScimEnterpriseGroupandInviteUsersRequest {
         pub displayName: String,
         pub members: Option<Vec<Members>>,
         pub schemas: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetScimInformationProvisionedEnterpriseGroupRequestMembers {
+    pub struct SetScimInformationProvisionedEnterpriseGroupRequestMembers {
         pub value: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetScimInformationProvisionedEnterpriseGroupRequest {
+    pub struct SetScimInformationProvisionedEnterpriseGroupRequest {
         pub displayName: String,
         pub members: Option<Vec<Members>>,
         pub schemas: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateAttributeScimEnterpriseGroupRequest {
+    pub struct UpdateAttributeScimEnterpriseGroupRequest {
         pub Operations: Vec<Operations>,
         pub schemas: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProvisionandInviteScimEnterpriseUserRequestName {
+    pub struct ProvisionandInviteScimEnterpriseUserRequestName {
         pub familyName: String,
         pub givenName: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProvisionandInviteScimEnterpriseUserRequestEmails {
+    pub struct ProvisionandInviteScimEnterpriseUserRequestEmails {
         pub primary: bool,
         #[serde(rename = "type")]
         pub type_: String,
@@ -8282,12 +8282,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProvisionandInviteScimEnterpriseUserRequestGroups {
+    pub struct ProvisionandInviteScimEnterpriseUserRequestGroups {
         pub value: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProvisionandInviteScimEnterpriseUserRequest {
+    pub struct ProvisionandInviteScimEnterpriseUserRequest {
         pub emails: Vec<Emails>,
         pub groups: Option<Vec<Groups>>,
         pub name: Name,
@@ -8296,13 +8296,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetScimInformationProvisionedEnterpriseUserRequestName {
+    pub struct SetScimInformationProvisionedEnterpriseUserRequestName {
         pub familyName: String,
         pub givenName: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetScimInformationProvisionedEnterpriseUserRequestEmails {
+    pub struct SetScimInformationProvisionedEnterpriseUserRequestEmails {
         pub primary: bool,
         #[serde(rename = "type")]
         pub type_: String,
@@ -8310,12 +8310,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetScimInformationProvisionedEnterpriseUserRequestGroups {
+    pub struct SetScimInformationProvisionedEnterpriseUserRequestGroups {
         pub value: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutSetScimInformationProvisionedEnterpriseUserRequest {
+    pub struct SetScimInformationProvisionedEnterpriseUserRequest {
         pub emails: Vec<Emails>,
         pub groups: Option<Vec<Groups>>,
         pub name: Name,
@@ -8324,24 +8324,24 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateAttributeScimEnterpriseUserRequestOperations {
+    pub struct UpdateAttributeScimEnterpriseUserRequestOperations {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateAttributeScimEnterpriseUserRequest {
+    pub struct UpdateAttributeScimEnterpriseUserRequest {
         pub Operations: Vec<Operations>,
         pub schemas: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProvisionandInviteScimUserRequestName {
+    pub struct ProvisionandInviteScimUserRequestName {
         pub familyName: String,
         pub formatted: Option<String>,
         pub givenName: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProvisionandInviteScimUserRequestEmails {
+    pub struct ProvisionandInviteScimUserRequestEmails {
         pub primary: Option<bool>,
         #[serde(rename = "type")]
         pub type_: Option<String>,
@@ -8349,7 +8349,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProvisionandInviteScimUserRequest {
+    pub struct ProvisionandInviteScimUserRequest {
         pub active: Option<bool>,
         pub displayName: Option<String>,
         pub emails: Vec<Emails>,
@@ -8361,14 +8361,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateProvisionedOrganizationMembershipRequestName {
+    pub struct UpdateProvisionedOrganizationMembershipRequestName {
         pub familyName: String,
         pub formatted: Option<String>,
         pub givenName: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateProvisionedOrganizationMembershipRequestEmails {
+    pub struct UpdateProvisionedOrganizationMembershipRequestEmails {
         pub primary: Option<bool>,
         #[serde(rename = "type")]
         pub type_: Option<String>,
@@ -8376,7 +8376,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateProvisionedOrganizationMembershipRequest {
+    pub struct UpdateProvisionedOrganizationMembershipRequest {
         pub active: Option<bool>,
         pub displayName: Option<String>,
         pub emails: Vec<Emails>,
@@ -8397,7 +8397,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateAttributeScimUserRequest {
+    pub struct UpdateAttributeScimUserRequest {
         pub Operations: Vec<Operations>,
         pub schemas: Option<Vec<String>>,
     }
@@ -8452,7 +8452,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateTeamRequest {
+    pub struct UpdateTeamRequest {
         pub description: Option<String>,
         pub name: String,
         pub parent_team_id: Option<i64>,
@@ -8461,45 +8461,45 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateDiscussionRequest {
+    pub struct CreateDiscussionRequest {
         pub body: String,
         pub private: Option<bool>,
         pub title: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateDiscussionRequest {
+    pub struct UpdateDiscussionRequest {
         pub body: Option<String>,
         pub title: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateDiscussionCommentRequest {
+    pub struct CreateDiscussionCommentRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateDiscussionCommentRequest {
+    pub struct UpdateDiscussionCommentRequest {
         pub body: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReactionTeamDiscussionCommentRequest {
+    pub struct CreateReactionTeamDiscussionCommentRequest {
         pub content: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateReactionTeamDiscussionRequest {
+    pub struct CreateReactionTeamDiscussionRequest {
         pub content: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddUpdateTeamMembershipUserRequest {
+    pub struct AddUpdateTeamMembershipUserRequest {
         pub role: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddUpdateTeamProjectPermissionsRequest {
+    pub struct AddUpdateTeamProjectPermissionsRequest {
         pub permission: Option<String>,
     }
 
@@ -8510,12 +8510,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddUpdateTeamRepositoryPermissionsRequest {
+    pub struct AddUpdateTeamRepositoryPermissionsRequest {
         pub permission: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchCreateUpdateIdpGroupConnectionsRequestGroups {
+    pub struct CreateUpdateIdpGroupConnectionsRequestGroups {
         pub description: Option<String>,
         pub group_description: String,
         pub group_id: String,
@@ -8525,13 +8525,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchCreateUpdateIdpGroupConnectionsRequest {
+    pub struct CreateUpdateIdpGroupConnectionsRequest {
         pub groups: Vec<Groups>,
         pub synced_at: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGetOkResponse {
+    pub struct GetOkResponse {
         pub avatar_url: String,
         pub bio: String,
         pub blog: String,
@@ -8578,7 +8578,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateRequest {
+    pub struct UpdateRequest {
         pub bio: Option<String>,
         pub blog: Option<String>,
         pub company: Option<String>,
@@ -8590,32 +8590,32 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchSetPrimaryEmailVisibilityRequest {
+    pub struct SetPrimaryEmailVisibilityRequest {
         pub visibility: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddEmailAddressRequest {
+    pub struct AddEmailAddressRequest {
         pub emails: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAddEmailAddressRequest {
+    pub struct AddEmailAddressRequest {
         pub emails: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteEmailAddressRequest {
+    pub struct DeleteEmailAddressRequest {
         pub emails: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteDeleteEmailAddressRequest {
+    pub struct DeleteEmailAddressRequest {
         pub emails: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateGpgKeyRequest {
+    pub struct CreateGpgKeyRequest {
         pub armored_public_key: String,
     }
 
@@ -8633,25 +8633,25 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGetInteractionRestrictionsPublicRepositoriesOkResponse {
+    pub struct GetInteractionRestrictionsPublicRepositoriesOkResponse {
         pub expires_at: DateTime<Utc>,
         pub limit: String,
         pub origin: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreatePublicSshKeyRequest {
+    pub struct CreatePublicSshKeyRequest {
         pub key: String,
         pub title: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateOrganizationMembershipRequest {
+    pub struct UpdateOrganizationMembershipRequest {
         pub state: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostStartUserMigrationRequest {
+    pub struct StartUserMigrationRequest {
         pub exclude: Option<Vec<String>>,
         pub exclude_attachments: Option<bool>,
         pub lock_repositories: Option<bool>,
@@ -8659,13 +8659,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateUserProjectRequest {
+    pub struct CreateUserProjectRequest {
         pub body: Option<String>,
         pub name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateRepositoryRequest {
+    pub struct CreateRepositoryRequest {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
         pub allow_squash_merge: Option<bool>,
@@ -8686,7 +8686,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGetUserOkResponse {
+    pub struct GetUserOkResponse {
         pub avatar_url: String,
         pub bio: String,
         pub blog: String,
@@ -8796,7 +8796,7 @@ impl Client {
     pub async fn apps_create_from_manifest(
         &self,
         code: &str,
-        body: &types::PostCreateGithubAppFromManifestRequest,
+        body: &types::CreateGithubAppFromManifestRequest,
     ) -> Result<types::PostCreateGithubAppFromManifestCreatedResponse> {
         let url = format!("{}/app-manifests/{}/conversions",
             self.baseurl,
@@ -8835,7 +8835,7 @@ impl Client {
      */
     pub async fn apps_update_webhook_config_for_app(
         &self,
-        body: &types::PatchUpdateWebhookConfigurationAppRequest,
+        body: &types::UpdateWebhookConfigurationAppRequest,
     ) -> Result<types::WebhookConfig> {
         let url = format!("{}/app/hook/config",
             self.baseurl,
@@ -8918,7 +8918,7 @@ impl Client {
     pub async fn apps_create_installation_access_token(
         &self,
         installation_id: i64,
-        body: &types::PostCreateInstallationAccessTokenAppRequest,
+        body: &types::CreateInstallationAccessTokenAppRequest,
     ) -> Result<types::InstallationToken> {
         let url = format!("{}/app/installations/{}/access_tokens",
             self.baseurl,
@@ -9041,7 +9041,7 @@ impl Client {
     pub async fn apps_delete_authorization(
         &self,
         client_id: &str,
-        body: &types::DeleteDeleteAppAuthorizationRequest,
+        body: &types::DeleteAppAuthorizationRequest,
     ) -> Result<()> {
         let url = format!("{}/applications/{}/grant",
             self.baseurl,
@@ -9085,7 +9085,7 @@ impl Client {
     pub async fn apps_check_token(
         &self,
         client_id: &str,
-        body: &types::PostCheckTokenRequest,
+        body: &types::CheckTokenRequest,
     ) -> Result<types::Authorization> {
         let url = format!("{}/applications/{}/token",
             self.baseurl,
@@ -9107,7 +9107,7 @@ impl Client {
     pub async fn apps_delete_token(
         &self,
         client_id: &str,
-        body: &types::DeleteDeleteAppTokenRequest,
+        body: &types::DeleteAppTokenRequest,
     ) -> Result<()> {
         let url = format!("{}/applications/{}/token",
             self.baseurl,
@@ -9129,7 +9129,7 @@ impl Client {
     pub async fn apps_reset_token(
         &self,
         client_id: &str,
-        body: &types::PatchResetTokenRequest,
+        body: &types::ResetTokenRequest,
     ) -> Result<types::Authorization> {
         let url = format!("{}/applications/{}/token",
             self.baseurl,
@@ -9151,7 +9151,7 @@ impl Client {
     pub async fn apps_scope_token(
         &self,
         client_id: &str,
-        body: &types::PostCreateScopedAccessTokenRequest,
+        body: &types::CreateScopedAccessTokenRequest,
     ) -> Result<types::Authorization> {
         let url = format!("{}/applications/{}/token/scoped",
             self.baseurl,
@@ -9279,7 +9279,7 @@ impl Client {
      */
     pub async fn oauth_authorizations_create_authorization(
         &self,
-        body: &types::PostCreateNewAuthorizationRequest,
+        body: &types::CreateNewAuthorizationRequest,
     ) -> Result<types::Authorization> {
         let url = format!("{}/authorizations",
             self.baseurl,
@@ -9300,7 +9300,7 @@ impl Client {
     pub async fn oauth_authorizations_get_or_create_authorization_for_app(
         &self,
         client_id: &str,
-        body: &types::PutGetorCreateAuthorizationSpecificAppRequest,
+        body: &types::GetorCreateAuthorizationSpecificAppRequest,
     ) -> Result<types::Authorization> {
         let url = format!("{}/authorizations/clients/{}",
             self.baseurl,
@@ -9323,7 +9323,7 @@ impl Client {
         &self,
         client_id: &str,
         fingerprint: &str,
-        body: &types::PutGetorCreateAuthorizationSpecificAppandFingerprintRequest,
+        body: &types::GetorCreateAuthorizationSpecificAppandFingerprintRequest,
     ) -> Result<types::Authorization> {
         let url = format!("{}/authorizations/clients/{}/{}",
             self.baseurl,
@@ -9386,7 +9386,7 @@ impl Client {
     pub async fn oauth_authorizations_update_authorization(
         &self,
         authorization_id: i64,
-        body: &types::PatchUpdateExistingAuthorizationRequest,
+        body: &types::UpdateExistingAuthorizationRequest,
     ) -> Result<types::Authorization> {
         let url = format!("{}/authorizations/{}",
             self.baseurl,
@@ -9445,7 +9445,7 @@ impl Client {
      */
     pub async fn emojis_get(
         &self,
-    ) -> Result<types::GetGetEmojisOkResponse> {
+    ) -> Result<types::GetEmojisOkResponse> {
         let url = format!("{}/emojis",
             self.baseurl,
         );
@@ -9484,7 +9484,7 @@ impl Client {
     pub async fn enterprise_admin_set_github_actions_permissions_enterprise(
         &self,
         enterprise: &str,
-        body: &types::PutSetGithubActionsPermissionsEnterpriseRequest,
+        body: &types::SetGithubActionsPermissionsEnterpriseRequest,
     ) -> Result<()> {
         let url = format!("{}/enterprises/{}/actions/permissions",
             self.baseurl,
@@ -9528,7 +9528,7 @@ impl Client {
     pub async fn enterprise_admin_set_selected_organizations_enabled_github_actions_enterprise(
         &self,
         enterprise: &str,
-        body: &types::PutSetSelectedOrganizationsEnabledGithubActionsinEnterpriseRequest,
+        body: &types::SetSelectedOrganizationsEnabledGithubActionsinEnterpriseRequest,
     ) -> Result<()> {
         let url = format!("{}/enterprises/{}/actions/permissions/organizations",
             self.baseurl,
@@ -9658,7 +9658,7 @@ impl Client {
     pub async fn enterprise_admin_create_self_hosted_runner_group_for_enterprise(
         &self,
         enterprise: &str,
-        body: &types::PostCreateSelfHostedRunnerGroupEnterpriseRequest,
+        body: &types::CreateSelfHostedRunnerGroupEnterpriseRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!("{}/enterprises/{}/actions/runner-groups",
             self.baseurl,
@@ -9725,7 +9725,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::PatchUpdateSelfHostedRunnerGroupEnterpriseRequest,
+        body: &types::UpdateSelfHostedRunnerGroupEnterpriseRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!("{}/enterprises/{}/actions/runner-groups/{}",
             self.baseurl,
@@ -9773,7 +9773,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::PutSetOrganizationAccessSelfHostedRunnerGroupinEnterpriseRequest,
+        body: &types::SetOrganizationAccessSelfHostedRunnerGroupinEnterpriseRequest,
     ) -> Result<()> {
         let url = format!("{}/enterprises/{}/actions/runner-groups/{}/organizations",
             self.baseurl,
@@ -9869,7 +9869,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::PutSetSelfHostedRunnersinGroupEnterpriseRequest,
+        body: &types::SetSelfHostedRunnersinGroupEnterpriseRequest,
     ) -> Result<()> {
         let url = format!("{}/enterprises/{}/actions/runner-groups/{}/runners",
             self.baseurl,
@@ -10211,7 +10211,7 @@ impl Client {
      */
     pub async fn gists_create(
         &self,
-        body: &types::PostCreateGistRequest,
+        body: &types::CreateGistRequest,
     ) -> Result<types::GistSimple> {
         let url = format!("{}/gists",
             self.baseurl,
@@ -10314,7 +10314,7 @@ impl Client {
     pub async fn gists_update(
         &self,
         gist_id: &str,
-        body: &types::PatchUpdateGistRequest,
+        body: &types::UpdateGistRequest,
     ) -> Result<types::GistSimple> {
         let url = format!("{}/gists/{}",
             self.baseurl,
@@ -10358,7 +10358,7 @@ impl Client {
     pub async fn gists_create_comment(
         &self,
         gist_id: &str,
-        body: &types::PostCreateGistCommentRequest,
+        body: &types::CreateGistCommentRequest,
     ) -> Result<types::GistComment> {
         let url = format!("{}/gists/{}/comments",
             self.baseurl,
@@ -10425,7 +10425,7 @@ impl Client {
         &self,
         gist_id: &str,
         comment_id: i64,
-        body: &types::PatchUpdateGistCommentRequest,
+        body: &types::UpdateGistCommentRequest,
     ) -> Result<types::GistComment> {
         let url = format!("{}/gists/{}/comments/{}",
             self.baseurl,
@@ -10740,7 +10740,7 @@ impl Client {
      */
     pub async fn markdown_render(
         &self,
-        body: &types::PostRenderMarkdownDocumentRequest,
+        body: &types::RenderMarkdownDocumentRequest,
     ) -> Result<String> {
         let url = format!("{}/markdown",
             self.baseurl,
@@ -10974,7 +10974,7 @@ impl Client {
      */
     pub async fn activity_mark_notifications_as_read(
         &self,
-        body: &types::PutMarkNotificationsasReadRequest,
+        body: &types::MarkNotificationsasReadRequest,
     ) -> Result<types::PutMarkNotificationsasReadAcceptedResponse> {
         let url = format!("{}/notifications",
             self.baseurl,
@@ -11055,7 +11055,7 @@ impl Client {
     pub async fn activity_set_thread_subscription(
         &self,
         thread_id: i64,
-        body: &types::PutSetThreadSubscriptionRequest,
+        body: &types::SetThreadSubscriptionRequest,
     ) -> Result<types::ThreadSubscription> {
         let url = format!("{}/notifications/threads/{}/subscription",
             self.baseurl,
@@ -11156,7 +11156,7 @@ impl Client {
     pub async fn orgs_update(
         &self,
         org: &str,
-        body: &types::PatchUpdateOrganizationRequest,
+        body: &types::UpdateOrganizationRequest,
     ) -> Result<types::OrganizationFull> {
         let url = format!("{}/orgs/{}",
             self.baseurl,
@@ -11198,7 +11198,7 @@ impl Client {
     pub async fn actions_set_github_actions_permissions_organization(
         &self,
         org: &str,
-        body: &types::PutSetGithubActionsPermissionsOrganizationRequest,
+        body: &types::SetGithubActionsPermissionsOrganizationRequest,
     ) -> Result<()> {
         let url = format!("{}/orgs/{}/actions/permissions",
             self.baseurl,
@@ -11242,7 +11242,7 @@ impl Client {
     pub async fn actions_set_selected_repositories_enabled_github_actions_organization(
         &self,
         org: &str,
-        body: &types::PutSetSelectedRepositoriesEnabledGithubActionsinOrganizationRequest,
+        body: &types::SetSelectedRepositoriesEnabledGithubActionsinOrganizationRequest,
     ) -> Result<()> {
         let url = format!("{}/orgs/{}/actions/permissions/repositories",
             self.baseurl,
@@ -11372,7 +11372,7 @@ impl Client {
     pub async fn actions_create_self_hosted_runner_group_for_org(
         &self,
         org: &str,
-        body: &types::PostCreateSelfHostedRunnerGroupOrganizationRequest,
+        body: &types::CreateSelfHostedRunnerGroupOrganizationRequest,
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!("{}/orgs/{}/actions/runner-groups",
             self.baseurl,
@@ -11439,7 +11439,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::PatchUpdateSelfHostedRunnerGroupOrganizationRequest,
+        body: &types::UpdateSelfHostedRunnerGroupOrganizationRequest,
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!("{}/orgs/{}/actions/runner-groups/{}",
             self.baseurl,
@@ -11487,7 +11487,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::PutSetRepositoryAccessSelfHostedRunnerGroupinOrganizationRequest,
+        body: &types::SetRepositoryAccessSelfHostedRunnerGroupinOrganizationRequest,
     ) -> Result<()> {
         let url = format!("{}/orgs/{}/actions/runner-groups/{}/repositories",
             self.baseurl,
@@ -11583,7 +11583,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::PutSetSelfHostedRunnersinGroupOrganizationRequest,
+        body: &types::SetSelfHostedRunnersinGroupOrganizationRequest,
     ) -> Result<()> {
         let url = format!("{}/orgs/{}/actions/runner-groups/{}/runners",
             self.baseurl,
@@ -11845,7 +11845,7 @@ impl Client {
         &self,
         org: &str,
         secret_name: &str,
-        body: &types::PutCreateUpdateOrganizationSecretRequest,
+        body: &types::CreateUpdateOrganizationSecretRequest,
     ) -> Result<types::EmptyObject> {
         let url = format!("{}/orgs/{}/actions/secrets/{}",
             self.baseurl,
@@ -11915,7 +11915,7 @@ impl Client {
         &self,
         org: &str,
         secret_name: &str,
-        body: &types::PutSetSelectedRepositoriesOrganizationSecretRequest,
+        body: &types::SetSelectedRepositoriesOrganizationSecretRequest,
     ) -> Result<()> {
         let url = format!("{}/orgs/{}/actions/secrets/{}/repositories",
             self.baseurl,
@@ -12207,7 +12207,7 @@ impl Client {
     pub async fn orgs_create_webhook(
         &self,
         org: &str,
-        body: &types::PostCreateOrganizationWebhookRequest,
+        body: &types::CreateOrganizationWebhookRequest,
     ) -> Result<types::OrgHook> {
         let url = format!("{}/orgs/{}/hooks",
             self.baseurl,
@@ -12274,7 +12274,7 @@ impl Client {
         &self,
         org: &str,
         hook_id: i64,
-        body: &types::PatchUpdateOrganizationWebhookRequest,
+        body: &types::UpdateOrganizationWebhookRequest,
     ) -> Result<types::OrgHook> {
         let url = format!("{}/orgs/{}/hooks/{}",
             self.baseurl,
@@ -12320,7 +12320,7 @@ impl Client {
         &self,
         org: &str,
         hook_id: i64,
-        body: &types::PatchUpdateWebhookConfigurationOrganizationRequest,
+        body: &types::UpdateWebhookConfigurationOrganizationRequest,
     ) -> Result<types::WebhookConfig> {
         let url = format!("{}/orgs/{}/hooks/{}/config",
             self.baseurl,
@@ -12407,7 +12407,7 @@ impl Client {
     pub async fn interactions_get_restrictions_for_org(
         &self,
         org: &str,
-    ) -> Result<types::GetGetInteractionRestrictionsOrganizationOkResponse> {
+    ) -> Result<types::GetInteractionRestrictionsOrganizationOkResponse> {
         let url = format!("{}/orgs/{}/interaction-limits",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
@@ -12491,7 +12491,7 @@ impl Client {
     pub async fn orgs_create_invitation(
         &self,
         org: &str,
-        body: &types::PostCreateOrganizationInvitationRequest,
+        body: &types::CreateOrganizationInvitationRequest,
     ) -> Result<types::OrganizationInvitation> {
         let url = format!("{}/orgs/{}/invitations",
             self.baseurl,
@@ -12678,7 +12678,7 @@ impl Client {
         &self,
         org: &str,
         username: &str,
-        body: &types::PutSetOrganizationMembershipUserRequest,
+        body: &types::SetOrganizationMembershipUserRequest,
     ) -> Result<types::OrgMembership> {
         let url = format!("{}/orgs/{}/memberships/{}",
             self.baseurl,
@@ -12746,7 +12746,7 @@ impl Client {
     pub async fn migrations_start_for_org(
         &self,
         org: &str,
-        body: &types::PostStartOrganizationMigrationRequest,
+        body: &types::StartOrganizationMigrationRequest,
     ) -> Result<types::Migration> {
         let url = format!("{}/orgs/{}/migrations",
             self.baseurl,
@@ -13151,7 +13151,7 @@ impl Client {
     pub async fn projects_create_for_org(
         &self,
         org: &str,
-        body: &types::PostCreateOrganizationProjectRequest,
+        body: &types::CreateOrganizationProjectRequest,
     ) -> Result<types::Project> {
         let url = format!("{}/orgs/{}/projects",
             self.baseurl,
@@ -13286,7 +13286,7 @@ impl Client {
     pub async fn repos_create_in_org(
         &self,
         org: &str,
-        body: &types::PostCreateOrganizationRepositoryRequest,
+        body: &types::CreateOrganizationRepositoryRequest,
     ) -> Result<types::Repository> {
         let url = format!("{}/orgs/{}/repos",
             self.baseurl,
@@ -13412,7 +13412,7 @@ impl Client {
     pub async fn teams_create(
         &self,
         org: &str,
-        body: &types::PostCreateTeamRequest,
+        body: &types::CreateTeamRequest,
     ) -> Result<types::TeamFull> {
         let url = format!("{}/orgs/{}/teams",
             self.baseurl,
@@ -13479,7 +13479,7 @@ impl Client {
         &self,
         org: &str,
         team_slug: &str,
-        body: &types::PatchUpdateTeamRequest,
+        body: &types::UpdateTeamRequest,
     ) -> Result<types::TeamFull> {
         let url = format!("{}/orgs/{}/teams/{}",
             self.baseurl,
@@ -13529,7 +13529,7 @@ impl Client {
         &self,
         org: &str,
         team_slug: &str,
-        body: &types::PostCreateDiscussionRequest,
+        body: &types::CreateDiscussionRequest,
     ) -> Result<types::TeamDiscussion> {
         let url = format!("{}/orgs/{}/teams/{}/discussions",
             self.baseurl,
@@ -13602,7 +13602,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        body: &types::PatchUpdateDiscussionRequest,
+        body: &types::UpdateDiscussionRequest,
     ) -> Result<types::TeamDiscussion> {
         let url = format!("{}/orgs/{}/teams/{}/discussions/{}",
             self.baseurl,
@@ -13655,7 +13655,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        body: &types::PostCreateDiscussionCommentRequest,
+        body: &types::CreateDiscussionCommentRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments",
             self.baseurl,
@@ -13734,7 +13734,7 @@ impl Client {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::PatchUpdateDiscussionCommentRequest,
+        body: &types::UpdateDiscussionCommentRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
             self.baseurl,
@@ -13791,7 +13791,7 @@ impl Client {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::PostCreateReactionTeamDiscussionCommentRequest,
+        body: &types::CreateReactionTeamDiscussionCommentRequest,
     ) -> Result<types::Reaction> {
         let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
             self.baseurl,
@@ -13873,7 +13873,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        body: &types::PostCreateReactionTeamDiscussionRequest,
+        body: &types::CreateReactionTeamDiscussionRequest,
     ) -> Result<types::Reaction> {
         let url = format!("{}/orgs/{}/teams/{}/discussions/{}/reactions",
             self.baseurl,
@@ -13998,7 +13998,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         username: &str,
-        body: &types::PutAddUpdateTeamMembershipUserRequest,
+        body: &types::AddUpdateTeamMembershipUserRequest,
     ) -> Result<types::TeamMembership> {
         let url = format!("{}/orgs/{}/teams/{}/memberships/{}",
             self.baseurl,
@@ -14096,7 +14096,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         project_id: i64,
-        body: &types::PutAddUpdateTeamProjectPermissionsRequest,
+        body: &types::AddUpdateTeamProjectPermissionsRequest,
     ) -> Result<()> {
         let url = format!("{}/orgs/{}/teams/{}/projects/{}",
             self.baseurl,
@@ -14197,7 +14197,7 @@ impl Client {
         team_slug: &str,
         owner: &str,
         repo: &str,
-        body: &types::PutAddUpdateTeamRepositoryPermissionsRequest,
+        body: &types::AddUpdateTeamRepositoryPermissionsRequest,
     ) -> Result<()> {
         let url = format!("{}/orgs/{}/teams/{}/repos/{}/{}",
             self.baseurl,
@@ -14271,7 +14271,7 @@ impl Client {
         &self,
         org: &str,
         team_slug: &str,
-        body: &types::PatchCreateUpdateIdpGroupConnectionsRequest,
+        body: &types::CreateUpdateIdpGroupConnectionsRequest,
     ) -> Result<types::GroupMapping> {
         let url = format!("{}/orgs/{}/teams/{}/team-sync/group-mappings",
             self.baseurl,
@@ -14358,7 +14358,7 @@ impl Client {
     pub async fn projects_update_card(
         &self,
         card_id: i64,
-        body: &types::PatchUpdateExistingProjectCardRequest,
+        body: &types::UpdateExistingProjectCardRequest,
     ) -> Result<types::ProjectCard> {
         let url = format!("{}/projects/columns/cards/{}",
             self.baseurl,
@@ -14380,7 +14380,7 @@ impl Client {
     pub async fn projects_move_card(
         &self,
         card_id: i64,
-        body: &types::PostMoveProjectCardRequest,
+        body: &types::MoveProjectCardRequest,
     ) -> Result<types::PostMoveProjectCardCreatedResponse> {
         let url = format!("{}/projects/columns/cards/{}/moves",
             self.baseurl,
@@ -14442,7 +14442,7 @@ impl Client {
     pub async fn projects_update_column(
         &self,
         column_id: i64,
-        body: &types::PatchUpdateExistingProjectColumnRequest,
+        body: &types::UpdateExistingProjectColumnRequest,
     ) -> Result<types::ProjectColumn> {
         let url = format!("{}/projects/columns/{}",
             self.baseurl,
@@ -14487,7 +14487,7 @@ impl Client {
     pub async fn projects_create_card(
         &self,
         column_id: i64,
-        body: &types::PostCreateProjectCardRequest,
+        body: &types::CreateProjectCardRequest,
     ) -> Result<types::ProjectCard> {
         let url = format!("{}/projects/columns/{}/cards",
             self.baseurl,
@@ -14509,7 +14509,7 @@ impl Client {
     pub async fn projects_move_column(
         &self,
         column_id: i64,
-        body: &types::PostMoveProjectColumnRequest,
+        body: &types::MoveProjectColumnRequest,
     ) -> Result<types::PostMoveProjectColumnCreatedResponse> {
         let url = format!("{}/projects/columns/{}/moves",
             self.baseurl,
@@ -14571,7 +14571,7 @@ impl Client {
     pub async fn projects_update(
         &self,
         project_id: i64,
-        body: &types::PatchUpdateProjectRequest,
+        body: &types::UpdateProjectRequest,
     ) -> Result<types::Project> {
         let url = format!("{}/projects/{}",
             self.baseurl,
@@ -14617,7 +14617,7 @@ impl Client {
         &self,
         project_id: i64,
         username: &str,
-        body: &types::PutAddProjectCollaboratorRequest,
+        body: &types::AddProjectCollaboratorRequest,
     ) -> Result<()> {
         let url = format!("{}/projects/{}/collaborators/{}",
             self.baseurl,
@@ -14706,7 +14706,7 @@ impl Client {
     pub async fn projects_create_column(
         &self,
         project_id: i64,
-        body: &types::PostCreateProjectColumnRequest,
+        body: &types::CreateProjectColumnRequest,
     ) -> Result<types::ProjectColumn> {
         let url = format!("{}/projects/{}/columns",
             self.baseurl,
@@ -14811,7 +14811,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PatchUpdateRepositoryRequest,
+        body: &types::UpdateRepositoryRequest,
     ) -> Result<types::FullRepository> {
         let url = format!("{}/repos/{}/{}",
             self.baseurl,
@@ -15003,7 +15003,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PutSetGithubActionsPermissionsRepositoryRequest,
+        body: &types::SetGithubActionsPermissionsRepositoryRequest,
     ) -> Result<()> {
         let url = format!("{}/repos/{}/{}/actions/permissions",
             self.baseurl,
@@ -15485,7 +15485,7 @@ impl Client {
         owner: &str,
         repo: &str,
         run_id: i64,
-        body: &types::PostReviewPendingDeploymentsWorkflowRunRequest,
+        body: &types::ReviewPendingDeploymentsWorkflowRunRequest,
     ) -> Result<Vec<types::Deployment>> {
         let url = format!("{}/repos/{}/{}/actions/runs/{}/pending_deployments",
             self.baseurl,
@@ -15629,7 +15629,7 @@ impl Client {
         owner: &str,
         repo: &str,
         secret_name: &str,
-        body: &types::PutCreateUpdateRepositorySecretRequest,
+        body: &types::CreateUpdateRepositorySecretRequest,
     ) -> Result<types::PutCreateUpdateRepositorySecretCreatedResponse> {
         let url = format!("{}/repos/{}/{}/actions/secrets/{}",
             self.baseurl,
@@ -15751,7 +15751,7 @@ impl Client {
         owner: &str,
         repo: &str,
         workflow_id: &str,
-        body: &types::PostCreateWorkflowDispatchEventRequest,
+        body: &types::CreateWorkflowDispatchEventRequest,
     ) -> Result<()> {
         let url = format!("{}/repos/{}/{}/actions/workflows/{}/dispatches",
             self.baseurl,
@@ -16020,7 +16020,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PutUpdateBranchProtectionRequest,
+        body: &types::UpdateBranchProtectionRequest,
     ) -> Result<types::ProtectedBranch> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection",
             self.baseurl,
@@ -16190,7 +16190,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PatchUpdatePullRequestReviewProtectionRequest,
+        body: &types::UpdatePullRequestReviewProtectionRequest,
     ) -> Result<types::ProtectedBranchPullRequestReview> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
             self.baseurl,
@@ -16336,7 +16336,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PatchUpdateStatusCheckProtectionRequest,
+        body: &types::UpdateStatusCheckProtectionRequest,
     ) -> Result<types::StatusCheckPolicy> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks",
             self.baseurl,
@@ -16386,7 +16386,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PutSetStatusCheckContextsRequest,
+        body: &types::SetStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
             self.baseurl,
@@ -16412,7 +16412,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PostAddStatusCheckContextsRequest,
+        body: &types::AddStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
             self.baseurl,
@@ -16438,7 +16438,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::DeleteRemoveStatusCheckContextsRequest,
+        body: &types::RemoveStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
             self.baseurl,
@@ -16536,7 +16536,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PutSetAppAccessRestrictionsRequest,
+        body: &types::SetAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
             self.baseurl,
@@ -16562,7 +16562,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PostAddAppAccessRestrictionsRequest,
+        body: &types::AddAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
             self.baseurl,
@@ -16588,7 +16588,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::DeleteRemoveAppAccessRestrictionsRequest,
+        body: &types::RemoveAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
             self.baseurl,
@@ -16638,7 +16638,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PutSetTeamAccessRestrictionsRequest,
+        body: &types::SetTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
             self.baseurl,
@@ -16664,7 +16664,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PostAddTeamAccessRestrictionsRequest,
+        body: &types::AddTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
             self.baseurl,
@@ -16690,7 +16690,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::DeleteRemoveTeamAccessRestrictionsRequest,
+        body: &types::RemoveTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
             self.baseurl,
@@ -16740,7 +16740,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PutSetUserAccessRestrictionsRequest,
+        body: &types::SetUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/users",
             self.baseurl,
@@ -16766,7 +16766,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PostAddUserAccessRestrictionsRequest,
+        body: &types::AddUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/users",
             self.baseurl,
@@ -16792,7 +16792,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::DeleteRemoveUserAccessRestrictionsRequest,
+        body: &types::RemoveUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/users",
             self.baseurl,
@@ -16818,7 +16818,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::PostRenameBranchRequest,
+        body: &types::RenameBranchRequest,
     ) -> Result<types::BranchWithProtection> {
         let url = format!("{}/repos/{}/{}/branches/{}/rename",
             self.baseurl,
@@ -16843,7 +16843,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateCheckRunRequest,
+        body: &types::CreateCheckRunRequest,
     ) -> Result<types::CheckRun> {
         let url = format!("{}/repos/{}/{}/check-runs",
             self.baseurl,
@@ -16892,7 +16892,7 @@ impl Client {
         owner: &str,
         repo: &str,
         check_run_id: i64,
-        body: &types::PatchUpdateCheckRunRequest,
+        body: &types::UpdateCheckRunRequest,
     ) -> Result<types::CheckRun> {
         let url = format!("{}/repos/{}/{}/check-runs/{}",
             self.baseurl,
@@ -16943,7 +16943,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateCheckSuiteRequest,
+        body: &types::CreateCheckSuiteRequest,
     ) -> Result<types::CheckSuite> {
         let url = format!("{}/repos/{}/{}/check-suites",
             self.baseurl,
@@ -16967,7 +16967,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PatchUpdateRepositoryPreferencesCheckSuitesRequest,
+        body: &types::UpdateRepositoryPreferencesCheckSuitesRequest,
     ) -> Result<types::CheckSuitePreference> {
         let url = format!("{}/repos/{}/{}/check-suites/preferences",
             self.baseurl,
@@ -17121,7 +17121,7 @@ impl Client {
         owner: &str,
         repo: &str,
         alert_number: &str,
-        body: &types::PatchUpdateCodeScanningAlertRequest,
+        body: &types::UpdateCodeScanningAlertRequest,
     ) -> Result<types::CodeScanningAlert> {
         let url = format!("{}/repos/{}/{}/code-scanning/alerts/{}",
             self.baseurl,
@@ -17250,7 +17250,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostUploadAnalysisasSarifDataRequest,
+        body: &types::UploadAnalysisasSarifDataRequest,
     ) -> Result<types::CodeScanningSarifsReceipt> {
         let url = format!("{}/repos/{}/{}/code-scanning/sarifs",
             self.baseurl,
@@ -17348,7 +17348,7 @@ impl Client {
         owner: &str,
         repo: &str,
         username: &str,
-        body: &types::PutAddRepositoryCollaboratorRequest,
+        body: &types::AddRepositoryCollaboratorRequest,
     ) -> Result<types::RepositoryInvitation> {
         let url = format!("{}/repos/{}/{}/collaborators/{}",
             self.baseurl,
@@ -17494,7 +17494,7 @@ impl Client {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::PatchUpdateCommitCommentRequest,
+        body: &types::UpdateCommitCommentRequest,
     ) -> Result<types::CommitComment> {
         let url = format!("{}/repos/{}/{}/comments/{}",
             self.baseurl,
@@ -17547,7 +17547,7 @@ impl Client {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::PostCreateReactionCommitCommentRequest,
+        body: &types::CreateReactionCommitCommentRequest,
     ) -> Result<types::Reaction> {
         let url = format!("{}/repos/{}/{}/comments/{}/reactions",
             self.baseurl,
@@ -17678,7 +17678,7 @@ impl Client {
         owner: &str,
         repo: &str,
         commit_sha: &str,
-        body: &types::PostCreateCommitCommentRequest,
+        body: &types::CreateCommitCommentRequest,
     ) -> Result<types::CommitComment> {
         let url = format!("{}/repos/{}/{}/commits/{}/comments",
             self.baseurl,
@@ -17936,7 +17936,7 @@ impl Client {
         owner: &str,
         repo: &str,
         content_reference_id: i64,
-        body: &types::PostCreateContentAttachmentRequest,
+        body: &types::CreateContentAttachmentRequest,
     ) -> Result<types::ContentReferenceAttachment> {
         let url = format!("{}/repos/{}/{}/content_references/{}/attachments",
             self.baseurl,
@@ -17963,7 +17963,7 @@ impl Client {
         repo: &str,
         path: &str,
         ref_: &str,
-    ) -> Result<types::GetGetRepositoryContentOkResponse> {
+    ) -> Result<types::GetRepositoryContentOkResponse> {
         let url = format!("{}/repos/{}/{}/contents/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
@@ -17987,7 +17987,7 @@ impl Client {
         owner: &str,
         repo: &str,
         path: &str,
-        body: &types::PutCreateUpdateFileContentsRequest,
+        body: &types::CreateUpdateFileContentsRequest,
     ) -> Result<types::FileCommit> {
         let url = format!("{}/repos/{}/{}/contents/{}",
             self.baseurl,
@@ -18013,7 +18013,7 @@ impl Client {
         owner: &str,
         repo: &str,
         path: &str,
-        body: &types::DeleteDeleteFileRequest,
+        body: &types::DeleteFileRequest,
     ) -> Result<types::FileCommit> {
         let url = format!("{}/repos/{}/{}/contents/{}",
             self.baseurl,
@@ -18091,7 +18091,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateDeploymentRequest,
+        body: &types::CreateDeploymentRequest,
     ) -> Result<types::Deployment> {
         let url = format!("{}/repos/{}/{}/deployments",
             self.baseurl,
@@ -18190,7 +18190,7 @@ impl Client {
         owner: &str,
         repo: &str,
         deployment_id: i64,
-        body: &types::PostCreateDeploymentStatusRequest,
+        body: &types::CreateDeploymentStatusRequest,
     ) -> Result<types::DeploymentStatus> {
         let url = format!("{}/repos/{}/{}/deployments/{}/statuses",
             self.baseurl,
@@ -18241,7 +18241,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateRepositoryDispatchEventRequest,
+        body: &types::CreateRepositoryDispatchEventRequest,
     ) -> Result<()> {
         let url = format!("{}/repos/{}/{}/dispatches",
             self.baseurl,
@@ -18265,7 +18265,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<types::GetGetAllEnvironmentsOkResponse> {
+    ) -> Result<types::GetAllEnvironmentsOkResponse> {
         let url = format!("{}/repos/{}/{}/environments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
@@ -18312,7 +18312,7 @@ impl Client {
         owner: &str,
         repo: &str,
         environment_name: &str,
-        body: &types::PutCreateUpdateEnvironmentRequest,
+        body: &types::CreateUpdateEnvironmentRequest,
     ) -> Result<types::Environment> {
         let url = format!("{}/repos/{}/{}/environments/{}",
             self.baseurl,
@@ -18410,7 +18410,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateForkRequest,
+        body: &types::CreateForkRequest,
     ) -> Result<types::FullRepository> {
         let url = format!("{}/repos/{}/{}/forks",
             self.baseurl,
@@ -18434,7 +18434,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateBlobRequest,
+        body: &types::CreateBlobRequest,
     ) -> Result<types::ShortBlob> {
         let url = format!("{}/repos/{}/{}/git/blobs",
             self.baseurl,
@@ -18482,7 +18482,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateCommitRequest,
+        body: &types::CreateCommitRequest,
     ) -> Result<types::GitCommit> {
         let url = format!("{}/repos/{}/{}/git/commits",
             self.baseurl,
@@ -18580,7 +18580,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateReferenceRequest,
+        body: &types::CreateReferenceRequest,
     ) -> Result<types::GitRef> {
         let url = format!("{}/repos/{}/{}/git/refs",
             self.baseurl,
@@ -18629,7 +18629,7 @@ impl Client {
         owner: &str,
         repo: &str,
         ref_: &str,
-        body: &types::PatchUpdateReferenceRequest,
+        body: &types::UpdateReferenceRequest,
     ) -> Result<types::GitRef> {
         let url = format!("{}/repos/{}/{}/git/refs/{}",
             self.baseurl,
@@ -18654,7 +18654,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateTagObjectRequest,
+        body: &types::CreateTagObjectRequest,
     ) -> Result<types::GitTag> {
         let url = format!("{}/repos/{}/{}/git/tags",
             self.baseurl,
@@ -18702,7 +18702,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateTreeRequest,
+        body: &types::CreateTreeRequest,
     ) -> Result<types::GitTree> {
         let url = format!("{}/repos/{}/{}/git/trees",
             self.baseurl,
@@ -18775,7 +18775,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateRepositoryWebhookRequest,
+        body: &types::CreateRepositoryWebhookRequest,
     ) -> Result<types::Hook> {
         let url = format!("{}/repos/{}/{}/hooks",
             self.baseurl,
@@ -18848,7 +18848,7 @@ impl Client {
         owner: &str,
         repo: &str,
         hook_id: i64,
-        body: &types::PatchUpdateRepositoryWebhookRequest,
+        body: &types::UpdateRepositoryWebhookRequest,
     ) -> Result<types::Hook> {
         let url = format!("{}/repos/{}/{}/hooks/{}",
             self.baseurl,
@@ -18898,7 +18898,7 @@ impl Client {
         owner: &str,
         repo: &str,
         hook_id: i64,
-        body: &types::PatchUpdateWebhookConfigurationRepositoryRequest,
+        body: &types::UpdateWebhookConfigurationRepositoryRequest,
     ) -> Result<types::WebhookConfig> {
         let url = format!("{}/repos/{}/{}/hooks/{}/config",
             self.baseurl,
@@ -18993,7 +18993,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PutStartImportRequest,
+        body: &types::StartImportRequest,
     ) -> Result<types::Import> {
         let url = format!("{}/repos/{}/{}/import",
             self.baseurl,
@@ -19039,7 +19039,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PatchUpdateImportRequest,
+        body: &types::UpdateImportRequest,
     ) -> Result<types::Import> {
         let url = format!("{}/repos/{}/{}/import",
             self.baseurl,
@@ -19087,7 +19087,7 @@ impl Client {
         owner: &str,
         repo: &str,
         author_id: i64,
-        body: &types::PatchMapCommitAuthorRequest,
+        body: &types::MapCommitAuthorRequest,
     ) -> Result<types::PorterAuthor> {
         let url = format!("{}/repos/{}/{}/import/authors/{}",
             self.baseurl,
@@ -19134,7 +19134,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PatchUpdateGitLfsPreferenceRequest,
+        body: &types::UpdateGitLfsPreferenceRequest,
     ) -> Result<types::Import> {
         let url = format!("{}/repos/{}/{}/import/lfs",
             self.baseurl,
@@ -19180,7 +19180,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<types::GetGetInteractionRestrictionsRepositoryOkResponse> {
+    ) -> Result<types::GetInteractionRestrictionsRepositoryOkResponse> {
         let url = format!("{}/repos/{}/{}/interaction-limits",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
@@ -19297,7 +19297,7 @@ impl Client {
         owner: &str,
         repo: &str,
         invitation_id: i64,
-        body: &types::PatchUpdateRepositoryInvitationRequest,
+        body: &types::UpdateRepositoryInvitationRequest,
     ) -> Result<types::RepositoryInvitation> {
         let url = format!("{}/repos/{}/{}/invitations/{}",
             self.baseurl,
@@ -19355,7 +19355,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateIssueRequest,
+        body: &types::CreateIssueRequest,
     ) -> Result<types::Issue> {
         let url = format!("{}/repos/{}/{}/issues",
             self.baseurl,
@@ -19455,7 +19455,7 @@ impl Client {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::PatchUpdateIssueCommentRequest,
+        body: &types::UpdateIssueCommentRequest,
     ) -> Result<types::IssueComment> {
         let url = format!("{}/repos/{}/{}/issues/comments/{}",
             self.baseurl,
@@ -19508,7 +19508,7 @@ impl Client {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::PostCreateReactionIssueCommentRequest,
+        body: &types::CreateReactionIssueCommentRequest,
     ) -> Result<types::Reaction> {
         let url = format!("{}/repos/{}/{}/issues/comments/{}/reactions",
             self.baseurl,
@@ -19632,7 +19632,7 @@ impl Client {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::PatchUpdateIssueRequest,
+        body: &types::UpdateIssueRequest,
     ) -> Result<types::Issue> {
         let url = format!("{}/repos/{}/{}/issues/{}",
             self.baseurl,
@@ -19658,7 +19658,7 @@ impl Client {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::PostAddAssigneesIssueRequest,
+        body: &types::AddAssigneesIssueRequest,
     ) -> Result<types::IssueSimple> {
         let url = format!("{}/repos/{}/{}/issues/{}/assignees",
             self.baseurl,
@@ -19684,7 +19684,7 @@ impl Client {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::DeleteRemoveAssigneesFromIssueRequest,
+        body: &types::RemoveAssigneesFromIssueRequest,
     ) -> Result<types::IssueSimple> {
         let url = format!("{}/repos/{}/{}/issues/{}/assignees",
             self.baseurl,
@@ -19737,7 +19737,7 @@ impl Client {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::PostCreateIssueCommentRequest,
+        body: &types::CreateIssueCommentRequest,
     ) -> Result<types::IssueComment> {
         let url = format!("{}/repos/{}/{}/issues/{}/comments",
             self.baseurl,
@@ -19815,7 +19815,7 @@ impl Client {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::PutSetLabelsIssueRequest,
+        body: &types::SetLabelsIssueRequest,
     ) -> Result<Vec<types::Label>> {
         let url = format!("{}/repos/{}/{}/issues/{}/labels",
             self.baseurl,
@@ -19841,7 +19841,7 @@ impl Client {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::PostAddLabelsIssueRequest,
+        body: &types::AddLabelsIssueRequest,
     ) -> Result<Vec<types::Label>> {
         let url = format!("{}/repos/{}/{}/issues/{}/labels",
             self.baseurl,
@@ -19917,7 +19917,7 @@ impl Client {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::PutLockIssueRequest,
+        body: &types::LockIssueRequest,
     ) -> Result<()> {
         let url = format!("{}/repos/{}/{}/issues/{}/lock",
             self.baseurl,
@@ -19994,7 +19994,7 @@ impl Client {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::PostCreateReactionIssueRequest,
+        body: &types::CreateReactionIssueRequest,
     ) -> Result<types::Reaction> {
         let url = format!("{}/repos/{}/{}/issues/{}/reactions",
             self.baseurl,
@@ -20095,7 +20095,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateDeployKeyRequest,
+        body: &types::CreateDeployKeyRequest,
     ) -> Result<types::DeployKey> {
         let url = format!("{}/repos/{}/{}/keys",
             self.baseurl,
@@ -20191,7 +20191,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateLabelRequest,
+        body: &types::CreateLabelRequest,
     ) -> Result<types::Label> {
         let url = format!("{}/repos/{}/{}/labels",
             self.baseurl,
@@ -20264,7 +20264,7 @@ impl Client {
         owner: &str,
         repo: &str,
         name: &str,
-        body: &types::PatchUpdateLabelRequest,
+        body: &types::UpdateLabelRequest,
     ) -> Result<types::Label> {
         let url = format!("{}/repos/{}/{}/labels/{}",
             self.baseurl,
@@ -20333,7 +20333,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostMergeBranchRequest,
+        body: &types::MergeBranchRequest,
     ) -> Result<types::Commit> {
         let url = format!("{}/repos/{}/{}/merges",
             self.baseurl,
@@ -20384,7 +20384,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateMilestoneRequest,
+        body: &types::CreateMilestoneRequest,
     ) -> Result<types::Milestone> {
         let url = format!("{}/repos/{}/{}/milestones",
             self.baseurl,
@@ -20457,7 +20457,7 @@ impl Client {
         owner: &str,
         repo: &str,
         milestone_number: i64,
-        body: &types::PatchUpdateMilestoneRequest,
+        body: &types::UpdateMilestoneRequest,
     ) -> Result<types::Milestone> {
         let url = format!("{}/repos/{}/{}/milestones/{}",
             self.baseurl,
@@ -20536,7 +20536,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PutMarkRepositoryNotificationsasReadRequest,
+        body: &types::MarkRepositoryNotificationsasReadRequest,
     ) -> Result<types::PutMarkRepositoryNotificationsasReadAcceptedResponse> {
         let url = format!("{}/repos/{}/{}/notifications",
             self.baseurl,
@@ -20582,7 +20582,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PutUpdateInformationAboutGithubPagesSiteRequest,
+        body: &types::UpdateInformationAboutGithubPagesSiteRequest,
     ) -> Result<()> {
         let url = format!("{}/repos/{}/{}/pages",
             self.baseurl,
@@ -20606,7 +20606,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateGithubPagesSiteRequest,
+        body: &types::CreateGithubPagesSiteRequest,
     ) -> Result<types::Page> {
         let url = format!("{}/repos/{}/{}/pages",
             self.baseurl,
@@ -20791,7 +20791,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateRepositoryProjectRequest,
+        body: &types::CreateRepositoryProjectRequest,
     ) -> Result<types::Project> {
         let url = format!("{}/repos/{}/{}/projects",
             self.baseurl,
@@ -20844,7 +20844,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreatePullRequestRequest,
+        body: &types::CreatePullRequestRequest,
     ) -> Result<types::PullRequest> {
         let url = format!("{}/repos/{}/{}/pulls",
             self.baseurl,
@@ -20944,7 +20944,7 @@ impl Client {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::PatchUpdateReviewCommentPullRequestRequest,
+        body: &types::UpdateReviewCommentPullRequestRequest,
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!("{}/repos/{}/{}/pulls/comments/{}",
             self.baseurl,
@@ -20997,7 +20997,7 @@ impl Client {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::PostCreateReactionPullRequestReviewCommentRequest,
+        body: &types::CreateReactionPullRequestReviewCommentRequest,
     ) -> Result<types::Reaction> {
         let url = format!("{}/repos/{}/{}/pulls/comments/{}/reactions",
             self.baseurl,
@@ -21073,7 +21073,7 @@ impl Client {
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::PatchUpdatePullRequestRequest,
+        body: &types::UpdatePullRequestRequest,
     ) -> Result<types::PullRequest> {
         let url = format!("{}/repos/{}/{}/pulls/{}",
             self.baseurl,
@@ -21128,7 +21128,7 @@ impl Client {
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::PostCreateReviewCommentPullRequestRequest,
+        body: &types::CreateReviewCommentPullRequestRequest,
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!("{}/repos/{}/{}/pulls/{}/comments",
             self.baseurl,
@@ -21155,7 +21155,7 @@ impl Client {
         repo: &str,
         pull_number: i64,
         comment_id: i64,
-        body: &types::PostCreateReplyReviewCommentRequest,
+        body: &types::CreateReplyReviewCommentRequest,
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!("{}/repos/{}/{}/pulls/{}/comments/{}/replies",
             self.baseurl,
@@ -21258,7 +21258,7 @@ impl Client {
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::PutMergePullRequestRequest,
+        body: &types::MergePullRequestRequest,
     ) -> Result<types::PullRequestMergeResult> {
         let url = format!("{}/repos/{}/{}/pulls/{}/merge",
             self.baseurl,
@@ -21310,7 +21310,7 @@ impl Client {
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::PostRequestReviewersPullRequestRequest,
+        body: &types::RequestReviewersPullRequestRequest,
     ) -> Result<types::PullRequestSimple> {
         let url = format!("{}/repos/{}/{}/pulls/{}/requested_reviewers",
             self.baseurl,
@@ -21336,7 +21336,7 @@ impl Client {
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::DeleteRemoveRequestedReviewersFromPullRequestRequest,
+        body: &types::RemoveRequestedReviewersFromPullRequestRequest,
     ) -> Result<types::PullRequestSimple> {
         let url = format!("{}/repos/{}/{}/pulls/{}/requested_reviewers",
             self.baseurl,
@@ -21388,7 +21388,7 @@ impl Client {
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::PostCreateReviewPullRequestRequest,
+        body: &types::CreateReviewPullRequestRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!("{}/repos/{}/{}/pulls/{}/reviews",
             self.baseurl,
@@ -21441,7 +21441,7 @@ impl Client {
         repo: &str,
         pull_number: i64,
         review_id: i64,
-        body: &types::PutUpdateReviewPullRequestRequest,
+        body: &types::UpdateReviewPullRequestRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!("{}/repos/{}/{}/pulls/{}/reviews/{}",
             self.baseurl,
@@ -21523,7 +21523,7 @@ impl Client {
         repo: &str,
         pull_number: i64,
         review_id: i64,
-        body: &types::PutDismissReviewPullRequestRequest,
+        body: &types::DismissReviewPullRequestRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!("{}/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
             self.baseurl,
@@ -21551,7 +21551,7 @@ impl Client {
         repo: &str,
         pull_number: i64,
         review_id: i64,
-        body: &types::PostSubmitReviewPullRequestRequest,
+        body: &types::SubmitReviewPullRequestRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!("{}/repos/{}/{}/pulls/{}/reviews/{}/events",
             self.baseurl,
@@ -21578,7 +21578,7 @@ impl Client {
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::PutUpdatePullRequestBranchRequest,
+        body: &types::UpdatePullRequestBranchRequest,
     ) -> Result<types::PutUpdatePullRequestBranchAcceptedResponse> {
         let url = format!("{}/repos/{}/{}/pulls/{}/update-branch",
             self.baseurl,
@@ -21675,7 +21675,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostCreateReleaseRequest,
+        body: &types::CreateReleaseRequest,
     ) -> Result<types::Release> {
         let url = format!("{}/repos/{}/{}/releases",
             self.baseurl,
@@ -21748,7 +21748,7 @@ impl Client {
         owner: &str,
         repo: &str,
         asset_id: i64,
-        body: &types::PatchUpdateReleaseAssetRequest,
+        body: &types::UpdateReleaseAssetRequest,
     ) -> Result<types::ReleaseAsset> {
         let url = format!("{}/repos/{}/{}/releases/assets/{}",
             self.baseurl,
@@ -21868,7 +21868,7 @@ impl Client {
         owner: &str,
         repo: &str,
         release_id: i64,
-        body: &types::PatchUpdateReleaseRequest,
+        body: &types::UpdateReleaseRequest,
     ) -> Result<types::Release> {
         let url = format!("{}/repos/{}/{}/releases/{}",
             self.baseurl,
@@ -21948,7 +21948,7 @@ impl Client {
         owner: &str,
         repo: &str,
         release_id: i64,
-        body: &types::PostCreateReactionReleaseRequest,
+        body: &types::CreateReactionReleaseRequest,
     ) -> Result<types::Reaction> {
         let url = format!("{}/repos/{}/{}/releases/{}/reactions",
             self.baseurl,
@@ -22024,7 +22024,7 @@ impl Client {
         owner: &str,
         repo: &str,
         alert_number: &str,
-        body: &types::PatchUpdateSecretScanningAlertRequest,
+        body: &types::UpdateSecretScanningAlertRequest,
     ) -> Result<types::SecretScanningAlert> {
         let url = format!("{}/repos/{}/{}/secret-scanning/alerts/{}",
             self.baseurl,
@@ -22184,7 +22184,7 @@ impl Client {
         owner: &str,
         repo: &str,
         sha: &str,
-        body: &types::PostCreateCommitStatusRequest,
+        body: &types::CreateCommitStatusRequest,
     ) -> Result<types::Status> {
         let url = format!("{}/repos/{}/{}/statuses/{}",
             self.baseurl,
@@ -22255,7 +22255,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PutSetRepositorySubscriptionRequest,
+        body: &types::SetRepositorySubscriptionRequest,
     ) -> Result<types::RepositorySubscription> {
         let url = format!("{}/repos/{}/{}/subscription",
             self.baseurl,
@@ -22397,7 +22397,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PutReplaceAllRepositoryTopicsRequest,
+        body: &types::ReplaceAllRepositoryTopicsRequest,
     ) -> Result<types::Topic> {
         let url = format!("{}/repos/{}/{}/topics",
             self.baseurl,
@@ -22511,7 +22511,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::PostTransferRepositoryRequest,
+        body: &types::TransferRepositoryRequest,
     ) -> Result<types::MinimalRepository> {
         let url = format!("{}/repos/{}/{}/transfer",
             self.baseurl,
@@ -22625,7 +22625,7 @@ impl Client {
         &self,
         template_owner: &str,
         template_repo: &str,
-        body: &types::PostCreateRepositoryUsingTemplateRequest,
+        body: &types::CreateRepositoryUsingTemplateRequest,
     ) -> Result<types::Repository> {
         let url = format!("{}/repos/{}/{}/generate",
             self.baseurl,
@@ -22739,7 +22739,7 @@ impl Client {
         repository_id: i64,
         environment_name: &str,
         secret_name: &str,
-        body: &types::PutCreateUpdateEnvironmentSecretRequest,
+        body: &types::CreateUpdateEnvironmentSecretRequest,
     ) -> Result<types::EmptyObject> {
         let url = format!("{}/repositories/{}/environments/{}/secrets/{}",
             self.baseurl,
@@ -22811,7 +22811,7 @@ impl Client {
     pub async fn enterprise_admin_provision_and_invite_enterprise_group(
         &self,
         enterprise: &str,
-        body: &types::PostProvisionScimEnterpriseGroupandInviteUsersRequest,
+        body: &types::ProvisionScimEnterpriseGroupandInviteUsersRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!("{}/scim/v2/enterprises/{}/Groups",
             self.baseurl,
@@ -22857,7 +22857,7 @@ impl Client {
         &self,
         enterprise: &str,
         scim_group_id: &str,
-        body: &types::PutSetScimInformationProvisionedEnterpriseGroupRequest,
+        body: &types::SetScimInformationProvisionedEnterpriseGroupRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!("{}/scim/v2/enterprises/{}/Groups/{}",
             self.baseurl,
@@ -22903,7 +22903,7 @@ impl Client {
         &self,
         enterprise: &str,
         scim_group_id: &str,
-        body: &types::PatchUpdateAttributeScimEnterpriseGroupRequest,
+        body: &types::UpdateAttributeScimEnterpriseGroupRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!("{}/scim/v2/enterprises/{}/Groups/{}",
             self.baseurl,
@@ -22949,7 +22949,7 @@ impl Client {
     pub async fn enterprise_admin_provision_and_invite_enterprise_user(
         &self,
         enterprise: &str,
-        body: &types::PostProvisionandInviteScimEnterpriseUserRequest,
+        body: &types::ProvisionandInviteScimEnterpriseUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!("{}/scim/v2/enterprises/{}/Users",
             self.baseurl,
@@ -22994,7 +22994,7 @@ impl Client {
         &self,
         enterprise: &str,
         scim_user_id: &str,
-        body: &types::PutSetScimInformationProvisionedEnterpriseUserRequest,
+        body: &types::SetScimInformationProvisionedEnterpriseUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!("{}/scim/v2/enterprises/{}/Users/{}",
             self.baseurl,
@@ -23040,7 +23040,7 @@ impl Client {
         &self,
         enterprise: &str,
         scim_user_id: &str,
-        body: &types::PatchUpdateAttributeScimEnterpriseUserRequest,
+        body: &types::UpdateAttributeScimEnterpriseUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!("{}/scim/v2/enterprises/{}/Users/{}",
             self.baseurl,
@@ -23086,7 +23086,7 @@ impl Client {
     pub async fn scim_provision_and_invite_user(
         &self,
         org: &str,
-        body: &types::PostProvisionandInviteScimUserRequest,
+        body: &types::ProvisionandInviteScimUserRequest,
     ) -> Result<types::ScimUser> {
         let url = format!("{}/scim/v2/organizations/{}/Users",
             self.baseurl,
@@ -23131,7 +23131,7 @@ impl Client {
         &self,
         org: &str,
         scim_user_id: &str,
-        body: &types::PutUpdateProvisionedOrganizationMembershipRequest,
+        body: &types::UpdateProvisionedOrganizationMembershipRequest,
     ) -> Result<types::ScimUser> {
         let url = format!("{}/scim/v2/organizations/{}/Users/{}",
             self.baseurl,
@@ -23177,7 +23177,7 @@ impl Client {
         &self,
         org: &str,
         scim_user_id: &str,
-        body: &types::PatchUpdateAttributeScimUserRequest,
+        body: &types::UpdateAttributeScimUserRequest,
     ) -> Result<types::ScimUser> {
         let url = format!("{}/scim/v2/organizations/{}/Users/{}",
             self.baseurl,
@@ -23400,7 +23400,7 @@ impl Client {
     pub async fn teams_update_legacy(
         &self,
         team_id: i64,
-        body: &types::PatchUpdateTeamRequest,
+        body: &types::UpdateTeamRequest,
     ) -> Result<types::TeamFull> {
         let url = format!("{}/teams/{}",
             self.baseurl,
@@ -23445,7 +23445,7 @@ impl Client {
     pub async fn teams_create_discussion_legacy(
         &self,
         team_id: i64,
-        body: &types::PostCreateDiscussionRequest,
+        body: &types::CreateDiscussionRequest,
     ) -> Result<types::TeamDiscussion> {
         let url = format!("{}/teams/{}/discussions",
             self.baseurl,
@@ -23512,7 +23512,7 @@ impl Client {
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &types::PatchUpdateDiscussionRequest,
+        body: &types::UpdateDiscussionRequest,
     ) -> Result<types::TeamDiscussion> {
         let url = format!("{}/teams/{}/discussions/{}",
             self.baseurl,
@@ -23561,7 +23561,7 @@ impl Client {
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &types::PostCreateDiscussionCommentRequest,
+        body: &types::CreateDiscussionCommentRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!("{}/teams/{}/discussions/{}/comments",
             self.baseurl,
@@ -23634,7 +23634,7 @@ impl Client {
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::PatchUpdateDiscussionCommentRequest,
+        body: &types::UpdateDiscussionCommentRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!("{}/teams/{}/discussions/{}/comments/{}",
             self.baseurl,
@@ -23687,7 +23687,7 @@ impl Client {
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::PostCreateReactionTeamDiscussionCommentRequest,
+        body: &types::CreateReactionTeamDiscussionCommentRequest,
     ) -> Result<types::Reaction> {
         let url = format!("{}/teams/{}/discussions/{}/comments/{}/reactions",
             self.baseurl,
@@ -23737,7 +23737,7 @@ impl Client {
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &types::PostCreateReactionTeamDiscussionRequest,
+        body: &types::CreateReactionTeamDiscussionRequest,
     ) -> Result<types::Reaction> {
         let url = format!("{}/teams/{}/discussions/{}/reactions",
             self.baseurl,
@@ -23894,7 +23894,7 @@ impl Client {
         &self,
         team_id: i64,
         username: &str,
-        body: &types::PutAddUpdateTeamMembershipUserRequest,
+        body: &types::AddUpdateTeamMembershipUserRequest,
     ) -> Result<types::TeamMembership> {
         let url = format!("{}/teams/{}/memberships/{}",
             self.baseurl,
@@ -23984,7 +23984,7 @@ impl Client {
         &self,
         team_id: i64,
         project_id: i64,
-        body: &types::PutAddUpdateTeamProjectPermissionsRequest,
+        body: &types::AddUpdateTeamProjectPermissionsRequest,
     ) -> Result<()> {
         let url = format!("{}/teams/{}/projects/{}",
             self.baseurl,
@@ -24077,7 +24077,7 @@ impl Client {
         team_id: i64,
         owner: &str,
         repo: &str,
-        body: &types::PutAddUpdateTeamRepositoryPermissionsRequest,
+        body: &types::AddUpdateTeamRepositoryPermissionsRequest,
     ) -> Result<()> {
         let url = format!("{}/teams/{}/repos/{}/{}",
             self.baseurl,
@@ -24145,7 +24145,7 @@ impl Client {
     pub async fn teams_create_or_update_idp_group_connections_legacy(
         &self,
         team_id: i64,
-        body: &types::PatchCreateUpdateIdpGroupConnectionsRequest,
+        body: &types::CreateUpdateIdpGroupConnectionsRequest,
     ) -> Result<types::GroupMapping> {
         let url = format!("{}/teams/{}/team-sync/group-mappings",
             self.baseurl,
@@ -24188,7 +24188,7 @@ impl Client {
      */
     pub async fn users_get_authenticated(
         &self,
-    ) -> Result<types::GetGetOkResponse> {
+    ) -> Result<types::GetOkResponse> {
         let url = format!("{}/user",
             self.baseurl,
         );
@@ -24206,7 +24206,7 @@ impl Client {
      */
     pub async fn users_update_authenticated(
         &self,
-        body: &types::PatchUpdateRequest,
+        body: &types::UpdateRequest,
     ) -> Result<types::PrivateUser> {
         let url = format!("{}/user",
             self.baseurl,
@@ -24304,7 +24304,7 @@ impl Client {
      */
     pub async fn users_set_primary_email_visibility_for_authenticated(
         &self,
-        body: &types::PatchSetPrimaryEmailVisibilityRequest,
+        body: &types::SetPrimaryEmailVisibilityRequest,
     ) -> Result<Vec<types::Email>> {
         let url = format!("{}/user/email/visibility",
             self.baseurl,
@@ -24344,7 +24344,7 @@ impl Client {
      */
     pub async fn users_add_email_for_authenticated(
         &self,
-        body: &types::PostAddEmailAddressRequest,
+        body: &types::AddEmailAddressRequest,
     ) -> Result<Vec<types::Email>> {
         let url = format!("{}/user/emails",
             self.baseurl,
@@ -24364,7 +24364,7 @@ impl Client {
      */
     pub async fn users_delete_email_for_authenticated(
         &self,
-        body: &types::DeleteDeleteEmailAddressRequest,
+        body: &types::DeleteEmailAddressRequest,
     ) -> Result<()> {
         let url = format!("{}/user/emails",
             self.baseurl,
@@ -24504,7 +24504,7 @@ impl Client {
      */
     pub async fn users_create_gpg_key_for_authenticated(
         &self,
-        body: &types::PostCreateGpgKeyRequest,
+        body: &types::CreateGpgKeyRequest,
     ) -> Result<types::GpgKey> {
         let url = format!("{}/user/gpg_keys",
             self.baseurl,
@@ -24650,7 +24650,7 @@ impl Client {
      */
     pub async fn interactions_get_restrictions_for_authenticated_user(
         &self,
-    ) -> Result<types::GetGetInteractionRestrictionsPublicRepositoriesOkResponse> {
+    ) -> Result<types::GetInteractionRestrictionsPublicRepositoriesOkResponse> {
         let url = format!("{}/user/interaction-limits",
             self.baseurl,
         );
@@ -24752,7 +24752,7 @@ impl Client {
      */
     pub async fn users_create_public_ssh_key_for_authenticated(
         &self,
-        body: &types::PostCreatePublicSshKeyRequest,
+        body: &types::CreatePublicSshKeyRequest,
     ) -> Result<types::Key> {
         let url = format!("{}/user/keys",
             self.baseurl,
@@ -24894,7 +24894,7 @@ impl Client {
     pub async fn orgs_update_membership_for_authenticated_user(
         &self,
         org: &str,
-        body: &types::PatchUpdateOrganizationMembershipRequest,
+        body: &types::UpdateOrganizationMembershipRequest,
     ) -> Result<types::OrgMembership> {
         let url = format!("{}/user/memberships/orgs/{}",
             self.baseurl,
@@ -24935,7 +24935,7 @@ impl Client {
      */
     pub async fn migrations_start_for_authenticated_user(
         &self,
-        body: &types::PostStartUserMigrationRequest,
+        body: &types::StartUserMigrationRequest,
     ) -> Result<types::Migration> {
         let url = format!("{}/user/migrations",
             self.baseurl,
@@ -25244,7 +25244,7 @@ impl Client {
      */
     pub async fn projects_create_for_authenticated_user(
         &self,
-        body: &types::PostCreateUserProjectRequest,
+        body: &types::CreateUserProjectRequest,
     ) -> Result<types::Project> {
         let url = format!("{}/user/projects",
             self.baseurl,
@@ -25311,7 +25311,7 @@ impl Client {
      */
     pub async fn repos_create_for_authenticated_user(
         &self,
-        body: &types::PostCreateRepositoryRequest,
+        body: &types::CreateRepositoryRequest,
     ) -> Result<types::Repository> {
         let url = format!("{}/user/repos",
             self.baseurl,
@@ -25540,7 +25540,7 @@ impl Client {
     pub async fn users_get_by_username(
         &self,
         username: &str,
-    ) -> Result<types::GetGetUserOkResponse> {
+    ) -> Result<types::GetUserOkResponse> {
         let url = format!("{}/users/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),

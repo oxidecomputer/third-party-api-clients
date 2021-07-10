@@ -1174,7 +1174,7 @@ fn gen(
                                 openapiv3::ReferenceOr::Item(item) => {
                                     let object_name = format!(
                                         "{} Request",
-                                        summary_to_object_name(m, &o.summary.as_ref().unwrap())
+                                        summary_to_object_name("", &o.summary.as_ref().unwrap())
                                     );
                                     ts.select_schema(Some(&object_name), item, "", false)?
                                 }
@@ -1478,26 +1478,30 @@ fn clean_name(s: &str) -> String {
 }
 
 fn summary_to_object_name(m: &str, s: &str) -> String {
-    format!(
-        "{} {}",
-        m.to_lowercase(),
-        &s.to_lowercase()
-            .replace('.', "")
-            .replace('_', " ")
-            .replace(" an ", " ")
-            .replace(" or ", " ")
-            .replace(" for ", " ")
-            .replace(" to ", " ")
-            .replace(" your ", " ")
-            .replace(" the ", " ")
-            .replace("(beta)", "")
-            .replace("(legacy)", "")
-            .replace("-", " ")
-            .replace(" a ", " ")
-            .replace("'", "")
-            .replace(" of ", " ")
-            .replace("authenticated user", "")
-    )
+    let cleaned = s
+        .to_lowercase()
+        .replace('.', "")
+        .replace('_', " ")
+        .replace(" an ", " ")
+        .replace(" or ", " ")
+        .replace(" for ", " ")
+        .replace(" to ", " ")
+        .replace(" your ", " ")
+        .replace(" the ", " ")
+        .replace("(beta)", "")
+        .replace("(legacy)", "")
+        .replace("-", " ")
+        .replace(" a ", " ")
+        .replace("'", "")
+        .replace(" of ", " ")
+        .replace("authenticated user", "")
+        .replace("  ", " ");
+
+    if m.is_empty() || cleaned.starts_with(&m.to_lowercase()) {
+        cleaned
+    } else {
+        format!("{} {}", m.to_lowercase(), cleaned)
+    }
 }
 
 fn main() -> Result<()> {
@@ -1592,7 +1596,7 @@ fn main() -> Result<()> {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!(
                                     "{} Request",
-                                    summary_to_object_name(m, &o.summary.as_ref().unwrap())
+                                    summary_to_object_name("", &o.summary.as_ref().unwrap())
                                 );
                                 let id = ts.select(Some(&object_name), s, false)?;
                                 println!("    {} {} request body -> {:?}", pn, m, id);
