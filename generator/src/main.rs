@@ -611,15 +611,16 @@ impl TypeSpace {
                 }
                 TypeDetails::Object(_) => {
                     if let Some(n) = &te.name {
+                        let struct_name = struct_name(&n);
                         if in_mod {
-                            Ok(n.to_string())
+                            Ok(struct_name.to_string())
                         } else {
                             /*
                              * Model types are declared in the "types" module,
                              * and must be referenced with that prefix when not
                              * in the module itself.
                              */
-                            Ok(format!("types::{}", n.to_string()))
+                            Ok(format!("types::{}", struct_name.to_string()))
                         }
                     } else {
                         bail!("object type {:?} does not have a name?", tid);
@@ -1027,27 +1028,37 @@ fn gen(
     a("    use serde::{Serialize, Deserialize};");
     a("");
     for te in ts.id_to_entry.values() {
-        match &te.details {
-            TypeDetails::Object(omap) => {
-                a("    #[derive(Serialize, Deserialize, Debug)]");
-                a(&format!(
-                    "    pub struct {} {{",
-                    te.name.as_deref().unwrap()
-                ));
-                for (name, tid) in omap.iter() {
-                    if let Ok(rt) = ts.render_type(tid, true) {
-                        a(&format!("        pub {}: {},", name, rt));
+        if let Some(sn) = te.name.as_deref() {
+            let struct_name = struct_name(&sn);
+            match &te.details {
+                TypeDetails::Object(omap) => {
+                    a("    #[derive(Serialize, Deserialize, Debug)]");
+                    a(&format!("    pub struct {} {{", struct_name));
+                    for (name, tid) in omap.iter() {
+                        if let Ok(rt) = ts.render_type(tid, true) {
+                            if name == "ref" {
+                                a(r#"        #[serde(rename = "ref")]"#);
+                                a(&format!("        pub ref_: {},", rt));
+                            } else if name == "type" {
+                                a(r#"        #[serde(rename = "type")]"#);
+                                a(&format!("        pub type_: {},", rt));
+                            } else {
+                                a(&format!("        pub {}: {},", name, rt));
+                            }
+                        } else {
+                            // TODO: fix this.
+                            println!("rendering type {:?} failed", tid);
+                        }
                     }
-                    // TODO: do something when this fails.
+                    a("    }");
+                    a("");
                 }
-                a("    }");
-                a("");
+                TypeDetails::Basic => {}
+                TypeDetails::Unknown => {}
+                TypeDetails::Enum(_) => {}
+                TypeDetails::Array(_) => {}
+                TypeDetails::Optional(_) => {}
             }
-            TypeDetails::Basic => {}
-            TypeDetails::Unknown => {}
-            TypeDetails::Enum(_) => {}
-            TypeDetails::Array(_) => {}
-            TypeDetails::Optional(_) => {}
         }
     }
     a("}");
@@ -1095,7 +1106,8 @@ fn gen(
                 return Ok(());
             };
 
-            let oid = o.operation_id.as_deref().unwrap();
+            let mut oid = o.operation_id.as_deref().unwrap().to_string();
+            oid = oid.replace("-", "_").replace("/", "_");
             a("    /**");
             a(&format!("     * {}: {} {}", oid, m, p));
             a("     */");
@@ -1283,10 +1295,13 @@ fn gen(
                                         }
                                     }
                                 };
-                                a(&format!(
-                                    "    ) -> Result<{}> {{",
-                                    ts.render_type(&tid, false)?
-                                ));
+                                if let Ok(rt) = ts.render_type(&tid, false) {
+                                    a(&format!("    ) -> Result<{}> {{", rt));
+                                } else {
+                                    // TODO: fix this
+                                    println!("rendering type {:?} failed", tid);
+                                    a("    ) -> Result<()> {");
+                                }
                             } else {
                                 bail!("media type encoding, no schema: {:#?}", mt);
                             }
@@ -1304,6 +1319,48 @@ fn gen(
                                     println!("ct {} render_type {}", ct, rt);
 
                                     a(&format!("    ) -> Result<{}> {{", rt));
+                                } else {
+                                    bail!("media type encoding, no schema: {:#?}", mt);
+                                }
+                            } else if ct == "application/scim+json" {
+                                if !mt.encoding.is_empty() {
+                                    bail!("media type encoding not empty: {:#?}", mt);
+                                }
+
+                                if let Some(s) = &mt.schema {
+                                    let tid = match s {
+                                        openapiv3::ReferenceOr::Reference { reference } => {
+                                            ts.select_ref(None, reference.as_str())?
+                                        }
+                                        openapiv3::ReferenceOr::Item(item) => {
+                                            if let openapiv3::StatusCode::Code(c) = only.0 {
+                                                let status_code = StatusCode::from_u16(*c).unwrap();
+                                                let object_name = format!(
+                                                    "{} {} Response",
+                                                    summary_to_object_name(
+                                                        m,
+                                                        &o.summary.as_ref().unwrap()
+                                                    ),
+                                                    status_code
+                                                        .canonical_reason()
+                                                        .unwrap()
+                                                        .to_lowercase()
+                                                );
+                                                ts.select_schema(Some(&object_name), item, "")?
+                                            } else {
+                                                bail!(
+                                                    "got a range and not a code for {:?}",
+                                                    only.0
+                                                );
+                                            }
+                                        }
+                                    };
+                                    if let Ok(rt) = ts.render_type(&tid, false) {
+                                        a(&format!("    ) -> Result<{}> {{", rt));
+                                    } else {
+                                        // TODO: fix this
+                                        println!("rendering type {:?} failed", tid);
+                                    }
                                 } else {
                                     bail!("media type encoding, no schema: {:#?}", mt);
                                 }
@@ -1359,6 +1416,10 @@ fn gen(
     a("}");
 
     Ok(out)
+}
+
+fn struct_name(s: &str) -> String {
+    titlecase::titlecase(&s.replace('-', " ").replace('_', " ")).replace(" ", "")
 }
 
 fn summary_to_object_name(m: &str, s: &str) -> String {
@@ -1611,17 +1672,18 @@ fn main() -> Result<()> {
             let mut toml = root.clone();
             toml.push("Cargo.toml");
             let tomlout = format!(
-                "[package]\n\
-                name = \"{}\"\n\
-                version = \"{}\"\n\
-                edition = \"2018\"\n\
-                \n\
-                [dependencies]\n\
-                anyhow = \"1\"\n\
-                chrono = \"0.4\"\n\
-                percent-encoding = \"2.1\"\n\
-                reqwest = {{ version = \"0.11\", features = [\"json\"] }}\n\
-                serde = {{ version = \"1\", features = [\"derive\"] }}\n",
+                r#"[package]
+name = "{}"
+version = "{}"
+edition = "2018"
+
+[dependencies]
+anyhow = "1"
+chrono = "0.4"
+percent-encoding = "2.1"
+reqwest = {{ version = "0.11", features = ["json"] }}
+serde = {{ version = "1", features = ["derive"] }}
+serde_json = "1""#,
                 name, version,
             );
             save(&toml, tomlout.as_str())?;
