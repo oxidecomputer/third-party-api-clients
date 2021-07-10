@@ -1,5 +1,7 @@
 
 use anyhow::Result;
+use chrono::{DateTime, Utc, NaiveDate};
+
 
 mod progenitor_support {
     use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
@@ -21,10 +23,10 @@ mod progenitor_support {
 }
 
 pub mod types {
-    use chrono::prelude::*;
     use serde::{Serialize, Deserialize};
+    use schemars::JsonSchema;
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SimpleUser {
         pub avatar_url: String,
         pub email: Option<String>,
@@ -50,7 +52,42 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Owner {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Permissions {
+        pub checks: Option<String>,
+        pub contents: Option<String>,
+        pub deployments: Option<String>,
+        pub issues: Option<String>,
+        pub metadata: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Integration {
         pub client_id: Option<String>,
         pub client_secret: Option<String>,
@@ -71,7 +108,7 @@ pub mod types {
         pub webhook_secret: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BasicError {
         pub documentation_url: Option<String>,
         pub message: Option<String>,
@@ -79,19 +116,19 @@ pub mod types {
         pub url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ValidationErrorSimple {
         pub documentation_url: String,
         pub errors: Option<Vec<String>>,
         pub message: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct WebhookConfig {
-        pub insecure_ssl: Option<webhook-config-insecure-ssl>,
+        pub insecure_ssl: Option<webhook config insecure ssl>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Enterprise {
         pub avatar_url: String,
         pub created_at: DateTime<Utc>,
@@ -105,7 +142,7 @@ pub mod types {
         pub website_url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AppPermissions {
         pub actions: Option<String>,
         pub administration: Option<String>,
@@ -140,7 +177,59 @@ pub mod types {
         pub workflows: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Account {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct SuspendedBy {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Installation {
         pub access_tokens_url: String,
         pub account: Account,
@@ -164,7 +253,7 @@ pub mod types {
         pub updated_at: DateTime<Utc>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LicenseSimple {
         pub html_url: Option<String>,
         pub key: String,
@@ -174,7 +263,166 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct License {
+        pub html_url: Option<String>,
+        pub key: String,
+        pub name: String,
+        pub node_id: String,
+        pub spdx_id: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Organization {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RepositoryPermissions {
+        pub admin: bool,
+        pub maintain: Option<bool>,
+        pub pull: bool,
+        pub push: bool,
+        pub triage: Option<bool>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RepositoryTemplate_repositoryTemplateRepositoryOwner {
+        pub avatar_url: Option<String>,
+        pub events_url: Option<String>,
+        pub followers_url: Option<String>,
+        pub following_url: Option<String>,
+        pub gists_url: Option<String>,
+        pub gravatar_id: Option<String>,
+        pub html_url: Option<String>,
+        pub id: Option<i64>,
+        pub login: Option<String>,
+        pub node_id: Option<String>,
+        pub organizations_url: Option<String>,
+        pub received_events_url: Option<String>,
+        pub repos_url: Option<String>,
+        pub site_admin: Option<bool>,
+        pub starred_url: Option<String>,
+        pub subscriptions_url: Option<String>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RepositoryTemplate_repositoryTemplateRepositoryPermissions {
+        pub admin: Option<bool>,
+        pub pull: Option<bool>,
+        pub push: Option<bool>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TemplateRepository {
+        pub allow_merge_commit: Option<bool>,
+        pub allow_rebase_merge: Option<bool>,
+        pub allow_squash_merge: Option<bool>,
+        pub archive_url: Option<String>,
+        pub archived: Option<bool>,
+        pub assignees_url: Option<String>,
+        pub blobs_url: Option<String>,
+        pub branches_url: Option<String>,
+        pub clone_url: Option<String>,
+        pub collaborators_url: Option<String>,
+        pub comments_url: Option<String>,
+        pub commits_url: Option<String>,
+        pub compare_url: Option<String>,
+        pub contents_url: Option<String>,
+        pub contributors_url: Option<String>,
+        pub created_at: Option<String>,
+        pub default_branch: Option<String>,
+        pub delete_branch_on_merge: Option<bool>,
+        pub deployments_url: Option<String>,
+        pub description: Option<String>,
+        pub disabled: Option<bool>,
+        pub downloads_url: Option<String>,
+        pub events_url: Option<String>,
+        pub fork: Option<bool>,
+        pub forks_count: Option<i64>,
+        pub forks_url: Option<String>,
+        pub full_name: Option<String>,
+        pub git_commits_url: Option<String>,
+        pub git_refs_url: Option<String>,
+        pub git_tags_url: Option<String>,
+        pub git_url: Option<String>,
+        pub has_downloads: Option<bool>,
+        pub has_issues: Option<bool>,
+        pub has_pages: Option<bool>,
+        pub has_projects: Option<bool>,
+        pub has_wiki: Option<bool>,
+        pub homepage: Option<String>,
+        pub hooks_url: Option<String>,
+        pub html_url: Option<String>,
+        pub id: Option<i64>,
+        pub is_template: Option<bool>,
+        pub issue_comment_url: Option<String>,
+        pub issue_events_url: Option<String>,
+        pub issues_url: Option<String>,
+        pub keys_url: Option<String>,
+        pub labels_url: Option<String>,
+        pub language: Option<String>,
+        pub languages_url: Option<String>,
+        pub merges_url: Option<String>,
+        pub milestones_url: Option<String>,
+        pub mirror_url: Option<String>,
+        pub name: Option<String>,
+        pub network_count: Option<i64>,
+        pub node_id: Option<String>,
+        pub notifications_url: Option<String>,
+        pub open_issues_count: Option<i64>,
+        pub owner: Option<Owner>,
+        pub permissions: Option<Permissions>,
+        pub private: Option<bool>,
+        pub pulls_url: Option<String>,
+        pub pushed_at: Option<String>,
+        pub releases_url: Option<String>,
+        pub size: Option<i64>,
+        pub ssh_url: Option<String>,
+        pub stargazers_count: Option<i64>,
+        pub stargazers_url: Option<String>,
+        pub statuses_url: Option<String>,
+        pub subscribers_count: Option<i64>,
+        pub subscribers_url: Option<String>,
+        pub subscription_url: Option<String>,
+        pub svn_url: Option<String>,
+        pub tags_url: Option<String>,
+        pub teams_url: Option<String>,
+        pub temp_clone_token: Option<String>,
+        pub topics: Option<Vec<String>>,
+        pub trees_url: Option<String>,
+        pub updated_at: Option<String>,
+        pub url: Option<String>,
+        pub visibility: Option<String>,
+        pub watchers_count: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Repository {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
@@ -266,7 +514,7 @@ pub mod types {
         pub watchers_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InstallationToken {
         pub expires_at: String,
         pub has_multiple_single_files: Option<bool>,
@@ -278,14 +526,57 @@ pub mod types {
         pub token: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Errors {
+        pub code: String,
+        pub field: Option<String>,
+        pub index: Option<i64>,
+        pub message: Option<String>,
+        pub resource: Option<String>,
+        pub value: Option<value>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ValidationError {
         pub documentation_url: String,
         pub errors: Option<Vec<Errors>>,
         pub message: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct App {
+        pub client_id: String,
+        pub name: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct User {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ApplicationGrant {
         pub app: App,
         pub created_at: DateTime<Utc>,
@@ -296,7 +587,7 @@ pub mod types {
         pub user: Option<User>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScopedInstallation {
         pub account: SimpleUser,
         pub has_multiple_single_files: Option<bool>,
@@ -307,7 +598,18 @@ pub mod types {
         pub single_file_paths: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct AuthorizationInstallation {
+        pub account: SimpleUser,
+        pub has_multiple_single_files: Option<bool>,
+        pub permissions: AppPermissions,
+        pub repositories_url: String,
+        pub repository_selection: String,
+        pub single_file_name: String,
+        pub single_file_paths: Option<Vec<String>>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Authorization {
         pub app: App,
         pub created_at: DateTime<Utc>,
@@ -325,7 +627,7 @@ pub mod types {
         pub user: Option<User>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeofConduct {
         pub body: Option<String>,
         pub html_url: String,
@@ -334,12 +636,12 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsEnterprisePermissions {
         pub selected_organizations_url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrganizationSimple {
         pub avatar_url: String,
         pub description: String,
@@ -355,14 +657,14 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SelectedActions {
         pub github_owned_allowed: Option<bool>,
         pub patterns_allowed: Option<Vec<String>>,
         pub verified_allowed: Option<bool>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RunnerGroupsEnterprise {
         pub allows_public_repositories: bool,
         pub default: bool,
@@ -373,7 +675,15 @@ pub mod types {
         pub visibility: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Labels {
+        pub id: Option<i64>,
+        pub name: Option<String>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Runner {
         pub busy: bool,
         pub id: i64,
@@ -383,7 +693,7 @@ pub mod types {
         pub status: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RunnerApplication {
         pub architecture: String,
         pub download_url: String,
@@ -393,7 +703,11 @@ pub mod types {
         pub temp_download_token: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct AuthenticationTokenPermissions {
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AuthenticationToken {
         pub expires_at: DateTime<Utc>,
         pub permissions: Option<Permissions>,
@@ -403,9 +717,19 @@ pub mod types {
         pub token: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ActorLocation {
+        pub country_name: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Data {
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AuditLogEvent {
-        pub @timestamp: Option<i64>,
+        #[serde(rename = "@timestamp")]
+        pub timestamp: Option<i64>,
         pub _document_id: Option<String>,
         pub action: Option<String>,
         pub active: Option<bool>,
@@ -447,7 +771,14 @@ pub mod types {
         pub visibility: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MinutesUsedBreakdown {
+        pub MACOS: Option<i64>,
+        pub UBUNTU: Option<i64>,
+        pub WINDOWS: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsBillingUsage {
         pub included_minutes: i64,
         pub minutes_used_breakdown: MinutesUsedBreakdown,
@@ -455,21 +786,21 @@ pub mod types {
         pub total_paid_minutes_used: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PackagesBillingUsage {
         pub included_gigabytes_bandwidth: i64,
         pub total_gigabytes_bandwidth_used: i64,
         pub total_paid_gigabytes_bandwidth_used: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CombinedBillingUsage {
         pub days_left_in_billing_cycle: i64,
         pub estimated_paid_storage_for_month: i64,
         pub estimated_storage_for_month: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Actor {
         pub avatar_url: String,
         pub display_login: Option<String>,
@@ -479,7 +810,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Label {
         pub color: String,
         pub default: bool,
@@ -490,7 +821,33 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Creator {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Milestone {
         pub closed_at: DateTime<Utc>,
         pub closed_issues: i64,
@@ -510,7 +867,63 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Assignee {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequest {
+        pub diff_url: String,
+        pub html_url: String,
+        pub merged_at: Option<DateTime<Utc>>,
+        pub patch_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PerformedviaGithubApp {
+        pub client_id: Option<String>,
+        pub client_secret: Option<String>,
+        pub created_at: DateTime<Utc>,
+        pub description: String,
+        pub events: Vec<String>,
+        pub external_url: String,
+        pub html_url: String,
+        pub id: i64,
+        pub installations_count: Option<i64>,
+        pub name: String,
+        pub node_id: String,
+        pub owner: Owner,
+        pub pem: Option<String>,
+        pub permissions: Permissions,
+        pub slug: Option<String>,
+        pub updated_at: DateTime<Utc>,
+        pub webhook_secret: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueSimple {
         pub active_lock_reason: Option<String>,
         pub assignee: Assignee,
@@ -543,10 +956,12 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionRollup {
-        pub +1: i64,
-        pub -1: i64,
+        #[serde(rename = "+1")]
+        pub plus_one: i64,
+        #[serde(rename = "-1")]
+        pub minus_one: i64,
         pub confused: i64,
         pub eyes: i64,
         pub heart: i64,
@@ -557,7 +972,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueComment {
         pub body: Option<String>,
         pub body_html: Option<String>,
@@ -574,7 +989,32 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Repo {
+        pub id: i64,
+        pub name: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Pages {
+        pub action: Option<String>,
+        pub html_url: Option<String>,
+        pub page_name: Option<String>,
+        pub sha: Option<String>,
+        pub summary: Option<String>,
+        pub title: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Payload {
+        pub action: Option<String>,
+        pub comment: Option<IssueComment>,
+        pub issue: Option<IssueSimple>,
+        pub pages: Option<Vec<Pages>>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Event {
         pub actor: Actor,
         pub created_at: DateTime<Utc>,
@@ -587,14 +1027,26 @@ pub mod types {
         pub type_: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LinkWithType {
         pub href: String,
         #[serde(rename = "type")]
         pub type_: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Links {
+        pub current_user: Option<LinkWithType>,
+        pub current_user_actor: Option<LinkWithType>,
+        pub current_user_organization: Option<LinkWithType>,
+        pub current_user_organizations: Option<Vec<LinkWithType>>,
+        pub current_user_public: Option<LinkWithType>,
+        pub security_advisories: Option<LinkWithType>,
+        pub timeline: LinkWithType,
+        pub user: LinkWithType,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Feed {
         pub _links: Links,
         pub current_user_actor_url: Option<String>,
@@ -607,7 +1059,11 @@ pub mod types {
         pub user_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Files {
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BaseGist {
         pub comments: i64,
         pub comments_url: String,
@@ -631,7 +1087,15 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Plan {
+        pub collaborators: i64,
+        pub name: String,
+        pub private_repos: i64,
+        pub space: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PublicUser {
         pub avatar_url: String,
         pub bio: String,
@@ -675,7 +1139,14 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ChangeStatus {
+        pub additions: Option<i64>,
+        pub deletions: Option<i64>,
+        pub total: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GistHistory {
         pub change_status: Option<ChangeStatus>,
         pub committed_at: Option<DateTime<Utc>>,
@@ -684,7 +1155,40 @@ pub mod types {
         pub version: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Forks {
+        pub created_at: Option<DateTime<Utc>>,
+        pub id: Option<String>,
+        pub updated_at: Option<DateTime<Utc>>,
+        pub url: Option<String>,
+        pub user: Option<PublicUser>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ForkOf {
+        pub comments: i64,
+        pub comments_url: String,
+        pub commits_url: String,
+        pub created_at: DateTime<Utc>,
+        pub description: String,
+        pub files: Files,
+        pub forks: Option<Vec<serde_json::Value>>,
+        pub forks_url: String,
+        pub git_pull_url: String,
+        pub git_push_url: String,
+        pub history: Option<Vec<serde_json::Value>>,
+        pub html_url: String,
+        pub id: String,
+        pub node_id: String,
+        pub owner: Option<Owner>,
+        pub public: bool,
+        pub truncated: Option<bool>,
+        pub updated_at: DateTime<Utc>,
+        pub url: String,
+        pub user: User,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GistSimple {
         pub comments: Option<i64>,
         pub comments_url: Option<String>,
@@ -709,7 +1213,7 @@ pub mod types {
         pub user: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GistComment {
         pub body: String,
         pub created_at: DateTime<Utc>,
@@ -720,7 +1224,7 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GistCommit {
         pub change_status: ChangeStatus,
         pub committed_at: DateTime<Utc>,
@@ -729,13 +1233,39 @@ pub mod types {
         pub version: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitignoreTemplate {
         pub name: String,
         pub source: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ClosedBy {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Issue {
         pub active_lock_reason: Option<String>,
         pub assignee: Assignee,
@@ -770,17 +1300,24 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct License {
-        pub html_url: Option<String>,
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct LicenseData {
+        pub body: String,
+        pub conditions: Vec<String>,
+        pub description: String,
+        pub featured: bool,
+        pub html_url: String,
+        pub implementation: String,
         pub key: String,
+        pub limitations: Vec<String>,
         pub name: String,
         pub node_id: String,
+        pub permissions: Vec<String>,
         pub spdx_id: String,
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MarketplaceListingPlan {
         pub accounts_url: String,
         pub bullets: Vec<String>,
@@ -797,8 +1334,29 @@ pub mod types {
         pub yearly_price_in_cents: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MarketplacePendingChange {
+        pub effective_date: Option<String>,
+        pub id: Option<i64>,
+        pub is_installed: Option<bool>,
+        pub plan: Option<MarketplaceListingPlan>,
+        pub unit_count: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MarketplacePurchase {
+        pub billing_cycle: Option<String>,
+        pub free_trial_ends_on: Option<String>,
+        pub is_installed: Option<bool>,
+        pub next_billing_date: Option<String>,
+        pub on_free_trial: Option<bool>,
+        pub plan: Option<MarketplaceListingPlan>,
+        pub unit_count: Option<i64>,
+        pub updated_at: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MarketplacePurchaseData {
         pub email: Option<String>,
         pub id: i64,
         pub login: String,
@@ -810,7 +1368,13 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct SshKeyFingerprints {
+        pub SHA256_DSA: Option<String>,
+        pub SHA256_RSA: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ApiOverview {
         pub actions: Option<Vec<String>>,
         pub api: Option<Vec<String>>,
@@ -825,7 +1389,33 @@ pub mod types {
         pub web: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MinimalRepositoryOwner {
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MinimalRepositoryPermissions {
+        pub admin: Option<bool>,
+        pub maintain: Option<bool>,
+        pub pull: Option<bool>,
+        pub push: Option<bool>,
+        pub triage: Option<bool>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MinimalRepositoryTemplate_repository {
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MinimalRepositoryLicense {
+        pub key: Option<String>,
+        pub name: Option<String>,
+        pub node_id: Option<String>,
+        pub spdx_id: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MinimalRepository {
         pub archive_url: String,
         pub archived: Option<bool>,
@@ -912,7 +1502,16 @@ pub mod types {
         pub watchers_count: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Subject {
+        pub latest_comment_url: String,
+        pub title: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Thread {
         pub id: String,
         pub last_read_at: String,
@@ -925,7 +1524,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ThreadSubscription {
         pub created_at: DateTime<Utc>,
         pub ignored: bool,
@@ -936,7 +1535,16 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct OrganizationFullPlan {
+        pub filled_seats: Option<i64>,
+        pub name: String,
+        pub private_repos: i64,
+        pub seats: Option<i64>,
+        pub space: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrganizationFull {
         pub avatar_url: String,
         pub billing_email: Option<String>,
@@ -987,12 +1595,12 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsOrganizationPermissions {
         pub selected_repositories_url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RunnerGroupsOrg {
         pub allows_public_repositories: bool,
         pub default: bool,
@@ -1005,7 +1613,7 @@ pub mod types {
         pub visibility: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrganizationActionsSecret {
         pub created_at: DateTime<Utc>,
         pub name: String,
@@ -1014,7 +1622,7 @@ pub mod types {
         pub visibility: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsPublicKey {
         pub created_at: Option<String>,
         pub id: Option<i64>,
@@ -1024,11 +1632,11 @@ pub mod types {
         pub url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EmptyObject {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CredentialAuthorization {
         pub authorized_credential_id: Option<i64>,
         pub authorized_credential_note: Option<String>,
@@ -1043,7 +1651,7 @@ pub mod types {
         pub token_last_eight: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrganizationInvitation {
         pub created_at: String,
         pub email: String,
@@ -1058,7 +1666,15 @@ pub mod types {
         pub team_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Config {
+        pub content_type: Option<String>,
+        pub insecure_ssl: Option<String>,
+        pub secret: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrgHook {
         pub active: bool,
         pub config: Config,
@@ -1073,17 +1689,17 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InteractionLimitResponse {
         pub expires_at: DateTime<Utc>,
         pub origin: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InteractionLimit {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamSimple {
         pub description: String,
         pub html_url: String,
@@ -1099,7 +1715,32 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamPermissions {
+        pub admin: bool,
+        pub maintain: bool,
+        pub pull: bool,
+        pub push: bool,
+        pub triage: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Parent {
+        pub description: String,
+        pub html_url: String,
+        pub id: i64,
+        pub ldap_dn: Option<String>,
+        pub members_url: String,
+        pub name: String,
+        pub node_id: String,
+        pub permission: String,
+        pub privacy: Option<String>,
+        pub repositories_url: String,
+        pub slug: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Team {
         pub description: String,
         pub html_url: String,
@@ -1116,7 +1757,12 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct OrgMembershipPermissions {
+        pub can_create_repository: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrgMembership {
         pub organization: OrganizationSimple,
         pub organization_url: String,
@@ -1127,7 +1773,7 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Migration {
         pub archive_url: Option<String>,
         pub created_at: DateTime<Utc>,
@@ -1144,7 +1790,94 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PackageRepository {
+        pub archive_url: String,
+        pub archived: Option<bool>,
+        pub assignees_url: String,
+        pub blobs_url: String,
+        pub branches_url: String,
+        pub clone_url: Option<String>,
+        pub code_of_conduct: Option<CodeofConduct>,
+        pub collaborators_url: String,
+        pub comments_url: String,
+        pub commits_url: String,
+        pub compare_url: String,
+        pub contents_url: String,
+        pub contributors_url: String,
+        pub created_at: Option<DateTime<Utc>>,
+        pub default_branch: Option<String>,
+        pub delete_branch_on_merge: Option<bool>,
+        pub deployments_url: String,
+        pub description: String,
+        pub disabled: Option<bool>,
+        pub downloads_url: String,
+        pub events_url: String,
+        pub fork: bool,
+        pub forks: Option<i64>,
+        pub forks_count: Option<i64>,
+        pub forks_url: String,
+        pub full_name: String,
+        pub git_commits_url: String,
+        pub git_refs_url: String,
+        pub git_tags_url: String,
+        pub git_url: Option<String>,
+        pub has_downloads: Option<bool>,
+        pub has_issues: Option<bool>,
+        pub has_pages: Option<bool>,
+        pub has_projects: Option<bool>,
+        pub has_wiki: Option<bool>,
+        pub homepage: Option<String>,
+        pub hooks_url: String,
+        pub html_url: String,
+        pub id: i64,
+        pub is_template: Option<bool>,
+        pub issue_comment_url: String,
+        pub issue_events_url: String,
+        pub issues_url: String,
+        pub keys_url: String,
+        pub labels_url: String,
+        pub language: Option<String>,
+        pub languages_url: String,
+        pub license: Option<License>,
+        pub merges_url: String,
+        pub milestones_url: String,
+        pub mirror_url: Option<String>,
+        pub name: String,
+        pub network_count: Option<i64>,
+        pub node_id: String,
+        pub notifications_url: String,
+        pub open_issues: Option<i64>,
+        pub open_issues_count: Option<i64>,
+        pub owner: Owner,
+        pub permissions: Option<Permissions>,
+        pub private: bool,
+        pub pulls_url: String,
+        pub pushed_at: Option<DateTime<Utc>>,
+        pub releases_url: String,
+        pub size: Option<i64>,
+        pub ssh_url: Option<String>,
+        pub stargazers_count: Option<i64>,
+        pub stargazers_url: String,
+        pub statuses_url: String,
+        pub subscribers_count: Option<i64>,
+        pub subscribers_url: String,
+        pub subscription_url: String,
+        pub svn_url: Option<String>,
+        pub tags_url: String,
+        pub teams_url: String,
+        pub temp_clone_token: Option<String>,
+        pub template_repository: Option<TemplateRepository>,
+        pub topics: Option<Vec<String>>,
+        pub trees_url: String,
+        pub updated_at: Option<DateTime<Utc>>,
+        pub url: String,
+        pub visibility: Option<String>,
+        pub watchers: Option<i64>,
+        pub watchers_count: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Package {
         pub created_at: DateTime<Utc>,
         pub html_url: String,
@@ -1159,7 +1892,24 @@ pub mod types {
         pub visibility: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Container {
+        pub tags: serde_json::Value,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Docker {
+        pub tag: Option<serde_json::Value>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Metadata {
+        pub container: Option<Container>,
+        pub docker: Option<Docker>,
+        pub package_type: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PackageVersion {
         pub created_at: DateTime<Utc>,
         pub deleted_at: Option<DateTime<Utc>>,
@@ -1174,7 +1924,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Project {
         pub body: String,
         pub columns_url: String,
@@ -1193,12 +1943,21 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Groups {
+        pub group_description: String,
+        pub group_id: String,
+        pub group_name: String,
+        pub status: Option<String>,
+        pub synced_at: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GroupMapping {
         pub groups: Option<Vec<Groups>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamFull {
         pub created_at: DateTime<Utc>,
         pub description: String,
@@ -1220,7 +1979,33 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Author {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamDiscussion {
         pub author: Author,
         pub body: String,
@@ -1242,7 +2027,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamDiscussionComment {
         pub author: Author,
         pub body: String,
@@ -1259,7 +2044,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Reaction {
         pub content: String,
         pub created_at: DateTime<Utc>,
@@ -1268,14 +2053,21 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamMembership {
         pub role: String,
         pub state: String,
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamProjectPermissions {
+        pub admin: bool,
+        pub read: bool,
+        pub write: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamProject {
         pub body: String,
         pub columns_url: String,
@@ -1295,7 +2087,20 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamRepositoryPermissions {
+        pub admin: bool,
+        pub maintain: Option<bool>,
+        pub pull: bool,
+        pub push: bool,
+        pub triage: Option<bool>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamRepositoryTemplate_repository {
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamRepository {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
@@ -1385,7 +2190,7 @@ pub mod types {
         pub watchers_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProjectCard {
         pub archived: Option<bool>,
         pub column_name: Option<String>,
@@ -1402,7 +2207,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProjectColumn {
         pub cards_url: String,
         pub created_at: DateTime<Utc>,
@@ -1414,13 +2219,13 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepositoryCollaboratorPermission {
         pub permission: String,
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RateLimit {
         pub limit: i64,
         pub remaining: i64,
@@ -1428,13 +2233,23 @@ pub mod types {
         pub used: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Resources {
+        pub code_scanning_upload: Option<RateLimit>,
+        pub core: RateLimit,
+        pub graphql: Option<RateLimit>,
+        pub integration_manifest: Option<RateLimit>,
+        pub search: RateLimit,
+        pub source_import: Option<RateLimit>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RateLimitOverview {
         pub rate: RateLimit,
         pub resources: Resources,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeofConductSimple {
         pub html_url: String,
         pub key: String,
@@ -1442,7 +2257,34 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FullRepositoryPermissions {
+        pub admin: bool,
+        pub pull: bool,
+        pub push: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FullRepositoryTemplate_repository {
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct AdvancedSecurity {
+        pub status: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct SecretScanning {
+        pub status: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct SecurityandAnalysis {
+        pub advanced_security: Option<AdvancedSecurity>,
+        pub secret_scanning: Option<SecretScanning>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct FullRepository {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
@@ -1538,7 +2380,7 @@ pub mod types {
         pub watchers_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Artifact {
         pub archive_download_url: String,
         pub created_at: DateTime<Utc>,
@@ -1552,7 +2394,17 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Steps {
+        pub completed_at: Option<DateTime<Utc>>,
+        pub conclusion: String,
+        pub name: String,
+        pub number: i64,
+        pub started_at: Option<DateTime<Utc>>,
+        pub status: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Job {
         pub check_run_url: String,
         pub completed_at: DateTime<Utc>,
@@ -1570,11 +2422,27 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsRepositoryPermissions {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Head {
+        #[serde(rename = "ref")]
+        pub ref_: String,
+        pub repo: Repo,
+        pub sha: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Base {
+        #[serde(rename = "ref")]
+        pub ref_: String,
+        pub repo: Repo,
+        pub sha: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestMinimal {
         pub base: Base,
         pub head: Head,
@@ -1583,7 +2451,19 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct SimpleCommitAuthor {
+        pub email: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Committer {
+        pub email: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SimpleCommit {
         pub author: Author,
         pub committer: Committer,
@@ -1593,7 +2473,17 @@ pub mod types {
         pub tree_id: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct HeadCommit {
+        pub author: Author,
+        pub committer: Committer,
+        pub id: String,
+        pub message: String,
+        pub timestamp: DateTime<Utc>,
+        pub tree_id: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct WorkflowRun {
         pub artifacts_url: String,
         pub cancel_url: String,
@@ -1625,7 +2515,18 @@ pub mod types {
         pub workflow_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Environments {
+        pub created_at: Option<DateTime<Utc>>,
+        pub html_url: Option<String>,
+        pub id: Option<i64>,
+        pub name: Option<String>,
+        pub node_id: Option<String>,
+        pub updated_at: Option<DateTime<Utc>>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnvironmentApprovals {
         pub comment: String,
         pub environments: Vec<Environments>,
@@ -1633,7 +2534,47 @@ pub mod types {
         pub user: SimpleUser,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Environment {
+        pub html_url: Option<String>,
+        pub id: Option<i64>,
+        pub name: Option<String>,
+        pub node_id: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Reviewer {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Reviewers {
+        pub reviewer: Option<Reviewer>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PendingDeployment {
         pub current_user_can_approve: bool,
         pub environment: Environment,
@@ -1642,7 +2583,11 @@ pub mod types {
         pub wait_timer_started_at: DateTime<Utc>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PayloadData {
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Deployment {
         pub created_at: DateTime<Utc>,
         pub creator: Creator,
@@ -1665,20 +2610,45 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Ubuntu {
+        pub jobs: i64,
+        pub total_ms: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Macos {
+        pub jobs: i64,
+        pub total_ms: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Windows {
+        pub jobs: i64,
+        pub total_ms: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Billable {
+        pub MACOS: Option<Macos>,
+        pub UBUNTU: Option<Ubuntu>,
+        pub WINDOWS: Option<Windows>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct WorkflowRunUsage {
         pub billable: Billable,
         pub run_duration_ms: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsSecret {
         pub created_at: DateTime<Utc>,
         pub name: String,
         pub updated_at: DateTime<Utc>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Workflow {
         pub badge_url: String,
         pub created_at: DateTime<Utc>,
@@ -1693,18 +2663,42 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct WorkflowUsageBillableBillableUBUNTU {
+        pub total_ms: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct WorkflowUsageBillableBillableMACOS {
+        pub total_ms: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct WorkflowUsageBillableBillableWINDOWS {
+        pub total_ms: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct WorkflowUsage {
         pub billable: Billable,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranchAdminEnforced {
         pub enabled: bool,
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct DismissalRestrictions {
+        pub teams: Option<Vec<Team>>,
+        pub teams_url: Option<String>,
+        pub url: Option<String>,
+        pub users: Option<Vec<SimpleUser>>,
+        pub users_url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranchPullRequestReview {
         pub dismiss_stale_reviews: bool,
         pub dismissal_restrictions: Option<DismissalRestrictions>,
@@ -1713,7 +2707,98 @@ pub mod types {
         pub url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Users {
+        pub avatar_url: Option<String>,
+        pub events_url: Option<String>,
+        pub followers_url: Option<String>,
+        pub following_url: Option<String>,
+        pub gists_url: Option<String>,
+        pub gravatar_id: Option<String>,
+        pub html_url: Option<String>,
+        pub id: Option<i64>,
+        pub login: Option<String>,
+        pub node_id: Option<String>,
+        pub organizations_url: Option<String>,
+        pub received_events_url: Option<String>,
+        pub repos_url: Option<String>,
+        pub site_admin: Option<bool>,
+        pub starred_url: Option<String>,
+        pub subscriptions_url: Option<String>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Teams {
+        pub description: Option<String>,
+        pub html_url: Option<String>,
+        pub id: Option<i64>,
+        pub members_url: Option<String>,
+        pub name: Option<String>,
+        pub node_id: Option<String>,
+        pub parent: Option<String>,
+        pub permission: Option<String>,
+        pub privacy: Option<String>,
+        pub repositories_url: Option<String>,
+        pub slug: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct BranchRestrictionPolicyAppsAppsOwner {
+        pub avatar_url: Option<String>,
+        pub description: Option<String>,
+        pub events_url: Option<String>,
+        pub followers_url: Option<String>,
+        pub following_url: Option<String>,
+        pub gists_url: Option<String>,
+        pub gravatar_id: Option<String>,
+        pub hooks_url: Option<String>,
+        pub html_url: Option<String>,
+        pub id: Option<i64>,
+        pub issues_url: Option<String>,
+        pub login: Option<String>,
+        pub members_url: Option<String>,
+        pub node_id: Option<String>,
+        pub organizations_url: Option<String>,
+        pub public_members_url: Option<String>,
+        pub received_events_url: Option<String>,
+        pub repos_url: Option<String>,
+        pub site_admin: Option<bool>,
+        pub starred_url: Option<String>,
+        pub subscriptions_url: Option<String>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct BranchRestrictionPolicyAppsAppsPermissions {
+        pub contents: Option<String>,
+        pub issues: Option<String>,
+        pub metadata: Option<String>,
+        pub single_file: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Apps {
+        pub created_at: Option<String>,
+        pub description: Option<String>,
+        pub events: Option<Vec<String>>,
+        pub external_url: Option<String>,
+        pub html_url: Option<String>,
+        pub id: Option<i64>,
+        pub name: Option<String>,
+        pub node_id: Option<String>,
+        pub owner: Option<Owner>,
+        pub permissions: Option<Permissions>,
+        pub slug: Option<String>,
+        pub updated_at: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchRestrictionPolicy {
         pub apps: Vec<Apps>,
         pub apps_url: String,
@@ -1724,7 +2809,42 @@ pub mod types {
         pub users_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RequiredStatusChecks {
+        pub contexts: Vec<String>,
+        pub contexts_url: Option<String>,
+        pub enforcement_level: Option<String>,
+        pub strict: Option<bool>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RequiredLinearHistory {
+        pub enabled: Option<bool>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct AllowForcePushes {
+        pub enabled: Option<bool>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct AllowDeletions {
+        pub enabled: Option<bool>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RequiredConversationResolution {
+        pub enabled: Option<bool>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RequiredSignatures {
+        pub enabled: bool,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchProtection {
         pub allow_deletions: Option<AllowDeletions>,
         pub allow_force_pushes: Option<AllowForcePushes>,
@@ -1741,7 +2861,13 @@ pub mod types {
         pub url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Commit {
+        pub sha: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ShortBranch {
         pub commit: Commit,
         pub name: String,
@@ -1750,14 +2876,14 @@ pub mod types {
         pub protection_url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitUser {
         pub date: Option<String>,
         pub email: Option<String>,
         pub name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Verification {
         pub payload: String,
         pub reason: String,
@@ -1765,13 +2891,115 @@ pub mod types {
         pub verified: bool,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Commit {
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitCommitCommitAuthor {
+        pub date: Option<String>,
+        pub email: Option<String>,
+        pub name: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitCommitCommitCommitter {
+        pub date: Option<String>,
+        pub email: Option<String>,
+        pub name: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Tree {
         pub sha: String,
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitCommit {
+        pub author: Author,
+        pub comment_count: i64,
+        pub committer: Committer,
+        pub message: String,
+        pub tree: Tree,
+        pub url: String,
+        pub verification: Option<Verification>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitCommitter {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Parents {
+        pub html_url: Option<String>,
+        pub sha: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Stats {
+        pub additions: Option<i64>,
+        pub deletions: Option<i64>,
+        pub total: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitFiles {
+        pub additions: Option<i64>,
+        pub blob_url: Option<String>,
+        pub changes: Option<i64>,
+        pub contents_url: Option<String>,
+        pub deletions: Option<i64>,
+        pub filename: Option<String>,
+        pub patch: Option<String>,
+        pub previous_filename: Option<String>,
+        pub raw_url: Option<String>,
+        pub sha: Option<String>,
+        pub status: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitData {
+        pub author: Author,
+        pub comments_url: String,
+        pub commit: Commit,
+        pub committer: Committer,
+        pub files: Option<Vec<Files>>,
+        pub html_url: String,
+        pub node_id: String,
+        pub parents: Vec<Parents>,
+        pub sha: String,
+        pub stats: Option<Stats>,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct BranchWithProtection_Links {
+        pub html: String,
+        #[serde(rename = "self")]
+        pub self_: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchWithProtection {
         pub _links: Links,
         pub commit: Commit,
@@ -1783,7 +3011,7 @@ pub mod types {
         pub required_approving_review_count: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct StatusCheckPolicy {
         pub contexts: Vec<String>,
         pub contexts_url: String,
@@ -1791,7 +3019,46 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ProtectedBranchRequired_pull_request_reviewsRequiredPullRequestReviewsDismissal_restrictions {
+        pub teams: Vec<Team>,
+        pub teams_url: String,
+        pub url: String,
+        pub users: Vec<SimpleUser>,
+        pub users_url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RequiredPullRequestReviews {
+        pub dismiss_stale_reviews: Option<bool>,
+        pub dismissal_restrictions: Option<DismissalRestrictions>,
+        pub require_code_owner_reviews: Option<bool>,
+        pub required_approving_review_count: Option<i64>,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct EnforceAdmins {
+        pub enabled: bool,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ProtectedBranchRequired_linear_history {
+        pub enabled: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ProtectedBranchAllow_force_pushes {
+        pub enabled: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ProtectedBranchAllow_deletions {
+        pub enabled: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranch {
         pub allow_deletions: Option<AllowDeletions>,
         pub allow_force_pushes: Option<AllowForcePushes>,
@@ -1805,7 +3072,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeploymentSimple {
         pub created_at: DateTime<Utc>,
         pub description: String,
@@ -1823,7 +3090,42 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Output {
+        pub annotations_count: i64,
+        pub annotations_url: String,
+        pub summary: String,
+        pub text: String,
+        pub title: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CheckSuite {
+        pub id: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CheckRunApp {
+        pub client_id: Option<String>,
+        pub client_secret: Option<String>,
+        pub created_at: DateTime<Utc>,
+        pub description: String,
+        pub events: Vec<String>,
+        pub external_url: String,
+        pub html_url: String,
+        pub id: i64,
+        pub installations_count: Option<i64>,
+        pub name: String,
+        pub node_id: String,
+        pub owner: Owner,
+        pub pem: Option<String>,
+        pub permissions: Permissions,
+        pub slug: Option<String>,
+        pub updated_at: DateTime<Utc>,
+        pub webhook_secret: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckRun {
         pub app: App,
         pub check_suite: CheckSuite,
@@ -1844,7 +3146,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckAnnotation {
         pub annotation_level: String,
         pub blob_href: String,
@@ -1858,8 +3160,29 @@ pub mod types {
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CheckSuite {
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CheckSuiteApp {
+        pub client_id: Option<String>,
+        pub client_secret: Option<String>,
+        pub created_at: DateTime<Utc>,
+        pub description: String,
+        pub events: Vec<String>,
+        pub external_url: String,
+        pub html_url: String,
+        pub id: i64,
+        pub installations_count: Option<i64>,
+        pub name: String,
+        pub node_id: String,
+        pub owner: Owner,
+        pub pem: Option<String>,
+        pub permissions: Permissions,
+        pub slug: Option<String>,
+        pub updated_at: DateTime<Utc>,
+        pub webhook_secret: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CheckSuiteData {
         pub after: String,
         pub app: App,
         pub before: String,
@@ -1879,13 +3202,24 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct AutoTriggerChecks {
+        pub app_id: i64,
+        pub setting: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Preferences {
+        pub auto_trigger_checks: Option<Vec<AutoTriggerChecks>>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckSuitePreference {
         pub preferences: Preferences,
         pub repository: MinimalRepository,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertRuleSummary {
         pub description: Option<String>,
         pub id: Option<String>,
@@ -1893,11 +3227,11 @@ pub mod types {
         pub severity: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAnalysisTool {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertLocation {
         pub end_column: Option<i64>,
         pub end_line: Option<i64>,
@@ -1906,7 +3240,12 @@ pub mod types {
         pub start_line: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Message {
+        pub text: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertInstance {
         pub commit_sha: Option<String>,
         pub html_url: Option<String>,
@@ -1914,7 +3253,7 @@ pub mod types {
         pub message: Option<Message>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertItems {
         pub dismissed_by: SimpleUser,
         pub most_recent_instance: CodeScanningAlertInstance,
@@ -1922,7 +3261,7 @@ pub mod types {
         pub tool: CodeScanningAnalysisTool,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertRule {
         pub description: Option<String>,
         pub full_description: Option<String>,
@@ -1934,7 +3273,7 @@ pub mod types {
         pub tags: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlert {
         pub dismissed_by: SimpleUser,
         pub instances: Option<serde_json::Value>,
@@ -1943,7 +3282,7 @@ pub mod types {
         pub tool: CodeScanningAnalysisTool,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAnalysis {
         pub deletable: bool,
         pub error: String,
@@ -1955,13 +3294,13 @@ pub mod types {
         pub warning: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAnalysisDeletion {
         pub confirm_delete_url: String,
         pub next_analysis_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimError {
         pub detail: Option<String>,
         pub documentation_url: Option<String>,
@@ -1971,18 +3310,25 @@ pub mod types {
         pub status: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningSarifsReceipt {
         pub url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningSarifsStatus {
         pub analyses_url: Option<String>,
         pub processing_status: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CollaboratorPermissions {
+        pub admin: bool,
+        pub pull: bool,
+        pub push: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Collaborator {
         pub avatar_url: String,
         pub email: Option<String>,
@@ -2008,7 +3354,59 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Invitee {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Inviter {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepositoryInvitation {
         pub created_at: DateTime<Utc>,
         pub expired: Option<bool>,
@@ -2022,7 +3420,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitComment {
         pub body: String,
         pub commit_id: String,
@@ -2039,19 +3437,19 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchShort {
         pub commit: Commit,
         pub name: String,
         pub protected: bool,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Link {
         pub href: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AutoMerge {
         pub commit_message: String,
         pub commit_title: String,
@@ -2059,7 +3457,51 @@ pub mod types {
         pub merge_method: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestSimpleLabels {
+        pub color: Option<String>,
+        pub default: Option<bool>,
+        pub description: Option<String>,
+        pub id: Option<i64>,
+        pub name: Option<String>,
+        pub node_id: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestSimpleHead {
+        pub label: String,
+        #[serde(rename = "ref")]
+        pub ref_: String,
+        pub repo: Repository,
+        pub sha: String,
+        pub user: User,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestSimpleBase {
+        pub label: String,
+        #[serde(rename = "ref")]
+        pub ref_: String,
+        pub repo: Repository,
+        pub sha: String,
+        pub user: User,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestSimple_Links {
+        pub comments: Link,
+        pub commits: Link,
+        pub html: Link,
+        pub issue: Link,
+        pub review_comment: Link,
+        pub review_comments: Link,
+        #[serde(rename = "self")]
+        pub self_: Link,
+        pub statuses: Link,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestSimple {
         pub _links: Links,
         pub active_lock_reason: Option<String>,
@@ -2098,7 +3540,7 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SimpleCommitStatus {
         pub avatar_url: String,
         pub context: String,
@@ -2113,7 +3555,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CombinedCommitStatus {
         pub commit_url: String,
         pub repository: MinimalRepository,
@@ -2124,7 +3566,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Status {
         pub avatar_url: String,
         pub context: String,
@@ -2139,13 +3581,62 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommunityHealthFile {
         pub html_url: String,
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommunityProfileFilesFilesCode_of_conduct {
+        pub html_url: String,
+        pub key: String,
+        pub name: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CodeofConductFile {
+        pub html_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Contributing {
+        pub html_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Readme {
+        pub html_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct IssueTemplate {
+        pub html_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestTemplate {
+        pub html_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommunityProfileFiles {
+        pub code_of_conduct: CodeofConduct,
+        pub code_of_conduct_file: CodeofConductFile,
+        pub contributing: Contributing,
+        pub issue_template: IssueTemplate,
+        pub license: License,
+        pub pull_request_template: PullRequestTemplate,
+        pub readme: Readme,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommunityProfile {
         pub content_reports_enabled: Option<bool>,
         pub description: String,
@@ -2155,7 +3646,7 @@ pub mod types {
         pub updated_at: DateTime<Utc>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DiffEntry {
         pub additions: i64,
         pub blob_url: String,
@@ -2170,7 +3661,7 @@ pub mod types {
         pub status: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitComparison {
         pub ahead_by: i64,
         pub base_commit: Commit,
@@ -2187,7 +3678,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentReferenceAttachment {
         pub body: String,
         pub id: i64,
@@ -2195,7 +3686,39 @@ pub mod types {
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ContentTreeEntriesEntries_Links {
+        pub git: String,
+        pub html: String,
+        #[serde(rename = "self")]
+        pub self_: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Entries {
+        pub _links: Links,
+        pub content: Option<String>,
+        pub download_url: String,
+        pub git_url: String,
+        pub html_url: String,
+        pub name: String,
+        pub path: String,
+        pub sha: String,
+        pub size: i64,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ContentTree_Links {
+        pub git: String,
+        pub html: String,
+        #[serde(rename = "self")]
+        pub self_: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentTree {
         pub _links: Links,
         pub download_url: String,
@@ -2211,7 +3734,15 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ContentDirectory_Links {
+        pub git: String,
+        pub html: String,
+        #[serde(rename = "self")]
+        pub self_: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentDirectory {
         pub _links: Links,
         pub content: Option<String>,
@@ -2227,7 +3758,15 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ContentFile_Links {
+        pub git: String,
+        pub html: String,
+        #[serde(rename = "self")]
+        pub self_: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentFile {
         pub _links: Links,
         pub content: String,
@@ -2246,7 +3785,15 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ContentSymlink_Links {
+        pub git: String,
+        pub html: String,
+        #[serde(rename = "self")]
+        pub self_: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentSymlink {
         pub _links: Links,
         pub download_url: String,
@@ -2262,7 +3809,15 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ContentSubmodule_Links {
+        pub git: String,
+        pub html: String,
+        #[serde(rename = "self")]
+        pub self_: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentSubmodule {
         pub _links: Links,
         pub download_url: String,
@@ -2278,13 +3833,85 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FileCommitContentContent_Links {
+        pub git: Option<String>,
+        pub html: Option<String>,
+        #[serde(rename = "self")]
+        pub self_: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Content {
+        pub _links: Option<Links>,
+        pub download_url: Option<String>,
+        pub git_url: Option<String>,
+        pub html_url: Option<String>,
+        pub name: Option<String>,
+        pub path: Option<String>,
+        pub sha: Option<String>,
+        pub size: Option<i64>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FileCommitCommitCommitAuthor {
+        pub date: Option<String>,
+        pub email: Option<String>,
+        pub name: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FileCommitCommitCommitCommitter {
+        pub date: Option<String>,
+        pub email: Option<String>,
+        pub name: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FileCommitCommitCommitTree {
+        pub sha: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FileCommitCommitCommitParents {
+        pub html_url: Option<String>,
+        pub sha: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FileCommitCommitCommitVerification {
+        pub payload: Option<String>,
+        pub reason: Option<String>,
+        pub signature: Option<String>,
+        pub verified: Option<bool>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FileCommitCommit {
+        pub author: Option<Author>,
+        pub committer: Option<Committer>,
+        pub html_url: Option<String>,
+        pub message: Option<String>,
+        pub node_id: Option<String>,
+        pub parents: Option<Vec<Parents>>,
+        pub sha: Option<String>,
+        pub tree: Option<Tree>,
+        pub url: Option<String>,
+        pub verification: Option<Verification>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct FileCommit {
         pub commit: Commit,
         pub content: Content,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Contributor {
         pub avatar_url: Option<String>,
         pub contributions: i64,
@@ -2310,7 +3937,7 @@ pub mod types {
         pub url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeploymentStatus {
         pub created_at: DateTime<Utc>,
         pub creator: Creator,
@@ -2329,28 +3956,48 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeploymentBranchPolicy {
         pub custom_branch_policies: bool,
         pub protected_branches: bool,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Environment {
-        pub html_url: Option<String>,
-        pub id: Option<i64>,
-        pub name: Option<String>,
-        pub node_id: Option<String>,
-        pub url: Option<String>,
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ProtectionRules {
+        pub id: i64,
+        pub node_id: String,
+        #[serde(rename = "type")]
+        pub type_: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Protection_rules {
+        pub id: i64,
+        pub node_id: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct EnvironmentData {
+        pub created_at: DateTime<Utc>,
+        pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
+        pub html_url: String,
+        pub id: i64,
+        pub name: String,
+        pub node_id: String,
+        pub protection_rules: Option<Vec<Protection_rules>>,
+        pub updated_at: DateTime<Utc>,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ShortBlob {
         pub sha: String,
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Blob {
         pub content: String,
         pub encoding: String,
@@ -2361,7 +4008,28 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct GitCommitAuthor {
+        pub date: DateTime<Utc>,
+        pub email: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct GitCommitCommitter {
+        pub date: DateTime<Utc>,
+        pub email: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct GitCommitParents {
+        pub html_url: String,
+        pub sha: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitCommit {
         pub author: Author,
         pub committer: Committer,
@@ -2375,7 +4043,15 @@ pub mod types {
         pub verification: Verification,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Object {
+        pub sha: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitRef {
         pub node_id: String,
         pub object: Object,
@@ -2384,7 +4060,14 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Tagger {
+        pub date: String,
+        pub email: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitTag {
         pub message: String,
         pub node_id: String,
@@ -2396,7 +4079,18 @@ pub mod types {
         pub verification: Option<Verification>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct GitTreeTree {
+        pub mode: Option<String>,
+        pub path: Option<String>,
+        pub sha: Option<String>,
+        pub size: Option<i64>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitTree {
         pub sha: String,
         pub tree: Vec<Tree>,
@@ -2404,14 +4098,25 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct HookResponse {
         pub code: i64,
         pub message: String,
         pub status: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct HookConfig {
+        pub digest: Option<String>,
+        pub email: Option<String>,
+        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub password: Option<String>,
+        pub room: Option<String>,
+        pub subdomain: Option<String>,
+        pub token: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Hook {
         pub active: bool,
         pub config: Config,
@@ -2428,7 +4133,14 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ProjectChoices {
+        pub human_name: Option<String>,
+        pub tfvc_project: Option<String>,
+        pub vcs: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Import {
         pub authors_count: Option<i64>,
         pub authors_url: String,
@@ -2455,7 +4167,7 @@ pub mod types {
         pub vcs_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PorterAuthor {
         pub email: String,
         pub id: i64,
@@ -2466,7 +4178,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PorterLargeFile {
         pub oid: String,
         pub path: String,
@@ -2474,13 +4186,13 @@ pub mod types {
         pub size: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEventLabel {
         pub color: String,
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEventDismissedReview {
         pub dismissal_commit_id: Option<String>,
         pub dismissal_message: String,
@@ -2488,12 +4200,12 @@ pub mod types {
         pub state: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEventMilestone {
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEventProjectCard {
         pub column_name: String,
         pub id: i64,
@@ -2503,13 +4215,117 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEventRename {
         pub from: String,
         pub to: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct IssueEventActor {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Assigner {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ReviewRequester {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RequestedReviewer {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEvent {
         pub actor: Actor,
         pub assignee: Option<Assignee>,
@@ -2534,7 +4350,13 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct LabeledIssueEventLabel {
+        pub color: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LabeledIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2548,7 +4370,13 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct UnlabeledIssueEventLabel {
+        pub color: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UnlabeledIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2562,7 +4390,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AssignedIssueEvent {
         pub actor: SimpleUser,
         pub assignee: SimpleUser,
@@ -2577,7 +4405,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UnassignedIssueEvent {
         pub actor: SimpleUser,
         pub assignee: SimpleUser,
@@ -2592,7 +4420,12 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MilestonedIssueEventMilestone {
+        pub title: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MilestonedIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2606,7 +4439,12 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct DemilestonedIssueEventMilestone {
+        pub title: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DemilestonedIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2620,7 +4458,13 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Rename {
+        pub from: String,
+        pub to: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RenamedIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2634,7 +4478,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewRequestedIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2650,7 +4494,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewRequestRemovedIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2666,7 +4510,15 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct DismissedReview {
+        pub dismissal_commit_id: Option<String>,
+        pub dismissal_message: String,
+        pub review_id: i64,
+        pub state: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewDismissedIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2680,7 +4532,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LockedIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2694,7 +4546,17 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct AddedtoProjectIssueEventProject_card {
+        pub column_name: String,
+        pub id: i64,
+        pub previous_column_name: Option<String>,
+        pub project_id: i64,
+        pub project_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddedtoProjectIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2708,7 +4570,17 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MovedColumninProjectIssueEventProject_card {
+        pub column_name: String,
+        pub id: i64,
+        pub previous_column_name: Option<String>,
+        pub project_id: i64,
+        pub project_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MovedColumninProjectIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2722,7 +4594,17 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RemovedFromProjectIssueEventProject_card {
+        pub column_name: String,
+        pub id: i64,
+        pub previous_column_name: Option<String>,
+        pub project_id: i64,
+        pub project_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RemovedFromProjectIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2736,7 +4618,17 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ConvertedNotetoIssueIssueEventProject_card {
+        pub column_name: String,
+        pub id: i64,
+        pub previous_column_name: Option<String>,
+        pub project_id: i64,
+        pub project_url: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ConvertedNotetoIssueIssueEvent {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2750,7 +4642,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEventforIssue {
         pub actor: SimpleUser,
         pub commit_id: String,
@@ -2764,7 +4656,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommentEvent {
         pub actor: SimpleUser,
         pub body: Option<String>,
@@ -2783,7 +4675,14 @@ pub mod types {
         pub user: SimpleUser,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Source {
+        pub issue: Option<IssueSimple>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCrossReferencedEvent {
         pub actor: Option<SimpleUser>,
         pub created_at: DateTime<Utc>,
@@ -2792,7 +4691,28 @@ pub mod types {
         pub updated_at: DateTime<Utc>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TimelineCommittedEventAuthor {
+        pub date: DateTime<Utc>,
+        pub email: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TimelineCommittedEventCommitter {
+        pub date: DateTime<Utc>,
+        pub email: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TimelineCommittedEventParents {
+        pub html_url: String,
+        pub sha: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommittedEvent {
         pub author: Author,
         pub committer: Committer,
@@ -2807,7 +4727,23 @@ pub mod types {
         pub verification: Verification,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Html {
+        pub href: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TimelineReviewedEvent_LinksLinksPull_request {
+        pub href: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TimelineReviewedEvent_Links {
+        pub html: Html,
+        pub pull_request: PullRequest,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineReviewedEvent {
         pub _links: Links,
         pub body: String,
@@ -2824,7 +4760,25 @@ pub mod types {
         pub user: SimpleUser,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Self {
+        pub href: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestReviewComment_LinksLinksPull_request {
+        pub href: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestReviewComment_Links {
+        pub html: Html,
+        pub pull_request: PullRequest,
+        #[serde(rename = "self")]
+        pub self_: Self,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewComment {
         pub _links: Links,
         pub body: String,
@@ -2855,14 +4809,14 @@ pub mod types {
         pub user: SimpleUser,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineLineCommentedEvent {
         pub comments: Option<Vec<PullRequestReviewComment>>,
         pub event: Option<String>,
         pub node_id: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommitCommentedEvent {
         pub comments: Option<Vec<CommitComment>>,
         pub commit_id: Option<String>,
@@ -2870,7 +4824,7 @@ pub mod types {
         pub node_id: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineAssignedIssueEvent {
         pub actor: SimpleUser,
         pub assignee: SimpleUser,
@@ -2884,7 +4838,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineUnassignedIssueEvent {
         pub actor: SimpleUser,
         pub assignee: SimpleUser,
@@ -2898,11 +4852,11 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineIssueEvents {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeployKey {
         pub created_at: String,
         pub id: i64,
@@ -2913,11 +4867,19 @@ pub mod types {
         pub verified: bool,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Language {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct LicenseContent_Links {
+        pub git: String,
+        pub html: String,
+        #[serde(rename = "self")]
+        pub self_: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LicenseContent {
         pub _links: Links,
         pub content: String,
@@ -2935,13 +4897,13 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PagesSourceHash {
         pub branch: String,
         pub path: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PagesHttpsCertificate {
         pub description: String,
         pub domains: serde_json::Value,
@@ -2949,7 +4911,7 @@ pub mod types {
         pub state: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Page {
         pub cname: String,
         pub custom_404: bool,
@@ -2962,7 +4924,38 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Error {
+        pub message: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Pusher {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PageBuild {
         pub commit: String,
         pub created_at: DateTime<Utc>,
@@ -2974,20 +4967,437 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PageBuildStatus {
         pub status: String,
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Domain {
+        pub caa_error: Option<String>,
+        pub dns_resolves: Option<bool>,
+        pub enforces_https: Option<bool>,
+        pub has_cname_record: Option<bool>,
+        pub has_mx_records_present: Option<bool>,
+        pub host: Option<String>,
+        pub https_error: Option<String>,
+        pub is_a_record: Option<bool>,
+        pub is_apex_domain: Option<bool>,
+        pub is_cloudflare_ip: Option<bool>,
+        pub is_cname_to_fastly: Option<bool>,
+        pub is_cname_to_github_user_domain: Option<bool>,
+        pub is_cname_to_pages_dot_github_dot_com: Option<bool>,
+        pub is_fastly_ip: Option<bool>,
+        pub is_https_eligible: Option<bool>,
+        pub is_non_github_pages_ip_present: Option<bool>,
+        pub is_old_ip_address: Option<bool>,
+        pub is_pages_domain: Option<bool>,
+        pub is_pointed_to_github_pages_ip: Option<bool>,
+        pub is_proxied: Option<bool>,
+        pub is_served_by_pages: Option<bool>,
+        pub is_valid: Option<bool>,
+        pub is_valid_domain: Option<bool>,
+        pub nameservers: Option<String>,
+        pub reason: Option<String>,
+        pub responds_to_https: Option<bool>,
+        pub should_be_a_record: Option<bool>,
+        pub uri: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct AltDomain {
+        pub caa_error: Option<String>,
+        pub dns_resolves: Option<bool>,
+        pub enforces_https: Option<bool>,
+        pub has_cname_record: Option<bool>,
+        pub has_mx_records_present: Option<bool>,
+        pub host: Option<String>,
+        pub https_error: Option<String>,
+        pub is_a_record: Option<bool>,
+        pub is_apex_domain: Option<bool>,
+        pub is_cloudflare_ip: Option<bool>,
+        pub is_cname_to_fastly: Option<bool>,
+        pub is_cname_to_github_user_domain: Option<bool>,
+        pub is_cname_to_pages_dot_github_dot_com: Option<bool>,
+        pub is_fastly_ip: Option<bool>,
+        pub is_https_eligible: Option<bool>,
+        pub is_non_github_pages_ip_present: Option<bool>,
+        pub is_old_ip_address: Option<bool>,
+        pub is_pages_domain: Option<bool>,
+        pub is_pointed_to_github_pages_ip: Option<bool>,
+        pub is_proxied: Option<bool>,
+        pub is_served_by_pages: Option<bool>,
+        pub is_valid: Option<bool>,
+        pub is_valid_domain: Option<bool>,
+        pub nameservers: Option<String>,
+        pub reason: Option<String>,
+        pub responds_to_https: Option<bool>,
+        pub should_be_a_record: Option<bool>,
+        pub uri: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PagesHealthCheck {
         pub alt_domain: Option<AltDomain>,
         pub domain: Option<Domain>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequest {
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestLabels {
+        pub color: Option<String>,
+        pub default: Option<bool>,
+        pub description: Option<String>,
+        pub id: Option<i64>,
+        pub name: Option<String>,
+        pub node_id: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestHeadHeadRepoRepoOwner {
+        pub avatar_url: String,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestHeadHeadRepoRepoPermissions {
+        pub admin: bool,
+        pub pull: bool,
+        pub push: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestHeadHeadRepoRepoLicense {
+        pub key: String,
+        pub name: String,
+        pub node_id: String,
+        pub spdx_id: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestHeadHeadRepo {
+        pub allow_merge_commit: Option<bool>,
+        pub allow_rebase_merge: Option<bool>,
+        pub allow_squash_merge: Option<bool>,
+        pub archive_url: String,
+        pub archived: bool,
+        pub assignees_url: String,
+        pub blobs_url: String,
+        pub branches_url: String,
+        pub clone_url: String,
+        pub collaborators_url: String,
+        pub comments_url: String,
+        pub commits_url: String,
+        pub compare_url: String,
+        pub contents_url: String,
+        pub contributors_url: String,
+        pub created_at: DateTime<Utc>,
+        pub default_branch: String,
+        pub deployments_url: String,
+        pub description: String,
+        pub disabled: bool,
+        pub downloads_url: String,
+        pub events_url: String,
+        pub fork: bool,
+        pub forks: i64,
+        pub forks_count: i64,
+        pub forks_url: String,
+        pub full_name: String,
+        pub git_commits_url: String,
+        pub git_refs_url: String,
+        pub git_tags_url: String,
+        pub git_url: String,
+        pub has_downloads: bool,
+        pub has_issues: bool,
+        pub has_pages: bool,
+        pub has_projects: bool,
+        pub has_wiki: bool,
+        pub homepage: String,
+        pub hooks_url: String,
+        pub html_url: String,
+        pub id: i64,
+        pub issue_comment_url: String,
+        pub issue_events_url: String,
+        pub issues_url: String,
+        pub keys_url: String,
+        pub labels_url: String,
+        pub language: String,
+        pub languages_url: String,
+        pub license: License,
+        pub master_branch: Option<String>,
+        pub merges_url: String,
+        pub milestones_url: String,
+        pub mirror_url: String,
+        pub name: String,
+        pub node_id: String,
+        pub notifications_url: String,
+        pub open_issues: i64,
+        pub open_issues_count: i64,
+        pub owner: Owner,
+        pub permissions: Option<Permissions>,
+        pub private: bool,
+        pub pulls_url: String,
+        pub pushed_at: DateTime<Utc>,
+        pub releases_url: String,
+        pub size: i64,
+        pub ssh_url: String,
+        pub stargazers_count: i64,
+        pub stargazers_url: String,
+        pub statuses_url: String,
+        pub subscribers_url: String,
+        pub subscription_url: String,
+        pub svn_url: String,
+        pub tags_url: String,
+        pub teams_url: String,
+        pub temp_clone_token: Option<String>,
+        pub topics: Option<Vec<String>>,
+        pub trees_url: String,
+        pub updated_at: DateTime<Utc>,
+        pub url: String,
+        pub watchers: i64,
+        pub watchers_count: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestHeadHeadUser {
+        pub avatar_url: String,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestHead {
+        pub label: String,
+        #[serde(rename = "ref")]
+        pub ref_: String,
+        pub repo: Repo,
+        pub sha: String,
+        pub user: User,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestBaseBaseRepoRepoOwner {
+        pub avatar_url: String,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestBaseBaseRepoRepoPermissions {
+        pub admin: bool,
+        pub pull: bool,
+        pub push: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestBaseBaseRepo {
+        pub allow_merge_commit: Option<bool>,
+        pub allow_rebase_merge: Option<bool>,
+        pub allow_squash_merge: Option<bool>,
+        pub archive_url: String,
+        pub archived: bool,
+        pub assignees_url: String,
+        pub blobs_url: String,
+        pub branches_url: String,
+        pub clone_url: String,
+        pub collaborators_url: String,
+        pub comments_url: String,
+        pub commits_url: String,
+        pub compare_url: String,
+        pub contents_url: String,
+        pub contributors_url: String,
+        pub created_at: DateTime<Utc>,
+        pub default_branch: String,
+        pub deployments_url: String,
+        pub description: String,
+        pub disabled: bool,
+        pub downloads_url: String,
+        pub events_url: String,
+        pub fork: bool,
+        pub forks: i64,
+        pub forks_count: i64,
+        pub forks_url: String,
+        pub full_name: String,
+        pub git_commits_url: String,
+        pub git_refs_url: String,
+        pub git_tags_url: String,
+        pub git_url: String,
+        pub has_downloads: bool,
+        pub has_issues: bool,
+        pub has_pages: bool,
+        pub has_projects: bool,
+        pub has_wiki: bool,
+        pub homepage: String,
+        pub hooks_url: String,
+        pub html_url: String,
+        pub id: i64,
+        pub issue_comment_url: String,
+        pub issue_events_url: String,
+        pub issues_url: String,
+        pub keys_url: String,
+        pub labels_url: String,
+        pub language: String,
+        pub languages_url: String,
+        pub license: License,
+        pub master_branch: Option<String>,
+        pub merges_url: String,
+        pub milestones_url: String,
+        pub mirror_url: String,
+        pub name: String,
+        pub node_id: String,
+        pub notifications_url: String,
+        pub open_issues: i64,
+        pub open_issues_count: i64,
+        pub owner: Owner,
+        pub permissions: Option<Permissions>,
+        pub private: bool,
+        pub pulls_url: String,
+        pub pushed_at: DateTime<Utc>,
+        pub releases_url: String,
+        pub size: i64,
+        pub ssh_url: String,
+        pub stargazers_count: i64,
+        pub stargazers_url: String,
+        pub statuses_url: String,
+        pub subscribers_url: String,
+        pub subscription_url: String,
+        pub svn_url: String,
+        pub tags_url: String,
+        pub teams_url: String,
+        pub temp_clone_token: Option<String>,
+        pub topics: Option<Vec<String>>,
+        pub trees_url: String,
+        pub updated_at: DateTime<Utc>,
+        pub url: String,
+        pub watchers: i64,
+        pub watchers_count: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestBaseBaseUser {
+        pub avatar_url: String,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestBase {
+        pub label: String,
+        #[serde(rename = "ref")]
+        pub ref_: String,
+        pub repo: Repo,
+        pub sha: String,
+        pub user: User,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequest_Links {
+        pub comments: Link,
+        pub commits: Link,
+        pub html: Link,
+        pub issue: Link,
+        pub review_comment: Link,
+        pub review_comments: Link,
+        #[serde(rename = "self")]
+        pub self_: Link,
+        pub statuses: Link,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MergedBy {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestData {
         pub _links: Links,
         pub active_lock_reason: Option<String>,
         pub additions: i64,
@@ -3037,20 +5447,31 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestMergeResult {
         pub merged: bool,
         pub message: String,
         pub sha: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewRequest {
         pub teams: Vec<Team>,
         pub users: Vec<SimpleUser>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestReview_LinksLinksPull_request {
+        pub href: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestReview_Links {
+        pub html: Html,
+        pub pull_request: PullRequest,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReview {
         pub _links: Links,
         pub body: String,
@@ -3066,7 +5487,15 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ReviewComment_Links {
+        pub html: Link,
+        pub pull_request: Link,
+        #[serde(rename = "self")]
+        pub self_: Link,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewComment {
         pub _links: Links,
         pub body: String,
@@ -3097,7 +5526,33 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Uploader {
+        pub avatar_url: String,
+        pub email: Option<String>,
+        pub events_url: String,
+        pub followers_url: String,
+        pub following_url: String,
+        pub gists_url: String,
+        pub gravatar_id: String,
+        pub html_url: String,
+        pub id: i64,
+        pub login: String,
+        pub name: Option<String>,
+        pub node_id: String,
+        pub organizations_url: String,
+        pub received_events_url: String,
+        pub repos_url: String,
+        pub site_admin: bool,
+        pub starred_at: Option<String>,
+        pub starred_url: String,
+        pub subscriptions_url: String,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReleaseAsset {
         pub browser_download_url: String,
         pub content_type: String,
@@ -3114,7 +5569,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Release {
         pub assets: Vec<ReleaseAsset>,
         pub assets_url: String,
@@ -3140,7 +5595,7 @@ pub mod types {
         pub zipball_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SecretScanningAlert {
         pub resolved_at: Option<DateTime<Utc>>,
         pub resolved_by: Option<SimpleUser>,
@@ -3148,33 +5603,41 @@ pub mod types {
         pub secret_type: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Stargazer {
         pub starred_at: DateTime<Utc>,
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitActivity {
         pub days: Vec<i64>,
         pub total: i64,
         pub week: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Weeks {
+        pub a: Option<i64>,
+        pub c: Option<i64>,
+        pub d: Option<i64>,
+        pub w: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContributorActivity {
         pub author: Author,
         pub total: i64,
         pub weeks: Vec<Weeks>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ParticipationStats {
         pub all: Vec<i64>,
         pub owner: Vec<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepositorySubscription {
         pub created_at: DateTime<Utc>,
         pub ignored: bool,
@@ -3184,7 +5647,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Tag {
         pub commit: Commit,
         pub name: String,
@@ -3193,26 +5656,26 @@ pub mod types {
         pub zipball_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Topic {
         pub names: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Traffic {
         pub count: i64,
         pub timestamp: DateTime<Utc>,
         pub uniques: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CloneTraffic {
         pub clones: Vec<Traffic>,
         pub count: i64,
         pub uniques: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentTraffic {
         pub count: i64,
         pub path: String,
@@ -3220,21 +5683,46 @@ pub mod types {
         pub uniques: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReferrerTraffic {
         pub count: i64,
         pub referrer: String,
         pub uniques: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ViewTraffic {
         pub count: i64,
         pub uniques: i64,
         pub views: Vec<Traffic>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Members {
+        pub $ref: Option<String>,
+        pub display: Option<String>,
+        pub value: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Meta {
+        pub created: Option<String>,
+        pub lastModified: Option<String>,
+        pub location: Option<String>,
+        pub resourceType: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Resources {
+        pub displayName: Option<String>,
+        pub externalId: Option<String>,
+        pub id: String,
+        pub members: Option<Vec<Members>>,
+        pub meta: Option<Meta>,
+        pub schemas: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimGroupListEnterprise {
         pub Resources: Vec<Resources>,
         pub itemsPerPage: f64,
@@ -3243,7 +5731,7 @@ pub mod types {
         pub totalResults: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimEnterpriseGroup {
         pub displayName: Option<String>,
         pub externalId: Option<String>,
@@ -3253,7 +5741,39 @@ pub mod types {
         pub schemas: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Name {
+        pub familyName: Option<String>,
+        pub givenName: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Emails {
+        pub primary: Option<bool>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
+        pub value: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ScimUserListEnterpriseResourcesResourcesGroups {
+        pub value: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ScimUserListEnterpriseResources {
+        pub active: Option<bool>,
+        pub emails: Option<Vec<Emails>>,
+        pub externalId: Option<String>,
+        pub groups: Option<Vec<Groups>>,
+        pub id: String,
+        pub meta: Option<Meta>,
+        pub name: Option<Name>,
+        pub schemas: Vec<String>,
+        pub userName: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUserListEnterprise {
         pub Resources: Vec<Resources>,
         pub itemsPerPage: f64,
@@ -3262,7 +5782,12 @@ pub mod types {
         pub totalResults: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ScimEnterpriseUserGroups {
+        pub value: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimEnterpriseUser {
         pub active: Option<bool>,
         pub emails: Option<Vec<Emails>>,
@@ -3275,7 +5800,35 @@ pub mod types {
         pub userName: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ScimUserName {
+        pub familyName: String,
+        pub formatted: Option<String>,
+        pub givenName: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ScimUserEmails {
+        pub primary: Option<bool>,
+        pub value: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ScimUserMeta {
+        pub created: Option<DateTime<Utc>>,
+        pub lastModified: Option<DateTime<Utc>>,
+        pub location: Option<String>,
+        pub resourceType: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Operations {
+        pub op: String,
+        pub path: Option<String>,
+        pub value: Option<value>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUser {
         pub active: bool,
         pub displayName: Option<String>,
@@ -3291,7 +5844,7 @@ pub mod types {
         pub userName: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUserList {
         pub Resources: Vec<ScimUser>,
         pub itemsPerPage: i64,
@@ -3300,7 +5853,13 @@ pub mod types {
         pub totalResults: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Matches {
+        pub indices: Option<Vec<i64>>,
+        pub text: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SearchResultTextMatches {
         pub fragment: Option<String>,
         pub matches: Option<Vec<Matches>>,
@@ -3309,7 +5868,7 @@ pub mod types {
         pub property: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeSearchResultItem {
         pub file_size: Option<i64>,
         pub git_url: String,
@@ -3326,7 +5885,46 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitSearchResultItemCommitCommitAuthor {
+        pub date: DateTime<Utc>,
+        pub email: String,
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitSearchResultItemCommitCommitCommitter {
+        pub date: Option<String>,
+        pub email: Option<String>,
+        pub name: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitSearchResultItemCommit {
+        pub author: Author,
+        pub comment_count: i64,
+        pub committer: Committer,
+        pub message: String,
+        pub tree: Tree,
+        pub url: String,
+        pub verification: Option<Verification>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitSearchResultItemCommitter {
+        pub date: Option<String>,
+        pub email: Option<String>,
+        pub name: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitSearchResultItemParents {
+        pub html_url: Option<String>,
+        pub sha: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitSearchResultItem {
         pub author: Author,
         pub comments_url: String,
@@ -3342,7 +5940,18 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct IssueSearchResultItemLabels {
+        pub color: Option<String>,
+        pub default: Option<bool>,
+        pub description: Option<String>,
+        pub id: Option<i64>,
+        pub name: Option<String>,
+        pub node_id: Option<String>,
+        pub url: Option<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueSearchResultItem {
         pub active_lock_reason: Option<String>,
         pub assignee: Assignee,
@@ -3378,7 +5987,7 @@ pub mod types {
         pub user: User,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LabelSearchResultItem {
         pub color: String,
         pub default: bool,
@@ -3391,7 +6000,14 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct RepoSearchResultItemPermissions {
+        pub admin: bool,
+        pub pull: bool,
+        pub push: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepoSearchResultItem {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
@@ -3478,7 +6094,25 @@ pub mod types {
         pub watchers_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TopicRelation {
+        pub id: Option<i64>,
+        pub name: Option<String>,
+        pub relation_type: Option<String>,
+        pub topic_id: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Related {
+        pub topic_relation: Option<TopicRelation>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Aliases {
+        pub topic_relation: Option<TopicRelation>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TopicSearchResultItem {
         pub aliases: Option<Vec<Aliases>>,
         pub created_at: DateTime<Utc>,
@@ -3498,7 +6132,7 @@ pub mod types {
         pub updated_at: DateTime<Utc>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UserSearchResultItem {
         pub avatar_url: String,
         pub bio: Option<String>,
@@ -3537,7 +6171,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PrivateUser {
         pub avatar_url: String,
         pub bio: String,
@@ -3584,7 +6218,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Email {
         pub email: String,
         pub primary: bool,
@@ -3592,2660 +6226,13 @@ pub mod types {
         pub visibility: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct GpgKey {
-        pub can_certify: bool,
-        pub can_encrypt_comms: bool,
-        pub can_encrypt_storage: bool,
-        pub can_sign: bool,
-        pub created_at: DateTime<Utc>,
-        pub emails: Vec<Emails>,
-        pub expires_at: DateTime<Utc>,
-        pub id: i64,
-        pub key_id: String,
-        pub primary_key_id: i64,
-        pub public_key: String,
-        pub raw_key: String,
-        pub subkeys: Vec<Subkeys>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Key {
-        pub created_at: DateTime<Utc>,
-        pub id: i64,
-        pub key: String,
-        pub read_only: bool,
-        pub title: String,
-        pub url: String,
-        pub verified: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MarketplaceAccount {
-        pub email: Option<String>,
-        pub id: i64,
-        pub login: String,
-        pub node_id: Option<String>,
-        pub organization_billing_email: Option<String>,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct UserMarketplacePurchase {
-        pub account: MarketplaceAccount,
-        pub billing_cycle: String,
-        pub free_trial_ends_on: DateTime<Utc>,
-        pub next_billing_date: DateTime<Utc>,
-        pub on_free_trial: bool,
-        pub plan: MarketplaceListingPlan,
-        pub unit_count: i64,
-        pub updated_at: DateTime<Utc>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct StarredRepository {
-        pub repo: Repository,
-        pub starred_at: DateTime<Utc>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Hovercard {
-        pub contexts: Vec<Contexts>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct KeySimple {
-        pub id: i64,
-        pub key: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Owner {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Permissions {
-        pub checks: Option<String>,
-        pub contents: Option<String>,
-        pub deployments: Option<String>,
-        pub issues: Option<String>,
-        pub metadata: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Account {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct SuspendedBy {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Organization {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RepositoryPermissions {
-        pub admin: bool,
-        pub maintain: Option<bool>,
-        pub pull: bool,
-        pub push: bool,
-        pub triage: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RepositoryTemplateRepositoryTemplateRepositoryOwner {
-        pub avatar_url: Option<String>,
-        pub events_url: Option<String>,
-        pub followers_url: Option<String>,
-        pub following_url: Option<String>,
-        pub gists_url: Option<String>,
-        pub gravatar_id: Option<String>,
-        pub html_url: Option<String>,
-        pub id: Option<i64>,
-        pub login: Option<String>,
-        pub node_id: Option<String>,
-        pub organizations_url: Option<String>,
-        pub received_events_url: Option<String>,
-        pub repos_url: Option<String>,
-        pub site_admin: Option<bool>,
-        pub starred_url: Option<String>,
-        pub subscriptions_url: Option<String>,
-        #[serde(rename = "type")]
-        pub type_: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RepositoryTemplateRepositoryTemplateRepositoryPermissions {
-        pub admin: Option<bool>,
-        pub pull: Option<bool>,
-        pub push: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TemplateRepository {
-        pub allow_merge_commit: Option<bool>,
-        pub allow_rebase_merge: Option<bool>,
-        pub allow_squash_merge: Option<bool>,
-        pub archive_url: Option<String>,
-        pub archived: Option<bool>,
-        pub assignees_url: Option<String>,
-        pub blobs_url: Option<String>,
-        pub branches_url: Option<String>,
-        pub clone_url: Option<String>,
-        pub collaborators_url: Option<String>,
-        pub comments_url: Option<String>,
-        pub commits_url: Option<String>,
-        pub compare_url: Option<String>,
-        pub contents_url: Option<String>,
-        pub contributors_url: Option<String>,
-        pub created_at: Option<String>,
-        pub default_branch: Option<String>,
-        pub delete_branch_on_merge: Option<bool>,
-        pub deployments_url: Option<String>,
-        pub description: Option<String>,
-        pub disabled: Option<bool>,
-        pub downloads_url: Option<String>,
-        pub events_url: Option<String>,
-        pub fork: Option<bool>,
-        pub forks_count: Option<i64>,
-        pub forks_url: Option<String>,
-        pub full_name: Option<String>,
-        pub git_commits_url: Option<String>,
-        pub git_refs_url: Option<String>,
-        pub git_tags_url: Option<String>,
-        pub git_url: Option<String>,
-        pub has_downloads: Option<bool>,
-        pub has_issues: Option<bool>,
-        pub has_pages: Option<bool>,
-        pub has_projects: Option<bool>,
-        pub has_wiki: Option<bool>,
-        pub homepage: Option<String>,
-        pub hooks_url: Option<String>,
-        pub html_url: Option<String>,
-        pub id: Option<i64>,
-        pub is_template: Option<bool>,
-        pub issue_comment_url: Option<String>,
-        pub issue_events_url: Option<String>,
-        pub issues_url: Option<String>,
-        pub keys_url: Option<String>,
-        pub labels_url: Option<String>,
-        pub language: Option<String>,
-        pub languages_url: Option<String>,
-        pub merges_url: Option<String>,
-        pub milestones_url: Option<String>,
-        pub mirror_url: Option<String>,
-        pub name: Option<String>,
-        pub network_count: Option<i64>,
-        pub node_id: Option<String>,
-        pub notifications_url: Option<String>,
-        pub open_issues_count: Option<i64>,
-        pub owner: Option<Owner>,
-        pub permissions: Option<Permissions>,
-        pub private: Option<bool>,
-        pub pulls_url: Option<String>,
-        pub pushed_at: Option<String>,
-        pub releases_url: Option<String>,
-        pub size: Option<i64>,
-        pub ssh_url: Option<String>,
-        pub stargazers_count: Option<i64>,
-        pub stargazers_url: Option<String>,
-        pub statuses_url: Option<String>,
-        pub subscribers_count: Option<i64>,
-        pub subscribers_url: Option<String>,
-        pub subscription_url: Option<String>,
-        pub svn_url: Option<String>,
-        pub tags_url: Option<String>,
-        pub teams_url: Option<String>,
-        pub temp_clone_token: Option<String>,
-        pub topics: Option<Vec<String>>,
-        pub trees_url: Option<String>,
-        pub updated_at: Option<String>,
-        pub url: Option<String>,
-        pub visibility: Option<String>,
-        pub watchers_count: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Errors {
-        pub code: String,
-        pub field: Option<String>,
-        pub index: Option<i64>,
-        pub message: Option<String>,
-        pub resource: Option<String>,
-        pub value: Option<value>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct App {
-        pub client_id: String,
-        pub name: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct User {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct AuthorizationInstallation {
-        pub account: SimpleUser,
-        pub has_multiple_single_files: Option<bool>,
-        pub permissions: AppPermissions,
-        pub repositories_url: String,
-        pub repository_selection: String,
-        pub single_file_name: String,
-        pub single_file_paths: Option<Vec<String>>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Labels {
-        pub id: Option<i64>,
-        pub name: Option<String>,
-        #[serde(rename = "type")]
-        pub type_: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct AuthenticationTokenPermissions {
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ActorLocation {
-        pub country_name: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Data {
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MinutesUsedBreakdown {
-        pub MACOS: Option<i64>,
-        pub UBUNTU: Option<i64>,
-        pub WINDOWS: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Creator {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Assignee {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequest {
-        pub diff_url: String,
-        pub html_url: String,
-        pub merged_at: Option<DateTime<Utc>>,
-        pub patch_url: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PerformedviaGithubApp {
-        pub client_id: Option<String>,
-        pub client_secret: Option<String>,
-        pub created_at: DateTime<Utc>,
-        pub description: String,
-        pub events: Vec<String>,
-        pub external_url: String,
-        pub html_url: String,
-        pub id: i64,
-        pub installations_count: Option<i64>,
-        pub name: String,
-        pub node_id: String,
-        pub owner: Owner,
-        pub pem: Option<String>,
-        pub permissions: Permissions,
-        pub slug: Option<String>,
-        pub updated_at: DateTime<Utc>,
-        pub webhook_secret: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Repo {
-        pub id: i64,
-        pub name: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Pages {
-        pub action: Option<String>,
-        pub html_url: Option<String>,
-        pub page_name: Option<String>,
-        pub sha: Option<String>,
-        pub summary: Option<String>,
-        pub title: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Payload {
-        pub action: Option<String>,
-        pub comment: Option<IssueComment>,
-        pub issue: Option<IssueSimple>,
-        pub pages: Option<Vec<Pages>>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Links {
-        pub current_user: Option<LinkWithType>,
-        pub current_user_actor: Option<LinkWithType>,
-        pub current_user_organization: Option<LinkWithType>,
-        pub current_user_organizations: Option<Vec<LinkWithType>>,
-        pub current_user_public: Option<LinkWithType>,
-        pub security_advisories: Option<LinkWithType>,
-        pub timeline: LinkWithType,
-        pub user: LinkWithType,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Files {
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Plan {
-        pub collaborators: i64,
-        pub name: String,
-        pub private_repos: i64,
-        pub space: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ChangeStatus {
-        pub additions: Option<i64>,
-        pub deletions: Option<i64>,
-        pub total: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Forks {
-        pub created_at: Option<DateTime<Utc>>,
-        pub id: Option<String>,
-        pub updated_at: Option<DateTime<Utc>>,
-        pub url: Option<String>,
-        pub user: Option<PublicUser>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ForkOf {
-        pub comments: i64,
-        pub comments_url: String,
-        pub commits_url: String,
-        pub created_at: DateTime<Utc>,
-        pub description: String,
-        pub files: Files,
-        pub forks: Option<Vec<serde_json::Value>>,
-        pub forks_url: String,
-        pub git_pull_url: String,
-        pub git_push_url: String,
-        pub history: Option<Vec<serde_json::Value>>,
-        pub html_url: String,
-        pub id: String,
-        pub node_id: String,
-        pub owner: Option<Owner>,
-        pub public: bool,
-        pub truncated: Option<bool>,
-        pub updated_at: DateTime<Utc>,
-        pub url: String,
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ClosedBy {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct LicenseData {
-        pub body: String,
-        pub conditions: Vec<String>,
-        pub description: String,
-        pub featured: bool,
-        pub html_url: String,
-        pub implementation: String,
-        pub key: String,
-        pub limitations: Vec<String>,
-        pub name: String,
-        pub node_id: String,
-        pub permissions: Vec<String>,
-        pub spdx_id: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MarketplacePendingChange {
-        pub effective_date: Option<String>,
-        pub id: Option<i64>,
-        pub is_installed: Option<bool>,
-        pub plan: Option<MarketplaceListingPlan>,
-        pub unit_count: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MarketplacePurchase {
-        pub billing_cycle: Option<String>,
-        pub free_trial_ends_on: Option<String>,
-        pub is_installed: Option<bool>,
-        pub next_billing_date: Option<String>,
-        pub on_free_trial: Option<bool>,
-        pub plan: Option<MarketplaceListingPlan>,
-        pub unit_count: Option<i64>,
-        pub updated_at: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct SshKeyFingerprints {
-        pub SHA256_DSA: Option<String>,
-        pub SHA256_RSA: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MinimalRepositoryOwner {
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MinimalRepositoryPermissions {
-        pub admin: Option<bool>,
-        pub maintain: Option<bool>,
-        pub pull: Option<bool>,
-        pub push: Option<bool>,
-        pub triage: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MinimalRepositoryTemplateRepository {
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MinimalRepositoryLicense {
-        pub key: Option<String>,
-        pub name: Option<String>,
-        pub node_id: Option<String>,
-        pub spdx_id: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Subject {
-        pub latest_comment_url: String,
-        pub title: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct OrganizationFullPlan {
-        pub filled_seats: Option<i64>,
-        pub name: String,
-        pub private_repos: i64,
-        pub seats: Option<i64>,
-        pub space: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Config {
-        pub content_type: Option<String>,
-        pub insecure_ssl: Option<String>,
-        pub secret: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TeamPermissions {
-        pub admin: bool,
-        pub maintain: bool,
-        pub pull: bool,
-        pub push: bool,
-        pub triage: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Parent {
-        pub description: String,
-        pub html_url: String,
-        pub id: i64,
-        pub ldap_dn: Option<String>,
-        pub members_url: String,
-        pub name: String,
-        pub node_id: String,
-        pub permission: String,
-        pub privacy: Option<String>,
-        pub repositories_url: String,
-        pub slug: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct OrgMembershipPermissions {
-        pub can_create_repository: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PackageRepository {
-        pub archive_url: String,
-        pub archived: Option<bool>,
-        pub assignees_url: String,
-        pub blobs_url: String,
-        pub branches_url: String,
-        pub clone_url: Option<String>,
-        pub code_of_conduct: Option<CodeofConduct>,
-        pub collaborators_url: String,
-        pub comments_url: String,
-        pub commits_url: String,
-        pub compare_url: String,
-        pub contents_url: String,
-        pub contributors_url: String,
-        pub created_at: Option<DateTime<Utc>>,
-        pub default_branch: Option<String>,
-        pub delete_branch_on_merge: Option<bool>,
-        pub deployments_url: String,
-        pub description: String,
-        pub disabled: Option<bool>,
-        pub downloads_url: String,
-        pub events_url: String,
-        pub fork: bool,
-        pub forks: Option<i64>,
-        pub forks_count: Option<i64>,
-        pub forks_url: String,
-        pub full_name: String,
-        pub git_commits_url: String,
-        pub git_refs_url: String,
-        pub git_tags_url: String,
-        pub git_url: Option<String>,
-        pub has_downloads: Option<bool>,
-        pub has_issues: Option<bool>,
-        pub has_pages: Option<bool>,
-        pub has_projects: Option<bool>,
-        pub has_wiki: Option<bool>,
-        pub homepage: Option<String>,
-        pub hooks_url: String,
-        pub html_url: String,
-        pub id: i64,
-        pub is_template: Option<bool>,
-        pub issue_comment_url: String,
-        pub issue_events_url: String,
-        pub issues_url: String,
-        pub keys_url: String,
-        pub labels_url: String,
-        pub language: Option<String>,
-        pub languages_url: String,
-        pub license: Option<License>,
-        pub merges_url: String,
-        pub milestones_url: String,
-        pub mirror_url: Option<String>,
-        pub name: String,
-        pub network_count: Option<i64>,
-        pub node_id: String,
-        pub notifications_url: String,
-        pub open_issues: Option<i64>,
-        pub open_issues_count: Option<i64>,
-        pub owner: Owner,
-        pub permissions: Option<Permissions>,
-        pub private: bool,
-        pub pulls_url: String,
-        pub pushed_at: Option<DateTime<Utc>>,
-        pub releases_url: String,
-        pub size: Option<i64>,
-        pub ssh_url: Option<String>,
-        pub stargazers_count: Option<i64>,
-        pub stargazers_url: String,
-        pub statuses_url: String,
-        pub subscribers_count: Option<i64>,
-        pub subscribers_url: String,
-        pub subscription_url: String,
-        pub svn_url: Option<String>,
-        pub tags_url: String,
-        pub teams_url: String,
-        pub temp_clone_token: Option<String>,
-        pub template_repository: Option<TemplateRepository>,
-        pub topics: Option<Vec<String>>,
-        pub trees_url: String,
-        pub updated_at: Option<DateTime<Utc>>,
-        pub url: String,
-        pub visibility: Option<String>,
-        pub watchers: Option<i64>,
-        pub watchers_count: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Container {
-        pub tags: serde_json::Value,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Docker {
-        pub tag: Option<serde_json::Value>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Metadata {
-        pub container: Option<Container>,
-        pub docker: Option<Docker>,
-        pub package_type: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Groups {
-        pub group_description: String,
-        pub group_id: String,
-        pub group_name: String,
-        pub status: Option<String>,
-        pub synced_at: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Author {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TeamProjectPermissions {
-        pub admin: bool,
-        pub read: bool,
-        pub write: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TeamRepositoryPermissions {
-        pub admin: bool,
-        pub maintain: Option<bool>,
-        pub pull: bool,
-        pub push: bool,
-        pub triage: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TeamRepositoryTemplateRepository {
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Resources {
-        pub code_scanning_upload: Option<RateLimit>,
-        pub core: RateLimit,
-        pub graphql: Option<RateLimit>,
-        pub integration_manifest: Option<RateLimit>,
-        pub search: RateLimit,
-        pub source_import: Option<RateLimit>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct FullRepositoryPermissions {
-        pub admin: bool,
-        pub pull: bool,
-        pub push: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct FullRepositoryTemplateRepository {
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct AdvancedSecurity {
-        pub status: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct SecretScanning {
-        pub status: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct SecurityandAnalysis {
-        pub advanced_security: Option<AdvancedSecurity>,
-        pub secret_scanning: Option<SecretScanning>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Steps {
-        pub completed_at: Option<DateTime<Utc>>,
-        pub conclusion: String,
-        pub name: String,
-        pub number: i64,
-        pub started_at: Option<DateTime<Utc>>,
-        pub status: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Head {
-        #[serde(rename = "ref")]
-        pub ref_: String,
-        pub repo: Repo,
-        pub sha: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Base {
-        #[serde(rename = "ref")]
-        pub ref_: String,
-        pub repo: Repo,
-        pub sha: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct SimpleCommitAuthor {
-        pub email: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Committer {
-        pub email: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct HeadCommit {
-        pub author: Author,
-        pub committer: Committer,
-        pub id: String,
-        pub message: String,
-        pub timestamp: DateTime<Utc>,
-        pub tree_id: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Environments {
-        pub created_at: Option<DateTime<Utc>>,
-        pub html_url: Option<String>,
-        pub id: Option<i64>,
-        pub name: Option<String>,
-        pub node_id: Option<String>,
-        pub updated_at: Option<DateTime<Utc>>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Reviewer {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Reviewers {
-        pub reviewer: Option<Reviewer>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PayloadData {
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Ubuntu {
-        pub jobs: i64,
-        pub total_ms: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Macos {
-        pub jobs: i64,
-        pub total_ms: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Windows {
-        pub jobs: i64,
-        pub total_ms: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Billable {
-        pub MACOS: Option<Macos>,
-        pub UBUNTU: Option<Ubuntu>,
-        pub WINDOWS: Option<Windows>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct WorkflowUsageBillableBillableUBUNTU {
-        pub total_ms: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct WorkflowUsageBillableBillableMACOS {
-        pub total_ms: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct WorkflowUsageBillableBillableWINDOWS {
-        pub total_ms: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct DismissalRestrictions {
-        pub teams: Option<Vec<Team>>,
-        pub teams_url: Option<String>,
-        pub url: Option<String>,
-        pub users: Option<Vec<SimpleUser>>,
-        pub users_url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Users {
-        pub avatar_url: Option<String>,
-        pub events_url: Option<String>,
-        pub followers_url: Option<String>,
-        pub following_url: Option<String>,
-        pub gists_url: Option<String>,
-        pub gravatar_id: Option<String>,
-        pub html_url: Option<String>,
-        pub id: Option<i64>,
-        pub login: Option<String>,
-        pub node_id: Option<String>,
-        pub organizations_url: Option<String>,
-        pub received_events_url: Option<String>,
-        pub repos_url: Option<String>,
-        pub site_admin: Option<bool>,
-        pub starred_url: Option<String>,
-        pub subscriptions_url: Option<String>,
-        #[serde(rename = "type")]
-        pub type_: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Teams {
-        pub description: Option<String>,
-        pub html_url: Option<String>,
-        pub id: Option<i64>,
-        pub members_url: Option<String>,
-        pub name: Option<String>,
-        pub node_id: Option<String>,
-        pub parent: Option<String>,
-        pub permission: Option<String>,
-        pub privacy: Option<String>,
-        pub repositories_url: Option<String>,
-        pub slug: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct BranchRestrictionPolicyAppsAppsOwner {
-        pub avatar_url: Option<String>,
-        pub description: Option<String>,
-        pub events_url: Option<String>,
-        pub followers_url: Option<String>,
-        pub following_url: Option<String>,
-        pub gists_url: Option<String>,
-        pub gravatar_id: Option<String>,
-        pub hooks_url: Option<String>,
-        pub html_url: Option<String>,
-        pub id: Option<i64>,
-        pub issues_url: Option<String>,
-        pub login: Option<String>,
-        pub members_url: Option<String>,
-        pub node_id: Option<String>,
-        pub organizations_url: Option<String>,
-        pub public_members_url: Option<String>,
-        pub received_events_url: Option<String>,
-        pub repos_url: Option<String>,
-        pub site_admin: Option<bool>,
-        pub starred_url: Option<String>,
-        pub subscriptions_url: Option<String>,
-        #[serde(rename = "type")]
-        pub type_: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct BranchRestrictionPolicyAppsAppsPermissions {
-        pub contents: Option<String>,
-        pub issues: Option<String>,
-        pub metadata: Option<String>,
-        pub single_file: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Apps {
-        pub created_at: Option<String>,
-        pub description: Option<String>,
-        pub events: Option<Vec<String>>,
-        pub external_url: Option<String>,
-        pub html_url: Option<String>,
-        pub id: Option<i64>,
-        pub name: Option<String>,
-        pub node_id: Option<String>,
-        pub owner: Option<Owner>,
-        pub permissions: Option<Permissions>,
-        pub slug: Option<String>,
-        pub updated_at: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RequiredStatusChecks {
-        pub contexts: Vec<String>,
-        pub contexts_url: Option<String>,
-        pub enforcement_level: Option<String>,
-        pub strict: Option<bool>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RequiredLinearHistory {
-        pub enabled: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct AllowForcePushes {
-        pub enabled: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct AllowDeletions {
-        pub enabled: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RequiredConversationResolution {
-        pub enabled: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RequiredSignatures {
-        pub enabled: bool,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitCommitCommitAuthor {
-        pub date: Option<String>,
-        pub email: Option<String>,
-        pub name: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitCommitCommitCommitter {
-        pub date: Option<String>,
-        pub email: Option<String>,
-        pub name: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Tree {
-        pub sha: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitCommit {
-        pub author: Author,
-        pub comment_count: i64,
-        pub committer: Committer,
-        pub message: String,
-        pub tree: Tree,
-        pub url: String,
-        pub verification: Option<Verification>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitCommitter {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Parents {
-        pub html_url: Option<String>,
-        pub sha: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Stats {
-        pub additions: Option<i64>,
-        pub deletions: Option<i64>,
-        pub total: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitFiles {
-        pub additions: Option<i64>,
-        pub blob_url: Option<String>,
-        pub changes: Option<i64>,
-        pub contents_url: Option<String>,
-        pub deletions: Option<i64>,
-        pub filename: Option<String>,
-        pub patch: Option<String>,
-        pub previous_filename: Option<String>,
-        pub raw_url: Option<String>,
-        pub sha: Option<String>,
-        pub status: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitData {
-        pub author: Author,
-        pub comments_url: String,
-        pub commit: Commit,
-        pub committer: Committer,
-        pub files: Option<Vec<Files>>,
-        pub html_url: String,
-        pub node_id: String,
-        pub parents: Vec<Parents>,
-        pub sha: String,
-        pub stats: Option<Stats>,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct BranchWithProtectionLinks {
-        pub html: String,
-        pub self: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ProtectedBranchRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
-        pub teams: Vec<Team>,
-        pub teams_url: String,
-        pub url: String,
-        pub users: Vec<SimpleUser>,
-        pub users_url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RequiredPullRequestReviews {
-        pub dismiss_stale_reviews: Option<bool>,
-        pub dismissal_restrictions: Option<DismissalRestrictions>,
-        pub require_code_owner_reviews: Option<bool>,
-        pub required_approving_review_count: Option<i64>,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct EnforceAdmins {
-        pub enabled: bool,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ProtectedBranchRequiredLinearHistory {
-        pub enabled: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ProtectedBranchAllowForcePushes {
-        pub enabled: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ProtectedBranchAllowDeletions {
-        pub enabled: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Output {
-        pub annotations_count: i64,
-        pub annotations_url: String,
-        pub summary: String,
-        pub text: String,
-        pub title: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CheckSuite {
-        pub id: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CheckRunApp {
-        pub client_id: Option<String>,
-        pub client_secret: Option<String>,
-        pub created_at: DateTime<Utc>,
-        pub description: String,
-        pub events: Vec<String>,
-        pub external_url: String,
-        pub html_url: String,
-        pub id: i64,
-        pub installations_count: Option<i64>,
-        pub name: String,
-        pub node_id: String,
-        pub owner: Owner,
-        pub pem: Option<String>,
-        pub permissions: Permissions,
-        pub slug: Option<String>,
-        pub updated_at: DateTime<Utc>,
-        pub webhook_secret: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CheckSuiteApp {
-        pub client_id: Option<String>,
-        pub client_secret: Option<String>,
-        pub created_at: DateTime<Utc>,
-        pub description: String,
-        pub events: Vec<String>,
-        pub external_url: String,
-        pub html_url: String,
-        pub id: i64,
-        pub installations_count: Option<i64>,
-        pub name: String,
-        pub node_id: String,
-        pub owner: Owner,
-        pub pem: Option<String>,
-        pub permissions: Permissions,
-        pub slug: Option<String>,
-        pub updated_at: DateTime<Utc>,
-        pub webhook_secret: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct AutoTriggerChecks {
-        pub app_id: i64,
-        pub setting: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Preferences {
-        pub auto_trigger_checks: Option<Vec<AutoTriggerChecks>>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Message {
-        pub text: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CollaboratorPermissions {
-        pub admin: bool,
-        pub pull: bool,
-        pub push: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Invitee {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Inviter {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestSimpleLabels {
-        pub color: Option<String>,
-        pub default: Option<bool>,
-        pub description: Option<String>,
-        pub id: Option<i64>,
-        pub name: Option<String>,
-        pub node_id: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestSimpleHead {
-        pub label: String,
-        #[serde(rename = "ref")]
-        pub ref_: String,
-        pub repo: Repository,
-        pub sha: String,
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestSimpleBase {
-        pub label: String,
-        #[serde(rename = "ref")]
-        pub ref_: String,
-        pub repo: Repository,
-        pub sha: String,
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestSimpleLinks {
-        pub comments: Link,
-        pub commits: Link,
-        pub html: Link,
-        pub issue: Link,
-        pub review_comment: Link,
-        pub review_comments: Link,
-        pub self: Link,
-        pub statuses: Link,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CodeofConduct {
-        pub html_url: String,
-        pub key: String,
-        pub name: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CodeofConductFile {
-        pub html_url: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Contributing {
-        pub html_url: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Readme {
-        pub html_url: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct IssueTemplate {
-        pub html_url: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestTemplate {
-        pub html_url: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommunityProfileFiles {
-        pub code_of_conduct: CodeofConduct,
-        pub code_of_conduct_file: CodeofConductFile,
-        pub contributing: Contributing,
-        pub issue_template: IssueTemplate,
-        pub license: License,
-        pub pull_request_template: PullRequestTemplate,
-        pub readme: Readme,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ContentTreeEntriesEntriesLinks {
-        pub git: String,
-        pub html: String,
-        pub self: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Entries {
-        pub _links: Links,
-        pub content: Option<String>,
-        pub download_url: String,
-        pub git_url: String,
-        pub html_url: String,
-        pub name: String,
-        pub path: String,
-        pub sha: String,
-        pub size: i64,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ContentTreeLinks {
-        pub git: String,
-        pub html: String,
-        pub self: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ContentDirectoryLinks {
-        pub git: String,
-        pub html: String,
-        pub self: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ContentFileLinks {
-        pub git: String,
-        pub html: String,
-        pub self: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ContentSymlinkLinks {
-        pub git: String,
-        pub html: String,
-        pub self: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ContentSubmoduleLinks {
-        pub git: String,
-        pub html: String,
-        pub self: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct FileCommitContentContentLinks {
-        pub git: Option<String>,
-        pub html: Option<String>,
-        pub self: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Content {
-        pub _links: Option<Links>,
-        pub download_url: Option<String>,
-        pub git_url: Option<String>,
-        pub html_url: Option<String>,
-        pub name: Option<String>,
-        pub path: Option<String>,
-        pub sha: Option<String>,
-        pub size: Option<i64>,
-        #[serde(rename = "type")]
-        pub type_: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct FileCommitCommitCommitAuthor {
-        pub date: Option<String>,
-        pub email: Option<String>,
-        pub name: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct FileCommitCommitCommitCommitter {
-        pub date: Option<String>,
-        pub email: Option<String>,
-        pub name: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct FileCommitCommitCommitTree {
-        pub sha: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct FileCommitCommitCommitParents {
-        pub html_url: Option<String>,
-        pub sha: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct FileCommitCommitCommitVerification {
-        pub payload: Option<String>,
-        pub reason: Option<String>,
-        pub signature: Option<String>,
-        pub verified: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct FileCommitCommit {
-        pub author: Option<Author>,
-        pub committer: Option<Committer>,
-        pub html_url: Option<String>,
-        pub message: Option<String>,
-        pub node_id: Option<String>,
-        pub parents: Option<Vec<Parents>>,
-        pub sha: Option<String>,
-        pub tree: Option<Tree>,
-        pub url: Option<String>,
-        pub verification: Option<Verification>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ProtectionRules {
-        pub id: i64,
-        pub node_id: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct EnvironmentData {
-        pub created_at: DateTime<Utc>,
-        pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
-        pub html_url: String,
-        pub id: i64,
-        pub name: String,
-        pub node_id: String,
-        pub protection_rules: Option<Vec<ProtectionRules>>,
-        pub updated_at: DateTime<Utc>,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct GitCommitAuthor {
-        pub date: DateTime<Utc>,
-        pub email: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct GitCommitCommitter {
-        pub date: DateTime<Utc>,
-        pub email: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct GitCommitParents {
-        pub html_url: String,
-        pub sha: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Object {
-        pub sha: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Tagger {
-        pub date: String,
-        pub email: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct GitTreeTree {
-        pub mode: Option<String>,
-        pub path: Option<String>,
-        pub sha: Option<String>,
-        pub size: Option<i64>,
-        #[serde(rename = "type")]
-        pub type_: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct HookConfig {
-        pub digest: Option<String>,
-        pub email: Option<String>,
-        pub insecure_ssl: Option<webhook-config-insecure-ssl>,
-        pub password: Option<String>,
-        pub room: Option<String>,
-        pub subdomain: Option<String>,
-        pub token: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ProjectChoices {
-        pub human_name: Option<String>,
-        pub tfvc_project: Option<String>,
-        pub vcs: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct IssueEventActor {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Assigner {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ReviewRequester {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RequestedReviewer {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct LabeledIssueEventLabel {
-        pub color: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct UnlabeledIssueEventLabel {
-        pub color: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MilestonedIssueEventMilestone {
-        pub title: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct DemilestonedIssueEventMilestone {
-        pub title: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Rename {
-        pub from: String,
-        pub to: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct DismissedReview {
-        pub dismissal_commit_id: Option<String>,
-        pub dismissal_message: String,
-        pub review_id: i64,
-        pub state: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ProjectCard {
-        pub column_name: String,
-        pub id: i64,
-        pub previous_column_name: Option<String>,
-        pub project_id: i64,
-        pub project_url: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Source {
-        pub issue: Option<IssueSimple>,
-        #[serde(rename = "type")]
-        pub type_: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TimelineCommittedEventAuthor {
-        pub date: DateTime<Utc>,
-        pub email: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TimelineCommittedEventCommitter {
-        pub date: DateTime<Utc>,
-        pub email: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TimelineCommittedEventParents {
-        pub html_url: String,
-        pub sha: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Html {
-        pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TimelineReviewedEventLinksLinksPullRequest {
-        pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TimelineReviewedEventLinks {
-        pub html: Html,
-        pub pull_request: PullRequest,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Self {
-        pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestReviewCommentLinksLinksPullRequest {
-        pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestReviewCommentLinks {
-        pub html: Html,
-        pub pull_request: PullRequest,
-        pub self: Self,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct LicenseContentLinks {
-        pub git: String,
-        pub html: String,
-        pub self: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Error {
-        pub message: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Pusher {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Domain {
-        pub caa_error: Option<String>,
-        pub dns_resolves: Option<bool>,
-        pub enforces_https: Option<bool>,
-        pub has_cname_record: Option<bool>,
-        pub has_mx_records_present: Option<bool>,
-        pub host: Option<String>,
-        pub https_error: Option<String>,
-        pub is_a_record: Option<bool>,
-        pub is_apex_domain: Option<bool>,
-        pub is_cloudflare_ip: Option<bool>,
-        pub is_cname_to_fastly: Option<bool>,
-        pub is_cname_to_github_user_domain: Option<bool>,
-        pub is_cname_to_pages_dot_github_dot_com: Option<bool>,
-        pub is_fastly_ip: Option<bool>,
-        pub is_https_eligible: Option<bool>,
-        pub is_non_github_pages_ip_present: Option<bool>,
-        pub is_old_ip_address: Option<bool>,
-        pub is_pages_domain: Option<bool>,
-        pub is_pointed_to_github_pages_ip: Option<bool>,
-        pub is_proxied: Option<bool>,
-        pub is_served_by_pages: Option<bool>,
-        pub is_valid: Option<bool>,
-        pub is_valid_domain: Option<bool>,
-        pub nameservers: Option<String>,
-        pub reason: Option<String>,
-        pub responds_to_https: Option<bool>,
-        pub should_be_a_record: Option<bool>,
-        pub uri: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct AltDomain {
-        pub caa_error: Option<String>,
-        pub dns_resolves: Option<bool>,
-        pub enforces_https: Option<bool>,
-        pub has_cname_record: Option<bool>,
-        pub has_mx_records_present: Option<bool>,
-        pub host: Option<String>,
-        pub https_error: Option<String>,
-        pub is_a_record: Option<bool>,
-        pub is_apex_domain: Option<bool>,
-        pub is_cloudflare_ip: Option<bool>,
-        pub is_cname_to_fastly: Option<bool>,
-        pub is_cname_to_github_user_domain: Option<bool>,
-        pub is_cname_to_pages_dot_github_dot_com: Option<bool>,
-        pub is_fastly_ip: Option<bool>,
-        pub is_https_eligible: Option<bool>,
-        pub is_non_github_pages_ip_present: Option<bool>,
-        pub is_old_ip_address: Option<bool>,
-        pub is_pages_domain: Option<bool>,
-        pub is_pointed_to_github_pages_ip: Option<bool>,
-        pub is_proxied: Option<bool>,
-        pub is_served_by_pages: Option<bool>,
-        pub is_valid: Option<bool>,
-        pub is_valid_domain: Option<bool>,
-        pub nameservers: Option<String>,
-        pub reason: Option<String>,
-        pub responds_to_https: Option<bool>,
-        pub should_be_a_record: Option<bool>,
-        pub uri: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestLabels {
-        pub color: Option<String>,
-        pub default: Option<bool>,
-        pub description: Option<String>,
-        pub id: Option<i64>,
-        pub name: Option<String>,
-        pub node_id: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestHeadHeadRepoRepoOwner {
-        pub avatar_url: String,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestHeadHeadRepoRepoPermissions {
-        pub admin: bool,
-        pub pull: bool,
-        pub push: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestHeadHeadRepoRepoLicense {
-        pub key: String,
-        pub name: String,
-        pub node_id: String,
-        pub spdx_id: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestHeadHeadRepo {
-        pub allow_merge_commit: Option<bool>,
-        pub allow_rebase_merge: Option<bool>,
-        pub allow_squash_merge: Option<bool>,
-        pub archive_url: String,
-        pub archived: bool,
-        pub assignees_url: String,
-        pub blobs_url: String,
-        pub branches_url: String,
-        pub clone_url: String,
-        pub collaborators_url: String,
-        pub comments_url: String,
-        pub commits_url: String,
-        pub compare_url: String,
-        pub contents_url: String,
-        pub contributors_url: String,
-        pub created_at: DateTime<Utc>,
-        pub default_branch: String,
-        pub deployments_url: String,
-        pub description: String,
-        pub disabled: bool,
-        pub downloads_url: String,
-        pub events_url: String,
-        pub fork: bool,
-        pub forks: i64,
-        pub forks_count: i64,
-        pub forks_url: String,
-        pub full_name: String,
-        pub git_commits_url: String,
-        pub git_refs_url: String,
-        pub git_tags_url: String,
-        pub git_url: String,
-        pub has_downloads: bool,
-        pub has_issues: bool,
-        pub has_pages: bool,
-        pub has_projects: bool,
-        pub has_wiki: bool,
-        pub homepage: String,
-        pub hooks_url: String,
-        pub html_url: String,
-        pub id: i64,
-        pub issue_comment_url: String,
-        pub issue_events_url: String,
-        pub issues_url: String,
-        pub keys_url: String,
-        pub labels_url: String,
-        pub language: String,
-        pub languages_url: String,
-        pub license: License,
-        pub master_branch: Option<String>,
-        pub merges_url: String,
-        pub milestones_url: String,
-        pub mirror_url: String,
-        pub name: String,
-        pub node_id: String,
-        pub notifications_url: String,
-        pub open_issues: i64,
-        pub open_issues_count: i64,
-        pub owner: Owner,
-        pub permissions: Option<Permissions>,
-        pub private: bool,
-        pub pulls_url: String,
-        pub pushed_at: DateTime<Utc>,
-        pub releases_url: String,
-        pub size: i64,
-        pub ssh_url: String,
-        pub stargazers_count: i64,
-        pub stargazers_url: String,
-        pub statuses_url: String,
-        pub subscribers_url: String,
-        pub subscription_url: String,
-        pub svn_url: String,
-        pub tags_url: String,
-        pub teams_url: String,
-        pub temp_clone_token: Option<String>,
-        pub topics: Option<Vec<String>>,
-        pub trees_url: String,
-        pub updated_at: DateTime<Utc>,
-        pub url: String,
-        pub watchers: i64,
-        pub watchers_count: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestHeadHeadUser {
-        pub avatar_url: String,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestHead {
-        pub label: String,
-        #[serde(rename = "ref")]
-        pub ref_: String,
-        pub repo: Repo,
-        pub sha: String,
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestBaseBaseRepoRepoOwner {
-        pub avatar_url: String,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestBaseBaseRepoRepoPermissions {
-        pub admin: bool,
-        pub pull: bool,
-        pub push: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestBaseBaseRepo {
-        pub allow_merge_commit: Option<bool>,
-        pub allow_rebase_merge: Option<bool>,
-        pub allow_squash_merge: Option<bool>,
-        pub archive_url: String,
-        pub archived: bool,
-        pub assignees_url: String,
-        pub blobs_url: String,
-        pub branches_url: String,
-        pub clone_url: String,
-        pub collaborators_url: String,
-        pub comments_url: String,
-        pub commits_url: String,
-        pub compare_url: String,
-        pub contents_url: String,
-        pub contributors_url: String,
-        pub created_at: DateTime<Utc>,
-        pub default_branch: String,
-        pub deployments_url: String,
-        pub description: String,
-        pub disabled: bool,
-        pub downloads_url: String,
-        pub events_url: String,
-        pub fork: bool,
-        pub forks: i64,
-        pub forks_count: i64,
-        pub forks_url: String,
-        pub full_name: String,
-        pub git_commits_url: String,
-        pub git_refs_url: String,
-        pub git_tags_url: String,
-        pub git_url: String,
-        pub has_downloads: bool,
-        pub has_issues: bool,
-        pub has_pages: bool,
-        pub has_projects: bool,
-        pub has_wiki: bool,
-        pub homepage: String,
-        pub hooks_url: String,
-        pub html_url: String,
-        pub id: i64,
-        pub issue_comment_url: String,
-        pub issue_events_url: String,
-        pub issues_url: String,
-        pub keys_url: String,
-        pub labels_url: String,
-        pub language: String,
-        pub languages_url: String,
-        pub license: License,
-        pub master_branch: Option<String>,
-        pub merges_url: String,
-        pub milestones_url: String,
-        pub mirror_url: String,
-        pub name: String,
-        pub node_id: String,
-        pub notifications_url: String,
-        pub open_issues: i64,
-        pub open_issues_count: i64,
-        pub owner: Owner,
-        pub permissions: Option<Permissions>,
-        pub private: bool,
-        pub pulls_url: String,
-        pub pushed_at: DateTime<Utc>,
-        pub releases_url: String,
-        pub size: i64,
-        pub ssh_url: String,
-        pub stargazers_count: i64,
-        pub stargazers_url: String,
-        pub statuses_url: String,
-        pub subscribers_url: String,
-        pub subscription_url: String,
-        pub svn_url: String,
-        pub tags_url: String,
-        pub teams_url: String,
-        pub temp_clone_token: Option<String>,
-        pub topics: Option<Vec<String>>,
-        pub trees_url: String,
-        pub updated_at: DateTime<Utc>,
-        pub url: String,
-        pub watchers: i64,
-        pub watchers_count: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestBaseBaseUser {
-        pub avatar_url: String,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestBase {
-        pub label: String,
-        #[serde(rename = "ref")]
-        pub ref_: String,
-        pub repo: Repo,
-        pub sha: String,
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestLinks {
-        pub comments: Link,
-        pub commits: Link,
-        pub html: Link,
-        pub issue: Link,
-        pub review_comment: Link,
-        pub review_comments: Link,
-        pub self: Link,
-        pub statuses: Link,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct MergedBy {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestReviewLinksLinksPullRequest {
-        pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PullRequestReviewLinks {
-        pub html: Html,
-        pub pull_request: PullRequest,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ReviewCommentLinks {
-        pub html: Link,
-        pub pull_request: Link,
-        pub self: Link,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Uploader {
-        pub avatar_url: String,
-        pub email: Option<String>,
-        pub events_url: String,
-        pub followers_url: String,
-        pub following_url: String,
-        pub gists_url: String,
-        pub gravatar_id: String,
-        pub html_url: String,
-        pub id: i64,
-        pub login: String,
-        pub name: Option<String>,
-        pub node_id: String,
-        pub organizations_url: String,
-        pub received_events_url: String,
-        pub repos_url: String,
-        pub site_admin: bool,
-        pub starred_at: Option<String>,
-        pub starred_url: String,
-        pub subscriptions_url: String,
-        #[serde(rename = "type")]
-        pub type_: String,
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Weeks {
-        pub a: Option<i64>,
-        pub c: Option<i64>,
-        pub d: Option<i64>,
-        pub w: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Members {
-        pub $ref: Option<String>,
-        pub display: Option<String>,
-        pub value: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Meta {
-        pub created: Option<String>,
-        pub lastModified: Option<String>,
-        pub location: Option<String>,
-        pub resourceType: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Resources {
-        pub displayName: Option<String>,
-        pub externalId: Option<String>,
-        pub id: String,
-        pub members: Option<Vec<Members>>,
-        pub meta: Option<Meta>,
-        pub schemas: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Name {
-        pub familyName: Option<String>,
-        pub givenName: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Emails {
-        pub primary: Option<bool>,
-        #[serde(rename = "type")]
-        pub type_: Option<String>,
-        pub value: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ScimUserListEnterpriseResourcesResourcesGroups {
-        pub value: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ScimUserListEnterpriseResources {
-        pub active: Option<bool>,
-        pub emails: Option<Vec<Emails>>,
-        pub externalId: Option<String>,
-        pub groups: Option<Vec<Groups>>,
-        pub id: String,
-        pub meta: Option<Meta>,
-        pub name: Option<Name>,
-        pub schemas: Vec<String>,
-        pub userName: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ScimEnterpriseUserGroups {
-        pub value: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ScimUserName {
-        pub familyName: String,
-        pub formatted: Option<String>,
-        pub givenName: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ScimUserEmails {
-        pub primary: Option<bool>,
-        pub value: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct ScimUserMeta {
-        pub created: Option<DateTime<Utc>>,
-        pub lastModified: Option<DateTime<Utc>>,
-        pub location: Option<String>,
-        pub resourceType: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Operations {
-        pub op: String,
-        pub path: Option<String>,
-        pub value: Option<value>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Matches {
-        pub indices: Option<Vec<i64>>,
-        pub text: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitSearchResultItemCommitCommitAuthor {
-        pub date: DateTime<Utc>,
-        pub email: String,
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitSearchResultItemCommitCommitCommitter {
-        pub date: Option<String>,
-        pub email: Option<String>,
-        pub name: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitSearchResultItemCommit {
-        pub author: Author,
-        pub comment_count: i64,
-        pub committer: Committer,
-        pub message: String,
-        pub tree: Tree,
-        pub url: String,
-        pub verification: Option<Verification>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitSearchResultItemCommitter {
-        pub date: Option<String>,
-        pub email: Option<String>,
-        pub name: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct CommitSearchResultItemParents {
-        pub html_url: Option<String>,
-        pub sha: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct IssueSearchResultItemLabels {
-        pub color: Option<String>,
-        pub default: Option<bool>,
-        pub description: Option<String>,
-        pub id: Option<i64>,
-        pub name: Option<String>,
-        pub node_id: Option<String>,
-        pub url: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct RepoSearchResultItemPermissions {
-        pub admin: bool,
-        pub pull: bool,
-        pub push: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct TopicRelation {
-        pub id: Option<i64>,
-        pub name: Option<String>,
-        pub relation_type: Option<String>,
-        pub topic_id: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Related {
-        pub topic_relation: Option<TopicRelation>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct Aliases {
-        pub topic_relation: Option<TopicRelation>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GpgKeyEmails {
         pub email: Option<String>,
         pub verified: Option<bool>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Subkeys {
         pub can_certify: Option<bool>,
         pub can_encrypt_comms: Option<bool>,
@@ -6262,13 +6249,82 @@ pub mod types {
         pub subkeys: Option<Vec<serde_json::Value>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct GpgKey {
+        pub can_certify: bool,
+        pub can_encrypt_comms: bool,
+        pub can_encrypt_storage: bool,
+        pub can_sign: bool,
+        pub created_at: DateTime<Utc>,
+        pub emails: Vec<Emails>,
+        pub expires_at: DateTime<Utc>,
+        pub id: i64,
+        pub key_id: String,
+        pub primary_key_id: i64,
+        pub public_key: String,
+        pub raw_key: String,
+        pub subkeys: Vec<Subkeys>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Key {
+        pub created_at: DateTime<Utc>,
+        pub id: i64,
+        pub key: String,
+        pub read_only: bool,
+        pub title: String,
+        pub url: String,
+        pub verified: bool,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MarketplaceAccount {
+        pub email: Option<String>,
+        pub id: i64,
+        pub login: String,
+        pub node_id: Option<String>,
+        pub organization_billing_email: Option<String>,
+        #[serde(rename = "type")]
+        pub type_: String,
+        pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct UserMarketplacePurchase {
+        pub account: MarketplaceAccount,
+        pub billing_cycle: String,
+        pub free_trial_ends_on: DateTime<Utc>,
+        pub next_billing_date: DateTime<Utc>,
+        pub on_free_trial: bool,
+        pub plan: MarketplaceListingPlan,
+        pub unit_count: i64,
+        pub updated_at: DateTime<Utc>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct StarredRepository {
+        pub repo: Repository,
+        pub starred_at: DateTime<Utc>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Contexts {
         pub message: String,
         pub octicon: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct Hovercard {
+        pub contexts: Vec<Contexts>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct KeySimple {
+        pub id: i64,
+        pub key: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGithubApiRootOkResponse {
         pub authorizations_url: String,
         pub code_search_url: String,
@@ -6305,11 +6361,11 @@ pub mod types {
         pub user_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateGithubAppFromManifestRequest {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateGithubAppFromManifestCreatedResponse {
         pub client_id: Option<String>,
         pub client_secret: Option<String>,
@@ -6330,39 +6386,39 @@ pub mod types {
         pub webhook_secret: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateWebhookConfigurationAppRequest {
-        pub insecure_ssl: Option<webhook-config-insecure-ssl>,
+        pub insecure_ssl: Option<webhook config insecure ssl>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateInstallationAccessTokenAppRequest {
         pub permissions: Option<AppPermissions>,
         pub repositories: Option<Vec<String>>,
         pub repository_ids: Option<Vec<i64>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteDeleteAppAuthorizationRequest {
         pub access_token: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCheckTokenRequest {
         pub access_token: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteDeleteAppTokenRequest {
         pub access_token: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchResetTokenRequest {
         pub access_token: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateScopedAccessTokenRequest {
         pub access_token: String,
         pub permissions: Option<AppPermissions>,
@@ -6372,7 +6428,7 @@ pub mod types {
         pub target_id: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetCheckAuthorizationOkResponse {
         pub app: App,
         pub created_at: DateTime<Utc>,
@@ -6390,7 +6446,7 @@ pub mod types {
         pub user: Option<User>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateNewAuthorizationRequest {
         pub client_id: Option<String>,
         pub client_secret: Option<String>,
@@ -6400,7 +6456,7 @@ pub mod types {
         pub scopes: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutGetorCreateAuthorizationSpecificAppRequest {
         pub client_secret: String,
         pub fingerprint: Option<String>,
@@ -6409,7 +6465,7 @@ pub mod types {
         pub scopes: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutGetorCreateAuthorizationSpecificAppandFingerprintRequest {
         pub client_secret: String,
         pub note: Option<String>,
@@ -6417,7 +6473,7 @@ pub mod types {
         pub scopes: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateExistingAuthorizationRequest {
         pub add_scopes: Option<Vec<String>>,
         pub fingerprint: Option<String>,
@@ -6427,32 +6483,32 @@ pub mod types {
         pub scopes: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetEmojisOkResponse {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetGithubActionsPermissionsEnterpriseRequest {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelectedOrganizationsEnabledGithubActionsinEnterpriseOkResponse {
         pub organizations: Vec<OrganizationSimple>,
         pub total_count: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetSelectedOrganizationsEnabledGithubActionsinEnterpriseRequest {
         pub selected_organization_ids: Vec<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelfHostedRunnerGroupsEnterpriseOkResponse {
         pub runner_groups: Vec<RunnerGroupsEnterprise>,
         pub total_count: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateSelfHostedRunnerGroupEnterpriseRequest {
         pub name: String,
         pub runners: Option<Vec<i64>>,
@@ -6460,98 +6516,98 @@ pub mod types {
         pub visibility: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateSelfHostedRunnerGroupEnterpriseRequest {
         pub name: Option<String>,
         pub visibility: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListOrganizationAccessSelfHostedRunnerGroupinEnterpriseOkResponse {
         pub organizations: Vec<OrganizationSimple>,
         pub total_count: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetOrganizationAccessSelfHostedRunnerGroupinEnterpriseRequest {
         pub selected_organization_ids: Vec<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelfHostedRunnersinGroupEnterpriseOkResponse {
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetSelfHostedRunnersinGroupEnterpriseRequest {
         pub runners: Vec<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelfHostedRunnersEnterpriseOkResponse {
         pub runners: Option<Vec<Runner>>,
         pub total_count: Option<f64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateGistRequest {
         pub description: Option<String>,
         pub files: Files,
         pub public: Option<public>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateGistRequest {
         pub description: Option<String>,
         pub files: Option<Files>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateGistCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateGistCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetCheckifGistIsStarredNotFoundResponse {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositoriesAccessibleAppInstallationOkResponse {
         pub repositories: Vec<Repository>,
         pub repository_selection: Option<String>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostRenderMarkdownDocumentRequest {
         pub context: Option<String>,
         pub mode: Option<String>,
         pub text: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutMarkNotificationsasReadRequest {
         pub last_read_at: Option<DateTime<Utc>>,
         pub read: Option<bool>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutMarkNotificationsasReadAcceptedResponse {
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetThreadSubscriptionRequest {
         pub ignored: Option<bool>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateOrganizationRequest {
         pub billing_email: Option<String>,
         pub blog: Option<String>,
@@ -6574,35 +6630,35 @@ pub mod types {
         pub twitter_username: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateOrganizationUnprocessableEntityResponse {
         pub documentation_url: String,
         pub errors: Option<Vec<Errors>>,
         pub message: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetGithubActionsPermissionsOrganizationRequest {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelectedRepositoriesEnabledGithubActionsinOrganizationOkResponse {
         pub repositories: Vec<Repository>,
         pub total_count: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetSelectedRepositoriesEnabledGithubActionsinOrganizationRequest {
         pub selected_repository_ids: Vec<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelfHostedRunnerGroupsOrganizationOkResponse {
         pub runner_groups: Vec<RunnerGroupsOrg>,
         pub total_count: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateSelfHostedRunnerGroupOrganizationRequest {
         pub name: String,
         pub runners: Option<Vec<i64>>,
@@ -6610,47 +6666,47 @@ pub mod types {
         pub visibility: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateSelfHostedRunnerGroupOrganizationRequest {
         pub name: Option<String>,
         pub visibility: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositoryAccessSelfHostedRunnerGroupinOrganizationOkResponse {
         pub repositories: Vec<MinimalRepository>,
         pub total_count: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetRepositoryAccessSelfHostedRunnerGroupinOrganizationRequest {
         pub selected_repository_ids: Vec<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelfHostedRunnersinGroupOrganizationOkResponse {
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetSelfHostedRunnersinGroupOrganizationRequest {
         pub runners: Vec<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelfHostedRunnersOrganizationOkResponse {
         pub runners: Vec<Runner>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListOrganizationSecretsOkResponse {
         pub secrets: Vec<OrganizationActionsSecret>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateOrganizationSecretRequest {
         pub encrypted_value: Option<String>,
         pub key_id: Option<String>,
@@ -6658,25 +6714,25 @@ pub mod types {
         pub visibility: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelectedRepositoriesOrganizationSecretOkResponse {
         pub repositories: Vec<MinimalRepository>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetSelectedRepositoriesOrganizationSecretRequest {
         pub selected_repository_ids: Option<Vec<i64>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateOrganizationWebhookRequestConfig {
-        pub insecure_ssl: Option<webhook-config-insecure-ssl>,
+        pub insecure_ssl: Option<webhook config insecure ssl>,
         pub password: Option<String>,
         pub username: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateOrganizationWebhookRequest {
         pub active: Option<bool>,
         pub config: Config,
@@ -6684,12 +6740,12 @@ pub mod types {
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateOrganizationWebhookRequestConfig {
-        pub insecure_ssl: Option<webhook-config-insecure-ssl>,
+        pub insecure_ssl: Option<webhook config insecure ssl>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateOrganizationWebhookRequest {
         pub active: Option<bool>,
         pub config: Option<Config>,
@@ -6697,24 +6753,24 @@ pub mod types {
         pub name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateWebhookConfigurationOrganizationRequest {
-        pub insecure_ssl: Option<webhook-config-insecure-ssl>,
+        pub insecure_ssl: Option<webhook config insecure ssl>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListAppInstallationsOrganizationOkResponse {
         pub installations: Vec<Installation>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetInteractionRestrictionsOrganizationOkResponse {
         pub expires_at: DateTime<Utc>,
         pub origin: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateOrganizationInvitationRequest {
         pub email: Option<String>,
         pub invitee_id: Option<i64>,
@@ -6722,12 +6778,12 @@ pub mod types {
         pub team_ids: Option<Vec<i64>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetOrganizationMembershipUserRequest {
         pub role: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostStartOrganizationMigrationRequest {
         pub exclude: Option<Vec<String>>,
         pub exclude_attachments: Option<bool>,
@@ -6735,23 +6791,23 @@ pub mod types {
         pub repositories: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutConvertOrganizationMemberOutsideCollaboratorAcceptedResponse {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteRemoveOutsideCollaboratorFromOrganizationUnprocessableEntityResponse {
         pub documentation_url: Option<String>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateOrganizationProjectRequest {
         pub body: Option<String>,
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateOrganizationRepositoryRequest {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
@@ -6772,7 +6828,7 @@ pub mod types {
         pub visibility: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateTeamRequest {
         pub description: Option<String>,
         pub maintainers: Option<Vec<String>>,
@@ -6783,7 +6839,7 @@ pub mod types {
         pub repo_names: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateTeamRequest {
         pub description: Option<String>,
         pub name: Option<String>,
@@ -6792,96 +6848,96 @@ pub mod types {
         pub privacy: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateDiscussionRequest {
         pub body: String,
         pub private: Option<bool>,
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateDiscussionRequest {
         pub body: Option<String>,
         pub title: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateDiscussionCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateDiscussionCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReactionTeamDiscussionCommentRequest {
         pub content: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReactionTeamDiscussionRequest {
         pub content: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddUpdateTeamMembershipUserRequest {
         pub role: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddUpdateTeamProjectPermissionsRequest {
         pub permission: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddUpdateTeamProjectPermissionsForbiddenResponse {
         pub documentation_url: Option<String>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddUpdateTeamRepositoryPermissionsRequest {
         pub permission: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchCreateUpdateIdpGroupConnectionsRequestGroups {
         pub group_description: String,
         pub group_id: String,
         pub group_name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchCreateUpdateIdpGroupConnectionsRequest {
         pub groups: Option<Vec<Groups>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteDeleteProjectCardForbiddenResponse {
         pub documentation_url: Option<String>,
         pub errors: Option<Vec<String>>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateExistingProjectCardRequest {
         pub archived: Option<bool>,
         pub note: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMoveProjectCardRequest {
         pub column_id: Option<i64>,
         pub position: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMoveProjectCardCreatedResponse {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMoveProjectCardForbiddenResponseErrors {
         pub code: Option<String>,
         pub field: Option<String>,
@@ -6889,20 +6945,20 @@ pub mod types {
         pub resource: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMoveProjectCardForbiddenResponse {
         pub documentation_url: Option<String>,
         pub errors: Option<Vec<Errors>>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMoveProjectCardServiceUnavailableResponseErrors {
         pub code: Option<String>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMoveProjectCardServiceUnavailableResponse {
         pub code: Option<String>,
         pub documentation_url: Option<String>,
@@ -6910,30 +6966,30 @@ pub mod types {
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateExistingProjectColumnRequest {
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateProjectCardRequest {
         pub note: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateProjectCardUnprocessableEntityResponse {
         pub documentation_url: String,
         pub errors: Option<Vec<Errors>>,
         pub message: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateProjectCardServiceUnavailableResponseErrors {
         pub code: Option<String>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateProjectCardServiceUnavailableResponse {
         pub code: Option<String>,
         pub documentation_url: Option<String>,
@@ -6941,23 +6997,23 @@ pub mod types {
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMoveProjectColumnRequest {
         pub position: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMoveProjectColumnCreatedResponse {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteDeleteProjectForbiddenResponse {
         pub documentation_url: Option<String>,
         pub errors: Option<Vec<String>>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateProjectRequest {
         pub body: Option<String>,
         pub name: Option<String>,
@@ -6966,30 +7022,30 @@ pub mod types {
         pub state: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateProjectForbiddenResponse {
         pub documentation_url: Option<String>,
         pub errors: Option<Vec<String>>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddProjectCollaboratorRequest {
         pub permission: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateProjectColumnRequest {
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteDeleteRepositoryForbiddenResponse {
         pub documentation_url: Option<String>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateRepositoryRequest {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
@@ -7009,122 +7065,122 @@ pub mod types {
         pub visibility: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListArtifactsRepositoryOkResponse {
         pub artifacts: Vec<Artifact>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetGithubActionsPermissionsRepositoryRequest {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListSelfHostedRunnersRepositoryOkResponse {
         pub runners: Vec<Runner>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListWorkflowRunsRepositoryOkResponse {
         pub total_count: i64,
         pub workflow_runs: Vec<WorkflowRun>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListWorkflowRunArtifactsOkResponse {
         pub artifacts: Vec<Artifact>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCancelWorkflowRunAcceptedResponse {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListJobsWorkflowRunOkResponse {
         pub jobs: Vec<Job>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostReviewPendingDeploymentsWorkflowRunRequest {
         pub comment: String,
         pub environment_ids: Vec<i64>,
         pub state: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostReRunWorkflowCreatedResponse {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositorySecretsOkResponse {
         pub secrets: Vec<ActionsSecret>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateRepositorySecretRequest {
         pub encrypted_value: Option<String>,
         pub key_id: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateRepositorySecretCreatedResponse {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositoryWorkflowsOkResponse {
         pub total_count: i64,
         pub workflows: Vec<Workflow>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Inputs {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateWorkflowDispatchEventRequest {
         pub inputs: Option<Inputs>,
         #[serde(rename = "ref")]
         pub ref_: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListWorkflowRunsOkResponse {
         pub total_count: i64,
         pub workflow_runs: Vec<WorkflowRun>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PutUpdateBranchProtectionRequestRequiredStatusChecks {
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PutUpdateBranchProtectionRequestRequired_status_checks {
         pub contexts: Vec<String>,
         pub strict: bool,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PutUpdateBranchProtectionRequestRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PutUpdateBranchProtectionRequestRequired_pull_request_reviewsRequiredPullRequestReviewsDismissal_restrictions {
         pub teams: Option<Vec<String>>,
         pub users: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PutUpdateBranchProtectionRequestRequiredPullRequestReviews {
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PutUpdateBranchProtectionRequestRequired_pull_request_reviews {
         pub dismiss_stale_reviews: Option<bool>,
         pub dismissal_restrictions: Option<DismissalRestrictions>,
         pub require_code_owner_reviews: Option<bool>,
         pub required_approving_review_count: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Restrictions {
         pub apps: Option<Vec<String>>,
         pub teams: Vec<String>,
         pub users: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutUpdateBranchProtectionRequest {
         pub allow_deletions: Option<bool>,
         pub allow_force_pushes: Option<bool>,
@@ -7136,13 +7192,13 @@ pub mod types {
         pub restrictions: Restrictions,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
-    pub struct PatchUpdatePullRequestReviewProtectionRequestDismissalRestrictions {
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PatchUpdatePullRequestReviewProtectionRequestDismissal_restrictions {
         pub teams: Option<Vec<String>>,
         pub users: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdatePullRequestReviewProtectionRequest {
         pub dismiss_stale_reviews: Option<bool>,
         pub dismissal_restrictions: Option<DismissalRestrictions>,
@@ -7150,78 +7206,78 @@ pub mod types {
         pub required_approving_review_count: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateStatusCheckProtectionRequest {
         pub contexts: Option<Vec<String>>,
         pub strict: Option<bool>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostAddStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteRemoveStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostAddAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteRemoveAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostAddTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteRemoveTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostAddUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteRemoveUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostRenameBranchRequest {
         pub new_name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Annotations {
         pub annotation_level: String,
         pub end_column: Option<i64>,
@@ -7234,14 +7290,14 @@ pub mod types {
         pub title: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Images {
         pub alt: String,
         pub caption: Option<String>,
         pub image_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateCheckRunRequestOutput {
         pub annotations: Option<Vec<Annotations>>,
         pub images: Option<Vec<Images>>,
@@ -7250,14 +7306,14 @@ pub mod types {
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Actions {
         pub description: String,
         pub identifier: String,
         pub label: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateCheckRunRequest {
         pub actions: Option<Vec<Actions>>,
         pub completed_at: Option<DateTime<Utc>>,
@@ -7271,7 +7327,7 @@ pub mod types {
         pub status: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateCheckRunRequestOutput {
         pub annotations: Option<Vec<Annotations>>,
         pub images: Option<Vec<Images>>,
@@ -7280,7 +7336,7 @@ pub mod types {
         pub title: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateCheckRunRequest {
         pub actions: Option<Vec<Actions>>,
         pub completed_at: Option<DateTime<Utc>>,
@@ -7293,54 +7349,54 @@ pub mod types {
         pub status: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateCheckSuiteRequest {
         pub head_sha: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateRepositoryPreferencesCheckSuitesRequest {
         pub auto_trigger_checks: Option<Vec<AutoTriggerChecks>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListCheckRunsinCheckSuiteOkResponse {
         pub check_runs: Vec<CheckRun>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostRerequestCheckSuiteCreatedResponse {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateCodeScanningAlertRequest {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostUploadAnalysisasSarifDataRequest {
         pub checkout_uri: Option<String>,
         pub started_at: Option<DateTime<Utc>>,
         pub tool_name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddRepositoryCollaboratorRequest {
         pub permission: Option<String>,
         pub permissions: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateCommitCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReactionCommitCommentRequest {
         pub content: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateCommitCommentRequest {
         pub body: String,
         pub line: Option<i64>,
@@ -7348,25 +7404,25 @@ pub mod types {
         pub position: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListCheckRunsGitReferenceOkResponse {
         pub check_runs: Vec<CheckRun>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListCheckSuitesGitReferenceOkResponse {
         pub check_suites: Vec<CheckSuite>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateContentAttachmentRequest {
         pub body: String,
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetRepositoryContentOkResponse {
         pub _links: Links,
         pub content: Option<String>,
@@ -7382,21 +7438,21 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateFileContentsRequestCommitter {
         pub date: Option<String>,
         pub email: String,
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateFileContentsRequestAuthor {
         pub date: Option<String>,
         pub email: String,
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateFileContentsRequest {
         pub author: Option<Author>,
         pub branch: Option<String>,
@@ -7406,19 +7462,19 @@ pub mod types {
         pub sha: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteDeleteFileRequestCommitter {
         pub email: Option<String>,
         pub name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteDeleteFileRequestAuthor {
         pub email: Option<String>,
         pub name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteDeleteFileRequest {
         pub author: Option<Author>,
         pub branch: Option<String>,
@@ -7427,7 +7483,7 @@ pub mod types {
         pub sha: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateDeploymentRequest {
         pub auto_merge: Option<bool>,
         pub description: Option<String>,
@@ -7441,12 +7497,12 @@ pub mod types {
         pub transient_environment: Option<bool>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateDeploymentAcceptedResponse {
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateDeploymentStatusRequest {
         pub auto_inactive: Option<bool>,
         pub description: Option<String>,
@@ -7457,59 +7513,59 @@ pub mod types {
         pub target_url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ClientPayload {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateRepositoryDispatchEventRequest {
         pub client_payload: Option<ClientPayload>,
         pub event_type: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetAllEnvironmentsOkResponse {
         pub environments: Option<Vec<Environment>>,
         pub total_count: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateEnvironmentRequestReviewers {
         pub id: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateEnvironmentRequest {
         pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
         pub reviewers: Option<Vec<Reviewers>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateForkRequest {
         pub organization: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateBlobRequest {
         pub content: String,
         pub encoding: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateCommitRequestAuthor {
         pub date: Option<DateTime<Utc>>,
         pub email: String,
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateCommitRequestCommitter {
         pub date: Option<DateTime<Utc>>,
         pub email: Option<String>,
         pub name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateCommitRequest {
         pub author: Option<Author>,
         pub committer: Option<Committer>,
@@ -7519,7 +7575,7 @@ pub mod types {
         pub tree: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReferenceRequest {
         pub key: Option<String>,
         #[serde(rename = "ref")]
@@ -7527,20 +7583,20 @@ pub mod types {
         pub sha: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateReferenceRequest {
         pub force: Option<bool>,
         pub sha: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateTagObjectRequestTagger {
         pub date: Option<DateTime<Utc>>,
         pub email: String,
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateTagObjectRequest {
         pub message: String,
         pub object: String,
@@ -7550,7 +7606,7 @@ pub mod types {
         pub type_: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateTreeRequestTree {
         pub content: Option<String>,
         pub mode: Option<String>,
@@ -7560,20 +7616,20 @@ pub mod types {
         pub type_: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateTreeRequest {
         pub base_tree: Option<String>,
         pub tree: Vec<Tree>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateRepositoryWebhookRequestConfig {
         pub digest: Option<String>,
-        pub insecure_ssl: Option<webhook-config-insecure-ssl>,
+        pub insecure_ssl: Option<webhook config insecure ssl>,
         pub token: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateRepositoryWebhookRequest {
         pub active: Option<bool>,
         pub config: Option<Config>,
@@ -7581,14 +7637,14 @@ pub mod types {
         pub name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateRepositoryWebhookRequestConfig {
         pub address: Option<String>,
-        pub insecure_ssl: Option<webhook-config-insecure-ssl>,
+        pub insecure_ssl: Option<webhook config insecure ssl>,
         pub room: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateRepositoryWebhookRequest {
         pub active: Option<bool>,
         pub add_events: Option<Vec<String>>,
@@ -7597,12 +7653,12 @@ pub mod types {
         pub remove_events: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateWebhookConfigurationRepositoryRequest {
-        pub insecure_ssl: Option<webhook-config-insecure-ssl>,
+        pub insecure_ssl: Option<webhook config insecure ssl>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutStartImportRequest {
         pub tfvc_project: Option<String>,
         pub vcs: Option<String>,
@@ -7611,7 +7667,7 @@ pub mod types {
         pub vcs_username: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateImportRequest {
         pub tfvc_project: Option<String>,
         pub vcs: Option<String>,
@@ -7619,29 +7675,29 @@ pub mod types {
         pub vcs_username: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchMapCommitAuthorRequest {
         pub email: Option<String>,
         pub name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateGitLfsPreferenceRequest {
         pub use_lfs: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetInteractionRestrictionsRepositoryOkResponse {
         pub expires_at: DateTime<Utc>,
         pub origin: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateRepositoryInvitationRequest {
         pub permissions: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateIssueRequest {
         pub assignee: Option<String>,
         pub assignees: Option<Vec<String>>,
@@ -7651,17 +7707,17 @@ pub mod types {
         pub title: title,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateIssueCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReactionIssueCommentRequest {
         pub content: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateIssueRequest {
         pub assignee: Option<String>,
         pub assignees: Option<Vec<String>>,
@@ -7672,70 +7728,70 @@ pub mod types {
         pub title: Option<title>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostAddAssigneesIssueRequest {
         pub assignees: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteRemoveAssigneesFromIssueRequest {
         pub assignees: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateIssueCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostAddLabelsIssueRequest {
         pub labels: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetLabelsIssueRequest {
         pub labels: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutLockIssueRequest {
         pub lock_reason: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReactionIssueRequest {
         pub content: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateDeployKeyRequest {
         pub key: String,
         pub read_only: Option<bool>,
         pub title: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateLabelRequest {
         pub color: Option<String>,
         pub description: Option<String>,
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateLabelRequest {
         pub color: Option<String>,
         pub description: Option<String>,
         pub new_name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMergeBranchRequest {
         pub base: String,
         pub commit_message: Option<String>,
         pub head: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateMilestoneRequest {
         pub description: Option<String>,
         pub due_on: Option<DateTime<Utc>>,
@@ -7743,7 +7799,7 @@ pub mod types {
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateMilestoneRequest {
         pub description: Option<String>,
         pub due_on: Option<DateTime<Utc>>,
@@ -7751,29 +7807,29 @@ pub mod types {
         pub title: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutMarkRepositoryNotificationsasReadRequest {
         pub last_read_at: Option<DateTime<Utc>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutMarkRepositoryNotificationsasReadAcceptedResponse {
         pub message: Option<String>,
         pub url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateGithubPagesSiteRequestSource {
         pub branch: String,
         pub path: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateGithubPagesSiteRequest {
         pub source: Source,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutUpdateInformationAboutGithubPagesSiteRequest {
         pub cname: Option<String>,
         pub https_enforced: Option<bool>,
@@ -7781,13 +7837,13 @@ pub mod types {
         pub source: Option<Source>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateRepositoryProjectRequest {
         pub body: Option<String>,
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreatePullRequestRequest {
         pub base: String,
         pub body: Option<String>,
@@ -7798,17 +7854,17 @@ pub mod types {
         pub title: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateReviewCommentPullRequestRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReactionPullRequestReviewCommentRequest {
         pub content: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdatePullRequestRequest {
         pub base: Option<String>,
         pub body: Option<String>,
@@ -7817,7 +7873,7 @@ pub mod types {
         pub title: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReviewCommentPullRequestRequest {
         pub body: String,
         pub commit_id: Option<String>,
@@ -7830,12 +7886,12 @@ pub mod types {
         pub start_side: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReplyReviewCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutMergePullRequestRequest {
         pub commit_message: Option<String>,
         pub commit_title: Option<String>,
@@ -7843,31 +7899,31 @@ pub mod types {
         pub sha: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutMergePullRequestMethodNotAllowedResponse {
         pub documentation_url: Option<String>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutMergePullRequestConflictResponse {
         pub documentation_url: Option<String>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostRequestReviewersPullRequestRequest {
         pub reviewers: Option<Vec<String>>,
         pub team_reviewers: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteRemoveRequestedReviewersFromPullRequestRequest {
         pub reviewers: Vec<String>,
         pub team_reviewers: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Comments {
         pub body: String,
         pub line: Option<i64>,
@@ -7878,7 +7934,7 @@ pub mod types {
         pub start_side: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReviewPullRequestRequest {
         pub body: Option<String>,
         pub comments: Option<Vec<Comments>>,
@@ -7886,35 +7942,35 @@ pub mod types {
         pub event: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutUpdateReviewPullRequestRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutDismissReviewPullRequestRequest {
         pub event: Option<String>,
         pub message: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostSubmitReviewPullRequestRequest {
         pub body: Option<String>,
         pub event: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutUpdatePullRequestBranchRequest {
         pub expected_head_sha: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutUpdatePullRequestBranchAcceptedResponse {
         pub message: Option<String>,
         pub url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReleaseRequest {
         pub body: Option<String>,
         pub discussion_category_name: Option<String>,
@@ -7925,14 +7981,14 @@ pub mod types {
         pub target_commitish: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateReleaseAssetRequest {
         pub label: Option<String>,
         pub name: Option<String>,
         pub state: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateReleaseRequest {
         pub body: Option<String>,
         pub discussion_category_name: Option<String>,
@@ -7943,16 +7999,16 @@ pub mod types {
         pub target_commitish: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReactionReleaseRequest {
         pub content: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateSecretScanningAlertRequest {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateCommitStatusRequest {
         pub context: Option<String>,
         pub description: Option<String>,
@@ -7960,24 +8016,24 @@ pub mod types {
         pub target_url: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetRepositorySubscriptionRequest {
         pub ignored: Option<bool>,
         pub subscribed: Option<bool>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutReplaceAllRepositoryTopicsRequest {
         pub names: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostTransferRepositoryRequest {
         pub new_owner: String,
         pub team_ids: Option<Vec<i64>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateRepositoryUsingTemplateRequest {
         pub description: Option<String>,
         pub include_all_branches: Option<bool>,
@@ -7986,62 +8042,62 @@ pub mod types {
         pub private: Option<bool>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListEnvironmentSecretsOkResponse {
         pub secrets: Vec<ActionsSecret>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateEnvironmentSecretRequest {
         pub encrypted_value: Option<String>,
         pub key_id: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProvisionScimEnterpriseGroupandInviteUsersRequestMembers {
         pub value: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProvisionScimEnterpriseGroupandInviteUsersRequest {
         pub displayName: String,
         pub members: Option<Vec<Members>>,
         pub schemas: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetScimInformationProvisionedEnterpriseGroupRequestMembers {
         pub value: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetScimInformationProvisionedEnterpriseGroupRequest {
         pub displayName: String,
         pub members: Option<Vec<Members>>,
         pub schemas: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Operations {
         pub op: String,
         pub path: Option<String>,
         pub value: Option<value>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateAttributeScimEnterpriseGroupRequest {
         pub Operations: Vec<Operations>,
         pub schemas: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProvisionandInviteScimEnterpriseUserRequestName {
         pub familyName: String,
         pub givenName: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProvisionandInviteScimEnterpriseUserRequestEmails {
         pub primary: bool,
         #[serde(rename = "type")]
@@ -8049,12 +8105,12 @@ pub mod types {
         pub value: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProvisionandInviteScimEnterpriseUserRequestGroups {
         pub value: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProvisionandInviteScimEnterpriseUserRequest {
         pub emails: Vec<Emails>,
         pub groups: Option<Vec<Groups>>,
@@ -8063,13 +8119,13 @@ pub mod types {
         pub userName: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetScimInformationProvisionedEnterpriseUserRequestName {
         pub familyName: String,
         pub givenName: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetScimInformationProvisionedEnterpriseUserRequestEmails {
         pub primary: bool,
         #[serde(rename = "type")]
@@ -8077,12 +8133,12 @@ pub mod types {
         pub value: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetScimInformationProvisionedEnterpriseUserRequestGroups {
         pub value: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetScimInformationProvisionedEnterpriseUserRequest {
         pub emails: Vec<Emails>,
         pub groups: Option<Vec<Groups>>,
@@ -8091,24 +8147,24 @@ pub mod types {
         pub userName: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateAttributeScimEnterpriseUserRequestOperations {
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateAttributeScimEnterpriseUserRequest {
         pub Operations: Vec<Operations>,
         pub schemas: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProvisionandInviteScimUserRequestName {
         pub familyName: String,
         pub formatted: Option<String>,
         pub givenName: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProvisionandInviteScimUserRequestEmails {
         pub primary: Option<bool>,
         #[serde(rename = "type")]
@@ -8116,7 +8172,7 @@ pub mod types {
         pub value: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProvisionandInviteScimUserRequest {
         pub active: Option<bool>,
         pub displayName: Option<String>,
@@ -8128,14 +8184,14 @@ pub mod types {
         pub userName: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutUpdateProvisionedOrganizationMembershipRequestName {
         pub familyName: String,
         pub formatted: Option<String>,
         pub givenName: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutUpdateProvisionedOrganizationMembershipRequestEmails {
         pub primary: Option<bool>,
         #[serde(rename = "type")]
@@ -8143,7 +8199,7 @@ pub mod types {
         pub value: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutUpdateProvisionedOrganizationMembershipRequest {
         pub active: Option<bool>,
         pub displayName: Option<String>,
@@ -8155,7 +8211,7 @@ pub mod types {
         pub userName: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ValueData {
         pub active: Option<bool>,
         pub externalId: Option<String>,
@@ -8164,62 +8220,62 @@ pub mod types {
         pub userName: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateAttributeScimUserRequest {
         pub Operations: Vec<Operations>,
         pub schemas: Option<Vec<String>>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchCodeOkResponse {
         pub incomplete_results: bool,
         pub items: Vec<CodeSearchResultItem>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchCommitsOkResponse {
         pub incomplete_results: bool,
         pub items: Vec<CommitSearchResultItem>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchIssuesandPullRequestsOkResponse {
         pub incomplete_results: bool,
         pub items: Vec<IssueSearchResultItem>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchLabelsOkResponse {
         pub incomplete_results: bool,
         pub items: Vec<LabelSearchResultItem>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchRepositoriesOkResponse {
         pub incomplete_results: bool,
         pub items: Vec<RepoSearchResultItem>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchTopicsOkResponse {
         pub incomplete_results: bool,
         pub items: Vec<TopicSearchResultItem>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchUsersOkResponse {
         pub incomplete_results: bool,
         pub items: Vec<UserSearchResultItem>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateTeamRequest {
         pub description: Option<String>,
         pub name: String,
@@ -8228,61 +8284,61 @@ pub mod types {
         pub privacy: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateDiscussionRequest {
         pub body: String,
         pub private: Option<bool>,
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateDiscussionRequest {
         pub body: Option<String>,
         pub title: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateDiscussionCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateDiscussionCommentRequest {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReactionTeamDiscussionCommentRequest {
         pub content: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateReactionTeamDiscussionRequest {
         pub content: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddUpdateTeamMembershipUserRequest {
         pub role: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddUpdateTeamProjectPermissionsRequest {
         pub permission: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddUpdateTeamProjectPermissionsForbiddenResponse {
         pub documentation_url: Option<String>,
         pub message: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutAddUpdateTeamRepositoryPermissionsRequest {
         pub permission: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchCreateUpdateIdpGroupConnectionsRequestGroups {
         pub description: Option<String>,
         pub group_description: String,
@@ -8292,13 +8348,13 @@ pub mod types {
         pub name: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchCreateUpdateIdpGroupConnectionsRequest {
         pub groups: Vec<Groups>,
         pub synced_at: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetOkResponse {
         pub avatar_url: String,
         pub bio: String,
@@ -8345,7 +8401,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateRequest {
         pub bio: Option<String>,
         pub blog: Option<String>,
@@ -8357,57 +8413,57 @@ pub mod types {
         pub twitter_username: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchSetPrimaryEmailVisibilityRequest {
         pub visibility: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostAddEmailAddressRequest {
         pub emails: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteDeleteEmailAddressRequest {
         pub emails: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateGpgKeyRequest {
         pub armored_public_key: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListAppInstallationsAccessibleUserAccessTokenOkResponse {
         pub installations: Vec<Installation>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositoriesAccessibleUserAccessTokenOkResponse {
         pub repositories: Vec<Repository>,
         pub repository_selection: Option<String>,
         pub total_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetInteractionRestrictionsPublicRepositoriesOkResponse {
         pub expires_at: DateTime<Utc>,
         pub origin: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreatePublicSshKeyRequest {
         pub key: String,
         pub title: Option<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateOrganizationMembershipRequest {
         pub state: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostStartUserMigrationRequest {
         pub exclude: Option<Vec<String>>,
         pub exclude_attachments: Option<bool>,
@@ -8415,13 +8471,13 @@ pub mod types {
         pub repositories: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateUserProjectRequest {
         pub body: Option<String>,
         pub name: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateRepositoryRequest {
         pub allow_merge_commit: Option<bool>,
         pub allow_rebase_merge: Option<bool>,
@@ -8442,7 +8498,7 @@ pub mod types {
         pub team_id: Option<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetUserOkResponse {
         pub avatar_url: String,
         pub bio: String,
@@ -13018,7 +13074,7 @@ impl Client {
     pub async fn repos_list_for_org(
         &self,
         org: &str,
-        type: &str,
+        type_: &str,
         sort: &str,
         direction: &str,
         per_page: i64,
@@ -16829,7 +16885,7 @@ impl Client {
         tool_guid: &str,
         page: i64,
         per_page: i64,
-        ref: &str,
+        ref_: &str,
         state: &str,
     ) -> Result<Vec<types::CodeScanningAlertItems>> {
         let url = format!("{}/repos/{}/{}/code-scanning/alerts",
@@ -16906,7 +16962,7 @@ impl Client {
         alert_number: &str,
         page: i64,
         per_page: i64,
-        ref: &str,
+        ref_: &str,
     ) -> Result<Vec<types::CodeScanningAlertInstance>> {
         let url = format!("{}/repos/{}/{}/code-scanning/alerts/{}/instances",
             self.baseurl,
@@ -16934,7 +16990,7 @@ impl Client {
         tool_guid: &str,
         page: i64,
         per_page: i64,
-        ref: &str,
+        ref_: &str,
         sarif_id: &str,
     ) -> Result<Vec<types::CodeScanningAnalysis>> {
         let url = format!("{}/repos/{}/{}/code-scanning/analyses",
@@ -17488,7 +17544,7 @@ impl Client {
         repo: &str,
         page: i64,
         per_page: i64,
-        ref: &str,
+        ref_: &str,
     ) -> Result<types::Commit> {
         let url = format!("{}/repos/{}/{}/commits/{}",
             self.baseurl,
@@ -17512,7 +17568,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
         check_name: &str,
         status: &str,
         filter: &str,
@@ -17542,7 +17598,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
         app_id: i64,
         check_name: &str,
         per_page: i64,
@@ -17570,7 +17626,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
         per_page: i64,
         page: i64,
     ) -> Result<types::CombinedCommitStatus> {
@@ -17596,7 +17652,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Status>> {
@@ -17719,7 +17775,7 @@ impl Client {
         owner: &str,
         repo: &str,
         path: &str,
-        ref: &str,
+        ref_: &str,
     ) -> Result<types::GetGetRepositoryContentOkResponse> {
         let url = format!("{}/repos/{}/{}/contents/{}",
             self.baseurl,
@@ -17821,7 +17877,7 @@ impl Client {
         owner: &str,
         repo: &str,
         sha: &str,
-        ref: &str,
+        ref_: &str,
         task: &str,
         environment: &str,
         per_page: i64,
@@ -18287,7 +18343,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::GitRef>> {
@@ -18313,7 +18369,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
     ) -> Result<types::GitRef> {
         let url = format!("{}/repos/{}/{}/git/ref/{}",
             self.baseurl,
@@ -18361,7 +18417,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
     ) -> Result<()> {
         let url = format!("{}/repos/{}/{}/git/refs/{}",
             self.baseurl,
@@ -18385,7 +18441,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
         body: &types::PatchUpdateReferenceRequest,
     ) -> Result<types::GitRef> {
         let url = format!("{}/repos/{}/{}/git/refs/{}",
@@ -21360,7 +21416,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
     ) -> Result<types::ContentFile> {
         let url = format!("{}/repos/{}/{}/readme",
             self.baseurl,
@@ -21384,7 +21440,7 @@ impl Client {
         owner: &str,
         repo: &str,
         dir: &str,
-        ref: &str,
+        ref_: &str,
     ) -> Result<types::ContentFile> {
         let url = format!("{}/repos/{}/{}/readme/{}",
             self.baseurl,
@@ -22082,7 +22138,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
     ) -> Result<()> {
         let url = format!("{}/repos/{}/{}/tarball/{}",
             self.baseurl,
@@ -22358,7 +22414,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref: &str,
+        ref_: &str,
     ) -> Result<()> {
         let url = format!("{}/repos/{}/{}/zipball/{}",
             self.baseurl,
@@ -25043,7 +25099,7 @@ impl Client {
         &self,
         visibility: &str,
         affiliation: &str,
-        type: &str,
+        type_: &str,
         sort: &str,
         direction: &str,
         per_page: i64,
@@ -25723,7 +25779,7 @@ impl Client {
     pub async fn repos_list_for_user(
         &self,
         username: &str,
-        type: &str,
+        type_: &str,
         sort: &str,
         direction: &str,
         per_page: i64,

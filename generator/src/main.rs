@@ -507,7 +507,6 @@ struct TypeSpace {
      */
     name_to_id: BTreeMap<String, TypeId>,
     id_to_entry: BTreeMap<TypeId, TypeEntry>,
-    ref_to_id: BTreeMap<String, TypeId>,
 
     import_chrono: bool,
 }
@@ -518,7 +517,6 @@ impl TypeSpace {
             next_id: 1,
             name_to_id: BTreeMap::new(),
             id_to_entry: BTreeMap::new(),
-            ref_to_id: BTreeMap::new(),
             import_chrono: false,
         }
     }
@@ -613,14 +611,14 @@ impl TypeSpace {
                     if let Some(n) = &te.name {
                         let struct_name = struct_name(&n);
                         if in_mod {
-                            Ok(struct_name.to_string())
+                            Ok(struct_name)
                         } else {
                             /*
                              * Model types are declared in the "types" module,
                              * and must be referenced with that prefix when not
                              * in the module itself.
                              */
-                            Ok(format!("types::{}", struct_name.to_string()))
+                            Ok(format!("types::{}", struct_name))
                         }
                     } else {
                         bail!("object type {:?} does not have a name?", tid);
@@ -672,36 +670,22 @@ impl TypeSpace {
         oid
     }
 
-    fn prepop_reference(&mut self, name: &str, r: &str) -> Result<()> {
-        let id = self.id_for_name(name);
-        if let Some(rid) = self.ref_to_id.get(r) {
-            println!("ref {:?}, name, {:?}, id {:?}, rid: {:?}", r, name, id, rid);
-            if rid != &id {
-                bail!(
-                    "duplicate ref {:?}, name, {:?}, id {:?}, rid {:?}",
-                    r,
-                    name,
-                    id,
-                    rid
-                );
-            }
-        } else {
-            println!("ref {:?}, name, {:?}, id {:?}", r, name, id);
-            self.ref_to_id.insert(r.to_string(), id);
-        }
-        Ok(())
-    }
+    fn select_ref(&mut self, _name: Option<&str>, reference: &str) -> Result<TypeId> {
+        let r = reference
+            .replace("#/components/schemas/", "")
+            .replace("_", " ")
+            .replace("-", " ");
 
-    fn select_ref(&mut self, _name: Option<&str>, r: &str) -> Result<TypeId> {
         /*
          * As this is a reference, all we can do for now is determine
          * the type ID.
          */
-        Ok(if let Some(id) = self.ref_to_id.get(r) {
+        Ok(if let Some(id) = self.name_to_id.get(&r) {
+            // we got the id.
             id.clone()
         } else {
             let id = self.assign();
-            self.ref_to_id.insert(r.to_string(), id.clone());
+            self.name_to_id.insert(r.to_string(), id.clone());
             id
         })
     }
@@ -734,7 +718,9 @@ impl TypeSpace {
                         (None, None) => {
                             bail!("types need a name? {:?} {:?}", name, s)
                         }
-                    };
+                    }
+                    .replace("_", " ")
+                    .replace("-", " ");
 
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
@@ -802,12 +788,19 @@ impl TypeSpace {
                 let id = self.select(name, all_of.get(0).unwrap())?;
                 if let Some(et) = self.id_to_entry.get(&id) {
                     if let Some(n) = name {
-                        (Some(n.to_string()), et.details.clone())
+                        if let TypeDetails::Object(_) = et.details {
+                            (
+                                Some(n.replace("-", " ").replace("_", " ")),
+                                et.details.clone(),
+                            )
+                        } else {
+                            (Some(n.to_string()), et.details.clone())
+                        }
                     } else {
                         bail!("all_of types need a name? {:?} {:?}", name, all_of)
                     }
                 } else {
-                    bail!("allof schema kind: {:?} {:?}\n{:?}", name, s, all_of);
+                    bail!("allof schema kind: {:?} {:?} {:?}", id, name, s,);
                 }
             }
             openapiv3::SchemaKind::OneOf { one_of } => {
@@ -983,6 +976,8 @@ fn gen(
      */
     a("");
     a("use anyhow::Result;"); /* XXX */
+    a("use chrono::{DateTime, Utc, NaiveDate};");
+    a("");
     a("");
 
     a("mod progenitor_support {");
@@ -1022,26 +1017,30 @@ fn gen(
      * Declare named types we know about:
      */
     a("pub mod types {");
-    if ts.import_chrono {
-        a("    use chrono::prelude::*;");
-    }
     a("    use serde::{Serialize, Deserialize};");
+    a("    use schemars::JsonSchema;");
     a("");
     for te in ts.id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
             let struct_name = struct_name(&sn);
             match &te.details {
                 TypeDetails::Object(omap) => {
-                    a("    #[derive(Serialize, Deserialize, Debug)]");
+                    a("    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
                     a(&format!("    pub struct {} {{", struct_name));
                     for (name, tid) in omap.iter() {
                         if let Ok(rt) = ts.render_type(tid, true) {
-                            if name == "ref" {
-                                a(r#"        #[serde(rename = "ref")]"#);
-                                a(&format!("        pub ref_: {},", rt));
-                            } else if name == "type" {
-                                a(r#"        #[serde(rename = "type")]"#);
-                                a(&format!("        pub type_: {},", rt));
+                            if name == "ref" || name == "type" || name == "self" {
+                                a(&format!(r#"        #[serde(rename = "{}")]"#, name));
+                                a(&format!("        pub {}_: {},", name, rt));
+                            } else if name == "+1" {
+                                a(r#"        #[serde(rename = "+1")]"#);
+                                a(&format!("        pub plus_one: {},", rt));
+                            } else if name == "-1" {
+                                a(r#"        #[serde(rename = "-1")]"#);
+                                a(&format!("        pub minus_one: {},", rt));
+                            } else if name.starts_with('@') {
+                                a(&format!(r#"        #[serde(rename = "{}")]"#, name));
+                                a(&format!("        pub {}: {},", name.replace('@', ""), rt));
                             } else {
                                 a(&format!("        pub {}: {},", name, rt));
                             }
@@ -1201,7 +1200,11 @@ fn gen(
                          */
                         let nam = &parameter_data.name;
                         let typ = parameter_data.render_type()?;
-                        a(&format!("        {}: {},", nam, typ));
+                        if nam == "ref" || nam == "type" {
+                            a(&format!("        {}_: {},", nam, typ));
+                        } else {
+                            a(&format!("        {}: {},", nam, typ));
+                        }
                     }
                     openapiv3::Parameter::Query {
                         parameter_data,
@@ -1221,7 +1224,11 @@ fn gen(
                          */
                         let nam = &parameter_data.name;
                         let typ = parameter_data.render_type()?;
-                        a(&format!("        {}: {},", nam, typ));
+                        if nam == "ref" || nam == "type" {
+                            a(&format!("        {}_: {},", nam, typ));
+                        } else {
+                            a(&format!("        {}: {},", nam, typ));
+                        }
                     }
                     x => bail!("unhandled parameter type: {:#?}", x),
                 }
@@ -1419,7 +1426,7 @@ fn gen(
 }
 
 fn struct_name(s: &str) -> String {
-    titlecase::titlecase(&s.replace('-', " ").replace('_', " ")).replace(" ", "")
+    titlecase::titlecase(&s).replace(" ", "")
 }
 
 fn summary_to_object_name(m: &str, s: &str) -> String {
@@ -1428,6 +1435,7 @@ fn summary_to_object_name(m: &str, s: &str) -> String {
         m.to_lowercase(),
         &s.to_lowercase()
             .replace('.', "")
+            .replace('_', " ")
             .replace(" an ", " ")
             .replace(" or ", " ")
             .replace(" for ", " ")
@@ -1478,23 +1486,13 @@ fn main() -> Result<()> {
 
     if let Some(components) = &api.components {
         /*
-         * First, grant each expected reference a type ID.  Each
-         * "components.schemas" entry needs an established reference for
-         * resolution in this and other parts of the document.
-         */
-        for n in components.schemas.keys() {
-            println!("PREPOP SCHEMA {}:", n);
-            ts.prepop_reference(n, &format!("#/components/schemas/{}", n))?;
-        }
-        println!();
-
-        /*
          * Populate a type to describe each entry in the schemas section:
          */
         for (i, (sn, s)) in components.schemas.iter().enumerate() {
-            println!("SCHEMA {}/{}: {}", i + 1, components.schemas.len(), sn);
+            let name = sn.replace("_", " ").replace("-", " ");
+            println!("SCHEMA {}/{}: {}", i + 1, components.schemas.len(), name);
 
-            let id = ts.select(Some(sn.as_str()), s)?;
+            let id = ts.select(Some(name.as_str()), s)?;
             println!("    -> {:?}", id);
 
             println!();
@@ -1682,6 +1680,7 @@ anyhow = "1"
 chrono = "0.4"
 percent-encoding = "2.1"
 reqwest = {{ version = "0.11", features = ["json"] }}
+schemars = {{ version = "0.8", features = ["chrono", "uuid"] }}
 serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1""#,
                 name, version,
