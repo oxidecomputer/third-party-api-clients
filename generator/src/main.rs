@@ -1,5 +1,3 @@
-#![allow(unused_imports)]
-
 use anyhow::{anyhow, bail, Context, Result};
 use openapiv3::OpenAPI;
 use serde::Deserialize;
