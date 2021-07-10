@@ -3289,9 +3289,11 @@ pub mod types {
         pub created_at: DateTime<Utc>,
         pub dismissed_at: DateTime<Utc>,
         pub dismissed_by: SimpleUser,
+        pub dismissed_reason: serde_json::Value,
         pub html_url: String,
         pub instances_url: String,
         pub most_recent_instance: CodeScanningAlertInstance,
+        pub number: i64,
         pub rule: CodeScanningAlertRuleSummary,
         pub state: String,
         pub tool: CodeScanningAnalysisTool,
@@ -3315,10 +3317,12 @@ pub mod types {
         pub created_at: DateTime<Utc>,
         pub dismissed_at: DateTime<Utc>,
         pub dismissed_by: SimpleUser,
+        pub dismissed_reason: serde_json::Value,
         pub html_url: String,
         pub instances: Option<serde_json::Value>,
         pub instances_url: String,
         pub most_recent_instance: CodeScanningAlertInstance,
+        pub number: i64,
         pub rule: CodeScanningAlertRule,
         pub state: String,
         pub tool: CodeScanningAnalysisTool,
@@ -4023,14 +4027,7 @@ pub mod types {
         pub node_id: String,
         #[serde(rename = "type")]
         pub type_: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Protection_rules {
-        pub id: i64,
-        pub node_id: String,
-        #[serde(rename = "type")]
-        pub type_: String,
+        pub wait_timer: Option<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -4041,7 +4038,7 @@ pub mod types {
         pub id: i64,
         pub name: String,
         pub node_id: String,
-        pub protection_rules: Option<Vec<Protection_rules>>,
+        pub protection_rules: Option<Vec<ProtectionRules>>,
         pub updated_at: DateTime<Utc>,
         pub url: String,
     }
@@ -5664,6 +5661,8 @@ pub mod types {
     pub struct SecretScanningAlert {
         pub created_at: Option<DateTime<Utc>>,
         pub html_url: Option<String>,
+        pub number: Option<i64>,
+        pub resolution: Option<serde_json::Value>,
         pub resolved_at: Option<DateTime<Utc>>,
         pub resolved_by: Option<SimpleUser>,
         pub secret: Option<String>,
@@ -7526,6 +7525,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateCodeScanningAlertRequest {
+        pub dismissed_reason: Option<serde_json::Value>,
         pub state: String,
     }
 
@@ -7700,6 +7700,7 @@ pub mod types {
     pub struct CreateUpdateEnvironmentRequest {
         pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
         pub reviewers: Option<Vec<Reviewers>>,
+        pub wait_timer: Option<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8188,6 +8189,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateSecretScanningAlertRequest {
+        pub resolution: Option<serde_json::Value>,
         pub state: String,
     }
 
@@ -22073,7 +22075,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<()> {
+    ) -> Result<Vec<Vec<i64>>> {
         let url = format!("{}/repos/{}/{}/stats/code_frequency",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
@@ -22161,7 +22163,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<()> {
+    ) -> Result<Vec<Vec<i64>>> {
         let url = format!("{}/repos/{}/{}/stats/punch_card",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),

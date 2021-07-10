@@ -125,10 +125,6 @@ where
                                 bail!("duplicate operation ID: {}", oid);
                             }
 
-                            if !o.tags.is_empty() {
-                                println!("op {}: tags, unsupported", oid);
-                            }
-
                             if !o.servers.is_empty() {
                                 println!("op {}: servers, unsupported", oid);
                             }
@@ -197,7 +193,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                             }
                             if !st.enumeration.is_empty() {
                                 // TODO: figure out enums
-                                println!("XXX enumeration");
+                                println!("XXX enumeration {}: {:?}", self.name, st);
                             }
                             if st.min_length.is_some() || st.max_length.is_some() {
                                 bail!("XXX min/max length");
@@ -264,7 +260,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 bail!("XXX maximum");
                             }
                             if !it.enumeration.is_empty() {
-                                bail!("XXX enumeration");
+                                bail!("XXX enumeration {}: {:?}", self.name, it);
                             }
                             if uint {
                                 format!("u{}", width)
@@ -272,9 +268,9 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 format!("i{}", width)
                             }
                         }
-                        openapiv3::SchemaKind::OneOf { one_of } => {
+                        openapiv3::SchemaKind::OneOf { one_of: _ } => {
                             // TODO: make this smarter, but for now just make it a string.
-                            println!("oneof parameter: {:?}", one_of);
+                            println!("oneof parameter: {:?}", self);
                             "&str".to_string()
                         }
                         x => bail!("unexpected type {:#?}", x),
@@ -350,7 +346,7 @@ impl ExtractJsonMediaType for openapiv3::Response {
                             bail!("XXX pattern");
                         }
                         if !st.enumeration.is_empty() {
-                            bail!("XXX enumeration");
+                            bail!("XXX binary enumeration {:?}", st);
                         }
                         return Ok(true);
                     }
@@ -709,14 +705,26 @@ impl TypeSpace {
         parent_name: &str,
         is_schema: bool,
     ) -> Result<TypeId> {
+        let nam = if let Some(n) = name {
+            n.to_string()
+        } else {
+            "".to_string()
+        };
+
         let (name, details) = match &s.schema_kind {
             openapiv3::SchemaKind::Type(t) => match t {
                 openapiv3::Type::Array(at) => {
-                    /*
-                     * Determine the type of item that will be in this array:
-                     */
-                    let itid = self.select_box(name, &at.items, parent_name)?;
-                    (None, TypeDetails::Array(itid))
+                    if is_schema {
+                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
+                        (Some(nam), TypeDetails::NamedType(id))
+                    } else {
+                        /*
+                         * Determine the type of item that will be in this array:
+                         */
+                        let itid =
+                            self.select_box(Some(&clean_name(&nam)), &at.items, parent_name)?;
+                        (None, TypeDetails::Array(itid))
+                    }
                 }
                 openapiv3::Type::Object(o) => {
                     /*
@@ -758,13 +766,7 @@ impl TypeSpace {
                         VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
 
-                    let nam = if let Some(n) = name {
-                        n.to_string()
-                    } else {
-                        "".to_string()
-                    };
                     if is_schema {
-                        //panic!("name {} t {:?}", nam, t);
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
                         (Some(nam), TypeDetails::NamedType(id))
                     } else {
@@ -792,13 +794,7 @@ impl TypeSpace {
                     }
                 }
                 openapiv3::Type::Boolean {} => {
-                    let nam = if let Some(n) = name {
-                        n.to_string()
-                    } else {
-                        "".to_string()
-                    };
                     if is_schema {
-                        //panic!("name {} t {:?}", nam, t);
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
                         (Some(nam), TypeDetails::NamedType(id))
                     } else {
@@ -806,16 +802,22 @@ impl TypeSpace {
                     }
                 }
                 openapiv3::Type::Number(_) => {
-                    /*
-                     * XXX
-                     */
-                    (Some("f64".to_string()), TypeDetails::Basic)
+                    // Then we use the serde_json type.
+                    if is_schema {
+                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
+                        (Some(nam), TypeDetails::NamedType(id))
+                    } else {
+                        (Some("f64".to_string()), TypeDetails::Basic)
+                    }
                 }
                 openapiv3::Type::Integer(_) => {
-                    /*
-                     * XXX
-                     */
-                    (Some("i64".to_string()), TypeDetails::Basic)
+                    // Then we use the serde_json type.
+                    if is_schema {
+                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
+                        (Some(nam), TypeDetails::NamedType(id))
+                    } else {
+                        (Some("i64".to_string()), TypeDetails::Basic)
+                    }
                 }
             },
             openapiv3::SchemaKind::AllOf { all_of } => {
@@ -871,7 +873,12 @@ impl TypeSpace {
             }
             openapiv3::SchemaKind::Any(_a) => {
                 // Then we use the serde_json type.
-                (Some("serde_json::Value".to_string()), TypeDetails::Basic)
+                if is_schema {
+                    let id = self.select_schema(Some(&nam), s, parent_name, false)?;
+                    (Some(nam), TypeDetails::NamedType(id))
+                } else {
+                    (Some("serde_json::Value".to_string()), TypeDetails::Basic)
+                }
             }
         };
 
@@ -1083,8 +1090,7 @@ fn gen(
                                 a(&format!("        pub {}: {},", name, rt));
                             }
                         } else {
-                            // TODO: fix this.
-                            println!("rendering type {:?} failed", tid);
+                            bail!("rendering type {} {:?} failed", name, tid);
                         }
                     }
                     a("    }");
@@ -1151,8 +1157,6 @@ fn gen(
             a("     */");
 
             let mut bounds: Vec<String> = Vec::new();
-
-            println!("generating {} {}", p, m);
 
             let (body_param, body_func) = if let Some(b) = &o.request_body {
                 let b = b.item()?;
@@ -1292,12 +1296,10 @@ fn gen(
                 let i = only.1.item()?;
                 if !i.headers.is_empty() {
                     // TODO: do response headers.
-                    println!("no response headers for now");
                 }
 
                 if !i.links.is_empty() {
                     // TODO: do response links
-                    println!("no response links for now");
                 }
                 /*
                  * XXX ignoring extensions.
@@ -1344,9 +1346,7 @@ fn gen(
                                 if let Ok(rt) = ts.render_type(&tid, false) {
                                     a(&format!("    ) -> Result<{}> {{", rt));
                                 } else {
-                                    // TODO: fix this
-                                    println!("rendering type {:?} failed", tid);
-                                    a("    ) -> Result<()> {");
+                                    bail!("rendering type {:?}: {:?} failed", tid, s);
                                 }
                             } else {
                                 bail!("media type encoding, no schema: {:#?}", mt);
@@ -1760,7 +1760,7 @@ serde_json = "1""#,
         }
     };
 
-    println!("-----------------------------------------------------");
+    /*println!("-----------------------------------------------------");
     println!(" TYPE SPACE");
     println!("-----------------------------------------------------");
     for te in ts.id_to_entry.values() {
@@ -1768,7 +1768,7 @@ serde_json = "1""#,
         println!("{:>4}  {}", te.id.0, n);
     }
     println!("-----------------------------------------------------");
-    println!();
+    println!();*/
 
     if fail {
         bail!("generation experienced errors");
