@@ -686,10 +686,7 @@ impl TypeSpace {
     }
 
     fn select_ref(&mut self, _name: Option<&str>, reference: &str) -> Result<TypeId> {
-        let r = reference
-            .replace("#/components/schemas/", "")
-            .replace("_", " ")
-            .replace("-", " ");
+        let r = clean_name(&reference.replace("#/components/schemas/", ""));
 
         /*
          * As this is a reference, all we can do for now is determine
@@ -725,30 +722,23 @@ impl TypeSpace {
                     /*
                      * Object types must have a consistent name.
                      */
-                    let name = match (name, s.schema_data.title.as_deref()) {
-                        (Some(n), None) => n.to_string(),
-                        (Some(n), Some("")) => n.to_string(),
-                        (None, Some(t)) => t.to_string(),
-                        (Some(""), Some(t)) => t.to_string(),
-                        (Some(n), Some(_)) => n.to_string(),
+                    let name = clean_name(match (name, s.schema_data.title.as_deref()) {
+                        (Some(n), None) => &n,
+                        (Some(n), Some("")) => &n,
+                        (None, Some(t)) => &t,
+                        (Some(""), Some(t)) => &t,
+                        (Some(n), Some(_)) => &n,
                         (None, None) => {
                             bail!("types need a name? {:?} {:?}", name, s)
                         }
-                    }
-                    .replace("_", " ")
-                    .replace("-", " ");
+                    });
 
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
                         let itid = self.select_box(
                             Some(n),
                             &rb,
-                            &format!(
-                                "{} {} {}",
-                                parent_name,
-                                name,
-                                n.replace("_", " ").replace("-", " ")
-                            ),
+                            &format!("{} {} {}", parent_name, name, clean_name(n)),
                         )?;
                         if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
@@ -834,10 +824,7 @@ impl TypeSpace {
                 if let Some(et) = self.id_to_entry.get(&id) {
                     if let Some(n) = name {
                         if let TypeDetails::Object(_) = et.details {
-                            (
-                                Some(n.replace("-", " ").replace("_", " ")),
-                                et.details.clone(),
-                            )
+                            (Some(clean_name(n)), et.details.clone())
                         } else {
                             (Some(n.to_string()), et.details.clone())
                         }
@@ -1486,6 +1473,10 @@ fn struct_name(s: &str) -> String {
     titlecase::titlecase(&s).replace(" ", "")
 }
 
+fn clean_name(s: &str) -> String {
+    s.replace("_", " ").replace("-", " ").to_lowercase()
+}
+
 fn summary_to_object_name(m: &str, s: &str) -> String {
     format!(
         "{} {}",
@@ -1546,7 +1537,7 @@ fn main() -> Result<()> {
          * Populate a type to describe each entry in the schemas section:
          */
         for (i, (sn, s)) in components.schemas.iter().enumerate() {
-            let name = sn.replace("_", " ").replace("-", " ");
+            let name = clean_name(sn);
             println!("SCHEMA {}/{}: {}", i + 1, components.schemas.len(), name);
 
             let id = ts.select(Some(name.as_str()), s, true)?;

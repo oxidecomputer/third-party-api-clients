@@ -2686,17 +2686,17 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct WorkflowUsageBillableBillableUBUNTU {
+    pub struct WorkflowUsageBillableBillableUbuntu {
         pub total_ms: Option<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct WorkflowUsageBillableBillableMACOS {
+    pub struct WorkflowUsageBillableBillableMacos {
         pub total_ms: Option<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct WorkflowUsageBillableBillableWINDOWS {
+    pub struct WorkflowUsageBillableBillableWindows {
         pub total_ms: Option<i64>,
     }
 
@@ -5783,7 +5783,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Resources {
+    pub struct ScimGroupListEnterpriseResources {
         pub displayName: Option<String>,
         pub externalId: Option<String>,
         pub id: String,
@@ -7065,6 +7065,11 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PostCreateProjectCardRequest {
+        pub note: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateProjectCardUnprocessableEntityResponse {
         pub documentation_url: String,
         pub errors: Option<Vec<Errors>>,
@@ -7308,7 +7313,22 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PostAddStatusCheckContextsRequest {
+        pub contexts: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetStatusCheckContextsRequest {
+        pub contexts: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PutSetStatusCheckContextsRequest {
+        pub contexts: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct DeleteRemoveStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
@@ -7323,7 +7343,22 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PostAddAppAccessRestrictionsRequest {
+        pub apps: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetAppAccessRestrictionsRequest {
+        pub apps: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PutSetAppAccessRestrictionsRequest {
+        pub apps: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct DeleteRemoveAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
@@ -7338,7 +7373,22 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PostAddTeamAccessRestrictionsRequest {
+        pub teams: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetTeamAccessRestrictionsRequest {
+        pub teams: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PutSetTeamAccessRestrictionsRequest {
+        pub teams: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct DeleteRemoveTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
@@ -7353,7 +7403,22 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PostAddUserAccessRestrictionsRequest {
+        pub users: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetUserAccessRestrictionsRequest {
+        pub users: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PutSetUserAccessRestrictionsRequest {
+        pub users: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct DeleteRemoveUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
@@ -7856,6 +7921,16 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PostAddLabelsIssueRequest {
+        pub labels: Option<Vec<String>>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PutSetLabelsIssueRequest {
+        pub labels: Option<Vec<String>>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetLabelsIssueRequest {
         pub labels: Option<Vec<String>>,
     }
@@ -8184,13 +8259,6 @@ pub mod types {
         pub displayName: String,
         pub members: Option<Vec<Members>>,
         pub schemas: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Operations {
-        pub op: String,
-        pub path: Option<String>,
-        pub value: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8528,6 +8596,16 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostAddEmailAddressRequest {
+        pub emails: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PostAddEmailAddressRequest {
+        pub emails: Vec<String>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct DeleteDeleteEmailAddressRequest {
         pub emails: Vec<String>,
     }
 
