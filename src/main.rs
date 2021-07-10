@@ -8,6 +8,7 @@ use std::ffi::OsStr;
 use std::fs::{File, OpenOptions};
 use std::io::Write;
 use std::path::{Path, PathBuf};
+use titlecase::titlecase;
 
 mod template;
 
@@ -177,72 +178,122 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
         Ok(match &self.format {
             openapiv3::ParameterSchemaOrContent::Schema(s) => {
-                let s = s.item()?;
-                match &s.schema_kind {
-                    SchemaKind::Type(Type::String(st)) => {
-                        if !st.format.is_empty() {
-                            bail!("XXX format");
+                if let Ok(s) = s.item() {
+                    match &s.schema_kind {
+                        SchemaKind::Type(Type::Boolean {}) => {
+                            "bool".to_string()
                         }
-                        if st.pattern.is_some() {
-                            bail!("XXX pattern");
+                        SchemaKind::Type(Type::Array(at)) => {
+                            // TODO: actually get the array type.
+                            println!("XXX array type: {:?}", at);
+                            "&[String]".to_string()
                         }
-                        if !st.enumeration.is_empty() {
-                            bail!("XXX enumeration");
-                        }
-                        if st.min_length.is_some() || st.max_length.is_some() {
-                            bail!("XXX min/max length");
-                        }
-                        "&str".to_string()
-                    }
-                    SchemaKind::Type(Type::Integer(it)) => {
-                        let mut uint;
-                        let width;
+                        SchemaKind::Type(Type::String(st)) => {
+                            use openapiv3::{
+                                StringFormat::Date,
+                                StringFormat::DateTime,
+                                VariantOrUnknownOrEmpty::{
+                                    Empty, Item, Unknown,
+                                },
+                            };
 
-                        use openapiv3::VariantOrUnknownOrEmpty::Unknown;
-                        if let Unknown(f) = &it.format {
-                            match f.as_str() {
-                                "uint" | "uint32" => {
-                                    uint = true;
-                                    width = 32;
-                                }
-                                "uint64" => {
-                                    uint = true;
-                                    width = 32;
-                                }
-                                f => bail!("XXX unknown integer format {}", f),
+                            if st.pattern.is_some() {
+                                bail!("XXX pattern");
                             }
-                        } else {
-                            bail!("XXX format {:?}", it.format);
-                        }
+                            if !st.enumeration.is_empty() {
+                                // TODO: figure out enums
+                                println!("XXX enumeration");
+                            }
+                            if st.min_length.is_some()
+                                || st.max_length.is_some()
+                            {
+                                bail!("XXX min/max length");
+                            }
 
-                        if it.multiple_of.is_some() {
-                            bail!("XXX multiple_of");
+                            match &st.format {
+                                Item(DateTime) => "DateTime<Utc>".to_string(),
+                                Item(Date) => "NaiveDate".to_string(),
+                                Empty => "&str".to_string(),
+                                Unknown(f) => match f.as_str() {
+                                    "float" => "f64".to_string(),
+                                    "uri" => "&str".to_string(),
+                                    "uri-template" => "&str".to_string(),
+                                    "email" => "&str".to_string(),
+                                    f => {
+                                        bail!("XXX unknown string format {}", f)
+                                    }
+                                },
+                                x => {
+                                    bail!("XXX string format {:?}", x);
+                                }
+                            }
                         }
-                        if it.exclusive_minimum || it.exclusive_maximum {
-                            bail!("XXX exclusive");
-                        }
+                        SchemaKind::Type(Type::Integer(it)) => {
+                            let mut uint;
+                            let width;
 
-                        if let Some(min) = it.minimum {
-                            if min == 0 {
-                                uint = true;
+                            use openapiv3::VariantOrUnknownOrEmpty::Unknown;
+                            if let Unknown(f) = &it.format {
+                                match f.as_str() {
+                                    "uint" | "uint32" => {
+                                        uint = true;
+                                        width = 32;
+                                    }
+                                    "uint64" => {
+                                        uint = true;
+                                        width = 32;
+                                    }
+                                    f => bail!(
+                                        "XXX unknown integer format {}",
+                                        f
+                                    ),
+                                }
                             } else {
-                                bail!("XXX invalid minimum: {}", min);
+                                // The format was empty, let's assume it's just a normal
+                                // i64.
+                                uint = false;
+                                width = 64;
+                            }
+
+                            if it.multiple_of.is_some() {
+                                bail!("XXX multiple_of");
+                            }
+                            if it.exclusive_minimum || it.exclusive_maximum {
+                                bail!("XXX exclusive");
+                            }
+
+                            if let Some(min) = it.minimum {
+                                if min == 0 {
+                                    uint = true;
+                                } else {
+                                    bail!("XXX invalid minimum: {}", min);
+                                }
+                            }
+
+                            if it.maximum.is_some() {
+                                bail!("XXX maximum");
+                            }
+                            if !it.enumeration.is_empty() {
+                                bail!("XXX enumeration");
+                            }
+                            if uint {
+                                format!("u{}", width)
+                            } else {
+                                format!("i{}", width)
                             }
                         }
-
-                        if it.maximum.is_some() {
-                            bail!("XXX maximum");
+                        openapiv3::SchemaKind::OneOf { one_of } => {
+                            // TODO: make this smarter, but for now just make it a string.
+                            println!("oneof parameter: {:?}", one_of);
+                            "&str".to_string()
                         }
-                        if !it.enumeration.is_empty() {
-                            bail!("XXX enumeration");
-                        }
-                        if uint {
-                            format!("u{}", width)
-                        } else {
-                            format!("i{}", width)
-                        }
+                        x => bail!("unexpected type {:#?}", x),
                     }
-                    x => bail!("unexpected type {:#?}", x),
+                } else {
+                    // We have a reference to a type. We could handle it, but for now
+                    // easier to return a string.
+                    // TODO: handle in the future.
+                    "&str".to_string()
                 }
             }
             x => bail!("XXX param format {:#?}", x),
@@ -257,10 +308,8 @@ trait ExtractJsonMediaType {
 
 impl ExtractJsonMediaType for openapiv3::Response {
     fn content_json(&self) -> Result<openapiv3::MediaType> {
-        if self.content.len() != 1 {
-            bail!("expected one content entry, found {}", self.content.len());
-        }
-
+        // We do not need to check the length of the content because there might be
+        // more than one. For example, if xml or some other format is also defined.
         if let Some(mt) = self.content.get("application/json") {
             Ok(mt.clone())
         } else {
@@ -279,10 +328,8 @@ impl ExtractJsonMediaType for openapiv3::Response {
             return Ok(false);
         }
 
-        if self.content.len() != 1 {
-            bail!("expected one content entry, found {}", self.content.len());
-        }
-
+        // We do not need to check the length of the content because there might be
+        // more than one. For example, if xml or some other format is also defined.
         if let Some(mt) = self.content.get("application/octet-stream") {
             if !mt.encoding.is_empty() {
                 bail!("XXX encoding");
@@ -338,10 +385,8 @@ impl ExtractJsonMediaType for openapiv3::Response {
 
 impl ExtractJsonMediaType for openapiv3::RequestBody {
     fn content_json(&self) -> Result<openapiv3::MediaType> {
-        if self.content.len() != 1 {
-            bail!("expected one content entry, found {}", self.content.len());
-        }
-
+        // We do not need to check the length of the content because there might be
+        // more than one. For example, if xml or some other format is also defined.
         if let Some(mt) = self.content.get("application/json") {
             Ok(mt.clone())
         } else {
@@ -360,10 +405,8 @@ impl ExtractJsonMediaType for openapiv3::RequestBody {
             return Ok(false);
         }
 
-        if self.content.len() != 1 {
-            bail!("expected one content entry, found {}", self.content.len());
-        }
-
+        // We do not need to check the length of the content because there might be
+        // more than one. For example, if xml or some other format is also defined.
         if let Some(mt) = self.content.get("application/octet-stream") {
             if !mt.encoding.is_empty() {
                 bail!("XXX encoding");
@@ -425,18 +468,19 @@ impl<T> ReferenceOrExt<T> for openapiv3::ReferenceOr<T> {
     fn item(&self) -> Result<&T> {
         match self {
             openapiv3::ReferenceOr::Item(i) => Ok(i),
-            openapiv3::ReferenceOr::Reference { reference: _ } => {
-                bail!("reference not supported here");
+            openapiv3::ReferenceOr::Reference { reference } => {
+                bail!("reference not supported here: {}", reference);
             }
         }
     }
 }
 
 #[allow(dead_code)]
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 enum TypeDetails {
     Unknown,
     Basic,
+    Enum(TypeId),
     Array(TypeId),
     Optional(TypeId),
     /*
@@ -514,6 +558,19 @@ impl TypeSpace {
                         format!("[BASIC {} !NONAME?]", tid.0)
                     }
                 }
+                TypeDetails::Enum(itid) => {
+                    if let Some(ite) = self.id_to_entry.get(&itid) {
+                        if let Some(n) = &ite.name {
+                            return format!("enum of {} <{}>", n, itid.0);
+                        }
+                    }
+
+                    /*
+                     * If there is no name attached, we should try a
+                     * recursive describe.
+                     */
+                    format!("enum of {}", self.describe(itid))
+                }
                 TypeDetails::Array(itid) => {
                     if let Some(ite) = self.id_to_entry.get(&itid) {
                         if let Some(n) = &ite.name {
@@ -565,6 +622,10 @@ impl TypeSpace {
                     } else {
                         bail!("basic type {:?} does not have a name?", tid);
                     }
+                }
+                TypeDetails::Enum(itid) => {
+                    println!("\tenum {:?} {:?}", te, itid);
+                    Ok(format!("Enum<{}>", "thing"))
                 }
                 TypeDetails::Array(itid) => {
                     Ok(format!("Vec<{}>", self.render_type(itid, in_mod)?))
@@ -637,6 +698,10 @@ impl TypeSpace {
     fn prepop_reference(&mut self, name: &str, r: &str) -> Result<()> {
         let id = self.id_for_name(name);
         if let Some(rid) = self.ref_to_id.get(r) {
+            println!(
+                "ref {:?}, name, {:?}, id {:?}, rid: {:?}",
+                r, name, id, rid
+            );
             if rid != &id {
                 bail!(
                     "duplicate ref {:?}, name, {:?}, id {:?}, rid {:?}",
@@ -647,6 +712,7 @@ impl TypeSpace {
                 );
             }
         } else {
+            println!("ref {:?}, name, {:?}, id {:?}", r, name, id);
             self.ref_to_id.insert(r.to_string(), id);
         }
         Ok(())
@@ -670,6 +736,7 @@ impl TypeSpace {
         &mut self,
         name: Option<&str>,
         s: &openapiv3::Schema,
+        parent_name: &str,
     ) -> Result<TypeId> {
         let (name, details) = match &s.schema_kind {
             openapiv3::SchemaKind::Type(t) => match t {
@@ -677,7 +744,7 @@ impl TypeSpace {
                     /*
                      * Determine the type of item that will be in this array:
                      */
-                    let itid = self.select_box(name, &at.items)?;
+                    let itid = self.select_box(name, &at.items, parent_name)?;
                     (None, TypeDetails::Array(itid))
                 }
                 openapiv3::Type::Object(o) => {
@@ -689,22 +756,19 @@ impl TypeSpace {
                         (Some(n), Some("")) => n.to_string(),
                         (None, Some(t)) => t.to_string(),
                         (Some(""), Some(t)) => t.to_string(),
-                        (Some(n), Some(t)) if n == t => n.to_string(),
-                        (Some(n), Some(t)) => {
-                            if n.replace('-', " ") == t {
-                                t.to_string()
-                            } else {
-                                bail!("names {} and {} conflict", n, t)
-                            }
-                        }
+                        (Some(n), Some(_)) => n.to_string(),
                         (None, None) => {
-                            bail!("types need a name? {:?}", s)
+                            bail!("types need a name? {:?} {:?}", name, s)
                         }
                     };
 
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
-                        let itid = self.select_box(Some(n), &rb)?;
+                        let itid = self.select_box(
+                            Some(n),
+                            &rb,
+                            &format!("{} {} {}", parent_name, name, n),
+                        )?;
                         if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
                         } else {
@@ -721,6 +785,7 @@ impl TypeSpace {
                 }
                 openapiv3::Type::String(st) => {
                     use openapiv3::{
+                        StringFormat::Date,
                         StringFormat::DateTime,
                         VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
@@ -733,12 +798,25 @@ impl TypeSpace {
                                 TypeDetails::Basic,
                             )
                         }
+                        Item(Date) => {
+                            self.import_chrono = true;
+                            (Some("NaiveDate".to_string()), TypeDetails::Basic)
+                        }
                         Empty => {
                             (Some("String".to_string()), TypeDetails::Basic)
                         }
                         Unknown(f) => match f.as_str() {
                             "float" => {
                                 (Some("f64".to_string()), TypeDetails::Basic)
+                            }
+                            "uri" => {
+                                (Some("String".to_string()), TypeDetails::Basic)
+                            }
+                            "uri-template" => {
+                                (Some("String".to_string()), TypeDetails::Basic)
+                            }
+                            "email" => {
+                                (Some("String".to_string()), TypeDetails::Basic)
                             }
                             f => bail!("XXX unknown string format {}", f),
                         },
@@ -763,9 +841,84 @@ impl TypeSpace {
                     (Some("i64".to_string()), TypeDetails::Basic)
                 }
             },
-            x => {
-                //bail!("unhandled schema kind: {:?} {:?}", name, s);
-                (Some("String".to_string()), TypeDetails::Basic)
+            openapiv3::SchemaKind::AllOf { all_of } => {
+                // TODO: Actually combine all the types.
+                let id = self.select(name, all_of.get(0).unwrap())?;
+                if let Some(et) = self.id_to_entry.get(&id) {
+                    if let Some(n) = name {
+                        (Some(n.to_string()), et.details.clone())
+                    } else {
+                        bail!(
+                            "all_of types need a name? {:?} {:?}",
+                            name,
+                            all_of
+                        )
+                    }
+                } else {
+                    bail!(
+                        "allof schema kind: {:?} {:?}\n{:?}",
+                        name,
+                        s,
+                        all_of
+                    );
+                }
+            }
+            openapiv3::SchemaKind::OneOf { one_of } => {
+                // Iterate over each one of an select the first one that is not
+                // an empty object.
+                let mut id = TypeId(0);
+                for o in one_of {
+                    if let Ok(i) = self.select(name, o) {
+                        id = i;
+                        break;
+                    }
+                }
+
+                if let Some(et) = self.id_to_entry.get(&id) {
+                    if let Some(n) = name {
+                        (Some(n.to_string()), et.details.clone())
+                    } else {
+                        bail!(
+                            "one_of types need a name? {:?} {:?}",
+                            name,
+                            one_of
+                        )
+                    }
+                } else {
+                    bail!(
+                        "oneof schema kind: {:?} {:?}\n{:?}",
+                        name,
+                        s,
+                        one_of
+                    );
+                }
+            }
+            openapiv3::SchemaKind::AnyOf { any_of } => {
+                // TODO: Actually combine all the types.
+                let id = self.select(name, any_of.get(0).unwrap())?;
+                if let Some(et) = self.id_to_entry.get(&id) {
+                    if let Some(n) = name {
+                        (Some(n.to_string()), et.details.clone())
+                    } else {
+                        bail!(
+                            "any_of types need a name? {:?} {:?}",
+                            name,
+                            any_of
+                        )
+                    }
+                } else {
+                    bail!(
+                        "anyof schema kind: {:?} {:?}\n{:?}",
+                        name,
+                        s,
+                        any_of
+                    );
+                }
+            }
+            openapiv3::SchemaKind::Any(a) => {
+                // Then we use the serde_json type.
+                println!("\t{:?} any schema kind: {:?}", name, a);
+                (Some("serde_json::Value".to_string()), TypeDetails::Basic)
             }
         };
 
@@ -782,7 +935,40 @@ impl TypeSpace {
              */
             if let Some(et) = self.id_to_entry.get(&id) {
                 if et.details != details {
-                    //bail!("{:?} != {:?}", et.details, details);
+                    // We can get here if there are two objects with the same name
+                    // that have properties that are different.
+                    // Let's check if we already have an object with the parent name.
+                    let mut pn = parent_name.to_string();
+                    if parent_name.is_empty() {
+                        // Append "Data" to the name.
+                        pn = format!("{} Data", name);
+                    }
+                    let parent_id = self.id_for_name(&pn);
+                    if let Some(pet) = self.id_to_entry.get(&parent_id) {
+                        // We already have an item with the parent name!
+                        if pet.details != details {
+                            // We can get here if there are two objects with the same name
+                            // that have properties that are different.
+                            // Let's rename the new object with the parent name.
+                            bail!(
+                        "object details for {} do not match: {:?} != {:?}",
+                        pn,
+                        pet.details,
+                        details,
+                    );
+                        }
+                    } else {
+                        // Let's rename the new object with the parent name.
+                        // Insert the new one with the parent name.
+                        self.id_to_entry.insert(
+                            parent_id.clone(),
+                            TypeEntry {
+                                id: parent_id.clone(),
+                                name: Some(pn),
+                                details,
+                            },
+                        );
+                    }
                 }
             } else {
                 self.id_to_entry.insert(
@@ -832,7 +1018,7 @@ impl TypeSpace {
             openapiv3::ReferenceOr::Reference { reference } => {
                 self.select_ref(name, reference.as_str())
             }
-            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s),
+            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s, ""),
         }
     }
 
@@ -840,19 +1026,24 @@ impl TypeSpace {
         &mut self,
         name: Option<&str>,
         s: &openapiv3::ReferenceOr<Box<openapiv3::Schema>>,
+        parent_name: &str,
     ) -> Result<TypeId> {
         match s {
             openapiv3::ReferenceOr::Reference { reference } => {
                 self.select_ref(name, reference.as_str())
             }
             openapiv3::ReferenceOr::Item(s) => {
-                self.select_schema(name, s.as_ref())
+                self.select_schema(name, s.as_ref(), parent_name)
             }
         }
     }
 }
 
-fn gen(api: &OpenAPI, ts: &mut TypeSpace) -> Result<String> {
+fn gen(
+    api: &OpenAPI,
+    ts: &mut TypeSpace,
+    parameters: BTreeMap<String, &openapiv3::Parameter>,
+) -> Result<String> {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -918,17 +1109,17 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace) -> Result<String> {
                     te.name.as_deref().unwrap()
                 ));
                 for (name, tid) in omap.iter() {
-                    a(&format!(
-                        "        pub {}: {},",
-                        name,
-                        ts.render_type(tid, true)?
-                    ));
+                    if let Ok(rt) = ts.render_type(tid, true) {
+                        a(&format!("        pub {}: {},", name, rt));
+                    }
+                    // TODO: do something when this fails.
                 }
                 a("    }");
                 a("");
             }
             TypeDetails::Basic => {}
             TypeDetails::Unknown => {}
+            TypeDetails::Enum(_) => {}
             TypeDetails::Array(_) => {}
             TypeDetails::Optional(_) => {}
         }
@@ -988,27 +1179,67 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace) -> Result<String> {
 
             let mut bounds: Vec<String> = Vec::new();
 
+            println!("generating {} {}", p, m);
+
             let (body_param, body_func) = if let Some(b) = &o.request_body {
                 let b = b.item()?;
                 if b.is_binary()? {
                     bounds.push("B: Into<reqwest::Body>".to_string());
                     (Some("B".to_string()), Some("body".to_string()))
                 } else {
-                    let mt = b
-                        .content_json()
-                        .with_context(|| anyhow!("{} {}", m, pn))?;
+                    let (ct, mt) = b.content.first().unwrap();
                     if !mt.encoding.is_empty() {
                         bail!("media type encoding not empty: {:#?}", mt);
                     }
 
-                    if let Some(s) = &mt.schema {
-                        let tid = ts.select(None, s)?;
-                        (
-                            Some(format!("&{}", ts.render_type(&tid, false)?)),
-                            Some("json".to_string()),
-                        )
+                    if ct == "application/json" {
+                        if let Some(s) = &mt.schema {
+                            let tid = match s {
+                                openapiv3::ReferenceOr::Reference {
+                                    reference,
+                                } => ts.select_ref(None, reference.as_str())?,
+                                openapiv3::ReferenceOr::Item(item) => {
+                                    let object_name = format!(
+                                        "{}Request",
+                                        summary_to_object_name(
+                                            m,
+                                            &o.summary.as_ref().unwrap()
+                                        )
+                                    );
+                                    ts.select_schema(
+                                        Some(&object_name),
+                                        item,
+                                        "",
+                                    )?
+                                }
+                            };
+                            (
+                                Some(format!(
+                                    "&{}",
+                                    ts.render_type(&tid, false)?
+                                )),
+                                Some("json".to_string()),
+                            )
+                        } else {
+                            bail!("media type encoding, no schema: {:#?}", mt);
+                        }
+                    } else if ct == "text/plain" || ct == "*/*" {
+                        if let Some(s) = &mt.schema {
+                            let tid = ts.select(None, s)?;
+                            let rt = ts.render_type(&tid, false)?;
+                            if rt == "String" {
+                                (
+                                    Some("&str".to_string()),
+                                    Some("text".to_string()),
+                                )
+                            } else {
+                                (Some(rt), Some("body".to_string()))
+                            }
+                        } else {
+                            bail!("media type encoding, no schema: {:#?}", mt);
+                        }
                     } else {
-                        bail!("media type encoding, no schema: {:#?}", mt);
+                        bail!("unhandled request content type: {}", ct);
                     }
                 }
             } else {
@@ -1023,7 +1254,24 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace) -> Result<String> {
             a("        &self,");
 
             for par in o.parameters.iter() {
-                match par.item()? {
+                let item = match par {
+                    openapiv3::ReferenceOr::Reference { reference } => {
+                        // Get the parameter from our BTreeMap.
+                        if let Some(param) = parameters.get(
+                            &reference.replace("#/components/parameters/", ""),
+                        ) {
+                            param
+                        } else {
+                            bail!(
+                                "could not find parameter with reference: {}",
+                                reference
+                            );
+                        }
+                    }
+                    openapiv3::ReferenceOr::Item(item) => item,
+                };
+
+                match item {
                     openapiv3::Parameter::Path {
                         parameter_data,
                         style: openapiv3::PathStyle::Simple,
@@ -1064,13 +1312,12 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace) -> Result<String> {
                 a(&format!("        body: {},", bp));
             }
 
-            // println!("{:#?}", o.responses);
-
-            if o.responses.responses.len() == 1 {
-                let only = o.responses.responses.iter().next().unwrap();
+            // Only do the first.
+            if let Some(only) = o.responses.responses.first() {
                 match only.0 {
                     openapiv3::StatusCode::Code(n) => {
-                        if *n < 200 || *n > 299 {
+                        // 302 is the code returned from /orgs/{org}/migrations/{migration_id}/archive GET
+                        if *n < 200 || *n > 303 {
                             bail!("code? {:#?}", only);
                         }
                     }
@@ -1079,11 +1326,13 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace) -> Result<String> {
 
                 let i = only.1.item()?;
                 if !i.headers.is_empty() {
-                    bail!("no response headers for now");
+                    // TODO: do response headers.
+                    println!("no response headers for now");
                 }
 
                 if !i.links.is_empty() {
-                    bail!("no response links for now");
+                    // TODO: do response links
+                    println!("no response links for now");
                 }
                 /*
                  * XXX ignoring extensions.
@@ -1093,30 +1342,77 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace) -> Result<String> {
                  * Look at the response content.  For now, support a single
                  * JSON-formatted response.
                  */
-                match (i.content.len(), i.content.get("application/json")) {
-                    (0, _) => {
-                        a("    ) -> Result<()> {");
-                    }
-                    (1, Some(mt)) => {
-                        if !mt.encoding.is_empty() {
-                            bail!("media type encoding not empty: {:#?}", mt);
-                        }
+                if i.content.is_empty() {
+                    a("    ) -> Result<()> {");
+                } else {
+                    match i.content.get("application/json") {
+                        Some(mt) => {
+                            if !mt.encoding.is_empty() {
+                                bail!(
+                                    "media type encoding not empty: {:#?}",
+                                    mt
+                                );
+                            }
 
-                        if let Some(s) = &mt.schema {
-                            let tid = ts.select(None, s)?;
-                            a(&format!(
-                                "    ) -> Result<{}> {{",
-                                ts.render_type(&tid, false)?
-                            ));
-                        } else {
-                            bail!("media type encoding, no schema: {:#?}", mt);
+                            if let Some(s) = &mt.schema {
+                                let tid = match s {
+                                    openapiv3::ReferenceOr::Reference {
+                                        reference,
+                                    } => {
+                                        ts.select_ref(None, reference.as_str())?
+                                    }
+                                    openapiv3::ReferenceOr::Item(item) => {
+                                        let object_name = format!(
+                                            "{}Response",
+                                            summary_to_object_name(
+                                                m,
+                                                &o.summary.as_ref().unwrap()
+                                            )
+                                        );
+                                        ts.select_schema(
+                                            Some(&object_name),
+                                            item,
+                                            "",
+                                        )?
+                                    }
+                                };
+                                a(&format!(
+                                    "    ) -> Result<{}> {{",
+                                    ts.render_type(&tid, false)?
+                                ));
+                            } else {
+                                bail!(
+                                    "media type encoding, no schema: {:#?}",
+                                    mt
+                                );
+                            }
                         }
-                    }
-                    (1, None) => {
-                        bail!("response content not JSON: {:#?}", i.content);
-                    }
-                    (_, _) => {
-                        bail!("too many response contents: {:#?}", i.content);
+                        None => {
+                            let (ct, mt) = i.content.first().unwrap();
+                            if ct == "text/plain"
+                                || ct == "text/html"
+                                || ct == "application/octocat-stream"
+                                || ct == "*/*"
+                            {
+                                if let Some(s) = &mt.schema {
+                                    let tid = ts.select(None, s)?;
+                                    let rt = ts.render_type(&tid, false)?;
+                                    println!("ct {} render_type {}", ct, rt);
+
+                                    a(&format!("    ) -> Result<{}> {{", rt));
+                                } else {
+                                    bail!(
+                                        "media type encoding, no schema: {:#?}",
+                                        mt
+                                    );
+                                }
+                            } else {
+                                bail!(
+                                    "unhandled response content type: {}",
+                                    ct
+                                );
+                            }
+                        }
                     }
                 }
             } else {
@@ -1167,6 +1463,28 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace) -> Result<String> {
     Ok(out)
 }
 
+fn summary_to_object_name(m: &str, s: &str) -> String {
+    format!(
+        "{} {}",
+        m.to_lowercase(),
+        &s.to_lowercase()
+            .replace('.', "")
+            .replace(" an ", " ")
+            .replace(" or ", " ")
+            .replace(" for ", " ")
+            .replace(" to ", " ")
+            .replace(" your ", " ")
+            .replace(" the ", " ")
+            .replace("(beta)", "")
+            .replace("(legacy)", "")
+            .replace("-", " ")
+            .replace(" a ", " ")
+            .replace("'", "")
+            .replace(" of ", " ")
+            .replace("authenticated user", "")
+    )
+}
+
 fn main() -> Result<()> {
     let mut opts = getopts::Options::new();
     opts.parsing_style(getopts::ParsingStyle::StopAtFirstFree);
@@ -1197,6 +1515,8 @@ fn main() -> Result<()> {
     let api = load_api(&args.opt_str("i").unwrap())?;
 
     let mut ts = TypeSpace::new();
+    let mut parameters: BTreeMap<String, &openapiv3::Parameter> =
+        BTreeMap::new();
 
     if let Some(components) = &api.components {
         /*
@@ -1205,7 +1525,7 @@ fn main() -> Result<()> {
          * resolution in this and other parts of the document.
          */
         for n in components.schemas.keys() {
-            println!("PREPOP {}:", n);
+            println!("PREPOP SCHEMA {}:", n);
             ts.prepop_reference(n, &format!("#/components/schemas/{}", n))?;
         }
         println!();
@@ -1219,6 +1539,30 @@ fn main() -> Result<()> {
             let id = ts.select(Some(sn.as_str()), s)?;
             println!("    -> {:?}", id);
 
+            println!();
+        }
+
+        println!();
+        for (i, (pn, p)) in components.parameters.iter().enumerate() {
+            println!(
+                "PARAMETER {}/{}: {}",
+                i + 1,
+                components.parameters.len(),
+                pn
+            );
+
+            match p {
+                openapiv3::ReferenceOr::Reference { reference } => {
+                    bail!(
+                        "parameter {} uses reference, unsupported {}",
+                        pn,
+                        reference
+                    );
+                }
+                openapiv3::ReferenceOr::Item(item) => {
+                    parameters.insert(pn.to_string(), item);
+                }
+            }
             println!();
         }
     }
@@ -1243,30 +1587,122 @@ fn main() -> Result<()> {
                     &o.request_body
                 {
                     if !body.is_binary()? {
-                        let mt = body
+                        if let Ok(mt) = body
                             .content_json()
-                            .with_context(|| anyhow!("{} {} request", m, pn))?;
-                        if let Some(s) = &mt.schema {
-                            let id = ts.select(None, s)?;
-                            println!(
-                                "    {} {} request body -> {:?}",
-                                pn, m, id
+                            .with_context(|| anyhow!("{} {} request", m, pn))
+                        {
+                            if let Some(s) = &mt.schema {
+                                let object_name = format!(
+                                    "{}Request",
+                                    summary_to_object_name(
+                                        m,
+                                        &o.summary.as_ref().unwrap()
+                                    )
+                                );
+                                let id = ts.select(Some(&object_name), s)?;
+                                println!(
+                                    "    {} {} request body -> {:?}",
+                                    pn, m, id
+                                );
+                            }
+                        } else if let Some((ct, mt)) = body.content.first() {
+                            if ct == "text/plain" || ct == "text/html" {
+                                println!(
+                                    "    {} {} request body -> &str",
+                                    pn, m,
+                                );
+                            } else if let Some(s) = &mt.schema {
+                                println!(
+                                    "    {} {} request body -> {:?}",
+                                    pn, m, s
+                                );
+                            } else {
+                                bail!(
+                                    "unknown request content: {} {} {:?}",
+                                    pn,
+                                    m,
+                                    body.content
+                                );
+                            }
+                        } else {
+                            bail!(
+                                "unknown request content: {} {} {:?}",
+                                pn,
+                                m,
+                                body.content
                             );
                         }
                     }
+                } else if let Some(openapiv3::ReferenceOr::Reference {
+                    reference,
+                }) = &o.request_body
+                {
+                    let id = ts.select_ref(None, reference.as_str())?;
+                    println!("    {} {} request body -> {:?}", pn, m, id);
                 }
 
                 /*
                  * Get the response body type for each status code:
                  */
                 for (code, r) in o.responses.responses.iter() {
-                    let ri = r.item()?;
-                    if !ri.is_binary()? && !ri.content.is_empty() {
-                        let mt = ri.content_json().with_context(|| {
-                            anyhow!("{} {} {}", m, pn, code)
-                        })?;
-                        if let Some(s) = &mt.schema {
-                            let id = ts.select(None, s)?;
+                    match r {
+                        openapiv3::ReferenceOr::Item(ri) => {
+                            if !ri.is_binary()? && !ri.content.is_empty() {
+                                if let Ok(mt) =
+                                    ri.content_json().with_context(|| {
+                                        anyhow!("{} {} {}", m, pn, code)
+                                    })
+                                {
+                                    if let Some(s) = &mt.schema {
+                                        let object_name = format!(
+                                            "{}Response",
+                                            summary_to_object_name(
+                                                m,
+                                                &o.summary.as_ref().unwrap()
+                                            )
+                                        );
+                                        let id =
+                                            ts.select(Some(&object_name), s)?;
+                                        println!(
+                                        "    {} {} {} response body -> {:?}",
+                                        pn, m, code, id
+                                    );
+                                    }
+                                } else if let Some((ct, mt)) =
+                                    ri.content.first()
+                                {
+                                    if ct == "text/plain" || ct == "text/html" {
+                                        println!(
+                                        "    {} {} {} response body -> String",
+                                        pn, m, code,
+                                    );
+                                    } else if let Some(s) = &mt.schema {
+                                        println!(
+                                        "    {} {} {} response body -> {:?}",
+                                        pn, m, code, s
+                                        );
+                                    } else {
+                                        bail!(
+                                        "unknown response content: {} {} {} {:?}",
+                                        pn,
+                                        m,
+                                        code,
+                                        ri.content
+                                    );
+                                    }
+                                } else {
+                                    bail!(
+                                        "unknown response content: {} {} {} {:?}",
+                                        pn,
+                                        m,
+                                        code,
+                                        ri.content
+                                    );
+                                }
+                            }
+                        }
+                        openapiv3::ReferenceOr::Reference { reference } => {
+                            let id = ts.select_ref(None, reference.as_str())?;
                             println!(
                                 "    {} {} {} response body -> {:?}",
                                 pn, m, code, id
@@ -1288,7 +1724,7 @@ fn main() -> Result<()> {
         grab(pn, "TRACE", op.trace.as_ref(), &mut ts)?;
     }
 
-    let fail = match gen(&api, &mut ts) {
+    let fail = match gen(&api, &mut ts, parameters) {
         Ok(out) => {
             let name = args.opt_str("n").unwrap();
             let version = args.opt_str("v").unwrap();
