@@ -1,14 +1,15 @@
-use anyhow::{anyhow, bail, Context, Result};
-use openapiv3::OpenAPI;
-use serde::Deserialize;
-use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
+mod template;
+
+use std::collections::{BTreeMap, HashSet};
 use std::ffi::OsStr;
 use std::fs::{File, OpenOptions};
 use std::io::Write;
 use std::path::{Path, PathBuf};
-use titlecase::titlecase;
 
-mod template;
+use anyhow::{anyhow, bail, Context, Result};
+use http::status::StatusCode;
+use openapiv3::OpenAPI;
+use serde::Deserialize;
 
 fn save<P>(p: P, data: &str) -> Result<()>
 where
@@ -1122,7 +1123,7 @@ fn gen(
                                 }
                                 openapiv3::ReferenceOr::Item(item) => {
                                     let object_name = format!(
-                                        "{}Request",
+                                        "{} Request",
                                         summary_to_object_name(m, &o.summary.as_ref().unwrap())
                                     );
                                     ts.select_schema(Some(&object_name), item, "")?
@@ -1263,11 +1264,23 @@ fn gen(
                                         ts.select_ref(None, reference.as_str())?
                                     }
                                     openapiv3::ReferenceOr::Item(item) => {
-                                        let object_name = format!(
-                                            "{}Response",
-                                            summary_to_object_name(m, &o.summary.as_ref().unwrap())
-                                        );
-                                        ts.select_schema(Some(&object_name), item, "")?
+                                        if let openapiv3::StatusCode::Code(c) = only.0 {
+                                            let status_code = StatusCode::from_u16(*c).unwrap();
+                                            let object_name = format!(
+                                                "{} {} Response",
+                                                summary_to_object_name(
+                                                    m,
+                                                    &o.summary.as_ref().unwrap()
+                                                ),
+                                                status_code
+                                                    .canonical_reason()
+                                                    .unwrap()
+                                                    .to_lowercase()
+                                            );
+                                            ts.select_schema(Some(&object_name), item, "")?
+                                        } else {
+                                            bail!("got a range and not a code for {:?}", only.0);
+                                        }
                                     }
                                 };
                                 a(&format!(
@@ -1471,7 +1484,7 @@ fn main() -> Result<()> {
                         {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!(
-                                    "{}Request",
+                                    "{} Request",
                                     summary_to_object_name(m, &o.summary.as_ref().unwrap())
                                 );
                                 let id = ts.select(Some(&object_name), s)?;
@@ -1508,15 +1521,27 @@ fn main() -> Result<()> {
                                     .with_context(|| anyhow!("{} {} {}", m, pn, code))
                                 {
                                     if let Some(s) = &mt.schema {
-                                        let object_name = format!(
-                                            "{}Response",
-                                            summary_to_object_name(m, &o.summary.as_ref().unwrap())
-                                        );
-                                        let id = ts.select(Some(&object_name), s)?;
-                                        println!(
-                                            "    {} {} {} response body -> {:?}",
-                                            pn, m, code, id
-                                        );
+                                        if let openapiv3::StatusCode::Code(c) = code {
+                                            let status_code = StatusCode::from_u16(*c).unwrap();
+                                            let object_name = format!(
+                                                "{} {} Response",
+                                                summary_to_object_name(
+                                                    m,
+                                                    &o.summary.as_ref().unwrap()
+                                                ),
+                                                status_code
+                                                    .canonical_reason()
+                                                    .unwrap()
+                                                    .to_lowercase()
+                                            );
+                                            let id = ts.select(Some(&object_name), s)?;
+                                            println!(
+                                                "    {} {} {} response body -> {:?}",
+                                                pn, m, code, id
+                                            );
+                                        } else {
+                                            bail!("got a range and not a code for {:?}", code);
+                                        }
                                     }
                                 } else if let Some((ct, mt)) = ri.content.first() {
                                     if ct == "text/plain" || ct == "text/html" {
