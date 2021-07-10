@@ -25,11 +25,19 @@ impl Template {
         out.push_str("            self.baseurl,\n");
         for c in self.components.iter() {
             if let Component::Parameter(n) = &c {
-                out.push_str(&format!(
-                    "            \
+                if n == "type" || n == "ref" {
+                    out.push_str(&format!(
+                        "            \
+                    progenitor_support::encode_path(&{}_.to_string()),\n",
+                        n
+                    ));
+                } else {
+                    out.push_str(&format!(
+                        "            \
                     progenitor_support::encode_path(&{}.to_string()),\n",
-                    n
-                ));
+                        n
+                    ));
+                }
             }
         }
         out.push_str("        );\n");
@@ -38,8 +46,7 @@ impl Template {
 }
 
 pub fn parse(t: &str) -> Result<Template> {
-    parse_inner(t)
-        .with_context(|| anyhow!("parse failure for template {:?}", t))
+    parse_inner(t).with_context(|| anyhow!("parse failure for template {:?}", t))
 }
 
 fn parse_inner(t: &str) -> Result<Template> {

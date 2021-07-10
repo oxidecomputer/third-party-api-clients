@@ -458,6 +458,7 @@ impl<T> ReferenceOrExt<T> for openapiv3::ReferenceOr<T> {
 enum TypeDetails {
     Unknown,
     Basic,
+    NamedType(TypeId),
     Enum(TypeId),
     Array(TypeId),
     Optional(TypeId),
@@ -534,6 +535,19 @@ impl TypeSpace {
                         format!("[BASIC {} !NONAME?]", tid.0)
                     }
                 }
+                TypeDetails::NamedType(itid) => {
+                    if let Some(ite) = self.id_to_entry.get(&itid) {
+                        if let Some(n) = &ite.name {
+                            return format!("named type of {} <{}>", n, itid.0);
+                        }
+                    }
+
+                    /*
+                     * If there is no name attached, we should try a
+                     * recursive describe.
+                     */
+                    format!("named type of {}", self.describe(itid))
+                }
                 TypeDetails::Enum(itid) => {
                     if let Some(ite) = self.id_to_entry.get(&itid) {
                         if let Some(n) = &ite.name {
@@ -599,6 +613,7 @@ impl TypeSpace {
                         bail!("basic type {:?} does not have a name?", tid);
                     }
                 }
+                TypeDetails::NamedType(itid) => self.render_type(itid, in_mod),
                 TypeDetails::Enum(itid) => {
                     println!("\tenum {:?} {:?}", te, itid);
                     Ok(format!("Enum<{}>", "thing"))
@@ -695,6 +710,7 @@ impl TypeSpace {
         name: Option<&str>,
         s: &openapiv3::Schema,
         parent_name: &str,
+        is_schema: bool,
     ) -> Result<TypeId> {
         let (name, details) = match &s.schema_kind {
             openapiv3::SchemaKind::Type(t) => match t {
@@ -727,7 +743,12 @@ impl TypeSpace {
                         let itid = self.select_box(
                             Some(n),
                             &rb,
-                            &format!("{} {} {}", parent_name, name, n),
+                            &format!(
+                                "{} {} {}",
+                                parent_name,
+                                name,
+                                n.replace("_", " ").replace("-", " ")
+                            ),
                         )?;
                         if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
@@ -747,29 +768,53 @@ impl TypeSpace {
                         VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
 
-                    match &st.format {
-                        Item(DateTime) => {
-                            self.import_chrono = true;
-                            (Some("DateTime<Utc>".to_string()), TypeDetails::Basic)
-                        }
-                        Item(Date) => {
-                            self.import_chrono = true;
-                            (Some("NaiveDate".to_string()), TypeDetails::Basic)
-                        }
-                        Empty => (Some("String".to_string()), TypeDetails::Basic),
-                        Unknown(f) => match f.as_str() {
-                            "float" => (Some("f64".to_string()), TypeDetails::Basic),
-                            "uri" => (Some("String".to_string()), TypeDetails::Basic),
-                            "uri-template" => (Some("String".to_string()), TypeDetails::Basic),
-                            "email" => (Some("String".to_string()), TypeDetails::Basic),
-                            f => bail!("XXX unknown string format {}", f),
-                        },
-                        x => {
-                            bail!("XXX string format {:?}", x);
+                    let nam = if let Some(n) = name {
+                        n.to_string()
+                    } else {
+                        "".to_string()
+                    };
+                    if is_schema {
+                        //panic!("name {} t {:?}", nam, t);
+                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
+                        (Some(nam), TypeDetails::NamedType(id))
+                    } else {
+                        match &st.format {
+                            Item(DateTime) => {
+                                self.import_chrono = true;
+                                (Some("DateTime<Utc>".to_string()), TypeDetails::Basic)
+                            }
+                            Item(Date) => {
+                                self.import_chrono = true;
+                                (Some("NaiveDate".to_string()), TypeDetails::Basic)
+                            }
+                            Empty => (Some("String".to_string()), TypeDetails::Basic),
+                            Unknown(f) => match f.as_str() {
+                                "float" => (Some("f64".to_string()), TypeDetails::Basic),
+                                "uri" => (Some("String".to_string()), TypeDetails::Basic),
+                                "uri-template" => (Some("String".to_string()), TypeDetails::Basic),
+                                "email" => (Some("String".to_string()), TypeDetails::Basic),
+                                f => bail!("XXX unknown string format {}", f),
+                            },
+                            x => {
+                                bail!("XXX string format {:?}", x);
+                            }
                         }
                     }
                 }
-                openapiv3::Type::Boolean {} => (Some("bool".to_string()), TypeDetails::Basic),
+                openapiv3::Type::Boolean {} => {
+                    let nam = if let Some(n) = name {
+                        n.to_string()
+                    } else {
+                        "".to_string()
+                    };
+                    if is_schema {
+                        //panic!("name {} t {:?}", nam, t);
+                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
+                        (Some(nam), TypeDetails::NamedType(id))
+                    } else {
+                        (Some("bool".to_string()), TypeDetails::Basic)
+                    }
+                }
                 openapiv3::Type::Number(_) => {
                     /*
                      * XXX
@@ -785,7 +830,7 @@ impl TypeSpace {
             },
             openapiv3::SchemaKind::AllOf { all_of } => {
                 // TODO: Actually combine all the types.
-                let id = self.select(name, all_of.get(0).unwrap())?;
+                let id = self.select(name, all_of.get(0).unwrap(), is_schema)?;
                 if let Some(et) = self.id_to_entry.get(&id) {
                     if let Some(n) = name {
                         if let TypeDetails::Object(_) = et.details {
@@ -808,7 +853,7 @@ impl TypeSpace {
                 // an empty object.
                 let mut id = TypeId(0);
                 for o in one_of {
-                    if let Ok(i) = self.select(name, o) {
+                    if let Ok(i) = self.select(name, o, true) {
                         id = i;
                         break;
                     }
@@ -826,7 +871,7 @@ impl TypeSpace {
             }
             openapiv3::SchemaKind::AnyOf { any_of } => {
                 // TODO: Actually combine all the types.
-                let id = self.select(name, any_of.get(0).unwrap())?;
+                let id = self.select(name, any_of.get(0).unwrap(), is_schema)?;
                 if let Some(et) = self.id_to_entry.get(&id) {
                     if let Some(n) = name {
                         (Some(n.to_string()), et.details.clone())
@@ -837,9 +882,8 @@ impl TypeSpace {
                     bail!("anyof schema kind: {:?} {:?}\n{:?}", name, s, any_of);
                 }
             }
-            openapiv3::SchemaKind::Any(a) => {
+            openapiv3::SchemaKind::Any(_a) => {
                 // Then we use the serde_json type.
-                println!("\t{:?} any schema kind: {:?}", name, a);
                 (Some("serde_json::Value".to_string()), TypeDetails::Basic)
             }
         };
@@ -935,12 +979,13 @@ impl TypeSpace {
         &mut self,
         name: Option<&str>,
         s: &openapiv3::ReferenceOr<openapiv3::Schema>,
+        is_schema: bool,
     ) -> Result<TypeId> {
         match s {
             openapiv3::ReferenceOr::Reference { reference } => {
                 self.select_ref(name, reference.as_str())
             }
-            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s, ""),
+            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s, "", is_schema),
         }
     }
 
@@ -954,7 +999,9 @@ impl TypeSpace {
             openapiv3::ReferenceOr::Reference { reference } => {
                 self.select_ref(name, reference.as_str())
             }
-            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s.as_ref(), parent_name),
+            openapiv3::ReferenceOr::Item(s) => {
+                self.select_schema(name, s.as_ref(), parent_name, false)
+            }
         }
     }
 }
@@ -976,7 +1023,7 @@ fn gen(
      */
     a("");
     a("use anyhow::Result;"); /* XXX */
-    a("use chrono::{DateTime, Utc, NaiveDate};");
+    a("use chrono::{DateTime, Utc};");
     a("");
     a("");
 
@@ -1017,8 +1064,9 @@ fn gen(
      * Declare named types we know about:
      */
     a("pub mod types {");
-    a("    use serde::{Serialize, Deserialize};");
+    a("    use chrono::{DateTime, Utc, NaiveDate};");
     a("    use schemars::JsonSchema;");
+    a("    use serde::{Serialize, Deserialize};");
     a("");
     for te in ts.id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
@@ -1032,6 +1080,9 @@ fn gen(
                             if name == "ref" || name == "type" || name == "self" {
                                 a(&format!(r#"        #[serde(rename = "{}")]"#, name));
                                 a(&format!("        pub {}_: {},", name, rt));
+                            } else if name == "$ref" {
+                                a(r#"        #[serde(rename = "$ref")]"#);
+                                a(&format!("        pub ref_: {},", rt));
                             } else if name == "+1" {
                                 a(r#"        #[serde(rename = "+1")]"#);
                                 a(&format!("        pub plus_one: {},", rt));
@@ -1055,6 +1106,7 @@ fn gen(
                 TypeDetails::Basic => {}
                 TypeDetails::Unknown => {}
                 TypeDetails::Enum(_) => {}
+                TypeDetails::NamedType(_) => {}
                 TypeDetails::Array(_) => {}
                 TypeDetails::Optional(_) => {}
             }
@@ -1137,7 +1189,7 @@ fn gen(
                                         "{} Request",
                                         summary_to_object_name(m, &o.summary.as_ref().unwrap())
                                     );
-                                    ts.select_schema(Some(&object_name), item, "")?
+                                    ts.select_schema(Some(&object_name), item, "", false)?
                                 }
                             };
                             (
@@ -1149,7 +1201,7 @@ fn gen(
                         }
                     } else if ct == "text/plain" || ct == "*/*" {
                         if let Some(s) = &mt.schema {
-                            let tid = ts.select(None, s)?;
+                            let tid = ts.select(None, s, false)?;
                             let rt = ts.render_type(&tid, false)?;
                             if rt == "String" {
                                 (Some("&str".to_string()), Some("text".to_string()))
@@ -1296,7 +1348,7 @@ fn gen(
                                                     .unwrap()
                                                     .to_lowercase()
                                             );
-                                            ts.select_schema(Some(&object_name), item, "")?
+                                            ts.select_schema(Some(&object_name), item, "", false)?
                                         } else {
                                             bail!("got a range and not a code for {:?}", only.0);
                                         }
@@ -1321,7 +1373,7 @@ fn gen(
                                 || ct == "*/*"
                             {
                                 if let Some(s) = &mt.schema {
-                                    let tid = ts.select(None, s)?;
+                                    let tid = ts.select(None, s, false)?;
                                     let rt = ts.render_type(&tid, false)?;
                                     println!("ct {} render_type {}", ct, rt);
 
@@ -1353,7 +1405,12 @@ fn gen(
                                                         .unwrap()
                                                         .to_lowercase()
                                                 );
-                                                ts.select_schema(Some(&object_name), item, "")?
+                                                ts.select_schema(
+                                                    Some(&object_name),
+                                                    item,
+                                                    "",
+                                                    false,
+                                                )?
                                             } else {
                                                 bail!(
                                                     "got a range and not a code for {:?}",
@@ -1492,7 +1549,7 @@ fn main() -> Result<()> {
             let name = sn.replace("_", " ").replace("-", " ");
             println!("SCHEMA {}/{}: {}", i + 1, components.schemas.len(), name);
 
-            let id = ts.select(Some(name.as_str()), s)?;
+            let id = ts.select(Some(name.as_str()), s, true)?;
             println!("    -> {:?}", id);
 
             println!();
@@ -1546,7 +1603,7 @@ fn main() -> Result<()> {
                                     "{} Request",
                                     summary_to_object_name(m, &o.summary.as_ref().unwrap())
                                 );
-                                let id = ts.select(Some(&object_name), s)?;
+                                let id = ts.select(Some(&object_name), s, false)?;
                                 println!("    {} {} request body -> {:?}", pn, m, id);
                             }
                         } else if let Some((ct, mt)) = body.content.first() {
@@ -1593,7 +1650,7 @@ fn main() -> Result<()> {
                                                     .unwrap()
                                                     .to_lowercase()
                                             );
-                                            let id = ts.select(Some(&object_name), s)?;
+                                            let id = ts.select(Some(&object_name), s, false)?;
                                             println!(
                                                 "    {} {} {} response body -> {:?}",
                                                 pn, m, code, id

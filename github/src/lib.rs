@@ -1,6 +1,6 @@
 
 use anyhow::Result;
-use chrono::{DateTime, Utc, NaiveDate};
+use chrono::{DateTime, Utc};
 
 
 mod progenitor_support {
@@ -23,8 +23,9 @@ mod progenitor_support {
 }
 
 pub mod types {
-    use serde::{Serialize, Deserialize};
+    use chrono::{DateTime, Utc, NaiveDate};
     use schemars::JsonSchema;
+    use serde::{Serialize, Deserialize};
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SimpleUser {
@@ -125,7 +126,10 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct WebhookConfig {
-        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub content_type: Option<String>,
+        pub insecure_ssl: Option<String>,
+        pub secret: Option<String>,
+        pub url: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -309,7 +313,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RepositoryTemplate_repositoryTemplateRepositoryOwner {
+    pub struct RepositoryTemplateRepositoryTemplateRepositoryOwner {
         pub avatar_url: Option<String>,
         pub events_url: Option<String>,
         pub followers_url: Option<String>,
@@ -332,7 +336,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RepositoryTemplate_repositoryTemplateRepositoryPermissions {
+    pub struct RepositoryTemplateRepositoryTemplateRepositoryPermissions {
         pub admin: Option<bool>,
         pub pull: Option<bool>,
         pub push: Option<bool>,
@@ -533,7 +537,7 @@ pub mod types {
         pub index: Option<i64>,
         pub message: Option<String>,
         pub resource: Option<String>,
-        pub value: Option<value>,
+        pub value: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -638,6 +642,9 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsEnterprisePermissions {
+        pub allowed_actions: String,
+        pub enabled_organizations: String,
+        pub selected_actions_url: Option<String>,
         pub selected_organizations_url: Option<String>,
     }
 
@@ -928,6 +935,7 @@ pub mod types {
         pub active_lock_reason: Option<String>,
         pub assignee: Assignee,
         pub assignees: Option<Vec<SimpleUser>>,
+        pub author_association: String,
         pub body: Option<String>,
         pub body_html: Option<String>,
         pub body_text: Option<String>,
@@ -974,6 +982,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueComment {
+        pub author_association: String,
         pub body: Option<String>,
         pub body_html: Option<String>,
         pub body_text: Option<String>,
@@ -1215,6 +1224,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GistComment {
+        pub author_association: String,
         pub body: String,
         pub created_at: DateTime<Utc>,
         pub id: i64,
@@ -1270,6 +1280,7 @@ pub mod types {
         pub active_lock_reason: Option<String>,
         pub assignee: Assignee,
         pub assignees: Option<Vec<SimpleUser>>,
+        pub author_association: String,
         pub body: Option<String>,
         pub body_html: Option<String>,
         pub body_text: Option<String>,
@@ -1403,7 +1414,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MinimalRepositoryTemplate_repository {
+    pub struct MinimalRepositoryTemplateRepository {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -1597,6 +1608,9 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsOrganizationPermissions {
+        pub allowed_actions: Option<String>,
+        pub enabled_repositories: String,
+        pub selected_actions_url: Option<String>,
         pub selected_repositories_url: Option<String>,
     }
 
@@ -1692,11 +1706,14 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InteractionLimitResponse {
         pub expires_at: DateTime<Utc>,
+        pub limit: String,
         pub origin: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InteractionLimit {
+        pub expiry: Option<String>,
+        pub limit: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -2097,7 +2114,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamRepositoryTemplate_repository {
+    pub struct TeamRepositoryTemplateRepository {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -2265,7 +2282,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FullRepositoryTemplate_repository {
+    pub struct FullRepositoryTemplateRepository {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -2424,6 +2441,9 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsRepositoryPermissions {
+        pub allowed_actions: String,
+        pub enabled: bool,
+        pub selected_actions_url: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -2572,6 +2592,8 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Reviewers {
         pub reviewer: Option<Reviewer>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -2993,7 +3015,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct BranchWithProtection_Links {
+    pub struct BranchWithProtectionLinks {
         pub html: String,
         #[serde(rename = "self")]
         pub self_: String,
@@ -3020,7 +3042,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchRequired_pull_request_reviewsRequiredPullRequestReviewsDismissal_restrictions {
+    pub struct ProtectedBranchRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
         pub teams: Vec<Team>,
         pub teams_url: String,
         pub url: String,
@@ -3044,17 +3066,17 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchRequired_linear_history {
+    pub struct ProtectedBranchRequiredLinearHistory {
         pub enabled: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchAllow_force_pushes {
+    pub struct ProtectedBranchAllowForcePushes {
         pub enabled: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchAllow_deletions {
+    pub struct ProtectedBranchAllowDeletions {
         pub enabled: bool,
     }
 
@@ -3229,6 +3251,9 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAnalysisTool {
+        pub guid: Option<String>,
+        pub name: Option<String>,
+        pub version: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3247,18 +3272,30 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertInstance {
+        pub analysis_key: Option<String>,
+        pub classifications: Option<Vec<String>>,
         pub commit_sha: Option<String>,
+        pub environment: Option<String>,
         pub html_url: Option<String>,
         pub location: Option<CodeScanningAlertLocation>,
         pub message: Option<Message>,
+        #[serde(rename = "ref")]
+        pub ref_: Option<String>,
+        pub state: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertItems {
+        pub created_at: DateTime<Utc>,
+        pub dismissed_at: DateTime<Utc>,
         pub dismissed_by: SimpleUser,
+        pub html_url: String,
+        pub instances_url: String,
         pub most_recent_instance: CodeScanningAlertInstance,
         pub rule: CodeScanningAlertRuleSummary,
+        pub state: String,
         pub tool: CodeScanningAnalysisTool,
+        pub url: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3275,22 +3312,37 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlert {
+        pub created_at: DateTime<Utc>,
+        pub dismissed_at: DateTime<Utc>,
         pub dismissed_by: SimpleUser,
+        pub html_url: String,
         pub instances: Option<serde_json::Value>,
+        pub instances_url: String,
         pub most_recent_instance: CodeScanningAlertInstance,
         pub rule: CodeScanningAlertRule,
+        pub state: String,
         pub tool: CodeScanningAnalysisTool,
+        pub url: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAnalysis {
+        pub analysis_key: String,
+        pub category: Option<String>,
+        pub commit_sha: String,
+        pub created_at: DateTime<Utc>,
         pub deletable: bool,
+        pub environment: String,
         pub error: String,
         pub id: i64,
+        #[serde(rename = "ref")]
+        pub ref_: String,
         pub results_count: i64,
         pub rules_count: i64,
+        pub sarif_id: String,
         pub tool: CodeScanningAnalysisTool,
         pub tool_name: Option<String>,
+        pub url: String,
         pub warning: String,
     }
 
@@ -3312,6 +3364,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningSarifsReceipt {
+        pub id: Option<String>,
         pub url: Option<String>,
     }
 
@@ -3422,6 +3475,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitComment {
+        pub author_association: String,
         pub body: String,
         pub commit_id: String,
         pub created_at: DateTime<Utc>,
@@ -3489,7 +3543,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestSimple_Links {
+    pub struct PullRequestSimpleLinks {
         pub comments: Link,
         pub commits: Link,
         pub html: Link,
@@ -3507,6 +3561,7 @@ pub mod types {
         pub active_lock_reason: Option<String>,
         pub assignee: Assignee,
         pub assignees: Option<Vec<SimpleUser>>,
+        pub author_association: String,
         pub auto_merge: AutoMerge,
         pub base: Base,
         pub body: String,
@@ -3588,7 +3643,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommunityProfileFilesFilesCode_of_conduct {
+    pub struct CommunityProfileFilesFilesCodeofConduct {
         pub html_url: String,
         pub key: String,
         pub name: String,
@@ -3687,7 +3742,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentTreeEntriesEntries_Links {
+    pub struct ContentTreeEntriesEntriesLinks {
         pub git: String,
         pub html: String,
         #[serde(rename = "self")]
@@ -3711,7 +3766,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentTree_Links {
+    pub struct ContentTreeLinks {
         pub git: String,
         pub html: String,
         #[serde(rename = "self")]
@@ -3735,7 +3790,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentDirectory_Links {
+    pub struct ContentDirectoryLinks {
         pub git: String,
         pub html: String,
         #[serde(rename = "self")]
@@ -3759,7 +3814,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentFile_Links {
+    pub struct ContentFileLinks {
         pub git: String,
         pub html: String,
         #[serde(rename = "self")]
@@ -3786,7 +3841,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentSymlink_Links {
+    pub struct ContentSymlinkLinks {
         pub git: String,
         pub html: String,
         #[serde(rename = "self")]
@@ -3810,7 +3865,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentSubmodule_Links {
+    pub struct ContentSubmoduleLinks {
         pub git: String,
         pub html: String,
         #[serde(rename = "self")]
@@ -3834,7 +3889,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitContentContent_Links {
+    pub struct FileCommitContentContentLinks {
         pub git: Option<String>,
         pub html: Option<String>,
         #[serde(rename = "self")]
@@ -4107,13 +4162,16 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct HookConfig {
+        pub content_type: Option<String>,
         pub digest: Option<String>,
         pub email: Option<String>,
-        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub insecure_ssl: Option<String>,
         pub password: Option<String>,
         pub room: Option<String>,
+        pub secret: Option<String>,
         pub subdomain: Option<String>,
         pub token: Option<String>,
+        pub url: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -4330,6 +4388,7 @@ pub mod types {
         pub actor: Actor,
         pub assignee: Option<Assignee>,
         pub assigner: Option<Assigner>,
+        pub author_association: Option<String>,
         pub commit_id: String,
         pub commit_url: String,
         pub created_at: DateTime<Utc>,
@@ -4547,7 +4606,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddedtoProjectIssueEventProject_card {
+    pub struct AddedtoProjectIssueEventProjectCard {
         pub column_name: String,
         pub id: i64,
         pub previous_column_name: Option<String>,
@@ -4571,7 +4630,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MovedColumninProjectIssueEventProject_card {
+    pub struct MovedColumninProjectIssueEventProjectCard {
         pub column_name: String,
         pub id: i64,
         pub previous_column_name: Option<String>,
@@ -4595,7 +4654,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemovedFromProjectIssueEventProject_card {
+    pub struct RemovedFromProjectIssueEventProjectCard {
         pub column_name: String,
         pub id: i64,
         pub previous_column_name: Option<String>,
@@ -4619,7 +4678,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ConvertedNotetoIssueIssueEventProject_card {
+    pub struct ConvertedNotetoIssueIssueEventProjectCard {
         pub column_name: String,
         pub id: i64,
         pub previous_column_name: Option<String>,
@@ -4659,6 +4718,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommentEvent {
         pub actor: SimpleUser,
+        pub author_association: String,
         pub body: Option<String>,
         pub body_html: Option<String>,
         pub body_text: Option<String>,
@@ -4733,12 +4793,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineReviewedEvent_LinksLinksPull_request {
+    pub struct TimelineReviewedEventLinksLinksPullRequest {
         pub href: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineReviewedEvent_Links {
+    pub struct TimelineReviewedEventLinks {
         pub html: Html,
         pub pull_request: PullRequest,
     }
@@ -4746,6 +4806,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineReviewedEvent {
         pub _links: Links,
+        pub author_association: String,
         pub body: String,
         pub body_html: Option<String>,
         pub body_text: Option<String>,
@@ -4766,12 +4827,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewComment_LinksLinksPull_request {
+    pub struct PullRequestReviewCommentLinksLinksPullRequest {
         pub href: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewComment_Links {
+    pub struct PullRequestReviewCommentLinks {
         pub html: Html,
         pub pull_request: PullRequest,
         #[serde(rename = "self")]
@@ -4781,6 +4842,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewComment {
         pub _links: Links,
+        pub author_association: String,
         pub body: String,
         pub body_html: Option<String>,
         pub body_text: Option<String>,
@@ -4872,7 +4934,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct LicenseContent_Links {
+    pub struct LicenseContentLinks {
         pub git: String,
         pub html: String,
         #[serde(rename = "self")]
@@ -5358,7 +5420,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequest_Links {
+    pub struct PullRequestLinks {
         pub comments: Link,
         pub commits: Link,
         pub html: Link,
@@ -5403,6 +5465,7 @@ pub mod types {
         pub additions: i64,
         pub assignee: Assignee,
         pub assignees: Option<Vec<SimpleUser>>,
+        pub author_association: String,
         pub auto_merge: AutoMerge,
         pub base: Base,
         pub body: String,
@@ -5461,12 +5524,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReview_LinksLinksPull_request {
+    pub struct PullRequestReviewLinksLinksPullRequest {
         pub href: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReview_Links {
+    pub struct PullRequestReviewLinks {
         pub html: Html,
         pub pull_request: PullRequest,
     }
@@ -5474,6 +5537,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReview {
         pub _links: Links,
+        pub author_association: String,
         pub body: String,
         pub body_html: Option<String>,
         pub body_text: Option<String>,
@@ -5488,7 +5552,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReviewComment_Links {
+    pub struct ReviewCommentLinks {
         pub html: Link,
         pub pull_request: Link,
         #[serde(rename = "self")]
@@ -5498,6 +5562,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewComment {
         pub _links: Links,
+        pub author_association: String,
         pub body: String,
         pub body_html: Option<String>,
         pub body_text: Option<String>,
@@ -5597,10 +5662,14 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SecretScanningAlert {
+        pub created_at: Option<DateTime<Utc>>,
+        pub html_url: Option<String>,
         pub resolved_at: Option<DateTime<Utc>>,
         pub resolved_by: Option<SimpleUser>,
         pub secret: Option<String>,
         pub secret_type: Option<String>,
+        pub state: Option<String>,
+        pub url: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5699,7 +5768,8 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Members {
-        pub $ref: Option<String>,
+        #[serde(rename = "$ref")]
+        pub ref_: Option<String>,
         pub display: Option<String>,
         pub value: Option<String>,
     }
@@ -5825,7 +5895,7 @@ pub mod types {
     pub struct Operations {
         pub op: String,
         pub path: Option<String>,
-        pub value: Option<value>,
+        pub value: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5956,6 +6026,7 @@ pub mod types {
         pub active_lock_reason: Option<String>,
         pub assignee: Assignee,
         pub assignees: Option<Vec<SimpleUser>>,
+        pub author_association: String,
         pub body: Option<String>,
         pub body_html: Option<String>,
         pub body_text: Option<String>,
@@ -6388,7 +6459,10 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateWebhookConfigurationAppRequest {
-        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub content_type: Option<String>,
+        pub insecure_ssl: Option<String>,
+        pub secret: Option<String>,
+        pub url: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6489,6 +6563,8 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetGithubActionsPermissionsEnterpriseRequest {
+        pub allowed_actions: Option<String>,
+        pub enabled_organizations: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6554,7 +6630,7 @@ pub mod types {
     pub struct PostCreateGistRequest {
         pub description: Option<String>,
         pub files: Files,
-        pub public: Option<public>,
+        pub public: Option<bool>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6639,6 +6715,8 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetGithubActionsPermissionsOrganizationRequest {
+        pub allowed_actions: Option<String>,
+        pub enabled_repositories: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6727,8 +6805,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateOrganizationWebhookRequestConfig {
-        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub content_type: Option<String>,
+        pub insecure_ssl: Option<String>,
         pub password: Option<String>,
+        pub secret: Option<String>,
+        pub url: String,
         pub username: Option<String>,
     }
 
@@ -6742,7 +6823,10 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateOrganizationWebhookRequestConfig {
-        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub content_type: Option<String>,
+        pub insecure_ssl: Option<String>,
+        pub secret: Option<String>,
+        pub url: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6755,7 +6839,10 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateWebhookConfigurationOrganizationRequest {
-        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub content_type: Option<String>,
+        pub insecure_ssl: Option<String>,
+        pub secret: Option<String>,
+        pub url: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6767,6 +6854,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetInteractionRestrictionsOrganizationOkResponse {
         pub expires_at: DateTime<Utc>,
+        pub limit: String,
         pub origin: String,
     }
 
@@ -7073,6 +7161,8 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutSetGithubActionsPermissionsRepositoryRequest {
+        pub allowed_actions: Option<String>,
+        pub enabled: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -7154,19 +7244,19 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateBranchProtectionRequestRequired_status_checks {
+    pub struct PutUpdateBranchProtectionRequestRequiredStatusChecks {
         pub contexts: Vec<String>,
         pub strict: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateBranchProtectionRequestRequired_pull_request_reviewsRequiredPullRequestReviewsDismissal_restrictions {
+    pub struct PutUpdateBranchProtectionRequestRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
         pub teams: Option<Vec<String>>,
         pub users: Option<Vec<String>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdateBranchProtectionRequestRequired_pull_request_reviews {
+    pub struct PutUpdateBranchProtectionRequestRequiredPullRequestReviews {
         pub dismiss_stale_reviews: Option<bool>,
         pub dismissal_restrictions: Option<DismissalRestrictions>,
         pub require_code_owner_reviews: Option<bool>,
@@ -7193,7 +7283,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdatePullRequestReviewProtectionRequestDismissal_restrictions {
+    pub struct PatchUpdatePullRequestReviewProtectionRequestDismissalRestrictions {
         pub teams: Option<Vec<String>>,
         pub users: Option<Vec<String>>,
     }
@@ -7371,11 +7461,16 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateCodeScanningAlertRequest {
+        pub state: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostUploadAnalysisasSarifDataRequest {
         pub checkout_uri: Option<String>,
+        pub commit_sha: String,
+        #[serde(rename = "ref")]
+        pub ref_: String,
+        pub sarif: String,
         pub started_at: Option<DateTime<Utc>>,
         pub tool_name: Option<String>,
     }
@@ -7532,6 +7627,8 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutCreateUpdateEnvironmentRequestReviewers {
         pub id: Option<i64>,
+        #[serde(rename = "type")]
+        pub type_: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -7624,9 +7721,12 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateRepositoryWebhookRequestConfig {
+        pub content_type: Option<String>,
         pub digest: Option<String>,
-        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub insecure_ssl: Option<String>,
+        pub secret: Option<String>,
         pub token: Option<String>,
+        pub url: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -7640,8 +7740,11 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateRepositoryWebhookRequestConfig {
         pub address: Option<String>,
-        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub content_type: Option<String>,
+        pub insecure_ssl: Option<String>,
         pub room: Option<String>,
+        pub secret: Option<String>,
+        pub url: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -7655,7 +7758,10 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateWebhookConfigurationRepositoryRequest {
-        pub insecure_ssl: Option<webhook config insecure ssl>,
+        pub content_type: Option<String>,
+        pub insecure_ssl: Option<String>,
+        pub secret: Option<String>,
+        pub url: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -7689,6 +7795,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetInteractionRestrictionsRepositoryOkResponse {
         pub expires_at: DateTime<Utc>,
+        pub limit: String,
         pub origin: String,
     }
 
@@ -7704,7 +7811,7 @@ pub mod types {
         pub body: Option<String>,
         pub labels: Option<Vec<Labels>>,
         pub milestone: Option<Milestone>,
-        pub title: title,
+        pub title: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -7725,7 +7832,7 @@ pub mod types {
         pub labels: Option<Vec<Labels>>,
         pub milestone: Option<Milestone>,
         pub state: Option<String>,
-        pub title: Option<title>,
+        pub title: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8006,6 +8113,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PatchUpdateSecretScanningAlertRequest {
+        pub state: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8082,7 +8190,7 @@ pub mod types {
     pub struct Operations {
         pub op: String,
         pub path: Option<String>,
-        pub value: Option<value>,
+        pub value: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8449,6 +8557,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetGetInteractionRestrictionsPublicRepositoriesOkResponse {
         pub expires_at: DateTime<Utc>,
+        pub limit: String,
         pub origin: String,
     }
 
@@ -17550,7 +17659,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.get(url)
@@ -17580,7 +17689,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.get(url)
@@ -17608,7 +17717,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.get(url)
@@ -17634,7 +17743,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.get(url)
@@ -17660,7 +17769,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.get(url)
@@ -18351,7 +18460,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.get(url)
@@ -18375,7 +18484,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.get(url)
@@ -18423,7 +18532,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.delete(url)
@@ -18448,7 +18557,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.patch(url)
@@ -22144,7 +22253,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.get(url)
@@ -22420,7 +22529,7 @@ impl Client {
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            progenitor_support::encode_path(&ref.to_string()),
+            progenitor_support::encode_path(&ref_.to_string()),
         );
 
         let res = self.client.get(url)
