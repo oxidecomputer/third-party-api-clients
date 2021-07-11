@@ -85,7 +85,7 @@
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
 //!
-//! let app_installation_id_str = env::var("GH_APP_INSTALLATION_ID").unwrap();
+//! let app_installation_id_str = env::var("GH_INSTALLATION_ID").unwrap();
 //! let app_installation_id = app_installation_id_str.parse::<u64>().unwrap();
 //!
 //! let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
@@ -25072,7 +25072,7 @@ impl Client {
                 agent,
                 credentials,
                 http,
-                crate::http_cache::HttpCache::noop(),
+                <dyn crate::http_cache::HttpCache>::noop(),
             ))
         }
         #[cfg(not(feature = "httpcache"))]
@@ -25282,7 +25282,7 @@ impl Client {
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {
-                    let next_link = link.as_ref().and_then(|l| crate::utils::next_link(&l));
+                    let next_link = link.as_ref().and_then(|l| crate::utils::next_link(l));
                     if let Err(e) = instance2.http_cache.cache_response(
                         &uri3,
                         &response_body,
@@ -30776,7 +30776,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     pub async fn repos_list_for_org(
         &self,
         org: &str,
-        type_: &&str,
+        type_: &str,
         sort: &str,
         direction: &str,
         per_page: i64,
@@ -35330,7 +35330,7 @@ check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", p
         tool_guid: &str,
         page: i64,
         per_page: i64,
-        ref_: &&str,
+        ref_: &str,
         state: &str,
     ) -> Result<Vec<types::CodeScanningAlertItems>> {
         let url = format!("/repos/{}/{}/code-scanning/alerts?page={}&per_page={}&ref={}&state={}&tool_guid={}&tool_name={}",
@@ -35415,7 +35415,7 @@ format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid
         alert_number: &str,
         page: i64,
         per_page: i64,
-        ref_: &&str,
+        ref_: &str,
     ) -> Result<Vec<types::CodeScanningAlertInstance>> {
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts/{}/instances?page={}&per_page={}&ref={}",
@@ -35462,7 +35462,7 @@ format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid
         tool_guid: &str,
         page: i64,
         per_page: i64,
-        ref_: &&str,
+        ref_: &str,
         sarif_id: &str,
     ) -> Result<Vec<types::CodeScanningAnalysis>> {
         let url = format!("/repos/{}/{}/code-scanning/analyses?page={}&per_page={}&ref={}&sarif_id={}&tool_guid={}&tool_name={}",
@@ -36610,7 +36610,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
         owner: &str,
         repo: &str,
         path: &str,
-        ref_: &&str,
+        ref_: &str,
     ) -> Result<types::GetRepositoryContentOkResponse> {
         let url = format!(
             "/repos/{}/{}/contents/{}?ref={}",
@@ -36734,7 +36734,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
         owner: &str,
         repo: &str,
         sha: &str,
-        ref_: &&str,
+        ref_: &str,
         task: &str,
         environment: &str,
         per_page: i64,
@@ -40938,7 +40938,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
         &self,
         owner: &str,
         repo: &str,
-        ref_: &&str,
+        ref_: &str,
     ) -> Result<types::ContentFile> {
         let url = format!(
             "/repos/{}/{}/readme?ref={}",
@@ -40966,7 +40966,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
         owner: &str,
         repo: &str,
         dir: &str,
-        ref_: &&str,
+        ref_: &str,
     ) -> Result<types::ContentFile> {
         let url = format!(
             "/repos/{}/{}/readme/{}?ref={}",
@@ -45413,7 +45413,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
         &self,
         visibility: &str,
         affiliation: &str,
-        type_: &&str,
+        type_: &str,
         sort: &str,
         direction: &str,
         per_page: i64,
@@ -46184,7 +46184,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     pub async fn repos_list_for_user(
         &self,
         username: &str,
-        type_: &&str,
+        type_: &str,
         sort: &str,
         direction: &str,
         per_page: i64,

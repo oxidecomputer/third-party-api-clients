@@ -1108,7 +1108,7 @@ fn gen(
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
 //!
-//! let app_installation_id_str = env::var("GH_APP_INSTALLATION_ID").unwrap();
+//! let app_installation_id_str = env::var("GH_INSTALLATION_ID").unwrap();
 //! let app_installation_id = app_installation_id_str.parse::<u64>().unwrap();
 //!
 //! let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
@@ -1316,7 +1316,7 @@ fn gen(
                 agent,
                 credentials,
                 http,
-                crate::http_cache::HttpCache::noop(),
+                <dyn crate::http_cache::HttpCache>::noop(),
             ))
         }
         #[cfg(not(feature = "httpcache"))]
@@ -1511,7 +1511,7 @@ fn gen(
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {
-                    let next_link = link.as_ref().and_then(|l| crate::utils::next_link(&l));
+                    let next_link = link.as_ref().and_then(|l| crate::utils::next_link(l));
                     if let Err(e) = instance2.http_cache.cache_response(
                         &uri3,
                         &response_body,
@@ -1864,10 +1864,6 @@ fn gen(
                         parameter_data,
                         style: openapiv3::PathStyle::Simple,
                     } => {
-                        /*
-                         * XXX Parameter types should probably go through
-                         * the type space...
-                         */
                         let nam = &to_snake_case(&parameter_data.name);
                         let typ = parameter_data.render_type()?;
                         if nam == "ref" || nam == "type" {
@@ -1888,14 +1884,10 @@ fn gen(
                             }
                         }
 
-                        /*
-                         * XXX Parameter types should probably go through
-                         * the type space...
-                         */
                         let nam = &to_snake_case(&parameter_data.name);
                         let typ = parameter_data.render_type()?;
                         if nam == "ref" || nam == "type" {
-                            a(&format!("        {}_: &{},", nam, typ));
+                            a(&format!("        {}_: {},", nam, typ));
                             query_params_str.push(format!(r#"("{}", {}_.to_string())"#, nam, nam));
                             query_params.insert(nam.to_string(), format!("{}_", nam));
                         } else {

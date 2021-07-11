@@ -81,7 +81,7 @@ impl HttpCache for FileBasedCache {
         etag: &[u8],
         next_link: &Option<String>,
     ) -> Result<()> {
-        let mut path = cache_path(&self.root, &uri, "json");
+        let mut path = cache_path(&self.root, uri, "json");
         println!("caching body at path: {}", path.display());
         if let Some(parent) = path.parent() {
             fs::create_dir_all(parent)?;
