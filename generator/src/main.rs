@@ -2431,7 +2431,7 @@ fn main() -> Result<()> {
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();
 
-    let fail = match gen(&api, &mut ts, parameters, &name, &version) {
+    let fail = match gen(&api, &mut ts, parameters, &name.replace("-", "_"), &version) {
         Ok(out) => {
             let description = args.opt_str("d").unwrap();
 
