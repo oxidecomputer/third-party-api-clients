@@ -143,6 +143,7 @@ pub mod http_cache;
 pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
+use async_recursion::async_recursion;
 use chrono::{DateTime, Utc};
 
 const DEFAULT_HOST: &str = "https://api.github.com";
@@ -25246,8 +25247,8 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
-        println!("Body: {:?}", &body);
         if let Some(body) = body {
+            println!("Body: {:?}", &body);
             req = req.body(body);
         }
         println!("Request: {:?}", &req);
@@ -25327,6 +25328,10 @@ impl Client {
                 unreachable!("this should not be reachable without the httpcache feature enabled")
             }
         } else {
+            println!(
+                "error response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let error = match (remaining, reset) {
                 (Some(remaining), Some(reset)) if remaining == 0 => {
                     let now = std::time::SystemTime::now()
@@ -25727,6 +25732,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/apps/#create-an-installation-access-token-for-an-app>
     */
+    #[async_recursion]
     pub async fn apps_create_installation_access_token(
         &self,
         installation_id: i64,
@@ -25737,15 +25743,13 @@ impl Client {
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post_media(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            crate::utils::MediaType::Preview("machine-man"),
+            crate::auth::AuthenticationConstraint::JWT,
+        )
+        .await
     }
 
     /**

@@ -1169,6 +1169,7 @@ fn gen(
     a("");
 
     a("use anyhow::{anyhow, Error, Result};");
+    a("use async_recursion::async_recursion;");
     a("use chrono::{DateTime, Utc};");
     a("");
 
@@ -1476,8 +1477,8 @@ fn gen(
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
-        println!("Body: {:?}", &body);
         if let Some(body) = body {
+            println!("Body: {:?}", &body);
             req = req.body(body);
         }
         println!("Request: {:?}", &req);
@@ -1547,6 +1548,9 @@ fn gen(
                     unreachable!("this should not be reachable without the httpcache feature enabled")
                 }
         } else {
+            println!("error response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let error = match (remaining, reset) {
                 (Some(remaining), Some(reset)) if remaining == 0 => {
                     let now = std::time::SystemTime::now()
@@ -1835,6 +1839,10 @@ fn gen(
                 (None, None)
             };
 
+            if oid == "apps_create_installation_access_token" {
+                a("#[async_recursion]");
+            }
+
             if bounds.is_empty() {
                 a(&format!("    pub async fn {}(", oid));
             } else {
@@ -1931,7 +1939,7 @@ fn gen(
             }
 
             // Only do the first.
-            let (response_type, is_vector) = if let Some(only) = o.responses.responses.first() {
+            let is_vector = if let Some(only) = o.responses.responses.first() {
                 match only.0 {
                     openapiv3::StatusCode::Code(n) => {
                         // 302 is the code returned from /orgs/{org}/migrations/{migration_id}/archive GET
@@ -1960,7 +1968,7 @@ fn gen(
                  */
                 if i.content.is_empty() {
                     a("    ) -> Result<()> {");
-                    ("()".to_string(), false)
+                    false
                 } else {
                     match i.content.get("application/json") {
                         Some(mt) => {
@@ -1996,7 +2004,7 @@ fn gen(
                                 if let Ok(rt) = ts.render_type(&tid, false) {
                                     a(&format!("    ) -> Result<{}> {{", rt));
 
-                                    ("json".to_string(), rt.starts_with("Vec<"))
+                                    rt.starts_with("Vec<")
                                 } else {
                                     bail!("rendering type {:?}: {:?} failed", tid, s);
                                 }
@@ -2016,8 +2024,7 @@ fn gen(
                                     let rt = ts.render_type(&tid, false)?;
 
                                     a(&format!("    ) -> Result<{}> {{", rt));
-
-                                    (rt.clone(), rt.starts_with("Vec<"))
+                                    rt.starts_with("Vec<")
                                 } else {
                                     bail!("media type encoding, no schema: {:#?}", mt);
                                 }
@@ -2062,7 +2069,7 @@ fn gen(
                                     if let Ok(rt) = ts.render_type(&tid, false) {
                                         a(&format!("    ) -> Result<{}> {{", rt));
 
-                                        ("json".to_string(), rt.starts_with("Vec<"))
+                                        rt.starts_with("Vec<")
                                     } else {
                                         bail!("rendering type {:?} failed", tid);
                                     }
@@ -2115,29 +2122,12 @@ fn gen(
                     panic!("function {} should be authenticated", oid);
                 }
 
-                a(&format!("let res = self.client.{}(url)", m.to_lowercase()));
-                if !query_params_str.is_empty() {
-                    a(&format!(".query(&[{}])", query_params_str.join(", ")));
-                }
-                if let Some(f) = &body_func {
-                    a(&format!(".{}(body)", f));
-                }
-                a(".send()");
-                a(".await?");
-                a(".error_for_status()?;"); /* XXX */
-
-                a("");
-
-                if response_type == "json" {
-                    a("Ok(res.json().await?)");
-                } else if response_type == "()" {
-                    a("let _ = res.text().await?;");
-                    a("Ok(())");
-                } else if response_type == "String" {
-                    a("Ok(res.text().await?)");
-                } else {
-                    panic!("response type: {}", response_type);
-                }
+                a(r#"self.post_media(
+                        &url,
+                        Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+                        crate::utils::MediaType::Preview("machine-man"),
+                        crate::auth::AuthenticationConstraint::JWT,
+                    ).await"#);
             }
             a("}");
             a("");
@@ -2437,6 +2427,7 @@ edition = "2018"
 
 [dependencies]
 anyhow = "1"
+async-recursion = "^0.3.2"
 chrono = {{ version = "0.4", features = ["serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}
 http = "^0.2.4"
