@@ -165,11 +165,11 @@ where
 }
 
 trait ParameterDataExt {
-    fn render_type(&self) -> Result<String>;
+    fn render_type(&self, name: &str) -> Result<String>;
 }
 
 impl ParameterDataExt for openapiv3::ParameterData {
-    fn render_type(&self) -> Result<String> {
+    fn render_type(&self, name: &str) -> Result<String> {
         use openapiv3::{SchemaKind, Type};
 
         Ok(match &self.format {
@@ -192,10 +192,25 @@ impl ParameterDataExt for openapiv3::ParameterData {
                             if st.pattern.is_some() {
                                 bail!("XXX pattern");
                             }
+
                             if !st.enumeration.is_empty() {
-                                // TODO: figure out enums
-                                //println!("XXX enumeration {}: {:?}", self.name, st);
+                                if name.is_empty() {
+                                    // TODO: fix this.
+                                    println!("parameter that enumerates should have a pre-defined type: {:?}", st);
+                                } else {
+                                    // We have an enum.
+                                    // Let's return the correct enum struct name.
+                                    let mut sn = struct_name(name);
+                                    // TODO: have a more automated way of making sure there aren't
+                                    // duplicates of enums.
+                                    if sn == "Status" {
+                                        sn = format!("{}Param", sn);
+                                    }
+
+                                    return Ok(format!("crate::types::{}", sn));
+                                }
                             }
+
                             if st.min_length.is_some() || st.max_length.is_some() {
                                 bail!("XXX min/max length");
                             }
@@ -1031,9 +1046,10 @@ fn gen(
 //!
 //! To install the library, add the following to your `Cargo.toml` file.
 //!
+//! ```toml
 //! [dependencies]
 //! {} = "{}"
-//!
+//! ```
 //!
 //! ## Basic example
 //!
@@ -1256,7 +1272,7 @@ fn gen(
                             }
 
                             a("#[derive(Serialize, Deserialize, Debug, Clone)]");
-                            a(r#"#[serde(rename_all = "lowercase")]"#);
+                            a(r#"#[serde(rename_all = "snake_case")]"#);
                             a(&format!("pub enum {} {{", sn));
                             for e in &st.enumeration {
                                 if struct_name(e).is_empty() {
@@ -1296,7 +1312,7 @@ fn gen(
                             }
 
                             a("#[derive(Serialize, Deserialize, Debug, Clone)]");
-                            a(r#"#[serde(rename_all = "lowercase")]"#);
+                            a(r#"#[serde(rename_all = "snake_case")]"#);
                             a(&format!("pub enum {} {{", sn));
                             for e in &st.enumeration {
                                 if struct_name(e).is_empty() {
@@ -1962,12 +1978,12 @@ fn gen(
             let mut query_params_str: Vec<String> = Default::default();
             let mut query_params: BTreeMap<String, String> = Default::default();
             for par in o.parameters.iter() {
+                let mut param_name = "".to_string();
                 let item = match par {
                     openapiv3::ReferenceOr::Reference { reference } => {
+                        param_name = reference.replace("#/components/parameters/", "");
                         // Get the parameter from our BTreeMap.
-                        if let Some(param) =
-                            parameters.get(&reference.replace("#/components/parameters/", ""))
-                        {
+                        if let Some(param) = parameters.get(&param_name) {
                             param
                         } else {
                             bail!("could not find parameter with reference: {}", reference);
@@ -1982,7 +1998,7 @@ fn gen(
                         style: openapiv3::PathStyle::Simple,
                     } => {
                         let nam = &to_snake_case(&parameter_data.name);
-                        let typ = parameter_data.render_type()?;
+                        let typ = parameter_data.render_type(&param_name)?;
                         if nam == "ref" || nam == "type" {
                             a(&format!("        {}_: {},", nam, typ));
                         } else {
@@ -2002,7 +2018,7 @@ fn gen(
                         }
 
                         let nam = &to_snake_case(&parameter_data.name);
-                        let typ = parameter_data.render_type()?;
+                        let typ = parameter_data.render_type(&param_name)?;
                         if nam == "ref" || nam == "type" {
                             a(&format!("        {}_: {},", nam, typ));
                             query_params_str.push(format!(r#"("{}", {}_.to_string())"#, nam, nam));

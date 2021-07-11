@@ -7,9 +7,10 @@
 //!
 //! To install the library, add the following to your `Cargo.toml` file.
 //!
+//! ```toml
 //! [dependencies]
 //! github_api_client = "0.1.0"
-//!
+//! ```
 //!
 //! ## Basic example
 //!
@@ -190,7 +191,7 @@ pub mod types {
     ///
     /// The default is `web`.
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "lowercase")]
+    #[serde(rename_all = "snake_case")]
     pub enum AuditLogInclude {
         Web,
         Git,
@@ -201,7 +202,7 @@ pub mod types {
     ///
     /// The default is `desc`.
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "lowercase")]
+    #[serde(rename_all = "snake_case")]
     pub enum AuditLogOrder {
         Desc,
         Asc,
@@ -209,7 +210,7 @@ pub mod types {
 
     /// One of `asc` (ascending) or `desc` (descending).
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "lowercase")]
+    #[serde(rename_all = "snake_case")]
     pub enum Direction {
         Asc,
         Desc,
@@ -217,7 +218,7 @@ pub mod types {
 
     /// Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "lowercase")]
+    #[serde(rename_all = "snake_case")]
     pub enum Order {
         Desc,
         Asc,
@@ -225,7 +226,7 @@ pub mod types {
 
     /// The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "lowercase")]
+    #[serde(rename_all = "snake_case")]
     pub enum PackageType {
         Npm,
         Maven,
@@ -237,7 +238,7 @@ pub mod types {
 
     /// Must be one of: `day`, `week`.
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "lowercase")]
+    #[serde(rename_all = "snake_case")]
     pub enum Per {
         Day,
         Week,
@@ -245,7 +246,7 @@ pub mod types {
 
     /// One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "lowercase")]
+    #[serde(rename_all = "snake_case")]
     pub enum Sort {
         Created,
         Updated,
@@ -253,7 +254,7 @@ pub mod types {
 
     /// Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "lowercase")]
+    #[serde(rename_all = "snake_case")]
     pub enum StatusParam {
         Queued,
         InProgress,
@@ -262,7 +263,7 @@ pub mod types {
 
     /// Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
     #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "lowercase")]
+    #[serde(rename_all = "snake_case")]
     pub enum WorkflowRunStatus {
         Completed,
         ActionRequired,
@@ -28214,16 +28215,16 @@ impl Client {
         &self,
         enterprise: &str,
         phrase: &str,
-        include: &str,
+        include: crate::types::AuditLogInclude,
         after: &str,
         before: &str,
-        order: &str,
+        order: crate::types::AuditLogOrder,
         page: i64,
         per_page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
         let url = format!("/enterprises/{}/audit-log?after={}&before={}&include={}&order={}&page={}&per_page={}&phrase={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-after.to_string(), before.to_string(), include.to_string(), order.to_string(), format!("{}", page), format!("{}", per_page), phrase.to_string(),         );
+after.to_string(), before.to_string(), include, order, format!("{}", page), format!("{}", per_page), phrase.to_string(),         );
 
         self.get_all_pages(&url).await
     }
@@ -28870,7 +28871,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
         state: &str,
         labels: &str,
         sort: &str,
-        direction: &str,
+        direction: crate::types::Direction,
         since: DateTime<Utc>,
         collab: bool,
         orgs: bool,
@@ -28880,7 +28881,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
         page: i64,
     ) -> Result<Vec<types::Issue>> {
         let url = format!("/issues?collab={}&direction={}&filter={}&labels={}&orgs={}&owned={}&page={}&per_page={}&pulls={}&since={}&sort={}&state={}",
-format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", orgs), format!("{}", owned), format!("{}", page), format!("{}", per_page), format!("{}", pulls), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
+format!("{}", collab), direction, filter.to_string(), labels.to_string(), format!("{}", orgs), format!("{}", owned), format!("{}", page), format!("{}", per_page), format!("{}", pulls), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
         self.get_all_pages(&url).await
     }
@@ -29025,7 +29026,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     pub async fn apps_list_accounts_for_plan(
         &self,
         plan_id: i64,
-        sort: &str,
+        sort: crate::types::Sort,
         direction: &str,
         per_page: i64,
         page: i64,
@@ -29036,7 +29037,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
             direction.to_string(),
             format!("{}", page),
             format!("{}", per_page),
-            sort.to_string(),
+            sort,
         );
 
         self.get_all_pages(&url).await
@@ -29104,14 +29105,14 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     pub async fn apps_list_accounts_for_plan_stubbed(
         &self,
         plan_id: i64,
-        sort: &str,
+        sort: crate::types::Sort,
         direction: &str,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
         let url = format!("/marketplace_listing/stubbed/plans/{}/accounts?direction={}&page={}&per_page={}&sort={}",
             progenitor_support::encode_path(&plan_id.to_string()),
-direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_string(),         );
+direction.to_string(), format!("{}", page), format!("{}", per_page), sort,         );
 
         self.get_all_pages(&url).await
     }
@@ -30484,16 +30485,16 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
         &self,
         org: &str,
         phrase: &str,
-        include: &str,
+        include: crate::types::AuditLogInclude,
         after: &str,
         before: &str,
-        order: &str,
+        order: crate::types::AuditLogOrder,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
         let url = format!("/orgs/{}/audit-log?after={}&before={}&include={}&order={}&page={}&per_page={}&phrase={}",
             progenitor_support::encode_path(&org.to_string()),
-after.to_string(), before.to_string(), include.to_string(), order.to_string(), format!("{}", page), format!("{}", per_page), phrase.to_string(),         );
+after.to_string(), before.to_string(), include, order, format!("{}", page), format!("{}", per_page), phrase.to_string(),         );
 
         self.get_all_pages(&url).await
     }
@@ -31094,14 +31095,14 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
         state: &str,
         labels: &str,
         sort: &str,
-        direction: &str,
+        direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
         let url = format!("/orgs/{}/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&state={}",
             progenitor_support::encode_path(&org.to_string()),
-direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
+direction, filter.to_string(), labels.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
         self.get_all_pages(&url).await
     }
@@ -31519,7 +31520,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_get_package_for_organization(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         org: &str,
     ) -> Result<types::Package> {
@@ -31548,7 +31549,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_delete_package_for_org(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         org: &str,
     ) -> Result<()> {
@@ -31581,7 +31582,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_restore_package_for_org(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         org: &str,
         token: &str,
@@ -31611,7 +31612,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_get_all_package_versions_for_package_owned_by_org(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         org: &str,
         page: i64,
@@ -31645,7 +31646,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_get_package_version_for_organization(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         org: &str,
         package_version_id: i64,
@@ -31676,7 +31677,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_delete_package_version_for_org(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         org: &str,
         package_version_id: i64,
@@ -31711,7 +31712,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_restore_package_version_for_org(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         org: &str,
         package_version_id: i64,
@@ -32186,7 +32187,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
         &self,
         org: &str,
         team_slug: &str,
-        direction: &str,
+        direction: crate::types::Direction,
         per_page: i64,
         page: i64,
         pinned: &str,
@@ -32195,7 +32196,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             "/orgs/{}/teams/{}/discussions?direction={}&page={}&per_page={}&pinned={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            direction.to_string(),
+            direction,
             format!("{}", page),
             format!("{}", per_page),
             pinned.to_string(),
@@ -32338,7 +32339,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        direction: &str,
+        direction: crate::types::Direction,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
@@ -32347,7 +32348,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            direction.to_string(),
+            direction,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -34187,7 +34188,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
         actor: &str,
         branch: &str,
         event: &str,
-        status: &str,
+        status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListWorkflowRunsRepositoryOkResponse> {
@@ -34200,7 +34201,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             event.to_string(),
             format!("{}", page),
             format!("{}", per_page),
-            status.to_string(),
+            status,
         );
 
         self.get(&url).await
@@ -34924,7 +34925,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
         actor: &str,
         branch: &str,
         event: &str,
-        status: &str,
+        status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListWorkflowRunsOkResponse> {
@@ -34932,7 +34933,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
-actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), format!("{}", per_page), status.to_string(),         );
+actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), format!("{}", per_page), status,         );
 
         self.get(&url).await
     }
@@ -36376,7 +36377,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
         repo: &str,
         check_suite_id: i64,
         check_name: &str,
-        status: &str,
+        status: crate::types::StatusParam,
         filter: &str,
         per_page: i64,
         page: i64,
@@ -36385,7 +36386,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
-check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", per_page), status.to_string(),         );
+check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", per_page), status,         );
 
         self.get(&url).await
     }
@@ -37398,7 +37399,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
         repo: &str,
         ref_: &str,
         check_name: &str,
-        status: &str,
+        status: crate::types::StatusParam,
         filter: &str,
         per_page: i64,
         page: i64,
@@ -37408,7 +37409,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", per_page), status.to_string(),         );
+format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", per_page), status,         );
 
         self.get(&url).await
     }
@@ -39470,7 +39471,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
         mentioned: &str,
         labels: &str,
         sort: &str,
-        direction: &str,
+        direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
         page: i64,
@@ -39478,7 +39479,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
         let url = format!("/repos/{}/{}/issues?assignee={}&creator={}&direction={}&labels={}&mentioned={}&milestone={}&page={}&per_page={}&since={}&sort={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_string(), mentioned.to_string(), milestone.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
+assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentioned.to_string(), milestone.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
         self.get_all_pages(&url).await
     }
@@ -39526,7 +39527,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
         &self,
         owner: &str,
         repo: &str,
-        sort: &str,
+        sort: crate::types::Sort,
         direction: &str,
         since: DateTime<Utc>,
         per_page: i64,
@@ -39540,7 +39541,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", page),
             format!("{}", per_page),
             since.to_rfc3339(),
-            sort.to_string(),
+            sort,
         );
 
         self.get_all_pages(&url).await
@@ -41465,7 +41466,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
         owner: &str,
         repo: &str,
         pull_number: i64,
-        sort: &str,
+        sort: crate::types::Sort,
         direction: &str,
         since: DateTime<Utc>,
         per_page: i64,
@@ -41480,7 +41481,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", page),
             format!("{}", per_page),
             since.to_rfc3339(),
-            sort.to_string(),
+            sort,
         );
 
         self.get_all_pages(&url).await
@@ -42995,13 +42996,13 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
         &self,
         owner: &str,
         repo: &str,
-        per: &str,
+        per: crate::types::Per,
     ) -> Result<types::CloneTraffic> {
         let url = format!(
             "/repos/{}/{}/traffic/clones?per={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            per.to_string(),
+            per,
         );
 
         self.get(&url).await
@@ -43066,13 +43067,13 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
         &self,
         owner: &str,
         repo: &str,
-        per: &str,
+        per: crate::types::Per,
     ) -> Result<types::ViewTraffic> {
         let url = format!(
             "/repos/{}/{}/traffic/views?per={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            per.to_string(),
+            per,
         );
 
         self.get(&url).await
@@ -44023,13 +44024,13 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
         &self,
         q: &str,
         sort: &str,
-        order: &str,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
         let url = format!(
             "/search/code?order={}&page={}&per_page={}&q={}&sort={}",
-            order.to_string(),
+            order,
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
@@ -44059,13 +44060,13 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
         &self,
         q: &str,
         sort: &str,
-        order: &str,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
         let url = format!(
             "/search/commits?order={}&page={}&per_page={}&q={}&sort={}",
-            order.to_string(),
+            order,
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
@@ -44099,13 +44100,13 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
         &self,
         q: &str,
         sort: &str,
-        order: &str,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchIssuesandPullRequestsOkResponse> {
         let url = format!(
             "/search/issues?order={}&page={}&per_page={}&q={}&sort={}",
-            order.to_string(),
+            order,
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
@@ -44137,13 +44138,13 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
         repository_id: i64,
         q: &str,
         sort: &str,
-        order: &str,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
         let url = format!(
             "/search/labels?order={}&page={}&per_page={}&q={}&repository_id={}&sort={}",
-            order.to_string(),
+            order,
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
@@ -44179,13 +44180,13 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
         &self,
         q: &str,
         sort: &str,
-        order: &str,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchRepositoriesOkResponse> {
         let url = format!(
             "/search/repositories?order={}&page={}&per_page={}&q={}&sort={}",
-            order.to_string(),
+            order,
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
@@ -44249,13 +44250,13 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
         &self,
         q: &str,
         sort: &str,
-        order: &str,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
         let url = format!(
             "/search/users?order={}&page={}&per_page={}&q={}&sort={}",
-            order.to_string(),
+            order,
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
@@ -44349,14 +44350,14 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     pub async fn teams_list_discussions_legacy(
         &self,
         team_id: i64,
-        direction: &str,
+        direction: crate::types::Direction,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamDiscussion>> {
         let url = format!(
             "/teams/{}/discussions?direction={}&page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            direction.to_string(),
+            direction,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -44489,7 +44490,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
         &self,
         team_id: i64,
         discussion_number: i64,
-        direction: &str,
+        direction: crate::types::Direction,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
@@ -44497,7 +44498,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             "/teams/{}/discussions/{}/comments?direction={}&page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            direction.to_string(),
+            direction,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -45841,13 +45842,13 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
         state: &str,
         labels: &str,
         sort: &str,
-        direction: &str,
+        direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
         let url = format!("/user/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&state={}",
-direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
+direction, filter.to_string(), labels.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
         self.get_all_pages(&url).await
     }
@@ -46278,7 +46279,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_get_package_for_authenticated_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
     ) -> Result<types::Package> {
         let url = format!(
@@ -46304,7 +46305,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_delete_package_for_authenticated_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
     ) -> Result<()> {
         let url = format!(
@@ -46333,7 +46334,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_restore_package_for_authenticated_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         token: &str,
     ) -> Result<()> {
@@ -46361,7 +46362,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         page: i64,
         per_page: i64,
@@ -46393,7 +46394,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_get_package_version_for_authenticated_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         package_version_id: i64,
     ) -> Result<types::PackageVersion> {
@@ -46421,7 +46422,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_delete_package_version_for_authenticated_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         package_version_id: i64,
     ) -> Result<()> {
@@ -46452,7 +46453,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     */
     pub async fn packages_restore_package_version_for_authenticated_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         package_version_id: i64,
     ) -> Result<()> {
@@ -46639,17 +46640,17 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     */
     pub async fn activity_list_repos_starred_by_authenticated_user(
         &self,
-        sort: &str,
-        direction: &str,
+        sort: crate::types::Sort,
+        direction: crate::types::Direction,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Repository>> {
         let url = format!(
             "/user/starred?direction={}&page={}&per_page={}&sort={}",
-            direction.to_string(),
+            direction,
             format!("{}", page),
             format!("{}", per_page),
-            sort.to_string(),
+            sort,
         );
 
         self.get_all_pages(&url).await
@@ -47135,7 +47136,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     */
     pub async fn packages_get_package_for_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         username: &str,
     ) -> Result<types::Package> {
@@ -47163,7 +47164,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     */
     pub async fn packages_get_all_package_versions_for_package_owned_by_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         username: &str,
     ) -> Result<Vec<types::PackageVersion>> {
@@ -47191,7 +47192,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     */
     pub async fn packages_get_package_version_for_user(
         &self,
-        package_type: &str,
+        package_type: crate::types::PackageType,
         package_name: &str,
         package_version_id: i64,
         username: &str,
@@ -47404,18 +47405,18 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     pub async fn activity_list_repos_starred_by_user(
         &self,
         username: &str,
-        sort: &str,
-        direction: &str,
+        sort: crate::types::Sort,
+        direction: crate::types::Direction,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::StarredRepository>> {
         let url = format!(
             "/users/{}/starred?direction={}&page={}&per_page={}&sort={}",
             progenitor_support::encode_path(&username.to_string()),
-            direction.to_string(),
+            direction,
             format!("{}", page),
             format!("{}", per_page),
-            sort.to_string(),
+            sort,
         );
 
         self.get_all_pages(&url).await
