@@ -758,7 +758,7 @@ impl TypeSpace {
         /*if is_schema {
             // If we are on a parent schema that as been defined in the spec, we want to ensure,
             // that type gets a named type. This is so that we can find all these types later on, even
-            // arrays and basic types like numbers and strings.
+            // arrays and basic types like numberserand strings.
             if let openapiv3::SchemaKind::Type(t) = s.schema_kind {
                 if let openapiv3::Type::Object(_) = t {
                     // If it's an object we will always have a named type so it's fine.
@@ -1479,14 +1479,17 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                 } else if rt.starts_with("Option<") {
                                     a(r#"skip_serializing_if = "Option::is_none","#);
                                 }
+                            } else if rt == "bool" || rt == "i32" || rt == "i64" || rt == "f32" || rt == "f64" || rt == "u32" || rt == "u64" {
+                                a(r#"#[serde(default,"#);
+                            } else {
+                                a(r#"#[serde("#);
+                            }
 
-                                if *name != prop {
-                                    a(&format!(r#"rename = "{}")]"#, name));
-                                } else {
-                                    a(r#")]"#);
-                                }
-                            } else if *name != prop {
-                                a(&format!(r#"#[serde(rename = "{}")]"#, name));
+                            // Close the serde string.
+                            if *name != prop {
+                                a(&format!(r#"rename = "{}")]"#, name));
+                            } else {
+                                a(r#")]"#);
                             }
 
                             if !prop.ends_with('_') {

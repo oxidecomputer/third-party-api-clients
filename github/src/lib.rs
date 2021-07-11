@@ -503,6 +503,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -540,6 +541,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -625,6 +627,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -662,6 +665,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -746,6 +750,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub client_secret: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -768,6 +773,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub installations_count: Option<i64>,
@@ -784,6 +790,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(
             default,
@@ -792,6 +799,7 @@ pub mod types {
         )]
         pub pem: String,
         /// The set of permissions for the GitHub app
+        #[serde()]
         pub permissions: Permissions,
         #[serde(
             default,
@@ -799,6 +807,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub slug: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -894,6 +903,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub avatar_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -907,6 +917,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -926,6 +937,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub slug: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -1857,6 +1869,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -1894,6 +1907,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -2005,6 +2019,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -2042,6 +2057,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -2086,7 +2102,9 @@ pub mod types {
         )]
         pub access_tokens_url: String,
         /// Simple User
+        #[serde()]
         pub account: Account,
+        #[serde(default)]
         pub app_id: i64,
         #[serde(
             default,
@@ -2100,6 +2118,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub contact_email: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub events: Vec<String>,
@@ -2111,8 +2130,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         /// The permissions granted to the user-to-server access token.
+        #[serde()]
         pub permissions: AppPermissions,
         #[serde(
             default,
@@ -2121,6 +2142,7 @@ pub mod types {
         )]
         pub repositories_url: String,
         /// Describe whether all repositories have been selected or there's a selection involved
+        #[serde()]
         pub repository_selection: RepositorySelection,
         #[serde(
             default,
@@ -2130,9 +2152,12 @@ pub mod types {
         pub single_file_name: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub single_file_paths: Vec<String>,
+        #[serde()]
         pub suspended_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub suspended_by: SuspendedBy,
+        #[serde(default)]
         pub target_id: i64,
         #[serde(
             default,
@@ -2140,6 +2165,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub target_type: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
     }
 
@@ -2276,6 +2302,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -2313,6 +2340,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -2349,10 +2377,13 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepositoryPermissions {
+        #[serde(default)]
         pub admin: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub maintain: Option<bool>,
+        #[serde(default)]
         pub pull: bool,
+        #[serde(default)]
         pub push: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub triage: Option<bool>,
@@ -2872,6 +2903,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub archive_url: String,
+        #[serde(default)]
         pub archived: bool,
         #[serde(
             default,
@@ -2933,6 +2965,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub contributors_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -2954,6 +2987,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub disabled: bool,
         #[serde(
             default,
@@ -2967,8 +3001,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub fork: bool,
+        #[serde(default)]
         pub forks: i64,
+        #[serde(default)]
         pub forks_count: i64,
         #[serde(
             default,
@@ -3006,10 +3043,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub git_url: String,
+        #[serde(default)]
         pub has_downloads: bool,
+        #[serde(default)]
         pub has_issues: bool,
+        #[serde(default)]
         pub has_pages: bool,
+        #[serde(default)]
         pub has_projects: bool,
+        #[serde(default)]
         pub has_wiki: bool,
         #[serde(
             default,
@@ -3029,6 +3071,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub is_template: Option<bool>,
@@ -3075,6 +3118,7 @@ pub mod types {
         )]
         pub languages_url: String,
         /// License Simple
+        #[serde()]
         pub license: License,
         #[serde(
             default,
@@ -3120,14 +3164,18 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub notifications_url: String,
+        #[serde(default)]
         pub open_issues: i64,
+        #[serde(default)]
         pub open_issues_count: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub organization: Option<Organization>,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
+        #[serde(default)]
         pub private: bool,
         #[serde(
             default,
@@ -3135,6 +3183,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub pulls_url: String,
+        #[serde()]
         pub pushed_at: DateTime<Utc>,
         #[serde(
             default,
@@ -3142,6 +3191,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub releases_url: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -3149,6 +3199,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub ssh_url: String,
+        #[serde(default)]
         pub stargazers_count: i64,
         #[serde(
             default,
@@ -3216,6 +3267,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub trees_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -3229,7 +3281,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub visibility: String,
+        #[serde(default)]
         pub watchers: i64,
+        #[serde(default)]
         pub watchers_count: i64,
     }
 
@@ -3419,6 +3473,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -3456,6 +3511,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -3493,11 +3549,15 @@ pub mod types {
     /// The authorization associated with an OAuth Access.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ApplicationGrant {
+        #[serde()]
         pub app: App,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub scopes: Vec<String>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -3512,10 +3572,12 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScopedInstallation {
         /// Simple User
+        #[serde()]
         pub account: SimpleUser,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub has_multiple_single_files: Option<bool>,
         /// The permissions granted to the user-to-server access token.
+        #[serde()]
         pub permissions: AppPermissions,
         #[serde(
             default,
@@ -3524,6 +3586,7 @@ pub mod types {
         )]
         pub repositories_url: String,
         /// Describe whether all repositories have been selected or there's a selection involved
+        #[serde()]
         pub repository_selection: RepositorySelection,
         #[serde(
             default,
@@ -3538,10 +3601,12 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AuthorizationInstallation {
         /// Simple User
+        #[serde()]
         pub account: SimpleUser,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub has_multiple_single_files: Option<bool>,
         /// The permissions granted to the user-to-server access token.
+        #[serde()]
         pub permissions: AppPermissions,
         #[serde(
             default,
@@ -3550,6 +3615,7 @@ pub mod types {
         )]
         pub repositories_url: String,
         /// Describe whether all repositories have been selected or there's a selection involved
+        #[serde()]
         pub repository_selection: RepositorySelection,
         #[serde(
             default,
@@ -3564,7 +3630,9 @@ pub mod types {
     /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Authorization {
+        #[serde()]
         pub app: App,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -3578,6 +3646,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub hashed_token: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub installation: Option<Installation>,
@@ -3608,6 +3677,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub token_last_eight: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -3713,8 +3783,10 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsEnterprisePermissions {
         /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+        #[serde()]
         pub allowed_actions: AllowedActions,
         /// The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+        #[serde()]
         pub enabled_organizations: EnabledOrganizations,
         #[serde(
             default,
@@ -3757,6 +3829,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub hooks_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -3814,8 +3887,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RunnerGroupsEnterprise {
+        #[serde(default)]
         pub allows_public_repositories: bool,
+        #[serde(default)]
         pub default: bool,
+        #[serde(default)]
         pub id: f64,
         #[serde(
             default,
@@ -3886,7 +3962,9 @@ pub mod types {
     /// A self hosted runner
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Runner {
+        #[serde(default)]
         pub busy: bool,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub labels: Vec<Labels>,
@@ -3957,6 +4035,7 @@ pub mod types {
     /// Authentication Token
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AuthenticationToken {
+        #[serde()]
         pub expires_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
@@ -4179,23 +4258,33 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsBillingUsage {
+        #[serde(default)]
         pub included_minutes: i64,
+        #[serde()]
         pub minutes_used_breakdown: MinutesUsedBreakdown,
+        #[serde(default)]
         pub total_minutes_used: i64,
+        #[serde(default)]
         pub total_paid_minutes_used: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PackagesBillingUsage {
+        #[serde(default)]
         pub included_gigabytes_bandwidth: i64,
+        #[serde(default)]
         pub total_gigabytes_bandwidth_used: i64,
+        #[serde(default)]
         pub total_paid_gigabytes_bandwidth_used: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CombinedBillingUsage {
+        #[serde(default)]
         pub days_left_in_billing_cycle: i64,
+        #[serde(default)]
         pub estimated_paid_storage_for_month: i64,
+        #[serde(default)]
         pub estimated_storage_for_month: i64,
     }
 
@@ -4220,6 +4309,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub gravatar_id: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -4244,6 +4334,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub color: String,
+        #[serde(default)]
         pub default: bool,
         #[serde(
             default,
@@ -4251,6 +4342,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -4349,6 +4441,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -4386,6 +4479,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -4423,10 +4517,14 @@ pub mod types {
     /// A collection of related issues and pull requests.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Milestone {
+        #[serde()]
         pub closed_at: DateTime<Utc>,
+        #[serde(default)]
         pub closed_issues: i64,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub creator: Creator,
         #[serde(
             default,
@@ -4434,6 +4532,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde()]
         pub due_on: DateTime<Utc>,
         #[serde(
             default,
@@ -4441,6 +4540,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -4454,9 +4554,12 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
+        #[serde(default)]
         pub open_issues: i64,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
         #[serde(
             default,
@@ -4464,6 +4567,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -4562,6 +4666,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -4599,6 +4704,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -4678,6 +4784,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub client_secret: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -4700,6 +4807,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub installations_count: Option<i64>,
@@ -4716,6 +4824,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(
             default,
@@ -4724,6 +4833,7 @@ pub mod types {
         )]
         pub pem: String,
         /// The set of permissions for the GitHub app
+        #[serde()]
         pub permissions: Permissions,
         #[serde(
             default,
@@ -4731,6 +4841,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub slug: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -4750,10 +4861,12 @@ pub mod types {
         )]
         pub active_lock_reason: String,
         /// Simple User
+        #[serde()]
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -4773,7 +4886,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body_text: String,
+        #[serde()]
         pub closed_at: DateTime<Utc>,
+        #[serde(default)]
         pub comments: i64,
         #[serde(
             default,
@@ -4781,6 +4896,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub comments_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -4794,6 +4910,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub labels: Vec<Label>,
@@ -4803,8 +4920,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub labels_url: String,
+        #[serde(default)]
         pub locked: bool,
         /// A collection of related issues and pull requests.
+        #[serde()]
         pub milestone: Milestone,
         #[serde(
             default,
@@ -4812,6 +4931,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub performed_via_github_app: Option<PerformedViaGithubApp>,
@@ -4843,6 +4963,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -4851,21 +4972,29 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionRollup {
-        #[serde(rename = "+1")]
+        #[serde(default, rename = "+1")]
         pub plus_one: i64,
-        #[serde(rename = "-1")]
+        #[serde(default, rename = "-1")]
         pub minus_one: i64,
+        #[serde(default)]
         pub confused: i64,
+        #[serde(default)]
         pub eyes: i64,
+        #[serde(default)]
         pub heart: i64,
+        #[serde(default)]
         pub hooray: i64,
+        #[serde(default)]
         pub laugh: i64,
+        #[serde(default)]
         pub rocket: i64,
+        #[serde(default)]
         pub total_count: i64,
         #[serde(
             default,
@@ -4879,6 +5008,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueComment {
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -4898,6 +5028,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body_text: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -4905,6 +5036,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -4922,6 +5054,7 @@ pub mod types {
         pub performed_via_github_app: Option<PerformedViaGithubApp>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -4930,11 +5063,13 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Repo {
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -5010,7 +5145,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Event {
         /// Actor
+        #[serde()]
         pub actor: Actor,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5020,8 +5157,11 @@ pub mod types {
         pub id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub org: Option<Actor>,
+        #[serde()]
         pub payload: Payload,
+        #[serde(default)]
         pub public: bool,
+        #[serde()]
         pub repo: Repo,
         #[serde(
             default,
@@ -5065,14 +5205,17 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub security_advisories: Option<LinkWithType>,
         /// Hypermedia Link with Type
+        #[serde()]
         pub timeline: LinkWithType,
         /// Hypermedia Link with Type
+        #[serde()]
         pub user: LinkWithType,
     }
 
     /// Feed
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Feed {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -5126,6 +5269,7 @@ pub mod types {
     /// Base Gist
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BaseGist {
+        #[serde(default)]
         pub comments: i64,
         #[serde(
             default,
@@ -5139,6 +5283,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commits_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5146,6 +5291,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde()]
         pub files: Files,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub forks: Vec<serde_json::Value>,
@@ -5189,9 +5335,11 @@ pub mod types {
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub owner: Option<Owner>,
+        #[serde(default)]
         pub public: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub truncated: Option<bool>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5200,11 +5348,13 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Plan {
+        #[serde(default)]
         pub collaborators: i64,
         #[serde(
             default,
@@ -5212,7 +5362,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+        #[serde(default)]
         pub private_repos: i64,
+        #[serde(default)]
         pub space: i64,
     }
 
@@ -5245,6 +5397,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub company: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub disk_usage: Option<i64>,
@@ -5260,6 +5413,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub followers: i64,
         #[serde(
             default,
@@ -5267,6 +5421,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub followers_url: String,
+        #[serde(default)]
         pub following: i64,
         #[serde(
             default,
@@ -5286,6 +5441,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub gravatar_id: String,
+        #[serde(default)]
         pub hireable: bool,
         #[serde(
             default,
@@ -5293,6 +5449,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -5330,7 +5487,9 @@ pub mod types {
         pub plan: Option<Plan>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub private_gists: Option<i64>,
+        #[serde(default)]
         pub public_gists: i64,
+        #[serde(default)]
         pub public_repos: i64,
         #[serde(
             default,
@@ -5344,6 +5503,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -5374,6 +5534,7 @@ pub mod types {
             rename = "type"
         )]
         pub type_: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5441,6 +5602,7 @@ pub mod types {
     /// Gist
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ForkOf {
+        #[serde(default)]
         pub comments: i64,
         #[serde(
             default,
@@ -5454,6 +5616,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commits_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5461,6 +5624,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde()]
         pub files: Files,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub forks: Vec<serde_json::Value>,
@@ -5504,9 +5668,11 @@ pub mod types {
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub owner: Option<Owner>,
+        #[serde(default)]
         pub public: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub truncated: Option<bool>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5515,6 +5681,7 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -5621,6 +5788,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GistComment {
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -5628,7 +5796,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -5636,6 +5806,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5644,13 +5815,16 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     /// Gist Commit
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GistCommit {
+        #[serde()]
         pub change_status: ChangeStatus,
+        #[serde()]
         pub committed_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5659,6 +5833,7 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
         #[serde(
             default,
@@ -5736,6 +5911,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -5773,6 +5949,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -5817,10 +5994,12 @@ pub mod types {
         )]
         pub active_lock_reason: String,
         /// Simple User
+        #[serde()]
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -5840,9 +6019,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body_text: String,
+        #[serde()]
         pub closed_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub closed_by: Option<ClosedBy>,
+        #[serde(default)]
         pub comments: i64,
         #[serde(
             default,
@@ -5850,6 +6031,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub comments_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5863,6 +6045,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         /// Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -5873,8 +6056,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub labels_url: String,
+        #[serde(default)]
         pub locked: bool,
         /// A collection of related issues and pull requests.
+        #[serde()]
         pub milestone: Milestone,
         #[serde(
             default,
@@ -5882,6 +6067,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub performed_via_github_app: Option<PerformedViaGithubApp>,
@@ -5915,6 +6101,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -5923,6 +6110,7 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -5943,6 +6131,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub featured: bool,
         #[serde(
             default,
@@ -6009,8 +6198,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub has_free_trial: bool,
+        #[serde(default)]
         pub id: i64,
+        #[serde(default)]
         pub monthly_price_in_cents: i64,
         #[serde(
             default,
@@ -6018,6 +6210,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(
             default,
@@ -6043,6 +6236,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde(default)]
         pub yearly_price_in_cents: i64,
     }
 
@@ -6109,6 +6303,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub email: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -6118,6 +6313,7 @@ pub mod types {
         pub login: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub marketplace_pending_change: Option<MarketplacePendingChange>,
+        #[serde()]
         pub marketplace_purchase: MarketplacePurchase,
         #[serde(
             default,
@@ -6177,6 +6373,7 @@ pub mod types {
         pub pages: Vec<String>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub ssh_key_fingerprints: Option<SshKeyFingerprints>,
+        #[serde(default)]
         pub verifiable_password_authentication: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub web: Vec<String>,
@@ -6345,6 +6542,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub fork: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub forks: Option<i64>,
@@ -6414,6 +6612,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub is_template: Option<bool>,
@@ -6504,9 +6703,11 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub open_issues_count: Option<i64>,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
+        #[serde(default)]
         pub private: bool,
         #[serde(
             default,
@@ -6663,7 +6864,9 @@ pub mod types {
         )]
         pub reason: String,
         /// Minimal Repository
+        #[serde()]
         pub repository: MinimalRepository,
+        #[serde()]
         pub subject: Subject,
         #[serde(
             default,
@@ -6671,6 +6874,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub subscription_url: String,
+        #[serde(default)]
         pub unread: bool,
         #[serde(
             default,
@@ -6689,7 +6893,9 @@ pub mod types {
     /// Thread Subscription
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ThreadSubscription {
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub ignored: bool,
         #[serde(
             default,
@@ -6703,6 +6909,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repository_url: String,
+        #[serde(default)]
         pub subscribed: bool,
         #[serde(
             default,
@@ -6728,9 +6935,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+        #[serde(default)]
         pub private_repos: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub seats: Option<i64>,
+        #[serde(default)]
         pub space: i64,
     }
 
@@ -6763,6 +6972,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub company: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -6790,9 +7000,13 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub followers: i64,
+        #[serde(default)]
         pub following: i64,
+        #[serde(default)]
         pub has_organization_projects: bool,
+        #[serde(default)]
         pub has_repository_projects: bool,
         #[serde(
             default,
@@ -6806,6 +7020,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub is_verified: Option<bool>,
@@ -6871,6 +7086,7 @@ pub mod types {
         pub plan: Option<Plan>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub private_gists: Option<i64>,
+        #[serde(default)]
         pub public_gists: i64,
         #[serde(
             default,
@@ -6878,6 +7094,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub public_members_url: String,
+        #[serde(default)]
         pub public_repos: i64,
         #[serde(
             default,
@@ -6902,6 +7119,7 @@ pub mod types {
             rename = "type"
         )]
         pub type_: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -6944,6 +7162,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allowed_actions: Option<AllowedActions>,
         /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+        #[serde()]
         pub enabled_repositories: EnabledRepositories,
         #[serde(
             default,
@@ -6961,9 +7180,13 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RunnerGroupsOrg {
+        #[serde(default)]
         pub allows_public_repositories: bool,
+        #[serde(default)]
         pub default: bool,
+        #[serde(default)]
         pub id: f64,
+        #[serde(default)]
         pub inherited: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub inherited_allows_public_repositories: Option<bool>,
@@ -7024,6 +7247,7 @@ pub mod types {
     /// Secrets for GitHub Actions for an organization.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrganizationActionsSecret {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -7037,8 +7261,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub selected_repositories_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         /// Visibility of a secret
+        #[serde()]
         pub visibility: Visibility,
     }
 
@@ -7102,7 +7328,9 @@ pub mod types {
         pub authorized_credential_title: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub credential_accessed_at: Option<DateTime<Utc>>,
+        #[serde()]
         pub credential_authorized_at: DateTime<Utc>,
+        #[serde(default)]
         pub credential_id: i64,
         #[serde(
             default,
@@ -7159,6 +7387,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub failed_reason: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -7167,6 +7396,7 @@ pub mod types {
         )]
         pub invitation_teams_url: String,
         /// Simple User
+        #[serde()]
         pub inviter: SimpleUser,
         #[serde(
             default,
@@ -7186,6 +7416,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub role: String,
+        #[serde(default)]
         pub team_count: i64,
     }
 
@@ -7220,11 +7451,15 @@ pub mod types {
     /// Org Hook
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrgHook {
+        #[serde(default)]
         pub active: bool,
+        #[serde()]
         pub config: Config,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub events: Vec<String>,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -7245,6 +7480,7 @@ pub mod types {
             rename = "type"
         )]
         pub type_: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -7285,8 +7521,10 @@ pub mod types {
     /// Interaction limit settings.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InteractionLimitResponse {
+        #[serde()]
         pub expires_at: DateTime<Utc>,
         /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+        #[serde()]
         pub limit: InteractionGroup,
         #[serde(
             default,
@@ -7334,6 +7572,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub expiry: Option<InteractionExpiry>,
         /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+        #[serde()]
         pub limit: InteractionGroup,
     }
 
@@ -7352,6 +7591,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -7411,10 +7651,15 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamPermissions {
+        #[serde(default)]
         pub admin: bool,
+        #[serde(default)]
         pub maintain: bool,
+        #[serde(default)]
         pub pull: bool,
+        #[serde(default)]
         pub push: bool,
+        #[serde(default)]
         pub triage: bool,
     }
 
@@ -7433,6 +7678,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -7505,6 +7751,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -7524,6 +7771,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde()]
         pub parent: Parent,
         #[serde(
             default,
@@ -7615,6 +7863,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrgMembershipPermissions {
+        #[serde(default)]
         pub can_create_repository: bool,
     }
 
@@ -7622,6 +7871,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrgMembership {
         /// Organization Simple
+        #[serde()]
         pub organization: OrganizationSimple,
         #[serde(
             default,
@@ -7632,8 +7882,10 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
         /// The user's membership type in the organization.
+        #[serde()]
         pub role: Role,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
         #[serde(
             default,
@@ -7642,6 +7894,7 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -7654,9 +7907,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub archive_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub exclude: Vec<serde_json::Value>,
+        #[serde(default)]
         pub exclude_attachments: bool,
         #[serde(
             default,
@@ -7664,7 +7919,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub guid: String,
+        #[serde(default)]
         pub id: i64,
+        #[serde(default)]
         pub lock_repositories: bool,
         #[serde(
             default,
@@ -7673,6 +7930,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
@@ -7682,6 +7940,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub state: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -7825,6 +8084,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub fork: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub forks: Option<i64>,
@@ -7894,6 +8154,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub is_template: Option<bool>,
@@ -7984,9 +8245,11 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub open_issues_count: Option<i64>,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
+        #[serde(default)]
         pub private: bool,
         #[serde(
             default,
@@ -8095,6 +8358,7 @@ pub mod types {
     /// A software package
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Package {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8102,6 +8366,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -8111,9 +8376,11 @@ pub mod types {
         pub name: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub owner: Option<Owner>,
+        #[serde()]
         pub package_type: PackageType,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub repository: Option<Repository>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8121,13 +8388,16 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde(default)]
         pub version_count: i64,
         /// Visibility of a secret
+        #[serde()]
         pub visibility: Visibility,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Container {
+        #[serde()]
         pub tags: serde_json::Value,
     }
 
@@ -8143,12 +8413,14 @@ pub mod types {
         pub container: Option<Container>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub docker: Option<Docker>,
+        #[serde()]
         pub package_type: PackageType,
     }
 
     /// A version of a software package
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PackageVersion {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub deleted_at: Option<DateTime<Utc>>,
@@ -8164,6 +8436,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -8185,6 +8458,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub package_html_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8239,8 +8513,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub columns_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub creator: Creator,
         #[serde(
             default,
@@ -8248,6 +8524,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -8261,6 +8538,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub organization_permission: Option<OrganizationPermission>,
@@ -8278,6 +8556,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub state: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8357,6 +8636,7 @@ pub mod types {
     /// Groups of organization members that gives permissions on specified repositories.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamFull {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8370,6 +8650,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -8377,6 +8658,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub ldap_dn: String,
+        #[serde(default)]
         pub members_count: i64,
         #[serde(
             default,
@@ -8397,6 +8679,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// Organization Full
+        #[serde()]
         pub organization: OrganizationFull,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub parent: Option<Parent>,
@@ -8408,6 +8691,7 @@ pub mod types {
         pub permission: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub privacy: Option<Privacy>,
+        #[serde(default)]
         pub repos_count: i64,
         #[serde(
             default,
@@ -8421,6 +8705,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub slug: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8481,6 +8766,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -8518,6 +8804,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -8556,6 +8843,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamDiscussion {
         /// Simple User
+        #[serde()]
         pub author: Author,
         #[serde(
             default,
@@ -8575,6 +8863,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body_version: String,
+        #[serde(default)]
         pub comments_count: i64,
         #[serde(
             default,
@@ -8582,6 +8871,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub comments_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8589,6 +8879,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde()]
         pub last_edited_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8596,8 +8887,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
+        #[serde(default)]
         pub pinned: bool,
+        #[serde(default)]
         pub private: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
@@ -8613,6 +8907,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8626,6 +8921,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamDiscussionComment {
         /// Simple User
+        #[serde()]
         pub author: Author,
         #[serde(
             default,
@@ -8645,6 +8941,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body_version: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8658,6 +8955,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde()]
         pub last_edited_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8665,9 +8963,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8719,8 +9019,11 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Reaction {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -8729,6 +9032,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -8788,8 +9092,10 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamMembership {
         /// The user's membership type in the organization.
+        #[serde()]
         pub role: Role,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
         #[serde(
             default,
@@ -8801,8 +9107,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamProjectPermissions {
+        #[serde(default)]
         pub admin: bool,
+        #[serde(default)]
         pub read: bool,
+        #[serde(default)]
         pub write: bool,
     }
 
@@ -8828,6 +9137,7 @@ pub mod types {
         )]
         pub created_at: String,
         /// Simple User
+        #[serde()]
         pub creator: SimpleUser,
         #[serde(
             default,
@@ -8835,6 +9145,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -8848,6 +9159,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(
             default,
@@ -8862,6 +9174,7 @@ pub mod types {
         )]
         pub owner_url: String,
         /// The set of permissions for the GitHub app
+        #[serde()]
         pub permissions: Permissions,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub private: Option<bool>,
@@ -8887,10 +9200,13 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamRepositoryPermissions {
+        #[serde(default)]
         pub admin: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub maintain: Option<bool>,
+        #[serde(default)]
         pub pull: bool,
+        #[serde(default)]
         pub push: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub triage: Option<bool>,
@@ -8914,6 +9230,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub archive_url: String,
+        #[serde(default)]
         pub archived: bool,
         #[serde(
             default,
@@ -8975,6 +9292,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub contributors_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -8996,6 +9314,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub disabled: bool,
         #[serde(
             default,
@@ -9009,8 +9328,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub fork: bool,
+        #[serde(default)]
         pub forks: i64,
+        #[serde(default)]
         pub forks_count: i64,
         #[serde(
             default,
@@ -9048,10 +9370,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub git_url: String,
+        #[serde(default)]
         pub has_downloads: bool,
+        #[serde(default)]
         pub has_issues: bool,
+        #[serde(default)]
         pub has_pages: bool,
+        #[serde(default)]
         pub has_projects: bool,
+        #[serde(default)]
         pub has_wiki: bool,
         #[serde(
             default,
@@ -9071,6 +9398,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub is_template: Option<bool>,
@@ -9117,6 +9445,7 @@ pub mod types {
         )]
         pub languages_url: String,
         /// License Simple
+        #[serde()]
         pub license: License,
         #[serde(
             default,
@@ -9162,12 +9491,16 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub notifications_url: String,
+        #[serde(default)]
         pub open_issues: i64,
+        #[serde(default)]
         pub open_issues_count: i64,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
+        #[serde(default)]
         pub private: bool,
         #[serde(
             default,
@@ -9175,6 +9508,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub pulls_url: String,
+        #[serde()]
         pub pushed_at: DateTime<Utc>,
         #[serde(
             default,
@@ -9182,6 +9516,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub releases_url: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -9189,6 +9524,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub ssh_url: String,
+        #[serde(default)]
         pub stargazers_count: i64,
         #[serde(
             default,
@@ -9250,6 +9586,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub trees_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -9263,7 +9600,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub visibility: String,
+        #[serde(default)]
         pub watchers: i64,
+        #[serde(default)]
         pub watchers_count: i64,
     }
 
@@ -9290,9 +9629,12 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub content_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub creator: Creator,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -9318,6 +9660,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub project_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -9336,7 +9679,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub cards_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -9356,6 +9701,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub project_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -9375,14 +9721,19 @@ pub mod types {
         )]
         pub permission: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RateLimit {
+        #[serde(default)]
         pub limit: i64,
+        #[serde(default)]
         pub remaining: i64,
+        #[serde(default)]
         pub reset: i64,
+        #[serde(default)]
         pub used: i64,
     }
 
@@ -9390,11 +9741,13 @@ pub mod types {
     pub struct Resources {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub code_scanning_upload: Option<RateLimit>,
+        #[serde()]
         pub core: RateLimit,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub graphql: Option<RateLimit>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub integration_manifest: Option<RateLimit>,
+        #[serde()]
         pub search: RateLimit,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub source_import: Option<RateLimit>,
@@ -9403,7 +9756,9 @@ pub mod types {
     /// Rate Limit Overview
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RateLimitOverview {
+        #[serde()]
         pub rate: RateLimit,
+        #[serde()]
         pub resources: Resources,
     }
 
@@ -9438,8 +9793,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct FullRepositoryPermissions {
+        #[serde(default)]
         pub admin: bool,
+        #[serde(default)]
         pub pull: bool,
+        #[serde(default)]
         pub push: bool,
     }
 
@@ -9533,6 +9891,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub archive_url: String,
+        #[serde(default)]
         pub archived: bool,
         #[serde(
             default,
@@ -9596,6 +9955,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub contributors_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -9617,6 +9977,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub disabled: bool,
         #[serde(
             default,
@@ -9630,8 +9991,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub fork: bool,
+        #[serde(default)]
         pub forks: i64,
+        #[serde(default)]
         pub forks_count: i64,
         #[serde(
             default,
@@ -9669,10 +10033,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub git_url: String,
+        #[serde(default)]
         pub has_downloads: bool,
+        #[serde(default)]
         pub has_issues: bool,
+        #[serde(default)]
         pub has_pages: bool,
+        #[serde(default)]
         pub has_projects: bool,
+        #[serde(default)]
         pub has_wiki: bool,
         #[serde(
             default,
@@ -9692,6 +10061,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub is_template: Option<bool>,
@@ -9738,6 +10108,7 @@ pub mod types {
         )]
         pub languages_url: String,
         /// License Simple
+        #[serde()]
         pub license: License,
         #[serde(
             default,
@@ -9769,6 +10140,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+        #[serde(default)]
         pub network_count: i64,
         #[serde(
             default,
@@ -9782,16 +10154,20 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub notifications_url: String,
+        #[serde(default)]
         pub open_issues: i64,
+        #[serde(default)]
         pub open_issues_count: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub organization: Option<Organization>,
         /// Simple User
+        #[serde()]
         pub owner: SimpleUser,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub parent: Option<Repository>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
+        #[serde(default)]
         pub private: bool,
         #[serde(
             default,
@@ -9799,6 +10175,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub pulls_url: String,
+        #[serde()]
         pub pushed_at: DateTime<Utc>,
         #[serde(
             default,
@@ -9808,6 +10185,7 @@ pub mod types {
         pub releases_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub security_and_analysis: Option<SecurityAnalysis>,
+        #[serde(default)]
         pub size: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub source: Option<Repository>,
@@ -9817,6 +10195,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub ssh_url: String,
+        #[serde(default)]
         pub stargazers_count: i64,
         #[serde(
             default,
@@ -9830,6 +10209,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub statuses_url: String,
+        #[serde(default)]
         pub subscribers_count: i64,
         #[serde(
             default,
@@ -9877,6 +10257,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub trees_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -9890,7 +10271,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub visibility: String,
+        #[serde(default)]
         pub watchers: i64,
+        #[serde(default)]
         pub watchers_count: i64,
     }
 
@@ -9903,9 +10286,13 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub archive_download_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub expired: bool,
+        #[serde()]
         pub expires_at: DateTime<Utc>,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -9919,7 +10306,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub size_in_bytes: i64,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10001,10 +10390,12 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
         /// The phase of the lifecycle that the job is currently in.
+        #[serde()]
         pub status: JobStepsStatus,
     }
 
@@ -10017,6 +10408,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub check_run_url: String,
+        #[serde()]
         pub completed_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10036,6 +10428,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -10049,6 +10442,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub run_id: i64,
         #[serde(
             default,
@@ -10056,8 +10450,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub run_url: String,
+        #[serde()]
         pub started_at: DateTime<Utc>,
         /// The phase of the lifecycle that the job is currently in.
+        #[serde()]
         pub status: JobStatus,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub steps: Vec<Steps>,
@@ -10072,8 +10468,10 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsRepositoryPermissions {
         /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+        #[serde()]
         pub allowed_actions: AllowedActions,
         /// Whether GitHub Actions is enabled on the repository.
+        #[serde(default)]
         pub enabled: bool,
         #[serde(
             default,
@@ -10092,6 +10490,7 @@ pub mod types {
             rename = "ref"
         )]
         pub ref_: String,
+        #[serde()]
         pub repo: Repo,
         #[serde(
             default,
@@ -10110,6 +10509,7 @@ pub mod types {
             rename = "ref"
         )]
         pub ref_: String,
+        #[serde()]
         pub repo: Repo,
         #[serde(
             default,
@@ -10121,9 +10521,13 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestMinimal {
+        #[serde()]
         pub base: Base,
+        #[serde()]
         pub head: Head,
+        #[serde(default)]
         pub id: i64,
+        #[serde(default)]
         pub number: i64,
         #[serde(
             default,
@@ -10169,7 +10573,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SimpleCommit {
         /// Simple User
+        #[serde()]
         pub author: Author,
+        #[serde()]
         pub committer: Committer,
         #[serde(
             default,
@@ -10183,6 +10589,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub message: String,
+        #[serde()]
         pub timestamp: DateTime<Utc>,
         #[serde(
             default,
@@ -10196,7 +10603,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct HeadCommit {
         /// Simple User
+        #[serde()]
         pub author: Author,
+        #[serde()]
         pub committer: Committer,
         #[serde(
             default,
@@ -10210,6 +10619,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub message: String,
+        #[serde()]
         pub timestamp: DateTime<Utc>,
         #[serde(
             default,
@@ -10254,6 +10664,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub conclusion: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10268,8 +10679,10 @@ pub mod types {
         )]
         pub head_branch: String,
         /// Simple Commit
+        #[serde()]
         pub head_commit: HeadCommit,
         /// Minimal Repository
+        #[serde()]
         pub head_repository: MinimalRepository,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub head_repository_id: Option<i64>,
@@ -10285,6 +10698,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -10313,6 +10727,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub pull_requests: Vec<PullRequestMinimal>,
         /// Minimal Repository
+        #[serde()]
         pub repository: MinimalRepository,
         #[serde(
             default,
@@ -10320,6 +10735,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub rerun_url: String,
+        #[serde(default)]
         pub run_number: i64,
         #[serde(
             default,
@@ -10327,6 +10743,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub status: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10334,6 +10751,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde(default)]
         pub workflow_id: i64,
         #[serde(
             default,
@@ -10416,8 +10834,10 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub environments: Vec<Environments>,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
         /// Simple User
+        #[serde()]
         pub user: SimpleUser,
     }
 
@@ -10528,6 +10948,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -10565,6 +10986,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -10610,12 +11032,16 @@ pub mod types {
     /// Details of a deployment that is waiting for protection rules to pass
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PendingDeployment {
+        #[serde(default)]
         pub current_user_can_approve: bool,
+        #[serde()]
         pub environment: Environment,
         /// The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub reviewers: Vec<Reviewers>,
+        #[serde(default)]
         pub wait_timer: i64,
+        #[serde()]
         pub wait_timer_started_at: DateTime<Utc>,
     }
 
@@ -10625,8 +11051,10 @@ pub mod types {
     /// A request for a specific ref(branch,sha,tag) to be deployed
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Deployment {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub creator: Creator,
         #[serde(
             default,
@@ -10640,6 +11068,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub environment: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -10653,6 +11082,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub original_environment: String,
+        #[serde()]
         pub payload: Payload,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub performed_via_github_app: Option<PerformedViaGithubApp>,
@@ -10691,6 +11121,7 @@ pub mod types {
         pub task: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub transient_environment: Option<bool>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10702,19 +11133,25 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Ubuntu {
+        #[serde(default)]
         pub jobs: i64,
+        #[serde(default)]
         pub total_ms: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Macos {
+        #[serde(default)]
         pub jobs: i64,
+        #[serde(default)]
         pub total_ms: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Windows {
+        #[serde(default)]
         pub jobs: i64,
+        #[serde(default)]
         pub total_ms: i64,
     }
 
@@ -10731,6 +11168,7 @@ pub mod types {
     /// Workflow Run Usage
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct WorkflowRunUsage {
+        #[serde()]
         pub billable: Billable,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub run_duration_ms: Option<i64>,
@@ -10739,6 +11177,7 @@ pub mod types {
     /// Set secrets for GitHub Actions.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsSecret {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10746,6 +11185,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
     }
 
@@ -10789,6 +11229,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub badge_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub deleted_at: Option<DateTime<Utc>>,
@@ -10798,6 +11239,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -10818,7 +11260,9 @@ pub mod types {
         )]
         pub path: String,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10849,12 +11293,14 @@ pub mod types {
     /// Workflow Usage
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct WorkflowUsage {
+        #[serde()]
         pub billable: Billable,
     }
 
     /// Protected Branch Admin Enforced
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranchAdminEnforced {
+        #[serde(default)]
         pub enabled: bool,
         #[serde(
             default,
@@ -10893,9 +11339,11 @@ pub mod types {
     /// Protected Branch Pull Request Review
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranchPullRequestReview {
+        #[serde(default)]
         pub dismiss_stale_reviews: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismissal_restrictions: Option<DismissalRestrictions>,
+        #[serde(default)]
         pub require_code_owner_reviews: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub required_approving_review_count: Option<i64>,
@@ -11394,6 +11842,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RequiredSignatures {
+        #[serde(default)]
         pub enabled: bool,
         #[serde(
             default,
@@ -11465,6 +11914,7 @@ pub mod types {
     /// Short Branch
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ShortBranch {
+        #[serde()]
         pub commit: Commit,
         #[serde(
             default,
@@ -11472,6 +11922,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+        #[serde(default)]
         pub protected: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub protection: Option<BranchProtection>,
@@ -11526,6 +11977,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub signature: String,
+        #[serde(default)]
         pub verified: bool,
     }
 
@@ -11685,6 +12137,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitData {
         /// Simple User
+        #[serde()]
         pub author: Author,
         #[serde(
             default,
@@ -11692,7 +12145,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub comments_url: String,
+        #[serde()]
         pub commit: Commit,
+        #[serde()]
         pub committer: Committer,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub files: Vec<Files>,
@@ -11746,7 +12201,9 @@ pub mod types {
     /// Branch With Protection
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchWithProtection {
+        #[serde()]
         pub links: Links,
+        #[serde()]
         pub commit: Commit,
         #[serde(
             default,
@@ -11760,8 +12217,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub pattern: String,
+        #[serde(default)]
         pub protected: bool,
         /// Branch Protection
+        #[serde()]
         pub protection: BranchProtection,
         #[serde(
             default,
@@ -11784,6 +12243,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub contexts_url: String,
+        #[serde(default)]
         pub strict: bool,
         #[serde(
             default,
@@ -11839,6 +12299,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnforceAdmins {
+        #[serde(default)]
         pub enabled: bool,
         #[serde(
             default,
@@ -11850,16 +12311,19 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranchRequiredLinearHistory {
+        #[serde(default)]
         pub enabled: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranchAllowForcePushes {
+        #[serde(default)]
         pub enabled: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranchAllowDeletions {
+        #[serde(default)]
         pub enabled: bool,
     }
 
@@ -11895,6 +12359,7 @@ pub mod types {
     /// A deployment created as the result of an Actions check run from a workflow that references an environment
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeploymentSimple {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -11908,6 +12373,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub environment: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -11945,6 +12411,7 @@ pub mod types {
         pub task: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub transient_environment: Option<bool>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -12019,6 +12486,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Output {
+        #[serde(default)]
         pub annotations_count: i64,
         #[serde(
             default,
@@ -12048,6 +12516,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckSuite {
+        #[serde(default)]
         pub id: i64,
     }
 
@@ -12066,6 +12535,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub client_secret: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -12088,6 +12558,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub installations_count: Option<i64>,
@@ -12104,6 +12575,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(
             default,
@@ -12112,6 +12584,7 @@ pub mod types {
         )]
         pub pem: String,
         /// The set of permissions for the GitHub app
+        #[serde()]
         pub permissions: Permissions,
         #[serde(
             default,
@@ -12119,6 +12592,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub slug: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -12131,9 +12605,13 @@ pub mod types {
     /// A check performed on the code of a given code change
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckRun {
+        #[serde()]
         pub app: App,
+        #[serde()]
         pub check_suite: CheckSuite,
+        #[serde()]
         pub completed_at: DateTime<Utc>,
+        #[serde()]
         pub conclusion: Conclusion,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub deployment: Option<DeploymentSimple>,
@@ -12161,6 +12639,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -12174,10 +12653,14 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde()]
         pub output: Output,
+        #[serde()]
         pub pull_requests: serde_json::Value,
+        #[serde()]
         pub started_at: DateTime<Utc>,
         /// The phase of the lifecycle that the check is currently in.
+        #[serde()]
         pub status: CheckRunStatus,
         #[serde(
             default,
@@ -12202,7 +12685,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub blob_href: String,
+        #[serde(default)]
         pub end_column: i64,
+        #[serde(default)]
         pub end_line: i64,
         #[serde(
             default,
@@ -12222,7 +12707,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub raw_details: String,
+        #[serde(default)]
         pub start_column: i64,
+        #[serde(default)]
         pub start_line: i64,
         #[serde(
             default,
@@ -12274,6 +12761,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub client_secret: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -12296,6 +12784,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub installations_count: Option<i64>,
@@ -12312,6 +12801,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(
             default,
@@ -12320,6 +12810,7 @@ pub mod types {
         )]
         pub pem: String,
         /// The set of permissions for the GitHub app
+        #[serde()]
         pub permissions: Permissions,
         #[serde(
             default,
@@ -12327,6 +12818,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub slug: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -12345,6 +12837,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub after: String,
+        #[serde()]
         pub app: App,
         #[serde(
             default,
@@ -12358,7 +12851,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub check_runs_url: String,
+        #[serde()]
         pub conclusion: Conclusion,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -12367,6 +12862,7 @@ pub mod types {
         )]
         pub head_branch: String,
         /// Simple Commit
+        #[serde()]
         pub head_commit: SimpleCommit,
         #[serde(
             default,
@@ -12374,7 +12870,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub head_sha: String,
+        #[serde(default)]
         pub id: i64,
+        #[serde(default)]
         pub latest_check_runs_count: i64,
         #[serde(
             default,
@@ -12385,8 +12883,11 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub pull_requests: Vec<PullRequestMinimal>,
         /// Minimal Repository
+        #[serde()]
         pub repository: MinimalRepository,
+        #[serde()]
         pub status: CheckSuiteStatus,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -12398,7 +12899,9 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AutoTriggerChecks {
+        #[serde(default)]
         pub app_id: i64,
+        #[serde(default)]
         pub setting: bool,
     }
 
@@ -12411,8 +12914,10 @@ pub mod types {
     /// Check suite configuration preferences for a repository.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckSuitePreference {
+        #[serde()]
         pub preferences: Preferences,
         /// Minimal Repository
+        #[serde()]
         pub repository: MinimalRepository,
     }
 
@@ -12627,12 +13132,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertItems {
         /// The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+        #[serde()]
         pub created_at: DateTime<Utc>,
         /// The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+        #[serde()]
         pub dismissed_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub dismissed_by: SimpleUser,
         /// **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
+        #[serde()]
         pub dismissed_reason: serde_json::Value,
         /// The GitHub URL of the alert resource.
         #[serde(
@@ -12648,12 +13157,17 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub instances_url: String,
+        #[serde()]
         pub most_recent_instance: CodeScanningAlertInstance,
         /// The security alert number.
+        #[serde(default)]
         pub number: i64,
+        #[serde()]
         pub rule: CodeScanningAlertRuleSummary,
         /// State of a code scanning alert.
+        #[serde()]
         pub state: CodeScanningAlertState,
+        #[serde()]
         pub tool: CodeScanningAnalysisTool,
         /// The REST API URL of the alert resource.
         #[serde(
@@ -12737,12 +13251,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlert {
         /// The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+        #[serde()]
         pub created_at: DateTime<Utc>,
         /// The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+        #[serde()]
         pub dismissed_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub dismissed_by: SimpleUser,
         /// **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
+        #[serde()]
         pub dismissed_reason: serde_json::Value,
         /// The GitHub URL of the alert resource.
         #[serde(
@@ -12760,12 +13278,17 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub instances_url: String,
+        #[serde()]
         pub most_recent_instance: CodeScanningAlertInstance,
         /// The security alert number.
+        #[serde(default)]
         pub number: i64,
+        #[serde()]
         pub rule: CodeScanningAlertRule,
         /// State of a code scanning alert.
+        #[serde()]
         pub state: CodeScanningAlertState,
+        #[serde()]
         pub tool: CodeScanningAnalysisTool,
         /// The REST API URL of the alert resource.
         #[serde(
@@ -12825,7 +13348,9 @@ pub mod types {
         )]
         pub commit_sha: String,
         /// The time that the analysis was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub deletable: bool,
         /// Identifies the variable values associated with the environment in which this analysis was performed.
         #[serde(
@@ -12840,6 +13365,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub error: String,
+        #[serde(default)]
         pub id: i64,
         /// The full Git reference, formatted as `refs/heads/<branch name>`,
         /// `refs/pull/<number>/merge`, or `refs/pull/<number>/head`.
@@ -12850,7 +13376,9 @@ pub mod types {
             rename = "ref"
         )]
         pub ref_: String,
+        #[serde(default)]
         pub results_count: i64,
+        #[serde(default)]
         pub rules_count: i64,
         /// An identifier for the upload.
         #[serde(
@@ -12859,6 +13387,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sarif_id: String,
+        #[serde()]
         pub tool: CodeScanningAnalysisTool,
         #[serde(
             default,
@@ -12987,8 +13516,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CollaboratorPermissions {
+        #[serde(default)]
         pub admin: bool,
+        #[serde(default)]
         pub pull: bool,
+        #[serde(default)]
         pub push: bool,
     }
 
@@ -13043,6 +13575,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -13082,6 +13615,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -13161,6 +13695,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -13198,6 +13733,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -13283,6 +13819,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -13320,6 +13857,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -13389,6 +13927,7 @@ pub mod types {
     /// Repository invitations let you manage who you collaborate with.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepositoryInvitation {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub expired: Option<bool>,
@@ -13398,10 +13937,13 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         /// Simple User
+        #[serde()]
         pub invitee: Invitee,
         /// Simple User
+        #[serde()]
         pub inviter: Inviter,
         #[serde(
             default,
@@ -13410,8 +13952,10 @@ pub mod types {
         )]
         pub node_id: String,
         /// The set of permissions for the GitHub app
+        #[serde()]
         pub permissions: Permissions,
         /// Minimal Repository
+        #[serde()]
         pub repository: MinimalRepository,
         #[serde(
             default,
@@ -13425,6 +13969,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitComment {
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -13438,6 +13983,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commit_id: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -13445,7 +13991,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
+        #[serde(default)]
         pub line: i64,
         #[serde(
             default,
@@ -13459,9 +14007,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub path: String,
+        #[serde(default)]
         pub position: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -13470,12 +14020,14 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     /// Branch Short
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchShort {
+        #[serde()]
         pub commit: Commit,
         #[serde(
             default,
@@ -13483,6 +14035,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+        #[serde(default)]
         pub protected: bool,
     }
 
@@ -13541,8 +14094,10 @@ pub mod types {
         )]
         pub commit_title: String,
         /// Simple User
+        #[serde()]
         pub enabled_by: SimpleUser,
         /// The merge method to use.
+        #[serde()]
         pub merge_method: MergeMethod,
     }
 
@@ -13600,6 +14155,7 @@ pub mod types {
         )]
         pub ref_: String,
         /// A git repository
+        #[serde()]
         pub repo: Repository,
         #[serde(
             default,
@@ -13608,6 +14164,7 @@ pub mod types {
         )]
         pub sha: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -13627,6 +14184,7 @@ pub mod types {
         )]
         pub ref_: String,
         /// A git repository
+        #[serde()]
         pub repo: Repository,
         #[serde(
             default,
@@ -13635,33 +14193,42 @@ pub mod types {
         )]
         pub sha: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestSimpleLinks {
         /// Hypermedia Link
+        #[serde()]
         pub comments: Link,
         /// Hypermedia Link
+        #[serde()]
         pub commits: Link,
         /// Hypermedia Link
+        #[serde()]
         pub html: Link,
         /// Hypermedia Link
+        #[serde()]
         pub issue: Link,
         /// Hypermedia Link
+        #[serde()]
         pub review_comment: Link,
         /// Hypermedia Link
+        #[serde()]
         pub review_comments: Link,
         /// Hypermedia Link
         #[serde(rename = "self")]
         pub self_: Link,
         /// Hypermedia Link
+        #[serde()]
         pub statuses: Link,
     }
 
     /// Pull Request Simple
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestSimple {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -13670,13 +14237,17 @@ pub mod types {
         )]
         pub active_lock_reason: String,
         /// Simple User
+        #[serde()]
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         /// The status of auto merging a pull request.
+        #[serde()]
         pub auto_merge: AutoMerge,
+        #[serde()]
         pub base: Base,
         #[serde(
             default,
@@ -13684,6 +14255,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
+        #[serde()]
         pub closed_at: DateTime<Utc>,
         #[serde(
             default,
@@ -13697,6 +14269,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commits_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -13706,6 +14279,7 @@ pub mod types {
         pub diff_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub draft: Option<bool>,
+        #[serde()]
         pub head: Head,
         #[serde(
             default,
@@ -13713,6 +14287,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -13722,6 +14297,7 @@ pub mod types {
         pub issue_url: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub labels: Vec<Labels>,
+        #[serde(default)]
         pub locked: bool,
         #[serde(
             default,
@@ -13729,8 +14305,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub merge_commit_sha: String,
+        #[serde()]
         pub merged_at: DateTime<Utc>,
         /// A collection of related issues and pull requests.
+        #[serde()]
         pub milestone: Milestone,
         #[serde(
             default,
@@ -13738,6 +14316,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(
             default,
@@ -13779,6 +14358,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -13787,6 +14367,7 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -13804,6 +14385,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub context: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -13811,6 +14393,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -13832,6 +14415,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub target_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -13851,6 +14435,7 @@ pub mod types {
         )]
         pub commit_url: String,
         /// Minimal Repository
+        #[serde()]
         pub repository: MinimalRepository,
         #[serde(
             default,
@@ -13866,6 +14451,7 @@ pub mod types {
         pub state: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub statuses: Vec<SimpleCommitStatus>,
+        #[serde(default)]
         pub total_count: i64,
         #[serde(
             default,
@@ -13897,6 +14483,7 @@ pub mod types {
         )]
         pub created_at: String,
         /// Simple User
+        #[serde()]
         pub creator: SimpleUser,
         #[serde(
             default,
@@ -13904,6 +14491,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -14065,13 +14653,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommunityProfileFiles {
         /// Code Of Conduct
+        #[serde()]
         pub code_of_conduct: CodeOfConduct,
+        #[serde()]
         pub code_of_conduct_file: CodeOfConductFile,
+        #[serde()]
         pub contributing: Contributing,
+        #[serde()]
         pub issue_template: IssueTemplate,
         /// License Simple
+        #[serde()]
         pub license: License,
+        #[serde()]
         pub pull_request_template: PullRequestTemplate,
+        #[serde()]
         pub readme: Readme,
     }
 
@@ -14092,14 +14687,18 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub documentation: String,
+        #[serde()]
         pub files: Files,
+        #[serde(default)]
         pub health_percentage: i64,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
     }
 
     /// Diff Entry
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DiffEntry {
+        #[serde(default)]
         pub additions: i64,
         #[serde(
             default,
@@ -14107,6 +14706,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub blob_url: String,
+        #[serde(default)]
         pub changes: i64,
         #[serde(
             default,
@@ -14114,6 +14714,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub contents_url: String,
+        #[serde(default)]
         pub deletions: i64,
         #[serde(
             default,
@@ -14185,8 +14786,11 @@ pub mod types {
     /// Commit Comparison
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitComparison {
+        #[serde(default)]
         pub ahead_by: i64,
+        #[serde()]
         pub base_commit: Commit,
+        #[serde(default)]
         pub behind_by: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub commits: Vec<Commit>,
@@ -14204,6 +14808,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde()]
         pub merge_base_commit: Commit,
         #[serde(
             default,
@@ -14217,7 +14822,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub permalink_url: String,
+        #[serde()]
         pub status: CommitComparisonStatus,
+        #[serde(default)]
         pub total_commits: i64,
         #[serde(
             default,
@@ -14236,6 +14843,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -14276,6 +14884,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Entries {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -14319,6 +14928,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -14361,6 +14971,7 @@ pub mod types {
     /// Content Tree
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentTree {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -14400,6 +15011,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -14441,6 +15053,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentDirectory {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -14484,6 +15097,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -14526,6 +15140,7 @@ pub mod types {
     /// Content File
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentFile {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -14575,6 +15190,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -14629,6 +15245,7 @@ pub mod types {
     /// An object describing a symlink
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentSymlink {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -14666,6 +15283,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -14714,6 +15332,7 @@ pub mod types {
     /// An object describing a symlink
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentSubmodule {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -14751,6 +15370,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -15006,8 +15626,10 @@ pub mod types {
     /// File Commit
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct FileCommitData {
+        #[serde()]
         pub commit: Commit,
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -15020,6 +15642,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub avatar_url: String,
+        #[serde(default)]
         pub contributions: i64,
         #[serde(
             default,
@@ -15169,8 +15792,10 @@ pub mod types {
     /// The status of a deployment.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeploymentStatus {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub creator: Creator,
         #[serde(
             default,
@@ -15196,6 +15821,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub environment_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -15218,6 +15844,7 @@ pub mod types {
         )]
         pub repository_url: String,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
         #[serde(
             default,
@@ -15225,6 +15852,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub target_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -15237,12 +15865,15 @@ pub mod types {
     /// The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeploymentBranchPolicy {
+        #[serde(default)]
         pub custom_branch_policies: bool,
+        #[serde(default)]
         pub protected_branches: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectionRules {
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -15264,6 +15895,7 @@ pub mod types {
     /// Details of a deployment environment
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnvironmentData {
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
@@ -15273,6 +15905,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -15288,6 +15921,7 @@ pub mod types {
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub protection_rules: Vec<ProtectionRules>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -15347,6 +15981,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -15359,6 +15994,7 @@ pub mod types {
     /// Identifying information for the git-user
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitCommitAuthor {
+        #[serde()]
         pub date: DateTime<Utc>,
         #[serde(
             default,
@@ -15377,6 +16013,7 @@ pub mod types {
     /// Identifying information for the git-user
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitCommitCommitter {
+        #[serde()]
         pub date: DateTime<Utc>,
         #[serde(
             default,
@@ -15434,6 +16071,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub signature: String,
+        #[serde(default)]
         pub verified: bool,
     }
 
@@ -15441,7 +16079,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitCommit {
         /// Simple User
+        #[serde()]
         pub author: Author,
+        #[serde()]
         pub committer: Committer,
         #[serde(
             default,
@@ -15469,6 +16109,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde()]
         pub tree: Tree,
         #[serde(
             default,
@@ -15476,6 +16117,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde()]
         pub verification: Verification,
     }
 
@@ -15511,6 +16153,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde()]
         pub object: Object,
         #[serde(
             default,
@@ -15564,6 +16207,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde()]
         pub object: Object,
         #[serde(
             default,
@@ -15577,6 +16221,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub tag: String,
+        #[serde()]
         pub tagger: Tagger,
         #[serde(
             default,
@@ -15637,6 +16282,7 @@ pub mod types {
         /// Objects specifying a tree structure
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub tree: Vec<Tree>,
+        #[serde(default)]
         pub truncated: bool,
         #[serde(
             default,
@@ -15648,6 +16294,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct HookResponse {
+        #[serde(default)]
         pub code: i64,
         #[serde(
             default,
@@ -15730,13 +16377,18 @@ pub mod types {
     /// Webhooks for repositories.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Hook {
+        #[serde(default)]
         pub active: bool,
+        #[serde()]
         pub config: Config,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         /// Determines what events the hook is triggered for. Default: ['push'].
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub events: Vec<String>,
+        #[serde(default)]
         pub id: i64,
+        #[serde()]
         pub last_response: HookResponse,
         #[serde(
             default,
@@ -15763,6 +16415,7 @@ pub mod types {
             rename = "type"
         )]
         pub type_: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -15902,6 +16555,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repository_url: String,
+        #[serde()]
         pub status: ImportStatus,
         #[serde(
             default,
@@ -15958,6 +16612,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub email: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -16012,6 +16667,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub ref_name: String,
+        #[serde(default)]
         pub size: i64,
     }
 
@@ -16046,6 +16702,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub dismissal_message: String,
+        #[serde(default)]
         pub review_id: i64,
         #[serde(
             default,
@@ -16075,6 +16732,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub column_name: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -16082,6 +16740,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub previous_column_name: String,
+        #[serde(default)]
         pub project_id: i64,
         #[serde(
             default,
@@ -16165,6 +16824,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -16202,6 +16862,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -16287,6 +16948,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -16324,6 +16986,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -16409,6 +17072,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -16446,6 +17110,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -16531,6 +17196,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -16568,6 +17234,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -16606,6 +17273,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEvent {
         /// Actor
+        #[serde()]
         pub actor: Actor,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub assignee: Option<Assignee>,
@@ -16625,6 +17293,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commit_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismissed_review: Option<IssueEventDismissedReview>,
@@ -16634,6 +17303,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub issue: Option<IssueSimple>,
@@ -16693,6 +17363,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LabeledIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -16718,8 +17389,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
+        #[serde()]
         pub label: Label,
         #[serde(
             default,
@@ -16728,6 +17401,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -16757,6 +17431,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UnlabeledIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -16782,8 +17457,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
+        #[serde()]
         pub label: Label,
         #[serde(
             default,
@@ -16792,6 +17469,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -16805,10 +17483,13 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AssignedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         /// Simple User
+        #[serde()]
         pub assignee: SimpleUser,
         /// Simple User
+        #[serde()]
         pub assigner: SimpleUser,
         #[serde(
             default,
@@ -16834,6 +17515,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -16842,6 +17524,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -16855,10 +17538,13 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UnassignedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         /// Simple User
+        #[serde()]
         pub assignee: SimpleUser,
         /// Simple User
+        #[serde()]
         pub assigner: SimpleUser,
         #[serde(
             default,
@@ -16884,6 +17570,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -16892,6 +17579,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -16915,6 +17603,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MilestonedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -16940,8 +17629,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         /// A collection of related issues and pull requests.
+        #[serde()]
         pub milestone: Milestone,
         #[serde(
             default,
@@ -16950,6 +17641,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -16973,6 +17665,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DemilestonedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -16998,8 +17691,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         /// A collection of related issues and pull requests.
+        #[serde()]
         pub milestone: Milestone,
         #[serde(
             default,
@@ -17008,6 +17703,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -17037,6 +17733,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RenamedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17062,6 +17759,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17070,7 +17768,9 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
+        #[serde()]
         pub rename: Rename,
         #[serde(
             default,
@@ -17084,6 +17784,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewRequestedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17109,6 +17810,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17117,12 +17819,14 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub requested_reviewer: Option<SimpleUser>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub requested_team: Option<Team>,
         /// Simple User
+        #[serde()]
         pub review_requester: SimpleUser,
         #[serde(
             default,
@@ -17136,6 +17840,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewRequestRemovedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17161,6 +17866,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17169,12 +17875,14 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub requested_reviewer: Option<SimpleUser>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub requested_team: Option<Team>,
         /// Simple User
+        #[serde()]
         pub review_requester: SimpleUser,
         #[serde(
             default,
@@ -17198,6 +17906,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub dismissal_message: String,
+        #[serde(default)]
         pub review_id: i64,
         #[serde(
             default,
@@ -17211,6 +17920,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewDismissedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17230,6 +17940,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub created_at: String,
+        #[serde()]
         pub dismissed_review: DismissedReview,
         #[serde(
             default,
@@ -17237,6 +17948,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17245,6 +17957,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -17258,6 +17971,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LockedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17283,6 +17997,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17297,6 +18012,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -17314,6 +18030,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub column_name: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17321,6 +18038,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub previous_column_name: String,
+        #[serde(default)]
         pub project_id: i64,
         #[serde(
             default,
@@ -17340,6 +18058,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddedProjectIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17365,6 +18084,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17373,6 +18093,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub project_card: Option<ProjectCard>,
@@ -17392,6 +18113,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub column_name: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17399,6 +18121,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub previous_column_name: String,
+        #[serde(default)]
         pub project_id: i64,
         #[serde(
             default,
@@ -17418,6 +18141,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MovedColumnInProjectIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17443,6 +18167,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17451,6 +18176,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub project_card: Option<ProjectCard>,
@@ -17470,6 +18196,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub column_name: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17477,6 +18204,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub previous_column_name: String,
+        #[serde(default)]
         pub project_id: i64,
         #[serde(
             default,
@@ -17496,6 +18224,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RemovedFromProjectIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17521,6 +18250,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17529,6 +18259,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub project_card: Option<ProjectCard>,
@@ -17548,6 +18279,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub column_name: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17555,6 +18287,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub previous_column_name: String,
+        #[serde(default)]
         pub project_id: i64,
         #[serde(
             default,
@@ -17574,6 +18307,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ConvertedNoteIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17599,6 +18333,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17607,6 +18342,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub project_card: Option<ProjectCard>,
@@ -17622,6 +18358,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEventFor {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17647,8 +18384,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
+        #[serde()]
         pub label: Label,
         #[serde(
             default,
@@ -17657,6 +18396,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -17670,8 +18410,10 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommentEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -17691,6 +18433,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body_text: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -17704,6 +18447,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17721,6 +18465,7 @@ pub mod types {
         pub performed_via_github_app: Option<Integration>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -17729,6 +18474,7 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: SimpleUser,
     }
 
@@ -17750,6 +18496,7 @@ pub mod types {
     pub struct TimelineCrossReferencedEvent {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub actor: Option<SimpleUser>,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -17757,13 +18504,16 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde()]
         pub source: Source,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
     }
 
     /// Identifying information for the git-user
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommittedEventAuthor {
+        #[serde()]
         pub date: DateTime<Utc>,
         #[serde(
             default,
@@ -17782,6 +18532,7 @@ pub mod types {
     /// Identifying information for the git-user
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommittedEventCommitter {
+        #[serde()]
         pub date: DateTime<Utc>,
         #[serde(
             default,
@@ -17839,6 +18590,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub signature: String,
+        #[serde(default)]
         pub verified: bool,
     }
 
@@ -17846,7 +18598,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommittedEvent {
         /// Simple User
+        #[serde()]
         pub author: Author,
+        #[serde()]
         pub committer: Committer,
         #[serde(
             default,
@@ -17880,6 +18634,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde()]
         pub tree: Tree,
         #[serde(
             default,
@@ -17887,6 +18642,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde()]
         pub verification: Verification,
     }
 
@@ -17912,15 +18668,19 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineReviewedEventLinks {
+        #[serde()]
         pub html: Html,
+        #[serde()]
         pub pull_request: PullRequest,
     }
 
     /// Timeline Reviewed Event
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineReviewedEvent {
+        #[serde()]
         pub links: Links,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -17958,6 +18718,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -17980,6 +18741,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub submitted_at: Option<DateTime<Utc>>,
         /// Simple User
+        #[serde()]
         pub user: SimpleUser,
     }
 
@@ -18058,8 +18820,10 @@ pub mod types {
     /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewComment {
+        #[serde()]
         pub links: Links,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -18085,6 +18849,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commit_id: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -18098,6 +18863,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub in_reply_to_id: Option<i64>,
@@ -18117,6 +18883,7 @@ pub mod types {
         pub original_commit_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub original_line: Option<i64>,
+        #[serde(default)]
         pub original_position: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub original_start_line: Option<i64>,
@@ -18126,7 +18893,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub path: String,
+        #[serde(default)]
         pub position: i64,
+        #[serde(default)]
         pub pull_request_review_id: i64,
         #[serde(
             default,
@@ -18142,6 +18911,7 @@ pub mod types {
         pub start_line: Option<i64>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub start_side: Option<StartSide>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -18150,6 +18920,7 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: SimpleUser,
     }
 
@@ -18201,8 +18972,10 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineAssignedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         /// Simple User
+        #[serde()]
         pub assignee: SimpleUser,
         #[serde(
             default,
@@ -18228,6 +19001,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -18236,6 +19010,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -18249,8 +19024,10 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineUnassignedIssueEvent {
         /// Simple User
+        #[serde()]
         pub actor: SimpleUser,
         /// Simple User
+        #[serde()]
         pub assignee: SimpleUser,
         #[serde(
             default,
@@ -18276,6 +19053,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub event: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -18284,6 +19062,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(
             default,
@@ -18306,6 +19085,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub created_at: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -18313,6 +19093,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub key: String,
+        #[serde(default)]
         pub read_only: bool,
         #[serde(
             default,
@@ -18326,6 +19107,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde(default)]
         pub verified: bool,
     }
 
@@ -18359,6 +19141,7 @@ pub mod types {
     /// License Content
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LicenseContent {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -18391,6 +19174,7 @@ pub mod types {
         )]
         pub html_url: String,
         /// License Simple
+        #[serde()]
         pub license: License,
         #[serde(
             default,
@@ -18410,6 +19194,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -18495,10 +19280,12 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde()]
         pub domains: serde_json::Value,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub expires_at: Option<NaiveDate>,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
     }
 
@@ -18539,6 +19326,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub cname: String,
+        #[serde(default)]
         pub custom_404: bool,
         #[serde(
             default,
@@ -18550,10 +19338,12 @@ pub mod types {
         pub https_certificate: Option<PagesHttpsCertificate>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub https_enforced: Option<bool>,
+        #[serde(default)]
         pub public: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub source: Option<PagesSourceHash>,
         /// The status of the most recent build of the Page.
+        #[serde()]
         pub status: PageStatus,
         #[serde(
             default,
@@ -18624,6 +19414,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -18661,6 +19452,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -18704,10 +19496,14 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commit: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub duration: i64,
+        #[serde()]
         pub error: Error,
         /// Simple User
+        #[serde()]
         pub pusher: Pusher,
         #[serde(
             default,
@@ -18715,6 +19511,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub status: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -19026,6 +19823,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -19057,6 +19855,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -19087,8 +19886,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestHeadRepoPermissions {
+        #[serde(default)]
         pub admin: bool,
+        #[serde(default)]
         pub pull: bool,
+        #[serde(default)]
         pub push: bool,
     }
 
@@ -19140,6 +19942,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub archive_url: String,
+        #[serde(default)]
         pub archived: bool,
         #[serde(
             default,
@@ -19201,6 +20004,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub contributors_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -19220,6 +20024,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub disabled: bool,
         #[serde(
             default,
@@ -19233,8 +20038,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub fork: bool,
+        #[serde(default)]
         pub forks: i64,
+        #[serde(default)]
         pub forks_count: i64,
         #[serde(
             default,
@@ -19272,10 +20080,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub git_url: String,
+        #[serde(default)]
         pub has_downloads: bool,
+        #[serde(default)]
         pub has_issues: bool,
+        #[serde(default)]
         pub has_pages: bool,
+        #[serde(default)]
         pub has_projects: bool,
+        #[serde(default)]
         pub has_wiki: bool,
         #[serde(
             default,
@@ -19295,6 +20108,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -19339,6 +20153,7 @@ pub mod types {
         )]
         pub languages_url: String,
         /// License Simple
+        #[serde()]
         pub license: License,
         #[serde(
             default,
@@ -19382,12 +20197,16 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub notifications_url: String,
+        #[serde(default)]
         pub open_issues: i64,
+        #[serde(default)]
         pub open_issues_count: i64,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
+        #[serde(default)]
         pub private: bool,
         #[serde(
             default,
@@ -19395,6 +20214,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub pulls_url: String,
+        #[serde()]
         pub pushed_at: DateTime<Utc>,
         #[serde(
             default,
@@ -19402,6 +20222,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub releases_url: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -19409,6 +20230,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub ssh_url: String,
+        #[serde(default)]
         pub stargazers_count: i64,
         #[serde(
             default,
@@ -19466,6 +20288,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub trees_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -19473,7 +20296,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde(default)]
         pub watchers: i64,
+        #[serde(default)]
         pub watchers_count: i64,
     }
 
@@ -19521,6 +20346,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -19552,6 +20378,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -19595,6 +20422,7 @@ pub mod types {
             rename = "ref"
         )]
         pub ref_: String,
+        #[serde()]
         pub repo: Repo,
         #[serde(
             default,
@@ -19603,6 +20431,7 @@ pub mod types {
         )]
         pub sha: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -19650,6 +20479,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -19681,6 +20511,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -19711,8 +20542,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestBaseRepoPermissions {
+        #[serde(default)]
         pub admin: bool,
+        #[serde(default)]
         pub pull: bool,
+        #[serde(default)]
         pub push: bool,
     }
 
@@ -19730,6 +20564,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub archive_url: String,
+        #[serde(default)]
         pub archived: bool,
         #[serde(
             default,
@@ -19791,6 +20626,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub contributors_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -19810,6 +20646,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub disabled: bool,
         #[serde(
             default,
@@ -19823,8 +20660,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub fork: bool,
+        #[serde(default)]
         pub forks: i64,
+        #[serde(default)]
         pub forks_count: i64,
         #[serde(
             default,
@@ -19862,10 +20702,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub git_url: String,
+        #[serde(default)]
         pub has_downloads: bool,
+        #[serde(default)]
         pub has_issues: bool,
+        #[serde(default)]
         pub has_pages: bool,
+        #[serde(default)]
         pub has_projects: bool,
+        #[serde(default)]
         pub has_wiki: bool,
         #[serde(
             default,
@@ -19885,6 +20730,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -19929,6 +20775,7 @@ pub mod types {
         )]
         pub languages_url: String,
         /// License Simple
+        #[serde()]
         pub license: License,
         #[serde(
             default,
@@ -19972,12 +20819,16 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub notifications_url: String,
+        #[serde(default)]
         pub open_issues: i64,
+        #[serde(default)]
         pub open_issues_count: i64,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
+        #[serde(default)]
         pub private: bool,
         #[serde(
             default,
@@ -19985,6 +20836,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub pulls_url: String,
+        #[serde()]
         pub pushed_at: DateTime<Utc>,
         #[serde(
             default,
@@ -19992,6 +20844,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub releases_url: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -19999,6 +20852,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub ssh_url: String,
+        #[serde(default)]
         pub stargazers_count: i64,
         #[serde(
             default,
@@ -20056,6 +20910,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub trees_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -20063,7 +20918,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde(default)]
         pub watchers: i64,
+        #[serde(default)]
         pub watchers_count: i64,
     }
 
@@ -20111,6 +20968,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -20142,6 +21000,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -20185,6 +21044,7 @@ pub mod types {
             rename = "ref"
         )]
         pub ref_: String,
+        #[serde()]
         pub repo: Repo,
         #[serde(
             default,
@@ -20193,27 +21053,35 @@ pub mod types {
         )]
         pub sha: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestLinks {
         /// Hypermedia Link
+        #[serde()]
         pub comments: Link,
         /// Hypermedia Link
+        #[serde()]
         pub commits: Link,
         /// Hypermedia Link
+        #[serde()]
         pub html: Link,
         /// Hypermedia Link
+        #[serde()]
         pub issue: Link,
         /// Hypermedia Link
+        #[serde()]
         pub review_comment: Link,
         /// Hypermedia Link
+        #[serde()]
         pub review_comments: Link,
         /// Hypermedia Link
         #[serde(rename = "self")]
         pub self_: Link,
         /// Hypermedia Link
+        #[serde()]
         pub statuses: Link,
     }
 
@@ -20268,6 +21136,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -20305,6 +21174,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -20342,6 +21212,7 @@ pub mod types {
     /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestData {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -20349,15 +21220,20 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub active_lock_reason: String,
+        #[serde(default)]
         pub additions: i64,
         /// Simple User
+        #[serde()]
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         /// The status of auto merging a pull request.
+        #[serde()]
         pub auto_merge: AutoMerge,
+        #[serde()]
         pub base: Base,
         #[serde(
             default,
@@ -20365,8 +21241,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
+        #[serde(default)]
         pub changed_files: i64,
+        #[serde()]
         pub closed_at: DateTime<Utc>,
+        #[serde(default)]
         pub comments: i64,
         #[serde(
             default,
@@ -20374,6 +21253,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub comments_url: String,
+        #[serde(default)]
         pub commits: i64,
         #[serde(
             default,
@@ -20381,7 +21261,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commits_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub deletions: i64,
         #[serde(
             default,
@@ -20391,6 +21273,7 @@ pub mod types {
         pub diff_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub draft: Option<bool>,
+        #[serde()]
         pub head: Head,
         #[serde(
             default,
@@ -20398,6 +21281,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -20407,7 +21291,9 @@ pub mod types {
         pub issue_url: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub labels: Vec<Labels>,
+        #[serde(default)]
         pub locked: bool,
+        #[serde(default)]
         pub maintainer_can_modify: bool,
         #[serde(
             default,
@@ -20415,6 +21301,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub merge_commit_sha: String,
+        #[serde(default)]
         pub mergeable: bool,
         #[serde(
             default,
@@ -20422,11 +21309,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub mergeable_state: String,
+        #[serde(default)]
         pub merged: bool,
+        #[serde()]
         pub merged_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub merged_by: MergedBy,
         /// A collection of related issues and pull requests.
+        #[serde()]
         pub milestone: Milestone,
         #[serde(
             default,
@@ -20434,6 +21325,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(
             default,
@@ -20453,6 +21345,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub review_comment_url: String,
+        #[serde(default)]
         pub review_comments: i64,
         #[serde(
             default,
@@ -20461,6 +21354,7 @@ pub mod types {
         )]
         pub review_comments_url: String,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
         #[serde(
             default,
@@ -20474,6 +21368,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -20482,12 +21377,14 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     /// Pull Request Merge Result
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestMergeResult {
+        #[serde(default)]
         pub merged: bool,
         #[serde(
             default,
@@ -20525,8 +21422,10 @@ pub mod types {
     /// Pull Request Reviews are reviews on pull requests.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewData {
+        #[serde()]
         pub links: Links,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -20558,6 +21457,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -20580,14 +21480,17 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub submitted_at: Option<DateTime<Utc>>,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewCommentLinks {
         /// Hypermedia Link
+        #[serde()]
         pub html: Link,
         /// Hypermedia Link
+        #[serde()]
         pub pull_request: Link,
         /// Hypermedia Link
         #[serde(rename = "self")]
@@ -20623,8 +21526,10 @@ pub mod types {
     /// Legacy Review Comment
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewComment {
+        #[serde()]
         pub links: Links,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -20650,6 +21555,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commit_id: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -20663,6 +21569,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub in_reply_to_id: Option<i64>,
@@ -20682,6 +21589,7 @@ pub mod types {
         pub original_commit_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub original_line: Option<i64>,
+        #[serde(default)]
         pub original_position: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub original_start_line: Option<i64>,
@@ -20691,7 +21599,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub path: String,
+        #[serde(default)]
         pub position: i64,
+        #[serde(default)]
         pub pull_request_review_id: i64,
         #[serde(
             default,
@@ -20707,6 +21617,7 @@ pub mod types {
         pub start_line: Option<i64>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub start_side: Option<StartSide>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -20715,6 +21626,7 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -20795,6 +21707,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -20832,6 +21745,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -20881,8 +21795,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub content_type: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub download_count: i64,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -20902,11 +21819,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub size: i64,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub uploader: Uploader,
         #[serde(
             default,
@@ -20928,6 +21849,7 @@ pub mod types {
         )]
         pub assets_url: String,
         /// Simple User
+        #[serde()]
         pub author: SimpleUser,
         #[serde(
             default,
@@ -20947,6 +21869,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body_text: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -20954,6 +21877,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub discussion_url: String,
+        #[serde(default)]
         pub draft: bool,
         #[serde(
             default,
@@ -20961,6 +21885,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -20974,7 +21899,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub prerelease: bool,
+        #[serde()]
         pub published_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
@@ -21085,8 +22012,10 @@ pub mod types {
     /// Stargazer
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Stargazer {
+        #[serde()]
         pub starred_at: DateTime<Utc>,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -21095,7 +22024,9 @@ pub mod types {
     pub struct CommitActivity {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub days: Vec<i64>,
+        #[serde(default)]
         pub total: i64,
+        #[serde(default)]
         pub week: i64,
     }
 
@@ -21115,7 +22046,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContributorActivity {
         /// Simple User
+        #[serde()]
         pub author: Author,
+        #[serde(default)]
         pub total: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub weeks: Vec<Weeks>,
@@ -21132,7 +22065,9 @@ pub mod types {
     /// Repository invitations let you manage who you collaborate with.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepositorySubscription {
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub ignored: bool,
         #[serde(
             default,
@@ -21146,6 +22081,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repository_url: String,
+        #[serde(default)]
         pub subscribed: bool,
         #[serde(
             default,
@@ -21158,6 +22094,7 @@ pub mod types {
     /// Tag
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Tag {
+        #[serde()]
         pub commit: Commit,
         #[serde(
             default,
@@ -21194,8 +22131,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Traffic {
+        #[serde(default)]
         pub count: i64,
+        #[serde()]
         pub timestamp: DateTime<Utc>,
+        #[serde(default)]
         pub uniques: i64,
     }
 
@@ -21204,13 +22144,16 @@ pub mod types {
     pub struct CloneTraffic {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub clones: Vec<Traffic>,
+        #[serde(default)]
         pub count: i64,
+        #[serde(default)]
         pub uniques: i64,
     }
 
     /// Content Traffic
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentTraffic {
+        #[serde(default)]
         pub count: i64,
         #[serde(
             default,
@@ -21224,12 +22167,14 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+        #[serde(default)]
         pub uniques: i64,
     }
 
     /// Referrer Traffic
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReferrerTraffic {
+        #[serde(default)]
         pub count: i64,
         #[serde(
             default,
@@ -21237,13 +22182,16 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub referrer: String,
+        #[serde(default)]
         pub uniques: i64,
     }
 
     /// View Traffic
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ViewTraffic {
+        #[serde(default)]
         pub count: i64,
+        #[serde(default)]
         pub uniques: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub views: Vec<Traffic>,
@@ -21332,10 +22280,13 @@ pub mod types {
     pub struct ScimGroupListEnterprise {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub resources: Vec<Resources>,
+        #[serde(default)]
         pub items_per_page: f64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
+        #[serde(default)]
         pub start_index: f64,
+        #[serde(default)]
         pub total_results: f64,
     }
 
@@ -21473,10 +22424,13 @@ pub mod types {
     pub struct ScimUserListEnterprise {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub resources: Vec<Resources>,
+        #[serde(default)]
         pub items_per_page: f64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
+        #[serde(default)]
         pub start_index: f64,
+        #[serde(default)]
         pub total_results: f64,
     }
 
@@ -21607,6 +22561,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Operations {
+        #[serde()]
         pub op: Op,
         #[serde(
             default,
@@ -21625,6 +22580,7 @@ pub mod types {
     /// SCIM /Users provisioning endpoints
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUser {
+        #[serde(default)]
         pub active: bool,
         #[serde(
             default,
@@ -21649,7 +22605,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub id: String,
+        #[serde()]
         pub meta: Meta,
+        #[serde()]
         pub name: Name,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub operations: Vec<Operations>,
@@ -21671,11 +22629,14 @@ pub mod types {
     pub struct ScimUserList {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub resources: Vec<ScimUser>,
+        #[serde(default)]
         pub items_per_page: i64,
         /// SCIM schema used.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
+        #[serde(default)]
         pub start_index: i64,
+        #[serde(default)]
         pub total_results: i64,
     }
 
@@ -21761,7 +22722,9 @@ pub mod types {
         )]
         pub path: String,
         /// Minimal Repository
+        #[serde()]
         pub repository: MinimalRepository,
+        #[serde(default)]
         pub score: f64,
         #[serde(
             default,
@@ -21781,6 +22744,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitSearchResultItemAuthor {
+        #[serde()]
         pub date: DateTime<Utc>,
         #[serde(
             default,
@@ -21822,8 +22786,11 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitSearchResultItem {
         /// Simple User
+        #[serde()]
         pub author: Author,
+        #[serde(default)]
         pub comment_count: i64,
+        #[serde()]
         pub committer: Committer,
         #[serde(
             default,
@@ -21831,6 +22798,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub message: String,
+        #[serde()]
         pub tree: Tree,
         #[serde(
             default,
@@ -21868,6 +22836,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitSearchResultItemData {
         /// Simple User
+        #[serde()]
         pub author: Author,
         #[serde(
             default,
@@ -21875,7 +22844,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub comments_url: String,
+        #[serde()]
         pub commit: Commit,
+        #[serde()]
         pub committer: Committer,
         #[serde(
             default,
@@ -21892,7 +22863,9 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub parents: Vec<Parents>,
         /// Minimal Repository
+        #[serde()]
         pub repository: MinimalRepository,
+        #[serde(default)]
         pub score: f64,
         #[serde(
             default,
@@ -21958,10 +22931,12 @@ pub mod types {
         )]
         pub active_lock_reason: String,
         /// Simple User
+        #[serde()]
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
+        #[serde()]
         pub author_association: AuthorAssociation,
         #[serde(
             default,
@@ -21981,7 +22956,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body_text: String,
+        #[serde()]
         pub closed_at: DateTime<Utc>,
+        #[serde(default)]
         pub comments: i64,
         #[serde(
             default,
@@ -21989,6 +22966,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub comments_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub draft: Option<bool>,
@@ -22004,6 +22982,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub labels: Vec<Labels>,
@@ -22013,8 +22992,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub labels_url: String,
+        #[serde(default)]
         pub locked: bool,
         /// A collection of related issues and pull requests.
+        #[serde()]
         pub milestone: Milestone,
         #[serde(
             default,
@@ -22022,6 +23003,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub performed_via_github_app: Option<PerformedViaGithubApp>,
@@ -22035,6 +23017,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repository_url: String,
+        #[serde(default)]
         pub score: f64,
         #[serde(
             default,
@@ -22056,6 +23039,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -22064,6 +23048,7 @@ pub mod types {
         )]
         pub url: String,
         /// Simple User
+        #[serde()]
         pub user: User,
     }
 
@@ -22076,6 +23061,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub color: String,
+        #[serde(default)]
         pub default: bool,
         #[serde(
             default,
@@ -22083,6 +23069,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -22096,6 +23083,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
+        #[serde(default)]
         pub score: f64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub text_matches: Option<SearchResultTextMatches>,
@@ -22109,8 +23097,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepoSearchResultItemPermissions {
+        #[serde(default)]
         pub admin: bool,
+        #[serde(default)]
         pub pull: bool,
+        #[serde(default)]
         pub push: bool,
     }
 
@@ -22129,6 +23120,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub archive_url: String,
+        #[serde(default)]
         pub archived: bool,
         #[serde(
             default,
@@ -22190,6 +23182,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub contributors_url: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -22211,6 +23204,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde(default)]
         pub disabled: bool,
         #[serde(
             default,
@@ -22224,8 +23218,11 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub fork: bool,
+        #[serde(default)]
         pub forks: i64,
+        #[serde(default)]
         pub forks_count: i64,
         #[serde(
             default,
@@ -22263,10 +23260,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub git_url: String,
+        #[serde(default)]
         pub has_downloads: bool,
+        #[serde(default)]
         pub has_issues: bool,
+        #[serde(default)]
         pub has_pages: bool,
+        #[serde(default)]
         pub has_projects: bool,
+        #[serde(default)]
         pub has_wiki: bool,
         #[serde(
             default,
@@ -22286,6 +23288,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -22330,6 +23333,7 @@ pub mod types {
         )]
         pub languages_url: String,
         /// License Simple
+        #[serde()]
         pub license: License,
         #[serde(
             default,
@@ -22373,12 +23377,16 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub notifications_url: String,
+        #[serde(default)]
         pub open_issues: i64,
+        #[serde(default)]
         pub open_issues_count: i64,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
+        #[serde(default)]
         pub private: bool,
         #[serde(
             default,
@@ -22386,6 +23394,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub pulls_url: String,
+        #[serde()]
         pub pushed_at: DateTime<Utc>,
         #[serde(
             default,
@@ -22393,7 +23402,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub releases_url: String,
+        #[serde(default)]
         pub score: f64,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -22401,6 +23412,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub ssh_url: String,
+        #[serde(default)]
         pub stargazers_count: i64,
         #[serde(
             default,
@@ -22460,6 +23472,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub trees_url: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -22467,7 +23480,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde(default)]
         pub watchers: i64,
+        #[serde(default)]
         pub watchers_count: i64,
     }
 
@@ -22508,6 +23523,7 @@ pub mod types {
     pub struct TopicSearchResultItem {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub aliases: Vec<Aliases>,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -22515,6 +23531,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub created_by: String,
+        #[serde(default)]
         pub curated: bool,
         #[serde(
             default,
@@ -22528,6 +23545,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub display_name: String,
+        #[serde(default)]
         pub featured: bool,
         #[serde(
             default,
@@ -22551,6 +23569,7 @@ pub mod types {
         pub released: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub repository_count: Option<i64>,
+        #[serde(default)]
         pub score: f64,
         #[serde(
             default,
@@ -22560,6 +23579,7 @@ pub mod types {
         pub short_description: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub text_matches: Option<SearchResultTextMatches>,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
     }
 
@@ -22640,6 +23660,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -22687,7 +23708,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub score: f64,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -22745,6 +23768,7 @@ pub mod types {
         pub blog: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub business_plus: Option<bool>,
+        #[serde(default)]
         pub collaborators: i64,
         #[serde(
             default,
@@ -22752,7 +23776,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub company: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub disk_usage: i64,
         #[serde(
             default,
@@ -22766,6 +23792,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub followers: i64,
         #[serde(
             default,
@@ -22773,6 +23800,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub followers_url: String,
+        #[serde(default)]
         pub following: i64,
         #[serde(
             default,
@@ -22792,6 +23820,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub gravatar_id: String,
+        #[serde(default)]
         pub hireable: bool,
         #[serde(
             default,
@@ -22799,6 +23828,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -22836,11 +23866,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub organizations_url: String,
+        #[serde(default)]
         pub owned_private_repos: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub plan: Option<Plan>,
+        #[serde(default)]
         pub private_gists: i64,
+        #[serde(default)]
         pub public_gists: i64,
+        #[serde(default)]
         pub public_repos: i64,
         #[serde(
             default,
@@ -22854,6 +23888,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -22869,6 +23904,7 @@ pub mod types {
         pub subscriptions_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub suspended_at: Option<DateTime<Utc>>,
+        #[serde(default)]
         pub total_private_repos: i64,
         #[serde(
             default,
@@ -22876,6 +23912,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub twitter_username: String,
+        #[serde(default)]
         pub two_factor_authentication: bool,
         #[serde(
             default,
@@ -22884,6 +23921,7 @@ pub mod types {
             rename = "type"
         )]
         pub type_: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -22902,7 +23940,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub email: String,
+        #[serde(default)]
         pub primary: bool,
+        #[serde(default)]
         pub verified: bool,
         #[serde(
             default,
@@ -22977,14 +24017,21 @@ pub mod types {
     /// A unique encryption key
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GpgKey {
+        #[serde(default)]
         pub can_certify: bool,
+        #[serde(default)]
         pub can_encrypt_comms: bool,
+        #[serde(default)]
         pub can_encrypt_storage: bool,
+        #[serde(default)]
         pub can_sign: bool,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub emails: Vec<Emails>,
+        #[serde()]
         pub expires_at: DateTime<Utc>,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -22992,6 +24039,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub key_id: String,
+        #[serde(default)]
         pub primary_key_id: i64,
         #[serde(
             default,
@@ -23012,7 +24060,9 @@ pub mod types {
     /// Key
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Key {
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -23020,6 +24070,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub key: String,
+        #[serde(default)]
         pub read_only: bool,
         #[serde(
             default,
@@ -23033,6 +24084,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+        #[serde(default)]
         pub verified: bool,
     }
 
@@ -23044,6 +24096,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub email: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -23081,6 +24134,7 @@ pub mod types {
     /// User Marketplace Purchase
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UserMarketplacePurchase {
+        #[serde()]
         pub account: MarketplaceAccount,
         #[serde(
             default,
@@ -23088,12 +24142,18 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub billing_cycle: String,
+        #[serde()]
         pub free_trial_ends_on: DateTime<Utc>,
+        #[serde()]
         pub next_billing_date: DateTime<Utc>,
+        #[serde(default)]
         pub on_free_trial: bool,
         /// Marketplace Listing Plan
+        #[serde()]
         pub plan: MarketplaceListingPlan,
+        #[serde(default)]
         pub unit_count: i64,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
     }
 
@@ -23101,7 +24161,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct StarredRepository {
         /// A git repository
+        #[serde()]
         pub repo: Repository,
+        #[serde()]
         pub starred_at: DateTime<Utc>,
     }
 
@@ -23131,6 +24193,7 @@ pub mod types {
     /// Key Simple
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct KeySimple {
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -23360,6 +24423,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub client_secret: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -23382,6 +24446,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub installations_count: Option<i64>,
@@ -23398,6 +24463,7 @@ pub mod types {
         )]
         pub node_id: String,
         /// Simple User
+        #[serde()]
         pub owner: Owner,
         #[serde(
             default,
@@ -23406,6 +24472,7 @@ pub mod types {
         )]
         pub pem: String,
         /// The set of permissions for the GitHub app
+        #[serde()]
         pub permissions: Permissions,
         #[serde(
             default,
@@ -23413,6 +24480,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub slug: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -23527,7 +24595,9 @@ pub mod types {
     /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetAppsCheckAuthorizationOkResponse {
+        #[serde()]
         pub app: App,
+        #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -23541,6 +24611,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub hashed_token: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub installation: Option<Installation>,
@@ -23571,6 +24642,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub token_last_eight: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -23708,6 +24780,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allowed_actions: Option<AllowedActions>,
         /// The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+        #[serde()]
         pub enabled_organizations: EnabledOrganizations,
     }
 
@@ -23715,6 +24788,7 @@ pub mod types {
     pub struct GetEnterpriseAdminListSelectedOrganizationsEnabledGithubActionsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub organizations: Vec<OrganizationSimple>,
+        #[serde(default)]
         pub total_count: f64,
     }
 
@@ -23729,6 +24803,7 @@ pub mod types {
     pub struct GetEnterpriseAdminListSelfHostedRunnerGroupsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runner_groups: Vec<RunnerGroupsEnterprise>,
+        #[serde(default)]
         pub total_count: f64,
     }
 
@@ -23816,6 +24891,7 @@ pub mod types {
     pub struct GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub organizations: Vec<OrganizationSimple>,
+        #[serde(default)]
         pub total_count: f64,
     }
 
@@ -23830,6 +24906,7 @@ pub mod types {
     pub struct GetEnterpriseAdminListSelfHostedRunnersInGroupOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
+        #[serde(default)]
         pub total_count: f64,
     }
 
@@ -23860,6 +24937,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
+        #[serde()]
         pub files: Files,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub public: Option<bool>,
@@ -23914,6 +24992,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repository_selection: String,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -24149,6 +25228,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allowed_actions: Option<AllowedActions>,
         /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+        #[serde()]
         pub enabled_repositories: EnabledRepositories,
     }
 
@@ -24156,6 +25236,7 @@ pub mod types {
     pub struct GetActionsListSelectedRepositoriesEnabledGithubOrganizationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
+        #[serde(default)]
         pub total_count: f64,
     }
 
@@ -24170,6 +25251,7 @@ pub mod types {
     pub struct GetActionsListSelfHostedRunnerGroupsOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runner_groups: Vec<RunnerGroupsOrg>,
+        #[serde(default)]
         pub total_count: f64,
     }
 
@@ -24261,6 +25343,7 @@ pub mod types {
     pub struct GetActionsListRepoAccessSelfHostedRunnerGroupInOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<MinimalRepository>,
+        #[serde(default)]
         pub total_count: f64,
     }
 
@@ -24275,6 +25358,7 @@ pub mod types {
     pub struct GetActionsListSelfHostedRunnersInGroupOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
+        #[serde(default)]
         pub total_count: f64,
     }
 
@@ -24289,6 +25373,7 @@ pub mod types {
     pub struct GetActionsListSelfHostedRunnersOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -24296,6 +25381,7 @@ pub mod types {
     pub struct GetActionsListOrgSecretsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub secrets: Vec<OrganizationActionsSecret>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -24347,6 +25433,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<String>,
         /// Visibility of a secret
+        #[serde()]
         pub visibility: Visibility,
     }
 
@@ -24354,6 +25441,7 @@ pub mod types {
     pub struct GetActionsListSelectedReposOrgSecretOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<MinimalRepository>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -24409,6 +25497,7 @@ pub mod types {
     pub struct OrgsCreateWebhookRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
+        #[serde()]
         pub config: Config,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub events: Vec<String>,
@@ -24498,14 +25587,17 @@ pub mod types {
     pub struct GetOrgsListAppInstallationsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub installations: Vec<Installation>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
     /// Interaction limit settings.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetInteractionsRestrictionsOrgOkResponse {
+        #[serde()]
         pub expires_at: DateTime<Utc>,
         /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+        #[serde()]
         pub limit: InteractionGroup,
         #[serde(
             default,
@@ -24994,6 +26086,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateTeamDiscussionCommentInOrgRequest {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -25038,6 +26131,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateTeamDiscussionInOrgRequest {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -25694,6 +26788,7 @@ pub mod types {
     pub struct GetActionsListArtifactsRepoOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub artifacts: Vec<Artifact>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -25702,6 +26797,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allowed_actions: Option<AllowedActions>,
         /// Whether GitHub Actions is enabled on the repository.
+        #[serde(default)]
         pub enabled: bool,
     }
 
@@ -25709,11 +26805,13 @@ pub mod types {
     pub struct GetActionsListSelfHostedRunnersRepoOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetActionsListWorkflowRunsRepoOkResponse {
+        #[serde(default)]
         pub total_count: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub workflow_runs: Vec<WorkflowRun>,
@@ -25723,6 +26821,7 @@ pub mod types {
     pub struct GetActionsListWorkflowRunArtifactsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub artifacts: Vec<Artifact>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -25733,6 +26832,7 @@ pub mod types {
     pub struct GetActionsListJobsWorkflowRunOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub jobs: Vec<Job>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -25774,6 +26874,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub environment_ids: Vec<i64>,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
     }
 
@@ -25784,6 +26885,7 @@ pub mod types {
     pub struct GetActionsListRepoSecretsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub secrets: Vec<ActionsSecret>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -25808,6 +26910,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetActionsListRepoWorkflowsOkResponse {
+        #[serde(default)]
         pub total_count: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub workflows: Vec<Workflow>,
@@ -25832,6 +26935,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetActionsListWorkflowRunsOkResponse {
+        #[serde(default)]
         pub total_count: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub workflow_runs: Vec<WorkflowRun>,
@@ -25843,6 +26947,7 @@ pub mod types {
         /// The list of status checks to require in order to merge into this branch
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub contexts: Vec<String>,
+        #[serde(default)]
         pub strict: bool,
     }
 
@@ -25887,14 +26992,18 @@ pub mod types {
         pub allow_deletions: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allow_force_pushes: Option<bool>,
+        #[serde(default)]
         pub enforce_admins: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub required_conversation_resolution: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub required_linear_history: Option<bool>,
+        #[serde()]
         pub required_pull_request_reviews: RequiredPullRequestReviews,
+        #[serde()]
         pub required_status_checks: RequiredStatusChecks,
         /// Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
+        #[serde()]
         pub restrictions: Restrictions,
     }
 
@@ -26119,9 +27228,11 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Annotations {
         /// The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
+        #[serde()]
         pub annotation_level: AnnotationLevel,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub end_column: Option<i64>,
+        #[serde(default)]
         pub end_line: i64,
         #[serde(
             default,
@@ -26143,6 +27254,7 @@ pub mod types {
         pub raw_details: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub start_column: Option<i64>,
+        #[serde(default)]
         pub start_line: i64,
         #[serde(
             default,
@@ -26433,6 +27545,7 @@ pub mod types {
     pub struct GetChecksListSuiteOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_runs: Vec<CheckRun>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -26444,6 +27557,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismissed_reason: Option<serde_json::Value>,
         /// Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
+        #[serde()]
         pub state: CodeScanningAlertSetState,
     }
 
@@ -26588,6 +27702,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateCommitCommentRequest {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -26615,6 +27730,7 @@ pub mod types {
     pub struct GetChecksListRefOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_runs: Vec<CheckRun>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -26622,6 +27738,7 @@ pub mod types {
     pub struct GetChecksListSuitesRefOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_suites: Vec<CheckSuite>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -26643,6 +27760,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetReposContentOkResponse {
+        #[serde()]
         pub links: Links,
         #[serde(
             default,
@@ -26686,6 +27804,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
+        #[serde(default)]
         pub size: i64,
         #[serde(
             default,
@@ -26978,6 +28097,7 @@ pub mod types {
         )]
         pub log_url: String,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
         #[serde(
             default,
@@ -27603,14 +28723,17 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MigrationsSetLfsPreferenceRequest {
         /// Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
+        #[serde()]
         pub use_lfs: UseLfs,
     }
 
     /// Interaction limit settings.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetInteractionsRestrictionsRepoOkResponse {
+        #[serde()]
         pub expires_at: DateTime<Utc>,
         /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+        #[serde()]
         pub limit: InteractionGroup,
         #[serde(
             default,
@@ -27737,6 +28860,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateIssueCommentRequest {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -27911,6 +29035,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateIssueRequest {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -28154,6 +29279,7 @@ pub mod types {
     /// The source branch and directory used to publish your Pages site.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReposCreatePagesSiteRequest {
+        #[serde()]
         pub source: Source,
     }
 
@@ -28302,6 +29428,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreatePullRequestReviewComment {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -28701,6 +29828,7 @@ pub mod types {
         )]
         pub body: String,
         /// Event
+        #[serde()]
         pub event: Event,
     }
 
@@ -28865,6 +29993,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateReleaseRequest {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -28873,6 +30002,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub resolution: Option<serde_json::Value>,
         /// Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
+        #[serde()]
         pub state: SecretScanningAlertState,
     }
 
@@ -28921,6 +30051,7 @@ pub mod types {
         )]
         pub description: String,
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
         #[serde(
             default,
@@ -28987,6 +30118,7 @@ pub mod types {
     pub struct GetActionsListEnvironmentSecretsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub secrets: Vec<ActionsSecret>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -29111,6 +30243,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnterpriseAdminProvisionInviteUserRequestEmails {
+        #[serde(default)]
         pub primary: bool,
         #[serde(
             default,
@@ -29144,6 +30277,7 @@ pub mod types {
         pub emails: Vec<Emails>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub groups: Vec<Groups>,
+        #[serde()]
         pub name: Name,
         /// The SCIM schema URIs.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -29174,6 +30308,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnterpriseAdminSetInformationProvisionedUserRequestEmails {
+        #[serde(default)]
         pub primary: bool,
         #[serde(
             default,
@@ -29207,6 +30342,7 @@ pub mod types {
         pub emails: Vec<Emails>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub groups: Vec<Groups>,
+        #[serde()]
         pub name: Name,
         /// The SCIM schema URIs.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -29294,6 +30430,7 @@ pub mod types {
         pub external_id: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub groups: Vec<String>,
+        #[serde()]
         pub name: Name,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
@@ -29367,6 +30504,7 @@ pub mod types {
         pub external_id: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub groups: Vec<String>,
+        #[serde()]
         pub name: Name,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
@@ -29389,57 +30527,71 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchCodeOkResponse {
+        #[serde(default)]
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<CodeSearchResultItem>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchCommitsOkResponse {
+        #[serde(default)]
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<CommitSearchResultItem>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchIssuesPullRequestsOkResponse {
+        #[serde(default)]
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<IssueSearchResultItem>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchLabelsOkResponse {
+        #[serde(default)]
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<LabelSearchResultItem>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchReposOkResponse {
+        #[serde(default)]
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<RepoSearchResultItem>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchTopicsOkResponse {
+        #[serde(default)]
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<TopicSearchResultItem>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchUsersOkResponse {
+        #[serde(default)]
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<UserSearchResultItem>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -29591,6 +30743,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateTeamDiscussionCommentLegacyRequest {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -29635,6 +30788,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateTeamDiscussionLegacyRequest {
         /// The reaction to use
+        #[serde()]
         pub content: Content,
     }
 
@@ -29841,6 +30995,7 @@ pub mod types {
         pub blog: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub business_plus: Option<bool>,
+        #[serde(default)]
         pub collaborators: i64,
         #[serde(
             default,
@@ -29848,7 +31003,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub company: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub disk_usage: i64,
         #[serde(
             default,
@@ -29862,6 +31019,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub followers: i64,
         #[serde(
             default,
@@ -29869,6 +31027,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub followers_url: String,
+        #[serde(default)]
         pub following: i64,
         #[serde(
             default,
@@ -29888,6 +31047,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub gravatar_id: String,
+        #[serde(default)]
         pub hireable: bool,
         #[serde(
             default,
@@ -29895,6 +31055,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -29932,11 +31093,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub organizations_url: String,
+        #[serde(default)]
         pub owned_private_repos: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub plan: Option<Plan>,
+        #[serde(default)]
         pub private_gists: i64,
+        #[serde(default)]
         pub public_gists: i64,
+        #[serde(default)]
         pub public_repos: i64,
         #[serde(
             default,
@@ -29950,6 +31115,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -29965,6 +31131,7 @@ pub mod types {
         pub subscriptions_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub suspended_at: Option<DateTime<Utc>>,
+        #[serde(default)]
         pub total_private_repos: i64,
         #[serde(
             default,
@@ -29972,6 +31139,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub twitter_username: String,
+        #[serde(default)]
         pub two_factor_authentication: bool,
         #[serde(
             default,
@@ -29980,6 +31148,7 @@ pub mod types {
             rename = "type"
         )]
         pub type_: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -30066,6 +31235,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UsersSetPrimaryEmailVisibilityAuthenticatedRequestData {
         /// Visibility of a secret
+        #[serde()]
         pub visibility: Visibility,
     }
 
@@ -30098,6 +31268,7 @@ pub mod types {
     pub struct GetAppsListInstallationsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub installations: Vec<Installation>,
+        #[serde(default)]
         pub total_count: i64,
     }
 
@@ -30111,14 +31282,17 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repository_selection: String,
+        #[serde(default)]
         pub total_count: i64,
     }
 
     /// Interaction limit settings.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetInteractionsRestrictionsOkResponse {
+        #[serde()]
         pub expires_at: DateTime<Utc>,
         /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+        #[serde()]
         pub limit: InteractionGroup,
         #[serde(
             default,
@@ -30171,6 +31345,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrgsUpdateMembershipRequest {
         /// The state of the milestone.
+        #[serde()]
         pub state: State,
     }
 
@@ -30307,6 +31482,7 @@ pub mod types {
         pub blog: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub business_plus: Option<bool>,
+        #[serde(default)]
         pub collaborators: i64,
         #[serde(
             default,
@@ -30314,7 +31490,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub company: String,
+        #[serde()]
         pub created_at: DateTime<Utc>,
+        #[serde(default)]
         pub disk_usage: i64,
         #[serde(
             default,
@@ -30328,6 +31506,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub events_url: String,
+        #[serde(default)]
         pub followers: i64,
         #[serde(
             default,
@@ -30335,6 +31514,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub followers_url: String,
+        #[serde(default)]
         pub following: i64,
         #[serde(
             default,
@@ -30354,6 +31534,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub gravatar_id: String,
+        #[serde(default)]
         pub hireable: bool,
         #[serde(
             default,
@@ -30361,6 +31542,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub html_url: String,
+        #[serde(default)]
         pub id: i64,
         #[serde(
             default,
@@ -30398,11 +31580,15 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub organizations_url: String,
+        #[serde(default)]
         pub owned_private_repos: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub plan: Option<Plan>,
+        #[serde(default)]
         pub private_gists: i64,
+        #[serde(default)]
         pub public_gists: i64,
+        #[serde(default)]
         pub public_repos: i64,
         #[serde(
             default,
@@ -30416,6 +31602,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repos_url: String,
+        #[serde(default)]
         pub site_admin: bool,
         #[serde(
             default,
@@ -30431,6 +31618,7 @@ pub mod types {
         pub subscriptions_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub suspended_at: Option<DateTime<Utc>>,
+        #[serde(default)]
         pub total_private_repos: i64,
         #[serde(
             default,
@@ -30438,6 +31626,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub twitter_username: String,
+        #[serde(default)]
         pub two_factor_authentication: bool,
         #[serde(
             default,
@@ -30446,6 +31635,7 @@ pub mod types {
             rename = "type"
         )]
         pub type_: String,
+        #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
