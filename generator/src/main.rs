@@ -450,6 +450,7 @@ impl<T> ReferenceOrExt<T> for openapiv3::ReferenceOr<T> {
     }
 }
 
+#[allow(dead_code)]
 #[derive(Debug, PartialEq, Clone)]
 enum TypeDetails {
     Unknown,
@@ -2450,7 +2451,7 @@ httpcache = ["dirs"]
         }
     };
 
-    /*println!("-----------------------------------------------------");
+    println!("-----------------------------------------------------");
     println!(" TYPE SPACE");
     println!("-----------------------------------------------------");
     for te in ts.id_to_entry.values() {
@@ -2458,7 +2459,7 @@ httpcache = ["dirs"]
         println!("{:>4}  {}", te.id.0, n);
     }
     println!("-----------------------------------------------------");
-    println!();*/
+    println!();
 
     if fail {
         bail!("generation experienced errors");
