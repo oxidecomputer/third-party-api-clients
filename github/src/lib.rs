@@ -25673,7 +25673,7 @@ impl Client {
             since.to_rfc3339(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -25812,7 +25812,7 @@ impl Client {
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -26131,7 +26131,7 @@ impl Client {
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -26318,7 +26318,7 @@ impl Client {
         &self,
     ) -> Result<Vec<types::CodeofConduct>> {
         let url = "/codes_of_conduct".to_string();
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -26973,7 +26973,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27113,7 +27113,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
 after.to_string(), before.to_string(), include.to_string(), order.to_string(), format!("{}", page), format!("{}", per_page), phrase.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27211,7 +27211,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27260,7 +27260,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             since.to_rfc3339(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27307,7 +27307,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             since.to_rfc3339(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27332,7 +27332,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             since.to_rfc3339(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27419,7 +27419,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27540,7 +27540,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27565,7 +27565,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27670,7 +27670,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     */
     pub async fn gitignore_get_all_templates(&self) -> Result<Vec<String>> {
         let url = "/gitignore/templates".to_string();
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27770,7 +27770,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
         let url = format!("/issues?collab={}&direction={}&filter={}&labels={}&orgs={}&owned={}&page={}&per_page={}&pulls={}&since={}&sort={}&state={}",
 format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", orgs), format!("{}", owned), format!("{}", page), format!("{}", per_page), format!("{}", pulls), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27795,7 +27795,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27896,7 +27896,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27927,7 +27927,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
             sort.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -27975,7 +27975,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -28001,7 +28001,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
             progenitor_support::encode_path(&plan_id.to_string()),
 direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -28044,7 +28044,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -28075,7 +28075,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
             since.to_rfc3339(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -28243,7 +28243,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
             format!("{}", since),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -28949,7 +28949,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -29383,7 +29383,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
             progenitor_support::encode_path(&org.to_string()),
 after.to_string(), before.to_string(), include.to_string(), order.to_string(), format!("{}", page), format!("{}", per_page), phrase.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -29401,7 +29401,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -29481,7 +29481,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -29531,7 +29531,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -29556,7 +29556,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -29581,7 +29581,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -29882,7 +29882,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -29958,7 +29958,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -29991,7 +29991,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
             progenitor_support::encode_path(&org.to_string()),
 direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -30020,7 +30020,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             role.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -30165,7 +30165,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -30321,7 +30321,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -30348,7 +30348,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -30516,7 +30516,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             state.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -30639,7 +30639,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             state.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -30690,7 +30690,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -30792,7 +30792,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             type_,
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -30954,7 +30954,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -31089,7 +31089,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             pinned.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -31240,7 +31240,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -31401,7 +31401,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -31499,7 +31499,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -31589,7 +31589,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -31620,7 +31620,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             role.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -31754,7 +31754,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -31869,7 +31869,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -32055,7 +32055,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -32232,7 +32232,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -32373,7 +32373,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -32472,7 +32472,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -32934,7 +32934,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -33168,7 +33168,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -33362,7 +33362,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -33876,7 +33876,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -33980,7 +33980,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
             format!("{}", protected),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -34444,7 +34444,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -34617,7 +34617,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -34752,7 +34752,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -34887,7 +34887,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -35159,7 +35159,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -35338,7 +35338,7 @@ check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", p
             progenitor_support::encode_path(&repo.to_string()),
 format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid.to_string(), tool_name.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -35427,7 +35427,7 @@ format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid
             ref_,
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -35470,7 +35470,7 @@ format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid
             progenitor_support::encode_path(&repo.to_string()),
 format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_guid.to_string(), tool_name.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -35705,7 +35705,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -35851,7 +35851,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -35962,7 +35962,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -36085,7 +36085,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
             until.to_rfc3339(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -36112,7 +36112,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -36141,7 +36141,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -36202,7 +36202,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -36401,7 +36401,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -36717,7 +36717,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -36752,7 +36752,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             task.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -36910,7 +36910,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -37144,7 +37144,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -37173,7 +37173,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             sort.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -37404,7 +37404,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -37699,7 +37699,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38068,7 +38068,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             format!("{}", since),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38121,7 +38121,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38275,7 +38275,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38368,7 +38368,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
             progenitor_support::encode_path(&repo.to_string()),
 assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_string(), mentioned.to_string(), milestone.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38431,7 +38431,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             sort.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38542,7 +38542,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38628,7 +38628,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38809,7 +38809,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             since.to_rfc3339(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38868,7 +38868,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -38897,7 +38897,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -39092,7 +39092,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -39180,7 +39180,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -39207,7 +39207,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -39312,7 +39312,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -39520,7 +39520,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             state.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -39657,7 +39657,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -39685,7 +39685,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
             progenitor_support::encode_path(&repo.to_string()),
 format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", participating), format!("{}", per_page), since.to_rfc3339(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -39834,7 +39834,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -39963,7 +39963,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             state.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -40028,7 +40028,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             state.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -40095,7 +40095,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             sort.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -40206,7 +40206,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -40371,7 +40371,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             sort.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -40471,7 +40471,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -40500,7 +40500,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -40673,7 +40673,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -40826,7 +40826,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41005,7 +41005,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41274,7 +41274,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41384,7 +41384,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             state.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41472,7 +41472,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41495,7 +41495,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41518,7 +41518,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41547,7 +41547,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41601,7 +41601,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41660,7 +41660,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41757,7 +41757,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41812,7 +41812,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41915,7 +41915,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -41938,7 +41938,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -42130,7 +42130,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     pub async fn repos_list_public(&self, since: i64) -> Result<Vec<types::MinimalRepository>> {
         let url = format!("/repositories?since={}", format!("{}", since),);
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -43249,7 +43249,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -43390,7 +43390,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -43541,7 +43541,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -43604,7 +43604,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -43661,7 +43661,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -43690,7 +43690,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             role.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -43895,7 +43895,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -43996,7 +43996,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44166,7 +44166,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44217,7 +44217,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     */
     pub async fn users_list_blocked_by_authenticated(&self) -> Result<Vec<types::SimpleUser>> {
         let url = "/user/blocks".to_string();
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44315,7 +44315,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44380,7 +44380,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44403,7 +44403,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44485,7 +44485,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44737,7 +44737,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
         let url = format!("/user/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&state={}",
 direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44760,7 +44760,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44843,7 +44843,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44866,7 +44866,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44891,7 +44891,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             state.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -44961,7 +44961,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45122,7 +45122,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45149,7 +45149,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45264,7 +45264,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             state.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45395,7 +45395,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45424,7 +45424,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
         let url = format!("/user/repos?affiliation={}&before={}&direction={}&page={}&per_page={}&since={}&sort={}&type={}&visibility={}",
 affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), type_, visibility.to_string(),         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45475,7 +45475,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45540,7 +45540,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             sort.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45632,7 +45632,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45655,7 +45655,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45676,7 +45676,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", since),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45725,7 +45725,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45752,7 +45752,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45777,7 +45777,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45802,7 +45802,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45827,7 +45827,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45877,7 +45877,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             since.to_rfc3339(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45902,7 +45902,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -45979,7 +45979,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -46006,7 +46006,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -46062,7 +46062,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -46119,7 +46119,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             state.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -46144,7 +46144,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -46169,7 +46169,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -46200,7 +46200,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             type_,
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -46306,7 +46306,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             sort.to_string(),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**
@@ -46331,7 +46331,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
             format!("{}", per_page),
         );
 
-        self.get(&url).await
+        self.get_all_pages(&url).await
     }
 
     /**

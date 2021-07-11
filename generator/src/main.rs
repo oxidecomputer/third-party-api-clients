@@ -1939,7 +1939,7 @@ fn gen(
             }
 
             // Only do the first.
-            let response_type = if let Some(only) = o.responses.responses.first() {
+            let (response_type, is_vector) = if let Some(only) = o.responses.responses.first() {
                 match only.0 {
                     openapiv3::StatusCode::Code(n) => {
                         // 302 is the code returned from /orgs/{org}/migrations/{migration_id}/archive GET
@@ -1968,7 +1968,7 @@ fn gen(
                  */
                 if i.content.is_empty() {
                     a("    ) -> Result<()> {");
-                    "()".to_string()
+                    ("()".to_string(), false)
                 } else {
                     match i.content.get("application/json") {
                         Some(mt) => {
@@ -2004,7 +2004,7 @@ fn gen(
                                 if let Ok(rt) = ts.render_type(&tid, false) {
                                     a(&format!("    ) -> Result<{}> {{", rt));
 
-                                    "json".to_string()
+                                    ("json".to_string(), rt.starts_with("Vec<"))
                                 } else {
                                     bail!("rendering type {:?}: {:?} failed", tid, s);
                                 }
@@ -2025,7 +2025,7 @@ fn gen(
 
                                     a(&format!("    ) -> Result<{}> {{", rt));
 
-                                    rt
+                                    (rt.clone(), rt.starts_with("Vec<"))
                                 } else {
                                     bail!("media type encoding, no schema: {:#?}", mt);
                                 }
@@ -2070,7 +2070,7 @@ fn gen(
                                     if let Ok(rt) = ts.render_type(&tid, false) {
                                         a(&format!("    ) -> Result<{}> {{", rt));
 
-                                        "json".to_string()
+                                        ("json".to_string(), rt.starts_with("Vec<"))
                                     } else {
                                         bail!("rendering type {:?} failed", tid);
                                     }
@@ -2097,7 +2097,11 @@ fn gen(
              * Perform the request.
              */
             if m == http::Method::GET {
-                a(&format!("       self.{}(&url).await", m.to_lowercase()));
+                if is_vector {
+                    a("self.get_all_pages(&url).await");
+                } else {
+                    a(&format!("self.{}(&url).await", m.to_lowercase()));
+                }
             } else if (m == http::Method::POST
                 || m == http::Method::PATCH
                 || m == http::Method::PUT
@@ -2113,47 +2117,37 @@ fn gen(
                 } else {
                     "None"
                 };
-                a(&format!(
-                    "       self.{}(&url, {}).await",
-                    m.to_lowercase(),
-                    body
-                ));
+                a(&format!("self.{}(&url, {}).await", m.to_lowercase(), body));
             } else {
                 if oid != "apps_create_installation_access_token" {
                     panic!("function {} should be authenticated", oid);
                 }
 
-                a(&format!(
-                    "        let res = self.client.{}(url)",
-                    m.to_lowercase()
-                ));
+                a(&format!("let res = self.client.{}(url)", m.to_lowercase()));
                 if !query_params_str.is_empty() {
-                    a(&format!(
-                        "            .query(&[{}])",
-                        query_params_str.join(", ")
-                    ));
+                    a(&format!(".query(&[{}])", query_params_str.join(", ")));
                 }
                 if let Some(f) = &body_func {
-                    a(&format!("            .{}(body)", f));
+                    a(&format!(".{}(body)", f));
                 }
-                a("            .send()");
-                a("            .await?");
-                a("            .error_for_status()?;"); /* XXX */
+                a(".send()");
+                a(".await?");
+                a(".error_for_status()?;"); /* XXX */
 
                 a("");
 
                 if response_type == "json" {
-                    a("        Ok(res.json().await?)");
+                    a("Ok(res.json().await?)");
                 } else if response_type == "()" {
-                    a("        let _ = res.text().await?;");
-                    a("        Ok(())");
+                    a("let _ = res.text().await?;");
+                    a("Ok(())");
                 } else if response_type == "String" {
-                    a("        Ok(res.text().await?)");
+                    a("Ok(res.text().await?)");
                 } else {
                     panic!("response type: {}", response_type);
                 }
             }
-            a("    }");
+            a("}");
             a("");
 
             Ok(())
