@@ -23141,7 +23141,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGithubApiRootOkResponse {
+    pub struct GetMetaRootOkResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23343,11 +23343,11 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateGithubAppFromManifestRequest {}
+    pub struct AppsCreateFromManifestRequest {}
 
     /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateGithubAppFromManifestCreatedResponse {
+    pub struct PostAppsCreateFromManifestCreatedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23423,7 +23423,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateWebhookConfigurationAppRequest {
+    pub struct AppsUpdateWebhookConfigAppRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23451,7 +23451,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateInstallationAccessTokenAppRequest {
+    pub struct AppsCreateInstallationAccessTokenRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<AppPermissions>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -23461,7 +23461,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteAppAuthorizationRequest {
+    pub struct AppsDeleteAuthorizationRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23471,7 +23471,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CheckTokenRequest {
+    pub struct AppsCheckTokenRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23481,7 +23481,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteAppTokenRequest {
+    pub struct AppsDeleteTokenRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23491,7 +23491,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ResetTokenRequest {
+    pub struct AppsResetTokenRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23501,7 +23501,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateScopedAccessTokenRequest {
+    pub struct AppsScopeTokenRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23526,7 +23526,7 @@ pub mod types {
 
     /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetCheckAuthorizationOkResponse {
+    pub struct GetAppsCheckAuthorizationOkResponse {
         pub app: App,
         pub created_at: DateTime<Utc>,
         #[serde(
@@ -23583,7 +23583,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateNewAuthorizationRequest {
+    pub struct OauthAuthorizationsCreateAuthorizationRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23619,7 +23619,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetCreateAuthorizationSpecificAppRequest {
+    pub struct OauthAuthorizationsGetCreateAuthorizationAppRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23649,7 +23649,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetCreateAuthorizationSpecificAppFingerprintRequest {
+    pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23673,7 +23673,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateExistingAuthorizationRequest {
+    pub struct OauthAuthorizationsUpdateAuthorizationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub add_scopes: Vec<String>,
         #[serde(
@@ -23704,7 +23704,7 @@ pub mod types {
     pub struct GetEmojisOkResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetGithubActionsPermissionsEnterpriseRequest {
+    pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allowed_actions: Option<AllowedActions>,
         /// The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
@@ -23712,21 +23712,21 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelectedOrganizationsEnabledGithubActionsInEnterpriseOkResponse {
+    pub struct GetEnterpriseAdminListSelectedOrganizationsEnabledGithubActionsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub organizations: Vec<OrganizationSimple>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelectedOrganizationsEnabledGithubActionsInEnterpriseRequest {
+    pub struct EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsRequest {
         /// List of organization IDs to enable for GitHub Actions.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_organization_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnerGroupsEnterpriseOkResponse {
+    pub struct GetEnterpriseAdminListSelfHostedRunnerGroupsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runner_groups: Vec<RunnerGroupsEnterprise>,
         pub total_count: f64,
@@ -23735,31 +23735,31 @@ pub mod types {
     /// Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected`
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateSelfHostedRunnerGroupEnterpriseRequestVisibility {
+    pub enum EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
         All,
         Selected,
         Noop,
     }
 
-    impl std::fmt::Display for CreateSelfHostedRunnerGroupEnterpriseRequestVisibility {
+    impl std::fmt::Display for EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateSelfHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
-                CreateSelfHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
-                CreateSelfHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
+                EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::All => "all",
+                EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::Selected => "selected",
+                EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateSelfHostedRunnerGroupEnterpriseRequestVisibility {
-        fn default() -> CreateSelfHostedRunnerGroupEnterpriseRequestVisibility {
-            CreateSelfHostedRunnerGroupEnterpriseRequestVisibility::Noop
+    impl Default for EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
+        fn default() -> EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
+            EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateSelfHostedRunnerGroupEnterpriseRequest {
+    pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23777,31 +23777,31 @@ pub mod types {
     /// Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility {
+    pub enum EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
         All,
         Selected,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility {
+    impl std::fmt::Display for EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
-                UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
-                UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
+                EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::All => "all",
+                EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::Selected => "selected",
+                EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility {
-        fn default() -> UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility {
-            UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility::Noop
+    impl Default for EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
+        fn default() -> EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
+            EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateSelfHostedRunnerGroupEnterpriseRequest {
+    pub struct EnterpriseAdminUpdateSelfHostedRunnerGroupRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23813,35 +23813,35 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListOrganizationAccessSelfHostedRunnerGroupInEnterpriseOkResponse {
+    pub struct GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub organizations: Vec<OrganizationSimple>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetOrganizationAccessSelfHostedRunnerGroupInEnterpriseRequest {
+    pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
         /// List of organization IDs that can access the runner group.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_organization_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersInGroupEnterpriseOkResponse {
+    pub struct GetEnterpriseAdminListSelfHostedRunnersInGroupOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelfHostedRunnersInGroupEnterpriseRequest {
+    pub struct EnterpriseAdminSetSelfHostedRunnersInGroupRequest {
         /// List of runner IDs to add to the runner group.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersEnterpriseOkResponse {
+    pub struct GetEnterpriseAdminListSelfHostedRunnersOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -23850,10 +23850,10 @@ pub mod types {
 
     /// Names and content for the files that make up the gist
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateGistRequestFiles {}
+    pub struct GistsCreateRequestFiles {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateGistRequest {
+    pub struct GistsCreateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23867,10 +23867,10 @@ pub mod types {
 
     /// Names of files to be updated
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateGistRequestFiles {}
+    pub struct GistsUpdateRequestFiles {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateGistRequest {
+    pub struct GistsUpdateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23882,7 +23882,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateGistCommentRequest {
+    pub struct GistsCreateCommentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23892,7 +23892,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateGistCommentRequest {
+    pub struct GistsUpdateCommentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23902,10 +23902,10 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetCheckIfGistStarredNotFoundResponse {}
+    pub struct GetGistsCheckStarredNotFoundResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListRepositoriesAccessibleAppInstallationOkResponse {
+    pub struct GetAppsListReposAccessibleInstallationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
         #[serde(
@@ -23944,7 +23944,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RenderMarkdownDocumentRequest {
+    pub struct MarkdownRenderRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23962,7 +23962,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MarkNotificationsAsReadRequest {
+    pub struct ActivityMarkNotificationsAsReadRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub last_read_at: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -23970,7 +23970,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutMarkNotificationsAsReadAcceptedResponse {
+    pub struct PutActivityMarkNotificationsAsReadAcceptedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23980,7 +23980,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetThreadSubscriptionRequest {
+    pub struct ActivitySetThreadSubscriptionRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub ignored: Option<bool>,
     }
@@ -24052,7 +24052,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateOrganizationRequest {
+    pub struct OrgsUpdateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24127,7 +24127,7 @@ pub mod types {
 
     /// Validation Error
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateOrganizationUnprocessableEntityResponse {
+    pub struct PatchOrgsUpdateUnprocessableEntityResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24145,7 +24145,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetGithubActionsPermissionsOrganizationRequest {
+    pub struct ActionsSetGithubPermissionsOrganizationRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allowed_actions: Option<AllowedActions>,
         /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
@@ -24153,21 +24153,21 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelectedRepositoriesEnabledGithubActionsInOrganizationOkResponse {
+    pub struct GetActionsListSelectedRepositoriesEnabledGithubOrganizationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelectedRepositoriesEnabledGithubActionsInOrganizationRequest {
+    pub struct ActionsSetSelectedRepositoriesEnabledGithubOrganizationRequest {
         /// List of repository IDs to enable for GitHub Actions.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnerGroupsOrganizationOkResponse {
+    pub struct GetActionsListSelfHostedRunnerGroupsOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runner_groups: Vec<RunnerGroupsOrg>,
         pub total_count: f64,
@@ -24176,33 +24176,33 @@ pub mod types {
     /// Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateSelfHostedRunnerGroupOrganizationRequestVisibility {
+    pub enum ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
         All,
         Private,
         Selected,
         Noop,
     }
 
-    impl std::fmt::Display for CreateSelfHostedRunnerGroupOrganizationRequestVisibility {
+    impl std::fmt::Display for ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateSelfHostedRunnerGroupOrganizationRequestVisibility::All => "all",
-                CreateSelfHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
-                CreateSelfHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
-                CreateSelfHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
+                ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::All => "all",
+                ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Private => "private",
+                ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Selected => "selected",
+                ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateSelfHostedRunnerGroupOrganizationRequestVisibility {
-        fn default() -> CreateSelfHostedRunnerGroupOrganizationRequestVisibility {
-            CreateSelfHostedRunnerGroupOrganizationRequestVisibility::Noop
+    impl Default for ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
+        fn default() -> ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
+            ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateSelfHostedRunnerGroupOrganizationRequest {
+    pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24220,33 +24220,33 @@ pub mod types {
     /// Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateSelfHostedRunnerGroupOrganizationRequestVisibility {
+    pub enum ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
         All,
         Private,
         Selected,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateSelfHostedRunnerGroupOrganizationRequestVisibility {
+    impl std::fmt::Display for ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::All => "all",
-                UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
-                UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
-                UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
+                ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::All => "all",
+                ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::Private => "private",
+                ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::Selected => "selected",
+                ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateSelfHostedRunnerGroupOrganizationRequestVisibility {
-        fn default() -> UpdateSelfHostedRunnerGroupOrganizationRequestVisibility {
-            UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::Noop
+    impl Default for ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
+        fn default() -> ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
+            ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateSelfHostedRunnerGroupOrganizationRequest {
+    pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24258,42 +24258,42 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListRepositoryAccessSelfHostedRunnerGroupInOrganizationOkResponse {
+    pub struct GetActionsListRepoAccessSelfHostedRunnerGroupInOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<MinimalRepository>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetRepositoryAccessSelfHostedRunnerGroupInOrganizationRequest {
+    pub struct ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest {
         /// List of repository IDs that can access the runner group.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersInGroupOrganizationOkResponse {
+    pub struct GetActionsListSelfHostedRunnersInGroupOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelfHostedRunnersInGroupOrganizationRequest {
+    pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
         /// List of runner IDs to add to the runner group.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersOrganizationOkResponse {
+    pub struct GetActionsListSelfHostedRunnersOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListOrganizationSecretsOkResponse {
+    pub struct GetActionsListOrgSecretsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub secrets: Vec<OrganizationActionsSecret>,
         pub total_count: i64,
@@ -24305,33 +24305,33 @@ pub mod types {
     /// \- `selected` - Only specific repositories can access the secret.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateUpdateOrganizationSecretRequestVisibility {
+    pub enum ActionsCreateUpdateOrgSecretRequestVisibility {
         All,
         Private,
         Selected,
         Noop,
     }
 
-    impl std::fmt::Display for CreateUpdateOrganizationSecretRequestVisibility {
+    impl std::fmt::Display for ActionsCreateUpdateOrgSecretRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateUpdateOrganizationSecretRequestVisibility::All => "all",
-                CreateUpdateOrganizationSecretRequestVisibility::Private => "private",
-                CreateUpdateOrganizationSecretRequestVisibility::Selected => "selected",
-                CreateUpdateOrganizationSecretRequestVisibility::Noop => "",
+                ActionsCreateUpdateOrgSecretRequestVisibility::All => "all",
+                ActionsCreateUpdateOrgSecretRequestVisibility::Private => "private",
+                ActionsCreateUpdateOrgSecretRequestVisibility::Selected => "selected",
+                ActionsCreateUpdateOrgSecretRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateUpdateOrganizationSecretRequestVisibility {
-        fn default() -> CreateUpdateOrganizationSecretRequestVisibility {
-            CreateUpdateOrganizationSecretRequestVisibility::Noop
+    impl Default for ActionsCreateUpdateOrgSecretRequestVisibility {
+        fn default() -> ActionsCreateUpdateOrgSecretRequestVisibility {
+            ActionsCreateUpdateOrgSecretRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateOrganizationSecretRequest {
+    pub struct ActionsCreateUpdateOrgSecretRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24351,21 +24351,21 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelectedRepositoriesOrganizationSecretOkResponse {
+    pub struct GetActionsListSelectedReposOrgSecretOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<MinimalRepository>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelectedRepositoriesOrganizationSecretRequest {
+    pub struct ActionsSetSelectedReposOrgSecretRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<i64>,
     }
 
     /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateOrganizationWebhookRequestConfig {
+    pub struct OrgsCreateWebhookRequestConfig {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24406,7 +24406,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateOrganizationWebhookRequest {
+    pub struct OrgsCreateWebhookRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
         pub config: Config,
@@ -24422,7 +24422,7 @@ pub mod types {
 
     /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateOrganizationWebhookRequestConfig {
+    pub struct OrgsUpdateWebhookRequestConfig {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24451,7 +24451,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateOrganizationWebhookRequest {
+    pub struct OrgsUpdateWebhookRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24467,7 +24467,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateWebhookConfigurationOrganizationRequest {
+    pub struct OrgsUpdateWebhookConfigOrgRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24495,7 +24495,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListAppInstallationsOrganizationOkResponse {
+    pub struct GetOrgsListAppInstallationsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub installations: Vec<Installation>,
         pub total_count: i64,
@@ -24503,7 +24503,7 @@ pub mod types {
 
     /// Interaction limit settings.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetInteractionRestrictionsOrganizationOkResponse {
+    pub struct GetInteractionsRestrictionsOrgOkResponse {
         pub expires_at: DateTime<Utc>,
         /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
         pub limit: InteractionGroup,
@@ -24521,33 +24521,33 @@ pub mod types {
     /// \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateOrganizationInvitationRequestRole {
+    pub enum OrgsCreateInvitationRequestRole {
         Admin,
         BillingManager,
         DirectMember,
         Noop,
     }
 
-    impl std::fmt::Display for CreateOrganizationInvitationRequestRole {
+    impl std::fmt::Display for OrgsCreateInvitationRequestRole {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateOrganizationInvitationRequestRole::Admin => "admin",
-                CreateOrganizationInvitationRequestRole::BillingManager => "billing_manager",
-                CreateOrganizationInvitationRequestRole::DirectMember => "direct_member",
-                CreateOrganizationInvitationRequestRole::Noop => "",
+                OrgsCreateInvitationRequestRole::Admin => "admin",
+                OrgsCreateInvitationRequestRole::BillingManager => "billing_manager",
+                OrgsCreateInvitationRequestRole::DirectMember => "direct_member",
+                OrgsCreateInvitationRequestRole::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateOrganizationInvitationRequestRole {
-        fn default() -> CreateOrganizationInvitationRequestRole {
-            CreateOrganizationInvitationRequestRole::Noop
+    impl Default for OrgsCreateInvitationRequestRole {
+        fn default() -> OrgsCreateInvitationRequestRole {
+            OrgsCreateInvitationRequestRole::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateOrganizationInvitationRequest {
+    pub struct OrgsCreateInvitationRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24567,31 +24567,31 @@ pub mod types {
     /// \* `member` - The user will become a non-owner member of the organization.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum SetOrganizationMembershipUserRequestRole {
+    pub enum OrgsSetMembershipUserRequestRole {
         Admin,
         Member,
         Noop,
     }
 
-    impl std::fmt::Display for SetOrganizationMembershipUserRequestRole {
+    impl std::fmt::Display for OrgsSetMembershipUserRequestRole {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                SetOrganizationMembershipUserRequestRole::Admin => "admin",
-                SetOrganizationMembershipUserRequestRole::Member => "member",
-                SetOrganizationMembershipUserRequestRole::Noop => "",
+                OrgsSetMembershipUserRequestRole::Admin => "admin",
+                OrgsSetMembershipUserRequestRole::Member => "member",
+                OrgsSetMembershipUserRequestRole::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for SetOrganizationMembershipUserRequestRole {
-        fn default() -> SetOrganizationMembershipUserRequestRole {
-            SetOrganizationMembershipUserRequestRole::Noop
+    impl Default for OrgsSetMembershipUserRequestRole {
+        fn default() -> OrgsSetMembershipUserRequestRole {
+            OrgsSetMembershipUserRequestRole::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetOrganizationMembershipUserRequest {
+    pub struct OrgsSetMembershipUserRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub role: Option<Role>,
     }
@@ -24620,7 +24620,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct StartOrganizationMigrationRequest {
+    pub struct MigrationsStartOrgRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub exclude: Vec<Exclude>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24633,10 +24633,10 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutConvertOrganizationMemberOutsideCollaboratorAcceptedResponse {}
+    pub struct PutOrgsConvertMemberOutsideCollaboratorAcceptedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRemoveOutsideCollaboratorFromOrganizationUnprocessableEntityResponse {
+    pub struct DeleteOrgsRemoveOutsideCollaboratorUnprocessableEntityResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24652,7 +24652,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateOrganizationProjectRequest {
+    pub struct ProjectsCreateOrgRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24671,7 +24671,7 @@ pub mod types {
     /// The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateOrganizationRepositoryRequestVisibility {
+    pub enum ReposCreateInOrgRequestVisibility {
         Internal,
         Private,
         Public,
@@ -24679,27 +24679,27 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateOrganizationRepositoryRequestVisibility {
+    impl std::fmt::Display for ReposCreateInOrgRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateOrganizationRepositoryRequestVisibility::Internal => "internal",
-                CreateOrganizationRepositoryRequestVisibility::Private => "private",
-                CreateOrganizationRepositoryRequestVisibility::Public => "public",
-                CreateOrganizationRepositoryRequestVisibility::Visibility => "visibility",
-                CreateOrganizationRepositoryRequestVisibility::Noop => "",
+                ReposCreateInOrgRequestVisibility::Internal => "internal",
+                ReposCreateInOrgRequestVisibility::Private => "private",
+                ReposCreateInOrgRequestVisibility::Public => "public",
+                ReposCreateInOrgRequestVisibility::Visibility => "visibility",
+                ReposCreateInOrgRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateOrganizationRepositoryRequestVisibility {
-        fn default() -> CreateOrganizationRepositoryRequestVisibility {
-            CreateOrganizationRepositoryRequestVisibility::Noop
+    impl Default for ReposCreateInOrgRequestVisibility {
+        fn default() -> ReposCreateInOrgRequestVisibility {
+            ReposCreateInOrgRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateOrganizationRepositoryRequest {
+    pub struct ReposCreateInOrgRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allow_merge_commit: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24766,26 +24766,26 @@ pub mod types {
     /// Default for child team: `closed`
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateTeamRequestPrivacy {
+    pub enum TeamsCreateRequestPrivacy {
         Closed,
         Secret,
         Noop,
     }
 
-    impl std::fmt::Display for CreateTeamRequestPrivacy {
+    impl std::fmt::Display for TeamsCreateRequestPrivacy {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateTeamRequestPrivacy::Closed => "closed",
-                CreateTeamRequestPrivacy::Secret => "secret",
-                CreateTeamRequestPrivacy::Noop => "",
+                TeamsCreateRequestPrivacy::Closed => "closed",
+                TeamsCreateRequestPrivacy::Secret => "secret",
+                TeamsCreateRequestPrivacy::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateTeamRequestPrivacy {
-        fn default() -> CreateTeamRequestPrivacy {
-            CreateTeamRequestPrivacy::Noop
+    impl Default for TeamsCreateRequestPrivacy {
+        fn default() -> TeamsCreateRequestPrivacy {
+            TeamsCreateRequestPrivacy::Noop
         }
     }
 
@@ -24821,7 +24821,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateTeamRequest {
+    pub struct TeamsCreateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24854,31 +24854,31 @@ pub mod types {
     /// \* `closed` - visible to all members of this organization.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateTeamRequestPrivacy {
+    pub enum TeamsUpdateInOrgRequestPrivacy {
         Closed,
         Secret,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateTeamRequestPrivacy {
+    impl std::fmt::Display for TeamsUpdateInOrgRequestPrivacy {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateTeamRequestPrivacy::Closed => "closed",
-                UpdateTeamRequestPrivacy::Secret => "secret",
-                UpdateTeamRequestPrivacy::Noop => "",
+                TeamsUpdateInOrgRequestPrivacy::Closed => "closed",
+                TeamsUpdateInOrgRequestPrivacy::Secret => "secret",
+                TeamsUpdateInOrgRequestPrivacy::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateTeamRequestPrivacy {
-        fn default() -> UpdateTeamRequestPrivacy {
-            UpdateTeamRequestPrivacy::Noop
+    impl Default for TeamsUpdateInOrgRequestPrivacy {
+        fn default() -> TeamsUpdateInOrgRequestPrivacy {
+            TeamsUpdateInOrgRequestPrivacy::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateTeamRequest {
+    pub struct TeamsUpdateInOrgRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24900,7 +24900,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateDiscussionRequest {
+    pub struct TeamsCreateDiscussionInOrgRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24918,7 +24918,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateDiscussionRequest {
+    pub struct TeamsUpdateDiscussionInOrgRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24934,7 +24934,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateDiscussionCommentRequest {
+    pub struct TeamsCreateDiscussionCommentInOrgRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24944,7 +24944,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateDiscussionCommentRequest {
+    pub struct TeamsUpdateDiscussionCommentInOrgRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24956,7 +24956,7 @@ pub mod types {
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReactionTeamDiscussionCommentRequestContent {
+    pub enum ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
         PlusOne,
         MinusOne,
         Confused,
@@ -24968,31 +24968,31 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateReactionTeamDiscussionCommentRequestContent {
+    impl std::fmt::Display for ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReactionTeamDiscussionCommentRequestContent::PlusOne => "+1",
-                CreateReactionTeamDiscussionCommentRequestContent::MinusOne => "-1",
-                CreateReactionTeamDiscussionCommentRequestContent::Confused => "confused",
-                CreateReactionTeamDiscussionCommentRequestContent::Eyes => "eyes",
-                CreateReactionTeamDiscussionCommentRequestContent::Heart => "heart",
-                CreateReactionTeamDiscussionCommentRequestContent::Hooray => "hooray",
-                CreateReactionTeamDiscussionCommentRequestContent::Laugh => "laugh",
-                CreateReactionTeamDiscussionCommentRequestContent::Rocket => "rocket",
-                CreateReactionTeamDiscussionCommentRequestContent::Noop => "",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::PlusOne => "+1",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::MinusOne => "-1",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Confused => "confused",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Eyes => "eyes",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Heart => "heart",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Hooray => "hooray",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Laugh => "laugh",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Rocket => "rocket",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReactionTeamDiscussionCommentRequestContent {
-        fn default() -> CreateReactionTeamDiscussionCommentRequestContent {
-            CreateReactionTeamDiscussionCommentRequestContent::Noop
+    impl Default for ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
+        fn default() -> ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
+            ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionTeamDiscussionCommentRequest {
+    pub struct ReactionsCreateTeamDiscussionCommentInOrgRequest {
         /// The reaction to use
         pub content: Content,
     }
@@ -25000,7 +25000,7 @@ pub mod types {
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReactionTeamDiscussionRequestContent {
+    pub enum ReactionsCreateTeamDiscussionInOrgRequestContent {
         PlusOne,
         MinusOne,
         Confused,
@@ -25012,31 +25012,31 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateReactionTeamDiscussionRequestContent {
+    impl std::fmt::Display for ReactionsCreateTeamDiscussionInOrgRequestContent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReactionTeamDiscussionRequestContent::PlusOne => "+1",
-                CreateReactionTeamDiscussionRequestContent::MinusOne => "-1",
-                CreateReactionTeamDiscussionRequestContent::Confused => "confused",
-                CreateReactionTeamDiscussionRequestContent::Eyes => "eyes",
-                CreateReactionTeamDiscussionRequestContent::Heart => "heart",
-                CreateReactionTeamDiscussionRequestContent::Hooray => "hooray",
-                CreateReactionTeamDiscussionRequestContent::Laugh => "laugh",
-                CreateReactionTeamDiscussionRequestContent::Rocket => "rocket",
-                CreateReactionTeamDiscussionRequestContent::Noop => "",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::PlusOne => "+1",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::MinusOne => "-1",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Confused => "confused",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Eyes => "eyes",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Heart => "heart",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Hooray => "hooray",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Laugh => "laugh",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Rocket => "rocket",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReactionTeamDiscussionRequestContent {
-        fn default() -> CreateReactionTeamDiscussionRequestContent {
-            CreateReactionTeamDiscussionRequestContent::Noop
+    impl Default for ReactionsCreateTeamDiscussionInOrgRequestContent {
+        fn default() -> ReactionsCreateTeamDiscussionInOrgRequestContent {
+            ReactionsCreateTeamDiscussionInOrgRequestContent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionTeamDiscussionRequest {
+    pub struct ReactionsCreateTeamDiscussionInOrgRequest {
         /// The reaction to use
         pub content: Content,
     }
@@ -25046,31 +25046,31 @@ pub mod types {
     /// \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum AddUpdateTeamMembershipUserRequestRole {
+    pub enum TeamsAddUpdateMembershipUserInOrgRequestRole {
         Maintainer,
         Member,
         Noop,
     }
 
-    impl std::fmt::Display for AddUpdateTeamMembershipUserRequestRole {
+    impl std::fmt::Display for TeamsAddUpdateMembershipUserInOrgRequestRole {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AddUpdateTeamMembershipUserRequestRole::Maintainer => "maintainer",
-                AddUpdateTeamMembershipUserRequestRole::Member => "member",
-                AddUpdateTeamMembershipUserRequestRole::Noop => "",
+                TeamsAddUpdateMembershipUserInOrgRequestRole::Maintainer => "maintainer",
+                TeamsAddUpdateMembershipUserInOrgRequestRole::Member => "member",
+                TeamsAddUpdateMembershipUserInOrgRequestRole::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for AddUpdateTeamMembershipUserRequestRole {
-        fn default() -> AddUpdateTeamMembershipUserRequestRole {
-            AddUpdateTeamMembershipUserRequestRole::Noop
+    impl Default for TeamsAddUpdateMembershipUserInOrgRequestRole {
+        fn default() -> TeamsAddUpdateMembershipUserInOrgRequestRole {
+            TeamsAddUpdateMembershipUserInOrgRequestRole::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddUpdateTeamMembershipUserRequest {
+    pub struct TeamsAddUpdateMembershipUserInOrgRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub role: Option<Role>,
     }
@@ -25082,39 +25082,39 @@ pub mod types {
     /// Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum AddUpdateTeamProjectPermissionsRequestPermission {
+    pub enum TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
         Admin,
         Read,
         Write,
         Noop,
     }
 
-    impl std::fmt::Display for AddUpdateTeamProjectPermissionsRequestPermission {
+    impl std::fmt::Display for TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AddUpdateTeamProjectPermissionsRequestPermission::Admin => "admin",
-                AddUpdateTeamProjectPermissionsRequestPermission::Read => "read",
-                AddUpdateTeamProjectPermissionsRequestPermission::Write => "write",
-                AddUpdateTeamProjectPermissionsRequestPermission::Noop => "",
+                TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Admin => "admin",
+                TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Read => "read",
+                TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Write => "write",
+                TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for AddUpdateTeamProjectPermissionsRequestPermission {
-        fn default() -> AddUpdateTeamProjectPermissionsRequestPermission {
-            AddUpdateTeamProjectPermissionsRequestPermission::Noop
+    impl Default for TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
+        fn default() -> TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
+            TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddUpdateTeamProjectPermissionsRequest {
+    pub struct TeamsAddUpdateProjectPermissionsInOrgRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permission: Option<Permission>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddUpdateTeamProjectPermissionsForbiddenResponse {
+    pub struct PutTeamsAddUpdateProjectPermissionsInOrgForbiddenResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25139,7 +25139,7 @@ pub mod types {
     /// If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum AddUpdateTeamRepositoryPermissionsRequestPermission {
+    pub enum TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
         Admin,
         Maintain,
         Pull,
@@ -25148,34 +25148,34 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for AddUpdateTeamRepositoryPermissionsRequestPermission {
+    impl std::fmt::Display for TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AddUpdateTeamRepositoryPermissionsRequestPermission::Admin => "admin",
-                AddUpdateTeamRepositoryPermissionsRequestPermission::Maintain => "maintain",
-                AddUpdateTeamRepositoryPermissionsRequestPermission::Pull => "pull",
-                AddUpdateTeamRepositoryPermissionsRequestPermission::Push => "push",
-                AddUpdateTeamRepositoryPermissionsRequestPermission::Triage => "triage",
-                AddUpdateTeamRepositoryPermissionsRequestPermission::Noop => "",
+                TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Admin => "admin",
+                TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Maintain => "maintain",
+                TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Pull => "pull",
+                TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Push => "push",
+                TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Triage => "triage",
+                TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for AddUpdateTeamRepositoryPermissionsRequestPermission {
-        fn default() -> AddUpdateTeamRepositoryPermissionsRequestPermission {
-            AddUpdateTeamRepositoryPermissionsRequestPermission::Noop
+    impl Default for TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
+        fn default() -> TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
+            TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddUpdateTeamRepositoryPermissionsRequest {
+    pub struct TeamsAddUpdateRepoPermissionsInOrgRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permission: Option<Permission>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateIdpGroupConnectionsRequestGroups {
+    pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25197,13 +25197,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateIdpGroupConnectionsRequest {
+    pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub groups: Vec<Groups>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteProjectCardForbiddenResponse {
+    pub struct DeleteProjectsCardForbiddenResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25221,7 +25221,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateExistingProjectCardRequest {
+    pub struct ProjectsUpdateCardRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub archived: Option<bool>,
         #[serde(
@@ -25233,7 +25233,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MoveProjectCardRequest {
+    pub struct ProjectsMoveCardRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub column_id: Option<i64>,
         #[serde(
@@ -25245,10 +25245,10 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectCardCreatedResponse {}
+    pub struct PostProjectsMoveCardCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectCardForbiddenResponseErrors {
+    pub struct PostProjectsMoveCardForbiddenResponseErrors {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25276,7 +25276,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectCardForbiddenResponse {
+    pub struct PostProjectsMoveCardForbiddenResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25294,7 +25294,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectCardServiceUnavailableResponseErrors {
+    pub struct PostProjectsMoveCardServiceUnavailableResponseErrors {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25310,7 +25310,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectCardServiceUnavailableResponse {
+    pub struct PostProjectsMoveCardServiceUnavailableResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25334,7 +25334,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateExistingProjectColumnRequest {
+    pub struct ProjectsUpdateColumnRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25344,7 +25344,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateProjectCardRequest {
+    pub struct ProjectsCreateCardRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25355,7 +25355,7 @@ pub mod types {
 
     /// Validation Error
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateProjectCardUnprocessableEntityResponse {
+    pub struct PostProjectsCreateCardUnprocessableEntityResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25373,7 +25373,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateProjectCardServiceUnavailableResponseErrors {
+    pub struct PostProjectsCreateCardServiceUnavailableResponseErrors {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25389,7 +25389,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateProjectCardServiceUnavailableResponse {
+    pub struct PostProjectsCreateCardServiceUnavailableResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25413,7 +25413,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MoveProjectColumnRequest {
+    pub struct ProjectsMoveColumnRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25423,10 +25423,10 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectColumnCreatedResponse {}
+    pub struct PostProjectsMoveColumnCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteProjectForbiddenResponse {
+    pub struct DeleteProjectsForbiddenResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25446,7 +25446,7 @@ pub mod types {
     /// The baseline permission that all organization members have on this project
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateProjectRequestOrganizationPermission {
+    pub enum ProjectsUpdateRequestOrganizationPermission {
         Admin,
         None,
         Read,
@@ -25454,27 +25454,27 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for UpdateProjectRequestOrganizationPermission {
+    impl std::fmt::Display for ProjectsUpdateRequestOrganizationPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateProjectRequestOrganizationPermission::Admin => "admin",
-                UpdateProjectRequestOrganizationPermission::None => "none",
-                UpdateProjectRequestOrganizationPermission::Read => "read",
-                UpdateProjectRequestOrganizationPermission::Write => "write",
-                UpdateProjectRequestOrganizationPermission::Noop => "",
+                ProjectsUpdateRequestOrganizationPermission::Admin => "admin",
+                ProjectsUpdateRequestOrganizationPermission::None => "none",
+                ProjectsUpdateRequestOrganizationPermission::Read => "read",
+                ProjectsUpdateRequestOrganizationPermission::Write => "write",
+                ProjectsUpdateRequestOrganizationPermission::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateProjectRequestOrganizationPermission {
-        fn default() -> UpdateProjectRequestOrganizationPermission {
-            UpdateProjectRequestOrganizationPermission::Noop
+    impl Default for ProjectsUpdateRequestOrganizationPermission {
+        fn default() -> ProjectsUpdateRequestOrganizationPermission {
+            ProjectsUpdateRequestOrganizationPermission::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateProjectRequest {
+    pub struct ProjectsUpdateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25500,7 +25500,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchUpdateProjectForbiddenResponse {
+    pub struct PatchProjectsUpdateForbiddenResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25520,39 +25520,39 @@ pub mod types {
     /// The permission to grant the collaborator.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum AddProjectCollaboratorRequestPermission {
+    pub enum ProjectsAddCollaboratorRequestPermission {
         Admin,
         Read,
         Write,
         Noop,
     }
 
-    impl std::fmt::Display for AddProjectCollaboratorRequestPermission {
+    impl std::fmt::Display for ProjectsAddCollaboratorRequestPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AddProjectCollaboratorRequestPermission::Admin => "admin",
-                AddProjectCollaboratorRequestPermission::Read => "read",
-                AddProjectCollaboratorRequestPermission::Write => "write",
-                AddProjectCollaboratorRequestPermission::Noop => "",
+                ProjectsAddCollaboratorRequestPermission::Admin => "admin",
+                ProjectsAddCollaboratorRequestPermission::Read => "read",
+                ProjectsAddCollaboratorRequestPermission::Write => "write",
+                ProjectsAddCollaboratorRequestPermission::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for AddProjectCollaboratorRequestPermission {
-        fn default() -> AddProjectCollaboratorRequestPermission {
-            AddProjectCollaboratorRequestPermission::Noop
+    impl Default for ProjectsAddCollaboratorRequestPermission {
+        fn default() -> ProjectsAddCollaboratorRequestPermission {
+            ProjectsAddCollaboratorRequestPermission::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddProjectCollaboratorRequest {
+    pub struct ProjectsAddCollaboratorRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permission: Option<Permission>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateProjectColumnRequest {
+    pub struct ProjectsCreateColumnRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25562,7 +25562,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteRepositoryForbiddenResponse {
+    pub struct DeleteReposForbiddenResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25580,7 +25580,7 @@ pub mod types {
     /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateRepositoryRequestVisibility {
+    pub enum ReposUpdateRequestVisibility {
         Internal,
         Private,
         Public,
@@ -25588,28 +25588,28 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for UpdateRepositoryRequestVisibility {
+    impl std::fmt::Display for ReposUpdateRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateRepositoryRequestVisibility::Internal => "internal",
-                UpdateRepositoryRequestVisibility::Private => "private",
-                UpdateRepositoryRequestVisibility::Public => "public",
-                UpdateRepositoryRequestVisibility::Visibility => "visibility",
-                UpdateRepositoryRequestVisibility::Noop => "",
+                ReposUpdateRequestVisibility::Internal => "internal",
+                ReposUpdateRequestVisibility::Private => "private",
+                ReposUpdateRequestVisibility::Public => "public",
+                ReposUpdateRequestVisibility::Visibility => "visibility",
+                ReposUpdateRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateRepositoryRequestVisibility {
-        fn default() -> UpdateRepositoryRequestVisibility {
-            UpdateRepositoryRequestVisibility::Noop
+    impl Default for ReposUpdateRequestVisibility {
+        fn default() -> ReposUpdateRequestVisibility {
+            ReposUpdateRequestVisibility::Noop
         }
     }
 
     /// Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see "[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequestSecurityAnalysisAdvanced {
+    pub struct ReposUpdateRequestSecurityAnalysisAdvanced {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25620,7 +25620,7 @@ pub mod types {
 
     /// Use the `status` property to enable or disable secret scanning for this repository. For more information, see "[About secret scanning](/code-security/secret-security/about-secret-scanning)."
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequestSecurityAnalysisSecretScanning {
+    pub struct ReposUpdateRequestSecurityAnalysisSecretScanning {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25631,7 +25631,7 @@ pub mod types {
 
     /// Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequestSecurityAnalysis {
+    pub struct ReposUpdateRequestSecurityAnalysis {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub advanced_security: Option<AdvancedSecurity>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25639,7 +25639,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequest {
+    pub struct ReposUpdateRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allow_merge_commit: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25691,14 +25691,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListArtifactsRepositoryOkResponse {
+    pub struct GetActionsListArtifactsRepoOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub artifacts: Vec<Artifact>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetGithubActionsPermissionsRepositoryRequest {
+    pub struct ActionsSetGithubPermissionsRepositoryRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allowed_actions: Option<AllowedActions>,
         /// Whether GitHub Actions is enabled on the repository.
@@ -25706,31 +25706,31 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersRepositoryOkResponse {
+    pub struct GetActionsListSelfHostedRunnersRepoOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListWorkflowRunsRepositoryOkResponse {
+    pub struct GetActionsListWorkflowRunsRepoOkResponse {
         pub total_count: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub workflow_runs: Vec<WorkflowRun>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListWorkflowRunArtifactsOkResponse {
+    pub struct GetActionsListWorkflowRunArtifactsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub artifacts: Vec<Artifact>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCancelWorkflowRunAcceptedResponse {}
+    pub struct PostActionsCancelWorkflowRunAcceptedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListJobsWorkflowRunOkResponse {
+    pub struct GetActionsListJobsWorkflowRunOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub jobs: Vec<Job>,
         pub total_count: i64,
@@ -25739,31 +25739,31 @@ pub mod types {
     /// Whether to approve or reject deployment to the specified environments. Must be one of: `approved` or `rejected`
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ReviewPendingDeploymentsWorkflowRunRequestState {
+    pub enum ActionsReviewPendingDeploymentsRunRequestState {
         Approved,
         Rejected,
         Noop,
     }
 
-    impl std::fmt::Display for ReviewPendingDeploymentsWorkflowRunRequestState {
+    impl std::fmt::Display for ActionsReviewPendingDeploymentsRunRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ReviewPendingDeploymentsWorkflowRunRequestState::Approved => "approved",
-                ReviewPendingDeploymentsWorkflowRunRequestState::Rejected => "rejected",
-                ReviewPendingDeploymentsWorkflowRunRequestState::Noop => "",
+                ActionsReviewPendingDeploymentsRunRequestState::Approved => "approved",
+                ActionsReviewPendingDeploymentsRunRequestState::Rejected => "rejected",
+                ActionsReviewPendingDeploymentsRunRequestState::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ReviewPendingDeploymentsWorkflowRunRequestState {
-        fn default() -> ReviewPendingDeploymentsWorkflowRunRequestState {
-            ReviewPendingDeploymentsWorkflowRunRequestState::Noop
+    impl Default for ActionsReviewPendingDeploymentsRunRequestState {
+        fn default() -> ActionsReviewPendingDeploymentsRunRequestState {
+            ActionsReviewPendingDeploymentsRunRequestState::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReviewPendingDeploymentsWorkflowRunRequest {
+    pub struct ActionsReviewPendingDeploymentsRunRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25778,17 +25778,17 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostReRunWorkflowCreatedResponse {}
+    pub struct PostActionsReRunWorkflowCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListRepositorySecretsOkResponse {
+    pub struct GetActionsListRepoSecretsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub secrets: Vec<ActionsSecret>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateRepositorySecretRequest {
+    pub struct ActionsCreateUpdateRepoSecretRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25804,10 +25804,10 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateRepositorySecretCreatedResponse {}
+    pub struct PutActionsCreateUpdateRepoSecretCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListRepositoryWorkflowsOkResponse {
+    pub struct GetActionsListRepoWorkflowsOkResponse {
         pub total_count: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub workflows: Vec<Workflow>,
@@ -25818,7 +25818,7 @@ pub mod types {
     pub struct Inputs {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateWorkflowDispatchEventRequest {
+    pub struct ActionsCreateWorkflowDispatchRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub inputs: Option<Inputs>,
         #[serde(
@@ -25831,7 +25831,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListWorkflowRunsOkResponse {
+    pub struct GetActionsListWorkflowRunsOkResponse {
         pub total_count: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub workflow_runs: Vec<WorkflowRun>,
@@ -25839,7 +25839,7 @@ pub mod types {
 
     /// Require status checks to pass before merging. Set to `null` to disable.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateBranchProtectionRequestRequiredStatusChecks {
+    pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
         /// The list of status checks to require in order to merge into this branch
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub contexts: Vec<String>,
@@ -25848,7 +25848,7 @@ pub mod types {
 
     /// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions {
+    pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<String>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -25857,7 +25857,7 @@ pub mod types {
 
     /// Require at least one approving review on a pull request, before merging. Set to `null` to disable.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateBranchProtectionRequestRequiredPullReviews {
+    pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismiss_stale_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25882,7 +25882,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateBranchProtectionRequest {
+    pub struct ReposUpdateBranchProtectionRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allow_deletions: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25900,7 +25900,7 @@ pub mod types {
 
     /// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdatePullRequestReviewProtectionDismissalRestrictions {
+    pub struct ReposUpdatePullRequestReviewProtectionDismissalRestrictions {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<String>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -25908,7 +25908,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdatePullRequestReviewProtection {
+    pub struct ReposUpdatePullRequestReviewProtection {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismiss_stale_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25920,7 +25920,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateStatusCheckProtectionRequest {
+    pub struct ReposUpdateStatusCheckProtectionRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub contexts: Vec<String>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25928,91 +25928,91 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddStatusCheckContextsRequest {
+    pub struct ReposAddStatusCheckContextsRequest {
         /// contexts parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub contexts: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetStatusCheckContextsRequest {
+    pub struct ReposSetStatusCheckContextsRequest {
         /// contexts parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub contexts: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveStatusCheckContextsRequest {
+    pub struct ReposRemoveStatusCheckContextsRequest {
         /// contexts parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub contexts: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddAppAccessRestrictionsRequest {
+    pub struct ReposAddAppAccessRestrictionsRequest {
         /// apps parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub apps: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetAppAccessRestrictionsRequest {
+    pub struct ReposSetAppAccessRestrictionsRequest {
         /// apps parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub apps: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveAppAccessRestrictionsRequest {
+    pub struct ReposRemoveAppAccessRestrictionsRequest {
         /// apps parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub apps: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddTeamAccessRestrictionsRequest {
+    pub struct ReposAddTeamAccessRestrictionsRequest {
         /// teams parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetTeamAccessRestrictionsRequest {
+    pub struct ReposSetTeamAccessRestrictionsRequest {
         /// teams parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveTeamAccessRestrictionsRequest {
+    pub struct ReposRemoveTeamAccessRestrictionsRequest {
         /// teams parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddUserAccessRestrictionsRequest {
+    pub struct ReposAddUserAccessRestrictionsRequest {
         /// users parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub users: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetUserAccessRestrictionsRequest {
+    pub struct ReposSetUserAccessRestrictionsRequest {
         /// users parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub users: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveUserAccessRestrictionsRequest {
+    pub struct ReposRemoveUserAccessRestrictionsRequest {
         /// users parameter
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub users: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RenameBranchRequest {
+    pub struct ReposRenameBranchRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26024,28 +26024,28 @@ pub mod types {
     /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateCheckRunRequestStatus {
+    pub enum ChecksCreateRequestStatus {
         Completed,
         InProgress,
         Queued,
         Noop,
     }
 
-    impl std::fmt::Display for CreateCheckRunRequestStatus {
+    impl std::fmt::Display for ChecksCreateRequestStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateCheckRunRequestStatus::Completed => "completed",
-                CreateCheckRunRequestStatus::InProgress => "in_progress",
-                CreateCheckRunRequestStatus::Queued => "queued",
-                CreateCheckRunRequestStatus::Noop => "",
+                ChecksCreateRequestStatus::Completed => "completed",
+                ChecksCreateRequestStatus::InProgress => "in_progress",
+                ChecksCreateRequestStatus::Queued => "queued",
+                ChecksCreateRequestStatus::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateCheckRunRequestStatus {
-        fn default() -> CreateCheckRunRequestStatus {
-            CreateCheckRunRequestStatus::Noop
+    impl Default for ChecksCreateRequestStatus {
+        fn default() -> ChecksCreateRequestStatus {
+            ChecksCreateRequestStatus::Noop
         }
     }
 
@@ -26053,7 +26053,7 @@ pub mod types {
     /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateCheckRunRequestConclusion {
+    pub enum ChecksCreateRequestConclusion {
         ActionRequired,
         Cancelled,
         Failure,
@@ -26065,26 +26065,26 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateCheckRunRequestConclusion {
+    impl std::fmt::Display for ChecksCreateRequestConclusion {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateCheckRunRequestConclusion::ActionRequired => "action_required",
-                CreateCheckRunRequestConclusion::Cancelled => "cancelled",
-                CreateCheckRunRequestConclusion::Failure => "failure",
-                CreateCheckRunRequestConclusion::Neutral => "neutral",
-                CreateCheckRunRequestConclusion::Skipped => "skipped",
-                CreateCheckRunRequestConclusion::Stale => "stale",
-                CreateCheckRunRequestConclusion::Success => "success",
-                CreateCheckRunRequestConclusion::TimedOut => "timed_out",
-                CreateCheckRunRequestConclusion::Noop => "",
+                ChecksCreateRequestConclusion::ActionRequired => "action_required",
+                ChecksCreateRequestConclusion::Cancelled => "cancelled",
+                ChecksCreateRequestConclusion::Failure => "failure",
+                ChecksCreateRequestConclusion::Neutral => "neutral",
+                ChecksCreateRequestConclusion::Skipped => "skipped",
+                ChecksCreateRequestConclusion::Stale => "stale",
+                ChecksCreateRequestConclusion::Success => "success",
+                ChecksCreateRequestConclusion::TimedOut => "timed_out",
+                ChecksCreateRequestConclusion::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateCheckRunRequestConclusion {
-        fn default() -> CreateCheckRunRequestConclusion {
-            CreateCheckRunRequestConclusion::Noop
+    impl Default for ChecksCreateRequestConclusion {
+        fn default() -> ChecksCreateRequestConclusion {
+            ChecksCreateRequestConclusion::Noop
         }
     }
 
@@ -26176,7 +26176,7 @@ pub mod types {
 
     /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateCheckRunRequestOutput {
+    pub struct ChecksCreateRequestOutput {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub annotations: Vec<Annotations>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -26202,7 +26202,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateCheckRunRequestActions {
+    pub struct ChecksCreateRequestActions {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26224,7 +26224,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateCheckRunRequest {
+    pub struct ChecksCreateRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub actions: Vec<Actions>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26260,34 +26260,34 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub status: Option<CreateCheckRunRequestStatus>,
+        pub status: Option<ChecksCreateRequestStatus>,
     }
 
     /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateCheckRunRequestStatus {
+    pub enum ChecksUpdateRequestStatus {
         Completed,
         InProgress,
         Queued,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateCheckRunRequestStatus {
+    impl std::fmt::Display for ChecksUpdateRequestStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateCheckRunRequestStatus::Completed => "completed",
-                UpdateCheckRunRequestStatus::InProgress => "in_progress",
-                UpdateCheckRunRequestStatus::Queued => "queued",
-                UpdateCheckRunRequestStatus::Noop => "",
+                ChecksUpdateRequestStatus::Completed => "completed",
+                ChecksUpdateRequestStatus::InProgress => "in_progress",
+                ChecksUpdateRequestStatus::Queued => "queued",
+                ChecksUpdateRequestStatus::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateCheckRunRequestStatus {
-        fn default() -> UpdateCheckRunRequestStatus {
-            UpdateCheckRunRequestStatus::Noop
+    impl Default for ChecksUpdateRequestStatus {
+        fn default() -> ChecksUpdateRequestStatus {
+            ChecksUpdateRequestStatus::Noop
         }
     }
 
@@ -26295,7 +26295,7 @@ pub mod types {
     /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateCheckRunRequestConclusion {
+    pub enum ChecksUpdateRequestConclusion {
         ActionRequired,
         Cancelled,
         Failure,
@@ -26307,32 +26307,32 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for UpdateCheckRunRequestConclusion {
+    impl std::fmt::Display for ChecksUpdateRequestConclusion {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateCheckRunRequestConclusion::ActionRequired => "action_required",
-                UpdateCheckRunRequestConclusion::Cancelled => "cancelled",
-                UpdateCheckRunRequestConclusion::Failure => "failure",
-                UpdateCheckRunRequestConclusion::Neutral => "neutral",
-                UpdateCheckRunRequestConclusion::Skipped => "skipped",
-                UpdateCheckRunRequestConclusion::Stale => "stale",
-                UpdateCheckRunRequestConclusion::Success => "success",
-                UpdateCheckRunRequestConclusion::TimedOut => "timed_out",
-                UpdateCheckRunRequestConclusion::Noop => "",
+                ChecksUpdateRequestConclusion::ActionRequired => "action_required",
+                ChecksUpdateRequestConclusion::Cancelled => "cancelled",
+                ChecksUpdateRequestConclusion::Failure => "failure",
+                ChecksUpdateRequestConclusion::Neutral => "neutral",
+                ChecksUpdateRequestConclusion::Skipped => "skipped",
+                ChecksUpdateRequestConclusion::Stale => "stale",
+                ChecksUpdateRequestConclusion::Success => "success",
+                ChecksUpdateRequestConclusion::TimedOut => "timed_out",
+                ChecksUpdateRequestConclusion::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateCheckRunRequestConclusion {
-        fn default() -> UpdateCheckRunRequestConclusion {
-            UpdateCheckRunRequestConclusion::Noop
+    impl Default for ChecksUpdateRequestConclusion {
+        fn default() -> ChecksUpdateRequestConclusion {
+            ChecksUpdateRequestConclusion::Noop
         }
     }
 
     /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateCheckRunRequestOutput {
+    pub struct ChecksUpdateRequestOutput {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub annotations: Vec<Annotations>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -26358,7 +26358,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateCheckRunRequestActions {
+    pub struct ChecksUpdateRequestActions {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26380,7 +26380,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateCheckRunRequest {
+    pub struct ChecksUpdateRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub actions: Vec<Actions>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26410,11 +26410,11 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub status: Option<UpdateCheckRunRequestStatus>,
+        pub status: Option<ChecksUpdateRequestStatus>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateCheckSuiteRequest {
+    pub struct ChecksCreateSuiteRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26424,23 +26424,23 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryPreferencesCheckSuitesRequest {
+    pub struct ChecksSetSuitesPreferencesRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub auto_trigger_checks: Vec<AutoTriggerChecks>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListCheckRunsInSuiteOkResponse {
+    pub struct GetChecksListSuiteOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_runs: Vec<CheckRun>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostRerequestCheckSuiteCreatedResponse {}
+    pub struct PostChecksRerequestSuiteCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateCodeScanningAlertRequest {
+    pub struct CodeScanningUpdateAlertRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismissed_reason: Option<serde_json::Value>,
         /// Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
@@ -26448,7 +26448,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UploadAnalysisAsSarifDataRequest {
+    pub struct CodeScanningUploadSarifRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26496,7 +26496,7 @@ pub mod types {
     /// \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum AddRepositoryCollaboratorRequestPermission {
+    pub enum ReposAddCollaboratorRequestPermission {
         Admin,
         Maintain,
         Pull,
@@ -26505,28 +26505,28 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for AddRepositoryCollaboratorRequestPermission {
+    impl std::fmt::Display for ReposAddCollaboratorRequestPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AddRepositoryCollaboratorRequestPermission::Admin => "admin",
-                AddRepositoryCollaboratorRequestPermission::Maintain => "maintain",
-                AddRepositoryCollaboratorRequestPermission::Pull => "pull",
-                AddRepositoryCollaboratorRequestPermission::Push => "push",
-                AddRepositoryCollaboratorRequestPermission::Triage => "triage",
-                AddRepositoryCollaboratorRequestPermission::Noop => "",
+                ReposAddCollaboratorRequestPermission::Admin => "admin",
+                ReposAddCollaboratorRequestPermission::Maintain => "maintain",
+                ReposAddCollaboratorRequestPermission::Pull => "pull",
+                ReposAddCollaboratorRequestPermission::Push => "push",
+                ReposAddCollaboratorRequestPermission::Triage => "triage",
+                ReposAddCollaboratorRequestPermission::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for AddRepositoryCollaboratorRequestPermission {
-        fn default() -> AddRepositoryCollaboratorRequestPermission {
-            AddRepositoryCollaboratorRequestPermission::Noop
+    impl Default for ReposAddCollaboratorRequestPermission {
+        fn default() -> ReposAddCollaboratorRequestPermission {
+            ReposAddCollaboratorRequestPermission::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddRepositoryCollaboratorRequest {
+    pub struct ReposAddCollaboratorRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permission: Option<Permission>,
         #[serde(
@@ -26538,7 +26538,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateCommitCommentRequest {
+    pub struct ReposUpdateCommitCommentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26550,7 +26550,7 @@ pub mod types {
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReactionCommitCommentRequestContent {
+    pub enum ReactionsCreateCommitCommentRequestContent {
         PlusOne,
         MinusOne,
         Confused,
@@ -26562,37 +26562,37 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateReactionCommitCommentRequestContent {
+    impl std::fmt::Display for ReactionsCreateCommitCommentRequestContent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReactionCommitCommentRequestContent::PlusOne => "+1",
-                CreateReactionCommitCommentRequestContent::MinusOne => "-1",
-                CreateReactionCommitCommentRequestContent::Confused => "confused",
-                CreateReactionCommitCommentRequestContent::Eyes => "eyes",
-                CreateReactionCommitCommentRequestContent::Heart => "heart",
-                CreateReactionCommitCommentRequestContent::Hooray => "hooray",
-                CreateReactionCommitCommentRequestContent::Laugh => "laugh",
-                CreateReactionCommitCommentRequestContent::Rocket => "rocket",
-                CreateReactionCommitCommentRequestContent::Noop => "",
+                ReactionsCreateCommitCommentRequestContent::PlusOne => "+1",
+                ReactionsCreateCommitCommentRequestContent::MinusOne => "-1",
+                ReactionsCreateCommitCommentRequestContent::Confused => "confused",
+                ReactionsCreateCommitCommentRequestContent::Eyes => "eyes",
+                ReactionsCreateCommitCommentRequestContent::Heart => "heart",
+                ReactionsCreateCommitCommentRequestContent::Hooray => "hooray",
+                ReactionsCreateCommitCommentRequestContent::Laugh => "laugh",
+                ReactionsCreateCommitCommentRequestContent::Rocket => "rocket",
+                ReactionsCreateCommitCommentRequestContent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReactionCommitCommentRequestContent {
-        fn default() -> CreateReactionCommitCommentRequestContent {
-            CreateReactionCommitCommentRequestContent::Noop
+    impl Default for ReactionsCreateCommitCommentRequestContent {
+        fn default() -> ReactionsCreateCommitCommentRequestContent {
+            ReactionsCreateCommitCommentRequestContent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionCommitCommentRequest {
+    pub struct ReactionsCreateCommitCommentRequest {
         /// The reaction to use
         pub content: Content,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateCommitCommentRequest {
+    pub struct ReposCreateCommitCommentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26612,21 +26612,21 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListCheckRunsGitReferenceOkResponse {
+    pub struct GetChecksListRefOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_runs: Vec<CheckRun>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListCheckSuitesGitReferenceOkResponse {
+    pub struct GetChecksListSuitesRefOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_suites: Vec<CheckSuite>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateContentAttachmentRequest {
+    pub struct AppsCreateContentAttachmentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26642,7 +26642,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetRepositoryContentOkResponse {
+    pub struct GetReposContentOkResponse {
         pub links: Links,
         #[serde(
             default,
@@ -26704,7 +26704,7 @@ pub mod types {
 
     /// The person that committed the file. Default: the authenticated user.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateFileContentsRequestCommitter {
+    pub struct ReposCreateUpdateFileContentsRequestCommitter {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26727,7 +26727,7 @@ pub mod types {
 
     /// The author of the file. Default: The `committer` or the authenticated user if you omit `committer`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateFileContentsRequestAuthor {
+    pub struct ReposCreateUpdateFileContentsRequestAuthor {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26749,7 +26749,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateFileContentsRequest {
+    pub struct ReposCreateUpdateFileContentsRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub author: Option<Author>,
         #[serde(
@@ -26782,7 +26782,7 @@ pub mod types {
 
     /// object containing information about the committer.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteFileRequestCommitter {
+    pub struct ReposDeleteFileRequestCommitter {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26799,7 +26799,7 @@ pub mod types {
 
     /// object containing information about the author.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteFileRequestAuthor {
+    pub struct ReposDeleteFileRequestAuthor {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26815,7 +26815,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteFileRequest {
+    pub struct ReposDeleteFileRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub author: Option<Author>,
         #[serde(
@@ -26841,7 +26841,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateDeploymentRequest {
+    pub struct ReposCreateDeploymentRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub auto_merge: Option<bool>,
         #[serde(
@@ -26880,7 +26880,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCreateDeploymentAcceptedResponse {
+    pub struct PostReposCreateDeploymentAcceptedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26892,7 +26892,7 @@ pub mod types {
     /// The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateDeploymentStatusRequestState {
+    pub enum ReposCreateDeploymentStatusRequestState {
         Error,
         Failure,
         InProgress,
@@ -26903,58 +26903,58 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateDeploymentStatusRequestState {
+    impl std::fmt::Display for ReposCreateDeploymentStatusRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateDeploymentStatusRequestState::Error => "error",
-                CreateDeploymentStatusRequestState::Failure => "failure",
-                CreateDeploymentStatusRequestState::InProgress => "in_progress",
-                CreateDeploymentStatusRequestState::Inactive => "inactive",
-                CreateDeploymentStatusRequestState::Pending => "pending",
-                CreateDeploymentStatusRequestState::Queued => "queued",
-                CreateDeploymentStatusRequestState::Success => "success",
-                CreateDeploymentStatusRequestState::Noop => "",
+                ReposCreateDeploymentStatusRequestState::Error => "error",
+                ReposCreateDeploymentStatusRequestState::Failure => "failure",
+                ReposCreateDeploymentStatusRequestState::InProgress => "in_progress",
+                ReposCreateDeploymentStatusRequestState::Inactive => "inactive",
+                ReposCreateDeploymentStatusRequestState::Pending => "pending",
+                ReposCreateDeploymentStatusRequestState::Queued => "queued",
+                ReposCreateDeploymentStatusRequestState::Success => "success",
+                ReposCreateDeploymentStatusRequestState::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateDeploymentStatusRequestState {
-        fn default() -> CreateDeploymentStatusRequestState {
-            CreateDeploymentStatusRequestState::Noop
+    impl Default for ReposCreateDeploymentStatusRequestState {
+        fn default() -> ReposCreateDeploymentStatusRequestState {
+            ReposCreateDeploymentStatusRequestState::Noop
         }
     }
 
     /// Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateDeploymentStatusRequestEnvironment {
+    pub enum ReposCreateDeploymentStatusRequestEnvironment {
         Production,
         Qa,
         Staging,
         Noop,
     }
 
-    impl std::fmt::Display for CreateDeploymentStatusRequestEnvironment {
+    impl std::fmt::Display for ReposCreateDeploymentStatusRequestEnvironment {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateDeploymentStatusRequestEnvironment::Production => "production",
-                CreateDeploymentStatusRequestEnvironment::Qa => "qa",
-                CreateDeploymentStatusRequestEnvironment::Staging => "staging",
-                CreateDeploymentStatusRequestEnvironment::Noop => "",
+                ReposCreateDeploymentStatusRequestEnvironment::Production => "production",
+                ReposCreateDeploymentStatusRequestEnvironment::Qa => "qa",
+                ReposCreateDeploymentStatusRequestEnvironment::Staging => "staging",
+                ReposCreateDeploymentStatusRequestEnvironment::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateDeploymentStatusRequestEnvironment {
-        fn default() -> CreateDeploymentStatusRequestEnvironment {
-            CreateDeploymentStatusRequestEnvironment::Noop
+    impl Default for ReposCreateDeploymentStatusRequestEnvironment {
+        fn default() -> ReposCreateDeploymentStatusRequestEnvironment {
+            ReposCreateDeploymentStatusRequestEnvironment::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateDeploymentStatusRequest {
+    pub struct ReposCreateDeploymentStatusRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub auto_inactive: Option<bool>,
         #[serde(
@@ -26992,7 +26992,7 @@ pub mod types {
     pub struct ClientPayload {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateRepositoryDispatchEventRequest {
+    pub struct ReposCreateDispatchEventRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub client_payload: Option<ClientPayload>,
         #[serde(
@@ -27004,7 +27004,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetAllEnvironmentsOkResponse {
+    pub struct GetReposAllEnvironmentsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub environments: Vec<Environment>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27012,7 +27012,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateEnvironmentRequestReviewers {
+    pub struct ReposCreateUpdateEnvironmentRequestReviewers {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub id: Option<i64>,
         #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
@@ -27020,7 +27020,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateEnvironmentRequest {
+    pub struct ReposCreateUpdateEnvironmentRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -27030,7 +27030,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateForkRequest {
+    pub struct ReposCreateForkRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27040,7 +27040,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateBlobRequest {
+    pub struct GitCreateBlobRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27057,7 +27057,7 @@ pub mod types {
 
     /// Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateCommitRequestAuthor {
+    pub struct GitCreateCommitRequestAuthor {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub date: Option<DateTime<Utc>>,
         #[serde(
@@ -27076,7 +27076,7 @@ pub mod types {
 
     /// Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateCommitRequestCommitter {
+    pub struct GitCreateCommitRequestCommitter {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub date: Option<DateTime<Utc>>,
         #[serde(
@@ -27094,7 +27094,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateCommitRequest {
+    pub struct GitCreateCommitRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub author: Option<Author>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27122,7 +27122,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReferenceRequest {
+    pub struct GitCreateRefRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27145,7 +27145,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateReferenceRequest {
+    pub struct GitUpdateRefRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub force: Option<bool>,
         #[serde(
@@ -27159,34 +27159,34 @@ pub mod types {
     /// The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateTagObjectRequestType {
+    pub enum GitCreateTagRequestType {
         Blob,
         Commit,
         Tree,
         Noop,
     }
 
-    impl std::fmt::Display for CreateTagObjectRequestType {
+    impl std::fmt::Display for GitCreateTagRequestType {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateTagObjectRequestType::Blob => "blob",
-                CreateTagObjectRequestType::Commit => "commit",
-                CreateTagObjectRequestType::Tree => "tree",
-                CreateTagObjectRequestType::Noop => "",
+                GitCreateTagRequestType::Blob => "blob",
+                GitCreateTagRequestType::Commit => "commit",
+                GitCreateTagRequestType::Tree => "tree",
+                GitCreateTagRequestType::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateTagObjectRequestType {
-        fn default() -> CreateTagObjectRequestType {
-            CreateTagObjectRequestType::Noop
+    impl Default for GitCreateTagRequestType {
+        fn default() -> GitCreateTagRequestType {
+            GitCreateTagRequestType::Noop
         }
     }
 
     /// An object with information about the individual creating the tag.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateTagObjectRequestTagger {
+    pub struct GitCreateTagRequestTagger {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub date: Option<DateTime<Utc>>,
         #[serde(
@@ -27204,7 +27204,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateTagObjectRequest {
+    pub struct GitCreateTagRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27233,7 +27233,7 @@ pub mod types {
     /// The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateTreeRequestMode {
+    pub enum GitCreateTreeRequestMode {
         SubdirectoryTree,
         FileBlob,
         ExecutableBlob,
@@ -27242,56 +27242,56 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateTreeRequestMode {
+    impl std::fmt::Display for GitCreateTreeRequestMode {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateTreeRequestMode::SubdirectoryTree => "040000",
-                CreateTreeRequestMode::FileBlob => "100644",
-                CreateTreeRequestMode::ExecutableBlob => "100755",
-                CreateTreeRequestMode::SymlinkPathBlob => "120000",
-                CreateTreeRequestMode::SubmoduleCommit => "160000",
-                CreateTreeRequestMode::Noop => "",
+                GitCreateTreeRequestMode::SubdirectoryTree => "040000",
+                GitCreateTreeRequestMode::FileBlob => "100644",
+                GitCreateTreeRequestMode::ExecutableBlob => "100755",
+                GitCreateTreeRequestMode::SymlinkPathBlob => "120000",
+                GitCreateTreeRequestMode::SubmoduleCommit => "160000",
+                GitCreateTreeRequestMode::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateTreeRequestMode {
-        fn default() -> CreateTreeRequestMode {
-            CreateTreeRequestMode::Noop
+    impl Default for GitCreateTreeRequestMode {
+        fn default() -> GitCreateTreeRequestMode {
+            GitCreateTreeRequestMode::Noop
         }
     }
 
     /// Either `blob`, `tree`, or `commit`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateTreeRequestType {
+    pub enum GitCreateTreeRequestType {
         Blob,
         Commit,
         Tree,
         Noop,
     }
 
-    impl std::fmt::Display for CreateTreeRequestType {
+    impl std::fmt::Display for GitCreateTreeRequestType {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateTreeRequestType::Blob => "blob",
-                CreateTreeRequestType::Commit => "commit",
-                CreateTreeRequestType::Tree => "tree",
-                CreateTreeRequestType::Noop => "",
+                GitCreateTreeRequestType::Blob => "blob",
+                GitCreateTreeRequestType::Commit => "commit",
+                GitCreateTreeRequestType::Tree => "tree",
+                GitCreateTreeRequestType::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateTreeRequestType {
-        fn default() -> CreateTreeRequestType {
-            CreateTreeRequestType::Noop
+    impl Default for GitCreateTreeRequestType {
+        fn default() -> GitCreateTreeRequestType {
+            GitCreateTreeRequestType::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateTreeRequest {
+    pub struct GitCreateTreeRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27317,7 +27317,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateTreeRequestData {
+    pub struct GitCreateTreeRequestData {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27331,7 +27331,7 @@ pub mod types {
 
     /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateRepositoryWebhookRequestConfig {
+    pub struct ReposCreateWebhookRequestConfig {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27371,7 +27371,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateRepositoryWebhookRequest {
+    pub struct ReposCreateWebhookRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27388,7 +27388,7 @@ pub mod types {
 
     /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryWebhookRequestConfig {
+    pub struct ReposUpdateWebhookRequestConfig {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27429,7 +27429,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryWebhookRequest {
+    pub struct ReposUpdateWebhookRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -27443,7 +27443,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateWebhookConfigurationRepositoryRequest {
+    pub struct ReposUpdateWebhookConfigRepoRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27501,7 +27501,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct StartImportRequest {
+    pub struct MigrationsStartImportRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27531,7 +27531,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateImportRequest {
+    pub struct MigrationsUpdateImportRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27559,7 +27559,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MapCommitAuthorRequest {
+    pub struct MigrationsMapCommitAuthorRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27601,14 +27601,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateGitLfsPreferenceRequest {
+    pub struct MigrationsSetLfsPreferenceRequest {
         /// Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
         pub use_lfs: UseLfs,
     }
 
     /// Interaction limit settings.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetInteractionRestrictionsRepositoryOkResponse {
+    pub struct GetInteractionsRestrictionsRepoOkResponse {
         pub expires_at: DateTime<Utc>,
         /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
         pub limit: InteractionGroup,
@@ -27623,7 +27623,7 @@ pub mod types {
     /// The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateRepositoryInvitationRequestPermissions {
+    pub enum ReposUpdateInvitationRequestPermissions {
         Admin,
         Maintain,
         Read,
@@ -27632,34 +27632,34 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for UpdateRepositoryInvitationRequestPermissions {
+    impl std::fmt::Display for ReposUpdateInvitationRequestPermissions {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateRepositoryInvitationRequestPermissions::Admin => "admin",
-                UpdateRepositoryInvitationRequestPermissions::Maintain => "maintain",
-                UpdateRepositoryInvitationRequestPermissions::Read => "read",
-                UpdateRepositoryInvitationRequestPermissions::Triage => "triage",
-                UpdateRepositoryInvitationRequestPermissions::Write => "write",
-                UpdateRepositoryInvitationRequestPermissions::Noop => "",
+                ReposUpdateInvitationRequestPermissions::Admin => "admin",
+                ReposUpdateInvitationRequestPermissions::Maintain => "maintain",
+                ReposUpdateInvitationRequestPermissions::Read => "read",
+                ReposUpdateInvitationRequestPermissions::Triage => "triage",
+                ReposUpdateInvitationRequestPermissions::Write => "write",
+                ReposUpdateInvitationRequestPermissions::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateRepositoryInvitationRequestPermissions {
-        fn default() -> UpdateRepositoryInvitationRequestPermissions {
-            UpdateRepositoryInvitationRequestPermissions::Noop
+    impl Default for ReposUpdateInvitationRequestPermissions {
+        fn default() -> ReposUpdateInvitationRequestPermissions {
+            ReposUpdateInvitationRequestPermissions::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryInvitationRequest {
+    pub struct ReposUpdateInvitationRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateIssueRequest {
+    pub struct IssuesCreateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27687,7 +27687,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateIssueCommentRequest {
+    pub struct IssuesUpdateCommentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27699,7 +27699,7 @@ pub mod types {
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReactionIssueCommentRequestContent {
+    pub enum ReactionsCreateIssueCommentRequestContent {
         PlusOne,
         MinusOne,
         Confused,
@@ -27711,31 +27711,31 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateReactionIssueCommentRequestContent {
+    impl std::fmt::Display for ReactionsCreateIssueCommentRequestContent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReactionIssueCommentRequestContent::PlusOne => "+1",
-                CreateReactionIssueCommentRequestContent::MinusOne => "-1",
-                CreateReactionIssueCommentRequestContent::Confused => "confused",
-                CreateReactionIssueCommentRequestContent::Eyes => "eyes",
-                CreateReactionIssueCommentRequestContent::Heart => "heart",
-                CreateReactionIssueCommentRequestContent::Hooray => "hooray",
-                CreateReactionIssueCommentRequestContent::Laugh => "laugh",
-                CreateReactionIssueCommentRequestContent::Rocket => "rocket",
-                CreateReactionIssueCommentRequestContent::Noop => "",
+                ReactionsCreateIssueCommentRequestContent::PlusOne => "+1",
+                ReactionsCreateIssueCommentRequestContent::MinusOne => "-1",
+                ReactionsCreateIssueCommentRequestContent::Confused => "confused",
+                ReactionsCreateIssueCommentRequestContent::Eyes => "eyes",
+                ReactionsCreateIssueCommentRequestContent::Heart => "heart",
+                ReactionsCreateIssueCommentRequestContent::Hooray => "hooray",
+                ReactionsCreateIssueCommentRequestContent::Laugh => "laugh",
+                ReactionsCreateIssueCommentRequestContent::Rocket => "rocket",
+                ReactionsCreateIssueCommentRequestContent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReactionIssueCommentRequestContent {
-        fn default() -> CreateReactionIssueCommentRequestContent {
-            CreateReactionIssueCommentRequestContent::Noop
+    impl Default for ReactionsCreateIssueCommentRequestContent {
+        fn default() -> ReactionsCreateIssueCommentRequestContent {
+            ReactionsCreateIssueCommentRequestContent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionIssueCommentRequest {
+    pub struct ReactionsCreateIssueCommentRequest {
         /// The reaction to use
         pub content: Content,
     }
@@ -27743,31 +27743,31 @@ pub mod types {
     /// State of the issue. Either `open` or `closed`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateIssueRequestState {
+    pub enum IssuesUpdateRequestState {
         Closed,
         Open,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateIssueRequestState {
+    impl std::fmt::Display for IssuesUpdateRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateIssueRequestState::Closed => "closed",
-                UpdateIssueRequestState::Open => "open",
-                UpdateIssueRequestState::Noop => "",
+                IssuesUpdateRequestState::Closed => "closed",
+                IssuesUpdateRequestState::Open => "open",
+                IssuesUpdateRequestState::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateIssueRequestState {
-        fn default() -> UpdateIssueRequestState {
-            UpdateIssueRequestState::Noop
+    impl Default for IssuesUpdateRequestState {
+        fn default() -> IssuesUpdateRequestState {
+            IssuesUpdateRequestState::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateIssueRequest {
+    pub struct IssuesUpdateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27797,19 +27797,19 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddAssigneesIssueRequest {
+    pub struct IssuesAddAssigneesRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveAssigneesFromIssueRequest {
+    pub struct IssuesRemoveAssigneesRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateIssueCommentRequest {
+    pub struct IssuesCreateCommentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27819,13 +27819,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddLabelsIssueRequest {
+    pub struct IssuesAddLabelsRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub labels: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetLabelsIssueRequest {
+    pub struct IssuesSetLabelsRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub labels: Vec<String>,
     }
@@ -27865,7 +27865,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct LockIssueRequest {
+    pub struct IssuesLockRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub lock_reason: Option<LockReason>,
     }
@@ -27873,7 +27873,7 @@ pub mod types {
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReactionIssueRequestContent {
+    pub enum ReactionsCreateIssueRequestContent {
         PlusOne,
         MinusOne,
         Confused,
@@ -27885,37 +27885,37 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateReactionIssueRequestContent {
+    impl std::fmt::Display for ReactionsCreateIssueRequestContent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReactionIssueRequestContent::PlusOne => "+1",
-                CreateReactionIssueRequestContent::MinusOne => "-1",
-                CreateReactionIssueRequestContent::Confused => "confused",
-                CreateReactionIssueRequestContent::Eyes => "eyes",
-                CreateReactionIssueRequestContent::Heart => "heart",
-                CreateReactionIssueRequestContent::Hooray => "hooray",
-                CreateReactionIssueRequestContent::Laugh => "laugh",
-                CreateReactionIssueRequestContent::Rocket => "rocket",
-                CreateReactionIssueRequestContent::Noop => "",
+                ReactionsCreateIssueRequestContent::PlusOne => "+1",
+                ReactionsCreateIssueRequestContent::MinusOne => "-1",
+                ReactionsCreateIssueRequestContent::Confused => "confused",
+                ReactionsCreateIssueRequestContent::Eyes => "eyes",
+                ReactionsCreateIssueRequestContent::Heart => "heart",
+                ReactionsCreateIssueRequestContent::Hooray => "hooray",
+                ReactionsCreateIssueRequestContent::Laugh => "laugh",
+                ReactionsCreateIssueRequestContent::Rocket => "rocket",
+                ReactionsCreateIssueRequestContent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReactionIssueRequestContent {
-        fn default() -> CreateReactionIssueRequestContent {
-            CreateReactionIssueRequestContent::Noop
+    impl Default for ReactionsCreateIssueRequestContent {
+        fn default() -> ReactionsCreateIssueRequestContent {
+            ReactionsCreateIssueRequestContent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionIssueRequest {
+    pub struct ReactionsCreateIssueRequest {
         /// The reaction to use
         pub content: Content,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateDeployKeyRequest {
+    pub struct ReposCreateDeployKeyRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27933,7 +27933,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateLabelRequest {
+    pub struct IssuesCreateLabelRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27955,7 +27955,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateLabelRequest {
+    pub struct IssuesUpdateLabelRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27977,7 +27977,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MergeBranchRequest {
+    pub struct ReposMergeRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28001,31 +28001,31 @@ pub mod types {
     /// The state of the milestone. Either `open` or `closed`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateMilestoneRequestState {
+    pub enum IssuesCreateMilestoneRequestState {
         Closed,
         Open,
         Noop,
     }
 
-    impl std::fmt::Display for CreateMilestoneRequestState {
+    impl std::fmt::Display for IssuesCreateMilestoneRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateMilestoneRequestState::Closed => "closed",
-                CreateMilestoneRequestState::Open => "open",
-                CreateMilestoneRequestState::Noop => "",
+                IssuesCreateMilestoneRequestState::Closed => "closed",
+                IssuesCreateMilestoneRequestState::Open => "open",
+                IssuesCreateMilestoneRequestState::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateMilestoneRequestState {
-        fn default() -> CreateMilestoneRequestState {
-            CreateMilestoneRequestState::Noop
+    impl Default for IssuesCreateMilestoneRequestState {
+        fn default() -> IssuesCreateMilestoneRequestState {
+            IssuesCreateMilestoneRequestState::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateMilestoneRequest {
+    pub struct IssuesCreateMilestoneRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28047,31 +28047,31 @@ pub mod types {
     /// The state of the milestone. Either `open` or `closed`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateMilestoneRequestState {
+    pub enum IssuesUpdateMilestoneRequestState {
         Closed,
         Open,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateMilestoneRequestState {
+    impl std::fmt::Display for IssuesUpdateMilestoneRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateMilestoneRequestState::Closed => "closed",
-                UpdateMilestoneRequestState::Open => "open",
-                UpdateMilestoneRequestState::Noop => "",
+                IssuesUpdateMilestoneRequestState::Closed => "closed",
+                IssuesUpdateMilestoneRequestState::Open => "open",
+                IssuesUpdateMilestoneRequestState::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateMilestoneRequestState {
-        fn default() -> UpdateMilestoneRequestState {
-            UpdateMilestoneRequestState::Noop
+    impl Default for IssuesUpdateMilestoneRequestState {
+        fn default() -> IssuesUpdateMilestoneRequestState {
+            IssuesUpdateMilestoneRequestState::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateMilestoneRequest {
+    pub struct IssuesUpdateMilestoneRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28091,13 +28091,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MarkRepositoryNotificationsAsReadRequest {
+    pub struct ActivityMarkRepoNotificationsAsReadRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub last_read_at: Option<DateTime<Utc>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutMarkRepositoryNotificationsAsReadAcceptedResponse {
+    pub struct PutActivityMarkRepoNotificationsAsReadAcceptedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28140,7 +28140,7 @@ pub mod types {
 
     /// The source branch and directory used to publish your Pages site.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateGithubPagesSiteRequestSource {
+    pub struct ReposCreatePagesSiteRequestSource {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28153,7 +28153,7 @@ pub mod types {
 
     /// The source branch and directory used to publish your Pages site.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateGithubPagesSiteRequest {
+    pub struct ReposCreatePagesSiteRequest {
         pub source: Source,
     }
 
@@ -28186,7 +28186,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateInformationAboutGithubPagesSiteRequest {
+    pub struct ReposUpdateInformationAboutPagesSiteRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28202,7 +28202,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateRepositoryProjectRequest {
+    pub struct ProjectsCreateRepoRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28218,7 +28218,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreatePullRequest {
+    pub struct PullsCreateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28252,7 +28252,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateReviewCommentPullRequest {
+    pub struct PullsUpdateReviewCommentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28264,7 +28264,7 @@ pub mod types {
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReactionPullRequestReviewCommentContent {
+    pub enum ReactionsCreatePullRequestReviewCommentContent {
         PlusOne,
         MinusOne,
         Confused,
@@ -28276,31 +28276,31 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateReactionPullRequestReviewCommentContent {
+    impl std::fmt::Display for ReactionsCreatePullRequestReviewCommentContent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReactionPullRequestReviewCommentContent::PlusOne => "+1",
-                CreateReactionPullRequestReviewCommentContent::MinusOne => "-1",
-                CreateReactionPullRequestReviewCommentContent::Confused => "confused",
-                CreateReactionPullRequestReviewCommentContent::Eyes => "eyes",
-                CreateReactionPullRequestReviewCommentContent::Heart => "heart",
-                CreateReactionPullRequestReviewCommentContent::Hooray => "hooray",
-                CreateReactionPullRequestReviewCommentContent::Laugh => "laugh",
-                CreateReactionPullRequestReviewCommentContent::Rocket => "rocket",
-                CreateReactionPullRequestReviewCommentContent::Noop => "",
+                ReactionsCreatePullRequestReviewCommentContent::PlusOne => "+1",
+                ReactionsCreatePullRequestReviewCommentContent::MinusOne => "-1",
+                ReactionsCreatePullRequestReviewCommentContent::Confused => "confused",
+                ReactionsCreatePullRequestReviewCommentContent::Eyes => "eyes",
+                ReactionsCreatePullRequestReviewCommentContent::Heart => "heart",
+                ReactionsCreatePullRequestReviewCommentContent::Hooray => "hooray",
+                ReactionsCreatePullRequestReviewCommentContent::Laugh => "laugh",
+                ReactionsCreatePullRequestReviewCommentContent::Rocket => "rocket",
+                ReactionsCreatePullRequestReviewCommentContent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReactionPullRequestReviewCommentContent {
-        fn default() -> CreateReactionPullRequestReviewCommentContent {
-            CreateReactionPullRequestReviewCommentContent::Noop
+    impl Default for ReactionsCreatePullRequestReviewCommentContent {
+        fn default() -> ReactionsCreatePullRequestReviewCommentContent {
+            ReactionsCreatePullRequestReviewCommentContent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionPullRequestReviewComment {
+    pub struct ReactionsCreatePullRequestReviewComment {
         /// The reaction to use
         pub content: Content,
     }
@@ -28308,31 +28308,31 @@ pub mod types {
     /// State of this Pull Request. Either `open` or `closed`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdatePullRequestState {
+    pub enum PullsUpdateRequestState {
         Closed,
         Open,
         Noop,
     }
 
-    impl std::fmt::Display for UpdatePullRequestState {
+    impl std::fmt::Display for PullsUpdateRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdatePullRequestState::Closed => "closed",
-                UpdatePullRequestState::Open => "open",
-                UpdatePullRequestState::Noop => "",
+                PullsUpdateRequestState::Closed => "closed",
+                PullsUpdateRequestState::Open => "open",
+                PullsUpdateRequestState::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdatePullRequestState {
-        fn default() -> UpdatePullRequestState {
-            UpdatePullRequestState::Noop
+    impl Default for PullsUpdateRequestState {
+        fn default() -> PullsUpdateRequestState {
+            PullsUpdateRequestState::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdatePullRequest {
+    pub struct PullsUpdateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28360,59 +28360,59 @@ pub mod types {
     /// **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReviewCommentPullRequestSide {
+    pub enum PullsCreateReviewCommentRequestSide {
         Left,
         Right,
         Noop,
     }
 
-    impl std::fmt::Display for CreateReviewCommentPullRequestSide {
+    impl std::fmt::Display for PullsCreateReviewCommentRequestSide {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReviewCommentPullRequestSide::Left => "LEFT",
-                CreateReviewCommentPullRequestSide::Right => "RIGHT",
-                CreateReviewCommentPullRequestSide::Noop => "",
+                PullsCreateReviewCommentRequestSide::Left => "LEFT",
+                PullsCreateReviewCommentRequestSide::Right => "RIGHT",
+                PullsCreateReviewCommentRequestSide::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReviewCommentPullRequestSide {
-        fn default() -> CreateReviewCommentPullRequestSide {
-            CreateReviewCommentPullRequestSide::Noop
+    impl Default for PullsCreateReviewCommentRequestSide {
+        fn default() -> PullsCreateReviewCommentRequestSide {
+            PullsCreateReviewCommentRequestSide::Noop
         }
     }
 
     /// **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReviewCommentPullRequestStartSide {
+    pub enum PullsCreateReviewCommentRequestStartSide {
         Left,
         Right,
         Side,
         Noop,
     }
 
-    impl std::fmt::Display for CreateReviewCommentPullRequestStartSide {
+    impl std::fmt::Display for PullsCreateReviewCommentRequestStartSide {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReviewCommentPullRequestStartSide::Left => "LEFT",
-                CreateReviewCommentPullRequestStartSide::Right => "RIGHT",
-                CreateReviewCommentPullRequestStartSide::Side => "side",
-                CreateReviewCommentPullRequestStartSide::Noop => "",
+                PullsCreateReviewCommentRequestStartSide::Left => "LEFT",
+                PullsCreateReviewCommentRequestStartSide::Right => "RIGHT",
+                PullsCreateReviewCommentRequestStartSide::Side => "side",
+                PullsCreateReviewCommentRequestStartSide::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReviewCommentPullRequestStartSide {
-        fn default() -> CreateReviewCommentPullRequestStartSide {
-            CreateReviewCommentPullRequestStartSide::Noop
+    impl Default for PullsCreateReviewCommentRequestStartSide {
+        fn default() -> PullsCreateReviewCommentRequestStartSide {
+            PullsCreateReviewCommentRequestStartSide::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReviewCommentPullRequest {
+    pub struct PullsCreateReviewCommentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28446,7 +28446,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReplyReviewCommentRequest {
+    pub struct PullsCreateReplyReviewCommentRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28458,33 +28458,33 @@ pub mod types {
     /// Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum MergePullRequestMethod {
+    pub enum PullsMergeRequestMethod {
         Merge,
         Rebase,
         Squash,
         Noop,
     }
 
-    impl std::fmt::Display for MergePullRequestMethod {
+    impl std::fmt::Display for PullsMergeRequestMethod {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                MergePullRequestMethod::Merge => "merge",
-                MergePullRequestMethod::Rebase => "rebase",
-                MergePullRequestMethod::Squash => "squash",
-                MergePullRequestMethod::Noop => "",
+                PullsMergeRequestMethod::Merge => "merge",
+                PullsMergeRequestMethod::Rebase => "rebase",
+                PullsMergeRequestMethod::Squash => "squash",
+                PullsMergeRequestMethod::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for MergePullRequestMethod {
-        fn default() -> MergePullRequestMethod {
-            MergePullRequestMethod::Noop
+    impl Default for PullsMergeRequestMethod {
+        fn default() -> PullsMergeRequestMethod {
+            PullsMergeRequestMethod::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MergePullRequest {
+    pub struct PullsMergeRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28508,7 +28508,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutMergePullRequestMethodNotAllowedResponse {
+    pub struct PutPullsMergeMethodNotAllowedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28524,7 +28524,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutMergePullRequestConflictResponse {
+    pub struct PutPullsMergeConflictResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28540,7 +28540,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RequestReviewersPull {
+    pub struct PullsRequestReviewers {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub reviewers: Vec<String>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -28548,7 +28548,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveRequestedReviewersFromPullRequest {
+    pub struct PullsRemoveRequestedReviewersRequest {
         /// An array of user `login`s that will be removed.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub reviewers: Vec<String>,
@@ -28559,28 +28559,28 @@ pub mod types {
     /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReviewPullRequestEvent {
+    pub enum PullsCreateReviewRequestEvent {
         Approve,
         Comment,
         RequestChanges,
         Noop,
     }
 
-    impl std::fmt::Display for CreateReviewPullRequestEvent {
+    impl std::fmt::Display for PullsCreateReviewRequestEvent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReviewPullRequestEvent::Approve => "APPROVE",
-                CreateReviewPullRequestEvent::Comment => "COMMENT",
-                CreateReviewPullRequestEvent::RequestChanges => "REQUEST_CHANGES",
-                CreateReviewPullRequestEvent::Noop => "",
+                PullsCreateReviewRequestEvent::Approve => "APPROVE",
+                PullsCreateReviewRequestEvent::Comment => "COMMENT",
+                PullsCreateReviewRequestEvent::RequestChanges => "REQUEST_CHANGES",
+                PullsCreateReviewRequestEvent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReviewPullRequestEvent {
-        fn default() -> CreateReviewPullRequestEvent {
-            CreateReviewPullRequestEvent::Noop
+    impl Default for PullsCreateReviewRequestEvent {
+        fn default() -> PullsCreateReviewRequestEvent {
+            PullsCreateReviewRequestEvent::Noop
         }
     }
 
@@ -28619,7 +28619,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReviewPullRequest {
+    pub struct PullsCreateReviewRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28639,7 +28639,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateReviewPullRequest {
+    pub struct PullsUpdateReviewRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28649,7 +28649,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DismissReviewPullRequest {
+    pub struct PullsDismissReviewRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28667,33 +28667,33 @@ pub mod types {
     /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum SubmitReviewPullRequestEvent {
+    pub enum PullsSubmitReviewRequestEvent {
         Approve,
         Comment,
         RequestChanges,
         Noop,
     }
 
-    impl std::fmt::Display for SubmitReviewPullRequestEvent {
+    impl std::fmt::Display for PullsSubmitReviewRequestEvent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                SubmitReviewPullRequestEvent::Approve => "APPROVE",
-                SubmitReviewPullRequestEvent::Comment => "COMMENT",
-                SubmitReviewPullRequestEvent::RequestChanges => "REQUEST_CHANGES",
-                SubmitReviewPullRequestEvent::Noop => "",
+                PullsSubmitReviewRequestEvent::Approve => "APPROVE",
+                PullsSubmitReviewRequestEvent::Comment => "COMMENT",
+                PullsSubmitReviewRequestEvent::RequestChanges => "REQUEST_CHANGES",
+                PullsSubmitReviewRequestEvent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for SubmitReviewPullRequestEvent {
-        fn default() -> SubmitReviewPullRequestEvent {
-            SubmitReviewPullRequestEvent::Noop
+    impl Default for PullsSubmitReviewRequestEvent {
+        fn default() -> PullsSubmitReviewRequestEvent {
+            PullsSubmitReviewRequestEvent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SubmitReviewPullRequest {
+    pub struct PullsSubmitReviewRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28705,7 +28705,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdatePullRequestBranch {
+    pub struct PullsUpdateBranchRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28715,7 +28715,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutUpdatePullRequestBranchAcceptedResponse {
+    pub struct PutPullsUpdateBranchAcceptedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28731,7 +28731,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReleaseRequest {
+    pub struct ReposCreateReleaseRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28769,7 +28769,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateReleaseAssetRequest {
+    pub struct ReposUpdateReleaseAssetRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28791,7 +28791,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateReleaseRequest {
+    pub struct ReposUpdateReleaseRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28831,7 +28831,7 @@ pub mod types {
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReactionReleaseRequestContent {
+    pub enum ReactionsCreateReleaseRequestContent {
         PlusOne,
         Eyes,
         Heart,
@@ -28841,35 +28841,35 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateReactionReleaseRequestContent {
+    impl std::fmt::Display for ReactionsCreateReleaseRequestContent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReactionReleaseRequestContent::PlusOne => "+1",
-                CreateReactionReleaseRequestContent::Eyes => "eyes",
-                CreateReactionReleaseRequestContent::Heart => "heart",
-                CreateReactionReleaseRequestContent::Hooray => "hooray",
-                CreateReactionReleaseRequestContent::Laugh => "laugh",
-                CreateReactionReleaseRequestContent::Rocket => "rocket",
-                CreateReactionReleaseRequestContent::Noop => "",
+                ReactionsCreateReleaseRequestContent::PlusOne => "+1",
+                ReactionsCreateReleaseRequestContent::Eyes => "eyes",
+                ReactionsCreateReleaseRequestContent::Heart => "heart",
+                ReactionsCreateReleaseRequestContent::Hooray => "hooray",
+                ReactionsCreateReleaseRequestContent::Laugh => "laugh",
+                ReactionsCreateReleaseRequestContent::Rocket => "rocket",
+                ReactionsCreateReleaseRequestContent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReactionReleaseRequestContent {
-        fn default() -> CreateReactionReleaseRequestContent {
-            CreateReactionReleaseRequestContent::Noop
+    impl Default for ReactionsCreateReleaseRequestContent {
+        fn default() -> ReactionsCreateReleaseRequestContent {
+            ReactionsCreateReleaseRequestContent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionReleaseRequest {
+    pub struct ReactionsCreateReleaseRequest {
         /// The reaction to use
         pub content: Content,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateSecretScanningAlertRequest {
+    pub struct SecretScanningUpdateAlertRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub resolution: Option<serde_json::Value>,
         /// Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
@@ -28879,7 +28879,7 @@ pub mod types {
     /// The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateCommitStatusRequestState {
+    pub enum ReposCreateCommitStatusRequestState {
         Error,
         Failure,
         Pending,
@@ -28887,27 +28887,27 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateCommitStatusRequestState {
+    impl std::fmt::Display for ReposCreateCommitStatusRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateCommitStatusRequestState::Error => "error",
-                CreateCommitStatusRequestState::Failure => "failure",
-                CreateCommitStatusRequestState::Pending => "pending",
-                CreateCommitStatusRequestState::Success => "success",
-                CreateCommitStatusRequestState::Noop => "",
+                ReposCreateCommitStatusRequestState::Error => "error",
+                ReposCreateCommitStatusRequestState::Failure => "failure",
+                ReposCreateCommitStatusRequestState::Pending => "pending",
+                ReposCreateCommitStatusRequestState::Success => "success",
+                ReposCreateCommitStatusRequestState::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateCommitStatusRequestState {
-        fn default() -> CreateCommitStatusRequestState {
-            CreateCommitStatusRequestState::Noop
+    impl Default for ReposCreateCommitStatusRequestState {
+        fn default() -> ReposCreateCommitStatusRequestState {
+            ReposCreateCommitStatusRequestState::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateCommitStatusRequest {
+    pub struct ReposCreateCommitStatusRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28931,7 +28931,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetRepositorySubscriptionRequest {
+    pub struct ActivitySetRepoSubscriptionRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub ignored: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -28939,14 +28939,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReplaceAllRepositoryTopicsRequest {
+    pub struct ReposReplaceAllTopicsRequest {
         /// An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. **Note:** Topic `names` cannot contain uppercase letters.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub names: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TransferRepositoryRequest {
+    pub struct ReposTransferRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28958,7 +28958,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateRepositoryUsingTemplateRequest {
+    pub struct ReposCreateUsingTemplateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28984,14 +28984,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListEnvironmentSecretsOkResponse {
+    pub struct GetActionsListEnvironmentSecretsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub secrets: Vec<ActionsSecret>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateEnvironmentSecretRequest {
+    pub struct ActionsCreateUpdateEnvironmentSecretRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29007,7 +29007,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionScimEnterpriseGroupInviteUsersRequestMembers {
+    pub struct EnterpriseAdminProvisionInviteGroupRequestMembers {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29017,7 +29017,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionScimEnterpriseGroupInviteUsersRequest {
+    pub struct EnterpriseAdminProvisionInviteGroupRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29032,7 +29032,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetScimInformationProvisionedEnterpriseGroupRequestMembers {
+    pub struct EnterpriseAdminSetInformationProvisionedGroupRequestMembers {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29042,7 +29042,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetScimInformationProvisionedEnterpriseGroupRequest {
+    pub struct EnterpriseAdminSetInformationProvisionedGroupRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29058,33 +29058,33 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
+    pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
         Add,
         Remove,
         Replace,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
+    impl std::fmt::Display for EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Add => "Add",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Remove => "Remove",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Replace => "Replace",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Noop => "",
+                EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Add => "Add",
+                EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Remove => "Remove",
+                EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Replace => "Replace",
+                EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
-        fn default() -> UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
-            UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Noop
+    impl Default for EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
+        fn default() -> EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
+            EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateAttributeScimEnterpriseGroupRequest {
+    pub struct EnterpriseAdminUpdateAttributeGroupRequest {
         /// Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub operations: Vec<Operations>,
@@ -29094,7 +29094,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionInviteScimEnterpriseUserRequestName {
+    pub struct EnterpriseAdminProvisionInviteUserRequestName {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29110,7 +29110,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionInviteScimEnterpriseUserRequestEmails {
+    pub struct EnterpriseAdminProvisionInviteUserRequestEmails {
         pub primary: bool,
         #[serde(
             default,
@@ -29128,7 +29128,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionInviteScimEnterpriseUserRequestGroups {
+    pub struct EnterpriseAdminProvisionInviteUserRequestGroups {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29138,7 +29138,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionInviteScimEnterpriseUserRequest {
+    pub struct EnterpriseAdminProvisionInviteUserRequest {
         /// List of user emails.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub emails: Vec<Emails>,
@@ -29157,7 +29157,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetScimInformationProvisionedEnterpriseUserRequestName {
+    pub struct EnterpriseAdminSetInformationProvisionedUserRequestName {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29173,7 +29173,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetScimInformationProvisionedEnterpriseUserRequestEmails {
+    pub struct EnterpriseAdminSetInformationProvisionedUserRequestEmails {
         pub primary: bool,
         #[serde(
             default,
@@ -29191,7 +29191,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetScimInformationProvisionedEnterpriseUserRequestGroups {
+    pub struct EnterpriseAdminSetInformationProvisionedUserRequestGroups {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29201,7 +29201,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetScimInformationProvisionedEnterpriseUserRequest {
+    pub struct EnterpriseAdminSetInformationProvisionedUserRequest {
         /// List of user emails.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub emails: Vec<Emails>,
@@ -29220,10 +29220,10 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateAttributeScimEnterpriseUserRequestOperations {}
+    pub struct EnterpriseAdminUpdateAttributeUserRequestOperations {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateAttributeScimEnterpriseUserRequest {
+    pub struct EnterpriseAdminUpdateAttributeUserRequest {
         /// Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub operations: Vec<Operations>,
@@ -29233,7 +29233,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionInviteScimUserRequestName {
+    pub struct ScimProvisionInviteUserRequestName {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29255,7 +29255,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionInviteScimUserRequestEmails {
+    pub struct ScimProvisionInviteUserRequestEmails {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub primary: Option<bool>,
         #[serde(
@@ -29274,7 +29274,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionInviteScimUserRequest {
+    pub struct ScimProvisionInviteUserRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
         #[serde(
@@ -29306,7 +29306,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateProvisionedOrganizationMembershipRequestName {
+    pub struct ScimSetInformationProvisionedUserRequestName {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29328,7 +29328,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateProvisionedOrganizationMembershipRequestEmails {
+    pub struct ScimSetInformationProvisionedUserRequestEmails {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub primary: Option<bool>,
         #[serde(
@@ -29347,7 +29347,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateProvisionedOrganizationMembershipRequest {
+    pub struct ScimSetInformationProvisionedUserRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
         #[serde(
@@ -29379,7 +29379,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateAttributeScimUserRequest {
+    pub struct ScimUpdateAttributeUserRequest {
         /// Set of operations to be performed
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub operations: Vec<Operations>,
@@ -29420,7 +29420,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetSearchRepositoriesOkResponse {
+    pub struct GetSearchReposOkResponse {
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<RepoSearchResultItem>,
@@ -29443,8 +29443,39 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /// The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. The options are:  
+    /// **For a non-nested team:**  
+    /// \* `secret` - only visible to organization owners and members of this team.  
+    /// \* `closed` - visible to all members of this organization.  
+    /// **For a parent or child team:**  
+    /// \* `closed` - visible to all members of this organization.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateTeamRequestData {
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamsUpdateLegacyRequestPrivacy {
+        Closed,
+        Secret,
+        Noop,
+    }
+
+    impl std::fmt::Display for TeamsUpdateLegacyRequestPrivacy {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamsUpdateLegacyRequestPrivacy::Closed => "closed",
+                TeamsUpdateLegacyRequestPrivacy::Secret => "secret",
+                TeamsUpdateLegacyRequestPrivacy::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamsUpdateLegacyRequestPrivacy {
+        fn default() -> TeamsUpdateLegacyRequestPrivacy {
+            TeamsUpdateLegacyRequestPrivacy::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamsUpdateLegacyRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29466,13 +29497,316 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddUpdateTeamProjectPermissionsRequestData {
+    pub struct TeamsCreateDiscussionLegacyRequest {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub body: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub private: Option<bool>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub title: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamsUpdateDiscussionLegacyRequest {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub body: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub title: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamsCreateDiscussionCommentLegacyRequest {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub body: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamsUpdateDiscussionCommentLegacyRequest {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub body: String,
+    }
+
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::PlusOne => "+1",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::MinusOne => "-1",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Confused => "confused",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Eyes => "eyes",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Heart => "heart",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Hooray => "hooray",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Laugh => "laugh",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Rocket => "rocket",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
+        fn default() -> ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
+            ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ReactionsCreateTeamDiscussionCommentLegacyRequest {
+        /// The reaction to use
+        pub content: Content,
+    }
+
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreateTeamDiscussionLegacyRequestContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreateTeamDiscussionLegacyRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreateTeamDiscussionLegacyRequestContent::PlusOne => "+1",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::MinusOne => "-1",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Confused => "confused",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Eyes => "eyes",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Heart => "heart",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Hooray => "hooray",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Laugh => "laugh",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Rocket => "rocket",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreateTeamDiscussionLegacyRequestContent {
+        fn default() -> ReactionsCreateTeamDiscussionLegacyRequestContent {
+            ReactionsCreateTeamDiscussionLegacyRequestContent::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ReactionsCreateTeamDiscussionLegacyRequest {
+        /// The reaction to use
+        pub content: Content,
+    }
+
+    /// The role that this user should have in the team. Can be one of:  
+    /// \* `member` - a normal member of the team.  
+    /// \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamsAddUpdateMembershipUserLegacyRequestRole {
+        Maintainer,
+        Member,
+        Noop,
+    }
+
+    impl std::fmt::Display for TeamsAddUpdateMembershipUserLegacyRequestRole {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamsAddUpdateMembershipUserLegacyRequestRole::Maintainer => "maintainer",
+                TeamsAddUpdateMembershipUserLegacyRequestRole::Member => "member",
+                TeamsAddUpdateMembershipUserLegacyRequestRole::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamsAddUpdateMembershipUserLegacyRequestRole {
+        fn default() -> TeamsAddUpdateMembershipUserLegacyRequestRole {
+            TeamsAddUpdateMembershipUserLegacyRequestRole::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamsAddUpdateMembershipUserLegacyRequest {
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub role: Option<Role>,
+    }
+
+    /// The permission to grant to the team for this project. Can be one of:  
+    /// \* `read` - team members can read, but not write to or administer this project.  
+    /// \* `write` - team members can read and write, but not administer this project.  
+    /// \* `admin` - team members can read, write and administer this project.  
+    /// Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamsAddUpdateProjectPermissionsLegacyRequestPermission {
+        Admin,
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for TeamsAddUpdateProjectPermissionsLegacyRequestPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Admin => "admin",
+                TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Read => "read",
+                TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Write => "write",
+                TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamsAddUpdateProjectPermissionsLegacyRequestPermission {
+        fn default() -> TeamsAddUpdateProjectPermissionsLegacyRequestPermission {
+            TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permission: Option<Permission>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateIdpGroupConnectionsRequestData {
+    pub struct PutTeamsAddUpdateProjectPermissionsLegacyForbiddenResponse {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub documentation_url: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub message: String,
+    }
+
+    /// The permission to grant the team on this repository. Can be one of:  
+    /// \* `pull` - team members can pull, but not push to or administer this repository.  
+    /// \* `push` - team members can pull and push, but not administer this repository.  
+    /// \* `admin` - team members can pull, push and administer this repository.  
+    ///   
+    /// If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+        Admin,
+        Pull,
+        Push,
+        Noop,
+    }
+
+    impl std::fmt::Display for TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Admin => "admin",
+                TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Pull => "pull",
+                TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Push => "push",
+                TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+        fn default() -> TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+            TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamsAddUpdateRepoPermissionsLegacyRequest {
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permission: Option<Permission>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequestGroups {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub description: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub group_description: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub group_id: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub group_name: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub id: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
         /// The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub groups: Vec<Groups>,
@@ -29486,7 +29820,7 @@ pub mod types {
 
     /// Private User
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetOkResponse {
+    pub struct GetUsersAuthenticatedOkResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29656,7 +29990,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRequest {
+    pub struct UsersUpdateAuthenticatedRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29706,37 +30040,37 @@ pub mod types {
     /// Denotes whether an email is publicly visible.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum SetPrimaryEmailVisibilityRequest {
+    pub enum UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
         Private,
         Public,
         Noop,
     }
 
-    impl std::fmt::Display for SetPrimaryEmailVisibilityRequest {
+    impl std::fmt::Display for UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                SetPrimaryEmailVisibilityRequest::Private => "private",
-                SetPrimaryEmailVisibilityRequest::Public => "public",
-                SetPrimaryEmailVisibilityRequest::Noop => "",
+                UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Private => "private",
+                UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Public => "public",
+                UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for SetPrimaryEmailVisibilityRequest {
-        fn default() -> SetPrimaryEmailVisibilityRequest {
-            SetPrimaryEmailVisibilityRequest::Noop
+    impl Default for UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
+        fn default() -> UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
+            UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetPrimaryEmailVisibilityRequestData {
+    pub struct UsersSetPrimaryEmailVisibilityAuthenticatedRequestData {
         /// Visibility of a secret
         pub visibility: Visibility,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddEmailAddressRequest {
+    pub struct UsersAddEmailAuthenticatedRequest {
         /// Adds one or more email addresses to your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub emails: Vec<String>,
@@ -29744,14 +30078,14 @@ pub mod types {
 
     /// Deletes one or more email addresses from your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteEmailAddressRequest {
+    pub struct UsersDeleteEmailAuthenticatedRequest {
         /// Email addresses associated with the GitHub user account.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub emails: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateGpgKeyRequest {
+    pub struct UsersCreateGpgKeyAuthenticatedRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29761,14 +30095,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListAppInstallationsAccessibleUserAccessTokenOkResponse {
+    pub struct GetAppsListInstallationsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub installations: Vec<Installation>,
         pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListRepositoriesAccessibleUserAccessTokenOkResponse {
+    pub struct GetAppsListInstallationReposOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
         #[serde(
@@ -29782,7 +30116,7 @@ pub mod types {
 
     /// Interaction limit settings.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetInteractionRestrictionsPublicRepositoriesOkResponse {
+    pub struct GetInteractionsRestrictionsOkResponse {
         pub expires_at: DateTime<Utc>,
         /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
         pub limit: InteractionGroup,
@@ -29795,7 +30129,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreatePublicSshKeyRequest {
+    pub struct UsersCreatePublicSshKeyAuthenticatedRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29813,29 +30147,29 @@ pub mod types {
     /// The state that the membership should be in. Only `"active"` will be accepted.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateOrganizationMembershipRequestState {
+    pub enum OrgsUpdateMembershipRequestState {
         Active,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateOrganizationMembershipRequestState {
+    impl std::fmt::Display for OrgsUpdateMembershipRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateOrganizationMembershipRequestState::Active => "active",
-                UpdateOrganizationMembershipRequestState::Noop => "",
+                OrgsUpdateMembershipRequestState::Active => "active",
+                OrgsUpdateMembershipRequestState::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateOrganizationMembershipRequestState {
-        fn default() -> UpdateOrganizationMembershipRequestState {
-            UpdateOrganizationMembershipRequestState::Noop
+    impl Default for OrgsUpdateMembershipRequestState {
+        fn default() -> OrgsUpdateMembershipRequestState {
+            OrgsUpdateMembershipRequestState::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateOrganizationMembershipRequest {
+    pub struct OrgsUpdateMembershipRequest {
         /// The state of the milestone.
         pub state: State,
     }
@@ -29843,29 +30177,29 @@ pub mod types {
     /// Allowed values that can be passed to the exclude param.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum StartUserMigrationRequestExclude {
+    pub enum MigrationsStartRequestExclude {
         Repositories,
         Noop,
     }
 
-    impl std::fmt::Display for StartUserMigrationRequestExclude {
+    impl std::fmt::Display for MigrationsStartRequestExclude {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                StartUserMigrationRequestExclude::Repositories => "repositories",
-                StartUserMigrationRequestExclude::Noop => "",
+                MigrationsStartRequestExclude::Repositories => "repositories",
+                MigrationsStartRequestExclude::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for StartUserMigrationRequestExclude {
-        fn default() -> StartUserMigrationRequestExclude {
-            StartUserMigrationRequestExclude::Noop
+    impl Default for MigrationsStartRequestExclude {
+        fn default() -> MigrationsStartRequestExclude {
+            MigrationsStartRequestExclude::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct StartUserMigrationRequest {
+    pub struct MigrationsStartRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub exclude: Vec<Exclude>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -29877,7 +30211,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUserProjectRequest {
+    pub struct ProjectsCreateRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29893,7 +30227,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateRepositoryRequest {
+    pub struct ReposCreateRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allow_merge_commit: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -29952,7 +30286,7 @@ pub mod types {
 
     /// Private User
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetUserOkResponse {
+    pub struct GetUsersByUsernameOkResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -30237,7 +30571,7 @@ impl Client {
                     let token = self
                         .apps_create_installation_access_token(
                             apptoken.installation_id as i64,
-                            &types::CreateInstallationAccessTokenAppRequest {
+                            &types::AppsCreateInstallationAccessTokenRequest {
                                 permissions: Default::default(),
                                 repositories: Default::default(),
                                 repository_ids: Default::default(),
@@ -30577,7 +30911,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/overview/resources-in-the-rest-api#root-endpoint>
     */
-    pub async fn meta_root(&self) -> Result<types::GetGithubApiRootOkResponse> {
+    pub async fn meta_root(&self) -> Result<types::GetMetaRootOkResponse> {
         let url = "".to_string();
         self.get(&url).await
     }
@@ -30610,8 +30944,8 @@ impl Client {
     pub async fn apps_create_from_manifest(
         &self,
         code: &str,
-        body: &types::CreateGithubAppFromManifestRequest,
-    ) -> Result<types::PostCreateGithubAppFromManifestCreatedResponse> {
+        body: &types::AppsCreateFromManifestRequest,
+    ) -> Result<types::PostAppsCreateFromManifestCreatedResponse> {
         let url = format!("/app-manifests/{}/conversions", progenitor_support::encode_path(&code.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -30644,7 +30978,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/apps#update-a-webhook-configuration-for-an-app>
     */
-    pub async fn apps_update_webhook_config_for_app(&self, body: &types::UpdateWebhookConfigurationAppRequest) -> Result<types::WebhookConfig> {
+    pub async fn apps_update_webhook_config_for_app(&self, body: &types::AppsUpdateWebhookConfigAppRequest) -> Result<types::WebhookConfig> {
         let url = "/app/hook/config".to_string();
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -30721,7 +31055,7 @@ impl Client {
     pub async fn apps_create_installation_access_token(
         &self,
         installation_id: i64,
-        body: &types::CreateInstallationAccessTokenAppRequest,
+        body: &types::AppsCreateInstallationAccessTokenRequest,
     ) -> Result<types::InstallationToken> {
         let url = format!(
             "/app/installations/{}/access_tokens",
@@ -30841,7 +31175,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/apps#delete-an-app-authorization>
     */
-    pub async fn apps_delete_authorization(&self, client_id: &str, body: &types::DeleteAppAuthorizationRequest) -> Result<()> {
+    pub async fn apps_delete_authorization(&self, client_id: &str, body: &types::AppsDeleteAuthorizationRequest) -> Result<()> {
         let url = format!("/applications/{}/grant", progenitor_support::encode_path(&client_id.to_string()),);
 
         self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -30879,7 +31213,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/apps#check-a-token>
     */
-    pub async fn apps_check_token(&self, client_id: &str, body: &types::CheckTokenRequest) -> Result<types::Authorization> {
+    pub async fn apps_check_token(&self, client_id: &str, body: &types::AppsCheckTokenRequest) -> Result<types::Authorization> {
         let url = format!("/applications/{}/token", progenitor_support::encode_path(&client_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -30894,7 +31228,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/apps#delete-an-app-token>
     */
-    pub async fn apps_delete_token(&self, client_id: &str, body: &types::DeleteAppTokenRequest) -> Result<()> {
+    pub async fn apps_delete_token(&self, client_id: &str, body: &types::AppsDeleteTokenRequest) -> Result<()> {
         let url = format!("/applications/{}/token", progenitor_support::encode_path(&client_id.to_string()),);
 
         self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -30909,7 +31243,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/apps#reset-a-token>
     */
-    pub async fn apps_reset_token(&self, client_id: &str, body: &types::ResetTokenRequest) -> Result<types::Authorization> {
+    pub async fn apps_reset_token(&self, client_id: &str, body: &types::AppsResetTokenRequest) -> Result<types::Authorization> {
         let url = format!("/applications/{}/token", progenitor_support::encode_path(&client_id.to_string()),);
 
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -30924,7 +31258,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/apps#create-a-scoped-access-token>
     */
-    pub async fn apps_scope_token(&self, client_id: &str, body: &types::CreateScopedAccessTokenRequest) -> Result<types::Authorization> {
+    pub async fn apps_scope_token(&self, client_id: &str, body: &types::AppsScopeTokenRequest) -> Result<types::Authorization> {
         let url = format!("/applications/{}/token/scoped", progenitor_support::encode_path(&client_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -30941,7 +31275,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/apps#check-an-authorization>
     */
-    pub async fn apps_check_authorization(&self, client_id: &str, access_token: &str) -> Result<types::GetCheckAuthorizationOkResponse> {
+    pub async fn apps_check_authorization(&self, client_id: &str, access_token: &str) -> Result<types::GetAppsCheckAuthorizationOkResponse> {
         let url = format!(
             "/applications/{}/tokens/{}",
             progenitor_support::encode_path(&client_id.to_string()),
@@ -31049,7 +31383,10 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#create-a-new-authorization>
     */
-    pub async fn oauth_authorizations_create_authorization(&self, body: &types::CreateNewAuthorizationRequest) -> Result<types::Authorization> {
+    pub async fn oauth_authorizations_create_authorization(
+        &self,
+        body: &types::OauthAuthorizationsCreateAuthorizationRequest,
+    ) -> Result<types::Authorization> {
         let url = "/authorizations".to_string();
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -31074,7 +31411,7 @@ impl Client {
     pub async fn oauth_authorizations_get_or_create_authorization_for_app(
         &self,
         client_id: &str,
-        body: &types::GetCreateAuthorizationSpecificAppRequest,
+        body: &types::OauthAuthorizationsGetCreateAuthorizationAppRequest,
     ) -> Result<types::Authorization> {
         let url = format!("/authorizations/clients/{}", progenitor_support::encode_path(&client_id.to_string()),);
 
@@ -31100,7 +31437,7 @@ impl Client {
         &self,
         client_id: &str,
         fingerprint: &str,
-        body: &types::GetCreateAuthorizationSpecificAppFingerprintRequest,
+        body: &types::OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest,
     ) -> Result<types::Authorization> {
         let url = format!(
             "/authorizations/clients/{}/{}",
@@ -31157,7 +31494,7 @@ impl Client {
     pub async fn oauth_authorizations_update_authorization(
         &self,
         authorization_id: i64,
-        body: &types::UpdateExistingAuthorizationRequest,
+        body: &types::OauthAuthorizationsUpdateAuthorizationRequest,
     ) -> Result<types::Authorization> {
         let url = format!("/authorizations/{}", progenitor_support::encode_path(&authorization_id.to_string()),);
 
@@ -31241,7 +31578,7 @@ impl Client {
     pub async fn enterprise_admin_set_github_actions_permissions_enterprise(
         &self,
         enterprise: &str,
-        body: &types::SetGithubActionsPermissionsEnterpriseRequest,
+        body: &types::EnterpriseAdminSetGithubActionsPermissionsRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/permissions",
@@ -31267,7 +31604,7 @@ impl Client {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelectedOrganizationsEnabledGithubActionsInEnterpriseOkResponse> {
+    ) -> Result<types::GetEnterpriseAdminListSelectedOrganizationsEnabledGithubActionsOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -31292,7 +31629,7 @@ impl Client {
     pub async fn enterprise_admin_set_selected_organizations_enabled_github_actions_enterprise(
         &self,
         enterprise: &str,
-        body: &types::SetSelectedOrganizationsEnabledGithubActionsInEnterpriseRequest,
+        body: &types::EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations",
@@ -31400,7 +31737,7 @@ impl Client {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnerGroupsEnterpriseOkResponse> {
+    ) -> Result<types::GetEnterpriseAdminListSelfHostedRunnerGroupsOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -31425,7 +31762,7 @@ impl Client {
     pub async fn enterprise_admin_create_self_hosted_runner_group_for_enterprise(
         &self,
         enterprise: &str,
-        body: &types::CreateSelfHostedRunnerGroupEnterpriseRequest,
+        body: &types::EnterpriseAdminCreateSelfHostedRunnerGroupRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups",
@@ -31496,7 +31833,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::UpdateSelfHostedRunnerGroupEnterpriseRequest,
+        body: &types::EnterpriseAdminUpdateSelfHostedRunnerGroupRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}",
@@ -31524,7 +31861,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListOrganizationAccessSelfHostedRunnerGroupInEnterpriseOkResponse> {
+    ) -> Result<types::GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -31551,7 +31888,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::SetOrganizationAccessSelfHostedRunnerGroupInEnterpriseRequest,
+        body: &types::EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations",
@@ -31633,7 +31970,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersInGroupEnterpriseOkResponse> {
+    ) -> Result<types::GetEnterpriseAdminListSelfHostedRunnersInGroupOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -31660,7 +31997,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::SetSelfHostedRunnersInGroupEnterpriseRequest,
+        body: &types::EnterpriseAdminSetSelfHostedRunnersInGroupRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners",
@@ -31742,7 +32079,7 @@ impl Client {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersEnterpriseOkResponse> {
+    ) -> Result<types::GetEnterpriseAdminListSelfHostedRunnersOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32043,7 +32380,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/gists#create-a-gist>
     */
-    pub async fn gists_create(&self, body: &types::CreateGistRequest) -> Result<types::GistSimple> {
+    pub async fn gists_create(&self, body: &types::GistsCreateRequest) -> Result<types::GistSimple> {
         let url = "/gists".to_string();
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -32129,7 +32466,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/gists/#update-a-gist>
     */
-    pub async fn gists_update(&self, gist_id: &str, body: &types::UpdateGistRequest) -> Result<types::GistSimple> {
+    pub async fn gists_update(&self, gist_id: &str, body: &types::GistsUpdateRequest) -> Result<types::GistSimple> {
         let url = format!("/gists/{}", progenitor_support::encode_path(&gist_id.to_string()),);
 
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -32164,7 +32501,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/gists#create-a-gist-comment>
     */
-    pub async fn gists_create_comment(&self, gist_id: &str, body: &types::CreateGistCommentRequest) -> Result<types::GistComment> {
+    pub async fn gists_create_comment(&self, gist_id: &str, body: &types::GistsCreateCommentRequest) -> Result<types::GistComment> {
         let url = format!("/gists/{}/comments", progenitor_support::encode_path(&gist_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -32217,7 +32554,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/gists#update-a-gist-comment>
     */
-    pub async fn gists_update_comment(&self, gist_id: &str, comment_id: i64, body: &types::UpdateGistCommentRequest) -> Result<types::GistComment> {
+    pub async fn gists_update_comment(&self, gist_id: &str, comment_id: i64, body: &types::GistsUpdateCommentRequest) -> Result<types::GistComment> {
         let url = format!(
             "/gists/{}/comments/{}",
             progenitor_support::encode_path(&gist_id.to_string()),
@@ -32391,7 +32728,7 @@ impl Client {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListRepositoriesAccessibleAppInstallationOkResponse> {
+    ) -> Result<types::GetAppsListReposAccessibleInstallationOkResponse> {
         let url = format!(
             "/installation/repositories?page={}&per_page={}",
             format!("{}", page),
@@ -32514,7 +32851,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/markdown#render-a-markdown-document>
     */
-    pub async fn markdown_render(&self, body: &types::RenderMarkdownDocumentRequest) -> Result<String> {
+    pub async fn markdown_render(&self, body: &types::MarkdownRenderRequest) -> Result<String> {
         let url = "/markdown".to_string();
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -32756,8 +33093,8 @@ impl Client {
     */
     pub async fn activity_mark_notifications_as_read(
         &self,
-        body: &types::MarkNotificationsAsReadRequest,
-    ) -> Result<types::PutMarkNotificationsAsReadAcceptedResponse> {
+        body: &types::ActivityMarkNotificationsAsReadRequest,
+    ) -> Result<types::PutActivityMarkNotificationsAsReadAcceptedResponse> {
         let url = "/notifications".to_string();
         self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -32828,7 +33165,7 @@ impl Client {
     pub async fn activity_set_thread_subscription(
         &self,
         thread_id: i64,
-        body: &types::SetThreadSubscriptionRequest,
+        body: &types::ActivitySetThreadSubscriptionRequest,
     ) -> Result<types::ThreadSubscription> {
         let url = format!(
             "/notifications/threads/{}/subscription",
@@ -32916,7 +33253,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/orgs/#update-an-organization>
     */
-    pub async fn orgs_update(&self, org: &str, body: &types::UpdateOrganizationRequest) -> Result<types::OrganizationFull> {
+    pub async fn orgs_update(&self, org: &str, body: &types::OrgsUpdateRequest) -> Result<types::OrganizationFull> {
         let url = format!("/orgs/{}", progenitor_support::encode_path(&org.to_string()),);
 
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -32955,7 +33292,7 @@ impl Client {
     pub async fn actions_set_github_actions_permissions_organization(
         &self,
         org: &str,
-        body: &types::SetGithubActionsPermissionsOrganizationRequest,
+        body: &types::ActionsSetGithubPermissionsOrganizationRequest,
     ) -> Result<()> {
         let url = format!("/orgs/{}/actions/permissions", progenitor_support::encode_path(&org.to_string()),);
 
@@ -32978,7 +33315,7 @@ impl Client {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelectedRepositoriesEnabledGithubActionsInOrganizationOkResponse> {
+    ) -> Result<types::GetActionsListSelectedRepositoriesEnabledGithubOrganizationOkResponse> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -33003,7 +33340,7 @@ impl Client {
     pub async fn actions_set_selected_repositories_enabled_github_actions_organization(
         &self,
         org: &str,
-        body: &types::SetSelectedRepositoriesEnabledGithubActionsInOrganizationRequest,
+        body: &types::ActionsSetSelectedRepositoriesEnabledGithubOrganizationRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories",
@@ -33117,7 +33454,7 @@ impl Client {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnerGroupsOrganizationOkResponse> {
+    ) -> Result<types::GetActionsListSelfHostedRunnerGroupsOrgOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -33144,7 +33481,7 @@ impl Client {
     pub async fn actions_create_self_hosted_runner_group_for_org(
         &self,
         org: &str,
-        body: &types::CreateSelfHostedRunnerGroupOrganizationRequest,
+        body: &types::ActionsCreateSelfHostedRunnerGroupOrgRequest,
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!("/orgs/{}/actions/runner-groups", progenitor_support::encode_path(&org.to_string()),);
 
@@ -33214,7 +33551,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::UpdateSelfHostedRunnerGroupOrganizationRequest,
+        body: &types::ActionsUpdateSelfHostedRunnerGroupOrgRequest,
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}",
@@ -33244,7 +33581,7 @@ impl Client {
         runner_group_id: i64,
         page: i64,
         per_page: i64,
-    ) -> Result<types::GetListRepositoryAccessSelfHostedRunnerGroupInOrganizationOkResponse> {
+    ) -> Result<types::GetActionsListRepoAccessSelfHostedRunnerGroupInOrgOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -33273,7 +33610,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::SetRepositoryAccessSelfHostedRunnerGroupInOrganizationRequest,
+        body: &types::ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories",
@@ -33364,7 +33701,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersInGroupOrganizationOkResponse> {
+    ) -> Result<types::GetActionsListSelfHostedRunnersInGroupOrgOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -33393,7 +33730,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::SetSelfHostedRunnersInGroupOrganizationRequest,
+        body: &types::ActionsSetSelfHostedRunnersInGroupOrgRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners",
@@ -33471,7 +33808,7 @@ impl Client {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersOrganizationOkResponse> {
+    ) -> Result<types::GetActionsListSelfHostedRunnersOrgOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -33604,7 +33941,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-organization-secrets>
     */
-    pub async fn actions_list_org_secrets(&self, org: &str, per_page: i64, page: i64) -> Result<types::GetListOrganizationSecretsOkResponse> {
+    pub async fn actions_list_org_secrets(&self, org: &str, per_page: i64, page: i64) -> Result<types::GetActionsListOrgSecretsOkResponse> {
         let url = format!(
             "/orgs/{}/actions/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -33736,7 +34073,7 @@ impl Client {
         &self,
         org: &str,
         secret_name: &str,
-        body: &types::CreateUpdateOrganizationSecretRequest,
+        body: &types::ActionsCreateUpdateOrgSecretRequest,
     ) -> Result<types::EmptyObject> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}",
@@ -33781,7 +34118,7 @@ impl Client {
         secret_name: &str,
         page: i64,
         per_page: i64,
-    ) -> Result<types::GetListSelectedRepositoriesOrganizationSecretOkResponse> {
+    ) -> Result<types::GetActionsListSelectedReposOrgSecretOkResponse> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -33806,7 +34143,7 @@ impl Client {
         &self,
         org: &str,
         secret_name: &str,
-        body: &types::SetSelectedRepositoriesOrganizationSecretRequest,
+        body: &types::ActionsSetSelectedReposOrgSecretRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories",
@@ -34073,7 +34410,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#create-an-organization-webhook>
     */
-    pub async fn orgs_create_webhook(&self, org: &str, body: &types::CreateOrganizationWebhookRequest) -> Result<types::OrgHook> {
+    pub async fn orgs_create_webhook(&self, org: &str, body: &types::OrgsCreateWebhookRequest) -> Result<types::OrgHook> {
         let url = format!("/orgs/{}/hooks", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -34126,7 +34463,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#update-an-organization-webhook>
     */
-    pub async fn orgs_update_webhook(&self, org: &str, hook_id: i64, body: &types::UpdateOrganizationWebhookRequest) -> Result<types::OrgHook> {
+    pub async fn orgs_update_webhook(&self, org: &str, hook_id: i64, body: &types::OrgsUpdateWebhookRequest) -> Result<types::OrgHook> {
         let url = format!(
             "/orgs/{}/hooks/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34172,7 +34509,7 @@ impl Client {
         &self,
         org: &str,
         hook_id: i64,
-        body: &types::UpdateWebhookConfigurationOrganizationRequest,
+        body: &types::OrgsUpdateWebhookConfigOrgRequest,
     ) -> Result<types::WebhookConfig> {
         let url = format!(
             "/orgs/{}/hooks/{}/config",
@@ -34228,12 +34565,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-app-installations-for-an-organization>
     */
-    pub async fn orgs_list_app_installations(
-        &self,
-        org: &str,
-        per_page: i64,
-        page: i64,
-    ) -> Result<types::GetListAppInstallationsOrganizationOkResponse> {
+    pub async fn orgs_list_app_installations(&self, org: &str, per_page: i64, page: i64) -> Result<types::GetOrgsListAppInstallationsOkResponse> {
         let url = format!(
             "/orgs/{}/installations?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34253,7 +34585,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-an-organization>
     */
-    pub async fn interactions_get_restrictions_for_org(&self, org: &str) -> Result<types::GetInteractionRestrictionsOrganizationOkResponse> {
+    pub async fn interactions_get_restrictions_for_org(&self, org: &str) -> Result<types::GetInteractionsRestrictionsOrgOkResponse> {
         let url = format!("/orgs/{}/interaction-limits", progenitor_support::encode_path(&org.to_string()),);
 
         self.get(&url).await
@@ -34320,11 +34652,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#create-an-organization-invitation>
     */
-    pub async fn orgs_create_invitation(
-        &self,
-        org: &str,
-        body: &types::CreateOrganizationInvitationRequest,
-    ) -> Result<types::OrganizationInvitation> {
+    pub async fn orgs_create_invitation(&self, org: &str, body: &types::OrgsCreateInvitationRequest) -> Result<types::OrganizationInvitation> {
         let url = format!("/orgs/{}/invitations", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -34514,7 +34842,7 @@ impl Client {
         &self,
         org: &str,
         username: &str,
-        body: &types::SetOrganizationMembershipUserRequest,
+        body: &types::OrgsSetMembershipUserRequest,
     ) -> Result<types::OrgMembership> {
         let url = format!(
             "/orgs/{}/memberships/{}",
@@ -34576,7 +34904,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#start-an-organization-migration>
     */
-    pub async fn migrations_start_for_org(&self, org: &str, body: &types::StartOrganizationMigrationRequest) -> Result<types::Migration> {
+    pub async fn migrations_start_for_org(&self, org: &str, body: &types::MigrationsStartOrgRequest) -> Result<types::Migration> {
         let url = format!("/orgs/{}/migrations", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -34728,7 +35056,7 @@ impl Client {
         &self,
         org: &str,
         username: &str,
-    ) -> Result<types::PutConvertOrganizationMemberOutsideCollaboratorAcceptedResponse> {
+    ) -> Result<types::PutOrgsConvertMemberOutsideCollaboratorAcceptedResponse> {
         let url = format!(
             "/orgs/{}/outside_collaborators/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35004,7 +35332,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#create-an-organization-project>
     */
-    pub async fn projects_create_for_org(&self, org: &str, body: &types::CreateOrganizationProjectRequest) -> Result<types::Project> {
+    pub async fn projects_create_for_org(&self, org: &str, body: &types::ProjectsCreateOrgRequest) -> Result<types::Project> {
         let url = format!("/orgs/{}/projects", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -35136,7 +35464,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-an-organization-repository>
     */
-    pub async fn repos_create_in_org(&self, org: &str, body: &types::CreateOrganizationRepositoryRequest) -> Result<types::Repository> {
+    pub async fn repos_create_in_org(&self, org: &str, body: &types::ReposCreateInOrgRequest) -> Result<types::Repository> {
         let url = format!("/orgs/{}/repos", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -35257,7 +35585,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/teams#create-a-team>
     */
-    pub async fn teams_create(&self, org: &str, body: &types::CreateTeamRequest) -> Result<types::TeamFull> {
+    pub async fn teams_create(&self, org: &str, body: &types::TeamsCreateRequest) -> Result<types::TeamFull> {
         let url = format!("/orgs/{}/teams", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -35318,7 +35646,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/teams#update-a-team>
     */
-    pub async fn teams_update_in_org(&self, org: &str, team_slug: &str, body: &types::UpdateTeamRequest) -> Result<types::TeamFull> {
+    pub async fn teams_update_in_org(&self, org: &str, team_slug: &str, body: &types::TeamsUpdateInOrgRequest) -> Result<types::TeamFull> {
         let url = format!(
             "/orgs/{}/teams/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35378,7 +35706,7 @@ impl Client {
         &self,
         org: &str,
         team_slug: &str,
-        body: &types::CreateDiscussionRequest,
+        body: &types::TeamsCreateDiscussionInOrgRequest,
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions",
@@ -35449,7 +35777,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        body: &types::UpdateDiscussionRequest,
+        body: &types::TeamsUpdateDiscussionInOrgRequest,
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}",
@@ -35512,7 +35840,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        body: &types::CreateDiscussionCommentRequest,
+        body: &types::TeamsCreateDiscussionCommentInOrgRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments",
@@ -35599,7 +35927,7 @@ impl Client {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::UpdateDiscussionCommentRequest,
+        body: &types::TeamsUpdateDiscussionCommentInOrgRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}",
@@ -35664,7 +35992,7 @@ impl Client {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::CreateReactionTeamDiscussionCommentRequest,
+        body: &types::ReactionsCreateTeamDiscussionCommentInOrgRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
@@ -35757,7 +36085,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        body: &types::CreateReactionTeamDiscussionRequest,
+        body: &types::ReactionsCreateTeamDiscussionInOrgRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions",
@@ -35905,7 +36233,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         username: &str,
-        body: &types::AddUpdateTeamMembershipUserRequest,
+        body: &types::TeamsAddUpdateMembershipUserInOrgRequest,
     ) -> Result<types::TeamMembership> {
         let url = format!(
             "/orgs/{}/teams/{}/memberships/{}",
@@ -36004,7 +36332,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         project_id: i64,
-        body: &types::AddUpdateTeamProjectPermissionsRequest,
+        body: &types::TeamsAddUpdateProjectPermissionsInOrgRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/projects/{}",
@@ -36113,7 +36441,7 @@ impl Client {
         team_slug: &str,
         owner: &str,
         repo: &str,
-        body: &types::AddUpdateTeamRepositoryPermissionsRequest,
+        body: &types::TeamsAddUpdateRepoPermissionsInOrgRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/repos/{}/{}",
@@ -36189,7 +36517,7 @@ impl Client {
         &self,
         org: &str,
         team_slug: &str,
-        body: &types::CreateUpdateIdpGroupConnectionsRequest,
+        body: &types::TeamsCreateUpdateIdpGroupConnectionsInOrgRequest,
     ) -> Result<types::GroupMapping> {
         let url = format!(
             "/orgs/{}/teams/{}/team-sync/group-mappings",
@@ -36262,7 +36590,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#update-a-project-card>
     */
-    pub async fn projects_update_card(&self, card_id: i64, body: &types::UpdateExistingProjectCardRequest) -> Result<types::ProjectCard> {
+    pub async fn projects_update_card(&self, card_id: i64, body: &types::ProjectsUpdateCardRequest) -> Result<types::ProjectCard> {
         let url = format!("/projects/columns/cards/{}", progenitor_support::encode_path(&card_id.to_string()),);
 
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -36277,7 +36605,11 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#move-a-project-card>
     */
-    pub async fn projects_move_card(&self, card_id: i64, body: &types::MoveProjectCardRequest) -> Result<types::PostMoveProjectCardCreatedResponse> {
+    pub async fn projects_move_card(
+        &self,
+        card_id: i64,
+        body: &types::ProjectsMoveCardRequest,
+    ) -> Result<types::PostProjectsMoveCardCreatedResponse> {
         let url = format!("/projects/columns/cards/{}/moves", progenitor_support::encode_path(&card_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -36322,7 +36654,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#update-a-project-column>
     */
-    pub async fn projects_update_column(&self, column_id: i64, body: &types::UpdateExistingProjectColumnRequest) -> Result<types::ProjectColumn> {
+    pub async fn projects_update_column(&self, column_id: i64, body: &types::ProjectsUpdateColumnRequest) -> Result<types::ProjectColumn> {
         let url = format!("/projects/columns/{}", progenitor_support::encode_path(&column_id.to_string()),);
 
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -36358,7 +36690,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#create-a-project-card>
     */
-    pub async fn projects_create_card(&self, column_id: i64, body: &types::CreateProjectCardRequest) -> Result<types::ProjectCard> {
+    pub async fn projects_create_card(&self, column_id: i64, body: &types::ProjectsCreateCardRequest) -> Result<types::ProjectCard> {
         let url = format!("/projects/columns/{}/cards", progenitor_support::encode_path(&column_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -36376,8 +36708,8 @@ impl Client {
     pub async fn projects_move_column(
         &self,
         column_id: i64,
-        body: &types::MoveProjectColumnRequest,
-    ) -> Result<types::PostMoveProjectColumnCreatedResponse> {
+        body: &types::ProjectsMoveColumnRequest,
+    ) -> Result<types::PostProjectsMoveColumnCreatedResponse> {
         let url = format!("/projects/columns/{}/moves", progenitor_support::encode_path(&column_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -36422,7 +36754,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#update-a-project>
     */
-    pub async fn projects_update(&self, project_id: i64, body: &types::UpdateProjectRequest) -> Result<types::Project> {
+    pub async fn projects_update(&self, project_id: i64, body: &types::ProjectsUpdateRequest) -> Result<types::Project> {
         let url = format!("/projects/{}", progenitor_support::encode_path(&project_id.to_string()),);
 
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -36458,7 +36790,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#add-project-collaborator>
     */
-    pub async fn projects_add_collaborator(&self, project_id: i64, username: &str, body: &types::AddProjectCollaboratorRequest) -> Result<()> {
+    pub async fn projects_add_collaborator(&self, project_id: i64, username: &str, body: &types::ProjectsAddCollaboratorRequest) -> Result<()> {
         let url = format!(
             "/projects/{}/collaborators/{}",
             progenitor_support::encode_path(&project_id.to_string()),
@@ -36535,7 +36867,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#create-a-project-column>
     */
-    pub async fn projects_create_column(&self, project_id: i64, body: &types::CreateProjectColumnRequest) -> Result<types::ProjectColumn> {
+    pub async fn projects_create_column(&self, project_id: i64, body: &types::ProjectsCreateColumnRequest) -> Result<types::ProjectColumn> {
         let url = format!("/projects/{}/columns", progenitor_support::encode_path(&project_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -36626,7 +36958,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos/#update-a-repository>
     */
-    pub async fn repos_update(&self, owner: &str, repo: &str, body: &types::UpdateRepositoryRequest) -> Result<types::FullRepository> {
+    pub async fn repos_update(&self, owner: &str, repo: &str, body: &types::ReposUpdateRequest) -> Result<types::FullRepository> {
         let url = format!(
             "/repos/{}/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -36651,7 +36983,7 @@ impl Client {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListArtifactsRepositoryOkResponse> {
+    ) -> Result<types::GetActionsListArtifactsRepoOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/artifacts?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -36809,7 +37141,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::SetGithubActionsPermissionsRepositoryRequest,
+        body: &types::ActionsSetGithubPermissionsRepositoryRequest,
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/permissions",
@@ -36881,7 +37213,7 @@ impl Client {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersRepositoryOkResponse> {
+    ) -> Result<types::GetActionsListSelfHostedRunnersRepoOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37037,7 +37369,7 @@ impl Client {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListWorkflowRunsRepositoryOkResponse> {
+    ) -> Result<types::GetActionsListWorkflowRunsRepoOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs?actor={}&branch={}&event={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37155,7 +37487,7 @@ impl Client {
         run_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListWorkflowRunArtifactsOkResponse> {
+    ) -> Result<types::GetActionsListWorkflowRunArtifactsOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/artifacts?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37177,7 +37509,12 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/actions#cancel-a-workflow-run>
     */
-    pub async fn actions_cancel_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::PostCancelWorkflowRunAcceptedResponse> {
+    pub async fn actions_cancel_workflow_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<types::PostActionsCancelWorkflowRunAcceptedResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/cancel",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37205,7 +37542,7 @@ impl Client {
         filter: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListJobsWorkflowRunOkResponse> {
+    ) -> Result<types::GetActionsListJobsWorkflowRunOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/jobs?filter={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37300,7 +37637,7 @@ impl Client {
         owner: &str,
         repo: &str,
         run_id: i64,
-        body: &types::ReviewPendingDeploymentsWorkflowRunRequest,
+        body: &types::ActionsReviewPendingDeploymentsRunRequest,
     ) -> Result<Vec<types::Deployment>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/pending_deployments",
@@ -37321,7 +37658,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/actions#re-run-a-workflow>
     */
-    pub async fn actions_re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::PostReRunWorkflowCreatedResponse> {
+    pub async fn actions_re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::PostActionsReRunWorkflowCreatedResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/rerun",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37369,7 +37706,7 @@ impl Client {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListRepositorySecretsOkResponse> {
+    ) -> Result<types::GetActionsListRepoSecretsOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37508,8 +37845,8 @@ impl Client {
         owner: &str,
         repo: &str,
         secret_name: &str,
-        body: &types::CreateUpdateRepositorySecretRequest,
-    ) -> Result<types::PutCreateUpdateRepositorySecretCreatedResponse> {
+        body: &types::ActionsCreateUpdateRepoSecretRequest,
+    ) -> Result<types::PutActionsCreateUpdateRepoSecretCreatedResponse> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37555,7 +37892,7 @@ impl Client {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListRepositoryWorkflowsOkResponse> {
+    ) -> Result<types::GetActionsListRepoWorkflowsOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/workflows?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37627,7 +37964,7 @@ impl Client {
         owner: &str,
         repo: &str,
         workflow_id: &str,
-        body: &types::CreateWorkflowDispatchEventRequest,
+        body: &types::ActionsCreateWorkflowDispatchRequest,
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/dispatches",
@@ -37683,7 +38020,7 @@ impl Client {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListWorkflowRunsOkResponse> {
+    ) -> Result<types::GetActionsListWorkflowRunsOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/runs?actor={}&branch={}&event={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -37887,7 +38224,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::UpdateBranchProtectionRequest,
+        body: &types::ReposUpdateBranchProtectionRequest,
     ) -> Result<types::ProtectedBranch> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection",
@@ -38046,7 +38383,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::UpdatePullRequestReviewProtection,
+        body: &types::ReposUpdatePullRequestReviewProtection,
     ) -> Result<types::ProtectedBranchPullRequestReview> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
@@ -38187,7 +38524,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::UpdateStatusCheckProtectionRequest,
+        body: &types::ReposUpdateStatusCheckProtectionRequest,
     ) -> Result<types::StatusCheckPolicy> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks",
@@ -38233,7 +38570,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::SetStatusCheckContextsRequest,
+        body: &types::ReposSetStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -38259,7 +38596,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::AddStatusCheckContextsRequest,
+        body: &types::ReposAddStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -38285,7 +38622,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::RemoveStatusCheckContextsRequest,
+        body: &types::ReposRemoveStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -38385,7 +38722,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::SetAppAccessRestrictionsRequest,
+        body: &types::ReposSetAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -38417,7 +38754,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::AddAppAccessRestrictionsRequest,
+        body: &types::ReposAddAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -38449,7 +38786,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::RemoveAppAccessRestrictionsRequest,
+        body: &types::ReposRemoveAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -38503,7 +38840,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::SetTeamAccessRestrictionsRequest,
+        body: &types::ReposSetTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -38535,7 +38872,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::AddTeamAccessRestrictionsRequest,
+        body: &types::ReposAddTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -38567,7 +38904,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::RemoveTeamAccessRestrictionsRequest,
+        body: &types::ReposRemoveTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -38621,7 +38958,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::SetUserAccessRestrictionsRequest,
+        body: &types::ReposSetUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -38653,7 +38990,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::AddUserAccessRestrictionsRequest,
+        body: &types::ReposAddUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -38685,7 +39022,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::RemoveUserAccessRestrictionsRequest,
+        body: &types::ReposRemoveUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -38725,7 +39062,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::RenameBranchRequest,
+        body: &types::ReposRenameBranchRequest,
     ) -> Result<types::BranchWithProtection> {
         let url = format!(
             "/repos/{}/{}/branches/{}/rename",
@@ -38750,7 +39087,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/checks#create-a-check-run>
     */
-    pub async fn checks_create(&self, owner: &str, repo: &str, body: &types::CreateCheckRunRequest) -> Result<types::CheckRun> {
+    pub async fn checks_create(&self, owner: &str, repo: &str, body: &types::ChecksCreateRequest) -> Result<types::CheckRun> {
         let url = format!(
             "/repos/{}/{}/check-runs",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38793,7 +39130,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/checks#update-a-check-run>
     */
-    pub async fn checks_update(&self, owner: &str, repo: &str, check_run_id: i64, body: &types::UpdateCheckRunRequest) -> Result<types::CheckRun> {
+    pub async fn checks_update(&self, owner: &str, repo: &str, check_run_id: i64, body: &types::ChecksUpdateRequest) -> Result<types::CheckRun> {
         let url = format!(
             "/repos/{}/{}/check-runs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38844,7 +39181,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/checks#create-a-check-suite>
     */
-    pub async fn checks_create_suite(&self, owner: &str, repo: &str, body: &types::CreateCheckSuiteRequest) -> Result<types::CheckSuite> {
+    pub async fn checks_create_suite(&self, owner: &str, repo: &str, body: &types::ChecksCreateSuiteRequest) -> Result<types::CheckSuite> {
         let url = format!(
             "/repos/{}/{}/check-suites",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38867,7 +39204,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::UpdateRepositoryPreferencesCheckSuitesRequest,
+        body: &types::ChecksSetSuitesPreferencesRequest,
     ) -> Result<types::CheckSuitePreference> {
         let url = format!(
             "/repos/{}/{}/check-suites/preferences",
@@ -38921,7 +39258,7 @@ impl Client {
         filter: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListCheckRunsInSuiteOkResponse> {
+    ) -> Result<types::GetChecksListSuiteOkResponse> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/check-runs?check_name={}&filter={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38953,7 +39290,7 @@ impl Client {
         owner: &str,
         repo: &str,
         check_suite_id: i64,
-    ) -> Result<types::PostRerequestCheckSuiteCreatedResponse> {
+    ) -> Result<types::PostChecksRerequestSuiteCreatedResponse> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/rerequest",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39044,7 +39381,7 @@ impl Client {
         owner: &str,
         repo: &str,
         alert_number: &str,
-        body: &types::UpdateCodeScanningAlertRequest,
+        body: &types::CodeScanningUpdateAlertRequest,
     ) -> Result<types::CodeScanningAlert> {
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts/{}",
@@ -39296,7 +39633,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::UploadAnalysisAsSarifDataRequest,
+        body: &types::CodeScanningUploadSarifRequest,
     ) -> Result<types::CodeScanningSarifsReceipt> {
         let url = format!(
             "/repos/{}/{}/code-scanning/sarifs",
@@ -39404,7 +39741,7 @@ impl Client {
         owner: &str,
         repo: &str,
         username: &str,
-        body: &types::AddRepositoryCollaboratorRequest,
+        body: &types::ReposAddCollaboratorRequest,
     ) -> Result<types::RepositoryInvitation> {
         let url = format!(
             "/repos/{}/{}/collaborators/{}",
@@ -39538,7 +39875,7 @@ impl Client {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::UpdateCommitCommentRequest,
+        body: &types::ReposUpdateCommitCommentRequest,
     ) -> Result<types::CommitComment> {
         let url = format!(
             "/repos/{}/{}/comments/{}",
@@ -39595,7 +39932,7 @@ impl Client {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::CreateReactionCommitCommentRequest,
+        body: &types::ReactionsCreateCommitCommentRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions",
@@ -39761,7 +40098,7 @@ impl Client {
         owner: &str,
         repo: &str,
         commit_sha: &str,
-        body: &types::CreateCommitCommentRequest,
+        body: &types::ReposCreateCommitCommentRequest,
     ) -> Result<types::CommitComment> {
         let url = format!(
             "/repos/{}/{}/commits/{}/comments",
@@ -39881,7 +40218,7 @@ impl Client {
         per_page: i64,
         page: i64,
         app_id: i64,
-    ) -> Result<types::GetListCheckRunsGitReferenceOkResponse> {
+    ) -> Result<types::GetChecksListRefOkResponse> {
         let url = format!(
             "/repos/{}/{}/commits/{}/check-runs?app_id={}&check_name={}&filter={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39918,7 +40255,7 @@ impl Client {
         check_name: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListCheckSuitesGitReferenceOkResponse> {
+    ) -> Result<types::GetChecksListSuitesRefOkResponse> {
         let url = format!(
             "/repos/{}/{}/commits/{}/check-suites?app_id={}&check_name={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40131,7 +40468,7 @@ impl Client {
         owner: &str,
         repo: &str,
         content_reference_id: i64,
-        body: &types::CreateContentAttachmentRequest,
+        body: &types::AppsCreateContentAttachmentRequest,
     ) -> Result<types::ContentReferenceAttachment> {
         let url = format!(
             "/repos/{}/{}/content_references/{}/attachments",
@@ -40183,7 +40520,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-repository-content>
     */
-    pub async fn repos_get_content(&self, owner: &str, repo: &str, path: &str, ref_: &str) -> Result<types::GetRepositoryContentOkResponse> {
+    pub async fn repos_get_content(&self, owner: &str, repo: &str, path: &str, ref_: &str) -> Result<types::GetReposContentOkResponse> {
         let url = format!(
             "/repos/{}/{}/contents/{}?ref={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40209,7 +40546,7 @@ impl Client {
         owner: &str,
         repo: &str,
         path: &str,
-        body: &types::CreateUpdateFileContentsRequest,
+        body: &types::ReposCreateUpdateFileContentsRequest,
     ) -> Result<types::FileCommit> {
         let url = format!(
             "/repos/{}/{}/contents/{}",
@@ -40236,7 +40573,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-file>
     */
-    pub async fn repos_delete_file(&self, owner: &str, repo: &str, path: &str, body: &types::DeleteFileRequest) -> Result<types::FileCommit> {
+    pub async fn repos_delete_file(&self, owner: &str, repo: &str, path: &str, body: &types::ReposDeleteFileRequest) -> Result<types::FileCommit> {
         let url = format!(
             "/repos/{}/{}/contents/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40359,7 +40696,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-deployment>
     */
-    pub async fn repos_create_deployment(&self, owner: &str, repo: &str, body: &types::CreateDeploymentRequest) -> Result<types::Deployment> {
+    pub async fn repos_create_deployment(&self, owner: &str, repo: &str, body: &types::ReposCreateDeploymentRequest) -> Result<types::Deployment> {
         let url = format!(
             "/repos/{}/{}/deployments",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40461,7 +40798,7 @@ impl Client {
         owner: &str,
         repo: &str,
         deployment_id: i64,
-        body: &types::CreateDeploymentStatusRequest,
+        body: &types::ReposCreateDeploymentStatusRequest,
     ) -> Result<types::DeploymentStatus> {
         let url = format!(
             "/repos/{}/{}/deployments/{}/statuses",
@@ -40512,7 +40849,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-repository-dispatch-event>
     */
-    pub async fn repos_create_dispatch_event(&self, owner: &str, repo: &str, body: &types::CreateRepositoryDispatchEventRequest) -> Result<()> {
+    pub async fn repos_create_dispatch_event(&self, owner: &str, repo: &str, body: &types::ReposCreateDispatchEventRequest) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/dispatches",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40533,7 +40870,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-all-environments>
     */
-    pub async fn repos_get_all_environments(&self, owner: &str, repo: &str) -> Result<types::GetAllEnvironmentsOkResponse> {
+    pub async fn repos_get_all_environments(&self, owner: &str, repo: &str) -> Result<types::GetReposAllEnvironmentsOkResponse> {
         let url = format!(
             "/repos/{}/{}/environments",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40583,7 +40920,7 @@ impl Client {
         owner: &str,
         repo: &str,
         environment_name: &str,
-        body: &types::CreateUpdateEnvironmentRequest,
+        body: &types::ReposCreateUpdateEnvironmentRequest,
     ) -> Result<types::Environment> {
         let url = format!(
             "/repos/{}/{}/environments/{}",
@@ -40669,7 +41006,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-fork>
     */
-    pub async fn repos_create_fork(&self, owner: &str, repo: &str, body: &types::CreateForkRequest) -> Result<types::FullRepository> {
+    pub async fn repos_create_fork(&self, owner: &str, repo: &str, body: &types::ReposCreateForkRequest) -> Result<types::FullRepository> {
         let url = format!(
             "/repos/{}/{}/forks",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40688,7 +41025,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-blob>
     */
-    pub async fn git_create_blob(&self, owner: &str, repo: &str, body: &types::CreateBlobRequest) -> Result<types::ShortBlob> {
+    pub async fn git_create_blob(&self, owner: &str, repo: &str, body: &types::GitCreateBlobRequest) -> Result<types::ShortBlob> {
         let url = format!(
             "/repos/{}/{}/git/blobs",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40758,7 +41095,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-commit>
     */
-    pub async fn git_create_commit(&self, owner: &str, repo: &str, body: &types::CreateCommitRequest) -> Result<types::GitCommit> {
+    pub async fn git_create_commit(&self, owner: &str, repo: &str, body: &types::GitCreateCommitRequest) -> Result<types::GitCommit> {
         let url = format!(
             "/repos/{}/{}/git/commits",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40876,7 +41213,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-reference>
     */
-    pub async fn git_create_ref(&self, owner: &str, repo: &str, body: &types::CreateReferenceRequest) -> Result<types::GitRef> {
+    pub async fn git_create_ref(&self, owner: &str, repo: &str, body: &types::GitCreateRefRequest) -> Result<types::GitRef> {
         let url = format!(
             "/repos/{}/{}/git/refs",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40915,7 +41252,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/git#update-a-reference>
     */
-    pub async fn git_update_ref(&self, owner: &str, repo: &str, ref_: &str, body: &types::UpdateReferenceRequest) -> Result<types::GitRef> {
+    pub async fn git_update_ref(&self, owner: &str, repo: &str, ref_: &str, body: &types::GitUpdateRefRequest) -> Result<types::GitRef> {
         let url = format!(
             "/repos/{}/{}/git/refs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40964,7 +41301,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-tag-object>
     */
-    pub async fn git_create_tag(&self, owner: &str, repo: &str, body: &types::CreateTagObjectRequest) -> Result<types::GitTag> {
+    pub async fn git_create_tag(&self, owner: &str, repo: &str, body: &types::GitCreateTagRequest) -> Result<types::GitTag> {
         let url = format!(
             "/repos/{}/{}/git/tags",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41032,7 +41369,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-tree>
     */
-    pub async fn git_create_tree(&self, owner: &str, repo: &str, body: &types::CreateTreeRequest) -> Result<types::GitTree> {
+    pub async fn git_create_tree(&self, owner: &str, repo: &str, body: &types::GitCreateTreeRequest) -> Result<types::GitTree> {
         let url = format!(
             "/repos/{}/{}/git/trees",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41096,7 +41433,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-repository-webhook>
     */
-    pub async fn repos_create_webhook(&self, owner: &str, repo: &str, body: &types::CreateRepositoryWebhookRequest) -> Result<types::Hook> {
+    pub async fn repos_create_webhook(&self, owner: &str, repo: &str, body: &types::ReposCreateWebhookRequest) -> Result<types::Hook> {
         let url = format!(
             "/repos/{}/{}/hooks",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41155,13 +41492,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-a-repository-webhook>
     */
-    pub async fn repos_update_webhook(
-        &self,
-        owner: &str,
-        repo: &str,
-        hook_id: i64,
-        body: &types::UpdateRepositoryWebhookRequest,
-    ) -> Result<types::Hook> {
+    pub async fn repos_update_webhook(&self, owner: &str, repo: &str, hook_id: i64, body: &types::ReposUpdateWebhookRequest) -> Result<types::Hook> {
         let url = format!(
             "/repos/{}/{}/hooks/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41210,7 +41541,7 @@ impl Client {
         owner: &str,
         repo: &str,
         hook_id: i64,
-        body: &types::UpdateWebhookConfigurationRepositoryRequest,
+        body: &types::ReposUpdateWebhookConfigRepoRequest,
     ) -> Result<types::WebhookConfig> {
         let url = format!(
             "/repos/{}/{}/hooks/{}/config",
@@ -41325,7 +41656,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#start-an-import>
     */
-    pub async fn migrations_start_import(&self, owner: &str, repo: &str, body: &types::StartImportRequest) -> Result<types::Import> {
+    pub async fn migrations_start_import(&self, owner: &str, repo: &str, body: &types::MigrationsStartImportRequest) -> Result<types::Import> {
         let url = format!(
             "/repos/{}/{}/import",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41364,7 +41695,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#update-an-import>
     */
-    pub async fn migrations_update_import(&self, owner: &str, repo: &str, body: &types::UpdateImportRequest) -> Result<types::Import> {
+    pub async fn migrations_update_import(&self, owner: &str, repo: &str, body: &types::MigrationsUpdateImportRequest) -> Result<types::Import> {
         let url = format!(
             "/repos/{}/{}/import",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41410,7 +41741,7 @@ impl Client {
         owner: &str,
         repo: &str,
         author_id: i64,
-        body: &types::MapCommitAuthorRequest,
+        body: &types::MigrationsMapCommitAuthorRequest,
     ) -> Result<types::PorterAuthor> {
         let url = format!(
             "/repos/{}/{}/import/authors/{}",
@@ -41450,7 +41781,12 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#update-git-lfs-preference>
     */
-    pub async fn migrations_set_lfs_preference(&self, owner: &str, repo: &str, body: &types::UpdateGitLfsPreferenceRequest) -> Result<types::Import> {
+    pub async fn migrations_set_lfs_preference(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::MigrationsSetLfsPreferenceRequest,
+    ) -> Result<types::Import> {
         let url = format!(
             "/repos/{}/{}/import/lfs",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41490,11 +41826,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-a-repository>
     */
-    pub async fn interactions_get_restrictions_for_repo(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<types::GetInteractionRestrictionsRepositoryOkResponse> {
+    pub async fn interactions_get_restrictions_for_repo(&self, owner: &str, repo: &str) -> Result<types::GetInteractionsRestrictionsRepoOkResponse> {
         let url = format!(
             "/repos/{}/{}/interaction-limits",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41602,7 +41934,7 @@ impl Client {
         owner: &str,
         repo: &str,
         invitation_id: i64,
-        body: &types::UpdateRepositoryInvitationRequest,
+        body: &types::ReposUpdateInvitationRequest,
     ) -> Result<types::RepositoryInvitation> {
         let url = format!(
             "/repos/{}/{}/invitations/{}",
@@ -41663,7 +41995,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/issues#create-an-issue>
     */
-    pub async fn issues_create(&self, owner: &str, repo: &str, body: &types::CreateIssueRequest) -> Result<types::Issue> {
+    pub async fn issues_create(&self, owner: &str, repo: &str, body: &types::IssuesCreateRequest) -> Result<types::Issue> {
         let url = format!(
             "/repos/{}/{}/issues",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41760,7 +42092,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::UpdateIssueCommentRequest,
+        body: &types::IssuesUpdateCommentRequest,
     ) -> Result<types::IssueComment> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}",
@@ -41817,7 +42149,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::CreateReactionIssueCommentRequest,
+        body: &types::ReactionsCreateIssueCommentRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions",
@@ -41932,7 +42264,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/issues/#update-an-issue>
     */
-    pub async fn issues_update(&self, owner: &str, repo: &str, issue_number: i64, body: &types::UpdateIssueRequest) -> Result<types::Issue> {
+    pub async fn issues_update(&self, owner: &str, repo: &str, issue_number: i64, body: &types::IssuesUpdateRequest) -> Result<types::Issue> {
         let url = format!(
             "/repos/{}/{}/issues/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41957,7 +42289,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::AddAssigneesIssueRequest,
+        body: &types::IssuesAddAssigneesRequest,
     ) -> Result<types::IssueSimple> {
         let url = format!(
             "/repos/{}/{}/issues/{}/assignees",
@@ -41983,7 +42315,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::RemoveAssigneesFromIssueRequest,
+        body: &types::IssuesRemoveAssigneesRequest,
     ) -> Result<types::IssueSimple> {
         let url = format!(
             "/repos/{}/{}/issues/{}/assignees",
@@ -42040,7 +42372,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::CreateIssueCommentRequest,
+        body: &types::IssuesCreateCommentRequest,
     ) -> Result<types::IssueComment> {
         let url = format!(
             "/repos/{}/{}/issues/{}/comments",
@@ -42124,7 +42456,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::SetLabelsIssueRequest,
+        body: &types::IssuesSetLabelsRequest,
     ) -> Result<Vec<types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
@@ -42150,7 +42482,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::AddLabelsIssueRequest,
+        body: &types::IssuesAddLabelsRequest,
     ) -> Result<Vec<types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
@@ -42214,7 +42546,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/issues#lock-an-issue>
     */
-    pub async fn issues_lock(&self, owner: &str, repo: &str, issue_number: i64, body: &types::LockIssueRequest) -> Result<()> {
+    pub async fn issues_lock(&self, owner: &str, repo: &str, issue_number: i64, body: &types::IssuesLockRequest) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/{}/lock",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42290,7 +42622,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::CreateReactionIssueRequest,
+        body: &types::ReactionsCreateIssueRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions",
@@ -42384,7 +42716,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-deploy-key>
     */
-    pub async fn repos_create_deploy_key(&self, owner: &str, repo: &str, body: &types::CreateDeployKeyRequest) -> Result<types::DeployKey> {
+    pub async fn repos_create_deploy_key(&self, owner: &str, repo: &str, body: &types::ReposCreateDeployKeyRequest) -> Result<types::DeployKey> {
         let url = format!(
             "/repos/{}/{}/keys",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42464,7 +42796,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/issues#create-a-label>
     */
-    pub async fn issues_create_label(&self, owner: &str, repo: &str, body: &types::CreateLabelRequest) -> Result<types::Label> {
+    pub async fn issues_create_label(&self, owner: &str, repo: &str, body: &types::IssuesCreateLabelRequest) -> Result<types::Label> {
         let url = format!(
             "/repos/{}/{}/labels",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42523,7 +42855,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/issues#update-a-label>
     */
-    pub async fn issues_update_label(&self, owner: &str, repo: &str, name: &str, body: &types::UpdateLabelRequest) -> Result<types::Label> {
+    pub async fn issues_update_label(&self, owner: &str, repo: &str, name: &str, body: &types::IssuesUpdateLabelRequest) -> Result<types::Label> {
         let url = format!(
             "/repos/{}/{}/labels/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42583,7 +42915,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/repos#merge-a-branch>
     */
-    pub async fn repos_merge(&self, owner: &str, repo: &str, body: &types::MergeBranchRequest) -> Result<types::Commit> {
+    pub async fn repos_merge(&self, owner: &str, repo: &str, body: &types::ReposMergeRequest) -> Result<types::Commit> {
         let url = format!(
             "/repos/{}/{}/merges",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42635,7 +42967,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/issues#create-a-milestone>
     */
-    pub async fn issues_create_milestone(&self, owner: &str, repo: &str, body: &types::CreateMilestoneRequest) -> Result<types::Milestone> {
+    pub async fn issues_create_milestone(&self, owner: &str, repo: &str, body: &types::IssuesCreateMilestoneRequest) -> Result<types::Milestone> {
         let url = format!(
             "/repos/{}/{}/milestones",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42699,7 +43031,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         milestone_number: i64,
-        body: &types::UpdateMilestoneRequest,
+        body: &types::IssuesUpdateMilestoneRequest,
     ) -> Result<types::Milestone> {
         let url = format!(
             "/repos/{}/{}/milestones/{}",
@@ -42788,8 +43120,8 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        body: &types::MarkRepositoryNotificationsAsReadRequest,
-    ) -> Result<types::PutMarkRepositoryNotificationsAsReadAcceptedResponse> {
+        body: &types::ActivityMarkRepoNotificationsAsReadRequest,
+    ) -> Result<types::PutActivityMarkRepoNotificationsAsReadAcceptedResponse> {
         let url = format!(
             "/repos/{}/{}/notifications",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42831,7 +43163,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        body: &types::UpdateInformationAboutGithubPagesSiteRequest,
+        body: &types::ReposUpdateInformationAboutPagesSiteRequest,
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/pages",
@@ -42851,7 +43183,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-github-pages-site>
     */
-    pub async fn repos_create_pages_site(&self, owner: &str, repo: &str, body: &types::CreateGithubPagesSiteRequest) -> Result<types::Page> {
+    pub async fn repos_create_pages_site(&self, owner: &str, repo: &str, body: &types::ReposCreatePagesSiteRequest) -> Result<types::Page> {
         let url = format!(
             "/repos/{}/{}/pages",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43015,7 +43347,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/projects#create-a-repository-project>
     */
-    pub async fn projects_create_for_repo(&self, owner: &str, repo: &str, body: &types::CreateRepositoryProjectRequest) -> Result<types::Project> {
+    pub async fn projects_create_for_repo(&self, owner: &str, repo: &str, body: &types::ProjectsCreateRepoRequest) -> Result<types::Project> {
         let url = format!(
             "/repos/{}/{}/projects",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43077,7 +43409,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#create-a-pull-request>
     */
-    pub async fn pulls_create(&self, owner: &str, repo: &str, body: &types::CreatePullRequest) -> Result<types::PullRequest> {
+    pub async fn pulls_create(&self, owner: &str, repo: &str, body: &types::PullsCreateRequest) -> Result<types::PullRequest> {
         let url = format!(
             "/repos/{}/{}/pulls",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43174,7 +43506,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::UpdateReviewCommentPullRequest,
+        body: &types::PullsUpdateReviewCommentRequest,
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}",
@@ -43231,7 +43563,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::CreateReactionPullRequestReviewComment,
+        body: &types::ReactionsCreatePullRequestReviewComment,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions",
@@ -43311,7 +43643,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/pulls/#update-a-pull-request>
     */
-    pub async fn pulls_update(&self, owner: &str, repo: &str, pull_number: i64, body: &types::UpdatePullRequest) -> Result<types::PullRequest> {
+    pub async fn pulls_update(&self, owner: &str, repo: &str, pull_number: i64, body: &types::PullsUpdateRequest) -> Result<types::PullRequest> {
         let url = format!(
             "/repos/{}/{}/pulls/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43378,7 +43710,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::CreateReviewCommentPullRequest,
+        body: &types::PullsCreateReviewCommentRequest,
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/comments",
@@ -43407,7 +43739,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repo: &str,
         pull_number: i64,
         comment_id: i64,
-        body: &types::CreateReplyReviewCommentRequest,
+        body: &types::PullsCreateReplyReviewCommentRequest,
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/comments/{}/replies",
@@ -43498,7 +43830,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::MergePullRequest,
+        body: &types::PullsMergeRequest,
     ) -> Result<types::PullRequestMergeResult> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/merge",
@@ -43553,7 +43885,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::RequestReviewersPull,
+        body: &types::PullsRequestReviewers,
     ) -> Result<types::PullRequestSimple> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/requested_reviewers",
@@ -43579,7 +43911,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::RemoveRequestedReviewersFromPullRequest,
+        body: &types::PullsRemoveRequestedReviewersRequest,
     ) -> Result<types::PullRequestSimple> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/requested_reviewers",
@@ -43640,7 +43972,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::CreateReviewPullRequest,
+        body: &types::PullsCreateReviewRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews",
@@ -43688,7 +44020,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repo: &str,
         pull_number: i64,
         review_id: i64,
-        body: &types::UpdateReviewPullRequest,
+        body: &types::PullsUpdateReviewRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}",
@@ -43768,7 +44100,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repo: &str,
         pull_number: i64,
         review_id: i64,
-        body: &types::DismissReviewPullRequest,
+        body: &types::PullsDismissReviewRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
@@ -43796,7 +44128,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repo: &str,
         pull_number: i64,
         review_id: i64,
-        body: &types::SubmitReviewPullRequest,
+        body: &types::PullsSubmitReviewRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}/events",
@@ -43823,8 +44155,8 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::UpdatePullRequestBranch,
-    ) -> Result<types::PutUpdatePullRequestBranchAcceptedResponse> {
+        body: &types::PullsUpdateBranchRequest,
+    ) -> Result<types::PutPullsUpdateBranchAcceptedResponse> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/update-branch",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43914,7 +44246,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-release>
     */
-    pub async fn repos_create_release(&self, owner: &str, repo: &str, body: &types::CreateReleaseRequest) -> Result<types::Release> {
+    pub async fn repos_create_release(&self, owner: &str, repo: &str, body: &types::ReposCreateReleaseRequest) -> Result<types::Release> {
         let url = format!(
             "/repos/{}/{}/releases",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43978,7 +44310,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         asset_id: i64,
-        body: &types::UpdateReleaseAssetRequest,
+        body: &types::ReposUpdateReleaseAssetRequest,
     ) -> Result<types::ReleaseAsset> {
         let url = format!(
             "/repos/{}/{}/releases/assets/{}",
@@ -44080,7 +44412,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-a-release>
     */
-    pub async fn repos_update_release(&self, owner: &str, repo: &str, release_id: i64, body: &types::UpdateReleaseRequest) -> Result<types::Release> {
+    pub async fn repos_update_release(
+        &self,
+        owner: &str,
+        repo: &str,
+        release_id: i64,
+        body: &types::ReposUpdateReleaseRequest,
+    ) -> Result<types::Release> {
         let url = format!(
             "/repos/{}/{}/releases/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44181,7 +44519,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         release_id: i64,
-        body: &types::CreateReactionReleaseRequest,
+        body: &types::ReactionsCreateReleaseRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/repos/{}/{}/releases/{}/reactions",
@@ -44264,7 +44602,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         alert_number: &str,
-        body: &types::UpdateSecretScanningAlertRequest,
+        body: &types::SecretScanningUpdateAlertRequest,
     ) -> Result<types::SecretScanningAlert> {
         let url = format!(
             "/repos/{}/{}/secret-scanning/alerts/{}",
@@ -44424,7 +44762,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         sha: &str,
-        body: &types::CreateCommitStatusRequest,
+        body: &types::ReposCreateCommitStatusRequest,
     ) -> Result<types::Status> {
         let url = format!(
             "/repos/{}/{}/statuses/{}",
@@ -44489,7 +44827,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        body: &types::SetRepositorySubscriptionRequest,
+        body: &types::ActivitySetRepoSubscriptionRequest,
     ) -> Result<types::RepositorySubscription> {
         let url = format!(
             "/repos/{}/{}/subscription",
@@ -44614,7 +44952,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/repos#replace-all-repository-topics>
     */
-    pub async fn repos_replace_all_topics(&self, owner: &str, repo: &str, body: &types::ReplaceAllRepositoryTopicsRequest) -> Result<types::Topic> {
+    pub async fn repos_replace_all_topics(&self, owner: &str, repo: &str, body: &types::ReposReplaceAllTopicsRequest) -> Result<types::Topic> {
         let url = format!(
             "/repos/{}/{}/topics",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44711,7 +45049,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/repos#transfer-a-repository>
     */
-    pub async fn repos_transfer(&self, owner: &str, repo: &str, body: &types::TransferRepositoryRequest) -> Result<types::MinimalRepository> {
+    pub async fn repos_transfer(&self, owner: &str, repo: &str, body: &types::ReposTransferRequest) -> Result<types::MinimalRepository> {
         let url = format!(
             "/repos/{}/{}/transfer",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44821,7 +45159,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         template_owner: &str,
         template_repo: &str,
-        body: &types::CreateRepositoryUsingTemplateRequest,
+        body: &types::ReposCreateUsingTemplateRequest,
     ) -> Result<types::Repository> {
         let url = format!(
             "/repos/{}/{}/generate",
@@ -44866,7 +45204,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         environment_name: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListEnvironmentSecretsOkResponse> {
+    ) -> Result<types::GetActionsListEnvironmentSecretsOkResponse> {
         let url = format!(
             "/repositories/{}/environments/{}/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&repository_id.to_string()),
@@ -45010,7 +45348,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repository_id: i64,
         environment_name: &str,
         secret_name: &str,
-        body: &types::CreateUpdateEnvironmentSecretRequest,
+        body: &types::ActionsCreateUpdateEnvironmentSecretRequest,
     ) -> Result<types::EmptyObject> {
         let url = format!(
             "/repositories/{}/environments/{}/secrets/{}",
@@ -45085,7 +45423,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn enterprise_admin_provision_and_invite_enterprise_group(
         &self,
         enterprise: &str,
-        body: &types::ProvisionScimEnterpriseGroupInviteUsersRequest,
+        body: &types::EnterpriseAdminProvisionInviteGroupRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!("/scim/v2/enterprises/{}/Groups", progenitor_support::encode_path(&enterprise.to_string()),);
 
@@ -45132,7 +45470,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         enterprise: &str,
         scim_group_id: &str,
-        body: &types::SetScimInformationProvisionedEnterpriseGroupRequest,
+        body: &types::EnterpriseAdminSetInformationProvisionedGroupRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!(
             "/scim/v2/enterprises/{}/Groups/{}",
@@ -45177,7 +45515,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         enterprise: &str,
         scim_group_id: &str,
-        body: &types::UpdateAttributeScimEnterpriseGroupRequest,
+        body: &types::EnterpriseAdminUpdateAttributeGroupRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!(
             "/scim/v2/enterprises/{}/Groups/{}",
@@ -45248,7 +45586,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn enterprise_admin_provision_and_invite_enterprise_user(
         &self,
         enterprise: &str,
-        body: &types::ProvisionInviteScimEnterpriseUserRequest,
+        body: &types::EnterpriseAdminProvisionInviteUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!("/scim/v2/enterprises/{}/Users", progenitor_support::encode_path(&enterprise.to_string()),);
 
@@ -45297,7 +45635,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         enterprise: &str,
         scim_user_id: &str,
-        body: &types::SetScimInformationProvisionedEnterpriseUserRequest,
+        body: &types::EnterpriseAdminSetInformationProvisionedUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!(
             "/scim/v2/enterprises/{}/Users/{}",
@@ -45357,7 +45695,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         enterprise: &str,
         scim_user_id: &str,
-        body: &types::UpdateAttributeScimEnterpriseUserRequest,
+        body: &types::EnterpriseAdminUpdateAttributeUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!(
             "/scim/v2/enterprises/{}/Users/{}",
@@ -45413,7 +45751,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/scim#provision-and-invite-a-scim-user>
     */
-    pub async fn scim_provision_and_invite_user(&self, org: &str, body: &types::ProvisionInviteScimUserRequest) -> Result<types::ScimUser> {
+    pub async fn scim_provision_and_invite_user(&self, org: &str, body: &types::ScimProvisionInviteUserRequest) -> Result<types::ScimUser> {
         let url = format!("/scim/v2/organizations/{}/Users", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -45455,7 +45793,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         org: &str,
         scim_user_id: &str,
-        body: &types::UpdateProvisionedOrganizationMembershipRequest,
+        body: &types::ScimSetInformationProvisionedUserRequest,
     ) -> Result<types::ScimUser> {
         let url = format!(
             "/scim/v2/organizations/{}/Users/{}",
@@ -45513,7 +45851,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         org: &str,
         scim_user_id: &str,
-        body: &types::UpdateAttributeScimUserRequest,
+        body: &types::ScimUpdateAttributeUserRequest,
     ) -> Result<types::ScimUser> {
         let url = format!(
             "/scim/v2/organizations/{}/Users/{}",
@@ -45713,7 +46051,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetSearchRepositoriesOkResponse> {
+    ) -> Result<types::GetSearchReposOkResponse> {
         let url = format!(
             "/search/repositories?order={}&page={}&per_page={}&q={}&sort={}",
             order,
@@ -45838,7 +46176,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#update-a-team-legacy>
     */
-    pub async fn teams_update_legacy(&self, team_id: i64, body: &types::UpdateTeamRequest) -> Result<types::TeamFull> {
+    pub async fn teams_update_legacy(&self, team_id: i64, body: &types::TeamsUpdateLegacyRequest) -> Result<types::TeamFull> {
         let url = format!("/teams/{}", progenitor_support::encode_path(&team_id.to_string()),);
 
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -45886,7 +46224,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/teams#create-a-discussion-legacy>
     */
-    pub async fn teams_create_discussion_legacy(&self, team_id: i64, body: &types::CreateDiscussionRequest) -> Result<types::TeamDiscussion> {
+    pub async fn teams_create_discussion_legacy(
+        &self,
+        team_id: i64,
+        body: &types::TeamsCreateDiscussionLegacyRequest,
+    ) -> Result<types::TeamDiscussion> {
         let url = format!("/teams/{}/discussions", progenitor_support::encode_path(&team_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -45949,7 +46291,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &types::UpdateDiscussionRequest,
+        body: &types::TeamsUpdateDiscussionLegacyRequest,
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "/teams/{}/discussions/{}",
@@ -46008,7 +46350,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &types::CreateDiscussionCommentRequest,
+        body: &types::TeamsCreateDiscussionCommentLegacyRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "/teams/{}/discussions/{}/comments",
@@ -46084,7 +46426,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::UpdateDiscussionCommentRequest,
+        body: &types::TeamsUpdateDiscussionCommentLegacyRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}",
@@ -46145,7 +46487,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::CreateReactionTeamDiscussionCommentRequest,
+        body: &types::ReactionsCreateTeamDiscussionCommentLegacyRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}/reactions",
@@ -46203,7 +46545,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &types::CreateReactionTeamDiscussionRequest,
+        body: &types::ReactionsCreateTeamDiscussionLegacyRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/teams/{}/discussions/{}/reactions",
@@ -46389,7 +46731,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         team_id: i64,
         username: &str,
-        body: &types::AddUpdateTeamMembershipUserRequest,
+        body: &types::TeamsAddUpdateMembershipUserLegacyRequest,
     ) -> Result<types::TeamMembership> {
         let url = format!(
             "/teams/{}/memberships/{}",
@@ -46483,7 +46825,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         team_id: i64,
         project_id: i64,
-        body: &types::AddUpdateTeamProjectPermissionsRequest,
+        body: &types::TeamsAddUpdateProjectPermissionsLegacyRequest,
     ) -> Result<()> {
         let url = format!(
             "/teams/{}/projects/{}",
@@ -46577,7 +46919,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         team_id: i64,
         owner: &str,
         repo: &str,
-        body: &types::AddUpdateTeamRepositoryPermissionsRequest,
+        body: &types::TeamsAddUpdateRepoPermissionsLegacyRequest,
     ) -> Result<()> {
         let url = format!(
             "/teams/{}/repos/{}/{}",
@@ -46649,7 +46991,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn teams_create_or_update_idp_group_connections_legacy(
         &self,
         team_id: i64,
-        body: &types::CreateUpdateIdpGroupConnectionsRequest,
+        body: &types::TeamsCreateUpdateIdpGroupConnectionsLegacyRequest,
     ) -> Result<types::GroupMapping> {
         let url = format!(
             "/teams/{}/team-sync/group-mappings",
@@ -46690,7 +47032,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
     */
-    pub async fn users_get_authenticated(&self) -> Result<types::GetOkResponse> {
+    pub async fn users_get_authenticated(&self) -> Result<types::GetUsersAuthenticatedOkResponse> {
         let url = "/user".to_string();
         self.get(&url).await
     }
@@ -46704,7 +47046,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/users/#update-the-authenticated-user>
     */
-    pub async fn users_update_authenticated(&self, body: &types::UpdateRequest) -> Result<types::PrivateUser> {
+    pub async fn users_update_authenticated(&self, body: &types::UsersUpdateAuthenticatedRequest) -> Result<types::PrivateUser> {
         let url = "/user".to_string();
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -46779,7 +47121,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     */
     pub async fn users_set_primary_email_visibility_for_authenticated(
         &self,
-        body: &types::SetPrimaryEmailVisibilityRequest,
+        body: &types::UsersSetPrimaryEmailVisibilityAuthenticatedRequest,
     ) -> Result<Vec<types::Email>> {
         let url = "/user/email/visibility".to_string();
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -46809,7 +47151,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/users#add-an-email-address-for-the-authenticated-user>
     */
-    pub async fn users_add_email_for_authenticated(&self, body: &types::AddEmailAddressRequest) -> Result<Vec<types::Email>> {
+    pub async fn users_add_email_for_authenticated(&self, body: &types::UsersAddEmailAuthenticatedRequest) -> Result<Vec<types::Email>> {
         let url = "/user/emails".to_string();
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -46823,7 +47165,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/users#delete-an-email-address-for-the-authenticated-user>
     */
-    pub async fn users_delete_email_for_authenticated(&self, body: &types::DeleteEmailAddressRequest) -> Result<()> {
+    pub async fn users_delete_email_for_authenticated(&self, body: &types::UsersDeleteEmailAuthenticatedRequest) -> Result<()> {
         let url = "/user/emails".to_string();
         self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -46929,7 +47271,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/users#create-a-gpg-key-for-the-authenticated-user>
     */
-    pub async fn users_create_gpg_key_for_authenticated(&self, body: &types::CreateGpgKeyRequest) -> Result<types::GpgKey> {
+    pub async fn users_create_gpg_key_for_authenticated(&self, body: &types::UsersCreateGpgKeyAuthenticatedRequest) -> Result<types::GpgKey> {
         let url = "/user/gpg_keys".to_string();
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -46983,7 +47325,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListAppInstallationsAccessibleUserAccessTokenOkResponse> {
+    ) -> Result<types::GetAppsListInstallationsOkResponse> {
         let url = format!("/user/installations?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
 
         self.get(&url).await
@@ -47009,7 +47351,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         installation_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListRepositoriesAccessibleUserAccessTokenOkResponse> {
+    ) -> Result<types::GetAppsListInstallationReposOkResponse> {
         let url = format!(
             "/user/installations/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&installation_id.to_string()),
@@ -47071,9 +47413,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-your-public-repositories>
     */
-    pub async fn interactions_get_restrictions_for_authenticated_user(
-        &self,
-    ) -> Result<types::GetInteractionRestrictionsPublicRepositoriesOkResponse> {
+    pub async fn interactions_get_restrictions_for_authenticated_user(&self) -> Result<types::GetInteractionsRestrictionsOkResponse> {
         let url = "/user/interaction-limits".to_string();
         self.get(&url).await
     }
@@ -47173,7 +47513,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/users#create-a-public-ssh-key-for-the-authenticated-user>
     */
-    pub async fn users_create_public_ssh_key_for_authenticated(&self, body: &types::CreatePublicSshKeyRequest) -> Result<types::Key> {
+    pub async fn users_create_public_ssh_key_for_authenticated(
+        &self,
+        body: &types::UsersCreatePublicSshKeyAuthenticatedRequest,
+    ) -> Result<types::Key> {
         let url = "/user/keys".to_string();
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -47297,7 +47640,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn orgs_update_membership_for_authenticated_user(
         &self,
         org: &str,
-        body: &types::UpdateOrganizationMembershipRequest,
+        body: &types::OrgsUpdateMembershipRequest,
     ) -> Result<types::OrgMembership> {
         let url = format!("/user/memberships/orgs/{}", progenitor_support::encode_path(&org.to_string()),);
 
@@ -47328,7 +47671,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#start-a-user-migration>
     */
-    pub async fn migrations_start_for_authenticated_user(&self, body: &types::StartUserMigrationRequest) -> Result<types::Migration> {
+    pub async fn migrations_start_for_authenticated_user(&self, body: &types::MigrationsStartRequest) -> Result<types::Migration> {
         let url = "/user/migrations".to_string();
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -47674,7 +48017,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/projects#create-a-user-project>
     */
-    pub async fn projects_create_for_authenticated_user(&self, body: &types::CreateUserProjectRequest) -> Result<types::Project> {
+    pub async fn projects_create_for_authenticated_user(&self, body: &types::ProjectsCreateRequest) -> Result<types::Project> {
         let url = "/user/projects".to_string();
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -47749,7 +48092,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user>
     */
-    pub async fn repos_create_for_authenticated_user(&self, body: &types::CreateRepositoryRequest) -> Result<types::Repository> {
+    pub async fn repos_create_for_authenticated_user(&self, body: &types::ReposCreateRequest) -> Result<types::Repository> {
         let url = "/user/repos".to_string();
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -47957,7 +48300,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/users#get-a-user>
     */
-    pub async fn users_get_by_username(&self, username: &str) -> Result<types::GetUserOkResponse> {
+    pub async fn users_get_by_username(&self, username: &str) -> Result<types::GetUsersByUsernameOkResponse> {
         let url = format!("/users/{}", progenitor_support::encode_path(&username.to_string()),);
 
         self.get(&url).await
