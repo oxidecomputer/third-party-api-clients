@@ -9,6 +9,7 @@ description = "An OpenAPI client generator, bespoke for the GitHub API."
 anyhow = "1"
 getopts = "0.2"
 http = "^0.2.4"
+Inflector = "^0.11.4"
 serde = { version = "1", features = [ "derive" ]}
 serde_json = "1"
 serde_yaml = "^0.8.17"

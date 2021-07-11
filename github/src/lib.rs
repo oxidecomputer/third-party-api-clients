@@ -706,7 +706,7 @@ pub mod types {
         pub download_url: String,
         pub filename: String,
         pub os: String,
-        pub sha256_checksum: Option<String>,
+        pub sha_256_checksum: Option<String>,
         pub temp_download_token: Option<String>,
     }
 
@@ -737,7 +737,7 @@ pub mod types {
     pub struct AuditLogEvent {
         #[serde(rename = "@timestamp")]
         pub timestamp: Option<i64>,
-        pub _document_id: Option<String>,
+        pub document_id: Option<String>,
         pub action: Option<String>,
         pub active: Option<bool>,
         pub active_was: Option<bool>,
@@ -780,9 +780,9 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MinutesUsedBreakdown {
-        pub MACOS: Option<i64>,
-        pub UBUNTU: Option<i64>,
-        pub WINDOWS: Option<i64>,
+        pub macos: Option<i64>,
+        pub ubuntu: Option<i64>,
+        pub windows: Option<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -1057,7 +1057,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Feed {
-        pub _links: Links,
+        pub links: Links,
         pub current_user_actor_url: Option<String>,
         pub current_user_organization_url: Option<String>,
         pub current_user_organization_urls: Option<Vec<String>>,
@@ -1381,8 +1381,8 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SshKeyFingerprints {
-        pub SHA256_DSA: Option<String>,
-        pub SHA256_RSA: Option<String>,
+        pub sha256_dsa: Option<String>,
+        pub sha256_rsa: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -2652,9 +2652,9 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Billable {
-        pub MACOS: Option<Macos>,
-        pub UBUNTU: Option<Ubuntu>,
-        pub WINDOWS: Option<Windows>,
+        pub macos: Option<Macos>,
+        pub ubuntu: Option<Ubuntu>,
+        pub windows: Option<Windows>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3023,7 +3023,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchWithProtection {
-        pub _links: Links,
+        pub links: Links,
         pub commit: Commit,
         pub name: String,
         pub pattern: Option<String>,
@@ -3362,7 +3362,7 @@ pub mod types {
         pub documentation_url: Option<String>,
         pub message: Option<String>,
         pub schemas: Option<Vec<String>>,
-        pub scimType: Option<String>,
+        pub scim_type: Option<String>,
         pub status: Option<i64>,
     }
 
@@ -3561,7 +3561,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestSimple {
-        pub _links: Links,
+        pub links: Links,
         pub active_lock_reason: Option<String>,
         pub assignee: Assignee,
         pub assignees: Option<Vec<SimpleUser>>,
@@ -3755,7 +3755,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Entries {
-        pub _links: Links,
+        pub links: Links,
         pub content: Option<String>,
         pub download_url: String,
         pub git_url: String,
@@ -3779,7 +3779,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentTree {
-        pub _links: Links,
+        pub links: Links,
         pub download_url: String,
         pub entries: Option<Vec<Entries>>,
         pub git_url: String,
@@ -3803,7 +3803,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentDirectory {
-        pub _links: Links,
+        pub links: Links,
         pub content: Option<String>,
         pub download_url: String,
         pub git_url: String,
@@ -3827,7 +3827,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentFile {
-        pub _links: Links,
+        pub links: Links,
         pub content: String,
         pub download_url: String,
         pub encoding: String,
@@ -3854,7 +3854,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentSymlink {
-        pub _links: Links,
+        pub links: Links,
         pub download_url: String,
         pub git_url: String,
         pub html_url: String,
@@ -3878,7 +3878,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentSubmodule {
-        pub _links: Links,
+        pub links: Links,
         pub download_url: String,
         pub git_url: String,
         pub html_url: String,
@@ -3902,7 +3902,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Content {
-        pub _links: Option<Links>,
+        pub links: Option<Links>,
         pub download_url: Option<String>,
         pub git_url: Option<String>,
         pub html_url: Option<String>,
@@ -4802,7 +4802,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineReviewedEvent {
-        pub _links: Links,
+        pub links: Links,
         pub author_association: String,
         pub body: String,
         pub body_html: Option<String>,
@@ -4838,7 +4838,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewComment {
-        pub _links: Links,
+        pub links: Links,
         pub author_association: String,
         pub body: String,
         pub body_html: Option<String>,
@@ -4940,7 +4940,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LicenseContent {
-        pub _links: Links,
+        pub links: Links,
         pub content: String,
         pub download_url: String,
         pub encoding: String,
@@ -5457,7 +5457,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestData {
-        pub _links: Links,
+        pub links: Links,
         pub active_lock_reason: Option<String>,
         pub additions: i64,
         pub assignee: Assignee,
@@ -5533,7 +5533,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReview {
-        pub _links: Links,
+        pub links: Links,
         pub author_association: String,
         pub body: String,
         pub body_html: Option<String>,
@@ -5558,7 +5558,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewComment {
-        pub _links: Links,
+        pub links: Links,
         pub author_association: String,
         pub body: String,
         pub body_html: Option<String>,
@@ -5776,15 +5776,15 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Meta {
         pub created: Option<String>,
-        pub lastModified: Option<String>,
+        pub last_modified: Option<String>,
         pub location: Option<String>,
-        pub resourceType: Option<String>,
+        pub resource_type: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimGroupListEnterpriseResources {
-        pub displayName: Option<String>,
-        pub externalId: Option<String>,
+        pub display_name: Option<String>,
+        pub external_id: Option<String>,
         pub id: String,
         pub members: Option<Vec<Members>>,
         pub meta: Option<Meta>,
@@ -5793,17 +5793,17 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimGroupListEnterprise {
-        pub Resources: Vec<Resources>,
-        pub itemsPerPage: f64,
+        pub resources: Vec<Resources>,
+        pub items_per_page: f64,
         pub schemas: Vec<String>,
-        pub startIndex: f64,
-        pub totalResults: f64,
+        pub start_index: f64,
+        pub total_results: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimEnterpriseGroup {
-        pub displayName: Option<String>,
-        pub externalId: Option<String>,
+        pub display_name: Option<String>,
+        pub external_id: Option<String>,
         pub id: String,
         pub members: Option<Vec<Members>>,
         pub meta: Option<Meta>,
@@ -5812,8 +5812,8 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Name {
-        pub familyName: Option<String>,
-        pub givenName: Option<String>,
+        pub family_name: Option<String>,
+        pub given_name: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5833,22 +5833,22 @@ pub mod types {
     pub struct ScimUserListEnterpriseResources {
         pub active: Option<bool>,
         pub emails: Option<Vec<Emails>>,
-        pub externalId: Option<String>,
+        pub external_id: Option<String>,
         pub groups: Option<Vec<Groups>>,
         pub id: String,
         pub meta: Option<Meta>,
         pub name: Option<Name>,
         pub schemas: Vec<String>,
-        pub userName: Option<String>,
+        pub user_name: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUserListEnterprise {
-        pub Resources: Vec<Resources>,
-        pub itemsPerPage: f64,
+        pub resources: Vec<Resources>,
+        pub items_per_page: f64,
         pub schemas: Vec<String>,
-        pub startIndex: f64,
-        pub totalResults: f64,
+        pub start_index: f64,
+        pub total_results: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5860,20 +5860,20 @@ pub mod types {
     pub struct ScimEnterpriseUser {
         pub active: Option<bool>,
         pub emails: Option<Vec<Emails>>,
-        pub externalId: Option<String>,
+        pub external_id: Option<String>,
         pub groups: Option<Vec<Groups>>,
         pub id: String,
         pub meta: Option<Meta>,
         pub name: Option<Name>,
         pub schemas: Vec<String>,
-        pub userName: Option<String>,
+        pub user_name: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUserName {
-        pub familyName: String,
+        pub family_name: String,
         pub formatted: Option<String>,
-        pub givenName: String,
+        pub given_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5885,9 +5885,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUserMeta {
         pub created: Option<DateTime<Utc>>,
-        pub lastModified: Option<DateTime<Utc>>,
+        pub last_modified: Option<DateTime<Utc>>,
         pub location: Option<String>,
-        pub resourceType: Option<String>,
+        pub resource_type: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5900,9 +5900,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUser {
         pub active: bool,
-        pub displayName: Option<String>,
+        pub display_name: Option<String>,
         pub emails: Vec<Emails>,
-        pub externalId: String,
+        pub external_id: String,
         pub groups: Option<Vec<serde_json::Value>>,
         pub id: String,
         pub meta: Meta,
@@ -5910,16 +5910,16 @@ pub mod types {
         pub operations: Option<Vec<Operations>>,
         pub organization_id: Option<i64>,
         pub schemas: Vec<String>,
-        pub userName: String,
+        pub user_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUserList {
-        pub Resources: Vec<ScimUser>,
-        pub itemsPerPage: i64,
+        pub resources: Vec<ScimUser>,
+        pub items_per_page: i64,
         pub schemas: Vec<String>,
-        pub startIndex: i64,
-        pub totalResults: i64,
+        pub start_index: i64,
+        pub total_results: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -7519,7 +7519,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetRepositoryContentOkResponse {
-        pub _links: Links,
+        pub links: Links,
         pub content: Option<String>,
         pub download_url: String,
         pub git_url: String,
@@ -8171,7 +8171,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProvisionScimEnterpriseGroupandInviteUsersRequest {
-        pub displayName: String,
+        pub display_name: String,
         pub members: Option<Vec<Members>>,
         pub schemas: Vec<String>,
     }
@@ -8183,21 +8183,21 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetScimInformationProvisionedEnterpriseGroupRequest {
-        pub displayName: String,
+        pub display_name: String,
         pub members: Option<Vec<Members>>,
         pub schemas: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateAttributeScimEnterpriseGroupRequest {
-        pub Operations: Vec<Operations>,
+        pub operations: Vec<Operations>,
         pub schemas: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProvisionandInviteScimEnterpriseUserRequestName {
-        pub familyName: String,
-        pub givenName: String,
+        pub family_name: String,
+        pub given_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8219,13 +8219,13 @@ pub mod types {
         pub groups: Option<Vec<Groups>>,
         pub name: Name,
         pub schemas: Vec<String>,
-        pub userName: String,
+        pub user_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetScimInformationProvisionedEnterpriseUserRequestName {
-        pub familyName: String,
-        pub givenName: String,
+        pub family_name: String,
+        pub given_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8247,7 +8247,7 @@ pub mod types {
         pub groups: Option<Vec<Groups>>,
         pub name: Name,
         pub schemas: Vec<String>,
-        pub userName: String,
+        pub user_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8256,15 +8256,15 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateAttributeScimEnterpriseUserRequest {
-        pub Operations: Vec<Operations>,
+        pub operations: Vec<Operations>,
         pub schemas: Vec<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProvisionandInviteScimUserRequestName {
-        pub familyName: String,
+        pub family_name: String,
         pub formatted: Option<String>,
-        pub givenName: String,
+        pub given_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8278,20 +8278,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProvisionandInviteScimUserRequest {
         pub active: Option<bool>,
-        pub displayName: Option<String>,
+        pub display_name: Option<String>,
         pub emails: Vec<Emails>,
-        pub externalId: Option<String>,
+        pub external_id: Option<String>,
         pub groups: Option<Vec<String>>,
         pub name: Name,
         pub schemas: Option<Vec<String>>,
-        pub userName: String,
+        pub user_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateProvisionedOrganizationMembershipRequestName {
-        pub familyName: String,
+        pub family_name: String,
         pub formatted: Option<String>,
-        pub givenName: String,
+        pub given_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8305,27 +8305,27 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateProvisionedOrganizationMembershipRequest {
         pub active: Option<bool>,
-        pub displayName: Option<String>,
+        pub display_name: Option<String>,
         pub emails: Vec<Emails>,
-        pub externalId: Option<String>,
+        pub external_id: Option<String>,
         pub groups: Option<Vec<String>>,
         pub name: Name,
         pub schemas: Option<Vec<String>>,
-        pub userName: String,
+        pub user_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ValueData {
         pub active: Option<bool>,
-        pub externalId: Option<String>,
-        pub familyName: Option<String>,
-        pub givenName: Option<String>,
-        pub userName: Option<String>,
+        pub external_id: Option<String>,
+        pub family_name: Option<String>,
+        pub given_name: Option<String>,
+        pub user_name: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateAttributeScimUserRequest {
-        pub Operations: Vec<Operations>,
+        pub operations: Vec<Operations>,
         pub schemas: Option<Vec<String>>,
     }
 
@@ -10611,16 +10611,16 @@ impl Client {
     /**
      * markdown_render_raw: POST /markdown/raw
      */
-    pub async fn markdown_render_raw(
+    pub async fn markdown_render_raw<T: Into<reqwest::Body>>(
         &self,
-        body: &str,
+        body: T,
     ) -> Result<String> {
         let url = format!("{}/markdown/raw",
             self.baseurl,
         );
 
         let res = self.client.post(url)
-            .text(body)
+            .body(body)
             .send()
             .await?
             .error_for_status()?;
@@ -21768,14 +21768,14 @@ impl Client {
     /**
      * repos_upload_release_asset: POST /repos/{owner}/{repo}/releases/{release_id}/assets
      */
-    pub async fn repos_upload_release_asset(
+    pub async fn repos_upload_release_asset<T: Into<reqwest::Body>>(
         &self,
         owner: &str,
         repo: &str,
         release_id: i64,
         name: &str,
         label: &str,
-        body: &str,
+        body: T,
     ) -> Result<types::ReleaseAsset> {
         let url = format!("{}/repos/{}/{}/releases/{}/assets",
             self.baseurl,
@@ -21785,7 +21785,7 @@ impl Client {
         );
 
         let res = self.client.post(url)
-            .text(body)
+            .body(body)
             .send()
             .await?
             .error_for_status()?;

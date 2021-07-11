@@ -8,6 +8,7 @@ use std::path::{Path, PathBuf};
 
 use anyhow::{anyhow, bail, Context, Result};
 use http::status::StatusCode;
+use inflector::cases::snakecase::to_snake_case;
 use openapiv3::OpenAPI;
 use serde::Deserialize;
 
@@ -1085,7 +1086,7 @@ fn gen(
                                 a(&format!(r#"        #[serde(rename = "{}")]"#, name));
                                 a(&format!("        pub {}: {},", name.replace('@', ""), rt));
                             } else {
-                                a(&format!("        pub {}: {},", name, rt));
+                                a(&format!("        pub {}: {},", to_snake_case(name), rt));
                             }
                         } else {
                             bail!("rendering type {} {:?} failed", name, tid);
@@ -1192,8 +1193,9 @@ fn gen(
                         if let Some(s) = &mt.schema {
                             let tid = ts.select(None, s, false)?;
                             let rt = ts.render_type(&tid, false)?;
+                            bounds.push("T: Into<reqwest::Body>".to_string());
                             if rt == "String" {
-                                (Some("&str".to_string()), Some("text".to_string()))
+                                (Some("T".to_string()), Some("body".to_string()))
                             } else {
                                 (Some(rt), Some("body".to_string()))
                             }
