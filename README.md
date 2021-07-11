@@ -1,6 +1,6 @@
 A fully generated, opinionated API client library for GitHub.
 
-# Examples
+## Basic example
 
 Typical use will require intializing a `Client`. This requires
 a user agent string and set of `Credentials`.
@@ -19,9 +19,9 @@ let github = Client::new(
 If you are a GitHub enterprise customer, you will want to create a client with the
 [Client#host](struct.Client.html#method.host) method.
 
-# Features
+## Feature flags
 
-## httpcache
+### `httpcache`
 
 Github supports conditional HTTP requests using etags to checksum responses
 Experimental support for utilizing this to cache responses locally with the
@@ -69,6 +69,8 @@ let github = Client::custom(
     http_cache
 );
 ```
+
+## Authenticating GitHub apps
 
 You can also authenticate via a GitHub app.
 
@@ -123,3 +125,10 @@ let github = Client::custom(
     http_cache,
 );
 ```
+
+## Acknowledgements
+
+Shout out to [hubcaps](https://github.com/softprops/hubcaps) for paving the
+way here. This extends that effort in a generated way so the library is
+always up to the date with the OpenAPI spec and no longer requires manual
+contributions to add new endpoints.
