@@ -127,9 +127,11 @@
 #![allow(clippy::too_many_arguments)]
 #![allow(missing_docs)]
 
+#[doc(inline)]
 pub mod auth;
 #[cfg(feature = "httpcache")]
 pub mod http_cache;
+#[doc(hidden)]
 pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
@@ -25509,7 +25511,7 @@ impl Client {
     }
 
     /**
-    * GitHub API Root
+    * GitHub API Root.
     *
     * This function performs a `GET` to the `/` endpoint.
     *
@@ -25523,7 +25525,7 @@ impl Client {
     }
 
     /**
-    * Get the authenticated app
+    * Get the authenticated app.
     *
     * This function performs a `GET` to the `/app` endpoint.
     *
@@ -25539,7 +25541,7 @@ impl Client {
     }
 
     /**
-    * Create a GitHub App from a manifest
+    * Create a GitHub App from a manifest.
     *
     * This function performs a `POST` to the `/app-manifests/{code}/conversions` endpoint.
     *
@@ -25565,7 +25567,7 @@ impl Client {
     }
 
     /**
-    * Get a webhook configuration for an app
+    * Get a webhook configuration for an app.
     *
     * This function performs a `GET` to the `/app/hook/config` endpoint.
     *
@@ -25581,7 +25583,7 @@ impl Client {
     }
 
     /**
-    * Update a webhook configuration for an app
+    * Update a webhook configuration for an app.
     *
     * This function performs a `PATCH` to the `/app/hook/config` endpoint.
     *
@@ -25604,7 +25606,7 @@ impl Client {
     }
 
     /**
-    * List installations for the authenticated app
+    * List installations for the authenticated app.
     *
     * This function performs a `GET` to the `/app/installations` endpoint.
     *
@@ -25633,7 +25635,7 @@ impl Client {
     }
 
     /**
-    * Get an installation for the authenticated app
+    * Get an installation for the authenticated app.
     *
     * This function performs a `GET` to the `/app/installations/{installation_id}` endpoint.
     *
@@ -25653,7 +25655,7 @@ impl Client {
     }
 
     /**
-    * Delete an installation for the authenticated app
+    * Delete an installation for the authenticated app.
     *
     * This function performs a `DELETE` to the `/app/installations/{installation_id}` endpoint.
     *
@@ -25673,7 +25675,7 @@ impl Client {
     }
 
     /**
-    * Create an installation access token for an app
+    * Create an installation access token for an app.
     *
     * This function performs a `POST` to the `/app/installations/{installation_id}/access_tokens` endpoint.
     *
@@ -25705,7 +25707,7 @@ impl Client {
     }
 
     /**
-    * Suspend an app installation
+    * Suspend an app installation.
     *
     * This function performs a `PUT` to the `/app/installations/{installation_id}/suspended` endpoint.
     *
@@ -25725,7 +25727,7 @@ impl Client {
     }
 
     /**
-    * Unsuspend an app installation
+    * Unsuspend an app installation.
     *
     * This function performs a `DELETE` to the `/app/installations/{installation_id}/suspended` endpoint.
     *
@@ -25745,7 +25747,7 @@ impl Client {
     }
 
     /**
-    * List your grants
+    * List your grants.
     *
     * This function performs a `GET` to the `/applications/grants` endpoint.
     *
@@ -25772,7 +25774,7 @@ impl Client {
     }
 
     /**
-    * Get a single grant
+    * Get a single grant.
     *
     * This function performs a `GET` to the `/applications/grants/{grant_id}` endpoint.
     *
@@ -25793,7 +25795,7 @@ impl Client {
     }
 
     /**
-    * Delete a grant
+    * Delete a grant.
     *
     * This function performs a `DELETE` to the `/applications/grants/{grant_id}` endpoint.
     *
@@ -25813,7 +25815,7 @@ impl Client {
     }
 
     /**
-    * Delete an app authorization
+    * Delete an app authorization.
     *
     * This function performs a `DELETE` to the `/applications/{client_id}/grant` endpoint.
     *
@@ -25840,7 +25842,7 @@ impl Client {
     }
 
     /**
-    * Revoke a grant for an application
+    * Revoke a grant for an application.
     *
     * This function performs a `DELETE` to the `/applications/{client_id}/grants/{access_token}` endpoint.
     *
@@ -25867,7 +25869,7 @@ impl Client {
     }
 
     /**
-    * Check a token
+    * Check a token.
     *
     * This function performs a `POST` to the `/applications/{client_id}/token` endpoint.
     *
@@ -25893,7 +25895,7 @@ impl Client {
     }
 
     /**
-    * Delete an app token
+    * Delete an app token.
     *
     * This function performs a `DELETE` to the `/applications/{client_id}/token` endpoint.
     *
@@ -25919,7 +25921,7 @@ impl Client {
     }
 
     /**
-    * Reset a token
+    * Reset a token.
     *
     * This function performs a `PATCH` to the `/applications/{client_id}/token` endpoint.
     *
@@ -25945,7 +25947,7 @@ impl Client {
     }
 
     /**
-    * Create a scoped access token
+    * Create a scoped access token.
     *
     * This function performs a `POST` to the `/applications/{client_id}/token/scoped` endpoint.
     *
@@ -25971,7 +25973,7 @@ impl Client {
     }
 
     /**
-    * Check an authorization
+    * Check an authorization.
     *
     * This function performs a `GET` to the `/applications/{client_id}/tokens/{access_token}` endpoint.
     *
@@ -25996,7 +25998,7 @@ impl Client {
     }
 
     /**
-    * Reset an authorization
+    * Reset an authorization.
     *
     * This function performs a `POST` to the `/applications/{client_id}/tokens/{access_token}` endpoint.
     *
@@ -26021,7 +26023,7 @@ impl Client {
     }
 
     /**
-    * Revoke an authorization for an application
+    * Revoke an authorization for an application.
     *
     * This function performs a `DELETE` to the `/applications/{client_id}/tokens/{access_token}` endpoint.
     *
@@ -26046,7 +26048,7 @@ impl Client {
     }
 
     /**
-    * Get an app
+    * Get an app.
     *
     * This function performs a `GET` to the `/apps/{app_slug}` endpoint.
     *
@@ -26066,7 +26068,7 @@ impl Client {
     }
 
     /**
-    * List your authorizations
+    * List your authorizations.
     *
     * This function performs a `GET` to the `/authorizations` endpoint.
     *
@@ -26091,7 +26093,7 @@ impl Client {
     }
 
     /**
-    * Create a new authorization
+    * Create a new authorization.
     *
     * This function performs a `POST` to the `/authorizations` endpoint.
     *
@@ -26122,7 +26124,7 @@ impl Client {
     }
 
     /**
-    * Get-or-create an authorization for a specific app
+    * Get-or-create an authorization for a specific app.
     *
     * This function performs a `PUT` to the `/authorizations/clients/{client_id}` endpoint.
     *
@@ -26156,7 +26158,7 @@ impl Client {
     }
 
     /**
-    * Get-or-create an authorization for a specific app and fingerprint
+    * Get-or-create an authorization for a specific app and fingerprint.
     *
     * This function performs a `PUT` to the `/authorizations/clients/{client_id}/{fingerprint}` endpoint.
     *
@@ -26190,7 +26192,7 @@ impl Client {
     }
 
     /**
-    * Get a single authorization
+    * Get a single authorization.
     *
     * This function performs a `GET` to the `/authorizations/{authorization_id}` endpoint.
     *
@@ -26211,7 +26213,7 @@ impl Client {
     }
 
     /**
-    * Delete an authorization
+    * Delete an authorization.
     *
     * This function performs a `DELETE` to the `/authorizations/{authorization_id}` endpoint.
     *
@@ -26232,7 +26234,7 @@ impl Client {
     }
 
     /**
-    * Update an existing authorization
+    * Update an existing authorization.
     *
     * This function performs a `PATCH` to the `/authorizations/{authorization_id}` endpoint.
     *
@@ -26262,7 +26264,7 @@ impl Client {
     }
 
     /**
-    * Get all codes of conduct
+    * Get all codes of conduct.
     *
     * This function performs a `GET` to the `/codes_of_conduct` endpoint.
     *
@@ -26278,7 +26280,7 @@ impl Client {
     }
 
     /**
-    * Get a code of conduct
+    * Get a code of conduct.
     *
     * This function performs a `GET` to the `/codes_of_conduct/{key}` endpoint.
     *
@@ -26299,7 +26301,7 @@ impl Client {
     }
 
     /**
-    * Get emojis
+    * Get emojis.
     *
     * This function performs a `GET` to the `/emojis` endpoint.
     *
@@ -26313,7 +26315,7 @@ impl Client {
     }
 
     /**
-    * Get GitHub Actions permissions for an enterprise
+    * Get GitHub Actions permissions for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/permissions` endpoint.
     *
@@ -26336,7 +26338,7 @@ impl Client {
     }
 
     /**
-    * Set GitHub Actions permissions for an enterprise
+    * Set GitHub Actions permissions for an enterprise.
     *
     * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/permissions` endpoint.
     *
@@ -26364,7 +26366,7 @@ impl Client {
     }
 
     /**
-    * List selected organizations enabled for GitHub Actions in an enterprise
+    * List selected organizations enabled for GitHub Actions in an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/permissions/organizations` endpoint.
     *
@@ -26391,7 +26393,7 @@ impl Client {
     }
 
     /**
-    * Set selected organizations enabled for GitHub Actions in an enterprise
+    * Set selected organizations enabled for GitHub Actions in an enterprise.
     *
     * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/permissions/organizations` endpoint.
     *
@@ -26419,7 +26421,7 @@ impl Client {
     }
 
     /**
-    * Enable a selected organization for GitHub Actions in an enterprise
+    * Enable a selected organization for GitHub Actions in an enterprise.
     *
     * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/permissions/organizations/{org_id}` endpoint.
     *
@@ -26444,7 +26446,7 @@ impl Client {
     }
 
     /**
-    * Disable a selected organization for GitHub Actions in an enterprise
+    * Disable a selected organization for GitHub Actions in an enterprise.
     *
     * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/permissions/organizations/{org_id}` endpoint.
     *
@@ -26469,7 +26471,7 @@ impl Client {
     }
 
     /**
-    * Get allowed actions for an enterprise
+    * Get allowed actions for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/permissions/selected-actions` endpoint.
     *
@@ -26492,7 +26494,7 @@ impl Client {
     }
 
     /**
-    * Set allowed actions for an enterprise
+    * Set allowed actions for an enterprise.
     *
     * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/permissions/selected-actions` endpoint.
     *
@@ -26520,7 +26522,7 @@ impl Client {
     }
 
     /**
-    * List self-hosted runner groups for an enterprise
+    * List self-hosted runner groups for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runner-groups` endpoint.
     *
@@ -26547,7 +26549,7 @@ impl Client {
     }
 
     /**
-    * Create a self-hosted runner group for an enterprise
+    * Create a self-hosted runner group for an enterprise.
     *
     * This function performs a `POST` to the `/enterprises/{enterprise}/actions/runner-groups` endpoint.
     *
@@ -26575,7 +26577,7 @@ impl Client {
     }
 
     /**
-    * Get a self-hosted runner group for an enterprise
+    * Get a self-hosted runner group for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}` endpoint.
     *
@@ -26600,7 +26602,7 @@ impl Client {
     }
 
     /**
-    * Delete a self-hosted runner group from an enterprise
+    * Delete a self-hosted runner group from an enterprise.
     *
     * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}` endpoint.
     *
@@ -26625,7 +26627,7 @@ impl Client {
     }
 
     /**
-    * Update a self-hosted runner group for an enterprise
+    * Update a self-hosted runner group for an enterprise.
     *
     * This function performs a `PATCH` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}` endpoint.
     *
@@ -26655,7 +26657,7 @@ impl Client {
     }
 
     /**
-    * List organization access to a self-hosted runner group in an enterprise
+    * List organization access to a self-hosted runner group in an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations` endpoint.
     *
@@ -26685,7 +26687,7 @@ impl Client {
     }
 
     /**
-    * Set organization access for a self-hosted runner group in an enterprise
+    * Set organization access for a self-hosted runner group in an enterprise.
     *
     * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations` endpoint.
     *
@@ -26715,7 +26717,7 @@ impl Client {
     }
 
     /**
-    * Add organization access to a self-hosted runner group in an enterprise
+    * Add organization access to a self-hosted runner group in an enterprise.
     *
     * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}` endpoint.
     *
@@ -26742,7 +26744,7 @@ impl Client {
     }
 
     /**
-    * Remove organization access to a self-hosted runner group in an enterprise
+    * Remove organization access to a self-hosted runner group in an enterprise.
     *
     * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}` endpoint.
     *
@@ -26769,7 +26771,7 @@ impl Client {
     }
 
     /**
-    * List self-hosted runners in a group for an enterprise
+    * List self-hosted runners in a group for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners` endpoint.
     *
@@ -26798,7 +26800,7 @@ impl Client {
     }
 
     /**
-    * Set self-hosted runners in a group for an enterprise
+    * Set self-hosted runners in a group for an enterprise.
     *
     * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners` endpoint.
     *
@@ -26828,7 +26830,7 @@ impl Client {
     }
 
     /**
-    * Add a self-hosted runner to a group for an enterprise
+    * Add a self-hosted runner to a group for an enterprise.
     *
     * This function performs a `PUT` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}` endpoint.
     *
@@ -26856,7 +26858,7 @@ impl Client {
     }
 
     /**
-    * Remove a self-hosted runner from a group for an enterprise
+    * Remove a self-hosted runner from a group for an enterprise.
     *
     * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}` endpoint.
     *
@@ -26883,7 +26885,7 @@ impl Client {
     }
 
     /**
-    * List self-hosted runners for an enterprise
+    * List self-hosted runners for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runners` endpoint.
     *
@@ -26910,7 +26912,7 @@ impl Client {
     }
 
     /**
-    * List runner applications for an enterprise
+    * List runner applications for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runners/downloads` endpoint.
     *
@@ -26933,7 +26935,7 @@ impl Client {
     }
 
     /**
-    * Create a registration token for an enterprise
+    * Create a registration token for an enterprise.
     *
     * This function performs a `POST` to the `/enterprises/{enterprise}/actions/runners/registration-token` endpoint.
     *
@@ -26964,7 +26966,7 @@ impl Client {
     }
 
     /**
-    * Create a remove token for an enterprise
+    * Create a remove token for an enterprise.
     *
     * This function performs a `POST` to the `/enterprises/{enterprise}/actions/runners/remove-token` endpoint.
     *
@@ -26996,7 +26998,7 @@ impl Client {
     }
 
     /**
-    * Get a self-hosted runner for an enterprise
+    * Get a self-hosted runner for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runners/{runner_id}` endpoint.
     *
@@ -27021,7 +27023,7 @@ impl Client {
     }
 
     /**
-    * Delete a self-hosted runner from an enterprise
+    * Delete a self-hosted runner from an enterprise.
     *
     * This function performs a `DELETE` to the `/enterprises/{enterprise}/actions/runners/{runner_id}` endpoint.
     *
@@ -27046,7 +27048,7 @@ impl Client {
     }
 
     /**
-    * Get the audit log for an enterprise
+    * Get the audit log for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/audit-log` endpoint.
     *
@@ -27073,7 +27075,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get GitHub Actions billing for an enterprise
+    * Get GitHub Actions billing for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/settings/billing/actions` endpoint.
     *
@@ -27098,7 +27100,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get GitHub Packages billing for an enterprise
+    * Get GitHub Packages billing for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/settings/billing/packages` endpoint.
     *
@@ -27123,7 +27125,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get shared storage billing for an enterprise
+    * Get shared storage billing for an enterprise.
     *
     * This function performs a `GET` to the `/enterprises/{enterprise}/settings/billing/shared-storage` endpoint.
     *
@@ -27148,7 +27150,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List public events
+    * List public events.
     *
     * This function performs a `GET` to the `/events` endpoint.
     *
@@ -27171,7 +27173,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get feeds
+    * Get feeds.
     *
     * This function performs a `GET` to the `/feeds` endpoint.
     *
@@ -27195,7 +27197,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List gists for the authenticated user
+    * List gists for the authenticated user.
     *
     * This function performs a `GET` to the `/gists` endpoint.
     *
@@ -27220,7 +27222,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Create a gist
+    * Create a gist.
     *
     * This function performs a `POST` to the `/gists` endpoint.
     *
@@ -27240,7 +27242,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List public gists
+    * List public gists.
     *
     * This function performs a `GET` to the `/gists/public` endpoint.
     *
@@ -27267,7 +27269,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List starred gists
+    * List starred gists.
     *
     * This function performs a `GET` to the `/gists/starred` endpoint.
     *
@@ -27292,7 +27294,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get a gist
+    * Get a gist.
     *
     * This function performs a `GET` to the `/gists/{gist_id}` endpoint.
     *
@@ -27310,7 +27312,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Delete a gist
+    * Delete a gist.
     *
     * This function performs a `DELETE` to the `/gists/{gist_id}` endpoint.
     *
@@ -27328,7 +27330,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Update a gist
+    * Update a gist.
     *
     * This function performs a `PATCH` to the `/gists/{gist_id}` endpoint.
     *
@@ -27354,7 +27356,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List gist comments
+    * List gist comments.
     *
     * This function performs a `GET` to the `/gists/{gist_id}/comments` endpoint.
     *
@@ -27379,7 +27381,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Create a gist comment
+    * Create a gist comment.
     *
     * This function performs a `POST` to the `/gists/{gist_id}/comments` endpoint.
     *
@@ -27405,7 +27407,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get a gist comment
+    * Get a gist comment.
     *
     * This function performs a `GET` to the `/gists/{gist_id}/comments/{comment_id}` endpoint.
     *
@@ -27428,7 +27430,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Delete a gist comment
+    * Delete a gist comment.
     *
     * This function performs a `DELETE` to the `/gists/{gist_id}/comments/{comment_id}` endpoint.
     *
@@ -27447,7 +27449,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Update a gist comment
+    * Update a gist comment.
     *
     * This function performs a `PATCH` to the `/gists/{gist_id}/comments/{comment_id}` endpoint.
     *
@@ -27475,7 +27477,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List gist commits
+    * List gist commits.
     *
     * This function performs a `GET` to the `/gists/{gist_id}/commits` endpoint.
     *
@@ -27500,7 +27502,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List gist forks
+    * List gist forks.
     *
     * This function performs a `GET` to the `/gists/{gist_id}/forks` endpoint.
     *
@@ -27525,7 +27527,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Fork a gist
+    * Fork a gist.
     *
     * This function performs a `POST` to the `/gists/{gist_id}/forks` endpoint.
     *
@@ -27543,7 +27545,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Check if a gist is starred
+    * Check if a gist is starred.
     *
     * This function performs a `GET` to the `/gists/{gist_id}/star` endpoint.
     *
@@ -27561,7 +27563,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Star a gist
+    * Star a gist.
     *
     * This function performs a `PUT` to the `/gists/{gist_id}/star` endpoint.
     *
@@ -27579,7 +27581,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Unstar a gist
+    * Unstar a gist.
     *
     * This function performs a `DELETE` to the `/gists/{gist_id}/star` endpoint.
     *
@@ -27597,7 +27599,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get a gist revision
+    * Get a gist revision.
     *
     * This function performs a `GET` to the `/gists/{gist_id}/{sha}` endpoint.
     *
@@ -27616,7 +27618,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get all gitignore templates
+    * Get all gitignore templates.
     *
     * This function performs a `GET` to the `/gitignore/templates` endpoint.
     *
@@ -27630,7 +27632,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get a gitignore template
+    * Get a gitignore template.
     *
     * This function performs a `GET` to the `/gitignore/templates/{name}` endpoint.
     *
@@ -27649,7 +27651,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List repositories accessible to the app installation
+    * List repositories accessible to the app installation.
     *
     * This function performs a `GET` to the `/installation/repositories` endpoint.
     *
@@ -27674,7 +27676,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Revoke an installation access token
+    * Revoke an installation access token.
     *
     * This function performs a `DELETE` to the `/installation/token` endpoint.
     *
@@ -27692,7 +27694,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List issues assigned to the authenticated user
+    * List issues assigned to the authenticated user.
     *
     * This function performs a `GET` to the `/issues` endpoint.
     *
@@ -27730,7 +27732,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * Get all commonly used licenses
+    * Get all commonly used licenses.
     *
     * This function performs a `GET` to the `/licenses` endpoint.
     *
@@ -27755,7 +27757,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * Get a license
+    * Get a license.
     *
     * This function performs a `GET` to the `/licenses/{license}` endpoint.
     *
@@ -27773,7 +27775,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * Render a Markdown document
+    * Render a Markdown document.
     *
     * This function performs a `POST` to the `/markdown` endpoint.
     *
@@ -27794,7 +27796,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * Render a Markdown document in raw mode
+    * Render a Markdown document in raw mode.
     *
     * This function performs a `POST` to the `/markdown/raw` endpoint.
     *
@@ -27808,7 +27810,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * Get a subscription plan for an account
+    * Get a subscription plan for an account.
     *
     * This function performs a `GET` to the `/marketplace_listing/accounts/{account_id}` endpoint.
     *
@@ -27831,7 +27833,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * List plans
+    * List plans.
     *
     * This function performs a `GET` to the `/marketplace_listing/plans` endpoint.
     *
@@ -27856,7 +27858,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * List accounts for a plan
+    * List accounts for a plan.
     *
     * This function performs a `GET` to the `/marketplace_listing/plans/{plan_id}/accounts` endpoint.
     *
@@ -27887,7 +27889,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * Get a subscription plan for an account (stubbed)
+    * Get a subscription plan for an account (stubbed).
     *
     * This function performs a `GET` to the `/marketplace_listing/stubbed/accounts/{account_id}` endpoint.
     *
@@ -27910,7 +27912,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * List plans (stubbed)
+    * List plans (stubbed).
     *
     * This function performs a `GET` to the `/marketplace_listing/stubbed/plans` endpoint.
     *
@@ -27935,7 +27937,7 @@ format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_stri
     }
 
     /**
-    * List accounts for a plan (stubbed)
+    * List accounts for a plan (stubbed).
     *
     * This function performs a `GET` to the `/marketplace_listing/stubbed/plans/{plan_id}/accounts` endpoint.
     *
@@ -27961,7 +27963,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get GitHub meta information
+    * Get GitHub meta information.
     *
     * This function performs a `GET` to the `/meta` endpoint.
     *
@@ -27977,7 +27979,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List public events for a network of repositories
+    * List public events for a network of repositories.
     *
     * This function performs a `GET` to the `/networks/{owner}/{repo}/events` endpoint.
     *
@@ -28004,7 +28006,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List notifications for the authenticated user
+    * List notifications for the authenticated user.
     *
     * This function performs a `GET` to the `/notifications` endpoint.
     *
@@ -28035,7 +28037,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Mark notifications as read
+    * Mark notifications as read.
     *
     * This function performs a `PUT` to the `/notifications` endpoint.
     *
@@ -28056,7 +28058,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get a thread
+    * Get a thread.
     *
     * This function performs a `GET` to the `/notifications/threads/{thread_id}` endpoint.
     *
@@ -28074,7 +28076,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Mark a thread as read
+    * Mark a thread as read.
     *
     * This function performs a `PATCH` to the `/notifications/threads/{thread_id}` endpoint.
     *
@@ -28092,7 +28094,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get a thread subscription for the authenticated user
+    * Get a thread subscription for the authenticated user.
     *
     * This function performs a `GET` to the `/notifications/threads/{thread_id}/subscription` endpoint.
     *
@@ -28115,7 +28117,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Set a thread subscription
+    * Set a thread subscription.
     *
     * This function performs a `PUT` to the `/notifications/threads/{thread_id}/subscription` endpoint.
     *
@@ -28145,7 +28147,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Delete a thread subscription
+    * Delete a thread subscription.
     *
     * This function performs a `DELETE` to the `/notifications/threads/{thread_id}/subscription` endpoint.
     *
@@ -28163,7 +28165,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get Octocat
+    * Get Octocat.
     *
     * This function performs a `GET` to the `/octocat` endpoint.
     *
@@ -28178,7 +28180,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List organizations
+    * List organizations.
     *
     * This function performs a `GET` to the `/organizations` endpoint.
     *
@@ -28203,7 +28205,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get an organization
+    * Get an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}` endpoint.
     *
@@ -28223,7 +28225,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Update an organization
+    * Update an organization.
     *
     * This function performs a `PATCH` to the `/orgs/{org}` endpoint.
     *
@@ -28251,7 +28253,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get GitHub Actions permissions for an organization
+    * Get GitHub Actions permissions for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/permissions` endpoint.
     *
@@ -28274,7 +28276,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Set GitHub Actions permissions for an organization
+    * Set GitHub Actions permissions for an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/permissions` endpoint.
     *
@@ -28304,7 +28306,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List selected repositories enabled for GitHub Actions in an organization
+    * List selected repositories enabled for GitHub Actions in an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/permissions/repositories` endpoint.
     *
@@ -28332,7 +28334,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Set selected repositories enabled for GitHub Actions in an organization
+    * Set selected repositories enabled for GitHub Actions in an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/permissions/repositories` endpoint.
     *
@@ -28360,7 +28362,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Enable a selected repository for GitHub Actions in an organization
+    * Enable a selected repository for GitHub Actions in an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/permissions/repositories/{repository_id}` endpoint.
     *
@@ -28385,7 +28387,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Disable a selected repository for GitHub Actions in an organization
+    * Disable a selected repository for GitHub Actions in an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/actions/permissions/repositories/{repository_id}` endpoint.
     *
@@ -28410,7 +28412,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get allowed actions for an organization
+    * Get allowed actions for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/permissions/selected-actions` endpoint.
     *
@@ -28433,7 +28435,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Set allowed actions for an organization
+    * Set allowed actions for an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/permissions/selected-actions` endpoint.
     *
@@ -28465,7 +28467,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List self-hosted runner groups for an organization
+    * List self-hosted runner groups for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/runner-groups` endpoint.
     *
@@ -28494,7 +28496,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Create a self-hosted runner group for an organization
+    * Create a self-hosted runner group for an organization.
     *
     * This function performs a `POST` to the `/orgs/{org}/actions/runner-groups` endpoint.
     *
@@ -28524,7 +28526,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get a self-hosted runner group for an organization
+    * Get a self-hosted runner group for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}` endpoint.
     *
@@ -28551,7 +28553,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Delete a self-hosted runner group from an organization
+    * Delete a self-hosted runner group from an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}` endpoint.
     *
@@ -28578,7 +28580,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Update a self-hosted runner group for an organization
+    * Update a self-hosted runner group for an organization.
     *
     * This function performs a `PATCH` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}` endpoint.
     *
@@ -28610,7 +28612,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List repository access to a self-hosted runner group in an organization
+    * List repository access to a self-hosted runner group in an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories` endpoint.
     *
@@ -28642,7 +28644,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Set repository access for a self-hosted runner group in an organization
+    * Set repository access for a self-hosted runner group in an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories` endpoint.
     *
@@ -28674,7 +28676,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Add repository access to a self-hosted runner group in an organization
+    * Add repository access to a self-hosted runner group in an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}` endpoint.
     *
@@ -28705,7 +28707,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Remove repository access to a self-hosted runner group in an organization
+    * Remove repository access to a self-hosted runner group in an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}` endpoint.
     *
@@ -28735,7 +28737,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List self-hosted runners in a group for an organization
+    * List self-hosted runners in a group for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners` endpoint.
     *
@@ -28766,7 +28768,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Set self-hosted runners in a group for an organization
+    * Set self-hosted runners in a group for an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners` endpoint.
     *
@@ -28798,7 +28800,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Add a self-hosted runner to a group for an organization
+    * Add a self-hosted runner to a group for an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}` endpoint.
     *
@@ -28829,7 +28831,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Remove a self-hosted runner from a group for an organization
+    * Remove a self-hosted runner from a group for an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}` endpoint.
     *
@@ -28859,7 +28861,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List self-hosted runners for an organization
+    * List self-hosted runners for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/runners` endpoint.
     *
@@ -28886,7 +28888,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List runner applications for an organization
+    * List runner applications for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/runners/downloads` endpoint.
     *
@@ -28909,7 +28911,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Create a registration token for an organization
+    * Create a registration token for an organization.
     *
     * This function performs a `POST` to the `/orgs/{org}/actions/runners/registration-token` endpoint.
     *
@@ -28940,7 +28942,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Create a remove token for an organization
+    * Create a remove token for an organization.
     *
     * This function performs a `POST` to the `/orgs/{org}/actions/runners/remove-token` endpoint.
     *
@@ -28972,7 +28974,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get a self-hosted runner for an organization
+    * Get a self-hosted runner for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/runners/{runner_id}` endpoint.
     *
@@ -28997,7 +28999,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Delete a self-hosted runner from an organization
+    * Delete a self-hosted runner from an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/actions/runners/{runner_id}` endpoint.
     *
@@ -29022,7 +29024,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List organization secrets
+    * List organization secrets.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/secrets` endpoint.
     *
@@ -29047,7 +29049,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get an organization public key
+    * Get an organization public key.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/secrets/public-key` endpoint.
     *
@@ -29065,7 +29067,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get an organization secret
+    * Get an organization secret.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/secrets/{secret_name}` endpoint.
     *
@@ -29088,7 +29090,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Create or update an organization secret
+    * Create or update an organization secret.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/secrets/{secret_name}` endpoint.
     *
@@ -29190,7 +29192,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Delete an organization secret
+    * Delete an organization secret.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/actions/secrets/{secret_name}` endpoint.
     *
@@ -29209,7 +29211,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * List selected repositories for an organization secret
+    * List selected repositories for an organization secret.
     *
     * This function performs a `GET` to the `/orgs/{org}/actions/secrets/{secret_name}/repositories` endpoint.
     *
@@ -29236,7 +29238,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Set selected repositories for an organization secret
+    * Set selected repositories for an organization secret.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/secrets/{secret_name}/repositories` endpoint.
     *
@@ -29264,7 +29266,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Add selected repository to an organization secret
+    * Add selected repository to an organization secret.
     *
     * This function performs a `PUT` to the `/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}` endpoint.
     *
@@ -29289,7 +29291,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Remove selected repository from an organization secret
+    * Remove selected repository from an organization secret.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}` endpoint.
     *
@@ -29314,7 +29316,7 @@ direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_str
     }
 
     /**
-    * Get the audit log for an organization
+    * Get the audit log for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/audit-log` endpoint.
     *
@@ -29343,7 +29345,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List users blocked by an organization
+    * List users blocked by an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/blocks` endpoint.
     *
@@ -29361,7 +29363,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Check if a user is blocked by an organization
+    * Check if a user is blocked by an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/blocks/{username}` endpoint.
     *
@@ -29380,7 +29382,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Block a user from an organization
+    * Block a user from an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/blocks/{username}` endpoint.
     *
@@ -29399,7 +29401,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Unblock a user from an organization
+    * Unblock a user from an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/blocks/{username}` endpoint.
     *
@@ -29418,7 +29420,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List SAML SSO authorizations for an organization
+    * List SAML SSO authorizations for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/credential-authorizations` endpoint.
     *
@@ -29441,7 +29443,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Remove a SAML SSO authorization for an organization
+    * Remove a SAML SSO authorization for an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/credential-authorizations/{credential_id}` endpoint.
     *
@@ -29466,7 +29468,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List public organization events
+    * List public organization events.
     *
     * This function performs a `GET` to the `/orgs/{org}/events` endpoint.
     *
@@ -29491,7 +29493,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List failed organization invitations
+    * List failed organization invitations.
     *
     * This function performs a `GET` to the `/orgs/{org}/failed_invitations` endpoint.
     *
@@ -29516,7 +29518,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List organization webhooks
+    * List organization webhooks.
     *
     * This function performs a `GET` to the `/orgs/{org}/hooks` endpoint.
     *
@@ -29541,7 +29543,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Create an organization webhook
+    * Create an organization webhook.
     *
     * This function performs a `POST` to the `/orgs/{org}/hooks` endpoint.
     *
@@ -29567,7 +29569,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get an organization webhook
+    * Get an organization webhook.
     *
     * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}` endpoint.
     *
@@ -29586,7 +29588,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Delete an organization webhook
+    * Delete an organization webhook.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/hooks/{hook_id}` endpoint.
     *
@@ -29605,7 +29607,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Update an organization webhook
+    * Update an organization webhook.
     *
     * This function performs a `PATCH` to the `/orgs/{org}/hooks/{hook_id}` endpoint.
     *
@@ -29633,7 +29635,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get a webhook configuration for an organization
+    * Get a webhook configuration for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}/config` endpoint.
     *
@@ -29658,7 +29660,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Update a webhook configuration for an organization
+    * Update a webhook configuration for an organization.
     *
     * This function performs a `PATCH` to the `/orgs/{org}/hooks/{hook_id}/config` endpoint.
     *
@@ -29688,7 +29690,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Ping an organization webhook
+    * Ping an organization webhook.
     *
     * This function performs a `POST` to the `/orgs/{org}/hooks/{hook_id}/pings` endpoint.
     *
@@ -29707,7 +29709,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get an organization installation for the authenticated app
+    * Get an organization installation for the authenticated app.
     *
     * This function performs a `GET` to the `/orgs/{org}/installation` endpoint.
     *
@@ -29727,7 +29729,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List app installations for an organization
+    * List app installations for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/installations` endpoint.
     *
@@ -29752,7 +29754,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Get interaction restrictions for an organization
+    * Get interaction restrictions for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/interaction-limits` endpoint.
     *
@@ -29773,7 +29775,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Set interaction restrictions for an organization
+    * Set interaction restrictions for an organization.
     *
     * This function performs a `PUT` to the `/orgs/{org}/interaction-limits` endpoint.
     *
@@ -29799,7 +29801,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Remove interaction restrictions for an organization
+    * Remove interaction restrictions for an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/interaction-limits` endpoint.
     *
@@ -29817,7 +29819,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List pending organization invitations
+    * List pending organization invitations.
     *
     * This function performs a `GET` to the `/orgs/{org}/invitations` endpoint.
     *
@@ -29842,7 +29844,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Create an organization invitation
+    * Create an organization invitation.
     *
     * This function performs a `POST` to the `/orgs/{org}/invitations` endpoint.
     *
@@ -29870,7 +29872,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * Cancel an organization invitation
+    * Cancel an organization invitation.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/invitations/{invitation_id}` endpoint.
     *
@@ -29891,7 +29893,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List organization invitation teams
+    * List organization invitation teams.
     *
     * This function performs a `GET` to the `/orgs/{org}/invitations/{invitation_id}/teams` endpoint.
     *
@@ -29918,7 +29920,7 @@ after.to_string(), before.to_string(), include.to_string(), order.to_string(), f
     }
 
     /**
-    * List organization issues assigned to the authenticated user
+    * List organization issues assigned to the authenticated user.
     *
     * This function performs a `GET` to the `/orgs/{org}/issues` endpoint.
     *
@@ -29951,7 +29953,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List organization members
+    * List organization members.
     *
     * This function performs a `GET` to the `/orgs/{org}/members` endpoint.
     *
@@ -29980,7 +29982,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Check organization membership for a user
+    * Check organization membership for a user.
     *
     * This function performs a `GET` to the `/orgs/{org}/members/{username}` endpoint.
     *
@@ -29999,7 +30001,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Remove an organization member
+    * Remove an organization member.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/members/{username}` endpoint.
     *
@@ -30018,7 +30020,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get organization membership for a user
+    * Get organization membership for a user.
     *
     * This function performs a `GET` to the `/orgs/{org}/memberships/{username}` endpoint.
     *
@@ -30041,7 +30043,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Set organization membership for a user
+    * Set organization membership for a user.
     *
     * This function performs a `PUT` to the `/orgs/{org}/memberships/{username}` endpoint.
     *
@@ -30077,7 +30079,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Remove organization membership for a user
+    * Remove organization membership for a user.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/memberships/{username}` endpoint.
     *
@@ -30098,7 +30100,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List organization migrations
+    * List organization migrations.
     *
     * This function performs a `GET` to the `/orgs/{org}/migrations` endpoint.
     *
@@ -30125,7 +30127,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Start an organization migration
+    * Start an organization migration.
     *
     * This function performs a `POST` to the `/orgs/{org}/migrations` endpoint.
     *
@@ -30151,7 +30153,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get an organization migration status
+    * Get an organization migration status.
     *
     * This function performs a `GET` to the `/orgs/{org}/migrations/{migration_id}` endpoint.
     *
@@ -30183,7 +30185,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Download an organization migration archive
+    * Download an organization migration archive.
     *
     * This function performs a `GET` to the `/orgs/{org}/migrations/{migration_id}/archive` endpoint.
     *
@@ -30206,7 +30208,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete an organization migration archive
+    * Delete an organization migration archive.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/migrations/{migration_id}/archive` endpoint.
     *
@@ -30229,7 +30231,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Unlock an organization repository
+    * Unlock an organization repository.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock` endpoint.
     *
@@ -30254,7 +30256,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List repositories in an organization migration
+    * List repositories in an organization migration.
     *
     * This function performs a `GET` to the `/orgs/{org}/migrations/{migration_id}/repositories` endpoint.
     *
@@ -30281,7 +30283,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List outside collaborators for an organization
+    * List outside collaborators for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/outside_collaborators` endpoint.
     *
@@ -30308,7 +30310,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Convert an organization member to outside collaborator
+    * Convert an organization member to outside collaborator.
     *
     * This function performs a `PUT` to the `/orgs/{org}/outside_collaborators/{username}` endpoint.
     *
@@ -30331,7 +30333,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Remove outside collaborator from an organization
+    * Remove outside collaborator from an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/outside_collaborators/{username}` endpoint.
     *
@@ -30350,7 +30352,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a package for an organization
+    * Get a package for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}` endpoint.
     *
@@ -30378,7 +30380,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a package for an organization
+    * Delete a package for an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/packages/{package_type}/{package_name}` endpoint.
     *
@@ -30407,7 +30409,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Restore a package for an organization
+    * Restore a package for an organization.
     *
     * This function performs a `POST` to the `/orgs/{org}/packages/{package_type}/{package_name}/restore` endpoint.
     *
@@ -30442,7 +30444,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get all package versions for a package owned by an organization
+    * Get all package versions for a package owned by an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions` endpoint.
     *
@@ -30476,7 +30478,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a package version for an organization
+    * Get a package version for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
     *
@@ -30506,7 +30508,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete package version for an organization
+    * Delete package version for an organization.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
     *
@@ -30537,7 +30539,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Restore package version for an organization
+    * Restore package version for an organization.
     *
     * This function performs a `POST` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}/restore` endpoint.
     *
@@ -30572,7 +30574,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List organization projects
+    * List organization projects.
     *
     * This function performs a `GET` to the `/orgs/{org}/projects` endpoint.
     *
@@ -30599,7 +30601,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create an organization project
+    * Create an organization project.
     *
     * This function performs a `POST` to the `/orgs/{org}/projects` endpoint.
     *
@@ -30625,7 +30627,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List public organization members
+    * List public organization members.
     *
     * This function performs a `GET` to the `/orgs/{org}/public_members` endpoint.
     *
@@ -30650,7 +30652,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Check public organization membership for a user
+    * Check public organization membership for a user.
     *
     * This function performs a `GET` to the `/orgs/{org}/public_members/{username}` endpoint.
     *
@@ -30673,7 +30675,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Set public organization membership for the authenticated user
+    * Set public organization membership for the authenticated user.
     *
     * This function performs a `PUT` to the `/orgs/{org}/public_members/{username}` endpoint.
     *
@@ -30698,7 +30700,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Remove public organization membership for the authenticated user
+    * Remove public organization membership for the authenticated user.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/public_members/{username}` endpoint.
     *
@@ -30721,7 +30723,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List organization repositories
+    * List organization repositories.
     *
     * This function performs a `GET` to the `/orgs/{org}/repos` endpoint.
     *
@@ -30752,7 +30754,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create an organization repository
+    * Create an organization repository.
     *
     * This function performs a `POST` to the `/orgs/{org}/repos` endpoint.
     *
@@ -30785,7 +30787,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get GitHub Actions billing for an organization
+    * Get GitHub Actions billing for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/settings/billing/actions` endpoint.
     *
@@ -30810,7 +30812,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get GitHub Packages billing for an organization
+    * Get GitHub Packages billing for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/settings/billing/packages` endpoint.
     *
@@ -30835,7 +30837,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get shared storage billing for an organization
+    * Get shared storage billing for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/settings/billing/shared-storage` endpoint.
     *
@@ -30860,7 +30862,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List IdP groups for an organization
+    * List IdP groups for an organization.
     *
     * This function performs a `GET` to the `/orgs/{org}/team-sync/groups` endpoint.
     *
@@ -30889,7 +30891,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List teams
+    * List teams.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams` endpoint.
     *
@@ -30914,7 +30916,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a team
+    * Create a team.
     *
     * This function performs a `POST` to the `/orgs/{org}/teams` endpoint.
     *
@@ -30942,7 +30944,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a team by name
+    * Get a team by name.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}` endpoint.
     *
@@ -30963,7 +30965,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a team
+    * Delete a team.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}` endpoint.
     *
@@ -30986,7 +30988,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Update a team
+    * Update a team.
     *
     * This function performs a `PATCH` to the `/orgs/{org}/teams/{team_slug}` endpoint.
     *
@@ -31016,7 +31018,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List discussions
+    * List discussions.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions` endpoint.
     *
@@ -31049,7 +31051,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a discussion
+    * Create a discussion.
     *
     * This function performs a `POST` to the `/orgs/{org}/teams/{team_slug}/discussions` endpoint.
     *
@@ -31081,7 +31083,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a discussion
+    * Get a discussion.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}` endpoint.
     *
@@ -31108,7 +31110,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a discussion
+    * Delete a discussion.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}` endpoint.
     *
@@ -31135,7 +31137,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Update a discussion
+    * Update a discussion.
     *
     * This function performs a `PATCH` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}` endpoint.
     *
@@ -31167,7 +31169,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List discussion comments
+    * List discussion comments.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments` endpoint.
     *
@@ -31200,7 +31202,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a discussion comment
+    * Create a discussion comment.
     *
     * This function performs a `POST` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments` endpoint.
     *
@@ -31234,7 +31236,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a discussion comment
+    * Get a discussion comment.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
     *
@@ -31263,7 +31265,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a discussion comment
+    * Delete a discussion comment.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
     *
@@ -31292,7 +31294,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Update a discussion comment
+    * Update a discussion comment.
     *
     * This function performs a `PATCH` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
     *
@@ -31326,7 +31328,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List reactions for a team discussion comment
+    * List reactions for a team discussion comment.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
     *
@@ -31361,7 +31363,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create reaction for a team discussion comment
+    * Create reaction for a team discussion comment.
     *
     * This function performs a `POST` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
     *
@@ -31395,7 +31397,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete team discussion comment reaction
+    * Delete team discussion comment reaction.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}` endpoint.
     *
@@ -31426,7 +31428,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List reactions for a team discussion
+    * List reactions for a team discussion.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions` endpoint.
     *
@@ -31459,7 +31461,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create reaction for a team discussion
+    * Create reaction for a team discussion.
     *
     * This function performs a `POST` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions` endpoint.
     *
@@ -31491,7 +31493,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete team discussion reaction
+    * Delete team discussion reaction.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}` endpoint.
     *
@@ -31520,7 +31522,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List pending team invitations
+    * List pending team invitations.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/invitations` endpoint.
     *
@@ -31549,7 +31551,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List team members
+    * List team members.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/members` endpoint.
     *
@@ -31580,7 +31582,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get team membership for a user
+    * Get team membership for a user.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/memberships/{username}` endpoint.
     *
@@ -31614,7 +31616,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Add or update team membership for a user
+    * Add or update team membership for a user.
     *
     * This function performs a `PUT` to the `/orgs/{org}/teams/{team_slug}/memberships/{username}` endpoint.
     *
@@ -31654,7 +31656,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Remove team membership for a user
+    * Remove team membership for a user.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/memberships/{username}` endpoint.
     *
@@ -31685,7 +31687,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List team projects
+    * List team projects.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/projects` endpoint.
     *
@@ -31714,7 +31716,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Check team permissions for a project
+    * Check team permissions for a project.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/projects/{project_id}` endpoint.
     *
@@ -31741,7 +31743,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Add or update team project permissions
+    * Add or update team project permissions.
     *
     * This function performs a `PUT` to the `/orgs/{org}/teams/{team_slug}/projects/{project_id}` endpoint.
     *
@@ -31773,7 +31775,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Remove a project from a team
+    * Remove a project from a team.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/projects/{project_id}` endpoint.
     *
@@ -31800,7 +31802,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List team repositories
+    * List team repositories.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/repos` endpoint.
     *
@@ -31829,7 +31831,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Check team permissions for a repository
+    * Check team permissions for a repository.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}` endpoint.
     *
@@ -31862,7 +31864,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Add or update team repository permissions
+    * Add or update team repository permissions.
     *
     * This function performs a `PUT` to the `/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}` endpoint.
     *
@@ -31898,7 +31900,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Remove a repository from a team
+    * Remove a repository from a team.
     *
     * This function performs a `DELETE` to the `/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}` endpoint.
     *
@@ -31927,7 +31929,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List IdP groups for a team
+    * List IdP groups for a team.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/team-sync/group-mappings` endpoint.
     *
@@ -31954,7 +31956,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create or update IdP group connections
+    * Create or update IdP group connections.
     *
     * This function performs a `PATCH` to the `/orgs/{org}/teams/{team_slug}/team-sync/group-mappings` endpoint.
     *
@@ -31986,7 +31988,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List child teams
+    * List child teams.
     *
     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/teams` endpoint.
     *
@@ -32015,7 +32017,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a project card
+    * Get a project card.
     *
     * This function performs a `GET` to the `/projects/columns/cards/{card_id}` endpoint.
     *
@@ -32033,7 +32035,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a project card
+    * Delete a project card.
     *
     * This function performs a `DELETE` to the `/projects/columns/cards/{card_id}` endpoint.
     *
@@ -32051,7 +32053,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Update an existing project card
+    * Update an existing project card.
     *
     * This function performs a `PATCH` to the `/projects/columns/cards/{card_id}` endpoint.
     *
@@ -32077,7 +32079,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Move a project card
+    * Move a project card.
     *
     * This function performs a `POST` to the `/projects/columns/cards/{card_id}/moves` endpoint.
     *
@@ -32103,7 +32105,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a project column
+    * Get a project column.
     *
     * This function performs a `GET` to the `/projects/columns/{column_id}` endpoint.
     *
@@ -32121,7 +32123,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a project column
+    * Delete a project column.
     *
     * This function performs a `DELETE` to the `/projects/columns/{column_id}` endpoint.
     *
@@ -32139,7 +32141,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Update an existing project column
+    * Update an existing project column.
     *
     * This function performs a `PATCH` to the `/projects/columns/{column_id}` endpoint.
     *
@@ -32165,7 +32167,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List project cards
+    * List project cards.
     *
     * This function performs a `GET` to the `/projects/columns/{column_id}/cards` endpoint.
     *
@@ -32192,7 +32194,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a project card
+    * Create a project card.
     *
     * This function performs a `POST` to the `/projects/columns/{column_id}/cards` endpoint.
     *
@@ -32218,7 +32220,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Move a project column
+    * Move a project column.
     *
     * This function performs a `POST` to the `/projects/columns/{column_id}/moves` endpoint.
     *
@@ -32244,7 +32246,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a project
+    * Get a project.
     *
     * This function performs a `GET` to the `/projects/{project_id}` endpoint.
     *
@@ -32262,7 +32264,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a project
+    * Delete a project.
     *
     * This function performs a `DELETE` to the `/projects/{project_id}` endpoint.
     *
@@ -32280,7 +32282,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Update a project
+    * Update a project.
     *
     * This function performs a `PATCH` to the `/projects/{project_id}` endpoint.
     *
@@ -32306,7 +32308,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List project collaborators
+    * List project collaborators.
     *
     * This function performs a `GET` to the `/projects/{project_id}/collaborators` endpoint.
     *
@@ -32333,7 +32335,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Add project collaborator
+    * Add project collaborator.
     *
     * This function performs a `PUT` to the `/projects/{project_id}/collaborators/{username}` endpoint.
     *
@@ -32361,7 +32363,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Remove user as a collaborator
+    * Remove user as a collaborator.
     *
     * This function performs a `DELETE` to the `/projects/{project_id}/collaborators/{username}` endpoint.
     *
@@ -32384,7 +32386,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get project permission for a user
+    * Get project permission for a user.
     *
     * This function performs a `GET` to the `/projects/{project_id}/collaborators/{username}/permission` endpoint.
     *
@@ -32407,7 +32409,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List project columns
+    * List project columns.
     *
     * This function performs a `GET` to the `/projects/{project_id}/columns` endpoint.
     *
@@ -32432,7 +32434,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a project column
+    * Create a project column.
     *
     * This function performs a `POST` to the `/projects/{project_id}/columns` endpoint.
     *
@@ -32458,7 +32460,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get rate limit status for the authenticated user
+    * Get rate limit status for the authenticated user.
     *
     * This function performs a `GET` to the `/rate_limit` endpoint.
     *
@@ -32474,7 +32476,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a reaction (Legacy)
+    * Delete a reaction (Legacy).
     *
     * This function performs a `DELETE` to the `/reactions/{reaction_id}` endpoint.
     *
@@ -32494,7 +32496,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a repository
+    * Get a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}` endpoint.
     *
@@ -32515,7 +32517,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a repository
+    * Delete a repository.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}` endpoint.
     *
@@ -32537,7 +32539,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Update a repository
+    * Update a repository.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}` endpoint.
     *
@@ -32565,7 +32567,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List artifacts for a repository
+    * List artifacts for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/artifacts` endpoint.
     *
@@ -32592,7 +32594,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get an artifact
+    * Get an artifact.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/artifacts/{artifact_id}` endpoint.
     *
@@ -32617,7 +32619,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete an artifact
+    * Delete an artifact.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/artifacts/{artifact_id}` endpoint.
     *
@@ -32642,7 +32644,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Download an artifact
+    * Download an artifact.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}` endpoint.
     *
@@ -32672,7 +32674,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a job for a workflow run
+    * Get a job for a workflow run.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/jobs/{job_id}` endpoint.
     *
@@ -32697,7 +32699,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Download job logs for a workflow run
+    * Download job logs for a workflow run.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/jobs/{job_id}/logs` endpoint.
     *
@@ -32725,7 +32727,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get GitHub Actions permissions for a repository
+    * Get GitHub Actions permissions for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/permissions` endpoint.
     *
@@ -32751,7 +32753,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Set GitHub Actions permissions for a repository
+    * Set GitHub Actions permissions for a repository.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/permissions` endpoint.
     *
@@ -32783,7 +32785,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get allowed actions for a repository
+    * Get allowed actions for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/permissions/selected-actions` endpoint.
     *
@@ -32808,7 +32810,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Set allowed actions for a repository
+    * Set allowed actions for a repository.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/permissions/selected-actions` endpoint.
     *
@@ -32842,7 +32844,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List self-hosted runners for a repository
+    * List self-hosted runners for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runners` endpoint.
     *
@@ -32869,7 +32871,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List runner applications for a repository
+    * List runner applications for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runners/downloads` endpoint.
     *
@@ -32894,7 +32896,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a registration token for a repository
+    * Create a registration token for a repository.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runners/registration-token` endpoint.
     *
@@ -32926,7 +32928,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a remove token for a repository
+    * Create a remove token for a repository.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runners/remove-token` endpoint.
     *
@@ -32958,7 +32960,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a self-hosted runner for a repository
+    * Get a self-hosted runner for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runners/{runner_id}` endpoint.
     *
@@ -32986,7 +32988,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a self-hosted runner from a repository
+    * Delete a self-hosted runner from a repository.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/runners/{runner_id}` endpoint.
     *
@@ -33014,7 +33016,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List workflow runs for a repository
+    * List workflow runs for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs` endpoint.
     *
@@ -33051,7 +33053,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a workflow run
+    * Get a workflow run.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}` endpoint.
     *
@@ -33076,7 +33078,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a workflow run
+    * Delete a workflow run.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/runs/{run_id}` endpoint.
     *
@@ -33103,7 +33105,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get the review history for a workflow run
+    * Get the review history for a workflow run.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/approvals` endpoint.
     *
@@ -33128,7 +33130,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Approve a workflow run for a fork pull request
+    * Approve a workflow run for a fork pull request.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/approve` endpoint.
     *
@@ -33157,7 +33159,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List workflow run artifacts
+    * List workflow run artifacts.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts` endpoint.
     *
@@ -33186,7 +33188,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Cancel a workflow run
+    * Cancel a workflow run.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/cancel` endpoint.
     *
@@ -33211,7 +33213,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List jobs for a workflow run
+    * List jobs for a workflow run.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/jobs` endpoint.
     *
@@ -33242,7 +33244,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Download workflow run logs
+    * Download workflow run logs.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/logs` endpoint.
     *
@@ -33270,7 +33272,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete workflow run logs
+    * Delete workflow run logs.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/logs` endpoint.
     *
@@ -33295,7 +33297,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get pending deployments for a workflow run
+    * Get pending deployments for a workflow run.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments` endpoint.
     *
@@ -33322,7 +33324,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Review pending deployments for a workflow run
+    * Review pending deployments for a workflow run.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments` endpoint.
     *
@@ -33354,7 +33356,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Re-run a workflow
+    * Re-run a workflow.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/rerun` endpoint.
     *
@@ -33379,7 +33381,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get workflow run usage
+    * Get workflow run usage.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/timing` endpoint.
     *
@@ -33406,7 +33408,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List repository secrets
+    * List repository secrets.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/secrets` endpoint.
     *
@@ -33433,7 +33435,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a repository public key
+    * Get a repository public key.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/secrets/public-key` endpoint.
     *
@@ -33456,7 +33458,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a repository secret
+    * Get a repository secret.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/secrets/{secret_name}` endpoint.
     *
@@ -33481,7 +33483,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create or update a repository secret
+    * Create or update a repository secret.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/secrets/{secret_name}` endpoint.
     *
@@ -33585,7 +33587,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a repository secret
+    * Delete a repository secret.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/actions/secrets/{secret_name}` endpoint.
     *
@@ -33610,7 +33612,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List repository workflows
+    * List repository workflows.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/workflows` endpoint.
     *
@@ -33637,7 +33639,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a workflow
+    * Get a workflow.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}` endpoint.
     *
@@ -33662,7 +33664,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Disable a workflow
+    * Disable a workflow.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable` endpoint.
     *
@@ -33689,7 +33691,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a workflow dispatch event
+    * Create a workflow dispatch event.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches` endpoint.
     *
@@ -33723,7 +33725,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Enable a workflow
+    * Enable a workflow.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable` endpoint.
     *
@@ -33750,7 +33752,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List workflow runs
+    * List workflow runs.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs` endpoint.
     *
@@ -33782,7 +33784,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get workflow usage
+    * Get workflow usage.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing` endpoint.
     *
@@ -33809,7 +33811,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * List assignees
+    * List assignees.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/assignees` endpoint.
     *
@@ -33836,7 +33838,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Check if a user can be assigned
+    * Check if a user can be assigned.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/assignees/{assignee}` endpoint.
     *
@@ -33865,7 +33867,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Enable automated security fixes
+    * Enable automated security fixes.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/automated-security-fixes` endpoint.
     *
@@ -33888,7 +33890,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Disable automated security fixes
+    * Disable automated security fixes.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/automated-security-fixes` endpoint.
     *
@@ -33911,7 +33913,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * List branches
+    * List branches.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches` endpoint.
     *
@@ -33940,7 +33942,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get a branch
+    * Get a branch.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}` endpoint.
     *
@@ -33965,7 +33967,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get branch protection
+    * Get branch protection.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection` endpoint.
     *
@@ -33990,7 +33992,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Update branch protection
+    * Update branch protection.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection` endpoint.
     *
@@ -34026,7 +34028,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Delete branch protection
+    * Delete branch protection.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection` endpoint.
     *
@@ -34051,7 +34053,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get admin branch protection
+    * Get admin branch protection.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins` endpoint.
     *
@@ -34076,7 +34078,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Set admin branch protection
+    * Set admin branch protection.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins` endpoint.
     *
@@ -34103,7 +34105,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Delete admin branch protection
+    * Delete admin branch protection.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins` endpoint.
     *
@@ -34130,7 +34132,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get pull request review protection
+    * Get pull request review protection.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews` endpoint.
     *
@@ -34155,7 +34157,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Delete pull request review protection
+    * Delete pull request review protection.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews` endpoint.
     *
@@ -34180,7 +34182,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Update pull request review protection
+    * Update pull request review protection.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews` endpoint.
     *
@@ -34214,7 +34216,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get commit signature protection
+    * Get commit signature protection.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures` endpoint.
     *
@@ -34243,7 +34245,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Create commit signature protection
+    * Create commit signature protection.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures` endpoint.
     *
@@ -34270,7 +34272,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Delete commit signature protection
+    * Delete commit signature protection.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures` endpoint.
     *
@@ -34297,7 +34299,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get status checks protection
+    * Get status checks protection.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks` endpoint.
     *
@@ -34322,7 +34324,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Remove status check protection
+    * Remove status check protection.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks` endpoint.
     *
@@ -34347,7 +34349,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Update status check protection
+    * Update status check protection.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks` endpoint.
     *
@@ -34379,7 +34381,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get all status check contexts
+    * Get all status check contexts.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
     *
@@ -34404,7 +34406,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Set status check contexts
+    * Set status check contexts.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
     *
@@ -34434,7 +34436,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Add status check contexts
+    * Add status check contexts.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
     *
@@ -34464,7 +34466,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Remove status check contexts
+    * Remove status check contexts.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
     *
@@ -34494,7 +34496,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get access restrictions
+    * Get access restrictions.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions` endpoint.
     *
@@ -34523,7 +34525,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Delete access restrictions
+    * Delete access restrictions.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions` endpoint.
     *
@@ -34550,7 +34552,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get apps with access to the protected branch
+    * Get apps with access to the protected branch.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
     *
@@ -34577,7 +34579,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Set app access restrictions
+    * Set app access restrictions.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
     *
@@ -34613,7 +34615,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Add app access restrictions
+    * Add app access restrictions.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
     *
@@ -34649,7 +34651,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Remove app access restrictions
+    * Remove app access restrictions.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
     *
@@ -34685,7 +34687,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get teams with access to the protected branch
+    * Get teams with access to the protected branch.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
     *
@@ -34712,7 +34714,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Set team access restrictions
+    * Set team access restrictions.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
     *
@@ -34748,7 +34750,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Add team access restrictions
+    * Add team access restrictions.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
     *
@@ -34784,7 +34786,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Remove team access restrictions
+    * Remove team access restrictions.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
     *
@@ -34820,7 +34822,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get users with access to the protected branch
+    * Get users with access to the protected branch.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
     *
@@ -34847,7 +34849,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Set user access restrictions
+    * Set user access restrictions.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
     *
@@ -34883,7 +34885,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Add user access restrictions
+    * Add user access restrictions.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
     *
@@ -34919,7 +34921,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Remove user access restrictions
+    * Remove user access restrictions.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
     *
@@ -34955,7 +34957,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Rename a branch
+    * Rename a branch.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/branches/{branch}/rename` endpoint.
     *
@@ -34999,7 +35001,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Create a check run
+    * Create a check run.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/check-runs` endpoint.
     *
@@ -35031,7 +35033,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get a check run
+    * Get a check run.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/check-runs/{check_run_id}` endpoint.
     *
@@ -35058,7 +35060,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Update a check run
+    * Update a check run.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/check-runs/{check_run_id}` endpoint.
     *
@@ -35090,7 +35092,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * List check run annotations
+    * List check run annotations.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations` endpoint.
     *
@@ -35119,7 +35121,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Create a check suite
+    * Create a check suite.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/check-suites` endpoint.
     *
@@ -35149,7 +35151,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Update repository preferences for check suites
+    * Update repository preferences for check suites.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/check-suites/preferences` endpoint.
     *
@@ -35177,7 +35179,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * Get a check suite
+    * Get a check suite.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/check-suites/{check_suite_id}` endpoint.
     *
@@ -35204,7 +35206,7 @@ actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), f
     }
 
     /**
-    * List check runs in a check suite
+    * List check runs in a check suite.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs` endpoint.
     *
@@ -35235,7 +35237,7 @@ check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", p
     }
 
     /**
-    * Rerequest a check suite
+    * Rerequest a check suite.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest` endpoint.
     *
@@ -35262,7 +35264,7 @@ check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", p
     }
 
     /**
-    * List code scanning alerts for a repository
+    * List code scanning alerts for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts` endpoint.
     *
@@ -35298,7 +35300,7 @@ format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid
     }
 
     /**
-    * Get a code scanning alert
+    * Get a code scanning alert.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}` endpoint.
     *
@@ -35326,7 +35328,7 @@ format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid
     }
 
     /**
-    * Update a code scanning alert
+    * Update a code scanning alert.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}` endpoint.
     *
@@ -35356,7 +35358,7 @@ format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid
     }
 
     /**
-    * List instances of a code scanning alert
+    * List instances of a code scanning alert.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances` endpoint.
     *
@@ -35387,7 +35389,7 @@ format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid
     }
 
     /**
-    * List code scanning analyses for a repository
+    * List code scanning analyses for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/analyses` endpoint.
     *
@@ -35430,7 +35432,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Get a code scanning analysis for a repository
+    * Get a code scanning analysis for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}` endpoint.
     *
@@ -35475,7 +35477,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Delete a code scanning analysis from a repository
+    * Delete a code scanning analysis from a repository.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}` endpoint.
     *
@@ -35565,7 +35567,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Upload an analysis as SARIF data
+    * Upload an analysis as SARIF data.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/code-scanning/sarifs` endpoint.
     *
@@ -35609,7 +35611,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Get information about a SARIF upload
+    * Get information about a SARIF upload.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}` endpoint.
     *
@@ -35634,7 +35636,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * List repository collaborators
+    * List repository collaborators.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators` endpoint.
     *
@@ -35665,7 +35667,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Check if a user is a repository collaborator
+    * Check if a user is a repository collaborator.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators/{username}` endpoint.
     *
@@ -35692,7 +35694,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Add a repository collaborator
+    * Add a repository collaborator.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/collaborators/{username}` endpoint.
     *
@@ -35732,7 +35734,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Remove a repository collaborator
+    * Remove a repository collaborator.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/collaborators/{username}` endpoint.
     *
@@ -35757,7 +35759,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Get repository permissions for a user
+    * Get repository permissions for a user.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators/{username}/permission` endpoint.
     *
@@ -35782,7 +35784,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * List commit comments for a repository
+    * List commit comments for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/comments` endpoint.
     *
@@ -35811,7 +35813,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Get a commit comment
+    * Get a commit comment.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/comments/{comment_id}` endpoint.
     *
@@ -35836,7 +35838,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Delete a commit comment
+    * Delete a commit comment.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/comments/{comment_id}` endpoint.
     *
@@ -35861,7 +35863,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Update a commit comment
+    * Update a commit comment.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/comments/{comment_id}` endpoint.
     *
@@ -35891,7 +35893,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * List reactions for a commit comment
+    * List reactions for a commit comment.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/comments/{comment_id}/reactions` endpoint.
     *
@@ -35922,7 +35924,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Create reaction for a commit comment
+    * Create reaction for a commit comment.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/comments/{comment_id}/reactions` endpoint.
     *
@@ -35952,7 +35954,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Delete a commit comment reaction
+    * Delete a commit comment reaction.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}` endpoint.
     *
@@ -35981,7 +35983,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * List commits
+    * List commits.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits` endpoint.
     *
@@ -36045,7 +36047,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * List branches for HEAD commit
+    * List branches for HEAD commit.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head` endpoint.
     *
@@ -36072,7 +36074,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * List commit comments
+    * List commit comments.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/comments` endpoint.
     *
@@ -36101,7 +36103,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Create a commit comment
+    * Create a commit comment.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/commits/{commit_sha}/comments` endpoint.
     *
@@ -36133,7 +36135,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * List pull requests associated with a commit
+    * List pull requests associated with a commit.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/pulls` endpoint.
     *
@@ -36162,7 +36164,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * Get a commit
+    * Get a commit.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}` endpoint.
     *
@@ -36226,7 +36228,7 @@ format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_g
     }
 
     /**
-    * List check runs for a Git reference
+    * List check runs for a Git reference.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/check-runs` endpoint.
     *
@@ -36258,7 +36260,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List check suites for a Git reference
+    * List check suites for a Git reference.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/check-suites` endpoint.
     *
@@ -36293,7 +36295,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get the combined status for a specific reference
+    * Get the combined status for a specific reference.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/status` endpoint.
     *
@@ -36330,7 +36332,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List commit statuses for a reference
+    * List commit statuses for a reference.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/statuses` endpoint.
     *
@@ -36361,7 +36363,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get the code of conduct for a repository
+    * Get the code of conduct for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/community/code_of_conduct` endpoint.
     *
@@ -36386,7 +36388,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get community profile metrics
+    * Get community profile metrics.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/community/profile` endpoint.
     *
@@ -36420,7 +36422,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Compare two commits
+    * Compare two commits.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/compare/{basehead}` endpoint.
     *
@@ -36488,7 +36490,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a content attachment
+    * Create a content attachment.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/content_references/{content_reference_id}/attachments` endpoint.
     *
@@ -36522,7 +36524,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get repository content
+    * Get repository content.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
     *
@@ -36580,7 +36582,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create or update file contents
+    * Create or update file contents.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
     *
@@ -36610,7 +36612,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Delete a file
+    * Delete a file.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
     *
@@ -36646,7 +36648,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List repository contributors
+    * List repository contributors.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/contributors` endpoint.
     *
@@ -36677,7 +36679,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List deployments
+    * List deployments.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments` endpoint.
     *
@@ -36712,7 +36714,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a deployment
+    * Create a deployment.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/deployments` endpoint.
     *
@@ -36784,7 +36786,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a deployment
+    * Get a deployment.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments/{deployment_id}` endpoint.
     *
@@ -36809,7 +36811,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Delete a deployment
+    * Delete a deployment.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/deployments/{deployment_id}` endpoint.
     *
@@ -36841,7 +36843,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List deployment statuses
+    * List deployment statuses.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses` endpoint.
     *
@@ -36870,7 +36872,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a deployment status
+    * Create a deployment status.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses` endpoint.
     *
@@ -36902,7 +36904,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a deployment status
+    * Get a deployment status.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}` endpoint.
     *
@@ -36929,7 +36931,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a repository dispatch event
+    * Create a repository dispatch event.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/dispatches` endpoint.
     *
@@ -36966,7 +36968,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get all environments
+    * Get all environments.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/environments` endpoint.
     *
@@ -36991,7 +36993,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get an environment
+    * Get an environment.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/environments/{environment_name}` endpoint.
     *
@@ -37016,7 +37018,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create or update an environment
+    * Create or update an environment.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/environments/{environment_name}` endpoint.
     *
@@ -37052,7 +37054,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Delete an environment
+    * Delete an environment.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/environments/{environment_name}` endpoint.
     *
@@ -37077,7 +37079,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List repository events
+    * List repository events.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/events` endpoint.
     *
@@ -37104,7 +37106,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List forks
+    * List forks.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/forks` endpoint.
     *
@@ -37133,7 +37135,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a fork
+    * Create a fork.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/forks` endpoint.
     *
@@ -37163,7 +37165,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a blob
+    * Create a blob.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/blobs` endpoint.
     *
@@ -37191,7 +37193,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a blob
+    * Get a blob.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/blobs/{file_sha}` endpoint.
     *
@@ -37218,7 +37220,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a commit
+    * Create a commit.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/commits` endpoint.
     *
@@ -37275,7 +37277,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a commit
+    * Get a commit.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/commits/{commit_sha}` endpoint.
     *
@@ -37329,7 +37331,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List matching references
+    * List matching references.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/matching-refs/{ref}` endpoint.
     *
@@ -37364,7 +37366,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a reference
+    * Get a reference.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/ref/{ref}` endpoint.
     *
@@ -37386,7 +37388,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a reference
+    * Create a reference.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/refs` endpoint.
     *
@@ -37414,7 +37416,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Delete a reference
+    * Delete a reference.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/git/refs/{ref}` endpoint.
     *
@@ -37434,7 +37436,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Update a reference
+    * Update a reference.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/git/refs/{ref}` endpoint.
     *
@@ -37464,7 +37466,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a tag object
+    * Create a tag object.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/tags` endpoint.
     *
@@ -37521,7 +37523,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a tag
+    * Get a tag.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/tags/{tag_sha}` endpoint.
     *
@@ -37573,7 +37575,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a tree
+    * Create a tree.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/trees` endpoint.
     *
@@ -37603,7 +37605,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a tree
+    * Get a tree.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/trees/{tree_sha}` endpoint.
     *
@@ -37632,7 +37634,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List repository webhooks
+    * List repository webhooks.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks` endpoint.
     *
@@ -37659,7 +37661,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Create a repository webhook
+    * Create a repository webhook.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/hooks` endpoint.
     *
@@ -37688,7 +37690,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a repository webhook
+    * Get a repository webhook.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}` endpoint.
     *
@@ -37713,7 +37715,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Delete a repository webhook
+    * Delete a repository webhook.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/hooks/{hook_id}` endpoint.
     *
@@ -37733,7 +37735,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Update a repository webhook
+    * Update a repository webhook.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/hooks/{hook_id}` endpoint.
     *
@@ -37763,7 +37765,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a webhook configuration for a repository
+    * Get a webhook configuration for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}/config` endpoint.
     *
@@ -37790,7 +37792,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Update a webhook configuration for a repository
+    * Update a webhook configuration for a repository.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/hooks/{hook_id}/config` endpoint.
     *
@@ -37822,7 +37824,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Ping a repository webhook
+    * Ping a repository webhook.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/hooks/{hook_id}/pings` endpoint.
     *
@@ -37842,7 +37844,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Test the push repository webhook
+    * Test the push repository webhook.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/hooks/{hook_id}/tests` endpoint.
     *
@@ -37869,7 +37871,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get an import status
+    * Get an import status.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/import` endpoint.
     *
@@ -37925,7 +37927,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Start an import
+    * Start an import.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/import` endpoint.
     *
@@ -37953,7 +37955,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Cancel an import
+    * Cancel an import.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/import` endpoint.
     *
@@ -37972,7 +37974,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Update an import
+    * Update an import.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import` endpoint.
     *
@@ -38001,7 +38003,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get commit authors
+    * Get commit authors.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/import/authors` endpoint.
     *
@@ -38028,7 +38030,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Map a commit author
+    * Map a commit author.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import/authors/{author_id}` endpoint.
     *
@@ -38058,7 +38060,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get large files
+    * Get large files.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/import/large_files` endpoint.
     *
@@ -38081,7 +38083,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Update Git LFS preference
+    * Update Git LFS preference.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import/lfs` endpoint.
     *
@@ -38109,7 +38111,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get a repository installation for the authenticated app
+    * Get a repository installation for the authenticated app.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/installation` endpoint.
     *
@@ -38134,7 +38136,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Get interaction restrictions for a repository
+    * Get interaction restrictions for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/interaction-limits` endpoint.
     *
@@ -38157,7 +38159,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Set interaction restrictions for a repository
+    * Set interaction restrictions for a repository.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/interaction-limits` endpoint.
     *
@@ -38185,7 +38187,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Remove interaction restrictions for a repository
+    * Remove interaction restrictions for a repository.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/interaction-limits` endpoint.
     *
@@ -38208,7 +38210,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List repository invitations
+    * List repository invitations.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/invitations` endpoint.
     *
@@ -38235,7 +38237,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Delete a repository invitation
+    * Delete a repository invitation.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/invitations/{invitation_id}` endpoint.
     *
@@ -38260,7 +38262,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * Update a repository invitation
+    * Update a repository invitation.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/invitations/{invitation_id}` endpoint.
     *
@@ -38290,7 +38292,7 @@ format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}",
     }
 
     /**
-    * List repository issues
+    * List repository issues.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues` endpoint.
     *
@@ -38328,7 +38330,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Create an issue
+    * Create an issue.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/issues` endpoint.
     *
@@ -38358,7 +38360,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List issue comments for a repository
+    * List issue comments for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments` endpoint.
     *
@@ -38391,7 +38393,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Get an issue comment
+    * Get an issue comment.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}` endpoint.
     *
@@ -38416,7 +38418,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Delete an issue comment
+    * Delete an issue comment.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}` endpoint.
     *
@@ -38441,7 +38443,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Update an issue comment
+    * Update an issue comment.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}` endpoint.
     *
@@ -38471,7 +38473,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List reactions for an issue comment
+    * List reactions for an issue comment.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions` endpoint.
     *
@@ -38502,7 +38504,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Create reaction for an issue comment
+    * Create reaction for an issue comment.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions` endpoint.
     *
@@ -38532,7 +38534,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Delete an issue comment reaction
+    * Delete an issue comment reaction.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}` endpoint.
     *
@@ -38561,7 +38563,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List issue events for a repository
+    * List issue events for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/events` endpoint.
     *
@@ -38588,7 +38590,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Get an issue event
+    * Get an issue event.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/events/{event_id}` endpoint.
     *
@@ -38613,7 +38615,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Get an issue
+    * Get an issue.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}` endpoint.
     *
@@ -38648,7 +38650,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Update an issue
+    * Update an issue.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/issues/{issue_number}` endpoint.
     *
@@ -38678,7 +38680,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Add assignees to an issue
+    * Add assignees to an issue.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/assignees` endpoint.
     *
@@ -38708,7 +38710,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Remove assignees from an issue
+    * Remove assignees from an issue.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/assignees` endpoint.
     *
@@ -38738,7 +38740,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List issue comments
+    * List issue comments.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/comments` endpoint.
     *
@@ -38769,7 +38771,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Create an issue comment
+    * Create an issue comment.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/comments` endpoint.
     *
@@ -38799,7 +38801,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List issue events
+    * List issue events.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/events` endpoint.
     *
@@ -38828,7 +38830,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List labels for an issue
+    * List labels for an issue.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
     *
@@ -38857,7 +38859,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Set labels for an issue
+    * Set labels for an issue.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
     *
@@ -38887,7 +38889,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Add labels to an issue
+    * Add labels to an issue.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
     *
@@ -38917,7 +38919,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Remove all labels from an issue
+    * Remove all labels from an issue.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
     *
@@ -38942,7 +38944,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Remove a label from an issue
+    * Remove a label from an issue.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels/{name}` endpoint.
     *
@@ -38969,7 +38971,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Lock an issue
+    * Lock an issue.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/issues/{issue_number}/lock` endpoint.
     *
@@ -39001,7 +39003,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Unlock an issue
+    * Unlock an issue.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/lock` endpoint.
     *
@@ -39021,7 +39023,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List reactions for an issue
+    * List reactions for an issue.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/reactions` endpoint.
     *
@@ -39052,7 +39054,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Create reaction for an issue
+    * Create reaction for an issue.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/reactions` endpoint.
     *
@@ -39082,7 +39084,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Delete an issue reaction
+    * Delete an issue reaction.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}` endpoint.
     *
@@ -39111,7 +39113,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List timeline events for an issue
+    * List timeline events for an issue.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/timeline` endpoint.
     *
@@ -39140,7 +39142,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List deploy keys
+    * List deploy keys.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/keys` endpoint.
     *
@@ -39167,7 +39169,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Create a deploy key
+    * Create a deploy key.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/keys` endpoint.
     *
@@ -39195,7 +39197,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Get a deploy key
+    * Get a deploy key.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/keys/{key_id}` endpoint.
     *
@@ -39220,7 +39222,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Delete a deploy key
+    * Delete a deploy key.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/keys/{key_id}` endpoint.
     *
@@ -39245,7 +39247,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List labels for a repository
+    * List labels for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/labels` endpoint.
     *
@@ -39272,7 +39274,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Create a label
+    * Create a label.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/labels` endpoint.
     *
@@ -39300,7 +39302,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Get a label
+    * Get a label.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/labels/{name}` endpoint.
     *
@@ -39325,7 +39327,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Delete a label
+    * Delete a label.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/labels/{name}` endpoint.
     *
@@ -39345,7 +39347,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Update a label
+    * Update a label.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/labels/{name}` endpoint.
     *
@@ -39375,7 +39377,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List repository languages
+    * List repository languages.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/languages` endpoint.
     *
@@ -39394,7 +39396,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Get the license for a repository
+    * Get the license for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/license` endpoint.
     *
@@ -39419,7 +39421,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Merge a branch
+    * Merge a branch.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/merges` endpoint.
     *
@@ -39447,7 +39449,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List milestones
+    * List milestones.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones` endpoint.
     *
@@ -39480,7 +39482,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Create a milestone
+    * Create a milestone.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/milestones` endpoint.
     *
@@ -39508,7 +39510,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Get a milestone
+    * Get a milestone.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones/{milestone_number}` endpoint.
     *
@@ -39533,7 +39535,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Delete a milestone
+    * Delete a milestone.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/milestones/{milestone_number}` endpoint.
     *
@@ -39558,7 +39560,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * Update a milestone
+    * Update a milestone.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/milestones/{milestone_number}` endpoint.
     *
@@ -39588,7 +39590,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List labels for issues in a milestone
+    * List labels for issues in a milestone.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones/{milestone_number}/labels` endpoint.
     *
@@ -39617,7 +39619,7 @@ assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_stri
     }
 
     /**
-    * List repository notifications for the authenticated user
+    * List repository notifications for the authenticated user.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/notifications` endpoint.
     *
@@ -39645,7 +39647,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Mark repository notifications as read
+    * Mark repository notifications as read.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/notifications` endpoint.
     *
@@ -39673,7 +39675,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a GitHub Pages site
+    * Get a GitHub Pages site.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pages` endpoint.
     *
@@ -39692,7 +39694,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Update information about a GitHub Pages site
+    * Update information about a GitHub Pages site.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/pages` endpoint.
     *
@@ -39720,7 +39722,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create a GitHub Pages site
+    * Create a GitHub Pages site.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/pages` endpoint.
     *
@@ -39748,7 +39750,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Delete a GitHub Pages site
+    * Delete a GitHub Pages site.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pages` endpoint.
     *
@@ -39767,7 +39769,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List GitHub Pages builds
+    * List GitHub Pages builds.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/builds` endpoint.
     *
@@ -39794,7 +39796,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Request a GitHub Pages build
+    * Request a GitHub Pages build.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/pages/builds` endpoint.
     *
@@ -39819,7 +39821,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get latest Pages build
+    * Get latest Pages build.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/builds/latest` endpoint.
     *
@@ -39842,7 +39844,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get GitHub Pages build
+    * Get GitHub Pages build.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/builds/{build_id}` endpoint.
     *
@@ -39867,7 +39869,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a DNS health check for GitHub Pages
+    * Get a DNS health check for GitHub Pages.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/health` endpoint.
     *
@@ -39894,7 +39896,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List repository projects
+    * List repository projects.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/projects` endpoint.
     *
@@ -39923,7 +39925,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create a repository project
+    * Create a repository project.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/projects` endpoint.
     *
@@ -39951,7 +39953,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List pull requests
+    * List pull requests.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls` endpoint.
     *
@@ -39988,7 +39990,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create a pull request
+    * Create a pull request.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls` endpoint.
     *
@@ -40022,7 +40024,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List review comments in a repository
+    * List review comments in a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments` endpoint.
     *
@@ -40055,7 +40057,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a review comment for a pull request
+    * Get a review comment for a pull request.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}` endpoint.
     *
@@ -40080,7 +40082,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Delete a review comment for a pull request
+    * Delete a review comment for a pull request.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}` endpoint.
     *
@@ -40105,7 +40107,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Update a review comment for a pull request
+    * Update a review comment for a pull request.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}` endpoint.
     *
@@ -40135,7 +40137,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List reactions for a pull request review comment
+    * List reactions for a pull request review comment.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions` endpoint.
     *
@@ -40166,7 +40168,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create reaction for a pull request review comment
+    * Create reaction for a pull request review comment.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions` endpoint.
     *
@@ -40196,7 +40198,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Delete a pull request comment reaction
+    * Delete a pull request comment reaction.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}` endpoint.
     *
@@ -40225,7 +40227,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a pull request
+    * Get a pull request.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}` endpoint.
     *
@@ -40264,7 +40266,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Update a pull request
+    * Update a pull request.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/pulls/{pull_number}` endpoint.
     *
@@ -40296,7 +40298,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List review comments on a pull request
+    * List review comments on a pull request.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments` endpoint.
     *
@@ -40331,7 +40333,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create a review comment for a pull request
+    * Create a review comment for a pull request.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments` endpoint.
     *
@@ -40368,7 +40370,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create a reply for a review comment
+    * Create a reply for a review comment.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies` endpoint.
     *
@@ -40402,7 +40404,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List commits on a pull request
+    * List commits on a pull request.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/commits` endpoint.
     *
@@ -40431,7 +40433,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List pull requests files
+    * List pull requests files.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/files` endpoint.
     *
@@ -40460,7 +40462,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Check if a pull request has been merged
+    * Check if a pull request has been merged.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/merge` endpoint.
     *
@@ -40485,7 +40487,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Merge a pull request
+    * Merge a pull request.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/pulls/{pull_number}/merge` endpoint.
     *
@@ -40515,7 +40517,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List requested reviewers for a pull request
+    * List requested reviewers for a pull request.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers` endpoint.
     *
@@ -40544,7 +40546,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Request reviewers for a pull request
+    * Request reviewers for a pull request.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers` endpoint.
     *
@@ -40574,7 +40576,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Remove requested reviewers from a pull request
+    * Remove requested reviewers from a pull request.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers` endpoint.
     *
@@ -40604,7 +40606,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List reviews for a pull request
+    * List reviews for a pull request.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews` endpoint.
     *
@@ -40633,7 +40635,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create a review for a pull request
+    * Create a review for a pull request.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews` endpoint.
     *
@@ -40669,7 +40671,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a review for a pull request
+    * Get a review for a pull request.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}` endpoint.
     *
@@ -40696,7 +40698,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Update a review for a pull request
+    * Update a review for a pull request.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}` endpoint.
     *
@@ -40728,7 +40730,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Delete a pending review for a pull request
+    * Delete a pending review for a pull request.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}` endpoint.
     *
@@ -40755,7 +40757,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List comments for a pull request review
+    * List comments for a pull request review.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments` endpoint.
     *
@@ -40786,7 +40788,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Dismiss a review for a pull request
+    * Dismiss a review for a pull request.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals` endpoint.
     *
@@ -40818,7 +40820,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Submit a review for a pull request
+    * Submit a review for a pull request.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events` endpoint.
     *
@@ -40850,7 +40852,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Update a pull request branch
+    * Update a pull request branch.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/pulls/{pull_number}/update-branch` endpoint.
     *
@@ -40880,7 +40882,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a repository README
+    * Get a repository README.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/readme` endpoint.
     *
@@ -40907,7 +40909,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a repository README for a directory
+    * Get a repository README for a directory.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/readme/{dir}` endpoint.
     *
@@ -40936,7 +40938,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List releases
+    * List releases.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/releases` endpoint.
     *
@@ -40965,7 +40967,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create a release
+    * Create a release.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/releases` endpoint.
     *
@@ -40995,7 +40997,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a release asset
+    * Get a release asset.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/assets/{asset_id}` endpoint.
     *
@@ -41020,7 +41022,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Delete a release asset
+    * Delete a release asset.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/releases/assets/{asset_id}` endpoint.
     *
@@ -41045,7 +41047,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Update a release asset
+    * Update a release asset.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/releases/assets/{asset_id}` endpoint.
     *
@@ -41075,7 +41077,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get the latest release
+    * Get the latest release.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/latest` endpoint.
     *
@@ -41100,7 +41102,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a release by tag name
+    * Get a release by tag name.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/tags/{tag}` endpoint.
     *
@@ -41125,7 +41127,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a release
+    * Get a release.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/{release_id}` endpoint.
     *
@@ -41150,7 +41152,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Delete a release
+    * Delete a release.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/releases/{release_id}` endpoint.
     *
@@ -41175,7 +41177,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Update a release
+    * Update a release.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/releases/{release_id}` endpoint.
     *
@@ -41205,7 +41207,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List release assets
+    * List release assets.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/{release_id}/assets` endpoint.
     *
@@ -41234,7 +41236,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Upload a release asset
+    * Upload a release asset.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/releases/{release_id}/assets` endpoint.
     *
@@ -41281,7 +41283,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create reaction for a release
+    * Create reaction for a release.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/releases/{release_id}/reactions` endpoint.
     *
@@ -41311,7 +41313,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List secret scanning alerts for a repository
+    * List secret scanning alerts for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/secret-scanning/alerts` endpoint.
     *
@@ -41344,7 +41346,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a secret scanning alert
+    * Get a secret scanning alert.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}` endpoint.
     *
@@ -41371,7 +41373,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Update a secret scanning alert
+    * Update a secret scanning alert.
     *
     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}` endpoint.
     *
@@ -41403,7 +41405,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List stargazers
+    * List stargazers.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/stargazers` endpoint.
     *
@@ -41432,7 +41434,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get the weekly commit activity
+    * Get the weekly commit activity.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/code_frequency` endpoint.
     *
@@ -41455,7 +41457,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get the last year of commit activity
+    * Get the last year of commit activity.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/commit_activity` endpoint.
     *
@@ -41478,7 +41480,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get all contributor commit activity
+    * Get all contributor commit activity.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/contributors` endpoint.
     *
@@ -41507,7 +41509,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get the weekly commit count
+    * Get the weekly commit count.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/participation` endpoint.
     *
@@ -41532,7 +41534,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get the hourly commit count for each day
+    * Get the hourly commit count for each day.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/punch_card` endpoint.
     *
@@ -41561,7 +41563,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create a commit status
+    * Create a commit status.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/statuses/{sha}` endpoint.
     *
@@ -41593,7 +41595,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List watchers
+    * List watchers.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/subscribers` endpoint.
     *
@@ -41620,7 +41622,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get a repository subscription
+    * Get a repository subscription.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/subscription` endpoint.
     *
@@ -41643,7 +41645,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Set a repository subscription
+    * Set a repository subscription.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/subscription` endpoint.
     *
@@ -41671,7 +41673,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Delete a repository subscription
+    * Delete a repository subscription.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/subscription` endpoint.
     *
@@ -41690,7 +41692,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List repository tags
+    * List repository tags.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/tags` endpoint.
     *
@@ -41717,7 +41719,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Download a repository archive (tar)
+    * Download a repository archive (tar).
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/tarball/{ref}` endpoint.
     *
@@ -41745,7 +41747,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List repository teams
+    * List repository teams.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/teams` endpoint.
     *
@@ -41772,7 +41774,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get all repository topics
+    * Get all repository topics.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/topics` endpoint.
     *
@@ -41799,7 +41801,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Replace all repository topics
+    * Replace all repository topics.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/topics` endpoint.
     *
@@ -41827,7 +41829,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get repository clones
+    * Get repository clones.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/clones` endpoint.
     *
@@ -41852,7 +41854,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get top referral paths
+    * Get top referral paths.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/paths` endpoint.
     *
@@ -41875,7 +41877,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get top referral sources
+    * Get top referral sources.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/referrers` endpoint.
     *
@@ -41898,7 +41900,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get page views
+    * Get page views.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/views` endpoint.
     *
@@ -41923,7 +41925,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Transfer a repository
+    * Transfer a repository.
     *
     * This function performs a `POST` to the `/repos/{owner}/{repo}/transfer` endpoint.
     *
@@ -41951,7 +41953,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Check if vulnerability alerts are enabled for a repository
+    * Check if vulnerability alerts are enabled for a repository.
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/vulnerability-alerts` endpoint.
     *
@@ -41970,7 +41972,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Enable vulnerability alerts
+    * Enable vulnerability alerts.
     *
     * This function performs a `PUT` to the `/repos/{owner}/{repo}/vulnerability-alerts` endpoint.
     *
@@ -41989,7 +41991,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Disable vulnerability alerts
+    * Disable vulnerability alerts.
     *
     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/vulnerability-alerts` endpoint.
     *
@@ -42008,7 +42010,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Download a repository archive (zip)
+    * Download a repository archive (zip).
     *
     * This function performs a `GET` to the `/repos/{owner}/{repo}/zipball/{ref}` endpoint.
     *
@@ -42036,7 +42038,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create a repository using a template
+    * Create a repository using a template.
     *
     * This function performs a `POST` to the `/repos/{template_owner}/{template_repo}/generate` endpoint.
     *
@@ -42071,7 +42073,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List public repositories
+    * List public repositories.
     *
     * This function performs a `GET` to the `/repositories` endpoint.
     *
@@ -42090,7 +42092,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List environment secrets
+    * List environment secrets.
     *
     * This function performs a `GET` to the `/repositories/{repository_id}/environments/{environment_name}/secrets` endpoint.
     *
@@ -42117,7 +42119,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get an environment public key
+    * Get an environment public key.
     *
     * This function performs a `GET` to the `/repositories/{repository_id}/environments/{environment_name}/secrets/public-key` endpoint.
     *
@@ -42140,7 +42142,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Get an environment secret
+    * Get an environment secret.
     *
     * This function performs a `GET` to the `/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}` endpoint.
     *
@@ -42165,7 +42167,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Create or update an environment secret
+    * Create or update an environment secret.
     *
     * This function performs a `PUT` to the `/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}` endpoint.
     *
@@ -42269,7 +42271,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * Delete an environment secret
+    * Delete an environment secret.
     *
     * This function performs a `DELETE` to the `/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}` endpoint.
     *
@@ -42294,7 +42296,7 @@ format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", part
     }
 
     /**
-    * List provisioned SCIM groups for an enterprise
+    * List provisioned SCIM groups for an enterprise.
     *
     * This function performs a `GET` to the `/scim/v2/enterprises/{enterprise}/Groups` endpoint.
     *
@@ -42318,7 +42320,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Provision a SCIM enterprise group and invite users
+    * Provision a SCIM enterprise group and invite users.
     *
     * This function performs a `POST` to the `/scim/v2/enterprises/{enterprise}/Groups` endpoint.
     *
@@ -42346,7 +42348,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get SCIM provisioning information for an enterprise group
+    * Get SCIM provisioning information for an enterprise group.
     *
     * This function performs a `GET` to the `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}` endpoint.
     *
@@ -42371,7 +42373,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Set SCIM information for a provisioned enterprise group
+    * Set SCIM information for a provisioned enterprise group.
     *
     * This function performs a `PUT` to the `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}` endpoint.
     *
@@ -42401,7 +42403,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Delete a SCIM group from an enterprise
+    * Delete a SCIM group from an enterprise.
     *
     * This function performs a `DELETE` to the `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}` endpoint.
     *
@@ -42424,7 +42426,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Update an attribute for a SCIM enterprise group
+    * Update an attribute for a SCIM enterprise group.
     *
     * This function performs a `PATCH` to the `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}` endpoint.
     *
@@ -42454,7 +42456,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List SCIM provisioned identities for an enterprise
+    * List SCIM provisioned identities for an enterprise.
     *
     * This function performs a `GET` to the `/scim/v2/enterprises/{enterprise}/Users` endpoint.
     *
@@ -42498,7 +42500,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Provision and invite a SCIM enterprise user
+    * Provision and invite a SCIM enterprise user.
     *
     * This function performs a `POST` to the `/scim/v2/enterprises/{enterprise}/Users` endpoint.
     *
@@ -42528,7 +42530,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get SCIM provisioning information for an enterprise user
+    * Get SCIM provisioning information for an enterprise user.
     *
     * This function performs a `GET` to the `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}` endpoint.
     *
@@ -42551,7 +42553,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Set SCIM information for a provisioned enterprise user
+    * Set SCIM information for a provisioned enterprise user.
     *
     * This function performs a `PUT` to the `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}` endpoint.
     *
@@ -42585,7 +42587,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Delete a SCIM user from an enterprise
+    * Delete a SCIM user from an enterprise.
     *
     * This function performs a `DELETE` to the `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}` endpoint.
     *
@@ -42608,7 +42610,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Update an attribute for a SCIM enterprise user
+    * Update an attribute for a SCIM enterprise user.
     *
     * This function performs a `PATCH` to the `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}` endpoint.
     *
@@ -42653,7 +42655,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List SCIM provisioned identities
+    * List SCIM provisioned identities.
     *
     * This function performs a `GET` to the `/scim/v2/organizations/{org}/Users` endpoint.
     *
@@ -42695,7 +42697,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Provision and invite a SCIM user
+    * Provision and invite a SCIM user.
     *
     * This function performs a `POST` to the `/scim/v2/organizations/{org}/Users` endpoint.
     *
@@ -42721,7 +42723,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get SCIM provisioning information for a user
+    * Get SCIM provisioning information for a user.
     *
     * This function performs a `GET` to the `/scim/v2/organizations/{org}/Users/{scim_user_id}` endpoint.
     *
@@ -42744,7 +42746,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Update a provisioned organization membership
+    * Update a provisioned organization membership.
     *
     * This function performs a `PUT` to the `/scim/v2/organizations/{org}/Users/{scim_user_id}` endpoint.
     *
@@ -42776,7 +42778,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Delete a SCIM user from an organization
+    * Delete a SCIM user from an organization.
     *
     * This function performs a `DELETE` to the `/scim/v2/organizations/{org}/Users/{scim_user_id}` endpoint.
     *
@@ -42795,7 +42797,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Update an attribute for a SCIM user
+    * Update an attribute for a SCIM user.
     *
     * This function performs a `PATCH` to the `/scim/v2/organizations/{org}/Users/{scim_user_id}` endpoint.
     *
@@ -42838,7 +42840,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Search code
+    * Search code.
     *
     * This function performs a `GET` to the `/search/code` endpoint.
     *
@@ -42884,7 +42886,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Search commits
+    * Search commits.
     *
     * This function performs a `GET` to the `/search/commits` endpoint.
     *
@@ -42920,7 +42922,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Search issues and pull requests
+    * Search issues and pull requests.
     *
     * This function performs a `GET` to the `/search/issues` endpoint.
     *
@@ -42960,7 +42962,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Search labels
+    * Search labels.
     *
     * This function performs a `GET` to the `/search/labels` endpoint.
     *
@@ -42999,7 +43001,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Search repositories
+    * Search repositories.
     *
     * This function performs a `GET` to the `/search/repositories` endpoint.
     *
@@ -43040,7 +43042,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Search topics
+    * Search topics.
     *
     * This function performs a `GET` to the `/search/topics` endpoint.
     *
@@ -43073,7 +43075,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Search users
+    * Search users.
     *
     * This function performs a `GET` to the `/search/users` endpoint.
     *
@@ -43110,7 +43112,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get a team (Legacy)
+    * Get a team (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}` endpoint.
     *
@@ -43128,7 +43130,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Delete a team (Legacy)
+    * Delete a team (Legacy).
     *
     * This function performs a `DELETE` to the `/teams/{team_id}` endpoint.
     *
@@ -43150,7 +43152,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Update a team (Legacy)
+    * Update a team (Legacy).
     *
     * This function performs a `PATCH` to the `/teams/{team_id}` endpoint.
     *
@@ -43180,7 +43182,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List discussions (Legacy)
+    * List discussions (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/discussions` endpoint.
     *
@@ -43209,7 +43211,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Create a discussion (Legacy)
+    * Create a discussion (Legacy).
     *
     * This function performs a `POST` to the `/teams/{team_id}/discussions` endpoint.
     *
@@ -43239,7 +43241,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get a discussion (Legacy)
+    * Get a discussion (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}` endpoint.
     *
@@ -43264,7 +43266,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Delete a discussion (Legacy)
+    * Delete a discussion (Legacy).
     *
     * This function performs a `DELETE` to the `/teams/{team_id}/discussions/{discussion_number}` endpoint.
     *
@@ -43289,7 +43291,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Update a discussion (Legacy)
+    * Update a discussion (Legacy).
     *
     * This function performs a `PATCH` to the `/teams/{team_id}/discussions/{discussion_number}` endpoint.
     *
@@ -43319,7 +43321,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List discussion comments (Legacy)
+    * List discussion comments (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments` endpoint.
     *
@@ -43350,7 +43352,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Create a discussion comment (Legacy)
+    * Create a discussion comment (Legacy).
     *
     * This function performs a `POST` to the `/teams/{team_id}/discussions/{discussion_number}/comments` endpoint.
     *
@@ -43382,7 +43384,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get a discussion comment (Legacy)
+    * Get a discussion comment (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
     *
@@ -43409,7 +43411,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Delete a discussion comment (Legacy)
+    * Delete a discussion comment (Legacy).
     *
     * This function performs a `DELETE` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
     *
@@ -43436,7 +43438,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Update a discussion comment (Legacy)
+    * Update a discussion comment (Legacy).
     *
     * This function performs a `PATCH` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}` endpoint.
     *
@@ -43468,7 +43470,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List reactions for a team discussion comment (Legacy)
+    * List reactions for a team discussion comment (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
     *
@@ -43501,7 +43503,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Create reaction for a team discussion comment (Legacy)
+    * Create reaction for a team discussion comment (Legacy).
     *
     * This function performs a `POST` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
     *
@@ -43533,7 +43535,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List reactions for a team discussion (Legacy)
+    * List reactions for a team discussion (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/reactions` endpoint.
     *
@@ -43564,7 +43566,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Create reaction for a team discussion (Legacy)
+    * Create reaction for a team discussion (Legacy).
     *
     * This function performs a `POST` to the `/teams/{team_id}/discussions/{discussion_number}/reactions` endpoint.
     *
@@ -43594,7 +43596,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List pending team invitations (Legacy)
+    * List pending team invitations (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/invitations` endpoint.
     *
@@ -43621,7 +43623,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List team members (Legacy)
+    * List team members (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/members` endpoint.
     *
@@ -43650,7 +43652,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get team member (Legacy)
+    * Get team member (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/members/{username}` endpoint.
     *
@@ -43673,7 +43675,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Add team member (Legacy)
+    * Add team member (Legacy).
     *
     * This function performs a `PUT` to the `/teams/{team_id}/members/{username}` endpoint.
     *
@@ -43702,7 +43704,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Remove team member (Legacy)
+    * Remove team member (Legacy).
     *
     * This function performs a `DELETE` to the `/teams/{team_id}/members/{username}` endpoint.
     *
@@ -43729,7 +43731,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get team membership for a user (Legacy)
+    * Get team membership for a user (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/memberships/{username}` endpoint.
     *
@@ -43761,7 +43763,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Add or update team membership for a user (Legacy)
+    * Add or update team membership for a user (Legacy).
     *
     * This function performs a `PUT` to the `/teams/{team_id}/memberships/{username}` endpoint.
     *
@@ -43799,7 +43801,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Remove team membership for a user (Legacy)
+    * Remove team membership for a user (Legacy).
     *
     * This function performs a `DELETE` to the `/teams/{team_id}/memberships/{username}` endpoint.
     *
@@ -43828,7 +43830,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List team projects (Legacy)
+    * List team projects (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/projects` endpoint.
     *
@@ -43855,7 +43857,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Check team permissions for a project (Legacy)
+    * Check team permissions for a project (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/projects/{project_id}` endpoint.
     *
@@ -43880,7 +43882,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Add or update team project permissions (Legacy)
+    * Add or update team project permissions (Legacy).
     *
     * This function performs a `PUT` to the `/teams/{team_id}/projects/{project_id}` endpoint.
     *
@@ -43910,7 +43912,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Remove a project from a team (Legacy)
+    * Remove a project from a team (Legacy).
     *
     * This function performs a `DELETE` to the `/teams/{team_id}/projects/{project_id}` endpoint.
     *
@@ -43931,7 +43933,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List team repositories (Legacy)
+    * List team repositories (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/repos` endpoint.
     *
@@ -43956,7 +43958,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Check team permissions for a repository (Legacy)
+    * Check team permissions for a repository (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/repos/{owner}/{repo}` endpoint.
     *
@@ -43985,7 +43987,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Add or update team repository permissions (Legacy)
+    * Add or update team repository permissions (Legacy).
     *
     * This function performs a `PUT` to the `/teams/{team_id}/repos/{owner}/{repo}` endpoint.
     *
@@ -44019,7 +44021,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Remove a repository from a team (Legacy)
+    * Remove a repository from a team (Legacy).
     *
     * This function performs a `DELETE` to the `/teams/{team_id}/repos/{owner}/{repo}` endpoint.
     *
@@ -44046,7 +44048,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List IdP groups for a team (Legacy)
+    * List IdP groups for a team (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/team-sync/group-mappings` endpoint.
     *
@@ -44071,7 +44073,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Create or update IdP group connections (Legacy)
+    * Create or update IdP group connections (Legacy).
     *
     * This function performs a `PATCH` to the `/teams/{team_id}/team-sync/group-mappings` endpoint.
     *
@@ -44101,7 +44103,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List child teams (Legacy)
+    * List child teams (Legacy).
     *
     * This function performs a `GET` to the `/teams/{team_id}/teams` endpoint.
     *
@@ -44126,7 +44128,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get the authenticated user
+    * Get the authenticated user.
     *
     * This function performs a `GET` to the `/user` endpoint.
     *
@@ -44142,7 +44144,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Update the authenticated user
+    * Update the authenticated user.
     *
     * This function performs a `PATCH` to the `/user` endpoint.
     *
@@ -44163,7 +44165,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List users blocked by the authenticated user
+    * List users blocked by the authenticated user.
     *
     * This function performs a `GET` to the `/user/blocks` endpoint.
     *
@@ -44177,7 +44179,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Check if a user is blocked by the authenticated user
+    * Check if a user is blocked by the authenticated user.
     *
     * This function performs a `GET` to the `/user/blocks/{username}` endpoint.
     *
@@ -44195,7 +44197,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Block a user
+    * Block a user.
     *
     * This function performs a `PUT` to the `/user/blocks/{username}` endpoint.
     *
@@ -44213,7 +44215,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Unblock a user
+    * Unblock a user.
     *
     * This function performs a `DELETE` to the `/user/blocks/{username}` endpoint.
     *
@@ -44231,7 +44233,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Set primary email visibility for the authenticated user
+    * Set primary email visibility for the authenticated user.
     *
     * This function performs a `PATCH` to the `/user/email/visibility` endpoint.
     *
@@ -44252,7 +44254,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List email addresses for the authenticated user
+    * List email addresses for the authenticated user.
     *
     * This function performs a `GET` to the `/user/emails` endpoint.
     *
@@ -44275,7 +44277,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Add an email address for the authenticated user
+    * Add an email address for the authenticated user.
     *
     * This function performs a `POST` to the `/user/emails` endpoint.
     *
@@ -44296,7 +44298,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Delete an email address for the authenticated user
+    * Delete an email address for the authenticated user.
     *
     * This function performs a `DELETE` to the `/user/emails` endpoint.
     *
@@ -44317,7 +44319,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List followers of the authenticated user
+    * List followers of the authenticated user.
     *
     * This function performs a `GET` to the `/user/followers` endpoint.
     *
@@ -44340,7 +44342,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List the people the authenticated user follows
+    * List the people the authenticated user follows.
     *
     * This function performs a `GET` to the `/user/following` endpoint.
     *
@@ -44363,7 +44365,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Check if a person is followed by the authenticated user
+    * Check if a person is followed by the authenticated user.
     *
     * This function performs a `GET` to the `/user/following/{username}` endpoint.
     *
@@ -44384,7 +44386,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Follow a user
+    * Follow a user.
     *
     * This function performs a `PUT` to the `/user/following/{username}` endpoint.
     *
@@ -44404,7 +44406,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Unfollow a user
+    * Unfollow a user.
     *
     * This function performs a `DELETE` to the `/user/following/{username}` endpoint.
     *
@@ -44422,7 +44424,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List GPG keys for the authenticated user
+    * List GPG keys for the authenticated user.
     *
     * This function performs a `GET` to the `/user/gpg_keys` endpoint.
     *
@@ -44445,7 +44447,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Create a GPG key for the authenticated user
+    * Create a GPG key for the authenticated user.
     *
     * This function performs a `POST` to the `/user/gpg_keys` endpoint.
     *
@@ -44466,7 +44468,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get a GPG key for the authenticated user
+    * Get a GPG key for the authenticated user.
     *
     * This function performs a `GET` to the `/user/gpg_keys/{gpg_key_id}` endpoint.
     *
@@ -44487,7 +44489,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Delete a GPG key for the authenticated user
+    * Delete a GPG key for the authenticated user.
     *
     * This function performs a `DELETE` to the `/user/gpg_keys/{gpg_key_id}` endpoint.
     *
@@ -44505,7 +44507,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List app installations accessible to the user access token
+    * List app installations accessible to the user access token.
     *
     * This function performs a `GET` to the `/user/installations` endpoint.
     *
@@ -44534,7 +44536,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List repositories accessible to the user access token
+    * List repositories accessible to the user access token.
     *
     * This function performs a `GET` to the `/user/installations/{installation_id}/repositories` endpoint.
     *
@@ -44565,7 +44567,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Add a repository to an app installation
+    * Add a repository to an app installation.
     *
     * This function performs a `PUT` to the `/user/installations/{installation_id}/repositories/{repository_id}` endpoint.
     *
@@ -44590,7 +44592,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Remove a repository from an app installation
+    * Remove a repository from an app installation.
     *
     * This function performs a `DELETE` to the `/user/installations/{installation_id}/repositories/{repository_id}` endpoint.
     *
@@ -44615,7 +44617,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Get interaction restrictions for your public repositories
+    * Get interaction restrictions for your public repositories.
     *
     * This function performs a `GET` to the `/user/interaction-limits` endpoint.
     *
@@ -44631,7 +44633,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Set interaction restrictions for your public repositories
+    * Set interaction restrictions for your public repositories.
     *
     * This function performs a `PUT` to the `/user/interaction-limits` endpoint.
     *
@@ -44652,7 +44654,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * Remove interaction restrictions from your public repositories
+    * Remove interaction restrictions from your public repositories.
     *
     * This function performs a `DELETE` to the `/user/interaction-limits` endpoint.
     *
@@ -44666,7 +44668,7 @@ format!("{}", count), excluded_attributes.to_string(), filter.to_string(), forma
     }
 
     /**
-    * List user account issues assigned to the authenticated user
+    * List user account issues assigned to the authenticated user.
     *
     * This function performs a `GET` to the `/user/issues` endpoint.
     *
@@ -44697,7 +44699,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List public SSH keys for the authenticated user
+    * List public SSH keys for the authenticated user.
     *
     * This function performs a `GET` to the `/user/keys` endpoint.
     *
@@ -44720,7 +44722,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a public SSH key for the authenticated user
+    * Create a public SSH key for the authenticated user.
     *
     * This function performs a `POST` to the `/user/keys` endpoint.
     *
@@ -44741,7 +44743,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a public SSH key for the authenticated user
+    * Get a public SSH key for the authenticated user.
     *
     * This function performs a `GET` to the `/user/keys/{key_id}` endpoint.
     *
@@ -44762,7 +44764,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a public SSH key for the authenticated user
+    * Delete a public SSH key for the authenticated user.
     *
     * This function performs a `DELETE` to the `/user/keys/{key_id}` endpoint.
     *
@@ -44780,7 +44782,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List subscriptions for the authenticated user
+    * List subscriptions for the authenticated user.
     *
     * This function performs a `GET` to the `/user/marketplace_purchases` endpoint.
     *
@@ -44803,7 +44805,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List subscriptions for the authenticated user (stubbed)
+    * List subscriptions for the authenticated user (stubbed).
     *
     * This function performs a `GET` to the `/user/marketplace_purchases/stubbed` endpoint.
     *
@@ -44826,7 +44828,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List organization memberships for the authenticated user
+    * List organization memberships for the authenticated user.
     *
     * This function performs a `GET` to the `/user/memberships/orgs` endpoint.
     *
@@ -44851,7 +44853,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get an organization membership for the authenticated user
+    * Get an organization membership for the authenticated user.
     *
     * This function performs a `GET` to the `/user/memberships/orgs/{org}` endpoint.
     *
@@ -44872,7 +44874,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Update an organization membership for the authenticated user
+    * Update an organization membership for the authenticated user.
     *
     * This function performs a `PATCH` to the `/user/memberships/orgs/{org}` endpoint.
     *
@@ -44898,7 +44900,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List user migrations
+    * List user migrations.
     *
     * This function performs a `GET` to the `/user/migrations` endpoint.
     *
@@ -44921,7 +44923,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Start a user migration
+    * Start a user migration.
     *
     * This function performs a `POST` to the `/user/migrations` endpoint.
     *
@@ -44942,7 +44944,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a user migration status
+    * Get a user migration status.
     *
     * This function performs a `GET` to the `/user/migrations/{migration_id}` endpoint.
     *
@@ -44972,7 +44974,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Download a user migration archive
+    * Download a user migration archive.
     *
     * This function performs a `GET` to the `/user/migrations/{migration_id}/archive` endpoint.
     *
@@ -45013,7 +45015,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a user migration archive
+    * Delete a user migration archive.
     *
     * This function performs a `DELETE` to the `/user/migrations/{migration_id}/archive` endpoint.
     *
@@ -45034,7 +45036,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Unlock a user repository
+    * Unlock a user repository.
     *
     * This function performs a `DELETE` to the `/user/migrations/{migration_id}/repos/{repo_name}/lock` endpoint.
     *
@@ -45057,7 +45059,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List repositories for a user migration
+    * List repositories for a user migration.
     *
     * This function performs a `GET` to the `/user/migrations/{migration_id}/repositories` endpoint.
     *
@@ -45082,7 +45084,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List organizations for the authenticated user
+    * List organizations for the authenticated user.
     *
     * This function performs a `GET` to the `/user/orgs` endpoint.
     *
@@ -45109,7 +45111,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a package for the authenticated user
+    * Get a package for the authenticated user.
     *
     * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}` endpoint.
     *
@@ -45135,7 +45137,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a package for the authenticated user
+    * Delete a package for the authenticated user.
     *
     * This function performs a `DELETE` to the `/user/packages/{package_type}/{package_name}` endpoint.
     *
@@ -45161,7 +45163,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Restore a package for the authenticated user
+    * Restore a package for the authenticated user.
     *
     * This function performs a `POST` to the `/user/packages/{package_type}/{package_name}/restore` endpoint.
     *
@@ -45192,7 +45194,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get all package versions for a package owned by the authenticated user
+    * Get all package versions for a package owned by the authenticated user.
     *
     * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions` endpoint.
     *
@@ -45224,7 +45226,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Get a package version for the authenticated user
+    * Get a package version for the authenticated user.
     *
     * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
     *
@@ -45252,7 +45254,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Delete a package version for the authenticated user
+    * Delete a package version for the authenticated user.
     *
     * This function performs a `DELETE` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
     *
@@ -45280,7 +45282,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Restore a package version for the authenticated user
+    * Restore a package version for the authenticated user.
     *
     * This function performs a `POST` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}/restore` endpoint.
     *
@@ -45311,7 +45313,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * Create a user project
+    * Create a user project.
     *
     * This function performs a `POST` to the `/user/projects` endpoint.
     *
@@ -45332,7 +45334,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List public email addresses for the authenticated user
+    * List public email addresses for the authenticated user.
     *
     * This function performs a `GET` to the `/user/public_emails` endpoint.
     *
@@ -45355,7 +45357,7 @@ direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", pag
     }
 
     /**
-    * List repositories for the authenticated user
+    * List repositories for the authenticated user.
     *
     * This function performs a `GET` to the `/user/repos` endpoint.
     *
@@ -45384,7 +45386,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Create a repository for the authenticated user
+    * Create a repository for the authenticated user.
     *
     * This function performs a `POST` to the `/user/repos` endpoint.
     *
@@ -45412,7 +45414,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List repository invitations for the authenticated user
+    * List repository invitations for the authenticated user.
     *
     * This function performs a `GET` to the `/user/repository_invitations` endpoint.
     *
@@ -45435,7 +45437,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Decline a repository invitation
+    * Decline a repository invitation.
     *
     * This function performs a `DELETE` to the `/user/repository_invitations/{invitation_id}` endpoint.
     *
@@ -45453,7 +45455,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Accept a repository invitation
+    * Accept a repository invitation.
     *
     * This function performs a `PATCH` to the `/user/repository_invitations/{invitation_id}` endpoint.
     *
@@ -45471,7 +45473,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List repositories starred by the authenticated user
+    * List repositories starred by the authenticated user.
     *
     * This function performs a `GET` to the `/user/starred` endpoint.
     *
@@ -45500,7 +45502,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Check if a repository is starred by the authenticated user
+    * Check if a repository is starred by the authenticated user.
     *
     * This function performs a `GET` to the `/user/starred/{owner}/{repo}` endpoint.
     *
@@ -45523,7 +45525,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Star a repository for the authenticated user
+    * Star a repository for the authenticated user.
     *
     * This function performs a `PUT` to the `/user/starred/{owner}/{repo}` endpoint.
     *
@@ -45546,7 +45548,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Unstar a repository for the authenticated user
+    * Unstar a repository for the authenticated user.
     *
     * This function performs a `DELETE` to the `/user/starred/{owner}/{repo}` endpoint.
     *
@@ -45569,7 +45571,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List repositories watched by the authenticated user
+    * List repositories watched by the authenticated user.
     *
     * This function performs a `GET` to the `/user/subscriptions` endpoint.
     *
@@ -45592,7 +45594,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List teams for the authenticated user
+    * List teams for the authenticated user.
     *
     * This function performs a `GET` to the `/user/teams` endpoint.
     *
@@ -45615,7 +45617,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List users
+    * List users.
     *
     * This function performs a `GET` to the `/users` endpoint.
     *
@@ -45636,7 +45638,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get a user
+    * Get a user.
     *
     * This function performs a `GET` to the `/users/{username}` endpoint.
     *
@@ -45660,7 +45662,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List events for the authenticated user
+    * List events for the authenticated user.
     *
     * This function performs a `GET` to the `/users/{username}/events` endpoint.
     *
@@ -45685,7 +45687,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List organization events for the authenticated user
+    * List organization events for the authenticated user.
     *
     * This function performs a `GET` to the `/users/{username}/events/orgs/{org}` endpoint.
     *
@@ -45712,7 +45714,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List public events for a user
+    * List public events for a user.
     *
     * This function performs a `GET` to the `/users/{username}/events/public` endpoint.
     *
@@ -45737,7 +45739,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List followers of a user
+    * List followers of a user.
     *
     * This function performs a `GET` to the `/users/{username}/followers` endpoint.
     *
@@ -45762,7 +45764,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List the people a user follows
+    * List the people a user follows.
     *
     * This function performs a `GET` to the `/users/{username}/following` endpoint.
     *
@@ -45787,7 +45789,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Check if a user follows another user
+    * Check if a user follows another user.
     *
     * This function performs a `GET` to the `/users/{username}/following/{target_user}` endpoint.
     *
@@ -45810,7 +45812,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List gists for a user
+    * List gists for a user.
     *
     * This function performs a `GET` to the `/users/{username}/gists` endpoint.
     *
@@ -45837,7 +45839,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List GPG keys for a user
+    * List GPG keys for a user.
     *
     * This function performs a `GET` to the `/users/{username}/gpg_keys` endpoint.
     *
@@ -45862,7 +45864,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get contextual information for a user
+    * Get contextual information for a user.
     *
     * This function performs a `GET` to the `/users/{username}/hovercard` endpoint.
     *
@@ -45894,7 +45896,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get a user installation for the authenticated app
+    * Get a user installation for the authenticated app.
     *
     * This function performs a `GET` to the `/users/{username}/installation` endpoint.
     *
@@ -45914,7 +45916,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List public keys for a user
+    * List public keys for a user.
     *
     * This function performs a `GET` to the `/users/{username}/keys` endpoint.
     *
@@ -45939,7 +45941,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List organizations for a user
+    * List organizations for a user.
     *
     * This function performs a `GET` to the `/users/{username}/orgs` endpoint.
     *
@@ -45966,7 +45968,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get a package for a user
+    * Get a package for a user.
     *
     * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}` endpoint.
     *
@@ -45994,7 +45996,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get all package versions for a package owned by a user
+    * Get all package versions for a package owned by a user.
     *
     * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions` endpoint.
     *
@@ -46022,7 +46024,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get a package version for a user
+    * Get a package version for a user.
     *
     * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
     *
@@ -46052,7 +46054,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List user projects
+    * List user projects.
     *
     * This function performs a `GET` to the `/users/{username}/projects` endpoint.
     *
@@ -46079,7 +46081,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List events received by the authenticated user
+    * List events received by the authenticated user.
     *
     * This function performs a `GET` to the `/users/{username}/received_events` endpoint.
     *
@@ -46104,7 +46106,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List public events received by a user
+    * List public events received by a user.
     *
     * This function performs a `GET` to the `/users/{username}/received_events/public` endpoint.
     *
@@ -46129,7 +46131,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List repositories for a user
+    * List repositories for a user.
     *
     * This function performs a `GET` to the `/users/{username}/repos` endpoint.
     *
@@ -46160,7 +46162,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get GitHub Actions billing for a user
+    * Get GitHub Actions billing for a user.
     *
     * This function performs a `GET` to the `/users/{username}/settings/billing/actions` endpoint.
     *
@@ -46185,7 +46187,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get GitHub Packages billing for a user
+    * Get GitHub Packages billing for a user.
     *
     * This function performs a `GET` to the `/users/{username}/settings/billing/packages` endpoint.
     *
@@ -46210,7 +46212,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get shared storage billing for a user
+    * Get shared storage billing for a user.
     *
     * This function performs a `GET` to the `/users/{username}/settings/billing/shared-storage` endpoint.
     *
@@ -46235,7 +46237,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List repositories starred by a user
+    * List repositories starred by a user.
     *
     * This function performs a `GET` to the `/users/{username}/starred` endpoint.
     *
@@ -46266,7 +46268,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * List repositories watched by a user
+    * List repositories watched by a user.
     *
     * This function performs a `GET` to the `/users/{username}/subscriptions` endpoint.
     *
@@ -46291,7 +46293,7 @@ affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}
     }
 
     /**
-    * Get the Zen of GitHub
+    * Get the Zen of GitHub.
     *
     * This function performs a `GET` to the `/zen` endpoint.
     *

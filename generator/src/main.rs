@@ -1152,9 +1152,11 @@ fn gen(
     a("#![allow(clippy::too_many_arguments)]");
     a("#![allow(missing_docs)]"); // TODO: Make this a deny.
     a("");
+    a("#[doc(inline)]");
     a("pub mod auth;");
     a(r#"#[cfg(feature = "httpcache")]"#);
     a("pub mod http_cache;");
+    a("#[doc(hidden)]");
     a("pub mod utils;");
     a("");
 
@@ -1718,7 +1720,7 @@ fn gen(
             oid = oid.replace("-", "_").replace("/", "_");
             a("/**");
             if let Some(summary) = &o.summary {
-                a(&format!("* {}", summary));
+                a(&format!("* {}.", summary.trim_end_matches('.')));
                 a("*");
             }
             a(&format!(
