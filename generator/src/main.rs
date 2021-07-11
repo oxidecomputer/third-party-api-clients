@@ -1081,7 +1081,7 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str) -> St
     let mut enums: Vec<String> = Default::default();
     for e in &enumsd {
         // Find any duplicates that are capitalized differently.
-        if enums.contains(e) || enums.contains(&to_snake_case(&e)) || enums.contains(&to_title_case(&e)) {
+        if enums.contains(e) || enums.contains(&to_snake_case(e)) || enums.contains(&to_title_case(e)) {
             continue;
         }
         enums.push(e.to_string());
