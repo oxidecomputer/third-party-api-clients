@@ -25366,7 +25366,7 @@ impl Client {
     }
 
     /**
-    * meta_root: GET /
+    * This function performs a `GET` to the endpoint `/`.
     *
     * Get Hypermedia links to resources accessible in GitHub's REST API
     *
@@ -25378,7 +25378,7 @@ impl Client {
     }
 
     /**
-    * apps_get_authenticated: GET /app
+    * This function performs a `GET` to the endpoint `/app`.
     *
     * Returns the GitHub App associated with the authentication credentials used. To see how many app installations are associated with this GitHub App, see the `installations_count` in the response. For more details about your app's installations, see the "[List installations for the authenticated app](https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app)" endpoint.
     *
@@ -25392,7 +25392,7 @@ impl Client {
     }
 
     /**
-    * apps_create_from_manifest: POST /app-manifests/{code}/conversions
+    * This function performs a `POST` to the endpoint `/app-manifests/{code}/conversions`.
     *
     * Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create a GitHub App with the manifest flow, you receive a temporary `code` used to retrieve the GitHub App's `id`, `pem` (private key), and `webhook_secret`.
     *
@@ -25416,7 +25416,7 @@ impl Client {
     }
 
     /**
-    * apps_get_webhook_config_for_app: GET /app/hook/config
+    * This function performs a `GET` to the endpoint `/app/hook/config`.
     *
     * Returns the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see "[Creating a GitHub App](/developers/apps/creating-a-github-app)."
     *
@@ -25430,7 +25430,7 @@ impl Client {
     }
 
     /**
-    * apps_update_webhook_config_for_app: PATCH /app/hook/config
+    * This function performs a `PATCH` to the endpoint `/app/hook/config`.
     *
     * Updates the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see "[Creating a GitHub App](/developers/apps/creating-a-github-app)."
     *
@@ -25451,7 +25451,7 @@ impl Client {
     }
 
     /**
-    * apps_list_installations: GET /app/installations
+    * This function performs a `GET` to the endpoint `/app/installations`.
     *
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
@@ -25478,7 +25478,7 @@ impl Client {
     }
 
     /**
-    * apps_get_installation: GET /app/installations/{installation_id}
+    * This function performs a `GET` to the endpoint `/app/installations/{installation_id}`.
     *
     * Enables an authenticated GitHub App to find an installation's information using the installation id. The installation's account type (`target_type`) will be either an organization or a user account, depending which account the repository belongs to.
     *
@@ -25496,7 +25496,7 @@ impl Client {
     }
 
     /**
-    * apps_delete_installation: DELETE /app/installations/{installation_id}
+    * This function performs a `DELETE` to the endpoint `/app/installations/{installation_id}`.
     *
     * Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/reference/apps/#suspend-an-app-installation)" endpoint.
     *
@@ -25517,7 +25517,7 @@ impl Client {
     }
 
     /**
-    * apps_create_installation_access_token: POST /app/installations/{installation_id}/access_tokens
+    * This function performs a `POST` to the endpoint `/app/installations/{installation_id}/access_tokens`.
     *
     * Creates an installation access token that enables a GitHub App to make authenticated API requests for the app's installation on an organization or individual account. Installation tokens expire one hour from the time you create them. Using an expired token produces a status code of `401 - Unauthorized`, and requires creating a new installation token. By default the installation token has access to all repositories that the installation can access. To restrict the access to specific repositories, you can provide the `repository_ids` when creating the token. When you omit `repository_ids`, the response does not contain the `repositories` key.
     *
@@ -25547,7 +25547,7 @@ impl Client {
     }
 
     /**
-    * apps_suspend_installation: PUT /app/installations/{installation_id}/suspended
+    * This function performs a `PUT` to the endpoint `/app/installations/{installation_id}/suspended`.
     *
     * Suspends a GitHub App on a user, organization, or business account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
     *
@@ -25565,7 +25565,7 @@ impl Client {
     }
 
     /**
-    * apps_unsuspend_installation: DELETE /app/installations/{installation_id}/suspended
+    * This function performs a `DELETE` to the endpoint `/app/installations/{installation_id}/suspended`.
     *
     * Removes a GitHub App installation suspension.
     *
@@ -25586,7 +25586,7 @@ impl Client {
     }
 
     /**
-    * oauth_authorizations_list_grants: GET /applications/grants
+    * This function performs a `GET` to the endpoint `/applications/grants`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -25601,9 +25601,9 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::ApplicationGrant>> {
         let url = format!(
-            "/applications/grants?page={}&per_page={}&client_id={}",
-            format!("{}", page),
+            "/applications/grants?per_page={}&page={}&client_id={}",
             format!("{}", per_page),
+            format!("{}", page),
             client_id.to_string(),
         );
 
@@ -25611,7 +25611,7 @@ impl Client {
     }
 
     /**
-    * oauth_authorizations_get_grant: GET /applications/grants/{grant_id}
+    * This function performs a `GET` to the endpoint `/applications/grants/{grant_id}`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -25630,7 +25630,7 @@ impl Client {
     }
 
     /**
-    * oauth_authorizations_delete_grant: DELETE /applications/grants/{grant_id}
+    * This function performs a `DELETE` to the endpoint `/applications/grants/{grant_id}`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -25651,7 +25651,7 @@ impl Client {
     }
 
     /**
-    * apps_delete_authorization: DELETE /applications/{client_id}/grant
+    * This function performs a `DELETE` to the endpoint `/applications/{client_id}/grant`.
     *
     * OAuth application owners can revoke a grant for their OAuth application and a specific user. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. You must also provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted.
     * Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for the user. Once deleted, the application will have no access to the user's account and will no longer be listed on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
@@ -25681,7 +25681,7 @@ impl Client {
     }
 
     /**
-    * apps_revoke_grant_for_application: DELETE /applications/{client_id}/grants/{access_token}
+    * This function performs a `DELETE` to the endpoint `/applications/{client_id}/grants/{access_token}`.
     *
     * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
     *
@@ -25709,7 +25709,7 @@ impl Client {
     }
 
     /**
-    * apps_check_token: POST /applications/{client_id}/token
+    * This function performs a `POST` to the endpoint `/applications/{client_id}/token`.
     *
     * OAuth applications can use a special API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) to use this endpoint, where the username is the OAuth application `client_id` and the password is its `client_secret`. Invalid tokens will return `404 NOT FOUND`.
     *
@@ -25733,7 +25733,7 @@ impl Client {
     }
 
     /**
-    * apps_delete_token: DELETE /applications/{client_id}/token
+    * This function performs a `DELETE` to the endpoint `/applications/{client_id}/token`.
     *
     * OAuth application owners can revoke a single token for an OAuth application. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password.
     *
@@ -25762,7 +25762,7 @@ impl Client {
     }
 
     /**
-    * apps_reset_token: PATCH /applications/{client_id}/token
+    * This function performs a `PATCH` to the endpoint `/applications/{client_id}/token`.
     *
     * OAuth applications can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the "token" property in the response because changes take effect immediately. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
     *
@@ -25786,7 +25786,7 @@ impl Client {
     }
 
     /**
-    * apps_scope_token: POST /applications/{client_id}/token/scoped
+    * This function performs a `POST` to the endpoint `/applications/{client_id}/token/scoped`.
     *
     * Use a non-scoped user-to-server OAuth access token to create a repository scoped and/or permission scoped user-to-server OAuth access token. You can specify which repositories the token can access and which permissions are granted to the token. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
     *
@@ -25810,7 +25810,7 @@ impl Client {
     }
 
     /**
-    * apps_check_authorization: GET /applications/{client_id}/tokens/{access_token}
+    * This function performs a `GET` to the endpoint `/applications/{client_id}/tokens/{access_token}`.
     *
     * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
     *
@@ -25833,7 +25833,7 @@ impl Client {
     }
 
     /**
-    * apps_reset_authorization: POST /applications/{client_id}/tokens/{access_token}
+    * This function performs a `POST` to the endpoint `/applications/{client_id}/tokens/{access_token}`.
     *
     * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
     *
@@ -25856,7 +25856,7 @@ impl Client {
     }
 
     /**
-    * apps_revoke_authorization_for_application: DELETE /applications/{client_id}/tokens/{access_token}
+    * This function performs a `DELETE` to the endpoint `/applications/{client_id}/tokens/{access_token}`.
     *
     * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
     *
@@ -25882,7 +25882,7 @@ impl Client {
     }
 
     /**
-    * apps_get_by_slug: GET /apps/{app_slug}
+    * This function performs a `GET` to the endpoint `/apps/{app_slug}`.
     *
     * **Note**: The `:app_slug` is just the URL-friendly name of your GitHub App. You can find this on the settings page for your GitHub App (e.g., `https://github.com/settings/apps/:app_slug`).
     *
@@ -25900,7 +25900,7 @@ impl Client {
     }
 
     /**
-    * oauth_authorizations_list_authorizations: GET /authorizations
+    * This function performs a `GET` to the endpoint `/authorizations`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -25913,17 +25913,17 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::Authorization>> {
         let url = format!(
-            "/authorizations?per_page={}&page={}&client_id={}",
+            "/authorizations?client_id={}&per_page={}&page={}",
+            client_id.to_string(),
             format!("{}", per_page),
             format!("{}", page),
-            client_id.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * oauth_authorizations_create_authorization: POST /authorizations
+    * This function performs a `POST` to the endpoint `/authorizations`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -25952,7 +25952,7 @@ impl Client {
     }
 
     /**
-    * oauth_authorizations_get_or_create_authorization_for_app: PUT /authorizations/clients/{client_id}
+    * This function performs a `PUT` to the endpoint `/authorizations/clients/{client_id}`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -25984,7 +25984,7 @@ impl Client {
     }
 
     /**
-    * oauth_authorizations_get_or_create_authorization_for_app_and_fingerprint: PUT /authorizations/clients/{client_id}/{fingerprint}
+    * This function performs a `PUT` to the endpoint `/authorizations/clients/{client_id}/{fingerprint}`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -26016,7 +26016,7 @@ impl Client {
     }
 
     /**
-    * oauth_authorizations_get_authorization: GET /authorizations/{authorization_id}
+    * This function performs a `GET` to the endpoint `/authorizations/{authorization_id}`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -26035,7 +26035,7 @@ impl Client {
     }
 
     /**
-    * oauth_authorizations_delete_authorization: DELETE /authorizations/{authorization_id}
+    * This function performs a `DELETE` to the endpoint `/authorizations/{authorization_id}`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -26057,7 +26057,7 @@ impl Client {
     }
 
     /**
-    * oauth_authorizations_update_authorization: PATCH /authorizations/{authorization_id}
+    * This function performs a `PATCH` to the endpoint `/authorizations/{authorization_id}`.
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
@@ -26085,7 +26085,7 @@ impl Client {
     }
 
     /**
-    * codes_of_conduct_get_all_codes_of_conduct: GET /codes_of_conduct
+    * This function performs a `GET` to the endpoint `/codes_of_conduct`.
     *
     *
     *
@@ -26099,7 +26099,7 @@ impl Client {
     }
 
     /**
-    * codes_of_conduct_get_conduct_code: GET /codes_of_conduct/{key}
+    * This function performs a `GET` to the endpoint `/codes_of_conduct/{key}`.
     *
     *
     *
@@ -26118,7 +26118,7 @@ impl Client {
     }
 
     /**
-    * emojis_get: GET /emojis
+    * This function performs a `GET` to the endpoint `/emojis`.
     *
     * Lists all the emojis available to use on GitHub.
     *
@@ -26130,7 +26130,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_get_github_actions_permissions_enterprise: GET /enterprises/{enterprise}/actions/permissions
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/permissions`.
     *
     * Gets the GitHub Actions permissions policy for organizations and allowed actions in an enterprise.
     *
@@ -26151,7 +26151,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_set_github_actions_permissions_enterprise: PUT /enterprises/{enterprise}/actions/permissions
+    * This function performs a `PUT` to the endpoint `/enterprises/{enterprise}/actions/permissions`.
     *
     * Sets the GitHub Actions permissions policy for organizations and allowed actions in an enterprise.
     *
@@ -26177,7 +26177,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_list_selected_organizations_enabled_github_actions_enterprise: GET /enterprises/{enterprise}/actions/permissions/organizations
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/permissions/organizations`.
     *
     * Lists the organizations that are selected to have GitHub Actions enabled in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
     *
@@ -26202,7 +26202,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_set_selected_organizations_enabled_github_actions_enterprise: PUT /enterprises/{enterprise}/actions/permissions/organizations
+    * This function performs a `PUT` to the endpoint `/enterprises/{enterprise}/actions/permissions/organizations`.
     *
     * Replaces the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
     *
@@ -26228,7 +26228,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_enable_selected_organization_github_actions_enterprise: PUT /enterprises/{enterprise}/actions/permissions/organizations/{org_id}
+    * This function performs a `PUT` to the endpoint `/enterprises/{enterprise}/actions/permissions/organizations/{org_id}`.
     *
     * Adds an organization to the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
     *
@@ -26251,7 +26251,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_disable_selected_organization_github_actions_enterprise: DELETE /enterprises/{enterprise}/actions/permissions/organizations/{org_id}
+    * This function performs a `DELETE` to the endpoint `/enterprises/{enterprise}/actions/permissions/organizations/{org_id}`.
     *
     * Removes an organization from the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
     *
@@ -26277,7 +26277,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_get_allowed_actions_enterprise: GET /enterprises/{enterprise}/actions/permissions/selected-actions
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/permissions/selected-actions`.
     *
     * Gets the selected actions that are allowed in an enterprise. To use this endpoint, the enterprise permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
     *
@@ -26298,7 +26298,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_set_allowed_actions_enterprise: PUT /enterprises/{enterprise}/actions/permissions/selected-actions
+    * This function performs a `PUT` to the endpoint `/enterprises/{enterprise}/actions/permissions/selected-actions`.
     *
     * Sets the actions that are allowed in an enterprise. To use this endpoint, the enterprise permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
     *
@@ -26324,7 +26324,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_list_self_hosted_runner_groups_for_enterprise: GET /enterprises/{enterprise}/actions/runner-groups
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/runner-groups`.
     *
     * Lists all self-hosted runner groups for an enterprise.
     *
@@ -26349,7 +26349,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_create_self_hosted_runner_group_for_enterprise: POST /enterprises/{enterprise}/actions/runner-groups
+    * This function performs a `POST` to the endpoint `/enterprises/{enterprise}/actions/runner-groups`.
     *
     * Creates a new self-hosted runner group for an enterprise.
     *
@@ -26375,7 +26375,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_get_self_hosted_runner_group_for_enterprise: GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}`.
     *
     * Gets a specific self-hosted runner group for an enterprise.
     *
@@ -26398,7 +26398,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_delete_self_hosted_runner_group_from_enterprise: DELETE /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}
+    * This function performs a `DELETE` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}`.
     *
     * Deletes a self-hosted runner group for an enterprise.
     *
@@ -26424,7 +26424,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_update_self_hosted_runner_group_for_enterprise: PATCH /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}
+    * This function performs a `PATCH` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}`.
     *
     * Updates the `name` and `visibility` of a self-hosted runner group in an enterprise.
     *
@@ -26452,7 +26452,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_list_org_access_to_self_hosted_runner_group_in_enterprise: GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations`.
     *
     * Lists the organizations with access to a self-hosted runner group.
     *
@@ -26469,18 +26469,18 @@ impl Client {
     ) -> Result<types::GetListOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseOkResponse>
     {
         let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/organizations?per_page={}&page={}",
+            "/enterprises/{}/actions/runner-groups/{}/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * enterprise_admin_set_org_access_to_self_hosted_runner_group_in_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations
+    * This function performs a `PUT` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations`.
     *
     * Replaces the list of organizations that have access to a self-hosted runner configured in an enterprise.
     *
@@ -26508,7 +26508,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_add_org_access_to_self_hosted_runner_group_in_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}
+    * This function performs a `PUT` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}`.
     *
     * Adds an organization to the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
     *
@@ -26533,7 +26533,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_remove_org_access_to_self_hosted_runner_group_in_enterprise: DELETE /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}
+    * This function performs a `DELETE` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}`.
     *
     * Removes an organization from the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
     *
@@ -26561,7 +26561,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_list_self_hosted_runners_in_group_for_enterprise: GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners`.
     *
     * Lists the self-hosted runners that are in a specific enterprise group.
     *
@@ -26588,7 +26588,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_set_self_hosted_runners_in_group_for_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners
+    * This function performs a `PUT` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners`.
     *
     * Replaces the list of self-hosted runners that are part of an enterprise runner group.
     *
@@ -26616,7 +26616,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_add_self_hosted_runner_to_group_for_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+    * This function performs a `PUT` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}`.
     *
     * Adds a self-hosted runner to a runner group configured in an enterprise.
     *
@@ -26642,7 +26642,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_remove_self_hosted_runner_from_group_for_enterprise: DELETE /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+    * This function performs a `DELETE` to the endpoint `/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}`.
     *
     * Removes a self-hosted runner from a group configured in an enterprise. The runner is then returned to the default group.
     *
@@ -26670,7 +26670,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_list_self_hosted_runners_for_enterprise: GET /enterprises/{enterprise}/actions/runners
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/runners`.
     *
     * Lists all self-hosted runners configured for an enterprise.
     *
@@ -26695,7 +26695,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_list_runner_applications_for_enterprise: GET /enterprises/{enterprise}/actions/runners/downloads
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/runners/downloads`.
     *
     * Lists binaries for the runner application that you can download and run.
     *
@@ -26716,7 +26716,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_create_registration_token_for_enterprise: POST /enterprises/{enterprise}/actions/runners/registration-token
+    * This function performs a `POST` to the endpoint `/enterprises/{enterprise}/actions/runners/registration-token`.
     *
     * Returns a token that you can pass to the `config` script. The token expires after one hour.
     *
@@ -26745,7 +26745,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_create_remove_token_for_enterprise: POST /enterprises/{enterprise}/actions/runners/remove-token
+    * This function performs a `POST` to the endpoint `/enterprises/{enterprise}/actions/runners/remove-token`.
     *
     * Returns a token that you can pass to the `config` script to remove a self-hosted runner from an enterprise. The token expires after one hour.
     *
@@ -26775,7 +26775,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_get_self_hosted_runner_for_enterprise: GET /enterprises/{enterprise}/actions/runners/{runner_id}
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/actions/runners/{runner_id}`.
     *
     * Gets a specific self-hosted runner configured in an enterprise.
     *
@@ -26798,7 +26798,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_delete_self_hosted_runner_from_enterprise: DELETE /enterprises/{enterprise}/actions/runners/{runner_id}
+    * This function performs a `DELETE` to the endpoint `/enterprises/{enterprise}/actions/runners/{runner_id}`.
     *
     * Forces the removal of a self-hosted runner from an enterprise. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
     *
@@ -26824,7 +26824,7 @@ impl Client {
     }
 
     /**
-    * enterprise_admin_get_audit_log: GET /enterprises/{enterprise}/audit-log
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/audit-log`.
     *
     * Gets the audit log for an enterprise. To use this endpoint, you must be an enterprise admin, and you must use an access token with the `admin:enterprise` scope.
     *
@@ -26841,15 +26841,15 @@ impl Client {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("/enterprises/{}/audit-log?include={}&phrase={}&order={}&per_page={}&after={}&page={}&before={}",
+        let url = format!("/enterprises/{}/audit-log?after={}&include={}&before={}&phrase={}&page={}&order={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_page), after.to_string(), format!("{}", page), before.to_string(),         );
+after.to_string(), include.to_string(), before.to_string(), phrase.to_string(), format!("{}", page), order.to_string(), format!("{}", per_page),         );
 
         self.get(&url).await
     }
 
     /**
-    * billing_get_github_actions_billing_ghe: GET /enterprises/{enterprise}/settings/billing/actions
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/settings/billing/actions`.
     *
     * Gets the summary of the free and paid GitHub Actions minutes used.
     *
@@ -26872,7 +26872,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * billing_get_github_packages_billing_ghe: GET /enterprises/{enterprise}/settings/billing/packages
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/settings/billing/packages`.
     *
     * Gets the free and paid storage used for GitHub Packages in gigabytes.
     *
@@ -26895,7 +26895,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * billing_get_shared_storage_billing_ghe: GET /enterprises/{enterprise}/settings/billing/shared-storage
+    * This function performs a `GET` to the endpoint `/enterprises/{enterprise}/settings/billing/shared-storage`.
     *
     * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
     *
@@ -26918,7 +26918,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * activity_list_public_events: GET /events
+    * This function performs a `GET` to the endpoint `/events`.
     *
     * We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago.
     *
@@ -26930,16 +26930,16 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/events?page={}&per_page={}",
-            format!("{}", page),
+            "/events?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * activity_get_feeds: GET /feeds
+    * This function performs a `GET` to the endpoint `/feeds`.
     *
     * GitHub provides several timeline resources in [Atom](http://en.wikipedia.org/wiki/Atom_(standard)) format. The Feeds API lists all the feeds available to the authenticated user:
     *
@@ -26961,7 +26961,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_list: GET /gists
+    * This function performs a `GET` to the endpoint `/gists`.
     *
     * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
     *
@@ -26974,17 +26974,17 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/gists?page={}&since={}&per_page={}",
+            "/gists?page={}&per_page={}&since={}",
             format!("{}", page),
-            since.to_rfc3339(),
             format!("{}", per_page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * gists_create: POST /gists
+    * This function performs a `POST` to the endpoint `/gists`.
     *
     * Allows you to add a new gist with one or more files.
     *
@@ -27002,7 +27002,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_list_public: GET /gists/public
+    * This function performs a `GET` to the endpoint `/gists/public`.
     *
     * List public gists sorted by most recently updated to least recently updated.
     *
@@ -27027,7 +27027,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_list_starred: GET /gists/starred
+    * This function performs a `GET` to the endpoint `/gists/starred`.
     *
     * List the authenticated user's starred gists:
     *
@@ -27040,17 +27040,17 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/gists/starred?per_page={}&since={}&page={}",
+            "/gists/starred?per_page={}&page={}&since={}",
             format!("{}", per_page),
-            since.to_rfc3339(),
             format!("{}", page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * gists_get: GET /gists/{gist_id}
+    * This function performs a `GET` to the endpoint `/gists/{gist_id}`.
     *
     *
     *
@@ -27066,7 +27066,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_delete: DELETE /gists/{gist_id}
+    * This function performs a `DELETE` to the endpoint `/gists/{gist_id}`.
     *
     *
     *
@@ -27085,7 +27085,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_update: PATCH /gists/{gist_id}
+    * This function performs a `PATCH` to the endpoint `/gists/{gist_id}`.
     *
     * Allows you to update or delete a gist file and rename gist files. Files from the previous version of the gist that aren't explicitly changed during an edit are unchanged.
     *
@@ -27109,7 +27109,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_list_comments: GET /gists/{gist_id}/comments
+    * This function performs a `GET` to the endpoint `/gists/{gist_id}/comments`.
     *
     *
     *
@@ -27122,17 +27122,17 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::GistComment>> {
         let url = format!(
-            "/gists/{}/comments?per_page={}&page={}",
+            "/gists/{}/comments?page={}&per_page={}",
             progenitor_support::encode_path(&gist_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * gists_create_comment: POST /gists/{gist_id}/comments
+    * This function performs a `POST` to the endpoint `/gists/{gist_id}/comments`.
     *
     *
     *
@@ -27156,7 +27156,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_get_comment: GET /gists/{gist_id}/comments/{comment_id}
+    * This function performs a `GET` to the endpoint `/gists/{gist_id}/comments/{comment_id}`.
     *
     *
     *
@@ -27177,7 +27177,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_delete_comment: DELETE /gists/{gist_id}/comments/{comment_id}
+    * This function performs a `DELETE` to the endpoint `/gists/{gist_id}/comments/{comment_id}`.
     *
     *
     *
@@ -27197,7 +27197,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_update_comment: PATCH /gists/{gist_id}/comments/{comment_id}
+    * This function performs a `PATCH` to the endpoint `/gists/{gist_id}/comments/{comment_id}`.
     *
     *
     *
@@ -27223,7 +27223,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_list_commits: GET /gists/{gist_id}/commits
+    * This function performs a `GET` to the endpoint `/gists/{gist_id}/commits`.
     *
     *
     *
@@ -27236,17 +27236,17 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::GistCommit>> {
         let url = format!(
-            "/gists/{}/commits?page={}&per_page={}",
+            "/gists/{}/commits?per_page={}&page={}",
             progenitor_support::encode_path(&gist_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * gists_list_forks: GET /gists/{gist_id}/forks
+    * This function performs a `GET` to the endpoint `/gists/{gist_id}/forks`.
     *
     *
     *
@@ -27269,7 +27269,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_fork: POST /gists/{gist_id}/forks
+    * This function performs a `POST` to the endpoint `/gists/{gist_id}/forks`.
     *
     * **Note**: This was previously `/gists/:gist_id/fork`.
     *
@@ -27285,7 +27285,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_check_is_starred: GET /gists/{gist_id}/star
+    * This function performs a `GET` to the endpoint `/gists/{gist_id}/star`.
     *
     *
     *
@@ -27301,7 +27301,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_star: PUT /gists/{gist_id}/star
+    * This function performs a `PUT` to the endpoint `/gists/{gist_id}/star`.
     *
     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
@@ -27317,7 +27317,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_unstar: DELETE /gists/{gist_id}/star
+    * This function performs a `DELETE` to the endpoint `/gists/{gist_id}/star`.
     *
     *
     *
@@ -27336,7 +27336,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gists_get_revision: GET /gists/{gist_id}/{sha}
+    * This function performs a `GET` to the endpoint `/gists/{gist_id}/{sha}`.
     *
     *
     *
@@ -27353,7 +27353,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gitignore_get_all_templates: GET /gitignore/templates
+    * This function performs a `GET` to the endpoint `/gitignore/templates`.
     *
     * List all templates available to pass as an option when [creating a repository](https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user).
     *
@@ -27365,7 +27365,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * gitignore_get_template: GET /gitignore/templates/{name}
+    * This function performs a `GET` to the endpoint `/gitignore/templates/{name}`.
     *
     * The API also allows fetching the source of a single template.
     * Use the raw [media type](https://docs.github.com/rest/overview/media-types/) to get the raw contents.
@@ -27382,7 +27382,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * apps_list_repos_accessible_to_installation: GET /installation/repositories
+    * This function performs a `GET` to the endpoint `/installation/repositories`.
     *
     * List repositories that an app installation can access.
     *
@@ -27405,7 +27405,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * apps_revoke_installation_access_token: DELETE /installation/token
+    * This function performs a `DELETE` to the endpoint `/installation/token`.
     *
     * Revokes the installation token you're using to authenticate as an installation and access this endpoint.
     *
@@ -27424,7 +27424,7 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
     }
 
     /**
-    * issues_list: GET /issues
+    * This function performs a `GET` to the endpoint `/issues`.
     *
     * List issues assigned to the authenticated user across all visible repositories including owned repositories, member
     * repositories, and organization repositories. You can use the `filter` query parameter to fetch issues that are not
@@ -27453,14 +27453,14 @@ include.to_string(), phrase.to_string(), order.to_string(), format!("{}", per_pa
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/issues?labels={}&owned={}&pulls={}&per_page={}&page={}&since={}&filter={}&orgs={}&state={}&sort={}&direction={}&collab={}",
-labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", per_page), format!("{}", page), since.to_rfc3339(), filter.to_string(), format!("{}", orgs), state.to_string(), sort.to_string(), direction.to_string(), format!("{}", collab),         );
+        let url = format!("/issues?labels={}&pulls={}&filter={}&collab={}&page={}&sort={}&state={}&owned={}&direction={}&since={}&orgs={}&per_page={}",
+labels.to_string(), format!("{}", pulls), filter.to_string(), format!("{}", collab), format!("{}", page), sort.to_string(), state.to_string(), format!("{}", owned), direction.to_string(), since.to_rfc3339(), format!("{}", orgs), format!("{}", per_page),         );
 
         self.get(&url).await
     }
 
     /**
-    * licenses_get_all_commonly_used: GET /licenses
+    * This function performs a `GET` to the endpoint `/licenses`.
     *
     *
     *
@@ -27473,9 +27473,9 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
         page: i64,
     ) -> Result<Vec<types::LicenseSimple>> {
         let url = format!(
-            "/licenses?featured={}&page={}&per_page={}",
-            format!("{}", featured),
+            "/licenses?page={}&featured={}&per_page={}",
             format!("{}", page),
+            format!("{}", featured),
             format!("{}", per_page),
         );
 
@@ -27483,7 +27483,7 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
     }
 
     /**
-    * licenses_get: GET /licenses/{license}
+    * This function performs a `GET` to the endpoint `/licenses/{license}`.
     *
     *
     *
@@ -27499,7 +27499,7 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
     }
 
     /**
-    * markdown_render: POST /markdown
+    * This function performs a `POST` to the endpoint `/markdown`.
     *
     *
     *
@@ -27518,7 +27518,7 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
     }
 
     /**
-    * markdown_render_raw: POST /markdown/raw
+    * This function performs a `POST` to the endpoint `/markdown/raw`.
     *
     * You must send Markdown as plain text (using a `Content-Type` header of `text/plain` or `text/x-markdown`) to this endpoint, rather than using JSON format. In raw mode, [GitHub Flavored Markdown](https://github.github.com/gfm/) is not supported and Markdown will be rendered in plain format like a README.md file. Markdown content must be 400 KB or less.
     *
@@ -27530,7 +27530,7 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
     }
 
     /**
-    * apps_get_subscription_plan_for_account: GET /marketplace_listing/accounts/{account_id}
+    * This function performs a `GET` to the endpoint `/marketplace_listing/accounts/{account_id}`.
     *
     * Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
     *
@@ -27551,7 +27551,7 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
     }
 
     /**
-    * apps_list_plans: GET /marketplace_listing/plans
+    * This function performs a `GET` to the endpoint `/marketplace_listing/plans`.
     *
     * Lists all plans that are part of your GitHub Marketplace listing.
     *
@@ -27574,7 +27574,7 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
     }
 
     /**
-    * apps_list_accounts_for_plan: GET /marketplace_listing/plans/{plan_id}/accounts
+    * This function performs a `GET` to the endpoint `/marketplace_listing/plans/{plan_id}/accounts`.
     *
     * Returns user and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
     *
@@ -27591,19 +27591,19 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
         let url = format!(
-            "/marketplace_listing/plans/{}/accounts?sort={}&per_page={}&direction={}&page={}",
+            "/marketplace_listing/plans/{}/accounts?page={}&per_page={}&sort={}&direction={}",
             progenitor_support::encode_path(&plan_id.to_string()),
-            sort.to_string(),
-            format!("{}", per_page),
-            direction.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
+            sort.to_string(),
+            direction.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * apps_get_subscription_plan_for_account_stubbed: GET /marketplace_listing/stubbed/accounts/{account_id}
+    * This function performs a `GET` to the endpoint `/marketplace_listing/stubbed/accounts/{account_id}`.
     *
     * Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
     *
@@ -27624,7 +27624,7 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
     }
 
     /**
-    * apps_list_plans_stubbed: GET /marketplace_listing/stubbed/plans
+    * This function performs a `GET` to the endpoint `/marketplace_listing/stubbed/plans`.
     *
     * Lists all plans that are part of your GitHub Marketplace listing.
     *
@@ -27638,16 +27638,16 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = format!(
-            "/marketplace_listing/stubbed/plans?per_page={}&page={}",
-            format!("{}", per_page),
+            "/marketplace_listing/stubbed/plans?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * apps_list_accounts_for_plan_stubbed: GET /marketplace_listing/stubbed/plans/{plan_id}/accounts
+    * This function performs a `GET` to the endpoint `/marketplace_listing/stubbed/plans/{plan_id}/accounts`.
     *
     * Returns repository and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
     *
@@ -27663,15 +27663,15 @@ labels.to_string(), format!("{}", owned), format!("{}", pulls), format!("{}", pe
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
-        let url = format!("/marketplace_listing/stubbed/plans/{}/accounts?per_page={}&direction={}&page={}&sort={}",
+        let url = format!("/marketplace_listing/stubbed/plans/{}/accounts?sort={}&direction={}&page={}&per_page={}",
             progenitor_support::encode_path(&plan_id.to_string()),
-format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_string(),         );
+sort.to_string(), direction.to_string(), format!("{}", page), format!("{}", per_page),         );
 
         self.get(&url).await
     }
 
     /**
-    * meta_get: GET /meta
+    * This function performs a `GET` to the endpoint `/meta`.
     *
     * Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
     *
@@ -27685,7 +27685,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * activity_list_public_events_for_repo_network: GET /networks/{owner}/{repo}/events
+    * This function performs a `GET` to the endpoint `/networks/{owner}/{repo}/events`.
     *
     *
     *
@@ -27710,7 +27710,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * activity_list_notifications_for_authenticated_user: GET /notifications
+    * This function performs a `GET` to the endpoint `/notifications`.
     *
     * List all notifications for the current user, sorted by most recently updated.
     *
@@ -27726,20 +27726,20 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
         page: i64,
     ) -> Result<Vec<types::Thread>> {
         let url = format!(
-            "/notifications?since={}&per_page={}&all={}&before={}&page={}&participating={}",
-            since.to_rfc3339(),
-            format!("{}", per_page),
-            format!("{}", all),
-            before.to_rfc3339(),
+            "/notifications?page={}&participating={}&since={}&before={}&per_page={}&all={}",
             format!("{}", page),
             format!("{}", participating),
+            since.to_rfc3339(),
+            before.to_rfc3339(),
+            format!("{}", per_page),
+            format!("{}", all),
         );
 
         self.get(&url).await
     }
 
     /**
-    * activity_mark_notifications_as_read: PUT /notifications
+    * This function performs a `PUT` to the endpoint `/notifications`.
     *
     * Marks all notifications as "read" removes it from the [default view on GitHub](https://github.com/notifications). If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List notifications for the authenticated user](https://docs.github.com/rest/reference/activity#list-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
     *
@@ -27758,7 +27758,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * activity_get_thread: GET /notifications/threads/{thread_id}
+    * This function performs a `GET` to the endpoint `/notifications/threads/{thread_id}`.
     *
     *
     *
@@ -27774,7 +27774,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * activity_mark_thread_as_read: PATCH /notifications/threads/{thread_id}
+    * This function performs a `PATCH` to the endpoint `/notifications/threads/{thread_id}`.
     *
     *
     *
@@ -27790,7 +27790,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * activity_get_thread_subscription_for_authenticated_user: GET /notifications/threads/{thread_id}/subscription
+    * This function performs a `GET` to the endpoint `/notifications/threads/{thread_id}/subscription`.
     *
     * This checks to see if the current user is subscribed to a thread. You can also [get a repository subscription](https://docs.github.com/rest/reference/activity#get-a-repository-subscription).
     *
@@ -27811,7 +27811,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * activity_set_thread_subscription: PUT /notifications/threads/{thread_id}/subscription
+    * This function performs a `PUT` to the endpoint `/notifications/threads/{thread_id}/subscription`.
     *
     * If you are watching a repository, you receive notifications for all threads by default. Use this endpoint to ignore future notifications for threads until you comment on the thread or get an **@mention**.
     *
@@ -27839,7 +27839,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * activity_delete_thread_subscription: DELETE /notifications/threads/{thread_id}/subscription
+    * This function performs a `DELETE` to the endpoint `/notifications/threads/{thread_id}/subscription`.
     *
     * Mutes all future notifications for a conversation until you comment on the thread or get an **@mention**. If you are watching the repository of the thread, you will still receive notifications. To ignore future notifications for a repository you are watching, use the [Set a thread subscription](https://docs.github.com/rest/reference/activity#set-a-thread-subscription) endpoint and set `ignore` to `true`.
     *
@@ -27858,7 +27858,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * meta_get_octocat: GET /octocat
+    * This function performs a `GET` to the endpoint `/octocat`.
     *
     * Get the octocat as ASCII art
     *
@@ -27871,7 +27871,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * orgs_list: GET /organizations
+    * This function performs a `GET` to the endpoint `/organizations`.
     *
     * Lists all organizations, in the order that they were created on GitHub.
     *
@@ -27894,7 +27894,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * orgs_get: GET /orgs/{org}
+    * This function performs a `GET` to the endpoint `/orgs/{org}`.
     *
     * To see many of the organization response values, you need to be an authenticated organization owner with the `admin:org` scope. When the value of `two_factor_requirement_enabled` is `true`, the organization requires all members, billing managers, and outside collaborators to enable [two-factor authentication](https://help.github.com/articles/securing-your-account-with-two-factor-authentication-2fa/).
     *
@@ -27912,7 +27912,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * orgs_update: PATCH /orgs/{org}
+    * This function performs a `PATCH` to the endpoint `/orgs/{org}`.
     *
     * **Parameter Deprecation Notice:** GitHub will replace and discontinue `members_allowed_repository_creation_type` in favor of more granular permissions. The new input parameters are `members_can_create_public_repositories`, `members_can_create_private_repositories` for all organizations and `members_can_create_internal_repositories` for organizations associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes).
     *
@@ -27938,7 +27938,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_get_github_actions_permissions_organization: GET /orgs/{org}/actions/permissions
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/permissions`.
     *
     * Gets the GitHub Actions permissions policy for repositories and allowed actions in an organization.
     *
@@ -27959,7 +27959,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_set_github_actions_permissions_organization: PUT /orgs/{org}/actions/permissions
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/permissions`.
     *
     * Sets the GitHub Actions permissions policy for repositories and allowed actions in an organization.
     *
@@ -27987,7 +27987,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_list_selected_repositories_enabled_github_actions_organization: GET /orgs/{org}/actions/permissions/repositories
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/permissions/repositories`.
     *
     * Lists the selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
     *
@@ -28003,17 +28003,17 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     ) -> Result<types::GetListSelectedRepositoriesEnabledGithubActionsinOrganizationOkResponse>
     {
         let url = format!(
-            "/orgs/{}/actions/permissions/repositories?page={}&per_page={}",
+            "/orgs/{}/actions/permissions/repositories?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_set_selected_repositories_enabled_github_actions_organization: PUT /orgs/{org}/actions/permissions/repositories
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/permissions/repositories`.
     *
     * Replaces the list of selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
     *
@@ -28039,7 +28039,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_enable_selected_repository_github_actions_organization: PUT /orgs/{org}/actions/permissions/repositories/{repository_id}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/permissions/repositories/{repository_id}`.
     *
     * Adds a repository to the list of selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
     *
@@ -28062,7 +28062,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_disable_selected_repository_github_actions_organization: DELETE /orgs/{org}/actions/permissions/repositories/{repository_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/actions/permissions/repositories/{repository_id}`.
     *
     * Removes a repository from the list of selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
     *
@@ -28088,7 +28088,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_get_allowed_actions_organization: GET /orgs/{org}/actions/permissions/selected-actions
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/permissions/selected-actions`.
     *
     * Gets the selected actions that are allowed in an organization. To use this endpoint, the organization permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization).""
     *
@@ -28109,7 +28109,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_set_allowed_actions_organization: PUT /orgs/{org}/actions/permissions/selected-actions
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/permissions/selected-actions`.
     *
     * Sets the actions that are allowed in an organization. To use this endpoint, the organization permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
     *
@@ -28139,7 +28139,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_list_self_hosted_runner_groups_for_org: GET /orgs/{org}/actions/runner-groups
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/runner-groups`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28166,7 +28166,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_create_self_hosted_runner_group_for_org: POST /orgs/{org}/actions/runner-groups
+    * This function performs a `POST` to the endpoint `/orgs/{org}/actions/runner-groups`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28194,7 +28194,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_get_self_hosted_runner_group_for_org: GET /orgs/{org}/actions/runner-groups/{runner_group_id}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28219,7 +28219,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_delete_self_hosted_runner_group_from_org: DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28247,7 +28247,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_update_self_hosted_runner_group_for_org: PATCH /orgs/{org}/actions/runner-groups/{runner_group_id}
+    * This function performs a `PATCH` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28277,7 +28277,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_list_repo_access_to_self_hosted_runner_group_in_org: GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28307,7 +28307,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_set_repo_access_to_self_hosted_runner_group_in_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28337,7 +28337,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_add_repo_access_to_self_hosted_runner_group_in_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28366,7 +28366,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_remove_repo_access_to_self_hosted_runner_group_in_org: DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28397,7 +28397,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_list_self_hosted_runners_in_group_for_org: GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28415,18 +28415,18 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersinGroupOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/runner-groups/{}/runners?per_page={}&page={}",
+            "/orgs/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_set_self_hosted_runners_in_group_for_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/runners
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28456,7 +28456,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_add_self_hosted_runner_to_group_for_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28485,7 +28485,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_remove_self_hosted_runner_from_group_for_org: DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}`.
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
     *
@@ -28516,7 +28516,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_list_self_hosted_runners_for_org: GET /orgs/{org}/actions/runners
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/runners`.
     *
     * Lists all self-hosted runners configured in an organization.
     *
@@ -28531,17 +28531,17 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/runners?per_page={}&page={}",
+            "/orgs/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_list_runner_applications_for_org: GET /orgs/{org}/actions/runners/downloads
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/runners/downloads`.
     *
     * Lists binaries for the runner application that you can download and run.
     *
@@ -28562,7 +28562,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_create_registration_token_for_org: POST /orgs/{org}/actions/runners/registration-token
+    * This function performs a `POST` to the endpoint `/orgs/{org}/actions/runners/registration-token`.
     *
     * Returns a token that you can pass to the `config` script. The token expires after one hour.
     *
@@ -28591,7 +28591,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_create_remove_token_for_org: POST /orgs/{org}/actions/runners/remove-token
+    * This function performs a `POST` to the endpoint `/orgs/{org}/actions/runners/remove-token`.
     *
     * Returns a token that you can pass to the `config` script to remove a self-hosted runner from an organization. The token expires after one hour.
     *
@@ -28621,7 +28621,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_get_self_hosted_runner_for_org: GET /orgs/{org}/actions/runners/{runner_id}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/runners/{runner_id}`.
     *
     * Gets a specific self-hosted runner configured in an organization.
     *
@@ -28644,7 +28644,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_delete_self_hosted_runner_from_org: DELETE /orgs/{org}/actions/runners/{runner_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/actions/runners/{runner_id}`.
     *
     * Forces the removal of a self-hosted runner from an organization. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
     *
@@ -28670,7 +28670,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_list_org_secrets: GET /orgs/{org}/actions/secrets
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/secrets`.
     *
     * Lists all secrets available in an organization without revealing their encrypted values. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
@@ -28693,7 +28693,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_get_org_public_key: GET /orgs/{org}/actions/secrets/public-key
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/secrets/public-key`.
     *
     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
@@ -28709,7 +28709,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_get_org_secret: GET /orgs/{org}/actions/secrets/{secret_name}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/secrets/{secret_name}`.
     *
     * Gets a single organization secret without revealing its encrypted value. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
@@ -28730,7 +28730,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_create_or_update_org_secret: PUT /orgs/{org}/actions/secrets/{secret_name}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/secrets/{secret_name}`.
     *
     * Creates or updates an organization secret with an encrypted value. Encrypt your secret using
     * [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). You must authenticate using an access
@@ -28830,7 +28830,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_delete_org_secret: DELETE /orgs/{org}/actions/secrets/{secret_name}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/actions/secrets/{secret_name}`.
     *
     * Deletes a secret in an organization using the secret name. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
@@ -28850,7 +28850,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_list_selected_repos_for_org_secret: GET /orgs/{org}/actions/secrets/{secret_name}/repositories
+    * This function performs a `GET` to the endpoint `/orgs/{org}/actions/secrets/{secret_name}/repositories`.
     *
     * Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to `selected`. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
@@ -28864,18 +28864,18 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
         per_page: i64,
     ) -> Result<types::GetListSelectedRepositoriesOrganizationSecretOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/secrets/{}/repositories?page={}&per_page={}",
+            "/orgs/{}/actions/secrets/{}/repositories?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_set_selected_repos_for_org_secret: PUT /orgs/{org}/actions/secrets/{secret_name}/repositories
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/secrets/{secret_name}/repositories`.
     *
     * Replaces all repositories for an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
@@ -28901,7 +28901,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_add_selected_repo_to_org_secret: PUT /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}`.
     *
     * Adds a repository to an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
@@ -28924,7 +28924,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * actions_remove_selected_repo_from_org_secret: DELETE /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}`.
     *
     * Removes a repository from an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
@@ -28950,7 +28950,7 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
     }
 
     /**
-    * orgs_get_audit_log: GET /orgs/{org}/audit-log
+    * This function performs a `GET` to the endpoint `/orgs/{org}/audit-log`.
     *
     * Gets the audit log for an organization. For more information, see "[Reviewing the audit log for your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization)."
     *
@@ -28969,15 +28969,15 @@ format!("{}", per_page), direction.to_string(), format!("{}", page), sort.to_str
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("/orgs/{}/audit-log?after={}&per_page={}&before={}&include={}&order={}&page={}&phrase={}",
+        let url = format!("/orgs/{}/audit-log?page={}&after={}&phrase={}&include={}&before={}&order={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-after.to_string(), format!("{}", per_page), before.to_string(), include.to_string(), order.to_string(), format!("{}", page), phrase.to_string(),         );
+format!("{}", page), after.to_string(), phrase.to_string(), include.to_string(), before.to_string(), order.to_string(), format!("{}", per_page),         );
 
         self.get(&url).await
     }
 
     /**
-    * orgs_list_blocked_users: GET /orgs/{org}/blocks
+    * This function performs a `GET` to the endpoint `/orgs/{org}/blocks`.
     *
     * List the users blocked by an organization.
     *
@@ -28993,7 +28993,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_check_blocked_user: GET /orgs/{org}/blocks/{username}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/blocks/{username}`.
     *
     *
     *
@@ -29010,7 +29010,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_block_user: PUT /orgs/{org}/blocks/{username}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/blocks/{username}`.
     *
     *
     *
@@ -29027,7 +29027,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_unblock_user: DELETE /orgs/{org}/blocks/{username}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/blocks/{username}`.
     *
     *
     *
@@ -29047,7 +29047,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_list_saml_sso_authorizations: GET /orgs/{org}/credential-authorizations
+    * This function performs a `GET` to the endpoint `/orgs/{org}/credential-authorizations`.
     *
     * Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
     *
@@ -29068,7 +29068,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_remove_saml_sso_authorization: DELETE /orgs/{org}/credential-authorizations/{credential_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/credential-authorizations/{credential_id}`.
     *
     * Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
     *
@@ -29094,7 +29094,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * activity_list_public_org_events: GET /orgs/{org}/events
+    * This function performs a `GET` to the endpoint `/orgs/{org}/events`.
     *
     *
     *
@@ -29117,7 +29117,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_list_failed_invitations: GET /orgs/{org}/failed_invitations
+    * This function performs a `GET` to the endpoint `/orgs/{org}/failed_invitations`.
     *
     * The return hash contains `failed_at` and `failed_reason` fields which represent the time at which the invitation failed and the reason for the failure.
     *
@@ -29140,7 +29140,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_list_webhooks: GET /orgs/{org}/hooks
+    * This function performs a `GET` to the endpoint `/orgs/{org}/hooks`.
     *
     *
     *
@@ -29163,7 +29163,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_create_webhook: POST /orgs/{org}/hooks
+    * This function performs a `POST` to the endpoint `/orgs/{org}/hooks`.
     *
     * Here's how you can create a hook that posts payloads in JSON format:
     *
@@ -29187,7 +29187,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_get_webhook: GET /orgs/{org}/hooks/{hook_id}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/hooks/{hook_id}`.
     *
     * Returns a webhook configured in an organization. To get only the webhook `config` properties, see "[Get a webhook configuration for an organization](/rest/reference/orgs#get-a-webhook-configuration-for-an-organization)."
     *
@@ -29204,7 +29204,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_delete_webhook: DELETE /orgs/{org}/hooks/{hook_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/hooks/{hook_id}`.
     *
     *
     *
@@ -29224,7 +29224,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_update_webhook: PATCH /orgs/{org}/hooks/{hook_id}
+    * This function performs a `PATCH` to the endpoint `/orgs/{org}/hooks/{hook_id}`.
     *
     * Updates a webhook configured in an organization. When you update a webhook, the `secret` will be overwritten. If you previously had a `secret` set, you must provide the same `secret` or set a new `secret` or the secret will be removed. If you are only updating individual webhook `config` properties, use "[Update a webhook configuration for an organization](/rest/reference/orgs#update-a-webhook-configuration-for-an-organization)."
     *
@@ -29250,7 +29250,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_get_webhook_config_for_org: GET /orgs/{org}/hooks/{hook_id}/config
+    * This function performs a `GET` to the endpoint `/orgs/{org}/hooks/{hook_id}/config`.
     *
     * Returns the webhook configuration for an organization. To get more information about the webhook, including the `active` state and `events`, use "[Get an organization webhook ](/rest/reference/orgs#get-an-organization-webhook)."
     *
@@ -29273,7 +29273,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_update_webhook_config_for_org: PATCH /orgs/{org}/hooks/{hook_id}/config
+    * This function performs a `PATCH` to the endpoint `/orgs/{org}/hooks/{hook_id}/config`.
     *
     * Updates the webhook configuration for an organization. To update more information about the webhook, including the `active` state and `events`, use "[Update an organization webhook ](/rest/reference/orgs#update-an-organization-webhook)."
     *
@@ -29301,7 +29301,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_ping_webhook: POST /orgs/{org}/hooks/{hook_id}/pings
+    * This function performs a `POST` to the endpoint `/orgs/{org}/hooks/{hook_id}/pings`.
     *
     * This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
     *
@@ -29318,7 +29318,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * apps_get_org_installation: GET /orgs/{org}/installation
+    * This function performs a `GET` to the endpoint `/orgs/{org}/installation`.
     *
     * Enables an authenticated GitHub App to find the organization's installation information.
     *
@@ -29336,7 +29336,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_list_app_installations: GET /orgs/{org}/installations
+    * This function performs a `GET` to the endpoint `/orgs/{org}/installations`.
     *
     * Lists all GitHub Apps in an organization. The installation count includes all GitHub Apps installed on repositories in the organization. You must be an organization owner with `admin:read` scope to use this endpoint.
     *
@@ -29349,17 +29349,17 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
         page: i64,
     ) -> Result<types::GetListAppInstallationsOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/installations?per_page={}&page={}",
+            "/orgs/{}/installations?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * interactions_get_restrictions_for_org: GET /orgs/{org}/interaction-limits
+    * This function performs a `GET` to the endpoint `/orgs/{org}/interaction-limits`.
     *
     * Shows which type of GitHub user can interact with this organization and when the restriction expires. If there is no restrictions, you will see an empty response.
     *
@@ -29378,7 +29378,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * interactions_set_restrictions_for_org: PUT /orgs/{org}/interaction-limits
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/interaction-limits`.
     *
     * Temporarily restricts interactions to a certain type of GitHub user in any public repository in the given organization. You must be an organization owner to set these restrictions. Setting the interaction limit at the organization level will overwrite any interaction limits that are set for individual repositories owned by the organization.
     *
@@ -29402,7 +29402,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * interactions_remove_restrictions_for_org: DELETE /orgs/{org}/interaction-limits
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/interaction-limits`.
     *
     * Removes all interaction restrictions from public repositories in the given organization. You must be an organization owner to remove restrictions.
     *
@@ -29421,7 +29421,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_list_pending_invitations: GET /orgs/{org}/invitations
+    * This function performs a `GET` to the endpoint `/orgs/{org}/invitations`.
     *
     * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
     *
@@ -29434,17 +29434,17 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
-            "/orgs/{}/invitations?per_page={}&page={}",
+            "/orgs/{}/invitations?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * orgs_create_invitation: POST /orgs/{org}/invitations
+    * This function performs a `POST` to the endpoint `/orgs/{org}/invitations`.
     *
     * Invite people to an organization by using their GitHub user ID or their email address. In order to create invitations in an organization, the authenticated user must be an organization owner.
     *
@@ -29470,7 +29470,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_cancel_invitation: DELETE /orgs/{org}/invitations/{invitation_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/invitations/{invitation_id}`.
     *
     * Cancel an organization invitation. In order to cancel an organization invitation, the authenticated user must be an organization owner.
     *
@@ -29492,7 +29492,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * orgs_list_invitation_teams: GET /orgs/{org}/invitations/{invitation_id}/teams
+    * This function performs a `GET` to the endpoint `/orgs/{org}/invitations/{invitation_id}/teams`.
     *
     * List all teams associated with an invitation. In order to see invitations in an organization, the authenticated user must be an organization owner.
     *
@@ -29517,7 +29517,7 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
     }
 
     /**
-    * issues_list_for_org: GET /orgs/{org}/issues
+    * This function performs a `GET` to the endpoint `/orgs/{org}/issues`.
     *
     * List issues in an organization assigned to the authenticated user.
     *
@@ -29540,15 +29540,15 @@ after.to_string(), format!("{}", per_page), before.to_string(), include.to_strin
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/orgs/{}/issues?sort={}&direction={}&page={}&state={}&labels={}&filter={}&since={}&per_page={}",
+        let url = format!("/orgs/{}/issues?per_page={}&since={}&labels={}&direction={}&filter={}&state={}&page={}&sort={}",
             progenitor_support::encode_path(&org.to_string()),
-sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(), labels.to_string(), filter.to_string(), since.to_rfc3339(), format!("{}", per_page),         );
+format!("{}", per_page), since.to_rfc3339(), labels.to_string(), direction.to_string(), filter.to_string(), state.to_string(), format!("{}", page), sort.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-    * orgs_list_members: GET /orgs/{org}/members
+    * This function performs a `GET` to the endpoint `/orgs/{org}/members`.
     *
     * List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
     *
@@ -29575,7 +29575,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_check_membership_for_user: GET /orgs/{org}/members/{username}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/members/{username}`.
     *
     * Check if a user is, publicly or privately, a member of the organization.
     *
@@ -29592,7 +29592,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_remove_member: DELETE /orgs/{org}/members/{username}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/members/{username}`.
     *
     * Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories.
     *
@@ -29612,7 +29612,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_get_membership_for_user: GET /orgs/{org}/memberships/{username}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/memberships/{username}`.
     *
     * In order to get a user's membership with an organization, the authenticated user must be an organization member. The `state` parameter in the response can be used to identify the user's membership status.
     *
@@ -29633,7 +29633,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_set_membership_for_user: PUT /orgs/{org}/memberships/{username}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/memberships/{username}`.
     *
     * Only authenticated organization owners can add a member to the organization or update the member's role.
     *
@@ -29667,7 +29667,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_remove_membership_for_user: DELETE /orgs/{org}/memberships/{username}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/memberships/{username}`.
     *
     * In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
     *
@@ -29689,7 +29689,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * migrations_list_for_org: GET /orgs/{org}/migrations
+    * This function performs a `GET` to the endpoint `/orgs/{org}/migrations`.
     *
     * Lists the most recent migrations.
     *
@@ -29703,18 +29703,18 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         exclude: &[String],
     ) -> Result<Vec<types::Migration>> {
         let url = format!(
-            "/orgs/{}/migrations?exclude={}&per_page={}&page={}",
+            "/orgs/{}/migrations?per_page={}&page={}&exclude={}",
             progenitor_support::encode_path(&org.to_string()),
-            exclude.join(" "),
             format!("{}", per_page),
             format!("{}", page),
+            exclude.join(" "),
         );
 
         self.get(&url).await
     }
 
     /**
-    * migrations_start_for_org: POST /orgs/{org}/migrations
+    * This function performs a `POST` to the endpoint `/orgs/{org}/migrations`.
     *
     * Initiates the generation of a migration archive.
     *
@@ -29738,7 +29738,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * migrations_get_status_for_org: GET /orgs/{org}/migrations/{migration_id}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/migrations/{migration_id}`.
     *
     * Fetches the status of a migration.
     *
@@ -29768,7 +29768,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * migrations_download_archive_for_org: GET /orgs/{org}/migrations/{migration_id}/archive
+    * This function performs a `GET` to the endpoint `/orgs/{org}/migrations/{migration_id}/archive`.
     *
     * Fetches the URL to a migration archive.
     *
@@ -29789,7 +29789,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * migrations_delete_archive_for_org: DELETE /orgs/{org}/migrations/{migration_id}/archive
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/migrations/{migration_id}/archive`.
     *
     * Deletes a previous migration archive. Migration archives are automatically deleted after seven days.
     *
@@ -29813,7 +29813,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * migrations_unlock_repo_for_org: DELETE /orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock`.
     *
     * Unlocks a repository that was locked for migration. You should unlock each migrated repository and [delete them](https://docs.github.com/rest/reference/repos#delete-a-repository) when the migration is complete and you no longer need the source data.
     *
@@ -29839,7 +29839,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * migrations_list_repos_for_org: GET /orgs/{org}/migrations/{migration_id}/repositories
+    * This function performs a `GET` to the endpoint `/orgs/{org}/migrations/{migration_id}/repositories`.
     *
     * List all the repositories for this organization migration.
     *
@@ -29864,7 +29864,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_list_outside_collaborators: GET /orgs/{org}/outside_collaborators
+    * This function performs a `GET` to the endpoint `/orgs/{org}/outside_collaborators`.
     *
     * List all users who are outside collaborators of an organization.
     *
@@ -29878,10 +29878,10 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/outside_collaborators?per_page={}&page={}&filter={}",
+            "/orgs/{}/outside_collaborators?page={}&per_page={}&filter={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
             filter.to_string(),
         );
 
@@ -29889,7 +29889,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_convert_member_to_outside_collaborator: PUT /orgs/{org}/outside_collaborators/{username}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/outside_collaborators/{username}`.
     *
     * When an organization member is converted to an outside collaborator, they'll only have access to the repositories that their current team membership allows. The user will no longer be a member of the organization. For more information, see "[Converting an organization member to an outside collaborator](https://help.github.com/articles/converting-an-organization-member-to-an-outside-collaborator/)".
     *
@@ -29910,7 +29910,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_remove_outside_collaborator: DELETE /orgs/{org}/outside_collaborators/{username}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/outside_collaborators/{username}`.
     *
     * Removing a user from this list will remove them from all the organization's repositories.
     *
@@ -29930,7 +29930,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * packages_get_package_for_organization: GET /orgs/{org}/packages/{package_type}/{package_name}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/packages/{package_type}/{package_name}`.
     *
     * Gets a specific package in an organization.
     *
@@ -29956,7 +29956,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * packages_delete_package_for_org: DELETE /orgs/{org}/packages/{package_type}/{package_name}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/packages/{package_type}/{package_name}`.
     *
     * Deletes an entire package in an organization. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
     *
@@ -29986,7 +29986,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * packages_restore_package_for_org: POST /orgs/{org}/packages/{package_type}/{package_name}/restore
+    * This function performs a `POST` to the endpoint `/orgs/{org}/packages/{package_type}/{package_name}/restore`.
     *
     * Restores an entire package in an organization.
     *
@@ -30019,7 +30019,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * packages_get_all_package_versions_for_package_owned_by_org: GET /orgs/{org}/packages/{package_type}/{package_name}/versions
+    * This function performs a `GET` to the endpoint `/orgs/{org}/packages/{package_type}/{package_name}/versions`.
     *
     * Returns all package versions for a package owned by an organization.
     *
@@ -30038,20 +30038,20 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         state: &str,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
-            "/orgs/{}/packages/{}/{}/versions?page={}&per_page={}&state={}",
+            "/orgs/{}/packages/{}/{}/versions?per_page={}&state={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
             state.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * packages_get_package_version_for_organization: GET /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}`.
     *
     * Gets a specific package version in an organization.
     *
@@ -30079,7 +30079,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * packages_delete_package_version_for_org: DELETE /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}`.
     *
     * Deletes a specific package version in an organization. If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
     *
@@ -30111,7 +30111,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * packages_restore_package_version_for_org: POST /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}/restore
+    * This function performs a `POST` to the endpoint `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}/restore`.
     *
     * Restores a specific package version in an organization.
     *
@@ -30144,7 +30144,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_list_for_org: GET /orgs/{org}/projects
+    * This function performs a `GET` to the endpoint `/orgs/{org}/projects`.
     *
     * Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
@@ -30158,18 +30158,18 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/orgs/{}/projects?state={}&page={}&per_page={}",
+            "/orgs/{}/projects?state={}&per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             state.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * projects_create_for_org: POST /orgs/{org}/projects
+    * This function performs a `POST` to the endpoint `/orgs/{org}/projects`.
     *
     * Creates an organization project board. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
@@ -30193,7 +30193,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_list_public_members: GET /orgs/{org}/public_members
+    * This function performs a `GET` to the endpoint `/orgs/{org}/public_members`.
     *
     * Members of an organization can choose to have their membership publicized or not.
     *
@@ -30216,7 +30216,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_check_public_membership_for_user: GET /orgs/{org}/public_members/{username}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/public_members/{username}`.
     *
     *
     *
@@ -30237,7 +30237,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_set_public_membership_for_authenticated_user: PUT /orgs/{org}/public_members/{username}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/public_members/{username}`.
     *
     * The user can publicize their own membership. (A user cannot publicize the membership for another user.)
     *
@@ -30260,7 +30260,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * orgs_remove_public_membership_for_authenticated_user: DELETE /orgs/{org}/public_members/{username}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/public_members/{username}`.
     *
     *
     *
@@ -30284,7 +30284,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * repos_list_for_org: GET /orgs/{org}/repos
+    * This function performs a `GET` to the endpoint `/orgs/{org}/repos`.
     *
     * Lists repositories for the specified organization.
     *
@@ -30300,20 +30300,20 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/orgs/{}/repos?type={}&page={}&sort={}&per_page={}&direction={}",
+            "/orgs/{}/repos?per_page={}&page={}&sort={}&direction={}&type={}",
             progenitor_support::encode_path(&org.to_string()),
-            type_,
+            format!("{}", per_page),
             format!("{}", page),
             sort.to_string(),
-            format!("{}", per_page),
             direction.to_string(),
+            type_,
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_create_in_org: POST /orgs/{org}/repos
+    * This function performs a `POST` to the endpoint `/orgs/{org}/repos`.
     *
     * Creates a new repository in the specified organization. The authenticated user must be a member of the organization.
     *
@@ -30344,7 +30344,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * billing_get_github_actions_billing_org: GET /orgs/{org}/settings/billing/actions
+    * This function performs a `GET` to the endpoint `/orgs/{org}/settings/billing/actions`.
     *
     * Gets the summary of the free and paid GitHub Actions minutes used.
     *
@@ -30367,7 +30367,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * billing_get_github_packages_billing_org: GET /orgs/{org}/settings/billing/packages
+    * This function performs a `GET` to the endpoint `/orgs/{org}/settings/billing/packages`.
     *
     * Gets the free and paid storage used for GitHub Packages in gigabytes.
     *
@@ -30390,7 +30390,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * billing_get_shared_storage_billing_org: GET /orgs/{org}/settings/billing/shared-storage
+    * This function performs a `GET` to the endpoint `/orgs/{org}/settings/billing/shared-storage`.
     *
     * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
     *
@@ -30413,7 +30413,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_list_idp_groups_for_org: GET /orgs/{org}/team-sync/groups
+    * This function performs a `GET` to the endpoint `/orgs/{org}/team-sync/groups`.
     *
     * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -30430,17 +30430,17 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: &str,
     ) -> Result<types::GroupMapping> {
         let url = format!(
-            "/orgs/{}/team-sync/groups?per_page={}&page={}",
+            "/orgs/{}/team-sync/groups?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             page.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_list: GET /orgs/{org}/teams
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams`.
     *
     * Lists all teams in an organization that are visible to the authenticated user.
     *
@@ -30463,7 +30463,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_create: POST /orgs/{org}/teams
+    * This function performs a `POST` to the endpoint `/orgs/{org}/teams`.
     *
     * To create a team, the authenticated user must be a member or owner of `{org}`. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see "[Setting team creation permissions](https://help.github.com/en/articles/setting-team-creation-permissions-in-your-organization)."
     *
@@ -30489,7 +30489,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_get_by_name: GET /orgs/{org}/teams/{team_slug}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}`.
     *
     * Gets a team using the team's `slug`. GitHub generates the `slug` from the team `name`.
     *
@@ -30508,7 +30508,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_delete_in_org: DELETE /orgs/{org}/teams/{team_slug}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/teams/{team_slug}`.
     *
     * To delete a team, the authenticated user must be an organization owner or team maintainer.
     *
@@ -30532,7 +30532,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_update_in_org: PATCH /orgs/{org}/teams/{team_slug}
+    * This function performs a `PATCH` to the endpoint `/orgs/{org}/teams/{team_slug}`.
     *
     * To edit a team, the authenticated user must either be an organization owner or a team maintainer.
     *
@@ -30560,7 +30560,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_list_discussions_in_org: GET /orgs/{org}/teams/{team_slug}/discussions
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions`.
     *
     * List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30591,7 +30591,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_create_discussion_in_org: POST /orgs/{org}/teams/{team_slug}/discussions
+    * This function performs a `POST` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions`.
     *
     * Creates a new discussion post on a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30621,7 +30621,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_get_discussion_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}`.
     *
     * Get a specific discussion on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30646,7 +30646,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_delete_discussion_in_org: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}`.
     *
     * Delete a discussion from a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30674,7 +30674,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_update_discussion_in_org: PATCH /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
+    * This function performs a `PATCH` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}`.
     *
     * Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30704,7 +30704,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_list_discussion_comments_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments`.
     *
     * List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30722,20 +30722,20 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments?direction={}&page={}&per_page={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments?direction={}&per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             direction.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_create_discussion_comment_in_org: POST /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments
+    * This function performs a `POST` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments`.
     *
     * Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30767,7 +30767,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_get_discussion_comment_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}`.
     *
     * Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30794,7 +30794,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_delete_discussion_comment_in_org: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}`.
     *
     * Deletes a comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30824,7 +30824,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_update_discussion_comment_in_org: PATCH /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}
+    * This function performs a `PATCH` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}`.
     *
     * Edits the body text of a discussion comment. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30856,7 +30856,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * reactions_list_for_team_discussion_comment_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions`.
     *
     * List the reactions to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments/). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30875,21 +30875,21 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?per_page={}&page={}&content={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?per_page={}&content={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
             format!("{}", per_page),
-            format!("{}", page),
             content.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * reactions_create_for_team_discussion_comment_in_org: POST /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions
+    * This function performs a `POST` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions`.
     *
     * Create a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion comment.
     *
@@ -30921,7 +30921,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * reactions_delete_for_team_discussion_comment: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}`.
     *
     * **Note:** You can also specify a team or organization with `team_id` and `org_id` using the route `DELETE /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions/:reaction_id`.
     *
@@ -30953,7 +30953,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * reactions_list_for_team_discussion_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions`.
     *
     * List the reactions to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -30971,12 +30971,12 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/reactions?page={}&per_page={}&content={}",
+            "/orgs/{}/teams/{}/discussions/{}/reactions?per_page={}&page={}&content={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
             content.to_string(),
         );
 
@@ -30984,7 +30984,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * reactions_create_for_team_discussion_in_org: POST /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions
+    * This function performs a `POST` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions`.
     *
     * Create a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion.
     *
@@ -31014,7 +31014,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * reactions_delete_for_team_discussion: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}`.
     *
     * **Note:** You can also specify a team or organization with `team_id` and `org_id` using the route `DELETE /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions/:reaction_id`.
     *
@@ -31044,7 +31044,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_list_pending_invitations_in_org: GET /orgs/{org}/teams/{team_slug}/invitations
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/invitations`.
     *
     * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
     *
@@ -31060,18 +31060,18 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
-            "/orgs/{}/teams/{}/invitations?per_page={}&page={}",
+            "/orgs/{}/teams/{}/invitations?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_list_members_in_org: GET /orgs/{org}/teams/{team_slug}/members
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/members`.
     *
     * Team members will include the members of child teams.
     *
@@ -31088,19 +31088,19 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/teams/{}/members?per_page={}&page={}&role={}",
+            "/orgs/{}/teams/{}/members?role={}&page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", per_page),
-            format!("{}", page),
             role.to_string(),
+            format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_get_membership_for_user_in_org: GET /orgs/{org}/teams/{team_slug}/memberships/{username}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/memberships/{username}`.
     *
     * Team members will include the members of child teams.
     *
@@ -31132,7 +31132,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_add_or_update_membership_for_user_in_org: PUT /orgs/{org}/teams/{team_slug}/memberships/{username}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/teams/{team_slug}/memberships/{username}`.
     *
     * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -31170,7 +31170,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_remove_membership_for_user_in_org: DELETE /orgs/{org}/teams/{team_slug}/memberships/{username}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/teams/{team_slug}/memberships/{username}`.
     *
     * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -31202,7 +31202,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_list_projects_in_org: GET /orgs/{org}/teams/{team_slug}/projects
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/projects`.
     *
     * Lists the organization projects for a team.
     *
@@ -31229,7 +31229,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_check_permissions_for_project_in_org: GET /orgs/{org}/teams/{team_slug}/projects/{project_id}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/projects/{project_id}`.
     *
     * Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
     *
@@ -31254,7 +31254,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_add_or_update_project_permissions_in_org: PUT /orgs/{org}/teams/{team_slug}/projects/{project_id}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/teams/{team_slug}/projects/{project_id}`.
     *
     * Adds an organization project to a team. To add a project to a team or update the team's permission on a project, the authenticated user must have `admin` permissions for the project. The project and team must be part of the same organization.
     *
@@ -31284,7 +31284,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_remove_project_in_org: DELETE /orgs/{org}/teams/{team_slug}/projects/{project_id}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/teams/{team_slug}/projects/{project_id}`.
     *
     * Removes an organization project from a team. An organization owner or a team maintainer can remove any project from the team. To remove a project from a team as an organization member, the authenticated user must have `read` access to both the team and project, or `admin` access to the team or project. This endpoint removes the project from the team, but does not delete the project.
     *
@@ -31312,7 +31312,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_list_repos_in_org: GET /orgs/{org}/teams/{team_slug}/repos
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/repos`.
     *
     * Lists a team's repositories visible to the authenticated user.
     *
@@ -31328,18 +31328,18 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/orgs/{}/teams/{}/repos?page={}&per_page={}",
+            "/orgs/{}/teams/{}/repos?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_check_permissions_for_repo_in_org: GET /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}`.
     *
     * Checks whether a team has `admin`, `push`, `maintain`, `triage`, or `pull` permission for a repository. Repositories inherited through a parent team will also be checked.
     *
@@ -31370,7 +31370,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_add_or_update_repo_permissions_in_org: PUT /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}
+    * This function performs a `PUT` to the endpoint `/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}`.
     *
     * To add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a `422 Unprocessable Entity` status if you attempt to add a repository to a team that is not owned by the organization. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
@@ -31404,7 +31404,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_remove_repo_in_org: DELETE /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}
+    * This function performs a `DELETE` to the endpoint `/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}`.
     *
     * If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. This does not delete the repository, it just removes it from the team.
     *
@@ -31434,7 +31434,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_list_idp_groups_in_org: GET /orgs/{org}/teams/{team_slug}/team-sync/group-mappings
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/team-sync/group-mappings`.
     *
     * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -31459,7 +31459,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_create_or_update_idp_group_connections_in_org: PATCH /orgs/{org}/teams/{team_slug}/team-sync/group-mappings
+    * This function performs a `PATCH` to the endpoint `/orgs/{org}/teams/{team_slug}/team-sync/group-mappings`.
     *
     * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -31489,7 +31489,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * teams_list_child_in_org: GET /orgs/{org}/teams/{team_slug}/teams
+    * This function performs a `GET` to the endpoint `/orgs/{org}/teams/{team_slug}/teams`.
     *
     * Lists the child teams of the team specified by `{team_slug}`.
     *
@@ -31505,18 +31505,18 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
-            "/orgs/{}/teams/{}/teams?per_page={}&page={}",
+            "/orgs/{}/teams/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * projects_get_card: GET /projects/columns/cards/{card_id}
+    * This function performs a `GET` to the endpoint `/projects/columns/cards/{card_id}`.
     *
     *
     *
@@ -31532,7 +31532,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_delete_card: DELETE /projects/columns/cards/{card_id}
+    * This function performs a `DELETE` to the endpoint `/projects/columns/cards/{card_id}`.
     *
     *
     *
@@ -31551,7 +31551,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_update_card: PATCH /projects/columns/cards/{card_id}
+    * This function performs a `PATCH` to the endpoint `/projects/columns/cards/{card_id}`.
     *
     *
     *
@@ -31575,7 +31575,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_move_card: POST /projects/columns/cards/{card_id}/moves
+    * This function performs a `POST` to the endpoint `/projects/columns/cards/{card_id}/moves`.
     *
     *
     *
@@ -31599,7 +31599,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_get_column: GET /projects/columns/{column_id}
+    * This function performs a `GET` to the endpoint `/projects/columns/{column_id}`.
     *
     *
     *
@@ -31615,7 +31615,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_delete_column: DELETE /projects/columns/{column_id}
+    * This function performs a `DELETE` to the endpoint `/projects/columns/{column_id}`.
     *
     *
     *
@@ -31634,7 +31634,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_update_column: PATCH /projects/columns/{column_id}
+    * This function performs a `PATCH` to the endpoint `/projects/columns/{column_id}`.
     *
     *
     *
@@ -31658,7 +31658,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_list_cards: GET /projects/columns/{column_id}/cards
+    * This function performs a `GET` to the endpoint `/projects/columns/{column_id}/cards`.
     *
     *
     *
@@ -31683,7 +31683,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_create_card: POST /projects/columns/{column_id}/cards
+    * This function performs a `POST` to the endpoint `/projects/columns/{column_id}/cards`.
     *
     *
     *
@@ -31707,7 +31707,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_move_column: POST /projects/columns/{column_id}/moves
+    * This function performs a `POST` to the endpoint `/projects/columns/{column_id}/moves`.
     *
     *
     *
@@ -31731,7 +31731,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_get: GET /projects/{project_id}
+    * This function performs a `GET` to the endpoint `/projects/{project_id}`.
     *
     * Gets a project by its `id`. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
@@ -31747,7 +31747,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_delete: DELETE /projects/{project_id}
+    * This function performs a `DELETE` to the endpoint `/projects/{project_id}`.
     *
     * Deletes a project board. Returns a `404 Not Found` status if projects are disabled.
     *
@@ -31766,7 +31766,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_update: PATCH /projects/{project_id}
+    * This function performs a `PATCH` to the endpoint `/projects/{project_id}`.
     *
     * Updates a project board's information. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
@@ -31790,7 +31790,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_list_collaborators: GET /projects/{project_id}/collaborators
+    * This function performs a `GET` to the endpoint `/projects/{project_id}/collaborators`.
     *
     * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
     *
@@ -31815,7 +31815,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_add_collaborator: PUT /projects/{project_id}/collaborators/{username}
+    * This function performs a `PUT` to the endpoint `/projects/{project_id}/collaborators/{username}`.
     *
     * Adds a collaborator to an organization project and sets their permission level. You must be an organization owner or a project `admin` to add a collaborator.
     *
@@ -31841,7 +31841,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_remove_collaborator: DELETE /projects/{project_id}/collaborators/{username}
+    * This function performs a `DELETE` to the endpoint `/projects/{project_id}/collaborators/{username}`.
     *
     * Removes a collaborator from an organization project. You must be an organization owner or a project `admin` to remove a collaborator.
     *
@@ -31865,7 +31865,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_get_permission_for_user: GET /projects/{project_id}/collaborators/{username}/permission
+    * This function performs a `GET` to the endpoint `/projects/{project_id}/collaborators/{username}/permission`.
     *
     * Returns the collaborator's permission level for an organization project. Possible values for the `permission` key: `admin`, `write`, `read`, `none`. You must be an organization owner or a project `admin` to review a user's permission level.
     *
@@ -31886,7 +31886,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * projects_list_columns: GET /projects/{project_id}/columns
+    * This function performs a `GET` to the endpoint `/projects/{project_id}/columns`.
     *
     *
     *
@@ -31899,17 +31899,17 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<Vec<types::ProjectColumn>> {
         let url = format!(
-            "/projects/{}/columns?page={}&per_page={}",
+            "/projects/{}/columns?per_page={}&page={}",
             progenitor_support::encode_path(&project_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * projects_create_column: POST /projects/{project_id}/columns
+    * This function performs a `POST` to the endpoint `/projects/{project_id}/columns`.
     *
     *
     *
@@ -31933,7 +31933,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * rate_limit_get: GET /rate_limit
+    * This function performs a `GET` to the endpoint `/rate_limit`.
     *
     * **Note:** Accessing this endpoint does not count against your REST API rate limit.
     *
@@ -31947,7 +31947,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * reactions_delete_legacy: DELETE /reactions/{reaction_id}
+    * This function performs a `DELETE` to the endpoint `/reactions/{reaction_id}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Reactions API. We recommend migrating your existing code to use the new delete reactions endpoints. For more information, see this [blog post](https://developer.github.com/changes/2020-02-26-new-delete-reactions-endpoints/).
     *
@@ -31968,7 +31968,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * repos_get: GET /repos/{owner}/{repo}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}`.
     *
     * When you pass the `scarlet-witch-preview` media type, requests to get a repository will also return the repository's code of conduct if it can be detected from the repository's code of conduct file.
     *
@@ -31987,7 +31987,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * repos_delete: DELETE /repos/{owner}/{repo}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}`.
     *
     * Deleting a repository requires admin access. If OAuth is used, the `delete_repo` scope is required.
     *
@@ -32010,7 +32010,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * repos_update: PATCH /repos/{owner}/{repo}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}`.
     *
     * **Note**: To edit a repository's topics, use the [Replace all repository topics](https://docs.github.com/rest/reference/repos#replace-all-repository-topics) endpoint.
     *
@@ -32036,7 +32036,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_list_artifacts_for_repo: GET /repos/{owner}/{repo}/actions/artifacts
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/artifacts`.
     *
     * Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
@@ -32050,18 +32050,18 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<types::GetListArtifactsRepositoryOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/artifacts?per_page={}&page={}",
+            "/repos/{}/{}/actions/artifacts?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_get_artifact: GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/artifacts/{artifact_id}`.
     *
     * Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
@@ -32084,7 +32084,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_delete_artifact: DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/actions/artifacts/{artifact_id}`.
     *
     * Deletes an artifact for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
@@ -32110,7 +32110,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_download_artifact: GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}`.
     *
     * Gets a redirect URL to download an archive for a repository. This URL expires after 1 minute. Look for `Location:` in
     * the response header to find the URL for the download. The `:archive_format` must be `zip`. Anyone with read access to
@@ -32138,7 +32138,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_get_job_for_workflow_run: GET /repos/{owner}/{repo}/actions/jobs/{job_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/jobs/{job_id}`.
     *
     * Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
@@ -32161,7 +32161,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_download_job_logs_for_workflow_run: GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/jobs/{job_id}/logs`.
     *
     * Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute. Look
     * for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can
@@ -32187,7 +32187,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_get_github_actions_permissions_repository: GET /repos/{owner}/{repo}/actions/permissions
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/permissions`.
     *
     * Gets the GitHub Actions permissions policy for a repository, including whether GitHub Actions is enabled and the actions allowed to run in the repository.
     *
@@ -32211,7 +32211,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_set_github_actions_permissions_repository: PUT /repos/{owner}/{repo}/actions/permissions
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/actions/permissions`.
     *
     * Sets the GitHub Actions permissions policy for enabling GitHub Actions and allowed actions in the repository.
     *
@@ -32241,7 +32241,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_get_allowed_actions_repository: GET /repos/{owner}/{repo}/actions/permissions/selected-actions
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/permissions/selected-actions`.
     *
     * Gets the settings for selected actions that are allowed in a repository. To use this endpoint, the repository policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for a repository](#set-github-actions-permissions-for-a-repository)."
     *
@@ -32264,7 +32264,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_set_allowed_actions_repository: PUT /repos/{owner}/{repo}/actions/permissions/selected-actions
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/actions/permissions/selected-actions`.
     *
     * Sets the actions that are allowed in a repository. To use this endpoint, the repository permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for a repository](#set-github-actions-permissions-for-a-repository)."
     *
@@ -32296,7 +32296,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_list_self_hosted_runners_for_repo: GET /repos/{owner}/{repo}/actions/runners
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runners`.
     *
     * Lists all self-hosted runners configured in a repository. You must authenticate using an access token with the `repo` scope to use this endpoint.
     *
@@ -32321,7 +32321,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_list_runner_applications_for_repo: GET /repos/{owner}/{repo}/actions/runners/downloads
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runners/downloads`.
     *
     * Lists binaries for the runner application that you can download and run.
     *
@@ -32344,7 +32344,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_create_registration_token_for_repo: POST /repos/{owner}/{repo}/actions/runners/registration-token
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/actions/runners/registration-token`.
     *
     * Returns a token that you can pass to the `config` script. The token expires after one hour. You must authenticate
     * using an access token with the `repo` scope to use this endpoint.
@@ -32374,7 +32374,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_create_remove_token_for_repo: POST /repos/{owner}/{repo}/actions/runners/remove-token
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/actions/runners/remove-token`.
     *
     * Returns a token that you can pass to remove a self-hosted runner from a repository. The token expires after one hour.
     * You must authenticate using an access token with the `repo` scope to use this endpoint.
@@ -32404,7 +32404,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_get_self_hosted_runner_for_repo: GET /repos/{owner}/{repo}/actions/runners/{runner_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runners/{runner_id}`.
     *
     * Gets a specific self-hosted runner configured in a repository.
     *
@@ -32430,7 +32430,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_delete_self_hosted_runner_from_repo: DELETE /repos/{owner}/{repo}/actions/runners/{runner_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/actions/runners/{runner_id}`.
     *
     * Forces the removal of a self-hosted runner from a repository. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
     *
@@ -32459,7 +32459,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_list_workflow_runs_for_repo: GET /repos/{owner}/{repo}/actions/runs
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runs`.
     *
     * Lists all workflow runs for a repository. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
     *
@@ -32479,22 +32479,22 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<types::GetListWorkflowRunsRepositoryOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runs?branch={}&event={}&status={}&page={}&per_page={}&actor={}",
+            "/repos/{}/{}/actions/runs?event={}&actor={}&branch={}&status={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            branch.to_string(),
             event.to_string(),
-            status.to_string(),
-            format!("{}", page),
-            format!("{}", per_page),
             actor.to_string(),
+            branch.to_string(),
+            status.to_string(),
+            format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_get_workflow_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}`.
     *
     * Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
@@ -32517,7 +32517,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_delete_workflow_run: DELETE /repos/{owner}/{repo}/actions/runs/{run_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}`.
     *
     * Delete a specific workflow run. Anyone with write access to the repository can use this endpoint. If the repository is
     * private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:write` permission to use
@@ -32545,7 +32545,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_get_reviews_for_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}/approvals
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/approvals`.
     *
     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
@@ -32568,7 +32568,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_approve_workflow_run: POST /repos/{owner}/{repo}/actions/runs/{run_id}/approve
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/approve`.
     *
     * **Note:** This endpoint is currently in beta and is subject to change.
     *
@@ -32595,7 +32595,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_list_workflow_run_artifacts: GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts`.
     *
     * Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
@@ -32610,19 +32610,19 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<types::GetListWorkflowRunArtifactsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runs/{}/artifacts?page={}&per_page={}",
+            "/repos/{}/{}/actions/runs/{}/artifacts?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_cancel_workflow_run: POST /repos/{owner}/{repo}/actions/runs/{run_id}/cancel
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/cancel`.
     *
     * Cancels a workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
@@ -32645,7 +32645,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_list_jobs_for_workflow_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/jobs`.
     *
     * Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
     *
@@ -32674,7 +32674,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_download_workflow_run_logs: GET /repos/{owner}/{repo}/actions/runs/{run_id}/logs
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/logs`.
     *
     * Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute. Look for
     * `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use
@@ -32700,7 +32700,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_delete_workflow_run_logs: DELETE /repos/{owner}/{repo}/actions/runs/{run_id}/logs
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/logs`.
     *
     * Deletes all logs for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
@@ -32726,7 +32726,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_get_pending_deployments_for_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments`.
     *
     * Get all deployment environments for a workflow run that are waiting for protection rules to pass.
     *
@@ -32751,7 +32751,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_review_pending_deployments_for_run: POST /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments`.
     *
     * Approve or reject pending deployments that are waiting on approval by a required reviewer.
     *
@@ -32781,7 +32781,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_re_run_workflow: POST /repos/{owner}/{repo}/actions/runs/{run_id}/rerun
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/rerun`.
     *
     * Re-runs your workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
@@ -32804,7 +32804,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_get_workflow_run_usage: GET /repos/{owner}/{repo}/actions/runs/{run_id}/timing
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/runs/{run_id}/timing`.
     *
     * Gets the number of billable minutes and total run time for a specific workflow run. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
     *
@@ -32829,7 +32829,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_list_repo_secrets: GET /repos/{owner}/{repo}/actions/secrets
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/secrets`.
     *
     * Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
@@ -32843,18 +32843,18 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<types::GetListRepositorySecretsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/secrets?per_page={}&page={}",
+            "/repos/{}/{}/actions/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_get_repo_public_key: GET /repos/{owner}/{repo}/actions/secrets/public-key
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/secrets/public-key`.
     *
     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
@@ -32875,7 +32875,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_get_repo_secret: GET /repos/{owner}/{repo}/actions/secrets/{secret_name}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/secrets/{secret_name}`.
     *
     * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
@@ -32898,7 +32898,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_create_or_update_repo_secret: PUT /repos/{owner}/{repo}/actions/secrets/{secret_name}
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/actions/secrets/{secret_name}`.
     *
     * Creates or updates a repository secret with an encrypted value. Encrypt your secret using
     * [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). You must authenticate using an access
@@ -33000,7 +33000,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_delete_repo_secret: DELETE /repos/{owner}/{repo}/actions/secrets/{secret_name}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/actions/secrets/{secret_name}`.
     *
     * Deletes a secret in a repository using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
@@ -33026,7 +33026,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_list_repo_workflows: GET /repos/{owner}/{repo}/actions/workflows
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/workflows`.
     *
     * Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
@@ -33040,18 +33040,18 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         page: i64,
     ) -> Result<types::GetListRepositoryWorkflowsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/workflows?page={}&per_page={}",
+            "/repos/{}/{}/actions/workflows?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_get_workflow: GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/workflows/{workflow_id}`.
     *
     * Gets a specific workflow. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
@@ -33074,7 +33074,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_disable_workflow: PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable`.
     *
     * Disables a workflow and sets the `state` of the workflow to `disabled_manually`. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`.
     *
@@ -33099,7 +33099,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_create_workflow_dispatch: POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches`.
     *
     * You can use this endpoint to manually trigger a GitHub Actions workflow run. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`.
     *
@@ -33131,7 +33131,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_enable_workflow: PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable`.
     *
     * Enables a workflow and sets the `state` of the workflow to `active`. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`.
     *
@@ -33156,7 +33156,7 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
     }
 
     /**
-    * actions_list_workflow_runs: GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs`.
     *
     * List all workflow runs for a workflow. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
     *
@@ -33176,17 +33176,17 @@ sort.to_string(), direction.to_string(), format!("{}", page), state.to_string(),
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListWorkflowRunsOkResponse> {
-        let url = format!("/repos/{}/{}/actions/workflows/{}/runs?status={}&actor={}&per_page={}&page={}&branch={}&event={}",
+        let url = format!("/repos/{}/{}/actions/workflows/{}/runs?actor={}&branch={}&per_page={}&event={}&page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
-status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", page), branch.to_string(), event.to_string(),         );
+actor.to_string(), branch.to_string(), format!("{}", per_page), event.to_string(), format!("{}", page), status.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-    * actions_get_workflow_usage: GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing`.
     *
     * Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
     *
@@ -33211,7 +33211,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * issues_list_assignees: GET /repos/{owner}/{repo}/assignees
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/assignees`.
     *
     * Lists the [available assignees](https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
     *
@@ -33236,7 +33236,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * issues_check_user_can_be_assigned: GET /repos/{owner}/{repo}/assignees/{assignee}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/assignees/{assignee}`.
     *
     * Checks if a user has permission to be assigned to an issue in this repository.
     *
@@ -33263,7 +33263,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_enable_automated_security_fixes: PUT /repos/{owner}/{repo}/automated-security-fixes
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/automated-security-fixes`.
     *
     * Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
     *
@@ -33284,7 +33284,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_disable_automated_security_fixes: DELETE /repos/{owner}/{repo}/automated-security-fixes
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/automated-security-fixes`.
     *
     * Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
     *
@@ -33308,7 +33308,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_list_branches: GET /repos/{owner}/{repo}/branches
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches`.
     *
     *
     *
@@ -33323,19 +33323,19 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
         page: i64,
     ) -> Result<Vec<types::ShortBranch>> {
         let url = format!(
-            "/repos/{}/{}/branches?protected={}&page={}&per_page={}",
+            "/repos/{}/{}/branches?protected={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", protected),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_get_branch: GET /repos/{owner}/{repo}/branches/{branch}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}`.
     *
     *
     *
@@ -33358,7 +33358,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_branch_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33381,7 +33381,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_update_branch_protection: PUT /repos/{owner}/{repo}/branches/{branch}/protection
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33415,7 +33415,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_delete_branch_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33441,7 +33441,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_admin_branch_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33464,7 +33464,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_set_admin_branch_protection: POST /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33489,7 +33489,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_delete_admin_branch_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33517,7 +33517,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_pull_request_review_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33540,7 +33540,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_delete_pull_request_review_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33566,7 +33566,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_update_pull_request_review_protection: PATCH /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33598,7 +33598,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_commit_signature_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33625,7 +33625,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_create_commit_signature_protection: POST /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33650,7 +33650,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_delete_commit_signature_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33678,7 +33678,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_status_checks_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33701,7 +33701,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_remove_status_check_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33727,7 +33727,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_update_status_check_protection: PATCH /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33757,7 +33757,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_all_status_check_contexts: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33780,7 +33780,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_set_status_check_contexts: PUT /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33808,7 +33808,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_add_status_check_contexts: POST /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33836,7 +33836,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_remove_status_check_contexts: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33868,7 +33868,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_access_restrictions: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33895,7 +33895,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_delete_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33923,7 +33923,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_apps_with_access_to_protected_branch: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33948,7 +33948,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_set_app_access_restrictions: PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -33982,7 +33982,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_add_app_access_restrictions: POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34016,7 +34016,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_remove_app_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34054,7 +34054,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_teams_with_access_to_protected_branch: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34079,7 +34079,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_set_team_access_restrictions: PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34113,7 +34113,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_add_team_access_restrictions: POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34147,7 +34147,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_remove_team_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34185,7 +34185,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_get_users_with_access_to_protected_branch: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34210,7 +34210,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_set_user_access_restrictions: PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34244,7 +34244,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_add_user_access_restrictions: POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34278,7 +34278,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_remove_user_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -34316,7 +34316,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * repos_rename_branch: POST /repos/{owner}/{repo}/branches/{branch}/rename
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/branches/{branch}/rename`.
     *
     * Renames a branch in a repository.
     *
@@ -34358,7 +34358,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * checks_create: POST /repos/{owner}/{repo}/check-runs
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/check-runs`.
     *
     * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
     *
@@ -34388,7 +34388,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * checks_get: GET /repos/{owner}/{repo}/check-runs/{check_run_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/check-runs/{check_run_id}`.
     *
     * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
     *
@@ -34413,7 +34413,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * checks_update: PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/check-runs/{check_run_id}`.
     *
     * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
     *
@@ -34443,7 +34443,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * checks_list_annotations: GET /repos/{owner}/{repo}/check-runs/{check_run_id}/annotations
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations`.
     *
     * Lists annotations for a check run using the annotation `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get annotations for a check run. OAuth Apps and authenticated users must have the `repo` scope to get annotations for a check run in a private repository.
     *
@@ -34458,19 +34458,19 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
         page: i64,
     ) -> Result<Vec<types::CheckAnnotation>> {
         let url = format!(
-            "/repos/{}/{}/check-runs/{}/annotations?page={}&per_page={}",
+            "/repos/{}/{}/check-runs/{}/annotations?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_run_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * checks_create_suite: POST /repos/{owner}/{repo}/check-suites
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/check-suites`.
     *
     * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`.
     *
@@ -34498,7 +34498,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * checks_set_suites_preferences: PATCH /repos/{owner}/{repo}/check-suites/preferences
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/check-suites/preferences`.
     *
     * Changes the default automatic flow when creating check suites. By default, a check suite is automatically created each time code is pushed to a repository. When you disable the automatic creation of check suites, you can manually [Create a check suite](https://docs.github.com/rest/reference/checks#create-a-check-suite). You must have admin permissions in the repository to set preferences for check suites.
     *
@@ -34524,7 +34524,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * checks_get_suite: GET /repos/{owner}/{repo}/check-suites/{check_suite_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/check-suites/{check_suite_id}`.
     *
     * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`.
     *
@@ -34549,7 +34549,7 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
     }
 
     /**
-    * checks_list_for_suite: GET /repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs`.
     *
     * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
     *
@@ -34568,17 +34568,17 @@ status.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", pa
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListCheckRunsinCheckSuiteOkResponse> {
-        let url = format!("/repos/{}/{}/check-suites/{}/check-runs?status={}&page={}&check_name={}&filter={}&per_page={}",
+        let url = format!("/repos/{}/{}/check-suites/{}/check-runs?filter={}&per_page={}&check_name={}&status={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
-status.to_string(), format!("{}", page), check_name.to_string(), filter.to_string(), format!("{}", per_page),         );
+filter.to_string(), format!("{}", per_page), check_name.to_string(), status.to_string(), format!("{}", page),         );
 
         self.get(&url).await
     }
 
     /**
-    * checks_rerequest_suite: POST /repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest`.
     *
     * Triggers GitHub to rerequest an existing check suite, without pushing new code to a repository. This endpoint will trigger the [`check_suite` webhook](https://docs.github.com/webhooks/event-payloads/#check_suite) event with the action `rerequested`. When a check suite is `rerequested`, its `status` is reset to `queued` and the `conclusion` is cleared.
     *
@@ -34603,7 +34603,7 @@ status.to_string(), format!("{}", page), check_name.to_string(), filter.to_strin
     }
 
     /**
-    * code_scanning_list_alerts_for_repo: GET /repos/{owner}/{repo}/code-scanning/alerts
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/code-scanning/alerts`.
     *
     * Lists all open code scanning alerts for the default branch (usually `main`
     * or `master`). You must use an access token with the `security_events` scope to use
@@ -34628,16 +34628,16 @@ status.to_string(), format!("{}", page), check_name.to_string(), filter.to_strin
         ref_: &&str,
         state: &str,
     ) -> Result<Vec<types::CodeScanningAlertItems>> {
-        let url = format!("/repos/{}/{}/code-scanning/alerts?per_page={}&state={}&ref={}&tool_name={}&tool_guid={}&page={}",
+        let url = format!("/repos/{}/{}/code-scanning/alerts?page={}&tool_name={}&tool_guid={}&per_page={}&ref={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-format!("{}", per_page), state.to_string(), ref_, tool_name.to_string(), tool_guid.to_string(), format!("{}", page),         );
+format!("{}", page), tool_name.to_string(), tool_guid.to_string(), format!("{}", per_page), ref_, state.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-    * code_scanning_get_alert: GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}`.
     *
     * Gets a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
     *
@@ -34663,7 +34663,7 @@ format!("{}", per_page), state.to_string(), ref_, tool_name.to_string(), tool_gu
     }
 
     /**
-    * code_scanning_update_alert: PATCH /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}`.
     *
     * Updates the status of a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
     *
@@ -34691,7 +34691,7 @@ format!("{}", per_page), state.to_string(), ref_, tool_name.to_string(), tool_gu
     }
 
     /**
-    * code_scanning_list_alert_instances: GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances`.
     *
     * Lists all instances of the specified code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
     *
@@ -34707,20 +34707,20 @@ format!("{}", per_page), state.to_string(), ref_, tool_name.to_string(), tool_gu
         ref_: &&str,
     ) -> Result<Vec<types::CodeScanningAlertInstance>> {
         let url = format!(
-            "/repos/{}/{}/code-scanning/alerts/{}/instances?page={}&per_page={}&ref={}",
+            "/repos/{}/{}/code-scanning/alerts/{}/instances?page={}&ref={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
             format!("{}", page),
-            format!("{}", per_page),
             ref_,
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * code_scanning_list_recent_analyses: GET /repos/{owner}/{repo}/code-scanning/analyses
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/code-scanning/analyses`.
     *
     * Lists the details of all code scanning analyses for a repository,
     * starting with the most recent.
@@ -34752,16 +34752,16 @@ format!("{}", per_page), state.to_string(), ref_, tool_name.to_string(), tool_gu
         ref_: &&str,
         sarif_id: &str,
     ) -> Result<Vec<types::CodeScanningAnalysis>> {
-        let url = format!("/repos/{}/{}/code-scanning/analyses?ref={}&sarif_id={}&page={}&per_page={}&tool_name={}&tool_guid={}",
+        let url = format!("/repos/{}/{}/code-scanning/analyses?tool_name={}&page={}&tool_guid={}&per_page={}&sarif_id={}&ref={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_name.to_string(), tool_guid.to_string(),         );
+tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}", per_page), sarif_id.to_string(), ref_,         );
 
         self.get(&url).await
     }
 
     /**
-    * code_scanning_get_analysis: GET /repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}`.
     *
     * Gets a specified code scanning analysis for a repository.
     * You must use an access token with the `security_events` scope to use this endpoint.
@@ -34804,7 +34804,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * code_scanning_delete_analysis: DELETE /repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}`.
     *
     * Deletes a specified code scanning analysis from a repository. For
     * private repositories, you must use an access token with the `repo` scope. For public repositories,
@@ -34900,7 +34900,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * code_scanning_upload_sarif: POST /repos/{owner}/{repo}/code-scanning/sarifs
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/code-scanning/sarifs`.
     *
     * Uploads SARIF data containing the results of a code scanning analysis to make the results available in a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
     *
@@ -34942,7 +34942,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * code_scanning_get_sarif: GET /repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}`.
     *
     * Gets information about a SARIF upload, including the status and the URL of the analysis that was uploaded so that you can retrieve details of the analysis. For more information, see "[Get a code scanning analysis for a repository](/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository)." You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
     *
@@ -34965,7 +34965,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_list_collaborators: GET /repos/{owner}/{repo}/collaborators
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/collaborators`.
     *
     * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
     *
@@ -34982,19 +34982,19 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
         page: i64,
     ) -> Result<Vec<types::Collaborator>> {
         let url = format!(
-            "/repos/{}/{}/collaborators?page={}&affiliation={}&per_page={}",
+            "/repos/{}/{}/collaborators?per_page={}&page={}&affiliation={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            format!("{}", per_page),
             format!("{}", page),
             affiliation.to_string(),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_check_collaborator: GET /repos/{owner}/{repo}/collaborators/{username}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/collaborators/{username}`.
     *
     * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
     *
@@ -35019,7 +35019,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_add_collaborator: PUT /repos/{owner}/{repo}/collaborators/{username}
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/collaborators/{username}`.
     *
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
@@ -35057,7 +35057,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_remove_collaborator: DELETE /repos/{owner}/{repo}/collaborators/{username}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/collaborators/{username}`.
     *
     *
     *
@@ -35083,7 +35083,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_get_collaborator_permission_level: GET /repos/{owner}/{repo}/collaborators/{username}/permission
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/collaborators/{username}/permission`.
     *
     * Checks the repository permission of a collaborator. The possible repository permissions are `admin`, `write`, `read`, and `none`.
     *
@@ -35106,7 +35106,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_list_commit_comments_for_repo: GET /repos/{owner}/{repo}/comments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/comments`.
     *
     * Commit Comments use [these custom media types](https://docs.github.com/rest/reference/repos#custom-media-types). You can read more about the use of media types in the API [here](https://docs.github.com/rest/overview/media-types/).
     *
@@ -35133,7 +35133,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_get_commit_comment: GET /repos/{owner}/{repo}/comments/{comment_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/comments/{comment_id}`.
     *
     *
     *
@@ -35156,7 +35156,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_delete_commit_comment: DELETE /repos/{owner}/{repo}/comments/{comment_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/comments/{comment_id}`.
     *
     *
     *
@@ -35182,7 +35182,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_update_commit_comment: PATCH /repos/{owner}/{repo}/comments/{comment_id}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/comments/{comment_id}`.
     *
     *
     *
@@ -35210,7 +35210,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * reactions_list_for_commit_comment: GET /repos/{owner}/{repo}/comments/{comment_id}/reactions
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/comments/{comment_id}/reactions`.
     *
     * List the reactions to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
     *
@@ -35226,20 +35226,20 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/comments/{}/reactions?content={}&per_page={}&page={}",
+            "/repos/{}/{}/comments/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
             content.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * reactions_create_for_commit_comment: POST /repos/{owner}/{repo}/comments/{comment_id}/reactions
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/comments/{comment_id}/reactions`.
     *
     * Create a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments). A response with an HTTP `200` status means that you already added the reaction type to this commit comment.
     *
@@ -35267,7 +35267,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * reactions_delete_for_commit_comment: DELETE /repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}`.
     *
     * **Note:** You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/comments/:comment_id/reactions/:reaction_id`.
     *
@@ -35297,7 +35297,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_list_commits: GET /repos/{owner}/{repo}/commits
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/commits`.
     *
     * **Signature verification object**
     *
@@ -35343,23 +35343,23 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
         page: i64,
     ) -> Result<Vec<types::Commit>> {
         let url = format!(
-            "/repos/{}/{}/commits?sha={}&per_page={}&path={}&since={}&until={}&author={}&page={}",
+            "/repos/{}/{}/commits?sha={}&path={}&page={}&author={}&since={}&until={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             sha.to_string(),
-            format!("{}", per_page),
             path.to_string(),
+            format!("{}", page),
+            author.to_string(),
             since.to_rfc3339(),
             until.to_rfc3339(),
-            author.to_string(),
-            format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_list_branches_for_head_commit: GET /repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head`.
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -35384,7 +35384,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_list_comments_for_commit: GET /repos/{owner}/{repo}/commits/{commit_sha}/comments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/commits/{commit_sha}/comments`.
     *
     * Use the `:commit_sha` to specify the commit that will have its comments listed.
     *
@@ -35399,19 +35399,19 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
         page: i64,
     ) -> Result<Vec<types::CommitComment>> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/comments?per_page={}&page={}",
+            "/repos/{}/{}/commits/{}/comments?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_create_commit_comment: POST /repos/{owner}/{repo}/commits/{commit_sha}/comments
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/commits/{commit_sha}/comments`.
     *
     * Create a comment for a commit using its `:commit_sha`.
     *
@@ -35441,7 +35441,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_list_pull_requests_associated_with_commit: GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/commits/{commit_sha}/pulls`.
     *
     * Lists the merged pull request that introduced the commit to the repository. If the commit is not present in the default branch, additionally returns open pull requests associated with the commit. The results may include open and closed pull requests. Additional preview headers may be required to see certain details for associated pull requests, such as whether a pull request is in a draft state. For more information about previews that might affect this endpoint, see the [List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests) endpoint.
     *
@@ -35468,7 +35468,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * repos_get_commit: GET /repos/{owner}/{repo}/commits/{ref}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/commits/{ref}`.
     *
     * Returns the contents of a single commit reference. You must have `read` access for the repository to use this endpoint.
     *
@@ -35530,7 +35530,7 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
     }
 
     /**
-    * checks_list_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/check-runs
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/commits/{ref}/check-runs`.
     *
     * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
     *
@@ -35550,17 +35550,17 @@ ref_, sarif_id.to_string(), format!("{}", page), format!("{}", per_page), tool_n
         page: i64,
         app_id: i64,
     ) -> Result<types::GetListCheckRunsGitReferenceOkResponse> {
-        let url = format!("/repos/{}/{}/commits/{}/check-runs?per_page={}&page={}&filter={}&app_id={}&check_name={}&status={}",
+        let url = format!("/repos/{}/{}/commits/{}/check-runs?filter={}&status={}&per_page={}&app_id={}&check_name={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", app_id), check_name.to_string(), status.to_string(),         );
+filter.to_string(), status.to_string(), format!("{}", per_page), format!("{}", app_id), check_name.to_string(), format!("{}", page),         );
 
         self.get(&url).await
     }
 
     /**
-    * checks_list_suites_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/check-suites
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/commits/{ref}/check-suites`.
     *
     * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`.
     *
@@ -35579,21 +35579,21 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
         page: i64,
     ) -> Result<types::GetListCheckSuitesGitReferenceOkResponse> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/check-suites?page={}&app_id={}&check_name={}&per_page={}",
+            "/repos/{}/{}/commits/{}/check-suites?app_id={}&check_name={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", page),
             format!("{}", app_id),
             check_name.to_string(),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_get_combined_status_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/status
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/commits/{ref}/status`.
     *
     * Users with pull access in a repository can access a combined view of commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name.
     *
@@ -35616,19 +35616,19 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
         page: i64,
     ) -> Result<types::CombinedCommitStatus> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/status?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/status?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_list_commit_statuses_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/statuses
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/commits/{ref}/statuses`.
     *
     * Users with pull access in a repository can view commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name. Statuses are returned in reverse chronological order. The first status in the list will be the latest one.
     *
@@ -35657,7 +35657,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * codes_of_conduct_get_for_repo: GET /repos/{owner}/{repo}/community/code_of_conduct
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/community/code_of_conduct`.
     *
     * Returns the contents of the repository's code of conduct file, if one is detected.
     *
@@ -35680,7 +35680,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_get_community_profile_metrics: GET /repos/{owner}/{repo}/community/profile
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/community/profile`.
     *
     * This endpoint will return all community profile metrics, including an
     * overall health score, repository description, the presence of documentation, detected
@@ -35712,7 +35712,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_compare_commits: GET /repos/{owner}/{repo}/compare/{basehead}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/compare/{basehead}`.
     *
     * The `basehead` param is comprised of two parts: `base` and `head`. Both must be branch names in `repo`. To compare branches across other repositories in the same network as `repo`, use the format `<USERNAME>:branch`.
     *
@@ -35766,19 +35766,19 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
         basehead: &str,
     ) -> Result<types::CommitComparison> {
         let url = format!(
-            "/repos/{}/{}/compare/{}?per_page={}&page={}",
+            "/repos/{}/{}/compare/{}?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&basehead.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * apps_create_content_attachment: POST /repos/{owner}/{repo}/content_references/{content_reference_id}/attachments
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/content_references/{content_reference_id}/attachments`.
     *
     * Creates an attachment under a content reference URL in the body or comment of an issue or pull request. Use the `id` and `repository` `full_name` of the content reference from the [`content_reference` event](https://docs.github.com/webhooks/event-payloads/#content_reference) to create an attachment.
     *
@@ -35810,7 +35810,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_get_content: GET /repos/{owner}/{repo}/contents/{path}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/contents/{path}`.
     *
     * Gets the contents of a file or directory in a repository. Specify the file path or directory in `:path`. If you omit
     * `:path`, you will receive the contents of the repository's root directory. See the description below regarding what the API response includes for directories.
@@ -35866,7 +35866,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_create_or_update_file_contents: PUT /repos/{owner}/{repo}/contents/{path}
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/contents/{path}`.
     *
     * Creates a new file or replaces an existing file in a repository.
     *
@@ -35894,7 +35894,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_delete_file: DELETE /repos/{owner}/{repo}/contents/{path}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/contents/{path}`.
     *
     * Deletes a file in a repository.
     *
@@ -35932,7 +35932,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_list_contributors: GET /repos/{owner}/{repo}/contributors
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/contributors`.
     *
     * Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.
     *
@@ -35949,19 +35949,19 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
         page: i64,
     ) -> Result<Vec<types::Contributor>> {
         let url = format!(
-            "/repos/{}/{}/contributors?per_page={}&page={}&anon={}",
+            "/repos/{}/{}/contributors?anon={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            anon.to_string(),
             format!("{}", per_page),
             format!("{}", page),
-            anon.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_list_deployments: GET /repos/{owner}/{repo}/deployments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/deployments`.
     *
     * Simple filtering of deployments is available via query parameters:
     *
@@ -35979,22 +35979,22 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
         page: i64,
     ) -> Result<Vec<types::Deployment>> {
         let url = format!(
-            "/repos/{}/{}/deployments?per_page={}&page={}&task={}&sha={}&environment={}&ref={}",
+            "/repos/{}/{}/deployments?task={}&page={}&ref={}&sha={}&environment={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
-            format!("{}", page),
             task.to_string(),
+            format!("{}", page),
+            ref_,
             sha.to_string(),
             environment.to_string(),
-            ref_,
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_create_deployment: POST /repos/{owner}/{repo}/deployments
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/deployments`.
     *
     * Deployments offer a few configurable parameters with certain defaults.
     *
@@ -36064,7 +36064,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_get_deployment: GET /repos/{owner}/{repo}/deployments/{deployment_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/deployments/{deployment_id}`.
     *
     *
     *
@@ -36087,7 +36087,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_delete_deployment: DELETE /repos/{owner}/{repo}/deployments/{deployment_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/deployments/{deployment_id}`.
     *
     * To ensure there can always be an active deployment, you can only delete an _inactive_ deployment. Anyone with `repo` or `repo_deployment` scopes can delete an inactive deployment.
     *
@@ -36120,7 +36120,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_list_deployment_statuses: GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses`.
     *
     * Users with pull access can view deployment statuses for a deployment:
     *
@@ -36135,19 +36135,19 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
         page: i64,
     ) -> Result<Vec<types::DeploymentStatus>> {
         let url = format!(
-            "/repos/{}/{}/deployments/{}/statuses?page={}&per_page={}",
+            "/repos/{}/{}/deployments/{}/statuses?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_create_deployment_status: POST /repos/{owner}/{repo}/deployments/{deployment_id}/statuses
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses`.
     *
     * Users with `push` access can create deployment statuses for a given deployment.
     *
@@ -36177,7 +36177,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_get_deployment_status: GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}`.
     *
     * Users with pull access can view a deployment status for a deployment:
     *
@@ -36202,7 +36202,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_create_dispatch_event: POST /repos/{owner}/{repo}/dispatches
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/dispatches`.
     *
     * You can use this endpoint to trigger a webhook event called `repository_dispatch` when you want activity that happens outside of GitHub to trigger a GitHub Actions workflow or GitHub App webhook. You must configure your GitHub Actions workflow or GitHub App to run when the `repository_dispatch` event occurs. For an example `repository_dispatch` webhook payload, see "[RepositoryDispatchEvent](https://docs.github.com/webhooks/event-payloads/#repository_dispatch)."
     *
@@ -36237,7 +36237,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_get_all_environments: GET /repos/{owner}/{repo}/environments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/environments`.
     *
     * Get all environments for a repository.
     *
@@ -36260,7 +36260,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_get_environment: GET /repos/{owner}/{repo}/environments/{environment_name}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/environments/{environment_name}`.
     *
     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
@@ -36283,7 +36283,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_create_or_update_environment: PUT /repos/{owner}/{repo}/environments/{environment_name}
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/environments/{environment_name}`.
     *
     * Create or update an environment with protection rules, such as required reviewers. For more information about environment protection rules, see "[Environments](/actions/reference/environments#environment-protection-rules)."
     *
@@ -36317,7 +36317,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_delete_an_environment: DELETE /repos/{owner}/{repo}/environments/{environment_name}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/environments/{environment_name}`.
     *
     * You must authenticate using an access token with the repo scope to use this endpoint.
     *
@@ -36343,7 +36343,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * activity_list_repo_events: GET /repos/{owner}/{repo}/events
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/events`.
     *
     *
     *
@@ -36368,7 +36368,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_list_forks: GET /repos/{owner}/{repo}/forks
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/forks`.
     *
     *
     *
@@ -36395,7 +36395,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_create_fork: POST /repos/{owner}/{repo}/forks
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/forks`.
     *
     * Create a fork for the authenticated user.
     *
@@ -36423,7 +36423,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_create_blob: POST /repos/{owner}/{repo}/git/blobs
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/git/blobs`.
     *
     *
     *
@@ -36449,7 +36449,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_get_blob: GET /repos/{owner}/{repo}/git/blobs/{file_sha}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/git/blobs/{file_sha}`.
     *
     * The `content` in the response will always be Base64 encoded.
     *
@@ -36474,7 +36474,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_create_commit: POST /repos/{owner}/{repo}/git/commits
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/git/commits`.
     *
     * Creates a new Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
     *
@@ -36529,7 +36529,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_get_commit: GET /repos/{owner}/{repo}/git/commits/{commit_sha}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/git/commits/{commit_sha}`.
     *
     * Gets a Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
     *
@@ -36581,7 +36581,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_list_matching_refs: GET /repos/{owner}/{repo}/git/matching-refs/{ref}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/git/matching-refs/{ref}`.
     *
     * Returns an array of references from your Git database that match the supplied name. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't exist in the repository, but existing refs start with `:ref`, they will be returned as an array.
     *
@@ -36614,7 +36614,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_get_ref: GET /repos/{owner}/{repo}/git/ref/{ref}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/git/ref/{ref}`.
     *
     * Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is returned.
     *
@@ -36634,7 +36634,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_create_ref: POST /repos/{owner}/{repo}/git/refs
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/git/refs`.
     *
     * Creates a reference for your repository. You are unable to create new references for empty repositories, even if the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
     *
@@ -36660,7 +36660,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_delete_ref: DELETE /repos/{owner}/{repo}/git/refs/{ref}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/git/refs/{ref}`.
     *
     *
     *
@@ -36681,7 +36681,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_update_ref: PATCH /repos/{owner}/{repo}/git/refs/{ref}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/git/refs/{ref}`.
     *
     *
     *
@@ -36709,7 +36709,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_create_tag: POST /repos/{owner}/{repo}/git/tags
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/git/tags`.
     *
     * Note that creating a tag object does not create the reference that makes a tag in Git. If you want to create an annotated tag in Git, you have to do this call to create the tag object, and then [create](https://docs.github.com/rest/reference/git#create-a-reference) the `refs/tags/[tag]` reference. If you want to create a lightweight tag, you only have to [create](https://docs.github.com/rest/reference/git#create-a-reference) the tag reference - this call would be unnecessary.
     *
@@ -36764,7 +36764,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_get_tag: GET /repos/{owner}/{repo}/git/tags/{tag_sha}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/git/tags/{tag_sha}`.
     *
     * **Signature verification object**
     *
@@ -36814,7 +36814,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_create_tree: POST /repos/{owner}/{repo}/git/trees
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/git/trees`.
     *
     * The tree creation API accepts nested entries. If you specify both a tree and a nested path modifying that tree, this endpoint will overwrite the contents of the tree with the new path contents, and create a new tree structure.
     *
@@ -36842,7 +36842,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * git_get_tree: GET /repos/{owner}/{repo}/git/trees/{tree_sha}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/git/trees/{tree_sha}`.
     *
     * Returns a single tree using the SHA1 value for that tree.
     *
@@ -36869,7 +36869,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_list_webhooks: GET /repos/{owner}/{repo}/hooks
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/hooks`.
     *
     *
     *
@@ -36894,7 +36894,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_create_webhook: POST /repos/{owner}/{repo}/hooks
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/hooks`.
     *
     * Repositories can have multiple webhooks installed. Each webhook should have a unique `config`. Multiple webhooks can
     * share the same `config` as long as those webhooks do not have any `events` that overlap.
@@ -36921,7 +36921,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_get_webhook: GET /repos/{owner}/{repo}/hooks/{hook_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/hooks/{hook_id}`.
     *
     * Returns a webhook configured in a repository. To get only the webhook `config` properties, see "[Get a webhook configuration for a repository](/rest/reference/repos#get-a-webhook-configuration-for-a-repository)."
     *
@@ -36944,7 +36944,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_delete_webhook: DELETE /repos/{owner}/{repo}/hooks/{hook_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/hooks/{hook_id}`.
     *
     *
     *
@@ -36965,7 +36965,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_update_webhook: PATCH /repos/{owner}/{repo}/hooks/{hook_id}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/hooks/{hook_id}`.
     *
     * Updates a webhook configured in a repository. If you previously had a `secret` set, you must provide the same `secret` or set a new `secret` or the secret will be removed. If you are only updating individual webhook `config` properties, use "[Update a webhook configuration for a repository](/rest/reference/repos#update-a-webhook-configuration-for-a-repository)."
     *
@@ -36993,7 +36993,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_get_webhook_config_for_repo: GET /repos/{owner}/{repo}/hooks/{hook_id}/config
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/hooks/{hook_id}/config`.
     *
     * Returns the webhook configuration for a repository. To get more information about the webhook, including the `active` state and `events`, use "[Get a repository webhook](/rest/reference/orgs#get-a-repository-webhook)."
     *
@@ -37018,7 +37018,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_update_webhook_config_for_repo: PATCH /repos/{owner}/{repo}/hooks/{hook_id}/config
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/hooks/{hook_id}/config`.
     *
     * Updates the webhook configuration for a repository. To update more information about the webhook, including the `active` state and `events`, use "[Update a repository webhook](/rest/reference/orgs#update-a-repository-webhook)."
     *
@@ -37048,7 +37048,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_ping_webhook: POST /repos/{owner}/{repo}/hooks/{hook_id}/pings
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/hooks/{hook_id}/pings`.
     *
     * This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
     *
@@ -37066,7 +37066,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_test_push_webhook: POST /repos/{owner}/{repo}/hooks/{hook_id}/tests
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/hooks/{hook_id}/tests`.
     *
     * This will trigger the hook with the latest push to the current repository if the hook is subscribed to `push` events. If the hook is not subscribed to `push` events, the server will respond with 204 but no test POST will be generated.
     *
@@ -37091,7 +37091,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * migrations_get_import_status: GET /repos/{owner}/{repo}/import
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/import`.
     *
     * View the progress of an import.
     *
@@ -37145,7 +37145,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * migrations_start_import: PUT /repos/{owner}/{repo}/import
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/import`.
     *
     * Start a source import to a GitHub repository using GitHub Importer.
     *
@@ -37171,7 +37171,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * migrations_cancel_import: DELETE /repos/{owner}/{repo}/import
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/import`.
     *
     * Stop an import for a repository.
     *
@@ -37191,7 +37191,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * migrations_update_import: PATCH /repos/{owner}/{repo}/import
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/import`.
     *
     * An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API
     * request. If no parameters are provided, the import will be restarted.
@@ -37218,7 +37218,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * migrations_get_commit_authors: GET /repos/{owner}/{repo}/import/authors
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/import/authors`.
     *
     * Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`.
     *
@@ -37243,7 +37243,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * migrations_map_commit_author: PATCH /repos/{owner}/{repo}/import/authors/{author_id}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/import/authors/{author_id}`.
     *
     * Update an author's identity for the import. Your application can continue updating authors any time before you push new commits to the repository.
     *
@@ -37271,7 +37271,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * migrations_get_large_files: GET /repos/{owner}/{repo}/import/large_files
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/import/large_files`.
     *
     * List files larger than 100MB found during the import
     *
@@ -37292,7 +37292,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * migrations_set_lfs_preference: PATCH /repos/{owner}/{repo}/import/lfs
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/import/lfs`.
     *
     * You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://help.github.com/articles/versioning-large-files/).
     *
@@ -37318,7 +37318,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * apps_get_repo_installation: GET /repos/{owner}/{repo}/installation
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/installation`.
     *
     * Enables an authenticated GitHub App to find the repository's installation information. The installation's account type will be either an organization or a user account, depending which account the repository belongs to.
     *
@@ -37341,7 +37341,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * interactions_get_restrictions_for_repo: GET /repos/{owner}/{repo}/interaction-limits
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/interaction-limits`.
     *
     * Shows which type of GitHub user can interact with this repository and when the restriction expires. If there are no restrictions, you will see an empty response.
     *
@@ -37362,7 +37362,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * interactions_set_restrictions_for_repo: PUT /repos/{owner}/{repo}/interaction-limits
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/interaction-limits`.
     *
     * Temporarily restricts interactions to a certain type of GitHub user within the given repository. You must have owner or admin access to set these restrictions. If an interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
     *
@@ -37388,7 +37388,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * interactions_remove_restrictions_for_repo: DELETE /repos/{owner}/{repo}/interaction-limits
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/interaction-limits`.
     *
     * Removes all interaction restrictions from the given repository. You must have owner or admin access to remove restrictions. If the interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
     *
@@ -37412,7 +37412,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_list_invitations: GET /repos/{owner}/{repo}/invitations
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/invitations`.
     *
     * When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
     *
@@ -37437,7 +37437,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_delete_invitation: DELETE /repos/{owner}/{repo}/invitations/{invitation_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/invitations/{invitation_id}`.
     *
     *
     *
@@ -37463,7 +37463,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * repos_update_invitation: PATCH /repos/{owner}/{repo}/invitations/{invitation_id}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/invitations/{invitation_id}`.
     *
     *
     *
@@ -37491,7 +37491,7 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
     }
 
     /**
-    * issues_list_for_repo: GET /repos/{owner}/{repo}/issues
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues`.
     *
     * List issues in a repository.
     *
@@ -37518,16 +37518,16 @@ format!("{}", per_page), format!("{}", page), filter.to_string(), format!("{}", 
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::IssueSimple>> {
-        let url = format!("/repos/{}/{}/issues?labels={}&page={}&mentioned={}&sort={}&direction={}&since={}&assignee={}&per_page={}&creator={}&milestone={}&state={}",
+        let url = format!("/repos/{}/{}/issues?assignee={}&creator={}&since={}&per_page={}&page={}&mentioned={}&direction={}&labels={}&milestone={}&state={}&sort={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string(), direction.to_string(), since.to_rfc3339(), assignee.to_string(), format!("{}", per_page), creator.to_string(), milestone.to_string(), state.to_string(),         );
+assignee.to_string(), creator.to_string(), since.to_rfc3339(), format!("{}", per_page), format!("{}", page), mentioned.to_string(), direction.to_string(), labels.to_string(), milestone.to_string(), state.to_string(), sort.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-    * issues_create: POST /repos/{owner}/{repo}/issues
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/issues`.
     *
     * Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://help.github.com/articles/disabling-issues/), the API returns a `410 Gone` status.
     *
@@ -37555,7 +37555,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_list_comments_for_repo: GET /repos/{owner}/{repo}/issues/comments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/comments`.
     *
     * By default, Issue Comments are ordered by ascending ID.
     *
@@ -37572,21 +37572,21 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
         page: i64,
     ) -> Result<Vec<types::IssueComment>> {
         let url = format!(
-            "/repos/{}/{}/issues/comments?sort={}&page={}&per_page={}&direction={}&since={}",
+            "/repos/{}/{}/issues/comments?direction={}&per_page={}&sort={}&since={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            sort.to_string(),
-            format!("{}", page),
-            format!("{}", per_page),
             direction.to_string(),
+            format!("{}", per_page),
+            sort.to_string(),
             since.to_rfc3339(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * issues_get_comment: GET /repos/{owner}/{repo}/issues/comments/{comment_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/comments/{comment_id}`.
     *
     *
     *
@@ -37609,7 +37609,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_delete_comment: DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/issues/comments/{comment_id}`.
     *
     *
     *
@@ -37635,7 +37635,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_update_comment: PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/issues/comments/{comment_id}`.
     *
     *
     *
@@ -37663,7 +37663,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * reactions_list_for_issue_comment: GET /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions`.
     *
     * List the reactions to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
     *
@@ -37679,20 +37679,20 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/issues/comments/{}/reactions?page={}&content={}&per_page={}",
+            "/repos/{}/{}/issues/comments/{}/reactions?content={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
-            format!("{}", page),
             content.to_string(),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * reactions_create_for_issue_comment: POST /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions`.
     *
     * Create a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments). A response with an HTTP `200` status means that you already added the reaction type to this issue comment.
     *
@@ -37720,7 +37720,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * reactions_delete_for_issue_comment: DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}`.
     *
     * **Note:** You can also specify a repository by `repository_id` using the route `DELETE delete /repositories/:repository_id/issues/comments/:comment_id/reactions/:reaction_id`.
     *
@@ -37750,7 +37750,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_list_events_for_repo: GET /repos/{owner}/{repo}/issues/events
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/events`.
     *
     *
     *
@@ -37764,18 +37764,18 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
         page: i64,
     ) -> Result<Vec<types::IssueEvent>> {
         let url = format!(
-            "/repos/{}/{}/issues/events?page={}&per_page={}",
+            "/repos/{}/{}/issues/events?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * issues_get_event: GET /repos/{owner}/{repo}/issues/events/{event_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/events/{event_id}`.
     *
     *
     *
@@ -37798,7 +37798,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_get: GET /repos/{owner}/{repo}/issues/{issue_number}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}`.
     *
     * The API returns a [`301 Moved Permanently` status](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-redirects-redirects) if the issue was
     * [transferred](https://help.github.com/articles/transferring-an-issue-to-another-repository/) to another repository. If
@@ -37831,7 +37831,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_update: PATCH /repos/{owner}/{repo}/issues/{issue_number}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}`.
     *
     * Issue owners and users with push access can edit an issue.
     *
@@ -37859,7 +37859,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_add_assignees: POST /repos/{owner}/{repo}/issues/{issue_number}/assignees
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/assignees`.
     *
     * Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
     *
@@ -37887,7 +37887,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_remove_assignees: DELETE /repos/{owner}/{repo}/issues/{issue_number}/assignees
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/assignees`.
     *
     * Removes one or more assignees from an issue.
     *
@@ -37919,7 +37919,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_list_comments: GET /repos/{owner}/{repo}/issues/{issue_number}/comments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/comments`.
     *
     * Issue Comments are ordered by ascending ID.
     *
@@ -37948,7 +37948,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_create_comment: POST /repos/{owner}/{repo}/issues/{issue_number}/comments
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/comments`.
     *
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
     *
@@ -37976,7 +37976,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_list_events: GET /repos/{owner}/{repo}/issues/{issue_number}/events
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/events`.
     *
     *
     *
@@ -38003,7 +38003,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_list_labels_on_issue: GET /repos/{owner}/{repo}/issues/{issue_number}/labels
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/labels`.
     *
     *
     *
@@ -38030,7 +38030,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_set_labels: PUT /repos/{owner}/{repo}/issues/{issue_number}/labels
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/labels`.
     *
     * Removes any previous labels and sets the new labels for an issue.
     *
@@ -38058,7 +38058,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_add_labels: POST /repos/{owner}/{repo}/issues/{issue_number}/labels
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/labels`.
     *
     *
     *
@@ -38086,7 +38086,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_remove_all_labels: DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/labels`.
     *
     *
     *
@@ -38112,7 +38112,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_remove_label: DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels/{name}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/labels/{name}`.
     *
     * Removes the specified label from the issue, and returns the remaining labels on the issue. This endpoint returns a `404 Not Found` status if the label does not exist.
     *
@@ -38139,7 +38139,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_lock: PUT /repos/{owner}/{repo}/issues/{issue_number}/lock
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/lock`.
     *
     * Users with push access can lock an issue or pull request's conversation.
     *
@@ -38169,7 +38169,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_unlock: DELETE /repos/{owner}/{repo}/issues/{issue_number}/lock
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/lock`.
     *
     * Users with push access can unlock an issue's conversation.
     *
@@ -38190,7 +38190,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * reactions_list_for_issue: GET /repos/{owner}/{repo}/issues/{issue_number}/reactions
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/reactions`.
     *
     * List the reactions to an [issue](https://docs.github.com/rest/reference/issues).
     *
@@ -38206,20 +38206,20 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/reactions?per_page={}&content={}&page={}",
+            "/repos/{}/{}/issues/{}/reactions?page={}&content={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            format!("{}", per_page),
-            content.to_string(),
             format!("{}", page),
+            content.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * reactions_create_for_issue: POST /repos/{owner}/{repo}/issues/{issue_number}/reactions
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/reactions`.
     *
     * Create a reaction to an [issue](https://docs.github.com/rest/reference/issues/). A response with an HTTP `200` status means that you already added the reaction type to this issue.
     *
@@ -38247,7 +38247,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * reactions_delete_for_issue: DELETE /repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}`.
     *
     * **Note:** You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/issues/:issue_number/reactions/:reaction_id`.
     *
@@ -38277,7 +38277,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_list_events_for_timeline: GET /repos/{owner}/{repo}/issues/{issue_number}/timeline
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/issues/{issue_number}/timeline`.
     *
     *
     *
@@ -38304,7 +38304,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * repos_list_deploy_keys: GET /repos/{owner}/{repo}/keys
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/keys`.
     *
     *
     *
@@ -38329,7 +38329,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * repos_create_deploy_key: POST /repos/{owner}/{repo}/keys
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/keys`.
     *
     * You can create a read-only deploy key.
     *
@@ -38355,7 +38355,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * repos_get_deploy_key: GET /repos/{owner}/{repo}/keys/{key_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/keys/{key_id}`.
     *
     *
     *
@@ -38378,7 +38378,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * repos_delete_deploy_key: DELETE /repos/{owner}/{repo}/keys/{key_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/keys/{key_id}`.
     *
     * Deploy keys are immutable. If you need to update a key, remove the key and create a new one instead.
     *
@@ -38404,7 +38404,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_list_labels_for_repo: GET /repos/{owner}/{repo}/labels
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/labels`.
     *
     *
     *
@@ -38418,18 +38418,18 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
         page: i64,
     ) -> Result<Vec<types::Label>> {
         let url = format!(
-            "/repos/{}/{}/labels?page={}&per_page={}",
+            "/repos/{}/{}/labels?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * issues_create_label: POST /repos/{owner}/{repo}/labels
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/labels`.
     *
     *
     *
@@ -38455,7 +38455,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_get_label: GET /repos/{owner}/{repo}/labels/{name}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/labels/{name}`.
     *
     *
     *
@@ -38478,7 +38478,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_delete_label: DELETE /repos/{owner}/{repo}/labels/{name}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/labels/{name}`.
     *
     *
     *
@@ -38499,7 +38499,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_update_label: PATCH /repos/{owner}/{repo}/labels/{name}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/labels/{name}`.
     *
     *
     *
@@ -38527,7 +38527,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * repos_list_languages: GET /repos/{owner}/{repo}/languages
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/languages`.
     *
     * Lists languages for the specified repository. The value shown for each language is the number of bytes of code written in that language.
     *
@@ -38544,7 +38544,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * licenses_get_for_repo: GET /repos/{owner}/{repo}/license
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/license`.
     *
     * This method returns the contents of the repository's license file, if one is detected.
     *
@@ -38567,7 +38567,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * repos_merge: POST /repos/{owner}/{repo}/merges
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/merges`.
     *
     *
     *
@@ -38593,7 +38593,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_list_milestones: GET /repos/{owner}/{repo}/milestones
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/milestones`.
     *
     *
     *
@@ -38610,21 +38610,21 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
         page: i64,
     ) -> Result<Vec<types::Milestone>> {
         let url = format!(
-            "/repos/{}/{}/milestones?page={}&per_page={}&sort={}&direction={}&state={}",
+            "/repos/{}/{}/milestones?state={}&direction={}&page={}&sort={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            sort.to_string(),
-            direction.to_string(),
             state.to_string(),
+            direction.to_string(),
+            format!("{}", page),
+            sort.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * issues_create_milestone: POST /repos/{owner}/{repo}/milestones
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/milestones`.
     *
     *
     *
@@ -38650,7 +38650,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_get_milestone: GET /repos/{owner}/{repo}/milestones/{milestone_number}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/milestones/{milestone_number}`.
     *
     *
     *
@@ -38673,7 +38673,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_delete_milestone: DELETE /repos/{owner}/{repo}/milestones/{milestone_number}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/milestones/{milestone_number}`.
     *
     *
     *
@@ -38699,7 +38699,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_update_milestone: PATCH /repos/{owner}/{repo}/milestones/{milestone_number}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/milestones/{milestone_number}`.
     *
     *
     *
@@ -38727,7 +38727,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * issues_list_labels_for_milestone: GET /repos/{owner}/{repo}/milestones/{milestone_number}/labels
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/milestones/{milestone_number}/labels`.
     *
     *
     *
@@ -38754,7 +38754,7 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
     }
 
     /**
-    * activity_list_repo_notifications_for_authenticated_user: GET /repos/{owner}/{repo}/notifications
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/notifications`.
     *
     * List all notifications for the current user.
     *
@@ -38771,16 +38771,16 @@ labels.to_string(), format!("{}", page), mentioned.to_string(), sort.to_string()
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Thread>> {
-        let url = format!("/repos/{}/{}/notifications?participating={}&all={}&before={}&since={}&per_page={}&page={}",
+        let url = format!("/repos/{}/{}/notifications?participating={}&before={}&per_page={}&all={}&since={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_rfc3339(), format!("{}", per_page), format!("{}", page),         );
+format!("{}", participating), before.to_rfc3339(), format!("{}", per_page), format!("{}", all), since.to_rfc3339(), format!("{}", page),         );
 
         self.get(&url).await
     }
 
     /**
-    * activity_mark_repo_notifications_as_read: PUT /repos/{owner}/{repo}/notifications
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/notifications`.
     *
     * Marks all notifications in a repository as "read" removes them from the [default view on GitHub](https://github.com/notifications). If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List repository notifications for the authenticated user](https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
     *
@@ -38806,7 +38806,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_pages: GET /repos/{owner}/{repo}/pages
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pages`.
     *
     *
     *
@@ -38823,7 +38823,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_update_information_about_pages_site: PUT /repos/{owner}/{repo}/pages
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/pages`.
     *
     * Updates information for a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages).
     *
@@ -38849,7 +38849,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_create_pages_site: POST /repos/{owner}/{repo}/pages
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/pages`.
     *
     * Configures a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages)."
     *
@@ -38875,7 +38875,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_delete_pages_site: DELETE /repos/{owner}/{repo}/pages
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/pages`.
     *
     *
     *
@@ -38895,7 +38895,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_list_pages_builds: GET /repos/{owner}/{repo}/pages/builds
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pages/builds`.
     *
     *
     *
@@ -38909,18 +38909,18 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<Vec<types::PageBuild>> {
         let url = format!(
-            "/repos/{}/{}/pages/builds?page={}&per_page={}",
+            "/repos/{}/{}/pages/builds?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_request_pages_build: POST /repos/{owner}/{repo}/pages/builds
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/pages/builds`.
     *
     * You can request that your site be built from the latest revision on the default branch. This has the same effect as pushing a commit to your default branch, but does not require an additional commit. Manually triggering page builds can be helpful when diagnosing build warnings and failures.
     *
@@ -38943,7 +38943,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_latest_pages_build: GET /repos/{owner}/{repo}/pages/builds/latest
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pages/builds/latest`.
     *
     *
     *
@@ -38964,7 +38964,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_pages_build: GET /repos/{owner}/{repo}/pages/builds/{build_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pages/builds/{build_id}`.
     *
     *
     *
@@ -38987,7 +38987,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_pages_health_check: GET /repos/{owner}/{repo}/pages/health
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pages/health`.
     *
     * Gets a health check of the DNS settings for the `CNAME` record configured for a repository's GitHub Pages.
     *
@@ -39012,7 +39012,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * projects_list_for_repo: GET /repos/{owner}/{repo}/projects
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/projects`.
     *
     * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
@@ -39027,19 +39027,19 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/repos/{}/{}/projects?per_page={}&page={}&state={}",
+            "/repos/{}/{}/projects?state={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            state.to_string(),
             format!("{}", per_page),
             format!("{}", page),
-            state.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * projects_create_for_repo: POST /repos/{owner}/{repo}/projects
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/projects`.
     *
     * Creates a repository project board. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
@@ -39065,7 +39065,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_list: GET /repos/{owner}/{repo}/pulls
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls`.
     *
     * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -39084,23 +39084,23 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<Vec<types::PullRequestSimple>> {
         let url = format!(
-            "/repos/{}/{}/pulls?direction={}&per_page={}&sort={}&state={}&head={}&base={}&page={}",
+            "/repos/{}/{}/pulls?per_page={}&state={}&head={}&base={}&direction={}&page={}&sort={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            direction.to_string(),
             format!("{}", per_page),
-            sort.to_string(),
             state.to_string(),
             head.to_string(),
             base.to_string(),
+            direction.to_string(),
             format!("{}", page),
+            sort.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * pulls_create: POST /repos/{owner}/{repo}/pulls
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/pulls`.
     *
     * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -39132,7 +39132,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_list_review_comments_for_repo: GET /repos/{owner}/{repo}/pulls/comments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/comments`.
     *
     * Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID.
     *
@@ -39149,21 +39149,21 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
-            "/repos/{}/{}/pulls/comments?page={}&direction={}&sort={}&per_page={}&since={}",
+            "/repos/{}/{}/pulls/comments?since={}&page={}&sort={}&per_page={}&direction={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            since.to_rfc3339(),
             format!("{}", page),
-            direction.to_string(),
             sort.to_string(),
             format!("{}", per_page),
-            since.to_rfc3339(),
+            direction.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * pulls_get_review_comment: GET /repos/{owner}/{repo}/pulls/comments/{comment_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/comments/{comment_id}`.
     *
     * Provides details for a review comment.
     *
@@ -39186,7 +39186,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_delete_review_comment: DELETE /repos/{owner}/{repo}/pulls/comments/{comment_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/pulls/comments/{comment_id}`.
     *
     * Deletes a review comment.
     *
@@ -39212,7 +39212,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_update_review_comment: PATCH /repos/{owner}/{repo}/pulls/comments/{comment_id}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/pulls/comments/{comment_id}`.
     *
     * Enables you to edit a review comment.
     *
@@ -39240,7 +39240,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * reactions_list_for_pull_request_review_comment: GET /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions`.
     *
     * List the reactions to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
     *
@@ -39256,20 +39256,20 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/pulls/comments/{}/reactions?content={}&page={}&per_page={}",
+            "/repos/{}/{}/pulls/comments/{}/reactions?per_page={}&page={}&content={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
-            content.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
+            content.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * reactions_create_for_pull_request_review_comment: POST /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions`.
     *
     * Create a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#comments). A response with an HTTP `200` status means that you already added the reaction type to this pull request review comment.
     *
@@ -39297,7 +39297,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * reactions_delete_for_pull_request_comment: DELETE /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}`.
     *
     * **Note:** You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/pulls/comments/:comment_id/reactions/:reaction_id.`
     *
@@ -39327,7 +39327,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_get: GET /repos/{owner}/{repo}/pulls/{pull_number}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}`.
     *
     * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -39364,7 +39364,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_update: PATCH /repos/{owner}/{repo}/pulls/{pull_number}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}`.
     *
     * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
@@ -39394,7 +39394,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_list_review_comments: GET /repos/{owner}/{repo}/pulls/{pull_number}/comments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/comments`.
     *
     * Lists all review comments for a pull request. By default, review comments are in ascending order by ID.
     *
@@ -39412,14 +39412,14 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/comments?per_page={}&sort={}&direction={}&page={}&since={}",
+            "/repos/{}/{}/pulls/{}/comments?page={}&direction={}&per_page={}&sort={}&since={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
+            format!("{}", page),
+            direction.to_string(),
             format!("{}", per_page),
             sort.to_string(),
-            direction.to_string(),
-            format!("{}", page),
             since.to_rfc3339(),
         );
 
@@ -39427,7 +39427,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_create_review_comment: POST /repos/{owner}/{repo}/pulls/{pull_number}/comments
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/comments`.
     *
     *
     * Creates a review comment in the pull request diff. To add a regular comment to a pull request timeline, see "[Create an issue comment](https://docs.github.com/rest/reference/issues#create-an-issue-comment)." We recommend creating a review comment using `line`, `side`, and optionally `start_line` and `start_side` if your comment applies to more than one line in the pull request diff.
@@ -39462,7 +39462,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_create_reply_for_review_comment: POST /repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies`.
     *
     * Creates a reply to a review comment for a pull request. For the `comment_id`, provide the ID of the review comment you are replying to. This must be the ID of a _top-level review comment_, not a reply to that comment. Replies to replies are not supported.
     *
@@ -39494,7 +39494,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_list_commits: GET /repos/{owner}/{repo}/pulls/{pull_number}/commits
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/commits`.
     *
     * Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://docs.github.com/rest/reference/repos#list-commits) endpoint.
     *
@@ -39521,7 +39521,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_list_files: GET /repos/{owner}/{repo}/pulls/{pull_number}/files
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/files`.
     *
     * **Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
     *
@@ -39536,19 +39536,19 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<Vec<types::DiffEntry>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/files?page={}&per_page={}",
+            "/repos/{}/{}/pulls/{}/files?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * pulls_check_if_merged: GET /repos/{owner}/{repo}/pulls/{pull_number}/merge
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/merge`.
     *
     *
     *
@@ -39571,7 +39571,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_merge: PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/merge`.
     *
     * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
     *
@@ -39599,7 +39599,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_list_requested_reviewers: GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers`.
     *
     *
     *
@@ -39614,19 +39614,19 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<types::PullRequestReviewRequest> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/requested_reviewers?page={}&per_page={}",
+            "/repos/{}/{}/pulls/{}/requested_reviewers?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * pulls_request_reviewers: POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers`.
     *
     * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
     *
@@ -39654,7 +39654,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_remove_requested_reviewers: DELETE /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers`.
     *
     *
     *
@@ -39686,7 +39686,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_list_reviews: GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/reviews`.
     *
     * The list of reviews returns in chronological order.
     *
@@ -39701,19 +39701,19 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<Vec<types::PullRequestReview>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews?per_page={}&page={}",
+            "/repos/{}/{}/pulls/{}/reviews?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * pulls_create_review: POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/reviews`.
     *
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
@@ -39747,7 +39747,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_get_review: GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}`.
     *
     *
     *
@@ -39772,7 +39772,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_update_review: PUT /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}`.
     *
     * Update the review summary comment with new text.
     *
@@ -39802,7 +39802,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_delete_pending_review: DELETE /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}`.
     *
     *
     *
@@ -39829,7 +39829,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_list_comments_for_review: GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments`.
     *
     * List comments for a specific pull request review.
     *
@@ -39858,7 +39858,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_dismiss_review: PUT /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals`.
     *
     * **Note:** To dismiss a pull request review on a [protected branch](https://docs.github.com/rest/reference/repos#branches), you must be a repository administrator or be included in the list of people or teams who can dismiss pull request reviews.
     *
@@ -39888,7 +39888,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_submit_review: POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events`.
     *
     *
     *
@@ -39918,7 +39918,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * pulls_update_branch: PUT /repos/{owner}/{repo}/pulls/{pull_number}/update-branch
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/pulls/{pull_number}/update-branch`.
     *
     * Updates the pull request branch with the latest upstream changes by merging HEAD from the base branch into the pull request branch.
     *
@@ -39946,7 +39946,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_readme: GET /repos/{owner}/{repo}/readme
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/readme`.
     *
     * Gets the preferred README for a repository.
     *
@@ -39971,7 +39971,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_readme_in_directory: GET /repos/{owner}/{repo}/readme/{dir}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/readme/{dir}`.
     *
     * Gets the README from a repository directory.
     *
@@ -39998,7 +39998,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_list_releases: GET /repos/{owner}/{repo}/releases
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/releases`.
     *
     * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the [Repository Tags API](https://docs.github.com/rest/reference/repos#list-repository-tags).
     *
@@ -40025,7 +40025,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_create_release: POST /repos/{owner}/{repo}/releases
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/releases`.
     *
     * Users with push access to the repository can create a release.
     *
@@ -40053,7 +40053,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_release_asset: GET /repos/{owner}/{repo}/releases/assets/{asset_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/releases/assets/{asset_id}`.
     *
     * To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
     *
@@ -40076,7 +40076,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_delete_release_asset: DELETE /repos/{owner}/{repo}/releases/assets/{asset_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/releases/assets/{asset_id}`.
     *
     *
     *
@@ -40102,7 +40102,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_update_release_asset: PATCH /repos/{owner}/{repo}/releases/assets/{asset_id}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/releases/assets/{asset_id}`.
     *
     * Users with push access to the repository can edit a release asset.
     *
@@ -40130,7 +40130,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_latest_release: GET /repos/{owner}/{repo}/releases/latest
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/releases/latest`.
     *
     * View the latest published full release for the repository.
     *
@@ -40153,7 +40153,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_release_by_tag: GET /repos/{owner}/{repo}/releases/tags/{tag}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/releases/tags/{tag}`.
     *
     * Get a published release with the specified tag.
     *
@@ -40176,7 +40176,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_release: GET /repos/{owner}/{repo}/releases/{release_id}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/releases/{release_id}`.
     *
     * **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
     *
@@ -40199,7 +40199,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_delete_release: DELETE /repos/{owner}/{repo}/releases/{release_id}
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/releases/{release_id}`.
     *
     * Users with push access to the repository can delete a release.
     *
@@ -40225,7 +40225,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_update_release: PATCH /repos/{owner}/{repo}/releases/{release_id}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/releases/{release_id}`.
     *
     * Users with push access to the repository can edit a release.
     *
@@ -40253,7 +40253,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_list_release_assets: GET /repos/{owner}/{repo}/releases/{release_id}/assets
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/releases/{release_id}/assets`.
     *
     *
     *
@@ -40280,7 +40280,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_upload_release_asset: POST /repos/{owner}/{repo}/releases/{release_id}/assets
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/releases/{release_id}/assets`.
     *
     * This endpoint makes use of [a Hypermedia relation](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia) to determine which URL to access. The endpoint you call to upload release assets is specific to your release. Use the `upload_url` returned in
     * the response of the [Create a release endpoint](https://docs.github.com/rest/reference/repos#create-a-release) to upload a release asset.
@@ -40313,19 +40313,19 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         body: T,
     ) -> Result<types::ReleaseAsset> {
         let url = format!(
-            "/repos/{}/{}/releases/{}/assets?name={}&label={}",
+            "/repos/{}/{}/releases/{}/assets?label={}&name={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
-            name.to_string(),
             label.to_string(),
+            name.to_string(),
         );
 
         self.post(&url, Some(body.into())).await
     }
 
     /**
-    * reactions_create_for_release: POST /repos/{owner}/{repo}/releases/{release_id}/reactions
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/releases/{release_id}/reactions`.
     *
     * Create a reaction to a [release](https://docs.github.com/rest/reference/repos#releases). A response with a `Status: 200 OK` means that you already added the reaction type to this release.
     *
@@ -40353,7 +40353,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * secret_scanning_list_alerts_for_repo: GET /repos/{owner}/{repo}/secret-scanning/alerts
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/secret-scanning/alerts`.
     *
     * Lists all secret scanning alerts for a private repository, from newest to oldest. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
     *
@@ -40371,20 +40371,20 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         per_page: i64,
     ) -> Result<Vec<types::SecretScanningAlert>> {
         let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts?state={}&page={}&per_page={}&secret_type={}",
+            "/repos/{}/{}/secret-scanning/alerts?per_page={}&secret_type={}&state={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            state.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
             secret_type.to_string(),
+            state.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * secret_scanning_get_alert: GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}`.
     *
     * Gets a single secret scanning alert detected in a private repository. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
     *
@@ -40409,7 +40409,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * secret_scanning_update_alert: PATCH /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}
+    * This function performs a `PATCH` to the endpoint `/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}`.
     *
     * Updates the status of a secret scanning alert in a private repository. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
     *
@@ -40439,7 +40439,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * activity_list_stargazers_for_repo: GET /repos/{owner}/{repo}/stargazers
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/stargazers`.
     *
     * Lists the people that have starred the repository.
     *
@@ -40455,18 +40455,18 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/repos/{}/{}/stargazers?per_page={}&page={}",
+            "/repos/{}/{}/stargazers?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_get_code_frequency_stats: GET /repos/{owner}/{repo}/stats/code_frequency
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/stats/code_frequency`.
     *
     * Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
     *
@@ -40487,7 +40487,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_commit_activity_stats: GET /repos/{owner}/{repo}/stats/commit_activity
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/stats/commit_activity`.
     *
     * Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
     *
@@ -40508,7 +40508,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_contributors_stats: GET /repos/{owner}/{repo}/stats/contributors
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/stats/contributors`.
     *
     *
     * Returns the `total` number of commits authored by the contributor. In addition, the response includes a Weekly Hash (`weeks` array) with the following information:
@@ -40535,7 +40535,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_participation_stats: GET /repos/{owner}/{repo}/stats/participation
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/stats/participation`.
     *
     * Returns the total commit counts for the `owner` and total commit counts in `all`. `all` is everyone combined, including the `owner` in the last 52 weeks. If you'd like to get the commit counts for non-owners, you can subtract `owner` from `all`.
     *
@@ -40558,7 +40558,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_punch_card_stats: GET /repos/{owner}/{repo}/stats/punch_card
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/stats/punch_card`.
     *
     * Each array contains the day number, hour number, and number of commits:
     *
@@ -40585,7 +40585,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_create_commit_status: POST /repos/{owner}/{repo}/statuses/{sha}
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/statuses/{sha}`.
     *
     * Users with push access in a repository can create commit statuses for a given SHA.
     *
@@ -40615,7 +40615,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * activity_list_watchers_for_repo: GET /repos/{owner}/{repo}/subscribers
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/subscribers`.
     *
     * Lists the people watching the specified repository.
     *
@@ -40640,7 +40640,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * activity_get_repo_subscription: GET /repos/{owner}/{repo}/subscription
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/subscription`.
     *
     *
     *
@@ -40661,7 +40661,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * activity_set_repo_subscription: PUT /repos/{owner}/{repo}/subscription
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/subscription`.
     *
     * If you would like to watch a repository, set `subscribed` to `true`. If you would like to ignore notifications made within a repository, set `ignored` to `true`. If you would like to stop watching a repository, [delete the repository's subscription](https://docs.github.com/rest/reference/activity#delete-a-repository-subscription) completely.
     *
@@ -40687,7 +40687,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * activity_delete_repo_subscription: DELETE /repos/{owner}/{repo}/subscription
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/subscription`.
     *
     * This endpoint should only be used to stop watching a repository. To control whether or not you wish to receive notifications from a repository, [set the repository's subscription manually](https://docs.github.com/rest/reference/activity#set-a-repository-subscription).
     *
@@ -40707,7 +40707,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_list_tags: GET /repos/{owner}/{repo}/tags
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/tags`.
     *
     *
     *
@@ -40732,7 +40732,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_download_tarball_archive: GET /repos/{owner}/{repo}/tarball/{ref}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/tarball/{ref}`.
     *
     * Gets a redirect URL to download a tar archive for a repository. If you omit `:ref`, the repository’s default branch (usually
     * `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use
@@ -40758,7 +40758,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_list_teams: GET /repos/{owner}/{repo}/teams
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/teams`.
     *
     *
     *
@@ -40783,7 +40783,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_all_topics: GET /repos/{owner}/{repo}/topics
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/topics`.
     *
     *
     *
@@ -40797,18 +40797,18 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         per_page: i64,
     ) -> Result<types::Topic> {
         let url = format!(
-            "/repos/{}/{}/topics?page={}&per_page={}",
+            "/repos/{}/{}/topics?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_replace_all_topics: PUT /repos/{owner}/{repo}/topics
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/topics`.
     *
     *
     *
@@ -40834,7 +40834,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_clones: GET /repos/{owner}/{repo}/traffic/clones
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/traffic/clones`.
     *
     * Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
     *
@@ -40857,7 +40857,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_top_paths: GET /repos/{owner}/{repo}/traffic/popular/paths
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/traffic/popular/paths`.
     *
     * Get the top 10 popular contents over the last 14 days.
     *
@@ -40878,7 +40878,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_top_referrers: GET /repos/{owner}/{repo}/traffic/popular/referrers
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/traffic/popular/referrers`.
     *
     * Get the top 10 referrers over the last 14 days.
     *
@@ -40899,7 +40899,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_get_views: GET /repos/{owner}/{repo}/traffic/views
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/traffic/views`.
     *
     * Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
     *
@@ -40922,7 +40922,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_transfer: POST /repos/{owner}/{repo}/transfer
+    * This function performs a `POST` to the endpoint `/repos/{owner}/{repo}/transfer`.
     *
     * A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://help.github.com/articles/about-repository-transfers/).
     *
@@ -40948,7 +40948,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_check_vulnerability_alerts: GET /repos/{owner}/{repo}/vulnerability-alerts
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/vulnerability-alerts`.
     *
     * Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
     *
@@ -40965,7 +40965,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_enable_vulnerability_alerts: PUT /repos/{owner}/{repo}/vulnerability-alerts
+    * This function performs a `PUT` to the endpoint `/repos/{owner}/{repo}/vulnerability-alerts`.
     *
     * Enables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
     *
@@ -40982,7 +40982,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_disable_vulnerability_alerts: DELETE /repos/{owner}/{repo}/vulnerability-alerts
+    * This function performs a `DELETE` to the endpoint `/repos/{owner}/{repo}/vulnerability-alerts`.
     *
     * Disables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
     *
@@ -41002,7 +41002,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_download_zipball_archive: GET /repos/{owner}/{repo}/zipball/{ref}
+    * This function performs a `GET` to the endpoint `/repos/{owner}/{repo}/zipball/{ref}`.
     *
     * Gets a redirect URL to download a zip archive for a repository. If you omit `:ref`, the repository’s default branch (usually
     * `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use
@@ -41028,7 +41028,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_create_using_template: POST /repos/{template_owner}/{template_repo}/generate
+    * This function performs a `POST` to the endpoint `/repos/{template_owner}/{template_repo}/generate`.
     *
     * Creates a new repository using a repository template. Use the `template_owner` and `template_repo` route parameters to specify the repository to use as the template. The authenticated user must own or be a member of an organization that owns the repository. To check if a repository is available to use as a template, get the repository's information using the [Get a repository](https://docs.github.com/rest/reference/repos#get-a-repository) endpoint and check that the `is_template` key is `true`.
     *
@@ -41061,7 +41061,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * repos_list_public: GET /repositories
+    * This function performs a `GET` to the endpoint `/repositories`.
     *
     * Lists all public repositories in the order that they were created.
     *
@@ -41078,7 +41078,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * actions_list_environment_secrets: GET /repositories/{repository_id}/environments/{environment_name}/secrets
+    * This function performs a `GET` to the endpoint `/repositories/{repository_id}/environments/{environment_name}/secrets`.
     *
     * Lists all secrets available in an environment without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
@@ -41103,7 +41103,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * actions_get_environment_public_key: GET /repositories/{repository_id}/environments/{environment_name}/secrets/public-key
+    * This function performs a `GET` to the endpoint `/repositories/{repository_id}/environments/{environment_name}/secrets/public-key`.
     *
     * Get the public key for an environment, which you need to encrypt environment secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
@@ -41124,7 +41124,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * actions_get_environment_secret: GET /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}
+    * This function performs a `GET` to the endpoint `/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}`.
     *
     * Gets a single environment secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
@@ -41147,7 +41147,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * actions_create_or_update_environment_secret: PUT /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}
+    * This function performs a `PUT` to the endpoint `/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}`.
     *
     * Creates or updates an environment secret with an encrypted value. Encrypt your secret using
     * [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). You must authenticate using an access
@@ -41249,7 +41249,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * actions_delete_environment_secret: DELETE /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}
+    * This function performs a `DELETE` to the endpoint `/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}`.
     *
     * Deletes a secret in an environment using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
@@ -41275,7 +41275,7 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
     }
 
     /**
-    * enterprise_admin_list_provisioned_groups_enterprise: GET /scim/v2/enterprises/{enterprise}/Groups
+    * This function performs a `GET` to the endpoint `/scim/v2/enterprises/{enterprise}/Groups`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41289,15 +41289,15 @@ format!("{}", participating), format!("{}", all), before.to_rfc3339(), since.to_
         filter: &str,
         excluded_attributes: &str,
     ) -> Result<types::ScimGroupListEnterprise> {
-        let url = format!("/scim/v2/enterprises/{}/Groups?start_index={}&count={}&excluded_attributes={}&filter={}",
+        let url = format!("/scim/v2/enterprises/{}/Groups?count={}&filter={}&start_index={}&excluded_attributes={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(), filter.to_string(),         );
+format!("{}", count), filter.to_string(), format!("{}", start_index), excluded_attributes.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-    * enterprise_admin_provision_and_invite_enterprise_group: POST /scim/v2/enterprises/{enterprise}/Groups
+    * This function performs a `POST` to the endpoint `/scim/v2/enterprises/{enterprise}/Groups`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41323,7 +41323,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_get_provisioning_information_for_enterprise_group: GET /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
+    * This function performs a `GET` to the endpoint `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41346,7 +41346,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_set_information_for_provisioned_enterprise_group: PUT /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
+    * This function performs a `PUT` to the endpoint `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41374,7 +41374,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_delete_scim_group_from_enterprise: DELETE /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
+    * This function performs a `DELETE` to the endpoint `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41398,7 +41398,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_update_attribute_for_enterprise_group: PATCH /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
+    * This function performs a `PATCH` to the endpoint `/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41426,7 +41426,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_list_provisioned_identities_enterprise: GET /scim/v2/enterprises/{enterprise}/Users
+    * This function performs a `GET` to the endpoint `/scim/v2/enterprises/{enterprise}/Users`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41457,10 +41457,10 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         filter: &str,
     ) -> Result<types::ScimUserListEnterprise> {
         let url = format!(
-            "/scim/v2/enterprises/{}/Users?start_index={}&filter={}&count={}",
+            "/scim/v2/enterprises/{}/Users?filter={}&start_index={}&count={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-            format!("{}", start_index),
             filter.to_string(),
+            format!("{}", start_index),
             format!("{}", count),
         );
 
@@ -41468,7 +41468,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_provision_and_invite_enterprise_user: POST /scim/v2/enterprises/{enterprise}/Users
+    * This function performs a `POST` to the endpoint `/scim/v2/enterprises/{enterprise}/Users`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41496,7 +41496,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_get_provisioning_information_for_enterprise_user: GET /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
+    * This function performs a `GET` to the endpoint `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41517,7 +41517,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_set_information_for_provisioned_enterprise_user: PUT /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
+    * This function performs a `PUT` to the endpoint `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41549,7 +41549,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_delete_user_from_enterprise: DELETE /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
+    * This function performs a `DELETE` to the endpoint `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41573,7 +41573,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * enterprise_admin_update_attribute_for_enterprise_user: PATCH /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
+    * This function performs a `PATCH` to the endpoint `/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}`.
     *
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
@@ -41616,7 +41616,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * scim_list_provisioned_identities: GET /scim/v2/organizations/{org}/Users
+    * This function performs a `GET` to the endpoint `/scim/v2/organizations/{org}/Users`.
     *
     * Retrieves a paginated list of all provisioned organization members, including pending invitations. If you provide the `filter` parameter, the resources for all matching provisions members are returned.
     *
@@ -41645,10 +41645,10 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         filter: &str,
     ) -> Result<types::ScimUserList> {
         let url = format!(
-            "/scim/v2/organizations/{}/Users?start_index={}&filter={}&count={}",
+            "/scim/v2/organizations/{}/Users?filter={}&start_index={}&count={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", start_index),
             filter.to_string(),
+            format!("{}", start_index),
             format!("{}", count),
         );
 
@@ -41656,7 +41656,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * scim_provision_and_invite_user: POST /scim/v2/organizations/{org}/Users
+    * This function performs a `POST` to the endpoint `/scim/v2/organizations/{org}/Users`.
     *
     * Provision organization membership for a user, and send an activation email to the email address.
     *
@@ -41680,7 +41680,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * scim_get_provisioning_information_for_user: GET /scim/v2/organizations/{org}/Users/{scim_user_id}
+    * This function performs a `GET` to the endpoint `/scim/v2/organizations/{org}/Users/{scim_user_id}`.
     *
     *
     *
@@ -41701,7 +41701,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * scim_set_information_for_provisioned_user: PUT /scim/v2/organizations/{org}/Users/{scim_user_id}
+    * This function performs a `PUT` to the endpoint `/scim/v2/organizations/{org}/Users/{scim_user_id}`.
     *
     * Replaces an existing provisioned user's information. You must provide all the information required for the user as if you were provisioning them for the first time. Any existing user information that you don't provide will be removed. If you want to only update a specific attribute, use the [Update an attribute for a SCIM user](https://docs.github.com/rest/reference/scim#update-an-attribute-for-a-scim-user) endpoint instead.
     *
@@ -41731,7 +41731,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * scim_delete_user_from_org: DELETE /scim/v2/organizations/{org}/Users/{scim_user_id}
+    * This function performs a `DELETE` to the endpoint `/scim/v2/organizations/{org}/Users/{scim_user_id}`.
     *
     *
     *
@@ -41751,7 +41751,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * scim_update_attribute_for_user: PATCH /scim/v2/organizations/{org}/Users/{scim_user_id}
+    * This function performs a `PATCH` to the endpoint `/scim/v2/organizations/{org}/Users/{scim_user_id}`.
     *
     * Allows you to change a provisioned user's individual attributes. To change a user's values, you must provide a specific `Operations` JSON format that contains at least one of the `add`, `remove`, or `replace` operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
     *
@@ -41792,7 +41792,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * search_code: GET /search/code
+    * This function performs a `GET` to the endpoint `/search/code`.
     *
     * Searches for query terms inside of a file. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
     *
@@ -41824,19 +41824,19 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
         let url = format!(
-            "/search/code?per_page={}&order={}&page={}&sort={}&q={}",
+            "/search/code?q={}&per_page={}&order={}&sort={}&page={}",
+            q.to_string(),
             format!("{}", per_page),
             order.to_string(),
-            format!("{}", page),
             sort.to_string(),
-            q.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * search_commits: GET /search/commits
+    * This function performs a `GET` to the endpoint `/search/commits`.
     *
     * Find commits via various criteria on the default branch (usually `master`). This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
     *
@@ -41858,19 +41858,19 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
         let url = format!(
-            "/search/commits?q={}&page={}&sort={}&per_page={}&order={}",
+            "/search/commits?sort={}&q={}&page={}&order={}&per_page={}",
+            sort.to_string(),
             q.to_string(),
             format!("{}", page),
-            sort.to_string(),
-            format!("{}", per_page),
             order.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * search_issues_and_pull_requests: GET /search/issues
+    * This function performs a `GET` to the endpoint `/search/issues`.
     *
     * Find issues by state and keyword. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
     *
@@ -41896,19 +41896,19 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<types::GetSearchIssuesandPullRequestsOkResponse> {
         let url = format!(
-            "/search/issues?page={}&per_page={}&order={}&q={}&sort={}",
-            format!("{}", page),
+            "/search/issues?q={}&per_page={}&order={}&sort={}&page={}",
+            q.to_string(),
             format!("{}", per_page),
             order.to_string(),
-            q.to_string(),
             sort.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * search_labels: GET /search/labels
+    * This function performs a `GET` to the endpoint `/search/labels`.
     *
     * Find labels in a repository with names or descriptions that match search keywords. Returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
     *
@@ -41932,20 +41932,20 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
         let url = format!(
-            "/search/labels?sort={}&repository_id={}&per_page={}&q={}&order={}&page={}",
-            sort.to_string(),
-            format!("{}", repository_id),
-            format!("{}", per_page),
-            q.to_string(),
+            "/search/labels?order={}&sort={}&page={}&per_page={}&repository_id={}&q={}",
             order.to_string(),
+            sort.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
+            format!("{}", repository_id),
+            q.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * search_repos: GET /search/repositories
+    * This function performs a `GET` to the endpoint `/search/repositories`.
     *
     * Find repositories via various criteria. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
     *
@@ -41972,19 +41972,19 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<types::GetSearchRepositoriesOkResponse> {
         let url = format!(
-            "/search/repositories?per_page={}&sort={}&q={}&order={}&page={}",
+            "/search/repositories?per_page={}&sort={}&page={}&q={}&order={}",
             format!("{}", per_page),
             sort.to_string(),
+            format!("{}", page),
             q.to_string(),
             order.to_string(),
-            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * search_topics: GET /search/topics
+    * This function performs a `GET` to the endpoint `/search/topics`.
     *
     * Find topics via various criteria. Results are sorted by best match. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination). See "[Searching topics](https://help.github.com/articles/searching-topics/)" for a detailed list of qualifiers.
     *
@@ -42005,17 +42005,17 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<types::GetSearchTopicsOkResponse> {
         let url = format!(
-            "/search/topics?q={}&per_page={}&page={}",
-            q.to_string(),
-            format!("{}", per_page),
+            "/search/topics?page={}&per_page={}&q={}",
             format!("{}", page),
+            format!("{}", per_page),
+            q.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * search_users: GET /search/users
+    * This function performs a `GET` to the endpoint `/search/users`.
     *
     * Find users via various criteria. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
     *
@@ -42038,11 +42038,11 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
         let url = format!(
-            "/search/users?sort={}&per_page={}&order={}&q={}&page={}",
-            sort.to_string(),
-            format!("{}", per_page),
-            order.to_string(),
+            "/search/users?q={}&sort={}&order={}&per_page={}&page={}",
             q.to_string(),
+            sort.to_string(),
+            order.to_string(),
+            format!("{}", per_page),
             format!("{}", page),
         );
 
@@ -42050,7 +42050,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_get_legacy: GET /teams/{team_id}
+    * This function performs a `GET` to the endpoint `/teams/{team_id}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the [Get a team by name](https://docs.github.com/rest/reference/teams#get-a-team-by-name) endpoint.
     *
@@ -42066,7 +42066,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_delete_legacy: DELETE /teams/{team_id}
+    * This function performs a `DELETE` to the endpoint `/teams/{team_id}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a team](https://docs.github.com/rest/reference/teams#delete-a-team) endpoint.
     *
@@ -42089,7 +42089,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_update_legacy: PATCH /teams/{team_id}
+    * This function performs a `PATCH` to the endpoint `/teams/{team_id}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a team](https://docs.github.com/rest/reference/teams#update-a-team) endpoint.
     *
@@ -42117,7 +42117,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_list_discussions_legacy: GET /teams/{team_id}/discussions
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/discussions`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List discussions`](https://docs.github.com/rest/reference/teams#list-discussions) endpoint.
     *
@@ -42133,18 +42133,18 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::TeamDiscussion>> {
         let url = format!(
-            "/teams/{}/discussions?per_page={}&page={}&direction={}",
+            "/teams/{}/discussions?direction={}&per_page={}&page={}",
             progenitor_support::encode_path(&team_id.to_string()),
+            direction.to_string(),
             format!("{}", per_page),
             format!("{}", page),
-            direction.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_create_discussion_legacy: POST /teams/{team_id}/discussions
+    * This function performs a `POST` to the endpoint `/teams/{team_id}/discussions`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create a discussion`](https://docs.github.com/rest/reference/teams#create-a-discussion) endpoint.
     *
@@ -42172,7 +42172,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_get_discussion_legacy: GET /teams/{team_id}/discussions/{discussion_number}
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/discussions/{discussion_number}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion](https://docs.github.com/rest/reference/teams#get-a-discussion) endpoint.
     *
@@ -42195,7 +42195,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_delete_discussion_legacy: DELETE /teams/{team_id}/discussions/{discussion_number}
+    * This function performs a `DELETE` to the endpoint `/teams/{team_id}/discussions/{discussion_number}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Delete a discussion`](https://docs.github.com/rest/reference/teams#delete-a-discussion) endpoint.
     *
@@ -42221,7 +42221,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_update_discussion_legacy: PATCH /teams/{team_id}/discussions/{discussion_number}
+    * This function performs a `PATCH` to the endpoint `/teams/{team_id}/discussions/{discussion_number}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion](https://docs.github.com/rest/reference/teams#update-a-discussion) endpoint.
     *
@@ -42249,7 +42249,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_list_discussion_comments_legacy: GET /teams/{team_id}/discussions/{discussion_number}/comments
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/discussions/{discussion_number}/comments`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List discussion comments](https://docs.github.com/rest/reference/teams#list-discussion-comments) endpoint.
     *
@@ -42266,19 +42266,19 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
-            "/teams/{}/discussions/{}/comments?per_page={}&direction={}&page={}",
+            "/teams/{}/discussions/{}/comments?page={}&per_page={}&direction={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
+            format!("{}", page),
             format!("{}", per_page),
             direction.to_string(),
-            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_create_discussion_comment_legacy: POST /teams/{team_id}/discussions/{discussion_number}/comments
+    * This function performs a `POST` to the endpoint `/teams/{team_id}/discussions/{discussion_number}/comments`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Create a discussion comment](https://docs.github.com/rest/reference/teams#create-a-discussion-comment) endpoint.
     *
@@ -42308,7 +42308,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_get_discussion_comment_legacy: GET /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion comment](https://docs.github.com/rest/reference/teams#get-a-discussion-comment) endpoint.
     *
@@ -42333,7 +42333,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_delete_discussion_comment_legacy: DELETE /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}
+    * This function performs a `DELETE` to the endpoint `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a discussion comment](https://docs.github.com/rest/reference/teams#delete-a-discussion-comment) endpoint.
     *
@@ -42361,7 +42361,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_update_discussion_comment_legacy: PATCH /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}
+    * This function performs a `PATCH` to the endpoint `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion comment](https://docs.github.com/rest/reference/teams#update-a-discussion-comment) endpoint.
     *
@@ -42391,7 +42391,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * reactions_list_for_team_discussion_comment_legacy: GET /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List reactions for a team discussion comment`](https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment) endpoint.
     *
@@ -42409,20 +42409,20 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/teams/{}/discussions/{}/comments/{}/reactions?page={}&per_page={}&content={}",
+            "/teams/{}/discussions/{}/comments/{}/reactions?page={}&content={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
             format!("{}", page),
-            format!("{}", per_page),
             content.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * reactions_create_for_team_discussion_comment_legacy: POST /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions
+    * This function performs a `POST` to the endpoint `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new "[Create reaction for a team discussion comment](https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion-comment)" endpoint.
     *
@@ -42452,7 +42452,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * reactions_list_for_team_discussion_legacy: GET /teams/{team_id}/discussions/{discussion_number}/reactions
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/discussions/{discussion_number}/reactions`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List reactions for a team discussion`](https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion) endpoint.
     *
@@ -42469,19 +42469,19 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/teams/{}/discussions/{}/reactions?content={}&page={}&per_page={}",
+            "/teams/{}/discussions/{}/reactions?page={}&per_page={}&content={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            content.to_string(),
             format!("{}", page),
             format!("{}", per_page),
+            content.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * reactions_create_for_team_discussion_legacy: POST /teams/{team_id}/discussions/{discussion_number}/reactions
+    * This function performs a `POST` to the endpoint `/teams/{team_id}/discussions/{discussion_number}/reactions`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create reaction for a team discussion`](https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion) endpoint.
     *
@@ -42509,7 +42509,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_list_pending_invitations_legacy: GET /teams/{team_id}/invitations
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/invitations`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List pending team invitations`](https://docs.github.com/rest/reference/teams#list-pending-team-invitations) endpoint.
     *
@@ -42534,7 +42534,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_list_members_legacy: GET /teams/{team_id}/members
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/members`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team members`](https://docs.github.com/rest/reference/teams#list-team-members) endpoint.
     *
@@ -42550,10 +42550,10 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/teams/{}/members?page={}&per_page={}&role={}",
+            "/teams/{}/members?per_page={}&page={}&role={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
             role.to_string(),
         );
 
@@ -42561,7 +42561,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_get_member_legacy: GET /teams/{team_id}/members/{username}
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/members/{username}`.
     *
     * The "Get team member" endpoint (described below) is deprecated.
     *
@@ -42582,7 +42582,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_add_member_legacy: PUT /teams/{team_id}/members/{username}
+    * This function performs a `PUT` to the endpoint `/teams/{team_id}/members/{username}`.
     *
     * The "Add team member" endpoint (described below) is deprecated.
     *
@@ -42609,7 +42609,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_remove_member_legacy: DELETE /teams/{team_id}/members/{username}
+    * This function performs a `DELETE` to the endpoint `/teams/{team_id}/members/{username}`.
     *
     * The "Remove team member" endpoint (described below) is deprecated.
     *
@@ -42637,7 +42637,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_get_membership_for_user_legacy: GET /teams/{team_id}/memberships/{username}
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/memberships/{username}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get team membership for a user](https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user) endpoint.
     *
@@ -42667,7 +42667,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_add_or_update_membership_for_user_legacy: PUT /teams/{team_id}/memberships/{username}
+    * This function performs a `PUT` to the endpoint `/teams/{team_id}/memberships/{username}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team membership for a user](https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user) endpoint.
     *
@@ -42703,7 +42703,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_remove_membership_for_user_legacy: DELETE /teams/{team_id}/memberships/{username}
+    * This function performs a `DELETE` to the endpoint `/teams/{team_id}/memberships/{username}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove team membership for a user](https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user) endpoint.
     *
@@ -42733,7 +42733,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_list_projects_legacy: GET /teams/{team_id}/projects
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/projects`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team projects`](https://docs.github.com/rest/reference/teams#list-team-projects) endpoint.
     *
@@ -42748,17 +42748,17 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::TeamProject>> {
         let url = format!(
-            "/teams/{}/projects?page={}&per_page={}",
+            "/teams/{}/projects?per_page={}&page={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_check_permissions_for_project_legacy: GET /teams/{team_id}/projects/{project_id}
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/projects/{project_id}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Check team permissions for a project](https://docs.github.com/rest/reference/teams#check-team-permissions-for-a-project) endpoint.
     *
@@ -42781,7 +42781,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_add_or_update_project_permissions_legacy: PUT /teams/{team_id}/projects/{project_id}
+    * This function performs a `PUT` to the endpoint `/teams/{team_id}/projects/{project_id}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team project permissions](https://docs.github.com/rest/reference/teams#add-or-update-team-project-permissions) endpoint.
     *
@@ -42809,7 +42809,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_remove_project_legacy: DELETE /teams/{team_id}/projects/{project_id}
+    * This function performs a `DELETE` to the endpoint `/teams/{team_id}/projects/{project_id}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove a project from a team](https://docs.github.com/rest/reference/teams#remove-a-project-from-a-team) endpoint.
     *
@@ -42831,7 +42831,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_list_repos_legacy: GET /teams/{team_id}/repos
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/repos`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://docs.github.com/rest/reference/teams#list-team-repositories) endpoint.
     *
@@ -42844,17 +42844,17 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/teams/{}/repos?per_page={}&page={}",
+            "/teams/{}/repos?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_check_permissions_for_repo_legacy: GET /teams/{team_id}/repos/{owner}/{repo}
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/repos/{owner}/{repo}`.
     *
     * **Note**: Repositories inherited through a parent team will also be checked.
     *
@@ -42881,7 +42881,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_add_or_update_repo_permissions_legacy: PUT /teams/{team_id}/repos/{owner}/{repo}
+    * This function performs a `PUT` to the endpoint `/teams/{team_id}/repos/{owner}/{repo}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new "[Add or update team repository permissions](https://docs.github.com/rest/reference/teams#add-or-update-team-repository-permissions)" endpoint.
     *
@@ -42913,7 +42913,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_remove_repo_legacy: DELETE /teams/{team_id}/repos/{owner}/{repo}
+    * This function performs a `DELETE` to the endpoint `/teams/{team_id}/repos/{owner}/{repo}`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove a repository from a team](https://docs.github.com/rest/reference/teams#remove-a-repository-from-a-team) endpoint.
     *
@@ -42941,7 +42941,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_list_idp_groups_for_legacy: GET /teams/{team_id}/team-sync/group-mappings
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/team-sync/group-mappings`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List IdP groups for a team`](https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team) endpoint.
     *
@@ -42964,7 +42964,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_create_or_update_idp_group_connections_legacy: PATCH /teams/{team_id}/team-sync/group-mappings
+    * This function performs a `PATCH` to the endpoint `/teams/{team_id}/team-sync/group-mappings`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create or update IdP group connections`](https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections) endpoint.
     *
@@ -42992,7 +42992,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * teams_list_child_legacy: GET /teams/{team_id}/teams
+    * This function performs a `GET` to the endpoint `/teams/{team_id}/teams`.
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List child teams`](https://docs.github.com/rest/reference/teams#list-child-teams) endpoint.
     *
@@ -43005,17 +43005,17 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
-            "/teams/{}/teams?per_page={}&page={}",
+            "/teams/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * users_get_authenticated: GET /user
+    * This function performs a `GET` to the endpoint `/user`.
     *
     * If the authenticated user is authenticated through basic authentication or OAuth with the `user` scope, then the response lists public and private profile information.
     *
@@ -43029,7 +43029,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_update_authenticated: PATCH /user
+    * This function performs a `PATCH` to the endpoint `/user`.
     *
     * **Note:** If your email is set to private and you send an `email` parameter as part of this request to update your profile, your privacy settings are still enforced: the email address will not be displayed on your public profile or via the API.
     *
@@ -43048,7 +43048,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_list_blocked_by_authenticated: GET /user/blocks
+    * This function performs a `GET` to the endpoint `/user/blocks`.
     *
     * List the users you've blocked on your personal account.
     *
@@ -43060,7 +43060,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_check_blocked: GET /user/blocks/{username}
+    * This function performs a `GET` to the endpoint `/user/blocks/{username}`.
     *
     *
     *
@@ -43076,7 +43076,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_block: PUT /user/blocks/{username}
+    * This function performs a `PUT` to the endpoint `/user/blocks/{username}`.
     *
     *
     *
@@ -43092,7 +43092,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_unblock: DELETE /user/blocks/{username}
+    * This function performs a `DELETE` to the endpoint `/user/blocks/{username}`.
     *
     *
     *
@@ -43111,7 +43111,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_set_primary_email_visibility_for_authenticated: PATCH /user/email/visibility
+    * This function performs a `PATCH` to the endpoint `/user/email/visibility`.
     *
     * Sets the visibility for your primary email addresses.
     *
@@ -43130,7 +43130,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_list_emails_for_authenticated: GET /user/emails
+    * This function performs a `GET` to the endpoint `/user/emails`.
     *
     * Lists all of your email addresses, and specifies which one is visible to the public. This endpoint is accessible with the `user:email` scope.
     *
@@ -43142,16 +43142,16 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::Email>> {
         let url = format!(
-            "/user/emails?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/emails?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * users_add_email_for_authenticated: POST /user/emails
+    * This function performs a `POST` to the endpoint `/user/emails`.
     *
     * This endpoint is accessible with the `user` scope.
     *
@@ -43170,7 +43170,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_delete_email_for_authenticated: DELETE /user/emails
+    * This function performs a `DELETE` to the endpoint `/user/emails`.
     *
     * This endpoint is accessible with the `user` scope.
     *
@@ -43194,7 +43194,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_list_followers_for_authenticated_user: GET /user/followers
+    * This function performs a `GET` to the endpoint `/user/followers`.
     *
     * Lists the people following the authenticated user.
     *
@@ -43215,7 +43215,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_list_followed_by_authenticated: GET /user/following
+    * This function performs a `GET` to the endpoint `/user/following`.
     *
     * Lists the people who the authenticated user follows.
     *
@@ -43227,16 +43227,16 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/user/following?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/following?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * users_check_person_is_followed_by_authenticated: GET /user/following/{username}
+    * This function performs a `GET` to the endpoint `/user/following/{username}`.
     *
     *
     *
@@ -43255,7 +43255,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_follow: PUT /user/following/{username}
+    * This function performs a `PUT` to the endpoint `/user/following/{username}`.
     *
     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
@@ -43273,7 +43273,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_unfollow: DELETE /user/following/{username}
+    * This function performs a `DELETE` to the endpoint `/user/following/{username}`.
     *
     * Unfollowing a user requires the user to be logged in and authenticated with basic auth or OAuth with the `user:follow` scope.
     *
@@ -43292,7 +43292,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_list_gpg_keys_for_authenticated: GET /user/gpg_keys
+    * This function performs a `GET` to the endpoint `/user/gpg_keys`.
     *
     * Lists the current user's GPG keys. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -43304,16 +43304,16 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         page: i64,
     ) -> Result<Vec<types::GpgKey>> {
         let url = format!(
-            "/user/gpg_keys?page={}&per_page={}",
-            format!("{}", page),
+            "/user/gpg_keys?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * users_create_gpg_key_for_authenticated: POST /user/gpg_keys
+    * This function performs a `POST` to the endpoint `/user/gpg_keys`.
     *
     * Adds a GPG key to the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least `write:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -43332,7 +43332,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_get_gpg_key_for_authenticated: GET /user/gpg_keys/{gpg_key_id}
+    * This function performs a `GET` to the endpoint `/user/gpg_keys/{gpg_key_id}`.
     *
     * View extended details for a single GPG key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -43351,7 +43351,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * users_delete_gpg_key_for_authenticated: DELETE /user/gpg_keys/{gpg_key_id}
+    * This function performs a `DELETE` to the endpoint `/user/gpg_keys/{gpg_key_id}`.
     *
     * Removes a GPG key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -43370,7 +43370,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * apps_list_installations_for_authenticated_user: GET /user/installations
+    * This function performs a `GET` to the endpoint `/user/installations`.
     *
     * Lists installations of your GitHub App that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
     *
@@ -43397,7 +43397,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * apps_list_installation_repos_for_authenticated_user: GET /user/installations/{installation_id}/repositories
+    * This function performs a `GET` to the endpoint `/user/installations/{installation_id}/repositories`.
     *
     * List repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access for an installation.
     *
@@ -43426,7 +43426,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * apps_add_repo_to_installation: PUT /user/installations/{installation_id}/repositories/{repository_id}
+    * This function performs a `PUT` to the endpoint `/user/installations/{installation_id}/repositories/{repository_id}`.
     *
     * Add a single repository to an installation. The authenticated user must have admin access to the repository.
     *
@@ -43449,7 +43449,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * apps_remove_repo_from_installation: DELETE /user/installations/{installation_id}/repositories/{repository_id}
+    * This function performs a `DELETE` to the endpoint `/user/installations/{installation_id}/repositories/{repository_id}`.
     *
     * Remove a single repository from an installation. The authenticated user must have admin access to the repository.
     *
@@ -43475,7 +43475,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * interactions_get_restrictions_for_authenticated_user: GET /user/interaction-limits
+    * This function performs a `GET` to the endpoint `/user/interaction-limits`.
     *
     * Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
     *
@@ -43489,7 +43489,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * interactions_set_restrictions_for_authenticated_user: PUT /user/interaction-limits
+    * This function performs a `PUT` to the endpoint `/user/interaction-limits`.
     *
     * Temporarily restricts which type of GitHub user can interact with your public repositories. Setting the interaction limit at the user level will overwrite any interaction limits that are set for individual repositories owned by the user.
     *
@@ -43508,7 +43508,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * interactions_remove_restrictions_for_authenticated_user: DELETE /user/interaction-limits
+    * This function performs a `DELETE` to the endpoint `/user/interaction-limits`.
     *
     * Removes any interaction restrictions from your public repositories.
     *
@@ -43523,7 +43523,7 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
     }
 
     /**
-    * issues_list_for_authenticated_user: GET /user/issues
+    * This function performs a `GET` to the endpoint `/user/issues`.
     *
     * List issues across owned and member repositories assigned to the authenticated user.
     *
@@ -43545,14 +43545,14 @@ format!("{}", start_index), format!("{}", count), excluded_attributes.to_string(
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/user/issues?filter={}&state={}&per_page={}&direction={}&labels={}&since={}&page={}&sort={}",
-filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_string(), labels.to_string(), since.to_rfc3339(), format!("{}", page), sort.to_string(),         );
+        let url = format!("/user/issues?labels={}&direction={}&state={}&since={}&per_page={}&sort={}&page={}&filter={}",
+labels.to_string(), direction.to_string(), state.to_string(), since.to_rfc3339(), format!("{}", per_page), sort.to_string(), format!("{}", page), filter.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-    * users_list_public_ssh_keys_for_authenticated: GET /user/keys
+    * This function performs a `GET` to the endpoint `/user/keys`.
     *
     * Lists the public SSH keys for the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -43564,16 +43564,16 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::Key>> {
         let url = format!(
-            "/user/keys?page={}&per_page={}",
-            format!("{}", page),
+            "/user/keys?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * users_create_public_ssh_key_for_authenticated: POST /user/keys
+    * This function performs a `POST` to the endpoint `/user/keys`.
     *
     * Adds a public SSH key to the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least `write:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -43592,7 +43592,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * users_get_public_ssh_key_for_authenticated: GET /user/keys/{key_id}
+    * This function performs a `GET` to the endpoint `/user/keys/{key_id}`.
     *
     * View extended details for a single public SSH key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -43611,7 +43611,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * users_delete_public_ssh_key_for_authenticated: DELETE /user/keys/{key_id}
+    * This function performs a `DELETE` to the endpoint `/user/keys/{key_id}`.
     *
     * Removes a public SSH key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
@@ -43630,7 +43630,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * apps_list_subscriptions_for_authenticated_user: GET /user/marketplace_purchases
+    * This function performs a `GET` to the endpoint `/user/marketplace_purchases`.
     *
     * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
     *
@@ -43642,16 +43642,16 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
         let url = format!(
-            "/user/marketplace_purchases?page={}&per_page={}",
-            format!("{}", page),
+            "/user/marketplace_purchases?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * apps_list_subscriptions_for_authenticated_user_stubbed: GET /user/marketplace_purchases/stubbed
+    * This function performs a `GET` to the endpoint `/user/marketplace_purchases/stubbed`.
     *
     * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
     *
@@ -43663,16 +43663,16 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
         let url = format!(
-            "/user/marketplace_purchases/stubbed?page={}&per_page={}",
-            format!("{}", page),
+            "/user/marketplace_purchases/stubbed?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * orgs_list_memberships_for_authenticated_user: GET /user/memberships/orgs
+    * This function performs a `GET` to the endpoint `/user/memberships/orgs`.
     *
     *
     *
@@ -43695,7 +43695,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * orgs_get_membership_for_authenticated_user: GET /user/memberships/orgs/{org}
+    * This function performs a `GET` to the endpoint `/user/memberships/orgs/{org}`.
     *
     *
     *
@@ -43714,7 +43714,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * orgs_update_membership_for_authenticated_user: PATCH /user/memberships/orgs/{org}
+    * This function performs a `PATCH` to the endpoint `/user/memberships/orgs/{org}`.
     *
     *
     *
@@ -43738,7 +43738,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * migrations_list_for_authenticated_user: GET /user/migrations
+    * This function performs a `GET` to the endpoint `/user/migrations`.
     *
     * Lists all migrations a user has started.
     *
@@ -43750,16 +43750,16 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::Migration>> {
         let url = format!(
-            "/user/migrations?page={}&per_page={}",
-            format!("{}", page),
+            "/user/migrations?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * migrations_start_for_authenticated_user: POST /user/migrations
+    * This function performs a `POST` to the endpoint `/user/migrations`.
     *
     * Initiates the generation of a user migration archive.
     *
@@ -43778,7 +43778,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * migrations_get_status_for_authenticated_user: GET /user/migrations/{migration_id}
+    * This function performs a `GET` to the endpoint `/user/migrations/{migration_id}`.
     *
     * Fetches a single user migration. The response includes the `state` of the migration, which can be one of the following values:
     *
@@ -43806,7 +43806,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * migrations_get_archive_for_authenticated_user: GET /user/migrations/{migration_id}/archive
+    * This function performs a `GET` to the endpoint `/user/migrations/{migration_id}/archive`.
     *
     * Fetches the URL to download the migration archive as a `tar.gz` file. Depending on the resources your repository uses, the migration archive can contain JSON files with data for these objects:
     *
@@ -43845,7 +43845,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * migrations_delete_archive_for_authenticated_user: DELETE /user/migrations/{migration_id}/archive
+    * This function performs a `DELETE` to the endpoint `/user/migrations/{migration_id}/archive`.
     *
     * Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://docs.github.com/rest/reference/migrations#list-user-migrations) and [Get a user migration status](https://docs.github.com/rest/reference/migrations#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
     *
@@ -43867,7 +43867,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * migrations_unlock_repo_for_authenticated_user: DELETE /user/migrations/{migration_id}/repos/{repo_name}/lock
+    * This function performs a `DELETE` to the endpoint `/user/migrations/{migration_id}/repos/{repo_name}/lock`.
     *
     * Unlocks a repository. You can lock repositories when you [start a user migration](https://docs.github.com/rest/reference/migrations#start-a-user-migration). Once the migration is complete you can unlock each repository to begin using it again or [delete the repository](https://docs.github.com/rest/reference/repos#delete-a-repository) if you no longer need the source data. Returns a status of `404 Not Found` if the repository is not locked.
     *
@@ -43891,7 +43891,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * migrations_list_repos_for_user: GET /user/migrations/{migration_id}/repositories
+    * This function performs a `GET` to the endpoint `/user/migrations/{migration_id}/repositories`.
     *
     * Lists all the repositories for this user migration.
     *
@@ -43904,17 +43904,17 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/user/migrations/{}/repositories?per_page={}&page={}",
+            "/user/migrations/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&migration_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * orgs_list_for_authenticated_user: GET /user/orgs
+    * This function performs a `GET` to the endpoint `/user/orgs`.
     *
     * List organizations for the authenticated user.
     *
@@ -43930,16 +43930,16 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!(
-            "/user/orgs?page={}&per_page={}",
-            format!("{}", page),
+            "/user/orgs?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * packages_get_package_for_authenticated_user: GET /user/packages/{package_type}/{package_name}
+    * This function performs a `GET` to the endpoint `/user/packages/{package_type}/{package_name}`.
     *
     * Gets a specific package for a package owned by the authenticated user.
     *
@@ -43963,7 +43963,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * packages_delete_package_for_authenticated_user: DELETE /user/packages/{package_type}/{package_name}
+    * This function performs a `DELETE` to the endpoint `/user/packages/{package_type}/{package_name}`.
     *
     * Deletes a package owned by the authenticated user. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
     *
@@ -43990,7 +43990,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * packages_restore_package_for_authenticated_user: POST /user/packages/{package_type}/{package_name}/restore
+    * This function performs a `POST` to the endpoint `/user/packages/{package_type}/{package_name}/restore`.
     *
     * Restores a package owned by the authenticated user.
     *
@@ -44019,7 +44019,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * packages_get_all_package_versions_for_package_owned_by_authenticated_user: GET /user/packages/{package_type}/{package_name}/versions
+    * This function performs a `GET` to the endpoint `/user/packages/{package_type}/{package_name}/versions`.
     *
     * Returns all package versions for a package owned by the authenticated user.
     *
@@ -44037,19 +44037,19 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
         state: &str,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
-            "/user/packages/{}/{}/versions?state={}&per_page={}&page={}",
+            "/user/packages/{}/{}/versions?state={}&page={}&per_page={}",
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
             state.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * packages_get_package_version_for_authenticated_user: GET /user/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * This function performs a `GET` to the endpoint `/user/packages/{package_type}/{package_name}/versions/{package_version_id}`.
     *
     * Gets a specific package version for a package owned by the authenticated user.
     *
@@ -44075,7 +44075,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * packages_delete_package_version_for_authenticated_user: DELETE /user/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * This function performs a `DELETE` to the endpoint `/user/packages/{package_type}/{package_name}/versions/{package_version_id}`.
     *
     * Deletes a specific package version for a package owned by the authenticated user.  If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
     *
@@ -44104,7 +44104,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * packages_restore_package_version_for_authenticated_user: POST /user/packages/{package_type}/{package_name}/versions/{package_version_id}/restore
+    * This function performs a `POST` to the endpoint `/user/packages/{package_type}/{package_name}/versions/{package_version_id}/restore`.
     *
     * Restores a package version owned by the authenticated user.
     *
@@ -44133,7 +44133,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * projects_create_for_authenticated_user: POST /user/projects
+    * This function performs a `POST` to the endpoint `/user/projects`.
     *
     *
     *
@@ -44152,7 +44152,7 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
     }
 
     /**
-    * users_list_public_emails_for_authenticated: GET /user/public_emails
+    * This function performs a `GET` to the endpoint `/user/public_emails`.
     *
     * Lists your publicly visible email address, which you can set with the [Set primary email visibility for the authenticated user](https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user) endpoint. This endpoint is accessible with the `user:email` scope.
     *
@@ -44164,16 +44164,16 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::Email>> {
         let url = format!(
-            "/user/public_emails?page={}&per_page={}",
-            format!("{}", page),
+            "/user/public_emails?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_list_for_authenticated_user: GET /user/repos
+    * This function performs a `GET` to the endpoint `/user/repos`.
     *
     * Lists repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
     *
@@ -44193,14 +44193,14 @@ filter.to_string(), state.to_string(), format!("{}", per_page), direction.to_str
         since: DateTime<Utc>,
         before: DateTime<Utc>,
     ) -> Result<Vec<types::Repository>> {
-        let url = format!("/user/repos?since={}&page={}&type={}&affiliation={}&sort={}&before={}&per_page={}&direction={}&visibility={}",
-since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to_string(), before.to_rfc3339(), format!("{}", per_page), direction.to_string(), visibility.to_string(),         );
+        let url = format!("/user/repos?direction={}&sort={}&affiliation={}&page={}&visibility={}&type={}&per_page={}&since={}&before={}",
+direction.to_string(), sort.to_string(), affiliation.to_string(), format!("{}", page), visibility.to_string(), type_, format!("{}", per_page), since.to_rfc3339(), before.to_rfc3339(),         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_create_for_authenticated_user: POST /user/repos
+    * This function performs a `POST` to the endpoint `/user/repos`.
     *
     * Creates a new repository for the authenticated user.
     *
@@ -44226,7 +44226,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * repos_list_invitations_for_authenticated_user: GET /user/repository_invitations
+    * This function performs a `GET` to the endpoint `/user/repository_invitations`.
     *
     * When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
     *
@@ -44247,7 +44247,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * repos_decline_invitation: DELETE /user/repository_invitations/{invitation_id}
+    * This function performs a `DELETE` to the endpoint `/user/repository_invitations/{invitation_id}`.
     *
     *
     *
@@ -44266,7 +44266,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * repos_accept_invitation: PATCH /user/repository_invitations/{invitation_id}
+    * This function performs a `PATCH` to the endpoint `/user/repository_invitations/{invitation_id}`.
     *
     *
     *
@@ -44282,7 +44282,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * activity_list_repos_starred_by_authenticated_user: GET /user/starred
+    * This function performs a `GET` to the endpoint `/user/starred`.
     *
     * Lists repositories the authenticated user has starred.
     *
@@ -44298,18 +44298,18 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::Repository>> {
         let url = format!(
-            "/user/starred?direction={}&per_page={}&page={}&sort={}",
+            "/user/starred?sort={}&direction={}&per_page={}&page={}",
+            sort.to_string(),
             direction.to_string(),
             format!("{}", per_page),
             format!("{}", page),
-            sort.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * activity_check_repo_is_starred_by_authenticated_user: GET /user/starred/{owner}/{repo}
+    * This function performs a `GET` to the endpoint `/user/starred/{owner}/{repo}`.
     *
     *
     *
@@ -44330,7 +44330,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * activity_star_repo_for_authenticated_user: PUT /user/starred/{owner}/{repo}
+    * This function performs a `PUT` to the endpoint `/user/starred/{owner}/{repo}`.
     *
     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
@@ -44351,7 +44351,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * activity_unstar_repo_for_authenticated_user: DELETE /user/starred/{owner}/{repo}
+    * This function performs a `DELETE` to the endpoint `/user/starred/{owner}/{repo}`.
     *
     *
     *
@@ -44375,7 +44375,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * activity_list_watched_repos_for_authenticated_user: GET /user/subscriptions
+    * This function performs a `GET` to the endpoint `/user/subscriptions`.
     *
     * Lists repositories the authenticated user is watching.
     *
@@ -44387,16 +44387,16 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/user/subscriptions?page={}&per_page={}",
-            format!("{}", page),
+            "/user/subscriptions?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * teams_list_for_authenticated_user: GET /user/teams
+    * This function performs a `GET` to the endpoint `/user/teams`.
     *
     * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires `user`, `repo`, or `read:org` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://docs.github.com/apps/building-oauth-apps/).
     *
@@ -44408,16 +44408,16 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::TeamFull>> {
         let url = format!(
-            "/user/teams?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/teams?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * users_list: GET /users
+    * This function performs a `GET` to the endpoint `/users`.
     *
     * Lists all users, in the order that they signed up on GitHub. This list includes personal user accounts and organization accounts.
     *
@@ -44436,7 +44436,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * users_get_by_username: GET /users/{username}
+    * This function performs a `GET` to the endpoint `/users/{username}`.
     *
     * Provides publicly available information about someone with a GitHub account.
     *
@@ -44458,7 +44458,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * activity_list_events_for_authenticated_user: GET /users/{username}/events
+    * This function performs a `GET` to the endpoint `/users/{username}/events`.
     *
     * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
     *
@@ -44471,17 +44471,17 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/events?per_page={}&page={}",
+            "/users/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * activity_list_org_events_for_authenticated_user: GET /users/{username}/events/orgs/{org}
+    * This function performs a `GET` to the endpoint `/users/{username}/events/orgs/{org}`.
     *
     * This is the user's organization dashboard. You must be authenticated as the user to view this.
     *
@@ -44506,7 +44506,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * activity_list_public_events_for_user: GET /users/{username}/events/public
+    * This function performs a `GET` to the endpoint `/users/{username}/events/public`.
     *
     *
     *
@@ -44529,7 +44529,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * users_list_followers_for_user: GET /users/{username}/followers
+    * This function performs a `GET` to the endpoint `/users/{username}/followers`.
     *
     * Lists the people following the specified user.
     *
@@ -44542,17 +44542,17 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/users/{}/followers?per_page={}&page={}",
+            "/users/{}/followers?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * users_list_following_for_user: GET /users/{username}/following
+    * This function performs a `GET` to the endpoint `/users/{username}/following`.
     *
     * Lists the people who the specified user follows.
     *
@@ -44565,17 +44565,17 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/users/{}/following?per_page={}&page={}",
+            "/users/{}/following?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * users_check_following_for_user: GET /users/{username}/following/{target_user}
+    * This function performs a `GET` to the endpoint `/users/{username}/following/{target_user}`.
     *
     *
     *
@@ -44596,7 +44596,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * gists_list_for_user: GET /users/{username}/gists
+    * This function performs a `GET` to the endpoint `/users/{username}/gists`.
     *
     * Lists public gists for the specified user:
     *
@@ -44610,18 +44610,18 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/users/{}/gists?since={}&page={}&per_page={}",
+            "/users/{}/gists?since={}&per_page={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
             since.to_rfc3339(),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * users_list_gpg_keys_for_user: GET /users/{username}/gpg_keys
+    * This function performs a `GET` to the endpoint `/users/{username}/gpg_keys`.
     *
     * Lists the GPG keys for a user. This information is accessible by anyone.
     *
@@ -44644,7 +44644,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * users_get_context_for_user: GET /users/{username}/hovercard
+    * This function performs a `GET` to the endpoint `/users/{username}/hovercard`.
     *
     * Provides hovercard information when authenticated through basic auth or OAuth with the `repo` scope. You can find out more about someone in relation to their pull requests, issues, repositories, and organizations.
     *
@@ -44674,7 +44674,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * apps_get_user_installation: GET /users/{username}/installation
+    * This function performs a `GET` to the endpoint `/users/{username}/installation`.
     *
     * Enables an authenticated GitHub App to find the user’s installation information.
     *
@@ -44692,7 +44692,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * users_list_public_keys_for_user: GET /users/{username}/keys
+    * This function performs a `GET` to the endpoint `/users/{username}/keys`.
     *
     * Lists the _verified_ public SSH keys for a user. This is accessible by anyone.
     *
@@ -44715,7 +44715,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * orgs_list_for_user: GET /users/{username}/orgs
+    * This function performs a `GET` to the endpoint `/users/{username}/orgs`.
     *
     * List [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.
     *
@@ -44730,17 +44730,17 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!(
-            "/users/{}/orgs?page={}&per_page={}",
+            "/users/{}/orgs?per_page={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * packages_get_package_for_user: GET /users/{username}/packages/{package_type}/{package_name}
+    * This function performs a `GET` to the endpoint `/users/{username}/packages/{package_type}/{package_name}`.
     *
     * Gets a specific package metadata for a public package owned by a user.
     *
@@ -44766,7 +44766,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * packages_get_all_package_versions_for_package_owned_by_user: GET /users/{username}/packages/{package_type}/{package_name}/versions
+    * This function performs a `GET` to the endpoint `/users/{username}/packages/{package_type}/{package_name}/versions`.
     *
     * Returns all package versions for a public package owned by a specified user.
     *
@@ -44792,7 +44792,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * packages_get_package_version_for_user: GET /users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * This function performs a `GET` to the endpoint `/users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}`.
     *
     * Gets a specific package version for a public package owned by a specified user.
     *
@@ -44820,7 +44820,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * projects_list_for_user: GET /users/{username}/projects
+    * This function performs a `GET` to the endpoint `/users/{username}/projects`.
     *
     *
     *
@@ -44834,18 +44834,18 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/users/{}/projects?page={}&state={}&per_page={}",
+            "/users/{}/projects?per_page={}&state={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
-            state.to_string(),
             format!("{}", per_page),
+            state.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * activity_list_received_events_for_user: GET /users/{username}/received_events
+    * This function performs a `GET` to the endpoint `/users/{username}/received_events`.
     *
     * These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events.
     *
@@ -44858,17 +44858,17 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/received_events?per_page={}&page={}",
+            "/users/{}/received_events?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * activity_list_received_public_events_for_user: GET /users/{username}/received_events/public
+    * This function performs a `GET` to the endpoint `/users/{username}/received_events/public`.
     *
     *
     *
@@ -44881,17 +44881,17 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/received_events/public?page={}&per_page={}",
+            "/users/{}/received_events/public?per_page={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-    * repos_list_for_user: GET /users/{username}/repos
+    * This function performs a `GET` to the endpoint `/users/{username}/repos`.
     *
     * Lists public repositories for the specified user. Note: For GitHub AE, this endpoint will list internal repositories for the specified user.
     *
@@ -44907,20 +44907,20 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/users/{}/repos?per_page={}&direction={}&page={}&type={}&sort={}",
+            "/users/{}/repos?sort={}&page={}&type={}&per_page={}&direction={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
-            direction.to_string(),
+            sort.to_string(),
             format!("{}", page),
             type_,
-            sort.to_string(),
+            format!("{}", per_page),
+            direction.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-    * billing_get_github_actions_billing_user: GET /users/{username}/settings/billing/actions
+    * This function performs a `GET` to the endpoint `/users/{username}/settings/billing/actions`.
     *
     * Gets the summary of the free and paid GitHub Actions minutes used.
     *
@@ -44943,7 +44943,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * billing_get_github_packages_billing_user: GET /users/{username}/settings/billing/packages
+    * This function performs a `GET` to the endpoint `/users/{username}/settings/billing/packages`.
     *
     * Gets the free and paid storage used for GitHub Packages in gigabytes.
     *
@@ -44966,7 +44966,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * billing_get_shared_storage_billing_user: GET /users/{username}/settings/billing/shared-storage
+    * This function performs a `GET` to the endpoint `/users/{username}/settings/billing/shared-storage`.
     *
     * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
     *
@@ -44989,7 +44989,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * activity_list_repos_starred_by_user: GET /users/{username}/starred
+    * This function performs a `GET` to the endpoint `/users/{username}/starred`.
     *
     * Lists repositories a user has starred.
     *
@@ -45006,11 +45006,11 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
         page: i64,
     ) -> Result<Vec<types::StarredRepository>> {
         let url = format!(
-            "/users/{}/starred?direction={}&per_page={}&page={}&sort={}",
+            "/users/{}/starred?page={}&direction={}&per_page={}&sort={}",
             progenitor_support::encode_path(&username.to_string()),
+            format!("{}", page),
             direction.to_string(),
             format!("{}", per_page),
-            format!("{}", page),
             sort.to_string(),
         );
 
@@ -45018,7 +45018,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * activity_list_repos_watched_by_user: GET /users/{username}/subscriptions
+    * This function performs a `GET` to the endpoint `/users/{username}/subscriptions`.
     *
     * Lists repositories a user is watching.
     *
@@ -45041,7 +45041,7 @@ since.to_rfc3339(), format!("{}", page), type_, affiliation.to_string(), sort.to
     }
 
     /**
-    * meta_get_zen: GET /zen
+    * This function performs a `GET` to the endpoint `/zen`.
     *
     * Get a random sentence from the Zen of GitHub
     */

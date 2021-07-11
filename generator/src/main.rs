@@ -1570,7 +1570,10 @@ fn gen(
             let mut oid = o.operation_id.as_deref().unwrap().to_string();
             oid = oid.replace("-", "_").replace("/", "_");
             a("/**");
-            a(&format!("* {}: {} {}", oid, m, p));
+            a(&format!(
+                "* This function performs a `{}` to the endpoint `{}`.",
+                m, p
+            ));
             if let Some(description) = &o.description {
                 a("*");
                 a(&format!("* {}", description.replace('\n', "\n* ")));
