@@ -12,7 +12,7 @@ const MAX_JWT_TOKEN_LIFE: time::Duration = time::Duration::from_secs(60 * 9);
 // 8 minutes so we refresh sooner than it actually expires
 const JWT_TOKEN_REFRESH_PERIOD: time::Duration = time::Duration::from_secs(60 * 8);
 
-/// Controls what sort of authentication is required for this request
+/// Controls what sort of authentication is required for this request.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum AuthenticationConstraint {
     /// No constraint
@@ -21,7 +21,7 @@ pub enum AuthenticationConstraint {
     JWT,
 }
 
-/// Various forms of authentication credentials supported by GitHub
+/// Various forms of authentication credentials supported by GitHub.
 #[derive(PartialEq, Clone)]
 pub enum Credentials {
     /// Oauth token string
@@ -65,7 +65,7 @@ impl fmt::Debug for Credentials {
     }
 }
 
-/// JSON Web Token authentication mechanism
+/// JSON Web Token authentication mechanism.
 ///
 /// The GitHub client methods are all &self, but the dynamically
 /// generated JWT token changes regularly. The token is also a bit
