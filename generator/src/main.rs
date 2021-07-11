@@ -1223,8 +1223,8 @@ fn gen(
             let struct_name = struct_name(sn);
             match &te.details {
                 TypeDetails::Object(omap) => {
-                    a("    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
-                    a(&format!("    pub struct {} {{", struct_name));
+                    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+                    a(&format!("pub struct {} {{", struct_name));
                     for (name, tid) in omap.iter() {
                         if let Ok(rt) = ts.render_type(tid, true) {
                             if rt == "String" {
@@ -1245,16 +1245,16 @@ fn gen(
                                 } else {
                                     a(&format!(r#"#[serde(rename = "{}")]"#, name));
                                 }
-                                a(&format!("        pub {}_: {},", name, rt));
+                                a(&format!("pub {}_: {},", name, rt));
                             } else if name == "$ref" {
                                 a(r#"rename = "$ref")]"#);
-                                a(&format!("        pub ref_: {},", rt));
+                                a(&format!("pub ref_: {},", rt));
                             } else if name == "+1" {
-                                a(r#"        #[serde(rename = "+1")]"#);
-                                a(&format!("        pub plus_one: {},", rt));
+                                a(r#"#[serde(rename = "+1")]"#);
+                                a(&format!("pub plus_one: {},", rt));
                             } else if name == "-1" {
                                 a(r#"        #[serde(rename = "-1")]"#);
-                                a(&format!("        pub minus_one: {},", rt));
+                                a(&format!("pub minus_one: {},", rt));
                             } else if name.starts_with('@') {
                                 if rt == "String"
                                     || rt.starts_with("Vec<")
@@ -1264,7 +1264,7 @@ fn gen(
                                 } else {
                                     a(&format!(r#"#[serde(rename = "{}")]"#, name));
                                 }
-                                a(&format!("        pub {}: {},", name.replace('@', ""), rt));
+                                a(&format!("pub {}: {},", name.replace('@', ""), rt));
                             } else {
                                 if rt == "String"
                                     || rt.starts_with("Vec<")
@@ -1278,7 +1278,7 @@ fn gen(
                             bail!("rendering type {} {:?} failed", name, tid);
                         }
                     }
-                    a("    }");
+                    a("}");
                     a("");
                 }
                 TypeDetails::Basic => {}
