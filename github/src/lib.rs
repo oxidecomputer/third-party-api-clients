@@ -211,6 +211,12 @@ pub mod types {
         }
     }
 
+    impl Default for AuditLogInclude {
+        fn default() -> AuditLogInclude {
+            AuditLogInclude::Noop
+        }
+    }
+
     /// The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
     ///
     /// The default is `desc`.
@@ -230,6 +236,12 @@ pub mod types {
                 AuditLogOrder::Noop => "",
             }
             .fmt(f)
+        }
+    }
+
+    impl Default for AuditLogOrder {
+        fn default() -> AuditLogOrder {
+            AuditLogOrder::Noop
         }
     }
 
@@ -253,6 +265,12 @@ pub mod types {
         }
     }
 
+    impl Default for Direction {
+        fn default() -> Direction {
+            Direction::Noop
+        }
+    }
+
     /// Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
     #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "snake_case")]
@@ -270,6 +288,12 @@ pub mod types {
                 Order::Noop => "",
             }
             .fmt(f)
+        }
+    }
+
+    impl Default for Order {
+        fn default() -> Order {
+            Order::Noop
         }
     }
 
@@ -319,6 +343,12 @@ pub mod types {
         }
     }
 
+    impl Default for Per {
+        fn default() -> Per {
+            Per::Noop
+        }
+    }
+
     /// One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
     #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "snake_case")]
@@ -336,6 +366,12 @@ pub mod types {
                 Sort::Noop => "",
             }
             .fmt(f)
+        }
+    }
+
+    impl Default for Sort {
+        fn default() -> Sort {
+            Sort::Noop
         }
     }
 
@@ -358,6 +394,12 @@ pub mod types {
                 StatusParam::Noop => "",
             }
             .fmt(f)
+        }
+    }
+
+    impl Default for StatusParam {
+        fn default() -> StatusParam {
+            StatusParam::Noop
         }
     }
 
@@ -400,6 +442,12 @@ pub mod types {
                 WorkflowRunStatus::Noop => "",
             }
             .fmt(f)
+        }
+    }
+
+    impl Default for WorkflowRunStatus {
+        fn default() -> WorkflowRunStatus {
+            WorkflowRunStatus::Noop
         }
     }
 
@@ -875,194 +923,843 @@ pub mod types {
         pub website_url: String,
     }
 
+    /// The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Actions {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Actions {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Actions::Read => "read",
+                Actions::Write => "write",
+                Actions::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Actions {
+        fn default() -> Actions {
+            Actions::Noop
+        }
+    }
+    /// The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Administration {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Administration {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Administration::Read => "read",
+                Administration::Write => "write",
+                Administration::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Administration {
+        fn default() -> Administration {
+            Administration::Noop
+        }
+    }
+    /// The level of permission to grant the access token for checks on code. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Checks {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Checks {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Checks::Read => "read",
+                Checks::Write => "write",
+                Checks::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Checks {
+        fn default() -> Checks {
+            Checks::Noop
+        }
+    }
+    /// The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ContentReferences {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for ContentReferences {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ContentReferences::Read => "read",
+                ContentReferences::Write => "write",
+                ContentReferences::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ContentReferences {
+        fn default() -> ContentReferences {
+            ContentReferences::Noop
+        }
+    }
+    /// The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Contents {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Contents {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Contents::Read => "read",
+                Contents::Write => "write",
+                Contents::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Contents {
+        fn default() -> Contents {
+            Contents::Noop
+        }
+    }
+    /// The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Deployments {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Deployments {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Deployments::Read => "read",
+                Deployments::Write => "write",
+                Deployments::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Deployments {
+        fn default() -> Deployments {
+            Deployments::Noop
+        }
+    }
+    /// The level of permission to grant the access token for managing repository environments. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Environments {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Environments {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Environments::Read => "read",
+                Environments::Write => "write",
+                Environments::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Environments {
+        fn default() -> Environments {
+            Environments::Noop
+        }
+    }
+    /// The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Issues {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Issues {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Issues::Read => "read",
+                Issues::Write => "write",
+                Issues::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Issues {
+        fn default() -> Issues {
+            Issues::Noop
+        }
+    }
+    /// The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Metadata {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Metadata {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Metadata::Read => "read",
+                Metadata::Write => "write",
+                Metadata::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Metadata {
+        fn default() -> Metadata {
+            Metadata::Noop
+        }
+    }
+    /// The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Packages {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Packages {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Packages::Read => "read",
+                Packages::Write => "write",
+                Packages::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Packages {
+        fn default() -> Packages {
+            Packages::Noop
+        }
+    }
+    /// The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Pages {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Pages {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Pages::Read => "read",
+                Pages::Write => "write",
+                Pages::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Pages {
+        fn default() -> Pages {
+            Pages::Noop
+        }
+    }
+    /// The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullRequests {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullRequests {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullRequests::Read => "read",
+                PullRequests::Write => "write",
+                PullRequests::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullRequests {
+        fn default() -> PullRequests {
+            PullRequests::Noop
+        }
+    }
+    /// The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum RepositoryHooks {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for RepositoryHooks {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                RepositoryHooks::Read => "read",
+                RepositoryHooks::Write => "write",
+                RepositoryHooks::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for RepositoryHooks {
+        fn default() -> RepositoryHooks {
+            RepositoryHooks::Noop
+        }
+    }
+    /// The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum RepositoryProjects {
+        Read,
+        Write,
+        Admin,
+        Noop,
+    }
+
+    impl std::fmt::Display for RepositoryProjects {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                RepositoryProjects::Read => "read",
+                RepositoryProjects::Write => "write",
+                RepositoryProjects::Admin => "admin",
+                RepositoryProjects::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for RepositoryProjects {
+        fn default() -> RepositoryProjects {
+            RepositoryProjects::Noop
+        }
+    }
+    /// The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SecretScanningAlerts {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for SecretScanningAlerts {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SecretScanningAlerts::Read => "read",
+                SecretScanningAlerts::Write => "write",
+                SecretScanningAlerts::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SecretScanningAlerts {
+        fn default() -> SecretScanningAlerts {
+            SecretScanningAlerts::Noop
+        }
+    }
+    /// The level of permission to grant the access token to manage repository secrets. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Secrets {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Secrets {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Secrets::Read => "read",
+                Secrets::Write => "write",
+                Secrets::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Secrets {
+        fn default() -> Secrets {
+            Secrets::Noop
+        }
+    }
+    /// The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SecurityEvents {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for SecurityEvents {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SecurityEvents::Read => "read",
+                SecurityEvents::Write => "write",
+                SecurityEvents::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SecurityEvents {
+        fn default() -> SecurityEvents {
+            SecurityEvents::Noop
+        }
+    }
+    /// The level of permission to grant the access token to manage just a single file. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SingleFile {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for SingleFile {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SingleFile::Read => "read",
+                SingleFile::Write => "write",
+                SingleFile::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SingleFile {
+        fn default() -> SingleFile {
+            SingleFile::Noop
+        }
+    }
+    /// The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Statuses {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Statuses {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Statuses::Read => "read",
+                Statuses::Write => "write",
+                Statuses::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Statuses {
+        fn default() -> Statuses {
+            Statuses::Noop
+        }
+    }
+    /// The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum VulnerabilityAlerts {
+        Read,
+        Noop,
+    }
+
+    impl std::fmt::Display for VulnerabilityAlerts {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                VulnerabilityAlerts::Read => "read",
+                VulnerabilityAlerts::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for VulnerabilityAlerts {
+        fn default() -> VulnerabilityAlerts {
+            VulnerabilityAlerts::Noop
+        }
+    }
+    /// The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Workflows {
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Workflows {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Workflows::Write => "write",
+                Workflows::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Workflows {
+        fn default() -> Workflows {
+            Workflows::Noop
+        }
+    }
+    /// The level of permission to grant the access token for organization teams and members. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Members {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for Members {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Members::Read => "read",
+                Members::Write => "write",
+                Members::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Members {
+        fn default() -> Members {
+            Members::Noop
+        }
+    }
+    /// The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrganizationAdministration {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrganizationAdministration {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrganizationAdministration::Read => "read",
+                OrganizationAdministration::Write => "write",
+                OrganizationAdministration::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrganizationAdministration {
+        fn default() -> OrganizationAdministration {
+            OrganizationAdministration::Noop
+        }
+    }
+    /// The level of permission to grant the access token to manage the post-receive hooks for an organization. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrganizationHooks {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrganizationHooks {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrganizationHooks::Read => "read",
+                OrganizationHooks::Write => "write",
+                OrganizationHooks::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrganizationHooks {
+        fn default() -> OrganizationHooks {
+            OrganizationHooks::Noop
+        }
+    }
+    /// The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrganizationPlan {
+        Read,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrganizationPlan {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrganizationPlan::Read => "read",
+                OrganizationPlan::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrganizationPlan {
+        fn default() -> OrganizationPlan {
+            OrganizationPlan::Noop
+        }
+    }
+    /// The level of permission to grant the access token to manage organization projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrganizationProjects {
+        Read,
+        Write,
+        Admin,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrganizationProjects {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrganizationProjects::Read => "read",
+                OrganizationProjects::Write => "write",
+                OrganizationProjects::Admin => "admin",
+                OrganizationProjects::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrganizationProjects {
+        fn default() -> OrganizationProjects {
+            OrganizationProjects::Noop
+        }
+    }
+    /// The level of permission to grant the access token for organization packages published to GitHub Packages. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrganizationPackages {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrganizationPackages {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrganizationPackages::Read => "read",
+                OrganizationPackages::Write => "write",
+                OrganizationPackages::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrganizationPackages {
+        fn default() -> OrganizationPackages {
+            OrganizationPackages::Noop
+        }
+    }
+    /// The level of permission to grant the access token to manage organization secrets. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrganizationSecrets {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrganizationSecrets {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrganizationSecrets::Read => "read",
+                OrganizationSecrets::Write => "write",
+                OrganizationSecrets::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrganizationSecrets {
+        fn default() -> OrganizationSecrets {
+            OrganizationSecrets::Noop
+        }
+    }
+    /// The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrganizationSelfDataHostedRunners {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrganizationSelfDataHostedRunners {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrganizationSelfDataHostedRunners::Read => "read",
+                OrganizationSelfDataHostedRunners::Write => "write",
+                OrganizationSelfDataHostedRunners::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrganizationSelfDataHostedRunners {
+        fn default() -> OrganizationSelfDataHostedRunners {
+            OrganizationSelfDataHostedRunners::Noop
+        }
+    }
+    /// The level of permission to grant the access token to view and manage users blocked by the organization. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrganizationUserBlocking {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrganizationUserBlocking {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrganizationUserBlocking::Read => "read",
+                OrganizationUserBlocking::Write => "write",
+                OrganizationUserBlocking::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrganizationUserBlocking {
+        fn default() -> OrganizationUserBlocking {
+            OrganizationUserBlocking::Noop
+        }
+    }
+    /// The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamDiscussions {
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for TeamDiscussions {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamDiscussions::Read => "read",
+                TeamDiscussions::Write => "write",
+                TeamDiscussions::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamDiscussions {
+        fn default() -> TeamDiscussions {
+            TeamDiscussions::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AppPermissions {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub actions: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub administration: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub checks: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content_references: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub contents: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub deployments: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub environments: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub issues: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub members: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub metadata: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_administration: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_hooks: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_packages: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_plan: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_projects: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_secrets: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_self_hosted_runners: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_user_blocking: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub packages: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub pages: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub pull_requests: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repository_hooks: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repository_projects: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub secret_scanning_alerts: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub secrets: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub security_events: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub single_file: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub statuses: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub team_discussions: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub vulnerability_alerts: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub workflows: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub actions: Option<Actions>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub administration: Option<Administration>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub checks: Option<Checks>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub content_references: Option<ContentReferences>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub contents: Option<Contents>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub deployments: Option<Deployments>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub environments: Option<Environments>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub issues: Option<Issues>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub members: Option<Members>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub metadata: Option<Metadata>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_administration: Option<OrganizationAdministration>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_hooks: Option<OrganizationHooks>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_packages: Option<OrganizationPackages>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_plan: Option<OrganizationPlan>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_projects: Option<OrganizationProjects>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_secrets: Option<OrganizationSecrets>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_self_hosted_runners: Option<OrganizationSelfDataHostedRunners>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_user_blocking: Option<OrganizationUserBlocking>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub packages: Option<Packages>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub pages: Option<Pages>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub pull_requests: Option<PullRequests>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub repository_hooks: Option<RepositoryHooks>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub repository_projects: Option<RepositoryProjects>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub secret_scanning_alerts: Option<SecretScanningAlerts>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub secrets: Option<Secrets>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub security_events: Option<SecurityEvents>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub single_file: Option<SingleFile>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub statuses: Option<Statuses>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub team_discussions: Option<TeamDiscussions>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub vulnerability_alerts: Option<VulnerabilityAlerts>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub workflows: Option<Workflows>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -1186,6 +1883,31 @@ pub mod types {
         pub url: String,
     }
 
+    /// Describe whether all repositories have been selected or there's a selection involved
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum RepositorySelection {
+        All,
+        Selected,
+        Noop,
+    }
+
+    impl std::fmt::Display for RepositorySelection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                RepositorySelection::All => "all",
+                RepositorySelection::Selected => "selected",
+                RepositorySelection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for RepositorySelection {
+        fn default() -> RepositorySelection {
+            RepositorySelection::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SuspendedBy {
         #[serde(
@@ -1348,12 +2070,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repositories_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repository_selection: String,
+        pub repository_selection: RepositorySelection,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2458,6 +3175,30 @@ pub mod types {
         pub watchers_count: i64,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum InstallationTokenRepositorySelection {
+        All,
+        Selected,
+        Noop,
+    }
+
+    impl std::fmt::Display for InstallationTokenRepositorySelection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                InstallationTokenRepositorySelection::All => "all",
+                InstallationTokenRepositorySelection::Selected => "selected",
+                InstallationTokenRepositorySelection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for InstallationTokenRepositorySelection {
+        fn default() -> InstallationTokenRepositorySelection {
+            InstallationTokenRepositorySelection::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InstallationToken {
         #[serde(
@@ -2472,12 +3213,8 @@ pub mod types {
         pub permissions: Option<AppPermissions>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repository_selection: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub repository_selection: Option<RepositorySelection>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2721,12 +3458,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repositories_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repository_selection: String,
+        pub repository_selection: RepositorySelection,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2749,12 +3481,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repositories_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repository_selection: String,
+        pub repository_selection: RepositorySelection,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2822,7 +3549,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CodeofConduct {
+    pub struct CodeOfConduct {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2855,20 +3582,64 @@ pub mod types {
         pub url: String,
     }
 
+    /// The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum EnabledOrganizations {
+        All,
+        None,
+        Selected,
+        Noop,
+    }
+
+    impl std::fmt::Display for EnabledOrganizations {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                EnabledOrganizations::All => "all",
+                EnabledOrganizations::None => "none",
+                EnabledOrganizations::Selected => "selected",
+                EnabledOrganizations::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for EnabledOrganizations {
+        fn default() -> EnabledOrganizations {
+            EnabledOrganizations::Noop
+        }
+    }
+    /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AllowedActions {
+        All,
+        LocalOnly,
+        Selected,
+        Noop,
+    }
+
+    impl std::fmt::Display for AllowedActions {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AllowedActions::All => "all",
+                AllowedActions::LocalOnly => "local_only",
+                AllowedActions::Selected => "selected",
+                AllowedActions::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AllowedActions {
+        fn default() -> AllowedActions {
+            AllowedActions::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsEnterprisePermissions {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub allowed_actions: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub enabled_organizations: String,
+        pub allowed_actions: AllowedActions,
+        pub enabled_organizations: EnabledOrganizations,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2995,6 +3766,31 @@ pub mod types {
         pub visibility: String,
     }
 
+    /// The type of label. Read-only labels are applied automatically when the runner is configured.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Type {
+        ReadOnly,
+        Custom,
+        Noop,
+    }
+
+    impl std::fmt::Display for Type {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Type::ReadOnly => "read-only",
+                Type::Custom => "custom",
+                Type::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Type {
+        fn default() -> Type {
+            Type::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Labels {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -3005,13 +3801,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
+        #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
+        pub type_: Option<Type>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3090,12 +3881,8 @@ pub mod types {
         pub permissions: Option<Permissions>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repository_selection: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub repository_selection: Option<RepositorySelection>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -3402,6 +4189,31 @@ pub mod types {
         pub url: String,
     }
 
+    /// The state of the milestone.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum State {
+        Open,
+        Closed,
+        Noop,
+    }
+
+    impl std::fmt::Display for State {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                State::Open => "open",
+                State::Closed => "closed",
+                State::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for State {
+        fn default() -> State {
+            State::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Creator {
         #[serde(
@@ -3557,12 +4369,7 @@ pub mod types {
         pub node_id: String,
         pub number: i64,
         pub open_issues: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -3578,6 +4385,43 @@ pub mod types {
         pub url: String,
     }
 
+    /// How the author is associated with the repository.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AuthorAssociation {
+        Collaborator,
+        Contributor,
+        FirstTimer,
+        FirstTimeContributor,
+        Mannequin,
+        Member,
+        None,
+        Owner,
+        Noop,
+    }
+
+    impl std::fmt::Display for AuthorAssociation {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AuthorAssociation::Collaborator => "COLLABORATOR",
+                AuthorAssociation::Contributor => "CONTRIBUTOR",
+                AuthorAssociation::FirstTimer => "FIRST_TIMER",
+                AuthorAssociation::FirstTimeContributor => "FIRST_TIME_CONTRIBUTOR",
+                AuthorAssociation::Mannequin => "MANNEQUIN",
+                AuthorAssociation::Member => "MEMBER",
+                AuthorAssociation::None => "NONE",
+                AuthorAssociation::Owner => "OWNER",
+                AuthorAssociation::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AuthorAssociation {
+        fn default() -> AuthorAssociation {
+            AuthorAssociation::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Assignee {
         #[serde(
@@ -3730,7 +4574,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PerformedviaGithubApp {
+    pub struct PerformedViaGithubApp {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -3813,12 +4657,7 @@ pub mod types {
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -3877,7 +4716,7 @@ pub mod types {
         pub node_id: String,
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedviaGithubApp>,
+        pub performed_via_github_app: Option<PerformedViaGithubApp>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub pull_request: Option<PullRequest>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -3939,12 +4778,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueComment {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -3984,7 +4818,7 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedviaGithubApp>,
+        pub performed_via_github_app: Option<PerformedViaGithubApp>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
         pub updated_at: DateTime<Utc>,
@@ -4015,7 +4849,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Pages {
+    pub struct EventPayloadPayloadPages {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -4670,12 +5504,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GistComment {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -4867,12 +5696,7 @@ pub mod types {
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -4933,7 +5757,7 @@ pub mod types {
         pub node_id: String,
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedviaGithubApp>,
+        pub performed_via_github_app: Option<PerformedViaGithubApp>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub pull_request: Option<PullRequest>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -5315,7 +6139,7 @@ pub mod types {
         )]
         pub clone_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub code_of_conduct: Option<CodeofConduct>,
+        pub code_of_conduct: Option<CodeOfConduct>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -5949,20 +6773,38 @@ pub mod types {
         pub url: String,
     }
 
+    /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum EnabledRepositories {
+        All,
+        None,
+        Selected,
+        Noop,
+    }
+
+    impl std::fmt::Display for EnabledRepositories {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                EnabledRepositories::All => "all",
+                EnabledRepositories::None => "none",
+                EnabledRepositories::Selected => "selected",
+                EnabledRepositories::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for EnabledRepositories {
+        fn default() -> EnabledRepositories {
+            EnabledRepositories::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsOrganizationPermissions {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub allowed_actions: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub enabled_repositories: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub allowed_actions: Option<AllowedActions>,
+        pub enabled_repositories: EnabledRepositories,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -6011,6 +6853,33 @@ pub mod types {
         pub visibility: String,
     }
 
+    /// Visibility of a secret
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Visibility {
+        All,
+        Private,
+        Selected,
+        Noop,
+    }
+
+    impl std::fmt::Display for Visibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Visibility::All => "all",
+                Visibility::Private => "private",
+                Visibility::Selected => "selected",
+                Visibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Visibility {
+        fn default() -> Visibility {
+            Visibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrganizationActionsSecret {
         pub created_at: DateTime<Utc>,
@@ -6027,12 +6896,7 @@ pub mod types {
         )]
         pub selected_repositories_url: String,
         pub updated_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        pub visibility: Visibility,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6241,15 +7105,37 @@ pub mod types {
         pub url: String,
     }
 
+    /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum InteractionGroup {
+        ExistingUsers,
+        ContributorsOnly,
+        CollaboratorsOnly,
+        Noop,
+    }
+
+    impl std::fmt::Display for InteractionGroup {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                InteractionGroup::ExistingUsers => "existing_users",
+                InteractionGroup::ContributorsOnly => "contributors_only",
+                InteractionGroup::CollaboratorsOnly => "collaborators_only",
+                InteractionGroup::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for InteractionGroup {
+        fn default() -> InteractionGroup {
+            InteractionGroup::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InteractionLimitResponse {
         pub expires_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub limit: String,
+        pub limit: InteractionGroup,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -6258,20 +7144,42 @@ pub mod types {
         pub origin: String,
     }
 
+    /// The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum InteractionExpiry {
+        OneDay,
+        ThreeDays,
+        OneWeek,
+        OneMonth,
+        SixMonths,
+        Noop,
+    }
+
+    impl std::fmt::Display for InteractionExpiry {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                InteractionExpiry::OneDay => "one_day",
+                InteractionExpiry::ThreeDays => "three_days",
+                InteractionExpiry::OneWeek => "one_week",
+                InteractionExpiry::OneMonth => "one_month",
+                InteractionExpiry::SixMonths => "six_months",
+                InteractionExpiry::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for InteractionExpiry {
+        fn default() -> InteractionExpiry {
+            InteractionExpiry::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InteractionLimit {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub expiry: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub limit: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub expiry: Option<InteractionExpiry>,
+        pub limit: InteractionGroup,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6493,6 +7401,58 @@ pub mod types {
         pub url: String,
     }
 
+    /// The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrgMembershipState {
+        Active,
+        Pending,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrgMembershipState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrgMembershipState::Active => "active",
+                OrgMembershipState::Pending => "pending",
+                OrgMembershipState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrgMembershipState {
+        fn default() -> OrgMembershipState {
+            OrgMembershipState::Noop
+        }
+    }
+    /// The user's membership type in the organization.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Role {
+        Admin,
+        Member,
+        BillingManager,
+        Noop,
+    }
+
+    impl std::fmt::Display for Role {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Role::Admin => "admin",
+                Role::Member => "member",
+                Role::BillingManager => "billing_manager",
+                Role::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Role {
+        fn default() -> Role {
+            Role::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrgMembershipPermissions {
         pub can_create_repository: bool,
@@ -6509,18 +7469,8 @@ pub mod types {
         pub organization_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub role: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub role: Role,
+        pub state: State,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -6574,6 +7524,62 @@ pub mod types {
         pub url: String,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PackageType {
+        Npm,
+        Maven,
+        Rubygems,
+        Docker,
+        Nuget,
+        Container,
+        Noop,
+    }
+
+    impl std::fmt::Display for PackageType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PackageType::Npm => "npm",
+                PackageType::Maven => "maven",
+                PackageType::Rubygems => "rubygems",
+                PackageType::Docker => "docker",
+                PackageType::Nuget => "nuget",
+                PackageType::Container => "container",
+                PackageType::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PackageType {
+        fn default() -> PackageType {
+            PackageType::Noop
+        }
+    }
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PackageVisibility {
+        Private,
+        Public,
+        Noop,
+    }
+
+    impl std::fmt::Display for PackageVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PackageVisibility::Private => "private",
+                PackageVisibility::Public => "public",
+                PackageVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PackageVisibility {
+        fn default() -> PackageVisibility {
+            PackageVisibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PackageRepository {
         #[serde(
@@ -6609,7 +7615,7 @@ pub mod types {
         )]
         pub clone_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub code_of_conduct: Option<CodeofConduct>,
+        pub code_of_conduct: Option<CodeOfConduct>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -6966,12 +7972,7 @@ pub mod types {
         pub name: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub owner: Option<Owner>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub package_type: String,
+        pub package_type: PackageType,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub repository: Option<Repository>,
         pub updated_at: DateTime<Utc>,
@@ -6982,12 +7983,7 @@ pub mod types {
         )]
         pub url: String,
         pub version_count: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        pub visibility: Visibility,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -7002,17 +7998,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Metadata {
+    pub struct PackageVersionMetadata {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub container: Option<Container>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub docker: Option<Docker>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub package_type: String,
+        pub package_type: PackageType,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -7062,6 +8053,35 @@ pub mod types {
         pub url: String,
     }
 
+    /// The baseline permission that all organization members have on this project. Only present if owner is an organization.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrganizationPermission {
+        Read,
+        Write,
+        Admin,
+        None,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrganizationPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrganizationPermission::Read => "read",
+                OrganizationPermission::Write => "write",
+                OrganizationPermission::Admin => "admin",
+                OrganizationPermission::None => "none",
+                OrganizationPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrganizationPermission {
+        fn default() -> OrganizationPermission {
+            OrganizationPermission::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Project {
         #[serde(
@@ -7098,12 +8118,8 @@ pub mod types {
         )]
         pub node_id: String,
         pub number: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_permission: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_permission: Option<OrganizationPermission>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -7167,6 +8183,31 @@ pub mod types {
         pub groups: Vec<Groups>,
     }
 
+    /// The level of privacy this team should have
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Privacy {
+        Closed,
+        Secret,
+        Noop,
+    }
+
+    impl std::fmt::Display for Privacy {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Privacy::Closed => "closed",
+                Privacy::Secret => "secret",
+                Privacy::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Privacy {
+        fn default() -> Privacy {
+            Privacy::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamFull {
         pub created_at: DateTime<Utc>,
@@ -7217,12 +8258,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub permission: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub privacy: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub privacy: Option<Privacy>,
         pub repos_count: i64,
         #[serde(
             default,
@@ -7487,14 +8524,46 @@ pub mod types {
         pub url: String,
     }
 
+    /// The reaction to use
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Content {
+        PlusOne,
+        MinusOne,
+        Laugh,
+        Confused,
+        Heart,
+        Hooray,
+        Rocket,
+        Eyes,
+        Noop,
+    }
+
+    impl std::fmt::Display for Content {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Content::PlusOne => "+1",
+                Content::MinusOne => "-1",
+                Content::Laugh => "laugh",
+                Content::Confused => "confused",
+                Content::Heart => "heart",
+                Content::Hooray => "hooray",
+                Content::Rocket => "rocket",
+                Content::Eyes => "eyes",
+                Content::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Content {
+        fn default() -> Content {
+            Content::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Reaction {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content: String,
+        pub content: Content,
         pub created_at: DateTime<Utc>,
         pub id: i64,
         #[serde(
@@ -7506,20 +8575,60 @@ pub mod types {
         pub user: User,
     }
 
+    /// The role of the user in the team.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamMembershipRole {
+        Member,
+        Maintainer,
+        Noop,
+    }
+
+    impl std::fmt::Display for TeamMembershipRole {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamMembershipRole::Member => "member",
+                TeamMembershipRole::Maintainer => "maintainer",
+                TeamMembershipRole::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamMembershipRole {
+        fn default() -> TeamMembershipRole {
+            TeamMembershipRole::Noop
+        }
+    }
+    /// The state of the user's membership in the team.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamMembershipState {
+        Active,
+        Pending,
+        Noop,
+    }
+
+    impl std::fmt::Display for TeamMembershipState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamMembershipState::Active => "active",
+                TeamMembershipState::Pending => "pending",
+                TeamMembershipState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamMembershipState {
+        fn default() -> TeamMembershipState {
+            TeamMembershipState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamMembership {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub role: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub role: Role,
+        pub state: State,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -8125,7 +9234,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CodeofConductSimple {
+    pub struct CodeOfConductSimple {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -8162,28 +9271,44 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct FullRepositoryTemplateRepository {}
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Status {
+        Enabled,
+        Disabled,
+        Noop,
+    }
+
+    impl std::fmt::Display for Status {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Status::Enabled => "enabled",
+                Status::Disabled => "disabled",
+                Status::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Status {
+        fn default() -> Status {
+            Status::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AdvancedSecurity {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub status: Option<Status>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SecretScanning {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub status: Option<Status>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SecurityandAnalysis {
+    pub struct SecurityAndAnalysis {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub advanced_security: Option<AdvancedSecurity>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -8232,7 +9357,7 @@ pub mod types {
         )]
         pub clone_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub code_of_conduct: Option<CodeofConductSimple>,
+        pub code_of_conduct: Option<CodeOfConductSimple>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -8478,7 +9603,7 @@ pub mod types {
         )]
         pub releases_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub security_and_analysis: Option<SecurityandAnalysis>,
+        pub security_and_analysis: Option<SecurityAndAnalysis>,
         pub size: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub source: Option<Repository>,
@@ -8599,6 +9724,60 @@ pub mod types {
         pub url: String,
     }
 
+    /// The phase of the lifecycle that the job is currently in.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum JobStatus {
+        Queued,
+        InProgress,
+        Completed,
+        Noop,
+    }
+
+    impl std::fmt::Display for JobStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                JobStatus::Queued => "queued",
+                JobStatus::InProgress => "in_progress",
+                JobStatus::Completed => "completed",
+                JobStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for JobStatus {
+        fn default() -> JobStatus {
+            JobStatus::Noop
+        }
+    }
+    /// The phase of the lifecycle that the job is currently in.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum JobStepsStepsStatus {
+        Queued,
+        InProgress,
+        Completed,
+        Noop,
+    }
+
+    impl std::fmt::Display for JobStepsStepsStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                JobStepsStepsStatus::Queued => "queued",
+                JobStepsStepsStatus::InProgress => "in_progress",
+                JobStepsStepsStatus::Completed => "completed",
+                JobStepsStepsStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for JobStepsStepsStatus {
+        fn default() -> JobStepsStepsStatus {
+            JobStepsStepsStatus::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Steps {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -8618,12 +9797,7 @@ pub mod types {
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        pub status: Status,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8674,12 +9848,7 @@ pub mod types {
         )]
         pub run_url: String,
         pub started_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        pub status: Status,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub steps: Vec<Steps>,
         #[serde(
@@ -8692,12 +9861,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsRepositoryPermissions {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub allowed_actions: String,
+        pub allowed_actions: AllowedActions,
         pub enabled: bool,
         #[serde(
             default,
@@ -8960,7 +10124,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Environments {
+    pub struct EnvironmentApprovalsEnvironments {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub created_at: Option<DateTime<Utc>>,
         #[serde(
@@ -8993,6 +10157,31 @@ pub mod types {
         pub url: String,
     }
 
+    /// Whether deployment to the environment(s) was approved or rejected
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum EnvironmentApprovalsState {
+        Approved,
+        Rejected,
+        Noop,
+    }
+
+    impl std::fmt::Display for EnvironmentApprovalsState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                EnvironmentApprovalsState::Approved => "approved",
+                EnvironmentApprovalsState::Rejected => "rejected",
+                EnvironmentApprovalsState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for EnvironmentApprovalsState {
+        fn default() -> EnvironmentApprovalsState {
+            EnvironmentApprovalsState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnvironmentApprovals {
         #[serde(
@@ -9003,15 +10192,35 @@ pub mod types {
         pub comment: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub environments: Vec<Environments>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
         pub user: SimpleUser,
     }
 
+    /// The type of reviewer. Must be one of: `User` or `Team`
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum DeploymentReviewerType {
+        User,
+        Team,
+        Noop,
+    }
+
+    impl std::fmt::Display for DeploymentReviewerType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                DeploymentReviewerType::User => "User",
+                DeploymentReviewerType::Team => "Team",
+                DeploymentReviewerType::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for DeploymentReviewerType {
+        fn default() -> DeploymentReviewerType {
+            DeploymentReviewerType::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Environment {
         #[serde(
@@ -9167,13 +10376,8 @@ pub mod types {
     pub struct Reviewers {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reviewer: Option<Reviewer>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
+        #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
+        pub type_: Option<DeploymentReviewerType>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -9220,7 +10424,7 @@ pub mod types {
         pub original_environment: String,
         pub payload: Payload,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedviaGithubApp>,
+        pub performed_via_github_app: Option<PerformedViaGithubApp>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub production_environment: Option<bool>,
         #[serde(
@@ -9312,6 +10516,36 @@ pub mod types {
         pub updated_at: DateTime<Utc>,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum WorkflowState {
+        Active,
+        Deleted,
+        DisabledFork,
+        DisabledInactivity,
+        DisabledManually,
+        Noop,
+    }
+
+    impl std::fmt::Display for WorkflowState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                WorkflowState::Active => "active",
+                WorkflowState::Deleted => "deleted",
+                WorkflowState::DisabledFork => "disabled_fork",
+                WorkflowState::DisabledInactivity => "disabled_inactivity",
+                WorkflowState::DisabledManually => "disabled_manually",
+                WorkflowState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for WorkflowState {
+        fn default() -> WorkflowState {
+            WorkflowState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Workflow {
         #[serde(
@@ -9348,12 +10582,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub path: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10584,7 +11813,7 @@ pub mod types {
         )]
         pub original_environment: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedviaGithubApp>,
+        pub performed_via_github_app: Option<PerformedViaGithubApp>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub production_environment: Option<bool>,
         #[serde(
@@ -10616,6 +11845,67 @@ pub mod types {
         pub url: String,
     }
 
+    /// The phase of the lifecycle that the check is currently in.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CheckRunStatus {
+        Queued,
+        InProgress,
+        Completed,
+        Noop,
+    }
+
+    impl std::fmt::Display for CheckRunStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CheckRunStatus::Queued => "queued",
+                CheckRunStatus::InProgress => "in_progress",
+                CheckRunStatus::Completed => "completed",
+                CheckRunStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CheckRunStatus {
+        fn default() -> CheckRunStatus {
+            CheckRunStatus::Noop
+        }
+    }
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Conclusion {
+        Success,
+        Failure,
+        Neutral,
+        Cancelled,
+        Skipped,
+        TimedOut,
+        ActionRequired,
+        Noop,
+    }
+
+    impl std::fmt::Display for Conclusion {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Conclusion::Success => "success",
+                Conclusion::Failure => "failure",
+                Conclusion::Neutral => "neutral",
+                Conclusion::Cancelled => "cancelled",
+                Conclusion::Skipped => "skipped",
+                Conclusion::TimedOut => "timed_out",
+                Conclusion::ActionRequired => "action_required",
+                Conclusion::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Conclusion {
+        fn default() -> Conclusion {
+            Conclusion::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Output {
         pub annotations_count: i64,
@@ -10728,12 +12018,7 @@ pub mod types {
         pub app: App,
         pub check_suite: CheckSuite,
         pub completed_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub conclusion: String,
+        pub conclusion: Conclusion,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub deployment: Option<DeploymentSimple>,
         #[serde(
@@ -10776,12 +12061,7 @@ pub mod types {
         pub output: Output,
         pub pull_requests: serde_json::Value,
         pub started_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        pub status: Status,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -10834,6 +12114,32 @@ pub mod types {
         pub title: String,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CheckSuiteStatus {
+        Queued,
+        InProgress,
+        Completed,
+        Noop,
+    }
+
+    impl std::fmt::Display for CheckSuiteStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CheckSuiteStatus::Queued => "queued",
+                CheckSuiteStatus::InProgress => "in_progress",
+                CheckSuiteStatus::Completed => "completed",
+                CheckSuiteStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CheckSuiteStatus {
+        fn default() -> CheckSuiteStatus {
+            CheckSuiteStatus::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckSuiteApp {
         #[serde(
@@ -10928,12 +12234,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub check_runs_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub conclusion: String,
+        pub conclusion: Conclusion,
         pub created_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10959,12 +12260,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub pull_requests: Vec<PullRequestMinimal>,
         pub repository: MinimalRepository,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        pub status: Status,
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -10992,6 +12288,64 @@ pub mod types {
         pub repository: MinimalRepository,
     }
 
+    /// State of a code scanning alert.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CodeScanningAlertState {
+        Open,
+        Closed,
+        Dismissed,
+        Fixed,
+        Noop,
+    }
+
+    impl std::fmt::Display for CodeScanningAlertState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CodeScanningAlertState::Open => "open",
+                CodeScanningAlertState::Closed => "closed",
+                CodeScanningAlertState::Dismissed => "dismissed",
+                CodeScanningAlertState::Fixed => "fixed",
+                CodeScanningAlertState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CodeScanningAlertState {
+        fn default() -> CodeScanningAlertState {
+            CodeScanningAlertState::Noop
+        }
+    }
+    /// The severity of the alert.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Severity {
+        None,
+        Note,
+        Warning,
+        Error,
+        Noop,
+    }
+
+    impl std::fmt::Display for Severity {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Severity::None => "none",
+                Severity::Note => "note",
+                Severity::Warning => "warning",
+                Severity::Error => "error",
+                Severity::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Severity {
+        fn default() -> Severity {
+            Severity::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertRuleSummary {
         #[serde(
@@ -11012,12 +12366,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub severity: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub severity: Option<Severity>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -11060,6 +12410,35 @@ pub mod types {
         pub start_line: Option<i64>,
     }
 
+    /// A classification of the file. For example to identify it as generated.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CodeScanningAlertClassification {
+        Source,
+        Generated,
+        Test,
+        Library,
+        Noop,
+    }
+
+    impl std::fmt::Display for CodeScanningAlertClassification {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CodeScanningAlertClassification::Source => "source",
+                CodeScanningAlertClassification::Generated => "generated",
+                CodeScanningAlertClassification::Test => "test",
+                CodeScanningAlertClassification::Library => "library",
+                CodeScanningAlertClassification::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CodeScanningAlertClassification {
+        fn default() -> CodeScanningAlertClassification {
+            CodeScanningAlertClassification::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Message {
         #[serde(
@@ -11079,7 +12458,7 @@ pub mod types {
         )]
         pub analysis_key: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub classifications: Vec<String>,
+        pub classifications: Vec<CodeScanningAlertClassification>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11109,12 +12488,8 @@ pub mod types {
             rename = "ref"
         )]
         pub ref_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub state: Option<CodeScanningAlertState>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -11138,12 +12513,7 @@ pub mod types {
         pub most_recent_instance: CodeScanningAlertInstance,
         pub number: i64,
         pub rule: CodeScanningAlertRuleSummary,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: CodeScanningAlertState,
         pub tool: CodeScanningAnalysisTool,
         #[serde(
             default,
@@ -11153,6 +12523,35 @@ pub mod types {
         pub url: String,
     }
 
+    /// The security severity of the alert.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SecuritySeverityLevel {
+        Low,
+        Medium,
+        High,
+        Critical,
+        Noop,
+    }
+
+    impl std::fmt::Display for SecuritySeverityLevel {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SecuritySeverityLevel::Low => "low",
+                SecuritySeverityLevel::Medium => "medium",
+                SecuritySeverityLevel::High => "high",
+                SecuritySeverityLevel::Critical => "critical",
+                SecuritySeverityLevel::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SecuritySeverityLevel {
+        fn default() -> SecuritySeverityLevel {
+            SecuritySeverityLevel::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertRule {
         #[serde(
@@ -11185,18 +12584,10 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub security_severity_level: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub severity: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub security_severity_level: Option<SecuritySeverityLevel>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub severity: Option<Severity>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub tags: Vec<String>,
     }
@@ -11224,12 +12615,7 @@ pub mod types {
         pub most_recent_instance: CodeScanningAlertInstance,
         pub number: i64,
         pub rule: CodeScanningAlertRule,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: CodeScanningAlertState,
         pub tool: CodeScanningAnalysisTool,
         #[serde(
             default,
@@ -11239,6 +12625,31 @@ pub mod types {
         pub url: String,
     }
 
+    /// Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CodeScanningAlertSetState {
+        Open,
+        Dismissed,
+        Noop,
+    }
+
+    impl std::fmt::Display for CodeScanningAlertSetState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CodeScanningAlertSetState::Open => "open",
+                CodeScanningAlertSetState::Dismissed => "dismissed",
+                CodeScanningAlertSetState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CodeScanningAlertSetState {
+        fn default() -> CodeScanningAlertSetState {
+            CodeScanningAlertSetState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAnalysis {
         #[serde(
@@ -11374,6 +12785,31 @@ pub mod types {
         pub url: String,
     }
 
+    /// `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ProcessingStatus {
+        Pending,
+        Complete,
+        Noop,
+    }
+
+    impl std::fmt::Display for ProcessingStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ProcessingStatus::Pending => "pending",
+                ProcessingStatus::Complete => "complete",
+                ProcessingStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ProcessingStatus {
+        fn default() -> ProcessingStatus {
+            ProcessingStatus::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningSarifsStatus {
         #[serde(
@@ -11382,12 +12818,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub analyses_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub processing_status: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub processing_status: Option<ProcessingStatus>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -11756,6 +13188,37 @@ pub mod types {
         pub url: String,
     }
 
+    /// The permission associated with the invitation.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum RepositoryInvitationPermissions {
+        Read,
+        Write,
+        Admin,
+        Triage,
+        Maintain,
+        Noop,
+    }
+
+    impl std::fmt::Display for RepositoryInvitationPermissions {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                RepositoryInvitationPermissions::Read => "read",
+                RepositoryInvitationPermissions::Write => "write",
+                RepositoryInvitationPermissions::Admin => "admin",
+                RepositoryInvitationPermissions::Triage => "triage",
+                RepositoryInvitationPermissions::Maintain => "maintain",
+                RepositoryInvitationPermissions::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for RepositoryInvitationPermissions {
+        fn default() -> RepositoryInvitationPermissions {
+            RepositoryInvitationPermissions::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepositoryInvitation {
         pub created_at: DateTime<Utc>,
@@ -11776,12 +13239,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permissions: String,
+        pub permissions: Permissions,
         pub repository: MinimalRepository,
         #[serde(
             default,
@@ -11793,12 +13251,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitComment {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11867,6 +13320,33 @@ pub mod types {
         pub href: String,
     }
 
+    /// The merge method to use.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum MergeMethod {
+        Merge,
+        Squash,
+        Rebase,
+        Noop,
+    }
+
+    impl std::fmt::Display for MergeMethod {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                MergeMethod::Merge => "merge",
+                MergeMethod::Squash => "squash",
+                MergeMethod::Rebase => "rebase",
+                MergeMethod::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for MergeMethod {
+        fn default() -> MergeMethod {
+            MergeMethod::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AutoMerge {
         #[serde(
@@ -11882,12 +13362,7 @@ pub mod types {
         )]
         pub commit_title: String,
         pub enabled_by: SimpleUser,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub merge_method: String,
+        pub merge_method: MergeMethod,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -12003,12 +13478,7 @@ pub mod types {
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         pub auto_merge: AutoMerge,
         pub base: Base,
         #[serde(
@@ -12205,7 +13675,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Status {
+    pub struct StatusData {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -12281,7 +13751,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommunityProfileFilesFilesCodeofConduct {
+    pub struct CommunityProfileFilesFilesCodeOfConduct {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -12309,7 +13779,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CodeofConductFile {
+    pub struct CodeOfConductFile {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -12390,8 +13860,8 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommunityProfileFiles {
-        pub code_of_conduct: CodeofConduct,
-        pub code_of_conduct_file: CodeofConductFile,
+        pub code_of_conduct: CodeOfConduct,
+        pub code_of_conduct_file: CodeOfConductFile,
         pub contributing: Contributing,
         pub issue_template: IssueTemplate,
         pub license: License,
@@ -12475,6 +13945,34 @@ pub mod types {
         pub status: String,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CommitComparisonStatus {
+        Diverged,
+        Ahead,
+        Behind,
+        Identical,
+        Noop,
+    }
+
+    impl std::fmt::Display for CommitComparisonStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CommitComparisonStatus::Diverged => "diverged",
+                CommitComparisonStatus::Ahead => "ahead",
+                CommitComparisonStatus::Behind => "behind",
+                CommitComparisonStatus::Identical => "identical",
+                CommitComparisonStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CommitComparisonStatus {
+        fn default() -> CommitComparisonStatus {
+            CommitComparisonStatus::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitComparison {
         pub ahead_by: i64,
@@ -12509,12 +14007,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub permalink_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        pub status: Status,
         pub total_commits: i64,
         #[serde(
             default,
@@ -13089,7 +14582,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Content {
+    pub struct FileCommitContent {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub links: Option<Links>,
         #[serde(
@@ -13419,6 +14912,41 @@ pub mod types {
         pub url: String,
     }
 
+    /// The state of the status.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum DeploymentStatusState {
+        Error,
+        Failure,
+        Inactive,
+        Pending,
+        Success,
+        Queued,
+        InProgress,
+        Noop,
+    }
+
+    impl std::fmt::Display for DeploymentStatusState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                DeploymentStatusState::Error => "error",
+                DeploymentStatusState::Failure => "failure",
+                DeploymentStatusState::Inactive => "inactive",
+                DeploymentStatusState::Pending => "pending",
+                DeploymentStatusState::Success => "success",
+                DeploymentStatusState::Queued => "queued",
+                DeploymentStatusState::InProgress => "in_progress",
+                DeploymentStatusState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for DeploymentStatusState {
+        fn default() -> DeploymentStatusState {
+            DeploymentStatusState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeploymentStatus {
         pub created_at: DateTime<Utc>,
@@ -13461,19 +14989,14 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedviaGithubApp>,
+        pub performed_via_github_app: Option<PerformedViaGithubApp>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repository_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14013,6 +15536,58 @@ pub mod types {
         pub url: String,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ImportStatus {
+        Auth,
+        Error,
+        None,
+        Detecting,
+        Choose,
+        AuthFailed,
+        Importing,
+        Mapping,
+        WaitingToPush,
+        Pushing,
+        Complete,
+        Setup,
+        Unknown,
+        DetectionFoundMultiple,
+        DetectionFoundNothing,
+        DetectionNeedsAuth,
+        Noop,
+    }
+
+    impl std::fmt::Display for ImportStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ImportStatus::Auth => "auth",
+                ImportStatus::Error => "error",
+                ImportStatus::None => "none",
+                ImportStatus::Detecting => "detecting",
+                ImportStatus::Choose => "choose",
+                ImportStatus::AuthFailed => "auth_failed",
+                ImportStatus::Importing => "importing",
+                ImportStatus::Mapping => "mapping",
+                ImportStatus::WaitingToPush => "waiting_to_push",
+                ImportStatus::Pushing => "pushing",
+                ImportStatus::Complete => "complete",
+                ImportStatus::Setup => "setup",
+                ImportStatus::Unknown => "unknown",
+                ImportStatus::DetectionFoundMultiple => "detection_found_multiple",
+                ImportStatus::DetectionFoundNothing => "detection_found_nothing",
+                ImportStatus::DetectionNeedsAuth => "detection_needs_auth",
+                ImportStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ImportStatus {
+        fn default() -> ImportStatus {
+            ImportStatus::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProjectChoices {
         #[serde(
@@ -14089,12 +15664,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repository_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        pub status: Status,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14791,12 +16361,8 @@ pub mod types {
         pub assignee: Option<Assignee>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub assigner: Option<Assigner>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub author_association: Option<AuthorAssociation>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14838,7 +16404,7 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedviaGithubApp>,
+        pub performed_via_github_app: Option<PerformedViaGithubApp>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub project_card: Option<IssueEventProjectCard>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -15448,7 +17014,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddedtoProjectIssueEventProjectCard {
+    pub struct AddedToProjectIssueEventProjectCard {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15478,7 +17044,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddedtoProjectIssueEvent {
+    pub struct AddedToProjectIssueEvent {
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -15523,7 +17089,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MovedColumninProjectIssueEventProjectCard {
+    pub struct MovedColumnInProjectIssueEventProjectCard {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15553,7 +17119,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MovedColumninProjectIssueEvent {
+    pub struct MovedColumnInProjectIssueEvent {
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -15673,7 +17239,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ConvertedNotetoIssueIssueEventProjectCard {
+    pub struct ConvertedNoteToIssueIssueEventProjectCard {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15703,7 +17269,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ConvertedNotetoIssueIssueEvent {
+    pub struct ConvertedNoteToIssueIssueEvent {
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -15748,7 +17314,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct IssueEventforIssue {
+    pub struct IssueEventForIssue {
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -15794,12 +17360,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommentEvent {
         pub actor: SimpleUser,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16040,12 +17601,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineReviewedEvent {
         pub links: Links,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16134,15 +17690,60 @@ pub mod types {
         pub self_: SelfData,
     }
 
+    /// The side of the first line of the range for a multi-line comment.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum StartSide {
+        Left,
+        Right,
+        Noop,
+    }
+
+    impl std::fmt::Display for StartSide {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                StartSide::Left => "LEFT",
+                StartSide::Right => "RIGHT",
+                StartSide::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for StartSide {
+        fn default() -> StartSide {
+            StartSide::Noop
+        }
+    }
+    /// The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Side {
+        Left,
+        Right,
+        Noop,
+    }
+
+    impl std::fmt::Display for Side {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Side::Left => "LEFT",
+                Side::Right => "RIGHT",
+                Side::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Side {
+        fn default() -> Side {
+            Side::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewComment {
         pub links: Links,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16218,20 +17819,12 @@ pub mod types {
         pub pull_request_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub side: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub side: Option<Side>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub start_line: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub start_side: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub start_side: Option<StartSide>,
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -16516,6 +18109,50 @@ pub mod types {
         pub path: String,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PagesHttpsCertificateState {
+        New,
+        AuthorizationCreated,
+        AuthorizationPending,
+        Authorized,
+        AuthorizationRevoked,
+        Issued,
+        Uploaded,
+        Approved,
+        Errored,
+        BadAuthz,
+        DestroyPending,
+        DnsChanged,
+        Noop,
+    }
+
+    impl std::fmt::Display for PagesHttpsCertificateState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PagesHttpsCertificateState::New => "new",
+                PagesHttpsCertificateState::AuthorizationCreated => "authorization_created",
+                PagesHttpsCertificateState::AuthorizationPending => "authorization_pending",
+                PagesHttpsCertificateState::Authorized => "authorized",
+                PagesHttpsCertificateState::AuthorizationRevoked => "authorization_revoked",
+                PagesHttpsCertificateState::Issued => "issued",
+                PagesHttpsCertificateState::Uploaded => "uploaded",
+                PagesHttpsCertificateState::Approved => "approved",
+                PagesHttpsCertificateState::Errored => "errored",
+                PagesHttpsCertificateState::BadAuthz => "bad_authz",
+                PagesHttpsCertificateState::DestroyPending => "destroy_pending",
+                PagesHttpsCertificateState::DnsChanged => "dns_changed",
+                PagesHttpsCertificateState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PagesHttpsCertificateState {
+        fn default() -> PagesHttpsCertificateState {
+            PagesHttpsCertificateState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PagesHttpsCertificate {
         #[serde(
@@ -16527,14 +18164,36 @@ pub mod types {
         pub domains: serde_json::Value,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub expires_at: Option<NaiveDate>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
     }
 
+    /// The status of the most recent build of the Page.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PageStatus {
+        Built,
+        Building,
+        Errored,
+        Noop,
+    }
+
+    impl std::fmt::Display for PageStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PageStatus::Built => "built",
+                PageStatus::Building => "building",
+                PageStatus::Errored => "errored",
+                PageStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PageStatus {
+        fn default() -> PageStatus {
+            PageStatus::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Page {
         #[serde(
@@ -16557,12 +18216,7 @@ pub mod types {
         pub public: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub source: Option<PagesSourceHash>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        pub status: Status,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16921,6 +18575,31 @@ pub mod types {
         pub domain: Option<Domain>,
     }
 
+    /// State of this Pull Request. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullRequestState {
+        Open,
+        Closed,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullRequestState::Open => "open",
+                PullRequestState::Closed => "closed",
+                PullRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullRequestState {
+        fn default() -> PullRequestState {
+            PullRequestState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestLabels {
         #[serde(
@@ -18314,12 +19993,7 @@ pub mod types {
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         pub auto_merge: AutoMerge,
         pub base: Base,
         #[serde(
@@ -18421,12 +20095,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub review_comments_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18493,12 +20162,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReview {
         pub links: Links,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18561,15 +20225,35 @@ pub mod types {
         pub self_: Link,
     }
 
+    /// The side of the first line of the range for a multi-line comment.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReviewCommentSide {
+        Left,
+        Right,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReviewCommentSide {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReviewCommentSide::Left => "LEFT",
+                ReviewCommentSide::Right => "RIGHT",
+                ReviewCommentSide::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReviewCommentSide {
+        fn default() -> ReviewCommentSide {
+            ReviewCommentSide::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewComment {
         pub links: Links,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18645,20 +20329,12 @@ pub mod types {
         pub pull_request_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub side: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub side: Option<Side>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub start_line: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub start_side: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub start_side: Option<StartSide>,
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -18669,6 +20345,31 @@ pub mod types {
         pub user: User,
     }
 
+    /// State of the release asset.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReleaseAssetState {
+        Uploaded,
+        Open,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReleaseAssetState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReleaseAssetState::Uploaded => "uploaded",
+                ReleaseAssetState::Open => "open",
+                ReleaseAssetState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReleaseAssetState {
+        fn default() -> ReleaseAssetState {
+            ReleaseAssetState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Uploader {
         #[serde(
@@ -18826,12 +20527,7 @@ pub mod types {
         )]
         pub node_id: String,
         pub size: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
         pub updated_at: DateTime<Utc>,
         pub uploader: Uploader,
         #[serde(
@@ -18940,6 +20636,31 @@ pub mod types {
         pub zipball_url: String,
     }
 
+    /// Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SecretScanningAlertState {
+        Open,
+        Resolved,
+        Noop,
+    }
+
+    impl std::fmt::Display for SecretScanningAlertState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SecretScanningAlertState::Open => "open",
+                SecretScanningAlertState::Resolved => "resolved",
+                SecretScanningAlertState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SecretScanningAlertState {
+        fn default() -> SecretScanningAlertState {
+            SecretScanningAlertState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SecretScanningAlert {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -18970,12 +20691,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub secret_type: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub state: Option<SecretScanningAlertState>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19140,7 +20857,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Members {
+    pub struct ScimGroupListEnterpriseResourcesResourcesMembers {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19227,6 +20944,29 @@ pub mod types {
         pub schemas: Vec<String>,
         pub start_index: f64,
         pub total_results: f64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ScimEnterpriseGroupMembers {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+            rename = "$ref"
+        )]
+        pub ref_: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub display: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub value: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -19445,14 +21185,35 @@ pub mod types {
         pub resource_type: String,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Op {
+        Add,
+        Remove,
+        Replace,
+        Noop,
+    }
+
+    impl std::fmt::Display for Op {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Op::Add => "add",
+                Op::Remove => "remove",
+                Op::Replace => "replace",
+                Op::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Op {
+        fn default() -> Op {
+            Op::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Operations {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub op: String,
+        pub op: Op,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19814,12 +21575,7 @@ pub mod types {
         pub assignee: Assignee,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub author_association: String,
+        pub author_association: AuthorAssociation,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19880,7 +21636,7 @@ pub mod types {
         pub node_id: String,
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedviaGithubApp>,
+        pub performed_via_github_app: Option<PerformedViaGithubApp>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub pull_request: Option<PullRequest>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -21452,7 +23208,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetorCreateAuthorizationSpecificAppRequest {
+    pub struct GetOrCreateAuthorizationSpecificAppRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -21482,7 +23238,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetorCreateAuthorizationSpecificAppandFingerprintRequest {
+    pub struct GetOrCreateAuthorizationSpecificAppAndFingerprintRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -21538,29 +23294,20 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetGithubActionsPermissionsEnterpriseRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub allowed_actions: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub enabled_organizations: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub allowed_actions: Option<AllowedActions>,
+        pub enabled_organizations: EnabledOrganizations,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelectedOrganizationsEnabledGithubActionsinEnterpriseOkResponse {
+    pub struct GetListSelectedOrganizationsEnabledGithubActionsInEnterpriseOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub organizations: Vec<OrganizationSimple>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelectedOrganizationsEnabledGithubActionsinEnterpriseRequest {
+    pub struct SetSelectedOrganizationsEnabledGithubActionsInEnterpriseRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_organization_ids: Vec<i64>,
     }
@@ -21572,6 +23319,31 @@ pub mod types {
         pub total_count: f64,
     }
 
+    /// Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected`
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+        Selected,
+        All,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
+                CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
+                CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+        fn default() -> CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+            CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateSelfDataHostedRunnerGroupEnterpriseRequest {
         #[serde(
@@ -21584,14 +23356,35 @@ pub mod types {
         pub runners: Vec<i64>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_organization_ids: Vec<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub visibility: Option<Visibility>,
     }
 
+    /// Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+        Selected,
+        All,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
+                UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
+                UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+        fn default() -> UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+            UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateSelfDataHostedRunnerGroupEnterpriseRequest {
         #[serde(
@@ -21600,36 +23393,32 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub visibility: Option<Visibility>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseOkResponse {
+    pub struct GetListOrganizationAccessSelfDataHostedRunnerGroupInEnterpriseOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub organizations: Vec<OrganizationSimple>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseRequest {
+    pub struct SetOrganizationAccessSelfDataHostedRunnerGroupInEnterpriseRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_organization_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfDataHostedRunnersinGroupEnterpriseOkResponse {
+    pub struct GetListSelfDataHostedRunnersInGroupEnterpriseOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelfDataHostedRunnersinGroupEnterpriseRequest {
+    pub struct SetSelfDataHostedRunnersInGroupEnterpriseRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<i64>,
     }
@@ -21694,7 +23483,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetCheckifGistIsStarredNotFoundResponse {}
+    pub struct GetCheckIfGistIsStarredNotFoundResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositoriesAccessibleAppInstallationOkResponse {
@@ -21709,6 +23498,31 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /// The rendering mode.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Mode {
+        Markdown,
+        Gfm,
+        Noop,
+    }
+
+    impl std::fmt::Display for Mode {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Mode::Markdown => "markdown",
+                Mode::Gfm => "gfm",
+                Mode::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Mode {
+        fn default() -> Mode {
+            Mode::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RenderMarkdownDocumentRequest {
         #[serde(
@@ -21717,12 +23531,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub context: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub mode: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub mode: Option<Mode>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -21732,7 +23542,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MarkNotificationsasReadRequest {
+    pub struct MarkNotificationsAsReadRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub last_read_at: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -21740,7 +23550,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutMarkNotificationsasReadAcceptedResponse {
+    pub struct PutMarkNotificationsAsReadAcceptedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -21755,6 +23565,70 @@ pub mod types {
         pub ignored: Option<bool>,
     }
 
+    /// Default permission level members have for organization repositories:  
+    /// \* `read` - can pull, but not push to or administer this repository.  
+    /// \* `write` - can pull and push, but not administer this repository.  
+    /// \* `admin` - can pull, push, and administer this repository.  
+    /// \* `none` - no permissions granted by default.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum DefaultRepositoryPermission {
+        Read,
+        Write,
+        Admin,
+        None,
+        Noop,
+    }
+
+    impl std::fmt::Display for DefaultRepositoryPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                DefaultRepositoryPermission::Read => "read",
+                DefaultRepositoryPermission::Write => "write",
+                DefaultRepositoryPermission::Admin => "admin",
+                DefaultRepositoryPermission::None => "none",
+                DefaultRepositoryPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for DefaultRepositoryPermission {
+        fn default() -> DefaultRepositoryPermission {
+            DefaultRepositoryPermission::Noop
+        }
+    }
+    /// Specifies which types of repositories non-admin organization members can create. Can be one of:  
+    /// \* `all` - all organization members can create public and private repositories.  
+    /// \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  
+    /// \* `none` - only admin members can create repositories.  
+    /// **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum MembersAllowedRepositoryCreationType {
+        All,
+        Private,
+        None,
+        Noop,
+    }
+
+    impl std::fmt::Display for MembersAllowedRepositoryCreationType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                MembersAllowedRepositoryCreationType::All => "all",
+                MembersAllowedRepositoryCreationType::Private => "private",
+                MembersAllowedRepositoryCreationType::None => "none",
+                MembersAllowedRepositoryCreationType::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for MembersAllowedRepositoryCreationType {
+        fn default() -> MembersAllowedRepositoryCreationType {
+            MembersAllowedRepositoryCreationType::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateOrganizationRequest {
         #[serde(
@@ -21775,12 +23649,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub company: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub default_repository_permission: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub default_repository_permission: Option<DefaultRepositoryPermission>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -21803,12 +23673,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub location: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub members_allowed_repository_creation_type: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub members_allowed_repository_creation_type: Option<MembersAllowedRepositoryCreationType>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub members_can_create_internal_repositories: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -21857,29 +23723,20 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetGithubActionsPermissionsOrganizationRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub allowed_actions: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub enabled_repositories: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub allowed_actions: Option<AllowedActions>,
+        pub enabled_repositories: EnabledRepositories,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelectedRepositoriesEnabledGithubActionsinOrganizationOkResponse {
+    pub struct GetListSelectedRepositoriesEnabledGithubActionsInOrganizationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelectedRepositoriesEnabledGithubActionsinOrganizationRequest {
+    pub struct SetSelectedRepositoriesEnabledGithubActionsInOrganizationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<i64>,
     }
@@ -21891,6 +23748,33 @@ pub mod types {
         pub total_count: f64,
     }
 
+    /// Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+        Selected,
+        All,
+        Private,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
+                CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::All => "all",
+                CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
+                CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+        fn default() -> CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+            CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateSelfDataHostedRunnerGroupOrganizationRequest {
         #[serde(
@@ -21903,14 +23787,37 @@ pub mod types {
         pub runners: Vec<i64>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub visibility: Option<Visibility>,
     }
 
+    /// Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+        Selected,
+        All,
+        Private,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
+                UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::All => "all",
+                UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
+                UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+        fn default() -> UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+            UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateSelfDataHostedRunnerGroupOrganizationRequest {
         #[serde(
@@ -21919,36 +23826,32 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub visibility: Option<Visibility>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListRepositoryAccessSelfDataHostedRunnerGroupinOrganizationOkResponse {
+    pub struct GetListRepositoryAccessSelfDataHostedRunnerGroupInOrganizationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<MinimalRepository>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetRepositoryAccessSelfDataHostedRunnerGroupinOrganizationRequest {
+    pub struct SetRepositoryAccessSelfDataHostedRunnerGroupInOrganizationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfDataHostedRunnersinGroupOrganizationOkResponse {
+    pub struct GetListSelfDataHostedRunnersInGroupOrganizationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelfDataHostedRunnersinGroupOrganizationRequest {
+    pub struct SetSelfDataHostedRunnersInGroupOrganizationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<i64>,
     }
@@ -21967,6 +23870,36 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /// Configures the access that repositories have to the organization secret. Can be one of:  
+    /// \- `all` - All repositories in an organization can access the secret.  
+    /// \- `private` - Private repositories in an organization can access the secret.  
+    /// \- `selected` - Only specific repositories can access the secret.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateUpdateOrganizationSecretRequestVisibility {
+        All,
+        Private,
+        Selected,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateUpdateOrganizationSecretRequestVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateUpdateOrganizationSecretRequestVisibility::All => "all",
+                CreateUpdateOrganizationSecretRequestVisibility::Private => "private",
+                CreateUpdateOrganizationSecretRequestVisibility::Selected => "selected",
+                CreateUpdateOrganizationSecretRequestVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateUpdateOrganizationSecretRequestVisibility {
+        fn default() -> CreateUpdateOrganizationSecretRequestVisibility {
+            CreateUpdateOrganizationSecretRequestVisibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateUpdateOrganizationSecretRequest {
         #[serde(
@@ -21983,12 +23916,7 @@ pub mod types {
         pub key_id: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<String>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        pub visibility: Visibility,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22141,12 +24069,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetInteractionRestrictionsOrganizationOkResponse {
         pub expires_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub limit: String,
+        pub limit: InteractionGroup,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -22155,6 +24078,36 @@ pub mod types {
         pub origin: String,
     }
 
+    /// Specify role for new member. Can be one of:  
+    /// \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  
+    /// \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
+    /// \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateOrganizationInvitationRequestRole {
+        Admin,
+        DirectMember,
+        BillingManager,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateOrganizationInvitationRequestRole {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateOrganizationInvitationRequestRole::Admin => "admin",
+                CreateOrganizationInvitationRequestRole::DirectMember => "direct_member",
+                CreateOrganizationInvitationRequestRole::BillingManager => "billing_manager",
+                CreateOrganizationInvitationRequestRole::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateOrganizationInvitationRequestRole {
+        fn default() -> CreateOrganizationInvitationRequestRole {
+            CreateOrganizationInvitationRequestRole::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateOrganizationInvitationRequest {
         #[serde(
@@ -22165,30 +24118,71 @@ pub mod types {
         pub email: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub invitee_id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub role: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub role: Option<Role>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub team_ids: Vec<i64>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetOrganizationMembershipUserRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub role: String,
+    /// The role to give the user in the organization. Can be one of:  
+    /// \* `admin` - The user will become an owner of the organization.  
+    /// \* `member` - The user will become a non-owner member of the organization.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SetOrganizationMembershipUserRequestRole {
+        Admin,
+        Member,
+        Noop,
     }
 
+    impl std::fmt::Display for SetOrganizationMembershipUserRequestRole {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SetOrganizationMembershipUserRequestRole::Admin => "admin",
+                SetOrganizationMembershipUserRequestRole::Member => "member",
+                SetOrganizationMembershipUserRequestRole::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SetOrganizationMembershipUserRequestRole {
+        fn default() -> SetOrganizationMembershipUserRequestRole {
+            SetOrganizationMembershipUserRequestRole::Noop
+        }
+    }
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct SetOrganizationMembershipUserRequest {
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub role: Option<Role>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Exclude {
+        Repositories,
+        Noop,
+    }
+
+    impl std::fmt::Display for Exclude {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Exclude::Repositories => "repositories",
+                Exclude::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Exclude {
+        fn default() -> Exclude {
+            Exclude::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct StartOrganizationMigrationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub exclude: Vec<String>,
+        pub exclude: Vec<Exclude>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub exclude_attachments: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -22232,6 +24226,36 @@ pub mod types {
         pub name: String,
     }
 
+    /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
+    /// The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateOrganizationRepositoryRequestVisibility {
+        Public,
+        Private,
+        Visibility,
+        Internal,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateOrganizationRepositoryRequestVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateOrganizationRepositoryRequestVisibility::Public => "public",
+                CreateOrganizationRepositoryRequestVisibility::Private => "private",
+                CreateOrganizationRepositoryRequestVisibility::Visibility => "visibility",
+                CreateOrganizationRepositoryRequestVisibility::Internal => "internal",
+                CreateOrganizationRepositoryRequestVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateOrganizationRepositoryRequestVisibility {
+        fn default() -> CreateOrganizationRepositoryRequestVisibility {
+            CreateOrganizationRepositoryRequestVisibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateOrganizationRepositoryRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -22286,14 +24310,72 @@ pub mod types {
         pub private: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub team_id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub visibility: Option<Visibility>,
     }
 
+    /// The level of privacy this team should have. The options are:  
+    /// **For a non-nested team:**  
+    /// \* `secret` - only visible to organization owners and members of this team.  
+    /// \* `closed` - visible to all members of this organization.  
+    /// Default: `secret`  
+    /// **For a parent or child team:**  
+    /// \* `closed` - visible to all members of this organization.  
+    /// Default for child team: `closed`
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateTeamRequestPrivacy {
+        Secret,
+        Closed,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateTeamRequestPrivacy {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateTeamRequestPrivacy::Secret => "secret",
+                CreateTeamRequestPrivacy::Closed => "closed",
+                CreateTeamRequestPrivacy::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateTeamRequestPrivacy {
+        fn default() -> CreateTeamRequestPrivacy {
+            CreateTeamRequestPrivacy::Noop
+        }
+    }
+    /// **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
+    /// \* `pull` - team members can pull, but not push to or administer newly-added repositories.  
+    /// \* `push` - team members can pull and push, but not administer newly-added repositories.  
+    /// \* `admin` - team members can pull, push and administer newly-added repositories.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Permission {
+        Pull,
+        Push,
+        Admin,
+        Noop,
+    }
+
+    impl std::fmt::Display for Permission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Permission::Pull => "pull",
+                Permission::Push => "push",
+                Permission::Admin => "admin",
+                Permission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Permission {
+        fn default() -> Permission {
+            Permission::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateTeamRequest {
         #[serde(
@@ -22312,22 +24394,44 @@ pub mod types {
         pub name: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub parent_team_id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permission: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub privacy: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permission: Option<Permission>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub privacy: Option<Privacy>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repo_names: Vec<String>,
     }
 
+    /// The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. When a team is nested, the `privacy` for parent teams cannot be `secret`. The options are:  
+    /// **For a non-nested team:**  
+    /// \* `secret` - only visible to organization owners and members of this team.  
+    /// \* `closed` - visible to all members of this organization.  
+    /// **For a parent or child team:**  
+    /// \* `closed` - visible to all members of this organization.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateTeamRequestPrivacy {
+        Secret,
+        Closed,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateTeamRequestPrivacy {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateTeamRequestPrivacy::Secret => "secret",
+                UpdateTeamRequestPrivacy::Closed => "closed",
+                UpdateTeamRequestPrivacy::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateTeamRequestPrivacy {
+        fn default() -> UpdateTeamRequestPrivacy {
+            UpdateTeamRequestPrivacy::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateTeamRequest {
         #[serde(
@@ -22344,18 +24448,10 @@ pub mod types {
         pub name: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub parent_team_id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permission: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub privacy: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permission: Option<Permission>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub privacy: Option<Privacy>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22412,44 +24508,158 @@ pub mod types {
         pub body: String,
     }
 
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReactionTeamDiscussionCommentRequestContent {
+        PlusOne,
+        MinusOne,
+        Laugh,
+        Confused,
+        Heart,
+        Hooray,
+        Rocket,
+        Eyes,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateReactionTeamDiscussionCommentRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReactionTeamDiscussionCommentRequestContent::PlusOne => "+1",
+                CreateReactionTeamDiscussionCommentRequestContent::MinusOne => "-1",
+                CreateReactionTeamDiscussionCommentRequestContent::Laugh => "laugh",
+                CreateReactionTeamDiscussionCommentRequestContent::Confused => "confused",
+                CreateReactionTeamDiscussionCommentRequestContent::Heart => "heart",
+                CreateReactionTeamDiscussionCommentRequestContent::Hooray => "hooray",
+                CreateReactionTeamDiscussionCommentRequestContent::Rocket => "rocket",
+                CreateReactionTeamDiscussionCommentRequestContent::Eyes => "eyes",
+                CreateReactionTeamDiscussionCommentRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReactionTeamDiscussionCommentRequestContent {
+        fn default() -> CreateReactionTeamDiscussionCommentRequestContent {
+            CreateReactionTeamDiscussionCommentRequestContent::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionTeamDiscussionCommentRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content: String,
+        pub content: Content,
     }
 
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReactionTeamDiscussionRequestContent {
+        PlusOne,
+        MinusOne,
+        Laugh,
+        Confused,
+        Heart,
+        Hooray,
+        Rocket,
+        Eyes,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateReactionTeamDiscussionRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReactionTeamDiscussionRequestContent::PlusOne => "+1",
+                CreateReactionTeamDiscussionRequestContent::MinusOne => "-1",
+                CreateReactionTeamDiscussionRequestContent::Laugh => "laugh",
+                CreateReactionTeamDiscussionRequestContent::Confused => "confused",
+                CreateReactionTeamDiscussionRequestContent::Heart => "heart",
+                CreateReactionTeamDiscussionRequestContent::Hooray => "hooray",
+                CreateReactionTeamDiscussionRequestContent::Rocket => "rocket",
+                CreateReactionTeamDiscussionRequestContent::Eyes => "eyes",
+                CreateReactionTeamDiscussionRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReactionTeamDiscussionRequestContent {
+        fn default() -> CreateReactionTeamDiscussionRequestContent {
+            CreateReactionTeamDiscussionRequestContent::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionTeamDiscussionRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content: String,
+        pub content: Content,
     }
 
+    /// The role that this user should have in the team. Can be one of:  
+    /// \* `member` - a normal member of the team.  
+    /// \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AddUpdateTeamMembershipUserRequestRole {
+        Member,
+        Maintainer,
+        Noop,
+    }
+
+    impl std::fmt::Display for AddUpdateTeamMembershipUserRequestRole {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AddUpdateTeamMembershipUserRequestRole::Member => "member",
+                AddUpdateTeamMembershipUserRequestRole::Maintainer => "maintainer",
+                AddUpdateTeamMembershipUserRequestRole::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AddUpdateTeamMembershipUserRequestRole {
+        fn default() -> AddUpdateTeamMembershipUserRequestRole {
+            AddUpdateTeamMembershipUserRequestRole::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddUpdateTeamMembershipUserRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub role: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub role: Option<Role>,
     }
 
+    /// The permission to grant to the team for this project. Can be one of:  
+    /// \* `read` - team members can read, but not write to or administer this project.  
+    /// \* `write` - team members can read and write, but not administer this project.  
+    /// \* `admin` - team members can read, write and administer this project.  
+    /// Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AddUpdateTeamProjectPermissionsRequestPermission {
+        Read,
+        Write,
+        Admin,
+        Noop,
+    }
+
+    impl std::fmt::Display for AddUpdateTeamProjectPermissionsRequestPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AddUpdateTeamProjectPermissionsRequestPermission::Read => "read",
+                AddUpdateTeamProjectPermissionsRequestPermission::Write => "write",
+                AddUpdateTeamProjectPermissionsRequestPermission::Admin => "admin",
+                AddUpdateTeamProjectPermissionsRequestPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AddUpdateTeamProjectPermissionsRequestPermission {
+        fn default() -> AddUpdateTeamProjectPermissionsRequestPermission {
+            AddUpdateTeamProjectPermissionsRequestPermission::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddUpdateTeamProjectPermissionsRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permission: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permission: Option<Permission>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22468,14 +24678,48 @@ pub mod types {
         pub message: String,
     }
 
+    /// The permission to grant the team on this repository. Can be one of:  
+    /// \* `pull` - team members can pull, but not push to or administer this repository.  
+    /// \* `push` - team members can pull and push, but not administer this repository.  
+    /// \* `admin` - team members can pull, push and administer this repository.  
+    /// \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  
+    /// \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  
+    ///   
+    /// If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AddUpdateTeamRepositoryPermissionsRequestPermission {
+        Pull,
+        Push,
+        Admin,
+        Maintain,
+        Triage,
+        Noop,
+    }
+
+    impl std::fmt::Display for AddUpdateTeamRepositoryPermissionsRequestPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AddUpdateTeamRepositoryPermissionsRequestPermission::Pull => "pull",
+                AddUpdateTeamRepositoryPermissionsRequestPermission::Push => "push",
+                AddUpdateTeamRepositoryPermissionsRequestPermission::Admin => "admin",
+                AddUpdateTeamRepositoryPermissionsRequestPermission::Maintain => "maintain",
+                AddUpdateTeamRepositoryPermissionsRequestPermission::Triage => "triage",
+                AddUpdateTeamRepositoryPermissionsRequestPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AddUpdateTeamRepositoryPermissionsRequestPermission {
+        fn default() -> AddUpdateTeamRepositoryPermissionsRequestPermission {
+            AddUpdateTeamRepositoryPermissionsRequestPermission::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddUpdateTeamRepositoryPermissionsRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permission: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permission: Option<Permission>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22746,6 +24990,35 @@ pub mod types {
         pub message: String,
     }
 
+    /// The baseline permission that all organization members have on this project
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateProjectRequestOrganizationPermission {
+        Read,
+        Write,
+        Admin,
+        None,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateProjectRequestOrganizationPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateProjectRequestOrganizationPermission::Read => "read",
+                UpdateProjectRequestOrganizationPermission::Write => "write",
+                UpdateProjectRequestOrganizationPermission::Admin => "admin",
+                UpdateProjectRequestOrganizationPermission::None => "none",
+                UpdateProjectRequestOrganizationPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateProjectRequestOrganizationPermission {
+        fn default() -> UpdateProjectRequestOrganizationPermission {
+            UpdateProjectRequestOrganizationPermission::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateProjectRequest {
         #[serde(
@@ -22760,12 +25033,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organization_permission: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub organization_permission: Option<OrganizationPermission>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub private: Option<bool>,
         #[serde(
@@ -22794,14 +25063,37 @@ pub mod types {
         pub message: String,
     }
 
+    /// The permission to grant the collaborator.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AddProjectCollaboratorRequestPermission {
+        Read,
+        Write,
+        Admin,
+        Noop,
+    }
+
+    impl std::fmt::Display for AddProjectCollaboratorRequestPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AddProjectCollaboratorRequestPermission::Read => "read",
+                AddProjectCollaboratorRequestPermission::Write => "write",
+                AddProjectCollaboratorRequestPermission::Admin => "admin",
+                AddProjectCollaboratorRequestPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AddProjectCollaboratorRequestPermission {
+        fn default() -> AddProjectCollaboratorRequestPermission {
+            AddProjectCollaboratorRequestPermission::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddProjectCollaboratorRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permission: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permission: Option<Permission>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22830,8 +25122,37 @@ pub mod types {
         pub message: String,
     }
 
+    /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateRepositoryRequestVisibility {
+        Public,
+        Private,
+        Visibility,
+        Internal,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateRepositoryRequestVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateRepositoryRequestVisibility::Public => "public",
+                UpdateRepositoryRequestVisibility::Private => "private",
+                UpdateRepositoryRequestVisibility::Visibility => "visibility",
+                UpdateRepositoryRequestVisibility::Internal => "internal",
+                UpdateRepositoryRequestVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateRepositoryRequestVisibility {
+        fn default() -> UpdateRepositoryRequestVisibility {
+            UpdateRepositoryRequestVisibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequestSecurityandAnalysisSecurityandAnalysisAdvancedSecurity {
+    pub struct UpdateRepositoryRequestSecurityAndAnalysisSecurityAndAnalysisAdvancedSecurity {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -22841,7 +25162,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequestSecurityandAnalysisSecurityandAnalysisSecretScanning {
+    pub struct UpdateRepositoryRequestSecurityAndAnalysisSecurityAndAnalysisSecretScanning {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -22851,7 +25172,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequestSecurityandAnalysis {
+    pub struct UpdateRepositoryRequestSecurityAndAnalysis {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub advanced_security: Option<AdvancedSecurity>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -22905,13 +25226,9 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub private: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub security_and_analysis: Option<SecurityandAnalysis>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        pub security_and_analysis: Option<SecurityAndAnalysis>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub visibility: Option<Visibility>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22923,12 +25240,8 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetGithubActionsPermissionsRepositoryRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub allowed_actions: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub allowed_actions: Option<AllowedActions>,
         pub enabled: bool,
     }
 
@@ -22963,6 +25276,31 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /// Whether to approve or reject deployment to the specified environments. Must be one of: `approved` or `rejected`
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReviewPendingDeploymentsWorkflowRunRequestState {
+        Approved,
+        Rejected,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReviewPendingDeploymentsWorkflowRunRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReviewPendingDeploymentsWorkflowRunRequestState::Approved => "approved",
+                ReviewPendingDeploymentsWorkflowRunRequestState::Rejected => "rejected",
+                ReviewPendingDeploymentsWorkflowRunRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReviewPendingDeploymentsWorkflowRunRequestState {
+        fn default() -> ReviewPendingDeploymentsWorkflowRunRequestState {
+            ReviewPendingDeploymentsWorkflowRunRequestState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewPendingDeploymentsWorkflowRunRequest {
         #[serde(
@@ -22973,12 +25311,7 @@ pub mod types {
         pub comment: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub environment_ids: Vec<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -23203,14 +25536,101 @@ pub mod types {
         pub new_name: String,
     }
 
+    /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateCheckRunRequestStatus {
+        Queued,
+        InProgress,
+        Completed,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateCheckRunRequestStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateCheckRunRequestStatus::Queued => "queued",
+                CreateCheckRunRequestStatus::InProgress => "in_progress",
+                CreateCheckRunRequestStatus::Completed => "completed",
+                CreateCheckRunRequestStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateCheckRunRequestStatus {
+        fn default() -> CreateCheckRunRequestStatus {
+            CreateCheckRunRequestStatus::Noop
+        }
+    }
+    /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
+    /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateCheckRunRequestConclusion {
+        ActionRequired,
+        Cancelled,
+        Failure,
+        Neutral,
+        Success,
+        Skipped,
+        Stale,
+        TimedOut,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateCheckRunRequestConclusion {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateCheckRunRequestConclusion::ActionRequired => "action_required",
+                CreateCheckRunRequestConclusion::Cancelled => "cancelled",
+                CreateCheckRunRequestConclusion::Failure => "failure",
+                CreateCheckRunRequestConclusion::Neutral => "neutral",
+                CreateCheckRunRequestConclusion::Success => "success",
+                CreateCheckRunRequestConclusion::Skipped => "skipped",
+                CreateCheckRunRequestConclusion::Stale => "stale",
+                CreateCheckRunRequestConclusion::TimedOut => "timed_out",
+                CreateCheckRunRequestConclusion::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateCheckRunRequestConclusion {
+        fn default() -> CreateCheckRunRequestConclusion {
+            CreateCheckRunRequestConclusion::Noop
+        }
+    }
+    /// The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AnnotationLevel {
+        Notice,
+        Warning,
+        Failure,
+        Noop,
+    }
+
+    impl std::fmt::Display for AnnotationLevel {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AnnotationLevel::Notice => "notice",
+                AnnotationLevel::Warning => "warning",
+                AnnotationLevel::Failure => "failure",
+                AnnotationLevel::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AnnotationLevel {
+        fn default() -> AnnotationLevel {
+            AnnotationLevel::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Annotations {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub annotation_level: String,
+        pub annotation_level: AnnotationLevel,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub end_column: Option<i64>,
         pub end_line: i64,
@@ -23292,7 +25712,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Actions {
+    pub struct CreateCheckRunRequestActions {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23319,12 +25739,8 @@ pub mod types {
         pub actions: Vec<Actions>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub completed_at: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub conclusion: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub conclusion: Option<Conclusion>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23353,14 +25769,75 @@ pub mod types {
         pub output: Option<Output>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub status: Option<Status>,
     }
 
+    /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateCheckRunRequestStatus {
+        Queued,
+        InProgress,
+        Completed,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateCheckRunRequestStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateCheckRunRequestStatus::Queued => "queued",
+                UpdateCheckRunRequestStatus::InProgress => "in_progress",
+                UpdateCheckRunRequestStatus::Completed => "completed",
+                UpdateCheckRunRequestStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateCheckRunRequestStatus {
+        fn default() -> UpdateCheckRunRequestStatus {
+            UpdateCheckRunRequestStatus::Noop
+        }
+    }
+    /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.  
+    /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateCheckRunRequestConclusion {
+        ActionRequired,
+        Cancelled,
+        Failure,
+        Neutral,
+        Success,
+        Skipped,
+        Stale,
+        TimedOut,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateCheckRunRequestConclusion {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateCheckRunRequestConclusion::ActionRequired => "action_required",
+                UpdateCheckRunRequestConclusion::Cancelled => "cancelled",
+                UpdateCheckRunRequestConclusion::Failure => "failure",
+                UpdateCheckRunRequestConclusion::Neutral => "neutral",
+                UpdateCheckRunRequestConclusion::Success => "success",
+                UpdateCheckRunRequestConclusion::Skipped => "skipped",
+                UpdateCheckRunRequestConclusion::Stale => "stale",
+                UpdateCheckRunRequestConclusion::TimedOut => "timed_out",
+                UpdateCheckRunRequestConclusion::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateCheckRunRequestConclusion {
+        fn default() -> UpdateCheckRunRequestConclusion {
+            UpdateCheckRunRequestConclusion::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateCheckRunRequestOutput {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -23388,17 +25865,35 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateCheckRunRequest {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub actions: Vec<Actions>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub completed_at: Option<DateTime<Utc>>,
+    pub struct UpdateCheckRunRequestActions {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
-        pub conclusion: String,
+        pub description: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub identifier: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub label: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct UpdateCheckRunRequest {
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub actions: Vec<Actions>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub completed_at: Option<DateTime<Utc>>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub conclusion: Option<Conclusion>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23421,12 +25916,8 @@ pub mod types {
         pub output: Option<Output>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub status: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub status: Option<Status>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -23446,7 +25937,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListCheckRunsinCheckSuiteOkResponse {
+    pub struct GetListCheckRunsInCheckSuiteOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_runs: Vec<CheckRun>,
         pub total_count: i64,
@@ -23459,16 +25950,11 @@ pub mod types {
     pub struct UpdateCodeScanningAlertRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismissed_reason: Option<serde_json::Value>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: CodeScanningAlertSetState,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UploadAnalysisasSarifDataRequest {
+    pub struct UploadAnalysisAsSarifDataRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23504,14 +25990,46 @@ pub mod types {
         pub tool_name: String,
     }
 
+    /// The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  
+    /// \* `pull` - can pull, but not push to or administer this repository.  
+    /// \* `push` - can pull and push, but not administer this repository.  
+    /// \* `admin` - can pull, push and administer this repository.  
+    /// \* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.  
+    /// \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AddRepositoryCollaboratorRequestPermission {
+        Pull,
+        Push,
+        Admin,
+        Maintain,
+        Triage,
+        Noop,
+    }
+
+    impl std::fmt::Display for AddRepositoryCollaboratorRequestPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AddRepositoryCollaboratorRequestPermission::Pull => "pull",
+                AddRepositoryCollaboratorRequestPermission::Push => "push",
+                AddRepositoryCollaboratorRequestPermission::Admin => "admin",
+                AddRepositoryCollaboratorRequestPermission::Maintain => "maintain",
+                AddRepositoryCollaboratorRequestPermission::Triage => "triage",
+                AddRepositoryCollaboratorRequestPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AddRepositoryCollaboratorRequestPermission {
+        fn default() -> AddRepositoryCollaboratorRequestPermission {
+            AddRepositoryCollaboratorRequestPermission::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddRepositoryCollaboratorRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permission: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permission: Option<Permission>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23530,14 +26048,46 @@ pub mod types {
         pub body: String,
     }
 
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReactionCommitCommentRequestContent {
+        PlusOne,
+        MinusOne,
+        Laugh,
+        Confused,
+        Heart,
+        Hooray,
+        Rocket,
+        Eyes,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateReactionCommitCommentRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReactionCommitCommentRequestContent::PlusOne => "+1",
+                CreateReactionCommitCommentRequestContent::MinusOne => "-1",
+                CreateReactionCommitCommentRequestContent::Laugh => "laugh",
+                CreateReactionCommitCommentRequestContent::Confused => "confused",
+                CreateReactionCommitCommentRequestContent::Heart => "heart",
+                CreateReactionCommitCommentRequestContent::Hooray => "hooray",
+                CreateReactionCommitCommentRequestContent::Rocket => "rocket",
+                CreateReactionCommitCommentRequestContent::Eyes => "eyes",
+                CreateReactionCommitCommentRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReactionCommitCommentRequestContent {
+        fn default() -> CreateReactionCommitCommentRequestContent {
+            CreateReactionCommitCommentRequestContent::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionCommitCommentRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content: String,
+        pub content: Content,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -23834,6 +26384,68 @@ pub mod types {
         pub message: String,
     }
 
+    /// The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateDeploymentStatusRequestState {
+        Error,
+        Failure,
+        Inactive,
+        InProgress,
+        Queued,
+        Pending,
+        Success,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateDeploymentStatusRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateDeploymentStatusRequestState::Error => "error",
+                CreateDeploymentStatusRequestState::Failure => "failure",
+                CreateDeploymentStatusRequestState::Inactive => "inactive",
+                CreateDeploymentStatusRequestState::InProgress => "in_progress",
+                CreateDeploymentStatusRequestState::Queued => "queued",
+                CreateDeploymentStatusRequestState::Pending => "pending",
+                CreateDeploymentStatusRequestState::Success => "success",
+                CreateDeploymentStatusRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateDeploymentStatusRequestState {
+        fn default() -> CreateDeploymentStatusRequestState {
+            CreateDeploymentStatusRequestState::Noop
+        }
+    }
+    /// Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateDeploymentStatusRequestEnvironment {
+        Production,
+        Staging,
+        Qa,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateDeploymentStatusRequestEnvironment {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateDeploymentStatusRequestEnvironment::Production => "production",
+                CreateDeploymentStatusRequestEnvironment::Staging => "staging",
+                CreateDeploymentStatusRequestEnvironment::Qa => "qa",
+                CreateDeploymentStatusRequestEnvironment::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateDeploymentStatusRequestEnvironment {
+        fn default() -> CreateDeploymentStatusRequestEnvironment {
+            CreateDeploymentStatusRequestEnvironment::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateDeploymentStatusRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -23844,12 +26456,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub environment: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub environment: Option<Environment>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23862,12 +26470,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub log_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23903,13 +26506,8 @@ pub mod types {
     pub struct CreateUpdateEnvironmentRequestReviewers {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
+        #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
+        pub type_: Option<DeploymentReviewerType>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24047,6 +26645,33 @@ pub mod types {
         pub sha: String,
     }
 
+    /// The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateTagObjectRequestType {
+        Commit,
+        Tree,
+        Blob,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateTagObjectRequestType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateTagObjectRequestType::Commit => "commit",
+                CreateTagObjectRequestType::Tree => "tree",
+                CreateTagObjectRequestType::Blob => "blob",
+                CreateTagObjectRequestType::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateTagObjectRequestType {
+        fn default() -> CreateTagObjectRequestType {
+            CreateTagObjectRequestType::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateTagObjectRequestTagger {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24087,15 +26712,68 @@ pub mod types {
         pub tag: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub tagger: Option<Tagger>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
+        #[serde(rename = "type")]
+        pub type_: Type,
     }
 
+    /// The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateTreeRequestTreeTreeMode {
+        FileBlob,
+        ExecutableBlob,
+        SubdirectoryTree,
+        SubmoduleCommit,
+        SymlinkPathBlob,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateTreeRequestTreeTreeMode {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateTreeRequestTreeTreeMode::FileBlob => "100644",
+                CreateTreeRequestTreeTreeMode::ExecutableBlob => "100755",
+                CreateTreeRequestTreeTreeMode::SubdirectoryTree => "040000",
+                CreateTreeRequestTreeTreeMode::SubmoduleCommit => "160000",
+                CreateTreeRequestTreeTreeMode::SymlinkPathBlob => "120000",
+                CreateTreeRequestTreeTreeMode::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateTreeRequestTreeTreeMode {
+        fn default() -> CreateTreeRequestTreeTreeMode {
+            CreateTreeRequestTreeTreeMode::Noop
+        }
+    }
+    /// Either `blob`, `tree`, or `commit`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateTreeRequestTreeTreeType {
+        Blob,
+        Tree,
+        Commit,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateTreeRequestTreeTreeType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateTreeRequestTreeTreeType::Blob => "blob",
+                CreateTreeRequestTreeTreeType::Tree => "tree",
+                CreateTreeRequestTreeTreeType::Commit => "commit",
+                CreateTreeRequestTreeTreeType::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateTreeRequestTreeTreeType {
+        fn default() -> CreateTreeRequestTreeTreeType {
+            CreateTreeRequestTreeTreeType::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateTreeRequestTree {
         #[serde(
@@ -24104,12 +26782,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub content: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub mode: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub mode: Option<Mode>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24122,13 +26796,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
+        #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
+        pub type_: Option<Type>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24281,6 +26950,35 @@ pub mod types {
         pub url: String,
     }
 
+    /// The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Vcs {
+        Subversion,
+        Git,
+        Mercurial,
+        Tfvc,
+        Noop,
+    }
+
+    impl std::fmt::Display for Vcs {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Vcs::Subversion => "subversion",
+                Vcs::Git => "git",
+                Vcs::Mercurial => "mercurial",
+                Vcs::Tfvc => "tfvc",
+                Vcs::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Vcs {
+        fn default() -> Vcs {
+            Vcs::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct StartImportRequest {
         #[serde(
@@ -24289,12 +26987,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub tfvc_project: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub vcs: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub vcs: Option<Vcs>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24359,25 +27053,40 @@ pub mod types {
         pub name: String,
     }
 
+    /// Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UseLfs {
+        OptIn,
+        OptOut,
+        Noop,
+    }
+
+    impl std::fmt::Display for UseLfs {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UseLfs::OptIn => "opt_in",
+                UseLfs::OptOut => "opt_out",
+                UseLfs::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UseLfs {
+        fn default() -> UseLfs {
+            UseLfs::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateGitLfsPreferenceRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub use_lfs: String,
+        pub use_lfs: UseLfs,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetInteractionRestrictionsRepositoryOkResponse {
         pub expires_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub limit: String,
+        pub limit: InteractionGroup,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24386,14 +27095,41 @@ pub mod types {
         pub origin: String,
     }
 
+    /// The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateRepositoryInvitationRequestPermissions {
+        Read,
+        Write,
+        Maintain,
+        Triage,
+        Admin,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateRepositoryInvitationRequestPermissions {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateRepositoryInvitationRequestPermissions::Read => "read",
+                UpdateRepositoryInvitationRequestPermissions::Write => "write",
+                UpdateRepositoryInvitationRequestPermissions::Maintain => "maintain",
+                UpdateRepositoryInvitationRequestPermissions::Triage => "triage",
+                UpdateRepositoryInvitationRequestPermissions::Admin => "admin",
+                UpdateRepositoryInvitationRequestPermissions::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateRepositoryInvitationRequestPermissions {
+        fn default() -> UpdateRepositoryInvitationRequestPermissions {
+            UpdateRepositoryInvitationRequestPermissions::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateRepositoryInvitationRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permissions: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permissions: Option<Permissions>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24434,16 +27170,73 @@ pub mod types {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionIssueCommentRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content: String,
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReactionIssueCommentRequestContent {
+        PlusOne,
+        MinusOne,
+        Laugh,
+        Confused,
+        Heart,
+        Hooray,
+        Rocket,
+        Eyes,
+        Noop,
     }
 
+    impl std::fmt::Display for CreateReactionIssueCommentRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReactionIssueCommentRequestContent::PlusOne => "+1",
+                CreateReactionIssueCommentRequestContent::MinusOne => "-1",
+                CreateReactionIssueCommentRequestContent::Laugh => "laugh",
+                CreateReactionIssueCommentRequestContent::Confused => "confused",
+                CreateReactionIssueCommentRequestContent::Heart => "heart",
+                CreateReactionIssueCommentRequestContent::Hooray => "hooray",
+                CreateReactionIssueCommentRequestContent::Rocket => "rocket",
+                CreateReactionIssueCommentRequestContent::Eyes => "eyes",
+                CreateReactionIssueCommentRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReactionIssueCommentRequestContent {
+        fn default() -> CreateReactionIssueCommentRequestContent {
+            CreateReactionIssueCommentRequestContent::Noop
+        }
+    }
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CreateReactionIssueCommentRequest {
+        pub content: Content,
+    }
+
+    /// State of the issue. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateIssueRequestState {
+        Open,
+        Closed,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateIssueRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateIssueRequestState::Open => "open",
+                UpdateIssueRequestState::Closed => "closed",
+                UpdateIssueRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateIssueRequestState {
+        fn default() -> UpdateIssueRequestState {
+            UpdateIssueRequestState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateIssueRequest {
         #[serde(
@@ -24464,12 +27257,8 @@ pub mod types {
         pub labels: Vec<Labels>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub milestone: Option<Milestone>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub state: Option<State>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24512,24 +27301,85 @@ pub mod types {
         pub labels: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct LockIssueRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub lock_reason: String,
+    /// The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:  
+    /// \* `off-topic`  
+    /// \* `too heated`  
+    /// \* `resolved`  
+    /// \* `spam`
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum LockReason {
+        OffTopic,
+        TooHeated,
+        Resolved,
+        Spam,
+        Noop,
     }
 
+    impl std::fmt::Display for LockReason {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                LockReason::OffTopic => "off-topic",
+                LockReason::TooHeated => "too heated",
+                LockReason::Resolved => "resolved",
+                LockReason::Spam => "spam",
+                LockReason::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for LockReason {
+        fn default() -> LockReason {
+            LockReason::Noop
+        }
+    }
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct LockIssueRequest {
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub lock_reason: Option<LockReason>,
+    }
+
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReactionIssueRequestContent {
+        PlusOne,
+        MinusOne,
+        Laugh,
+        Confused,
+        Heart,
+        Hooray,
+        Rocket,
+        Eyes,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateReactionIssueRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReactionIssueRequestContent::PlusOne => "+1",
+                CreateReactionIssueRequestContent::MinusOne => "-1",
+                CreateReactionIssueRequestContent::Laugh => "laugh",
+                CreateReactionIssueRequestContent::Confused => "confused",
+                CreateReactionIssueRequestContent::Heart => "heart",
+                CreateReactionIssueRequestContent::Hooray => "hooray",
+                CreateReactionIssueRequestContent::Rocket => "rocket",
+                CreateReactionIssueRequestContent::Eyes => "eyes",
+                CreateReactionIssueRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReactionIssueRequestContent {
+        fn default() -> CreateReactionIssueRequestContent {
+            CreateReactionIssueRequestContent::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionIssueRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content: String,
+        pub content: Content,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24616,6 +27466,31 @@ pub mod types {
         pub head: String,
     }
 
+    /// The state of the milestone. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateMilestoneRequestState {
+        Open,
+        Closed,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateMilestoneRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateMilestoneRequestState::Open => "open",
+                CreateMilestoneRequestState::Closed => "closed",
+                CreateMilestoneRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateMilestoneRequestState {
+        fn default() -> CreateMilestoneRequestState {
+            CreateMilestoneRequestState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateMilestoneRequest {
         #[serde(
@@ -24626,12 +27501,8 @@ pub mod types {
         pub description: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub due_on: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub state: Option<State>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24640,6 +27511,31 @@ pub mod types {
         pub title: String,
     }
 
+    /// The state of the milestone. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateMilestoneRequestState {
+        Open,
+        Closed,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateMilestoneRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateMilestoneRequestState::Open => "open",
+                UpdateMilestoneRequestState::Closed => "closed",
+                UpdateMilestoneRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateMilestoneRequestState {
+        fn default() -> UpdateMilestoneRequestState {
+            UpdateMilestoneRequestState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateMilestoneRequest {
         #[serde(
@@ -24650,12 +27546,8 @@ pub mod types {
         pub description: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub due_on: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub state: Option<State>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24665,13 +27557,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MarkRepositoryNotificationsasReadRequest {
+    pub struct MarkRepositoryNotificationsAsReadRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub last_read_at: Option<DateTime<Utc>>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutMarkRepositoryNotificationsasReadAcceptedResponse {
+    pub struct PutMarkRepositoryNotificationsAsReadAcceptedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24686,6 +27578,31 @@ pub mod types {
         pub url: String,
     }
 
+    /// The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Path {
+        Root,
+        Docs,
+        Noop,
+    }
+
+    impl std::fmt::Display for Path {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Path::Root => "/",
+                Path::Docs => "/docs",
+                Path::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Path {
+        fn default() -> Path {
+            Path::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateGithubPagesSiteRequestSource {
         #[serde(
@@ -24694,12 +27611,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub branch: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub path: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub path: Option<Path>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24707,6 +27620,33 @@ pub mod types {
         pub source: Source,
     }
 
+    /// Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SourceData {
+        GhPages,
+        Master,
+        MasterDocs,
+        Noop,
+    }
+
+    impl std::fmt::Display for SourceData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SourceData::GhPages => "gh-pages",
+                SourceData::Master => "master",
+                SourceData::MasterDocs => "master /docs",
+                SourceData::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SourceData {
+        fn default() -> SourceData {
+            SourceData::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateInformationAboutGithubPagesSiteRequest {
         #[serde(
@@ -24783,16 +27723,73 @@ pub mod types {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionPullRequestReviewCommentRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content: String,
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReactionPullRequestReviewCommentRequestContent {
+        PlusOne,
+        MinusOne,
+        Laugh,
+        Confused,
+        Heart,
+        Hooray,
+        Rocket,
+        Eyes,
+        Noop,
     }
 
+    impl std::fmt::Display for CreateReactionPullRequestReviewCommentRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReactionPullRequestReviewCommentRequestContent::PlusOne => "+1",
+                CreateReactionPullRequestReviewCommentRequestContent::MinusOne => "-1",
+                CreateReactionPullRequestReviewCommentRequestContent::Laugh => "laugh",
+                CreateReactionPullRequestReviewCommentRequestContent::Confused => "confused",
+                CreateReactionPullRequestReviewCommentRequestContent::Heart => "heart",
+                CreateReactionPullRequestReviewCommentRequestContent::Hooray => "hooray",
+                CreateReactionPullRequestReviewCommentRequestContent::Rocket => "rocket",
+                CreateReactionPullRequestReviewCommentRequestContent::Eyes => "eyes",
+                CreateReactionPullRequestReviewCommentRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReactionPullRequestReviewCommentRequestContent {
+        fn default() -> CreateReactionPullRequestReviewCommentRequestContent {
+            CreateReactionPullRequestReviewCommentRequestContent::Noop
+        }
+    }
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CreateReactionPullRequestReviewCommentRequest {
+        pub content: Content,
+    }
+
+    /// State of this Pull Request. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdatePullRequestRequestState {
+        Open,
+        Closed,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdatePullRequestRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdatePullRequestRequestState::Open => "open",
+                UpdatePullRequestRequestState::Closed => "closed",
+                UpdatePullRequestRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdatePullRequestRequestState {
+        fn default() -> UpdatePullRequestRequestState {
+            UpdatePullRequestRequestState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdatePullRequestRequest {
         #[serde(
@@ -24809,12 +27806,8 @@ pub mod types {
         pub body: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub maintainer_can_modify: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub state: Option<State>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24823,6 +27816,58 @@ pub mod types {
         pub title: String,
     }
 
+    /// **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReviewCommentPullRequestRequestSide {
+        Left,
+        Right,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateReviewCommentPullRequestRequestSide {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReviewCommentPullRequestRequestSide::Left => "LEFT",
+                CreateReviewCommentPullRequestRequestSide::Right => "RIGHT",
+                CreateReviewCommentPullRequestRequestSide::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReviewCommentPullRequestRequestSide {
+        fn default() -> CreateReviewCommentPullRequestRequestSide {
+            CreateReviewCommentPullRequestRequestSide::Noop
+        }
+    }
+    /// **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReviewCommentPullRequestRequestStartSide {
+        Left,
+        Right,
+        Side,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateReviewCommentPullRequestRequestStartSide {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReviewCommentPullRequestRequestStartSide::Left => "LEFT",
+                CreateReviewCommentPullRequestRequestStartSide::Right => "RIGHT",
+                CreateReviewCommentPullRequestRequestStartSide::Side => "side",
+                CreateReviewCommentPullRequestRequestStartSide::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReviewCommentPullRequestRequestStartSide {
+        fn default() -> CreateReviewCommentPullRequestRequestStartSide {
+            CreateReviewCommentPullRequestRequestStartSide::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReviewCommentPullRequestRequest {
         #[serde(
@@ -24849,20 +27894,12 @@ pub mod types {
         pub path: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub position: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub side: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub side: Option<Side>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub start_line: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub start_side: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub start_side: Option<StartSide>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24875,6 +27912,33 @@ pub mod types {
         pub body: String,
     }
 
+    /// Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum MergePullRequestRequestMergeMethod {
+        Merge,
+        Squash,
+        Rebase,
+        Noop,
+    }
+
+    impl std::fmt::Display for MergePullRequestRequestMergeMethod {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                MergePullRequestRequestMergeMethod::Merge => "merge",
+                MergePullRequestRequestMergeMethod::Squash => "squash",
+                MergePullRequestRequestMergeMethod::Rebase => "rebase",
+                MergePullRequestRequestMergeMethod::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for MergePullRequestRequestMergeMethod {
+        fn default() -> MergePullRequestRequestMergeMethod {
+            MergePullRequestRequestMergeMethod::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MergePullRequestRequest {
         #[serde(
@@ -24889,12 +27953,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commit_title: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub merge_method: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub merge_method: Option<MergeMethod>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24951,6 +28011,33 @@ pub mod types {
         pub team_reviewers: Vec<String>,
     }
 
+    /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReviewPullRequestRequestEvent {
+        Approve,
+        RequestChanges,
+        Comment,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateReviewPullRequestRequestEvent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReviewPullRequestRequestEvent::Approve => "APPROVE",
+                CreateReviewPullRequestRequestEvent::RequestChanges => "REQUEST_CHANGES",
+                CreateReviewPullRequestRequestEvent::Comment => "COMMENT",
+                CreateReviewPullRequestRequestEvent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReviewPullRequestRequestEvent {
+        fn default() -> CreateReviewPullRequestRequestEvent {
+            CreateReviewPullRequestRequestEvent::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Comments {
         #[serde(
@@ -25001,12 +28088,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub commit_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub event: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub event: Option<Event>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25035,6 +28118,33 @@ pub mod types {
         pub message: String,
     }
 
+    /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SubmitReviewPullRequestRequestEvent {
+        Approve,
+        RequestChanges,
+        Comment,
+        Noop,
+    }
+
+    impl std::fmt::Display for SubmitReviewPullRequestRequestEvent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SubmitReviewPullRequestRequestEvent::Approve => "APPROVE",
+                SubmitReviewPullRequestRequestEvent::RequestChanges => "REQUEST_CHANGES",
+                SubmitReviewPullRequestRequestEvent::Comment => "COMMENT",
+                SubmitReviewPullRequestRequestEvent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SubmitReviewPullRequestRequestEvent {
+        fn default() -> SubmitReviewPullRequestRequestEvent {
+            SubmitReviewPullRequestRequestEvent::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SubmitReviewPullRequestRequest {
         #[serde(
@@ -25043,12 +28153,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub event: String,
+        pub event: Event,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25175,28 +28280,80 @@ pub mod types {
         pub target_commitish: String,
     }
 
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateReactionReleaseRequestContent {
+        PlusOne,
+        Laugh,
+        Heart,
+        Hooray,
+        Rocket,
+        Eyes,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateReactionReleaseRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateReactionReleaseRequestContent::PlusOne => "+1",
+                CreateReactionReleaseRequestContent::Laugh => "laugh",
+                CreateReactionReleaseRequestContent::Heart => "heart",
+                CreateReactionReleaseRequestContent::Hooray => "hooray",
+                CreateReactionReleaseRequestContent::Rocket => "rocket",
+                CreateReactionReleaseRequestContent::Eyes => "eyes",
+                CreateReactionReleaseRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateReactionReleaseRequestContent {
+        fn default() -> CreateReactionReleaseRequestContent {
+            CreateReactionReleaseRequestContent::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionReleaseRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content: String,
+        pub content: Content,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateSecretScanningAlertRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub resolution: Option<serde_json::Value>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: SecretScanningAlertState,
     }
 
+    /// The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum CreateCommitStatusRequestState {
+        Error,
+        Failure,
+        Pending,
+        Success,
+        Noop,
+    }
+
+    impl std::fmt::Display for CreateCommitStatusRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                CreateCommitStatusRequestState::Error => "error",
+                CreateCommitStatusRequestState::Failure => "failure",
+                CreateCommitStatusRequestState::Pending => "pending",
+                CreateCommitStatusRequestState::Success => "success",
+                CreateCommitStatusRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for CreateCommitStatusRequestState {
+        fn default() -> CreateCommitStatusRequestState {
+            CreateCommitStatusRequestState::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateCommitStatusRequest {
         #[serde(
@@ -25211,12 +28368,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub description: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+        pub state: State,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25301,7 +28453,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionScimEnterpriseGroupandInviteUsersRequestMembers {
+    pub struct ProvisionScimEnterpriseGroupAndInviteUsersRequestMembers {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25311,7 +28463,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionScimEnterpriseGroupandInviteUsersRequest {
+    pub struct ProvisionScimEnterpriseGroupAndInviteUsersRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25348,6 +28500,38 @@ pub mod types {
         pub schemas: Vec<String>,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp {
+        Add,
+        Add,
+        Remove,
+        Remove,
+        Replace,
+        Replace,
+        Noop,
+    }
+
+    impl std::fmt::Display for UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Add => "add",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Add => "Add",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Remove => "remove",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Remove => "Remove",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Replace => "replace",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Replace => "Replace",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp {
+        fn default() -> UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp {
+            UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateAttributeScimEnterpriseGroupRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -25357,7 +28541,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionandInviteScimEnterpriseUserRequestName {
+    pub struct ProvisionAndInviteScimEnterpriseUserRequestName {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25373,7 +28557,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionandInviteScimEnterpriseUserRequestEmails {
+    pub struct ProvisionAndInviteScimEnterpriseUserRequestEmails {
         pub primary: bool,
         #[serde(
             default,
@@ -25391,7 +28575,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionandInviteScimEnterpriseUserRequestGroups {
+    pub struct ProvisionAndInviteScimEnterpriseUserRequestGroups {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25401,7 +28585,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionandInviteScimEnterpriseUserRequest {
+    pub struct ProvisionAndInviteScimEnterpriseUserRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub emails: Vec<Emails>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -25490,7 +28674,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionandInviteScimUserRequestName {
+    pub struct ProvisionAndInviteScimUserRequestName {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25512,7 +28696,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionandInviteScimUserRequestEmails {
+    pub struct ProvisionAndInviteScimUserRequestEmails {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub primary: Option<bool>,
         #[serde(
@@ -25531,7 +28715,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionandInviteScimUserRequest {
+    pub struct ProvisionAndInviteScimUserRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
         #[serde(
@@ -25658,7 +28842,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetSearchIssuesandPullRequestsOkResponse {
+    pub struct GetSearchIssuesAndPullRequestsOkResponse {
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<IssueSearchResultItem>,
@@ -25713,28 +28897,16 @@ pub mod types {
         pub name: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub parent_team_id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permission: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub privacy: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permission: Option<Permission>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub privacy: Option<Privacy>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddUpdateTeamProjectPermissionsRequestData {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permission: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub permission: Option<Permission>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25967,14 +29139,34 @@ pub mod types {
         pub twitter_username: String,
     }
 
+    /// Denotes whether an email is publicly visible.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SetPrimaryEmailVisibilityRequestVisibility {
+        Public,
+        Private,
+        Noop,
+    }
+
+    impl std::fmt::Display for SetPrimaryEmailVisibilityRequestVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SetPrimaryEmailVisibilityRequestVisibility::Public => "public",
+                SetPrimaryEmailVisibilityRequestVisibility::Private => "private",
+                SetPrimaryEmailVisibilityRequestVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SetPrimaryEmailVisibilityRequestVisibility {
+        fn default() -> SetPrimaryEmailVisibilityRequestVisibility {
+            SetPrimaryEmailVisibilityRequestVisibility::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetPrimaryEmailVisibilityRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
+        pub visibility: Visibility,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26022,12 +29214,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetInteractionRestrictionsPublicRepositoriesOkResponse {
         pub expires_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub limit: String,
+        pub limit: InteractionGroup,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26052,20 +29239,61 @@ pub mod types {
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateOrganizationMembershipRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub state: String,
+    /// The state that the membership should be in. Only `"active"` will be accepted.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum UpdateOrganizationMembershipRequestState {
+        Active,
+        Noop,
     }
 
+    impl std::fmt::Display for UpdateOrganizationMembershipRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                UpdateOrganizationMembershipRequestState::Active => "active",
+                UpdateOrganizationMembershipRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for UpdateOrganizationMembershipRequestState {
+        fn default() -> UpdateOrganizationMembershipRequestState {
+            UpdateOrganizationMembershipRequestState::Noop
+        }
+    }
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct UpdateOrganizationMembershipRequest {
+        pub state: State,
+    }
+
+    /// Allowed values that can be passed to the exclude param.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "snake_case")]
+    pub enum StartUserMigrationRequestExclude {
+        Repositories,
+        Noop,
+    }
+
+    impl std::fmt::Display for StartUserMigrationRequestExclude {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                StartUserMigrationRequestExclude::Repositories => "repositories",
+                StartUserMigrationRequestExclude::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for StartUserMigrationRequestExclude {
+        fn default() -> StartUserMigrationRequestExclude {
+            StartUserMigrationRequestExclude::Noop
+        }
+    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct StartUserMigrationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub exclude: Vec<String>,
+        pub exclude: Vec<Exclude>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub exclude_attachments: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27271,7 +30499,7 @@ impl Client {
     pub async fn oauth_authorizations_get_or_create_authorization_for_app(
         &self,
         client_id: &str,
-        body: &types::GetorCreateAuthorizationSpecificAppRequest,
+        body: &types::GetOrCreateAuthorizationSpecificAppRequest,
     ) -> Result<types::Authorization> {
         let url = format!("/authorizations/clients/{}", progenitor_support::encode_path(&client_id.to_string()),);
 
@@ -27297,7 +30525,7 @@ impl Client {
         &self,
         client_id: &str,
         fingerprint: &str,
-        body: &types::GetorCreateAuthorizationSpecificAppandFingerprintRequest,
+        body: &types::GetOrCreateAuthorizationSpecificAppAndFingerprintRequest,
     ) -> Result<types::Authorization> {
         let url = format!(
             "/authorizations/clients/{}/{}",
@@ -27370,7 +30598,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
     */
-    pub async fn codes_of_conduct_get_all_codes_of_conduct(&self) -> Result<Vec<types::CodeofConduct>> {
+    pub async fn codes_of_conduct_get_all_codes_of_conduct(&self) -> Result<Vec<types::CodeOfConduct>> {
         let url = "/codes_of_conduct".to_string();
         self.get_all_pages(&url).await
     }
@@ -27384,7 +30612,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-a-code-of-conduct>
     */
-    pub async fn codes_of_conduct_get_conduct_code(&self, key: &str) -> Result<types::CodeofConduct> {
+    pub async fn codes_of_conduct_get_conduct_code(&self, key: &str) -> Result<types::CodeOfConduct> {
         let url = format!("/codes_of_conduct/{}", progenitor_support::encode_path(&key.to_string()),);
 
         self.get(&url).await
@@ -27464,7 +30692,7 @@ impl Client {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelectedOrganizationsEnabledGithubActionsinEnterpriseOkResponse> {
+    ) -> Result<types::GetListSelectedOrganizationsEnabledGithubActionsInEnterpriseOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -27489,7 +30717,7 @@ impl Client {
     pub async fn enterprise_admin_set_selected_organizations_enabled_github_actions_enterprise(
         &self,
         enterprise: &str,
-        body: &types::SetSelectedOrganizationsEnabledGithubActionsinEnterpriseRequest,
+        body: &types::SetSelectedOrganizationsEnabledGithubActionsInEnterpriseRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations",
@@ -27721,7 +30949,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseOkResponse> {
+    ) -> Result<types::GetListOrganizationAccessSelfDataHostedRunnerGroupInEnterpriseOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -27748,7 +30976,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::SetOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseRequest,
+        body: &types::SetOrganizationAccessSelfDataHostedRunnerGroupInEnterpriseRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations",
@@ -27830,7 +31058,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfDataHostedRunnersinGroupEnterpriseOkResponse> {
+    ) -> Result<types::GetListSelfDataHostedRunnersInGroupEnterpriseOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -27857,7 +31085,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::SetSelfDataHostedRunnersinGroupEnterpriseRequest,
+        body: &types::SetSelfDataHostedRunnersInGroupEnterpriseRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners",
@@ -28953,8 +32181,8 @@ impl Client {
     */
     pub async fn activity_mark_notifications_as_read(
         &self,
-        body: &types::MarkNotificationsasReadRequest,
-    ) -> Result<types::PutMarkNotificationsasReadAcceptedResponse> {
+        body: &types::MarkNotificationsAsReadRequest,
+    ) -> Result<types::PutMarkNotificationsAsReadAcceptedResponse> {
         let url = "/notifications".to_string();
         self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -29175,7 +32403,7 @@ impl Client {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelectedRepositoriesEnabledGithubActionsinOrganizationOkResponse> {
+    ) -> Result<types::GetListSelectedRepositoriesEnabledGithubActionsInOrganizationOkResponse> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -29200,7 +32428,7 @@ impl Client {
     pub async fn actions_set_selected_repositories_enabled_github_actions_organization(
         &self,
         org: &str,
-        body: &types::SetSelectedRepositoriesEnabledGithubActionsinOrganizationRequest,
+        body: &types::SetSelectedRepositoriesEnabledGithubActionsInOrganizationRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories",
@@ -29441,7 +32669,7 @@ impl Client {
         runner_group_id: i64,
         page: i64,
         per_page: i64,
-    ) -> Result<types::GetListRepositoryAccessSelfDataHostedRunnerGroupinOrganizationOkResponse> {
+    ) -> Result<types::GetListRepositoryAccessSelfDataHostedRunnerGroupInOrganizationOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -29470,7 +32698,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::SetRepositoryAccessSelfDataHostedRunnerGroupinOrganizationRequest,
+        body: &types::SetRepositoryAccessSelfDataHostedRunnerGroupInOrganizationRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories",
@@ -29561,7 +32789,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfDataHostedRunnersinGroupOrganizationOkResponse> {
+    ) -> Result<types::GetListSelfDataHostedRunnersInGroupOrganizationOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -29590,7 +32818,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::SetSelfDataHostedRunnersinGroupOrganizationRequest,
+        body: &types::SetSelfDataHostedRunnersInGroupOrganizationRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners",
@@ -35118,7 +38346,7 @@ impl Client {
         filter: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListCheckRunsinCheckSuiteOkResponse> {
+    ) -> Result<types::GetListCheckRunsInCheckSuiteOkResponse> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/check-runs?check_name={}&filter={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -35493,7 +38721,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        body: &types::UploadAnalysisasSarifDataRequest,
+        body: &types::UploadAnalysisAsSarifDataRequest,
     ) -> Result<types::CodeScanningSarifsReceipt> {
         let url = format!(
             "/repos/{}/{}/code-scanning/sarifs",
@@ -36209,7 +39437,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-the-code-of-conduct-for-a-repository>
     */
-    pub async fn codes_of_conduct_get_for_repo(&self, owner: &str, repo: &str) -> Result<types::CodeofConduct> {
+    pub async fn codes_of_conduct_get_for_repo(&self, owner: &str, repo: &str) -> Result<types::CodeOfConduct> {
         let url = format!(
             "/repos/{}/{}/community/code_of_conduct",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38265,7 +41493,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         issue_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<types::IssueEventforIssue>> {
+    ) -> Result<Vec<types::IssueEventForIssue>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38985,8 +42213,8 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        body: &types::MarkRepositoryNotificationsasReadRequest,
-    ) -> Result<types::PutMarkRepositoryNotificationsasReadAcceptedResponse> {
+        body: &types::MarkRepositoryNotificationsAsReadRequest,
+    ) -> Result<types::PutMarkRepositoryNotificationsAsReadAcceptedResponse> {
         let url = format!(
             "/repos/{}/{}/notifications",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41288,7 +44516,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn enterprise_admin_provision_and_invite_enterprise_group(
         &self,
         enterprise: &str,
-        body: &types::ProvisionScimEnterpriseGroupandInviteUsersRequest,
+        body: &types::ProvisionScimEnterpriseGroupAndInviteUsersRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!("/scim/v2/enterprises/{}/Groups", progenitor_support::encode_path(&enterprise.to_string()),);
 
@@ -41451,7 +44679,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn enterprise_admin_provision_and_invite_enterprise_user(
         &self,
         enterprise: &str,
-        body: &types::ProvisionandInviteScimEnterpriseUserRequest,
+        body: &types::ProvisionAndInviteScimEnterpriseUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!("/scim/v2/enterprises/{}/Users", progenitor_support::encode_path(&enterprise.to_string()),);
 
@@ -41616,7 +44844,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/scim#provision-and-invite-a-scim-user>
     */
-    pub async fn scim_provision_and_invite_user(&self, org: &str, body: &types::ProvisionandInviteScimUserRequest) -> Result<types::ScimUser> {
+    pub async fn scim_provision_and_invite_user(&self, org: &str, body: &types::ProvisionAndInviteScimUserRequest) -> Result<types::ScimUser> {
         let url = format!("/scim/v2/organizations/{}/Users", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -41836,7 +45064,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetSearchIssuesandPullRequestsOkResponse> {
+    ) -> Result<types::GetSearchIssuesAndPullRequestsOkResponse> {
         let url = format!(
             "/search/issues?order={}&page={}&per_page={}&q={}&sort={}",
             order,
