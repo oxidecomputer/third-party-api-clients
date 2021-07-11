@@ -631,7 +631,7 @@ impl TypeSpace {
             }
         }
 
-        out.to_string()
+        out.trim().to_string()
     }
 
     fn render_type(&self, tid: &TypeId, in_mod: bool) -> Result<String> {
@@ -1464,6 +1464,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                             // Try to render the docs.
                             let p = ts.render_docs(tid);
                             if !p.is_empty() && p != desc {
+                                println!("p: '{}'\ndesc: '{}'", p, desc);
                                 a(&p);
                             }
 
