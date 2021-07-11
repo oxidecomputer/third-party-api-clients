@@ -25587,11 +25587,11 @@ impl Client {
         outdated: &str,
     ) -> Result<Vec<types::Installation>> {
         let url = format!(
-            "/app/installations?outdated={}&per_page={}&since={}&page={}",
+            "/app/installations?outdated={}&page={}&per_page={}&since={}",
             outdated.to_string(),
+            format!("{}", page),
             format!("{}", per_page),
             since.to_rfc3339(),
-            format!("{}", page),
         );
 
         self.get(&url).await
@@ -25727,10 +25727,10 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::ApplicationGrant>> {
         let url = format!(
-            "/applications/grants?page={}&per_page={}&client_id={}",
+            "/applications/grants?client_id={}&page={}&per_page={}",
+            client_id.to_string(),
             format!("{}", page),
             format!("{}", per_page),
-            client_id.to_string(),
         );
 
         self.get(&url).await
@@ -26046,10 +26046,10 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::Authorization>> {
         let url = format!(
-            "/authorizations?client_id={}&per_page={}&page={}",
+            "/authorizations?client_id={}&page={}&per_page={}",
             client_id.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -26502,10 +26502,10 @@ impl Client {
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnerGroupsEnterpriseOkResponse> {
         let url = format!(
-            "/enterprises/{}/actions/runner-groups?per_page={}&page={}",
+            "/enterprises/{}/actions/runner-groups?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -26639,11 +26639,11 @@ impl Client {
     ) -> Result<types::GetListOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseOkResponse>
     {
         let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/organizations?per_page={}&page={}",
+            "/enterprises/{}/actions/runner-groups/{}/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27030,9 +27030,9 @@ impl Client {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("/enterprises/{}/audit-log?order={}&per_page={}&include={}&page={}&after={}&phrase={}&before={}",
+        let url = format!("/enterprises/{}/audit-log?after={}&before={}&include={}&order={}&page={}&per_page={}&phrase={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-order.to_string(), format!("{}", per_page), include.to_string(), format!("{}", page), after.to_string(), phrase.to_string(), before.to_string(),         );
+after.to_string(), before.to_string(), include.to_string(), order.to_string(), format!("{}", page), format!("{}", per_page), phrase.to_string(),         );
 
         self.get(&url).await
     }
@@ -27222,9 +27222,9 @@ order.to_string(), format!("{}", per_page), include.to_string(), format!("{}", p
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/gists/public?per_page={}&page={}&since={}",
-            format!("{}", per_page),
+            "/gists/public?page={}&per_page={}&since={}",
             format!("{}", page),
+            format!("{}", per_page),
             since.to_rfc3339(),
         );
 
@@ -27247,10 +27247,10 @@ order.to_string(), format!("{}", per_page), include.to_string(), format!("{}", p
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/gists/starred?since={}&page={}&per_page={}",
-            since.to_rfc3339(),
+            "/gists/starred?page={}&per_page={}&since={}",
             format!("{}", page),
             format!("{}", per_page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
@@ -27334,10 +27334,10 @@ order.to_string(), format!("{}", per_page), include.to_string(), format!("{}", p
         page: i64,
     ) -> Result<Vec<types::GistComment>> {
         let url = format!(
-            "/gists/{}/comments?per_page={}&page={}",
+            "/gists/{}/comments?page={}&per_page={}",
             progenitor_support::encode_path(&gist_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27630,9 +27630,9 @@ order.to_string(), format!("{}", per_page), include.to_string(), format!("{}", p
         page: i64,
     ) -> Result<types::GetListRepositoriesAccessibleAppInstallationOkResponse> {
         let url = format!(
-            "/installation/repositories?per_page={}&page={}",
-            format!("{}", per_page),
+            "/installation/repositories?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27688,8 +27688,8 @@ order.to_string(), format!("{}", per_page), include.to_string(), format!("{}", p
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/issues?pulls={}&page={}&filter={}&orgs={}&state={}&direction={}&per_page={}&sort={}&collab={}&since={}&labels={}&owned={}",
-format!("{}", pulls), format!("{}", page), filter.to_string(), format!("{}", orgs), state.to_string(), direction.to_string(), format!("{}", per_page), sort.to_string(), format!("{}", collab), since.to_rfc3339(), labels.to_string(), format!("{}", owned),         );
+        let url = format!("/issues?collab={}&direction={}&filter={}&labels={}&orgs={}&owned={}&page={}&per_page={}&pulls={}&since={}&sort={}&state={}",
+format!("{}", collab), direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", orgs), format!("{}", owned), format!("{}", page), format!("{}", per_page), format!("{}", pulls), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
         self.get(&url).await
     }
@@ -27710,10 +27710,10 @@ format!("{}", pulls), format!("{}", page), filter.to_string(), format!("{}", org
         page: i64,
     ) -> Result<Vec<types::LicenseSimple>> {
         let url = format!(
-            "/licenses?per_page={}&page={}&featured={}",
-            format!("{}", per_page),
-            format!("{}", page),
+            "/licenses?featured={}&page={}&per_page={}",
             format!("{}", featured),
+            format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27812,9 +27812,9 @@ format!("{}", pulls), format!("{}", page), filter.to_string(), format!("{}", org
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = format!(
-            "/marketplace_listing/plans?per_page={}&page={}",
-            format!("{}", per_page),
+            "/marketplace_listing/plans?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27840,12 +27840,12 @@ format!("{}", pulls), format!("{}", page), filter.to_string(), format!("{}", org
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
         let url = format!(
-            "/marketplace_listing/plans/{}/accounts?sort={}&direction={}&page={}&per_page={}",
+            "/marketplace_listing/plans/{}/accounts?direction={}&page={}&per_page={}&sort={}",
             progenitor_support::encode_path(&plan_id.to_string()),
-            sort.to_string(),
             direction.to_string(),
             format!("{}", page),
             format!("{}", per_page),
+            sort.to_string(),
         );
 
         self.get(&url).await
@@ -27891,9 +27891,9 @@ format!("{}", pulls), format!("{}", page), filter.to_string(), format!("{}", org
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = format!(
-            "/marketplace_listing/stubbed/plans?per_page={}&page={}",
-            format!("{}", per_page),
+            "/marketplace_listing/stubbed/plans?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27918,9 +27918,9 @@ format!("{}", pulls), format!("{}", page), filter.to_string(), format!("{}", org
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
-        let url = format!("/marketplace_listing/stubbed/plans/{}/accounts?sort={}&per_page={}&page={}&direction={}",
+        let url = format!("/marketplace_listing/stubbed/plans/{}/accounts?direction={}&page={}&per_page={}&sort={}",
             progenitor_support::encode_path(&plan_id.to_string()),
-sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_string(),         );
+direction.to_string(), format!("{}", page), format!("{}", per_page), sort.to_string(),         );
 
         self.get(&url).await
     }
@@ -27958,11 +27958,11 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/networks/{}/{}/events?per_page={}&page={}",
+            "/networks/{}/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27987,13 +27987,13 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::Thread>> {
         let url = format!(
-            "/notifications?before={}&since={}&all={}&per_page={}&page={}&participating={}",
-            before.to_rfc3339(),
-            since.to_rfc3339(),
+            "/notifications?all={}&before={}&page={}&participating={}&per_page={}&since={}",
             format!("{}", all),
-            format!("{}", per_page),
+            before.to_rfc3339(),
             format!("{}", page),
             format!("{}", participating),
+            format!("{}", per_page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
@@ -28159,9 +28159,9 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         per_page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!(
-            "/organizations?since={}&per_page={}",
-            format!("{}", since),
+            "/organizations?per_page={}&since={}",
             format!("{}", per_page),
+            format!("{}", since),
         );
 
         self.get(&url).await
@@ -28287,10 +28287,10 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
     ) -> Result<types::GetListSelectedRepositoriesEnabledGithubActionsinOrganizationOkResponse>
     {
         let url = format!(
-            "/orgs/{}/actions/permissions/repositories?per_page={}&page={}",
+            "/orgs/{}/actions/permissions/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -28449,10 +28449,10 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnerGroupsOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/runner-groups?per_page={}&page={}",
+            "/orgs/{}/actions/runner-groups?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -28720,11 +28720,11 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersinGroupOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/runner-groups/{}/runners?per_page={}&page={}",
+            "/orgs/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -28841,10 +28841,10 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/runners?per_page={}&page={}",
+            "/orgs/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -29002,10 +29002,10 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<types::GetListOrganizationSecretsOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/secrets?per_page={}&page={}",
+            "/orgs/{}/actions/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -29300,9 +29300,9 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("/orgs/{}/audit-log?include={}&before={}&order={}&per_page={}&page={}&phrase={}&after={}",
+        let url = format!("/orgs/{}/audit-log?after={}&before={}&include={}&order={}&page={}&per_page={}&phrase={}",
             progenitor_support::encode_path(&org.to_string()),
-include.to_string(), before.to_string(), order.to_string(), format!("{}", per_page), format!("{}", page), phrase.to_string(), after.to_string(),         );
+after.to_string(), before.to_string(), include.to_string(), order.to_string(), format!("{}", page), format!("{}", per_page), phrase.to_string(),         );
 
         self.get(&url).await
     }
@@ -29797,10 +29797,10 @@ include.to_string(), before.to_string(), order.to_string(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
-            "/orgs/{}/invitations?per_page={}&page={}",
+            "/orgs/{}/invitations?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -29908,9 +29908,9 @@ include.to_string(), before.to_string(), order.to_string(), format!("{}", per_pa
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/orgs/{}/issues?filter={}&since={}&per_page={}&state={}&page={}&direction={}&sort={}&labels={}",
+        let url = format!("/orgs/{}/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&state={}",
             progenitor_support::encode_path(&org.to_string()),
-filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string(), format!("{}", page), direction.to_string(), sort.to_string(), labels.to_string(),         );
+direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
         self.get(&url).await
     }
@@ -29933,12 +29933,12 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/members?per_page={}&role={}&filter={}&page={}",
+            "/orgs/{}/members?filter={}&page={}&per_page={}&role={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
-            role.to_string(),
             filter.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
+            role.to_string(),
         );
 
         self.get(&url).await
@@ -30262,11 +30262,11 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/outside_collaborators?per_page={}&filter={}&page={}",
+            "/orgs/{}/outside_collaborators?filter={}&page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             filter.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -30428,13 +30428,13 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         state: &str,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
-            "/orgs/{}/packages/{}/{}/versions?state={}&page={}&per_page={}",
+            "/orgs/{}/packages/{}/{}/versions?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
-            state.to_string(),
             format!("{}", page),
             format!("{}", per_page),
+            state.to_string(),
         );
 
         self.get(&url).await
@@ -30553,11 +30553,11 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/orgs/{}/projects?state={}&page={}&per_page={}",
+            "/orgs/{}/projects?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&org.to_string()),
-            state.to_string(),
             format!("{}", page),
             format!("{}", per_page),
+            state.to_string(),
         );
 
         self.get(&url).await
@@ -30704,13 +30704,13 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/orgs/{}/repos?sort={}&direction={}&type={}&page={}&per_page={}",
+            "/orgs/{}/repos?direction={}&page={}&per_page={}&sort={}&type={}",
             progenitor_support::encode_path(&org.to_string()),
-            sort.to_string(),
             direction.to_string(),
-            type_,
             format!("{}", page),
             format!("{}", per_page),
+            sort.to_string(),
+            type_,
         );
 
         self.get(&url).await
@@ -30844,10 +30844,10 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: &str,
     ) -> Result<types::GroupMapping> {
         let url = format!(
-            "/orgs/{}/team-sync/groups?per_page={}&page={}",
+            "/orgs/{}/team-sync/groups?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             page.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -30869,10 +30869,10 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
-            "/orgs/{}/teams?per_page={}&page={}",
+            "/orgs/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -31001,13 +31001,13 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         pinned: &str,
     ) -> Result<Vec<types::TeamDiscussion>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions?pinned={}&direction={}&per_page={}&page={}",
+            "/orgs/{}/teams/{}/discussions?direction={}&page={}&per_page={}&pinned={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            pinned.to_string(),
             direction.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
+            pinned.to_string(),
         );
 
         self.get(&url).await
@@ -31152,13 +31152,13 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments?direction={}&per_page={}&page={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments?direction={}&page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             direction.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -31312,13 +31312,13 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?page={}&content={}&per_page={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
-            format!("{}", page),
             content.to_string(),
+            format!("{}", page),
             format!("{}", per_page),
         );
 
@@ -31411,12 +31411,12 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/reactions?page={}&content={}&per_page={}",
+            "/orgs/{}/teams/{}/discussions/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            format!("{}", page),
             content.to_string(),
+            format!("{}", page),
             format!("{}", per_page),
         );
 
@@ -31533,12 +31533,12 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/teams/{}/members?role={}&page={}&per_page={}",
+            "/orgs/{}/teams/{}/members?page={}&per_page={}&role={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            role.to_string(),
             format!("{}", page),
             format!("{}", per_page),
+            role.to_string(),
         );
 
         self.get(&url).await
@@ -31668,11 +31668,11 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::TeamProject>> {
         let url = format!(
-            "/orgs/{}/teams/{}/projects?per_page={}&page={}",
+            "/orgs/{}/teams/{}/projects?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -31783,11 +31783,11 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/orgs/{}/teams/{}/repos?per_page={}&page={}",
+            "/orgs/{}/teams/{}/repos?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -32146,11 +32146,11 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::ProjectCard>> {
         let url = format!(
-            "/projects/columns/{}/cards?per_page={}&archived_state={}&page={}",
+            "/projects/columns/{}/cards?archived_state={}&page={}&per_page={}",
             progenitor_support::encode_path(&column_id.to_string()),
-            format!("{}", per_page),
             archived_state.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -32287,11 +32287,11 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/projects/{}/collaborators?affiliation={}&per_page={}&page={}",
+            "/projects/{}/collaborators?affiliation={}&page={}&per_page={}",
             progenitor_support::encode_path(&project_id.to_string()),
             affiliation.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -32546,11 +32546,11 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<types::GetListArtifactsRepositoryOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/artifacts?per_page={}&page={}",
+            "/repos/{}/{}/actions/artifacts?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -33001,15 +33001,15 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<types::GetListWorkflowRunsRepositoryOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runs?actor={}&status={}&page={}&branch={}&event={}&per_page={}",
+            "/repos/{}/{}/actions/runs?actor={}&branch={}&event={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             actor.to_string(),
-            status.to_string(),
-            format!("{}", page),
             branch.to_string(),
             event.to_string(),
+            format!("{}", page),
             format!("{}", per_page),
+            status.to_string(),
         );
 
         self.get(&url).await
@@ -33139,12 +33139,12 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<types::GetListWorkflowRunArtifactsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runs/{}/artifacts?per_page={}&page={}",
+            "/repos/{}/{}/actions/runs/{}/artifacts?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -33194,13 +33194,13 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<types::GetListJobsWorkflowRunOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runs/{}/jobs?filter={}&per_page={}&page={}",
+            "/repos/{}/{}/actions/runs/{}/jobs?filter={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
             filter.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -33387,11 +33387,11 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         page: i64,
     ) -> Result<types::GetListRepositorySecretsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/secrets?per_page={}&page={}",
+            "/repos/{}/{}/actions/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -33737,11 +33737,11 @@ filter.to_string(), since.to_rfc3339(), format!("{}", per_page), state.to_string
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListWorkflowRunsOkResponse> {
-        let url = format!("/repos/{}/{}/actions/workflows/{}/runs?event={}&branch={}&actor={}&per_page={}&page={}&status={}",
+        let url = format!("/repos/{}/{}/actions/workflows/{}/runs?actor={}&branch={}&event={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
-event.to_string(), branch.to_string(), actor.to_string(), format!("{}", per_page), format!("{}", page), status.to_string(),         );
+actor.to_string(), branch.to_string(), event.to_string(), format!("{}", page), format!("{}", per_page), status.to_string(),         );
 
         self.get(&url).await
     }
@@ -33893,11 +33893,11 @@ event.to_string(), branch.to_string(), actor.to_string(), format!("{}", per_page
         page: i64,
     ) -> Result<Vec<types::ShortBranch>> {
         let url = format!(
-            "/repos/{}/{}/branches?per_page={}&page={}&protected={}",
+            "/repos/{}/{}/branches?page={}&per_page={}&protected={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
             format!("{}", protected),
         );
 
@@ -35072,12 +35072,12 @@ event.to_string(), branch.to_string(), actor.to_string(), format!("{}", per_page
         page: i64,
     ) -> Result<Vec<types::CheckAnnotation>> {
         let url = format!(
-            "/repos/{}/{}/check-runs/{}/annotations?per_page={}&page={}",
+            "/repos/{}/{}/check-runs/{}/annotations?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_run_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -35190,11 +35190,11 @@ event.to_string(), branch.to_string(), actor.to_string(), format!("{}", per_page
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListCheckRunsinCheckSuiteOkResponse> {
-        let url = format!("/repos/{}/{}/check-suites/{}/check-runs?check_name={}&status={}&per_page={}&page={}&filter={}",
+        let url = format!("/repos/{}/{}/check-suites/{}/check-runs?check_name={}&filter={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
-check_name.to_string(), status.to_string(), format!("{}", per_page), format!("{}", page), filter.to_string(),         );
+check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", per_page), status.to_string(),         );
 
         self.get(&url).await
     }
@@ -35254,10 +35254,10 @@ check_name.to_string(), status.to_string(), format!("{}", per_page), format!("{}
         ref_: &&str,
         state: &str,
     ) -> Result<Vec<types::CodeScanningAlertItems>> {
-        let url = format!("/repos/{}/{}/code-scanning/alerts?per_page={}&ref={}&tool_name={}&state={}&page={}&tool_guid={}",
+        let url = format!("/repos/{}/{}/code-scanning/alerts?page={}&per_page={}&ref={}&state={}&tool_guid={}&tool_name={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-format!("{}", per_page), ref_, tool_name.to_string(), state.to_string(), format!("{}", page), tool_guid.to_string(),         );
+format!("{}", page), format!("{}", per_page), ref_, state.to_string(), tool_guid.to_string(), tool_name.to_string(),         );
 
         self.get(&url).await
     }
@@ -35386,10 +35386,10 @@ format!("{}", per_page), ref_, tool_name.to_string(), state.to_string(), format!
         ref_: &&str,
         sarif_id: &str,
     ) -> Result<Vec<types::CodeScanningAnalysis>> {
-        let url = format!("/repos/{}/{}/code-scanning/analyses?per_page={}&page={}&tool_name={}&ref={}&sarif_id={}&tool_guid={}",
+        let url = format!("/repos/{}/{}/code-scanning/analyses?page={}&per_page={}&ref={}&sarif_id={}&tool_guid={}&tool_name={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-format!("{}", per_page), format!("{}", page), tool_name.to_string(), ref_, sarif_id.to_string(), tool_guid.to_string(),         );
+format!("{}", page), format!("{}", per_page), ref_, sarif_id.to_string(), tool_guid.to_string(), tool_name.to_string(),         );
 
         self.get(&url).await
     }
@@ -35618,12 +35618,12 @@ format!("{}", per_page), format!("{}", page), tool_name.to_string(), ref_, sarif
         page: i64,
     ) -> Result<Vec<types::Collaborator>> {
         let url = format!(
-            "/repos/{}/{}/collaborators?page={}&per_page={}&affiliation={}",
+            "/repos/{}/{}/collaborators?affiliation={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            affiliation.to_string(),
             format!("{}", page),
             format!("{}", per_page),
-            affiliation.to_string(),
         );
 
         self.get(&url).await
@@ -35874,13 +35874,13 @@ format!("{}", per_page), format!("{}", page), tool_name.to_string(), ref_, sarif
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/comments/{}/reactions?per_page={}&content={}&page={}",
+            "/repos/{}/{}/comments/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
-            format!("{}", per_page),
             content.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -35994,16 +35994,16 @@ format!("{}", per_page), format!("{}", page), tool_name.to_string(), ref_, sarif
         page: i64,
     ) -> Result<Vec<types::Commit>> {
         let url = format!(
-            "/repos/{}/{}/commits?sha={}&since={}&until={}&path={}&per_page={}&page={}&author={}",
+            "/repos/{}/{}/commits?author={}&page={}&path={}&per_page={}&sha={}&since={}&until={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            author.to_string(),
+            format!("{}", page),
+            path.to_string(),
+            format!("{}", per_page),
             sha.to_string(),
             since.to_rfc3339(),
             until.to_rfc3339(),
-            path.to_string(),
-            format!("{}", per_page),
-            format!("{}", page),
-            author.to_string(),
         );
 
         self.get(&url).await
@@ -36054,12 +36054,12 @@ format!("{}", per_page), format!("{}", page), tool_name.to_string(), ref_, sarif
         page: i64,
     ) -> Result<Vec<types::CommitComment>> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/comments?per_page={}&page={}",
+            "/repos/{}/{}/commits/{}/comments?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -36115,12 +36115,12 @@ format!("{}", per_page), format!("{}", page), tool_name.to_string(), ref_, sarif
         page: i64,
     ) -> Result<Vec<types::PullRequestSimple>> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/pulls?per_page={}&page={}",
+            "/repos/{}/{}/commits/{}/pulls?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -36213,11 +36213,11 @@ format!("{}", per_page), format!("{}", page), tool_name.to_string(), ref_, sarif
         page: i64,
         app_id: i64,
     ) -> Result<types::GetListCheckRunsGitReferenceOkResponse> {
-        let url = format!("/repos/{}/{}/commits/{}/check-runs?filter={}&check_name={}&per_page={}&page={}&status={}&app_id={}",
+        let url = format!("/repos/{}/{}/commits/{}/check-runs?app_id={}&check_name={}&filter={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-filter.to_string(), check_name.to_string(), format!("{}", per_page), format!("{}", page), status.to_string(), format!("{}", app_id),         );
+format!("{}", app_id), check_name.to_string(), filter.to_string(), format!("{}", page), format!("{}", per_page), status.to_string(),         );
 
         self.get(&url).await
     }
@@ -36244,12 +36244,12 @@ filter.to_string(), check_name.to_string(), format!("{}", per_page), format!("{}
         page: i64,
     ) -> Result<types::GetListCheckSuitesGitReferenceOkResponse> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/check-suites?check_name={}&app_id={}&page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/check-suites?app_id={}&check_name={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            check_name.to_string(),
             format!("{}", app_id),
+            check_name.to_string(),
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -36630,12 +36630,12 @@ filter.to_string(), check_name.to_string(), format!("{}", per_page), format!("{}
         page: i64,
     ) -> Result<Vec<types::Contributor>> {
         let url = format!(
-            "/repos/{}/{}/contributors?per_page={}&page={}&anon={}",
+            "/repos/{}/{}/contributors?anon={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
-            format!("{}", page),
             anon.to_string(),
+            format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -36662,14 +36662,14 @@ filter.to_string(), check_name.to_string(), format!("{}", per_page), format!("{}
         page: i64,
     ) -> Result<Vec<types::Deployment>> {
         let url = format!(
-            "/repos/{}/{}/deployments?per_page={}&sha={}&ref={}&environment={}&page={}&task={}",
+            "/repos/{}/{}/deployments?environment={}&page={}&per_page={}&ref={}&sha={}&task={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
-            sha.to_string(),
-            ref_,
             environment.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
+            ref_,
+            sha.to_string(),
             task.to_string(),
         );
 
@@ -37086,11 +37086,11 @@ filter.to_string(), check_name.to_string(), format!("{}", per_page), format!("{}
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/repos/{}/{}/forks?per_page={}&page={}&sort={}",
+            "/repos/{}/{}/forks?page={}&per_page={}&sort={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
             sort.to_string(),
         );
 
@@ -37317,12 +37317,12 @@ filter.to_string(), check_name.to_string(), format!("{}", per_page), format!("{}
         page: i64,
     ) -> Result<Vec<types::GitRef>> {
         let url = format!(
-            "/repos/{}/{}/git/matching-refs/{}?per_page={}&page={}",
+            "/repos/{}/{}/git/matching-refs/{}?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -37613,11 +37613,11 @@ filter.to_string(), check_name.to_string(), format!("{}", per_page), format!("{}
         page: i64,
     ) -> Result<Vec<types::Hook>> {
         let url = format!(
-            "/repos/{}/{}/hooks?per_page={}&page={}",
+            "/repos/{}/{}/hooks?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -38284,10 +38284,10 @@ filter.to_string(), check_name.to_string(), format!("{}", per_page), format!("{}
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::IssueSimple>> {
-        let url = format!("/repos/{}/{}/issues?labels={}&milestone={}&assignee={}&sort={}&since={}&creator={}&direction={}&state={}&per_page={}&page={}&mentioned={}",
+        let url = format!("/repos/{}/{}/issues?assignee={}&creator={}&direction={}&labels={}&mentioned={}&milestone={}&page={}&per_page={}&since={}&sort={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(), since.to_rfc3339(), creator.to_string(), direction.to_string(), state.to_string(), format!("{}", per_page), format!("{}", page), mentioned.to_string(),         );
+assignee.to_string(), creator.to_string(), direction.to_string(), labels.to_string(), mentioned.to_string(), milestone.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
         self.get(&url).await
     }
@@ -38342,14 +38342,14 @@ labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(
         page: i64,
     ) -> Result<Vec<types::IssueComment>> {
         let url = format!(
-            "/repos/{}/{}/issues/comments?sort={}&direction={}&page={}&since={}&per_page={}",
+            "/repos/{}/{}/issues/comments?direction={}&page={}&per_page={}&since={}&sort={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            sort.to_string(),
             direction.to_string(),
             format!("{}", page),
-            since.to_rfc3339(),
             format!("{}", per_page),
+            since.to_rfc3339(),
+            sort.to_string(),
         );
 
         self.get(&url).await
@@ -38454,13 +38454,13 @@ labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/issues/comments/{}/reactions?page={}&per_page={}&content={}",
+            "/repos/{}/{}/issues/comments/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
+            content.to_string(),
             format!("{}", page),
             format!("{}", per_page),
-            content.to_string(),
         );
 
         self.get(&url).await
@@ -38721,13 +38721,13 @@ labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(
         page: i64,
     ) -> Result<Vec<types::IssueComment>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/comments?since={}&per_page={}&page={}",
+            "/repos/{}/{}/issues/{}/comments?page={}&per_page={}&since={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            since.to_rfc3339(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
@@ -38781,12 +38781,12 @@ labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(
         page: i64,
     ) -> Result<Vec<types::IssueEventforIssue>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/events?per_page={}&page={}",
+            "/repos/{}/{}/issues/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -39004,13 +39004,13 @@ labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/reactions?per_page={}&page={}&content={}",
+            "/repos/{}/{}/issues/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            format!("{}", per_page),
-            format!("{}", page),
             content.to_string(),
+            format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -39093,12 +39093,12 @@ labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(
         page: i64,
     ) -> Result<Vec<types::TimelineIssueEvents>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/timeline?per_page={}&page={}",
+            "/repos/{}/{}/issues/{}/timeline?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -39431,14 +39431,14 @@ labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(
         page: i64,
     ) -> Result<Vec<types::Milestone>> {
         let url = format!(
-            "/repos/{}/{}/milestones?state={}&page={}&sort={}&direction={}&per_page={}",
+            "/repos/{}/{}/milestones?direction={}&page={}&per_page={}&sort={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            state.to_string(),
-            format!("{}", page),
-            sort.to_string(),
             direction.to_string(),
+            format!("{}", page),
             format!("{}", per_page),
+            sort.to_string(),
+            state.to_string(),
         );
 
         self.get(&url).await
@@ -39570,12 +39570,12 @@ labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(
         page: i64,
     ) -> Result<Vec<types::Label>> {
         let url = format!(
-            "/repos/{}/{}/milestones/{}/labels?per_page={}&page={}",
+            "/repos/{}/{}/milestones/{}/labels?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -39601,10 +39601,10 @@ labels.to_string(), milestone.to_string(), assignee.to_string(), sort.to_string(
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Thread>> {
-        let url = format!("/repos/{}/{}/notifications?page={}&since={}&before={}&participating={}&all={}&per_page={}",
+        let url = format!("/repos/{}/{}/notifications?all={}&before={}&page={}&participating={}&per_page={}&since={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", participating), format!("{}", all), format!("{}", per_page),         );
+format!("{}", all), before.to_rfc3339(), format!("{}", page), format!("{}", participating), format!("{}", per_page), since.to_rfc3339(),         );
 
         self.get(&url).await
     }
@@ -39748,11 +39748,11 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::PageBuild>> {
         let url = format!(
-            "/repos/{}/{}/pages/builds?per_page={}&page={}",
+            "/repos/{}/{}/pages/builds?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -39876,12 +39876,12 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/repos/{}/{}/projects?state={}&per_page={}&page={}",
+            "/repos/{}/{}/projects?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            state.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
+            state.to_string(),
         );
 
         self.get(&url).await
@@ -39937,16 +39937,16 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::PullRequestSimple>> {
         let url = format!(
-            "/repos/{}/{}/pulls?sort={}&page={}&base={}&state={}&direction={}&per_page={}&head={}",
+            "/repos/{}/{}/pulls?base={}&direction={}&head={}&page={}&per_page={}&sort={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            sort.to_string(),
-            format!("{}", page),
             base.to_string(),
-            state.to_string(),
             direction.to_string(),
-            format!("{}", per_page),
             head.to_string(),
+            format!("{}", page),
+            format!("{}", per_page),
+            sort.to_string(),
+            state.to_string(),
         );
 
         self.get(&url).await
@@ -40006,14 +40006,14 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
-            "/repos/{}/{}/pulls/comments?page={}&per_page={}&direction={}&sort={}&since={}",
+            "/repos/{}/{}/pulls/comments?direction={}&page={}&per_page={}&since={}&sort={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            direction.to_string(),
             format!("{}", page),
             format!("{}", per_page),
-            direction.to_string(),
-            sort.to_string(),
             since.to_rfc3339(),
+            sort.to_string(),
         );
 
         self.get(&url).await
@@ -40118,13 +40118,13 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/pulls/comments/{}/reactions?content={}&per_page={}&page={}",
+            "/repos/{}/{}/pulls/comments/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
             content.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -40281,14 +40281,14 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/comments?since={}&page={}&per_page={}&direction={}&sort={}",
+            "/repos/{}/{}/pulls/{}/comments?direction={}&page={}&per_page={}&since={}&sort={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            since.to_rfc3339(),
+            direction.to_string(),
             format!("{}", page),
             format!("{}", per_page),
-            direction.to_string(),
+            since.to_rfc3339(),
             sort.to_string(),
         );
 
@@ -40384,12 +40384,12 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::Commit>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/commits?per_page={}&page={}",
+            "/repos/{}/{}/pulls/{}/commits?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -40413,12 +40413,12 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::DiffEntry>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/files?per_page={}&page={}",
+            "/repos/{}/{}/pulls/{}/files?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -40586,12 +40586,12 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::PullRequestReview>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews?per_page={}&page={}",
+            "/repos/{}/{}/pulls/{}/reviews?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -40738,13 +40738,13 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::ReviewComment>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/reviews/{}/comments?per_page={}&page={}",
+            "/repos/{}/{}/pulls/{}/reviews/{}/comments?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
             progenitor_support::encode_path(&review_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -41187,12 +41187,12 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::ReleaseAsset>> {
         let url = format!(
-            "/repos/{}/{}/releases/{}/assets?per_page={}&page={}",
+            "/repos/{}/{}/releases/{}/assets?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -41234,12 +41234,12 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         body: T,
     ) -> Result<types::ReleaseAsset> {
         let url = format!(
-            "/repos/{}/{}/releases/{}/assets?name={}&label={}",
+            "/repos/{}/{}/releases/{}/assets?label={}&name={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
-            name.to_string(),
             label.to_string(),
+            name.to_string(),
         );
 
         self.post(&url, Some(body.into())).await
@@ -41296,13 +41296,13 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         per_page: i64,
     ) -> Result<Vec<types::SecretScanningAlert>> {
         let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts?per_page={}&state={}&secret_type={}&page={}",
+            "/repos/{}/{}/secret-scanning/alerts?page={}&per_page={}&secret_type={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
-            state.to_string(),
-            secret_type.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
+            secret_type.to_string(),
+            state.to_string(),
         );
 
         self.get(&url).await
@@ -41671,11 +41671,11 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::Tag>> {
         let url = format!(
-            "/repos/{}/{}/tags?per_page={}&page={}",
+            "/repos/{}/{}/tags?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -41726,11 +41726,11 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
-            "/repos/{}/{}/teams?per_page={}&page={}",
+            "/repos/{}/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -42071,11 +42071,11 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         page: i64,
     ) -> Result<types::GetListEnvironmentSecretsOkResponse> {
         let url = format!(
-            "/repositories/{}/environments/{}/secrets?per_page={}&page={}",
+            "/repositories/{}/environments/{}/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -42275,9 +42275,9 @@ format!("{}", page), since.to_rfc3339(), before.to_rfc3339(), format!("{}", part
         filter: &str,
         excluded_attributes: &str,
     ) -> Result<types::ScimGroupListEnterprise> {
-        let url = format!("/scim/v2/enterprises/{}/Groups?count={}&start_index={}&filter={}&excluded_attributes={}",
+        let url = format!("/scim/v2/enterprises/{}/Groups?count={}&excluded_attributes={}&filter={}&start_index={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),         );
+format!("{}", count), excluded_attributes.to_string(), filter.to_string(), format!("{}", start_index),         );
 
         self.get(&url).await
     }
@@ -42452,10 +42452,10 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         filter: &str,
     ) -> Result<types::ScimUserListEnterprise> {
         let url = format!(
-            "/scim/v2/enterprises/{}/Users?filter={}&count={}&start_index={}",
+            "/scim/v2/enterprises/{}/Users?count={}&filter={}&start_index={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-            filter.to_string(),
             format!("{}", count),
+            filter.to_string(),
             format!("{}", start_index),
         );
 
@@ -42649,11 +42649,11 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         filter: &str,
     ) -> Result<types::ScimUserList> {
         let url = format!(
-            "/scim/v2/organizations/{}/Users?count={}&start_index={}&filter={}",
+            "/scim/v2/organizations/{}/Users?count={}&filter={}&start_index={}",
             progenitor_support::encode_path(&org.to_string()),
             format!("{}", count),
-            format!("{}", start_index),
             filter.to_string(),
+            format!("{}", start_index),
         );
 
         self.get(&url).await
@@ -42837,12 +42837,12 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
         let url = format!(
-            "/search/code?order={}&per_page={}&page={}&sort={}&q={}",
+            "/search/code?order={}&page={}&per_page={}&q={}&sort={}",
             order.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
-            sort.to_string(),
+            format!("{}", per_page),
             q.to_string(),
+            sort.to_string(),
         );
 
         self.get(&url).await
@@ -42873,12 +42873,12 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
         let url = format!(
-            "/search/commits?q={}&sort={}&order={}&per_page={}&page={}",
+            "/search/commits?order={}&page={}&per_page={}&q={}&sort={}",
+            order.to_string(),
+            format!("{}", page),
+            format!("{}", per_page),
             q.to_string(),
             sort.to_string(),
-            order.to_string(),
-            format!("{}", per_page),
-            format!("{}", page),
         );
 
         self.get(&url).await
@@ -42913,12 +42913,12 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<types::GetSearchIssuesandPullRequestsOkResponse> {
         let url = format!(
-            "/search/issues?q={}&order={}&page={}&sort={}&per_page={}",
-            q.to_string(),
+            "/search/issues?order={}&page={}&per_page={}&q={}&sort={}",
             order.to_string(),
             format!("{}", page),
-            sort.to_string(),
             format!("{}", per_page),
+            q.to_string(),
+            sort.to_string(),
         );
 
         self.get(&url).await
@@ -42951,13 +42951,13 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
         let url = format!(
-            "/search/labels?repository_id={}&q={}&order={}&sort={}&per_page={}&page={}",
-            format!("{}", repository_id),
-            q.to_string(),
+            "/search/labels?order={}&page={}&per_page={}&q={}&repository_id={}&sort={}",
             order.to_string(),
-            sort.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
+            q.to_string(),
+            format!("{}", repository_id),
+            sort.to_string(),
         );
 
         self.get(&url).await
@@ -42993,12 +42993,12 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<types::GetSearchRepositoriesOkResponse> {
         let url = format!(
-            "/search/repositories?order={}&per_page={}&sort={}&page={}&q={}",
+            "/search/repositories?order={}&page={}&per_page={}&q={}&sort={}",
             order.to_string(),
-            format!("{}", per_page),
-            sort.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
             q.to_string(),
+            sort.to_string(),
         );
 
         self.get(&url).await
@@ -43028,10 +43028,10 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<types::GetSearchTopicsOkResponse> {
         let url = format!(
-            "/search/topics?q={}&per_page={}&page={}",
-            q.to_string(),
-            format!("{}", per_page),
+            "/search/topics?page={}&per_page={}&q={}",
             format!("{}", page),
+            format!("{}", per_page),
+            q.to_string(),
         );
 
         self.get(&url).await
@@ -43063,12 +43063,12 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
         let url = format!(
-            "/search/users?page={}&q={}&sort={}&order={}&per_page={}",
+            "/search/users?order={}&page={}&per_page={}&q={}&sort={}",
+            order.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
             q.to_string(),
             sort.to_string(),
-            order.to_string(),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -43163,11 +43163,11 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<Vec<types::TeamDiscussion>> {
         let url = format!(
-            "/teams/{}/discussions?direction={}&per_page={}&page={}",
+            "/teams/{}/discussions?direction={}&page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             direction.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -43303,12 +43303,12 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
-            "/teams/{}/discussions/{}/comments?direction={}&per_page={}&page={}",
+            "/teams/{}/discussions/{}/comments?direction={}&page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             direction.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -43453,13 +43453,13 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/teams/{}/discussions/{}/comments/{}/reactions?page={}&per_page={}&content={}",
+            "/teams/{}/discussions/{}/comments/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
+            content.to_string(),
             format!("{}", page),
             format!("{}", per_page),
-            content.to_string(),
         );
 
         self.get(&url).await
@@ -43517,12 +43517,12 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/teams/{}/discussions/{}/reactions?per_page={}&content={}&page={}",
+            "/teams/{}/discussions/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            format!("{}", per_page),
             content.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -43604,11 +43604,11 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/teams/{}/members?role={}&per_page={}&page={}",
+            "/teams/{}/members?page={}&per_page={}&role={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            role.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
+            role.to_string(),
         );
 
         self.get(&url).await
@@ -44231,9 +44231,9 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<Vec<types::Email>> {
         let url = format!(
-            "/user/emails?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/emails?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -44520,10 +44520,10 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         page: i64,
     ) -> Result<types::GetListRepositoriesAccessibleUserAccessTokenOkResponse> {
         let url = format!(
-            "/user/installations/{}/repositories?per_page={}&page={}",
+            "/user/installations/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&installation_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -44655,8 +44655,8 @@ format!("{}", count), format!("{}", start_index), filter.to_string(), excluded_a
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/user/issues?sort={}&state={}&per_page={}&labels={}&since={}&page={}&filter={}&direction={}",
-sort.to_string(), state.to_string(), format!("{}", per_page), labels.to_string(), since.to_rfc3339(), format!("{}", page), filter.to_string(), direction.to_string(),         );
+        let url = format!("/user/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&state={}",
+direction.to_string(), filter.to_string(), labels.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
 
         self.get(&url).await
     }
@@ -44676,9 +44676,9 @@ sort.to_string(), state.to_string(), format!("{}", per_page), labels.to_string()
         page: i64,
     ) -> Result<Vec<types::Key>> {
         let url = format!(
-            "/user/keys?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/keys?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -44806,10 +44806,10 @@ sort.to_string(), state.to_string(), format!("{}", per_page), labels.to_string()
         page: i64,
     ) -> Result<Vec<types::OrgMembership>> {
         let url = format!(
-            "/user/memberships/orgs?state={}&page={}&per_page={}",
-            state.to_string(),
+            "/user/memberships/orgs?page={}&per_page={}&state={}",
             format!("{}", page),
             format!("{}", per_page),
+            state.to_string(),
         );
 
         self.get(&url).await
@@ -44877,9 +44877,9 @@ sort.to_string(), state.to_string(), format!("{}", per_page), labels.to_string()
         page: i64,
     ) -> Result<Vec<types::Migration>> {
         let url = format!(
-            "/user/migrations?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/migrations?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45065,9 +45065,9 @@ sort.to_string(), state.to_string(), format!("{}", per_page), labels.to_string()
         page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!(
-            "/user/orgs?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/orgs?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45177,12 +45177,12 @@ sort.to_string(), state.to_string(), format!("{}", per_page), labels.to_string()
         state: &str,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
-            "/user/packages/{}/{}/versions?per_page={}&state={}&page={}",
+            "/user/packages/{}/{}/versions?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
+            format!("{}", page),
             format!("{}", per_page),
             state.to_string(),
-            format!("{}", page),
         );
 
         self.get(&url).await
@@ -45311,9 +45311,9 @@ sort.to_string(), state.to_string(), format!("{}", per_page), labels.to_string()
         page: i64,
     ) -> Result<Vec<types::Email>> {
         let url = format!(
-            "/user/public_emails?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/public_emails?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45342,8 +45342,8 @@ sort.to_string(), state.to_string(), format!("{}", per_page), labels.to_string()
         since: DateTime<Utc>,
         before: DateTime<Utc>,
     ) -> Result<Vec<types::Repository>> {
-        let url = format!("/user/repos?direction={}&affiliation={}&type={}&page={}&before={}&per_page={}&sort={}&since={}&visibility={}",
-direction.to_string(), affiliation.to_string(), type_, format!("{}", page), before.to_rfc3339(), format!("{}", per_page), sort.to_string(), since.to_rfc3339(), visibility.to_string(),         );
+        let url = format!("/user/repos?affiliation={}&before={}&direction={}&page={}&per_page={}&since={}&sort={}&type={}&visibility={}",
+affiliation.to_string(), before.to_rfc3339(), direction.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), type_, visibility.to_string(),         );
 
         self.get(&url).await
     }
@@ -45454,11 +45454,11 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::Repository>> {
         let url = format!(
-            "/user/starred?direction={}&sort={}&page={}&per_page={}",
+            "/user/starred?direction={}&page={}&per_page={}&sort={}",
             direction.to_string(),
-            sort.to_string(),
             format!("{}", page),
             format!("{}", per_page),
+            sort.to_string(),
         );
 
         self.get(&url).await
@@ -45571,9 +45571,9 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::TeamFull>> {
         let url = format!(
-            "/user/teams?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/teams?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45640,10 +45640,10 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/events?per_page={}&page={}",
+            "/users/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45692,10 +45692,10 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/events/public?per_page={}&page={}",
+            "/users/{}/events/public?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45717,10 +45717,10 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/users/{}/followers?per_page={}&page={}",
+            "/users/{}/followers?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45791,11 +45791,11 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/users/{}/gists?page={}&since={}&per_page={}",
+            "/users/{}/gists?page={}&per_page={}&since={}",
             progenitor_support::encode_path(&username.to_string()),
             format!("{}", page),
-            since.to_rfc3339(),
             format!("{}", per_page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
@@ -45849,10 +45849,10 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         subject_id: &str,
     ) -> Result<types::Hovercard> {
         let url = format!(
-            "/users/{}/hovercard?subject_type={}&subject_id={}",
+            "/users/{}/hovercard?subject_id={}&subject_type={}",
             progenitor_support::encode_path(&username.to_string()),
-            subject_type.to_string(),
             subject_id.to_string(),
+            subject_type.to_string(),
         );
 
         self.get(&url).await
@@ -45894,10 +45894,10 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::KeySimple>> {
         let url = format!(
-            "/users/{}/keys?per_page={}&page={}",
+            "/users/{}/keys?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -46033,11 +46033,11 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/users/{}/projects?state={}&per_page={}&page={}",
+            "/users/{}/projects?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&username.to_string()),
-            state.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
+            state.to_string(),
         );
 
         self.get(&url).await
@@ -46084,10 +46084,10 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/received_events/public?per_page={}&page={}",
+            "/users/{}/received_events/public?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -46112,13 +46112,13 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/users/{}/repos?direction={}&page={}&sort={}&type={}&per_page={}",
+            "/users/{}/repos?direction={}&page={}&per_page={}&sort={}&type={}",
             progenitor_support::encode_path(&username.to_string()),
             direction.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
             sort.to_string(),
             type_,
-            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -46219,12 +46219,12 @@ direction.to_string(), affiliation.to_string(), type_, format!("{}", page), befo
         page: i64,
     ) -> Result<Vec<types::StarredRepository>> {
         let url = format!(
-            "/users/{}/starred?direction={}&per_page={}&sort={}&page={}",
+            "/users/{}/starred?direction={}&page={}&per_page={}&sort={}",
             progenitor_support::encode_path(&username.to_string()),
             direction.to_string(),
+            format!("{}", page),
             format!("{}", per_page),
             sort.to_string(),
-            format!("{}", page),
         );
 
         self.get(&url).await

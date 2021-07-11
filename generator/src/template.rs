@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 use anyhow::{anyhow, bail, Context, Result};
 
@@ -14,7 +14,7 @@ pub struct Template {
 }
 
 impl Template {
-    pub fn compile(&self, query_params: HashMap<String, String>) -> String {
+    pub fn compile(&self, query_params: BTreeMap<String, String>) -> String {
         let mut out = "        let url = ".to_string();
         if self.components.is_empty() && query_params.is_empty() {
             out.push_str(r#""".to_string();"#);
