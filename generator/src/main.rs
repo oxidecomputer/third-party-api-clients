@@ -1,6 +1,6 @@
 mod template;
 
-use std::collections::{BTreeMap, HashSet};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::ffi::OsStr;
 use std::fs::{File, OpenOptions};
 use std::io::Write;
@@ -1574,7 +1574,8 @@ fn gen(
             }
             a("        &self,");
 
-            let mut query_params: Vec<String> = Default::default();
+            let mut query_params_str: Vec<String> = Default::default();
+            let mut query_params: HashMap<String, String> = Default::default();
             for par in o.parameters.iter() {
                 let item = match par {
                     openapiv3::ReferenceOr::Reference { reference } => {
@@ -1627,23 +1628,37 @@ fn gen(
                         let typ = parameter_data.render_type()?;
                         if nam == "ref" || nam == "type" {
                             a(&format!("        {}_: &{},", nam, typ));
-                            query_params.push(format!(r#"("{}", {}_.to_string())"#, nam, nam));
+                            query_params_str.push(format!(r#"("{}", {}_.to_string())"#, nam, nam));
+                            query_params.insert(nam.to_string(), format!("{}_", nam));
                         } else {
                             a(&format!("        {}: {},", nam, typ));
                             if typ == "DateTime<Utc>" {
-                                query_params.push(format!(r#"("{}", {}.to_rfc3339())"#, nam, nam));
-                            } else if typ == "i64" || typ == "bool" {
+                                query_params_str
+                                    .push(format!(r#"("{}", {}.to_rfc3339())"#, nam, nam));
                                 query_params
+                                    .insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
+                            } else if typ == "i64" || typ == "bool" {
+                                query_params_str
                                     .push(format!(r#"("{}", format!("{{}}", {}))"#, nam, nam));
+                                query_params.insert(
+                                    nam.to_string(),
+                                    format!(r#"format!("{{}}", {})"#, nam),
+                                );
                             } else if typ == "&str" {
-                                query_params.push(format!(r#"("{}", {}.to_string())"#, nam, nam));
+                                query_params_str
+                                    .push(format!(r#"("{}", {}.to_string())"#, nam, nam));
+                                query_params
+                                    .insert(nam.to_string(), format!("{}.to_string()", nam));
                             } else if typ == "&[String]" {
                                 // TODO: I have no idea how these should be seperated and the docs
                                 // don't give any answers either, for "exclude".
                                 // https://docs.github.com/en/rest/reference/migrations
-                                query_params.push(format!(r#"("{}", {}.join(" "))"#, nam, nam));
+                                query_params_str.push(format!(r#"("{}", {}.join(" "))"#, nam, nam));
+                                query_params
+                                    .insert(nam.to_string(), format!("{}.join(\" \")", nam));
                             } else {
-                                query_params.push(format!(r#"("{}", {})"#, nam, nam));
+                                query_params_str.push(format!(r#"("{}", {})"#, nam, nam));
+                                query_params.insert(nam.to_string(), nam.to_string());
                             }
                         }
                     }
@@ -1808,7 +1823,7 @@ fn gen(
              * Generate the URL for the request.
              */
             let tmp = template::parse(p)?;
-            a(&tmp.compile());
+            a(&tmp.compile(query_params));
 
             /*
              * Perform the request.
@@ -1835,10 +1850,10 @@ fn gen(
                     "        let res = self.client.{}(url)",
                     m.to_lowercase()
                 ));
-                if !query_params.is_empty() {
+                if !query_params_str.is_empty() {
                     a(&format!(
                         "            .query(&[{}])",
-                        query_params.join(", ")
+                        query_params_str.join(", ")
                     ));
                 }
                 if let Some(f) = &body_func {

@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use anyhow::{anyhow, bail, Context, Result};
 
 #[derive(Eq, PartialEq, Clone, Debug)]
@@ -12,9 +14,9 @@ pub struct Template {
 }
 
 impl Template {
-    pub fn compile(&self) -> String {
+    pub fn compile(&self, query_params: HashMap<String, String>) -> String {
         let mut out = "        let url = ".to_string();
-        if self.components.is_empty() {
+        if self.components.is_empty() && query_params.is_empty() {
             out.push_str(r#""".to_string();"#);
         } else {
             let mut has_params = false;
@@ -28,7 +30,7 @@ impl Template {
                 }
             }
 
-            if !has_params {
+            if !has_params && query_params.is_empty() {
                 out.push('"');
                 for c in self.components.iter() {
                     out.push('/');
@@ -49,6 +51,15 @@ impl Template {
                         }
                     }
                 }
+                if !query_params.is_empty() {
+                    out.push('?');
+                    for (i, key) in query_params.keys().enumerate() {
+                        if i > 0 {
+                            out.push('&');
+                        }
+                        out.push_str(&format!("{}={{}}", key));
+                    }
+                }
                 out.push_str("\",\n");
                 for c in self.components.iter() {
                     if let Component::Parameter(n) = &c {
@@ -65,6 +76,11 @@ impl Template {
                                 n
                             ));
                         }
+                    }
+                }
+                if !query_params.is_empty() {
+                    for (key) in query_params.values() {
+                        out.push_str(&format!("{}, ", key));
                     }
                 }
                 out.push_str("        );\n");
