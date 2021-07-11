@@ -1283,6 +1283,24 @@ fn gen(
                             }
                             a("}");
                             a("");
+
+                            a(&format!("impl std::fmt::Display for {} {{", sn));
+                            a(
+                                r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#,
+                            );
+                            a(r#"match *self {"#);
+                            for e in &st.enumeration {
+                                if struct_name(e).is_empty() {
+                                    // TODO: do something for empty(?)
+                                    continue;
+                                }
+                                a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
+                            }
+                            a("}");
+                            a(".fmt(f)");
+                            a("}");
+                            a("}");
+                            a("");
                         }
                     }
                 }

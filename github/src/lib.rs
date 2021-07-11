@@ -236,6 +236,20 @@ pub mod types {
         Container,
     }
 
+    impl std::fmt::Display for PackageType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PackageType::Npm => "npm",
+                PackageType::Maven => "maven",
+                PackageType::Rubygems => "rubygems",
+                PackageType::Docker => "docker",
+                PackageType::Nuget => "nuget",
+                PackageType::Container => "container",
+            }
+            .fmt(f)
+        }
+    }
+
     /// Must be one of: `day`, `week`.
     #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "snake_case")]
