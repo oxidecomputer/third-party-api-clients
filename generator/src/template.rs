@@ -15,36 +15,60 @@ impl Template {
     pub fn compile(&self) -> String {
         let mut out = "        let url = ".to_string();
         if self.components.is_empty() {
-            out.push_str("DEFAULT_HOST.to_string();");
+            out.push_str(r#""".to_string();"#);
         } else {
-            out.push_str("format!(\"{}");
+            let mut has_params = false;
             for c in self.components.iter() {
-                out.push('/');
                 match c {
-                    Component::Constant(n) => out.push_str(n),
-                    Component::Parameter(_) => out.push_str("{}"),
-                }
-            }
-            out.push_str("\",\n");
-            out.push_str("           DEFAULT_HOST,\n");
-            for c in self.components.iter() {
-                if let Component::Parameter(n) = &c {
-                    if n == "type" || n == "ref" {
-                        out.push_str(&format!(
-                            "            \
-                    progenitor_support::encode_path(&{}_.to_string()),\n",
-                            n
-                        ));
-                    } else {
-                        out.push_str(&format!(
-                            "            \
-                    progenitor_support::encode_path(&{}.to_string()),\n",
-                            n
-                        ));
+                    Component::Constant(_) => (),
+                    Component::Parameter(_) => {
+                        has_params = true;
+                        break;
                     }
                 }
             }
-            out.push_str("        );\n");
+
+            if !has_params {
+                out.push('"');
+                for c in self.components.iter() {
+                    out.push('/');
+                    match c {
+                        Component::Constant(n) => out.push_str(n),
+                        Component::Parameter(_) => (),
+                    }
+                }
+                out.push_str("\".to_string();");
+            } else {
+                out.push_str("format!(\"");
+                for c in self.components.iter() {
+                    out.push('/');
+                    match c {
+                        Component::Constant(n) => out.push_str(n),
+                        Component::Parameter(_) => {
+                            out.push_str("{}");
+                        }
+                    }
+                }
+                out.push_str("\",\n");
+                for c in self.components.iter() {
+                    if let Component::Parameter(n) = &c {
+                        if n == "type" || n == "ref" {
+                            out.push_str(&format!(
+                                "            \
+                    progenitor_support::encode_path(&{}_.to_string()),\n",
+                                n
+                            ));
+                        } else {
+                            out.push_str(&format!(
+                                "            \
+                    progenitor_support::encode_path(&{}.to_string()),\n",
+                                n
+                            ));
+                        }
+                    }
+                }
+                out.push_str("        );\n");
+            }
         }
         out
     }

@@ -1016,14 +1016,15 @@ fn gen(
     a("#![allow(clippy::too_many_arguments)]");
     a("");
     a("pub mod auth;");
-    a("pub mod utils;");
-
     a(r#"#[cfg(feature = "httpcache")]"#);
     a("pub mod http_cache;");
+    a("pub mod utils;");
     a("");
+
     a("use anyhow::{anyhow, Error, Result};");
     a("use chrono::{DateTime, Utc};");
     a("");
+
     a(r#"const DEFAULT_HOST: &str = "https://api.github.com";"#);
     a("");
 
@@ -1279,6 +1280,9 @@ fn gen(
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
+        #[cfg(feature = "httpcache")]
+        let uri2 = uri.to_string();
+
         let (url, auth) = self.url_and_auth(uri, authentication).await?;
 
         let instance = <&Client>::clone(&self);
@@ -1287,7 +1291,6 @@ fn gen(
         let mut req = instance.client.request(method, url);
 
         #[cfg(feature = "httpcache")]
-        let uri2 = uri.to_string();
         let mut req = {
             let mut req = instance.client.request(method.clone(), url);
             if method == http::Method::GET {
@@ -1301,7 +1304,7 @@ fn gen(
         req = req.header(http::header::USER_AGENT, &*instance.agent);
         req = req.header(
             http::header::ACCEPT,
-            &*format!("{}", hyperx::header::qitem::<Mime>(From::from(media_type))),
+            &*format!("{}", hyperx::header::qitem::<mime::Mime>(From::from(media_type))),
         );
 
         if let Some(auth_str) = auth {
@@ -1391,6 +1394,41 @@ fn gen(
             };
             Err(error)
         }
+    }
+
+    async fn request_entity<D>(
+        &self,
+        method: http::Method,
+        uri: &str,
+        body: Option<Vec<u8>>,
+        media_type: crate::utils::MediaType,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let (_ , r) = self.request(method, uri, body, media_type, authentication).await?;
+        Ok(r)
+    }
+
+    async fn get<D>(&self, uri: &str) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.get_media(uri, crate::utils::MediaType::Json).await
+    }
+
+    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::GET,
+            &(self.host.clone() + uri),
+            None,
+            media,
+            self::auth::AuthenticationConstraint::Unconstrained,
+        ).await
     }"#);
     a("");
 
@@ -1718,10 +1756,14 @@ fn gen(
             /*
              * Perform the request.
              */
-            a(&format!(
-                "        let res = self.client.{}(url)",
-                m.to_lowercase()
-            ));
+            if m == http::Method::GET {
+                a(&format!("        let res = self.{}(url)", m.to_lowercase()));
+            } else {
+                a(&format!(
+                    "        let res = self.client.{}(url)",
+                    m.to_lowercase()
+                ));
+            }
             if !query_params.is_empty() {
                 a(&format!(
                     "            .query(&[{}])",
