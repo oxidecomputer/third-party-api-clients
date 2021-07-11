@@ -30,7 +30,7 @@ Experimental support for utilizing this to cache responses locally with the
 To enable this, add the following to your `Cargo.toml` file:
 
 ```toml
-[dependencies.hubcaps]
+[dependencies.github_api_client]
  version = "..."
  default-features = false
  features = ["httpcache"]

@@ -1053,7 +1053,7 @@ fn gen(
 //! To enable this, add the following to your `Cargo.toml` file:
 //!
 //! ```toml
-//! [dependencies.hubcaps]
+//! [dependencies.{}]
 //!  version = "..."
 //!  default-features = false
 //!  features = ["httpcache"]
@@ -1147,7 +1147,7 @@ fn gen(
 //! );
 //! ```
 //!"#,
-        n, n, n, n, n
+        n, n, n, n, n, n
     ));
     a("#![allow(clippy::too_many_arguments)]");
     a("#![allow(missing_docs)]"); // TODO: Make this a deny.
