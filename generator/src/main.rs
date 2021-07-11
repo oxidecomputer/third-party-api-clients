@@ -1062,7 +1062,7 @@ fn get_enums_for_param(param: &openapiv3::Parameter) -> Vec<String> {
     vec![]
 }
 
-fn render_param(n: &str, enums: &[String], required: bool, description: &str) -> String {
+fn render_param(n: &str, en: &[String], required: bool, description: &str) -> String {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1070,9 +1070,13 @@ fn render_param(n: &str, enums: &[String], required: bool, description: &str) ->
         out.push('\n');
     };
 
-    if enums.is_empty() {
+    if en.is_empty() {
         return out.to_string();
     }
+
+    let mut enums = en.to_vec();
+    enums.sort_unstable();
+    enums.dedup();
 
     if !description.is_empty() {
         a(&format!("/// {}", description.replace('\n', "\n/// ")));
@@ -1088,12 +1092,12 @@ fn render_param(n: &str, enums: &[String], required: bool, description: &str) ->
     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
     a(r#"#[serde(rename_all = "snake_case")]"#);
     a(&format!("pub enum {} {{", sn));
-    for e in enums {
-        if struct_name(e).is_empty() {
+    for e in &enums {
+        if struct_name(&e).is_empty() {
             // TODO: do something for empty(?)
             continue;
         }
-        a(&format!("{},", struct_name(e)));
+        a(&format!("{},", struct_name(&e)));
     }
     if !required {
         a("Noop,");
@@ -1104,12 +1108,12 @@ fn render_param(n: &str, enums: &[String], required: bool, description: &str) ->
     a(&format!("impl std::fmt::Display for {} {{", sn));
     a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
     a(r#"match *self {"#);
-    for e in enums {
-        if struct_name(e).is_empty() {
+    for e in &enums {
+        if struct_name(&e).is_empty() {
             // TODO: do something for empty(?)
             continue;
         }
-        a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
+        a(&format!(r#"{}::{} => "{}","#, sn, struct_name(&e), e));
     }
     if !required {
         a(&format!(r#"{}::Noop => "","#, sn,));
@@ -2278,7 +2282,12 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
 }
 
 fn struct_name(s: &str) -> String {
-    to_title_case(&clean_name(s)).replace(" ", "").replace("Self", "SelfData")
+    let t = to_title_case(&clean_name(s)).replace(" ", "");
+    if t == "Self" {
+        "SelfData".to_string()
+    } else {
+        t
+    }
 }
 
 fn clean_name(t: &str) -> String {

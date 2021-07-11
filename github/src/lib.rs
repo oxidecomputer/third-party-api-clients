@@ -194,18 +194,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AuditLogInclude {
-        Web,
-        Git,
         All,
+        Git,
+        Web,
         Noop,
     }
 
     impl std::fmt::Display for AuditLogInclude {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AuditLogInclude::Web => "web",
-                AuditLogInclude::Git => "git",
                 AuditLogInclude::All => "all",
+                AuditLogInclude::Git => "git",
+                AuditLogInclude::Web => "web",
                 AuditLogInclude::Noop => "",
             }
             .fmt(f)
@@ -224,16 +224,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AuditLogOrder {
-        Desc,
         Asc,
+        Desc,
         Noop,
     }
 
     impl std::fmt::Display for AuditLogOrder {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AuditLogOrder::Desc => "desc",
                 AuditLogOrder::Asc => "asc",
+                AuditLogOrder::Desc => "desc",
                 AuditLogOrder::Noop => "",
             }
             .fmt(f)
@@ -276,16 +276,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Order {
-        Desc,
         Asc,
+        Desc,
         Noop,
     }
 
     impl std::fmt::Display for Order {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                Order::Desc => "desc",
                 Order::Asc => "asc",
+                Order::Desc => "desc",
                 Order::Noop => "",
             }
             .fmt(f)
@@ -302,23 +302,23 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PackageType {
-        Npm,
-        Maven,
-        Rubygems,
-        Docker,
-        Nuget,
         Container,
+        Docker,
+        Maven,
+        Npm,
+        Nuget,
+        Rubygems,
     }
 
     impl std::fmt::Display for PackageType {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PackageType::Npm => "npm",
-                PackageType::Maven => "maven",
-                PackageType::Rubygems => "rubygems",
-                PackageType::Docker => "docker",
-                PackageType::Nuget => "nuget",
                 PackageType::Container => "container",
+                PackageType::Docker => "docker",
+                PackageType::Maven => "maven",
+                PackageType::Npm => "npm",
+                PackageType::Nuget => "nuget",
+                PackageType::Rubygems => "rubygems",
             }
             .fmt(f)
         }
@@ -380,18 +380,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum StatusParam {
-        Queued,
-        InProgress,
         Completed,
+        InProgress,
+        Queued,
         Noop,
     }
 
     impl std::fmt::Display for StatusParam {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                StatusParam::Queued => "queued",
-                StatusParam::InProgress => "in_progress",
                 StatusParam::Completed => "completed",
+                StatusParam::InProgress => "in_progress",
+                StatusParam::Queued => "queued",
                 StatusParam::Noop => "",
             }
             .fmt(f)
@@ -408,18 +408,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum WorkflowRunStatus {
-        Completed,
         ActionRequired,
         Cancelled,
+        Completed,
         Failure,
+        InProgress,
         Neutral,
+        Queued,
+        Requested,
         Skipped,
         Stale,
         Success,
         TimedOut,
-        InProgress,
-        Queued,
-        Requested,
         Waiting,
         Noop,
     }
@@ -427,18 +427,18 @@ pub mod types {
     impl std::fmt::Display for WorkflowRunStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                WorkflowRunStatus::Completed => "completed",
                 WorkflowRunStatus::ActionRequired => "action_required",
                 WorkflowRunStatus::Cancelled => "cancelled",
+                WorkflowRunStatus::Completed => "completed",
                 WorkflowRunStatus::Failure => "failure",
+                WorkflowRunStatus::InProgress => "in_progress",
                 WorkflowRunStatus::Neutral => "neutral",
+                WorkflowRunStatus::Queued => "queued",
+                WorkflowRunStatus::Requested => "requested",
                 WorkflowRunStatus::Skipped => "skipped",
                 WorkflowRunStatus::Stale => "stale",
                 WorkflowRunStatus::Success => "success",
                 WorkflowRunStatus::TimedOut => "timed_out",
-                WorkflowRunStatus::InProgress => "in_progress",
-                WorkflowRunStatus::Queued => "queued",
-                WorkflowRunStatus::Requested => "requested",
                 WorkflowRunStatus::Waiting => "waiting",
                 WorkflowRunStatus::Noop => "",
             }
@@ -1266,18 +1266,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositoryProjects {
+        Admin,
         Read,
         Write,
-        Admin,
         Noop,
     }
 
     impl std::fmt::Display for RepositoryProjects {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                RepositoryProjects::Admin => "admin",
                 RepositoryProjects::Read => "read",
                 RepositoryProjects::Write => "write",
-                RepositoryProjects::Admin => "admin",
                 RepositoryProjects::Noop => "",
             }
             .fmt(f)
@@ -1574,18 +1574,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationProjects {
+        Admin,
         Read,
         Write,
-        Admin,
         Noop,
     }
 
     impl std::fmt::Display for OrganizationProjects {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                OrganizationProjects::Admin => "admin",
                 OrganizationProjects::Read => "read",
                 OrganizationProjects::Write => "write",
-                OrganizationProjects::Admin => "admin",
                 OrganizationProjects::Noop => "",
             }
             .fmt(f)
@@ -1653,26 +1653,26 @@ pub mod types {
     /// The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum OrganizationSelfDataDataHostedRunners {
+    pub enum OrganizationSelfHostedRunners {
         Read,
         Write,
         Noop,
     }
 
-    impl std::fmt::Display for OrganizationSelfDataDataHostedRunners {
+    impl std::fmt::Display for OrganizationSelfHostedRunners {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                OrganizationSelfDataDataHostedRunners::Read => "read",
-                OrganizationSelfDataDataHostedRunners::Write => "write",
-                OrganizationSelfDataDataHostedRunners::Noop => "",
+                OrganizationSelfHostedRunners::Read => "read",
+                OrganizationSelfHostedRunners::Write => "write",
+                OrganizationSelfHostedRunners::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for OrganizationSelfDataDataHostedRunners {
-        fn default() -> OrganizationSelfDataDataHostedRunners {
-            OrganizationSelfDataDataHostedRunners::Noop
+    impl Default for OrganizationSelfHostedRunners {
+        fn default() -> OrganizationSelfHostedRunners {
+            OrganizationSelfHostedRunners::Noop
         }
     }
 
@@ -1763,7 +1763,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub organization_secrets: Option<OrganizationSecrets>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub organization_self_hosted_runners: Option<OrganizationSelfDataHostedRunners>,
+        pub organization_self_hosted_runners: Option<OrganizationSelfHostedRunners>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub organization_user_blocking: Option<OrganizationUserBlocking>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -3806,16 +3806,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Type {
-        ReadOnly,
         Custom,
+        ReadOnly,
         Noop,
     }
 
     impl std::fmt::Display for Type {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                Type::ReadOnly => "read-only",
                 Type::Custom => "custom",
+                Type::ReadOnly => "read-only",
                 Type::Noop => "",
             }
             .fmt(f)
@@ -4230,16 +4230,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum State {
-        Open,
         Closed,
+        Open,
         Noop,
     }
 
     impl std::fmt::Display for State {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                State::Open => "open",
                 State::Closed => "closed",
+                State::Open => "open",
                 State::Noop => "",
             }
             .fmt(f)
@@ -7150,18 +7150,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum InteractionGroup {
-        ExistingUsers,
-        ContributorsOnly,
         CollaboratorsOnly,
+        ContributorsOnly,
+        ExistingUsers,
         Noop,
     }
 
     impl std::fmt::Display for InteractionGroup {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                InteractionGroup::ExistingUsers => "existing_users",
-                InteractionGroup::ContributorsOnly => "contributors_only",
                 InteractionGroup::CollaboratorsOnly => "collaborators_only",
+                InteractionGroup::ContributorsOnly => "contributors_only",
+                InteractionGroup::ExistingUsers => "existing_users",
                 InteractionGroup::Noop => "",
             }
             .fmt(f)
@@ -7191,10 +7191,10 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum InteractionExpiry {
         OneDay,
-        ThreeDays,
-        OneWeek,
         OneMonth,
+        OneWeek,
         SixMonths,
+        ThreeDays,
         Noop,
     }
 
@@ -7202,10 +7202,10 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 InteractionExpiry::OneDay => "one_day",
-                InteractionExpiry::ThreeDays => "three_days",
-                InteractionExpiry::OneWeek => "one_week",
                 InteractionExpiry::OneMonth => "one_month",
+                InteractionExpiry::OneWeek => "one_week",
                 InteractionExpiry::SixMonths => "six_months",
+                InteractionExpiry::ThreeDays => "three_days",
                 InteractionExpiry::Noop => "",
             }
             .fmt(f)
@@ -7475,8 +7475,8 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum Role {
         Admin,
-        Member,
         BillingManager,
+        Member,
         Noop,
     }
 
@@ -7484,8 +7484,8 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 Role::Admin => "admin",
-                Role::Member => "member",
                 Role::BillingManager => "billing_manager",
+                Role::Member => "member",
                 Role::Noop => "",
             }
             .fmt(f)
@@ -8071,20 +8071,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationPermission {
-        Read,
-        Write,
         Admin,
         None,
+        Read,
+        Write,
         Noop,
     }
 
     impl std::fmt::Display for OrganizationPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                OrganizationPermission::Read => "read",
-                OrganizationPermission::Write => "write",
                 OrganizationPermission::Admin => "admin",
                 OrganizationPermission::None => "none",
+                OrganizationPermission::Read => "read",
+                OrganizationPermission::Write => "write",
                 OrganizationPermission::Noop => "",
             }
             .fmt(f)
@@ -8546,12 +8546,12 @@ pub mod types {
     pub enum Content {
         PlusOne,
         MinusOne,
-        Laugh,
         Confused,
+        Eyes,
         Heart,
         Hooray,
+        Laugh,
         Rocket,
-        Eyes,
         Noop,
     }
 
@@ -8560,12 +8560,12 @@ pub mod types {
             match *self {
                 Content::PlusOne => "+1",
                 Content::MinusOne => "-1",
-                Content::Laugh => "laugh",
                 Content::Confused => "confused",
+                Content::Eyes => "eyes",
                 Content::Heart => "heart",
                 Content::Hooray => "hooray",
+                Content::Laugh => "laugh",
                 Content::Rocket => "rocket",
-                Content::Eyes => "eyes",
                 Content::Noop => "",
             }
             .fmt(f)
@@ -8596,16 +8596,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamMembershipRole {
-        Member,
         Maintainer,
+        Member,
         Noop,
     }
 
     impl std::fmt::Display for TeamMembershipRole {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                TeamMembershipRole::Member => "member",
                 TeamMembershipRole::Maintainer => "maintainer",
+                TeamMembershipRole::Member => "member",
                 TeamMembershipRole::Noop => "",
             }
             .fmt(f)
@@ -9293,16 +9293,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum FullRepositorySecurityAnalysisAdvancedStatus {
-        Enabled,
         Disabled,
+        Enabled,
         Noop,
     }
 
     impl std::fmt::Display for FullRepositorySecurityAnalysisAdvancedStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                FullRepositorySecurityAnalysisAdvancedStatus::Enabled => "enabled",
                 FullRepositorySecurityAnalysisAdvancedStatus::Disabled => "disabled",
+                FullRepositorySecurityAnalysisAdvancedStatus::Enabled => "enabled",
                 FullRepositorySecurityAnalysisAdvancedStatus::Noop => "",
             }
             .fmt(f)
@@ -9324,16 +9324,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum FullRepositorySecurityAnalysisSecretScanningStatus {
-        Enabled,
         Disabled,
+        Enabled,
         Noop,
     }
 
     impl std::fmt::Display for FullRepositorySecurityAnalysisSecretScanningStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                FullRepositorySecurityAnalysisSecretScanningStatus::Enabled => "enabled",
                 FullRepositorySecurityAnalysisSecretScanningStatus::Disabled => "disabled",
+                FullRepositorySecurityAnalysisSecretScanningStatus::Enabled => "enabled",
                 FullRepositorySecurityAnalysisSecretScanningStatus::Noop => "",
             }
             .fmt(f)
@@ -9773,18 +9773,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum JobStatus {
-        Queued,
-        InProgress,
         Completed,
+        InProgress,
+        Queued,
         Noop,
     }
 
     impl std::fmt::Display for JobStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                JobStatus::Queued => "queued",
-                JobStatus::InProgress => "in_progress",
                 JobStatus::Completed => "completed",
+                JobStatus::InProgress => "in_progress",
+                JobStatus::Queued => "queued",
                 JobStatus::Noop => "",
             }
             .fmt(f)
@@ -9801,18 +9801,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum JobStepsStatus {
-        Queued,
-        InProgress,
         Completed,
+        InProgress,
+        Queued,
         Noop,
     }
 
     impl std::fmt::Display for JobStepsStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                JobStepsStatus::Queued => "queued",
-                JobStepsStatus::InProgress => "in_progress",
                 JobStepsStatus::Completed => "completed",
+                JobStepsStatus::InProgress => "in_progress",
+                JobStepsStatus::Queued => "queued",
                 JobStepsStatus::Noop => "",
             }
             .fmt(f)
@@ -10248,16 +10248,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum DeploymentReviewerType {
-        User,
         Team,
+        User,
         Noop,
     }
 
     impl std::fmt::Display for DeploymentReviewerType {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                DeploymentReviewerType::User => "User",
                 DeploymentReviewerType::Team => "Team",
+                DeploymentReviewerType::User => "User",
                 DeploymentReviewerType::Noop => "",
             }
             .fmt(f)
@@ -11756,18 +11756,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CheckRunStatus {
-        Queued,
-        InProgress,
         Completed,
+        InProgress,
+        Queued,
         Noop,
     }
 
     impl std::fmt::Display for CheckRunStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CheckRunStatus::Queued => "queued",
-                CheckRunStatus::InProgress => "in_progress",
                 CheckRunStatus::Completed => "completed",
+                CheckRunStatus::InProgress => "in_progress",
+                CheckRunStatus::Queued => "queued",
                 CheckRunStatus::Noop => "",
             }
             .fmt(f)
@@ -11783,26 +11783,26 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Conclusion {
-        Success,
+        ActionRequired,
+        Cancelled,
         Failure,
         Neutral,
-        Cancelled,
         Skipped,
+        Success,
         TimedOut,
-        ActionRequired,
         Noop,
     }
 
     impl std::fmt::Display for Conclusion {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                Conclusion::Success => "success",
+                Conclusion::ActionRequired => "action_required",
+                Conclusion::Cancelled => "cancelled",
                 Conclusion::Failure => "failure",
                 Conclusion::Neutral => "neutral",
-                Conclusion::Cancelled => "cancelled",
                 Conclusion::Skipped => "skipped",
+                Conclusion::Success => "success",
                 Conclusion::TimedOut => "timed_out",
-                Conclusion::ActionRequired => "action_required",
                 Conclusion::Noop => "",
             }
             .fmt(f)
@@ -12026,18 +12026,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CheckSuiteStatus {
-        Queued,
-        InProgress,
         Completed,
+        InProgress,
+        Queued,
         Noop,
     }
 
     impl std::fmt::Display for CheckSuiteStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CheckSuiteStatus::Queued => "queued",
-                CheckSuiteStatus::InProgress => "in_progress",
                 CheckSuiteStatus::Completed => "completed",
+                CheckSuiteStatus::InProgress => "in_progress",
+                CheckSuiteStatus::Queued => "queued",
                 CheckSuiteStatus::Noop => "",
             }
             .fmt(f)
@@ -12202,20 +12202,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CodeScanningAlertState {
-        Open,
         Closed,
         Dismissed,
         Fixed,
+        Open,
         Noop,
     }
 
     impl std::fmt::Display for CodeScanningAlertState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CodeScanningAlertState::Open => "open",
                 CodeScanningAlertState::Closed => "closed",
                 CodeScanningAlertState::Dismissed => "dismissed",
                 CodeScanningAlertState::Fixed => "fixed",
+                CodeScanningAlertState::Open => "open",
                 CodeScanningAlertState::Noop => "",
             }
             .fmt(f)
@@ -12232,20 +12232,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Severity {
+        Error,
         None,
         Note,
         Warning,
-        Error,
         Noop,
     }
 
     impl std::fmt::Display for Severity {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                Severity::Error => "error",
                 Severity::None => "none",
                 Severity::Note => "note",
                 Severity::Warning => "warning",
-                Severity::Error => "error",
                 Severity::Noop => "",
             }
             .fmt(f)
@@ -12326,20 +12326,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CodeScanningAlertClassification {
-        Source,
         Generated,
-        Test,
         Library,
+        Source,
+        Test,
         Noop,
     }
 
     impl std::fmt::Display for CodeScanningAlertClassification {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CodeScanningAlertClassification::Source => "source",
                 CodeScanningAlertClassification::Generated => "generated",
-                CodeScanningAlertClassification::Test => "test",
                 CodeScanningAlertClassification::Library => "library",
+                CodeScanningAlertClassification::Source => "source",
+                CodeScanningAlertClassification::Test => "test",
                 CodeScanningAlertClassification::Noop => "",
             }
             .fmt(f)
@@ -12440,20 +12440,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecuritySeverityLevel {
+        Critical,
+        High,
         Low,
         Medium,
-        High,
-        Critical,
         Noop,
     }
 
     impl std::fmt::Display for SecuritySeverityLevel {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                SecuritySeverityLevel::Critical => "critical",
+                SecuritySeverityLevel::High => "high",
                 SecuritySeverityLevel::Low => "low",
                 SecuritySeverityLevel::Medium => "medium",
-                SecuritySeverityLevel::High => "high",
-                SecuritySeverityLevel::Critical => "critical",
                 SecuritySeverityLevel::Noop => "",
             }
             .fmt(f)
@@ -12543,16 +12543,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CodeScanningAlertSetState {
-        Open,
         Dismissed,
+        Open,
         Noop,
     }
 
     impl std::fmt::Display for CodeScanningAlertSetState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CodeScanningAlertSetState::Open => "open",
                 CodeScanningAlertSetState::Dismissed => "dismissed",
+                CodeScanningAlertSetState::Open => "open",
                 CodeScanningAlertSetState::Noop => "",
             }
             .fmt(f)
@@ -12704,16 +12704,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProcessingStatus {
-        Pending,
         Complete,
+        Pending,
         Noop,
     }
 
     impl std::fmt::Display for ProcessingStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ProcessingStatus::Pending => "pending",
                 ProcessingStatus::Complete => "complete",
+                ProcessingStatus::Pending => "pending",
                 ProcessingStatus::Noop => "",
             }
             .fmt(f)
@@ -13108,22 +13108,22 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositoryInvitationPermissions {
-        Read,
-        Write,
         Admin,
-        Triage,
         Maintain,
+        Read,
+        Triage,
+        Write,
         Noop,
     }
 
     impl std::fmt::Display for RepositoryInvitationPermissions {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                RepositoryInvitationPermissions::Read => "read",
-                RepositoryInvitationPermissions::Write => "write",
                 RepositoryInvitationPermissions::Admin => "admin",
-                RepositoryInvitationPermissions::Triage => "triage",
                 RepositoryInvitationPermissions::Maintain => "maintain",
+                RepositoryInvitationPermissions::Read => "read",
+                RepositoryInvitationPermissions::Triage => "triage",
+                RepositoryInvitationPermissions::Write => "write",
                 RepositoryInvitationPermissions::Noop => "",
             }
             .fmt(f)
@@ -13242,8 +13242,8 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum MergeMethod {
         Merge,
-        Squash,
         Rebase,
+        Squash,
         Noop,
     }
 
@@ -13251,8 +13251,8 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 MergeMethod::Merge => "merge",
-                MergeMethod::Squash => "squash",
                 MergeMethod::Rebase => "rebase",
+                MergeMethod::Squash => "squash",
                 MergeMethod::Noop => "",
             }
             .fmt(f)
@@ -13866,9 +13866,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CommitComparisonStatus {
-        Diverged,
         Ahead,
         Behind,
+        Diverged,
         Identical,
         Noop,
     }
@@ -13876,9 +13876,9 @@ pub mod types {
     impl std::fmt::Display for CommitComparisonStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CommitComparisonStatus::Diverged => "diverged",
                 CommitComparisonStatus::Ahead => "ahead",
                 CommitComparisonStatus::Behind => "behind",
+                CommitComparisonStatus::Diverged => "diverged",
                 CommitComparisonStatus::Identical => "identical",
                 CommitComparisonStatus::Noop => "",
             }
@@ -14837,11 +14837,11 @@ pub mod types {
     pub enum DeploymentStatusState {
         Error,
         Failure,
+        InProgress,
         Inactive,
         Pending,
-        Success,
         Queued,
-        InProgress,
+        Success,
         Noop,
     }
 
@@ -14850,11 +14850,11 @@ pub mod types {
             match *self {
                 DeploymentStatusState::Error => "error",
                 DeploymentStatusState::Failure => "failure",
+                DeploymentStatusState::InProgress => "in_progress",
                 DeploymentStatusState::Inactive => "inactive",
                 DeploymentStatusState::Pending => "pending",
-                DeploymentStatusState::Success => "success",
                 DeploymentStatusState::Queued => "queued",
-                DeploymentStatusState::InProgress => "in_progress",
+                DeploymentStatusState::Success => "success",
                 DeploymentStatusState::Noop => "",
             }
             .fmt(f)
@@ -15460,21 +15460,21 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum ImportStatus {
         Auth,
-        Error,
-        None,
-        Detecting,
-        Choose,
         AuthFailed,
-        Importing,
-        Mapping,
-        WaitingToPush,
-        Pushing,
+        Choose,
         Complete,
-        Setup,
-        Unknown,
+        Detecting,
         DetectionFoundMultiple,
         DetectionFoundNothing,
         DetectionNeedsAuth,
+        Error,
+        Importing,
+        Mapping,
+        None,
+        Pushing,
+        Setup,
+        Unknown,
+        WaitingToPush,
         Noop,
     }
 
@@ -15482,21 +15482,21 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 ImportStatus::Auth => "auth",
-                ImportStatus::Error => "error",
-                ImportStatus::None => "none",
-                ImportStatus::Detecting => "detecting",
-                ImportStatus::Choose => "choose",
                 ImportStatus::AuthFailed => "auth_failed",
-                ImportStatus::Importing => "importing",
-                ImportStatus::Mapping => "mapping",
-                ImportStatus::WaitingToPush => "waiting_to_push",
-                ImportStatus::Pushing => "pushing",
+                ImportStatus::Choose => "choose",
                 ImportStatus::Complete => "complete",
-                ImportStatus::Setup => "setup",
-                ImportStatus::Unknown => "unknown",
+                ImportStatus::Detecting => "detecting",
                 ImportStatus::DetectionFoundMultiple => "detection_found_multiple",
                 ImportStatus::DetectionFoundNothing => "detection_found_nothing",
                 ImportStatus::DetectionNeedsAuth => "detection_needs_auth",
+                ImportStatus::Error => "error",
+                ImportStatus::Importing => "importing",
+                ImportStatus::Mapping => "mapping",
+                ImportStatus::None => "none",
+                ImportStatus::Pushing => "pushing",
+                ImportStatus::Setup => "setup",
+                ImportStatus::Unknown => "unknown",
+                ImportStatus::WaitingToPush => "waiting_to_push",
                 ImportStatus::Noop => "",
             }
             .fmt(f)
@@ -18027,36 +18027,36 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PagesHttpsCertificateState {
-        New,
+        Approved,
         AuthorizationCreated,
         AuthorizationPending,
-        Authorized,
         AuthorizationRevoked,
-        Issued,
-        Uploaded,
-        Approved,
-        Errored,
+        Authorized,
         BadAuthz,
         DestroyPending,
         DnsChanged,
+        Errored,
+        Issued,
+        New,
+        Uploaded,
         Noop,
     }
 
     impl std::fmt::Display for PagesHttpsCertificateState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PagesHttpsCertificateState::New => "new",
+                PagesHttpsCertificateState::Approved => "approved",
                 PagesHttpsCertificateState::AuthorizationCreated => "authorization_created",
                 PagesHttpsCertificateState::AuthorizationPending => "authorization_pending",
-                PagesHttpsCertificateState::Authorized => "authorized",
                 PagesHttpsCertificateState::AuthorizationRevoked => "authorization_revoked",
-                PagesHttpsCertificateState::Issued => "issued",
-                PagesHttpsCertificateState::Uploaded => "uploaded",
-                PagesHttpsCertificateState::Approved => "approved",
-                PagesHttpsCertificateState::Errored => "errored",
+                PagesHttpsCertificateState::Authorized => "authorized",
                 PagesHttpsCertificateState::BadAuthz => "bad_authz",
                 PagesHttpsCertificateState::DestroyPending => "destroy_pending",
                 PagesHttpsCertificateState::DnsChanged => "dns_changed",
+                PagesHttpsCertificateState::Errored => "errored",
+                PagesHttpsCertificateState::Issued => "issued",
+                PagesHttpsCertificateState::New => "new",
+                PagesHttpsCertificateState::Uploaded => "uploaded",
                 PagesHttpsCertificateState::Noop => "",
             }
             .fmt(f)
@@ -18087,8 +18087,8 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PageStatus {
-        Built,
         Building,
+        Built,
         Errored,
         Noop,
     }
@@ -18096,8 +18096,8 @@ pub mod types {
     impl std::fmt::Display for PageStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PageStatus::Built => "built",
                 PageStatus::Building => "building",
+                PageStatus::Built => "built",
                 PageStatus::Errored => "errored",
                 PageStatus::Noop => "",
             }
@@ -18496,16 +18496,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullRequestState {
-        Open,
         Closed,
+        Open,
         Noop,
     }
 
     impl std::fmt::Display for PullRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PullRequestState::Open => "open",
                 PullRequestState::Closed => "closed",
+                PullRequestState::Open => "open",
                 PullRequestState::Noop => "",
             }
             .fmt(f)
@@ -20262,16 +20262,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReleaseAssetState {
-        Uploaded,
         Open,
+        Uploaded,
         Noop,
     }
 
     impl std::fmt::Display for ReleaseAssetState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ReleaseAssetState::Uploaded => "uploaded",
                 ReleaseAssetState::Open => "open",
+                ReleaseAssetState::Uploaded => "uploaded",
                 ReleaseAssetState::Noop => "",
             }
             .fmt(f)
@@ -23207,7 +23207,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfDataHostedRunnerGroupsEnterpriseOkResponse {
+    pub struct GetListSelfHostedRunnerGroupsEnterpriseOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runner_groups: Vec<RunnerGroupsEnterprise>,
         pub total_count: f64,
@@ -23216,31 +23216,31 @@ pub mod types {
     /// Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected`
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
-        Selected,
+    pub enum CreateSelfHostedRunnerGroupEnterpriseRequestVisibility {
         All,
+        Selected,
         Noop,
     }
 
-    impl std::fmt::Display for CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
+    impl std::fmt::Display for CreateSelfHostedRunnerGroupEnterpriseRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
-                CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
-                CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
+                CreateSelfHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
+                CreateSelfHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
+                CreateSelfHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
-        fn default() -> CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
-            CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Noop
+    impl Default for CreateSelfHostedRunnerGroupEnterpriseRequestVisibility {
+        fn default() -> CreateSelfHostedRunnerGroupEnterpriseRequestVisibility {
+            CreateSelfHostedRunnerGroupEnterpriseRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateSelfDataHostedRunnerGroupEnterpriseRequest {
+    pub struct CreateSelfHostedRunnerGroupEnterpriseRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23258,31 +23258,31 @@ pub mod types {
     /// Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
-        Selected,
+    pub enum UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility {
         All,
+        Selected,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
+    impl std::fmt::Display for UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
-                UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
-                UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
+                UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
+                UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
+                UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
-        fn default() -> UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
-            UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Noop
+    impl Default for UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility {
+        fn default() -> UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility {
+            UpdateSelfHostedRunnerGroupEnterpriseRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateSelfDataHostedRunnerGroupEnterpriseRequest {
+    pub struct UpdateSelfHostedRunnerGroupEnterpriseRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23294,33 +23294,33 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListOrganizationAccessSelfDataHostedRunnerGroupInEnterpriseOkResponse {
+    pub struct GetListOrganizationAccessSelfHostedRunnerGroupInEnterpriseOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub organizations: Vec<OrganizationSimple>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetOrganizationAccessSelfDataHostedRunnerGroupInEnterpriseRequest {
+    pub struct SetOrganizationAccessSelfHostedRunnerGroupInEnterpriseRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_organization_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfDataHostedRunnersInGroupEnterpriseOkResponse {
+    pub struct GetListSelfHostedRunnersInGroupEnterpriseOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelfDataHostedRunnersInGroupEnterpriseRequest {
+    pub struct SetSelfHostedRunnersInGroupEnterpriseRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfDataHostedRunnersEnterpriseOkResponse {
+    pub struct GetListSelfHostedRunnersEnterpriseOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -23398,16 +23398,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Mode {
-        Markdown,
         Gfm,
+        Markdown,
         Noop,
     }
 
     impl std::fmt::Display for Mode {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                Mode::Markdown => "markdown",
                 Mode::Gfm => "gfm",
+                Mode::Markdown => "markdown",
                 Mode::Noop => "",
             }
             .fmt(f)
@@ -23470,20 +23470,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum DefaultRepositoryPermission {
-        Read,
-        Write,
         Admin,
         None,
+        Read,
+        Write,
         Noop,
     }
 
     impl std::fmt::Display for DefaultRepositoryPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                DefaultRepositoryPermission::Read => "read",
-                DefaultRepositoryPermission::Write => "write",
                 DefaultRepositoryPermission::Admin => "admin",
                 DefaultRepositoryPermission::None => "none",
+                DefaultRepositoryPermission::Read => "read",
+                DefaultRepositoryPermission::Write => "write",
                 DefaultRepositoryPermission::Noop => "",
             }
             .fmt(f)
@@ -23505,8 +23505,8 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum MembersAllowedRepositoryCreationType {
         All,
-        Private,
         None,
+        Private,
         Noop,
     }
 
@@ -23514,8 +23514,8 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 MembersAllowedRepositoryCreationType::All => "all",
-                MembersAllowedRepositoryCreationType::Private => "private",
                 MembersAllowedRepositoryCreationType::None => "none",
+                MembersAllowedRepositoryCreationType::Private => "private",
                 MembersAllowedRepositoryCreationType::Noop => "",
             }
             .fmt(f)
@@ -23641,7 +23641,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfDataHostedRunnerGroupsOrganizationOkResponse {
+    pub struct GetListSelfHostedRunnerGroupsOrganizationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runner_groups: Vec<RunnerGroupsOrg>,
         pub total_count: f64,
@@ -23650,33 +23650,33 @@ pub mod types {
     /// Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
-        Selected,
+    pub enum CreateSelfHostedRunnerGroupOrganizationRequestVisibility {
         All,
         Private,
+        Selected,
         Noop,
     }
 
-    impl std::fmt::Display for CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
+    impl std::fmt::Display for CreateSelfHostedRunnerGroupOrganizationRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
-                CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::All => "all",
-                CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
-                CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
+                CreateSelfHostedRunnerGroupOrganizationRequestVisibility::All => "all",
+                CreateSelfHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
+                CreateSelfHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
+                CreateSelfHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
-        fn default() -> CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
-            CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Noop
+    impl Default for CreateSelfHostedRunnerGroupOrganizationRequestVisibility {
+        fn default() -> CreateSelfHostedRunnerGroupOrganizationRequestVisibility {
+            CreateSelfHostedRunnerGroupOrganizationRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateSelfDataHostedRunnerGroupOrganizationRequest {
+    pub struct CreateSelfHostedRunnerGroupOrganizationRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23694,33 +23694,33 @@ pub mod types {
     /// Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
-        Selected,
+    pub enum UpdateSelfHostedRunnerGroupOrganizationRequestVisibility {
         All,
         Private,
+        Selected,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
+    impl std::fmt::Display for UpdateSelfHostedRunnerGroupOrganizationRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
-                UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::All => "all",
-                UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
-                UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
+                UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::All => "all",
+                UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
+                UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
+                UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
-        fn default() -> UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
-            UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Noop
+    impl Default for UpdateSelfHostedRunnerGroupOrganizationRequestVisibility {
+        fn default() -> UpdateSelfHostedRunnerGroupOrganizationRequestVisibility {
+            UpdateSelfHostedRunnerGroupOrganizationRequestVisibility::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateSelfDataHostedRunnerGroupOrganizationRequest {
+    pub struct UpdateSelfHostedRunnerGroupOrganizationRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23732,33 +23732,33 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListRepositoryAccessSelfDataHostedRunnerGroupInOrganizationOkResponse {
+    pub struct GetListRepositoryAccessSelfHostedRunnerGroupInOrganizationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<MinimalRepository>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetRepositoryAccessSelfDataHostedRunnerGroupInOrganizationRequest {
+    pub struct SetRepositoryAccessSelfHostedRunnerGroupInOrganizationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfDataHostedRunnersInGroupOrganizationOkResponse {
+    pub struct GetListSelfHostedRunnersInGroupOrganizationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelfDataHostedRunnersInGroupOrganizationRequest {
+    pub struct SetSelfHostedRunnersInGroupOrganizationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfDataHostedRunnersOrganizationOkResponse {
+    pub struct GetListSelfHostedRunnersOrganizationOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: i64,
@@ -23988,8 +23988,8 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum CreateOrganizationInvitationRequestRole {
         Admin,
-        DirectMember,
         BillingManager,
+        DirectMember,
         Noop,
     }
 
@@ -23997,8 +23997,8 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 CreateOrganizationInvitationRequestRole::Admin => "admin",
-                CreateOrganizationInvitationRequestRole::DirectMember => "direct_member",
                 CreateOrganizationInvitationRequestRole::BillingManager => "billing_manager",
+                CreateOrganizationInvitationRequestRole::DirectMember => "direct_member",
                 CreateOrganizationInvitationRequestRole::Noop => "",
             }
             .fmt(f)
@@ -24136,20 +24136,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateOrganizationRepositoryRequestVisibility {
-        Public,
-        Private,
-        Visibility,
         Internal,
+        Private,
+        Public,
+        Visibility,
         Noop,
     }
 
     impl std::fmt::Display for CreateOrganizationRepositoryRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateOrganizationRepositoryRequestVisibility::Public => "public",
-                CreateOrganizationRepositoryRequestVisibility::Private => "private",
-                CreateOrganizationRepositoryRequestVisibility::Visibility => "visibility",
                 CreateOrganizationRepositoryRequestVisibility::Internal => "internal",
+                CreateOrganizationRepositoryRequestVisibility::Private => "private",
+                CreateOrganizationRepositoryRequestVisibility::Public => "public",
+                CreateOrganizationRepositoryRequestVisibility::Visibility => "visibility",
                 CreateOrganizationRepositoryRequestVisibility::Noop => "",
             }
             .fmt(f)
@@ -24231,16 +24231,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateTeamRequestPrivacy {
-        Secret,
         Closed,
+        Secret,
         Noop,
     }
 
     impl std::fmt::Display for CreateTeamRequestPrivacy {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateTeamRequestPrivacy::Secret => "secret",
                 CreateTeamRequestPrivacy::Closed => "closed",
+                CreateTeamRequestPrivacy::Secret => "secret",
                 CreateTeamRequestPrivacy::Noop => "",
             }
             .fmt(f)
@@ -24260,18 +24260,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Permission {
+        Admin,
         Pull,
         Push,
-        Admin,
         Noop,
     }
 
     impl std::fmt::Display for Permission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                Permission::Admin => "admin",
                 Permission::Pull => "pull",
                 Permission::Push => "push",
-                Permission::Admin => "admin",
                 Permission::Noop => "",
             }
             .fmt(f)
@@ -24319,16 +24319,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateTeamRequestPrivacy {
-        Secret,
         Closed,
+        Secret,
         Noop,
     }
 
     impl std::fmt::Display for UpdateTeamRequestPrivacy {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateTeamRequestPrivacy::Secret => "secret",
                 UpdateTeamRequestPrivacy::Closed => "closed",
+                UpdateTeamRequestPrivacy::Secret => "secret",
                 UpdateTeamRequestPrivacy::Noop => "",
             }
             .fmt(f)
@@ -24423,12 +24423,12 @@ pub mod types {
     pub enum CreateReactionTeamDiscussionCommentRequestContent {
         PlusOne,
         MinusOne,
-        Laugh,
         Confused,
+        Eyes,
         Heart,
         Hooray,
+        Laugh,
         Rocket,
-        Eyes,
         Noop,
     }
 
@@ -24437,12 +24437,12 @@ pub mod types {
             match *self {
                 CreateReactionTeamDiscussionCommentRequestContent::PlusOne => "+1",
                 CreateReactionTeamDiscussionCommentRequestContent::MinusOne => "-1",
-                CreateReactionTeamDiscussionCommentRequestContent::Laugh => "laugh",
                 CreateReactionTeamDiscussionCommentRequestContent::Confused => "confused",
+                CreateReactionTeamDiscussionCommentRequestContent::Eyes => "eyes",
                 CreateReactionTeamDiscussionCommentRequestContent::Heart => "heart",
                 CreateReactionTeamDiscussionCommentRequestContent::Hooray => "hooray",
+                CreateReactionTeamDiscussionCommentRequestContent::Laugh => "laugh",
                 CreateReactionTeamDiscussionCommentRequestContent::Rocket => "rocket",
-                CreateReactionTeamDiscussionCommentRequestContent::Eyes => "eyes",
                 CreateReactionTeamDiscussionCommentRequestContent::Noop => "",
             }
             .fmt(f)
@@ -24466,12 +24466,12 @@ pub mod types {
     pub enum CreateReactionTeamDiscussionRequestContent {
         PlusOne,
         MinusOne,
-        Laugh,
         Confused,
+        Eyes,
         Heart,
         Hooray,
+        Laugh,
         Rocket,
-        Eyes,
         Noop,
     }
 
@@ -24480,12 +24480,12 @@ pub mod types {
             match *self {
                 CreateReactionTeamDiscussionRequestContent::PlusOne => "+1",
                 CreateReactionTeamDiscussionRequestContent::MinusOne => "-1",
-                CreateReactionTeamDiscussionRequestContent::Laugh => "laugh",
                 CreateReactionTeamDiscussionRequestContent::Confused => "confused",
+                CreateReactionTeamDiscussionRequestContent::Eyes => "eyes",
                 CreateReactionTeamDiscussionRequestContent::Heart => "heart",
                 CreateReactionTeamDiscussionRequestContent::Hooray => "hooray",
+                CreateReactionTeamDiscussionRequestContent::Laugh => "laugh",
                 CreateReactionTeamDiscussionRequestContent::Rocket => "rocket",
-                CreateReactionTeamDiscussionRequestContent::Eyes => "eyes",
                 CreateReactionTeamDiscussionRequestContent::Noop => "",
             }
             .fmt(f)
@@ -24509,16 +24509,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddUpdateTeamMembershipUserRequestRole {
-        Member,
         Maintainer,
+        Member,
         Noop,
     }
 
     impl std::fmt::Display for AddUpdateTeamMembershipUserRequestRole {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AddUpdateTeamMembershipUserRequestRole::Member => "member",
                 AddUpdateTeamMembershipUserRequestRole::Maintainer => "maintainer",
+                AddUpdateTeamMembershipUserRequestRole::Member => "member",
                 AddUpdateTeamMembershipUserRequestRole::Noop => "",
             }
             .fmt(f)
@@ -24545,18 +24545,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddUpdateTeamProjectPermissionsRequestPermission {
+        Admin,
         Read,
         Write,
-        Admin,
         Noop,
     }
 
     impl std::fmt::Display for AddUpdateTeamProjectPermissionsRequestPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                AddUpdateTeamProjectPermissionsRequestPermission::Admin => "admin",
                 AddUpdateTeamProjectPermissionsRequestPermission::Read => "read",
                 AddUpdateTeamProjectPermissionsRequestPermission::Write => "write",
-                AddUpdateTeamProjectPermissionsRequestPermission::Admin => "admin",
                 AddUpdateTeamProjectPermissionsRequestPermission::Noop => "",
             }
             .fmt(f)
@@ -24602,10 +24602,10 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddUpdateTeamRepositoryPermissionsRequestPermission {
-        Pull,
-        Push,
         Admin,
         Maintain,
+        Pull,
+        Push,
         Triage,
         Noop,
     }
@@ -24613,10 +24613,10 @@ pub mod types {
     impl std::fmt::Display for AddUpdateTeamRepositoryPermissionsRequestPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AddUpdateTeamRepositoryPermissionsRequestPermission::Pull => "pull",
-                AddUpdateTeamRepositoryPermissionsRequestPermission::Push => "push",
                 AddUpdateTeamRepositoryPermissionsRequestPermission::Admin => "admin",
                 AddUpdateTeamRepositoryPermissionsRequestPermission::Maintain => "maintain",
+                AddUpdateTeamRepositoryPermissionsRequestPermission::Pull => "pull",
+                AddUpdateTeamRepositoryPermissionsRequestPermission::Push => "push",
                 AddUpdateTeamRepositoryPermissionsRequestPermission::Triage => "triage",
                 AddUpdateTeamRepositoryPermissionsRequestPermission::Noop => "",
             }
@@ -24908,20 +24908,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateProjectRequestOrganizationPermission {
-        Read,
-        Write,
         Admin,
         None,
+        Read,
+        Write,
         Noop,
     }
 
     impl std::fmt::Display for UpdateProjectRequestOrganizationPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateProjectRequestOrganizationPermission::Read => "read",
-                UpdateProjectRequestOrganizationPermission::Write => "write",
                 UpdateProjectRequestOrganizationPermission::Admin => "admin",
                 UpdateProjectRequestOrganizationPermission::None => "none",
+                UpdateProjectRequestOrganizationPermission::Read => "read",
+                UpdateProjectRequestOrganizationPermission::Write => "write",
                 UpdateProjectRequestOrganizationPermission::Noop => "",
             }
             .fmt(f)
@@ -24982,18 +24982,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddProjectCollaboratorRequestPermission {
+        Admin,
         Read,
         Write,
-        Admin,
         Noop,
     }
 
     impl std::fmt::Display for AddProjectCollaboratorRequestPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                AddProjectCollaboratorRequestPermission::Admin => "admin",
                 AddProjectCollaboratorRequestPermission::Read => "read",
                 AddProjectCollaboratorRequestPermission::Write => "write",
-                AddProjectCollaboratorRequestPermission::Admin => "admin",
                 AddProjectCollaboratorRequestPermission::Noop => "",
             }
             .fmt(f)
@@ -25042,20 +25042,20 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateRepositoryRequestVisibility {
-        Public,
-        Private,
-        Visibility,
         Internal,
+        Private,
+        Public,
+        Visibility,
         Noop,
     }
 
     impl std::fmt::Display for UpdateRepositoryRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateRepositoryRequestVisibility::Public => "public",
-                UpdateRepositoryRequestVisibility::Private => "private",
-                UpdateRepositoryRequestVisibility::Visibility => "visibility",
                 UpdateRepositoryRequestVisibility::Internal => "internal",
+                UpdateRepositoryRequestVisibility::Private => "private",
+                UpdateRepositoryRequestVisibility::Public => "public",
+                UpdateRepositoryRequestVisibility::Visibility => "visibility",
                 UpdateRepositoryRequestVisibility::Noop => "",
             }
             .fmt(f)
@@ -25163,7 +25163,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfDataHostedRunnersRepositoryOkResponse {
+    pub struct GetListSelfHostedRunnersRepositoryOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         pub total_count: i64,
@@ -25458,18 +25458,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateCheckRunRequestStatus {
-        Queued,
-        InProgress,
         Completed,
+        InProgress,
+        Queued,
         Noop,
     }
 
     impl std::fmt::Display for CreateCheckRunRequestStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateCheckRunRequestStatus::Queued => "queued",
-                CreateCheckRunRequestStatus::InProgress => "in_progress",
                 CreateCheckRunRequestStatus::Completed => "completed",
+                CreateCheckRunRequestStatus::InProgress => "in_progress",
+                CreateCheckRunRequestStatus::Queued => "queued",
                 CreateCheckRunRequestStatus::Noop => "",
             }
             .fmt(f)
@@ -25491,9 +25491,9 @@ pub mod types {
         Cancelled,
         Failure,
         Neutral,
-        Success,
         Skipped,
         Stale,
+        Success,
         TimedOut,
         Noop,
     }
@@ -25505,9 +25505,9 @@ pub mod types {
                 CreateCheckRunRequestConclusion::Cancelled => "cancelled",
                 CreateCheckRunRequestConclusion::Failure => "failure",
                 CreateCheckRunRequestConclusion::Neutral => "neutral",
-                CreateCheckRunRequestConclusion::Success => "success",
                 CreateCheckRunRequestConclusion::Skipped => "skipped",
                 CreateCheckRunRequestConclusion::Stale => "stale",
+                CreateCheckRunRequestConclusion::Success => "success",
                 CreateCheckRunRequestConclusion::TimedOut => "timed_out",
                 CreateCheckRunRequestConclusion::Noop => "",
             }
@@ -25525,18 +25525,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AnnotationLevel {
+        Failure,
         Notice,
         Warning,
-        Failure,
         Noop,
     }
 
     impl std::fmt::Display for AnnotationLevel {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                AnnotationLevel::Failure => "failure",
                 AnnotationLevel::Notice => "notice",
                 AnnotationLevel::Warning => "warning",
-                AnnotationLevel::Failure => "failure",
                 AnnotationLevel::Noop => "",
             }
             .fmt(f)
@@ -25698,18 +25698,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateCheckRunRequestStatus {
-        Queued,
-        InProgress,
         Completed,
+        InProgress,
+        Queued,
         Noop,
     }
 
     impl std::fmt::Display for UpdateCheckRunRequestStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateCheckRunRequestStatus::Queued => "queued",
-                UpdateCheckRunRequestStatus::InProgress => "in_progress",
                 UpdateCheckRunRequestStatus::Completed => "completed",
+                UpdateCheckRunRequestStatus::InProgress => "in_progress",
+                UpdateCheckRunRequestStatus::Queued => "queued",
                 UpdateCheckRunRequestStatus::Noop => "",
             }
             .fmt(f)
@@ -25731,9 +25731,9 @@ pub mod types {
         Cancelled,
         Failure,
         Neutral,
-        Success,
         Skipped,
         Stale,
+        Success,
         TimedOut,
         Noop,
     }
@@ -25745,9 +25745,9 @@ pub mod types {
                 UpdateCheckRunRequestConclusion::Cancelled => "cancelled",
                 UpdateCheckRunRequestConclusion::Failure => "failure",
                 UpdateCheckRunRequestConclusion::Neutral => "neutral",
-                UpdateCheckRunRequestConclusion::Success => "success",
                 UpdateCheckRunRequestConclusion::Skipped => "skipped",
                 UpdateCheckRunRequestConclusion::Stale => "stale",
+                UpdateCheckRunRequestConclusion::Success => "success",
                 UpdateCheckRunRequestConclusion::TimedOut => "timed_out",
                 UpdateCheckRunRequestConclusion::Noop => "",
             }
@@ -25922,10 +25922,10 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddRepositoryCollaboratorRequestPermission {
-        Pull,
-        Push,
         Admin,
         Maintain,
+        Pull,
+        Push,
         Triage,
         Noop,
     }
@@ -25933,10 +25933,10 @@ pub mod types {
     impl std::fmt::Display for AddRepositoryCollaboratorRequestPermission {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AddRepositoryCollaboratorRequestPermission::Pull => "pull",
-                AddRepositoryCollaboratorRequestPermission::Push => "push",
                 AddRepositoryCollaboratorRequestPermission::Admin => "admin",
                 AddRepositoryCollaboratorRequestPermission::Maintain => "maintain",
+                AddRepositoryCollaboratorRequestPermission::Pull => "pull",
+                AddRepositoryCollaboratorRequestPermission::Push => "push",
                 AddRepositoryCollaboratorRequestPermission::Triage => "triage",
                 AddRepositoryCollaboratorRequestPermission::Noop => "",
             }
@@ -25978,12 +25978,12 @@ pub mod types {
     pub enum CreateReactionCommitCommentRequestContent {
         PlusOne,
         MinusOne,
-        Laugh,
         Confused,
+        Eyes,
         Heart,
         Hooray,
+        Laugh,
         Rocket,
-        Eyes,
         Noop,
     }
 
@@ -25992,12 +25992,12 @@ pub mod types {
             match *self {
                 CreateReactionCommitCommentRequestContent::PlusOne => "+1",
                 CreateReactionCommitCommentRequestContent::MinusOne => "-1",
-                CreateReactionCommitCommentRequestContent::Laugh => "laugh",
                 CreateReactionCommitCommentRequestContent::Confused => "confused",
+                CreateReactionCommitCommentRequestContent::Eyes => "eyes",
                 CreateReactionCommitCommentRequestContent::Heart => "heart",
                 CreateReactionCommitCommentRequestContent::Hooray => "hooray",
+                CreateReactionCommitCommentRequestContent::Laugh => "laugh",
                 CreateReactionCommitCommentRequestContent::Rocket => "rocket",
-                CreateReactionCommitCommentRequestContent::Eyes => "eyes",
                 CreateReactionCommitCommentRequestContent::Noop => "",
             }
             .fmt(f)
@@ -26315,10 +26315,10 @@ pub mod types {
     pub enum CreateDeploymentStatusRequestState {
         Error,
         Failure,
-        Inactive,
         InProgress,
-        Queued,
+        Inactive,
         Pending,
+        Queued,
         Success,
         Noop,
     }
@@ -26328,10 +26328,10 @@ pub mod types {
             match *self {
                 CreateDeploymentStatusRequestState::Error => "error",
                 CreateDeploymentStatusRequestState::Failure => "failure",
-                CreateDeploymentStatusRequestState::Inactive => "inactive",
                 CreateDeploymentStatusRequestState::InProgress => "in_progress",
-                CreateDeploymentStatusRequestState::Queued => "queued",
+                CreateDeploymentStatusRequestState::Inactive => "inactive",
                 CreateDeploymentStatusRequestState::Pending => "pending",
+                CreateDeploymentStatusRequestState::Queued => "queued",
                 CreateDeploymentStatusRequestState::Success => "success",
                 CreateDeploymentStatusRequestState::Noop => "",
             }
@@ -26350,8 +26350,8 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum CreateDeploymentStatusRequestEnvironment {
         Production,
-        Staging,
         Qa,
+        Staging,
         Noop,
     }
 
@@ -26359,8 +26359,8 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 CreateDeploymentStatusRequestEnvironment::Production => "production",
-                CreateDeploymentStatusRequestEnvironment::Staging => "staging",
                 CreateDeploymentStatusRequestEnvironment::Qa => "qa",
+                CreateDeploymentStatusRequestEnvironment::Staging => "staging",
                 CreateDeploymentStatusRequestEnvironment::Noop => "",
             }
             .fmt(f)
@@ -26576,18 +26576,18 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateTagObjectRequestType {
+        Blob,
         Commit,
         Tree,
-        Blob,
         Noop,
     }
 
     impl std::fmt::Display for CreateTagObjectRequestType {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                CreateTagObjectRequestType::Blob => "blob",
                 CreateTagObjectRequestType::Commit => "commit",
                 CreateTagObjectRequestType::Tree => "tree",
-                CreateTagObjectRequestType::Blob => "blob",
                 CreateTagObjectRequestType::Noop => "",
             }
             .fmt(f)
@@ -26648,22 +26648,22 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateTreeRequestMode {
+        SubdirectoryTree,
         FileBlob,
         ExecutableBlob,
-        SubdirectoryTree,
-        SubmoduleCommit,
         SymlinkPathBlob,
+        SubmoduleCommit,
         Noop,
     }
 
     impl std::fmt::Display for CreateTreeRequestMode {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
+                CreateTreeRequestMode::SubdirectoryTree => "040000",
                 CreateTreeRequestMode::FileBlob => "100644",
                 CreateTreeRequestMode::ExecutableBlob => "100755",
-                CreateTreeRequestMode::SubdirectoryTree => "040000",
-                CreateTreeRequestMode::SubmoduleCommit => "160000",
                 CreateTreeRequestMode::SymlinkPathBlob => "120000",
+                CreateTreeRequestMode::SubmoduleCommit => "160000",
                 CreateTreeRequestMode::Noop => "",
             }
             .fmt(f)
@@ -26681,8 +26681,8 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum CreateTreeRequestType {
         Blob,
-        Tree,
         Commit,
+        Tree,
         Noop,
     }
 
@@ -26690,8 +26690,8 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 CreateTreeRequestType::Blob => "blob",
-                CreateTreeRequestType::Tree => "tree",
                 CreateTreeRequestType::Commit => "commit",
+                CreateTreeRequestType::Tree => "tree",
                 CreateTreeRequestType::Noop => "",
             }
             .fmt(f)
@@ -26884,9 +26884,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Vcs {
-        Subversion,
         Git,
         Mercurial,
+        Subversion,
         Tfvc,
         Noop,
     }
@@ -26894,9 +26894,9 @@ pub mod types {
     impl std::fmt::Display for Vcs {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                Vcs::Subversion => "subversion",
                 Vcs::Git => "git",
                 Vcs::Mercurial => "mercurial",
+                Vcs::Subversion => "subversion",
                 Vcs::Tfvc => "tfvc",
                 Vcs::Noop => "",
             }
@@ -27031,22 +27031,22 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateRepositoryInvitationRequestPermissions {
-        Read,
-        Write,
-        Maintain,
-        Triage,
         Admin,
+        Maintain,
+        Read,
+        Triage,
+        Write,
         Noop,
     }
 
     impl std::fmt::Display for UpdateRepositoryInvitationRequestPermissions {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateRepositoryInvitationRequestPermissions::Read => "read",
-                UpdateRepositoryInvitationRequestPermissions::Write => "write",
-                UpdateRepositoryInvitationRequestPermissions::Maintain => "maintain",
-                UpdateRepositoryInvitationRequestPermissions::Triage => "triage",
                 UpdateRepositoryInvitationRequestPermissions::Admin => "admin",
+                UpdateRepositoryInvitationRequestPermissions::Maintain => "maintain",
+                UpdateRepositoryInvitationRequestPermissions::Read => "read",
+                UpdateRepositoryInvitationRequestPermissions::Triage => "triage",
+                UpdateRepositoryInvitationRequestPermissions::Write => "write",
                 UpdateRepositoryInvitationRequestPermissions::Noop => "",
             }
             .fmt(f)
@@ -27109,12 +27109,12 @@ pub mod types {
     pub enum CreateReactionIssueCommentRequestContent {
         PlusOne,
         MinusOne,
-        Laugh,
         Confused,
+        Eyes,
         Heart,
         Hooray,
+        Laugh,
         Rocket,
-        Eyes,
         Noop,
     }
 
@@ -27123,12 +27123,12 @@ pub mod types {
             match *self {
                 CreateReactionIssueCommentRequestContent::PlusOne => "+1",
                 CreateReactionIssueCommentRequestContent::MinusOne => "-1",
-                CreateReactionIssueCommentRequestContent::Laugh => "laugh",
                 CreateReactionIssueCommentRequestContent::Confused => "confused",
+                CreateReactionIssueCommentRequestContent::Eyes => "eyes",
                 CreateReactionIssueCommentRequestContent::Heart => "heart",
                 CreateReactionIssueCommentRequestContent::Hooray => "hooray",
+                CreateReactionIssueCommentRequestContent::Laugh => "laugh",
                 CreateReactionIssueCommentRequestContent::Rocket => "rocket",
-                CreateReactionIssueCommentRequestContent::Eyes => "eyes",
                 CreateReactionIssueCommentRequestContent::Noop => "",
             }
             .fmt(f)
@@ -27150,16 +27150,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateIssueRequestState {
-        Open,
         Closed,
+        Open,
         Noop,
     }
 
     impl std::fmt::Display for UpdateIssueRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateIssueRequestState::Open => "open",
                 UpdateIssueRequestState::Closed => "closed",
+                UpdateIssueRequestState::Open => "open",
                 UpdateIssueRequestState::Noop => "",
             }
             .fmt(f)
@@ -27245,9 +27245,9 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum LockReason {
         OffTopic,
-        TooHeated,
         Resolved,
         Spam,
+        TooHeated,
         Noop,
     }
 
@@ -27255,9 +27255,9 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 LockReason::OffTopic => "off-topic",
-                LockReason::TooHeated => "too heated",
                 LockReason::Resolved => "resolved",
                 LockReason::Spam => "spam",
+                LockReason::TooHeated => "too heated",
                 LockReason::Noop => "",
             }
             .fmt(f)
@@ -27282,12 +27282,12 @@ pub mod types {
     pub enum CreateReactionIssueRequestContent {
         PlusOne,
         MinusOne,
-        Laugh,
         Confused,
+        Eyes,
         Heart,
         Hooray,
+        Laugh,
         Rocket,
-        Eyes,
         Noop,
     }
 
@@ -27296,12 +27296,12 @@ pub mod types {
             match *self {
                 CreateReactionIssueRequestContent::PlusOne => "+1",
                 CreateReactionIssueRequestContent::MinusOne => "-1",
-                CreateReactionIssueRequestContent::Laugh => "laugh",
                 CreateReactionIssueRequestContent::Confused => "confused",
+                CreateReactionIssueRequestContent::Eyes => "eyes",
                 CreateReactionIssueRequestContent::Heart => "heart",
                 CreateReactionIssueRequestContent::Hooray => "hooray",
+                CreateReactionIssueRequestContent::Laugh => "laugh",
                 CreateReactionIssueRequestContent::Rocket => "rocket",
-                CreateReactionIssueRequestContent::Eyes => "eyes",
                 CreateReactionIssueRequestContent::Noop => "",
             }
             .fmt(f)
@@ -27407,16 +27407,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateMilestoneRequestState {
-        Open,
         Closed,
+        Open,
         Noop,
     }
 
     impl std::fmt::Display for CreateMilestoneRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateMilestoneRequestState::Open => "open",
                 CreateMilestoneRequestState::Closed => "closed",
+                CreateMilestoneRequestState::Open => "open",
                 CreateMilestoneRequestState::Noop => "",
             }
             .fmt(f)
@@ -27453,16 +27453,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateMilestoneRequestState {
-        Open,
         Closed,
+        Open,
         Noop,
     }
 
     impl std::fmt::Display for UpdateMilestoneRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateMilestoneRequestState::Open => "open",
                 UpdateMilestoneRequestState::Closed => "closed",
+                UpdateMilestoneRequestState::Open => "open",
                 UpdateMilestoneRequestState::Noop => "",
             }
             .fmt(f)
@@ -27670,12 +27670,12 @@ pub mod types {
     pub enum CreateReactionPullRequestReviewCommentContent {
         PlusOne,
         MinusOne,
-        Laugh,
         Confused,
+        Eyes,
         Heart,
         Hooray,
+        Laugh,
         Rocket,
-        Eyes,
         Noop,
     }
 
@@ -27684,12 +27684,12 @@ pub mod types {
             match *self {
                 CreateReactionPullRequestReviewCommentContent::PlusOne => "+1",
                 CreateReactionPullRequestReviewCommentContent::MinusOne => "-1",
-                CreateReactionPullRequestReviewCommentContent::Laugh => "laugh",
                 CreateReactionPullRequestReviewCommentContent::Confused => "confused",
+                CreateReactionPullRequestReviewCommentContent::Eyes => "eyes",
                 CreateReactionPullRequestReviewCommentContent::Heart => "heart",
                 CreateReactionPullRequestReviewCommentContent::Hooray => "hooray",
+                CreateReactionPullRequestReviewCommentContent::Laugh => "laugh",
                 CreateReactionPullRequestReviewCommentContent::Rocket => "rocket",
-                CreateReactionPullRequestReviewCommentContent::Eyes => "eyes",
                 CreateReactionPullRequestReviewCommentContent::Noop => "",
             }
             .fmt(f)
@@ -27711,16 +27711,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdatePullRequestState {
-        Open,
         Closed,
+        Open,
         Noop,
     }
 
     impl std::fmt::Display for UpdatePullRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdatePullRequestState::Open => "open",
                 UpdatePullRequestState::Closed => "closed",
+                UpdatePullRequestState::Open => "open",
                 UpdatePullRequestState::Noop => "",
             }
             .fmt(f)
@@ -27862,8 +27862,8 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum MergePullRequestMethod {
         Merge,
-        Squash,
         Rebase,
+        Squash,
         Noop,
     }
 
@@ -27871,8 +27871,8 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 MergePullRequestMethod::Merge => "merge",
-                MergePullRequestMethod::Squash => "squash",
                 MergePullRequestMethod::Rebase => "rebase",
+                MergePullRequestMethod::Squash => "squash",
                 MergePullRequestMethod::Noop => "",
             }
             .fmt(f)
@@ -27962,8 +27962,8 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum CreateReviewPullRequestEvent {
         Approve,
-        RequestChanges,
         Comment,
+        RequestChanges,
         Noop,
     }
 
@@ -27971,8 +27971,8 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 CreateReviewPullRequestEvent::Approve => "APPROVE",
-                CreateReviewPullRequestEvent::RequestChanges => "REQUEST_CHANGES",
                 CreateReviewPullRequestEvent::Comment => "COMMENT",
+                CreateReviewPullRequestEvent::RequestChanges => "REQUEST_CHANGES",
                 CreateReviewPullRequestEvent::Noop => "",
             }
             .fmt(f)
@@ -28070,8 +28070,8 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum SubmitReviewPullRequestEvent {
         Approve,
-        RequestChanges,
         Comment,
+        RequestChanges,
         Noop,
     }
 
@@ -28079,8 +28079,8 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 SubmitReviewPullRequestEvent::Approve => "APPROVE",
-                SubmitReviewPullRequestEvent::RequestChanges => "REQUEST_CHANGES",
                 SubmitReviewPullRequestEvent::Comment => "COMMENT",
+                SubmitReviewPullRequestEvent::RequestChanges => "REQUEST_CHANGES",
                 SubmitReviewPullRequestEvent::Noop => "",
             }
             .fmt(f)
@@ -28233,11 +28233,11 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum CreateReactionReleaseRequestContent {
         PlusOne,
-        Laugh,
+        Eyes,
         Heart,
         Hooray,
+        Laugh,
         Rocket,
-        Eyes,
         Noop,
     }
 
@@ -28245,11 +28245,11 @@ pub mod types {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
                 CreateReactionReleaseRequestContent::PlusOne => "+1",
-                CreateReactionReleaseRequestContent::Laugh => "laugh",
+                CreateReactionReleaseRequestContent::Eyes => "eyes",
                 CreateReactionReleaseRequestContent::Heart => "heart",
                 CreateReactionReleaseRequestContent::Hooray => "hooray",
+                CreateReactionReleaseRequestContent::Laugh => "laugh",
                 CreateReactionReleaseRequestContent::Rocket => "rocket",
-                CreateReactionReleaseRequestContent::Eyes => "eyes",
                 CreateReactionReleaseRequestContent::Noop => "",
             }
             .fmt(f)
@@ -28454,10 +28454,10 @@ pub mod types {
     #[serde(rename_all = "snake_case")]
     pub enum UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
         Add,
-        Add,
-        Remove,
         Remove,
         Replace,
+        Add,
+        Remove,
         Replace,
         Noop,
     }
@@ -28465,12 +28465,12 @@ pub mod types {
     impl std::fmt::Display for UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Add => "add",
                 UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Add => "Add",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Remove => "remove",
                 UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Remove => "Remove",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Replace => "replace",
                 UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Replace => "Replace",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Add => "add",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Remove => "remove",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Replace => "replace",
                 UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Noop => "",
             }
             .fmt(f)
@@ -29094,16 +29094,16 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SetPrimaryEmailVisibilityRequest {
-        Public,
         Private,
+        Public,
         Noop,
     }
 
     impl std::fmt::Display for SetPrimaryEmailVisibilityRequest {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                SetPrimaryEmailVisibilityRequest::Public => "public",
                 SetPrimaryEmailVisibilityRequest::Private => "private",
+                SetPrimaryEmailVisibilityRequest::Public => "public",
                 SetPrimaryEmailVisibilityRequest::Noop => "",
             }
             .fmt(f)
@@ -30779,7 +30779,7 @@ impl Client {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfDataHostedRunnerGroupsEnterpriseOkResponse> {
+    ) -> Result<types::GetListSelfHostedRunnerGroupsEnterpriseOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -30804,7 +30804,7 @@ impl Client {
     pub async fn enterprise_admin_create_self_hosted_runner_group_for_enterprise(
         &self,
         enterprise: &str,
-        body: &types::CreateSelfDataHostedRunnerGroupEnterpriseRequest,
+        body: &types::CreateSelfHostedRunnerGroupEnterpriseRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups",
@@ -30875,7 +30875,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::UpdateSelfDataHostedRunnerGroupEnterpriseRequest,
+        body: &types::UpdateSelfHostedRunnerGroupEnterpriseRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}",
@@ -30903,7 +30903,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListOrganizationAccessSelfDataHostedRunnerGroupInEnterpriseOkResponse> {
+    ) -> Result<types::GetListOrganizationAccessSelfHostedRunnerGroupInEnterpriseOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -30930,7 +30930,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::SetOrganizationAccessSelfDataHostedRunnerGroupInEnterpriseRequest,
+        body: &types::SetOrganizationAccessSelfHostedRunnerGroupInEnterpriseRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations",
@@ -31012,7 +31012,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfDataHostedRunnersInGroupEnterpriseOkResponse> {
+    ) -> Result<types::GetListSelfHostedRunnersInGroupEnterpriseOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -31039,7 +31039,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::SetSelfDataHostedRunnersInGroupEnterpriseRequest,
+        body: &types::SetSelfHostedRunnersInGroupEnterpriseRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners",
@@ -31121,7 +31121,7 @@ impl Client {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfDataHostedRunnersEnterpriseOkResponse> {
+    ) -> Result<types::GetListSelfHostedRunnersEnterpriseOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32496,7 +32496,7 @@ impl Client {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfDataHostedRunnerGroupsOrganizationOkResponse> {
+    ) -> Result<types::GetListSelfHostedRunnerGroupsOrganizationOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -32523,7 +32523,7 @@ impl Client {
     pub async fn actions_create_self_hosted_runner_group_for_org(
         &self,
         org: &str,
-        body: &types::CreateSelfDataHostedRunnerGroupOrganizationRequest,
+        body: &types::CreateSelfHostedRunnerGroupOrganizationRequest,
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!("/orgs/{}/actions/runner-groups", progenitor_support::encode_path(&org.to_string()),);
 
@@ -32593,7 +32593,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::UpdateSelfDataHostedRunnerGroupOrganizationRequest,
+        body: &types::UpdateSelfHostedRunnerGroupOrganizationRequest,
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}",
@@ -32623,7 +32623,7 @@ impl Client {
         runner_group_id: i64,
         page: i64,
         per_page: i64,
-    ) -> Result<types::GetListRepositoryAccessSelfDataHostedRunnerGroupInOrganizationOkResponse> {
+    ) -> Result<types::GetListRepositoryAccessSelfHostedRunnerGroupInOrganizationOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -32652,7 +32652,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::SetRepositoryAccessSelfDataHostedRunnerGroupInOrganizationRequest,
+        body: &types::SetRepositoryAccessSelfHostedRunnerGroupInOrganizationRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories",
@@ -32743,7 +32743,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfDataHostedRunnersInGroupOrganizationOkResponse> {
+    ) -> Result<types::GetListSelfHostedRunnersInGroupOrganizationOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -32772,7 +32772,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::SetSelfDataHostedRunnersInGroupOrganizationRequest,
+        body: &types::SetSelfHostedRunnersInGroupOrganizationRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners",
@@ -32850,7 +32850,7 @@ impl Client {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfDataHostedRunnersOrganizationOkResponse> {
+    ) -> Result<types::GetListSelfHostedRunnersOrganizationOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36260,7 +36260,7 @@ impl Client {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfDataHostedRunnersRepositoryOkResponse> {
+    ) -> Result<types::GetListSelfHostedRunnersRepositoryOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
