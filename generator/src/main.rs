@@ -1269,16 +1269,15 @@ fn gen(
         }
     }
 
-    async fn request<B, Out>(
+    async fn request<Out>(
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<B>,
+        body: Option<reqwest::Body>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
     where
-        B: Into<reqwest::Body>,
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         #[cfg(feature = "httpcache")]
@@ -1397,16 +1396,15 @@ fn gen(
         }
     }
 
-    async fn request_entity<B, D>(
+    async fn request_entity<D>(
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<B>,
+        body: Option<reqwest::Body>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
     where
-        B: Into<reqwest::Body>,
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let (_ , r) = self.request(method, uri, body, media_type, authentication).await?;
@@ -1459,9 +1457,8 @@ fn gen(
         ).await
     }
 
-    async fn post<B, D>(&self, uri: &str, message: B) -> Result<D>
+    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
-        B: Into<reqwest::Body>,
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.post_media(
@@ -1472,21 +1469,20 @@ fn gen(
         ).await
     }
 
-    async fn post_media<B, D>(
+    async fn post_media<D>(
         &self,
         uri: &str,
-        message: B,
+        message: Option<reqwest::Body>,
         media: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
     where
-        B: Into<reqwest::Body>,
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.request_entity(
             http::Method::POST,
             &(self.host.clone() + uri),
-            Some(message),
+            message,
             media,
             authentication,
         ).await
@@ -1819,10 +1815,20 @@ fn gen(
              */
             if m == http::Method::GET {
                 a(&format!("       self.{}(&url).await", m.to_lowercase()));
-            } else if m == http::Method::POST {
+            } else if m == http::Method::POST && oid != "apps_create_installation_access_token" {
+                let body = if let Some(f) = &body_func {
+                    if f == "json" {
+                        "Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))"
+                    } else {
+                        "Some(body.into())"
+                    }
+                } else {
+                    "None"
+                };
                 a(&format!(
-                    "       self.{}(&url, body).await",
+                    "       self.{}(&url, {}).await",
                     m.to_lowercase(),
+                    body
                 ));
             } else {
                 a(&format!(
