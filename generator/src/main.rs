@@ -1572,10 +1572,12 @@ fn gen(
             a("/**");
             a(&format!("* {}: {} {}", oid, m, p));
             if let Some(description) = &o.description {
-                a(&format!("* {}", description));
+                a("*");
+                a(&format!("* {}", description.replace('\n', "\n* ")));
             }
             if let Some(external_docs) = &o.external_docs {
-                a(&format!("* FROM: {}", external_docs.url));
+                a("*");
+                a(&format!("* FROM: <{}>", external_docs.url));
             }
             a("*/");
 
