@@ -185,10 +185,7 @@ mod test {
             (
                 "/measure/{number}",
                 Template {
-                    components: vec![
-                        Component::Constant("measure".into()),
-                        Component::Parameter("number".into()),
-                    ],
+                    components: vec![Component::Constant("measure".into()), Component::Parameter("number".into())],
                 },
             ),
             (

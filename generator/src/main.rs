@@ -17,11 +17,7 @@ where
     P: AsRef<Path>,
 {
     let p = p.as_ref();
-    let mut f = OpenOptions::new()
-        .create(true)
-        .truncate(true)
-        .write(true)
-        .open(p)?;
+    let mut f = OpenOptions::new().create(true).truncate(true).write(true).open(p)?;
     f.write_all(data.as_bytes())?;
     f.flush()?;
     Ok(())
@@ -315,10 +311,7 @@ impl ExtractJsonMediaType for openapiv3::Response {
         if let Some(mt) = self.content.get("application/json") {
             Ok(mt.clone())
         } else {
-            bail!(
-                "could not find application/json, only found {}",
-                self.content.keys().next().unwrap()
-            );
+            bail!("could not find application/json, only found {}", self.content.keys().next().unwrap());
         }
     }
 
@@ -386,10 +379,7 @@ impl ExtractJsonMediaType for openapiv3::RequestBody {
         if let Some(mt) = self.content.get("application/json") {
             Ok(mt.clone())
         } else {
-            bail!(
-                "could not find application/json, only found {}",
-                self.content.keys().next().unwrap()
-            );
+            bail!("could not find application/json, only found {}", self.content.keys().next().unwrap());
         }
     }
 
@@ -470,15 +460,15 @@ impl<T> ReferenceOrExt<T> for openapiv3::ReferenceOr<T> {
 enum TypeDetails {
     Unknown,
     Basic,
-    NamedType(TypeId),
-    Enum(TypeId),
-    Array(TypeId),
-    Optional(TypeId),
+    NamedType(TypeId, openapiv3::SchemaData),
+    Enum(TypeId, openapiv3::SchemaData),
+    Array(TypeId, openapiv3::SchemaData),
+    Optional(TypeId, openapiv3::SchemaData),
     /*
      * Object property names are sorted lexicographically to ensure a stable
      * order in the generated code.
      */
-    Object(BTreeMap<String, TypeId>),
+    Object(BTreeMap<String, TypeId>, openapiv3::SchemaData),
 }
 
 #[derive(Debug)]
@@ -547,7 +537,7 @@ impl TypeSpace {
                         format!("[BASIC {} !NONAME?]", tid.0)
                     }
                 }
-                TypeDetails::NamedType(itid) => {
+                TypeDetails::NamedType(itid, _) => {
                     if let Some(ite) = self.id_to_entry.get(itid) {
                         if let Some(n) = &ite.name {
                             return format!("named type of {} <{}>", n, itid.0);
@@ -560,7 +550,7 @@ impl TypeSpace {
                      */
                     format!("named type of {}", self.describe(itid))
                 }
-                TypeDetails::Enum(itid) => {
+                TypeDetails::Enum(itid, _) => {
                     if let Some(ite) = self.id_to_entry.get(itid) {
                         if let Some(n) = &ite.name {
                             return format!("enum of {} <{}>", n, itid.0);
@@ -573,7 +563,7 @@ impl TypeSpace {
                      */
                     format!("enum of {}", self.describe(itid))
                 }
-                TypeDetails::Array(itid) => {
+                TypeDetails::Array(itid, _) => {
                     if let Some(ite) = self.id_to_entry.get(itid) {
                         if let Some(n) = &ite.name {
                             return format!("array of {} <{}>", n, itid.0);
@@ -586,7 +576,7 @@ impl TypeSpace {
                      */
                     format!("array of {}", self.describe(itid))
                 }
-                TypeDetails::Optional(itid) => {
+                TypeDetails::Optional(itid, _) => {
                     if let Some(ite) = self.id_to_entry.get(itid) {
                         if let Some(n) = &ite.name {
                             return format!("option of {} <{}>", n, itid.0);
@@ -599,7 +589,7 @@ impl TypeSpace {
                      */
                     format!("option of {}", self.describe(itid))
                 }
-                TypeDetails::Object(_) => {
+                TypeDetails::Object(..) => {
                     if let Some(n) = &te.name {
                         format!("object {}", n)
                     } else {
@@ -625,13 +615,13 @@ impl TypeSpace {
                         bail!("basic type {:?} does not have a name?", tid);
                     }
                 }
-                TypeDetails::NamedType(itid) => self.render_type(itid, in_mod),
-                TypeDetails::Enum(itid) => {
+                TypeDetails::NamedType(itid, _) => self.render_type(itid, in_mod),
+                TypeDetails::Enum(itid, _) => {
                     println!("\tenum {:?} {:?}", te, itid);
                     Ok(format!("Enum<{}>", "thing"))
                 }
-                TypeDetails::Array(itid) => Ok(format!("Vec<{}>", self.render_type(itid, in_mod)?)),
-                TypeDetails::Optional(itid) => {
+                TypeDetails::Array(itid, _) => Ok(format!("Vec<{}>", self.render_type(itid, in_mod)?)),
+                TypeDetails::Optional(itid, _) => {
                     let rt = self.render_type(itid, in_mod)?;
                     if rt == "String" || rt.starts_with("Vec<") {
                         Ok(rt)
@@ -639,7 +629,7 @@ impl TypeSpace {
                         Ok(format!("Option<{}>", rt))
                     }
                 }
-                TypeDetails::Object(_) => {
+                TypeDetails::Object(..) => {
                     if let Some(n) = &te.name {
                         let struct_name = struct_name(n);
                         if in_mod {
@@ -682,10 +672,10 @@ impl TypeSpace {
         id
     }
 
-    fn id_for_optional(&mut self, want: &TypeId) -> TypeId {
+    fn id_for_optional(&mut self, want: &TypeId, sd: openapiv3::SchemaData) -> TypeId {
         for (oid, oent) in self.id_to_entry.iter() {
             match &oent.details {
-                TypeDetails::Optional(id) if id == want => return oid.clone(),
+                TypeDetails::Optional(id, schema_data) if id == want && *schema_data == sd => return oid.clone(),
                 _ => continue,
             }
         }
@@ -696,7 +686,7 @@ impl TypeSpace {
             TypeEntry {
                 id: oid.clone(),
                 name: None,
-                details: TypeDetails::Optional(want.clone()),
+                details: TypeDetails::Optional(want.clone(), sd),
             },
         );
         oid
@@ -719,38 +709,39 @@ impl TypeSpace {
         })
     }
 
-    fn select_schema(
-        &mut self,
-        name: Option<&str>,
-        s: &openapiv3::Schema,
-        parent_name: &str,
-        is_schema: bool,
-    ) -> Result<TypeId> {
-        let nam = if let Some(n) = name {
-            n.to_string()
-        } else {
-            "".to_string()
-        };
+    fn select_schema(&mut self, name: Option<&str>, s: &openapiv3::Schema, parent_name: &str, is_schema: bool) -> Result<TypeId> {
+        let nam = if let Some(n) = name { n.to_string() } else { "".to_string() };
+
+        // TODO: refactor this function somehow.
+        /*if is_schema {
+            // If we are on a parent schema that as been defined in the spec, we want to ensure,
+            // that type gets a named type. This is so that we can find all these types later on, even
+            // arrays and basic types like numbers and strings.
+            if let openapiv3::SchemaKind::Type(t) = s.schema_kind {
+                if let openapiv3::Type::Object(_) = t {
+                    // If it's an object we will always have a named type so it's fine.
+                } else {
+                    // For everything else ensure we have a named type.
+                    let id = self.select_schema(Some(&nam), s, parent_name, false)?;
+                    (Some(nam), TypeDetails::NamedType(id))
+                }
+            }
+        }*/
 
         let (name, details) = match &s.schema_kind {
             openapiv3::SchemaKind::Type(t) => match t {
                 openapiv3::Type::Array(at) => {
                     if is_schema {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id))
+                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                     } else {
-                        /*
-                         * Determine the type of item that will be in this array:
-                         */
-                        let itid =
-                            self.select_box(Some(&clean_name(&nam)), &at.items, parent_name)?;
-                        (None, TypeDetails::Array(itid))
+                        // Determine the type of item that will be in this array.
+                        let itid = self.select_box(Some(&clean_name(&nam)), &at.items, parent_name)?;
+                        (None, TypeDetails::Array(itid, s.schema_data.clone()))
                     }
                 }
                 openapiv3::Type::Object(o) => {
-                    /*
-                     * Object types must have a consistent name.
-                     */
+                    // Object types must have a consistent name.
                     let name = clean_name(match (name, s.schema_data.title.as_deref()) {
                         (Some(n), None) => n,
                         (Some(n), Some("")) => n,
@@ -764,21 +755,15 @@ impl TypeSpace {
 
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
-                        let itid = self.select_box(
-                            Some(n),
-                            rb,
-                            &format!("{} {} {}", parent_name, name, clean_name(n)),
-                        )?;
+                        let itid = self.select_box(Some(n), rb, &format!("{} {} {}", parent_name, name, clean_name(n)))?;
                         if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
                         } else {
-                            /*
-                             * This is an optional member.
-                             */
-                            omap.insert(n.to_string(), self.id_for_optional(&itid));
+                            // This is an optional member.
+                            omap.insert(n.to_string(), self.id_for_optional(&itid, s.schema_data.clone()));
                         }
                     }
-                    (Some(name), TypeDetails::Object(omap))
+                    (Some(name), TypeDetails::Object(omap, s.schema_data.clone()))
                 }
                 openapiv3::Type::String(st) => {
                     use openapiv3::{
@@ -787,9 +772,16 @@ impl TypeSpace {
                         VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
 
+                    if !st.enumeration.is_empty() {
+                        // We have an enumeration.
+                        println!("enumeration is not empty {:?}", s);
+                        //let id = self.select_schema(Some(&nam), s, parent_name, false)?;
+                        //(Some(nam), TypeDetails::Enum(id, s.schema_data.clone()))
+                    }
+
                     if is_schema {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id))
+                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                     } else {
                         match &st.format {
                             Item(DateTime) => {
@@ -817,25 +809,23 @@ impl TypeSpace {
                 openapiv3::Type::Boolean {} => {
                     if is_schema {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id))
+                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                     } else {
                         (Some("bool".to_string()), TypeDetails::Basic)
                     }
                 }
                 openapiv3::Type::Number(_) => {
-                    // Then we use the serde_json type.
                     if is_schema {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id))
+                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                     } else {
                         (Some("f64".to_string()), TypeDetails::Basic)
                     }
                 }
                 openapiv3::Type::Integer(_) => {
-                    // Then we use the serde_json type.
                     if is_schema {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id))
+                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                     } else {
                         (Some("i64".to_string()), TypeDetails::Basic)
                     }
@@ -846,7 +836,7 @@ impl TypeSpace {
                 let id = self.select(name, all_of.get(0).unwrap(), is_schema)?;
                 if let Some(et) = self.id_to_entry.get(&id) {
                     if let Some(n) = name {
-                        if let TypeDetails::Object(_) = et.details {
+                        if let TypeDetails::Object(..) = et.details {
                             (Some(clean_name(n)), et.details.clone())
                         } else {
                             (Some(n.to_string()), et.details.clone())
@@ -896,7 +886,7 @@ impl TypeSpace {
                 // Then we use the serde_json type.
                 if is_schema {
                     let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                    (Some(nam), TypeDetails::NamedType(id))
+                    (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                 } else {
                     (Some("serde_json::Value".to_string()), TypeDetails::Basic)
                 }
@@ -931,10 +921,7 @@ impl TypeSpace {
                             // We can get here if there are two objects with the same name
                             // that have properties that are different.
                             // Let's rename the new object with the parent name.
-                            println!(
-                                "object details for {} do not match: {:?} != {:?}",
-                                pn, pet.details, details,
-                            );
+                            println!("object details for {} do not match: {:?} != {:?}", pn, pet.details, details,);
                         }
                     } else {
                         // Let's rename the new object with the parent name.
@@ -988,44 +975,22 @@ impl TypeSpace {
         }
     }
 
-    fn select(
-        &mut self,
-        name: Option<&str>,
-        s: &openapiv3::ReferenceOr<openapiv3::Schema>,
-        is_schema: bool,
-    ) -> Result<TypeId> {
+    fn select(&mut self, name: Option<&str>, s: &openapiv3::ReferenceOr<openapiv3::Schema>, is_schema: bool) -> Result<TypeId> {
         match s {
-            openapiv3::ReferenceOr::Reference { reference } => {
-                self.select_ref(name, reference.as_str())
-            }
+            openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
             openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s, "", is_schema),
         }
     }
 
-    fn select_box(
-        &mut self,
-        name: Option<&str>,
-        s: &openapiv3::ReferenceOr<Box<openapiv3::Schema>>,
-        parent_name: &str,
-    ) -> Result<TypeId> {
+    fn select_box(&mut self, name: Option<&str>, s: &openapiv3::ReferenceOr<Box<openapiv3::Schema>>, parent_name: &str) -> Result<TypeId> {
         match s {
-            openapiv3::ReferenceOr::Reference { reference } => {
-                self.select_ref(name, reference.as_str())
-            }
-            openapiv3::ReferenceOr::Item(s) => {
-                self.select_schema(name, s.as_ref(), parent_name, false)
-            }
+            openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
+            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s.as_ref(), parent_name, false),
         }
     }
 }
 
-fn gen(
-    api: &OpenAPI,
-    ts: &mut TypeSpace,
-    parameters: BTreeMap<String, &openapiv3::Parameter>,
-    n: &str,
-    version: &str,
-) -> Result<String> {
+fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv3::Parameter>, n: &str, version: &str) -> Result<String> {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1288,9 +1253,7 @@ fn gen(
                             a("");
 
                             a(&format!("impl std::fmt::Display for {} {{", sn));
-                            a(
-                                r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#,
-                            );
+                            a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
                             a(r#"match *self {"#);
                             for e in &st.enumeration {
                                 if struct_name(e).is_empty() {
@@ -1364,9 +1327,7 @@ fn gen(
                             a("");
 
                             a(&format!("impl std::fmt::Display for {} {{", sn));
-                            a(
-                                r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#,
-                            );
+                            a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
                             a(r#"match *self {"#);
                             for e in &st.enumeration {
                                 if struct_name(e).is_empty() {
@@ -1396,7 +1357,7 @@ fn gen(
         if let Some(sn) = te.name.as_deref() {
             let struct_name = struct_name(sn);
             match &te.details {
-                TypeDetails::Object(omap) => {
+                TypeDetails::Object(omap, _) => {
                     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
                     a(&format!("pub struct {} {{", struct_name));
                     for (name, tid) in omap.iter() {
@@ -1414,8 +1375,7 @@ fn gen(
                                 prop = name.replace('@', "");
                             }
 
-                            if rt == "String" || rt.starts_with("Vec<") || rt.starts_with("Option<")
-                            {
+                            if rt == "String" || rt.starts_with("Vec<") || rt.starts_with("Option<") {
                                 a(r#"#[serde(default,"#);
                                 if rt == "String" {
                                     a(
@@ -1449,10 +1409,10 @@ fn gen(
                 }
                 TypeDetails::Basic => {}
                 TypeDetails::Unknown => {}
-                TypeDetails::Enum(_) => {}
-                TypeDetails::NamedType(_) => {}
-                TypeDetails::Array(_) => {}
-                TypeDetails::Optional(_) => {}
+                TypeDetails::Enum(..) => {}
+                TypeDetails::NamedType(..) => {}
+                TypeDetails::Array(..) => {}
+                TypeDetails::Optional(..) => {}
             }
         }
     }
@@ -1957,10 +1917,7 @@ fn gen(
                 a(&format!("* {}.", summary.trim_end_matches('.')));
                 a("*");
             }
-            a(&format!(
-                "* This function performs a `{}` to the `{}` endpoint.",
-                m, p
-            ));
+            a(&format!("* This function performs a `{}` to the `{}` endpoint.", m, p));
             if let Some(description) = &o.description {
                 a("*");
                 a(&format!("* {}", description.replace('\n', "\n* ")));
@@ -1987,21 +1944,13 @@ fn gen(
                     if ct == "application/json" {
                         if let Some(s) = &mt.schema {
                             let tid = match s {
-                                openapiv3::ReferenceOr::Reference { reference } => {
-                                    ts.select_ref(None, reference.as_str())?
-                                }
+                                openapiv3::ReferenceOr::Reference { reference } => ts.select_ref(None, reference.as_str())?,
                                 openapiv3::ReferenceOr::Item(item) => {
-                                    let object_name = format!(
-                                        "{} request",
-                                        summary_to_object_name("", o.summary.as_ref().unwrap())
-                                    );
+                                    let object_name = format!("{} request", summary_to_object_name("", o.summary.as_ref().unwrap()));
                                     ts.select_schema(Some(&object_name), item, "", false)?
                                 }
                             };
-                            (
-                                Some(format!("&{}", ts.render_type(&tid, false)?)),
-                                Some("json".to_string()),
-                            )
+                            (Some(format!("&{}", ts.render_type(&tid, false)?)), Some("json".to_string()))
                         } else {
                             bail!("media type encoding, no schema: {:#?}", mt);
                         }
@@ -2038,6 +1987,10 @@ fn gen(
             a("        &self,");
 
             let mut query_params_str: Vec<String> = Default::default();
+            /*
+             * Query parameters are sorted lexicographically to ensure a stable
+             * order in the generated code.
+             */
             let mut query_params: BTreeMap<String, String> = Default::default();
             for par in o.parameters.iter() {
                 let mut param_name = "".to_string();
@@ -2088,29 +2041,20 @@ fn gen(
                         } else {
                             a(&format!("        {}: {},", nam, typ));
                             if typ == "DateTime<Utc>" {
-                                query_params_str
-                                    .push(format!(r#"("{}", {}.to_rfc3339())"#, nam, nam));
-                                query_params
-                                    .insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
+                                query_params_str.push(format!(r#"("{}", {}.to_rfc3339())"#, nam, nam));
+                                query_params.insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
                             } else if typ == "i64" || typ == "bool" {
-                                query_params_str
-                                    .push(format!(r#"("{}", format!("{{}}", {}))"#, nam, nam));
-                                query_params.insert(
-                                    nam.to_string(),
-                                    format!(r#"format!("{{}}", {})"#, nam),
-                                );
+                                query_params_str.push(format!(r#"("{}", format!("{{}}", {}))"#, nam, nam));
+                                query_params.insert(nam.to_string(), format!(r#"format!("{{}}", {})"#, nam));
                             } else if typ == "&str" {
-                                query_params_str
-                                    .push(format!(r#"("{}", {}.to_string())"#, nam, nam));
-                                query_params
-                                    .insert(nam.to_string(), format!("{}.to_string()", nam));
+                                query_params_str.push(format!(r#"("{}", {}.to_string())"#, nam, nam));
+                                query_params.insert(nam.to_string(), format!("{}.to_string()", nam));
                             } else if typ == "&[String]" {
                                 // TODO: I have no idea how these should be seperated and the docs
                                 // don't give any answers either, for "exclude".
                                 // https://docs.github.com/en/rest/reference/migrations
                                 query_params_str.push(format!(r#"("{}", {}.join(" "))"#, nam, nam));
-                                query_params
-                                    .insert(nam.to_string(), format!("{}.join(\" \")", nam));
+                                query_params.insert(nam.to_string(), format!("{}.join(\" \")", nam));
                             } else {
                                 query_params_str.push(format!(r#"("{}", {})"#, nam, nam));
                                 query_params.insert(nam.to_string(), nam.to_string());
@@ -2165,22 +2109,14 @@ fn gen(
 
                             if let Some(s) = &mt.schema {
                                 let tid = match s {
-                                    openapiv3::ReferenceOr::Reference { reference } => {
-                                        ts.select_ref(None, reference.as_str())?
-                                    }
+                                    openapiv3::ReferenceOr::Reference { reference } => ts.select_ref(None, reference.as_str())?,
                                     openapiv3::ReferenceOr::Item(item) => {
                                         if let openapiv3::StatusCode::Code(c) = only.0 {
                                             let status_code = StatusCode::from_u16(*c).unwrap();
                                             let object_name = format!(
                                                 "{} {} Response",
-                                                summary_to_object_name(
-                                                    m,
-                                                    o.summary.as_ref().unwrap()
-                                                ),
-                                                status_code
-                                                    .canonical_reason()
-                                                    .unwrap()
-                                                    .to_lowercase()
+                                                summary_to_object_name(m, o.summary.as_ref().unwrap()),
+                                                status_code.canonical_reason().unwrap().to_lowercase()
                                             );
                                             ts.select_schema(Some(&object_name), item, "", false)?
                                         } else {
@@ -2201,11 +2137,7 @@ fn gen(
                         }
                         None => {
                             let (ct, mt) = i.content.first().unwrap();
-                            if ct == "text/plain"
-                                || ct == "text/html"
-                                || ct == "application/octocat-stream"
-                                || ct == "*/*"
-                            {
+                            if ct == "text/plain" || ct == "text/html" || ct == "application/octocat-stream" || ct == "*/*" {
                                 if let Some(s) = &mt.schema {
                                     let tid = ts.select(None, s, false)?;
                                     let rt = ts.render_type(&tid, false)?;
@@ -2222,34 +2154,18 @@ fn gen(
 
                                 if let Some(s) = &mt.schema {
                                     let tid = match s {
-                                        openapiv3::ReferenceOr::Reference { reference } => {
-                                            ts.select_ref(None, reference.as_str())?
-                                        }
+                                        openapiv3::ReferenceOr::Reference { reference } => ts.select_ref(None, reference.as_str())?,
                                         openapiv3::ReferenceOr::Item(item) => {
                                             if let openapiv3::StatusCode::Code(c) = only.0 {
                                                 let status_code = StatusCode::from_u16(*c).unwrap();
                                                 let object_name = format!(
                                                     "{} {} Response",
-                                                    summary_to_object_name(
-                                                        m,
-                                                        o.summary.as_ref().unwrap()
-                                                    ),
-                                                    status_code
-                                                        .canonical_reason()
-                                                        .unwrap()
-                                                        .to_lowercase()
+                                                    summary_to_object_name(m, o.summary.as_ref().unwrap()),
+                                                    status_code.canonical_reason().unwrap().to_lowercase()
                                                 );
-                                                ts.select_schema(
-                                                    Some(&object_name),
-                                                    item,
-                                                    "",
-                                                    false,
-                                                )?
+                                                ts.select_schema(Some(&object_name), item, "", false)?
                                             } else {
-                                                bail!(
-                                                    "got a range and not a code for {:?}",
-                                                    only.0
-                                                );
+                                                bail!("got a range and not a code for {:?}", only.0);
                                             }
                                         }
                                     };
@@ -2288,10 +2204,7 @@ fn gen(
                 } else {
                     a(&format!("self.{}(&url).await", m.to_lowercase()));
                 }
-            } else if (m == http::Method::POST
-                || m == http::Method::PATCH
-                || m == http::Method::PUT
-                || m == http::Method::DELETE)
+            } else if (m == http::Method::POST || m == http::Method::PATCH || m == http::Method::PUT || m == http::Method::DELETE)
                 && oid != "apps_create_installation_access_token"
             {
                 let body = if let Some(f) = &body_func {
@@ -2338,17 +2251,11 @@ fn gen(
 }
 
 fn struct_name(s: &str) -> String {
-    titlecase::titlecase(&clean_name(s))
-        .replace(" ", "")
-        .replace("Self", "SelfData")
+    titlecase::titlecase(&clean_name(s)).replace(" ", "").replace("Self", "SelfData")
 }
 
 fn clean_name(s: &str) -> String {
-    s.replace("_", " ")
-        .replace("-", " ")
-        .to_lowercase()
-        .trim()
-        .to_string()
+    s.replace("_", " ").replace("-", " ").to_lowercase().trim().to_string()
 }
 
 fn summary_to_object_name(m: &str, s: &str) -> String {
@@ -2383,12 +2290,7 @@ fn summary_to_object_name(m: &str, s: &str) -> String {
 fn main() -> Result<()> {
     let mut opts = getopts::Options::new();
     opts.parsing_style(getopts::ParsingStyle::StopAtFirstFree);
-    opts.reqopt(
-        "i",
-        "",
-        "OpenAPI definition document (JSON | YAML)",
-        "INPUT",
-    );
+    opts.reqopt("i", "", "OpenAPI definition document (JSON | YAML)", "INPUT");
     opts.reqopt("o", "", "Generated Rust crate directory", "OUTPUT");
     opts.reqopt("n", "", "Target Rust crate name", "CRATE");
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
@@ -2410,39 +2312,31 @@ fn main() -> Result<()> {
 
     let api = load_api(&args.opt_str("i").unwrap())?;
 
+    /*
+     * Grab all the types defined by schemas and parameters.
+     */
     let mut ts = TypeSpace::new();
     let mut parameters: BTreeMap<String, &openapiv3::Parameter> = BTreeMap::new();
 
     if let Some(components) = &api.components {
-        /*
-         * Populate a type to describe each entry in the schemas section:
-         */
+        // Populate a type to describe each entry in the schemas section.
         for (i, (sn, s)) in components.schemas.iter().enumerate() {
             let name = clean_name(sn);
             println!("SCHEMA {}/{}: {}", i + 1, components.schemas.len(), name);
 
             let id = ts.select(Some(name.as_str()), s, true)?;
             println!("    -> {:?}", id);
-
             println!();
         }
-        println!();
 
+        // Populate a type to describe each entry in the parameters section.
         for (i, (pn, p)) in components.parameters.iter().enumerate() {
-            println!(
-                "PARAMETER {}/{}: {}",
-                i + 1,
-                components.parameters.len(),
-                pn
-            );
+            println!("PARAMETER {}/{}: {}", i + 1, components.parameters.len(), pn);
 
-            match p {
-                openapiv3::ReferenceOr::Reference { reference } => {
-                    bail!("parameter {} uses reference, unsupported {}", pn, reference);
-                }
-                openapiv3::ReferenceOr::Item(item) => {
-                    parameters.insert(pn.to_string(), item);
-                }
+            if let openapiv3::ReferenceOr::Item(item) = p {
+                parameters.insert(pn.to_string(), item);
+            } else {
+                bail!("parameter {} uses reference, unsupported: {:?}", pn, p);
             }
             println!();
         }
@@ -2455,31 +2349,18 @@ fn main() -> Result<()> {
     for (pn, p) in api.paths.iter() {
         let op = p.item()?;
 
-        let grab = |pn: &str,
-                    m: &str,
-                    o: Option<&openapiv3::Operation>,
-                    ts: &mut TypeSpace|
-         -> Result<()> {
+        let grab = |pn: &str, m: &str, o: Option<&openapiv3::Operation>, ts: &mut TypeSpace| -> Result<()> {
             if let Some(o) = o {
                 /*
                  * Get the request body type, if this operation has one:
                  */
                 if let Some(openapiv3::ReferenceOr::Item(body)) = &o.request_body {
                     if !body.is_binary()? {
-                        if let Ok(mt) = body
-                            .content_json()
-                            .with_context(|| anyhow!("{} {} request", m, pn))
-                        {
+                        if let Ok(mt) = body.content_json().with_context(|| anyhow!("{} {} request", m, pn)) {
                             if let Some(s) = &mt.schema {
-                                let object_name = format!(
-                                    "{} request",
-                                    summary_to_object_name("", o.summary.as_ref().unwrap())
-                                );
+                                let object_name = format!("{} request", summary_to_object_name("", o.summary.as_ref().unwrap()));
                                 let id = ts.select(Some(&object_name), s, false)?;
-                                println!(
-                                    "    {} {} request body -> '{}' {:?}",
-                                    pn, m, object_name, id
-                                );
+                                println!("    {} {} request body -> '{}' {:?}", pn, m, object_name, id);
                             }
                         } else if let Some((ct, mt)) = body.content.first() {
                             if ct == "text/plain" || ct == "text/html" {
@@ -2493,9 +2374,7 @@ fn main() -> Result<()> {
                             bail!("unknown request content: {} {} {:?}", pn, m, body.content);
                         }
                     }
-                } else if let Some(openapiv3::ReferenceOr::Reference { reference }) =
-                    &o.request_body
-                {
+                } else if let Some(openapiv3::ReferenceOr::Reference { reference }) = &o.request_body {
                     let id = ts.select_ref(None, reference.as_str())?;
                     println!("    {} {} request body -> {:?}", pn, m, id);
                 }
@@ -2507,61 +2386,31 @@ fn main() -> Result<()> {
                     match r {
                         openapiv3::ReferenceOr::Item(ri) => {
                             if !ri.is_binary()? && !ri.content.is_empty() {
-                                if let Ok(mt) = ri
-                                    .content_json()
-                                    .with_context(|| anyhow!("{} {} {}", m, pn, code))
-                                {
+                                if let Ok(mt) = ri.content_json().with_context(|| anyhow!("{} {} {}", m, pn, code)) {
                                     if let Some(s) = &mt.schema {
                                         if let openapiv3::StatusCode::Code(c) = code {
                                             let status_code = StatusCode::from_u16(*c).unwrap();
                                             let object_name = format!(
                                                 "{} {} Response",
-                                                summary_to_object_name(
-                                                    m,
-                                                    o.summary.as_ref().unwrap()
-                                                ),
-                                                status_code
-                                                    .canonical_reason()
-                                                    .unwrap()
-                                                    .to_lowercase()
+                                                summary_to_object_name(m, o.summary.as_ref().unwrap()),
+                                                status_code.canonical_reason().unwrap().to_lowercase()
                                             );
                                             let id = ts.select(Some(&object_name), s, false)?;
-                                            println!(
-                                                "    {} {} {} response body -> {:?}",
-                                                pn, m, code, id
-                                            );
+                                            println!("    {} {} {} response body -> {:?}", pn, m, code, id);
                                         } else {
                                             bail!("got a range and not a code for {:?}", code);
                                         }
                                     }
                                 } else if let Some((ct, mt)) = ri.content.first() {
                                     if ct == "text/plain" || ct == "text/html" {
-                                        println!(
-                                            "    {} {} {} response body -> String",
-                                            pn, m, code,
-                                        );
+                                        println!("    {} {} {} response body -> String", pn, m, code,);
                                     } else if let Some(s) = &mt.schema {
-                                        println!(
-                                            "    {} {} {} response body -> {:?}",
-                                            pn, m, code, s
-                                        );
+                                        println!("    {} {} {} response body -> {:?}", pn, m, code, s);
                                     } else {
-                                        bail!(
-                                            "unknown response content: {} {} {} {:?}",
-                                            pn,
-                                            m,
-                                            code,
-                                            ri.content
-                                        );
+                                        bail!("unknown response content: {} {} {} {:?}", pn, m, code, ri.content);
                                     }
                                 } else {
-                                    bail!(
-                                        "unknown response content: {} {} {} {:?}",
-                                        pn,
-                                        m,
-                                        code,
-                                        ri.content
-                                    );
+                                    bail!("unknown response content: {} {} {} {:?}", pn, m, code, ri.content);
                                 }
                             }
                         }

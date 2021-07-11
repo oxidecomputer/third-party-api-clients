@@ -15,13 +15,7 @@ pub type BoxedHttpCache = Box<dyn HttpCache + Send + Sync>;
 
 /// Implements a cached response and looking up the etag and next link.
 pub trait HttpCache: HttpCacheClone + Debug {
-    fn cache_response(
-        &self,
-        uri: &str,
-        body: &[u8],
-        etag: &[u8],
-        next_link: &Option<String>,
-    ) -> Result<()>;
+    fn cache_response(&self, uri: &str, body: &[u8], etag: &[u8], next_link: &Option<String>) -> Result<()>;
     fn lookup_etag(&self, uri: &str) -> Result<String>;
     fn lookup_body(&self, uri: &str) -> Result<String>;
     fn lookup_next_link(&self, uri: &str) -> Result<Option<String>>;
@@ -78,13 +72,7 @@ impl FileBasedCache {
 }
 
 impl HttpCache for FileBasedCache {
-    fn cache_response(
-        &self,
-        uri: &str,
-        body: &[u8],
-        etag: &[u8],
-        next_link: &Option<String>,
-    ) -> Result<()> {
+    fn cache_response(&self, uri: &str, body: &[u8], etag: &[u8], next_link: &Option<String>) -> Result<()> {
         let mut path = cache_path(&self.root, uri, "json");
         println!("caching body at path: {}", path.display());
         if let Some(parent) = path.parent() {

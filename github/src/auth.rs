@@ -43,15 +43,8 @@ pub enum Credentials {
 impl fmt::Debug for Credentials {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Credentials::Token(value) => f
-                .debug_tuple("Credentials::Token")
-                .field(&"*".repeat(value.len()))
-                .finish(),
-            Credentials::Client(id, secret) => f
-                .debug_tuple("Credentials::Client")
-                .field(&id)
-                .field(&"*".repeat(secret.len()))
-                .finish(),
+            Credentials::Token(value) => f.debug_tuple("Credentials::Token").field(&"*".repeat(value.len())).finish(),
+            Credentials::Client(id, secret) => f.debug_tuple("Credentials::Client").field(&id).field(&"*".repeat(secret.len())).finish(),
             Credentials::JWT(jwt) => f
                 .debug_struct("Credentials::JWT")
                 .field("app_id", &jwt.app_id)
@@ -102,8 +95,8 @@ impl JWTCredentials {
     pub fn token(&self) -> String {
         let mut expiring = self.cache.lock().unwrap();
         if expiring.is_stale() {
-            *expiring = ExpiringJWTCredential::calculate(self.app_id, &self.private_key)
-                .expect("JWT private key worked before, it should work now...");
+            *expiring =
+                ExpiringJWTCredential::calculate(self.app_id, &self.private_key).expect("JWT private key worked before, it should work now...");
         }
 
         expiring.token.clone()
@@ -134,9 +127,7 @@ impl ExpiringJWTCredential {
         // SystemTime can go backwards, Instant can't, so always use
         // Instant for ensuring regular cycling.
         let created_at = time::Instant::now();
-        let now = time::SystemTime::now()
-            .duration_since(time::UNIX_EPOCH)
-            .unwrap();
+        let now = time::SystemTime::now().duration_since(time::UNIX_EPOCH).unwrap();
         let expires = now + MAX_JWT_TOKEN_LIFE;
 
         let payload = JWTCredentialClaim {
@@ -145,16 +136,9 @@ impl ExpiringJWTCredential {
             iss: app_id,
         };
         let header = jwt::Header::new(jwt::Algorithm::RS256);
-        let jwt = jwt::encode(
-            &header,
-            &payload,
-            &jsonwebtoken::EncodingKey::from_rsa_der(private_key),
-        )?;
+        let jwt = jwt::encode(&header, &payload, &jsonwebtoken::EncodingKey::from_rsa_der(private_key))?;
 
-        Ok(ExpiringJWTCredential {
-            created_at,
-            token: jwt,
-        })
+        Ok(ExpiringJWTCredential { created_at, token: jwt })
     }
 
     fn is_stale(&self) -> bool {
