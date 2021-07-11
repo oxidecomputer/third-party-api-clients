@@ -599,6 +599,41 @@ impl TypeSpace {
         }
     }
 
+    fn render_docs(&self, tid: &TypeId) -> String {
+        let mut out = String::new();
+
+        let mut a = |s: &str| {
+            out.push_str(s);
+            out.push('\n');
+        };
+
+        let schema = if let Some(te) = self.id_to_entry.get(tid) {
+            match &te.details {
+                TypeDetails::Basic => None,
+                TypeDetails::NamedType(_, schema_data) => Some(schema_data),
+                TypeDetails::Enum(_, schema_data) => Some(schema_data),
+                TypeDetails::Array(_, schema_data) => Some(schema_data),
+                TypeDetails::Optional(_, schema_data) => Some(schema_data),
+                TypeDetails::Object(_, schema_data) => Some(schema_data),
+                TypeDetails::Unknown => None,
+            }
+        } else {
+            None
+        };
+
+        if let Some(s) = schema {
+            if let Some(description) = &s.description {
+                a(&format!("/// {}", description.replace('\n', "\n/// ")));
+            }
+            if let Some(external_docs) = &s.external_docs {
+                a("///");
+                a(&format!("/// FROM: <{}>", external_docs.url));
+            }
+        }
+
+        out.to_string()
+    }
+
     fn render_type(&self, tid: &TypeId, in_mod: bool) -> Result<String> {
         if let Some(te) = self.id_to_entry.get(tid) {
             match &te.details {
@@ -1399,9 +1434,16 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     a(&p);
                 }
                 TypeDetails::Object(omap, schema_data) => {
-                    if let Some(description) = &schema_data.description {
-                        a(&format!("/// {}", description.replace('\n', "\n/// ")));
+                    let desc = if let Some(description) = &schema_data.description {
+                        format!("/// {}", description.replace('\n', "\n/// "))
+                    } else {
+                        "".to_string()
+                    };
+
+                    if !desc.is_empty() {
+                        a(&desc);
                     }
+
                     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
                     a(&format!("pub struct {} {{", sn));
                     for (name, tid) in omap.iter() {
@@ -1419,6 +1461,13 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                 prop = name.replace('@', "");
                             }
 
+                            // Try to render the docs.
+                            let p = ts.render_docs(tid);
+                            if !p.is_empty() && p != desc {
+                                a(&p);
+                            }
+
+                            // Render the serde string.
                             if rt == "String" || rt.starts_with("Vec<") || rt.starts_with("Option<") {
                                 a(r#"#[serde(default,"#);
                                 if rt == "String" {
@@ -2384,6 +2433,7 @@ fn main() -> Result<()> {
     opts.reqopt("n", "", "Target Rust crate name", "CRATE");
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
     opts.reqopt("d", "", "Target Rust crate description", "DESCRIPTION");
+    opts.optflag("", "ts", "Print the type space upon completion");
 
     let args = match opts.parse(std::env::args().skip(1)) {
         Ok(args) => {
@@ -2600,15 +2650,17 @@ httpcache = ["dirs"]
         }
     };
 
-    println!("-----------------------------------------------------");
-    println!(" TYPE SPACE");
-    println!("-----------------------------------------------------");
-    for te in ts.id_to_entry.values() {
-        let n = ts.describe(&te.id);
-        println!("{:>4}  {}", te.id.0, n);
+    if args.opt_present("ts") {
+        println!("-----------------------------------------------------");
+        println!(" TYPE SPACE");
+        println!("-----------------------------------------------------");
+        for te in ts.id_to_entry.values() {
+            let n = ts.describe(&te.id);
+            println!("{:>4}  {}", te.id.0, n);
+        }
+        println!("-----------------------------------------------------");
+        println!();
     }
-    println!("-----------------------------------------------------");
-    println!();
 
     if fail {
         bail!("generation experienced errors");
