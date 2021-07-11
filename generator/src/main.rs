@@ -1295,6 +1295,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
     ));
     a("#![feature(async_stream)]");
     a("#![allow(clippy::too_many_arguments)]");
+    a("#![allow(clippy::nonstandard_macro_braces)]");
     a("#![allow(missing_docs)]"); // TODO: Make this a deny.
     a("");
     a("pub mod auth;");
