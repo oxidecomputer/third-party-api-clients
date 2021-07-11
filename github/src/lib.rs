@@ -28456,9 +28456,6 @@ pub mod types {
         Add,
         Remove,
         Replace,
-        Add,
-        Remove,
-        Replace,
         Noop,
     }
 
@@ -28468,9 +28465,6 @@ pub mod types {
                 UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Add => "Add",
                 UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Remove => "Remove",
                 UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Replace => "Replace",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Add => "add",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Remove => "remove",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Replace => "replace",
                 UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Noop => "",
             }
             .fmt(f)
