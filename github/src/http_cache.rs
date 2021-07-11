@@ -139,7 +139,7 @@ pub fn cache_path<S: AsRef<OsStr>>(dir: &Path, uri: &str, extension: S) -> PathB
     let uri_encoded = uri.replace(" ", "%20");
     let uri = uri_encoded
         .parse::<Uri>()
-        .expect(&format!("Expected a URI, got {}", uri_encoded));
+        .unwrap_or_else(|_| panic!("Expected a URI, got {}", uri_encoded));
     let parts = uri.clone().into_parts();
     let mut path = dir.to_path_buf();
     path.push("v1");

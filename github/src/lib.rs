@@ -8731,6 +8731,156 @@ impl Client {
         }
     }
 
+    async fn request<Out>(
+        &self,
+        method: http::Method,
+        uri: &str,
+        body: Option<Vec<u8>>,
+        //media_type: MediaType,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> Result<(Option<hyperx::header::Link>, Out)>
+    where
+        Out: DeserializeOwned + 'static + Send,
+    {
+        let (url, auth) = self
+            .url_and_auth(uri, authentication)
+            .await
+            .map_err(Error::from);
+
+        let instance = self.clone();
+
+        #[cfg(not(feature = "httpcache"))]
+        let mut req = instance.client.request(method, url);
+
+        #[cfg(feature = "httpcache")]
+        let uri2 = uri.to_string();
+        let mut req = {
+            let mut req = instance.client.request(method.clone(), url);
+            if method == Method::GET {
+                if let Ok(etag) = instance.http_cache.lookup_etag(&uri2) {
+                    req = req.header(IF_NONE_MATCH, etag);
+                }
+            }
+            req
+        };
+
+        req = req.header(http::header::USER_AGENT, &*instance.agent);
+        /*req = req.header(
+            http::header::ACCEPT,
+            &*format!("{}", qitem::<Mime>(From::from(media_type))),
+        );*/
+
+        if let Some(auth_str) = auth {
+            req = req.header(http::header::AUTHORIZATION, &*auth_str);
+        }
+
+        println!("Body: {:?}", &body);
+        if let Some(body) = body {
+            req = req.body(reqwest::Body::from(body));
+        }
+        println!("Request: {:?}", &req);
+        let response = req.send().await.map_err(Error::from);
+
+        #[cfg(feature = "httpcache")]
+        let instance2 = self.clone();
+
+        #[cfg(feature = "httpcache")]
+        let uri3 = uri.to_string();
+
+        #[cfg(not(feature = "httpcache"))]
+        let (remaining, reset) = get_header_values(response.headers());
+
+        #[cfg(feature = "httpcache")]
+        let (remaining, reset, etag) = get_header_values(response.headers());
+
+        let status = response.status();
+        let link = response
+            .headers()
+            .get(http::header::LINK)
+            .and_then(|l| l.to_str().ok())
+            .and_then(|l| l.parse().ok());
+
+        let response_body = response.bytes().await.map_err(Error::from);
+
+        if status.is_success() {
+            println!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
+            #[cfg(feature = "httpcache")]
+            {
+                if let Some(etag) = etag {
+                    let next_link = link.as_ref().and_then(|l| next_link(&l));
+                    if let Err(e) = instance2.http_cache.cache_response(
+                        &uri3,
+                        &response_body,
+                        &etag,
+                        &next_link,
+                    ) {
+                        // failing to cache isn't fatal, so just log & swallow the error
+                        println!("Failed to cache body & etag: {}", e);
+                    }
+                }
+            }
+            let parsed_response = if status == StatusCode::NO_CONTENT {
+                serde_json::from_str("null")
+            } else {
+                serde_json::from_slice::<Out>(&response_body)
+            };
+            parsed_response.map(|out| (link, out)).map_err(Error::Codec)
+        } else if status == StatusCode::NOT_MODIFIED {
+            // only supported case is when client provides if-none-match
+            // header when cargo builds with --cfg feature="httpcache"
+            #[cfg(feature = "httpcache")]
+            {
+                instance2
+                    .http_cache
+                    .lookup_body(&uri3)
+                    .map_err(Error::from)
+                    .and_then(|body| {
+                        serde_json::from_str::<Out>(&body)
+                            .map_err(Error::from)
+                            .and_then(|out| {
+                                let link = match link {
+                                    Some(link) => Ok(Some(link)),
+                                    None => instance2.http_cache.lookup_next_link(&uri3).map(
+                                        |next_link| {
+                                            next_link.map(|next| {
+                                                let next = hyperx::header::LinkValue::new(next)
+                                                    .push_rel(RelationType::Next);
+                                                hyperx::header::Link::new(vec![next])
+                                            })
+                                        },
+                                    ),
+                                };
+                                link.map(|link| (link, out))
+                            })
+                    })
+            }
+            #[cfg(not(feature = "httpcache"))]
+            {
+                unreachable!("this should not be reachable without the httpcache feature enabled")
+            }
+        } else {
+            let error = match (remaining, reset) {
+                (Some(remaining), Some(reset)) if remaining == 0 => {
+                    let now = std::time::SystemTime::now()
+                        .duration_since(std::time::UNIX_EPOCH)
+                        .unwrap()
+                        .as_secs();
+                    Error::RateLimit {
+                        reset: std::time::Duration::from_secs(u64::from(reset) - now),
+                    }
+                }
+                _ => Error::Fault {
+                    code: status,
+                    error: serde_json::from_slice(&response_body)?,
+                },
+            };
+            Err(error)
+        }
+    }
+
     /**
      * meta_root: GET /
      */
