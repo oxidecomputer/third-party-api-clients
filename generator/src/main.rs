@@ -1093,11 +1093,11 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str) -> St
     a(r#"#[serde(rename_all = "snake_case")]"#);
     a(&format!("pub enum {} {{", sn));
     for e in &enums {
-        if struct_name(&e).is_empty() {
+        if struct_name(e).is_empty() {
             // TODO: do something for empty(?)
             continue;
         }
-        a(&format!("{},", struct_name(&e)));
+        a(&format!("{},", struct_name(e)));
     }
     if !required {
         a("Noop,");
@@ -1109,11 +1109,11 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str) -> St
     a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
     a(r#"match *self {"#);
     for e in &enums {
-        if struct_name(&e).is_empty() {
+        if struct_name(e).is_empty() {
             // TODO: do something for empty(?)
             continue;
         }
-        a(&format!(r#"{}::{} => "{}","#, sn, struct_name(&e), e));
+        a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
     }
     if !required {
         a(&format!(r#"{}::Noop => "","#, sn,));
