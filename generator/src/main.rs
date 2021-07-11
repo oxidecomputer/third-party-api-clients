@@ -1175,7 +1175,7 @@ fn gen(
                                 }
                                 openapiv3::ReferenceOr::Item(item) => {
                                     let object_name = format!(
-                                        "{} Request",
+                                        "{} request",
                                         summary_to_object_name("", &o.summary.as_ref().unwrap())
                                     );
                                     ts.select_schema(Some(&object_name), item, "", false)?
@@ -1600,7 +1600,7 @@ fn main() -> Result<()> {
                         {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!(
-                                    "{} Request",
+                                    "{} request",
                                     summary_to_object_name("", &o.summary.as_ref().unwrap())
                                 );
                                 let id = ts.select(Some(&object_name), s, false)?;
@@ -1737,7 +1737,7 @@ edition = "2018"
 
 [dependencies]
 anyhow = "1"
-chrono = "0.4"
+chrono = {{ version = "0.4", features = ["serde"] }}
 percent-encoding = "2.1"
 reqwest = {{ version = "0.11", features = ["json"] }}
 schemars = {{ version = "0.8", features = ["chrono", "uuid"] }}

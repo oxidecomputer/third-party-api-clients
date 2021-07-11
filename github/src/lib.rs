@@ -7064,11 +7064,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateProjectCardRequest {
-        pub note: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateProjectCardUnprocessableEntityResponse {
         pub documentation_url: String,
         pub errors: Option<Vec<Errors>>,
@@ -7312,22 +7307,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddStatusCheckContextsRequest {
-        pub contexts: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetStatusCheckContextsRequest {
-        pub contexts: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetStatusCheckContextsRequest {
-        pub contexts: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveStatusCheckContextsRequest {
         pub contexts: Vec<String>,
     }
 
@@ -7342,22 +7322,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddAppAccessRestrictionsRequest {
-        pub apps: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetAppAccessRestrictionsRequest {
-        pub apps: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetAppAccessRestrictionsRequest {
-        pub apps: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveAppAccessRestrictionsRequest {
         pub apps: Vec<String>,
     }
 
@@ -7372,22 +7337,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddTeamAccessRestrictionsRequest {
-        pub teams: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetTeamAccessRestrictionsRequest {
-        pub teams: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetTeamAccessRestrictionsRequest {
-        pub teams: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveTeamAccessRestrictionsRequest {
         pub teams: Vec<String>,
     }
 
@@ -7402,22 +7352,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddUserAccessRestrictionsRequest {
-        pub users: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetUserAccessRestrictionsRequest {
-        pub users: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetUserAccessRestrictionsRequest {
-        pub users: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveUserAccessRestrictionsRequest {
         pub users: Vec<String>,
     }
 
@@ -7918,16 +7853,6 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddLabelsIssueRequest {
-        pub labels: Option<Vec<String>>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddLabelsIssueRequest {
-        pub labels: Option<Vec<String>>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetLabelsIssueRequest {
         pub labels: Option<Vec<String>>,
     }
 
@@ -8534,16 +8459,6 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddEmailAddressRequest {
-        pub emails: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddEmailAddressRequest {
-        pub emails: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteEmailAddressRequest {
         pub emails: Vec<String>,
     }
 
