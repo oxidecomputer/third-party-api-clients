@@ -214,10 +214,9 @@ mod test {
     #[test]
     fn compile() -> Result<()> {
         let t = parse("/measure/{number}")?;
-        let out = t.compile();
-        let want = "        let url = format!(\"{}/measure/{}\",\
-            \n            self.baseurl,\
-            \n            number,\
+        let out = t.compile(Default::default());
+        let want = "        let url = format!(\"/measure/{}\",\
+            \n            progenitor_support::encode_path(&number.to_string()),\
             \n        );\n";
         assert_eq!(want, &out);
         Ok(())
