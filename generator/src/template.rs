@@ -13,34 +13,39 @@ pub struct Template {
 
 impl Template {
     pub fn compile(&self) -> String {
-        let mut out = "        let url = format!(\"{}".to_string();
-        for c in self.components.iter() {
-            out.push('/');
-            match c {
-                Component::Constant(n) => out.push_str(n),
-                Component::Parameter(_) => out.push_str("{}"),
-            }
-        }
-        out.push_str("\",\n");
-        out.push_str("            self.baseurl,\n");
-        for c in self.components.iter() {
-            if let Component::Parameter(n) = &c {
-                if n == "type" || n == "ref" {
-                    out.push_str(&format!(
-                        "            \
-                    progenitor_support::encode_path(&{}_.to_string()),\n",
-                        n
-                    ));
-                } else {
-                    out.push_str(&format!(
-                        "            \
-                    progenitor_support::encode_path(&{}.to_string()),\n",
-                        n
-                    ));
+        let mut out = "        let url = ".to_string();
+        if self.components.is_empty() {
+            out.push_str("self.baseurl.to_string();");
+        } else {
+            out.push_str("format!(\"{}");
+            for c in self.components.iter() {
+                out.push('/');
+                match c {
+                    Component::Constant(n) => out.push_str(n),
+                    Component::Parameter(_) => out.push_str("{}"),
                 }
             }
+            out.push_str("\",\n");
+            out.push_str("            self.baseurl,\n");
+            for c in self.components.iter() {
+                if let Component::Parameter(n) = &c {
+                    if n == "type" || n == "ref" {
+                        out.push_str(&format!(
+                            "            \
+                    progenitor_support::encode_path(&{}_.to_string()),\n",
+                            n
+                        ));
+                    } else {
+                        out.push_str(&format!(
+                            "            \
+                    progenitor_support::encode_path(&{}.to_string()),\n",
+                            n
+                        ));
+                    }
+                }
+            }
+            out.push_str("        );\n");
         }
-        out.push_str("        );\n");
         out
     }
 }

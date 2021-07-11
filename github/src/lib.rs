@@ -8586,8 +8586,7 @@ impl Client {
      * meta_root: GET /
      */
     pub async fn meta_root(&self) -> Result<types::GetGithubApiRootOkResponse> {
-        let url = format!("{}", self.baseurl,);
-
+        let url = self.baseurl.to_string();
         let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
