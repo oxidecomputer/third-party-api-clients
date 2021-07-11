@@ -1008,6 +1008,8 @@ fn gen(
     api: &OpenAPI,
     ts: &mut TypeSpace,
     parameters: BTreeMap<String, &openapiv3::Parameter>,
+    n: &str,
+    version: &str,
 ) -> Result<String> {
     let mut out = String::new();
 
@@ -1019,14 +1021,24 @@ fn gen(
     /*
      * Deal with any dependencies we require to produce this client.
      */
-    let n = "github_api_client";
     a(&format!(
         r#"//! A fully generated, opinionated API client library for GitHub.
+//!
+//! This library is generated from the [GitHub OpenAPI
+//! specs](https://github.com/github/rest-api-description). This way it will remain
+//! up to date as features are added. The documentation for the crate is generated
+//! along with the code to make this library easy to use.
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
+//!
+//! [dependencies]
+//! {} = "{}"
+//!
 //!
 //! ## Basic example
 //!
 //! Typical use will require intializing a `Client`. This requires
-//! a user agent string and set of `Credentials`.
+//! a user agent string and set of `auth::Credentials`.
 //!
 //! ```
 //! use {}::{{auth::Credentials, Client}};
@@ -1053,10 +1065,8 @@ fn gen(
 //! To enable this, add the following to your `Cargo.toml` file:
 //!
 //! ```toml
-//! [dependencies.{}]
-//!  version = "..."
-//!  default-features = false
-//!  features = ["httpcache"]
+//! [dependencies]
+//! {} = {{ version = "{}", features = ["httpcache"] }}
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -1155,7 +1165,7 @@ fn gen(
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
 //!"#,
-        n, n, n, n, n, n
+        n, version, n, n, version, n, n, n, n
     ));
     a("#![feature(async_stream)]");
     a("#![allow(clippy::too_many_arguments)]");
@@ -2418,10 +2428,11 @@ fn main() -> Result<()> {
         grab(pn, "TRACE", op.trace.as_ref(), &mut ts)?;
     }
 
-    let fail = match gen(&api, &mut ts, parameters) {
+    let name = args.opt_str("n").unwrap();
+    let version = args.opt_str("v").unwrap();
+
+    let fail = match gen(&api, &mut ts, parameters, &name, &version) {
         Ok(out) => {
-            let name = args.opt_str("n").unwrap();
-            let version = args.opt_str("v").unwrap();
             let description = args.opt_str("d").unwrap();
 
             /*

@@ -1,12 +1,23 @@
 //! A fully generated, opinionated API client library for GitHub.
 //!
+//! This library is generated from the [GitHub OpenAPI
+//! specs](https://github.com/github/rest-api-description). This way it will remain
+//! up to date as features are added. The documentation for the crate is generated
+//! along with the code to make this library easy to use.
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
+//!
+//! [dependencies]
+//! github-api-client = "0.1.0"
+//!
+//!
 //! ## Basic example
 //!
 //! Typical use will require intializing a `Client`. This requires
 //! a user agent string and set of `Credentials`.
 //!
 //! ```
-//! use github_api_client::{auth::Credentials, Client};
+//! use github-api-client::{auth::Credentials, Client};
 //!
 //! let github = Client::new(
 //!   String::from("user-agent-name"),
@@ -30,10 +41,8 @@
 //! To enable this, add the following to your `Cargo.toml` file:
 //!
 //! ```toml
-//! [dependencies.github_api_client]
-//!  version = "..."
-//!  default-features = false
-//!  features = ["httpcache"]
+//! [dependencies]
+//! github-api-client = { version = "0.1.0", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -41,9 +50,9 @@
 //! Here is an example:
 //!
 //! ```
-//! use github_api_client::{auth::Credentials, Client};
+//! use github-api-client::{auth::Credentials, Client};
 //! #[cfg(feature = "httpcache")]
-//! use github_api_client::http_cache::HttpCache;
+//! use github-api-client::http_cache::HttpCache;
 //!
 //! #[cfg(feature = "httpcache")]
 //! let http_cache = HttpCache::in_home_dir();
@@ -78,9 +87,9 @@
 //! ```rust
 //! use std::env;
 //!
-//! use github_api_client::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
+//! use github-api-client::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
 //! #[cfg(feature = "httpcache")]
-//! use github_api_client::http_cache::FileBasedCache;
+//! use github-api-client::http_cache::FileBasedCache;
 //!
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();

@@ -1,4 +1,4 @@
-//! Implements <https://tools.ietf.org/html/rfc7232> Conditional Requests
+//! Implements <https://tools.ietf.org/html/rfc7232> Conditional Requests.
 use std::collections::hash_map::DefaultHasher;
 use std::ffi::OsStr;
 use std::fmt::Debug;
@@ -10,8 +10,10 @@ use std::path::{Path, PathBuf};
 use anyhow::{Error, Result};
 use http::Uri;
 
+/// A type for an HTTP cache.
 pub type BoxedHttpCache = Box<dyn HttpCache + Send + Sync>;
 
+/// Implements a cached response and looking up the etag and next link.
 pub trait HttpCache: HttpCacheClone + Debug {
     fn cache_response(
         &self,
@@ -43,6 +45,7 @@ impl Clone for BoxedHttpCache {
     }
 }
 
+/// Noop type for no cache.
 #[derive(Clone, Debug)]
 pub struct NoCache;
 
@@ -61,6 +64,7 @@ impl HttpCache for NoCache {
     }
 }
 
+/// A file based cache.
 #[derive(Clone, Debug)]
 pub struct FileBasedCache {
     root: PathBuf,
