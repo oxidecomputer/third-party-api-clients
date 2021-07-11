@@ -1757,37 +1757,37 @@ fn gen(
              * Perform the request.
              */
             if m == http::Method::GET {
-                a(&format!("        let res = self.{}(url)", m.to_lowercase()));
+                a(&format!("       self.{}(&url).await", m.to_lowercase()));
             } else {
                 a(&format!(
                     "        let res = self.client.{}(url)",
                     m.to_lowercase()
                 ));
-            }
-            if !query_params.is_empty() {
-                a(&format!(
-                    "            .query(&[{}])",
-                    query_params.join(", ")
-                ));
-            }
-            if let Some(f) = &body_func {
-                a(&format!("            .{}(body)", f));
-            }
-            a("            .send()");
-            a("            .await?");
-            a("            .error_for_status()?;"); /* XXX */
+                if !query_params.is_empty() {
+                    a(&format!(
+                        "            .query(&[{}])",
+                        query_params.join(", ")
+                    ));
+                }
+                if let Some(f) = &body_func {
+                    a(&format!("            .{}(body)", f));
+                }
+                a("            .send()");
+                a("            .await?");
+                a("            .error_for_status()?;"); /* XXX */
 
-            a("");
+                a("");
 
-            if response_type == "json" {
-                a("        Ok(res.json().await?)");
-            } else if response_type == "()" {
-                a("        let _ = res.text().await?;");
-                a("        Ok(())");
-            } else if response_type == "String" {
-                a("        Ok(res.text().await?)");
-            } else {
-                panic!("response type: {}", response_type);
+                if response_type == "json" {
+                    a("        Ok(res.json().await?)");
+                } else if response_type == "()" {
+                    a("        let _ = res.text().await?;");
+                    a("        Ok(())");
+                } else if response_type == "String" {
+                    a("        Ok(res.text().await?)");
+                } else {
+                    panic!("response type: {}", response_type);
+                }
             }
             a("    }");
             a("");

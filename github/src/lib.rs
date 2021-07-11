@@ -8922,9 +8922,7 @@ impl Client {
      */
     pub async fn meta_root(&self) -> Result<types::GetGithubApiRootOkResponse> {
         let url = "".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -8932,9 +8930,7 @@ impl Client {
      */
     pub async fn apps_get_authenticated(&self) -> Result<types::Integration> {
         let url = "/app".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -8966,9 +8962,7 @@ impl Client {
      */
     pub async fn apps_get_webhook_config_for_app(&self) -> Result<types::WebhookConfig> {
         let url = "/app/hook/config".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9001,19 +8995,7 @@ impl Client {
         outdated: &str,
     ) -> Result<Vec<types::Installation>> {
         let url = "/app/installations".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-                ("since", since.to_rfc3339()),
-                ("outdated", outdated.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9025,9 +9007,7 @@ impl Client {
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9109,18 +9089,7 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::ApplicationGrant>> {
         let url = "/applications/grants".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-                ("client_id", client_id.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9135,9 +9104,7 @@ impl Client {
             progenitor_support::encode_path(&grant_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9311,9 +9278,7 @@ impl Client {
             progenitor_support::encode_path(&access_token.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9364,9 +9329,7 @@ impl Client {
             progenitor_support::encode_path(&app_slug.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9379,18 +9342,7 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::Authorization>> {
         let url = "/authorizations".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-                ("client_id", client_id.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9474,9 +9426,7 @@ impl Client {
             progenitor_support::encode_path(&authorization_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9528,9 +9478,7 @@ impl Client {
         &self,
     ) -> Result<Vec<types::CodeofConduct>> {
         let url = "/codes_of_conduct".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9545,9 +9493,7 @@ impl Client {
             progenitor_support::encode_path(&key.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9555,9 +9501,7 @@ impl Client {
      */
     pub async fn emojis_get(&self) -> Result<types::GetEmojisOkResponse> {
         let url = "/emojis".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9572,9 +9516,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9616,17 +9558,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9706,9 +9638,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9750,17 +9680,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9801,9 +9721,7 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9869,17 +9787,7 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -9969,17 +9877,7 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10067,17 +9965,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10092,9 +9980,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10145,9 +10031,7 @@ impl Client {
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10189,22 +10073,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("phrase", phrase.to_string()),
-                ("include", include.to_string()),
-                ("after", after.to_string()),
-                ("before", before.to_string()),
-                ("order", order.to_string()),
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10219,9 +10088,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10236,9 +10103,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10253,9 +10118,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10267,17 +10130,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = "/events".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10285,9 +10138,7 @@ impl Client {
      */
     pub async fn activity_get_feeds(&self) -> Result<types::Feed> {
         let url = "/feeds".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10300,18 +10151,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = "/gists".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10340,18 +10180,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = "/gists/public".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10364,18 +10193,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = "/gists/starred".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10387,9 +10205,7 @@ impl Client {
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10445,17 +10261,7 @@ impl Client {
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10496,9 +10302,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10557,17 +10361,7 @@ impl Client {
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10584,17 +10378,7 @@ impl Client {
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10620,10 +10404,7 @@ impl Client {
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -10666,9 +10447,7 @@ impl Client {
             progenitor_support::encode_path(&sha.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10676,9 +10455,7 @@ impl Client {
      */
     pub async fn gitignore_get_all_templates(&self) -> Result<Vec<String>> {
         let url = "/gitignore/templates".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10690,9 +10467,7 @@ impl Client {
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10704,17 +10479,7 @@ impl Client {
         page: i64,
     ) -> Result<types::GetListRepositoriesAccessibleAppInstallationOkResponse> {
         let url = "/installation/repositories".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10747,27 +10512,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Issue>> {
         let url = "/issues".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("filter", filter.to_string()),
-                ("state", state.to_string()),
-                ("labels", labels.to_string()),
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("since", since.to_rfc3339()),
-                ("collab", format!("{}", collab)),
-                ("orgs", format!("{}", orgs)),
-                ("owned", format!("{}", owned)),
-                ("pulls", format!("{}", pulls)),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10780,18 +10525,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::LicenseSimple>> {
         let url = "/licenses".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("featured", format!("{}", featured)),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10803,9 +10537,7 @@ impl Client {
             progenitor_support::encode_path(&license.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10855,9 +10587,7 @@ impl Client {
             progenitor_support::encode_path(&account_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10869,17 +10599,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = "/marketplace_listing/plans".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10898,19 +10618,7 @@ impl Client {
             progenitor_support::encode_path(&plan_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10925,9 +10633,7 @@ impl Client {
             progenitor_support::encode_path(&account_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10939,17 +10645,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = "/marketplace_listing/stubbed/plans".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10968,19 +10664,7 @@ impl Client {
             progenitor_support::encode_path(&plan_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -10988,9 +10672,7 @@ impl Client {
      */
     pub async fn meta_get(&self) -> Result<types::ApiOverview> {
         let url = "/meta".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11009,17 +10691,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11035,21 +10707,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Thread>> {
         let url = "/notifications".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("all", format!("{}", all)),
-                ("participating", format!("{}", participating)),
-                ("since", since.to_rfc3339()),
-                ("before", before.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11080,9 +10738,7 @@ impl Client {
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11112,9 +10768,7 @@ impl Client {
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11161,14 +10815,7 @@ impl Client {
      */
     pub async fn meta_get_octocat(&self, s: &str) -> Result<String> {
         let url = "/octocat".to_string();
-        let res = self
-            .get(url)
-            .query(&[("s", s.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.text().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11180,17 +10827,7 @@ impl Client {
         per_page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
         let url = "/organizations".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("since", format!("{}", since)),
-                ("per_page", format!("{}", per_page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11202,9 +10839,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11243,9 +10878,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11288,17 +10921,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11378,9 +11001,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11422,17 +11043,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11473,9 +11084,7 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11541,17 +11150,7 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11641,17 +11240,7 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11739,17 +11328,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11764,9 +11343,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11817,9 +11394,7 @@ impl Client {
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11856,17 +11431,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11878,9 +11443,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11897,9 +11460,7 @@ impl Client {
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -11960,17 +11521,7 @@ impl Client {
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12063,22 +11614,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("phrase", phrase.to_string()),
-                ("include", include.to_string()),
-                ("after", after.to_string()),
-                ("before", before.to_string()),
-                ("order", order.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12090,9 +11626,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12105,10 +11639,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -12155,9 +11686,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12194,17 +11723,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12221,17 +11740,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12248,17 +11757,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12295,9 +11794,7 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12356,9 +11853,7 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12412,9 +11907,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12431,17 +11924,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12456,9 +11939,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12514,17 +11995,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12583,17 +12054,7 @@ impl Client {
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12616,23 +12077,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("filter", filter.to_string()),
-                ("state", state.to_string()),
-                ("labels", labels.to_string()),
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12651,19 +12096,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("filter", filter.to_string()),
-                ("role", role.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12676,10 +12109,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -12712,9 +12142,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12774,18 +12202,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-                ("exclude", exclude.join(" ")),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12827,14 +12244,7 @@ impl Client {
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("exclude", exclude.join(" "))])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12851,10 +12261,7 @@ impl Client {
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -12915,17 +12322,7 @@ impl Client {
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -12943,18 +12340,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("filter", filter.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13008,9 +12394,7 @@ impl Client {
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13083,18 +12467,7 @@ impl Client {
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-                ("state", state.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13115,9 +12488,7 @@ impl Client {
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13183,18 +12554,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("state", state.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13235,17 +12595,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13262,10 +12612,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -13325,20 +12672,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("type", type_.to_string()),
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13377,9 +12711,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13394,9 +12726,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13411,9 +12741,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13430,17 +12758,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", page.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13457,17 +12775,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13504,9 +12812,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13569,19 +12875,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-                ("pinned", pinned.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13626,9 +12920,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13700,18 +12992,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13760,9 +13041,7 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13840,18 +13119,7 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("content", content.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -13929,18 +13197,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("content", content.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14011,17 +13268,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14041,18 +13288,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("role", role.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14071,9 +13307,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14142,17 +13376,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14171,9 +13395,7 @@ impl Client {
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14243,17 +13465,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14274,9 +13486,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14348,9 +13558,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14395,17 +13603,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14417,9 +13615,7 @@ impl Client {
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14494,9 +13690,7 @@ impl Client {
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14553,18 +13747,7 @@ impl Client {
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("archived_state", archived_state.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14624,9 +13807,7 @@ impl Client {
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14683,18 +13864,7 @@ impl Client {
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("affiliation", affiliation.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14758,9 +13928,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14777,17 +13945,7 @@ impl Client {
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14819,9 +13977,7 @@ impl Client {
      */
     pub async fn rate_limit_get(&self) -> Result<types::RateLimitOverview> {
         let url = "/rate_limit".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14849,9 +14005,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14912,17 +14066,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14941,9 +14085,7 @@ impl Client {
             progenitor_support::encode_path(&artifact_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -14986,10 +14128,7 @@ impl Client {
             progenitor_support::encode_path(&archive_format.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -15008,9 +14147,7 @@ impl Client {
             progenitor_support::encode_path(&job_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15029,10 +14166,7 @@ impl Client {
             progenitor_support::encode_path(&job_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -15049,9 +14183,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15095,9 +14227,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15143,17 +14273,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15170,9 +14290,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15229,9 +14347,7 @@ impl Client {
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15276,21 +14392,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("actor", actor.to_string()),
-                ("branch", branch.to_string()),
-                ("event", event.to_string()),
-                ("status", status.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15309,9 +14411,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15352,9 +14452,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15396,17 +14494,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15449,18 +14537,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("filter", filter.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15479,10 +14556,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -15523,9 +14597,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15593,9 +14665,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15614,17 +14684,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15641,9 +14701,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15662,9 +14720,7 @@ impl Client {
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15733,17 +14789,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15762,9 +14808,7 @@ impl Client {
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15862,21 +14906,7 @@ impl Client {
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("actor", actor.to_string()),
-                ("branch", branch.to_string()),
-                ("event", event.to_string()),
-                ("status", status.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15895,9 +14925,7 @@ impl Client {
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15916,17 +14944,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -15945,10 +14963,7 @@ impl Client {
             progenitor_support::encode_path(&assignee.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -16008,18 +15023,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("protected", format!("{}", protected)),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16038,9 +15042,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16059,9 +15061,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16130,9 +15130,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16194,9 +15192,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16265,9 +15261,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16329,9 +15323,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16400,9 +15392,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16505,9 +15495,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16548,9 +15536,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16653,9 +15639,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16758,9 +15742,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16917,9 +15899,7 @@ impl Client {
             progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -16968,17 +15948,7 @@ impl Client {
             progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17049,9 +16019,7 @@ impl Client {
             progenitor_support::encode_path(&check_suite_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17075,20 +16043,7 @@ impl Client {
             progenitor_support::encode_path(&check_suite_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("check_name", check_name.to_string()),
-                ("status", status.to_string()),
-                ("filter", filter.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17132,21 +16087,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("tool_name", tool_name.to_string()),
-                ("tool_guid", tool_guid.to_string()),
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-                ("ref", ref_.to_string()),
-                ("state", state.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17165,9 +16106,7 @@ impl Client {
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17217,18 +16156,7 @@ impl Client {
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-                ("ref", ref_.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17251,21 +16179,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("tool_name", tool_name.to_string()),
-                ("tool_guid", tool_guid.to_string()),
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-                ("ref", ref_.to_string()),
-                ("sarif_id", sarif_id.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17284,9 +16198,7 @@ impl Client {
             progenitor_support::encode_path(&analysis_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17359,9 +16271,7 @@ impl Client {
             progenitor_support::encode_path(&sarif_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17381,18 +16291,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("affiliation", affiliation.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17411,10 +16310,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -17483,9 +16379,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17504,17 +16398,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17533,9 +16417,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17607,18 +16489,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("content", content.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17694,22 +16565,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("sha", sha.to_string()),
-                ("path", path.to_string()),
-                ("author", author.to_string()),
-                ("since", since.to_rfc3339()),
-                ("until", until.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17728,9 +16584,7 @@ impl Client {
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17751,17 +16605,7 @@ impl Client {
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17810,17 +16654,7 @@ impl Client {
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17841,17 +16675,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17876,21 +16700,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("check_name", check_name.to_string()),
-                ("status", status.to_string()),
-                ("filter", filter.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-                ("app_id", format!("{}", app_id)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17913,19 +16723,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("app_id", format!("{}", app_id)),
-                ("check_name", check_name.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17946,17 +16744,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -17977,17 +16765,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18004,9 +16782,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18023,9 +16799,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18046,17 +16820,7 @@ impl Client {
             progenitor_support::encode_path(&basehead.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18104,14 +16868,7 @@ impl Client {
             progenitor_support::encode_path(&path.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("ref", ref_.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18187,18 +16944,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("anon", anon.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18221,21 +16967,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("sha", sha.to_string()),
-                ("ref", ref_.to_string()),
-                ("task", task.to_string()),
-                ("environment", environment.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18280,9 +17012,7 @@ impl Client {
             progenitor_support::encode_path(&deployment_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18325,17 +17055,7 @@ impl Client {
             progenitor_support::encode_path(&deployment_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18384,9 +17104,7 @@ impl Client {
             progenitor_support::encode_path(&status_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18430,9 +17148,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18451,9 +17167,7 @@ impl Client {
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18522,17 +17236,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18552,18 +17256,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("sort", sort.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18634,9 +17327,7 @@ impl Client {
             progenitor_support::encode_path(&file_sha.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18681,9 +17372,7 @@ impl Client {
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18704,17 +17393,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18728,9 +17407,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18846,9 +17523,7 @@ impl Client {
             progenitor_support::encode_path(&tag_sha.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18894,14 +17569,7 @@ impl Client {
             progenitor_support::encode_path(&tree_sha.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("recursive", recursive.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18920,17 +17588,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -18975,9 +17633,7 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19041,9 +17697,7 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19127,9 +17781,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19215,14 +17867,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("since", format!("{}", since))])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19267,9 +17912,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19312,9 +17955,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19331,9 +17972,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19398,17 +18037,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19486,26 +18115,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("milestone", milestone.to_string()),
-                ("state", state.to_string()),
-                ("assignee", assignee.to_string()),
-                ("creator", creator.to_string()),
-                ("mentioned", mentioned.to_string()),
-                ("labels", labels.to_string()),
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19553,20 +18163,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19585,9 +18182,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19659,18 +18254,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("content", content.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19741,17 +18325,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19770,9 +18344,7 @@ impl Client {
             progenitor_support::encode_path(&event_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19791,9 +18363,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19899,18 +18469,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19959,17 +18518,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -19990,17 +18539,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20169,18 +18708,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("content", content.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20253,17 +18781,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20282,17 +18800,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20337,9 +18845,7 @@ impl Client {
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20380,17 +18886,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20435,9 +18931,7 @@ impl Client {
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20495,9 +18989,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20514,9 +19006,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20564,20 +19054,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("state", state.to_string()),
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20622,9 +19099,7 @@ impl Client {
             progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20695,17 +19170,7 @@ impl Client {
             progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20728,21 +19193,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("all", format!("{}", all)),
-                ("participating", format!("{}", participating)),
-                ("since", since.to_rfc3339()),
-                ("before", before.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20781,9 +19232,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20871,17 +19320,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20917,9 +19356,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20938,9 +19375,7 @@ impl Client {
             progenitor_support::encode_path(&build_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20957,9 +19392,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -20979,18 +19412,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("state", state.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21040,22 +19462,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("state", state.to_string()),
-                ("head", head.to_string()),
-                ("base", base.to_string()),
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21103,20 +19510,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21135,9 +19529,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21209,18 +19601,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("content", content.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21291,9 +19672,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21345,20 +19724,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21437,17 +19803,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21468,17 +19824,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21497,10 +19843,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -21549,17 +19892,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21636,17 +19969,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21695,9 +20018,7 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21773,17 +20094,7 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21889,14 +20200,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("ref", ref_.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21916,14 +20220,7 @@ impl Client {
             progenitor_support::encode_path(&dir.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("ref", ref_.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21942,17 +20239,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -21997,9 +20284,7 @@ impl Client {
             progenitor_support::encode_path(&asset_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22066,9 +20351,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22087,9 +20370,7 @@ impl Client {
             progenitor_support::encode_path(&tag.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22108,9 +20389,7 @@ impl Client {
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22181,17 +20460,7 @@ impl Client {
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22271,19 +20540,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("state", state.to_string()),
-                ("secret_type", secret_type.to_string()),
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22302,9 +20559,7 @@ impl Client {
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22351,17 +20606,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22378,9 +20623,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22397,9 +20640,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22416,9 +20657,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22435,9 +20674,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22454,9 +20691,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22503,17 +20738,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22530,9 +20755,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22593,17 +20816,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22622,10 +20835,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -22644,17 +20854,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22673,17 +20873,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22727,14 +20917,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("per", per.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22751,9 +20934,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22770,9 +20951,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22790,14 +20969,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("per", per.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22836,10 +21008,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -22890,10 +21059,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -22927,14 +21093,7 @@ impl Client {
      */
     pub async fn repos_list_public(&self, since: i64) -> Result<Vec<types::MinimalRepository>> {
         let url = "/repositories".to_string();
-        let res = self
-            .get(url)
-            .query(&[("since", format!("{}", since))])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22953,17 +21112,7 @@ impl Client {
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -22980,9 +21129,7 @@ impl Client {
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23001,9 +21148,7 @@ impl Client {
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23072,19 +21217,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("start_index", format!("{}", start_index)),
-                ("count", format!("{}", count)),
-                ("filter", filter.to_string()),
-                ("excluded_attributes", excluded_attributes.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23126,14 +21259,7 @@ impl Client {
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("excluded_attributes", excluded_attributes.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23223,18 +21349,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("start_index", format!("{}", start_index)),
-                ("count", format!("{}", count)),
-                ("filter", filter.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23275,9 +21390,7 @@ impl Client {
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23367,18 +21480,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("start_index", format!("{}", start_index)),
-                ("count", format!("{}", count)),
-                ("filter", filter.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23419,9 +21521,7 @@ impl Client {
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23504,20 +21604,7 @@ impl Client {
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
         let url = "/search/code".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("q", q.to_string()),
-                ("sort", sort.to_string()),
-                ("order", order.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23532,20 +21619,7 @@ impl Client {
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
         let url = "/search/commits".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("q", q.to_string()),
-                ("sort", sort.to_string()),
-                ("order", order.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23560,20 +21634,7 @@ impl Client {
         page: i64,
     ) -> Result<types::GetSearchIssuesandPullRequestsOkResponse> {
         let url = "/search/issues".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("q", q.to_string()),
-                ("sort", sort.to_string()),
-                ("order", order.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23589,21 +21650,7 @@ impl Client {
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
         let url = "/search/labels".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("repository_id", format!("{}", repository_id)),
-                ("q", q.to_string()),
-                ("sort", sort.to_string()),
-                ("order", order.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23618,20 +21665,7 @@ impl Client {
         page: i64,
     ) -> Result<types::GetSearchRepositoriesOkResponse> {
         let url = "/search/repositories".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("q", q.to_string()),
-                ("sort", sort.to_string()),
-                ("order", order.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23644,18 +21678,7 @@ impl Client {
         page: i64,
     ) -> Result<types::GetSearchTopicsOkResponse> {
         let url = "/search/topics".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("q", q.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23670,20 +21693,7 @@ impl Client {
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
         let url = "/search/users".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("q", q.to_string()),
-                ("sort", sort.to_string()),
-                ("order", order.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23695,9 +21705,7 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23754,18 +21762,7 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23806,9 +21803,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23874,18 +21869,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -23930,9 +21914,7 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24004,18 +21986,7 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("content", content.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24063,18 +22034,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("content", content.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24117,17 +22077,7 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24145,18 +22095,7 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("role", role.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24169,10 +22108,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -24221,9 +22157,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24286,17 +22220,7 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24313,9 +22237,7 @@ impl Client {
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24375,17 +22297,7 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24404,9 +22316,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24472,9 +22382,7 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24515,17 +22423,7 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24533,9 +22431,7 @@ impl Client {
      */
     pub async fn users_get_authenticated(&self) -> Result<types::GetOkResponse> {
         let url = "/user".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24562,9 +22458,7 @@ impl Client {
      */
     pub async fn users_list_blocked_by_authenticated(&self) -> Result<Vec<types::SimpleUser>> {
         let url = "/user/blocks".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24576,10 +22470,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -24640,17 +22531,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Email>> {
         let url = "/user/emails".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24701,17 +22582,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = "/user/followers".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24723,17 +22594,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = "/user/following".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24748,10 +22609,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -24793,17 +22651,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::GpgKey>> {
         let url = "/user/gpg_keys".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24837,9 +22685,7 @@ impl Client {
             progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24866,17 +22712,7 @@ impl Client {
         page: i64,
     ) -> Result<types::GetListAppInstallationsAccessibleUserAccessTokenOkResponse> {
         let url = "/user/installations".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24893,17 +22729,7 @@ impl Client {
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -24953,9 +22779,7 @@ impl Client {
         &self,
     ) -> Result<types::GetInteractionRestrictionsPublicRepositoriesOkResponse> {
         let url = "/user/interaction-limits".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25003,23 +22827,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Issue>> {
         let url = "/user/issues".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("filter", filter.to_string()),
-                ("state", state.to_string()),
-                ("labels", labels.to_string()),
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25031,17 +22839,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Key>> {
         let url = "/user/keys".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25075,9 +22873,7 @@ impl Client {
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25104,17 +22900,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
         let url = "/user/marketplace_purchases".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25126,17 +22912,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
         let url = "/user/marketplace_purchases/stubbed".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25149,18 +22925,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::OrgMembership>> {
         let url = "/user/memberships/orgs".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("state", state.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25175,9 +22940,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25213,17 +22976,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Migration>> {
         let url = "/user/migrations".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25258,14 +23011,7 @@ impl Client {
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[("exclude", exclude.join(" "))])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25280,10 +23026,7 @@ impl Client {
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -25338,17 +23081,7 @@ impl Client {
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25360,17 +23093,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
         let url = "/user/orgs".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25387,9 +23110,7 @@ impl Client {
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25456,18 +23177,7 @@ impl Client {
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("page", format!("{}", page)),
-                ("per_page", format!("{}", per_page)),
-                ("state", state.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25486,9 +23196,7 @@ impl Client {
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25563,17 +23271,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Email>> {
         let url = "/user/public_emails".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25592,24 +23290,7 @@ impl Client {
         before: DateTime<Utc>,
     ) -> Result<Vec<types::Repository>> {
         let url = "/user/repos".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("visibility", visibility.to_string()),
-                ("affiliation", affiliation.to_string()),
-                ("type", type_.to_string()),
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-                ("since", since.to_rfc3339()),
-                ("before", before.to_rfc3339()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25640,17 +23321,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::RepositoryInvitation>> {
         let url = "/user/repository_invitations".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25694,19 +23365,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Repository>> {
         let url = "/user/starred".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25723,10 +23382,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -25778,17 +23434,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = "/user/subscriptions".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25800,17 +23446,7 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::TeamFull>> {
         let url = "/user/teams".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25818,17 +23454,7 @@ impl Client {
      */
     pub async fn users_list(&self, since: i64, per_page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = "/users".to_string();
-        let res = self
-            .get(url)
-            .query(&[
-                ("since", format!("{}", since)),
-                ("per_page", format!("{}", per_page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25840,9 +23466,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25859,17 +23483,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25888,17 +23502,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25915,17 +23519,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25942,17 +23536,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25969,17 +23553,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -25996,10 +23570,7 @@ impl Client {
             progenitor_support::encode_path(&target_user.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.get(&url).await
     }
 
     /**
@@ -26017,18 +23588,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("since", since.to_rfc3339()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26045,17 +23605,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26072,17 +23622,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("subject_type", subject_type.to_string()),
-                ("subject_id", subject_id.to_string()),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26094,9 +23634,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26113,17 +23651,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26140,17 +23668,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26169,9 +23687,7 @@ impl Client {
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26190,9 +23706,7 @@ impl Client {
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26213,9 +23727,7 @@ impl Client {
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26233,18 +23745,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("state", state.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26261,17 +23762,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26288,17 +23779,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26318,20 +23799,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("type", type_.to_string()),
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26346,9 +23814,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26363,9 +23829,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26380,9 +23844,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26401,19 +23863,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("sort", sort.to_string()),
-                ("direction", direction.to_string()),
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26430,17 +23880,7 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self
-            .get(url)
-            .query(&[
-                ("per_page", format!("{}", per_page)),
-                ("page", format!("{}", page)),
-            ])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.get(&url).await
     }
 
     /**
@@ -26448,8 +23888,6 @@ impl Client {
      */
     pub async fn meta_get_zen(&self) -> Result<String> {
         let url = "/zen".to_string();
-        let res = self.get(url).send().await?.error_for_status()?;
-
-        Ok(res.text().await?)
+        self.get(&url).await
     }
 }
