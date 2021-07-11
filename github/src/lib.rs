@@ -1,5 +1,7 @@
 #![allow(clippy::too_many_arguments)]
 
+pub mod http_cache;
+
 use anyhow::Result;
 use chrono::{DateTime, Utc};
 

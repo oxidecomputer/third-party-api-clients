@@ -1016,6 +1016,8 @@ fn gen(
      */
     a("#![allow(clippy::too_many_arguments)]");
     a("");
+    a("pub mod http_cache;");
+    a("");
     a("use anyhow::Result;"); /* XXX */
     a("use chrono::{DateTime, Utc};");
     a("");
@@ -1782,6 +1784,8 @@ edition = "2018"
 [dependencies]
 anyhow = "1"
 chrono = {{ version = "0.4", features = ["serde"] }}
+dirs = "^3.0.2"
+http = "^0.2.4"
 percent-encoding = "2.1"
 reqwest = {{ version = "0.11", features = ["json"] }}
 schemars = {{ version = "0.8", features = ["chrono", "uuid"] }}
