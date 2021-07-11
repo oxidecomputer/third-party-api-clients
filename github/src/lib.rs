@@ -1,9 +1,13 @@
 #![allow(clippy::too_many_arguments)]
 
+pub mod auth;
+#[cfg(feature = "httpcache")]
 pub mod http_cache;
 
-use anyhow::Result;
+use anyhow::{Error, Result};
 use chrono::{DateTime, Utc};
+
+const DEFAULT_HOST: &str = "https://api.github.com";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
@@ -8567,22 +8571,163 @@ pub mod types {
 }
 
 pub struct Client {
-    baseurl: String,
+    host: String,
+    agent: String,
     client: reqwest::Client,
+    credentials: Option<crate::auth::Credentials>,
+    #[cfg(feature = "httpcache")]
+    http_cache: crate::http_cache::BoxedHttpCache,
 }
 
 impl Client {
-    pub fn new(baseurl: &str) -> Client {
-        let dur = std::time::Duration::from_secs(15);
-        let client = reqwest::ClientBuilder::new()
-            .connect_timeout(dur)
-            .timeout(dur)
-            .build()
-            .unwrap();
+    pub fn new<A, C>(agent: A, credentials: C) -> Result<Self>
+    where
+        A: Into<String>,
+        C: Into<Option<crate::auth::Credentials>>,
+    {
+        Self::host(DEFAULT_HOST, agent, credentials)
+    }
 
-        Client {
-            baseurl: baseurl.to_string(),
-            client,
+    pub fn host<H, A, C>(host: H, agent: A, credentials: C) -> Result<Self>
+    where
+        H: Into<String>,
+        A: Into<String>,
+        C: Into<Option<crate::auth::Credentials>>,
+    {
+        let http = reqwest::Client::builder().build()?;
+        #[cfg(feature = "httpcache")]
+        {
+            Ok(Self::custom(
+                host,
+                agent,
+                credentials,
+                http,
+                crate::http_cache::HttpCache::noop(),
+            ))
+        }
+        #[cfg(not(feature = "httpcache"))]
+        {
+            Ok(Self::custom(host, agent, credentials, http))
+        }
+    }
+
+    #[cfg(feature = "httpcache")]
+    pub fn custom<H, A, CR>(
+        host: H,
+        agent: A,
+        credentials: CR,
+        http: reqwest::Client,
+        http_cache: crate::http_cache::BoxedHttpCache,
+    ) -> Self
+    where
+        H: Into<String>,
+        A: Into<String>,
+        CR: Into<Option<crate::auth::Credentials>>,
+    {
+        Self {
+            host: host.into(),
+            agent: agent.into(),
+            client: http,
+            credentials: credentials.into(),
+            http_cache,
+        }
+    }
+
+    #[cfg(not(feature = "httpcache"))]
+    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: Client) -> Self
+    where
+        H: Into<String>,
+        A: Into<String>,
+        CR: Into<Option<crate::auth::Credentials>>,
+    {
+        Self {
+            host: host.into(),
+            agent: agent.into(),
+            client: http,
+            credentials: credentials.into(),
+        }
+    }
+
+    pub fn set_credentials<CR>(&mut self, credentials: CR)
+    where
+        CR: Into<Option<crate::auth::Credentials>>,
+    {
+        self.credentials = credentials.into();
+    }
+
+    fn credentials(
+        &self,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> Option<&crate::auth::Credentials> {
+        match (authentication, self.credentials.as_ref()) {
+            (crate::auth::AuthenticationConstraint::Unconstrained, creds) => creds,
+            (
+                crate::auth::AuthenticationConstraint::JWT,
+                creds @ Some(&crate::auth::Credentials::JWT(_)),
+            ) => creds,
+            (
+                crate::auth::AuthenticationConstraint::JWT,
+                Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
+            ) => Some(apptoken.jwt()),
+            (crate::auth::AuthenticationConstraint::JWT, creds) => {
+                println!(
+                    "Request needs JWT authentication but only {:?} available",
+                    creds
+                );
+                None
+            }
+        }
+    }
+
+    async fn url_and_auth(
+        &self,
+        uri: &str,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> Result<(reqwest::Url, Option<String>)> {
+        let parsed_url = uri.parse::<reqwest::Url>();
+
+        match self.credentials(authentication) {
+            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => parsed_url
+                .map(|mut u| {
+                    u.query_pairs_mut()
+                        .append_pair("client_id", id)
+                        .append_pair("client_secret", secret);
+                    (u, None)
+                })
+                .map_err(Error::from),
+            Some(&crate::auth::Credentials::Token(ref token)) => {
+                let auth = format!("token {}", token);
+                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+            }
+            Some(&crate::auth::Credentials::JWT(ref jwt)) => {
+                let auth = format!("Bearer {}", jwt.token());
+                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+            }
+            Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
+                if let Some(token) = apptoken.token() {
+                    let auth = format!("token {}", token);
+                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                } else {
+                    println!("App token is stale, refreshing");
+                    let token_ref = apptoken.access_key.clone();
+
+                    let token = self
+                        .apps_create_installation_access_token(
+                            apptoken.installation_id as i64,
+                            &types::CreateInstallationAccessTokenAppRequest {
+                                permissions: Default::default(),
+                                repositories: Default::default(),
+                                repository_ids: Default::default(),
+                            },
+                        )
+                        .await
+                        .unwrap();
+                    let auth = format!("token {}", &token.token);
+                    *token_ref.lock().unwrap() = Some(token.token);
+                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                }
+            }
+            None => parsed_url.map(|u| (u, None)).map_err(Error::from),
         }
     }
 
@@ -8590,7 +8735,7 @@ impl Client {
      * meta_root: GET /
      */
     pub async fn meta_root(&self) -> Result<types::GetGithubApiRootOkResponse> {
-        let url = self.baseurl.to_string();
+        let url = DEFAULT_HOST.to_string();
         let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
@@ -8600,7 +8745,7 @@ impl Client {
      * apps_get_authenticated: GET /app
      */
     pub async fn apps_get_authenticated(&self) -> Result<types::Integration> {
-        let url = format!("{}/app", self.baseurl,);
+        let url = format!("{}/app", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -8617,7 +8762,7 @@ impl Client {
     ) -> Result<types::PostCreateGithubAppFromManifestCreatedResponse> {
         let url = format!(
             "{}/app-manifests/{}/conversions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&code.to_string()),
         );
 
@@ -8636,7 +8781,7 @@ impl Client {
      * apps_get_webhook_config_for_app: GET /app/hook/config
      */
     pub async fn apps_get_webhook_config_for_app(&self) -> Result<types::WebhookConfig> {
-        let url = format!("{}/app/hook/config", self.baseurl,);
+        let url = format!("{}/app/hook/config", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -8650,7 +8795,7 @@ impl Client {
         &self,
         body: &types::UpdateWebhookConfigurationAppRequest,
     ) -> Result<types::WebhookConfig> {
-        let url = format!("{}/app/hook/config", self.baseurl,);
+        let url = format!("{}/app/hook/config", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -8673,7 +8818,7 @@ impl Client {
         since: DateTime<Utc>,
         outdated: &str,
     ) -> Result<Vec<types::Installation>> {
-        let url = format!("{}/app/installations", self.baseurl,);
+        let url = format!("{}/app/installations", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -8697,7 +8842,7 @@ impl Client {
     pub async fn apps_get_installation(&self, installation_id: i64) -> Result<types::Installation> {
         let url = format!(
             "{}/app/installations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
@@ -8712,7 +8857,7 @@ impl Client {
     pub async fn apps_delete_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
             "{}/app/installations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
@@ -8732,7 +8877,7 @@ impl Client {
     ) -> Result<types::InstallationToken> {
         let url = format!(
             "{}/app/installations/{}/access_tokens",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
@@ -8753,7 +8898,7 @@ impl Client {
     pub async fn apps_suspend_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
             "{}/app/installations/{}/suspended",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
@@ -8769,7 +8914,7 @@ impl Client {
     pub async fn apps_unsuspend_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
             "{}/app/installations/{}/suspended",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
@@ -8788,7 +8933,7 @@ impl Client {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<types::ApplicationGrant>> {
-        let url = format!("{}/applications/grants", self.baseurl,);
+        let url = format!("{}/applications/grants", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -8814,7 +8959,7 @@ impl Client {
     ) -> Result<types::ApplicationGrant> {
         let url = format!(
             "{}/applications/grants/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&grant_id.to_string()),
         );
 
@@ -8829,7 +8974,7 @@ impl Client {
     pub async fn oauth_authorizations_delete_grant(&self, grant_id: i64) -> Result<()> {
         let url = format!(
             "{}/applications/grants/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&grant_id.to_string()),
         );
 
@@ -8849,7 +8994,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/applications/{}/grant",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
@@ -8875,7 +9020,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/applications/{}/grants/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&access_token.to_string()),
         );
@@ -8896,7 +9041,7 @@ impl Client {
     ) -> Result<types::Authorization> {
         let url = format!(
             "{}/applications/{}/token",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
@@ -8921,7 +9066,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/applications/{}/token",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
@@ -8947,7 +9092,7 @@ impl Client {
     ) -> Result<types::Authorization> {
         let url = format!(
             "{}/applications/{}/token",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
@@ -8972,7 +9117,7 @@ impl Client {
     ) -> Result<types::Authorization> {
         let url = format!(
             "{}/applications/{}/token/scoped",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
@@ -8997,7 +9142,7 @@ impl Client {
     ) -> Result<types::GetCheckAuthorizationOkResponse> {
         let url = format!(
             "{}/applications/{}/tokens/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&access_token.to_string()),
         );
@@ -9017,7 +9162,7 @@ impl Client {
     ) -> Result<types::Authorization> {
         let url = format!(
             "{}/applications/{}/tokens/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&access_token.to_string()),
         );
@@ -9037,7 +9182,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/applications/{}/tokens/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&access_token.to_string()),
         );
@@ -9054,7 +9199,7 @@ impl Client {
     pub async fn apps_get_by_slug(&self, app_slug: &str) -> Result<types::Integration> {
         let url = format!(
             "{}/apps/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&app_slug.to_string()),
         );
 
@@ -9072,7 +9217,7 @@ impl Client {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<types::Authorization>> {
-        let url = format!("{}/authorizations", self.baseurl,);
+        let url = format!("{}/authorizations", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -9096,7 +9241,7 @@ impl Client {
         &self,
         body: &types::CreateNewAuthorizationRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/authorizations", self.baseurl,);
+        let url = format!("{}/authorizations", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -9119,7 +9264,7 @@ impl Client {
     ) -> Result<types::Authorization> {
         let url = format!(
             "{}/authorizations/clients/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
@@ -9145,7 +9290,7 @@ impl Client {
     ) -> Result<types::Authorization> {
         let url = format!(
             "{}/authorizations/clients/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&fingerprint.to_string()),
         );
@@ -9170,7 +9315,7 @@ impl Client {
     ) -> Result<types::Authorization> {
         let url = format!(
             "{}/authorizations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&authorization_id.to_string()),
         );
 
@@ -9188,7 +9333,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/authorizations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&authorization_id.to_string()),
         );
 
@@ -9208,7 +9353,7 @@ impl Client {
     ) -> Result<types::Authorization> {
         let url = format!(
             "{}/authorizations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&authorization_id.to_string()),
         );
 
@@ -9229,7 +9374,7 @@ impl Client {
     pub async fn codes_of_conduct_get_all_codes_of_conduct(
         &self,
     ) -> Result<Vec<types::CodeofConduct>> {
-        let url = format!("{}/codes_of_conduct", self.baseurl,);
+        let url = format!("{}/codes_of_conduct", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -9245,7 +9390,7 @@ impl Client {
     ) -> Result<types::CodeofConduct> {
         let url = format!(
             "{}/codes_of_conduct/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&key.to_string()),
         );
 
@@ -9258,7 +9403,7 @@ impl Client {
      * emojis_get: GET /emojis
      */
     pub async fn emojis_get(&self) -> Result<types::GetEmojisOkResponse> {
-        let url = format!("{}/emojis", self.baseurl,);
+        let url = format!("{}/emojis", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -9274,7 +9419,7 @@ impl Client {
     ) -> Result<types::ActionsEnterprisePermissions> {
         let url = format!(
             "{}/enterprises/{}/actions/permissions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9293,7 +9438,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/permissions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9320,7 +9465,7 @@ impl Client {
     ) -> Result<types::GetListSelectedOrganizationsEnabledGithubActionsinEnterpriseOkResponse> {
         let url = format!(
             "{}/enterprises/{}/actions/permissions/organizations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9348,7 +9493,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/permissions/organizations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9374,7 +9519,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/permissions/organizations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&org_id.to_string()),
         );
@@ -9395,7 +9540,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/permissions/organizations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&org_id.to_string()),
         );
@@ -9415,7 +9560,7 @@ impl Client {
     ) -> Result<types::SelectedActions> {
         let url = format!(
             "{}/enterprises/{}/actions/permissions/selected-actions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9434,7 +9579,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/permissions/selected-actions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9461,7 +9606,7 @@ impl Client {
     ) -> Result<types::GetListSelfDataHostedRunnerGroupsEnterpriseOkResponse> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9489,7 +9634,7 @@ impl Client {
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9514,7 +9659,7 @@ impl Client {
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -9534,7 +9679,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -9556,7 +9701,7 @@ impl Client {
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -9585,7 +9730,7 @@ impl Client {
     {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}/organizations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -9615,7 +9760,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}/organizations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -9643,7 +9788,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}/organizations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&org_id.to_string()),
@@ -9666,7 +9811,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}/organizations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&org_id.to_string()),
@@ -9690,7 +9835,7 @@ impl Client {
     ) -> Result<types::GetListSelfDataHostedRunnersinGroupEnterpriseOkResponse> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}/runners",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -9720,7 +9865,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}/runners",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -9748,7 +9893,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
@@ -9771,7 +9916,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/runner-groups/{}/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
@@ -9794,7 +9939,7 @@ impl Client {
     ) -> Result<types::GetListSelfDataHostedRunnersEnterpriseOkResponse> {
         let url = format!(
             "{}/enterprises/{}/actions/runners",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9821,7 +9966,7 @@ impl Client {
     ) -> Result<Vec<types::RunnerApplication>> {
         let url = format!(
             "{}/enterprises/{}/actions/runners/downloads",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9839,7 +9984,7 @@ impl Client {
     ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "{}/enterprises/{}/actions/runners/registration-token",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9857,7 +10002,7 @@ impl Client {
     ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "{}/enterprises/{}/actions/runners/remove-token",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9876,7 +10021,7 @@ impl Client {
     ) -> Result<types::Runner> {
         let url = format!(
             "{}/enterprises/{}/actions/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
@@ -9896,7 +10041,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/enterprises/{}/actions/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
@@ -9923,7 +10068,7 @@ impl Client {
     ) -> Result<Vec<types::AuditLogEvent>> {
         let url = format!(
             "{}/enterprises/{}/audit-log",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9955,7 +10100,7 @@ impl Client {
     ) -> Result<types::ActionsBillingUsage> {
         let url = format!(
             "{}/enterprises/{}/settings/billing/actions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9973,7 +10118,7 @@ impl Client {
     ) -> Result<types::PackagesBillingUsage> {
         let url = format!(
             "{}/enterprises/{}/settings/billing/packages",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -9991,7 +10136,7 @@ impl Client {
     ) -> Result<types::CombinedBillingUsage> {
         let url = format!(
             "{}/enterprises/{}/settings/billing/shared-storage",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -10008,7 +10153,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/events", self.baseurl,);
+        let url = format!("{}/events", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10028,7 +10173,7 @@ impl Client {
      * activity_get_feeds: GET /feeds
      */
     pub async fn activity_get_feeds(&self) -> Result<types::Feed> {
-        let url = format!("{}/feeds", self.baseurl,);
+        let url = format!("{}/feeds", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -10044,7 +10189,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
-        let url = format!("{}/gists", self.baseurl,);
+        let url = format!("{}/gists", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10065,7 +10210,7 @@ impl Client {
      * gists_create: POST /gists
      */
     pub async fn gists_create(&self, body: &types::CreateGistRequest) -> Result<types::GistSimple> {
-        let url = format!("{}/gists", self.baseurl,);
+        let url = format!("{}/gists", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10087,7 +10232,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
-        let url = format!("{}/gists/public", self.baseurl,);
+        let url = format!("{}/gists/public", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10113,7 +10258,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
-        let url = format!("{}/gists/starred", self.baseurl,);
+        let url = format!("{}/gists/starred", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10136,7 +10281,7 @@ impl Client {
     pub async fn gists_get(&self, gist_id: &str) -> Result<types::GistSimple> {
         let url = format!(
             "{}/gists/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10151,7 +10296,7 @@ impl Client {
     pub async fn gists_delete(&self, gist_id: &str) -> Result<()> {
         let url = format!(
             "{}/gists/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10171,7 +10316,7 @@ impl Client {
     ) -> Result<types::GistSimple> {
         let url = format!(
             "{}/gists/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10197,7 +10342,7 @@ impl Client {
     ) -> Result<Vec<types::GistComment>> {
         let url = format!(
             "{}/gists/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10225,7 +10370,7 @@ impl Client {
     ) -> Result<types::GistComment> {
         let url = format!(
             "{}/gists/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10250,7 +10395,7 @@ impl Client {
     ) -> Result<types::GistComment> {
         let url = format!(
             "{}/gists/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
@@ -10266,7 +10411,7 @@ impl Client {
     pub async fn gists_delete_comment(&self, gist_id: &str, comment_id: i64) -> Result<()> {
         let url = format!(
             "{}/gists/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
@@ -10288,7 +10433,7 @@ impl Client {
     ) -> Result<types::GistComment> {
         let url = format!(
             "{}/gists/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
@@ -10315,7 +10460,7 @@ impl Client {
     ) -> Result<Vec<types::GistCommit>> {
         let url = format!(
             "{}/gists/{}/commits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10344,7 +10489,7 @@ impl Client {
     ) -> Result<Vec<types::GistSimple>> {
         let url = format!(
             "{}/gists/{}/forks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10368,7 +10513,7 @@ impl Client {
     pub async fn gists_fork(&self, gist_id: &str) -> Result<types::BaseGist> {
         let url = format!(
             "{}/gists/{}/forks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10383,7 +10528,7 @@ impl Client {
     pub async fn gists_check_is_starred(&self, gist_id: &str) -> Result<()> {
         let url = format!(
             "{}/gists/{}/star",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10399,7 +10544,7 @@ impl Client {
     pub async fn gists_star(&self, gist_id: &str) -> Result<()> {
         let url = format!(
             "{}/gists/{}/star",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10415,7 +10560,7 @@ impl Client {
     pub async fn gists_unstar(&self, gist_id: &str) -> Result<()> {
         let url = format!(
             "{}/gists/{}/star",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
@@ -10431,7 +10576,7 @@ impl Client {
     pub async fn gists_get_revision(&self, gist_id: &str, sha: &str) -> Result<types::GistSimple> {
         let url = format!(
             "{}/gists/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gist_id.to_string()),
             progenitor_support::encode_path(&sha.to_string()),
         );
@@ -10445,7 +10590,7 @@ impl Client {
      * gitignore_get_all_templates: GET /gitignore/templates
      */
     pub async fn gitignore_get_all_templates(&self) -> Result<Vec<String>> {
-        let url = format!("{}/gitignore/templates", self.baseurl,);
+        let url = format!("{}/gitignore/templates", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -10458,7 +10603,7 @@ impl Client {
     pub async fn gitignore_get_template(&self, name: &str) -> Result<types::GitignoreTemplate> {
         let url = format!(
             "{}/gitignore/templates/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&name.to_string()),
         );
 
@@ -10475,7 +10620,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListRepositoriesAccessibleAppInstallationOkResponse> {
-        let url = format!("{}/installation/repositories", self.baseurl,);
+        let url = format!("{}/installation/repositories", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10495,7 +10640,7 @@ impl Client {
      * apps_revoke_installation_access_token: DELETE /installation/token
      */
     pub async fn apps_revoke_installation_access_token(&self) -> Result<()> {
-        let url = format!("{}/installation/token", self.baseurl,);
+        let url = format!("{}/installation/token", DEFAULT_HOST,);
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
@@ -10521,7 +10666,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("{}/issues", self.baseurl,);
+        let url = format!("{}/issues", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10556,7 +10701,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::LicenseSimple>> {
-        let url = format!("{}/licenses", self.baseurl,);
+        let url = format!("{}/licenses", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10579,7 +10724,7 @@ impl Client {
     pub async fn licenses_get(&self, license: &str) -> Result<types::License> {
         let url = format!(
             "{}/licenses/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&license.to_string()),
         );
 
@@ -10595,7 +10740,7 @@ impl Client {
         &self,
         body: &types::RenderMarkdownDocumentRequest,
     ) -> Result<String> {
-        let url = format!("{}/markdown", self.baseurl,);
+        let url = format!("{}/markdown", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10612,7 +10757,7 @@ impl Client {
      * markdown_render_raw: POST /markdown/raw
      */
     pub async fn markdown_render_raw<T: Into<reqwest::Body>>(&self, body: T) -> Result<String> {
-        let url = format!("{}/markdown/raw", self.baseurl,);
+        let url = format!("{}/markdown/raw", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10634,7 +10779,7 @@ impl Client {
     ) -> Result<types::MarketplacePurchase> {
         let url = format!(
             "{}/marketplace_listing/accounts/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&account_id.to_string()),
         );
 
@@ -10651,7 +10796,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
-        let url = format!("{}/marketplace_listing/plans", self.baseurl,);
+        let url = format!("{}/marketplace_listing/plans", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10680,7 +10825,7 @@ impl Client {
     ) -> Result<Vec<types::MarketplacePurchase>> {
         let url = format!(
             "{}/marketplace_listing/plans/{}/accounts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&plan_id.to_string()),
         );
 
@@ -10709,7 +10854,7 @@ impl Client {
     ) -> Result<types::MarketplacePurchase> {
         let url = format!(
             "{}/marketplace_listing/stubbed/accounts/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&account_id.to_string()),
         );
 
@@ -10726,7 +10871,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
-        let url = format!("{}/marketplace_listing/stubbed/plans", self.baseurl,);
+        let url = format!("{}/marketplace_listing/stubbed/plans", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10755,7 +10900,7 @@ impl Client {
     ) -> Result<Vec<types::MarketplacePurchase>> {
         let url = format!(
             "{}/marketplace_listing/stubbed/plans/{}/accounts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&plan_id.to_string()),
         );
 
@@ -10779,7 +10924,7 @@ impl Client {
      * meta_get: GET /meta
      */
     pub async fn meta_get(&self) -> Result<types::ApiOverview> {
-        let url = format!("{}/meta", self.baseurl,);
+        let url = format!("{}/meta", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -10798,7 +10943,7 @@ impl Client {
     ) -> Result<Vec<types::Event>> {
         let url = format!(
             "{}/networks/{}/{}/events",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -10829,7 +10974,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Thread>> {
-        let url = format!("{}/notifications", self.baseurl,);
+        let url = format!("{}/notifications", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10856,7 +11001,7 @@ impl Client {
         &self,
         body: &types::MarkNotificationsasReadRequest,
     ) -> Result<types::PutMarkNotificationsasReadAcceptedResponse> {
-        let url = format!("{}/notifications", self.baseurl,);
+        let url = format!("{}/notifications", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10875,7 +11020,7 @@ impl Client {
     pub async fn activity_get_thread(&self, thread_id: i64) -> Result<types::Thread> {
         let url = format!(
             "{}/notifications/threads/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
@@ -10890,7 +11035,7 @@ impl Client {
     pub async fn activity_mark_thread_as_read(&self, thread_id: i64) -> Result<()> {
         let url = format!(
             "{}/notifications/threads/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
@@ -10909,7 +11054,7 @@ impl Client {
     ) -> Result<types::ThreadSubscription> {
         let url = format!(
             "{}/notifications/threads/{}/subscription",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
@@ -10928,7 +11073,7 @@ impl Client {
     ) -> Result<types::ThreadSubscription> {
         let url = format!(
             "{}/notifications/threads/{}/subscription",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
@@ -10949,7 +11094,7 @@ impl Client {
     pub async fn activity_delete_thread_subscription(&self, thread_id: i64) -> Result<()> {
         let url = format!(
             "{}/notifications/threads/{}/subscription",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
@@ -10963,7 +11108,7 @@ impl Client {
      * meta_get_octocat: GET /octocat
      */
     pub async fn meta_get_octocat(&self, s: &str) -> Result<String> {
-        let url = format!("{}/octocat", self.baseurl,);
+        let url = format!("{}/octocat", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -10984,7 +11129,7 @@ impl Client {
         since: i64,
         per_page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
-        let url = format!("{}/organizations", self.baseurl,);
+        let url = format!("{}/organizations", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -11006,7 +11151,7 @@ impl Client {
     pub async fn orgs_get(&self, org: &str) -> Result<types::OrganizationFull> {
         let url = format!(
             "{}/orgs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11025,7 +11170,7 @@ impl Client {
     ) -> Result<types::OrganizationFull> {
         let url = format!(
             "{}/orgs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11049,7 +11194,7 @@ impl Client {
     ) -> Result<types::ActionsOrganizationPermissions> {
         let url = format!(
             "{}/orgs/{}/actions/permissions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11068,7 +11213,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/permissions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11096,7 +11241,7 @@ impl Client {
     {
         let url = format!(
             "{}/orgs/{}/actions/permissions/repositories",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11124,7 +11269,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/permissions/repositories",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11150,7 +11295,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/permissions/repositories/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
@@ -11171,7 +11316,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/permissions/repositories/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
@@ -11191,7 +11336,7 @@ impl Client {
     ) -> Result<types::SelectedActions> {
         let url = format!(
             "{}/orgs/{}/actions/permissions/selected-actions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11210,7 +11355,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/permissions/selected-actions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11237,7 +11382,7 @@ impl Client {
     ) -> Result<types::GetListSelfDataHostedRunnerGroupsOrganizationOkResponse> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11265,7 +11410,7 @@ impl Client {
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11290,7 +11435,7 @@ impl Client {
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -11310,7 +11455,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -11332,7 +11477,7 @@ impl Client {
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -11361,7 +11506,7 @@ impl Client {
     {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}/repositories",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -11391,7 +11536,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}/repositories",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -11419,7 +11564,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}/repositories/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
@@ -11442,7 +11587,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}/repositories/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
@@ -11466,7 +11611,7 @@ impl Client {
     ) -> Result<types::GetListSelfDataHostedRunnersinGroupOrganizationOkResponse> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}/runners",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -11496,7 +11641,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}/runners",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
@@ -11524,7 +11669,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
@@ -11547,7 +11692,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/runner-groups/{}/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
@@ -11570,7 +11715,7 @@ impl Client {
     ) -> Result<types::GetListSelfDataHostedRunnersOrganizationOkResponse> {
         let url = format!(
             "{}/orgs/{}/actions/runners",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11597,7 +11742,7 @@ impl Client {
     ) -> Result<Vec<types::RunnerApplication>> {
         let url = format!(
             "{}/orgs/{}/actions/runners/downloads",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11615,7 +11760,7 @@ impl Client {
     ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "{}/orgs/{}/actions/runners/registration-token",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11633,7 +11778,7 @@ impl Client {
     ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "{}/orgs/{}/actions/runners/remove-token",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11652,7 +11797,7 @@ impl Client {
     ) -> Result<types::Runner> {
         let url = format!(
             "{}/orgs/{}/actions/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
@@ -11672,7 +11817,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
@@ -11694,7 +11839,7 @@ impl Client {
     ) -> Result<types::GetListOrganizationSecretsOkResponse> {
         let url = format!(
             "{}/orgs/{}/actions/secrets",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11718,7 +11863,7 @@ impl Client {
     pub async fn actions_get_org_public_key(&self, org: &str) -> Result<types::ActionsPublicKey> {
         let url = format!(
             "{}/orgs/{}/actions/secrets/public-key",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11737,7 +11882,7 @@ impl Client {
     ) -> Result<types::OrganizationActionsSecret> {
         let url = format!(
             "{}/orgs/{}/actions/secrets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
@@ -11758,7 +11903,7 @@ impl Client {
     ) -> Result<types::EmptyObject> {
         let url = format!(
             "{}/orgs/{}/actions/secrets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
@@ -11780,7 +11925,7 @@ impl Client {
     pub async fn actions_delete_org_secret(&self, org: &str, secret_name: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/secrets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
@@ -11803,7 +11948,7 @@ impl Client {
     ) -> Result<types::GetListSelectedRepositoriesOrganizationSecretOkResponse> {
         let url = format!(
             "{}/orgs/{}/actions/secrets/{}/repositories",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
@@ -11833,7 +11978,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/secrets/{}/repositories",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
@@ -11861,7 +12006,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/secrets/{}/repositories/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
@@ -11884,7 +12029,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/actions/secrets/{}/repositories/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
@@ -11912,7 +12057,7 @@ impl Client {
     ) -> Result<Vec<types::AuditLogEvent>> {
         let url = format!(
             "{}/orgs/{}/audit-log",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11941,7 +12086,7 @@ impl Client {
     pub async fn orgs_list_blocked_users(&self, org: &str) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/orgs/{}/blocks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -11956,7 +12101,7 @@ impl Client {
     pub async fn orgs_check_blocked_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/blocks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -11973,7 +12118,7 @@ impl Client {
     pub async fn orgs_block_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/blocks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -11990,7 +12135,7 @@ impl Client {
     pub async fn orgs_unblock_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/blocks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -12010,7 +12155,7 @@ impl Client {
     ) -> Result<Vec<types::CredentialAuthorization>> {
         let url = format!(
             "{}/orgs/{}/credential-authorizations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12029,7 +12174,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/credential-authorizations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&credential_id.to_string()),
         );
@@ -12051,7 +12196,7 @@ impl Client {
     ) -> Result<Vec<types::Event>> {
         let url = format!(
             "{}/orgs/{}/events",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12080,7 +12225,7 @@ impl Client {
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
             "{}/orgs/{}/failed_invitations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12109,7 +12254,7 @@ impl Client {
     ) -> Result<Vec<types::OrgHook>> {
         let url = format!(
             "{}/orgs/{}/hooks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12137,7 +12282,7 @@ impl Client {
     ) -> Result<types::OrgHook> {
         let url = format!(
             "{}/orgs/{}/hooks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12158,7 +12303,7 @@ impl Client {
     pub async fn orgs_get_webhook(&self, org: &str, hook_id: i64) -> Result<types::OrgHook> {
         let url = format!(
             "{}/orgs/{}/hooks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
@@ -12174,7 +12319,7 @@ impl Client {
     pub async fn orgs_delete_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/hooks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
@@ -12196,7 +12341,7 @@ impl Client {
     ) -> Result<types::OrgHook> {
         let url = format!(
             "{}/orgs/{}/hooks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
@@ -12222,7 +12367,7 @@ impl Client {
     ) -> Result<types::WebhookConfig> {
         let url = format!(
             "{}/orgs/{}/hooks/{}/config",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
@@ -12243,7 +12388,7 @@ impl Client {
     ) -> Result<types::WebhookConfig> {
         let url = format!(
             "{}/orgs/{}/hooks/{}/config",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
@@ -12265,7 +12410,7 @@ impl Client {
     pub async fn orgs_ping_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/hooks/{}/pings",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
@@ -12282,7 +12427,7 @@ impl Client {
     pub async fn apps_get_org_installation(&self, org: &str) -> Result<types::Installation> {
         let url = format!(
             "{}/orgs/{}/installation",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12302,7 +12447,7 @@ impl Client {
     ) -> Result<types::GetListAppInstallationsOrganizationOkResponse> {
         let url = format!(
             "{}/orgs/{}/installations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12329,7 +12474,7 @@ impl Client {
     ) -> Result<types::GetInteractionRestrictionsOrganizationOkResponse> {
         let url = format!(
             "{}/orgs/{}/interaction-limits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12348,7 +12493,7 @@ impl Client {
     ) -> Result<types::InteractionLimitResponse> {
         let url = format!(
             "{}/orgs/{}/interaction-limits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12369,7 +12514,7 @@ impl Client {
     pub async fn interactions_remove_restrictions_for_org(&self, org: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/interaction-limits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12390,7 +12535,7 @@ impl Client {
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
             "{}/orgs/{}/invitations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12418,7 +12563,7 @@ impl Client {
     ) -> Result<types::OrganizationInvitation> {
         let url = format!(
             "{}/orgs/{}/invitations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12439,7 +12584,7 @@ impl Client {
     pub async fn orgs_cancel_invitation(&self, org: &str, invitation_id: i64) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/invitations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
@@ -12462,7 +12607,7 @@ impl Client {
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "{}/orgs/{}/invitations/{}/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
@@ -12498,7 +12643,7 @@ impl Client {
     ) -> Result<Vec<types::Issue>> {
         let url = format!(
             "{}/orgs/{}/issues",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12535,7 +12680,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/orgs/{}/members",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12561,7 +12706,7 @@ impl Client {
     pub async fn orgs_check_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/members/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -12578,7 +12723,7 @@ impl Client {
     pub async fn orgs_remove_member(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/members/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -12599,7 +12744,7 @@ impl Client {
     ) -> Result<types::OrgMembership> {
         let url = format!(
             "{}/orgs/{}/memberships/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -12620,7 +12765,7 @@ impl Client {
     ) -> Result<types::OrgMembership> {
         let url = format!(
             "{}/orgs/{}/memberships/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -12642,7 +12787,7 @@ impl Client {
     pub async fn orgs_remove_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/memberships/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -12665,7 +12810,7 @@ impl Client {
     ) -> Result<Vec<types::Migration>> {
         let url = format!(
             "{}/orgs/{}/migrations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12694,7 +12839,7 @@ impl Client {
     ) -> Result<types::Migration> {
         let url = format!(
             "{}/orgs/{}/migrations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12720,7 +12865,7 @@ impl Client {
     ) -> Result<types::Migration> {
         let url = format!(
             "{}/orgs/{}/migrations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
         );
@@ -12746,7 +12891,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/migrations/{}/archive",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
         );
@@ -12767,7 +12912,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/migrations/{}/archive",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
         );
@@ -12789,7 +12934,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/migrations/{}/repos/{}/lock",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
             progenitor_support::encode_path(&repo_name.to_string()),
@@ -12813,7 +12958,7 @@ impl Client {
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "{}/orgs/{}/migrations/{}/repositories",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
         );
@@ -12844,7 +12989,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/orgs/{}/outside_collaborators",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -12873,7 +13018,7 @@ impl Client {
     ) -> Result<types::PutConvertOrganizationMemberOutsideCollaboratorAcceptedResponse> {
         let url = format!(
             "{}/orgs/{}/outside_collaborators/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -12889,7 +13034,7 @@ impl Client {
     pub async fn orgs_remove_outside_collaborator(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/outside_collaborators/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -12911,7 +13056,7 @@ impl Client {
     ) -> Result<types::Package> {
         let url = format!(
             "{}/orgs/{}/packages/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -12933,7 +13078,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/packages/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -12957,7 +13102,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/packages/{}/{}/restore",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -12989,7 +13134,7 @@ impl Client {
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "{}/orgs/{}/packages/{}/{}/versions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -13022,7 +13167,7 @@ impl Client {
     ) -> Result<types::PackageVersion> {
         let url = format!(
             "{}/orgs/{}/packages/{}/{}/versions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -13046,7 +13191,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/packages/{}/{}/versions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -13071,7 +13216,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/packages/{}/{}/versions/{}/restore",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -13096,7 +13241,7 @@ impl Client {
     ) -> Result<Vec<types::Project>> {
         let url = format!(
             "{}/orgs/{}/projects",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13125,7 +13270,7 @@ impl Client {
     ) -> Result<types::Project> {
         let url = format!(
             "{}/orgs/{}/projects",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13151,7 +13296,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/orgs/{}/public_members",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13179,7 +13324,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/public_members/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -13200,7 +13345,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/public_members/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -13221,7 +13366,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/public_members/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -13246,7 +13391,7 @@ impl Client {
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "{}/orgs/{}/repos",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13277,7 +13422,7 @@ impl Client {
     ) -> Result<types::Repository> {
         let url = format!(
             "{}/orgs/{}/repos",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13301,7 +13446,7 @@ impl Client {
     ) -> Result<types::ActionsBillingUsage> {
         let url = format!(
             "{}/orgs/{}/settings/billing/actions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13319,7 +13464,7 @@ impl Client {
     ) -> Result<types::PackagesBillingUsage> {
         let url = format!(
             "{}/orgs/{}/settings/billing/packages",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13337,7 +13482,7 @@ impl Client {
     ) -> Result<types::CombinedBillingUsage> {
         let url = format!(
             "{}/orgs/{}/settings/billing/shared-storage",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13357,7 +13502,7 @@ impl Client {
     ) -> Result<types::GroupMapping> {
         let url = format!(
             "{}/orgs/{}/team-sync/groups",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13386,7 +13531,7 @@ impl Client {
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "{}/orgs/{}/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13414,7 +13559,7 @@ impl Client {
     ) -> Result<types::TeamFull> {
         let url = format!(
             "{}/orgs/{}/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -13435,7 +13580,7 @@ impl Client {
     pub async fn teams_get_by_name(&self, org: &str, team_slug: &str) -> Result<types::TeamFull> {
         let url = format!(
             "{}/orgs/{}/teams/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -13451,7 +13596,7 @@ impl Client {
     pub async fn teams_delete_in_org(&self, org: &str, team_slug: &str) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -13473,7 +13618,7 @@ impl Client {
     ) -> Result<types::TeamFull> {
         let url = format!(
             "{}/orgs/{}/teams/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -13503,7 +13648,7 @@ impl Client {
     ) -> Result<Vec<types::TeamDiscussion>> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -13535,7 +13680,7 @@ impl Client {
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -13562,7 +13707,7 @@ impl Client {
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13584,7 +13729,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13608,7 +13753,7 @@ impl Client {
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13639,7 +13784,7 @@ impl Client {
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13672,7 +13817,7 @@ impl Client {
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13701,7 +13846,7 @@ impl Client {
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13725,7 +13870,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13751,7 +13896,7 @@ impl Client {
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13784,7 +13929,7 @@ impl Client {
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13819,7 +13964,7 @@ impl Client {
     ) -> Result<types::Reaction> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13850,7 +13995,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13878,7 +14023,7 @@ impl Client {
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13911,7 +14056,7 @@ impl Client {
     ) -> Result<types::Reaction> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13940,7 +14085,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}/discussions/{}/reactions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
@@ -13965,7 +14110,7 @@ impl Client {
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
             "{}/orgs/{}/teams/{}/invitations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -13997,7 +14142,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/orgs/{}/teams/{}/members",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -14028,7 +14173,7 @@ impl Client {
     ) -> Result<types::TeamMembership> {
         let url = format!(
             "{}/orgs/{}/teams/{}/memberships/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&username.to_string()),
@@ -14051,7 +14196,7 @@ impl Client {
     ) -> Result<types::TeamMembership> {
         let url = format!(
             "{}/orgs/{}/teams/{}/memberships/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&username.to_string()),
@@ -14079,7 +14224,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}/memberships/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&username.to_string()),
@@ -14103,7 +14248,7 @@ impl Client {
     ) -> Result<Vec<types::TeamProject>> {
         let url = format!(
             "{}/orgs/{}/teams/{}/projects",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -14133,7 +14278,7 @@ impl Client {
     ) -> Result<types::TeamProject> {
         let url = format!(
             "{}/orgs/{}/teams/{}/projects/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
@@ -14156,7 +14301,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}/projects/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
@@ -14185,7 +14330,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}/projects/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
@@ -14209,7 +14354,7 @@ impl Client {
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "{}/orgs/{}/teams/{}/repos",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -14240,7 +14385,7 @@ impl Client {
     ) -> Result<types::TeamRepository> {
         let url = format!(
             "{}/orgs/{}/teams/{}/repos/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&owner.to_string()),
@@ -14265,7 +14410,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}/repos/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&owner.to_string()),
@@ -14296,7 +14441,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/orgs/{}/teams/{}/repos/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&owner.to_string()),
@@ -14319,7 +14464,7 @@ impl Client {
     ) -> Result<types::GroupMapping> {
         let url = format!(
             "{}/orgs/{}/teams/{}/team-sync/group-mappings",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -14340,7 +14485,7 @@ impl Client {
     ) -> Result<types::GroupMapping> {
         let url = format!(
             "{}/orgs/{}/teams/{}/team-sync/group-mappings",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -14368,7 +14513,7 @@ impl Client {
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "{}/orgs/{}/teams/{}/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
@@ -14393,7 +14538,7 @@ impl Client {
     pub async fn projects_get_card(&self, card_id: i64) -> Result<types::ProjectCard> {
         let url = format!(
             "{}/projects/columns/cards/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
@@ -14408,7 +14553,7 @@ impl Client {
     pub async fn projects_delete_card(&self, card_id: i64) -> Result<()> {
         let url = format!(
             "{}/projects/columns/cards/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
@@ -14428,7 +14573,7 @@ impl Client {
     ) -> Result<types::ProjectCard> {
         let url = format!(
             "{}/projects/columns/cards/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
@@ -14453,7 +14598,7 @@ impl Client {
     ) -> Result<types::PostMoveProjectCardCreatedResponse> {
         let url = format!(
             "{}/projects/columns/cards/{}/moves",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
@@ -14474,7 +14619,7 @@ impl Client {
     pub async fn projects_get_column(&self, column_id: i64) -> Result<types::ProjectColumn> {
         let url = format!(
             "{}/projects/columns/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
@@ -14489,7 +14634,7 @@ impl Client {
     pub async fn projects_delete_column(&self, column_id: i64) -> Result<()> {
         let url = format!(
             "{}/projects/columns/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
@@ -14509,7 +14654,7 @@ impl Client {
     ) -> Result<types::ProjectColumn> {
         let url = format!(
             "{}/projects/columns/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
@@ -14536,7 +14681,7 @@ impl Client {
     ) -> Result<Vec<types::ProjectCard>> {
         let url = format!(
             "{}/projects/columns/{}/cards",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
@@ -14565,7 +14710,7 @@ impl Client {
     ) -> Result<types::ProjectCard> {
         let url = format!(
             "{}/projects/columns/{}/cards",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
@@ -14590,7 +14735,7 @@ impl Client {
     ) -> Result<types::PostMoveProjectColumnCreatedResponse> {
         let url = format!(
             "{}/projects/columns/{}/moves",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
@@ -14611,7 +14756,7 @@ impl Client {
     pub async fn projects_get(&self, project_id: i64) -> Result<types::Project> {
         let url = format!(
             "{}/projects/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
@@ -14626,7 +14771,7 @@ impl Client {
     pub async fn projects_delete(&self, project_id: i64) -> Result<()> {
         let url = format!(
             "{}/projects/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
@@ -14646,7 +14791,7 @@ impl Client {
     ) -> Result<types::Project> {
         let url = format!(
             "{}/projects/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
@@ -14673,7 +14818,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/projects/{}/collaborators",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
@@ -14703,7 +14848,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/projects/{}/collaborators/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&project_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -14730,7 +14875,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/projects/{}/collaborators/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&project_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -14751,7 +14896,7 @@ impl Client {
     ) -> Result<types::RepositoryCollaboratorPermission> {
         let url = format!(
             "{}/projects/{}/collaborators/{}/permission",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&project_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -14772,7 +14917,7 @@ impl Client {
     ) -> Result<Vec<types::ProjectColumn>> {
         let url = format!(
             "{}/projects/{}/columns",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
@@ -14800,7 +14945,7 @@ impl Client {
     ) -> Result<types::ProjectColumn> {
         let url = format!(
             "{}/projects/{}/columns",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
@@ -14819,7 +14964,7 @@ impl Client {
      * rate_limit_get: GET /rate_limit
      */
     pub async fn rate_limit_get(&self) -> Result<types::RateLimitOverview> {
-        let url = format!("{}/rate_limit", self.baseurl,);
+        let url = format!("{}/rate_limit", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -14832,7 +14977,7 @@ impl Client {
     pub async fn reactions_delete_legacy(&self, reaction_id: i64) -> Result<()> {
         let url = format!(
             "{}/reactions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
@@ -14848,7 +14993,7 @@ impl Client {
     pub async fn repos_get(&self, owner: &str, repo: &str) -> Result<types::FullRepository> {
         let url = format!(
             "{}/repos/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -14864,7 +15009,7 @@ impl Client {
     pub async fn repos_delete(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -14886,7 +15031,7 @@ impl Client {
     ) -> Result<types::FullRepository> {
         let url = format!(
             "{}/repos/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -14914,7 +15059,7 @@ impl Client {
     ) -> Result<types::GetListArtifactsRepositoryOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/artifacts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -14944,7 +15089,7 @@ impl Client {
     ) -> Result<types::Artifact> {
         let url = format!(
             "{}/repos/{}/{}/actions/artifacts/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&artifact_id.to_string()),
@@ -14966,7 +15111,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/artifacts/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&artifact_id.to_string()),
@@ -14990,7 +15135,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/artifacts/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&artifact_id.to_string()),
@@ -15014,7 +15159,7 @@ impl Client {
     ) -> Result<types::Job> {
         let url = format!(
             "{}/repos/{}/{}/actions/jobs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&job_id.to_string()),
@@ -15036,7 +15181,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/jobs/{}/logs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&job_id.to_string()),
@@ -15058,7 +15203,7 @@ impl Client {
     ) -> Result<types::ActionsRepositoryPermissions> {
         let url = format!(
             "{}/repos/{}/{}/actions/permissions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15079,7 +15224,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/permissions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15106,7 +15251,7 @@ impl Client {
     ) -> Result<types::SelectedActions> {
         let url = format!(
             "{}/repos/{}/{}/actions/permissions/selected-actions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15127,7 +15272,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/permissions/selected-actions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15156,7 +15301,7 @@ impl Client {
     ) -> Result<types::GetListSelfDataHostedRunnersRepositoryOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/runners",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15185,7 +15330,7 @@ impl Client {
     ) -> Result<Vec<types::RunnerApplication>> {
         let url = format!(
             "{}/repos/{}/{}/actions/runners/downloads",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15205,7 +15350,7 @@ impl Client {
     ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "{}/repos/{}/{}/actions/runners/registration-token",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15225,7 +15370,7 @@ impl Client {
     ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "{}/repos/{}/{}/actions/runners/remove-token",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15246,7 +15391,7 @@ impl Client {
     ) -> Result<types::Runner> {
         let url = format!(
             "{}/repos/{}/{}/actions/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
@@ -15268,7 +15413,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/runners/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
@@ -15296,7 +15441,7 @@ impl Client {
     ) -> Result<types::GetListWorkflowRunsRepositoryOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15330,7 +15475,7 @@ impl Client {
     ) -> Result<types::WorkflowRun> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15352,7 +15497,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15375,7 +15520,7 @@ impl Client {
     ) -> Result<Vec<types::EnvironmentApprovals>> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/approvals",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15397,7 +15542,7 @@ impl Client {
     ) -> Result<types::EmptyObject> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/approve",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15421,7 +15566,7 @@ impl Client {
     ) -> Result<types::GetListWorkflowRunArtifactsOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/artifacts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15452,7 +15597,7 @@ impl Client {
     ) -> Result<types::PostCancelWorkflowRunAcceptedResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/cancel",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15477,7 +15622,7 @@ impl Client {
     ) -> Result<types::GetListJobsWorkflowRunOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/jobs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15509,7 +15654,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/logs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15532,7 +15677,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/logs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15555,7 +15700,7 @@ impl Client {
     ) -> Result<Vec<types::PendingDeployment>> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/pending_deployments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15578,7 +15723,7 @@ impl Client {
     ) -> Result<Vec<types::Deployment>> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/pending_deployments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15606,7 +15751,7 @@ impl Client {
     ) -> Result<types::PostReRunWorkflowCreatedResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/rerun",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15628,7 +15773,7 @@ impl Client {
     ) -> Result<types::WorkflowRunUsage> {
         let url = format!(
             "{}/repos/{}/{}/actions/runs/{}/timing",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
@@ -15651,7 +15796,7 @@ impl Client {
     ) -> Result<types::GetListRepositorySecretsOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/secrets",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15680,7 +15825,7 @@ impl Client {
     ) -> Result<types::ActionsPublicKey> {
         let url = format!(
             "{}/repos/{}/{}/actions/secrets/public-key",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15701,7 +15846,7 @@ impl Client {
     ) -> Result<types::ActionsSecret> {
         let url = format!(
             "{}/repos/{}/{}/actions/secrets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
@@ -15724,7 +15869,7 @@ impl Client {
     ) -> Result<types::PutCreateUpdateRepositorySecretCreatedResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/secrets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
@@ -15752,7 +15897,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/secrets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
@@ -15776,7 +15921,7 @@ impl Client {
     ) -> Result<types::GetListRepositoryWorkflowsOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/workflows",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15806,7 +15951,7 @@ impl Client {
     ) -> Result<types::Workflow> {
         let url = format!(
             "{}/repos/{}/{}/actions/workflows/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
@@ -15828,7 +15973,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/workflows/{}/disable",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
@@ -15852,7 +15997,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/workflows/{}/dispatches",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
@@ -15881,7 +16026,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/actions/workflows/{}/enable",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
@@ -15910,7 +16055,7 @@ impl Client {
     ) -> Result<types::GetListWorkflowRunsOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/actions/workflows/{}/runs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
@@ -15945,7 +16090,7 @@ impl Client {
     ) -> Result<types::WorkflowUsage> {
         let url = format!(
             "{}/repos/{}/{}/actions/workflows/{}/timing",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
@@ -15968,7 +16113,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/repos/{}/{}/assignees",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -15998,7 +16143,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/assignees/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&assignee.to_string()),
@@ -16020,7 +16165,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/automated-security-fixes",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -16041,7 +16186,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/automated-security-fixes",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -16065,7 +16210,7 @@ impl Client {
     ) -> Result<Vec<types::ShortBranch>> {
         let url = format!(
             "{}/repos/{}/{}/branches",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -16096,7 +16241,7 @@ impl Client {
     ) -> Result<types::BranchWithProtection> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16118,7 +16263,7 @@ impl Client {
     ) -> Result<types::BranchProtection> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16141,7 +16286,7 @@ impl Client {
     ) -> Result<types::ProtectedBranch> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16169,7 +16314,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16192,7 +16337,7 @@ impl Client {
     ) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/enforce_admins",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16214,7 +16359,7 @@ impl Client {
     ) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/enforce_admins",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16236,7 +16381,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/enforce_admins",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16259,7 +16404,7 @@ impl Client {
     ) -> Result<types::ProtectedBranchPullRequestReview> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16281,7 +16426,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16305,7 +16450,7 @@ impl Client {
     ) -> Result<types::ProtectedBranchPullRequestReview> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16333,7 +16478,7 @@ impl Client {
     ) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_signatures",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16355,7 +16500,7 @@ impl Client {
     ) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_signatures",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16377,7 +16522,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_signatures",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16400,7 +16545,7 @@ impl Client {
     ) -> Result<types::StatusCheckPolicy> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_status_checks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16422,7 +16567,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_status_checks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16446,7 +16591,7 @@ impl Client {
     ) -> Result<types::StatusCheckPolicy> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_status_checks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16474,7 +16619,7 @@ impl Client {
     ) -> Result<Vec<String>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16497,7 +16642,7 @@ impl Client {
     ) -> Result<Vec<String>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16526,7 +16671,7 @@ impl Client {
     ) -> Result<Vec<String>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16555,7 +16700,7 @@ impl Client {
     ) -> Result<Vec<String>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16583,7 +16728,7 @@ impl Client {
     ) -> Result<types::BranchRestrictionPolicy> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16605,7 +16750,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16628,7 +16773,7 @@ impl Client {
     ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16651,7 +16796,7 @@ impl Client {
     ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16680,7 +16825,7 @@ impl Client {
     ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16709,7 +16854,7 @@ impl Client {
     ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16737,7 +16882,7 @@ impl Client {
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16760,7 +16905,7 @@ impl Client {
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16789,7 +16934,7 @@ impl Client {
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16818,7 +16963,7 @@ impl Client {
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16846,7 +16991,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/users",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16869,7 +17014,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/users",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16898,7 +17043,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/users",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16927,7 +17072,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/protection/restrictions/users",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16956,7 +17101,7 @@ impl Client {
     ) -> Result<types::BranchWithProtection> {
         let url = format!(
             "{}/repos/{}/{}/branches/{}/rename",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
@@ -16984,7 +17129,7 @@ impl Client {
     ) -> Result<types::CheckRun> {
         let url = format!(
             "{}/repos/{}/{}/check-runs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -17011,7 +17156,7 @@ impl Client {
     ) -> Result<types::CheckRun> {
         let url = format!(
             "{}/repos/{}/{}/check-runs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_run_id.to_string()),
@@ -17034,7 +17179,7 @@ impl Client {
     ) -> Result<types::CheckRun> {
         let url = format!(
             "{}/repos/{}/{}/check-runs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_run_id.to_string()),
@@ -17064,7 +17209,7 @@ impl Client {
     ) -> Result<Vec<types::CheckAnnotation>> {
         let url = format!(
             "{}/repos/{}/{}/check-runs/{}/annotations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_run_id.to_string()),
@@ -17095,7 +17240,7 @@ impl Client {
     ) -> Result<types::CheckSuite> {
         let url = format!(
             "{}/repos/{}/{}/check-suites",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -17122,7 +17267,7 @@ impl Client {
     ) -> Result<types::CheckSuitePreference> {
         let url = format!(
             "{}/repos/{}/{}/check-suites/preferences",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -17149,7 +17294,7 @@ impl Client {
     ) -> Result<types::CheckSuite> {
         let url = format!(
             "{}/repos/{}/{}/check-suites/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
@@ -17176,7 +17321,7 @@ impl Client {
     ) -> Result<types::GetListCheckRunsinCheckSuiteOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/check-suites/{}/check-runs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
@@ -17210,7 +17355,7 @@ impl Client {
     ) -> Result<types::PostRerequestCheckSuiteCreatedResponse> {
         let url = format!(
             "{}/repos/{}/{}/check-suites/{}/rerequest",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
@@ -17237,7 +17382,7 @@ impl Client {
     ) -> Result<Vec<types::CodeScanningAlertItems>> {
         let url = format!(
             "{}/repos/{}/{}/code-scanning/alerts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -17271,7 +17416,7 @@ impl Client {
     ) -> Result<types::CodeScanningAlert> {
         let url = format!(
             "{}/repos/{}/{}/code-scanning/alerts/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
@@ -17294,7 +17439,7 @@ impl Client {
     ) -> Result<types::CodeScanningAlert> {
         let url = format!(
             "{}/repos/{}/{}/code-scanning/alerts/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
@@ -17325,7 +17470,7 @@ impl Client {
     ) -> Result<Vec<types::CodeScanningAlertInstance>> {
         let url = format!(
             "{}/repos/{}/{}/code-scanning/alerts/{}/instances",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
@@ -17362,7 +17507,7 @@ impl Client {
     ) -> Result<Vec<types::CodeScanningAnalysis>> {
         let url = format!(
             "{}/repos/{}/{}/code-scanning/analyses",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -17396,7 +17541,7 @@ impl Client {
     ) -> Result<types::CodeScanningAnalysis> {
         let url = format!(
             "{}/repos/{}/{}/code-scanning/analyses/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&analysis_id.to_string()),
@@ -17419,7 +17564,7 @@ impl Client {
     ) -> Result<types::CodeScanningAnalysisDeletion> {
         let url = format!(
             "{}/repos/{}/{}/code-scanning/analyses/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&analysis_id.to_string()),
@@ -17447,7 +17592,7 @@ impl Client {
     ) -> Result<types::CodeScanningSarifsReceipt> {
         let url = format!(
             "{}/repos/{}/{}/code-scanning/sarifs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -17474,7 +17619,7 @@ impl Client {
     ) -> Result<types::CodeScanningSarifsStatus> {
         let url = format!(
             "{}/repos/{}/{}/code-scanning/sarifs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&sarif_id.to_string()),
@@ -17498,7 +17643,7 @@ impl Client {
     ) -> Result<Vec<types::Collaborator>> {
         let url = format!(
             "{}/repos/{}/{}/collaborators",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -17529,7 +17674,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/collaborators/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&username.to_string()),
@@ -17553,7 +17698,7 @@ impl Client {
     ) -> Result<types::RepositoryInvitation> {
         let url = format!(
             "{}/repos/{}/{}/collaborators/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&username.to_string()),
@@ -17581,7 +17726,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/collaborators/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&username.to_string()),
@@ -17604,7 +17749,7 @@ impl Client {
     ) -> Result<types::RepositoryCollaboratorPermission> {
         let url = format!(
             "{}/repos/{}/{}/collaborators/{}/permission",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&username.to_string()),
@@ -17627,7 +17772,7 @@ impl Client {
     ) -> Result<Vec<types::CommitComment>> {
         let url = format!(
             "{}/repos/{}/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -17657,7 +17802,7 @@ impl Client {
     ) -> Result<types::CommitComment> {
         let url = format!(
             "{}/repos/{}/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -17679,7 +17824,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -17703,7 +17848,7 @@ impl Client {
     ) -> Result<types::CommitComment> {
         let url = format!(
             "{}/repos/{}/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -17734,7 +17879,7 @@ impl Client {
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
             "{}/repos/{}/{}/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -17767,7 +17912,7 @@ impl Client {
     ) -> Result<types::Reaction> {
         let url = format!(
             "{}/repos/{}/{}/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -17796,7 +17941,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/comments/{}/reactions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -17826,7 +17971,7 @@ impl Client {
     ) -> Result<Vec<types::Commit>> {
         let url = format!(
             "{}/repos/{}/{}/commits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -17861,7 +18006,7 @@ impl Client {
     ) -> Result<Vec<types::BranchShort>> {
         let url = format!(
             "{}/repos/{}/{}/commits/{}/branches-where-head",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
@@ -17885,7 +18030,7 @@ impl Client {
     ) -> Result<Vec<types::CommitComment>> {
         let url = format!(
             "{}/repos/{}/{}/commits/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
@@ -17917,7 +18062,7 @@ impl Client {
     ) -> Result<types::CommitComment> {
         let url = format!(
             "{}/repos/{}/{}/commits/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
@@ -17947,7 +18092,7 @@ impl Client {
     ) -> Result<Vec<types::PullRequestSimple>> {
         let url = format!(
             "{}/repos/{}/{}/commits/{}/pulls",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
@@ -17980,7 +18125,7 @@ impl Client {
     ) -> Result<types::Commit> {
         let url = format!(
             "{}/repos/{}/{}/commits/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -18017,7 +18162,7 @@ impl Client {
     ) -> Result<types::GetListCheckRunsGitReferenceOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/commits/{}/check-runs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -18056,7 +18201,7 @@ impl Client {
     ) -> Result<types::GetListCheckSuitesGitReferenceOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/commits/{}/check-suites",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -18091,7 +18236,7 @@ impl Client {
     ) -> Result<types::CombinedCommitStatus> {
         let url = format!(
             "{}/repos/{}/{}/commits/{}/status",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -18124,7 +18269,7 @@ impl Client {
     ) -> Result<Vec<types::Status>> {
         let url = format!(
             "{}/repos/{}/{}/commits/{}/statuses",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -18154,7 +18299,7 @@ impl Client {
     ) -> Result<types::CodeofConduct> {
         let url = format!(
             "{}/repos/{}/{}/community/code_of_conduct",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18174,7 +18319,7 @@ impl Client {
     ) -> Result<types::CommunityProfile> {
         let url = format!(
             "{}/repos/{}/{}/community/profile",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18197,7 +18342,7 @@ impl Client {
     ) -> Result<types::CommitComparison> {
         let url = format!(
             "{}/repos/{}/{}/compare/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&basehead.to_string()),
@@ -18229,7 +18374,7 @@ impl Client {
     ) -> Result<types::ContentReferenceAttachment> {
         let url = format!(
             "{}/repos/{}/{}/content_references/{}/attachments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&content_reference_id.to_string()),
@@ -18258,7 +18403,7 @@ impl Client {
     ) -> Result<types::GetRepositoryContentOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/contents/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&path.to_string()),
@@ -18287,7 +18432,7 @@ impl Client {
     ) -> Result<types::FileCommit> {
         let url = format!(
             "{}/repos/{}/{}/contents/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&path.to_string()),
@@ -18316,7 +18461,7 @@ impl Client {
     ) -> Result<types::FileCommit> {
         let url = format!(
             "{}/repos/{}/{}/contents/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&path.to_string()),
@@ -18346,7 +18491,7 @@ impl Client {
     ) -> Result<Vec<types::Contributor>> {
         let url = format!(
             "{}/repos/{}/{}/contributors",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18382,7 +18527,7 @@ impl Client {
     ) -> Result<Vec<types::Deployment>> {
         let url = format!(
             "{}/repos/{}/{}/deployments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18416,7 +18561,7 @@ impl Client {
     ) -> Result<types::Deployment> {
         let url = format!(
             "{}/repos/{}/{}/deployments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18443,7 +18588,7 @@ impl Client {
     ) -> Result<types::Deployment> {
         let url = format!(
             "{}/repos/{}/{}/deployments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
@@ -18465,7 +18610,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/deployments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
@@ -18490,7 +18635,7 @@ impl Client {
     ) -> Result<Vec<types::DeploymentStatus>> {
         let url = format!(
             "{}/repos/{}/{}/deployments/{}/statuses",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
@@ -18522,7 +18667,7 @@ impl Client {
     ) -> Result<types::DeploymentStatus> {
         let url = format!(
             "{}/repos/{}/{}/deployments/{}/statuses",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
@@ -18551,7 +18696,7 @@ impl Client {
     ) -> Result<types::DeploymentStatus> {
         let url = format!(
             "{}/repos/{}/{}/deployments/{}/statuses/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
@@ -18574,7 +18719,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/dispatches",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18601,7 +18746,7 @@ impl Client {
     ) -> Result<types::GetAllEnvironmentsOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/environments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18622,7 +18767,7 @@ impl Client {
     ) -> Result<types::Environment> {
         let url = format!(
             "{}/repos/{}/{}/environments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
@@ -18645,7 +18790,7 @@ impl Client {
     ) -> Result<types::Environment> {
         let url = format!(
             "{}/repos/{}/{}/environments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
@@ -18673,7 +18818,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/environments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
@@ -18697,7 +18842,7 @@ impl Client {
     ) -> Result<Vec<types::Event>> {
         let url = format!(
             "{}/repos/{}/{}/events",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18729,7 +18874,7 @@ impl Client {
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "{}/repos/{}/{}/forks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18760,7 +18905,7 @@ impl Client {
     ) -> Result<types::FullRepository> {
         let url = format!(
             "{}/repos/{}/{}/forks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18787,7 +18932,7 @@ impl Client {
     ) -> Result<types::ShortBlob> {
         let url = format!(
             "{}/repos/{}/{}/git/blobs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18814,7 +18959,7 @@ impl Client {
     ) -> Result<types::Blob> {
         let url = format!(
             "{}/repos/{}/{}/git/blobs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&file_sha.to_string()),
@@ -18836,7 +18981,7 @@ impl Client {
     ) -> Result<types::GitCommit> {
         let url = format!(
             "{}/repos/{}/{}/git/commits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18863,7 +19008,7 @@ impl Client {
     ) -> Result<types::GitCommit> {
         let url = format!(
             "{}/repos/{}/{}/git/commits/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
@@ -18887,7 +19032,7 @@ impl Client {
     ) -> Result<Vec<types::GitRef>> {
         let url = format!(
             "{}/repos/{}/{}/git/matching-refs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -18913,7 +19058,7 @@ impl Client {
     pub async fn git_get_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<types::GitRef> {
         let url = format!(
             "{}/repos/{}/{}/git/ref/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -18935,7 +19080,7 @@ impl Client {
     ) -> Result<types::GitRef> {
         let url = format!(
             "{}/repos/{}/{}/git/refs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -18957,7 +19102,7 @@ impl Client {
     pub async fn git_delete_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/git/refs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -18981,7 +19126,7 @@ impl Client {
     ) -> Result<types::GitRef> {
         let url = format!(
             "{}/repos/{}/{}/git/refs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -19009,7 +19154,7 @@ impl Client {
     ) -> Result<types::GitTag> {
         let url = format!(
             "{}/repos/{}/{}/git/tags",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19036,7 +19181,7 @@ impl Client {
     ) -> Result<types::GitTag> {
         let url = format!(
             "{}/repos/{}/{}/git/tags/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&tag_sha.to_string()),
@@ -19058,7 +19203,7 @@ impl Client {
     ) -> Result<types::GitTree> {
         let url = format!(
             "{}/repos/{}/{}/git/trees",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19086,7 +19231,7 @@ impl Client {
     ) -> Result<types::GitTree> {
         let url = format!(
             "{}/repos/{}/{}/git/trees/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&tree_sha.to_string()),
@@ -19115,7 +19260,7 @@ impl Client {
     ) -> Result<Vec<types::Hook>> {
         let url = format!(
             "{}/repos/{}/{}/hooks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19145,7 +19290,7 @@ impl Client {
     ) -> Result<types::Hook> {
         let url = format!(
             "{}/repos/{}/{}/hooks",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19172,7 +19317,7 @@ impl Client {
     ) -> Result<types::Hook> {
         let url = format!(
             "{}/repos/{}/{}/hooks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
@@ -19189,7 +19334,7 @@ impl Client {
     pub async fn repos_delete_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/hooks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
@@ -19213,7 +19358,7 @@ impl Client {
     ) -> Result<types::Hook> {
         let url = format!(
             "{}/repos/{}/{}/hooks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
@@ -19241,7 +19386,7 @@ impl Client {
     ) -> Result<types::WebhookConfig> {
         let url = format!(
             "{}/repos/{}/{}/hooks/{}/config",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
@@ -19264,7 +19409,7 @@ impl Client {
     ) -> Result<types::WebhookConfig> {
         let url = format!(
             "{}/repos/{}/{}/hooks/{}/config",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
@@ -19287,7 +19432,7 @@ impl Client {
     pub async fn repos_ping_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/hooks/{}/pings",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
@@ -19310,7 +19455,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/hooks/{}/tests",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
@@ -19332,7 +19477,7 @@ impl Client {
     ) -> Result<types::Import> {
         let url = format!(
             "{}/repos/{}/{}/import",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19353,7 +19498,7 @@ impl Client {
     ) -> Result<types::Import> {
         let url = format!(
             "{}/repos/{}/{}/import",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19375,7 +19520,7 @@ impl Client {
     pub async fn migrations_cancel_import(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/import",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19397,7 +19542,7 @@ impl Client {
     ) -> Result<types::Import> {
         let url = format!(
             "{}/repos/{}/{}/import",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19424,7 +19569,7 @@ impl Client {
     ) -> Result<Vec<types::PorterAuthor>> {
         let url = format!(
             "{}/repos/{}/{}/import/authors",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19452,7 +19597,7 @@ impl Client {
     ) -> Result<types::PorterAuthor> {
         let url = format!(
             "{}/repos/{}/{}/import/authors/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&author_id.to_string()),
@@ -19479,7 +19624,7 @@ impl Client {
     ) -> Result<Vec<types::PorterLargeFile>> {
         let url = format!(
             "{}/repos/{}/{}/import/large_files",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19500,7 +19645,7 @@ impl Client {
     ) -> Result<types::Import> {
         let url = format!(
             "{}/repos/{}/{}/import/lfs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19526,7 +19671,7 @@ impl Client {
     ) -> Result<types::Installation> {
         let url = format!(
             "{}/repos/{}/{}/installation",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19546,7 +19691,7 @@ impl Client {
     ) -> Result<types::GetInteractionRestrictionsRepositoryOkResponse> {
         let url = format!(
             "{}/repos/{}/{}/interaction-limits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19567,7 +19712,7 @@ impl Client {
     ) -> Result<types::InteractionLimitResponse> {
         let url = format!(
             "{}/repos/{}/{}/interaction-limits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19593,7 +19738,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/interaction-limits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19616,7 +19761,7 @@ impl Client {
     ) -> Result<Vec<types::RepositoryInvitation>> {
         let url = format!(
             "{}/repos/{}/{}/invitations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19646,7 +19791,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/invitations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&invitation_id.to_string()),
@@ -19670,7 +19815,7 @@ impl Client {
     ) -> Result<types::RepositoryInvitation> {
         let url = format!(
             "{}/repos/{}/{}/invitations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&invitation_id.to_string()),
@@ -19708,7 +19853,7 @@ impl Client {
     ) -> Result<Vec<types::IssueSimple>> {
         let url = format!(
             "{}/repos/{}/{}/issues",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19747,7 +19892,7 @@ impl Client {
     ) -> Result<types::Issue> {
         let url = format!(
             "{}/repos/{}/{}/issues",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19778,7 +19923,7 @@ impl Client {
     ) -> Result<Vec<types::IssueComment>> {
         let url = format!(
             "{}/repos/{}/{}/issues/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -19811,7 +19956,7 @@ impl Client {
     ) -> Result<types::IssueComment> {
         let url = format!(
             "{}/repos/{}/{}/issues/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -19833,7 +19978,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/issues/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -19857,7 +20002,7 @@ impl Client {
     ) -> Result<types::IssueComment> {
         let url = format!(
             "{}/repos/{}/{}/issues/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -19888,7 +20033,7 @@ impl Client {
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
             "{}/repos/{}/{}/issues/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -19921,7 +20066,7 @@ impl Client {
     ) -> Result<types::Reaction> {
         let url = format!(
             "{}/repos/{}/{}/issues/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -19950,7 +20095,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/issues/comments/{}/reactions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -19975,7 +20120,7 @@ impl Client {
     ) -> Result<Vec<types::IssueEvent>> {
         let url = format!(
             "{}/repos/{}/{}/issues/events",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20005,7 +20150,7 @@ impl Client {
     ) -> Result<types::IssueEvent> {
         let url = format!(
             "{}/repos/{}/{}/issues/events/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&event_id.to_string()),
@@ -20027,7 +20172,7 @@ impl Client {
     ) -> Result<types::Issue> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20050,7 +20195,7 @@ impl Client {
     ) -> Result<types::Issue> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20079,7 +20224,7 @@ impl Client {
     ) -> Result<types::IssueSimple> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/assignees",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20108,7 +20253,7 @@ impl Client {
     ) -> Result<types::IssueSimple> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/assignees",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20139,7 +20284,7 @@ impl Client {
     ) -> Result<Vec<types::IssueComment>> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20172,7 +20317,7 @@ impl Client {
     ) -> Result<types::IssueComment> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20202,7 +20347,7 @@ impl Client {
     ) -> Result<Vec<types::IssueEventforIssue>> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/events",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20235,7 +20380,7 @@ impl Client {
     ) -> Result<Vec<types::Label>> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/labels",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20267,7 +20412,7 @@ impl Client {
     ) -> Result<Vec<types::Label>> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/labels",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20296,7 +20441,7 @@ impl Client {
     ) -> Result<Vec<types::Label>> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/labels",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20324,7 +20469,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/labels",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20348,7 +20493,7 @@ impl Client {
     ) -> Result<Vec<types::Label>> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/labels/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20372,7 +20517,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/lock",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20396,7 +20541,7 @@ impl Client {
     pub async fn issues_unlock(&self, owner: &str, repo: &str, issue_number: i64) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/lock",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20422,7 +20567,7 @@ impl Client {
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20455,7 +20600,7 @@ impl Client {
     ) -> Result<types::Reaction> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20484,7 +20629,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/reactions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20510,7 +20655,7 @@ impl Client {
     ) -> Result<Vec<types::TimelineIssueEvents>> {
         let url = format!(
             "{}/repos/{}/{}/issues/{}/timeline",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
@@ -20542,7 +20687,7 @@ impl Client {
     ) -> Result<Vec<types::DeployKey>> {
         let url = format!(
             "{}/repos/{}/{}/keys",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20572,7 +20717,7 @@ impl Client {
     ) -> Result<types::DeployKey> {
         let url = format!(
             "{}/repos/{}/{}/keys",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20599,7 +20744,7 @@ impl Client {
     ) -> Result<types::DeployKey> {
         let url = format!(
             "{}/repos/{}/{}/keys/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&key_id.to_string()),
@@ -20621,7 +20766,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/keys/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&key_id.to_string()),
@@ -20645,7 +20790,7 @@ impl Client {
     ) -> Result<Vec<types::Label>> {
         let url = format!(
             "{}/repos/{}/{}/labels",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20675,7 +20820,7 @@ impl Client {
     ) -> Result<types::Label> {
         let url = format!(
             "{}/repos/{}/{}/labels",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20702,7 +20847,7 @@ impl Client {
     ) -> Result<types::Label> {
         let url = format!(
             "{}/repos/{}/{}/labels/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&name.to_string()),
@@ -20719,7 +20864,7 @@ impl Client {
     pub async fn issues_delete_label(&self, owner: &str, repo: &str, name: &str) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/labels/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&name.to_string()),
@@ -20743,7 +20888,7 @@ impl Client {
     ) -> Result<types::Label> {
         let url = format!(
             "{}/repos/{}/{}/labels/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&name.to_string()),
@@ -20766,7 +20911,7 @@ impl Client {
     pub async fn repos_list_languages(&self, owner: &str, repo: &str) -> Result<types::Language> {
         let url = format!(
             "{}/repos/{}/{}/languages",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20786,7 +20931,7 @@ impl Client {
     ) -> Result<types::LicenseContent> {
         let url = format!(
             "{}/repos/{}/{}/license",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20807,7 +20952,7 @@ impl Client {
     ) -> Result<types::Commit> {
         let url = format!(
             "{}/repos/{}/{}/merges",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20838,7 +20983,7 @@ impl Client {
     ) -> Result<Vec<types::Milestone>> {
         let url = format!(
             "{}/repos/{}/{}/milestones",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20871,7 +21016,7 @@ impl Client {
     ) -> Result<types::Milestone> {
         let url = format!(
             "{}/repos/{}/{}/milestones",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -20898,7 +21043,7 @@ impl Client {
     ) -> Result<types::Milestone> {
         let url = format!(
             "{}/repos/{}/{}/milestones/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
@@ -20920,7 +21065,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/milestones/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
@@ -20944,7 +21089,7 @@ impl Client {
     ) -> Result<types::Milestone> {
         let url = format!(
             "{}/repos/{}/{}/milestones/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
@@ -20974,7 +21119,7 @@ impl Client {
     ) -> Result<Vec<types::Label>> {
         let url = format!(
             "{}/repos/{}/{}/milestones/{}/labels",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
@@ -21010,7 +21155,7 @@ impl Client {
     ) -> Result<Vec<types::Thread>> {
         let url = format!(
             "{}/repos/{}/{}/notifications",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21044,7 +21189,7 @@ impl Client {
     ) -> Result<types::PutMarkRepositoryNotificationsasReadAcceptedResponse> {
         let url = format!(
             "{}/repos/{}/{}/notifications",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21066,7 +21211,7 @@ impl Client {
     pub async fn repos_get_pages(&self, owner: &str, repo: &str) -> Result<types::Page> {
         let url = format!(
             "{}/repos/{}/{}/pages",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21087,7 +21232,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/pages",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21115,7 +21260,7 @@ impl Client {
     ) -> Result<types::Page> {
         let url = format!(
             "{}/repos/{}/{}/pages",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21137,7 +21282,7 @@ impl Client {
     pub async fn repos_delete_pages_site(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/pages",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21160,7 +21305,7 @@ impl Client {
     ) -> Result<Vec<types::PageBuild>> {
         let url = format!(
             "{}/repos/{}/{}/pages/builds",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21189,7 +21334,7 @@ impl Client {
     ) -> Result<types::PageBuildStatus> {
         let url = format!(
             "{}/repos/{}/{}/pages/builds",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21209,7 +21354,7 @@ impl Client {
     ) -> Result<types::PageBuild> {
         let url = format!(
             "{}/repos/{}/{}/pages/builds/latest",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21230,7 +21375,7 @@ impl Client {
     ) -> Result<types::PageBuild> {
         let url = format!(
             "{}/repos/{}/{}/pages/builds/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&build_id.to_string()),
@@ -21251,7 +21396,7 @@ impl Client {
     ) -> Result<types::PagesHealthCheck> {
         let url = format!(
             "{}/repos/{}/{}/pages/health",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21274,7 +21419,7 @@ impl Client {
     ) -> Result<Vec<types::Project>> {
         let url = format!(
             "{}/repos/{}/{}/projects",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21305,7 +21450,7 @@ impl Client {
     ) -> Result<types::Project> {
         let url = format!(
             "{}/repos/{}/{}/projects",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21338,7 +21483,7 @@ impl Client {
     ) -> Result<Vec<types::PullRequestSimple>> {
         let url = format!(
             "{}/repos/{}/{}/pulls",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21373,7 +21518,7 @@ impl Client {
     ) -> Result<types::PullRequest> {
         let url = format!(
             "{}/repos/{}/{}/pulls",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21404,7 +21549,7 @@ impl Client {
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
             "{}/repos/{}/{}/pulls/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -21437,7 +21582,7 @@ impl Client {
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "{}/repos/{}/{}/pulls/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -21459,7 +21604,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/pulls/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -21483,7 +21628,7 @@ impl Client {
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "{}/repos/{}/{}/pulls/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -21514,7 +21659,7 @@ impl Client {
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
             "{}/repos/{}/{}/pulls/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -21547,7 +21692,7 @@ impl Client {
     ) -> Result<types::Reaction> {
         let url = format!(
             "{}/repos/{}/{}/pulls/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -21576,7 +21721,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/pulls/comments/{}/reactions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
@@ -21600,7 +21745,7 @@ impl Client {
     ) -> Result<types::PullRequest> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21623,7 +21768,7 @@ impl Client {
     ) -> Result<types::PullRequest> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21656,7 +21801,7 @@ impl Client {
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21691,7 +21836,7 @@ impl Client {
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21721,7 +21866,7 @@ impl Client {
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/comments/{}/replies",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21752,7 +21897,7 @@ impl Client {
     ) -> Result<Vec<types::Commit>> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/commits",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21785,7 +21930,7 @@ impl Client {
     ) -> Result<Vec<types::DiffEntry>> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/files",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21816,7 +21961,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/merge",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21840,7 +21985,7 @@ impl Client {
     ) -> Result<types::PullRequestMergeResult> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/merge",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21870,7 +22015,7 @@ impl Client {
     ) -> Result<types::PullRequestReviewRequest> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/requested_reviewers",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21902,7 +22047,7 @@ impl Client {
     ) -> Result<types::PullRequestSimple> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/requested_reviewers",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21931,7 +22076,7 @@ impl Client {
     ) -> Result<types::PullRequestSimple> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/requested_reviewers",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21961,7 +22106,7 @@ impl Client {
     ) -> Result<Vec<types::PullRequestReview>> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/reviews",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -21993,7 +22138,7 @@ impl Client {
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/reviews",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -22022,7 +22167,7 @@ impl Client {
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/reviews/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -22047,7 +22192,7 @@ impl Client {
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/reviews/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -22077,7 +22222,7 @@ impl Client {
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/reviews/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -22103,7 +22248,7 @@ impl Client {
     ) -> Result<Vec<types::ReviewComment>> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/reviews/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -22137,7 +22282,7 @@ impl Client {
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -22168,7 +22313,7 @@ impl Client {
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/reviews/{}/events",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -22198,7 +22343,7 @@ impl Client {
     ) -> Result<types::PutUpdatePullRequestBranchAcceptedResponse> {
         let url = format!(
             "{}/repos/{}/{}/pulls/{}/update-branch",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
@@ -22226,7 +22371,7 @@ impl Client {
     ) -> Result<types::ContentFile> {
         let url = format!(
             "{}/repos/{}/{}/readme",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22254,7 +22399,7 @@ impl Client {
     ) -> Result<types::ContentFile> {
         let url = format!(
             "{}/repos/{}/{}/readme/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&dir.to_string()),
@@ -22283,7 +22428,7 @@ impl Client {
     ) -> Result<Vec<types::Release>> {
         let url = format!(
             "{}/repos/{}/{}/releases",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22313,7 +22458,7 @@ impl Client {
     ) -> Result<types::Release> {
         let url = format!(
             "{}/repos/{}/{}/releases",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22340,7 +22485,7 @@ impl Client {
     ) -> Result<types::ReleaseAsset> {
         let url = format!(
             "{}/repos/{}/{}/releases/assets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&asset_id.to_string()),
@@ -22362,7 +22507,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/releases/assets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&asset_id.to_string()),
@@ -22386,7 +22531,7 @@ impl Client {
     ) -> Result<types::ReleaseAsset> {
         let url = format!(
             "{}/repos/{}/{}/releases/assets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&asset_id.to_string()),
@@ -22413,7 +22558,7 @@ impl Client {
     ) -> Result<types::Release> {
         let url = format!(
             "{}/repos/{}/{}/releases/latest",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22434,7 +22579,7 @@ impl Client {
     ) -> Result<types::Release> {
         let url = format!(
             "{}/repos/{}/{}/releases/tags/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&tag.to_string()),
@@ -22456,7 +22601,7 @@ impl Client {
     ) -> Result<types::Release> {
         let url = format!(
             "{}/repos/{}/{}/releases/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
@@ -22478,7 +22623,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/releases/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
@@ -22502,7 +22647,7 @@ impl Client {
     ) -> Result<types::Release> {
         let url = format!(
             "{}/repos/{}/{}/releases/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
@@ -22532,7 +22677,7 @@ impl Client {
     ) -> Result<Vec<types::ReleaseAsset>> {
         let url = format!(
             "{}/repos/{}/{}/releases/{}/assets",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
@@ -22566,7 +22711,7 @@ impl Client {
     ) -> Result<types::ReleaseAsset> {
         let url = format!(
             "{}/repos/{}/{}/releases/{}/assets",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
@@ -22596,7 +22741,7 @@ impl Client {
     ) -> Result<types::Reaction> {
         let url = format!(
             "{}/repos/{}/{}/releases/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
@@ -22627,7 +22772,7 @@ impl Client {
     ) -> Result<Vec<types::SecretScanningAlert>> {
         let url = format!(
             "{}/repos/{}/{}/secret-scanning/alerts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22659,7 +22804,7 @@ impl Client {
     ) -> Result<types::SecretScanningAlert> {
         let url = format!(
             "{}/repos/{}/{}/secret-scanning/alerts/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
@@ -22682,7 +22827,7 @@ impl Client {
     ) -> Result<types::SecretScanningAlert> {
         let url = format!(
             "{}/repos/{}/{}/secret-scanning/alerts/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
@@ -22711,7 +22856,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/repos/{}/{}/stargazers",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22740,7 +22885,7 @@ impl Client {
     ) -> Result<Vec<Vec<i64>>> {
         let url = format!(
             "{}/repos/{}/{}/stats/code_frequency",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22760,7 +22905,7 @@ impl Client {
     ) -> Result<Vec<types::CommitActivity>> {
         let url = format!(
             "{}/repos/{}/{}/stats/commit_activity",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22780,7 +22925,7 @@ impl Client {
     ) -> Result<Vec<types::ContributorActivity>> {
         let url = format!(
             "{}/repos/{}/{}/stats/contributors",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22800,7 +22945,7 @@ impl Client {
     ) -> Result<types::ParticipationStats> {
         let url = format!(
             "{}/repos/{}/{}/stats/participation",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22820,7 +22965,7 @@ impl Client {
     ) -> Result<Vec<Vec<i64>>> {
         let url = format!(
             "{}/repos/{}/{}/stats/punch_card",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22842,7 +22987,7 @@ impl Client {
     ) -> Result<types::Status> {
         let url = format!(
             "{}/repos/{}/{}/statuses/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&sha.to_string()),
@@ -22871,7 +23016,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/repos/{}/{}/subscribers",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22900,7 +23045,7 @@ impl Client {
     ) -> Result<types::RepositorySubscription> {
         let url = format!(
             "{}/repos/{}/{}/subscription",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22921,7 +23066,7 @@ impl Client {
     ) -> Result<types::RepositorySubscription> {
         let url = format!(
             "{}/repos/{}/{}/subscription",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22943,7 +23088,7 @@ impl Client {
     pub async fn activity_delete_repo_subscription(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/subscription",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22966,7 +23111,7 @@ impl Client {
     ) -> Result<Vec<types::Tag>> {
         let url = format!(
             "{}/repos/{}/{}/tags",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -22996,7 +23141,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/tarball/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -23020,7 +23165,7 @@ impl Client {
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "{}/repos/{}/{}/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23051,7 +23196,7 @@ impl Client {
     ) -> Result<types::Topic> {
         let url = format!(
             "{}/repos/{}/{}/topics",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23081,7 +23226,7 @@ impl Client {
     ) -> Result<types::Topic> {
         let url = format!(
             "{}/repos/{}/{}/topics",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23108,7 +23253,7 @@ impl Client {
     ) -> Result<types::CloneTraffic> {
         let url = format!(
             "{}/repos/{}/{}/traffic/clones",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23134,7 +23279,7 @@ impl Client {
     ) -> Result<Vec<types::ContentTraffic>> {
         let url = format!(
             "{}/repos/{}/{}/traffic/popular/paths",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23154,7 +23299,7 @@ impl Client {
     ) -> Result<Vec<types::ReferrerTraffic>> {
         let url = format!(
             "{}/repos/{}/{}/traffic/popular/referrers",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23175,7 +23320,7 @@ impl Client {
     ) -> Result<types::ViewTraffic> {
         let url = format!(
             "{}/repos/{}/{}/traffic/views",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23202,7 +23347,7 @@ impl Client {
     ) -> Result<types::MinimalRepository> {
         let url = format!(
             "{}/repos/{}/{}/transfer",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23224,7 +23369,7 @@ impl Client {
     pub async fn repos_check_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/vulnerability-alerts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23241,7 +23386,7 @@ impl Client {
     pub async fn repos_enable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/vulnerability-alerts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23258,7 +23403,7 @@ impl Client {
     pub async fn repos_disable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/vulnerability-alerts",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -23280,7 +23425,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repos/{}/{}/zipball/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -23303,7 +23448,7 @@ impl Client {
     ) -> Result<types::Repository> {
         let url = format!(
             "{}/repos/{}/{}/generate",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&template_owner.to_string()),
             progenitor_support::encode_path(&template_repo.to_string()),
         );
@@ -23323,7 +23468,7 @@ impl Client {
      * repos_list_public: GET /repositories
      */
     pub async fn repos_list_public(&self, since: i64) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/repositories", self.baseurl,);
+        let url = format!("{}/repositories", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -23348,7 +23493,7 @@ impl Client {
     ) -> Result<types::GetListEnvironmentSecretsOkResponse> {
         let url = format!(
             "{}/repositories/{}/environments/{}/secrets",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
         );
@@ -23377,7 +23522,7 @@ impl Client {
     ) -> Result<types::ActionsPublicKey> {
         let url = format!(
             "{}/repositories/{}/environments/{}/secrets/public-key",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
         );
@@ -23398,7 +23543,7 @@ impl Client {
     ) -> Result<types::ActionsSecret> {
         let url = format!(
             "{}/repositories/{}/environments/{}/secrets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
@@ -23421,7 +23566,7 @@ impl Client {
     ) -> Result<types::EmptyObject> {
         let url = format!(
             "{}/repositories/{}/environments/{}/secrets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
@@ -23449,7 +23594,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/repositories/{}/environments/{}/secrets/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
@@ -23474,7 +23619,7 @@ impl Client {
     ) -> Result<types::ScimGroupListEnterprise> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Groups",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -23504,7 +23649,7 @@ impl Client {
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Groups",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -23530,7 +23675,7 @@ impl Client {
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
@@ -23557,7 +23702,7 @@ impl Client {
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
@@ -23583,7 +23728,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
@@ -23605,7 +23750,7 @@ impl Client {
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Groups/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
@@ -23633,7 +23778,7 @@ impl Client {
     ) -> Result<types::ScimUserListEnterprise> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Users",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -23662,7 +23807,7 @@ impl Client {
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Users",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
@@ -23687,7 +23832,7 @@ impl Client {
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Users/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
@@ -23708,7 +23853,7 @@ impl Client {
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Users/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
@@ -23734,7 +23879,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Users/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
@@ -23756,7 +23901,7 @@ impl Client {
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Users/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
@@ -23784,7 +23929,7 @@ impl Client {
     ) -> Result<types::ScimUserList> {
         let url = format!(
             "{}/scim/v2/organizations/{}/Users",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -23813,7 +23958,7 @@ impl Client {
     ) -> Result<types::ScimUser> {
         let url = format!(
             "{}/scim/v2/organizations/{}/Users",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -23838,7 +23983,7 @@ impl Client {
     ) -> Result<types::ScimUser> {
         let url = format!(
             "{}/scim/v2/organizations/{}/Users/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
@@ -23859,7 +24004,7 @@ impl Client {
     ) -> Result<types::ScimUser> {
         let url = format!(
             "{}/scim/v2/organizations/{}/Users/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
@@ -23881,7 +24026,7 @@ impl Client {
     pub async fn scim_delete_user_from_org(&self, org: &str, scim_user_id: &str) -> Result<()> {
         let url = format!(
             "{}/scim/v2/organizations/{}/Users/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
@@ -23903,7 +24048,7 @@ impl Client {
     ) -> Result<types::ScimUser> {
         let url = format!(
             "{}/scim/v2/organizations/{}/Users/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
@@ -23930,7 +24075,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
-        let url = format!("{}/search/code", self.baseurl,);
+        let url = format!("{}/search/code", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -23960,7 +24105,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
-        let url = format!("{}/search/commits", self.baseurl,);
+        let url = format!("{}/search/commits", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -23990,7 +24135,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchIssuesandPullRequestsOkResponse> {
-        let url = format!("{}/search/issues", self.baseurl,);
+        let url = format!("{}/search/issues", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -24021,7 +24166,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
-        let url = format!("{}/search/labels", self.baseurl,);
+        let url = format!("{}/search/labels", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -24052,7 +24197,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchRepositoriesOkResponse> {
-        let url = format!("{}/search/repositories", self.baseurl,);
+        let url = format!("{}/search/repositories", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -24080,7 +24225,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchTopicsOkResponse> {
-        let url = format!("{}/search/topics", self.baseurl,);
+        let url = format!("{}/search/topics", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -24108,7 +24253,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
-        let url = format!("{}/search/users", self.baseurl,);
+        let url = format!("{}/search/users", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -24133,7 +24278,7 @@ impl Client {
     pub async fn teams_get_legacy(&self, team_id: i64) -> Result<types::TeamFull> {
         let url = format!(
             "{}/teams/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24148,7 +24293,7 @@ impl Client {
     pub async fn teams_delete_legacy(&self, team_id: i64) -> Result<()> {
         let url = format!(
             "{}/teams/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24168,7 +24313,7 @@ impl Client {
     ) -> Result<types::TeamFull> {
         let url = format!(
             "{}/teams/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24195,7 +24340,7 @@ impl Client {
     ) -> Result<Vec<types::TeamDiscussion>> {
         let url = format!(
             "{}/teams/{}/discussions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24224,7 +24369,7 @@ impl Client {
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "{}/teams/{}/discussions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24249,7 +24394,7 @@ impl Client {
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "{}/teams/{}/discussions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
@@ -24269,7 +24414,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/teams/{}/discussions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
@@ -24291,7 +24436,7 @@ impl Client {
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "{}/teams/{}/discussions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
@@ -24320,7 +24465,7 @@ impl Client {
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
             "{}/teams/{}/discussions/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
@@ -24351,7 +24496,7 @@ impl Client {
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "{}/teams/{}/discussions/{}/comments",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
@@ -24378,7 +24523,7 @@ impl Client {
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "{}/teams/{}/discussions/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
@@ -24400,7 +24545,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/teams/{}/discussions/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
@@ -24424,7 +24569,7 @@ impl Client {
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "{}/teams/{}/discussions/{}/comments/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
@@ -24455,7 +24600,7 @@ impl Client {
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
             "{}/teams/{}/discussions/{}/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
@@ -24488,7 +24633,7 @@ impl Client {
     ) -> Result<types::Reaction> {
         let url = format!(
             "{}/teams/{}/discussions/{}/comments/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
@@ -24518,7 +24663,7 @@ impl Client {
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
             "{}/teams/{}/discussions/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
@@ -24549,7 +24694,7 @@ impl Client {
     ) -> Result<types::Reaction> {
         let url = format!(
             "{}/teams/{}/discussions/{}/reactions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
@@ -24576,7 +24721,7 @@ impl Client {
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
             "{}/teams/{}/invitations",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24606,7 +24751,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/teams/{}/members",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24631,7 +24776,7 @@ impl Client {
     pub async fn teams_get_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
             "{}/teams/{}/members/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -24648,7 +24793,7 @@ impl Client {
     pub async fn teams_add_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
             "{}/teams/{}/members/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -24665,7 +24810,7 @@ impl Client {
     pub async fn teams_remove_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
             "{}/teams/{}/members/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -24686,7 +24831,7 @@ impl Client {
     ) -> Result<types::TeamMembership> {
         let url = format!(
             "{}/teams/{}/memberships/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -24707,7 +24852,7 @@ impl Client {
     ) -> Result<types::TeamMembership> {
         let url = format!(
             "{}/teams/{}/memberships/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -24733,7 +24878,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/teams/{}/memberships/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
@@ -24755,7 +24900,7 @@ impl Client {
     ) -> Result<Vec<types::TeamProject>> {
         let url = format!(
             "{}/teams/{}/projects",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24783,7 +24928,7 @@ impl Client {
     ) -> Result<types::TeamProject> {
         let url = format!(
             "{}/teams/{}/projects/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
         );
@@ -24804,7 +24949,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/teams/{}/projects/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
         );
@@ -24827,7 +24972,7 @@ impl Client {
     pub async fn teams_remove_project_legacy(&self, team_id: i64, project_id: i64) -> Result<()> {
         let url = format!(
             "{}/teams/{}/projects/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
         );
@@ -24849,7 +24994,7 @@ impl Client {
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "{}/teams/{}/repos",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24878,7 +25023,7 @@ impl Client {
     ) -> Result<types::TeamRepository> {
         let url = format!(
             "{}/teams/{}/repos/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -24901,7 +25046,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/teams/{}/repos/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -24930,7 +25075,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/teams/{}/repos/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -24951,7 +25096,7 @@ impl Client {
     ) -> Result<types::GroupMapping> {
         let url = format!(
             "{}/teams/{}/team-sync/group-mappings",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24970,7 +25115,7 @@ impl Client {
     ) -> Result<types::GroupMapping> {
         let url = format!(
             "{}/teams/{}/team-sync/group-mappings",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -24996,7 +25141,7 @@ impl Client {
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "{}/teams/{}/teams",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
@@ -25018,7 +25163,7 @@ impl Client {
      * users_get_authenticated: GET /user
      */
     pub async fn users_get_authenticated(&self) -> Result<types::GetOkResponse> {
-        let url = format!("{}/user", self.baseurl,);
+        let url = format!("{}/user", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -25032,7 +25177,7 @@ impl Client {
         &self,
         body: &types::UpdateRequest,
     ) -> Result<types::PrivateUser> {
-        let url = format!("{}/user", self.baseurl,);
+        let url = format!("{}/user", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25049,7 +25194,7 @@ impl Client {
      * users_list_blocked_by_authenticated: GET /user/blocks
      */
     pub async fn users_list_blocked_by_authenticated(&self) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/user/blocks", self.baseurl,);
+        let url = format!("{}/user/blocks", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -25062,7 +25207,7 @@ impl Client {
     pub async fn users_check_blocked(&self, username: &str) -> Result<()> {
         let url = format!(
             "{}/user/blocks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -25078,7 +25223,7 @@ impl Client {
     pub async fn users_block(&self, username: &str) -> Result<()> {
         let url = format!(
             "{}/user/blocks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -25094,7 +25239,7 @@ impl Client {
     pub async fn users_unblock(&self, username: &str) -> Result<()> {
         let url = format!(
             "{}/user/blocks/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -25111,7 +25256,7 @@ impl Client {
         &self,
         body: &types::SetPrimaryEmailVisibilityRequest,
     ) -> Result<Vec<types::Email>> {
-        let url = format!("{}/user/email/visibility", self.baseurl,);
+        let url = format!("{}/user/email/visibility", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25132,7 +25277,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Email>> {
-        let url = format!("{}/user/emails", self.baseurl,);
+        let url = format!("{}/user/emails", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25155,7 +25300,7 @@ impl Client {
         &self,
         body: &types::AddEmailAddressRequest,
     ) -> Result<Vec<types::Email>> {
-        let url = format!("{}/user/emails", self.baseurl,);
+        let url = format!("{}/user/emails", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25175,7 +25320,7 @@ impl Client {
         &self,
         body: &types::DeleteEmailAddressRequest,
     ) -> Result<()> {
-        let url = format!("{}/user/emails", self.baseurl,);
+        let url = format!("{}/user/emails", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25197,7 +25342,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/user/followers", self.baseurl,);
+        let url = format!("{}/user/followers", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25221,7 +25366,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/user/following", self.baseurl,);
+        let url = format!("{}/user/following", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25246,7 +25391,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/following/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -25262,7 +25407,7 @@ impl Client {
     pub async fn users_follow(&self, username: &str) -> Result<()> {
         let url = format!(
             "{}/user/following/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -25278,7 +25423,7 @@ impl Client {
     pub async fn users_unfollow(&self, username: &str) -> Result<()> {
         let url = format!(
             "{}/user/following/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -25296,7 +25441,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::GpgKey>> {
-        let url = format!("{}/user/gpg_keys", self.baseurl,);
+        let url = format!("{}/user/gpg_keys", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25319,7 +25464,7 @@ impl Client {
         &self,
         body: &types::CreateGpgKeyRequest,
     ) -> Result<types::GpgKey> {
-        let url = format!("{}/user/gpg_keys", self.baseurl,);
+        let url = format!("{}/user/gpg_keys", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25341,7 +25486,7 @@ impl Client {
     ) -> Result<types::GpgKey> {
         let url = format!(
             "{}/user/gpg_keys/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
 
@@ -25356,7 +25501,7 @@ impl Client {
     pub async fn users_delete_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> Result<()> {
         let url = format!(
             "{}/user/gpg_keys/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
 
@@ -25374,7 +25519,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListAppInstallationsAccessibleUserAccessTokenOkResponse> {
-        let url = format!("{}/user/installations", self.baseurl,);
+        let url = format!("{}/user/installations", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25401,7 +25546,7 @@ impl Client {
     ) -> Result<types::GetListRepositoriesAccessibleUserAccessTokenOkResponse> {
         let url = format!(
             "{}/user/installations/{}/repositories",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
@@ -25429,7 +25574,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/installations/{}/repositories/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&installation_id.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
@@ -25450,7 +25595,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/installations/{}/repositories/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&installation_id.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
@@ -25467,7 +25612,7 @@ impl Client {
     pub async fn interactions_get_restrictions_for_authenticated_user(
         &self,
     ) -> Result<types::GetInteractionRestrictionsPublicRepositoriesOkResponse> {
-        let url = format!("{}/user/interaction-limits", self.baseurl,);
+        let url = format!("{}/user/interaction-limits", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
@@ -25481,7 +25626,7 @@ impl Client {
         &self,
         body: &types::InteractionLimit,
     ) -> Result<types::InteractionLimitResponse> {
-        let url = format!("{}/user/interaction-limits", self.baseurl,);
+        let url = format!("{}/user/interaction-limits", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25498,7 +25643,7 @@ impl Client {
      * interactions_remove_restrictions_for_authenticated_user: DELETE /user/interaction-limits
      */
     pub async fn interactions_remove_restrictions_for_authenticated_user(&self) -> Result<()> {
-        let url = format!("{}/user/interaction-limits", self.baseurl,);
+        let url = format!("{}/user/interaction-limits", DEFAULT_HOST,);
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
@@ -25520,7 +25665,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("{}/user/issues", self.baseurl,);
+        let url = format!("{}/user/issues", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25550,7 +25695,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Key>> {
-        let url = format!("{}/user/keys", self.baseurl,);
+        let url = format!("{}/user/keys", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25573,7 +25718,7 @@ impl Client {
         &self,
         body: &types::CreatePublicSshKeyRequest,
     ) -> Result<types::Key> {
-        let url = format!("{}/user/keys", self.baseurl,);
+        let url = format!("{}/user/keys", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25595,7 +25740,7 @@ impl Client {
     ) -> Result<types::Key> {
         let url = format!(
             "{}/user/keys/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
@@ -25610,7 +25755,7 @@ impl Client {
     pub async fn users_delete_public_ssh_key_for_authenticated(&self, key_id: i64) -> Result<()> {
         let url = format!(
             "{}/user/keys/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
@@ -25628,7 +25773,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
-        let url = format!("{}/user/marketplace_purchases", self.baseurl,);
+        let url = format!("{}/user/marketplace_purchases", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25652,7 +25797,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
-        let url = format!("{}/user/marketplace_purchases/stubbed", self.baseurl,);
+        let url = format!("{}/user/marketplace_purchases/stubbed", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25677,7 +25822,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrgMembership>> {
-        let url = format!("{}/user/memberships/orgs", self.baseurl,);
+        let url = format!("{}/user/memberships/orgs", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25703,7 +25848,7 @@ impl Client {
     ) -> Result<types::OrgMembership> {
         let url = format!(
             "{}/user/memberships/orgs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -25722,7 +25867,7 @@ impl Client {
     ) -> Result<types::OrgMembership> {
         let url = format!(
             "{}/user/memberships/orgs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&org.to_string()),
         );
 
@@ -25745,7 +25890,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Migration>> {
-        let url = format!("{}/user/migrations", self.baseurl,);
+        let url = format!("{}/user/migrations", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25768,7 +25913,7 @@ impl Client {
         &self,
         body: &types::StartUserMigrationRequest,
     ) -> Result<types::Migration> {
-        let url = format!("{}/user/migrations", self.baseurl,);
+        let url = format!("{}/user/migrations", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25791,7 +25936,7 @@ impl Client {
     ) -> Result<types::Migration> {
         let url = format!(
             "{}/user/migrations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
@@ -25815,7 +25960,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/migrations/{}/archive",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
@@ -25834,7 +25979,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/migrations/{}/archive",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
@@ -25854,7 +25999,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/migrations/{}/repos/{}/lock",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&migration_id.to_string()),
             progenitor_support::encode_path(&repo_name.to_string()),
         );
@@ -25876,7 +26021,7 @@ impl Client {
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "{}/user/migrations/{}/repositories",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
@@ -25902,7 +26047,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
-        let url = format!("{}/user/orgs", self.baseurl,);
+        let url = format!("{}/user/orgs", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -25928,7 +26073,7 @@ impl Client {
     ) -> Result<types::Package> {
         let url = format!(
             "{}/user/packages/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
@@ -25948,7 +26093,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/packages/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
@@ -25970,7 +26115,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/packages/{}/{}/restore",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
@@ -26000,7 +26145,7 @@ impl Client {
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "{}/user/packages/{}/{}/versions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
@@ -26031,7 +26176,7 @@ impl Client {
     ) -> Result<types::PackageVersion> {
         let url = format!(
             "{}/user/packages/{}/{}/versions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
             progenitor_support::encode_path(&package_version_id.to_string()),
@@ -26053,7 +26198,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/packages/{}/{}/versions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
             progenitor_support::encode_path(&package_version_id.to_string()),
@@ -26076,7 +26221,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/packages/{}/{}/versions/{}/restore",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
             progenitor_support::encode_path(&package_version_id.to_string()),
@@ -26095,7 +26240,7 @@ impl Client {
         &self,
         body: &types::CreateUserProjectRequest,
     ) -> Result<types::Project> {
-        let url = format!("{}/user/projects", self.baseurl,);
+        let url = format!("{}/user/projects", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -26116,7 +26261,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Email>> {
-        let url = format!("{}/user/public_emails", self.baseurl,);
+        let url = format!("{}/user/public_emails", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -26147,7 +26292,7 @@ impl Client {
         since: DateTime<Utc>,
         before: DateTime<Utc>,
     ) -> Result<Vec<types::Repository>> {
-        let url = format!("{}/user/repos", self.baseurl,);
+        let url = format!("{}/user/repos", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -26177,7 +26322,7 @@ impl Client {
         &self,
         body: &types::CreateRepositoryRequest,
     ) -> Result<types::Repository> {
-        let url = format!("{}/user/repos", self.baseurl,);
+        let url = format!("{}/user/repos", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -26198,7 +26343,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::RepositoryInvitation>> {
-        let url = format!("{}/user/repository_invitations", self.baseurl,);
+        let url = format!("{}/user/repository_invitations", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -26220,7 +26365,7 @@ impl Client {
     pub async fn repos_decline_invitation(&self, invitation_id: i64) -> Result<()> {
         let url = format!(
             "{}/user/repository_invitations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
@@ -26236,7 +26381,7 @@ impl Client {
     pub async fn repos_accept_invitation(&self, invitation_id: i64) -> Result<()> {
         let url = format!(
             "{}/user/repository_invitations/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
@@ -26256,7 +26401,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Repository>> {
-        let url = format!("{}/user/starred", self.baseurl,);
+        let url = format!("{}/user/starred", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -26284,7 +26429,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/starred/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -26305,7 +26450,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/starred/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -26326,7 +26471,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/user/starred/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
@@ -26345,7 +26490,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/user/subscriptions", self.baseurl,);
+        let url = format!("{}/user/subscriptions", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -26369,7 +26514,7 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamFull>> {
-        let url = format!("{}/user/teams", self.baseurl,);
+        let url = format!("{}/user/teams", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -26389,7 +26534,7 @@ impl Client {
      * users_list: GET /users
      */
     pub async fn users_list(&self, since: i64, per_page: i64) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/users", self.baseurl,);
+        let url = format!("{}/users", DEFAULT_HOST,);
 
         let res = self
             .client
@@ -26411,7 +26556,7 @@ impl Client {
     pub async fn users_get_by_username(&self, username: &str) -> Result<types::GetUserOkResponse> {
         let url = format!(
             "{}/users/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26431,7 +26576,7 @@ impl Client {
     ) -> Result<Vec<types::Event>> {
         let url = format!(
             "{}/users/{}/events",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26461,7 +26606,7 @@ impl Client {
     ) -> Result<Vec<types::Event>> {
         let url = format!(
             "{}/users/{}/events/orgs/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&org.to_string()),
         );
@@ -26491,7 +26636,7 @@ impl Client {
     ) -> Result<Vec<types::Event>> {
         let url = format!(
             "{}/users/{}/events/public",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26520,7 +26665,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/users/{}/followers",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26549,7 +26694,7 @@ impl Client {
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "{}/users/{}/following",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26577,7 +26722,7 @@ impl Client {
     ) -> Result<()> {
         let url = format!(
             "{}/users/{}/following/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&target_user.to_string()),
         );
@@ -26600,7 +26745,7 @@ impl Client {
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
             "{}/users/{}/gists",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26630,7 +26775,7 @@ impl Client {
     ) -> Result<Vec<types::GpgKey>> {
         let url = format!(
             "{}/users/{}/gpg_keys",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26659,7 +26804,7 @@ impl Client {
     ) -> Result<types::Hovercard> {
         let url = format!(
             "{}/users/{}/hovercard",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26683,7 +26828,7 @@ impl Client {
     pub async fn apps_get_user_installation(&self, username: &str) -> Result<types::Installation> {
         let url = format!(
             "{}/users/{}/installation",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26703,7 +26848,7 @@ impl Client {
     ) -> Result<Vec<types::KeySimple>> {
         let url = format!(
             "{}/users/{}/keys",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26732,7 +26877,7 @@ impl Client {
     ) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!(
             "{}/users/{}/orgs",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26761,7 +26906,7 @@ impl Client {
     ) -> Result<types::Package> {
         let url = format!(
             "{}/users/{}/packages/{}/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -26783,7 +26928,7 @@ impl Client {
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "{}/users/{}/packages/{}/{}/versions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -26806,7 +26951,7 @@ impl Client {
     ) -> Result<types::PackageVersion> {
         let url = format!(
             "{}/users/{}/packages/{}/{}/versions/{}",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
@@ -26830,7 +26975,7 @@ impl Client {
     ) -> Result<Vec<types::Project>> {
         let url = format!(
             "{}/users/{}/projects",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26860,7 +27005,7 @@ impl Client {
     ) -> Result<Vec<types::Event>> {
         let url = format!(
             "{}/users/{}/received_events",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26889,7 +27034,7 @@ impl Client {
     ) -> Result<Vec<types::Event>> {
         let url = format!(
             "{}/users/{}/received_events/public",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26921,7 +27066,7 @@ impl Client {
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "{}/users/{}/repos",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26951,7 +27096,7 @@ impl Client {
     ) -> Result<types::ActionsBillingUsage> {
         let url = format!(
             "{}/users/{}/settings/billing/actions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26969,7 +27114,7 @@ impl Client {
     ) -> Result<types::PackagesBillingUsage> {
         let url = format!(
             "{}/users/{}/settings/billing/packages",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -26987,7 +27132,7 @@ impl Client {
     ) -> Result<types::CombinedBillingUsage> {
         let url = format!(
             "{}/users/{}/settings/billing/shared-storage",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -27009,7 +27154,7 @@ impl Client {
     ) -> Result<Vec<types::StarredRepository>> {
         let url = format!(
             "{}/users/{}/starred",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -27040,7 +27185,7 @@ impl Client {
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "{}/users/{}/subscriptions",
-            self.baseurl,
+            DEFAULT_HOST,
             progenitor_support::encode_path(&username.to_string()),
         );
 
@@ -27062,7 +27207,7 @@ impl Client {
      * meta_get_zen: GET /zen
      */
     pub async fn meta_get_zen(&self) -> Result<String> {
-        let url = format!("{}/zen", self.baseurl,);
+        let url = format!("{}/zen", DEFAULT_HOST,);
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 

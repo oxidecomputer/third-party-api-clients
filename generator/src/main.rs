@@ -450,7 +450,6 @@ impl<T> ReferenceOrExt<T> for openapiv3::ReferenceOr<T> {
     }
 }
 
-#[allow(dead_code)]
 #[derive(Debug, PartialEq, Clone)]
 enum TypeDetails {
     Unknown,
@@ -1016,11 +1015,14 @@ fn gen(
      */
     a("#![allow(clippy::too_many_arguments)]");
     a("");
+    a("pub mod auth;");
+    a(r#"#[cfg(feature = "httpcache")]"#);
     a("pub mod http_cache;");
     a("");
-    a("use anyhow::Result;"); /* XXX */
+    a("use anyhow::{Error, Result};");
     a("use chrono::{DateTime, Utc};");
     a("");
+    a(r#"const DEFAULT_HOST: &str = "https://api.github.com";"#);
     a("");
 
     a("mod progenitor_support {");
@@ -1113,26 +1115,156 @@ fn gen(
     /*
      * Declare the client object:
      */
-    a("pub struct Client {");
-    a("    baseurl: String,");
-    a("    client: reqwest::Client,");
-    a("}");
+    a(r#"pub struct Client {
+        host: String,
+        agent: String,
+        client: reqwest::Client,
+        credentials: Option<crate::auth::Credentials>,
+        #[cfg(feature = "httpcache")]
+        http_cache: crate::http_cache::BoxedHttpCache,
+    }"#);
     a("");
 
-    a("impl Client {");
-    a("    pub fn new(baseurl: &str) -> Client {");
-    a("        let dur = std::time::Duration::from_secs(15);");
-    a("        let client = reqwest::ClientBuilder::new()");
-    a("            .connect_timeout(dur)");
-    a("            .timeout(dur)");
-    a("            .build()");
-    a("            .unwrap();");
-    a("");
-    a("        Client {");
-    a("            baseurl: baseurl.to_string(),");
-    a("            client,");
-    a("        }");
-    a("    }");
+    a(r#"impl Client {
+    pub fn new<A, C>(agent: A, credentials: C) -> Result<Self>
+    where
+        A: Into<String>,
+        C: Into<Option<crate::auth::Credentials>>,
+    {
+        Self::host(DEFAULT_HOST, agent, credentials)
+    }
+
+    pub fn host<H, A, C>(host: H, agent: A, credentials: C) -> Result<Self>
+    where
+        H: Into<String>,
+        A: Into<String>,
+        C: Into<Option<crate::auth::Credentials>>,
+    {
+        let http = reqwest::Client::builder().build()?;
+        #[cfg(feature = "httpcache")]
+        {
+            Ok(Self::custom(
+                host,
+                agent,
+                credentials,
+                http,
+                crate::http_cache::HttpCache::noop(),
+            ))
+        }
+        #[cfg(not(feature = "httpcache"))]
+        {
+            Ok(Self::custom(host, agent, credentials, http))
+        }
+    }
+
+    #[cfg(feature = "httpcache")]
+    pub fn custom<H, A, CR>(
+        host: H,
+        agent: A,
+        credentials: CR,
+        http: reqwest::Client,
+        http_cache: crate::http_cache::BoxedHttpCache,
+    ) -> Self
+    where
+        H: Into<String>,
+        A: Into<String>,
+        CR: Into<Option<crate::auth::Credentials>>,
+    {
+        Self {
+            host: host.into(),
+            agent: agent.into(),
+            client: http,
+            credentials: credentials.into(),
+            http_cache,
+        }
+    }
+
+    #[cfg(not(feature = "httpcache"))]
+    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: Client) -> Self
+    where
+        H: Into<String>,
+        A: Into<String>,
+        CR: Into<Option<crate::auth::Credentials>>,
+    {
+        Self {
+            host: host.into(),
+            agent: agent.into(),
+            client: http,
+            credentials: credentials.into(),
+        }
+    }
+
+    pub fn set_credentials<CR>(&mut self, credentials: CR)
+    where
+        CR: Into<Option<crate::auth::Credentials>>,
+    {
+        self.credentials = credentials.into();
+    }
+
+    fn credentials(&self, authentication: crate::auth::AuthenticationConstraint) -> Option<&crate::auth::Credentials> {
+        match (authentication, self.credentials.as_ref()) {
+            (crate::auth::AuthenticationConstraint::Unconstrained, creds) => creds,
+            (crate::auth::AuthenticationConstraint::JWT, creds @ Some(&crate::auth::Credentials::JWT(_))) => creds,
+            (
+                crate::auth::AuthenticationConstraint::JWT,
+                Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
+            ) => Some(apptoken.jwt()),
+            (crate::auth::AuthenticationConstraint::JWT, creds) => {
+                println!(
+                    "Request needs JWT authentication but only {:?} available",
+                    creds
+                );
+                None
+            }
+        }
+    }
+
+    async fn url_and_auth(
+        &self,
+        uri: &str,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> Result<(reqwest::Url, Option<String>)> {
+        let parsed_url = uri.parse::<reqwest::Url>();
+
+        match self.credentials(authentication) {
+            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => parsed_url
+                .map(|mut u| {
+                    u.query_pairs_mut()
+                        .append_pair("client_id", id)
+                        .append_pair("client_secret", secret);
+                    (u, None)
+                })
+                .map_err(Error::from),
+            Some(&crate::auth::Credentials::Token(ref token)) => {
+                let auth = format!("token {}", token);
+                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+            }
+            Some(&crate::auth::Credentials::JWT(ref jwt)) => {
+                let auth = format!("Bearer {}", jwt.token());
+                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+            }
+            Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
+                if let Some(token) = apptoken.token() {
+                    let auth = format!("token {}", token);
+                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                } else {
+                    println!("App token is stale, refreshing");
+                    let token_ref = apptoken.access_key.clone();
+
+                    let token = self.apps_create_installation_access_token(apptoken.installation_id as i64,
+                    &types::CreateInstallationAccessTokenAppRequest{
+                        permissions: Default::default(),
+                        repositories: Default::default(),
+                        repository_ids: Default::default(),
+                    }).await.unwrap();
+                    let auth = format!("token {}", &token.token);
+                    *token_ref.lock().unwrap() = Some(token.token);
+                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                }
+            }
+            None => parsed_url.map(|u| (u, None)).map_err(Error::from),
+        }
+    }"#);
     a("");
 
     /*
@@ -1779,19 +1911,28 @@ fn main() -> Result<()> {
 name = "{}"
 description = "{}"
 version = "{}"
+documentation = "https://docs.rs/{}/"
+repository = "https://github.com/oxidecomputer/{}"
+readme = "README.md"
 edition = "2018"
 
 [dependencies]
 anyhow = "1"
 chrono = {{ version = "0.4", features = ["serde"] }}
-dirs = "^3.0.2"
+dirs = {{ version = "^3.0.2", optional = true }}
 http = "^0.2.4"
+jsonwebtoken = "7"
 percent-encoding = "2.1"
 reqwest = {{ version = "0.11", features = ["json"] }}
 schemars = {{ version = "0.8", features = ["chrono", "uuid"] }}
 serde = {{ version = "1", features = ["derive"] }}
-serde_json = "1""#,
-                name, description, version,
+serde_json = "1"
+
+[features]
+# enable etag-based http_cache functionality
+httpcache = ["dirs"]
+"#,
+                name, description, version, name, name
             );
             save(&toml, tomlout.as_str())?;
 

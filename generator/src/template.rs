@@ -15,7 +15,7 @@ impl Template {
     pub fn compile(&self) -> String {
         let mut out = "        let url = ".to_string();
         if self.components.is_empty() {
-            out.push_str("self.baseurl.to_string();");
+            out.push_str("DEFAULT_HOST.to_string();");
         } else {
             out.push_str("format!(\"{}");
             for c in self.components.iter() {
@@ -26,7 +26,7 @@ impl Template {
                 }
             }
             out.push_str("\",\n");
-            out.push_str("            self.baseurl,\n");
+            out.push_str("           DEFAULT_HOST,\n");
             for c in self.components.iter() {
                 if let Component::Parameter(n) = &c {
                     if n == "type" || n == "ref" {
