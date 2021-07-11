@@ -25366,32 +25366,32 @@ impl Client {
     }
 
     /**
-     * meta_root: GET /
-     * Get Hypermedia links to resources accessible in GitHub's REST API
-     * FROM: https://docs.github.com/rest/overview/resources-in-the-rest-api#root-endpoint
-     */
+    * meta_root: GET /
+    * Get Hypermedia links to resources accessible in GitHub's REST API
+    * FROM: https://docs.github.com/rest/overview/resources-in-the-rest-api#root-endpoint
+    */
     pub async fn meta_root(&self) -> Result<types::GetGithubApiRootOkResponse> {
         let url = "".to_string();
         self.get(&url).await
     }
 
     /**
-         * apps_get_authenticated: GET /app
-         * Returns the GitHub App associated with the authentication credentials used. To see how many app installations are associated with this GitHub App, see the `installations_count` in the response. For more details about your app's installations, see the "[List installations for the authenticated app](https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app)" endpoint.
+    * apps_get_authenticated: GET /app
+    * Returns the GitHub App associated with the authentication credentials used. To see how many app installations are associated with this GitHub App, see the `installations_count` in the response. For more details about your app's installations, see the "[List installations for the authenticated app](https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app)" endpoint.
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#get-the-authenticated-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#get-the-authenticated-app
+    */
     pub async fn apps_get_authenticated(&self) -> Result<types::Integration> {
         let url = "/app".to_string();
         self.get(&url).await
     }
 
     /**
-     * apps_create_from_manifest: POST /app-manifests/{code}/conversions
-     * Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create a GitHub App with the manifest flow, you receive a temporary `code` used to retrieve the GitHub App's `id`, `pem` (private key), and `webhook_secret`.
-     * FROM: https://docs.github.com/rest/reference/apps#create-a-github-app-from-a-manifest
-     */
+    * apps_create_from_manifest: POST /app-manifests/{code}/conversions
+    * Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create a GitHub App with the manifest flow, you receive a temporary `code` used to retrieve the GitHub App's `id`, `pem` (private key), and `webhook_secret`.
+    * FROM: https://docs.github.com/rest/reference/apps#create-a-github-app-from-a-manifest
+    */
     pub async fn apps_create_from_manifest(
         &self,
         code: &str,
@@ -25410,24 +25410,24 @@ impl Client {
     }
 
     /**
-         * apps_get_webhook_config_for_app: GET /app/hook/config
-         * Returns the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see "[Creating a GitHub App](/developers/apps/creating-a-github-app)."
+    * apps_get_webhook_config_for_app: GET /app/hook/config
+    * Returns the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see "[Creating a GitHub App](/developers/apps/creating-a-github-app)."
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#get-a-webhook-configuration-for-an-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#get-a-webhook-configuration-for-an-app
+    */
     pub async fn apps_get_webhook_config_for_app(&self) -> Result<types::WebhookConfig> {
         let url = "/app/hook/config".to_string();
         self.get(&url).await
     }
 
     /**
-         * apps_update_webhook_config_for_app: PATCH /app/hook/config
-         * Updates the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see "[Creating a GitHub App](/developers/apps/creating-a-github-app)."
+    * apps_update_webhook_config_for_app: PATCH /app/hook/config
+    * Updates the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see "[Creating a GitHub App](/developers/apps/creating-a-github-app)."
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#update-a-webhook-configuration-for-an-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#update-a-webhook-configuration-for-an-app
+    */
     pub async fn apps_update_webhook_config_for_app(
         &self,
         body: &types::UpdateWebhookConfigurationAppRequest,
@@ -25441,12 +25441,12 @@ impl Client {
     }
 
     /**
-         * apps_list_installations: GET /app/installations
-         * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+    * apps_list_installations: GET /app/installations
+    * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
 
     The permissions the installation has are included under the `permissions` key.
-         * FROM: https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app
+    */
     pub async fn apps_list_installations(
         &self,
         per_page: i64,
@@ -25455,23 +25455,23 @@ impl Client {
         outdated: &str,
     ) -> Result<Vec<types::Installation>> {
         let url = format!(
-            "/app/installations?per_page={}&page={}&outdated={}&since={}",
-            format!("{}", per_page),
+            "/app/installations?page={}&outdated={}&since={}&per_page={}",
             format!("{}", page),
             outdated.to_string(),
             since.to_rfc3339(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * apps_get_installation: GET /app/installations/{installation_id}
-         * Enables an authenticated GitHub App to find an installation's information using the installation id. The installation's account type (`target_type`) will be either an organization or a user account, depending which account the repository belongs to.
+    * apps_get_installation: GET /app/installations/{installation_id}
+    * Enables an authenticated GitHub App to find an installation's information using the installation id. The installation's account type (`target_type`) will be either an organization or a user account, depending which account the repository belongs to.
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#get-an-installation-for-the-authenticated-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#get-an-installation-for-the-authenticated-app
+    */
     pub async fn apps_get_installation(&self, installation_id: i64) -> Result<types::Installation> {
         let url = format!(
             "/app/installations/{}",
@@ -25482,12 +25482,12 @@ impl Client {
     }
 
     /**
-         * apps_delete_installation: DELETE /app/installations/{installation_id}
-         * Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/reference/apps/#suspend-an-app-installation)" endpoint.
+    * apps_delete_installation: DELETE /app/installations/{installation_id}
+    * Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/reference/apps/#suspend-an-app-installation)" endpoint.
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#delete-an-installation-for-the-authenticated-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#delete-an-installation-for-the-authenticated-app
+    */
     pub async fn apps_delete_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
             "/app/installations/{}",
@@ -25501,12 +25501,12 @@ impl Client {
     }
 
     /**
-         * apps_create_installation_access_token: POST /app/installations/{installation_id}/access_tokens
-         * Creates an installation access token that enables a GitHub App to make authenticated API requests for the app's installation on an organization or individual account. Installation tokens expire one hour from the time you create them. Using an expired token produces a status code of `401 - Unauthorized`, and requires creating a new installation token. By default the installation token has access to all repositories that the installation can access. To restrict the access to specific repositories, you can provide the `repository_ids` when creating the token. When you omit `repository_ids`, the response does not contain the `repositories` key.
+    * apps_create_installation_access_token: POST /app/installations/{installation_id}/access_tokens
+    * Creates an installation access token that enables a GitHub App to make authenticated API requests for the app's installation on an organization or individual account. Installation tokens expire one hour from the time you create them. Using an expired token produces a status code of `401 - Unauthorized`, and requires creating a new installation token. By default the installation token has access to all repositories that the installation can access. To restrict the access to specific repositories, you can provide the `repository_ids` when creating the token. When you omit `repository_ids`, the response does not contain the `repositories` key.
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps/#create-an-installation-access-token-for-an-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps/#create-an-installation-access-token-for-an-app
+    */
     pub async fn apps_create_installation_access_token(
         &self,
         installation_id: i64,
@@ -25529,12 +25529,12 @@ impl Client {
     }
 
     /**
-         * apps_suspend_installation: PUT /app/installations/{installation_id}/suspended
-         * Suspends a GitHub App on a user, organization, or business account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
+    * apps_suspend_installation: PUT /app/installations/{installation_id}/suspended
+    * Suspends a GitHub App on a user, organization, or business account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#suspend-an-app-installation
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#suspend-an-app-installation
+    */
     pub async fn apps_suspend_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
             "/app/installations/{}/suspended",
@@ -25545,12 +25545,12 @@ impl Client {
     }
 
     /**
-         * apps_unsuspend_installation: DELETE /app/installations/{installation_id}/suspended
-         * Removes a GitHub App installation suspension.
+    * apps_unsuspend_installation: DELETE /app/installations/{installation_id}/suspended
+    * Removes a GitHub App installation suspension.
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#unsuspend-an-app-installation
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#unsuspend-an-app-installation
+    */
     pub async fn apps_unsuspend_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
             "/app/installations/{}/suspended",
@@ -25564,12 +25564,12 @@ impl Client {
     }
 
     /**
-         * oauth_authorizations_list_grants: GET /applications/grants
-         * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * oauth_authorizations_list_grants: GET /applications/grants
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
 
     You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `["repo", "user"]`.
-         * FROM: https://docs.github.com/rest/reference/oauth-authorizations#list-your-grants
-         */
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#list-your-grants
+    */
     pub async fn oauth_authorizations_list_grants(
         &self,
         per_page: i64,
@@ -25577,20 +25577,20 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::ApplicationGrant>> {
         let url = format!(
-            "/applications/grants?client_id={}&per_page={}&page={}",
-            client_id.to_string(),
+            "/applications/grants?per_page={}&page={}&client_id={}",
             format!("{}", per_page),
             format!("{}", page),
+            client_id.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-     * oauth_authorizations_get_grant: GET /applications/grants/{grant_id}
-     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
-     * FROM: https://docs.github.com/rest/reference/oauth-authorizations#get-a-single-grant
-     */
+    * oauth_authorizations_get_grant: GET /applications/grants/{grant_id}
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#get-a-single-grant
+    */
     pub async fn oauth_authorizations_get_grant(
         &self,
         grant_id: i64,
@@ -25604,12 +25604,12 @@ impl Client {
     }
 
     /**
-         * oauth_authorizations_delete_grant: DELETE /applications/grants/{grant_id}
-         * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * oauth_authorizations_delete_grant: DELETE /applications/grants/{grant_id}
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
 
     Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for your user. Once deleted, the application has no access to your account and is no longer listed on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
-         * FROM: https://docs.github.com/rest/reference/oauth-authorizations#delete-a-grant
-         */
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#delete-a-grant
+    */
     pub async fn oauth_authorizations_delete_grant(&self, grant_id: i64) -> Result<()> {
         let url = format!(
             "/applications/grants/{}",
@@ -25623,11 +25623,11 @@ impl Client {
     }
 
     /**
-         * apps_delete_authorization: DELETE /applications/{client_id}/grant
-         * OAuth application owners can revoke a grant for their OAuth application and a specific user. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. You must also provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted.
+    * apps_delete_authorization: DELETE /applications/{client_id}/grant
+    * OAuth application owners can revoke a grant for their OAuth application and a specific user. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. You must also provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted.
     Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for the user. Once deleted, the application will have no access to the user's account and will no longer be listed on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
-         * FROM: https://docs.github.com/rest/reference/apps#delete-an-app-authorization
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#delete-an-app-authorization
+    */
     pub async fn apps_delete_authorization(
         &self,
         client_id: &str,
@@ -25651,14 +25651,14 @@ impl Client {
     }
 
     /**
-         * apps_revoke_grant_for_application: DELETE /applications/{client_id}/grants/{access_token}
-         * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
+    * apps_revoke_grant_for_application: DELETE /applications/{client_id}/grants/{access_token}
+    * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
 
     OAuth application owners can revoke a grant for their OAuth application and a specific user. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. You must also provide a valid token as `:access_token` and the grant for the token's owner will be deleted.
 
     Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for the user. Once deleted, the application will have no access to the user's account and will no longer be listed on [the Applications settings page under "Authorized OAuth Apps" on GitHub](https://github.com/settings/applications#authorized).
-         * FROM: https://docs.github.com/rest/reference/apps#revoke-a-grant-for-an-application
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#revoke-a-grant-for-an-application
+    */
     pub async fn apps_revoke_grant_for_application(
         &self,
         client_id: &str,
@@ -25677,10 +25677,10 @@ impl Client {
     }
 
     /**
-     * apps_check_token: POST /applications/{client_id}/token
-     * OAuth applications can use a special API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) to use this endpoint, where the username is the OAuth application `client_id` and the password is its `client_secret`. Invalid tokens will return `404 NOT FOUND`.
-     * FROM: https://docs.github.com/rest/reference/apps#check-a-token
-     */
+    * apps_check_token: POST /applications/{client_id}/token
+    * OAuth applications can use a special API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) to use this endpoint, where the username is the OAuth application `client_id` and the password is its `client_secret`. Invalid tokens will return `404 NOT FOUND`.
+    * FROM: https://docs.github.com/rest/reference/apps#check-a-token
+    */
     pub async fn apps_check_token(
         &self,
         client_id: &str,
@@ -25699,10 +25699,10 @@ impl Client {
     }
 
     /**
-     * apps_delete_token: DELETE /applications/{client_id}/token
-     * OAuth application owners can revoke a single token for an OAuth application. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password.
-     * FROM: https://docs.github.com/rest/reference/apps#delete-an-app-token
-     */
+    * apps_delete_token: DELETE /applications/{client_id}/token
+    * OAuth application owners can revoke a single token for an OAuth application. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password.
+    * FROM: https://docs.github.com/rest/reference/apps#delete-an-app-token
+    */
     pub async fn apps_delete_token(
         &self,
         client_id: &str,
@@ -25726,10 +25726,10 @@ impl Client {
     }
 
     /**
-     * apps_reset_token: PATCH /applications/{client_id}/token
-     * OAuth applications can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the "token" property in the response because changes take effect immediately. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
-     * FROM: https://docs.github.com/rest/reference/apps#reset-a-token
-     */
+    * apps_reset_token: PATCH /applications/{client_id}/token
+    * OAuth applications can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the "token" property in the response because changes take effect immediately. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
+    * FROM: https://docs.github.com/rest/reference/apps#reset-a-token
+    */
     pub async fn apps_reset_token(
         &self,
         client_id: &str,
@@ -25748,10 +25748,10 @@ impl Client {
     }
 
     /**
-     * apps_scope_token: POST /applications/{client_id}/token/scoped
-     * Use a non-scoped user-to-server OAuth access token to create a repository scoped and/or permission scoped user-to-server OAuth access token. You can specify which repositories the token can access and which permissions are granted to the token. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
-     * FROM: https://docs.github.com/rest/reference/apps#create-a-scoped-access-token
-     */
+    * apps_scope_token: POST /applications/{client_id}/token/scoped
+    * Use a non-scoped user-to-server OAuth access token to create a repository scoped and/or permission scoped user-to-server OAuth access token. You can specify which repositories the token can access and which permissions are granted to the token. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
+    * FROM: https://docs.github.com/rest/reference/apps#create-a-scoped-access-token
+    */
     pub async fn apps_scope_token(
         &self,
         client_id: &str,
@@ -25770,12 +25770,12 @@ impl Client {
     }
 
     /**
-         * apps_check_authorization: GET /applications/{client_id}/tokens/{access_token}
-         * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
+    * apps_check_authorization: GET /applications/{client_id}/tokens/{access_token}
+    * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
 
     OAuth applications can use a special API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
-         * FROM: https://docs.github.com/rest/reference/apps#check-an-authorization
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#check-an-authorization
+    */
     pub async fn apps_check_authorization(
         &self,
         client_id: &str,
@@ -25791,12 +25791,12 @@ impl Client {
     }
 
     /**
-         * apps_reset_authorization: POST /applications/{client_id}/tokens/{access_token}
-         * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
+    * apps_reset_authorization: POST /applications/{client_id}/tokens/{access_token}
+    * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
 
     OAuth applications can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the "token" property in the response because changes take effect immediately. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
-         * FROM: https://docs.github.com/rest/reference/apps#reset-an-authorization
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#reset-an-authorization
+    */
     pub async fn apps_reset_authorization(
         &self,
         client_id: &str,
@@ -25812,12 +25812,12 @@ impl Client {
     }
 
     /**
-         * apps_revoke_authorization_for_application: DELETE /applications/{client_id}/tokens/{access_token}
-         * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
+    * apps_revoke_authorization_for_application: DELETE /applications/{client_id}/tokens/{access_token}
+    * **Deprecation Notice:** GitHub will discontinue OAuth endpoints that contain `access_token` in the path parameter. We have introduced new endpoints that allow you to securely manage tokens for OAuth Apps by moving `access_token` to the request body. For more information, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
 
     OAuth application owners can revoke a single token for an OAuth application. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password.
-         * FROM: https://docs.github.com/rest/reference/apps#revoke-an-authorization-for-an-application
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#revoke-an-authorization-for-an-application
+    */
     pub async fn apps_revoke_authorization_for_application(
         &self,
         client_id: &str,
@@ -25836,12 +25836,12 @@ impl Client {
     }
 
     /**
-         * apps_get_by_slug: GET /apps/{app_slug}
-         * **Note**: The `:app_slug` is just the URL-friendly name of your GitHub App. You can find this on the settings page for your GitHub App (e.g., `https://github.com/settings/apps/:app_slug`).
+    * apps_get_by_slug: GET /apps/{app_slug}
+    * **Note**: The `:app_slug` is just the URL-friendly name of your GitHub App. You can find this on the settings page for your GitHub App (e.g., `https://github.com/settings/apps/:app_slug`).
 
     If the GitHub App you specify is public, you can access this endpoint without authenticating. If the GitHub App you specify is private, you must authenticate with a [personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps/#get-an-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps/#get-an-app
+    */
     pub async fn apps_get_by_slug(&self, app_slug: &str) -> Result<types::Integration> {
         let url = format!(
             "/apps/{}",
@@ -25852,10 +25852,10 @@ impl Client {
     }
 
     /**
-     * oauth_authorizations_list_authorizations: GET /authorizations
-     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
-     * FROM: https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations
-     */
+    * oauth_authorizations_list_authorizations: GET /authorizations
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations
+    */
     pub async fn oauth_authorizations_list_authorizations(
         &self,
         per_page: i64,
@@ -25863,18 +25863,18 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::Authorization>> {
         let url = format!(
-            "/authorizations?client_id={}&page={}&per_page={}",
-            client_id.to_string(),
-            format!("{}", page),
+            "/authorizations?per_page={}&page={}&client_id={}",
             format!("{}", per_page),
+            format!("{}", page),
+            client_id.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * oauth_authorizations_create_authorization: POST /authorizations
-         * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * oauth_authorizations_create_authorization: POST /authorizations
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
 
     **Warning:** Apps must use the [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow) to obtain OAuth tokens that work with GitHub SAML organizations. OAuth tokens created using the Authorizations API will be unable to access GitHub SAML organizations. For more information, see the [blog post](https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api).
 
@@ -25885,8 +25885,8 @@ impl Client {
     You can also create tokens on GitHub from the [personal access tokens settings](https://github.com/settings/tokens) page. Read more about these tokens in [the GitHub Help documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use).
 
     Organizations that enforce SAML SSO require personal access tokens to be allowed. Read more about allowing tokens in [the GitHub Help documentation](https://help.github.com/articles/about-identity-and-access-management-with-saml-single-sign-on).
-         * FROM: https://docs.github.com/rest/reference/oauth-authorizations#create-a-new-authorization
-         */
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#create-a-new-authorization
+    */
     pub async fn oauth_authorizations_create_authorization(
         &self,
         body: &types::CreateNewAuthorizationRequest,
@@ -25900,8 +25900,8 @@ impl Client {
     }
 
     /**
-         * oauth_authorizations_get_or_create_authorization_for_app: PUT /authorizations/clients/{client_id}
-         * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * oauth_authorizations_get_or_create_authorization_for_app: PUT /authorizations/clients/{client_id}
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
 
     **Warning:** Apps must use the [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow) to obtain OAuth tokens that work with GitHub SAML organizations. OAuth tokens created using the Authorizations API will be unable to access GitHub SAML organizations. For more information, see the [blog post](https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api).
 
@@ -25910,8 +25910,8 @@ impl Client {
     If you have two-factor authentication setup, Basic Authentication for this endpoint requires that you use a one-time password (OTP) and your username and password instead of tokens. For more information, see "[Working with two-factor authentication](https://docs.github.com/rest/overview/other-authentication-methods#working-with-two-factor-authentication)."
 
     **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
-         * FROM: https://docs.github.com/rest/reference/oauth-authorizations#get-or-create-an-authorization-for-a-specific-app
-         */
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#get-or-create-an-authorization-for-a-specific-app
+    */
     pub async fn oauth_authorizations_get_or_create_authorization_for_app(
         &self,
         client_id: &str,
@@ -25930,16 +25930,16 @@ impl Client {
     }
 
     /**
-         * oauth_authorizations_get_or_create_authorization_for_app_and_fingerprint: PUT /authorizations/clients/{client_id}/{fingerprint}
-         * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * oauth_authorizations_get_or_create_authorization_for_app_and_fingerprint: PUT /authorizations/clients/{client_id}/{fingerprint}
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
 
     **Warning:** Apps must use the [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow) to obtain OAuth tokens that work with GitHub SAML organizations. OAuth tokens created using the Authorizations API will be unable to access GitHub SAML organizations. For more information, see the [blog post](https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api).
 
     This method will create a new authorization for the specified OAuth application, only if an authorization for that application and fingerprint do not already exist for the user. The URL includes the 20 character client ID for the OAuth app that is requesting the token. `fingerprint` is a unique string to distinguish an authorization from others created for the same client ID and user. It returns the user's existing authorization for the application if one is present. Otherwise, it creates and returns a new one.
 
     If you have two-factor authentication setup, Basic Authentication for this endpoint requires that you use a one-time password (OTP) and your username and password instead of tokens. For more information, see "[Working with two-factor authentication](https://docs.github.com/rest/overview/other-authentication-methods#working-with-two-factor-authentication)."
-         * FROM: https://docs.github.com/rest/reference/oauth-authorizations#get-or-create-an-authorization-for-a-specific-app-and-fingerprint
-         */
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#get-or-create-an-authorization-for-a-specific-app-and-fingerprint
+    */
     pub async fn oauth_authorizations_get_or_create_authorization_for_app_and_fingerprint(
         &self,
         client_id: &str,
@@ -25960,10 +25960,10 @@ impl Client {
     }
 
     /**
-     * oauth_authorizations_get_authorization: GET /authorizations/{authorization_id}
-     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
-     * FROM: https://docs.github.com/rest/reference/oauth-authorizations#get-a-single-authorization
-     */
+    * oauth_authorizations_get_authorization: GET /authorizations/{authorization_id}
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#get-a-single-authorization
+    */
     pub async fn oauth_authorizations_get_authorization(
         &self,
         authorization_id: i64,
@@ -25977,10 +25977,10 @@ impl Client {
     }
 
     /**
-     * oauth_authorizations_delete_authorization: DELETE /authorizations/{authorization_id}
-     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
-     * FROM: https://docs.github.com/rest/reference/oauth-authorizations#delete-an-authorization
-     */
+    * oauth_authorizations_delete_authorization: DELETE /authorizations/{authorization_id}
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#delete-an-authorization
+    */
     pub async fn oauth_authorizations_delete_authorization(
         &self,
         authorization_id: i64,
@@ -25997,14 +25997,14 @@ impl Client {
     }
 
     /**
-         * oauth_authorizations_update_authorization: PATCH /authorizations/{authorization_id}
-         * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+    * oauth_authorizations_update_authorization: PATCH /authorizations/{authorization_id}
+    * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
 
     If you have two-factor authentication setup, Basic Authentication for this endpoint requires that you use a one-time password (OTP) and your username and password instead of tokens. For more information, see "[Working with two-factor authentication](https://docs.github.com/rest/overview/other-authentication-methods#working-with-two-factor-authentication)."
 
     You can only send one of these scope keys at a time.
-         * FROM: https://docs.github.com/rest/reference/oauth-authorizations#update-an-existing-authorization
-         */
+    * FROM: https://docs.github.com/rest/reference/oauth-authorizations#update-an-existing-authorization
+    */
     pub async fn oauth_authorizations_update_authorization(
         &self,
         authorization_id: i64,
@@ -26023,10 +26023,10 @@ impl Client {
     }
 
     /**
-     * codes_of_conduct_get_all_codes_of_conduct: GET /codes_of_conduct
-     *
-     * FROM: https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct
-     */
+    * codes_of_conduct_get_all_codes_of_conduct: GET /codes_of_conduct
+    *
+    * FROM: https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct
+    */
     pub async fn codes_of_conduct_get_all_codes_of_conduct(
         &self,
     ) -> Result<Vec<types::CodeofConduct>> {
@@ -26035,10 +26035,10 @@ impl Client {
     }
 
     /**
-     * codes_of_conduct_get_conduct_code: GET /codes_of_conduct/{key}
-     *
-     * FROM: https://docs.github.com/rest/reference/codes-of-conduct#get-a-code-of-conduct
-     */
+    * codes_of_conduct_get_conduct_code: GET /codes_of_conduct/{key}
+    *
+    * FROM: https://docs.github.com/rest/reference/codes-of-conduct#get-a-code-of-conduct
+    */
     pub async fn codes_of_conduct_get_conduct_code(
         &self,
         key: &str,
@@ -26052,22 +26052,22 @@ impl Client {
     }
 
     /**
-     * emojis_get: GET /emojis
-     * Lists all the emojis available to use on GitHub.
-     * FROM: https://docs.github.com/rest/reference/emojis#get-emojis
-     */
+    * emojis_get: GET /emojis
+    * Lists all the emojis available to use on GitHub.
+    * FROM: https://docs.github.com/rest/reference/emojis#get-emojis
+    */
     pub async fn emojis_get(&self) -> Result<types::GetEmojisOkResponse> {
         let url = "/emojis".to_string();
         self.get(&url).await
     }
 
     /**
-         * enterprise_admin_get_github_actions_permissions_enterprise: GET /enterprises/{enterprise}/actions/permissions
-         * Gets the GitHub Actions permissions policy for organizations and allowed actions in an enterprise.
+    * enterprise_admin_get_github_actions_permissions_enterprise: GET /enterprises/{enterprise}/actions/permissions
+    * Gets the GitHub Actions permissions policy for organizations and allowed actions in an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-github-actions-permissions-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-github-actions-permissions-for-an-enterprise
+    */
     pub async fn enterprise_admin_get_github_actions_permissions_enterprise(
         &self,
         enterprise: &str,
@@ -26081,12 +26081,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_set_github_actions_permissions_enterprise: PUT /enterprises/{enterprise}/actions/permissions
-         * Sets the GitHub Actions permissions policy for organizations and allowed actions in an enterprise.
+    * enterprise_admin_set_github_actions_permissions_enterprise: PUT /enterprises/{enterprise}/actions/permissions
+    * Sets the GitHub Actions permissions policy for organizations and allowed actions in an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-github-actions-permissions-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-github-actions-permissions-for-an-enterprise
+    */
     pub async fn enterprise_admin_set_github_actions_permissions_enterprise(
         &self,
         enterprise: &str,
@@ -26105,12 +26105,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_list_selected_organizations_enabled_github_actions_enterprise: GET /enterprises/{enterprise}/actions/permissions/organizations
-         * Lists the organizations that are selected to have GitHub Actions enabled in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
+    * enterprise_admin_list_selected_organizations_enabled_github_actions_enterprise: GET /enterprises/{enterprise}/actions/permissions/organizations
+    * Lists the organizations that are selected to have GitHub Actions enabled in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-selected-organizations-enabled-for-github-actions-in-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-selected-organizations-enabled-for-github-actions-in-an-enterprise
+    */
     pub async fn enterprise_admin_list_selected_organizations_enabled_github_actions_enterprise(
         &self,
         enterprise: &str,
@@ -26128,12 +26128,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_set_selected_organizations_enabled_github_actions_enterprise: PUT /enterprises/{enterprise}/actions/permissions/organizations
-         * Replaces the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
+    * enterprise_admin_set_selected_organizations_enabled_github_actions_enterprise: PUT /enterprises/{enterprise}/actions/permissions/organizations
+    * Replaces the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-selected-organizations-enabled-for-github-actions-in-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-selected-organizations-enabled-for-github-actions-in-an-enterprise
+    */
     pub async fn enterprise_admin_set_selected_organizations_enabled_github_actions_enterprise(
         &self,
         enterprise: &str,
@@ -26152,12 +26152,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_enable_selected_organization_github_actions_enterprise: PUT /enterprises/{enterprise}/actions/permissions/organizations/{org_id}
-         * Adds an organization to the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
+    * enterprise_admin_enable_selected_organization_github_actions_enterprise: PUT /enterprises/{enterprise}/actions/permissions/organizations/{org_id}
+    * Adds an organization to the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#enable-a-selected-organization-for-github-actions-in-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#enable-a-selected-organization-for-github-actions-in-an-enterprise
+    */
     pub async fn enterprise_admin_enable_selected_organization_github_actions_enterprise(
         &self,
         enterprise: &str,
@@ -26173,12 +26173,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_disable_selected_organization_github_actions_enterprise: DELETE /enterprises/{enterprise}/actions/permissions/organizations/{org_id}
-         * Removes an organization from the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
+    * enterprise_admin_disable_selected_organization_github_actions_enterprise: DELETE /enterprises/{enterprise}/actions/permissions/organizations/{org_id}
+    * Removes an organization from the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#disable-a-selected-organization-for-github-actions-in-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#disable-a-selected-organization-for-github-actions-in-an-enterprise
+    */
     pub async fn enterprise_admin_disable_selected_organization_github_actions_enterprise(
         &self,
         enterprise: &str,
@@ -26197,12 +26197,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_get_allowed_actions_enterprise: GET /enterprises/{enterprise}/actions/permissions/selected-actions
-         * Gets the selected actions that are allowed in an enterprise. To use this endpoint, the enterprise permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
+    * enterprise_admin_get_allowed_actions_enterprise: GET /enterprises/{enterprise}/actions/permissions/selected-actions
+    * Gets the selected actions that are allowed in an enterprise. To use this endpoint, the enterprise permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-allowed-actions-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-allowed-actions-for-an-enterprise
+    */
     pub async fn enterprise_admin_get_allowed_actions_enterprise(
         &self,
         enterprise: &str,
@@ -26216,12 +26216,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_set_allowed_actions_enterprise: PUT /enterprises/{enterprise}/actions/permissions/selected-actions
-         * Sets the actions that are allowed in an enterprise. To use this endpoint, the enterprise permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
+    * enterprise_admin_set_allowed_actions_enterprise: PUT /enterprises/{enterprise}/actions/permissions/selected-actions
+    * Sets the actions that are allowed in an enterprise. To use this endpoint, the enterprise permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-allowed-actions-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-allowed-actions-for-an-enterprise
+    */
     pub async fn enterprise_admin_set_allowed_actions_enterprise(
         &self,
         enterprise: &str,
@@ -26240,12 +26240,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_list_self_hosted_runner_groups_for_enterprise: GET /enterprises/{enterprise}/actions/runner-groups
-         * Lists all self-hosted runner groups for an enterprise.
+    * enterprise_admin_list_self_hosted_runner_groups_for_enterprise: GET /enterprises/{enterprise}/actions/runner-groups
+    * Lists all self-hosted runner groups for an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-self-hosted-runner-groups-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-self-hosted-runner-groups-for-an-enterprise
+    */
     pub async fn enterprise_admin_list_self_hosted_runner_groups_for_enterprise(
         &self,
         enterprise: &str,
@@ -26263,12 +26263,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_create_self_hosted_runner_group_for_enterprise: POST /enterprises/{enterprise}/actions/runner-groups
-         * Creates a new self-hosted runner group for an enterprise.
+    * enterprise_admin_create_self_hosted_runner_group_for_enterprise: POST /enterprises/{enterprise}/actions/runner-groups
+    * Creates a new self-hosted runner group for an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#create-self-hosted-runner-group-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#create-self-hosted-runner-group-for-an-enterprise
+    */
     pub async fn enterprise_admin_create_self_hosted_runner_group_for_enterprise(
         &self,
         enterprise: &str,
@@ -26287,12 +26287,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_get_self_hosted_runner_group_for_enterprise: GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}
-         * Gets a specific self-hosted runner group for an enterprise.
+    * enterprise_admin_get_self_hosted_runner_group_for_enterprise: GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}
+    * Gets a specific self-hosted runner group for an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-a-self-hosted-runner-group-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-a-self-hosted-runner-group-for-an-enterprise
+    */
     pub async fn enterprise_admin_get_self_hosted_runner_group_for_enterprise(
         &self,
         enterprise: &str,
@@ -26308,12 +26308,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_delete_self_hosted_runner_group_from_enterprise: DELETE /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}
-         * Deletes a self-hosted runner group for an enterprise.
+    * enterprise_admin_delete_self_hosted_runner_group_from_enterprise: DELETE /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}
+    * Deletes a self-hosted runner group for an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#delete-a-self-hosted-runner-group-from-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#delete-a-self-hosted-runner-group-from-an-enterprise
+    */
     pub async fn enterprise_admin_delete_self_hosted_runner_group_from_enterprise(
         &self,
         enterprise: &str,
@@ -26332,12 +26332,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_update_self_hosted_runner_group_for_enterprise: PATCH /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}
-         * Updates the `name` and `visibility` of a self-hosted runner group in an enterprise.
+    * enterprise_admin_update_self_hosted_runner_group_for_enterprise: PATCH /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}
+    * Updates the `name` and `visibility` of a self-hosted runner group in an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#update-a-self-hosted-runner-group-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#update-a-self-hosted-runner-group-for-an-enterprise
+    */
     pub async fn enterprise_admin_update_self_hosted_runner_group_for_enterprise(
         &self,
         enterprise: &str,
@@ -26358,12 +26358,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_list_org_access_to_self_hosted_runner_group_in_enterprise: GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations
-         * Lists the organizations with access to a self-hosted runner group.
+    * enterprise_admin_list_org_access_to_self_hosted_runner_group_in_enterprise: GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations
+    * Lists the organizations with access to a self-hosted runner group.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-organization-access-to-a-self-hosted-runner-group-in-a-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-organization-access-to-a-self-hosted-runner-group-in-a-enterprise
+    */
     pub async fn enterprise_admin_list_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
         enterprise: &str,
@@ -26384,12 +26384,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_set_org_access_to_self_hosted_runner_group_in_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations
-         * Replaces the list of organizations that have access to a self-hosted runner configured in an enterprise.
+    * enterprise_admin_set_org_access_to_self_hosted_runner_group_in_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations
+    * Replaces the list of organizations that have access to a self-hosted runner configured in an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-organization-access-to-a-self-hosted-runner-group-in-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-organization-access-to-a-self-hosted-runner-group-in-an-enterprise
+    */
     pub async fn enterprise_admin_set_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
         enterprise: &str,
@@ -26410,12 +26410,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_add_org_access_to_self_hosted_runner_group_in_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}
-         * Adds an organization to the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
+    * enterprise_admin_add_org_access_to_self_hosted_runner_group_in_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}
+    * Adds an organization to the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#add-organization-access-to-a-self-hosted-runner-group-in-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#add-organization-access-to-a-self-hosted-runner-group-in-an-enterprise
+    */
     pub async fn enterprise_admin_add_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
         enterprise: &str,
@@ -26433,12 +26433,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_remove_org_access_to_self_hosted_runner_group_in_enterprise: DELETE /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}
-         * Removes an organization from the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
+    * enterprise_admin_remove_org_access_to_self_hosted_runner_group_in_enterprise: DELETE /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}
+    * Removes an organization from the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#remove-organization-access-to-a-self-hosted-runner-group-in-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#remove-organization-access-to-a-self-hosted-runner-group-in-an-enterprise
+    */
     pub async fn enterprise_admin_remove_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
         enterprise: &str,
@@ -26459,12 +26459,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_list_self_hosted_runners_in_group_for_enterprise: GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners
-         * Lists the self-hosted runners that are in a specific enterprise group.
+    * enterprise_admin_list_self_hosted_runners_in_group_for_enterprise: GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners
+    * Lists the self-hosted runners that are in a specific enterprise group.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-self-hosted-runners-in-a-group-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-self-hosted-runners-in-a-group-for-an-enterprise
+    */
     pub async fn enterprise_admin_list_self_hosted_runners_in_group_for_enterprise(
         &self,
         enterprise: &str,
@@ -26484,12 +26484,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_set_self_hosted_runners_in_group_for_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners
-         * Replaces the list of self-hosted runners that are part of an enterprise runner group.
+    * enterprise_admin_set_self_hosted_runners_in_group_for_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners
+    * Replaces the list of self-hosted runners that are part of an enterprise runner group.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-self-hosted-runners-in-a-group-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-self-hosted-runners-in-a-group-for-an-enterprise
+    */
     pub async fn enterprise_admin_set_self_hosted_runners_in_group_for_enterprise(
         &self,
         enterprise: &str,
@@ -26510,13 +26510,13 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_add_self_hosted_runner_to_group_for_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
-         * Adds a self-hosted runner to a runner group configured in an enterprise.
+    * enterprise_admin_add_self_hosted_runner_to_group_for_enterprise: PUT /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+    * Adds a self-hosted runner to a runner group configured in an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise`
     scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#add-a-self-hosted-runner-to-a-group-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#add-a-self-hosted-runner-to-a-group-for-an-enterprise
+    */
     pub async fn enterprise_admin_add_self_hosted_runner_to_group_for_enterprise(
         &self,
         enterprise: &str,
@@ -26534,12 +26534,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_remove_self_hosted_runner_from_group_for_enterprise: DELETE /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
-         * Removes a self-hosted runner from a group configured in an enterprise. The runner is then returned to the default group.
+    * enterprise_admin_remove_self_hosted_runner_from_group_for_enterprise: DELETE /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+    * Removes a self-hosted runner from a group configured in an enterprise. The runner is then returned to the default group.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#remove-a-self-hosted-runner-from-a-group-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#remove-a-self-hosted-runner-from-a-group-for-an-enterprise
+    */
     pub async fn enterprise_admin_remove_self_hosted_runner_from_group_for_enterprise(
         &self,
         enterprise: &str,
@@ -26560,12 +26560,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_list_self_hosted_runners_for_enterprise: GET /enterprises/{enterprise}/actions/runners
-         * Lists all self-hosted runners configured for an enterprise.
+    * enterprise_admin_list_self_hosted_runners_for_enterprise: GET /enterprises/{enterprise}/actions/runners
+    * Lists all self-hosted runners configured for an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-self-hosted-runners-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-self-hosted-runners-for-an-enterprise
+    */
     pub async fn enterprise_admin_list_self_hosted_runners_for_enterprise(
         &self,
         enterprise: &str,
@@ -26573,22 +26573,22 @@ impl Client {
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersEnterpriseOkResponse> {
         let url = format!(
-            "/enterprises/{}/actions/runners?page={}&per_page={}",
+            "/enterprises/{}/actions/runners?per_page={}&page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * enterprise_admin_list_runner_applications_for_enterprise: GET /enterprises/{enterprise}/actions/runners/downloads
-         * Lists binaries for the runner application that you can download and run.
+    * enterprise_admin_list_runner_applications_for_enterprise: GET /enterprises/{enterprise}/actions/runners/downloads
+    * Lists binaries for the runner application that you can download and run.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-runner-applications-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-runner-applications-for-an-enterprise
+    */
     pub async fn enterprise_admin_list_runner_applications_for_enterprise(
         &self,
         enterprise: &str,
@@ -26602,8 +26602,8 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_create_registration_token_for_enterprise: POST /enterprises/{enterprise}/actions/runners/registration-token
-         * Returns a token that you can pass to the `config` script. The token expires after one hour.
+    * enterprise_admin_create_registration_token_for_enterprise: POST /enterprises/{enterprise}/actions/runners/registration-token
+    * Returns a token that you can pass to the `config` script. The token expires after one hour.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
 
@@ -26614,8 +26614,8 @@ impl Client {
     ```
     ./config.sh --url https://github.com/enterprises/octo-enterprise --token TOKEN
     ```
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#create-a-registration-token-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#create-a-registration-token-for-an-enterprise
+    */
     pub async fn enterprise_admin_create_registration_token_for_enterprise(
         &self,
         enterprise: &str,
@@ -26629,8 +26629,8 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_create_remove_token_for_enterprise: POST /enterprises/{enterprise}/actions/runners/remove-token
-         * Returns a token that you can pass to the `config` script to remove a self-hosted runner from an enterprise. The token expires after one hour.
+    * enterprise_admin_create_remove_token_for_enterprise: POST /enterprises/{enterprise}/actions/runners/remove-token
+    * Returns a token that you can pass to the `config` script to remove a self-hosted runner from an enterprise. The token expires after one hour.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
 
@@ -26642,8 +26642,8 @@ impl Client {
     ```
     ./config.sh remove --token TOKEN
     ```
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#create-a-remove-token-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#create-a-remove-token-for-an-enterprise
+    */
     pub async fn enterprise_admin_create_remove_token_for_enterprise(
         &self,
         enterprise: &str,
@@ -26657,12 +26657,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_get_self_hosted_runner_for_enterprise: GET /enterprises/{enterprise}/actions/runners/{runner_id}
-         * Gets a specific self-hosted runner configured in an enterprise.
+    * enterprise_admin_get_self_hosted_runner_for_enterprise: GET /enterprises/{enterprise}/actions/runners/{runner_id}
+    * Gets a specific self-hosted runner configured in an enterprise.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-a-self-hosted-runner-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-a-self-hosted-runner-for-an-enterprise
+    */
     pub async fn enterprise_admin_get_self_hosted_runner_for_enterprise(
         &self,
         enterprise: &str,
@@ -26678,12 +26678,12 @@ impl Client {
     }
 
     /**
-         * enterprise_admin_delete_self_hosted_runner_from_enterprise: DELETE /enterprises/{enterprise}/actions/runners/{runner_id}
-         * Forces the removal of a self-hosted runner from an enterprise. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
+    * enterprise_admin_delete_self_hosted_runner_from_enterprise: DELETE /enterprises/{enterprise}/actions/runners/{runner_id}
+    * Forces the removal of a self-hosted runner from an enterprise. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
 
     You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#delete-self-hosted-runner-from-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#delete-self-hosted-runner-from-an-enterprise
+    */
     pub async fn enterprise_admin_delete_self_hosted_runner_from_enterprise(
         &self,
         enterprise: &str,
@@ -26702,10 +26702,10 @@ impl Client {
     }
 
     /**
-     * enterprise_admin_get_audit_log: GET /enterprises/{enterprise}/audit-log
-     * Gets the audit log for an enterprise. To use this endpoint, you must be an enterprise admin, and you must use an access token with the `admin:enterprise` scope.
-     * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-the-audit-log-for-an-enterprise
-     */
+    * enterprise_admin_get_audit_log: GET /enterprises/{enterprise}/audit-log
+    * Gets the audit log for an enterprise. To use this endpoint, you must be an enterprise admin, and you must use an access token with the `admin:enterprise` scope.
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-the-audit-log-for-an-enterprise
+    */
     pub async fn enterprise_admin_get_audit_log(
         &self,
         enterprise: &str,
@@ -26717,22 +26717,22 @@ impl Client {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("/enterprises/{}/audit-log?after={}&before={}&order={}&page={}&per_page={}&phrase={}&include={}",
+        let url = format!("/enterprises/{}/audit-log?after={}&include={}&order={}&phrase={}&page={}&before={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-after.to_string(), before.to_string(), order.to_string(), format!("{}", page), format!("{}", per_page), phrase.to_string(), include.to_string(),         );
+after.to_string(), include.to_string(), order.to_string(), phrase.to_string(), format!("{}", page), before.to_string(), format!("{}", per_page),         );
 
         self.get(&url).await
     }
 
     /**
-         * billing_get_github_actions_billing_ghe: GET /enterprises/{enterprise}/settings/billing/actions
-         * Gets the summary of the free and paid GitHub Actions minutes used.
+    * billing_get_github_actions_billing_ghe: GET /enterprises/{enterprise}/settings/billing/actions
+    * Gets the summary of the free and paid GitHub Actions minutes used.
 
     Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
     The authenticated user must be an enterprise admin.
-         * FROM: https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-an-enterprise
+    */
     pub async fn billing_get_github_actions_billing_ghe(
         &self,
         enterprise: &str,
@@ -26746,14 +26746,14 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-         * billing_get_github_packages_billing_ghe: GET /enterprises/{enterprise}/settings/billing/packages
-         * Gets the free and paid storage used for GitHub Packages in gigabytes.
+    * billing_get_github_packages_billing_ghe: GET /enterprises/{enterprise}/settings/billing/packages
+    * Gets the free and paid storage used for GitHub Packages in gigabytes.
 
     Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
     The authenticated user must be an enterprise admin.
-         * FROM: https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-an-enterprise
+    */
     pub async fn billing_get_github_packages_billing_ghe(
         &self,
         enterprise: &str,
@@ -26767,14 +26767,14 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-         * billing_get_shared_storage_billing_ghe: GET /enterprises/{enterprise}/settings/billing/shared-storage
-         * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
+    * billing_get_shared_storage_billing_ghe: GET /enterprises/{enterprise}/settings/billing/shared-storage
+    * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
 
     Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
     The authenticated user must be an enterprise admin.
-         * FROM: https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-an-enterprise
+    */
     pub async fn billing_get_shared_storage_billing_ghe(
         &self,
         enterprise: &str,
@@ -26788,27 +26788,27 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * activity_list_public_events: GET /events
-     * We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago.
-     * FROM: https://docs.github.com/rest/reference/activity#list-public-events
-     */
+    * activity_list_public_events: GET /events
+    * We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago.
+    * FROM: https://docs.github.com/rest/reference/activity#list-public-events
+    */
     pub async fn activity_list_public_events(
         &self,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/events?per_page={}&page={}",
-            format!("{}", per_page),
+            "/events?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * activity_get_feeds: GET /feeds
-         * GitHub provides several timeline resources in [Atom](http://en.wikipedia.org/wiki/Atom_(standard)) format. The Feeds API lists all the feeds available to the authenticated user:
+    * activity_get_feeds: GET /feeds
+    * GitHub provides several timeline resources in [Atom](http://en.wikipedia.org/wiki/Atom_(standard)) format. The Feeds API lists all the feeds available to the authenticated user:
 
     *   **Timeline**: The GitHub global public timeline
     *   **User**: The public timeline for any user, using [URI template](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia)
@@ -26819,18 +26819,18 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     *   **Security advisories**: A collection of public announcements that provide information about security-related vulnerabilities in software on GitHub.
 
     **Note**: Private feeds are only returned when [authenticating via Basic Auth](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) since current feed URIs use the older, non revocable auth tokens.
-         * FROM: https://docs.github.com/rest/reference/activity#get-feeds
-         */
+    * FROM: https://docs.github.com/rest/reference/activity#get-feeds
+    */
     pub async fn activity_get_feeds(&self) -> Result<types::Feed> {
         let url = "/feeds".to_string();
         self.get(&url).await
     }
 
     /**
-     * gists_list: GET /gists
-     * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
-     * FROM: https://docs.github.com/rest/reference/gists#list-gists-for-the-authenticated-user
-     */
+    * gists_list: GET /gists
+    * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
+    * FROM: https://docs.github.com/rest/reference/gists#list-gists-for-the-authenticated-user
+    */
     pub async fn gists_list(
         &self,
         since: DateTime<Utc>,
@@ -26838,22 +26838,22 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/gists?page={}&since={}&per_page={}",
-            format!("{}", page),
+            "/gists?since={}&per_page={}&page={}",
             since.to_rfc3339(),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * gists_create: POST /gists
-         * Allows you to add a new gist with one or more files.
+    * gists_create: POST /gists
+    * Allows you to add a new gist with one or more files.
 
     **Note:** Don't name your files "gistfile" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
-         * FROM: https://docs.github.com/rest/reference/gists#create-a-gist
-         */
+    * FROM: https://docs.github.com/rest/reference/gists#create-a-gist
+    */
     pub async fn gists_create(&self, body: &types::CreateGistRequest) -> Result<types::GistSimple> {
         let url = "/gists".to_string();
         self.post(
@@ -26864,12 +26864,12 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-         * gists_list_public: GET /gists/public
-         * List public gists sorted by most recently updated to least recently updated.
+    * gists_list_public: GET /gists/public
+    * List public gists sorted by most recently updated to least recently updated.
 
     Note: With [pagination](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
-         * FROM: https://docs.github.com/rest/reference/gists#list-public-gists
-         */
+    * FROM: https://docs.github.com/rest/reference/gists#list-public-gists
+    */
     pub async fn gists_list_public(
         &self,
         since: DateTime<Utc>,
@@ -26877,9 +26877,9 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/gists/public?per_page={}&since={}&page={}",
-            format!("{}", per_page),
+            "/gists/public?since={}&per_page={}&page={}",
             since.to_rfc3339(),
+            format!("{}", per_page),
             format!("{}", page),
         );
 
@@ -26887,10 +26887,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_list_starred: GET /gists/starred
-     * List the authenticated user's starred gists:
-     * FROM: https://docs.github.com/rest/reference/gists#list-starred-gists
-     */
+    * gists_list_starred: GET /gists/starred
+    * List the authenticated user's starred gists:
+    * FROM: https://docs.github.com/rest/reference/gists#list-starred-gists
+    */
     pub async fn gists_list_starred(
         &self,
         since: DateTime<Utc>,
@@ -26898,20 +26898,20 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/gists/starred?since={}&per_page={}&page={}",
-            since.to_rfc3339(),
-            format!("{}", per_page),
+            "/gists/starred?page={}&per_page={}&since={}",
             format!("{}", page),
+            format!("{}", per_page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
     }
 
     /**
-     * gists_get: GET /gists/{gist_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#get-a-gist
-     */
+    * gists_get: GET /gists/{gist_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#get-a-gist
+    */
     pub async fn gists_get(&self, gist_id: &str) -> Result<types::GistSimple> {
         let url = format!(
             "/gists/{}",
@@ -26922,10 +26922,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_delete: DELETE /gists/{gist_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#delete-a-gist
-     */
+    * gists_delete: DELETE /gists/{gist_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#delete-a-gist
+    */
     pub async fn gists_delete(&self, gist_id: &str) -> Result<()> {
         let url = format!(
             "/gists/{}",
@@ -26939,10 +26939,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_update: PATCH /gists/{gist_id}
-     * Allows you to update or delete a gist file and rename gist files. Files from the previous version of the gist that aren't explicitly changed during an edit are unchanged.
-     * FROM: https://docs.github.com/rest/reference/gists/#update-a-gist
-     */
+    * gists_update: PATCH /gists/{gist_id}
+    * Allows you to update or delete a gist file and rename gist files. Files from the previous version of the gist that aren't explicitly changed during an edit are unchanged.
+    * FROM: https://docs.github.com/rest/reference/gists/#update-a-gist
+    */
     pub async fn gists_update(
         &self,
         gist_id: &str,
@@ -26961,10 +26961,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_list_comments: GET /gists/{gist_id}/comments
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#list-gist-comments
-     */
+    * gists_list_comments: GET /gists/{gist_id}/comments
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#list-gist-comments
+    */
     pub async fn gists_list_comments(
         &self,
         gist_id: &str,
@@ -26982,10 +26982,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_create_comment: POST /gists/{gist_id}/comments
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#create-a-gist-comment
-     */
+    * gists_create_comment: POST /gists/{gist_id}/comments
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#create-a-gist-comment
+    */
     pub async fn gists_create_comment(
         &self,
         gist_id: &str,
@@ -27004,10 +27004,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_get_comment: GET /gists/{gist_id}/comments/{comment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#get-a-gist-comment
-     */
+    * gists_get_comment: GET /gists/{gist_id}/comments/{comment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#get-a-gist-comment
+    */
     pub async fn gists_get_comment(
         &self,
         gist_id: &str,
@@ -27023,10 +27023,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_delete_comment: DELETE /gists/{gist_id}/comments/{comment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#delete-a-gist-comment
-     */
+    * gists_delete_comment: DELETE /gists/{gist_id}/comments/{comment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#delete-a-gist-comment
+    */
     pub async fn gists_delete_comment(&self, gist_id: &str, comment_id: i64) -> Result<()> {
         let url = format!(
             "/gists/{}/comments/{}",
@@ -27041,10 +27041,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_update_comment: PATCH /gists/{gist_id}/comments/{comment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#update-a-gist-comment
-     */
+    * gists_update_comment: PATCH /gists/{gist_id}/comments/{comment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#update-a-gist-comment
+    */
     pub async fn gists_update_comment(
         &self,
         gist_id: &str,
@@ -27065,10 +27065,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_list_commits: GET /gists/{gist_id}/commits
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#list-gist-commits
-     */
+    * gists_list_commits: GET /gists/{gist_id}/commits
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#list-gist-commits
+    */
     pub async fn gists_list_commits(
         &self,
         gist_id: &str,
@@ -27086,10 +27086,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_list_forks: GET /gists/{gist_id}/forks
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#list-gist-forks
-     */
+    * gists_list_forks: GET /gists/{gist_id}/forks
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#list-gist-forks
+    */
     pub async fn gists_list_forks(
         &self,
         gist_id: &str,
@@ -27107,10 +27107,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_fork: POST /gists/{gist_id}/forks
-     * **Note**: This was previously `/gists/:gist_id/fork`.
-     * FROM: https://docs.github.com/rest/reference/gists#fork-a-gist
-     */
+    * gists_fork: POST /gists/{gist_id}/forks
+    * **Note**: This was previously `/gists/:gist_id/fork`.
+    * FROM: https://docs.github.com/rest/reference/gists#fork-a-gist
+    */
     pub async fn gists_fork(&self, gist_id: &str) -> Result<types::BaseGist> {
         let url = format!(
             "/gists/{}/forks",
@@ -27121,10 +27121,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_check_is_starred: GET /gists/{gist_id}/star
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#check-if-a-gist-is-starred
-     */
+    * gists_check_is_starred: GET /gists/{gist_id}/star
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#check-if-a-gist-is-starred
+    */
     pub async fn gists_check_is_starred(&self, gist_id: &str) -> Result<()> {
         let url = format!(
             "/gists/{}/star",
@@ -27135,10 +27135,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_star: PUT /gists/{gist_id}/star
-     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-     * FROM: https://docs.github.com/rest/reference/gists#star-a-gist
-     */
+    * gists_star: PUT /gists/{gist_id}/star
+    * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    * FROM: https://docs.github.com/rest/reference/gists#star-a-gist
+    */
     pub async fn gists_star(&self, gist_id: &str) -> Result<()> {
         let url = format!(
             "/gists/{}/star",
@@ -27149,10 +27149,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_unstar: DELETE /gists/{gist_id}/star
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#unstar-a-gist
-     */
+    * gists_unstar: DELETE /gists/{gist_id}/star
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#unstar-a-gist
+    */
     pub async fn gists_unstar(&self, gist_id: &str) -> Result<()> {
         let url = format!(
             "/gists/{}/star",
@@ -27166,10 +27166,10 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gists_get_revision: GET /gists/{gist_id}/{sha}
-     *
-     * FROM: https://docs.github.com/rest/reference/gists#get-a-gist-revision
-     */
+    * gists_get_revision: GET /gists/{gist_id}/{sha}
+    *
+    * FROM: https://docs.github.com/rest/reference/gists#get-a-gist-revision
+    */
     pub async fn gists_get_revision(&self, gist_id: &str, sha: &str) -> Result<types::GistSimple> {
         let url = format!(
             "/gists/{}/{}",
@@ -27181,21 +27181,21 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-     * gitignore_get_all_templates: GET /gitignore/templates
-     * List all templates available to pass as an option when [creating a repository](https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user).
-     * FROM: https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates
-     */
+    * gitignore_get_all_templates: GET /gitignore/templates
+    * List all templates available to pass as an option when [creating a repository](https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user).
+    * FROM: https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates
+    */
     pub async fn gitignore_get_all_templates(&self) -> Result<Vec<String>> {
         let url = "/gitignore/templates".to_string();
         self.get(&url).await
     }
 
     /**
-         * gitignore_get_template: GET /gitignore/templates/{name}
-         * The API also allows fetching the source of a single template.
+    * gitignore_get_template: GET /gitignore/templates/{name}
+    * The API also allows fetching the source of a single template.
     Use the raw [media type](https://docs.github.com/rest/overview/media-types/) to get the raw contents.
-         * FROM: https://docs.github.com/rest/reference/gitignore#get-a-gitignore-template
-         */
+    * FROM: https://docs.github.com/rest/reference/gitignore#get-a-gitignore-template
+    */
     pub async fn gitignore_get_template(&self, name: &str) -> Result<types::GitignoreTemplate> {
         let url = format!(
             "/gitignore/templates/{}",
@@ -27206,35 +27206,35 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-         * apps_list_repos_accessible_to_installation: GET /installation/repositories
-         * List repositories that an app installation can access.
+    * apps_list_repos_accessible_to_installation: GET /installation/repositories
+    * List repositories that an app installation can access.
 
     You must use an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#list-repositories-accessible-to-the-app-installation
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#list-repositories-accessible-to-the-app-installation
+    */
     pub async fn apps_list_repos_accessible_to_installation(
         &self,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListRepositoriesAccessibleAppInstallationOkResponse> {
         let url = format!(
-            "/installation/repositories?page={}&per_page={}",
-            format!("{}", page),
+            "/installation/repositories?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * apps_revoke_installation_access_token: DELETE /installation/token
-         * Revokes the installation token you're using to authenticate as an installation and access this endpoint.
+    * apps_revoke_installation_access_token: DELETE /installation/token
+    * Revokes the installation token you're using to authenticate as an installation and access this endpoint.
 
     Once an installation token is revoked, the token is invalidated and cannot be used. Other endpoints that require the revoked installation token must have a new installation token to work. You can create a new token using the "[Create an installation access token for an app](https://docs.github.com/rest/reference/apps#create-an-installation-access-token-for-an-app)" endpoint.
 
     You must use an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#revoke-an-installation-access-token
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#revoke-an-installation-access-token
+    */
     pub async fn apps_revoke_installation_access_token(&self) -> Result<()> {
         let url = "/installation/token".to_string();
         let res = self.client.delete(url).send().await?.error_for_status()?;
@@ -27244,8 +27244,8 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     }
 
     /**
-         * issues_list: GET /issues
-         * List issues assigned to the authenticated user across all visible repositories including owned repositories, member
+    * issues_list: GET /issues
+    * List issues assigned to the authenticated user across all visible repositories including owned repositories, member
     repositories, and organization repositories. You can use the `filter` query parameter to fetch issues that are not
     necessarily assigned to you.
 
@@ -27254,8 +27254,8 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
     reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
     the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
     request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-         * FROM: https://docs.github.com/rest/reference/issues#list-issues-assigned-to-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/issues#list-issues-assigned-to-the-authenticated-user
+    */
     pub async fn issues_list(
         &self,
         filter: &str,
@@ -27271,17 +27271,17 @@ after.to_string(), before.to_string(), order.to_string(), format!("{}", page), f
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/issues?orgs={}&per_page={}&pulls={}&page={}&sort={}&collab={}&state={}&filter={}&labels={}&owned={}&direction={}&since={}",
-format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}", page), sort.to_string(), format!("{}", collab), state.to_string(), filter.to_string(), labels.to_string(), format!("{}", owned), direction.to_string(), since.to_rfc3339(),         );
+        let url = format!("/issues?since={}&filter={}&sort={}&page={}&labels={}&state={}&pulls={}&direction={}&per_page={}&owned={}&collab={}&orgs={}",
+since.to_rfc3339(), filter.to_string(), sort.to_string(), format!("{}", page), labels.to_string(), state.to_string(), format!("{}", pulls), direction.to_string(), format!("{}", per_page), format!("{}", owned), format!("{}", collab), format!("{}", orgs),         );
 
         self.get(&url).await
     }
 
     /**
-     * licenses_get_all_commonly_used: GET /licenses
-     *
-     * FROM: https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses
-     */
+    * licenses_get_all_commonly_used: GET /licenses
+    *
+    * FROM: https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses
+    */
     pub async fn licenses_get_all_commonly_used(
         &self,
         featured: bool,
@@ -27289,20 +27289,20 @@ format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}"
         page: i64,
     ) -> Result<Vec<types::LicenseSimple>> {
         let url = format!(
-            "/licenses?featured={}&page={}&per_page={}",
-            format!("{}", featured),
-            format!("{}", page),
+            "/licenses?per_page={}&page={}&featured={}",
             format!("{}", per_page),
+            format!("{}", page),
+            format!("{}", featured),
         );
 
         self.get(&url).await
     }
 
     /**
-     * licenses_get: GET /licenses/{license}
-     *
-     * FROM: https://docs.github.com/rest/reference/licenses#get-a-license
-     */
+    * licenses_get: GET /licenses/{license}
+    *
+    * FROM: https://docs.github.com/rest/reference/licenses#get-a-license
+    */
     pub async fn licenses_get(&self, license: &str) -> Result<types::License> {
         let url = format!(
             "/licenses/{}",
@@ -27313,10 +27313,10 @@ format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}"
     }
 
     /**
-     * markdown_render: POST /markdown
-     *
-     * FROM: https://docs.github.com/rest/reference/markdown#render-a-markdown-document
-     */
+    * markdown_render: POST /markdown
+    *
+    * FROM: https://docs.github.com/rest/reference/markdown#render-a-markdown-document
+    */
     pub async fn markdown_render(
         &self,
         body: &types::RenderMarkdownDocumentRequest,
@@ -27330,22 +27330,22 @@ format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}"
     }
 
     /**
-     * markdown_render_raw: POST /markdown/raw
-     * You must send Markdown as plain text (using a `Content-Type` header of `text/plain` or `text/x-markdown`) to this endpoint, rather than using JSON format. In raw mode, [GitHub Flavored Markdown](https://github.github.com/gfm/) is not supported and Markdown will be rendered in plain format like a README.md file. Markdown content must be 400 KB or less.
-     * FROM: https://docs.github.com/rest/reference/markdown#render-a-markdown-document-in-raw-mode
-     */
+    * markdown_render_raw: POST /markdown/raw
+    * You must send Markdown as plain text (using a `Content-Type` header of `text/plain` or `text/x-markdown`) to this endpoint, rather than using JSON format. In raw mode, [GitHub Flavored Markdown](https://github.github.com/gfm/) is not supported and Markdown will be rendered in plain format like a README.md file. Markdown content must be 400 KB or less.
+    * FROM: https://docs.github.com/rest/reference/markdown#render-a-markdown-document-in-raw-mode
+    */
     pub async fn markdown_render_raw<T: Into<reqwest::Body>>(&self, body: T) -> Result<String> {
         let url = "/markdown/raw".to_string();
         self.post(&url, Some(body.into())).await
     }
 
     /**
-         * apps_get_subscription_plan_for_account: GET /marketplace_listing/accounts/{account_id}
-         * Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
+    * apps_get_subscription_plan_for_account: GET /marketplace_listing/accounts/{account_id}
+    * Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
 
     GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#get-a-subscription-plan-for-an-account
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#get-a-subscription-plan-for-an-account
+    */
     pub async fn apps_get_subscription_plan_for_account(
         &self,
         account_id: i64,
@@ -27359,12 +27359,12 @@ format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}"
     }
 
     /**
-         * apps_list_plans: GET /marketplace_listing/plans
-         * Lists all plans that are part of your GitHub Marketplace listing.
+    * apps_list_plans: GET /marketplace_listing/plans
+    * Lists all plans that are part of your GitHub Marketplace listing.
 
     GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#list-plans
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#list-plans
+    */
     pub async fn apps_list_plans(
         &self,
         per_page: i64,
@@ -27380,12 +27380,12 @@ format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}"
     }
 
     /**
-         * apps_list_accounts_for_plan: GET /marketplace_listing/plans/{plan_id}/accounts
-         * Returns user and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
+    * apps_list_accounts_for_plan: GET /marketplace_listing/plans/{plan_id}/accounts
+    * Returns user and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
 
     GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan
+    */
     pub async fn apps_list_accounts_for_plan(
         &self,
         plan_id: i64,
@@ -27395,24 +27395,24 @@ format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}"
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
         let url = format!(
-            "/marketplace_listing/plans/{}/accounts?sort={}&per_page={}&direction={}&page={}",
+            "/marketplace_listing/plans/{}/accounts?per_page={}&sort={}&page={}&direction={}",
             progenitor_support::encode_path(&plan_id.to_string()),
-            sort.to_string(),
             format!("{}", per_page),
-            direction.to_string(),
+            sort.to_string(),
             format!("{}", page),
+            direction.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * apps_get_subscription_plan_for_account_stubbed: GET /marketplace_listing/stubbed/accounts/{account_id}
-         * Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
+    * apps_get_subscription_plan_for_account_stubbed: GET /marketplace_listing/stubbed/accounts/{account_id}
+    * Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
 
     GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#get-a-subscription-plan-for-an-account-stubbed
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#get-a-subscription-plan-for-an-account-stubbed
+    */
     pub async fn apps_get_subscription_plan_for_account_stubbed(
         &self,
         account_id: i64,
@@ -27426,12 +27426,12 @@ format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}"
     }
 
     /**
-         * apps_list_plans_stubbed: GET /marketplace_listing/stubbed/plans
-         * Lists all plans that are part of your GitHub Marketplace listing.
+    * apps_list_plans_stubbed: GET /marketplace_listing/stubbed/plans
+    * Lists all plans that are part of your GitHub Marketplace listing.
 
     GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#list-plans-stubbed
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#list-plans-stubbed
+    */
     pub async fn apps_list_plans_stubbed(
         &self,
         per_page: i64,
@@ -27447,12 +27447,12 @@ format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}"
     }
 
     /**
-         * apps_list_accounts_for_plan_stubbed: GET /marketplace_listing/stubbed/plans/{plan_id}/accounts
-         * Returns repository and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
+    * apps_list_accounts_for_plan_stubbed: GET /marketplace_listing/stubbed/plans/{plan_id}/accounts
+    * Returns repository and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
 
     GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan-stubbed
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan-stubbed
+    */
     pub async fn apps_list_accounts_for_plan_stubbed(
         &self,
         plan_id: i64,
@@ -27461,30 +27461,30 @@ format!("{}", orgs), format!("{}", per_page), format!("{}", pulls), format!("{}"
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
-        let url = format!("/marketplace_listing/stubbed/plans/{}/accounts?sort={}&direction={}&per_page={}&page={}",
+        let url = format!("/marketplace_listing/stubbed/plans/{}/accounts?page={}&direction={}&sort={}&per_page={}",
             progenitor_support::encode_path(&plan_id.to_string()),
-sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", page),         );
+format!("{}", page), direction.to_string(), sort.to_string(), format!("{}", per_page),         );
 
         self.get(&url).await
     }
 
     /**
-         * meta_get: GET /meta
-         * Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
+    * meta_get: GET /meta
+    * Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
 
     **Note:** The IP addresses shown in the documentation's response are only example values. You must always query the API directly to get the latest list of IP addresses.
-         * FROM: https://docs.github.com/rest/reference/meta#get-github-meta-information
-         */
+    * FROM: https://docs.github.com/rest/reference/meta#get-github-meta-information
+    */
     pub async fn meta_get(&self) -> Result<types::ApiOverview> {
         let url = "/meta".to_string();
         self.get(&url).await
     }
 
     /**
-     * activity_list_public_events_for_repo_network: GET /networks/{owner}/{repo}/events
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#list-public-events-for-a-network-of-repositories
-     */
+    * activity_list_public_events_for_repo_network: GET /networks/{owner}/{repo}/events
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#list-public-events-for-a-network-of-repositories
+    */
     pub async fn activity_list_public_events_for_repo_network(
         &self,
         owner: &str,
@@ -27504,10 +27504,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * activity_list_notifications_for_authenticated_user: GET /notifications
-     * List all notifications for the current user, sorted by most recently updated.
-     * FROM: https://docs.github.com/rest/reference/activity#list-notifications-for-the-authenticated-user
-     */
+    * activity_list_notifications_for_authenticated_user: GET /notifications
+    * List all notifications for the current user, sorted by most recently updated.
+    * FROM: https://docs.github.com/rest/reference/activity#list-notifications-for-the-authenticated-user
+    */
     pub async fn activity_list_notifications_for_authenticated_user(
         &self,
         all: bool,
@@ -27518,23 +27518,23 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
         page: i64,
     ) -> Result<Vec<types::Thread>> {
         let url = format!(
-            "/notifications?all={}&since={}&before={}&page={}&per_page={}&participating={}",
+            "/notifications?all={}&participating={}&before={}&per_page={}&page={}&since={}",
             format!("{}", all),
-            since.to_rfc3339(),
-            before.to_rfc3339(),
-            format!("{}", page),
-            format!("{}", per_page),
             format!("{}", participating),
+            before.to_rfc3339(),
+            format!("{}", per_page),
+            format!("{}", page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
     }
 
     /**
-     * activity_mark_notifications_as_read: PUT /notifications
-     * Marks all notifications as "read" removes it from the [default view on GitHub](https://github.com/notifications). If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List notifications for the authenticated user](https://docs.github.com/rest/reference/activity#list-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
-     * FROM: https://docs.github.com/rest/reference/activity#mark-notifications-as-read
-     */
+    * activity_mark_notifications_as_read: PUT /notifications
+    * Marks all notifications as "read" removes it from the [default view on GitHub](https://github.com/notifications). If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List notifications for the authenticated user](https://docs.github.com/rest/reference/activity#list-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
+    * FROM: https://docs.github.com/rest/reference/activity#mark-notifications-as-read
+    */
     pub async fn activity_mark_notifications_as_read(
         &self,
         body: &types::MarkNotificationsasReadRequest,
@@ -27548,10 +27548,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * activity_get_thread: GET /notifications/threads/{thread_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#get-a-thread
-     */
+    * activity_get_thread: GET /notifications/threads/{thread_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#get-a-thread
+    */
     pub async fn activity_get_thread(&self, thread_id: i64) -> Result<types::Thread> {
         let url = format!(
             "/notifications/threads/{}",
@@ -27562,10 +27562,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * activity_mark_thread_as_read: PATCH /notifications/threads/{thread_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#mark-a-thread-as-read
-     */
+    * activity_mark_thread_as_read: PATCH /notifications/threads/{thread_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#mark-a-thread-as-read
+    */
     pub async fn activity_mark_thread_as_read(&self, thread_id: i64) -> Result<()> {
         let url = format!(
             "/notifications/threads/{}",
@@ -27576,12 +27576,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * activity_get_thread_subscription_for_authenticated_user: GET /notifications/threads/{thread_id}/subscription
-         * This checks to see if the current user is subscribed to a thread. You can also [get a repository subscription](https://docs.github.com/rest/reference/activity#get-a-repository-subscription).
+    * activity_get_thread_subscription_for_authenticated_user: GET /notifications/threads/{thread_id}/subscription
+    * This checks to see if the current user is subscribed to a thread. You can also [get a repository subscription](https://docs.github.com/rest/reference/activity#get-a-repository-subscription).
 
     Note that subscriptions are only generated if a user is participating in a conversation--for example, they've replied to the thread, were **@mentioned**, or manually subscribe to a thread.
-         * FROM: https://docs.github.com/rest/reference/activity#get-a-thread-subscription-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/activity#get-a-thread-subscription-for-the-authenticated-user
+    */
     pub async fn activity_get_thread_subscription_for_authenticated_user(
         &self,
         thread_id: i64,
@@ -27595,14 +27595,14 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * activity_set_thread_subscription: PUT /notifications/threads/{thread_id}/subscription
-         * If you are watching a repository, you receive notifications for all threads by default. Use this endpoint to ignore future notifications for threads until you comment on the thread or get an **@mention**.
+    * activity_set_thread_subscription: PUT /notifications/threads/{thread_id}/subscription
+    * If you are watching a repository, you receive notifications for all threads by default. Use this endpoint to ignore future notifications for threads until you comment on the thread or get an **@mention**.
 
     You can also use this endpoint to subscribe to threads that you are currently not receiving notifications for or to subscribed to threads that you have previously ignored.
 
     Unsubscribing from a conversation in a repository that you are not watching is functionally equivalent to the [Delete a thread subscription](https://docs.github.com/rest/reference/activity#delete-a-thread-subscription) endpoint.
-         * FROM: https://docs.github.com/rest/reference/activity#set-a-thread-subscription
-         */
+    * FROM: https://docs.github.com/rest/reference/activity#set-a-thread-subscription
+    */
     pub async fn activity_set_thread_subscription(
         &self,
         thread_id: i64,
@@ -27621,10 +27621,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * activity_delete_thread_subscription: DELETE /notifications/threads/{thread_id}/subscription
-     * Mutes all future notifications for a conversation until you comment on the thread or get an **@mention**. If you are watching the repository of the thread, you will still receive notifications. To ignore future notifications for a repository you are watching, use the [Set a thread subscription](https://docs.github.com/rest/reference/activity#set-a-thread-subscription) endpoint and set `ignore` to `true`.
-     * FROM: https://docs.github.com/rest/reference/activity#delete-a-thread-subscription
-     */
+    * activity_delete_thread_subscription: DELETE /notifications/threads/{thread_id}/subscription
+    * Mutes all future notifications for a conversation until you comment on the thread or get an **@mention**. If you are watching the repository of the thread, you will still receive notifications. To ignore future notifications for a repository you are watching, use the [Set a thread subscription](https://docs.github.com/rest/reference/activity#set-a-thread-subscription) endpoint and set `ignore` to `true`.
+    * FROM: https://docs.github.com/rest/reference/activity#delete-a-thread-subscription
+    */
     pub async fn activity_delete_thread_subscription(&self, thread_id: i64) -> Result<()> {
         let url = format!(
             "/notifications/threads/{}/subscription",
@@ -27638,10 +27638,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * meta_get_octocat: GET /octocat
-     * Get the octocat as ASCII art
-     * FROM: https://docs.github.com/rest/reference/meta#get-octocat
-     */
+    * meta_get_octocat: GET /octocat
+    * Get the octocat as ASCII art
+    * FROM: https://docs.github.com/rest/reference/meta#get-octocat
+    */
     pub async fn meta_get_octocat(&self, s: &str) -> Result<String> {
         let url = format!("/octocat?s={}", s.to_string(),);
 
@@ -27649,12 +27649,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * orgs_list: GET /organizations
-         * Lists all organizations, in the order that they were created on GitHub.
+    * orgs_list: GET /organizations
+    * Lists all organizations, in the order that they were created on GitHub.
 
     **Note:** Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of organizations.
-         * FROM: https://docs.github.com/rest/reference/orgs#list-organizations
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#list-organizations
+    */
     pub async fn orgs_list(
         &self,
         since: i64,
@@ -27670,12 +27670,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * orgs_get: GET /orgs/{org}
-         * To see many of the organization response values, you need to be an authenticated organization owner with the `admin:org` scope. When the value of `two_factor_requirement_enabled` is `true`, the organization requires all members, billing managers, and outside collaborators to enable [two-factor authentication](https://help.github.com/articles/securing-your-account-with-two-factor-authentication-2fa/).
+    * orgs_get: GET /orgs/{org}
+    * To see many of the organization response values, you need to be an authenticated organization owner with the `admin:org` scope. When the value of `two_factor_requirement_enabled` is `true`, the organization requires all members, billing managers, and outside collaborators to enable [two-factor authentication](https://help.github.com/articles/securing-your-account-with-two-factor-authentication-2fa/).
 
     GitHub Apps with the `Organization plan` permission can use this endpoint to retrieve information about an organization's GitHub plan. See "[Authenticating with GitHub Apps](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/)" for details. For an example response, see 'Response with GitHub plan information' below."
-         * FROM: https://docs.github.com/rest/reference/orgs#get-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#get-an-organization
+    */
     pub async fn orgs_get(&self, org: &str) -> Result<types::OrganizationFull> {
         let url = format!(
             "/orgs/{}",
@@ -27686,12 +27686,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * orgs_update: PATCH /orgs/{org}
-         * **Parameter Deprecation Notice:** GitHub will replace and discontinue `members_allowed_repository_creation_type` in favor of more granular permissions. The new input parameters are `members_can_create_public_repositories`, `members_can_create_private_repositories` for all organizations and `members_can_create_internal_repositories` for organizations associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes).
+    * orgs_update: PATCH /orgs/{org}
+    * **Parameter Deprecation Notice:** GitHub will replace and discontinue `members_allowed_repository_creation_type` in favor of more granular permissions. The new input parameters are `members_can_create_public_repositories`, `members_can_create_private_repositories` for all organizations and `members_can_create_internal_repositories` for organizations associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes).
 
     Enables an authenticated organization owner with the `admin:org` scope to update the organization's profile and member privileges.
-         * FROM: https://docs.github.com/rest/reference/orgs/#update-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs/#update-an-organization
+    */
     pub async fn orgs_update(
         &self,
         org: &str,
@@ -27710,12 +27710,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_get_github_actions_permissions_organization: GET /orgs/{org}/actions/permissions
-         * Gets the GitHub Actions permissions policy for repositories and allowed actions in an organization.
+    * actions_get_github_actions_permissions_organization: GET /orgs/{org}/actions/permissions
+    * Gets the GitHub Actions permissions policy for repositories and allowed actions in an organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#get-github-actions-permissions-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-github-actions-permissions-for-an-organization
+    */
     pub async fn actions_get_github_actions_permissions_organization(
         &self,
         org: &str,
@@ -27729,14 +27729,14 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_set_github_actions_permissions_organization: PUT /orgs/{org}/actions/permissions
-         * Sets the GitHub Actions permissions policy for repositories and allowed actions in an organization.
+    * actions_set_github_actions_permissions_organization: PUT /orgs/{org}/actions/permissions
+    * Sets the GitHub Actions permissions policy for repositories and allowed actions in an organization.
 
     If the organization belongs to an enterprise that has set restrictive permissions at the enterprise level, such as `allowed_actions` to `selected` actions, then you cannot override them for the organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#set-github-actions-permissions-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#set-github-actions-permissions-for-an-organization
+    */
     pub async fn actions_set_github_actions_permissions_organization(
         &self,
         org: &str,
@@ -27755,12 +27755,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_list_selected_repositories_enabled_github_actions_organization: GET /orgs/{org}/actions/permissions/repositories
-         * Lists the selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
+    * actions_list_selected_repositories_enabled_github_actions_organization: GET /orgs/{org}/actions/permissions/repositories
+    * Lists the selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#list-selected-repositories-enabled-for-github-actions-in-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#list-selected-repositories-enabled-for-github-actions-in-an-organization
+    */
     pub async fn actions_list_selected_repositories_enabled_github_actions_organization(
         &self,
         org: &str,
@@ -27779,12 +27779,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_set_selected_repositories_enabled_github_actions_organization: PUT /orgs/{org}/actions/permissions/repositories
-         * Replaces the list of selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
+    * actions_set_selected_repositories_enabled_github_actions_organization: PUT /orgs/{org}/actions/permissions/repositories
+    * Replaces the list of selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#set-selected-repositories-enabled-for-github-actions-in-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#set-selected-repositories-enabled-for-github-actions-in-an-organization
+    */
     pub async fn actions_set_selected_repositories_enabled_github_actions_organization(
         &self,
         org: &str,
@@ -27803,12 +27803,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_enable_selected_repository_github_actions_organization: PUT /orgs/{org}/actions/permissions/repositories/{repository_id}
-         * Adds a repository to the list of selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
+    * actions_enable_selected_repository_github_actions_organization: PUT /orgs/{org}/actions/permissions/repositories/{repository_id}
+    * Adds a repository to the list of selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#enable-a-selected-repository-for-github-actions-in-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#enable-a-selected-repository-for-github-actions-in-an-organization
+    */
     pub async fn actions_enable_selected_repository_github_actions_organization(
         &self,
         org: &str,
@@ -27824,12 +27824,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_disable_selected_repository_github_actions_organization: DELETE /orgs/{org}/actions/permissions/repositories/{repository_id}
-         * Removes a repository from the list of selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
+    * actions_disable_selected_repository_github_actions_organization: DELETE /orgs/{org}/actions/permissions/repositories/{repository_id}
+    * Removes a repository from the list of selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for `enabled_repositories` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#disable-a-selected-repository-for-github-actions-in-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#disable-a-selected-repository-for-github-actions-in-an-organization
+    */
     pub async fn actions_disable_selected_repository_github_actions_organization(
         &self,
         org: &str,
@@ -27848,12 +27848,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_get_allowed_actions_organization: GET /orgs/{org}/actions/permissions/selected-actions
-         * Gets the selected actions that are allowed in an organization. To use this endpoint, the organization permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization).""
+    * actions_get_allowed_actions_organization: GET /orgs/{org}/actions/permissions/selected-actions
+    * Gets the selected actions that are allowed in an organization. To use this endpoint, the organization permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization).""
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#get-allowed-actions-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-allowed-actions-for-an-organization
+    */
     pub async fn actions_get_allowed_actions_organization(
         &self,
         org: &str,
@@ -27867,16 +27867,16 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_set_allowed_actions_organization: PUT /orgs/{org}/actions/permissions/selected-actions
-         * Sets the actions that are allowed in an organization. To use this endpoint, the organization permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
+    * actions_set_allowed_actions_organization: PUT /orgs/{org}/actions/permissions/selected-actions
+    * Sets the actions that are allowed in an organization. To use this endpoint, the organization permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization)."
 
     If the organization belongs to an enterprise that has `selected` actions set at the enterprise level, then you cannot override any of the enterprise's allowed actions settings.
 
     To use the `patterns_allowed` setting for private repositories, the organization must belong to an enterprise. If the organization does not belong to an enterprise, then the `patterns_allowed` setting only applies to public repositories in the organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#set-allowed-actions-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#set-allowed-actions-for-an-organization
+    */
     pub async fn actions_set_allowed_actions_organization(
         &self,
         org: &str,
@@ -27895,14 +27895,14 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_list_self_hosted_runner_groups_for_org: GET /orgs/{org}/actions/runner-groups
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_list_self_hosted_runner_groups_for_org: GET /orgs/{org}/actions/runner-groups
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
     Lists all self-hosted runner groups configured in an organization and inherited from an enterprise.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#list-self-hosted-runner-groups-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#list-self-hosted-runner-groups-for-an-organization
+    */
     pub async fn actions_list_self_hosted_runner_groups_for_org(
         &self,
         org: &str,
@@ -27910,24 +27910,24 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnerGroupsOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/runner-groups?page={}&per_page={}",
+            "/orgs/{}/actions/runner-groups?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * actions_create_self_hosted_runner_group_for_org: POST /orgs/{org}/actions/runner-groups
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_create_self_hosted_runner_group_for_org: POST /orgs/{org}/actions/runner-groups
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
     Creates a new self-hosted runner group for an organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#create-a-self-hosted-runner-group-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#create-a-self-hosted-runner-group-for-an-organization
+    */
     pub async fn actions_create_self_hosted_runner_group_for_org(
         &self,
         org: &str,
@@ -27946,14 +27946,14 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_get_self_hosted_runner_group_for_org: GET /orgs/{org}/actions/runner-groups/{runner_group_id}
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_get_self_hosted_runner_group_for_org: GET /orgs/{org}/actions/runner-groups/{runner_group_id}
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
     Gets a specific self-hosted runner group for an organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#get-a-self-hosted-runner-group-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-a-self-hosted-runner-group-for-an-organization
+    */
     pub async fn actions_get_self_hosted_runner_group_for_org(
         &self,
         org: &str,
@@ -27969,14 +27969,14 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_delete_self_hosted_runner_group_from_org: DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_delete_self_hosted_runner_group_from_org: DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
     Deletes a self-hosted runner group for an organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#delete-a-self-hosted-runner-group-from-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#delete-a-self-hosted-runner-group-from-an-organization
+    */
     pub async fn actions_delete_self_hosted_runner_group_from_org(
         &self,
         org: &str,
@@ -27995,14 +27995,14 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_update_self_hosted_runner_group_for_org: PATCH /orgs/{org}/actions/runner-groups/{runner_group_id}
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_update_self_hosted_runner_group_for_org: PATCH /orgs/{org}/actions/runner-groups/{runner_group_id}
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
     Updates the `name` and `visibility` of a self-hosted runner group in an organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#update-a-self-hosted-runner-group-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#update-a-self-hosted-runner-group-for-an-organization
+    */
     pub async fn actions_update_self_hosted_runner_group_for_org(
         &self,
         org: &str,
@@ -28023,14 +28023,14 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_list_repo_access_to_self_hosted_runner_group_in_org: GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_list_repo_access_to_self_hosted_runner_group_in_org: GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
     Lists the repositories with access to a self-hosted runner group configured in an organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#list-repository-access-to-a-self-hosted-runner-group-in-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#list-repository-access-to-a-self-hosted-runner-group-in-an-organization
+    */
     pub async fn actions_list_repo_access_to_self_hosted_runner_group_in_org(
         &self,
         org: &str,
@@ -28040,25 +28040,25 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     ) -> Result<types::GetListRepositoryAccessSelfDataHostedRunnerGroupinOrganizationOkResponse>
     {
         let url = format!(
-            "/orgs/{}/actions/runner-groups/{}/repositories?per_page={}&page={}",
+            "/orgs/{}/actions/runner-groups/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * actions_set_repo_access_to_self_hosted_runner_group_in_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_set_repo_access_to_self_hosted_runner_group_in_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
     Replaces the list of repositories that have access to a self-hosted runner group configured in an organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#set-repository-access-to-a-self-hosted-runner-group-in-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#set-repository-access-to-a-self-hosted-runner-group-in-an-organization
+    */
     pub async fn actions_set_repo_access_to_self_hosted_runner_group_in_org(
         &self,
         org: &str,
@@ -28079,16 +28079,16 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_add_repo_access_to_self_hosted_runner_group_in_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_add_repo_access_to_self_hosted_runner_group_in_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
 
     Adds a repository to the list of selected repositories that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an organization](#create-a-self-hosted-runner-group-for-an-organization)."
 
     You must authenticate using an access token with the `admin:org`
     scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#add-repository-acess-to-a-self-hosted-runner-group-in-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#add-repository-acess-to-a-self-hosted-runner-group-in-an-organization
+    */
     pub async fn actions_add_repo_access_to_self_hosted_runner_group_in_org(
         &self,
         org: &str,
@@ -28106,15 +28106,15 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_remove_repo_access_to_self_hosted_runner_group_in_org: DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_remove_repo_access_to_self_hosted_runner_group_in_org: DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
 
     Removes a repository from the list of selected repositories that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an organization](#create-a-self-hosted-runner-group-for-an-organization)."
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#remove-repository-access-to-a-self-hosted-runner-group-in-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#remove-repository-access-to-a-self-hosted-runner-group-in-an-organization
+    */
     pub async fn actions_remove_repo_access_to_self_hosted_runner_group_in_org(
         &self,
         org: &str,
@@ -28135,14 +28135,14 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_list_self_hosted_runners_in_group_for_org: GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_list_self_hosted_runners_in_group_for_org: GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
     Lists self-hosted runners that are in a specific organization group.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#list-self-hosted-runners-in-a-group-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#list-self-hosted-runners-in-a-group-for-an-organization
+    */
     pub async fn actions_list_self_hosted_runners_in_group_for_org(
         &self,
         org: &str,
@@ -28151,25 +28151,25 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersinGroupOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
+            "/orgs/{}/actions/runner-groups/{}/runners?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * actions_set_self_hosted_runners_in_group_for_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/runners
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_set_self_hosted_runners_in_group_for_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/runners
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
     Replaces the list of self-hosted runners that are part of an organization runner group.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#set-self-hosted-runners-in-a-group-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#set-self-hosted-runners-in-a-group-for-an-organization
+    */
     pub async fn actions_set_self_hosted_runners_in_group_for_org(
         &self,
         org: &str,
@@ -28190,16 +28190,16 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_add_self_hosted_runner_to_group_for_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_add_self_hosted_runner_to_group_for_org: PUT /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
 
     Adds a self-hosted runner to a runner group configured in an organization.
 
     You must authenticate using an access token with the `admin:org`
     scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#add-a-self-hosted-runner-to-a-group-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#add-a-self-hosted-runner-to-a-group-for-an-organization
+    */
     pub async fn actions_add_self_hosted_runner_to_group_for_org(
         &self,
         org: &str,
@@ -28217,15 +28217,15 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_remove_self_hosted_runner_from_group_for_org: DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
-         * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+    * actions_remove_self_hosted_runner_from_group_for_org: DELETE /orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}
+    * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
 
 
     Removes a self-hosted runner from a group configured in an organization. The runner is then returned to the default group.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#remove-a-self-hosted-runner-from-a-group-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#remove-a-self-hosted-runner-from-a-group-for-an-organization
+    */
     pub async fn actions_remove_self_hosted_runner_from_group_for_org(
         &self,
         org: &str,
@@ -28246,12 +28246,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_list_self_hosted_runners_for_org: GET /orgs/{org}/actions/runners
-         * Lists all self-hosted runners configured in an organization.
+    * actions_list_self_hosted_runners_for_org: GET /orgs/{org}/actions/runners
+    * Lists all self-hosted runners configured in an organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#list-self-hosted-runners-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#list-self-hosted-runners-for-an-organization
+    */
     pub async fn actions_list_self_hosted_runners_for_org(
         &self,
         org: &str,
@@ -28269,12 +28269,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_list_runner_applications_for_org: GET /orgs/{org}/actions/runners/downloads
-         * Lists binaries for the runner application that you can download and run.
+    * actions_list_runner_applications_for_org: GET /orgs/{org}/actions/runners/downloads
+    * Lists binaries for the runner application that you can download and run.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#list-runner-applications-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#list-runner-applications-for-an-organization
+    */
     pub async fn actions_list_runner_applications_for_org(
         &self,
         org: &str,
@@ -28288,8 +28288,8 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_create_registration_token_for_org: POST /orgs/{org}/actions/runners/registration-token
-         * Returns a token that you can pass to the `config` script. The token expires after one hour.
+    * actions_create_registration_token_for_org: POST /orgs/{org}/actions/runners/registration-token
+    * Returns a token that you can pass to the `config` script. The token expires after one hour.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
@@ -28300,8 +28300,8 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     ```
     ./config.sh --url https://github.com/octo-org --token TOKEN
     ```
-         * FROM: https://docs.github.com/rest/reference/actions#create-a-registration-token-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#create-a-registration-token-for-an-organization
+    */
     pub async fn actions_create_registration_token_for_org(
         &self,
         org: &str,
@@ -28315,8 +28315,8 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_create_remove_token_for_org: POST /orgs/{org}/actions/runners/remove-token
-         * Returns a token that you can pass to the `config` script to remove a self-hosted runner from an organization. The token expires after one hour.
+    * actions_create_remove_token_for_org: POST /orgs/{org}/actions/runners/remove-token
+    * Returns a token that you can pass to the `config` script to remove a self-hosted runner from an organization. The token expires after one hour.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
@@ -28328,8 +28328,8 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     ```
     ./config.sh remove --token TOKEN
     ```
-         * FROM: https://docs.github.com/rest/reference/actions#create-a-remove-token-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#create-a-remove-token-for-an-organization
+    */
     pub async fn actions_create_remove_token_for_org(
         &self,
         org: &str,
@@ -28343,12 +28343,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_get_self_hosted_runner_for_org: GET /orgs/{org}/actions/runners/{runner_id}
-         * Gets a specific self-hosted runner configured in an organization.
+    * actions_get_self_hosted_runner_for_org: GET /orgs/{org}/actions/runners/{runner_id}
+    * Gets a specific self-hosted runner configured in an organization.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#get-a-self-hosted-runner-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-a-self-hosted-runner-for-an-organization
+    */
     pub async fn actions_get_self_hosted_runner_for_org(
         &self,
         org: &str,
@@ -28364,12 +28364,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_delete_self_hosted_runner_from_org: DELETE /orgs/{org}/actions/runners/{runner_id}
-         * Forces the removal of a self-hosted runner from an organization. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
+    * actions_delete_self_hosted_runner_from_org: DELETE /orgs/{org}/actions/runners/{runner_id}
+    * Forces the removal of a self-hosted runner from an organization. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
 
     You must authenticate using an access token with the `admin:org` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#delete-a-self-hosted-runner-from-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#delete-a-self-hosted-runner-from-an-organization
+    */
     pub async fn actions_delete_self_hosted_runner_from_org(
         &self,
         org: &str,
@@ -28388,10 +28388,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * actions_list_org_secrets: GET /orgs/{org}/actions/secrets
-     * Lists all secrets available in an organization without revealing their encrypted values. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#list-organization-secrets
-     */
+    * actions_list_org_secrets: GET /orgs/{org}/actions/secrets
+    * Lists all secrets available in an organization without revealing their encrypted values. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#list-organization-secrets
+    */
     pub async fn actions_list_org_secrets(
         &self,
         org: &str,
@@ -28409,10 +28409,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * actions_get_org_public_key: GET /orgs/{org}/actions/secrets/public-key
-     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-an-organization-public-key
-     */
+    * actions_get_org_public_key: GET /orgs/{org}/actions/secrets/public-key
+    * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-an-organization-public-key
+    */
     pub async fn actions_get_org_public_key(&self, org: &str) -> Result<types::ActionsPublicKey> {
         let url = format!(
             "/orgs/{}/actions/secrets/public-key",
@@ -28423,10 +28423,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * actions_get_org_secret: GET /orgs/{org}/actions/secrets/{secret_name}
-     * Gets a single organization secret without revealing its encrypted value. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-an-organization-secret
-     */
+    * actions_get_org_secret: GET /orgs/{org}/actions/secrets/{secret_name}
+    * Gets a single organization secret without revealing its encrypted value. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-an-organization-secret
+    */
     pub async fn actions_get_org_secret(
         &self,
         org: &str,
@@ -28442,8 +28442,8 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * actions_create_or_update_org_secret: PUT /orgs/{org}/actions/secrets/{secret_name}
-         * Creates or updates an organization secret with an encrypted value. Encrypt your secret using
+    * actions_create_or_update_org_secret: PUT /orgs/{org}/actions/secrets/{secret_name}
+    * Creates or updates an organization secret with an encrypted value. Encrypt your secret using
     [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). You must authenticate using an access
     token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to
     use this endpoint.
@@ -28518,8 +28518,8 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     # Print the base64 encoded secret
     puts Base64.strict_encode64(encrypted_secret)
     ```
-         * FROM: https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret
+    */
     pub async fn actions_create_or_update_org_secret(
         &self,
         org: &str,
@@ -28540,10 +28540,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * actions_delete_org_secret: DELETE /orgs/{org}/actions/secrets/{secret_name}
-     * Deletes a secret in an organization using the secret name. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#delete-an-organization-secret
-     */
+    * actions_delete_org_secret: DELETE /orgs/{org}/actions/secrets/{secret_name}
+    * Deletes a secret in an organization using the secret name. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#delete-an-organization-secret
+    */
     pub async fn actions_delete_org_secret(&self, org: &str, secret_name: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}",
@@ -28558,10 +28558,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * actions_list_selected_repos_for_org_secret: GET /orgs/{org}/actions/secrets/{secret_name}/repositories
-     * Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to `selected`. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#list-selected-repositories-for-an-organization-secret
-     */
+    * actions_list_selected_repos_for_org_secret: GET /orgs/{org}/actions/secrets/{secret_name}/repositories
+    * Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to `selected`. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#list-selected-repositories-for-an-organization-secret
+    */
     pub async fn actions_list_selected_repos_for_org_secret(
         &self,
         org: &str,
@@ -28570,21 +28570,21 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
         per_page: i64,
     ) -> Result<types::GetListSelectedRepositoriesOrganizationSecretOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/secrets/{}/repositories?per_page={}&page={}",
+            "/orgs/{}/actions/secrets/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * actions_set_selected_repos_for_org_secret: PUT /orgs/{org}/actions/secrets/{secret_name}/repositories
-     * Replaces all repositories for an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#set-selected-repositories-for-an-organization-secret
-     */
+    * actions_set_selected_repos_for_org_secret: PUT /orgs/{org}/actions/secrets/{secret_name}/repositories
+    * Replaces all repositories for an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#set-selected-repositories-for-an-organization-secret
+    */
     pub async fn actions_set_selected_repos_for_org_secret(
         &self,
         org: &str,
@@ -28605,10 +28605,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * actions_add_selected_repo_to_org_secret: PUT /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
-     * Adds a repository to an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#add-selected-repository-to-an-organization-secret
-     */
+    * actions_add_selected_repo_to_org_secret: PUT /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
+    * Adds a repository to an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#add-selected-repository-to-an-organization-secret
+    */
     pub async fn actions_add_selected_repo_to_org_secret(
         &self,
         org: &str,
@@ -28626,10 +28626,10 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-     * actions_remove_selected_repo_from_org_secret: DELETE /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
-     * Removes a repository from an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#remove-selected-repository-from-an-organization-secret
-     */
+    * actions_remove_selected_repo_from_org_secret: DELETE /orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}
+    * Removes a repository from an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#remove-selected-repository-from-an-organization-secret
+    */
     pub async fn actions_remove_selected_repo_from_org_secret(
         &self,
         org: &str,
@@ -28650,12 +28650,12 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
     }
 
     /**
-         * orgs_get_audit_log: GET /orgs/{org}/audit-log
-         * Gets the audit log for an organization. For more information, see "[Reviewing the audit log for your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization)."
+    * orgs_get_audit_log: GET /orgs/{org}/audit-log
+    * Gets the audit log for an organization. For more information, see "[Reviewing the audit log for your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization)."
 
     To use this endpoint, you must be an organization owner, and you must use an access token with the `admin:org` scope. GitHub Apps must have the `organization_administration` read permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/orgs#get-audit-log
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#get-audit-log
+    */
     pub async fn orgs_get_audit_log(
         &self,
         org: &str,
@@ -28667,18 +28667,18 @@ sort.to_string(), direction.to_string(), format!("{}", per_page), format!("{}", 
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("/orgs/{}/audit-log?order={}&after={}&per_page={}&page={}&phrase={}&include={}&before={}",
+        let url = format!("/orgs/{}/audit-log?include={}&after={}&phrase={}&per_page={}&order={}&before={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", page), phrase.to_string(), include.to_string(), before.to_string(),         );
+include.to_string(), after.to_string(), phrase.to_string(), format!("{}", per_page), order.to_string(), before.to_string(), format!("{}", page),         );
 
         self.get(&url).await
     }
 
     /**
-     * orgs_list_blocked_users: GET /orgs/{org}/blocks
-     * List the users blocked by an organization.
-     * FROM: https://docs.github.com/rest/reference/orgs#list-users-blocked-by-an-organization
-     */
+    * orgs_list_blocked_users: GET /orgs/{org}/blocks
+    * List the users blocked by an organization.
+    * FROM: https://docs.github.com/rest/reference/orgs#list-users-blocked-by-an-organization
+    */
     pub async fn orgs_list_blocked_users(&self, org: &str) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/orgs/{}/blocks",
@@ -28689,10 +28689,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_check_blocked_user: GET /orgs/{org}/blocks/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#check-if-a-user-is-blocked-by-an-organization
-     */
+    * orgs_check_blocked_user: GET /orgs/{org}/blocks/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#check-if-a-user-is-blocked-by-an-organization
+    */
     pub async fn orgs_check_blocked_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/blocks/{}",
@@ -28704,10 +28704,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_block_user: PUT /orgs/{org}/blocks/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#block-a-user-from-an-organization
-     */
+    * orgs_block_user: PUT /orgs/{org}/blocks/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#block-a-user-from-an-organization
+    */
     pub async fn orgs_block_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/blocks/{}",
@@ -28719,10 +28719,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_unblock_user: DELETE /orgs/{org}/blocks/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#unblock-a-user-from-an-organization
-     */
+    * orgs_unblock_user: DELETE /orgs/{org}/blocks/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#unblock-a-user-from-an-organization
+    */
     pub async fn orgs_unblock_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/blocks/{}",
@@ -28737,12 +28737,12 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * orgs_list_saml_sso_authorizations: GET /orgs/{org}/credential-authorizations
-         * Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
+    * orgs_list_saml_sso_authorizations: GET /orgs/{org}/credential-authorizations
+    * Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
 
     An authenticated organization owner with the `read:org` scope can list all credential authorizations for an organization that uses SAML single sign-on (SSO). The credentials are either personal access tokens or SSH keys that organization members have authorized for the organization. For more information, see [About authentication with SAML single sign-on](https://help.github.com/en/articles/about-authentication-with-saml-single-sign-on).
-         * FROM: https://docs.github.com/rest/reference/orgs#list-saml-sso-authorizations-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#list-saml-sso-authorizations-for-an-organization
+    */
     pub async fn orgs_list_saml_sso_authorizations(
         &self,
         org: &str,
@@ -28756,12 +28756,12 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * orgs_remove_saml_sso_authorization: DELETE /orgs/{org}/credential-authorizations/{credential_id}
-         * Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
+    * orgs_remove_saml_sso_authorization: DELETE /orgs/{org}/credential-authorizations/{credential_id}
+    * Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
 
     An authenticated organization owner with the `admin:org` scope can remove a credential authorization for an organization that uses SAML SSO. Once you remove someone's credential authorization, they will need to create a new personal access token or SSH key and authorize it for the organization they want to access.
-         * FROM: https://docs.github.com/rest/reference/orgs#remove-a-saml-sso-authorization-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#remove-a-saml-sso-authorization-for-an-organization
+    */
     pub async fn orgs_remove_saml_sso_authorization(
         &self,
         org: &str,
@@ -28780,10 +28780,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * activity_list_public_org_events: GET /orgs/{org}/events
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#list-public-organization-events
-     */
+    * activity_list_public_org_events: GET /orgs/{org}/events
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#list-public-organization-events
+    */
     pub async fn activity_list_public_org_events(
         &self,
         org: &str,
@@ -28791,20 +28791,20 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/orgs/{}/events?per_page={}&page={}",
+            "/orgs/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * orgs_list_failed_invitations: GET /orgs/{org}/failed_invitations
-     * The return hash contains `failed_at` and `failed_reason` fields which represent the time at which the invitation failed and the reason for the failure.
-     * FROM: https://docs.github.com/rest/reference/orgs#list-failed-organization-invitations
-     */
+    * orgs_list_failed_invitations: GET /orgs/{org}/failed_invitations
+    * The return hash contains `failed_at` and `failed_reason` fields which represent the time at which the invitation failed and the reason for the failure.
+    * FROM: https://docs.github.com/rest/reference/orgs#list-failed-organization-invitations
+    */
     pub async fn orgs_list_failed_invitations(
         &self,
         org: &str,
@@ -28812,20 +28812,20 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
-            "/orgs/{}/failed_invitations?page={}&per_page={}",
+            "/orgs/{}/failed_invitations?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * orgs_list_webhooks: GET /orgs/{org}/hooks
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#list-organization-webhooks
-     */
+    * orgs_list_webhooks: GET /orgs/{org}/hooks
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#list-organization-webhooks
+    */
     pub async fn orgs_list_webhooks(
         &self,
         org: &str,
@@ -28833,20 +28833,20 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
         page: i64,
     ) -> Result<Vec<types::OrgHook>> {
         let url = format!(
-            "/orgs/{}/hooks?per_page={}&page={}",
+            "/orgs/{}/hooks?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * orgs_create_webhook: POST /orgs/{org}/hooks
-     * Here's how you can create a hook that posts payloads in JSON format:
-     * FROM: https://docs.github.com/rest/reference/orgs#create-an-organization-webhook
-     */
+    * orgs_create_webhook: POST /orgs/{org}/hooks
+    * Here's how you can create a hook that posts payloads in JSON format:
+    * FROM: https://docs.github.com/rest/reference/orgs#create-an-organization-webhook
+    */
     pub async fn orgs_create_webhook(
         &self,
         org: &str,
@@ -28865,10 +28865,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_get_webhook: GET /orgs/{org}/hooks/{hook_id}
-     * Returns a webhook configured in an organization. To get only the webhook `config` properties, see "[Get a webhook configuration for an organization](/rest/reference/orgs#get-a-webhook-configuration-for-an-organization)."
-     * FROM: https://docs.github.com/rest/reference/orgs#get-an-organization-webhook
-     */
+    * orgs_get_webhook: GET /orgs/{org}/hooks/{hook_id}
+    * Returns a webhook configured in an organization. To get only the webhook `config` properties, see "[Get a webhook configuration for an organization](/rest/reference/orgs#get-a-webhook-configuration-for-an-organization)."
+    * FROM: https://docs.github.com/rest/reference/orgs#get-an-organization-webhook
+    */
     pub async fn orgs_get_webhook(&self, org: &str, hook_id: i64) -> Result<types::OrgHook> {
         let url = format!(
             "/orgs/{}/hooks/{}",
@@ -28880,10 +28880,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_delete_webhook: DELETE /orgs/{org}/hooks/{hook_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#delete-an-organization-webhook
-     */
+    * orgs_delete_webhook: DELETE /orgs/{org}/hooks/{hook_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#delete-an-organization-webhook
+    */
     pub async fn orgs_delete_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
         let url = format!(
             "/orgs/{}/hooks/{}",
@@ -28898,10 +28898,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_update_webhook: PATCH /orgs/{org}/hooks/{hook_id}
-     * Updates a webhook configured in an organization. When you update a webhook, the `secret` will be overwritten. If you previously had a `secret` set, you must provide the same `secret` or set a new `secret` or the secret will be removed. If you are only updating individual webhook `config` properties, use "[Update a webhook configuration for an organization](/rest/reference/orgs#update-a-webhook-configuration-for-an-organization)."
-     * FROM: https://docs.github.com/rest/reference/orgs#update-an-organization-webhook
-     */
+    * orgs_update_webhook: PATCH /orgs/{org}/hooks/{hook_id}
+    * Updates a webhook configured in an organization. When you update a webhook, the `secret` will be overwritten. If you previously had a `secret` set, you must provide the same `secret` or set a new `secret` or the secret will be removed. If you are only updating individual webhook `config` properties, use "[Update a webhook configuration for an organization](/rest/reference/orgs#update-a-webhook-configuration-for-an-organization)."
+    * FROM: https://docs.github.com/rest/reference/orgs#update-an-organization-webhook
+    */
     pub async fn orgs_update_webhook(
         &self,
         org: &str,
@@ -28922,12 +28922,12 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * orgs_get_webhook_config_for_org: GET /orgs/{org}/hooks/{hook_id}/config
-         * Returns the webhook configuration for an organization. To get more information about the webhook, including the `active` state and `events`, use "[Get an organization webhook ](/rest/reference/orgs#get-an-organization-webhook)."
+    * orgs_get_webhook_config_for_org: GET /orgs/{org}/hooks/{hook_id}/config
+    * Returns the webhook configuration for an organization. To get more information about the webhook, including the `active` state and `events`, use "[Get an organization webhook ](/rest/reference/orgs#get-an-organization-webhook)."
 
     Access tokens must have the `admin:org_hook` scope, and GitHub Apps must have the `organization_hooks:read` permission.
-         * FROM: https://docs.github.com/rest/reference/orgs#get-a-webhook-configuration-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#get-a-webhook-configuration-for-an-organization
+    */
     pub async fn orgs_get_webhook_config_for_org(
         &self,
         org: &str,
@@ -28943,12 +28943,12 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * orgs_update_webhook_config_for_org: PATCH /orgs/{org}/hooks/{hook_id}/config
-         * Updates the webhook configuration for an organization. To update more information about the webhook, including the `active` state and `events`, use "[Update an organization webhook ](/rest/reference/orgs#update-an-organization-webhook)."
+    * orgs_update_webhook_config_for_org: PATCH /orgs/{org}/hooks/{hook_id}/config
+    * Updates the webhook configuration for an organization. To update more information about the webhook, including the `active` state and `events`, use "[Update an organization webhook ](/rest/reference/orgs#update-an-organization-webhook)."
 
     Access tokens must have the `admin:org_hook` scope, and GitHub Apps must have the `organization_hooks:write` permission.
-         * FROM: https://docs.github.com/rest/reference/orgs#update-a-webhook-configuration-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#update-a-webhook-configuration-for-an-organization
+    */
     pub async fn orgs_update_webhook_config_for_org(
         &self,
         org: &str,
@@ -28969,10 +28969,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_ping_webhook: POST /orgs/{org}/hooks/{hook_id}/pings
-     * This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
-     * FROM: https://docs.github.com/rest/reference/orgs#ping-an-organization-webhook
-     */
+    * orgs_ping_webhook: POST /orgs/{org}/hooks/{hook_id}/pings
+    * This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
+    * FROM: https://docs.github.com/rest/reference/orgs#ping-an-organization-webhook
+    */
     pub async fn orgs_ping_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
         let url = format!(
             "/orgs/{}/hooks/{}/pings",
@@ -28984,12 +28984,12 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * apps_get_org_installation: GET /orgs/{org}/installation
-         * Enables an authenticated GitHub App to find the organization's installation information.
+    * apps_get_org_installation: GET /orgs/{org}/installation
+    * Enables an authenticated GitHub App to find the organization's installation information.
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#get-an-organization-installation-for-the-authenticated-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#get-an-organization-installation-for-the-authenticated-app
+    */
     pub async fn apps_get_org_installation(&self, org: &str) -> Result<types::Installation> {
         let url = format!(
             "/orgs/{}/installation",
@@ -29000,10 +29000,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_list_app_installations: GET /orgs/{org}/installations
-     * Lists all GitHub Apps in an organization. The installation count includes all GitHub Apps installed on repositories in the organization. You must be an organization owner with `admin:read` scope to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/orgs#list-app-installations-for-an-organization
-     */
+    * orgs_list_app_installations: GET /orgs/{org}/installations
+    * Lists all GitHub Apps in an organization. The installation count includes all GitHub Apps installed on repositories in the organization. You must be an organization owner with `admin:read` scope to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/orgs#list-app-installations-for-an-organization
+    */
     pub async fn orgs_list_app_installations(
         &self,
         org: &str,
@@ -29021,10 +29021,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * interactions_get_restrictions_for_org: GET /orgs/{org}/interaction-limits
-     * Shows which type of GitHub user can interact with this organization and when the restriction expires. If there is no restrictions, you will see an empty response.
-     * FROM: https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-an-organization
-     */
+    * interactions_get_restrictions_for_org: GET /orgs/{org}/interaction-limits
+    * Shows which type of GitHub user can interact with this organization and when the restriction expires. If there is no restrictions, you will see an empty response.
+    * FROM: https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-an-organization
+    */
     pub async fn interactions_get_restrictions_for_org(
         &self,
         org: &str,
@@ -29038,10 +29038,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * interactions_set_restrictions_for_org: PUT /orgs/{org}/interaction-limits
-     * Temporarily restricts interactions to a certain type of GitHub user in any public repository in the given organization. You must be an organization owner to set these restrictions. Setting the interaction limit at the organization level will overwrite any interaction limits that are set for individual repositories owned by the organization.
-     * FROM: https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-an-organization
-     */
+    * interactions_set_restrictions_for_org: PUT /orgs/{org}/interaction-limits
+    * Temporarily restricts interactions to a certain type of GitHub user in any public repository in the given organization. You must be an organization owner to set these restrictions. Setting the interaction limit at the organization level will overwrite any interaction limits that are set for individual repositories owned by the organization.
+    * FROM: https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-an-organization
+    */
     pub async fn interactions_set_restrictions_for_org(
         &self,
         org: &str,
@@ -29060,10 +29060,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * interactions_remove_restrictions_for_org: DELETE /orgs/{org}/interaction-limits
-     * Removes all interaction restrictions from public repositories in the given organization. You must be an organization owner to remove restrictions.
-     * FROM: https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-for-an-organization
-     */
+    * interactions_remove_restrictions_for_org: DELETE /orgs/{org}/interaction-limits
+    * Removes all interaction restrictions from public repositories in the given organization. You must be an organization owner to remove restrictions.
+    * FROM: https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-for-an-organization
+    */
     pub async fn interactions_remove_restrictions_for_org(&self, org: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/interaction-limits",
@@ -29077,10 +29077,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_list_pending_invitations: GET /orgs/{org}/invitations
-     * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
-     * FROM: https://docs.github.com/rest/reference/orgs#list-pending-organization-invitations
-     */
+    * orgs_list_pending_invitations: GET /orgs/{org}/invitations
+    * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
+    * FROM: https://docs.github.com/rest/reference/orgs#list-pending-organization-invitations
+    */
     pub async fn orgs_list_pending_invitations(
         &self,
         org: &str,
@@ -29088,22 +29088,22 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
-            "/orgs/{}/invitations?page={}&per_page={}",
+            "/orgs/{}/invitations?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * orgs_create_invitation: POST /orgs/{org}/invitations
-         * Invite people to an organization by using their GitHub user ID or their email address. In order to create invitations in an organization, the authenticated user must be an organization owner.
+    * orgs_create_invitation: POST /orgs/{org}/invitations
+    * Invite people to an organization by using their GitHub user ID or their email address. In order to create invitations in an organization, the authenticated user must be an organization owner.
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
-         * FROM: https://docs.github.com/rest/reference/orgs#create-an-organization-invitation
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#create-an-organization-invitation
+    */
     pub async fn orgs_create_invitation(
         &self,
         org: &str,
@@ -29122,12 +29122,12 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * orgs_cancel_invitation: DELETE /orgs/{org}/invitations/{invitation_id}
-         * Cancel an organization invitation. In order to cancel an organization invitation, the authenticated user must be an organization owner.
+    * orgs_cancel_invitation: DELETE /orgs/{org}/invitations/{invitation_id}
+    * Cancel an organization invitation. In order to cancel an organization invitation, the authenticated user must be an organization owner.
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications).
-         * FROM: https://docs.github.com/rest/reference/orgs#cancel-an-organization-invitation
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#cancel-an-organization-invitation
+    */
     pub async fn orgs_cancel_invitation(&self, org: &str, invitation_id: i64) -> Result<()> {
         let url = format!(
             "/orgs/{}/invitations/{}",
@@ -29142,10 +29142,10 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_list_invitation_teams: GET /orgs/{org}/invitations/{invitation_id}/teams
-     * List all teams associated with an invitation. In order to see invitations in an organization, the authenticated user must be an organization owner.
-     * FROM: https://docs.github.com/rest/reference/orgs#list-organization-invitation-teams
-     */
+    * orgs_list_invitation_teams: GET /orgs/{org}/invitations/{invitation_id}/teams
+    * List all teams associated with an invitation. In order to see invitations in an organization, the authenticated user must be an organization owner.
+    * FROM: https://docs.github.com/rest/reference/orgs#list-organization-invitation-teams
+    */
     pub async fn orgs_list_invitation_teams(
         &self,
         org: &str,
@@ -29154,26 +29154,26 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
         page: i64,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
-            "/orgs/{}/invitations/{}/teams?page={}&per_page={}",
+            "/orgs/{}/invitations/{}/teams?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&invitation_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * issues_list_for_org: GET /orgs/{org}/issues
-         * List issues in an organization assigned to the authenticated user.
+    * issues_list_for_org: GET /orgs/{org}/issues
+    * List issues in an organization assigned to the authenticated user.
 
     **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
     reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
     the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
     request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-         * FROM: https://docs.github.com/rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user
+    */
     pub async fn issues_list_for_org(
         &self,
         org: &str,
@@ -29186,18 +29186,18 @@ order.to_string(), after.to_string(), format!("{}", per_page), format!("{}", pag
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/orgs/{}/issues?state={}&sort={}&labels={}&per_page={}&page={}&direction={}&filter={}&since={}",
+        let url = format!("/orgs/{}/issues?labels={}&page={}&per_page={}&sort={}&state={}&direction={}&since={}&filter={}",
             progenitor_support::encode_path(&org.to_string()),
-state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page), format!("{}", page), direction.to_string(), filter.to_string(), since.to_rfc3339(),         );
+labels.to_string(), format!("{}", page), format!("{}", per_page), sort.to_string(), state.to_string(), direction.to_string(), since.to_rfc3339(), filter.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-     * orgs_list_members: GET /orgs/{org}/members
-     * List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
-     * FROM: https://docs.github.com/rest/reference/orgs#list-organization-members
-     */
+    * orgs_list_members: GET /orgs/{org}/members
+    * List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
+    * FROM: https://docs.github.com/rest/reference/orgs#list-organization-members
+    */
     pub async fn orgs_list_members(
         &self,
         org: &str,
@@ -29207,11 +29207,11 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/members?per_page={}&filter={}&role={}&page={}",
+            "/orgs/{}/members?filter={}&role={}&per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             filter.to_string(),
             role.to_string(),
+            format!("{}", per_page),
             format!("{}", page),
         );
 
@@ -29219,10 +29219,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * orgs_check_membership_for_user: GET /orgs/{org}/members/{username}
-     * Check if a user is, publicly or privately, a member of the organization.
-     * FROM: https://docs.github.com/rest/reference/orgs#check-organization-membership-for-a-user
-     */
+    * orgs_check_membership_for_user: GET /orgs/{org}/members/{username}
+    * Check if a user is, publicly or privately, a member of the organization.
+    * FROM: https://docs.github.com/rest/reference/orgs#check-organization-membership-for-a-user
+    */
     pub async fn orgs_check_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/members/{}",
@@ -29234,10 +29234,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * orgs_remove_member: DELETE /orgs/{org}/members/{username}
-     * Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories.
-     * FROM: https://docs.github.com/rest/reference/orgs#remove-an-organization-member
-     */
+    * orgs_remove_member: DELETE /orgs/{org}/members/{username}
+    * Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories.
+    * FROM: https://docs.github.com/rest/reference/orgs#remove-an-organization-member
+    */
     pub async fn orgs_remove_member(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/members/{}",
@@ -29252,10 +29252,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * orgs_get_membership_for_user: GET /orgs/{org}/memberships/{username}
-     * In order to get a user's membership with an organization, the authenticated user must be an organization member. The `state` parameter in the response can be used to identify the user's membership status.
-     * FROM: https://docs.github.com/rest/reference/orgs#get-organization-membership-for-a-user
-     */
+    * orgs_get_membership_for_user: GET /orgs/{org}/memberships/{username}
+    * In order to get a user's membership with an organization, the authenticated user must be an organization member. The `state` parameter in the response can be used to identify the user's membership status.
+    * FROM: https://docs.github.com/rest/reference/orgs#get-organization-membership-for-a-user
+    */
     pub async fn orgs_get_membership_for_user(
         &self,
         org: &str,
@@ -29271,8 +29271,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * orgs_set_membership_for_user: PUT /orgs/{org}/memberships/{username}
-         * Only authenticated organization owners can add a member to the organization or update the member's role.
+    * orgs_set_membership_for_user: PUT /orgs/{org}/memberships/{username}
+    * Only authenticated organization owners can add a member to the organization or update the member's role.
 
     *   If the authenticated user is _adding_ a member to the organization, the invited user will receive an email inviting them to the organization. The user's [membership status](https://docs.github.com/rest/reference/orgs#get-organization-membership-for-a-user) will be `pending` until they accept the invitation.
 
@@ -29281,8 +29281,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     **Rate limits**
 
     To prevent abuse, the authenticated user is limited to 50 organization invitations per 24 hour period. If the organization is more than one month old or on a paid plan, the limit is 500 invitations per 24 hour period.
-         * FROM: https://docs.github.com/rest/reference/orgs#set-organization-membership-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#set-organization-membership-for-a-user
+    */
     pub async fn orgs_set_membership_for_user(
         &self,
         org: &str,
@@ -29303,12 +29303,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * orgs_remove_membership_for_user: DELETE /orgs/{org}/memberships/{username}
-         * In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
+    * orgs_remove_membership_for_user: DELETE /orgs/{org}/memberships/{username}
+    * In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
 
     If the specified user is an active member of the organization, this will remove them from the organization. If the specified user has been invited to the organization, this will cancel their invitation. The specified user will receive an email notification in both cases.
-         * FROM: https://docs.github.com/rest/reference/orgs#remove-organization-membership-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#remove-organization-membership-for-a-user
+    */
     pub async fn orgs_remove_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/memberships/{}",
@@ -29323,10 +29323,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * migrations_list_for_org: GET /orgs/{org}/migrations
-     * Lists the most recent migrations.
-     * FROM: https://docs.github.com/rest/reference/migrations#list-organization-migrations
-     */
+    * migrations_list_for_org: GET /orgs/{org}/migrations
+    * Lists the most recent migrations.
+    * FROM: https://docs.github.com/rest/reference/migrations#list-organization-migrations
+    */
     pub async fn migrations_list_for_org(
         &self,
         org: &str,
@@ -29335,21 +29335,21 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         exclude: &[String],
     ) -> Result<Vec<types::Migration>> {
         let url = format!(
-            "/orgs/{}/migrations?page={}&exclude={}&per_page={}",
+            "/orgs/{}/migrations?page={}&per_page={}&exclude={}",
             progenitor_support::encode_path(&org.to_string()),
             format!("{}", page),
-            exclude.join(" "),
             format!("{}", per_page),
+            exclude.join(" "),
         );
 
         self.get(&url).await
     }
 
     /**
-     * migrations_start_for_org: POST /orgs/{org}/migrations
-     * Initiates the generation of a migration archive.
-     * FROM: https://docs.github.com/rest/reference/migrations#start-an-organization-migration
-     */
+    * migrations_start_for_org: POST /orgs/{org}/migrations
+    * Initiates the generation of a migration archive.
+    * FROM: https://docs.github.com/rest/reference/migrations#start-an-organization-migration
+    */
     pub async fn migrations_start_for_org(
         &self,
         org: &str,
@@ -29368,8 +29368,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * migrations_get_status_for_org: GET /orgs/{org}/migrations/{migration_id}
-         * Fetches the status of a migration.
+    * migrations_get_status_for_org: GET /orgs/{org}/migrations/{migration_id}
+    * Fetches the status of a migration.
 
     The `state` of a migration can be one of the following values:
 
@@ -29377,8 +29377,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     *   `exporting`, which means the migration is in progress.
     *   `exported`, which means the migration finished successfully.
     *   `failed`, which means the migration failed.
-         * FROM: https://docs.github.com/rest/reference/migrations#get-an-organization-migration-status
-         */
+    * FROM: https://docs.github.com/rest/reference/migrations#get-an-organization-migration-status
+    */
     pub async fn migrations_get_status_for_org(
         &self,
         org: &str,
@@ -29396,10 +29396,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * migrations_download_archive_for_org: GET /orgs/{org}/migrations/{migration_id}/archive
-     * Fetches the URL to a migration archive.
-     * FROM: https://docs.github.com/rest/reference/migrations#download-an-organization-migration-archive
-     */
+    * migrations_download_archive_for_org: GET /orgs/{org}/migrations/{migration_id}/archive
+    * Fetches the URL to a migration archive.
+    * FROM: https://docs.github.com/rest/reference/migrations#download-an-organization-migration-archive
+    */
     pub async fn migrations_download_archive_for_org(
         &self,
         org: &str,
@@ -29415,10 +29415,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * migrations_delete_archive_for_org: DELETE /orgs/{org}/migrations/{migration_id}/archive
-     * Deletes a previous migration archive. Migration archives are automatically deleted after seven days.
-     * FROM: https://docs.github.com/rest/reference/migrations#delete-an-organization-migration-archive
-     */
+    * migrations_delete_archive_for_org: DELETE /orgs/{org}/migrations/{migration_id}/archive
+    * Deletes a previous migration archive. Migration archives are automatically deleted after seven days.
+    * FROM: https://docs.github.com/rest/reference/migrations#delete-an-organization-migration-archive
+    */
     pub async fn migrations_delete_archive_for_org(
         &self,
         org: &str,
@@ -29437,10 +29437,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * migrations_unlock_repo_for_org: DELETE /orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock
-     * Unlocks a repository that was locked for migration. You should unlock each migrated repository and [delete them](https://docs.github.com/rest/reference/repos#delete-a-repository) when the migration is complete and you no longer need the source data.
-     * FROM: https://docs.github.com/rest/reference/migrations#unlock-an-organization-repository
-     */
+    * migrations_unlock_repo_for_org: DELETE /orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock
+    * Unlocks a repository that was locked for migration. You should unlock each migrated repository and [delete them](https://docs.github.com/rest/reference/repos#delete-a-repository) when the migration is complete and you no longer need the source data.
+    * FROM: https://docs.github.com/rest/reference/migrations#unlock-an-organization-repository
+    */
     pub async fn migrations_unlock_repo_for_org(
         &self,
         org: &str,
@@ -29461,10 +29461,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * migrations_list_repos_for_org: GET /orgs/{org}/migrations/{migration_id}/repositories
-     * List all the repositories for this organization migration.
-     * FROM: https://docs.github.com/rest/reference/migrations#list-repositories-in-an-organization-migration
-     */
+    * migrations_list_repos_for_org: GET /orgs/{org}/migrations/{migration_id}/repositories
+    * List all the repositories for this organization migration.
+    * FROM: https://docs.github.com/rest/reference/migrations#list-repositories-in-an-organization-migration
+    */
     pub async fn migrations_list_repos_for_org(
         &self,
         org: &str,
@@ -29484,10 +29484,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * orgs_list_outside_collaborators: GET /orgs/{org}/outside_collaborators
-     * List all users who are outside collaborators of an organization.
-     * FROM: https://docs.github.com/rest/reference/orgs#list-outside-collaborators-for-an-organization
-     */
+    * orgs_list_outside_collaborators: GET /orgs/{org}/outside_collaborators
+    * List all users who are outside collaborators of an organization.
+    * FROM: https://docs.github.com/rest/reference/orgs#list-outside-collaborators-for-an-organization
+    */
     pub async fn orgs_list_outside_collaborators(
         &self,
         org: &str,
@@ -29496,21 +29496,21 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/outside_collaborators?filter={}&page={}&per_page={}",
+            "/orgs/{}/outside_collaborators?page={}&per_page={}&filter={}",
             progenitor_support::encode_path(&org.to_string()),
-            filter.to_string(),
             format!("{}", page),
             format!("{}", per_page),
+            filter.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-     * orgs_convert_member_to_outside_collaborator: PUT /orgs/{org}/outside_collaborators/{username}
-     * When an organization member is converted to an outside collaborator, they'll only have access to the repositories that their current team membership allows. The user will no longer be a member of the organization. For more information, see "[Converting an organization member to an outside collaborator](https://help.github.com/articles/converting-an-organization-member-to-an-outside-collaborator/)".
-     * FROM: https://docs.github.com/rest/reference/orgs#convert-an-organization-member-to-outside-collaborator
-     */
+    * orgs_convert_member_to_outside_collaborator: PUT /orgs/{org}/outside_collaborators/{username}
+    * When an organization member is converted to an outside collaborator, they'll only have access to the repositories that their current team membership allows. The user will no longer be a member of the organization. For more information, see "[Converting an organization member to an outside collaborator](https://help.github.com/articles/converting-an-organization-member-to-an-outside-collaborator/)".
+    * FROM: https://docs.github.com/rest/reference/orgs#convert-an-organization-member-to-outside-collaborator
+    */
     pub async fn orgs_convert_member_to_outside_collaborator(
         &self,
         org: &str,
@@ -29526,10 +29526,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * orgs_remove_outside_collaborator: DELETE /orgs/{org}/outside_collaborators/{username}
-     * Removing a user from this list will remove them from all the organization's repositories.
-     * FROM: https://docs.github.com/rest/reference/orgs#remove-outside-collaborator-from-an-organization
-     */
+    * orgs_remove_outside_collaborator: DELETE /orgs/{org}/outside_collaborators/{username}
+    * Removing a user from this list will remove them from all the organization's repositories.
+    * FROM: https://docs.github.com/rest/reference/orgs#remove-outside-collaborator-from-an-organization
+    */
     pub async fn orgs_remove_outside_collaborator(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/outside_collaborators/{}",
@@ -29544,13 +29544,13 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * packages_get_package_for_organization: GET /orgs/{org}/packages/{package_type}/{package_name}
-         * Gets a specific package in an organization.
+    * packages_get_package_for_organization: GET /orgs/{org}/packages/{package_type}/{package_name}
+    * Gets a specific package in an organization.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#get-a-package-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#get-a-package-for-an-organization
+    */
     pub async fn packages_get_package_for_organization(
         &self,
         package_type: &str,
@@ -29568,14 +29568,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * packages_delete_package_for_org: DELETE /orgs/{org}/packages/{package_type}/{package_name}
-         * Deletes an entire package in an organization. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
+    * packages_delete_package_for_org: DELETE /orgs/{org}/packages/{package_type}/{package_name}
+    * Deletes an entire package in an organization. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
 
     To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` scope. In addition:
     - If `package_type` is not `container`, your token must also include the `repo` scope.
     - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
-         * FROM: https://docs.github.com/rest/reference/packages#delete-a-package-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#delete-a-package-for-an-organization
+    */
     pub async fn packages_delete_package_for_org(
         &self,
         package_type: &str,
@@ -29596,8 +29596,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * packages_restore_package_for_org: POST /orgs/{org}/packages/{package_type}/{package_name}/restore
-         * Restores an entire package in an organization.
+    * packages_restore_package_for_org: POST /orgs/{org}/packages/{package_type}/{package_name}/restore
+    * Restores an entire package in an organization.
 
     You can restore a deleted package under the following conditions:
       - The package was deleted within the last 30 days.
@@ -29606,8 +29606,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:write` scope. In addition:
     - If `package_type` is not `container`, your token must also include the `repo` scope.
     - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
-         * FROM: https://docs.github.com/rest/reference/packages#restore-a-package-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#restore-a-package-for-an-organization
+    */
     pub async fn packages_restore_package_for_org(
         &self,
         package_type: &str,
@@ -29627,13 +29627,13 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * packages_get_all_package_versions_for_package_owned_by_org: GET /orgs/{org}/packages/{package_type}/{package_name}/versions
-         * Returns all package versions for a package owned by an organization.
+    * packages_get_all_package_versions_for_package_owned_by_org: GET /orgs/{org}/packages/{package_type}/{package_name}/versions
+    * Returns all package versions for a package owned by an organization.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization
+    */
     pub async fn packages_get_all_package_versions_for_package_owned_by_org(
         &self,
         package_type: &str,
@@ -29644,26 +29644,26 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         state: &str,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
-            "/orgs/{}/packages/{}/{}/versions?page={}&per_page={}&state={}",
+            "/orgs/{}/packages/{}/{}/versions?state={}&per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
             state.to_string(),
+            format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * packages_get_package_version_for_organization: GET /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}
-         * Gets a specific package version in an organization.
+    * packages_get_package_version_for_organization: GET /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * Gets a specific package version in an organization.
 
     You must authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#get-a-package-version-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#get-a-package-version-for-an-organization
+    */
     pub async fn packages_get_package_version_for_organization(
         &self,
         package_type: &str,
@@ -29683,14 +29683,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * packages_delete_package_version_for_org: DELETE /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}
-         * Deletes a specific package version in an organization. If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
+    * packages_delete_package_version_for_org: DELETE /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * Deletes a specific package version in an organization. If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
 
     To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` scope. In addition:
     - If `package_type` is not `container`, your token must also include the `repo` scope.
     - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
-         * FROM: https://docs.github.com/rest/reference/packages#delete-a-package-version-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#delete-a-package-version-for-an-organization
+    */
     pub async fn packages_delete_package_version_for_org(
         &self,
         package_type: &str,
@@ -29713,8 +29713,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * packages_restore_package_version_for_org: POST /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}/restore
-         * Restores a specific package version in an organization.
+    * packages_restore_package_version_for_org: POST /orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}/restore
+    * Restores a specific package version in an organization.
 
     You can restore a deleted package under the following conditions:
       - The package was deleted within the last 30 days.
@@ -29723,8 +29723,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:write` scope. In addition:
     - If `package_type` is not `container`, your token must also include the `repo` scope.
     - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
-         * FROM: https://docs.github.com/rest/reference/packages#restore-a-package-version-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#restore-a-package-version-for-an-organization
+    */
     pub async fn packages_restore_package_version_for_org(
         &self,
         package_type: &str,
@@ -29744,10 +29744,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_list_for_org: GET /orgs/{org}/projects
-     * Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     * FROM: https://docs.github.com/rest/reference/projects#list-organization-projects
-     */
+    * projects_list_for_org: GET /orgs/{org}/projects
+    * Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+    * FROM: https://docs.github.com/rest/reference/projects#list-organization-projects
+    */
     pub async fn projects_list_for_org(
         &self,
         org: &str,
@@ -29756,21 +29756,21 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/orgs/{}/projects?per_page={}&page={}&state={}",
+            "/orgs/{}/projects?per_page={}&state={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             format!("{}", per_page),
-            format!("{}", page),
             state.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * projects_create_for_org: POST /orgs/{org}/projects
-     * Creates an organization project board. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     * FROM: https://docs.github.com/rest/reference/projects#create-an-organization-project
-     */
+    * projects_create_for_org: POST /orgs/{org}/projects
+    * Creates an organization project board. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+    * FROM: https://docs.github.com/rest/reference/projects#create-an-organization-project
+    */
     pub async fn projects_create_for_org(
         &self,
         org: &str,
@@ -29789,10 +29789,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * orgs_list_public_members: GET /orgs/{org}/public_members
-     * Members of an organization can choose to have their membership publicized or not.
-     * FROM: https://docs.github.com/rest/reference/orgs#list-public-organization-members
-     */
+    * orgs_list_public_members: GET /orgs/{org}/public_members
+    * Members of an organization can choose to have their membership publicized or not.
+    * FROM: https://docs.github.com/rest/reference/orgs#list-public-organization-members
+    */
     pub async fn orgs_list_public_members(
         &self,
         org: &str,
@@ -29800,20 +29800,20 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/public_members?page={}&per_page={}",
+            "/orgs/{}/public_members?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * orgs_check_public_membership_for_user: GET /orgs/{org}/public_members/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#check-public-organization-membership-for-a-user
-     */
+    * orgs_check_public_membership_for_user: GET /orgs/{org}/public_members/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#check-public-organization-membership-for-a-user
+    */
     pub async fn orgs_check_public_membership_for_user(
         &self,
         org: &str,
@@ -29829,12 +29829,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * orgs_set_public_membership_for_authenticated_user: PUT /orgs/{org}/public_members/{username}
-         * The user can publicize their own membership. (A user cannot publicize the membership for another user.)
+    * orgs_set_public_membership_for_authenticated_user: PUT /orgs/{org}/public_members/{username}
+    * The user can publicize their own membership. (A user cannot publicize the membership for another user.)
 
     Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-         * FROM: https://docs.github.com/rest/reference/orgs#set-public-organization-membership-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#set-public-organization-membership-for-the-authenticated-user
+    */
     pub async fn orgs_set_public_membership_for_authenticated_user(
         &self,
         org: &str,
@@ -29850,10 +29850,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * orgs_remove_public_membership_for_authenticated_user: DELETE /orgs/{org}/public_members/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#remove-public-organization-membership-for-the-authenticated-user
-     */
+    * orgs_remove_public_membership_for_authenticated_user: DELETE /orgs/{org}/public_members/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#remove-public-organization-membership-for-the-authenticated-user
+    */
     pub async fn orgs_remove_public_membership_for_authenticated_user(
         &self,
         org: &str,
@@ -29872,10 +29872,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * repos_list_for_org: GET /orgs/{org}/repos
-     * Lists repositories for the specified organization.
-     * FROM: https://docs.github.com/rest/reference/repos#list-organization-repositories
-     */
+    * repos_list_for_org: GET /orgs/{org}/repos
+    * Lists repositories for the specified organization.
+    * FROM: https://docs.github.com/rest/reference/repos#list-organization-repositories
+    */
     pub async fn repos_list_for_org(
         &self,
         org: &str,
@@ -29886,21 +29886,21 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/orgs/{}/repos?direction={}&per_page={}&page={}&sort={}&type={}",
+            "/orgs/{}/repos?sort={}&per_page={}&page={}&type={}&direction={}",
             progenitor_support::encode_path(&org.to_string()),
-            direction.to_string(),
+            sort.to_string(),
             format!("{}", per_page),
             format!("{}", page),
-            sort.to_string(),
             type_,
+            direction.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_create_in_org: POST /orgs/{org}/repos
-         * Creates a new repository in the specified organization. The authenticated user must be a member of the organization.
+    * repos_create_in_org: POST /orgs/{org}/repos
+    * Creates a new repository in the specified organization. The authenticated user must be a member of the organization.
 
     **OAuth scope requirements**
 
@@ -29908,8 +29908,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
 
     *   `public_repo` scope or `repo` scope to create a public repository. Note: For GitHub AE, use `repo` scope to create an internal repository.
     *   `repo` scope to create a private repository
-         * FROM: https://docs.github.com/rest/reference/repos#create-an-organization-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-an-organization-repository
+    */
     pub async fn repos_create_in_org(
         &self,
         org: &str,
@@ -29928,14 +29928,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * billing_get_github_actions_billing_org: GET /orgs/{org}/settings/billing/actions
-         * Gets the summary of the free and paid GitHub Actions minutes used.
+    * billing_get_github_actions_billing_org: GET /orgs/{org}/settings/billing/actions
+    * Gets the summary of the free and paid GitHub Actions minutes used.
 
     Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage returned includes any minute multipliers for macOS and Windows runners, and is rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
     Access tokens must have the `repo` or `admin:org` scope.
-         * FROM: https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-an-organization
+    */
     pub async fn billing_get_github_actions_billing_org(
         &self,
         org: &str,
@@ -29949,14 +29949,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * billing_get_github_packages_billing_org: GET /orgs/{org}/settings/billing/packages
-         * Gets the free and paid storage used for GitHub Packages in gigabytes.
+    * billing_get_github_packages_billing_org: GET /orgs/{org}/settings/billing/packages
+    * Gets the free and paid storage used for GitHub Packages in gigabytes.
 
     Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
     Access tokens must have the `repo` or `admin:org` scope.
-         * FROM: https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-an-organization
+    */
     pub async fn billing_get_github_packages_billing_org(
         &self,
         org: &str,
@@ -29970,14 +29970,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * billing_get_shared_storage_billing_org: GET /orgs/{org}/settings/billing/shared-storage
-         * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
+    * billing_get_shared_storage_billing_org: GET /orgs/{org}/settings/billing/shared-storage
+    * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
 
     Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
     Access tokens must have the `repo` or `admin:org` scope.
-         * FROM: https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-an-organization
+    */
     pub async fn billing_get_shared_storage_billing_org(
         &self,
         org: &str,
@@ -29991,14 +29991,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_list_idp_groups_for_org: GET /orgs/{org}/team-sync/groups
-         * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * teams_list_idp_groups_for_org: GET /orgs/{org}/team-sync/groups
+    * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     List IdP groups available in an organization. You can limit your page results using the `per_page` parameter. GitHub generates a url-encoded `page` token using a cursor value for where the next page begins. For more information on cursor pagination, see "[Offset and Cursor Pagination explained](https://dev.to/jackmarchant/offset-and-cursor-pagination-explained-b89)."
 
     The `per_page` parameter provides pagination for a list of IdP groups the authenticated user can access in an organization. For example, if the user `octocat` wants to see two groups per page in `octo-org` via cURL, it would look like this:
-         * FROM: https://docs.github.com/rest/reference/teams#list-idp-groups-for-an-organization
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-idp-groups-for-an-organization
+    */
     pub async fn teams_list_idp_groups_for_org(
         &self,
         org: &str,
@@ -30006,20 +30006,20 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: &str,
     ) -> Result<types::GroupMapping> {
         let url = format!(
-            "/orgs/{}/team-sync/groups?page={}&per_page={}",
+            "/orgs/{}/team-sync/groups?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            page.to_string(),
             format!("{}", per_page),
+            page.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-     * teams_list: GET /orgs/{org}/teams
-     * Lists all teams in an organization that are visible to the authenticated user.
-     * FROM: https://docs.github.com/rest/reference/teams#list-teams
-     */
+    * teams_list: GET /orgs/{org}/teams
+    * Lists all teams in an organization that are visible to the authenticated user.
+    * FROM: https://docs.github.com/rest/reference/teams#list-teams
+    */
     pub async fn teams_list(
         &self,
         org: &str,
@@ -30037,12 +30037,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_create: POST /orgs/{org}/teams
-         * To create a team, the authenticated user must be a member or owner of `{org}`. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see "[Setting team creation permissions](https://help.github.com/en/articles/setting-team-creation-permissions-in-your-organization)."
+    * teams_create: POST /orgs/{org}/teams
+    * To create a team, the authenticated user must be a member or owner of `{org}`. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see "[Setting team creation permissions](https://help.github.com/en/articles/setting-team-creation-permissions-in-your-organization)."
 
     When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of `maintainers`. For more information, see "[About teams](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-teams)".
-         * FROM: https://docs.github.com/rest/reference/teams#create-a-team
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#create-a-team
+    */
     pub async fn teams_create(
         &self,
         org: &str,
@@ -30061,12 +30061,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_get_by_name: GET /orgs/{org}/teams/{team_slug}
-         * Gets a team using the team's `slug`. GitHub generates the `slug` from the team `name`.
+    * teams_get_by_name: GET /orgs/{org}/teams/{team_slug}
+    * Gets a team using the team's `slug`. GitHub generates the `slug` from the team `name`.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}`.
-         * FROM: https://docs.github.com/rest/reference/teams#get-a-team-by-name
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#get-a-team-by-name
+    */
     pub async fn teams_get_by_name(&self, org: &str, team_slug: &str) -> Result<types::TeamFull> {
         let url = format!(
             "/orgs/{}/teams/{}",
@@ -30078,14 +30078,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_delete_in_org: DELETE /orgs/{org}/teams/{team_slug}
-         * To delete a team, the authenticated user must be an organization owner or team maintainer.
+    * teams_delete_in_org: DELETE /orgs/{org}/teams/{team_slug}
+    * To delete a team, the authenticated user must be an organization owner or team maintainer.
 
     If you are an organization owner, deleting a parent team will delete all of its child teams as well.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}`.
-         * FROM: https://docs.github.com/rest/reference/teams#delete-a-team
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#delete-a-team
+    */
     pub async fn teams_delete_in_org(&self, org: &str, team_slug: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}",
@@ -30100,12 +30100,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_update_in_org: PATCH /orgs/{org}/teams/{team_slug}
-         * To edit a team, the authenticated user must either be an organization owner or a team maintainer.
+    * teams_update_in_org: PATCH /orgs/{org}/teams/{team_slug}
+    * To edit a team, the authenticated user must either be an organization owner or a team maintainer.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}`.
-         * FROM: https://docs.github.com/rest/reference/teams#update-a-team
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#update-a-team
+    */
     pub async fn teams_update_in_org(
         &self,
         org: &str,
@@ -30126,12 +30126,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_list_discussions_in_org: GET /orgs/{org}/teams/{team_slug}/discussions
-         * List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_list_discussions_in_org: GET /orgs/{org}/teams/{team_slug}/discussions
+    * List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions`.
-         * FROM: https://docs.github.com/rest/reference/teams#list-discussions
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-discussions
+    */
     pub async fn teams_list_discussions_in_org(
         &self,
         org: &str,
@@ -30142,27 +30142,27 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         pinned: &str,
     ) -> Result<Vec<types::TeamDiscussion>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions?page={}&direction={}&pinned={}&per_page={}",
+            "/orgs/{}/teams/{}/discussions?per_page={}&page={}&pinned={}&direction={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
-            direction.to_string(),
-            pinned.to_string(),
             format!("{}", per_page),
+            format!("{}", page),
+            pinned.to_string(),
+            direction.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * teams_create_discussion_in_org: POST /orgs/{org}/teams/{team_slug}/discussions
-         * Creates a new discussion post on a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_create_discussion_in_org: POST /orgs/{org}/teams/{team_slug}/discussions
+    * Creates a new discussion post on a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions`.
-         * FROM: https://docs.github.com/rest/reference/teams#create-a-discussion
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#create-a-discussion
+    */
     pub async fn teams_create_discussion_in_org(
         &self,
         org: &str,
@@ -30183,12 +30183,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_get_discussion_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
-         * Get a specific discussion on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_get_discussion_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
+    * Get a specific discussion on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
-         * FROM: https://docs.github.com/rest/reference/teams#get-a-discussion
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#get-a-discussion
+    */
     pub async fn teams_get_discussion_in_org(
         &self,
         org: &str,
@@ -30206,12 +30206,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_delete_discussion_in_org: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
-         * Delete a discussion from a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_delete_discussion_in_org: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
+    * Delete a discussion from a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
-         * FROM: https://docs.github.com/rest/reference/teams#delete-a-discussion
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#delete-a-discussion
+    */
     pub async fn teams_delete_discussion_in_org(
         &self,
         org: &str,
@@ -30232,12 +30232,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_update_discussion_in_org: PATCH /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
-         * Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_update_discussion_in_org: PATCH /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}
+    * Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
-         * FROM: https://docs.github.com/rest/reference/teams#update-a-discussion
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#update-a-discussion
+    */
     pub async fn teams_update_discussion_in_org(
         &self,
         org: &str,
@@ -30260,12 +30260,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_list_discussion_comments_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments
-         * List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_list_discussion_comments_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments
+    * List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
-         * FROM: https://docs.github.com/rest/reference/teams#list-discussion-comments
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-discussion-comments
+    */
     pub async fn teams_list_discussion_comments_in_org(
         &self,
         org: &str,
@@ -30276,27 +30276,27 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments?direction={}&per_page={}&page={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments?per_page={}&page={}&direction={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            direction.to_string(),
             format!("{}", per_page),
             format!("{}", page),
+            direction.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * teams_create_discussion_comment_in_org: POST /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments
-         * Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_create_discussion_comment_in_org: POST /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments
+    * Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
-         * FROM: https://docs.github.com/rest/reference/teams#create-a-discussion-comment
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#create-a-discussion-comment
+    */
     pub async fn teams_create_discussion_comment_in_org(
         &self,
         org: &str,
@@ -30319,12 +30319,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_get_discussion_comment_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}
-         * Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_get_discussion_comment_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}
+    * Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
-         * FROM: https://docs.github.com/rest/reference/teams#get-a-discussion-comment
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#get-a-discussion-comment
+    */
     pub async fn teams_get_discussion_comment_in_org(
         &self,
         org: &str,
@@ -30344,12 +30344,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_delete_discussion_comment_in_org: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}
-         * Deletes a comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_delete_discussion_comment_in_org: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}
+    * Deletes a comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
-         * FROM: https://docs.github.com/rest/reference/teams#delete-a-discussion-comment
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#delete-a-discussion-comment
+    */
     pub async fn teams_delete_discussion_comment_in_org(
         &self,
         org: &str,
@@ -30372,12 +30372,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_update_discussion_comment_in_org: PATCH /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}
-         * Edits the body text of a discussion comment. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * teams_update_discussion_comment_in_org: PATCH /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}
+    * Edits the body text of a discussion comment. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
-         * FROM: https://docs.github.com/rest/reference/teams#update-a-discussion-comment
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#update-a-discussion-comment
+    */
     pub async fn teams_update_discussion_comment_in_org(
         &self,
         org: &str,
@@ -30402,12 +30402,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * reactions_list_for_team_discussion_comment_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions
-         * List the reactions to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments/). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * reactions_list_for_team_discussion_comment_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions
+    * List the reactions to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments/). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions`.
-         * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment
+    */
     pub async fn reactions_list_for_team_discussion_comment_in_org(
         &self,
         org: &str,
@@ -30419,26 +30419,26 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?per_page={}&content={}&page={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?per_page={}&page={}&content={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
             format!("{}", per_page),
-            content.to_string(),
             format!("{}", page),
+            content.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * reactions_create_for_team_discussion_comment_in_org: POST /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions
-         * Create a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion comment.
+    * reactions_create_for_team_discussion_comment_in_org: POST /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions
+    * Create a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion comment.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions`.
-         * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion-comment
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion-comment
+    */
     pub async fn reactions_create_for_team_discussion_comment_in_org(
         &self,
         org: &str,
@@ -30463,12 +30463,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * reactions_delete_for_team_discussion_comment: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}
-         * **Note:** You can also specify a team or organization with `team_id` and `org_id` using the route `DELETE /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions/:reaction_id`.
+    * reactions_delete_for_team_discussion_comment: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}
+    * **Note:** You can also specify a team or organization with `team_id` and `org_id` using the route `DELETE /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions/:reaction_id`.
 
     Delete a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/reactions#delete-team-discussion-comment-reaction
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#delete-team-discussion-comment-reaction
+    */
     pub async fn reactions_delete_for_team_discussion_comment(
         &self,
         org: &str,
@@ -30493,12 +30493,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * reactions_list_for_team_discussion_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions
-         * List the reactions to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * reactions_list_for_team_discussion_in_org: GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions
+    * List the reactions to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions`.
-         * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion
+    */
     pub async fn reactions_list_for_team_discussion_in_org(
         &self,
         org: &str,
@@ -30509,12 +30509,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/reactions?content={}&per_page={}&page={}",
+            "/orgs/{}/teams/{}/discussions/{}/reactions?per_page={}&content={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            content.to_string(),
             format!("{}", per_page),
+            content.to_string(),
             format!("{}", page),
         );
 
@@ -30522,12 +30522,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * reactions_create_for_team_discussion_in_org: POST /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions
-         * Create a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion.
+    * reactions_create_for_team_discussion_in_org: POST /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions
+    * Create a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions`.
-         * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion
+    */
     pub async fn reactions_create_for_team_discussion_in_org(
         &self,
         org: &str,
@@ -30550,12 +30550,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * reactions_delete_for_team_discussion: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}
-         * **Note:** You can also specify a team or organization with `team_id` and `org_id` using the route `DELETE /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions/:reaction_id`.
+    * reactions_delete_for_team_discussion: DELETE /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}
+    * **Note:** You can also specify a team or organization with `team_id` and `org_id` using the route `DELETE /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions/:reaction_id`.
 
     Delete a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/reactions#delete-team-discussion-reaction
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#delete-team-discussion-reaction
+    */
     pub async fn reactions_delete_for_team_discussion(
         &self,
         org: &str,
@@ -30578,12 +30578,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_list_pending_invitations_in_org: GET /orgs/{org}/teams/{team_slug}/invitations
-         * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
+    * teams_list_pending_invitations_in_org: GET /orgs/{org}/teams/{team_slug}/invitations
+    * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/invitations`.
-         * FROM: https://docs.github.com/rest/reference/teams#list-pending-team-invitations
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-pending-team-invitations
+    */
     pub async fn teams_list_pending_invitations_in_org(
         &self,
         org: &str,
@@ -30592,23 +30592,23 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
-            "/orgs/{}/teams/{}/invitations?page={}&per_page={}",
+            "/orgs/{}/teams/{}/invitations?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * teams_list_members_in_org: GET /orgs/{org}/teams/{team_slug}/members
-         * Team members will include the members of child teams.
+    * teams_list_members_in_org: GET /orgs/{org}/teams/{team_slug}/members
+    * Team members will include the members of child teams.
 
     To list members in a team, the team must be visible to the authenticated user.
-         * FROM: https://docs.github.com/rest/reference/teams#list-team-members
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-team-members
+    */
     pub async fn teams_list_members_in_org(
         &self,
         org: &str,
@@ -30618,20 +30618,20 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/teams/{}/members?page={}&role={}&per_page={}",
+            "/orgs/{}/teams/{}/members?per_page={}&page={}&role={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
+            format!("{}", per_page),
             format!("{}", page),
             role.to_string(),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * teams_get_membership_for_user_in_org: GET /orgs/{org}/teams/{team_slug}/memberships/{username}
-         * Team members will include the members of child teams.
+    * teams_get_membership_for_user_in_org: GET /orgs/{org}/teams/{team_slug}/memberships/{username}
+    * Team members will include the members of child teams.
 
     To get a user's membership with a team, the team must be visible to the authenticated user.
 
@@ -30641,8 +30641,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     The response contains the `state` of the membership and the member's `role`.
 
     The `role` for organization owners is set to `maintainer`. For more information about `maintainer` roles, see see [Create a team](https://docs.github.com/rest/reference/teams#create-a-team).
-         * FROM: https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user
+    */
     pub async fn teams_get_membership_for_user_in_org(
         &self,
         org: &str,
@@ -30660,8 +30660,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_add_or_update_membership_for_user_in_org: PUT /orgs/{org}/teams/{team_slug}/memberships/{username}
-         * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * teams_add_or_update_membership_for_user_in_org: PUT /orgs/{org}/teams/{team_slug}/memberships/{username}
+    * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Adds an organization member to a team. An authenticated organization owner or team maintainer can add organization members to a team.
 
@@ -30672,8 +30672,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     If the user is already a member of the team, this endpoint will update the role of the team member's role. To update the membership of a team member, the authenticated user must be an organization owner or a team maintainer.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/memberships/{username}`.
-         * FROM: https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user
+    */
     pub async fn teams_add_or_update_membership_for_user_in_org(
         &self,
         org: &str,
@@ -30696,16 +30696,16 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_remove_membership_for_user_in_org: DELETE /orgs/{org}/teams/{team_slug}/memberships/{username}
-         * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * teams_remove_membership_for_user_in_org: DELETE /orgs/{org}/teams/{team_slug}/memberships/{username}
+    * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     To remove a membership between a user and a team, the authenticated user must have 'admin' permissions to the team or be an owner of the organization that the team is associated with. Removing team membership does not delete the user, it just removes their membership from the team.
 
     **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/memberships/{username}`.
-         * FROM: https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user
+    */
     pub async fn teams_remove_membership_for_user_in_org(
         &self,
         org: &str,
@@ -30726,12 +30726,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_list_projects_in_org: GET /orgs/{org}/teams/{team_slug}/projects
-         * Lists the organization projects for a team.
+    * teams_list_projects_in_org: GET /orgs/{org}/teams/{team_slug}/projects
+    * Lists the organization projects for a team.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects`.
-         * FROM: https://docs.github.com/rest/reference/teams#list-team-projects
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-team-projects
+    */
     pub async fn teams_list_projects_in_org(
         &self,
         org: &str,
@@ -30751,12 +30751,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_check_permissions_for_project_in_org: GET /orgs/{org}/teams/{team_slug}/projects/{project_id}
-         * Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
+    * teams_check_permissions_for_project_in_org: GET /orgs/{org}/teams/{team_slug}/projects/{project_id}
+    * Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
-         * FROM: https://docs.github.com/rest/reference/teams#check-team-permissions-for-a-project
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#check-team-permissions-for-a-project
+    */
     pub async fn teams_check_permissions_for_project_in_org(
         &self,
         org: &str,
@@ -30774,12 +30774,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_add_or_update_project_permissions_in_org: PUT /orgs/{org}/teams/{team_slug}/projects/{project_id}
-         * Adds an organization project to a team. To add a project to a team or update the team's permission on a project, the authenticated user must have `admin` permissions for the project. The project and team must be part of the same organization.
+    * teams_add_or_update_project_permissions_in_org: PUT /orgs/{org}/teams/{team_slug}/projects/{project_id}
+    * Adds an organization project to a team. To add a project to a team or update the team's permission on a project, the authenticated user must have `admin` permissions for the project. The project and team must be part of the same organization.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
-         * FROM: https://docs.github.com/rest/reference/teams#add-or-update-team-project-permissions
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#add-or-update-team-project-permissions
+    */
     pub async fn teams_add_or_update_project_permissions_in_org(
         &self,
         org: &str,
@@ -30802,12 +30802,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_remove_project_in_org: DELETE /orgs/{org}/teams/{team_slug}/projects/{project_id}
-         * Removes an organization project from a team. An organization owner or a team maintainer can remove any project from the team. To remove a project from a team as an organization member, the authenticated user must have `read` access to both the team and project, or `admin` access to the team or project. This endpoint removes the project from the team, but does not delete the project.
+    * teams_remove_project_in_org: DELETE /orgs/{org}/teams/{team_slug}/projects/{project_id}
+    * Removes an organization project from a team. An organization owner or a team maintainer can remove any project from the team. To remove a project from a team as an organization member, the authenticated user must have `read` access to both the team and project, or `admin` access to the team or project. This endpoint removes the project from the team, but does not delete the project.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
-         * FROM: https://docs.github.com/rest/reference/teams#remove-a-project-from-a-team
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#remove-a-project-from-a-team
+    */
     pub async fn teams_remove_project_in_org(
         &self,
         org: &str,
@@ -30828,12 +30828,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_list_repos_in_org: GET /orgs/{org}/teams/{team_slug}/repos
-         * Lists a team's repositories visible to the authenticated user.
+    * teams_list_repos_in_org: GET /orgs/{org}/teams/{team_slug}/repos
+    * Lists a team's repositories visible to the authenticated user.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos`.
-         * FROM: https://docs.github.com/rest/reference/teams#list-team-repositories
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-team-repositories
+    */
     pub async fn teams_list_repos_in_org(
         &self,
         org: &str,
@@ -30853,16 +30853,16 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_check_permissions_for_repo_in_org: GET /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}
-         * Checks whether a team has `admin`, `push`, `maintain`, `triage`, or `pull` permission for a repository. Repositories inherited through a parent team will also be checked.
+    * teams_check_permissions_for_repo_in_org: GET /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}
+    * Checks whether a team has `admin`, `push`, `maintain`, `triage`, or `pull` permission for a repository. Repositories inherited through a parent team will also be checked.
 
     You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `application/vnd.github.v3.repository+json` accept header.
 
     If a team doesn't have permission for the repository, you will receive a `404 Not Found` response status.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
-         * FROM: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-repository
+    */
     pub async fn teams_check_permissions_for_repo_in_org(
         &self,
         org: &str,
@@ -30882,14 +30882,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_add_or_update_repo_permissions_in_org: PUT /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}
-         * To add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a `422 Unprocessable Entity` status if you attempt to add a repository to a team that is not owned by the organization. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    * teams_add_or_update_repo_permissions_in_org: PUT /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}
+    * To add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a `422 Unprocessable Entity` status if you attempt to add a repository to a team that is not owned by the organization. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
 
     For more information about the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
-         * FROM: https://docs.github.com/rest/reference/teams/#add-or-update-team-repository-permissions
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#add-or-update-team-repository-permissions
+    */
     pub async fn teams_add_or_update_repo_permissions_in_org(
         &self,
         org: &str,
@@ -30914,12 +30914,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_remove_repo_in_org: DELETE /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}
-         * If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. This does not delete the repository, it just removes it from the team.
+    * teams_remove_repo_in_org: DELETE /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}
+    * If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. This does not delete the repository, it just removes it from the team.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
-         * FROM: https://docs.github.com/rest/reference/teams/#remove-a-repository-from-a-team
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#remove-a-repository-from-a-team
+    */
     pub async fn teams_remove_repo_in_org(
         &self,
         org: &str,
@@ -30942,14 +30942,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_list_idp_groups_in_org: GET /orgs/{org}/teams/{team_slug}/team-sync/group-mappings
-         * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * teams_list_idp_groups_in_org: GET /orgs/{org}/teams/{team_slug}/team-sync/group-mappings
+    * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     List IdP groups connected to a team on GitHub.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/team-sync/group-mappings`.
-         * FROM: https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team
+    */
     pub async fn teams_list_idp_groups_in_org(
         &self,
         org: &str,
@@ -30965,14 +30965,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_create_or_update_idp_group_connections_in_org: PATCH /orgs/{org}/teams/{team_slug}/team-sync/group-mappings
-         * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * teams_create_or_update_idp_group_connections_in_org: PATCH /orgs/{org}/teams/{team_slug}/team-sync/group-mappings
+    * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty `groups` array will remove all connections for a team.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/team-sync/group-mappings`.
-         * FROM: https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections
+    */
     pub async fn teams_create_or_update_idp_group_connections_in_org(
         &self,
         org: &str,
@@ -30993,12 +30993,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * teams_list_child_in_org: GET /orgs/{org}/teams/{team_slug}/teams
-         * Lists the child teams of the team specified by `{team_slug}`.
+    * teams_list_child_in_org: GET /orgs/{org}/teams/{team_slug}/teams
+    * Lists the child teams of the team specified by `{team_slug}`.
 
     **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/teams`.
-         * FROM: https://docs.github.com/rest/reference/teams#list-child-teams
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-child-teams
+    */
     pub async fn teams_list_child_in_org(
         &self,
         org: &str,
@@ -31007,21 +31007,21 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
-            "/orgs/{}/teams/{}/teams?page={}&per_page={}",
+            "/orgs/{}/teams/{}/teams?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * projects_get_card: GET /projects/columns/cards/{card_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#get-a-project-card
-     */
+    * projects_get_card: GET /projects/columns/cards/{card_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#get-a-project-card
+    */
     pub async fn projects_get_card(&self, card_id: i64) -> Result<types::ProjectCard> {
         let url = format!(
             "/projects/columns/cards/{}",
@@ -31032,10 +31032,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_delete_card: DELETE /projects/columns/cards/{card_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#delete-a-project-card
-     */
+    * projects_delete_card: DELETE /projects/columns/cards/{card_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#delete-a-project-card
+    */
     pub async fn projects_delete_card(&self, card_id: i64) -> Result<()> {
         let url = format!(
             "/projects/columns/cards/{}",
@@ -31049,10 +31049,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_update_card: PATCH /projects/columns/cards/{card_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#update-a-project-card
-     */
+    * projects_update_card: PATCH /projects/columns/cards/{card_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#update-a-project-card
+    */
     pub async fn projects_update_card(
         &self,
         card_id: i64,
@@ -31071,10 +31071,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_move_card: POST /projects/columns/cards/{card_id}/moves
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#move-a-project-card
-     */
+    * projects_move_card: POST /projects/columns/cards/{card_id}/moves
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#move-a-project-card
+    */
     pub async fn projects_move_card(
         &self,
         card_id: i64,
@@ -31093,10 +31093,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_get_column: GET /projects/columns/{column_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#get-a-project-column
-     */
+    * projects_get_column: GET /projects/columns/{column_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#get-a-project-column
+    */
     pub async fn projects_get_column(&self, column_id: i64) -> Result<types::ProjectColumn> {
         let url = format!(
             "/projects/columns/{}",
@@ -31107,10 +31107,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_delete_column: DELETE /projects/columns/{column_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#delete-a-project-column
-     */
+    * projects_delete_column: DELETE /projects/columns/{column_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#delete-a-project-column
+    */
     pub async fn projects_delete_column(&self, column_id: i64) -> Result<()> {
         let url = format!(
             "/projects/columns/{}",
@@ -31124,10 +31124,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_update_column: PATCH /projects/columns/{column_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#update-a-project-column
-     */
+    * projects_update_column: PATCH /projects/columns/{column_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#update-a-project-column
+    */
     pub async fn projects_update_column(
         &self,
         column_id: i64,
@@ -31146,10 +31146,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_list_cards: GET /projects/columns/{column_id}/cards
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#list-project-cards
-     */
+    * projects_list_cards: GET /projects/columns/{column_id}/cards
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#list-project-cards
+    */
     pub async fn projects_list_cards(
         &self,
         column_id: i64,
@@ -31158,21 +31158,21 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::ProjectCard>> {
         let url = format!(
-            "/projects/columns/{}/cards?archived_state={}&per_page={}&page={}",
+            "/projects/columns/{}/cards?per_page={}&page={}&archived_state={}",
             progenitor_support::encode_path(&column_id.to_string()),
-            archived_state.to_string(),
             format!("{}", per_page),
             format!("{}", page),
+            archived_state.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-     * projects_create_card: POST /projects/columns/{column_id}/cards
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#create-a-project-card
-     */
+    * projects_create_card: POST /projects/columns/{column_id}/cards
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#create-a-project-card
+    */
     pub async fn projects_create_card(
         &self,
         column_id: i64,
@@ -31191,10 +31191,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_move_column: POST /projects/columns/{column_id}/moves
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#move-a-project-column
-     */
+    * projects_move_column: POST /projects/columns/{column_id}/moves
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#move-a-project-column
+    */
     pub async fn projects_move_column(
         &self,
         column_id: i64,
@@ -31213,10 +31213,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_get: GET /projects/{project_id}
-     * Gets a project by its `id`. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     * FROM: https://docs.github.com/rest/reference/projects#get-a-project
-     */
+    * projects_get: GET /projects/{project_id}
+    * Gets a project by its `id`. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+    * FROM: https://docs.github.com/rest/reference/projects#get-a-project
+    */
     pub async fn projects_get(&self, project_id: i64) -> Result<types::Project> {
         let url = format!(
             "/projects/{}",
@@ -31227,10 +31227,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_delete: DELETE /projects/{project_id}
-     * Deletes a project board. Returns a `404 Not Found` status if projects are disabled.
-     * FROM: https://docs.github.com/rest/reference/projects#delete-a-project
-     */
+    * projects_delete: DELETE /projects/{project_id}
+    * Deletes a project board. Returns a `404 Not Found` status if projects are disabled.
+    * FROM: https://docs.github.com/rest/reference/projects#delete-a-project
+    */
     pub async fn projects_delete(&self, project_id: i64) -> Result<()> {
         let url = format!(
             "/projects/{}",
@@ -31244,10 +31244,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_update: PATCH /projects/{project_id}
-     * Updates a project board's information. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     * FROM: https://docs.github.com/rest/reference/projects#update-a-project
-     */
+    * projects_update: PATCH /projects/{project_id}
+    * Updates a project board's information. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+    * FROM: https://docs.github.com/rest/reference/projects#update-a-project
+    */
     pub async fn projects_update(
         &self,
         project_id: i64,
@@ -31266,10 +31266,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_list_collaborators: GET /projects/{project_id}/collaborators
-     * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
-     * FROM: https://docs.github.com/rest/reference/projects#list-project-collaborators
-     */
+    * projects_list_collaborators: GET /projects/{project_id}/collaborators
+    * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
+    * FROM: https://docs.github.com/rest/reference/projects#list-project-collaborators
+    */
     pub async fn projects_list_collaborators(
         &self,
         project_id: i64,
@@ -31278,10 +31278,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/projects/{}/collaborators?affiliation={}&page={}&per_page={}",
+            "/projects/{}/collaborators?page={}&affiliation={}&per_page={}",
             progenitor_support::encode_path(&project_id.to_string()),
-            affiliation.to_string(),
             format!("{}", page),
+            affiliation.to_string(),
             format!("{}", per_page),
         );
 
@@ -31289,10 +31289,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_add_collaborator: PUT /projects/{project_id}/collaborators/{username}
-     * Adds a collaborator to an organization project and sets their permission level. You must be an organization owner or a project `admin` to add a collaborator.
-     * FROM: https://docs.github.com/rest/reference/projects#add-project-collaborator
-     */
+    * projects_add_collaborator: PUT /projects/{project_id}/collaborators/{username}
+    * Adds a collaborator to an organization project and sets their permission level. You must be an organization owner or a project `admin` to add a collaborator.
+    * FROM: https://docs.github.com/rest/reference/projects#add-project-collaborator
+    */
     pub async fn projects_add_collaborator(
         &self,
         project_id: i64,
@@ -31313,10 +31313,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_remove_collaborator: DELETE /projects/{project_id}/collaborators/{username}
-     * Removes a collaborator from an organization project. You must be an organization owner or a project `admin` to remove a collaborator.
-     * FROM: https://docs.github.com/rest/reference/projects#remove-project-collaborator
-     */
+    * projects_remove_collaborator: DELETE /projects/{project_id}/collaborators/{username}
+    * Removes a collaborator from an organization project. You must be an organization owner or a project `admin` to remove a collaborator.
+    * FROM: https://docs.github.com/rest/reference/projects#remove-project-collaborator
+    */
     pub async fn projects_remove_collaborator(
         &self,
         project_id: i64,
@@ -31335,10 +31335,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_get_permission_for_user: GET /projects/{project_id}/collaborators/{username}/permission
-     * Returns the collaborator's permission level for an organization project. Possible values for the `permission` key: `admin`, `write`, `read`, `none`. You must be an organization owner or a project `admin` to review a user's permission level.
-     * FROM: https://docs.github.com/rest/reference/projects#get-project-permission-for-a-user
-     */
+    * projects_get_permission_for_user: GET /projects/{project_id}/collaborators/{username}/permission
+    * Returns the collaborator's permission level for an organization project. Possible values for the `permission` key: `admin`, `write`, `read`, `none`. You must be an organization owner or a project `admin` to review a user's permission level.
+    * FROM: https://docs.github.com/rest/reference/projects#get-project-permission-for-a-user
+    */
     pub async fn projects_get_permission_for_user(
         &self,
         project_id: i64,
@@ -31354,10 +31354,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * projects_list_columns: GET /projects/{project_id}/columns
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#list-project-columns
-     */
+    * projects_list_columns: GET /projects/{project_id}/columns
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#list-project-columns
+    */
     pub async fn projects_list_columns(
         &self,
         project_id: i64,
@@ -31365,20 +31365,20 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<Vec<types::ProjectColumn>> {
         let url = format!(
-            "/projects/{}/columns?page={}&per_page={}",
+            "/projects/{}/columns?per_page={}&page={}",
             progenitor_support::encode_path(&project_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * projects_create_column: POST /projects/{project_id}/columns
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#create-a-project-column
-     */
+    * projects_create_column: POST /projects/{project_id}/columns
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#create-a-project-column
+    */
     pub async fn projects_create_column(
         &self,
         project_id: i64,
@@ -31397,24 +31397,24 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * rate_limit_get: GET /rate_limit
-         * **Note:** Accessing this endpoint does not count against your REST API rate limit.
+    * rate_limit_get: GET /rate_limit
+    * **Note:** Accessing this endpoint does not count against your REST API rate limit.
 
     **Note:** The `rate` object is deprecated. If you're writing new API client code or updating existing code, you should use the `core` object instead of the `rate` object. The `core` object contains the same information that is present in the `rate` object.
-         * FROM: https://docs.github.com/rest/reference/rate-limit#get-rate-limit-status-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/rate-limit#get-rate-limit-status-for-the-authenticated-user
+    */
     pub async fn rate_limit_get(&self) -> Result<types::RateLimitOverview> {
         let url = "/rate_limit".to_string();
         self.get(&url).await
     }
 
     /**
-         * reactions_delete_legacy: DELETE /reactions/{reaction_id}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Reactions API. We recommend migrating your existing code to use the new delete reactions endpoints. For more information, see this [blog post](https://developer.github.com/changes/2020-02-26-new-delete-reactions-endpoints/).
+    * reactions_delete_legacy: DELETE /reactions/{reaction_id}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Reactions API. We recommend migrating your existing code to use the new delete reactions endpoints. For more information, see this [blog post](https://developer.github.com/changes/2020-02-26-new-delete-reactions-endpoints/).
 
     OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/), when deleting a [team discussion](https://docs.github.com/rest/reference/teams#discussions) or [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments).
-         * FROM: https://docs.github.com/rest/reference/reactions/#delete-a-reaction-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions/#delete-a-reaction-legacy
+    */
     pub async fn reactions_delete_legacy(&self, reaction_id: i64) -> Result<()> {
         let url = format!(
             "/reactions/{}",
@@ -31428,12 +31428,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * repos_get: GET /repos/{owner}/{repo}
-         * When you pass the `scarlet-witch-preview` media type, requests to get a repository will also return the repository's code of conduct if it can be detected from the repository's code of conduct file.
+    * repos_get: GET /repos/{owner}/{repo}
+    * When you pass the `scarlet-witch-preview` media type, requests to get a repository will also return the repository's code of conduct if it can be detected from the repository's code of conduct file.
 
     The `parent` and `source` objects are present when the repository is a fork. `parent` is the repository this repository was forked from, `source` is the ultimate source for the network.
-         * FROM: https://docs.github.com/rest/reference/repos#get-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-repository
+    */
     pub async fn repos_get(&self, owner: &str, repo: &str) -> Result<types::FullRepository> {
         let url = format!(
             "/repos/{}/{}",
@@ -31445,13 +31445,13 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * repos_delete: DELETE /repos/{owner}/{repo}
-         * Deleting a repository requires admin access. If OAuth is used, the `delete_repo` scope is required.
+    * repos_delete: DELETE /repos/{owner}/{repo}
+    * Deleting a repository requires admin access. If OAuth is used, the `delete_repo` scope is required.
 
     If an organization owner has configured the organization to prevent members from deleting organization-owned
     repositories, you will get a `403 Forbidden` response.
-         * FROM: https://docs.github.com/rest/reference/repos#delete-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-repository
+    */
     pub async fn repos_delete(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}",
@@ -31466,10 +31466,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * repos_update: PATCH /repos/{owner}/{repo}
-     * **Note**: To edit a repository's topics, use the [Replace all repository topics](https://docs.github.com/rest/reference/repos#replace-all-repository-topics) endpoint.
-     * FROM: https://docs.github.com/rest/reference/repos/#update-a-repository
-     */
+    * repos_update: PATCH /repos/{owner}/{repo}
+    * **Note**: To edit a repository's topics, use the [Replace all repository topics](https://docs.github.com/rest/reference/repos#replace-all-repository-topics) endpoint.
+    * FROM: https://docs.github.com/rest/reference/repos/#update-a-repository
+    */
     pub async fn repos_update(
         &self,
         owner: &str,
@@ -31490,10 +31490,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_list_artifacts_for_repo: GET /repos/{owner}/{repo}/actions/artifacts
-     * Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#list-artifacts-for-a-repository
-     */
+    * actions_list_artifacts_for_repo: GET /repos/{owner}/{repo}/actions/artifacts
+    * Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#list-artifacts-for-a-repository
+    */
     pub async fn actions_list_artifacts_for_repo(
         &self,
         owner: &str,
@@ -31513,10 +31513,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_get_artifact: GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
-     * Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-an-artifact
-     */
+    * actions_get_artifact: GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
+    * Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-an-artifact
+    */
     pub async fn actions_get_artifact(
         &self,
         owner: &str,
@@ -31534,10 +31534,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_delete_artifact: DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
-     * Deletes an artifact for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#delete-an-artifact
-     */
+    * actions_delete_artifact: DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}
+    * Deletes an artifact for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#delete-an-artifact
+    */
     pub async fn actions_delete_artifact(
         &self,
         owner: &str,
@@ -31558,13 +31558,13 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_download_artifact: GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}
-         * Gets a redirect URL to download an archive for a repository. This URL expires after 1 minute. Look for `Location:` in
+    * actions_download_artifact: GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}
+    * Gets a redirect URL to download an archive for a repository. This URL expires after 1 minute. Look for `Location:` in
     the response header to find the URL for the download. The `:archive_format` must be `zip`. Anyone with read access to
     the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope.
     GitHub Apps must have the `actions:read` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#download-an-artifact
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#download-an-artifact
+    */
     pub async fn actions_download_artifact(
         &self,
         owner: &str,
@@ -31584,10 +31584,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_get_job_for_workflow_run: GET /repos/{owner}/{repo}/actions/jobs/{job_id}
-     * Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-a-job-for-a-workflow-run
-     */
+    * actions_get_job_for_workflow_run: GET /repos/{owner}/{repo}/actions/jobs/{job_id}
+    * Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-a-job-for-a-workflow-run
+    */
     pub async fn actions_get_job_for_workflow_run(
         &self,
         owner: &str,
@@ -31605,13 +31605,13 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_download_job_logs_for_workflow_run: GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs
-         * Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute. Look
+    * actions_download_job_logs_for_workflow_run: GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs
+    * Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute. Look
     for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can
     use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must
     have the `actions:read` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#download-job-logs-for-a-workflow-run
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#download-job-logs-for-a-workflow-run
+    */
     pub async fn actions_download_job_logs_for_workflow_run(
         &self,
         owner: &str,
@@ -31629,13 +31629,13 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_get_github_actions_permissions_repository: GET /repos/{owner}/{repo}/actions/permissions
-         * Gets the GitHub Actions permissions policy for a repository, including whether GitHub Actions is enabled and the actions allowed to run in the repository.
+    * actions_get_github_actions_permissions_repository: GET /repos/{owner}/{repo}/actions/permissions
+    * Gets the GitHub Actions permissions policy for a repository, including whether GitHub Actions is enabled and the actions allowed to run in the repository.
 
     You must authenticate using an access token with the `repo` scope to use this
     endpoint. GitHub Apps must have the `administration` repository permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#get-github-actions-permissions-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-github-actions-permissions-for-a-repository
+    */
     pub async fn actions_get_github_actions_permissions_repository(
         &self,
         owner: &str,
@@ -31651,14 +31651,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_set_github_actions_permissions_repository: PUT /repos/{owner}/{repo}/actions/permissions
-         * Sets the GitHub Actions permissions policy for enabling GitHub Actions and allowed actions in the repository.
+    * actions_set_github_actions_permissions_repository: PUT /repos/{owner}/{repo}/actions/permissions
+    * Sets the GitHub Actions permissions policy for enabling GitHub Actions and allowed actions in the repository.
 
     If the repository belongs to an organization or enterprise that has set restrictive permissions at the organization or enterprise levels, such as `allowed_actions` to `selected` actions, then you cannot override them for the repository.
 
     You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `administration` repository permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#set-github-actions-permissions-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#set-github-actions-permissions-for-a-repository
+    */
     pub async fn actions_set_github_actions_permissions_repository(
         &self,
         owner: &str,
@@ -31679,12 +31679,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_get_allowed_actions_repository: GET /repos/{owner}/{repo}/actions/permissions/selected-actions
-         * Gets the settings for selected actions that are allowed in a repository. To use this endpoint, the repository policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for a repository](#set-github-actions-permissions-for-a-repository)."
+    * actions_get_allowed_actions_repository: GET /repos/{owner}/{repo}/actions/permissions/selected-actions
+    * Gets the settings for selected actions that are allowed in a repository. To use this endpoint, the repository policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for a repository](#set-github-actions-permissions-for-a-repository)."
 
     You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `administration` repository permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#get-allowed-actions-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-allowed-actions-for-a-repository
+    */
     pub async fn actions_get_allowed_actions_repository(
         &self,
         owner: &str,
@@ -31700,16 +31700,16 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_set_allowed_actions_repository: PUT /repos/{owner}/{repo}/actions/permissions/selected-actions
-         * Sets the actions that are allowed in a repository. To use this endpoint, the repository permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for a repository](#set-github-actions-permissions-for-a-repository)."
+    * actions_set_allowed_actions_repository: PUT /repos/{owner}/{repo}/actions/permissions/selected-actions
+    * Sets the actions that are allowed in a repository. To use this endpoint, the repository permission policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for a repository](#set-github-actions-permissions-for-a-repository)."
 
     If the repository belongs to an organization or enterprise that has `selected` actions set at the organization or enterprise levels, then you cannot override any of the allowed actions settings.
 
     To use the `patterns_allowed` setting for private repositories, the repository must belong to an enterprise. If the repository does not belong to an enterprise, then the `patterns_allowed` setting only applies to public repositories.
 
     You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `administration` repository permission to use this API.
-         * FROM: https://docs.github.com/rest/reference/actions#set-allowed-actions-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#set-allowed-actions-for-a-repository
+    */
     pub async fn actions_set_allowed_actions_repository(
         &self,
         owner: &str,
@@ -31730,10 +31730,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_list_self_hosted_runners_for_repo: GET /repos/{owner}/{repo}/actions/runners
-     * Lists all self-hosted runners configured in a repository. You must authenticate using an access token with the `repo` scope to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#list-self-hosted-runners-for-a-repository
-     */
+    * actions_list_self_hosted_runners_for_repo: GET /repos/{owner}/{repo}/actions/runners
+    * Lists all self-hosted runners configured in a repository. You must authenticate using an access token with the `repo` scope to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#list-self-hosted-runners-for-a-repository
+    */
     pub async fn actions_list_self_hosted_runners_for_repo(
         &self,
         owner: &str,
@@ -31742,23 +31742,23 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersRepositoryOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runners?per_page={}&page={}",
+            "/repos/{}/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * actions_list_runner_applications_for_repo: GET /repos/{owner}/{repo}/actions/runners/downloads
-         * Lists binaries for the runner application that you can download and run.
+    * actions_list_runner_applications_for_repo: GET /repos/{owner}/{repo}/actions/runners/downloads
+    * Lists binaries for the runner application that you can download and run.
 
     You must authenticate using an access token with the `repo` scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#list-runner-applications-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#list-runner-applications-for-a-repository
+    */
     pub async fn actions_list_runner_applications_for_repo(
         &self,
         owner: &str,
@@ -31774,8 +31774,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_create_registration_token_for_repo: POST /repos/{owner}/{repo}/actions/runners/registration-token
-         * Returns a token that you can pass to the `config` script. The token expires after one hour. You must authenticate
+    * actions_create_registration_token_for_repo: POST /repos/{owner}/{repo}/actions/runners/registration-token
+    * Returns a token that you can pass to the `config` script. The token expires after one hour. You must authenticate
     using an access token with the `repo` scope to use this endpoint.
 
     #### Example using registration token
@@ -31785,8 +31785,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     ```
     ./config.sh --url https://github.com/octo-org/octo-repo-artifacts --token TOKEN
     ```
-         * FROM: https://docs.github.com/rest/reference/actions#create-a-registration-token-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#create-a-registration-token-for-a-repository
+    */
     pub async fn actions_create_registration_token_for_repo(
         &self,
         owner: &str,
@@ -31802,8 +31802,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_create_remove_token_for_repo: POST /repos/{owner}/{repo}/actions/runners/remove-token
-         * Returns a token that you can pass to remove a self-hosted runner from a repository. The token expires after one hour.
+    * actions_create_remove_token_for_repo: POST /repos/{owner}/{repo}/actions/runners/remove-token
+    * Returns a token that you can pass to remove a self-hosted runner from a repository. The token expires after one hour.
     You must authenticate using an access token with the `repo` scope to use this endpoint.
 
     #### Example using remove token
@@ -31813,8 +31813,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     ```
     ./config.sh remove --token TOKEN
     ```
-         * FROM: https://docs.github.com/rest/reference/actions#create-a-remove-token-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#create-a-remove-token-for-a-repository
+    */
     pub async fn actions_create_remove_token_for_repo(
         &self,
         owner: &str,
@@ -31830,13 +31830,13 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_get_self_hosted_runner_for_repo: GET /repos/{owner}/{repo}/actions/runners/{runner_id}
-         * Gets a specific self-hosted runner configured in a repository.
+    * actions_get_self_hosted_runner_for_repo: GET /repos/{owner}/{repo}/actions/runners/{runner_id}
+    * Gets a specific self-hosted runner configured in a repository.
 
     You must authenticate using an access token with the `repo` scope to use this
     endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#get-a-self-hosted-runner-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-a-self-hosted-runner-for-a-repository
+    */
     pub async fn actions_get_self_hosted_runner_for_repo(
         &self,
         owner: &str,
@@ -31854,13 +31854,13 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_delete_self_hosted_runner_from_repo: DELETE /repos/{owner}/{repo}/actions/runners/{runner_id}
-         * Forces the removal of a self-hosted runner from a repository. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
+    * actions_delete_self_hosted_runner_from_repo: DELETE /repos/{owner}/{repo}/actions/runners/{runner_id}
+    * Forces the removal of a self-hosted runner from a repository. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
 
     You must authenticate using an access token with the `repo`
     scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#delete-a-self-hosted-runner-from-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#delete-a-self-hosted-runner-from-a-repository
+    */
     pub async fn actions_delete_self_hosted_runner_from_repo(
         &self,
         owner: &str,
@@ -31881,12 +31881,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_list_workflow_runs_for_repo: GET /repos/{owner}/{repo}/actions/runs
-         * Lists all workflow runs for a repository. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
+    * actions_list_workflow_runs_for_repo: GET /repos/{owner}/{repo}/actions/runs
+    * Lists all workflow runs for a repository. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
 
     Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#list-workflow-runs-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#list-workflow-runs-for-a-repository
+    */
     pub async fn actions_list_workflow_runs_for_repo(
         &self,
         owner: &str,
@@ -31899,25 +31899,25 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<types::GetListWorkflowRunsRepositoryOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runs?per_page={}&event={}&page={}&status={}&actor={}&branch={}",
+            "/repos/{}/{}/actions/runs?page={}&per_page={}&branch={}&event={}&actor={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
-            event.to_string(),
             format!("{}", page),
-            status.to_string(),
-            actor.to_string(),
+            format!("{}", per_page),
             branch.to_string(),
+            event.to_string(),
+            actor.to_string(),
+            status.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-     * actions_get_workflow_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}
-     * Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-a-workflow-run
-     */
+    * actions_get_workflow_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}
+    * Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-a-workflow-run
+    */
     pub async fn actions_get_workflow_run(
         &self,
         owner: &str,
@@ -31935,12 +31935,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_delete_workflow_run: DELETE /repos/{owner}/{repo}/actions/runs/{run_id}
-         * Delete a specific workflow run. Anyone with write access to the repository can use this endpoint. If the repository is
+    * actions_delete_workflow_run: DELETE /repos/{owner}/{repo}/actions/runs/{run_id}
+    * Delete a specific workflow run. Anyone with write access to the repository can use this endpoint. If the repository is
     private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:write` permission to use
     this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#delete-a-workflow-run
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#delete-a-workflow-run
+    */
     pub async fn actions_delete_workflow_run(
         &self,
         owner: &str,
@@ -31961,10 +31961,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_get_reviews_for_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}/approvals
-     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-the-review-history-for-a-workflow-run
-     */
+    * actions_get_reviews_for_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}/approvals
+    * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-the-review-history-for-a-workflow-run
+    */
     pub async fn actions_get_reviews_for_run(
         &self,
         owner: &str,
@@ -31982,14 +31982,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_approve_workflow_run: POST /repos/{owner}/{repo}/actions/runs/{run_id}/approve
-         * **Note:** This endpoint is currently in beta and is subject to change.
+    * actions_approve_workflow_run: POST /repos/{owner}/{repo}/actions/runs/{run_id}/approve
+    * **Note:** This endpoint is currently in beta and is subject to change.
 
     Approves a workflow run for a pull request from a public fork of a first time contributor. For more information, see ["Approving workflow runs from public forks](https://docs.github.com/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks)."
 
     You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#approve-a-workflow-run-for-a-fork-pull-request
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#approve-a-workflow-run-for-a-fork-pull-request
+    */
     pub async fn actions_approve_workflow_run(
         &self,
         owner: &str,
@@ -32007,10 +32007,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_list_workflow_run_artifacts: GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts
-     * Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#list-workflow-run-artifacts
-     */
+    * actions_list_workflow_run_artifacts: GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts
+    * Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#list-workflow-run-artifacts
+    */
     pub async fn actions_list_workflow_run_artifacts(
         &self,
         owner: &str,
@@ -32032,10 +32032,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_cancel_workflow_run: POST /repos/{owner}/{repo}/actions/runs/{run_id}/cancel
-     * Cancels a workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#cancel-a-workflow-run
-     */
+    * actions_cancel_workflow_run: POST /repos/{owner}/{repo}/actions/runs/{run_id}/cancel
+    * Cancels a workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#cancel-a-workflow-run
+    */
     pub async fn actions_cancel_workflow_run(
         &self,
         owner: &str,
@@ -32053,10 +32053,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_list_jobs_for_workflow_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs
-     * Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
-     * FROM: https://docs.github.com/rest/reference/actions#list-jobs-for-a-workflow-run
-     */
+    * actions_list_jobs_for_workflow_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs
+    * Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
+    * FROM: https://docs.github.com/rest/reference/actions#list-jobs-for-a-workflow-run
+    */
     pub async fn actions_list_jobs_for_workflow_run(
         &self,
         owner: &str,
@@ -32067,12 +32067,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<types::GetListJobsWorkflowRunOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runs/{}/jobs?filter={}&page={}&per_page={}",
+            "/repos/{}/{}/actions/runs/{}/jobs?page={}&filter={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
-            filter.to_string(),
             format!("{}", page),
+            filter.to_string(),
             format!("{}", per_page),
         );
 
@@ -32080,13 +32080,13 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_download_workflow_run_logs: GET /repos/{owner}/{repo}/actions/runs/{run_id}/logs
-         * Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute. Look for
+    * actions_download_workflow_run_logs: GET /repos/{owner}/{repo}/actions/runs/{run_id}/logs
+    * Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute. Look for
     `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use
     this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have
     the `actions:read` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#download-workflow-run-logs
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#download-workflow-run-logs
+    */
     pub async fn actions_download_workflow_run_logs(
         &self,
         owner: &str,
@@ -32104,10 +32104,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_delete_workflow_run_logs: DELETE /repos/{owner}/{repo}/actions/runs/{run_id}/logs
-     * Deletes all logs for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#delete-workflow-run-logs
-     */
+    * actions_delete_workflow_run_logs: DELETE /repos/{owner}/{repo}/actions/runs/{run_id}/logs
+    * Deletes all logs for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#delete-workflow-run-logs
+    */
     pub async fn actions_delete_workflow_run_logs(
         &self,
         owner: &str,
@@ -32128,12 +32128,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_get_pending_deployments_for_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments
-         * Get all deployment environments for a workflow run that are waiting for protection rules to pass.
+    * actions_get_pending_deployments_for_run: GET /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments
+    * Get all deployment environments for a workflow run that are waiting for protection rules to pass.
 
     Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#get-pending-deployments-for-a-workflow-run
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-pending-deployments-for-a-workflow-run
+    */
     pub async fn actions_get_pending_deployments_for_run(
         &self,
         owner: &str,
@@ -32151,12 +32151,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_review_pending_deployments_for_run: POST /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments
-         * Approve or reject pending deployments that are waiting on approval by a required reviewer.
+    * actions_review_pending_deployments_for_run: POST /repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments
+    * Approve or reject pending deployments that are waiting on approval by a required reviewer.
 
     Anyone with read access to the repository contents and deployments can use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#review-pending-deployments-for-a-workflow-run
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#review-pending-deployments-for-a-workflow-run
+    */
     pub async fn actions_review_pending_deployments_for_run(
         &self,
         owner: &str,
@@ -32179,10 +32179,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_re_run_workflow: POST /repos/{owner}/{repo}/actions/runs/{run_id}/rerun
-     * Re-runs your workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#re-run-a-workflow
-     */
+    * actions_re_run_workflow: POST /repos/{owner}/{repo}/actions/runs/{run_id}/rerun
+    * Re-runs your workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#re-run-a-workflow
+    */
     pub async fn actions_re_run_workflow(
         &self,
         owner: &str,
@@ -32200,12 +32200,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_get_workflow_run_usage: GET /repos/{owner}/{repo}/actions/runs/{run_id}/timing
-         * Gets the number of billable minutes and total run time for a specific workflow run. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+    * actions_get_workflow_run_usage: GET /repos/{owner}/{repo}/actions/runs/{run_id}/timing
+    * Gets the number of billable minutes and total run time for a specific workflow run. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
     Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#get-workflow-run-usage
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-workflow-run-usage
+    */
     pub async fn actions_get_workflow_run_usage(
         &self,
         owner: &str,
@@ -32223,10 +32223,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_list_repo_secrets: GET /repos/{owner}/{repo}/actions/secrets
-     * Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#list-repository-secrets
-     */
+    * actions_list_repo_secrets: GET /repos/{owner}/{repo}/actions/secrets
+    * Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#list-repository-secrets
+    */
     pub async fn actions_list_repo_secrets(
         &self,
         owner: &str,
@@ -32235,21 +32235,21 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<types::GetListRepositorySecretsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/secrets?page={}&per_page={}",
+            "/repos/{}/{}/actions/secrets?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * actions_get_repo_public_key: GET /repos/{owner}/{repo}/actions/secrets/public-key
-     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-a-repository-public-key
-     */
+    * actions_get_repo_public_key: GET /repos/{owner}/{repo}/actions/secrets/public-key
+    * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-a-repository-public-key
+    */
     pub async fn actions_get_repo_public_key(
         &self,
         owner: &str,
@@ -32265,10 +32265,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_get_repo_secret: GET /repos/{owner}/{repo}/actions/secrets/{secret_name}
-     * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-a-repository-secret
-     */
+    * actions_get_repo_secret: GET /repos/{owner}/{repo}/actions/secrets/{secret_name}
+    * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-a-repository-secret
+    */
     pub async fn actions_get_repo_secret(
         &self,
         owner: &str,
@@ -32286,8 +32286,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_create_or_update_repo_secret: PUT /repos/{owner}/{repo}/actions/secrets/{secret_name}
-         * Creates or updates a repository secret with an encrypted value. Encrypt your secret using
+    * actions_create_or_update_repo_secret: PUT /repos/{owner}/{repo}/actions/secrets/{secret_name}
+    * Creates or updates a repository secret with an encrypted value. Encrypt your secret using
     [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). You must authenticate using an access
     token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use
     this endpoint.
@@ -32362,8 +32362,8 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     # Print the base64 encoded secret
     puts Base64.strict_encode64(encrypted_secret)
     ```
-         * FROM: https://docs.github.com/rest/reference/actions#create-or-update-a-repository-secret
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#create-or-update-a-repository-secret
+    */
     pub async fn actions_create_or_update_repo_secret(
         &self,
         owner: &str,
@@ -32386,10 +32386,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_delete_repo_secret: DELETE /repos/{owner}/{repo}/actions/secrets/{secret_name}
-     * Deletes a secret in a repository using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#delete-a-repository-secret
-     */
+    * actions_delete_repo_secret: DELETE /repos/{owner}/{repo}/actions/secrets/{secret_name}
+    * Deletes a secret in a repository using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#delete-a-repository-secret
+    */
     pub async fn actions_delete_repo_secret(
         &self,
         owner: &str,
@@ -32410,10 +32410,10 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-     * actions_list_repo_workflows: GET /repos/{owner}/{repo}/actions/workflows
-     * Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#list-repository-workflows
-     */
+    * actions_list_repo_workflows: GET /repos/{owner}/{repo}/actions/workflows
+    * Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#list-repository-workflows
+    */
     pub async fn actions_list_repo_workflows(
         &self,
         owner: &str,
@@ -32422,21 +32422,21 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         page: i64,
     ) -> Result<types::GetListRepositoryWorkflowsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/workflows?page={}&per_page={}",
+            "/repos/{}/{}/actions/workflows?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * actions_get_workflow: GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}
-     * Gets a specific workflow. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-a-workflow
-     */
+    * actions_get_workflow: GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}
+    * Gets a specific workflow. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-a-workflow
+    */
     pub async fn actions_get_workflow(
         &self,
         owner: &str,
@@ -32454,12 +32454,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_disable_workflow: PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable
-         * Disables a workflow and sets the `state` of the workflow to `disabled_manually`. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`.
+    * actions_disable_workflow: PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable
+    * Disables a workflow and sets the `state` of the workflow to `disabled_manually`. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`.
 
     You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#disable-a-workflow
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#disable-a-workflow
+    */
     pub async fn actions_disable_workflow(
         &self,
         owner: &str,
@@ -32477,14 +32477,14 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_create_workflow_dispatch: POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
-         * You can use this endpoint to manually trigger a GitHub Actions workflow run. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`.
+    * actions_create_workflow_dispatch: POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
+    * You can use this endpoint to manually trigger a GitHub Actions workflow run. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`.
 
     You must configure your GitHub Actions workflow to run when the [`workflow_dispatch` webhook](/developers/webhooks-and-events/webhook-events-and-payloads#workflow_dispatch) event occurs. The `inputs` are configured in the workflow file. For more information about how to configure the `workflow_dispatch` event in the workflow file, see "[Events that trigger workflows](/actions/reference/events-that-trigger-workflows#workflow_dispatch)."
 
     You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint. For more information, see "[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line)."
-         * FROM: https://docs.github.com/rest/reference/actions#create-a-workflow-dispatch-event
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#create-a-workflow-dispatch-event
+    */
     pub async fn actions_create_workflow_dispatch(
         &self,
         owner: &str,
@@ -32507,12 +32507,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_enable_workflow: PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable
-         * Enables a workflow and sets the `state` of the workflow to `active`. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`.
+    * actions_enable_workflow: PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable
+    * Enables a workflow and sets the `state` of the workflow to `active`. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`.
 
     You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#enable-a-workflow
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#enable-a-workflow
+    */
     pub async fn actions_enable_workflow(
         &self,
         owner: &str,
@@ -32530,12 +32530,12 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
     }
 
     /**
-         * actions_list_workflow_runs: GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs
-         * List all workflow runs for a workflow. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
+    * actions_list_workflow_runs: GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs
+    * List all workflow runs for a workflow. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
 
     Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/actions#list-workflow-runs
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#list-workflow-runs
+    */
     pub async fn actions_list_workflow_runs(
         &self,
         owner: &str,
@@ -32548,22 +32548,22 @@ state.to_string(), sort.to_string(), labels.to_string(), format!("{}", per_page)
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListWorkflowRunsOkResponse> {
-        let url = format!("/repos/{}/{}/actions/workflows/{}/runs?page={}&branch={}&actor={}&status={}&per_page={}&event={}",
+        let url = format!("/repos/{}/{}/actions/workflows/{}/runs?event={}&branch={}&page={}&actor={}&status={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
-format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), format!("{}", per_page), event.to_string(),         );
+event.to_string(), branch.to_string(), format!("{}", page), actor.to_string(), status.to_string(), format!("{}", per_page),         );
 
         self.get(&url).await
     }
 
     /**
-         * actions_get_workflow_usage: GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing
-         * Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+    * actions_get_workflow_usage: GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing
+    * Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
     You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/actions#get-workflow-usage
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#get-workflow-usage
+    */
     pub async fn actions_get_workflow_usage(
         &self,
         owner: &str,
@@ -32581,10 +32581,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * issues_list_assignees: GET /repos/{owner}/{repo}/assignees
-     * Lists the [available assignees](https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
-     * FROM: https://docs.github.com/rest/reference/issues#list-assignees
-     */
+    * issues_list_assignees: GET /repos/{owner}/{repo}/assignees
+    * Lists the [available assignees](https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
+    * FROM: https://docs.github.com/rest/reference/issues#list-assignees
+    */
     pub async fn issues_list_assignees(
         &self,
         owner: &str,
@@ -32593,25 +32593,25 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/repos/{}/{}/assignees?per_page={}&page={}",
+            "/repos/{}/{}/assignees?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * issues_check_user_can_be_assigned: GET /repos/{owner}/{repo}/assignees/{assignee}
-         * Checks if a user has permission to be assigned to an issue in this repository.
+    * issues_check_user_can_be_assigned: GET /repos/{owner}/{repo}/assignees/{assignee}
+    * Checks if a user has permission to be assigned to an issue in this repository.
 
     If the `assignee` can be assigned to issues in the repository, a `204` header with no content is returned.
 
     Otherwise a `404` status code is returned.
-         * FROM: https://docs.github.com/rest/reference/issues#check-if-a-user-can-be-assigned
-         */
+    * FROM: https://docs.github.com/rest/reference/issues#check-if-a-user-can-be-assigned
+    */
     pub async fn issues_check_user_can_be_assigned(
         &self,
         owner: &str,
@@ -32629,10 +32629,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_enable_automated_security_fixes: PUT /repos/{owner}/{repo}/automated-security-fixes
-     * Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
-     * FROM: https://docs.github.com/rest/reference/repos#enable-automated-security-fixes
-     */
+    * repos_enable_automated_security_fixes: PUT /repos/{owner}/{repo}/automated-security-fixes
+    * Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
+    * FROM: https://docs.github.com/rest/reference/repos#enable-automated-security-fixes
+    */
     pub async fn repos_enable_automated_security_fixes(
         &self,
         owner: &str,
@@ -32648,10 +32648,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_disable_automated_security_fixes: DELETE /repos/{owner}/{repo}/automated-security-fixes
-     * Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
-     * FROM: https://docs.github.com/rest/reference/repos#disable-automated-security-fixes
-     */
+    * repos_disable_automated_security_fixes: DELETE /repos/{owner}/{repo}/automated-security-fixes
+    * Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
+    * FROM: https://docs.github.com/rest/reference/repos#disable-automated-security-fixes
+    */
     pub async fn repos_disable_automated_security_fixes(
         &self,
         owner: &str,
@@ -32670,10 +32670,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_list_branches: GET /repos/{owner}/{repo}/branches
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#list-branches
-     */
+    * repos_list_branches: GET /repos/{owner}/{repo}/branches
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#list-branches
+    */
     pub async fn repos_list_branches(
         &self,
         owner: &str,
@@ -32695,10 +32695,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_get_branch: GET /repos/{owner}/{repo}/branches/{branch}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-branch
-     */
+    * repos_get_branch: GET /repos/{owner}/{repo}/branches/{branch}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-branch
+    */
     pub async fn repos_get_branch(
         &self,
         owner: &str,
@@ -32716,10 +32716,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_get_branch_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#get-branch-protection
-     */
+    * repos_get_branch_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#get-branch-protection
+    */
     pub async fn repos_get_branch_protection(
         &self,
         owner: &str,
@@ -32737,16 +32737,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_update_branch_protection: PUT /repos/{owner}/{repo}/branches/{branch}/protection
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_update_branch_protection: PUT /repos/{owner}/{repo}/branches/{branch}/protection
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Protecting a branch requires admin or owner permissions to the repository.
 
     **Note**: Passing new arrays of `users` and `teams` replaces their previous values.
 
     **Note**: The list of users, apps, and teams in total is limited to 100 items.
-         * FROM: https://docs.github.com/rest/reference/repos#update-branch-protection
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#update-branch-protection
+    */
     pub async fn repos_update_branch_protection(
         &self,
         owner: &str,
@@ -32769,10 +32769,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_delete_branch_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#delete-branch-protection
-     */
+    * repos_delete_branch_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#delete-branch-protection
+    */
     pub async fn repos_delete_branch_protection(
         &self,
         owner: &str,
@@ -32793,10 +32793,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_get_admin_branch_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#get-admin-branch-protection
-     */
+    * repos_get_admin_branch_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#get-admin-branch-protection
+    */
     pub async fn repos_get_admin_branch_protection(
         &self,
         owner: &str,
@@ -32814,12 +32814,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_set_admin_branch_protection: POST /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_set_admin_branch_protection: POST /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Adding admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
-         * FROM: https://docs.github.com/rest/reference/repos#set-admin-branch-protection
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#set-admin-branch-protection
+    */
     pub async fn repos_set_admin_branch_protection(
         &self,
         owner: &str,
@@ -32837,12 +32837,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_delete_admin_branch_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_delete_admin_branch_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Removing admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
-         * FROM: https://docs.github.com/rest/reference/repos#delete-admin-branch-protection
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#delete-admin-branch-protection
+    */
     pub async fn repos_delete_admin_branch_protection(
         &self,
         owner: &str,
@@ -32863,10 +32863,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_get_pull_request_review_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#get-pull-request-review-protection
-     */
+    * repos_get_pull_request_review_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#get-pull-request-review-protection
+    */
     pub async fn repos_get_pull_request_review_protection(
         &self,
         owner: &str,
@@ -32884,10 +32884,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_delete_pull_request_review_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#delete-pull-request-review-protection
-     */
+    * repos_delete_pull_request_review_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#delete-pull-request-review-protection
+    */
     pub async fn repos_delete_pull_request_review_protection(
         &self,
         owner: &str,
@@ -32908,14 +32908,14 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_update_pull_request_review_protection: PATCH /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_update_pull_request_review_protection: PATCH /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Updating pull request review enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
 
     **Note**: Passing new arrays of `users` and `teams` replaces their previous values.
-         * FROM: https://docs.github.com/rest/reference/repos#update-pull-request-review-protection
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#update-pull-request-review-protection
+    */
     pub async fn repos_update_pull_request_review_protection(
         &self,
         owner: &str,
@@ -32938,14 +32938,14 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_get_commit_signature_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_get_commit_signature_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     When authenticated with admin or owner permissions to the repository, you can use this endpoint to check whether a branch requires signed commits. An enabled status of `true` indicates you must sign commits on this branch. For more information, see [Signing commits with GPG](https://help.github.com/articles/signing-commits-with-gpg) in GitHub Help.
 
     **Note**: You must enable branch protection to require signed commits.
-         * FROM: https://docs.github.com/rest/reference/repos#get-commit-signature-protection
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-commit-signature-protection
+    */
     pub async fn repos_get_commit_signature_protection(
         &self,
         owner: &str,
@@ -32963,12 +32963,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_create_commit_signature_protection: POST /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_create_commit_signature_protection: POST /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     When authenticated with admin or owner permissions to the repository, you can use this endpoint to require signed commits on a branch. You must enable branch protection to require signed commits.
-         * FROM: https://docs.github.com/rest/reference/repos#create-commit-signature-protection
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-commit-signature-protection
+    */
     pub async fn repos_create_commit_signature_protection(
         &self,
         owner: &str,
@@ -32986,12 +32986,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_delete_commit_signature_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_delete_commit_signature_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     When authenticated with admin or owner permissions to the repository, you can use this endpoint to disable required signed commits on a branch. You must enable branch protection to require signed commits.
-         * FROM: https://docs.github.com/rest/reference/repos#delete-commit-signature-protection
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#delete-commit-signature-protection
+    */
     pub async fn repos_delete_commit_signature_protection(
         &self,
         owner: &str,
@@ -33012,10 +33012,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_get_status_checks_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#get-status-checks-protection
-     */
+    * repos_get_status_checks_protection: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#get-status-checks-protection
+    */
     pub async fn repos_get_status_checks_protection(
         &self,
         owner: &str,
@@ -33033,10 +33033,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_remove_status_check_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#remove-status-check-protection
-     */
+    * repos_remove_status_check_protection: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#remove-status-check-protection
+    */
     pub async fn repos_remove_status_check_protection(
         &self,
         owner: &str,
@@ -33057,12 +33057,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_update_status_check_protection: PATCH /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_update_status_check_protection: PATCH /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Updating required status checks requires admin or owner permissions to the repository and branch protection to be enabled.
-         * FROM: https://docs.github.com/rest/reference/repos#update-status-check-potection
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#update-status-check-potection
+    */
     pub async fn repos_update_status_check_protection(
         &self,
         owner: &str,
@@ -33085,10 +33085,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_get_all_status_check_contexts: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#get-all-status-check-contexts
-     */
+    * repos_get_all_status_check_contexts: GET /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#get-all-status-check-contexts
+    */
     pub async fn repos_get_all_status_check_contexts(
         &self,
         owner: &str,
@@ -33106,10 +33106,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_set_status_check_contexts: PUT /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#set-status-check-contexts
-     */
+    * repos_set_status_check_contexts: PUT /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#set-status-check-contexts
+    */
     pub async fn repos_set_status_check_contexts(
         &self,
         owner: &str,
@@ -33132,10 +33132,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_add_status_check_contexts: POST /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#add-status-check-contexts
-     */
+    * repos_add_status_check_contexts: POST /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#add-status-check-contexts
+    */
     pub async fn repos_add_status_check_contexts(
         &self,
         owner: &str,
@@ -33158,10 +33158,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * repos_remove_status_check_contexts: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
-     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/repos#remove-status-check-contexts
-     */
+    * repos_remove_status_check_contexts: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/repos#remove-status-check-contexts
+    */
     pub async fn repos_remove_status_check_contexts(
         &self,
         owner: &str,
@@ -33188,14 +33188,14 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_get_access_restrictions: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_get_access_restrictions: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Lists who has access to this protected branch.
 
     **Note**: Users, apps, and teams `restrictions` are only available for organization-owned repositories.
-         * FROM: https://docs.github.com/rest/reference/repos#get-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-access-restrictions
+    */
     pub async fn repos_get_access_restrictions(
         &self,
         owner: &str,
@@ -33213,12 +33213,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_delete_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_delete_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Disables the ability to restrict who can push to this branch.
-         * FROM: https://docs.github.com/rest/reference/repos#delete-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#delete-access-restrictions
+    */
     pub async fn repos_delete_access_restrictions(
         &self,
         owner: &str,
@@ -33239,12 +33239,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_get_apps_with_access_to_protected_branch: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_get_apps_with_access_to_protected_branch: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Lists the GitHub Apps that have push access to this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
-         * FROM: https://docs.github.com/rest/reference/repos#list-apps-with-access-to-the-protected-branch
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-apps-with-access-to-the-protected-branch
+    */
     pub async fn repos_get_apps_with_access_to_protected_branch(
         &self,
         owner: &str,
@@ -33262,16 +33262,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_set_app_access_restrictions: PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_set_app_access_restrictions: PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Replaces the list of apps that have push access to this branch. This removes all apps that previously had push access and grants push access to the new list of apps. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
 
     | Type    | Description                                                                                                                                                |
     | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-         * FROM: https://docs.github.com/rest/reference/repos#set-app-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#set-app-access-restrictions
+    */
     pub async fn repos_set_app_access_restrictions(
         &self,
         owner: &str,
@@ -33294,16 +33294,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_add_app_access_restrictions: POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_add_app_access_restrictions: POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Grants the specified apps push access for this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
 
     | Type    | Description                                                                                                                                                |
     | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-         * FROM: https://docs.github.com/rest/reference/repos#add-app-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#add-app-access-restrictions
+    */
     pub async fn repos_add_app_access_restrictions(
         &self,
         owner: &str,
@@ -33326,16 +33326,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_remove_app_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_remove_app_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Removes the ability of an app to push to this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
 
     | Type    | Description                                                                                                                                                |
     | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-         * FROM: https://docs.github.com/rest/reference/repos#remove-app-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#remove-app-access-restrictions
+    */
     pub async fn repos_remove_app_access_restrictions(
         &self,
         owner: &str,
@@ -33362,12 +33362,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_get_teams_with_access_to_protected_branch: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_get_teams_with_access_to_protected_branch: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Lists the teams who have push access to this branch. The list includes child teams.
-         * FROM: https://docs.github.com/rest/reference/repos#list-teams-with-access-to-the-protected-branch
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-teams-with-access-to-the-protected-branch
+    */
     pub async fn repos_get_teams_with_access_to_protected_branch(
         &self,
         owner: &str,
@@ -33385,16 +33385,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_set_team_access_restrictions: PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_set_team_access_restrictions: PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Replaces the list of teams that have push access to this branch. This removes all teams that previously had push access and grants push access to the new list of teams. Team restrictions include child teams.
 
     | Type    | Description                                                                                                                                |
     | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
     | `array` | The teams that can have push access. Use the team's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-         * FROM: https://docs.github.com/rest/reference/repos#set-team-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#set-team-access-restrictions
+    */
     pub async fn repos_set_team_access_restrictions(
         &self,
         owner: &str,
@@ -33417,16 +33417,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_add_team_access_restrictions: POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_add_team_access_restrictions: POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Grants the specified teams push access for this branch. You can also give push access to child teams.
 
     | Type    | Description                                                                                                                                |
     | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
     | `array` | The teams that can have push access. Use the team's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-         * FROM: https://docs.github.com/rest/reference/repos#add-team-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#add-team-access-restrictions
+    */
     pub async fn repos_add_team_access_restrictions(
         &self,
         owner: &str,
@@ -33449,16 +33449,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_remove_team_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_remove_team_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Removes the ability of a team to push to this branch. You can also remove push access for child teams.
 
     | Type    | Description                                                                                                                                         |
     | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `array` | Teams that should no longer have push access. Use the team's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-         * FROM: https://docs.github.com/rest/reference/repos#remove-team-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#remove-team-access-restrictions
+    */
     pub async fn repos_remove_team_access_restrictions(
         &self,
         owner: &str,
@@ -33485,12 +33485,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_get_users_with_access_to_protected_branch: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_get_users_with_access_to_protected_branch: GET /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Lists the people who have push access to this branch.
-         * FROM: https://docs.github.com/rest/reference/repos#list-users-with-access-to-the-protected-branch
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-users-with-access-to-the-protected-branch
+    */
     pub async fn repos_get_users_with_access_to_protected_branch(
         &self,
         owner: &str,
@@ -33508,16 +33508,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_set_user_access_restrictions: PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_set_user_access_restrictions: PUT /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Replaces the list of people that have push access to this branch. This removes all people that previously had push access and grants push access to the new list of people.
 
     | Type    | Description                                                                                                                   |
     | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
     | `array` | Usernames for people who can have push access. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-         * FROM: https://docs.github.com/rest/reference/repos#set-user-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#set-user-access-restrictions
+    */
     pub async fn repos_set_user_access_restrictions(
         &self,
         owner: &str,
@@ -33540,16 +33540,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_add_user_access_restrictions: POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_add_user_access_restrictions: POST /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Grants the specified people push access for this branch.
 
     | Type    | Description                                                                                                                   |
     | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
     | `array` | Usernames for people who can have push access. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-         * FROM: https://docs.github.com/rest/reference/repos#add-user-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#add-user-access-restrictions
+    */
     pub async fn repos_add_user_access_restrictions(
         &self,
         owner: &str,
@@ -33572,16 +33572,16 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_remove_user_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_remove_user_access_restrictions: DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Removes the ability of a user to push to this branch.
 
     | Type    | Description                                                                                                                                   |
     | ------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
     | `array` | Usernames of the people who should no longer have push access. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-         * FROM: https://docs.github.com/rest/reference/repos#remove-user-access-restrictions
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#remove-user-access-restrictions
+    */
     pub async fn repos_remove_user_access_restrictions(
         &self,
         owner: &str,
@@ -33608,8 +33608,8 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * repos_rename_branch: POST /repos/{owner}/{repo}/branches/{branch}/rename
-         * Renames a branch in a repository.
+    * repos_rename_branch: POST /repos/{owner}/{repo}/branches/{branch}/rename
+    * Renames a branch in a repository.
 
     **Note:** Although the API responds immediately, the branch rename process might take some extra time to complete in the background. You won't be able to push to the old branch name while the rename process is in progress. For more information, see "[Renaming a branch](https://docs.github.com/github/administering-a-repository/renaming-a-branch)".
 
@@ -33624,8 +33624,8 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
 
     * Users must have admin or owner permissions.
     * GitHub Apps must have the `administration:write` repository permission.
-         * FROM: https://docs.github.com/rest/reference/repos#rename-a-branch
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#rename-a-branch
+    */
     pub async fn repos_rename_branch(
         &self,
         owner: &str,
@@ -33648,14 +33648,14 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * checks_create: POST /repos/{owner}/{repo}/check-runs
-         * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
+    * checks_create: POST /repos/{owner}/{repo}/check-runs
+    * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
 
     Creates a new check run for a specific commit in a repository. Your GitHub App must have the `checks:write` permission to create check runs.
 
     In a check suite, GitHub limits the number of check runs with the same name to 1000. Once these check runs exceed 1000, GitHub will start to automatically delete older check runs.
-         * FROM: https://docs.github.com/rest/reference/checks#create-a-check-run
-         */
+    * FROM: https://docs.github.com/rest/reference/checks#create-a-check-run
+    */
     pub async fn checks_create(
         &self,
         owner: &str,
@@ -33676,12 +33676,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * checks_get: GET /repos/{owner}/{repo}/check-runs/{check_run_id}
-         * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
+    * checks_get: GET /repos/{owner}/{repo}/check-runs/{check_run_id}
+    * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
 
     Gets a single check run using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
-         * FROM: https://docs.github.com/rest/reference/checks#get-a-check-run
-         */
+    * FROM: https://docs.github.com/rest/reference/checks#get-a-check-run
+    */
     pub async fn checks_get(
         &self,
         owner: &str,
@@ -33699,12 +33699,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * checks_update: PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}
-         * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
+    * checks_update: PATCH /repos/{owner}/{repo}/check-runs/{check_run_id}
+    * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
 
     Updates a check run for a specific commit in a repository. Your GitHub App must have the `checks:write` permission to edit check runs.
-         * FROM: https://docs.github.com/rest/reference/checks#update-a-check-run
-         */
+    * FROM: https://docs.github.com/rest/reference/checks#update-a-check-run
+    */
     pub async fn checks_update(
         &self,
         owner: &str,
@@ -33727,10 +33727,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * checks_list_annotations: GET /repos/{owner}/{repo}/check-runs/{check_run_id}/annotations
-     * Lists annotations for a check run using the annotation `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get annotations for a check run. OAuth Apps and authenticated users must have the `repo` scope to get annotations for a check run in a private repository.
-     * FROM: https://docs.github.com/rest/reference/checks#list-check-run-annotations
-     */
+    * checks_list_annotations: GET /repos/{owner}/{repo}/check-runs/{check_run_id}/annotations
+    * Lists annotations for a check run using the annotation `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get annotations for a check run. OAuth Apps and authenticated users must have the `repo` scope to get annotations for a check run in a private repository.
+    * FROM: https://docs.github.com/rest/reference/checks#list-check-run-annotations
+    */
     pub async fn checks_list_annotations(
         &self,
         owner: &str,
@@ -33752,12 +33752,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * checks_create_suite: POST /repos/{owner}/{repo}/check-suites
-         * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`.
+    * checks_create_suite: POST /repos/{owner}/{repo}/check-suites
+    * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`.
 
     By default, check suites are automatically created when you create a [check run](https://docs.github.com/rest/reference/checks#check-runs). You only need to use this endpoint for manually creating check suites when you've disabled automatic creation using "[Update repository preferences for check suites](https://docs.github.com/rest/reference/checks#update-repository-preferences-for-check-suites)". Your GitHub App must have the `checks:write` permission to create check suites.
-         * FROM: https://docs.github.com/rest/reference/checks#create-a-check-suite
-         */
+    * FROM: https://docs.github.com/rest/reference/checks#create-a-check-suite
+    */
     pub async fn checks_create_suite(
         &self,
         owner: &str,
@@ -33778,10 +33778,10 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-     * checks_set_suites_preferences: PATCH /repos/{owner}/{repo}/check-suites/preferences
-     * Changes the default automatic flow when creating check suites. By default, a check suite is automatically created each time code is pushed to a repository. When you disable the automatic creation of check suites, you can manually [Create a check suite](https://docs.github.com/rest/reference/checks#create-a-check-suite). You must have admin permissions in the repository to set preferences for check suites.
-     * FROM: https://docs.github.com/rest/reference/checks#update-repository-preferences-for-check-suites
-     */
+    * checks_set_suites_preferences: PATCH /repos/{owner}/{repo}/check-suites/preferences
+    * Changes the default automatic flow when creating check suites. By default, a check suite is automatically created each time code is pushed to a repository. When you disable the automatic creation of check suites, you can manually [Create a check suite](https://docs.github.com/rest/reference/checks#create-a-check-suite). You must have admin permissions in the repository to set preferences for check suites.
+    * FROM: https://docs.github.com/rest/reference/checks#update-repository-preferences-for-check-suites
+    */
     pub async fn checks_set_suites_preferences(
         &self,
         owner: &str,
@@ -33802,12 +33802,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * checks_get_suite: GET /repos/{owner}/{repo}/check-suites/{check_suite_id}
-         * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`.
+    * checks_get_suite: GET /repos/{owner}/{repo}/check-suites/{check_suite_id}
+    * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`.
 
     Gets a single check suite using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check suites. OAuth Apps and authenticated users must have the `repo` scope to get check suites in a private repository.
-         * FROM: https://docs.github.com/rest/reference/checks#get-a-check-suite
-         */
+    * FROM: https://docs.github.com/rest/reference/checks#get-a-check-suite
+    */
     pub async fn checks_get_suite(
         &self,
         owner: &str,
@@ -33825,12 +33825,12 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
     }
 
     /**
-         * checks_list_for_suite: GET /repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs
-         * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
+    * checks_list_for_suite: GET /repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs
+    * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
 
     Lists check runs for a check suite using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
-         * FROM: https://docs.github.com/rest/reference/checks#list-check-runs-in-a-check-suite
-         */
+    * FROM: https://docs.github.com/rest/reference/checks#list-check-runs-in-a-check-suite
+    */
     pub async fn checks_list_for_suite(
         &self,
         owner: &str,
@@ -33842,22 +33842,22 @@ format!("{}", page), branch.to_string(), actor.to_string(), status.to_string(), 
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListCheckRunsinCheckSuiteOkResponse> {
-        let url = format!("/repos/{}/{}/check-suites/{}/check-runs?status={}&per_page={}&check_name={}&filter={}&page={}",
+        let url = format!("/repos/{}/{}/check-suites/{}/check-runs?status={}&page={}&filter={}&per_page={}&check_name={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
-status.to_string(), format!("{}", per_page), check_name.to_string(), filter.to_string(), format!("{}", page),         );
+status.to_string(), format!("{}", page), filter.to_string(), format!("{}", per_page), check_name.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-         * checks_rerequest_suite: POST /repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest
-         * Triggers GitHub to rerequest an existing check suite, without pushing new code to a repository. This endpoint will trigger the [`check_suite` webhook](https://docs.github.com/webhooks/event-payloads/#check_suite) event with the action `rerequested`. When a check suite is `rerequested`, its `status` is reset to `queued` and the `conclusion` is cleared.
+    * checks_rerequest_suite: POST /repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest
+    * Triggers GitHub to rerequest an existing check suite, without pushing new code to a repository. This endpoint will trigger the [`check_suite` webhook](https://docs.github.com/webhooks/event-payloads/#check_suite) event with the action `rerequested`. When a check suite is `rerequested`, its `status` is reset to `queued` and the `conclusion` is cleared.
 
     To rerequest a check suite, your GitHub App must have the `checks:read` permission on a private repository or pull access to a public repository.
-         * FROM: https://docs.github.com/rest/reference/checks#rerequest-a-check-suite
-         */
+    * FROM: https://docs.github.com/rest/reference/checks#rerequest-a-check-suite
+    */
     pub async fn checks_rerequest_suite(
         &self,
         owner: &str,
@@ -33875,8 +33875,8 @@ status.to_string(), format!("{}", per_page), check_name.to_string(), filter.to_s
     }
 
     /**
-         * code_scanning_list_alerts_for_repo: GET /repos/{owner}/{repo}/code-scanning/alerts
-         * Lists all open code scanning alerts for the default branch (usually `main`
+    * code_scanning_list_alerts_for_repo: GET /repos/{owner}/{repo}/code-scanning/alerts
+    * Lists all open code scanning alerts for the default branch (usually `main`
     or `master`). You must use an access token with the `security_events` scope to use
     this endpoint. GitHub Apps must have the `security_events` read permission to use
     this endpoint.
@@ -33885,8 +33885,8 @@ status.to_string(), format!("{}", per_page), check_name.to_string(), filter.to_s
     This provides details of the most recent instance of this alert
     for the default branch or for the specified Git reference
     (if you used `ref` in the request).
-         * FROM: https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-a-repository
+    */
     pub async fn code_scanning_list_alerts_for_repo(
         &self,
         owner: &str,
@@ -33898,22 +33898,22 @@ status.to_string(), format!("{}", per_page), check_name.to_string(), filter.to_s
         ref_: &&str,
         state: &str,
     ) -> Result<Vec<types::CodeScanningAlertItems>> {
-        let url = format!("/repos/{}/{}/code-scanning/alerts?ref={}&state={}&page={}&tool_name={}&tool_guid={}&per_page={}",
+        let url = format!("/repos/{}/{}/code-scanning/alerts?page={}&ref={}&tool_guid={}&tool_name={}&state={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-ref_, state.to_string(), format!("{}", page), tool_name.to_string(), tool_guid.to_string(), format!("{}", per_page),         );
+format!("{}", page), ref_, tool_guid.to_string(), tool_name.to_string(), state.to_string(), format!("{}", per_page),         );
 
         self.get(&url).await
     }
 
     /**
-         * code_scanning_get_alert: GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}
-         * Gets a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+    * code_scanning_get_alert: GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}
+    * Gets a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
 
     **Deprecation notice**:
     The instances field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The same information can now be retrieved via a GET request to the URL specified by `instances_url`.
-         * FROM: https://docs.github.com/rest/reference/code-scanning#get-a-code-scanning-alert
-         */
+    * FROM: https://docs.github.com/rest/reference/code-scanning#get-a-code-scanning-alert
+    */
     pub async fn code_scanning_get_alert(
         &self,
         owner: &str,
@@ -33931,10 +33931,10 @@ ref_, state.to_string(), format!("{}", page), tool_name.to_string(), tool_guid.t
     }
 
     /**
-     * code_scanning_update_alert: PATCH /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}
-     * Updates the status of a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/code-scanning#update-a-code-scanning-alert
-     */
+    * code_scanning_update_alert: PATCH /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}
+    * Updates the status of a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/code-scanning#update-a-code-scanning-alert
+    */
     pub async fn code_scanning_update_alert(
         &self,
         owner: &str,
@@ -33957,10 +33957,10 @@ ref_, state.to_string(), format!("{}", page), tool_name.to_string(), tool_guid.t
     }
 
     /**
-     * code_scanning_list_alert_instances: GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances
-     * Lists all instances of the specified code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/code-scanning#list-instances-of-a-code-scanning-alert
-     */
+    * code_scanning_list_alert_instances: GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances
+    * Lists all instances of the specified code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/code-scanning#list-instances-of-a-code-scanning-alert
+    */
     pub async fn code_scanning_list_alert_instances(
         &self,
         owner: &str,
@@ -33971,21 +33971,21 @@ ref_, state.to_string(), format!("{}", page), tool_name.to_string(), tool_guid.t
         ref_: &&str,
     ) -> Result<Vec<types::CodeScanningAlertInstance>> {
         let url = format!(
-            "/repos/{}/{}/code-scanning/alerts/{}/instances?page={}&per_page={}&ref={}",
+            "/repos/{}/{}/code-scanning/alerts/{}/instances?ref={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
             ref_,
+            format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * code_scanning_list_recent_analyses: GET /repos/{owner}/{repo}/code-scanning/analyses
-         * Lists the details of all code scanning analyses for a repository,
+    * code_scanning_list_recent_analyses: GET /repos/{owner}/{repo}/code-scanning/analyses
+    * Lists the details of all code scanning analyses for a repository,
     starting with the most recent.
     The response is paginated and you can use the `page` and `per_page` parameters
     to list the analyses you're interested in.
@@ -34001,8 +34001,8 @@ ref_, state.to_string(), format!("{}", page), tool_name.to_string(), tool_guid.t
 
     **Deprecation notice**:
     The `tool_name` field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The tool name can now be found inside the `tool` field.
-         * FROM: https://docs.github.com/rest/reference/code-scanning#list-code-scanning-analyses-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/code-scanning#list-code-scanning-analyses-for-a-repository
+    */
     pub async fn code_scanning_list_recent_analyses(
         &self,
         owner: &str,
@@ -34014,17 +34014,17 @@ ref_, state.to_string(), format!("{}", page), tool_name.to_string(), tool_guid.t
         ref_: &&str,
         sarif_id: &str,
     ) -> Result<Vec<types::CodeScanningAnalysis>> {
-        let url = format!("/repos/{}/{}/code-scanning/analyses?tool_name={}&page={}&tool_guid={}&per_page={}&ref={}&sarif_id={}",
+        let url = format!("/repos/{}/{}/code-scanning/analyses?tool_guid={}&ref={}&page={}&per_page={}&tool_name={}&sarif_id={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}", per_page), ref_, sarif_id.to_string(),         );
+tool_guid.to_string(), ref_, format!("{}", page), format!("{}", per_page), tool_name.to_string(), sarif_id.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-         * code_scanning_get_analysis: GET /repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}
-         * Gets a specified code scanning analysis for a repository.
+    * code_scanning_get_analysis: GET /repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}
+    * Gets a specified code scanning analysis for a repository.
     You must use an access token with the `security_events` scope to use this endpoint.
     GitHub Apps must have the `security_events` read permission to use this endpoint.
 
@@ -34045,8 +34045,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
 
     **Deprecation notice**:
     The `tool_name` field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The tool name can now be found inside the `tool` field.
-         * FROM: https://docs.github.com/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository
+    */
     pub async fn code_scanning_get_analysis(
         &self,
         owner: &str,
@@ -34064,8 +34064,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-         * code_scanning_delete_analysis: DELETE /repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}
-         * Deletes a specified code scanning analysis from a repository. For
+    * code_scanning_delete_analysis: DELETE /repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}
+    * Deletes a specified code scanning analysis from a repository. For
     private repositories, you must use an access token with the `repo` scope. For public repositories,
     you must use an access token with `public_repo` and `repo:security_events` scopes.
     GitHub Apps must have the `security_events` write permission to use this endpoint.
@@ -34129,8 +34129,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
       * Parse the response for the value of `confirm_delete_url` and, if found, use this in the next iteration.
 
     The above process assumes that you want to remove all trace of the tool's analyses from the GitHub user interface, for the specified repository, and it therefore uses the `confirm_delete_url` value. Alternatively, you could use the `next_analysis_url` value, which would leave the last analysis in each set undeleted to avoid removing a tool's analysis entirely.
-         * FROM: https://docs.github.com/rest/reference/code-scanning#delete-a-code-scanning-analysis-from-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/code-scanning#delete-a-code-scanning-analysis-from-a-repository
+    */
     pub async fn code_scanning_delete_analysis(
         &self,
         owner: &str,
@@ -34158,8 +34158,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-         * code_scanning_upload_sarif: POST /repos/{owner}/{repo}/code-scanning/sarifs
-         * Uploads SARIF data containing the results of a code scanning analysis to make the results available in a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
+    * code_scanning_upload_sarif: POST /repos/{owner}/{repo}/code-scanning/sarifs
+    * Uploads SARIF data containing the results of a code scanning analysis to make the results available in a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
 
     There are two places where you can upload code scanning results.
      - If you upload to a pull request, for example `--ref refs/pull/42/merge` or `--ref refs/pull/42/head`, then the results appear as alerts in a pull request check. For more information, see "[Triaging code scanning alerts in pull requests](/code-security/secure-coding/triaging-code-scanning-alerts-in-pull-requests)."
@@ -34176,8 +34176,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     The `202 Accepted`, response includes an `id` value.
     You can use this ID to check the status of the upload by using this for the `/sarifs/{sarif_id}` endpoint.
     For more information, see "[Get information about a SARIF upload](/rest/reference/code-scanning#get-information-about-a-sarif-upload)."
-         * FROM: https://docs.github.com/rest/reference/code-scanning#upload-a-sarif-file
-         */
+    * FROM: https://docs.github.com/rest/reference/code-scanning#upload-a-sarif-file
+    */
     pub async fn code_scanning_upload_sarif(
         &self,
         owner: &str,
@@ -34198,10 +34198,10 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-     * code_scanning_get_sarif: GET /repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}
-     * Gets information about a SARIF upload, including the status and the URL of the analysis that was uploaded so that you can retrieve details of the analysis. For more information, see "[Get a code scanning analysis for a repository](/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository)." You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/code-scanning#list-recent-code-scanning-analyses-for-a-repository
-     */
+    * code_scanning_get_sarif: GET /repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}
+    * Gets information about a SARIF upload, including the status and the URL of the analysis that was uploaded so that you can retrieve details of the analysis. For more information, see "[Get a code scanning analysis for a repository](/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository)." You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/code-scanning#list-recent-code-scanning-analyses-for-a-repository
+    */
     pub async fn code_scanning_get_sarif(
         &self,
         owner: &str,
@@ -34219,12 +34219,12 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-         * repos_list_collaborators: GET /repos/{owner}/{repo}/collaborators
-         * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
+    * repos_list_collaborators: GET /repos/{owner}/{repo}/collaborators
+    * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
 
     Team members will include the members of child teams.
-         * FROM: https://docs.github.com/rest/reference/repos#list-repository-collaborators
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-repository-collaborators
+    */
     pub async fn repos_list_collaborators(
         &self,
         owner: &str,
@@ -34246,12 +34246,12 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-         * repos_check_collaborator: GET /repos/{owner}/{repo}/collaborators/{username}
-         * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
+    * repos_check_collaborator: GET /repos/{owner}/{repo}/collaborators/{username}
+    * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
 
     Team members will include the members of child teams.
-         * FROM: https://docs.github.com/rest/reference/repos#check-if-a-user-is-a-repository-collaborator
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#check-if-a-user-is-a-repository-collaborator
+    */
     pub async fn repos_check_collaborator(
         &self,
         owner: &str,
@@ -34269,8 +34269,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-         * repos_add_collaborator: PUT /repos/{owner}/{repo}/collaborators/{username}
-         * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+    * repos_add_collaborator: PUT /repos/{owner}/{repo}/collaborators/{username}
+    * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
 
     For more information the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
 
@@ -34281,8 +34281,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     **Rate limits**
 
     To prevent abuse, you are limited to sending 50 invitations to a repository per 24 hour period. Note there is no limit if you are inviting organization members to an organization repository.
-         * FROM: https://docs.github.com/rest/reference/repos#add-a-repository-collaborator
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#add-a-repository-collaborator
+    */
     pub async fn repos_add_collaborator(
         &self,
         owner: &str,
@@ -34305,10 +34305,10 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-     * repos_remove_collaborator: DELETE /repos/{owner}/{repo}/collaborators/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#remove-a-repository-collaborator
-     */
+    * repos_remove_collaborator: DELETE /repos/{owner}/{repo}/collaborators/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#remove-a-repository-collaborator
+    */
     pub async fn repos_remove_collaborator(
         &self,
         owner: &str,
@@ -34329,10 +34329,10 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-     * repos_get_collaborator_permission_level: GET /repos/{owner}/{repo}/collaborators/{username}/permission
-     * Checks the repository permission of a collaborator. The possible repository permissions are `admin`, `write`, `read`, and `none`.
-     * FROM: https://docs.github.com/rest/reference/repos#get-repository-permissions-for-a-user
-     */
+    * repos_get_collaborator_permission_level: GET /repos/{owner}/{repo}/collaborators/{username}/permission
+    * Checks the repository permission of a collaborator. The possible repository permissions are `admin`, `write`, `read`, and `none`.
+    * FROM: https://docs.github.com/rest/reference/repos#get-repository-permissions-for-a-user
+    */
     pub async fn repos_get_collaborator_permission_level(
         &self,
         owner: &str,
@@ -34350,12 +34350,12 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-         * repos_list_commit_comments_for_repo: GET /repos/{owner}/{repo}/comments
-         * Commit Comments use [these custom media types](https://docs.github.com/rest/reference/repos#custom-media-types). You can read more about the use of media types in the API [here](https://docs.github.com/rest/overview/media-types/).
+    * repos_list_commit_comments_for_repo: GET /repos/{owner}/{repo}/comments
+    * Commit Comments use [these custom media types](https://docs.github.com/rest/reference/repos#custom-media-types). You can read more about the use of media types in the API [here](https://docs.github.com/rest/overview/media-types/).
 
     Comments are ordered by ascending ID.
-         * FROM: https://docs.github.com/rest/reference/repos#list-commit-comments-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-commit-comments-for-a-repository
+    */
     pub async fn repos_list_commit_comments_for_repo(
         &self,
         owner: &str,
@@ -34364,21 +34364,21 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
         page: i64,
     ) -> Result<Vec<types::CommitComment>> {
         let url = format!(
-            "/repos/{}/{}/comments?page={}&per_page={}",
+            "/repos/{}/{}/comments?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * repos_get_commit_comment: GET /repos/{owner}/{repo}/comments/{comment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-commit-comment
-     */
+    * repos_get_commit_comment: GET /repos/{owner}/{repo}/comments/{comment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-commit-comment
+    */
     pub async fn repos_get_commit_comment(
         &self,
         owner: &str,
@@ -34396,10 +34396,10 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-     * repos_delete_commit_comment: DELETE /repos/{owner}/{repo}/comments/{comment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#delete-a-commit-comment
-     */
+    * repos_delete_commit_comment: DELETE /repos/{owner}/{repo}/comments/{comment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-commit-comment
+    */
     pub async fn repos_delete_commit_comment(
         &self,
         owner: &str,
@@ -34420,10 +34420,10 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-     * repos_update_commit_comment: PATCH /repos/{owner}/{repo}/comments/{comment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#update-a-commit-comment
-     */
+    * repos_update_commit_comment: PATCH /repos/{owner}/{repo}/comments/{comment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#update-a-commit-comment
+    */
     pub async fn repos_update_commit_comment(
         &self,
         owner: &str,
@@ -34446,10 +34446,10 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-     * reactions_list_for_commit_comment: GET /repos/{owner}/{repo}/comments/{comment_id}/reactions
-     * List the reactions to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
-     * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-a-commit-comment
-     */
+    * reactions_list_for_commit_comment: GET /repos/{owner}/{repo}/comments/{comment_id}/reactions
+    * List the reactions to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
+    * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-a-commit-comment
+    */
     pub async fn reactions_list_for_commit_comment(
         &self,
         owner: &str,
@@ -34460,23 +34460,23 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/comments/{}/reactions?content={}&per_page={}&page={}",
+            "/repos/{}/{}/comments/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
             content.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * reactions_create_for_commit_comment: POST /repos/{owner}/{repo}/comments/{comment_id}/reactions
-     * Create a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments). A response with an HTTP `200` status means that you already added the reaction type to this commit comment.
-     * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-a-commit-comment
-     */
+    * reactions_create_for_commit_comment: POST /repos/{owner}/{repo}/comments/{comment_id}/reactions
+    * Create a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments). A response with an HTTP `200` status means that you already added the reaction type to this commit comment.
+    * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-a-commit-comment
+    */
     pub async fn reactions_create_for_commit_comment(
         &self,
         owner: &str,
@@ -34499,12 +34499,12 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-         * reactions_delete_for_commit_comment: DELETE /repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}
-         * **Note:** You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/comments/:comment_id/reactions/:reaction_id`.
+    * reactions_delete_for_commit_comment: DELETE /repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}
+    * **Note:** You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/comments/:comment_id/reactions/:reaction_id`.
 
     Delete a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
-         * FROM: https://docs.github.com/rest/reference/reactions#delete-a-commit-comment-reaction
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#delete-a-commit-comment-reaction
+    */
     pub async fn reactions_delete_for_commit_comment(
         &self,
         owner: &str,
@@ -34527,8 +34527,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-         * repos_list_commits: GET /repos/{owner}/{repo}/commits
-         * **Signature verification object**
+    * repos_list_commits: GET /repos/{owner}/{repo}/commits
+    * **Signature verification object**
 
     The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
 
@@ -34556,8 +34556,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     | `malformed_signature` | There was an error parsing the signature. |
     | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
     | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-         * FROM: https://docs.github.com/rest/reference/repos#list-commits
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-commits
+    */
     pub async fn repos_list_commits(
         &self,
         owner: &str,
@@ -34571,28 +34571,28 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
         page: i64,
     ) -> Result<Vec<types::Commit>> {
         let url = format!(
-            "/repos/{}/{}/commits?path={}&until={}&since={}&per_page={}&page={}&sha={}&author={}",
+            "/repos/{}/{}/commits?sha={}&until={}&page={}&path={}&author={}&since={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            path.to_string(),
+            sha.to_string(),
             until.to_rfc3339(),
+            format!("{}", page),
+            path.to_string(),
+            author.to_string(),
             since.to_rfc3339(),
             format!("{}", per_page),
-            format!("{}", page),
-            sha.to_string(),
-            author.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_list_branches_for_head_commit: GET /repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head
-         * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * repos_list_branches_for_head_commit: GET /repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head
+    * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Returns all branches where the given commit SHA is the HEAD, or latest commit for the branch.
-         * FROM: https://docs.github.com/rest/reference/repos#list-branches-for-head-commit
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-branches-for-head-commit
+    */
     pub async fn repos_list_branches_for_head_commit(
         &self,
         owner: &str,
@@ -34610,10 +34610,10 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-     * repos_list_comments_for_commit: GET /repos/{owner}/{repo}/commits/{commit_sha}/comments
-     * Use the `:commit_sha` to specify the commit that will have its comments listed.
-     * FROM: https://docs.github.com/rest/reference/repos#list-commit-comments
-     */
+    * repos_list_comments_for_commit: GET /repos/{owner}/{repo}/commits/{commit_sha}/comments
+    * Use the `:commit_sha` to specify the commit that will have its comments listed.
+    * FROM: https://docs.github.com/rest/reference/repos#list-commit-comments
+    */
     pub async fn repos_list_comments_for_commit(
         &self,
         owner: &str,
@@ -34623,24 +34623,24 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
         page: i64,
     ) -> Result<Vec<types::CommitComment>> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/comments?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/comments?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_create_commit_comment: POST /repos/{owner}/{repo}/commits/{commit_sha}/comments
-         * Create a comment for a commit using its `:commit_sha`.
+    * repos_create_commit_comment: POST /repos/{owner}/{repo}/commits/{commit_sha}/comments
+    * Create a comment for a commit using its `:commit_sha`.
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-commit-comment
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-commit-comment
+    */
     pub async fn repos_create_commit_comment(
         &self,
         owner: &str,
@@ -34663,10 +34663,10 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     }
 
     /**
-     * repos_list_pull_requests_associated_with_commit: GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls
-     * Lists the merged pull request that introduced the commit to the repository. If the commit is not present in the default branch, additionally returns open pull requests associated with the commit. The results may include open and closed pull requests. Additional preview headers may be required to see certain details for associated pull requests, such as whether a pull request is in a draft state. For more information about previews that might affect this endpoint, see the [List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests) endpoint.
-     * FROM: https://docs.github.com/rest/reference/repos#list-pull-requests-associated-with-a-commit
-     */
+    * repos_list_pull_requests_associated_with_commit: GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls
+    * Lists the merged pull request that introduced the commit to the repository. If the commit is not present in the default branch, additionally returns open pull requests associated with the commit. The results may include open and closed pull requests. Additional preview headers may be required to see certain details for associated pull requests, such as whether a pull request is in a draft state. For more information about previews that might affect this endpoint, see the [List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests) endpoint.
+    * FROM: https://docs.github.com/rest/reference/repos#list-pull-requests-associated-with-a-commit
+    */
     pub async fn repos_list_pull_requests_associated_with_commit(
         &self,
         owner: &str,
@@ -34676,20 +34676,20 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
         page: i64,
     ) -> Result<Vec<types::PullRequestSimple>> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/pulls?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/pulls?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_get_commit: GET /repos/{owner}/{repo}/commits/{ref}
-         * Returns the contents of a single commit reference. You must have `read` access for the repository to use this endpoint.
+    * repos_get_commit: GET /repos/{owner}/{repo}/commits/{ref}
+    * Returns the contents of a single commit reference. You must have `read` access for the repository to use this endpoint.
 
     **Note:** If there are more than 300 files in the commit diff, the response will include pagination link headers for the remaining files, up to a limit of 3000 files. Each page contains the static commit information, and the only changes are to the file listing.
 
@@ -34725,8 +34725,8 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
     | `malformed_signature` | There was an error parsing the signature. |
     | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
     | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-         * FROM: https://docs.github.com/rest/reference/repos#get-a-commit
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-commit
+    */
     pub async fn repos_get_commit(
         &self,
         owner: &str,
@@ -34736,24 +34736,24 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
         ref_: &str,
     ) -> Result<types::Commit> {
         let url = format!(
-            "/repos/{}/{}/commits/{}?per_page={}&page={}",
+            "/repos/{}/{}/commits/{}?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * checks_list_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/check-runs
-         * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
+    * checks_list_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/check-runs
+    * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array.
 
     Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag name. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
-         * FROM: https://docs.github.com/rest/reference/checks#list-check-runs-for-a-git-reference
-         */
+    * FROM: https://docs.github.com/rest/reference/checks#list-check-runs-for-a-git-reference
+    */
     pub async fn checks_list_for_ref(
         &self,
         owner: &str,
@@ -34766,22 +34766,22 @@ tool_name.to_string(), format!("{}", page), tool_guid.to_string(), format!("{}",
         page: i64,
         app_id: i64,
     ) -> Result<types::GetListCheckRunsGitReferenceOkResponse> {
-        let url = format!("/repos/{}/{}/commits/{}/check-runs?page={}&check_name={}&app_id={}&status={}&filter={}&per_page={}",
+        let url = format!("/repos/{}/{}/commits/{}/check-runs?status={}&per_page={}&filter={}&check_name={}&page={}&app_id={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_string(), filter.to_string(), format!("{}", per_page),         );
+status.to_string(), format!("{}", per_page), filter.to_string(), check_name.to_string(), format!("{}", page), format!("{}", app_id),         );
 
         self.get(&url).await
     }
 
     /**
-         * checks_list_suites_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/check-suites
-         * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`.
+    * checks_list_suites_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/check-suites
+    * **Note:** The Checks API only looks for pushes in the repository where the check suite or check run were created. Pushes to a branch in a forked repository are not detected and return an empty `pull_requests` array and a `null` value for `head_branch`.
 
     Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a tag name. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to list check suites. OAuth Apps and authenticated users must have the `repo` scope to get check suites in a private repository.
-         * FROM: https://docs.github.com/rest/reference/checks#list-check-suites-for-a-git-reference
-         */
+    * FROM: https://docs.github.com/rest/reference/checks#list-check-suites-for-a-git-reference
+    */
     pub async fn checks_list_suites_for_ref(
         &self,
         owner: &str,
@@ -34793,22 +34793,22 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
         page: i64,
     ) -> Result<types::GetListCheckSuitesGitReferenceOkResponse> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/check-suites?per_page={}&page={}&check_name={}&app_id={}",
+            "/repos/{}/{}/commits/{}/check-suites?app_id={}&per_page={}&page={}&check_name={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
+            format!("{}", app_id),
             format!("{}", per_page),
             format!("{}", page),
             check_name.to_string(),
-            format!("{}", app_id),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_get_combined_status_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/status
-         * Users with pull access in a repository can access a combined view of commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name.
+    * repos_get_combined_status_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/status
+    * Users with pull access in a repository can access a combined view of commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name.
 
     The most recent status for each context is returned, up to 100. This field [paginates](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination) if there are over 100 contexts.
 
@@ -34817,8 +34817,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     *   **failure** if any of the contexts report as `error` or `failure`
     *   **pending** if there are no statuses or a context is `pending`
     *   **success** if the latest status for all contexts is `success`
-         * FROM: https://docs.github.com/rest/reference/repos#get-the-combined-status-for-a-specific-reference
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-the-combined-status-for-a-specific-reference
+    */
     pub async fn repos_get_combined_status_for_ref(
         &self,
         owner: &str,
@@ -34828,24 +34828,24 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
         page: i64,
     ) -> Result<types::CombinedCommitStatus> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/status?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/status?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_list_commit_statuses_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/statuses
-         * Users with pull access in a repository can view commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name. Statuses are returned in reverse chronological order. The first status in the list will be the latest one.
+    * repos_list_commit_statuses_for_ref: GET /repos/{owner}/{repo}/commits/{ref}/statuses
+    * Users with pull access in a repository can view commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name. Statuses are returned in reverse chronological order. The first status in the list will be the latest one.
 
     This resource is also available via a legacy route: `GET /repos/:owner/:repo/statuses/:ref`.
-         * FROM: https://docs.github.com/rest/reference/repos#list-commit-statuses-for-a-reference
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-commit-statuses-for-a-reference
+    */
     pub async fn repos_list_commit_statuses_for_ref(
         &self,
         owner: &str,
@@ -34867,12 +34867,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * codes_of_conduct_get_for_repo: GET /repos/{owner}/{repo}/community/code_of_conduct
-         * Returns the contents of the repository's code of conduct file, if one is detected.
+    * codes_of_conduct_get_for_repo: GET /repos/{owner}/{repo}/community/code_of_conduct
+    * Returns the contents of the repository's code of conduct file, if one is detected.
 
     A code of conduct is detected if there is a file named `CODE_OF_CONDUCT` in the root directory of the repository. GitHub detects which code of conduct it is using fuzzy matching.
-         * FROM: https://docs.github.com/rest/reference/codes-of-conduct#get-the-code-of-conduct-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/codes-of-conduct#get-the-code-of-conduct-for-a-repository
+    */
     pub async fn codes_of_conduct_get_for_repo(
         &self,
         owner: &str,
@@ -34888,8 +34888,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_get_community_profile_metrics: GET /repos/{owner}/{repo}/community/profile
-         * This endpoint will return all community profile metrics, including an
+    * repos_get_community_profile_metrics: GET /repos/{owner}/{repo}/community/profile
+    * This endpoint will return all community profile metrics, including an
     overall health score, repository description, the presence of documentation, detected
     code of conduct, detected license, and the presence of ISSUE\_TEMPLATE, PULL\_REQUEST\_TEMPLATE,
     README, and CONTRIBUTING files.
@@ -34901,8 +34901,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     `health_percentage` is `25`.
 
     `content_reports_enabled` is only returned for organization-owned repositories.
-         * FROM: https://docs.github.com/rest/reference/repos#get-community-profile-metrics
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-community-profile-metrics
+    */
     pub async fn repos_get_community_profile_metrics(
         &self,
         owner: &str,
@@ -34918,8 +34918,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_compare_commits: GET /repos/{owner}/{repo}/compare/{basehead}
-         * The `basehead` param is comprised of two parts: `base` and `head`. Both must be branch names in `repo`. To compare branches across other repositories in the same network as `repo`, use the format `<USERNAME>:branch`.
+    * repos_compare_commits: GET /repos/{owner}/{repo}/compare/{basehead}
+    * The `basehead` param is comprised of two parts: `base` and `head`. Both must be branch names in `repo`. To compare branches across other repositories in the same network as `repo`, use the format `<USERNAME>:branch`.
 
     The response from the API is equivalent to running the `git log base..head` command; however, commits are returned in chronological order. Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
 
@@ -34959,8 +34959,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     | `malformed_signature` | There was an error parsing the signature. |
     | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
     | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-         * FROM: https://docs.github.com/rest/reference/repos#compare-two-commits
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#compare-two-commits
+    */
     pub async fn repos_compare_commits(
         &self,
         owner: &str,
@@ -34982,14 +34982,14 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * apps_create_content_attachment: POST /repos/{owner}/{repo}/content_references/{content_reference_id}/attachments
-         * Creates an attachment under a content reference URL in the body or comment of an issue or pull request. Use the `id` and `repository` `full_name` of the content reference from the [`content_reference` event](https://docs.github.com/webhooks/event-payloads/#content_reference) to create an attachment.
+    * apps_create_content_attachment: POST /repos/{owner}/{repo}/content_references/{content_reference_id}/attachments
+    * Creates an attachment under a content reference URL in the body or comment of an issue or pull request. Use the `id` and `repository` `full_name` of the content reference from the [`content_reference` event](https://docs.github.com/webhooks/event-payloads/#content_reference) to create an attachment.
 
     The app must create a content attachment within six hours of the content reference URL being posted. See "[Using content attachments](https://docs.github.com/apps/using-content-attachments/)" for details about content attachments.
 
     You must use an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#create-a-content-attachment
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#create-a-content-attachment
+    */
     pub async fn apps_create_content_attachment(
         &self,
         owner: &str,
@@ -35012,8 +35012,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_get_content: GET /repos/{owner}/{repo}/contents/{path}
-         * Gets the contents of a file or directory in a repository. Specify the file path or directory in `:path`. If you omit
+    * repos_get_content: GET /repos/{owner}/{repo}/contents/{path}
+    * Gets the contents of a file or directory in a repository. Specify the file path or directory in `:path`. If you omit
     `:path`, you will receive the contents of the repository's root directory. See the description below regarding what the API response includes for directories.
 
     Files and symlinks support [a custom media type](https://docs.github.com/rest/reference/repos#custom-media-types) for
@@ -35045,8 +35045,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
 
     If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the
     github.com URLs (`html_url` and `_links["html"]`) will have null values.
-         * FROM: https://docs.github.com/rest/reference/repos#get-repository-content
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-repository-content
+    */
     pub async fn repos_get_content(
         &self,
         owner: &str,
@@ -35066,10 +35066,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_create_or_update_file_contents: PUT /repos/{owner}/{repo}/contents/{path}
-     * Creates a new file or replaces an existing file in a repository.
-     * FROM: https://docs.github.com/rest/reference/repos#create-or-update-file-contents
-     */
+    * repos_create_or_update_file_contents: PUT /repos/{owner}/{repo}/contents/{path}
+    * Creates a new file or replaces an existing file in a repository.
+    * FROM: https://docs.github.com/rest/reference/repos#create-or-update-file-contents
+    */
     pub async fn repos_create_or_update_file_contents(
         &self,
         owner: &str,
@@ -35092,16 +35092,16 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_delete_file: DELETE /repos/{owner}/{repo}/contents/{path}
-         * Deletes a file in a repository.
+    * repos_delete_file: DELETE /repos/{owner}/{repo}/contents/{path}
+    * Deletes a file in a repository.
 
     You can provide an additional `committer` parameter, which is an object containing information about the committer. Or, you can provide an `author` parameter, which is an object containing information about the author.
 
     The `author` section is optional and is filled in with the `committer` information if omitted. If the `committer` information is omitted, the authenticated user's information is used.
 
     You must provide values for both `name` and `email`, whether you choose to use `author` or `committer`. Otherwise, you'll receive a `422` status code.
-         * FROM: https://docs.github.com/rest/reference/repos#delete-a-file
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-file
+    */
     pub async fn repos_delete_file(
         &self,
         owner: &str,
@@ -35128,12 +35128,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_list_contributors: GET /repos/{owner}/{repo}/contributors
-         * Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.
+    * repos_list_contributors: GET /repos/{owner}/{repo}/contributors
+    * Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.
 
     GitHub identifies contributors by author email address. This endpoint groups contribution counts by GitHub user, which includes all associated email addresses. To improve performance, only the first 500 author email addresses in the repository link to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
-         * FROM: https://docs.github.com/rest/reference/repos#list-repository-contributors
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-repository-contributors
+    */
     pub async fn repos_list_contributors(
         &self,
         owner: &str,
@@ -35143,11 +35143,11 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
         page: i64,
     ) -> Result<Vec<types::Contributor>> {
         let url = format!(
-            "/repos/{}/{}/contributors?anon={}&page={}&per_page={}",
+            "/repos/{}/{}/contributors?page={}&anon={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            anon.to_string(),
             format!("{}", page),
+            anon.to_string(),
             format!("{}", per_page),
         );
 
@@ -35155,10 +35155,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_list_deployments: GET /repos/{owner}/{repo}/deployments
-     * Simple filtering of deployments is available via query parameters:
-     * FROM: https://docs.github.com/rest/reference/repos#list-deployments
-     */
+    * repos_list_deployments: GET /repos/{owner}/{repo}/deployments
+    * Simple filtering of deployments is available via query parameters:
+    * FROM: https://docs.github.com/rest/reference/repos#list-deployments
+    */
     pub async fn repos_list_deployments(
         &self,
         owner: &str,
@@ -35171,23 +35171,23 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
         page: i64,
     ) -> Result<Vec<types::Deployment>> {
         let url = format!(
-            "/repos/{}/{}/deployments?environment={}&per_page={}&task={}&sha={}&page={}&ref={}",
+            "/repos/{}/{}/deployments?sha={}&environment={}&per_page={}&page={}&ref={}&task={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            sha.to_string(),
             environment.to_string(),
             format!("{}", per_page),
-            task.to_string(),
-            sha.to_string(),
             format!("{}", page),
             ref_,
+            task.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_create_deployment: POST /repos/{owner}/{repo}/deployments
-         * Deployments offer a few configurable parameters with certain defaults.
+    * repos_create_deployment: POST /repos/{owner}/{repo}/deployments
+    * Deployments offer a few configurable parameters with certain defaults.
 
     The `ref` parameter can be any named branch, tag, or SHA. At GitHub we often deploy branches and verify them
     before we merge a pull request.
@@ -35232,8 +35232,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     #### Failed commit status checks
     This error happens when the `required_contexts` parameter indicates that one or more contexts need to have a `success`
     status for the commit to be deployed, but one or more of the required contexts do not have a state of `success`.
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-deployment
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-deployment
+    */
     pub async fn repos_create_deployment(
         &self,
         owner: &str,
@@ -35254,10 +35254,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_get_deployment: GET /repos/{owner}/{repo}/deployments/{deployment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-deployment
-     */
+    * repos_get_deployment: GET /repos/{owner}/{repo}/deployments/{deployment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-deployment
+    */
     pub async fn repos_get_deployment(
         &self,
         owner: &str,
@@ -35275,8 +35275,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_delete_deployment: DELETE /repos/{owner}/{repo}/deployments/{deployment_id}
-         * To ensure there can always be an active deployment, you can only delete an _inactive_ deployment. Anyone with `repo` or `repo_deployment` scopes can delete an inactive deployment.
+    * repos_delete_deployment: DELETE /repos/{owner}/{repo}/deployments/{deployment_id}
+    * To ensure there can always be an active deployment, you can only delete an _inactive_ deployment. Anyone with `repo` or `repo_deployment` scopes can delete an inactive deployment.
 
     To set a deployment as inactive, you must:
 
@@ -35284,8 +35284,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     *   Mark the active deployment as inactive by adding any non-successful deployment status.
 
     For more information, see "[Create a deployment](https://docs.github.com/rest/reference/repos/#create-a-deployment)" and "[Create a deployment status](https://docs.github.com/rest/reference/repos#create-a-deployment-status)."
-         * FROM: https://docs.github.com/rest/reference/repos#delete-a-deployment
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-deployment
+    */
     pub async fn repos_delete_deployment(
         &self,
         owner: &str,
@@ -35306,10 +35306,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_list_deployment_statuses: GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses
-     * Users with pull access can view deployment statuses for a deployment:
-     * FROM: https://docs.github.com/rest/reference/repos#list-deployment-statuses
-     */
+    * repos_list_deployment_statuses: GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses
+    * Users with pull access can view deployment statuses for a deployment:
+    * FROM: https://docs.github.com/rest/reference/repos#list-deployment-statuses
+    */
     pub async fn repos_list_deployment_statuses(
         &self,
         owner: &str,
@@ -35319,24 +35319,24 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
         page: i64,
     ) -> Result<Vec<types::DeploymentStatus>> {
         let url = format!(
-            "/repos/{}/{}/deployments/{}/statuses?per_page={}&page={}",
+            "/repos/{}/{}/deployments/{}/statuses?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_create_deployment_status: POST /repos/{owner}/{repo}/deployments/{deployment_id}/statuses
-         * Users with `push` access can create deployment statuses for a given deployment.
+    * repos_create_deployment_status: POST /repos/{owner}/{repo}/deployments/{deployment_id}/statuses
+    * Users with `push` access can create deployment statuses for a given deployment.
 
     GitHub Apps require `read & write` access to "Deployments" and `read-only` access to "Repo contents" (for private repos). OAuth Apps require the `repo_deployment` scope.
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-deployment-status
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-deployment-status
+    */
     pub async fn repos_create_deployment_status(
         &self,
         owner: &str,
@@ -35359,10 +35359,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_get_deployment_status: GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}
-     * Users with pull access can view a deployment status for a deployment:
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-deployment-status
-     */
+    * repos_get_deployment_status: GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}
+    * Users with pull access can view a deployment status for a deployment:
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-deployment-status
+    */
     pub async fn repos_get_deployment_status(
         &self,
         owner: &str,
@@ -35382,8 +35382,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_create_dispatch_event: POST /repos/{owner}/{repo}/dispatches
-         * You can use this endpoint to trigger a webhook event called `repository_dispatch` when you want activity that happens outside of GitHub to trigger a GitHub Actions workflow or GitHub App webhook. You must configure your GitHub Actions workflow or GitHub App to run when the `repository_dispatch` event occurs. For an example `repository_dispatch` webhook payload, see "[RepositoryDispatchEvent](https://docs.github.com/webhooks/event-payloads/#repository_dispatch)."
+    * repos_create_dispatch_event: POST /repos/{owner}/{repo}/dispatches
+    * You can use this endpoint to trigger a webhook event called `repository_dispatch` when you want activity that happens outside of GitHub to trigger a GitHub Actions workflow or GitHub App webhook. You must configure your GitHub Actions workflow or GitHub App to run when the `repository_dispatch` event occurs. For an example `repository_dispatch` webhook payload, see "[RepositoryDispatchEvent](https://docs.github.com/webhooks/event-payloads/#repository_dispatch)."
 
     The `client_payload` parameter is available for any extra information that your workflow might need. This parameter is a JSON payload that will be passed on when the webhook event is dispatched. For example, the `client_payload` can include a message that a user would like to send using a GitHub Actions workflow. Or the `client_payload` can be used as a test to debug your workflow.
 
@@ -35393,8 +35393,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
       - GitHub Apps with both `metadata:read` and `contents:read&write` permissions.
 
     This input example shows how you can use the `client_payload` as a test to debug your workflow.
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-repository-dispatch-event
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-repository-dispatch-event
+    */
     pub async fn repos_create_dispatch_event(
         &self,
         owner: &str,
@@ -35415,12 +35415,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_get_all_environments: GET /repos/{owner}/{repo}/environments
-         * Get all environments for a repository.
+    * repos_get_all_environments: GET /repos/{owner}/{repo}/environments
+    * Get all environments for a repository.
 
     Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/repos#get-all-environments
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-all-environments
+    */
     pub async fn repos_get_all_environments(
         &self,
         owner: &str,
@@ -35436,10 +35436,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_get_environment: GET /repos/{owner}/{repo}/environments/{environment_name}
-     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/repos#get-an-environment
-     */
+    * repos_get_environment: GET /repos/{owner}/{repo}/environments/{environment_name}
+    * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/repos#get-an-environment
+    */
     pub async fn repos_get_environment(
         &self,
         owner: &str,
@@ -35457,16 +35457,16 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_create_or_update_environment: PUT /repos/{owner}/{repo}/environments/{environment_name}
-         * Create or update an environment with protection rules, such as required reviewers. For more information about environment protection rules, see "[Environments](/actions/reference/environments#environment-protection-rules)."
+    * repos_create_or_update_environment: PUT /repos/{owner}/{repo}/environments/{environment_name}
+    * Create or update an environment with protection rules, such as required reviewers. For more information about environment protection rules, see "[Environments](/actions/reference/environments#environment-protection-rules)."
 
     **Note:** Although you can use this operation to specify that only branches that match specified name patterns can deploy to this environment, you must use the UI to set the name patterns. For more information, see "[Environments](/actions/reference/environments#deployment-branches)."
 
     **Note:** To create or update secrets for an environment, see "[Secrets](/rest/reference/actions#secrets)."
 
     You must authenticate using an access token with the repo scope to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/repos#create-or-update-an-environment
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-or-update-an-environment
+    */
     pub async fn repos_create_or_update_environment(
         &self,
         owner: &str,
@@ -35489,10 +35489,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_delete_an_environment: DELETE /repos/{owner}/{repo}/environments/{environment_name}
-     * You must authenticate using an access token with the repo scope to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/repos#delete-an-environment
-     */
+    * repos_delete_an_environment: DELETE /repos/{owner}/{repo}/environments/{environment_name}
+    * You must authenticate using an access token with the repo scope to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/repos#delete-an-environment
+    */
     pub async fn repos_delete_an_environment(
         &self,
         owner: &str,
@@ -35513,10 +35513,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * activity_list_repo_events: GET /repos/{owner}/{repo}/events
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#list-repository-events
-     */
+    * activity_list_repo_events: GET /repos/{owner}/{repo}/events
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#list-repository-events
+    */
     pub async fn activity_list_repo_events(
         &self,
         owner: &str,
@@ -35536,10 +35536,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_list_forks: GET /repos/{owner}/{repo}/forks
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#list-forks
-     */
+    * repos_list_forks: GET /repos/{owner}/{repo}/forks
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#list-forks
+    */
     pub async fn repos_list_forks(
         &self,
         owner: &str,
@@ -35561,12 +35561,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_create_fork: POST /repos/{owner}/{repo}/forks
-         * Create a fork for the authenticated user.
+    * repos_create_fork: POST /repos/{owner}/{repo}/forks
+    * Create a fork for the authenticated user.
 
     **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://support.github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com).
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-fork
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-fork
+    */
     pub async fn repos_create_fork(
         &self,
         owner: &str,
@@ -35587,10 +35587,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * git_create_blob: POST /repos/{owner}/{repo}/git/blobs
-     *
-     * FROM: https://docs.github.com/rest/reference/git#create-a-blob
-     */
+    * git_create_blob: POST /repos/{owner}/{repo}/git/blobs
+    *
+    * FROM: https://docs.github.com/rest/reference/git#create-a-blob
+    */
     pub async fn git_create_blob(
         &self,
         owner: &str,
@@ -35611,12 +35611,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * git_get_blob: GET /repos/{owner}/{repo}/git/blobs/{file_sha}
-         * The `content` in the response will always be Base64 encoded.
+    * git_get_blob: GET /repos/{owner}/{repo}/git/blobs/{file_sha}
+    * The `content` in the response will always be Base64 encoded.
 
     _Note_: This API supports blobs up to 100 megabytes in size.
-         * FROM: https://docs.github.com/rest/reference/git#get-a-blob
-         */
+    * FROM: https://docs.github.com/rest/reference/git#get-a-blob
+    */
     pub async fn git_get_blob(
         &self,
         owner: &str,
@@ -35634,8 +35634,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * git_create_commit: POST /repos/{owner}/{repo}/git/commits
-         * Creates a new Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
+    * git_create_commit: POST /repos/{owner}/{repo}/git/commits
+    * Creates a new Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
 
     **Signature verification object**
 
@@ -35665,8 +35665,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     | `malformed_signature` | There was an error parsing the signature. |
     | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
     | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-         * FROM: https://docs.github.com/rest/reference/git#create-a-commit
-         */
+    * FROM: https://docs.github.com/rest/reference/git#create-a-commit
+    */
     pub async fn git_create_commit(
         &self,
         owner: &str,
@@ -35687,8 +35687,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * git_get_commit: GET /repos/{owner}/{repo}/git/commits/{commit_sha}
-         * Gets a Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
+    * git_get_commit: GET /repos/{owner}/{repo}/git/commits/{commit_sha}
+    * Gets a Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
 
     **Signature verification object**
 
@@ -35718,8 +35718,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     | `malformed_signature` | There was an error parsing the signature. |
     | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
     | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-         * FROM: https://docs.github.com/rest/reference/git#get-a-commit
-         */
+    * FROM: https://docs.github.com/rest/reference/git#get-a-commit
+    */
     pub async fn git_get_commit(
         &self,
         owner: &str,
@@ -35737,16 +35737,16 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * git_list_matching_refs: GET /repos/{owner}/{repo}/git/matching-refs/{ref}
-         * Returns an array of references from your Git database that match the supplied name. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't exist in the repository, but existing refs start with `:ref`, they will be returned as an array.
+    * git_list_matching_refs: GET /repos/{owner}/{repo}/git/matching-refs/{ref}
+    * Returns an array of references from your Git database that match the supplied name. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't exist in the repository, but existing refs start with `:ref`, they will be returned as an array.
 
     When you use this endpoint without providing a `:ref`, it will return an array of all the references from your Git database, including notes and stashes if they exist on the server. Anything in the namespace is returned, not just `heads` and `tags`.
 
     **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
 
     If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the response can still include other matching head refs that start with the word `feature`, such as `featureA` and `featureB`.
-         * FROM: https://docs.github.com/rest/reference/git#list-matching-references
-         */
+    * FROM: https://docs.github.com/rest/reference/git#list-matching-references
+    */
     pub async fn git_list_matching_refs(
         &self,
         owner: &str,
@@ -35768,12 +35768,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * git_get_ref: GET /repos/{owner}/{repo}/git/ref/{ref}
-         * Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is returned.
+    * git_get_ref: GET /repos/{owner}/{repo}/git/ref/{ref}
+    * Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is returned.
 
     **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
-         * FROM: https://docs.github.com/rest/reference/git#get-a-reference
-         */
+    * FROM: https://docs.github.com/rest/reference/git#get-a-reference
+    */
     pub async fn git_get_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<types::GitRef> {
         let url = format!(
             "/repos/{}/{}/git/ref/{}",
@@ -35786,10 +35786,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * git_create_ref: POST /repos/{owner}/{repo}/git/refs
-     * Creates a reference for your repository. You are unable to create new references for empty repositories, even if the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
-     * FROM: https://docs.github.com/rest/reference/git#create-a-reference
-     */
+    * git_create_ref: POST /repos/{owner}/{repo}/git/refs
+    * Creates a reference for your repository. You are unable to create new references for empty repositories, even if the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
+    * FROM: https://docs.github.com/rest/reference/git#create-a-reference
+    */
     pub async fn git_create_ref(
         &self,
         owner: &str,
@@ -35810,10 +35810,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * git_delete_ref: DELETE /repos/{owner}/{repo}/git/refs/{ref}
-     *
-     * FROM: https://docs.github.com/rest/reference/git#delete-a-reference
-     */
+    * git_delete_ref: DELETE /repos/{owner}/{repo}/git/refs/{ref}
+    *
+    * FROM: https://docs.github.com/rest/reference/git#delete-a-reference
+    */
     pub async fn git_delete_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/git/refs/{}",
@@ -35829,10 +35829,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * git_update_ref: PATCH /repos/{owner}/{repo}/git/refs/{ref}
-     *
-     * FROM: https://docs.github.com/rest/reference/git#update-a-reference
-     */
+    * git_update_ref: PATCH /repos/{owner}/{repo}/git/refs/{ref}
+    *
+    * FROM: https://docs.github.com/rest/reference/git#update-a-reference
+    */
     pub async fn git_update_ref(
         &self,
         owner: &str,
@@ -35855,8 +35855,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * git_create_tag: POST /repos/{owner}/{repo}/git/tags
-         * Note that creating a tag object does not create the reference that makes a tag in Git. If you want to create an annotated tag in Git, you have to do this call to create the tag object, and then [create](https://docs.github.com/rest/reference/git#create-a-reference) the `refs/tags/[tag]` reference. If you want to create a lightweight tag, you only have to [create](https://docs.github.com/rest/reference/git#create-a-reference) the tag reference - this call would be unnecessary.
+    * git_create_tag: POST /repos/{owner}/{repo}/git/tags
+    * Note that creating a tag object does not create the reference that makes a tag in Git. If you want to create an annotated tag in Git, you have to do this call to create the tag object, and then [create](https://docs.github.com/rest/reference/git#create-a-reference) the `refs/tags/[tag]` reference. If you want to create a lightweight tag, you only have to [create](https://docs.github.com/rest/reference/git#create-a-reference) the tag reference - this call would be unnecessary.
 
     **Signature verification object**
 
@@ -35886,8 +35886,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     | `malformed_signature` | There was an error parsing the signature. |
     | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
     | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-         * FROM: https://docs.github.com/rest/reference/git#create-a-tag-object
-         */
+    * FROM: https://docs.github.com/rest/reference/git#create-a-tag-object
+    */
     pub async fn git_create_tag(
         &self,
         owner: &str,
@@ -35908,8 +35908,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * git_get_tag: GET /repos/{owner}/{repo}/git/tags/{tag_sha}
-         * **Signature verification object**
+    * git_get_tag: GET /repos/{owner}/{repo}/git/tags/{tag_sha}
+    * **Signature verification object**
 
     The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
 
@@ -35937,8 +35937,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     | `malformed_signature` | There was an error parsing the signature. |
     | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
     | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-         * FROM: https://docs.github.com/rest/reference/git#get-a-tag
-         */
+    * FROM: https://docs.github.com/rest/reference/git#get-a-tag
+    */
     pub async fn git_get_tag(
         &self,
         owner: &str,
@@ -35956,12 +35956,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * git_create_tree: POST /repos/{owner}/{repo}/git/trees
-         * The tree creation API accepts nested entries. If you specify both a tree and a nested path modifying that tree, this endpoint will overwrite the contents of the tree with the new path contents, and create a new tree structure.
+    * git_create_tree: POST /repos/{owner}/{repo}/git/trees
+    * The tree creation API accepts nested entries. If you specify both a tree and a nested path modifying that tree, this endpoint will overwrite the contents of the tree with the new path contents, and create a new tree structure.
 
     If you use this endpoint to add, delete, or modify the file contents in a tree, you will need to commit the tree and then update a branch to point to the commit. For more information see "[Create a commit](https://docs.github.com/rest/reference/git#create-a-commit)" and "[Update a reference](https://docs.github.com/rest/reference/git#update-a-reference)."
-         * FROM: https://docs.github.com/rest/reference/git#create-a-tree
-         */
+    * FROM: https://docs.github.com/rest/reference/git#create-a-tree
+    */
     pub async fn git_create_tree(
         &self,
         owner: &str,
@@ -35982,12 +35982,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * git_get_tree: GET /repos/{owner}/{repo}/git/trees/{tree_sha}
-         * Returns a single tree using the SHA1 value for that tree.
+    * git_get_tree: GET /repos/{owner}/{repo}/git/trees/{tree_sha}
+    * Returns a single tree using the SHA1 value for that tree.
 
     If `truncated` is `true` in the response then the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.
-         * FROM: https://docs.github.com/rest/reference/git#get-a-tree
-         */
+    * FROM: https://docs.github.com/rest/reference/git#get-a-tree
+    */
     pub async fn git_get_tree(
         &self,
         owner: &str,
@@ -36007,10 +36007,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_list_webhooks: GET /repos/{owner}/{repo}/hooks
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#list-repository-webhooks
-     */
+    * repos_list_webhooks: GET /repos/{owner}/{repo}/hooks
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#list-repository-webhooks
+    */
     pub async fn repos_list_webhooks(
         &self,
         owner: &str,
@@ -36030,11 +36030,11 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_create_webhook: POST /repos/{owner}/{repo}/hooks
-         * Repositories can have multiple webhooks installed. Each webhook should have a unique `config`. Multiple webhooks can
+    * repos_create_webhook: POST /repos/{owner}/{repo}/hooks
+    * Repositories can have multiple webhooks installed. Each webhook should have a unique `config`. Multiple webhooks can
     share the same `config` as long as those webhooks do not have any `events` that overlap.
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-repository-webhook
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-repository-webhook
+    */
     pub async fn repos_create_webhook(
         &self,
         owner: &str,
@@ -36055,10 +36055,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_get_webhook: GET /repos/{owner}/{repo}/hooks/{hook_id}
-     * Returns a webhook configured in a repository. To get only the webhook `config` properties, see "[Get a webhook configuration for a repository](/rest/reference/repos#get-a-webhook-configuration-for-a-repository)."
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-repository-webhook
-     */
+    * repos_get_webhook: GET /repos/{owner}/{repo}/hooks/{hook_id}
+    * Returns a webhook configured in a repository. To get only the webhook `config` properties, see "[Get a webhook configuration for a repository](/rest/reference/repos#get-a-webhook-configuration-for-a-repository)."
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-repository-webhook
+    */
     pub async fn repos_get_webhook(
         &self,
         owner: &str,
@@ -36076,10 +36076,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_delete_webhook: DELETE /repos/{owner}/{repo}/hooks/{hook_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#delete-a-repository-webhook
-     */
+    * repos_delete_webhook: DELETE /repos/{owner}/{repo}/hooks/{hook_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-repository-webhook
+    */
     pub async fn repos_delete_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/hooks/{}",
@@ -36095,10 +36095,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_update_webhook: PATCH /repos/{owner}/{repo}/hooks/{hook_id}
-     * Updates a webhook configured in a repository. If you previously had a `secret` set, you must provide the same `secret` or set a new `secret` or the secret will be removed. If you are only updating individual webhook `config` properties, use "[Update a webhook configuration for a repository](/rest/reference/repos#update-a-webhook-configuration-for-a-repository)."
-     * FROM: https://docs.github.com/rest/reference/repos#update-a-repository-webhook
-     */
+    * repos_update_webhook: PATCH /repos/{owner}/{repo}/hooks/{hook_id}
+    * Updates a webhook configured in a repository. If you previously had a `secret` set, you must provide the same `secret` or set a new `secret` or the secret will be removed. If you are only updating individual webhook `config` properties, use "[Update a webhook configuration for a repository](/rest/reference/repos#update-a-webhook-configuration-for-a-repository)."
+    * FROM: https://docs.github.com/rest/reference/repos#update-a-repository-webhook
+    */
     pub async fn repos_update_webhook(
         &self,
         owner: &str,
@@ -36121,12 +36121,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_get_webhook_config_for_repo: GET /repos/{owner}/{repo}/hooks/{hook_id}/config
-         * Returns the webhook configuration for a repository. To get more information about the webhook, including the `active` state and `events`, use "[Get a repository webhook](/rest/reference/orgs#get-a-repository-webhook)."
+    * repos_get_webhook_config_for_repo: GET /repos/{owner}/{repo}/hooks/{hook_id}/config
+    * Returns the webhook configuration for a repository. To get more information about the webhook, including the `active` state and `events`, use "[Get a repository webhook](/rest/reference/orgs#get-a-repository-webhook)."
 
     Access tokens must have the `read:repo_hook` or `repo` scope, and GitHub Apps must have the `repository_hooks:read` permission.
-         * FROM: https://docs.github.com/rest/reference/repos#get-a-webhook-configuration-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-webhook-configuration-for-a-repository
+    */
     pub async fn repos_get_webhook_config_for_repo(
         &self,
         owner: &str,
@@ -36144,12 +36144,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_update_webhook_config_for_repo: PATCH /repos/{owner}/{repo}/hooks/{hook_id}/config
-         * Updates the webhook configuration for a repository. To update more information about the webhook, including the `active` state and `events`, use "[Update a repository webhook](/rest/reference/orgs#update-a-repository-webhook)."
+    * repos_update_webhook_config_for_repo: PATCH /repos/{owner}/{repo}/hooks/{hook_id}/config
+    * Updates the webhook configuration for a repository. To update more information about the webhook, including the `active` state and `events`, use "[Update a repository webhook](/rest/reference/orgs#update-a-repository-webhook)."
 
     Access tokens must have the `write:repo_hook` or `repo` scope, and GitHub Apps must have the `repository_hooks:write` permission.
-         * FROM: https://docs.github.com/rest/reference/repos#update-a-webhook-configuration-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#update-a-webhook-configuration-for-a-repository
+    */
     pub async fn repos_update_webhook_config_for_repo(
         &self,
         owner: &str,
@@ -36172,10 +36172,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_ping_webhook: POST /repos/{owner}/{repo}/hooks/{hook_id}/pings
-     * This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
-     * FROM: https://docs.github.com/rest/reference/repos#ping-a-repository-webhook
-     */
+    * repos_ping_webhook: POST /repos/{owner}/{repo}/hooks/{hook_id}/pings
+    * This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
+    * FROM: https://docs.github.com/rest/reference/repos#ping-a-repository-webhook
+    */
     pub async fn repos_ping_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/hooks/{}/pings",
@@ -36188,12 +36188,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * repos_test_push_webhook: POST /repos/{owner}/{repo}/hooks/{hook_id}/tests
-         * This will trigger the hook with the latest push to the current repository if the hook is subscribed to `push` events. If the hook is not subscribed to `push` events, the server will respond with 204 but no test POST will be generated.
+    * repos_test_push_webhook: POST /repos/{owner}/{repo}/hooks/{hook_id}/tests
+    * This will trigger the hook with the latest push to the current repository if the hook is subscribed to `push` events. If the hook is not subscribed to `push` events, the server will respond with 204 but no test POST will be generated.
 
     **Note**: Previously `/repos/:owner/:repo/hooks/:hook_id/test`
-         * FROM: https://docs.github.com/rest/reference/repos#test-the-push-repository-webhook
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#test-the-push-repository-webhook
+    */
     pub async fn repos_test_push_webhook(
         &self,
         owner: &str,
@@ -36211,8 +36211,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * migrations_get_import_status: GET /repos/{owner}/{repo}/import
-         * View the progress of an import.
+    * migrations_get_import_status: GET /repos/{owner}/{repo}/import
+    * View the progress of an import.
 
     **Import status**
 
@@ -36246,8 +36246,8 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     *   `has_large_files` - the boolean value describing whether files larger than 100MB were found during the `importing` step.
     *   `large_files_size` - the total size in gigabytes of files larger than 100MB found in the originating repository.
     *   `large_files_count` - the total number of files larger than 100MB found in the originating repository. To see a list of these files, make a "Get Large Files" request.
-         * FROM: https://docs.github.com/rest/reference/migrations#get-an-import-status
-         */
+    * FROM: https://docs.github.com/rest/reference/migrations#get-an-import-status
+    */
     pub async fn migrations_get_import_status(
         &self,
         owner: &str,
@@ -36263,10 +36263,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * migrations_start_import: PUT /repos/{owner}/{repo}/import
-     * Start a source import to a GitHub repository using GitHub Importer.
-     * FROM: https://docs.github.com/rest/reference/migrations#start-an-import
-     */
+    * migrations_start_import: PUT /repos/{owner}/{repo}/import
+    * Start a source import to a GitHub repository using GitHub Importer.
+    * FROM: https://docs.github.com/rest/reference/migrations#start-an-import
+    */
     pub async fn migrations_start_import(
         &self,
         owner: &str,
@@ -36287,10 +36287,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * migrations_cancel_import: DELETE /repos/{owner}/{repo}/import
-     * Stop an import for a repository.
-     * FROM: https://docs.github.com/rest/reference/migrations#cancel-an-import
-     */
+    * migrations_cancel_import: DELETE /repos/{owner}/{repo}/import
+    * Stop an import for a repository.
+    * FROM: https://docs.github.com/rest/reference/migrations#cancel-an-import
+    */
     pub async fn migrations_cancel_import(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/import",
@@ -36305,11 +36305,11 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * migrations_update_import: PATCH /repos/{owner}/{repo}/import
-         * An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API
+    * migrations_update_import: PATCH /repos/{owner}/{repo}/import
+    * An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API
     request. If no parameters are provided, the import will be restarted.
-         * FROM: https://docs.github.com/rest/reference/migrations#update-an-import
-         */
+    * FROM: https://docs.github.com/rest/reference/migrations#update-an-import
+    */
     pub async fn migrations_update_import(
         &self,
         owner: &str,
@@ -36330,12 +36330,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * migrations_get_commit_authors: GET /repos/{owner}/{repo}/import/authors
-         * Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`.
+    * migrations_get_commit_authors: GET /repos/{owner}/{repo}/import/authors
+    * Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`.
 
     This endpoint and the [Map a commit author](https://docs.github.com/rest/reference/migrations#map-a-commit-author) endpoint allow you to provide correct Git author information.
-         * FROM: https://docs.github.com/rest/reference/migrations#get-commit-authors
-         */
+    * FROM: https://docs.github.com/rest/reference/migrations#get-commit-authors
+    */
     pub async fn migrations_get_commit_authors(
         &self,
         owner: &str,
@@ -36353,10 +36353,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * migrations_map_commit_author: PATCH /repos/{owner}/{repo}/import/authors/{author_id}
-     * Update an author's identity for the import. Your application can continue updating authors any time before you push new commits to the repository.
-     * FROM: https://docs.github.com/rest/reference/migrations#map-a-commit-author
-     */
+    * migrations_map_commit_author: PATCH /repos/{owner}/{repo}/import/authors/{author_id}
+    * Update an author's identity for the import. Your application can continue updating authors any time before you push new commits to the repository.
+    * FROM: https://docs.github.com/rest/reference/migrations#map-a-commit-author
+    */
     pub async fn migrations_map_commit_author(
         &self,
         owner: &str,
@@ -36379,10 +36379,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * migrations_get_large_files: GET /repos/{owner}/{repo}/import/large_files
-     * List files larger than 100MB found during the import
-     * FROM: https://docs.github.com/rest/reference/migrations#get-large-files
-     */
+    * migrations_get_large_files: GET /repos/{owner}/{repo}/import/large_files
+    * List files larger than 100MB found during the import
+    * FROM: https://docs.github.com/rest/reference/migrations#get-large-files
+    */
     pub async fn migrations_get_large_files(
         &self,
         owner: &str,
@@ -36398,10 +36398,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * migrations_set_lfs_preference: PATCH /repos/{owner}/{repo}/import/lfs
-     * You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://help.github.com/articles/versioning-large-files/).
-     * FROM: https://docs.github.com/rest/reference/migrations#update-git-lfs-preference
-     */
+    * migrations_set_lfs_preference: PATCH /repos/{owner}/{repo}/import/lfs
+    * You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://help.github.com/articles/versioning-large-files/).
+    * FROM: https://docs.github.com/rest/reference/migrations#update-git-lfs-preference
+    */
     pub async fn migrations_set_lfs_preference(
         &self,
         owner: &str,
@@ -36422,12 +36422,12 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * apps_get_repo_installation: GET /repos/{owner}/{repo}/installation
-         * Enables an authenticated GitHub App to find the repository's installation information. The installation's account type will be either an organization or a user account, depending which account the repository belongs to.
+    * apps_get_repo_installation: GET /repos/{owner}/{repo}/installation
+    * Enables an authenticated GitHub App to find the repository's installation information. The installation's account type will be either an organization or a user account, depending which account the repository belongs to.
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#get-a-repository-installation-for-the-authenticated-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#get-a-repository-installation-for-the-authenticated-app
+    */
     pub async fn apps_get_repo_installation(
         &self,
         owner: &str,
@@ -36443,10 +36443,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * interactions_get_restrictions_for_repo: GET /repos/{owner}/{repo}/interaction-limits
-     * Shows which type of GitHub user can interact with this repository and when the restriction expires. If there are no restrictions, you will see an empty response.
-     * FROM: https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-a-repository
-     */
+    * interactions_get_restrictions_for_repo: GET /repos/{owner}/{repo}/interaction-limits
+    * Shows which type of GitHub user can interact with this repository and when the restriction expires. If there are no restrictions, you will see an empty response.
+    * FROM: https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-a-repository
+    */
     pub async fn interactions_get_restrictions_for_repo(
         &self,
         owner: &str,
@@ -36462,10 +36462,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * interactions_set_restrictions_for_repo: PUT /repos/{owner}/{repo}/interaction-limits
-     * Temporarily restricts interactions to a certain type of GitHub user within the given repository. You must have owner or admin access to set these restrictions. If an interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
-     * FROM: https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-a-repository
-     */
+    * interactions_set_restrictions_for_repo: PUT /repos/{owner}/{repo}/interaction-limits
+    * Temporarily restricts interactions to a certain type of GitHub user within the given repository. You must have owner or admin access to set these restrictions. If an interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
+    * FROM: https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-a-repository
+    */
     pub async fn interactions_set_restrictions_for_repo(
         &self,
         owner: &str,
@@ -36486,10 +36486,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * interactions_remove_restrictions_for_repo: DELETE /repos/{owner}/{repo}/interaction-limits
-     * Removes all interaction restrictions from the given repository. You must have owner or admin access to remove restrictions. If the interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
-     * FROM: https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-for-a-repository
-     */
+    * interactions_remove_restrictions_for_repo: DELETE /repos/{owner}/{repo}/interaction-limits
+    * Removes all interaction restrictions from the given repository. You must have owner or admin access to remove restrictions. If the interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
+    * FROM: https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-for-a-repository
+    */
     pub async fn interactions_remove_restrictions_for_repo(
         &self,
         owner: &str,
@@ -36508,10 +36508,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_list_invitations: GET /repos/{owner}/{repo}/invitations
-     * When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
-     * FROM: https://docs.github.com/rest/reference/repos#list-repository-invitations
-     */
+    * repos_list_invitations: GET /repos/{owner}/{repo}/invitations
+    * When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
+    * FROM: https://docs.github.com/rest/reference/repos#list-repository-invitations
+    */
     pub async fn repos_list_invitations(
         &self,
         owner: &str,
@@ -36531,10 +36531,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_delete_invitation: DELETE /repos/{owner}/{repo}/invitations/{invitation_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#delete-a-repository-invitation
-     */
+    * repos_delete_invitation: DELETE /repos/{owner}/{repo}/invitations/{invitation_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-repository-invitation
+    */
     pub async fn repos_delete_invitation(
         &self,
         owner: &str,
@@ -36555,10 +36555,10 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-     * repos_update_invitation: PATCH /repos/{owner}/{repo}/invitations/{invitation_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#update-a-repository-invitation
-     */
+    * repos_update_invitation: PATCH /repos/{owner}/{repo}/invitations/{invitation_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#update-a-repository-invitation
+    */
     pub async fn repos_update_invitation(
         &self,
         owner: &str,
@@ -36581,15 +36581,15 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
     }
 
     /**
-         * issues_list_for_repo: GET /repos/{owner}/{repo}/issues
-         * List issues in a repository.
+    * issues_list_for_repo: GET /repos/{owner}/{repo}/issues
+    * List issues in a repository.
 
     **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
     reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
     the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
     request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-         * FROM: https://docs.github.com/rest/reference/issues#list-repository-issues
-         */
+    * FROM: https://docs.github.com/rest/reference/issues#list-repository-issues
+    */
     pub async fn issues_list_for_repo(
         &self,
         owner: &str,
@@ -36606,21 +36606,21 @@ format!("{}", page), check_name.to_string(), format!("{}", app_id), status.to_st
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::IssueSimple>> {
-        let url = format!("/repos/{}/{}/issues?creator={}&labels={}&page={}&milestone={}&state={}&assignee={}&mentioned={}&since={}&sort={}&per_page={}&direction={}",
+        let url = format!("/repos/{}/{}/issues?per_page={}&page={}&mentioned={}&creator={}&state={}&labels={}&sort={}&direction={}&assignee={}&since={}&milestone={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_string(), state.to_string(), assignee.to_string(), mentioned.to_string(), since.to_rfc3339(), sort.to_string(), format!("{}", per_page), direction.to_string(),         );
+format!("{}", per_page), format!("{}", page), mentioned.to_string(), creator.to_string(), state.to_string(), labels.to_string(), sort.to_string(), direction.to_string(), assignee.to_string(), since.to_rfc3339(), milestone.to_string(),         );
 
         self.get(&url).await
     }
 
     /**
-         * issues_create: POST /repos/{owner}/{repo}/issues
-         * Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://help.github.com/articles/disabling-issues/), the API returns a `410 Gone` status.
+    * issues_create: POST /repos/{owner}/{repo}/issues
+    * Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://help.github.com/articles/disabling-issues/), the API returns a `410 Gone` status.
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
-         * FROM: https://docs.github.com/rest/reference/issues#create-an-issue
-         */
+    * FROM: https://docs.github.com/rest/reference/issues#create-an-issue
+    */
     pub async fn issues_create(
         &self,
         owner: &str,
@@ -36641,10 +36641,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_list_comments_for_repo: GET /repos/{owner}/{repo}/issues/comments
-     * By default, Issue Comments are ordered by ascending ID.
-     * FROM: https://docs.github.com/rest/reference/issues#list-issue-comments-for-a-repository
-     */
+    * issues_list_comments_for_repo: GET /repos/{owner}/{repo}/issues/comments
+    * By default, Issue Comments are ordered by ascending ID.
+    * FROM: https://docs.github.com/rest/reference/issues#list-issue-comments-for-a-repository
+    */
     pub async fn issues_list_comments_for_repo(
         &self,
         owner: &str,
@@ -36656,13 +36656,13 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
         page: i64,
     ) -> Result<Vec<types::IssueComment>> {
         let url = format!(
-            "/repos/{}/{}/issues/comments?per_page={}&sort={}&direction={}&since={}&page={}",
+            "/repos/{}/{}/issues/comments?since={}&sort={}&per_page={}&direction={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
-            sort.to_string(),
-            direction.to_string(),
             since.to_rfc3339(),
+            sort.to_string(),
+            format!("{}", per_page),
+            direction.to_string(),
             format!("{}", page),
         );
 
@@ -36670,10 +36670,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_get_comment: GET /repos/{owner}/{repo}/issues/comments/{comment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#get-an-issue-comment
-     */
+    * issues_get_comment: GET /repos/{owner}/{repo}/issues/comments/{comment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#get-an-issue-comment
+    */
     pub async fn issues_get_comment(
         &self,
         owner: &str,
@@ -36691,10 +36691,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_delete_comment: DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#delete-an-issue-comment
-     */
+    * issues_delete_comment: DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#delete-an-issue-comment
+    */
     pub async fn issues_delete_comment(
         &self,
         owner: &str,
@@ -36715,10 +36715,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_update_comment: PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#update-an-issue-comment
-     */
+    * issues_update_comment: PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#update-an-issue-comment
+    */
     pub async fn issues_update_comment(
         &self,
         owner: &str,
@@ -36741,10 +36741,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * reactions_list_for_issue_comment: GET /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions
-     * List the reactions to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
-     * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue-comment
-     */
+    * reactions_list_for_issue_comment: GET /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions
+    * List the reactions to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
+    * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue-comment
+    */
     pub async fn reactions_list_for_issue_comment(
         &self,
         owner: &str,
@@ -36755,12 +36755,12 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/issues/comments/{}/reactions?page={}&per_page={}&content={}",
+            "/repos/{}/{}/issues/comments/{}/reactions?per_page={}&page={}&content={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
             content.to_string(),
         );
 
@@ -36768,10 +36768,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * reactions_create_for_issue_comment: POST /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions
-     * Create a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments). A response with an HTTP `200` status means that you already added the reaction type to this issue comment.
-     * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-an-issue-comment
-     */
+    * reactions_create_for_issue_comment: POST /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions
+    * Create a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments). A response with an HTTP `200` status means that you already added the reaction type to this issue comment.
+    * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-an-issue-comment
+    */
     pub async fn reactions_create_for_issue_comment(
         &self,
         owner: &str,
@@ -36794,12 +36794,12 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-         * reactions_delete_for_issue_comment: DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}
-         * **Note:** You can also specify a repository by `repository_id` using the route `DELETE delete /repositories/:repository_id/issues/comments/:comment_id/reactions/:reaction_id`.
+    * reactions_delete_for_issue_comment: DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}
+    * **Note:** You can also specify a repository by `repository_id` using the route `DELETE delete /repositories/:repository_id/issues/comments/:comment_id/reactions/:reaction_id`.
 
     Delete a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
-         * FROM: https://docs.github.com/rest/reference/reactions#delete-an-issue-comment-reaction
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#delete-an-issue-comment-reaction
+    */
     pub async fn reactions_delete_for_issue_comment(
         &self,
         owner: &str,
@@ -36822,10 +36822,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_list_events_for_repo: GET /repos/{owner}/{repo}/issues/events
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#list-issue-events-for-a-repository
-     */
+    * issues_list_events_for_repo: GET /repos/{owner}/{repo}/issues/events
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#list-issue-events-for-a-repository
+    */
     pub async fn issues_list_events_for_repo(
         &self,
         owner: &str,
@@ -36845,10 +36845,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_get_event: GET /repos/{owner}/{repo}/issues/events/{event_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#get-an-issue-event
-     */
+    * issues_get_event: GET /repos/{owner}/{repo}/issues/events/{event_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#get-an-issue-event
+    */
     pub async fn issues_get_event(
         &self,
         owner: &str,
@@ -36866,8 +36866,8 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-         * issues_get: GET /repos/{owner}/{repo}/issues/{issue_number}
-         * The API returns a [`301 Moved Permanently` status](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-redirects-redirects) if the issue was
+    * issues_get: GET /repos/{owner}/{repo}/issues/{issue_number}
+    * The API returns a [`301 Moved Permanently` status](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-redirects-redirects) if the issue was
     [transferred](https://help.github.com/articles/transferring-an-issue-to-another-repository/) to another repository. If
     the issue was transferred to or deleted from a repository where the authenticated user lacks read access, the API
     returns a `404 Not Found` status. If the issue was deleted from a repository where the authenticated user has read
@@ -36878,8 +36878,8 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
     the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
     request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-         * FROM: https://docs.github.com/rest/reference/issues#get-an-issue
-         */
+    * FROM: https://docs.github.com/rest/reference/issues#get-an-issue
+    */
     pub async fn issues_get(
         &self,
         owner: &str,
@@ -36897,10 +36897,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_update: PATCH /repos/{owner}/{repo}/issues/{issue_number}
-     * Issue owners and users with push access can edit an issue.
-     * FROM: https://docs.github.com/rest/reference/issues/#update-an-issue
-     */
+    * issues_update: PATCH /repos/{owner}/{repo}/issues/{issue_number}
+    * Issue owners and users with push access can edit an issue.
+    * FROM: https://docs.github.com/rest/reference/issues/#update-an-issue
+    */
     pub async fn issues_update(
         &self,
         owner: &str,
@@ -36923,10 +36923,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_add_assignees: POST /repos/{owner}/{repo}/issues/{issue_number}/assignees
-     * Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
-     * FROM: https://docs.github.com/rest/reference/issues#add-assignees-to-an-issue
-     */
+    * issues_add_assignees: POST /repos/{owner}/{repo}/issues/{issue_number}/assignees
+    * Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
+    * FROM: https://docs.github.com/rest/reference/issues#add-assignees-to-an-issue
+    */
     pub async fn issues_add_assignees(
         &self,
         owner: &str,
@@ -36949,10 +36949,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_remove_assignees: DELETE /repos/{owner}/{repo}/issues/{issue_number}/assignees
-     * Removes one or more assignees from an issue.
-     * FROM: https://docs.github.com/rest/reference/issues#remove-assignees-from-an-issue
-     */
+    * issues_remove_assignees: DELETE /repos/{owner}/{repo}/issues/{issue_number}/assignees
+    * Removes one or more assignees from an issue.
+    * FROM: https://docs.github.com/rest/reference/issues#remove-assignees-from-an-issue
+    */
     pub async fn issues_remove_assignees(
         &self,
         owner: &str,
@@ -36979,10 +36979,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_list_comments: GET /repos/{owner}/{repo}/issues/{issue_number}/comments
-     * Issue Comments are ordered by ascending ID.
-     * FROM: https://docs.github.com/rest/reference/issues#list-issue-comments
-     */
+    * issues_list_comments: GET /repos/{owner}/{repo}/issues/{issue_number}/comments
+    * Issue Comments are ordered by ascending ID.
+    * FROM: https://docs.github.com/rest/reference/issues#list-issue-comments
+    */
     pub async fn issues_list_comments(
         &self,
         owner: &str,
@@ -36993,12 +36993,12 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
         page: i64,
     ) -> Result<Vec<types::IssueComment>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/comments?since={}&per_page={}&page={}",
+            "/repos/{}/{}/issues/{}/comments?per_page={}&since={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            since.to_rfc3339(),
             format!("{}", per_page),
+            since.to_rfc3339(),
             format!("{}", page),
         );
 
@@ -37006,10 +37006,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_create_comment: POST /repos/{owner}/{repo}/issues/{issue_number}/comments
-     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
-     * FROM: https://docs.github.com/rest/reference/issues#create-an-issue-comment
-     */
+    * issues_create_comment: POST /repos/{owner}/{repo}/issues/{issue_number}/comments
+    * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
+    * FROM: https://docs.github.com/rest/reference/issues#create-an-issue-comment
+    */
     pub async fn issues_create_comment(
         &self,
         owner: &str,
@@ -37032,10 +37032,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_list_events: GET /repos/{owner}/{repo}/issues/{issue_number}/events
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#list-issue-events
-     */
+    * issues_list_events: GET /repos/{owner}/{repo}/issues/{issue_number}/events
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#list-issue-events
+    */
     pub async fn issues_list_events(
         &self,
         owner: &str,
@@ -37045,22 +37045,22 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
         page: i64,
     ) -> Result<Vec<types::IssueEventforIssue>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/events?per_page={}&page={}",
+            "/repos/{}/{}/issues/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * issues_list_labels_on_issue: GET /repos/{owner}/{repo}/issues/{issue_number}/labels
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#list-labels-for-an-issue
-     */
+    * issues_list_labels_on_issue: GET /repos/{owner}/{repo}/issues/{issue_number}/labels
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#list-labels-for-an-issue
+    */
     pub async fn issues_list_labels_on_issue(
         &self,
         owner: &str,
@@ -37082,10 +37082,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_set_labels: PUT /repos/{owner}/{repo}/issues/{issue_number}/labels
-     * Removes any previous labels and sets the new labels for an issue.
-     * FROM: https://docs.github.com/rest/reference/issues#set-labels-for-an-issue
-     */
+    * issues_set_labels: PUT /repos/{owner}/{repo}/issues/{issue_number}/labels
+    * Removes any previous labels and sets the new labels for an issue.
+    * FROM: https://docs.github.com/rest/reference/issues#set-labels-for-an-issue
+    */
     pub async fn issues_set_labels(
         &self,
         owner: &str,
@@ -37108,10 +37108,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_add_labels: POST /repos/{owner}/{repo}/issues/{issue_number}/labels
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#add-labels-to-an-issue
-     */
+    * issues_add_labels: POST /repos/{owner}/{repo}/issues/{issue_number}/labels
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#add-labels-to-an-issue
+    */
     pub async fn issues_add_labels(
         &self,
         owner: &str,
@@ -37134,10 +37134,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_remove_all_labels: DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#remove-all-labels-from-an-issue
-     */
+    * issues_remove_all_labels: DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#remove-all-labels-from-an-issue
+    */
     pub async fn issues_remove_all_labels(
         &self,
         owner: &str,
@@ -37158,10 +37158,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_remove_label: DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels/{name}
-     * Removes the specified label from the issue, and returns the remaining labels on the issue. This endpoint returns a `404 Not Found` status if the label does not exist.
-     * FROM: https://docs.github.com/rest/reference/issues#remove-a-label-from-an-issue
-     */
+    * issues_remove_label: DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels/{name}
+    * Removes the specified label from the issue, and returns the remaining labels on the issue. This endpoint returns a `404 Not Found` status if the label does not exist.
+    * FROM: https://docs.github.com/rest/reference/issues#remove-a-label-from-an-issue
+    */
     pub async fn issues_remove_label(
         &self,
         owner: &str,
@@ -37183,12 +37183,12 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-         * issues_lock: PUT /repos/{owner}/{repo}/issues/{issue_number}/lock
-         * Users with push access can lock an issue or pull request's conversation.
+    * issues_lock: PUT /repos/{owner}/{repo}/issues/{issue_number}/lock
+    * Users with push access can lock an issue or pull request's conversation.
 
     Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-         * FROM: https://docs.github.com/rest/reference/issues#lock-an-issue
-         */
+    * FROM: https://docs.github.com/rest/reference/issues#lock-an-issue
+    */
     pub async fn issues_lock(
         &self,
         owner: &str,
@@ -37211,10 +37211,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_unlock: DELETE /repos/{owner}/{repo}/issues/{issue_number}/lock
-     * Users with push access can unlock an issue's conversation.
-     * FROM: https://docs.github.com/rest/reference/issues#unlock-an-issue
-     */
+    * issues_unlock: DELETE /repos/{owner}/{repo}/issues/{issue_number}/lock
+    * Users with push access can unlock an issue's conversation.
+    * FROM: https://docs.github.com/rest/reference/issues#unlock-an-issue
+    */
     pub async fn issues_unlock(&self, owner: &str, repo: &str, issue_number: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/{}/lock",
@@ -37230,10 +37230,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * reactions_list_for_issue: GET /repos/{owner}/{repo}/issues/{issue_number}/reactions
-     * List the reactions to an [issue](https://docs.github.com/rest/reference/issues).
-     * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue
-     */
+    * reactions_list_for_issue: GET /repos/{owner}/{repo}/issues/{issue_number}/reactions
+    * List the reactions to an [issue](https://docs.github.com/rest/reference/issues).
+    * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue
+    */
     pub async fn reactions_list_for_issue(
         &self,
         owner: &str,
@@ -37244,23 +37244,23 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/reactions?page={}&per_page={}&content={}",
+            "/repos/{}/{}/issues/{}/reactions?per_page={}&content={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
             content.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * reactions_create_for_issue: POST /repos/{owner}/{repo}/issues/{issue_number}/reactions
-     * Create a reaction to an [issue](https://docs.github.com/rest/reference/issues/). A response with an HTTP `200` status means that you already added the reaction type to this issue.
-     * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-an-issue
-     */
+    * reactions_create_for_issue: POST /repos/{owner}/{repo}/issues/{issue_number}/reactions
+    * Create a reaction to an [issue](https://docs.github.com/rest/reference/issues/). A response with an HTTP `200` status means that you already added the reaction type to this issue.
+    * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-an-issue
+    */
     pub async fn reactions_create_for_issue(
         &self,
         owner: &str,
@@ -37283,12 +37283,12 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-         * reactions_delete_for_issue: DELETE /repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}
-         * **Note:** You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/issues/:issue_number/reactions/:reaction_id`.
+    * reactions_delete_for_issue: DELETE /repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}
+    * **Note:** You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/issues/:issue_number/reactions/:reaction_id`.
 
     Delete a reaction to an [issue](https://docs.github.com/rest/reference/issues/).
-         * FROM: https://docs.github.com/rest/reference/reactions#delete-an-issue-reaction
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#delete-an-issue-reaction
+    */
     pub async fn reactions_delete_for_issue(
         &self,
         owner: &str,
@@ -37311,10 +37311,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_list_events_for_timeline: GET /repos/{owner}/{repo}/issues/{issue_number}/timeline
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#list-timeline-events-for-an-issue
-     */
+    * issues_list_events_for_timeline: GET /repos/{owner}/{repo}/issues/{issue_number}/timeline
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#list-timeline-events-for-an-issue
+    */
     pub async fn issues_list_events_for_timeline(
         &self,
         owner: &str,
@@ -37324,22 +37324,22 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
         page: i64,
     ) -> Result<Vec<types::TimelineIssueEvents>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/timeline?per_page={}&page={}",
+            "/repos/{}/{}/issues/{}/timeline?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * repos_list_deploy_keys: GET /repos/{owner}/{repo}/keys
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#list-deploy-keys
-     */
+    * repos_list_deploy_keys: GET /repos/{owner}/{repo}/keys
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#list-deploy-keys
+    */
     pub async fn repos_list_deploy_keys(
         &self,
         owner: &str,
@@ -37359,10 +37359,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * repos_create_deploy_key: POST /repos/{owner}/{repo}/keys
-     * You can create a read-only deploy key.
-     * FROM: https://docs.github.com/rest/reference/repos#create-a-deploy-key
-     */
+    * repos_create_deploy_key: POST /repos/{owner}/{repo}/keys
+    * You can create a read-only deploy key.
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-deploy-key
+    */
     pub async fn repos_create_deploy_key(
         &self,
         owner: &str,
@@ -37383,10 +37383,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * repos_get_deploy_key: GET /repos/{owner}/{repo}/keys/{key_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-deploy-key
-     */
+    * repos_get_deploy_key: GET /repos/{owner}/{repo}/keys/{key_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-deploy-key
+    */
     pub async fn repos_get_deploy_key(
         &self,
         owner: &str,
@@ -37404,10 +37404,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * repos_delete_deploy_key: DELETE /repos/{owner}/{repo}/keys/{key_id}
-     * Deploy keys are immutable. If you need to update a key, remove the key and create a new one instead.
-     * FROM: https://docs.github.com/rest/reference/repos#delete-a-deploy-key
-     */
+    * repos_delete_deploy_key: DELETE /repos/{owner}/{repo}/keys/{key_id}
+    * Deploy keys are immutable. If you need to update a key, remove the key and create a new one instead.
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-deploy-key
+    */
     pub async fn repos_delete_deploy_key(
         &self,
         owner: &str,
@@ -37428,10 +37428,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_list_labels_for_repo: GET /repos/{owner}/{repo}/labels
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#list-labels-for-a-repository
-     */
+    * issues_list_labels_for_repo: GET /repos/{owner}/{repo}/labels
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#list-labels-for-a-repository
+    */
     pub async fn issues_list_labels_for_repo(
         &self,
         owner: &str,
@@ -37451,10 +37451,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_create_label: POST /repos/{owner}/{repo}/labels
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#create-a-label
-     */
+    * issues_create_label: POST /repos/{owner}/{repo}/labels
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#create-a-label
+    */
     pub async fn issues_create_label(
         &self,
         owner: &str,
@@ -37475,10 +37475,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_get_label: GET /repos/{owner}/{repo}/labels/{name}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#get-a-label
-     */
+    * issues_get_label: GET /repos/{owner}/{repo}/labels/{name}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#get-a-label
+    */
     pub async fn issues_get_label(
         &self,
         owner: &str,
@@ -37496,10 +37496,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_delete_label: DELETE /repos/{owner}/{repo}/labels/{name}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#delete-a-label
-     */
+    * issues_delete_label: DELETE /repos/{owner}/{repo}/labels/{name}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#delete-a-label
+    */
     pub async fn issues_delete_label(&self, owner: &str, repo: &str, name: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/labels/{}",
@@ -37515,10 +37515,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_update_label: PATCH /repos/{owner}/{repo}/labels/{name}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#update-a-label
-     */
+    * issues_update_label: PATCH /repos/{owner}/{repo}/labels/{name}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#update-a-label
+    */
     pub async fn issues_update_label(
         &self,
         owner: &str,
@@ -37541,10 +37541,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * repos_list_languages: GET /repos/{owner}/{repo}/languages
-     * Lists languages for the specified repository. The value shown for each language is the number of bytes of code written in that language.
-     * FROM: https://docs.github.com/rest/reference/repos#list-repository-languages
-     */
+    * repos_list_languages: GET /repos/{owner}/{repo}/languages
+    * Lists languages for the specified repository. The value shown for each language is the number of bytes of code written in that language.
+    * FROM: https://docs.github.com/rest/reference/repos#list-repository-languages
+    */
     pub async fn repos_list_languages(&self, owner: &str, repo: &str) -> Result<types::Language> {
         let url = format!(
             "/repos/{}/{}/languages",
@@ -37556,12 +37556,12 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-         * licenses_get_for_repo: GET /repos/{owner}/{repo}/license
-         * This method returns the contents of the repository's license file, if one is detected.
+    * licenses_get_for_repo: GET /repos/{owner}/{repo}/license
+    * This method returns the contents of the repository's license file, if one is detected.
 
     Similar to [Get repository content](https://docs.github.com/rest/reference/repos#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
-         * FROM: https://docs.github.com/rest/reference/licenses/#get-the-license-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/licenses/#get-the-license-for-a-repository
+    */
     pub async fn licenses_get_for_repo(
         &self,
         owner: &str,
@@ -37577,10 +37577,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * repos_merge: POST /repos/{owner}/{repo}/merges
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#merge-a-branch
-     */
+    * repos_merge: POST /repos/{owner}/{repo}/merges
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#merge-a-branch
+    */
     pub async fn repos_merge(
         &self,
         owner: &str,
@@ -37601,10 +37601,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_list_milestones: GET /repos/{owner}/{repo}/milestones
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#list-milestones
-     */
+    * issues_list_milestones: GET /repos/{owner}/{repo}/milestones
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#list-milestones
+    */
     pub async fn issues_list_milestones(
         &self,
         owner: &str,
@@ -37616,13 +37616,13 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
         page: i64,
     ) -> Result<Vec<types::Milestone>> {
         let url = format!(
-            "/repos/{}/{}/milestones?direction={}&state={}&sort={}&per_page={}&page={}",
+            "/repos/{}/{}/milestones?per_page={}&sort={}&state={}&direction={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            direction.to_string(),
-            state.to_string(),
-            sort.to_string(),
             format!("{}", per_page),
+            sort.to_string(),
+            state.to_string(),
+            direction.to_string(),
             format!("{}", page),
         );
 
@@ -37630,10 +37630,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_create_milestone: POST /repos/{owner}/{repo}/milestones
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#create-a-milestone
-     */
+    * issues_create_milestone: POST /repos/{owner}/{repo}/milestones
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#create-a-milestone
+    */
     pub async fn issues_create_milestone(
         &self,
         owner: &str,
@@ -37654,10 +37654,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_get_milestone: GET /repos/{owner}/{repo}/milestones/{milestone_number}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#get-a-milestone
-     */
+    * issues_get_milestone: GET /repos/{owner}/{repo}/milestones/{milestone_number}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#get-a-milestone
+    */
     pub async fn issues_get_milestone(
         &self,
         owner: &str,
@@ -37675,10 +37675,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_delete_milestone: DELETE /repos/{owner}/{repo}/milestones/{milestone_number}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#delete-a-milestone
-     */
+    * issues_delete_milestone: DELETE /repos/{owner}/{repo}/milestones/{milestone_number}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#delete-a-milestone
+    */
     pub async fn issues_delete_milestone(
         &self,
         owner: &str,
@@ -37699,10 +37699,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_update_milestone: PATCH /repos/{owner}/{repo}/milestones/{milestone_number}
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#update-a-milestone
-     */
+    * issues_update_milestone: PATCH /repos/{owner}/{repo}/milestones/{milestone_number}
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#update-a-milestone
+    */
     pub async fn issues_update_milestone(
         &self,
         owner: &str,
@@ -37725,10 +37725,10 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
     }
 
     /**
-     * issues_list_labels_for_milestone: GET /repos/{owner}/{repo}/milestones/{milestone_number}/labels
-     *
-     * FROM: https://docs.github.com/rest/reference/issues#list-labels-for-issues-in-a-milestone
-     */
+    * issues_list_labels_for_milestone: GET /repos/{owner}/{repo}/milestones/{milestone_number}/labels
+    *
+    * FROM: https://docs.github.com/rest/reference/issues#list-labels-for-issues-in-a-milestone
+    */
     pub async fn issues_list_labels_for_milestone(
         &self,
         owner: &str,
@@ -37738,22 +37738,22 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
         page: i64,
     ) -> Result<Vec<types::Label>> {
         let url = format!(
-            "/repos/{}/{}/milestones/{}/labels?per_page={}&page={}",
+            "/repos/{}/{}/milestones/{}/labels?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * activity_list_repo_notifications_for_authenticated_user: GET /repos/{owner}/{repo}/notifications
-     * List all notifications for the current user.
-     * FROM: https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user
-     */
+    * activity_list_repo_notifications_for_authenticated_user: GET /repos/{owner}/{repo}/notifications
+    * List all notifications for the current user.
+    * FROM: https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user
+    */
     pub async fn activity_list_repo_notifications_for_authenticated_user(
         &self,
         owner: &str,
@@ -37765,19 +37765,19 @@ creator.to_string(), labels.to_string(), format!("{}", page), milestone.to_strin
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Thread>> {
-        let url = format!("/repos/{}/{}/notifications?before={}&since={}&page={}&all={}&participating={}&per_page={}",
+        let url = format!("/repos/{}/{}/notifications?since={}&all={}&participating={}&before={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all), format!("{}", participating), format!("{}", per_page),         );
+since.to_rfc3339(), format!("{}", all), format!("{}", participating), before.to_rfc3339(), format!("{}", per_page), format!("{}", page),         );
 
         self.get(&url).await
     }
 
     /**
-     * activity_mark_repo_notifications_as_read: PUT /repos/{owner}/{repo}/notifications
-     * Marks all notifications in a repository as "read" removes them from the [default view on GitHub](https://github.com/notifications). If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List repository notifications for the authenticated user](https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
-     * FROM: https://docs.github.com/rest/reference/activity#mark-repository-notifications-as-read
-     */
+    * activity_mark_repo_notifications_as_read: PUT /repos/{owner}/{repo}/notifications
+    * Marks all notifications in a repository as "read" removes them from the [default view on GitHub](https://github.com/notifications). If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List repository notifications for the authenticated user](https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
+    * FROM: https://docs.github.com/rest/reference/activity#mark-repository-notifications-as-read
+    */
     pub async fn activity_mark_repo_notifications_as_read(
         &self,
         owner: &str,
@@ -37798,10 +37798,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_pages: GET /repos/{owner}/{repo}/pages
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-github-pages-site
-     */
+    * repos_get_pages: GET /repos/{owner}/{repo}/pages
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-github-pages-site
+    */
     pub async fn repos_get_pages(&self, owner: &str, repo: &str) -> Result<types::Page> {
         let url = format!(
             "/repos/{}/{}/pages",
@@ -37813,10 +37813,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_update_information_about_pages_site: PUT /repos/{owner}/{repo}/pages
-     * Updates information for a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages).
-     * FROM: https://docs.github.com/rest/reference/repos#update-information-about-a-github-pages-site
-     */
+    * repos_update_information_about_pages_site: PUT /repos/{owner}/{repo}/pages
+    * Updates information for a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages).
+    * FROM: https://docs.github.com/rest/reference/repos#update-information-about-a-github-pages-site
+    */
     pub async fn repos_update_information_about_pages_site(
         &self,
         owner: &str,
@@ -37837,10 +37837,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_create_pages_site: POST /repos/{owner}/{repo}/pages
-     * Configures a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages)."
-     * FROM: https://docs.github.com/rest/reference/repos#create-a-github-pages-site
-     */
+    * repos_create_pages_site: POST /repos/{owner}/{repo}/pages
+    * Configures a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages)."
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-github-pages-site
+    */
     pub async fn repos_create_pages_site(
         &self,
         owner: &str,
@@ -37861,10 +37861,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_delete_pages_site: DELETE /repos/{owner}/{repo}/pages
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#delete-a-github-pages-site
-     */
+    * repos_delete_pages_site: DELETE /repos/{owner}/{repo}/pages
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-github-pages-site
+    */
     pub async fn repos_delete_pages_site(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/pages",
@@ -37879,10 +37879,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_list_pages_builds: GET /repos/{owner}/{repo}/pages/builds
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#list-github-pages-builds
-     */
+    * repos_list_pages_builds: GET /repos/{owner}/{repo}/pages/builds
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#list-github-pages-builds
+    */
     pub async fn repos_list_pages_builds(
         &self,
         owner: &str,
@@ -37891,23 +37891,23 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<Vec<types::PageBuild>> {
         let url = format!(
-            "/repos/{}/{}/pages/builds?per_page={}&page={}",
+            "/repos/{}/{}/pages/builds?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_request_pages_build: POST /repos/{owner}/{repo}/pages/builds
-         * You can request that your site be built from the latest revision on the default branch. This has the same effect as pushing a commit to your default branch, but does not require an additional commit. Manually triggering page builds can be helpful when diagnosing build warnings and failures.
+    * repos_request_pages_build: POST /repos/{owner}/{repo}/pages/builds
+    * You can request that your site be built from the latest revision on the default branch. This has the same effect as pushing a commit to your default branch, but does not require an additional commit. Manually triggering page builds can be helpful when diagnosing build warnings and failures.
 
     Build requests are limited to one concurrent build per repository and one concurrent build per requester. If you request a build while another is still in progress, the second request will be queued until the first completes.
-         * FROM: https://docs.github.com/rest/reference/repos#request-a-github-pages-build
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#request-a-github-pages-build
+    */
     pub async fn repos_request_pages_build(
         &self,
         owner: &str,
@@ -37923,10 +37923,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_latest_pages_build: GET /repos/{owner}/{repo}/pages/builds/latest
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#get-latest-pages-build
-     */
+    * repos_get_latest_pages_build: GET /repos/{owner}/{repo}/pages/builds/latest
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#get-latest-pages-build
+    */
     pub async fn repos_get_latest_pages_build(
         &self,
         owner: &str,
@@ -37942,10 +37942,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_pages_build: GET /repos/{owner}/{repo}/pages/builds/{build_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#get-github-pages-build
-     */
+    * repos_get_pages_build: GET /repos/{owner}/{repo}/pages/builds/{build_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#get-github-pages-build
+    */
     pub async fn repos_get_pages_build(
         &self,
         owner: &str,
@@ -37963,14 +37963,14 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_get_pages_health_check: GET /repos/{owner}/{repo}/pages/health
-         * Gets a health check of the DNS settings for the `CNAME` record configured for a repository's GitHub Pages.
+    * repos_get_pages_health_check: GET /repos/{owner}/{repo}/pages/health
+    * Gets a health check of the DNS settings for the `CNAME` record configured for a repository's GitHub Pages.
 
     The first request to this endpoint returns a `202 Accepted` status and starts an asynchronous background task to get the results for the domain. After the background task completes, subsequent requests to this endpoint return a `200 OK` status with the health check results in the response.
 
     Users must have admin or owner permissions. GitHub Apps must have the `pages:write` and `administration:write` permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/repos#get-a-dns-health-check-for-github-pages
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-dns-health-check-for-github-pages
+    */
     pub async fn repos_get_pages_health_check(
         &self,
         owner: &str,
@@ -37986,10 +37986,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * projects_list_for_repo: GET /repos/{owner}/{repo}/projects
-     * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     * FROM: https://docs.github.com/rest/reference/projects#list-repository-projects
-     */
+    * projects_list_for_repo: GET /repos/{owner}/{repo}/projects
+    * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+    * FROM: https://docs.github.com/rest/reference/projects#list-repository-projects
+    */
     pub async fn projects_list_for_repo(
         &self,
         owner: &str,
@@ -37999,22 +37999,22 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/repos/{}/{}/projects?per_page={}&state={}&page={}",
+            "/repos/{}/{}/projects?page={}&state={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
-            state.to_string(),
             format!("{}", page),
+            state.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * projects_create_for_repo: POST /repos/{owner}/{repo}/projects
-     * Creates a repository project board. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-     * FROM: https://docs.github.com/rest/reference/projects#create-a-repository-project
-     */
+    * projects_create_for_repo: POST /repos/{owner}/{repo}/projects
+    * Creates a repository project board. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+    * FROM: https://docs.github.com/rest/reference/projects#create-a-repository-project
+    */
     pub async fn projects_create_for_repo(
         &self,
         owner: &str,
@@ -38035,10 +38035,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_list: GET /repos/{owner}/{repo}/pulls
-     * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-     * FROM: https://docs.github.com/rest/reference/pulls#list-pull-requests
-     */
+    * pulls_list: GET /repos/{owner}/{repo}/pulls
+    * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * FROM: https://docs.github.com/rest/reference/pulls#list-pull-requests
+    */
     pub async fn pulls_list(
         &self,
         owner: &str,
@@ -38052,32 +38052,32 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<Vec<types::PullRequestSimple>> {
         let url = format!(
-            "/repos/{}/{}/pulls?page={}&per_page={}&base={}&state={}&head={}&direction={}&sort={}",
+            "/repos/{}/{}/pulls?head={}&base={}&state={}&per_page={}&sort={}&direction={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            head.to_string(),
             base.to_string(),
             state.to_string(),
-            head.to_string(),
-            direction.to_string(),
+            format!("{}", per_page),
             sort.to_string(),
+            direction.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * pulls_create: POST /repos/{owner}/{repo}/pulls
-         * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * pulls_create: POST /repos/{owner}/{repo}/pulls
+    * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     To open or update a pull request in a public repository, you must have write access to the head or the source branch. For organization-owned repositories, you must be a member of the organization that owns the repository to open or update a pull request.
 
     You can create a new pull request.
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
-         * FROM: https://docs.github.com/rest/reference/pulls#create-a-pull-request
-         */
+    * FROM: https://docs.github.com/rest/reference/pulls#create-a-pull-request
+    */
     pub async fn pulls_create(
         &self,
         owner: &str,
@@ -38098,10 +38098,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_list_review_comments_for_repo: GET /repos/{owner}/{repo}/pulls/comments
-     * Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID.
-     * FROM: https://docs.github.com/rest/reference/pulls#list-review-comments-in-a-repository
-     */
+    * pulls_list_review_comments_for_repo: GET /repos/{owner}/{repo}/pulls/comments
+    * Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID.
+    * FROM: https://docs.github.com/rest/reference/pulls#list-review-comments-in-a-repository
+    */
     pub async fn pulls_list_review_comments_for_repo(
         &self,
         owner: &str,
@@ -38113,24 +38113,24 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
-            "/repos/{}/{}/pulls/comments?since={}&sort={}&page={}&per_page={}&direction={}",
+            "/repos/{}/{}/pulls/comments?per_page={}&sort={}&since={}&direction={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            since.to_rfc3339(),
-            sort.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
+            sort.to_string(),
+            since.to_rfc3339(),
             direction.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * pulls_get_review_comment: GET /repos/{owner}/{repo}/pulls/comments/{comment_id}
-     * Provides details for a review comment.
-     * FROM: https://docs.github.com/rest/reference/pulls#get-a-review-comment-for-a-pull-request
-     */
+    * pulls_get_review_comment: GET /repos/{owner}/{repo}/pulls/comments/{comment_id}
+    * Provides details for a review comment.
+    * FROM: https://docs.github.com/rest/reference/pulls#get-a-review-comment-for-a-pull-request
+    */
     pub async fn pulls_get_review_comment(
         &self,
         owner: &str,
@@ -38148,10 +38148,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_delete_review_comment: DELETE /repos/{owner}/{repo}/pulls/comments/{comment_id}
-     * Deletes a review comment.
-     * FROM: https://docs.github.com/rest/reference/pulls#delete-a-review-comment-for-a-pull-request
-     */
+    * pulls_delete_review_comment: DELETE /repos/{owner}/{repo}/pulls/comments/{comment_id}
+    * Deletes a review comment.
+    * FROM: https://docs.github.com/rest/reference/pulls#delete-a-review-comment-for-a-pull-request
+    */
     pub async fn pulls_delete_review_comment(
         &self,
         owner: &str,
@@ -38172,10 +38172,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_update_review_comment: PATCH /repos/{owner}/{repo}/pulls/comments/{comment_id}
-     * Enables you to edit a review comment.
-     * FROM: https://docs.github.com/rest/reference/pulls#update-a-review-comment-for-a-pull-request
-     */
+    * pulls_update_review_comment: PATCH /repos/{owner}/{repo}/pulls/comments/{comment_id}
+    * Enables you to edit a review comment.
+    * FROM: https://docs.github.com/rest/reference/pulls#update-a-review-comment-for-a-pull-request
+    */
     pub async fn pulls_update_review_comment(
         &self,
         owner: &str,
@@ -38198,10 +38198,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * reactions_list_for_pull_request_review_comment: GET /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions
-     * List the reactions to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
-     * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-a-pull-request-review-comment
-     */
+    * reactions_list_for_pull_request_review_comment: GET /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions
+    * List the reactions to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
+    * FROM: https://docs.github.com/rest/reference/reactions#list-reactions-for-a-pull-request-review-comment
+    */
     pub async fn reactions_list_for_pull_request_review_comment(
         &self,
         owner: &str,
@@ -38212,23 +38212,23 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/pulls/comments/{}/reactions?content={}&page={}&per_page={}",
+            "/repos/{}/{}/pulls/comments/{}/reactions?content={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
             content.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * reactions_create_for_pull_request_review_comment: POST /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions
-     * Create a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#comments). A response with an HTTP `200` status means that you already added the reaction type to this pull request review comment.
-     * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-a-pull-request-review-comment
-     */
+    * reactions_create_for_pull_request_review_comment: POST /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions
+    * Create a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#comments). A response with an HTTP `200` status means that you already added the reaction type to this pull request review comment.
+    * FROM: https://docs.github.com/rest/reference/reactions#create-reaction-for-a-pull-request-review-comment
+    */
     pub async fn reactions_create_for_pull_request_review_comment(
         &self,
         owner: &str,
@@ -38251,12 +38251,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * reactions_delete_for_pull_request_comment: DELETE /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}
-         * **Note:** You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/pulls/comments/:comment_id/reactions/:reaction_id.`
+    * reactions_delete_for_pull_request_comment: DELETE /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}
+    * **Note:** You can also specify a repository by `repository_id` using the route `DELETE /repositories/:repository_id/pulls/comments/:comment_id/reactions/:reaction_id.`
 
     Delete a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
-         * FROM: https://docs.github.com/rest/reference/reactions#delete-a-pull-request-comment-reaction
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions#delete-a-pull-request-comment-reaction
+    */
     pub async fn reactions_delete_for_pull_request_comment(
         &self,
         owner: &str,
@@ -38279,8 +38279,8 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * pulls_get: GET /repos/{owner}/{repo}/pulls/{pull_number}
-         * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * pulls_get: GET /repos/{owner}/{repo}/pulls/{pull_number}
+    * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Lists details of a pull request by providing its number.
 
@@ -38295,8 +38295,8 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     *   If [rebased](https://help.github.com/articles/about-merge-methods-on-github/#rebasing-and-merging-your-commits), `merge_commit_sha` represents the commit that the base branch was updated to.
 
     Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
-         * FROM: https://docs.github.com/rest/reference/pulls#get-a-pull-request
-         */
+    * FROM: https://docs.github.com/rest/reference/pulls#get-a-pull-request
+    */
     pub async fn pulls_get(
         &self,
         owner: &str,
@@ -38314,12 +38314,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * pulls_update: PATCH /repos/{owner}/{repo}/pulls/{pull_number}
-         * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+    * pulls_update: PATCH /repos/{owner}/{repo}/pulls/{pull_number}
+    * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     To open or update a pull request in a public repository, you must have write access to the head or the source branch. For organization-owned repositories, you must be a member of the organization that owns the repository to open or update a pull request.
-         * FROM: https://docs.github.com/rest/reference/pulls/#update-a-pull-request
-         */
+    * FROM: https://docs.github.com/rest/reference/pulls/#update-a-pull-request
+    */
     pub async fn pulls_update(
         &self,
         owner: &str,
@@ -38342,10 +38342,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_list_review_comments: GET /repos/{owner}/{repo}/pulls/{pull_number}/comments
-     * Lists all review comments for a pull request. By default, review comments are in ascending order by ID.
-     * FROM: https://docs.github.com/rest/reference/pulls#list-review-comments-on-a-pull-request
-     */
+    * pulls_list_review_comments: GET /repos/{owner}/{repo}/pulls/{pull_number}/comments
+    * Lists all review comments for a pull request. By default, review comments are in ascending order by ID.
+    * FROM: https://docs.github.com/rest/reference/pulls#list-review-comments-on-a-pull-request
+    */
     pub async fn pulls_list_review_comments(
         &self,
         owner: &str,
@@ -38358,23 +38358,23 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/comments?direction={}&since={}&sort={}&page={}&per_page={}",
+            "/repos/{}/{}/pulls/{}/comments?sort={}&direction={}&per_page={}&page={}&since={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            direction.to_string(),
-            since.to_rfc3339(),
             sort.to_string(),
-            format!("{}", page),
+            direction.to_string(),
             format!("{}", per_page),
+            format!("{}", page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * pulls_create_review_comment: POST /repos/{owner}/{repo}/pulls/{pull_number}/comments
-         *
+    * pulls_create_review_comment: POST /repos/{owner}/{repo}/pulls/{pull_number}/comments
+    *
     Creates a review comment in the pull request diff. To add a regular comment to a pull request timeline, see "[Create an issue comment](https://docs.github.com/rest/reference/issues#create-an-issue-comment)." We recommend creating a review comment using `line`, `side`, and optionally `start_line` and `start_side` if your comment applies to more than one line in the pull request diff.
 
     You can still create a review comment using the `position` parameter. When you use `position`, the `line`, `side`, `start_line`, and `start_side` parameters are not required. For more information, see the [`comfort-fade` preview notice](https://docs.github.com/rest/reference/pulls#create-a-review-comment-for-a-pull-request-preview-notices).
@@ -38382,8 +38382,8 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     **Note:** The position value equals the number of lines down from the first "@@" hunk header in the file you want to add a comment. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the diff continues to increase through lines of whitespace and additional hunks until the beginning of a new file.
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
-         * FROM: https://docs.github.com/rest/reference/pulls#create-a-review-comment-for-a-pull-request
-         */
+    * FROM: https://docs.github.com/rest/reference/pulls#create-a-review-comment-for-a-pull-request
+    */
     pub async fn pulls_create_review_comment(
         &self,
         owner: &str,
@@ -38406,12 +38406,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * pulls_create_reply_for_review_comment: POST /repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies
-         * Creates a reply to a review comment for a pull request. For the `comment_id`, provide the ID of the review comment you are replying to. This must be the ID of a _top-level review comment_, not a reply to that comment. Replies to replies are not supported.
+    * pulls_create_reply_for_review_comment: POST /repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies
+    * Creates a reply to a review comment for a pull request. For the `comment_id`, provide the ID of the review comment you are replying to. This must be the ID of a _top-level review comment_, not a reply to that comment. Replies to replies are not supported.
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
-         * FROM: https://docs.github.com/rest/reference/pulls#create-a-reply-for-a-review-comment
-         */
+    * FROM: https://docs.github.com/rest/reference/pulls#create-a-reply-for-a-review-comment
+    */
     pub async fn pulls_create_reply_for_review_comment(
         &self,
         owner: &str,
@@ -38436,10 +38436,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_list_commits: GET /repos/{owner}/{repo}/pulls/{pull_number}/commits
-     * Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://docs.github.com/rest/reference/repos#list-commits) endpoint.
-     * FROM: https://docs.github.com/rest/reference/pulls#list-commits-on-a-pull-request
-     */
+    * pulls_list_commits: GET /repos/{owner}/{repo}/pulls/{pull_number}/commits
+    * Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://docs.github.com/rest/reference/repos#list-commits) endpoint.
+    * FROM: https://docs.github.com/rest/reference/pulls#list-commits-on-a-pull-request
+    */
     pub async fn pulls_list_commits(
         &self,
         owner: &str,
@@ -38461,10 +38461,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_list_files: GET /repos/{owner}/{repo}/pulls/{pull_number}/files
-     * **Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
-     * FROM: https://docs.github.com/rest/reference/pulls#list-pull-requests-files
-     */
+    * pulls_list_files: GET /repos/{owner}/{repo}/pulls/{pull_number}/files
+    * **Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
+    * FROM: https://docs.github.com/rest/reference/pulls#list-pull-requests-files
+    */
     pub async fn pulls_list_files(
         &self,
         owner: &str,
@@ -38486,10 +38486,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_check_if_merged: GET /repos/{owner}/{repo}/pulls/{pull_number}/merge
-     *
-     * FROM: https://docs.github.com/rest/reference/pulls#check-if-a-pull-request-has-been-merged
-     */
+    * pulls_check_if_merged: GET /repos/{owner}/{repo}/pulls/{pull_number}/merge
+    *
+    * FROM: https://docs.github.com/rest/reference/pulls#check-if-a-pull-request-has-been-merged
+    */
     pub async fn pulls_check_if_merged(
         &self,
         owner: &str,
@@ -38507,10 +38507,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_merge: PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge
-     * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
-     * FROM: https://docs.github.com/rest/reference/pulls#merge-a-pull-request
-     */
+    * pulls_merge: PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge
+    * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
+    * FROM: https://docs.github.com/rest/reference/pulls#merge-a-pull-request
+    */
     pub async fn pulls_merge(
         &self,
         owner: &str,
@@ -38533,10 +38533,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_list_requested_reviewers: GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
-     *
-     * FROM: https://docs.github.com/rest/reference/pulls#list-requested-reviewers-for-a-pull-request
-     */
+    * pulls_list_requested_reviewers: GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
+    *
+    * FROM: https://docs.github.com/rest/reference/pulls#list-requested-reviewers-for-a-pull-request
+    */
     pub async fn pulls_list_requested_reviewers(
         &self,
         owner: &str,
@@ -38546,22 +38546,22 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<types::PullRequestReviewRequest> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/requested_reviewers?page={}&per_page={}",
+            "/repos/{}/{}/pulls/{}/requested_reviewers?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * pulls_request_reviewers: POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
-     * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
-     * FROM: https://docs.github.com/rest/reference/pulls#request-reviewers-for-a-pull-request
-     */
+    * pulls_request_reviewers: POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
+    * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
+    * FROM: https://docs.github.com/rest/reference/pulls#request-reviewers-for-a-pull-request
+    */
     pub async fn pulls_request_reviewers(
         &self,
         owner: &str,
@@ -38584,10 +38584,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_remove_requested_reviewers: DELETE /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
-     *
-     * FROM: https://docs.github.com/rest/reference/pulls#remove-requested-reviewers-from-a-pull-request
-     */
+    * pulls_remove_requested_reviewers: DELETE /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
+    *
+    * FROM: https://docs.github.com/rest/reference/pulls#remove-requested-reviewers-from-a-pull-request
+    */
     pub async fn pulls_remove_requested_reviewers(
         &self,
         owner: &str,
@@ -38614,10 +38614,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_list_reviews: GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews
-     * The list of reviews returns in chronological order.
-     * FROM: https://docs.github.com/rest/reference/pulls#list-reviews-for-a-pull-request
-     */
+    * pulls_list_reviews: GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews
+    * The list of reviews returns in chronological order.
+    * FROM: https://docs.github.com/rest/reference/pulls#list-reviews-for-a-pull-request
+    */
     pub async fn pulls_list_reviews(
         &self,
         owner: &str,
@@ -38639,16 +38639,16 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * pulls_create_review: POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews
-         * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+    * pulls_create_review: POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews
+    * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
 
     Pull request reviews created in the `PENDING` state do not include the `submitted_at` property in the response.
 
     **Note:** To comment on a specific line in a file, you need to first determine the _position_ of that line in the diff. The GitHub REST API v3 offers the `application/vnd.github.v3.diff` [media type](https://docs.github.com/rest/overview/media-types#commits-commit-comparison-and-pull-requests). To see a pull request diff, add this media type to the `Accept` header of a call to the [single pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) endpoint.
 
     The `position` value equals the number of lines down from the first "@@" hunk header in the file you want to add a comment. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the diff continues to increase through lines of whitespace and additional hunks until the beginning of a new file.
-         * FROM: https://docs.github.com/rest/reference/pulls#create-a-review-for-a-pull-request
-         */
+    * FROM: https://docs.github.com/rest/reference/pulls#create-a-review-for-a-pull-request
+    */
     pub async fn pulls_create_review(
         &self,
         owner: &str,
@@ -38671,10 +38671,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_get_review: GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/pulls#get-a-review-for-a-pull-request
-     */
+    * pulls_get_review: GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/pulls#get-a-review-for-a-pull-request
+    */
     pub async fn pulls_get_review(
         &self,
         owner: &str,
@@ -38694,10 +38694,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_update_review: PUT /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
-     * Update the review summary comment with new text.
-     * FROM: https://docs.github.com/rest/reference/pulls#update-a-review-for-a-pull-request
-     */
+    * pulls_update_review: PUT /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
+    * Update the review summary comment with new text.
+    * FROM: https://docs.github.com/rest/reference/pulls#update-a-review-for-a-pull-request
+    */
     pub async fn pulls_update_review(
         &self,
         owner: &str,
@@ -38722,10 +38722,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_delete_pending_review: DELETE /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/pulls#delete-a-pending-review-for-a-pull-request
-     */
+    * pulls_delete_pending_review: DELETE /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/pulls#delete-a-pending-review-for-a-pull-request
+    */
     pub async fn pulls_delete_pending_review(
         &self,
         owner: &str,
@@ -38747,10 +38747,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_list_comments_for_review: GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments
-     * List comments for a specific pull request review.
-     * FROM: https://docs.github.com/rest/reference/pulls#list-comments-for-a-pull-request-review
-     */
+    * pulls_list_comments_for_review: GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments
+    * List comments for a specific pull request review.
+    * FROM: https://docs.github.com/rest/reference/pulls#list-comments-for-a-pull-request-review
+    */
     pub async fn pulls_list_comments_for_review(
         &self,
         owner: &str,
@@ -38774,10 +38774,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_dismiss_review: PUT /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals
-     * **Note:** To dismiss a pull request review on a [protected branch](https://docs.github.com/rest/reference/repos#branches), you must be a repository administrator or be included in the list of people or teams who can dismiss pull request reviews.
-     * FROM: https://docs.github.com/rest/reference/pulls#dismiss-a-review-for-a-pull-request
-     */
+    * pulls_dismiss_review: PUT /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals
+    * **Note:** To dismiss a pull request review on a [protected branch](https://docs.github.com/rest/reference/repos#branches), you must be a repository administrator or be included in the list of people or teams who can dismiss pull request reviews.
+    * FROM: https://docs.github.com/rest/reference/pulls#dismiss-a-review-for-a-pull-request
+    */
     pub async fn pulls_dismiss_review(
         &self,
         owner: &str,
@@ -38802,10 +38802,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_submit_review: POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events
-     *
-     * FROM: https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request
-     */
+    * pulls_submit_review: POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events
+    *
+    * FROM: https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request
+    */
     pub async fn pulls_submit_review(
         &self,
         owner: &str,
@@ -38830,10 +38830,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * pulls_update_branch: PUT /repos/{owner}/{repo}/pulls/{pull_number}/update-branch
-     * Updates the pull request branch with the latest upstream changes by merging HEAD from the base branch into the pull request branch.
-     * FROM: https://docs.github.com/rest/reference/pulls#update-a-pull-request-branch
-     */
+    * pulls_update_branch: PUT /repos/{owner}/{repo}/pulls/{pull_number}/update-branch
+    * Updates the pull request branch with the latest upstream changes by merging HEAD from the base branch into the pull request branch.
+    * FROM: https://docs.github.com/rest/reference/pulls#update-a-pull-request-branch
+    */
     pub async fn pulls_update_branch(
         &self,
         owner: &str,
@@ -38856,12 +38856,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_get_readme: GET /repos/{owner}/{repo}/readme
-         * Gets the preferred README for a repository.
+    * repos_get_readme: GET /repos/{owner}/{repo}/readme
+    * Gets the preferred README for a repository.
 
     READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
-         * FROM: https://docs.github.com/rest/reference/repos#get-a-repository-readme
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-repository-readme
+    */
     pub async fn repos_get_readme(
         &self,
         owner: &str,
@@ -38879,12 +38879,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_get_readme_in_directory: GET /repos/{owner}/{repo}/readme/{dir}
-         * Gets the README from a repository directory.
+    * repos_get_readme_in_directory: GET /repos/{owner}/{repo}/readme/{dir}
+    * Gets the README from a repository directory.
 
     READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
-         * FROM: https://docs.github.com/rest/reference/repos#get-a-repository-directory-readme
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-repository-directory-readme
+    */
     pub async fn repos_get_readme_in_directory(
         &self,
         owner: &str,
@@ -38904,12 +38904,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_list_releases: GET /repos/{owner}/{repo}/releases
-         * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the [Repository Tags API](https://docs.github.com/rest/reference/repos#list-repository-tags).
+    * repos_list_releases: GET /repos/{owner}/{repo}/releases
+    * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the [Repository Tags API](https://docs.github.com/rest/reference/repos#list-repository-tags).
 
     Information about published releases are available to everyone. Only users with push access will receive listings for draft releases.
-         * FROM: https://docs.github.com/rest/reference/repos#list-releases
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-releases
+    */
     pub async fn repos_list_releases(
         &self,
         owner: &str,
@@ -38929,12 +38929,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_create_release: POST /repos/{owner}/{repo}/releases
-         * Users with push access to the repository can create a release.
+    * repos_create_release: POST /repos/{owner}/{repo}/releases
+    * Users with push access to the repository can create a release.
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-release
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-release
+    */
     pub async fn repos_create_release(
         &self,
         owner: &str,
@@ -38955,10 +38955,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_release_asset: GET /repos/{owner}/{repo}/releases/assets/{asset_id}
-     * To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-release-asset
-     */
+    * repos_get_release_asset: GET /repos/{owner}/{repo}/releases/assets/{asset_id}
+    * To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-release-asset
+    */
     pub async fn repos_get_release_asset(
         &self,
         owner: &str,
@@ -38976,10 +38976,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_delete_release_asset: DELETE /repos/{owner}/{repo}/releases/assets/{asset_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#delete-a-release-asset
-     */
+    * repos_delete_release_asset: DELETE /repos/{owner}/{repo}/releases/assets/{asset_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-release-asset
+    */
     pub async fn repos_delete_release_asset(
         &self,
         owner: &str,
@@ -39000,10 +39000,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_update_release_asset: PATCH /repos/{owner}/{repo}/releases/assets/{asset_id}
-     * Users with push access to the repository can edit a release asset.
-     * FROM: https://docs.github.com/rest/reference/repos#update-a-release-asset
-     */
+    * repos_update_release_asset: PATCH /repos/{owner}/{repo}/releases/assets/{asset_id}
+    * Users with push access to the repository can edit a release asset.
+    * FROM: https://docs.github.com/rest/reference/repos#update-a-release-asset
+    */
     pub async fn repos_update_release_asset(
         &self,
         owner: &str,
@@ -39026,12 +39026,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_get_latest_release: GET /repos/{owner}/{repo}/releases/latest
-         * View the latest published full release for the repository.
+    * repos_get_latest_release: GET /repos/{owner}/{repo}/releases/latest
+    * View the latest published full release for the repository.
 
     The latest release is the most recent non-prerelease, non-draft release, sorted by the `created_at` attribute. The `created_at` attribute is the date of the commit used for the release, and not the date when the release was drafted or published.
-         * FROM: https://docs.github.com/rest/reference/repos#get-the-latest-release
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-the-latest-release
+    */
     pub async fn repos_get_latest_release(
         &self,
         owner: &str,
@@ -39047,10 +39047,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_release_by_tag: GET /repos/{owner}/{repo}/releases/tags/{tag}
-     * Get a published release with the specified tag.
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-release-by-tag-name
-     */
+    * repos_get_release_by_tag: GET /repos/{owner}/{repo}/releases/tags/{tag}
+    * Get a published release with the specified tag.
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-release-by-tag-name
+    */
     pub async fn repos_get_release_by_tag(
         &self,
         owner: &str,
@@ -39068,10 +39068,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_release: GET /repos/{owner}/{repo}/releases/{release_id}
-     * **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
-     * FROM: https://docs.github.com/rest/reference/repos#get-a-release
-     */
+    * repos_get_release: GET /repos/{owner}/{repo}/releases/{release_id}
+    * **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
+    * FROM: https://docs.github.com/rest/reference/repos#get-a-release
+    */
     pub async fn repos_get_release(
         &self,
         owner: &str,
@@ -39089,10 +39089,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_delete_release: DELETE /repos/{owner}/{repo}/releases/{release_id}
-     * Users with push access to the repository can delete a release.
-     * FROM: https://docs.github.com/rest/reference/repos#delete-a-release
-     */
+    * repos_delete_release: DELETE /repos/{owner}/{repo}/releases/{release_id}
+    * Users with push access to the repository can delete a release.
+    * FROM: https://docs.github.com/rest/reference/repos#delete-a-release
+    */
     pub async fn repos_delete_release(
         &self,
         owner: &str,
@@ -39113,10 +39113,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_update_release: PATCH /repos/{owner}/{repo}/releases/{release_id}
-     * Users with push access to the repository can edit a release.
-     * FROM: https://docs.github.com/rest/reference/repos#update-a-release
-     */
+    * repos_update_release: PATCH /repos/{owner}/{repo}/releases/{release_id}
+    * Users with push access to the repository can edit a release.
+    * FROM: https://docs.github.com/rest/reference/repos#update-a-release
+    */
     pub async fn repos_update_release(
         &self,
         owner: &str,
@@ -39139,10 +39139,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_list_release_assets: GET /repos/{owner}/{repo}/releases/{release_id}/assets
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#list-release-assets
-     */
+    * repos_list_release_assets: GET /repos/{owner}/{repo}/releases/{release_id}/assets
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#list-release-assets
+    */
     pub async fn repos_list_release_assets(
         &self,
         owner: &str,
@@ -39164,8 +39164,8 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_upload_release_asset: POST /repos/{owner}/{repo}/releases/{release_id}/assets
-         * This endpoint makes use of [a Hypermedia relation](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia) to determine which URL to access. The endpoint you call to upload release assets is specific to your release. Use the `upload_url` returned in
+    * repos_upload_release_asset: POST /repos/{owner}/{repo}/releases/{release_id}/assets
+    * This endpoint makes use of [a Hypermedia relation](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia) to determine which URL to access. The endpoint you call to upload release assets is specific to your release. Use the `upload_url` returned in
     the response of the [Create a release endpoint](https://docs.github.com/rest/reference/repos#create-a-release) to upload a release asset.
 
     You need to use an HTTP client which supports [SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this endpoint.
@@ -39183,8 +39183,8 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     *   GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The "[List assets for a release](https://docs.github.com/rest/reference/repos#list-assets-for-a-release)"
     endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact).
     *   If you upload an asset with the same filename as another uploaded asset, you'll receive an error and must delete the old file before you can re-upload the new asset.
-         * FROM: https://docs.github.com/rest/reference/repos#upload-a-release-asset
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#upload-a-release-asset
+    */
     pub async fn repos_upload_release_asset<T: Into<reqwest::Body>>(
         &self,
         owner: &str,
@@ -39195,22 +39195,22 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         body: T,
     ) -> Result<types::ReleaseAsset> {
         let url = format!(
-            "/repos/{}/{}/releases/{}/assets?label={}&name={}",
+            "/repos/{}/{}/releases/{}/assets?name={}&label={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
-            label.to_string(),
             name.to_string(),
+            label.to_string(),
         );
 
         self.post(&url, Some(body.into())).await
     }
 
     /**
-     * reactions_create_for_release: POST /repos/{owner}/{repo}/releases/{release_id}/reactions
-     * Create a reaction to a [release](https://docs.github.com/rest/reference/repos#releases). A response with a `Status: 200 OK` means that you already added the reaction type to this release.
-     * FROM: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-release
-     */
+    * reactions_create_for_release: POST /repos/{owner}/{repo}/releases/{release_id}/reactions
+    * Create a reaction to a [release](https://docs.github.com/rest/reference/repos#releases). A response with a `Status: 200 OK` means that you already added the reaction type to this release.
+    * FROM: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-release
+    */
     pub async fn reactions_create_for_release(
         &self,
         owner: &str,
@@ -39233,12 +39233,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * secret_scanning_list_alerts_for_repo: GET /repos/{owner}/{repo}/secret-scanning/alerts
-         * Lists all secret scanning alerts for a private repository, from newest to oldest. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
+    * secret_scanning_list_alerts_for_repo: GET /repos/{owner}/{repo}/secret-scanning/alerts
+    * Lists all secret scanning alerts for a private repository, from newest to oldest. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
 
     GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-a-repository
-         */
+    * FROM: https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-a-repository
+    */
     pub async fn secret_scanning_list_alerts_for_repo(
         &self,
         owner: &str,
@@ -39249,25 +39249,25 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         per_page: i64,
     ) -> Result<Vec<types::SecretScanningAlert>> {
         let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts?page={}&state={}&secret_type={}&per_page={}",
+            "/repos/{}/{}/secret-scanning/alerts?per_page={}&page={}&state={}&secret_type={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            format!("{}", per_page),
             format!("{}", page),
             state.to_string(),
             secret_type.to_string(),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * secret_scanning_get_alert: GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}
-         * Gets a single secret scanning alert detected in a private repository. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
+    * secret_scanning_get_alert: GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}
+    * Gets a single secret scanning alert detected in a private repository. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
 
     GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/secret-scanning#get-a-secret-scanning-alert
-         */
+    * FROM: https://docs.github.com/rest/reference/secret-scanning#get-a-secret-scanning-alert
+    */
     pub async fn secret_scanning_get_alert(
         &self,
         owner: &str,
@@ -39285,12 +39285,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * secret_scanning_update_alert: PATCH /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}
-         * Updates the status of a secret scanning alert in a private repository. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
+    * secret_scanning_update_alert: PATCH /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}
+    * Updates the status of a secret scanning alert in a private repository. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
 
     GitHub Apps must have the `secret_scanning_alerts` write permission to use this endpoint.
-         * FROM: https://docs.github.com/rest/reference/secret-scanning#update-a-secret-scanning-alert
-         */
+    * FROM: https://docs.github.com/rest/reference/secret-scanning#update-a-secret-scanning-alert
+    */
     pub async fn secret_scanning_update_alert(
         &self,
         owner: &str,
@@ -39313,12 +39313,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * activity_list_stargazers_for_repo: GET /repos/{owner}/{repo}/stargazers
-         * Lists the people that have starred the repository.
+    * activity_list_stargazers_for_repo: GET /repos/{owner}/{repo}/stargazers
+    * Lists the people that have starred the repository.
 
     You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
-         * FROM: https://docs.github.com/rest/reference/activity#list-stargazers
-         */
+    * FROM: https://docs.github.com/rest/reference/activity#list-stargazers
+    */
     pub async fn activity_list_stargazers_for_repo(
         &self,
         owner: &str,
@@ -39327,21 +39327,21 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/repos/{}/{}/stargazers?per_page={}&page={}",
+            "/repos/{}/{}/stargazers?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * repos_get_code_frequency_stats: GET /repos/{owner}/{repo}/stats/code_frequency
-     * Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
-     * FROM: https://docs.github.com/rest/reference/repos#get-the-weekly-commit-activity
-     */
+    * repos_get_code_frequency_stats: GET /repos/{owner}/{repo}/stats/code_frequency
+    * Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
+    * FROM: https://docs.github.com/rest/reference/repos#get-the-weekly-commit-activity
+    */
     pub async fn repos_get_code_frequency_stats(
         &self,
         owner: &str,
@@ -39357,10 +39357,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_commit_activity_stats: GET /repos/{owner}/{repo}/stats/commit_activity
-     * Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
-     * FROM: https://docs.github.com/rest/reference/repos#get-the-last-year-of-commit-activity
-     */
+    * repos_get_commit_activity_stats: GET /repos/{owner}/{repo}/stats/commit_activity
+    * Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
+    * FROM: https://docs.github.com/rest/reference/repos#get-the-last-year-of-commit-activity
+    */
     pub async fn repos_get_commit_activity_stats(
         &self,
         owner: &str,
@@ -39376,16 +39376,16 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_get_contributors_stats: GET /repos/{owner}/{repo}/stats/contributors
-         *
+    * repos_get_contributors_stats: GET /repos/{owner}/{repo}/stats/contributors
+    *
     Returns the `total` number of commits authored by the contributor. In addition, the response includes a Weekly Hash (`weeks` array) with the following information:
 
     *   `w` - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).
     *   `a` - Number of additions
     *   `d` - Number of deletions
     *   `c` - Number of commits
-         * FROM: https://docs.github.com/rest/reference/repos#get-all-contributor-commit-activity
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-all-contributor-commit-activity
+    */
     pub async fn repos_get_contributors_stats(
         &self,
         owner: &str,
@@ -39401,12 +39401,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_get_participation_stats: GET /repos/{owner}/{repo}/stats/participation
-         * Returns the total commit counts for the `owner` and total commit counts in `all`. `all` is everyone combined, including the `owner` in the last 52 weeks. If you'd like to get the commit counts for non-owners, you can subtract `owner` from `all`.
+    * repos_get_participation_stats: GET /repos/{owner}/{repo}/stats/participation
+    * Returns the total commit counts for the `owner` and total commit counts in `all`. `all` is everyone combined, including the `owner` in the last 52 weeks. If you'd like to get the commit counts for non-owners, you can subtract `owner` from `all`.
 
     The array order is oldest week (index 0) to most recent week.
-         * FROM: https://docs.github.com/rest/reference/repos#get-the-weekly-commit-count
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-the-weekly-commit-count
+    */
     pub async fn repos_get_participation_stats(
         &self,
         owner: &str,
@@ -39422,16 +39422,16 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_get_punch_card_stats: GET /repos/{owner}/{repo}/stats/punch_card
-         * Each array contains the day number, hour number, and number of commits:
+    * repos_get_punch_card_stats: GET /repos/{owner}/{repo}/stats/punch_card
+    * Each array contains the day number, hour number, and number of commits:
 
     *   `0-6`: Sunday - Saturday
     *   `0-23`: Hour of day
     *   Number of commits
 
     For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays. All times are based on the time zone of individual commits.
-         * FROM: https://docs.github.com/rest/reference/repos#get-the-hourly-commit-count-for-each-day
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#get-the-hourly-commit-count-for-each-day
+    */
     pub async fn repos_get_punch_card_stats(
         &self,
         owner: &str,
@@ -39447,12 +39447,12 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_create_commit_status: POST /repos/{owner}/{repo}/statuses/{sha}
-         * Users with push access in a repository can create commit statuses for a given SHA.
+    * repos_create_commit_status: POST /repos/{owner}/{repo}/statuses/{sha}
+    * Users with push access in a repository can create commit statuses for a given SHA.
 
     Note: there is a limit of 1000 statuses per `sha` and `context` within a repository. Attempts to create more than 1000 statuses will result in a validation error.
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-commit-status
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-commit-status
+    */
     pub async fn repos_create_commit_status(
         &self,
         owner: &str,
@@ -39475,10 +39475,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * activity_list_watchers_for_repo: GET /repos/{owner}/{repo}/subscribers
-     * Lists the people watching the specified repository.
-     * FROM: https://docs.github.com/rest/reference/activity#list-watchers
-     */
+    * activity_list_watchers_for_repo: GET /repos/{owner}/{repo}/subscribers
+    * Lists the people watching the specified repository.
+    * FROM: https://docs.github.com/rest/reference/activity#list-watchers
+    */
     pub async fn activity_list_watchers_for_repo(
         &self,
         owner: &str,
@@ -39498,10 +39498,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * activity_get_repo_subscription: GET /repos/{owner}/{repo}/subscription
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#get-a-repository-subscription
-     */
+    * activity_get_repo_subscription: GET /repos/{owner}/{repo}/subscription
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#get-a-repository-subscription
+    */
     pub async fn activity_get_repo_subscription(
         &self,
         owner: &str,
@@ -39517,10 +39517,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * activity_set_repo_subscription: PUT /repos/{owner}/{repo}/subscription
-     * If you would like to watch a repository, set `subscribed` to `true`. If you would like to ignore notifications made within a repository, set `ignored` to `true`. If you would like to stop watching a repository, [delete the repository's subscription](https://docs.github.com/rest/reference/activity#delete-a-repository-subscription) completely.
-     * FROM: https://docs.github.com/rest/reference/activity#set-a-repository-subscription
-     */
+    * activity_set_repo_subscription: PUT /repos/{owner}/{repo}/subscription
+    * If you would like to watch a repository, set `subscribed` to `true`. If you would like to ignore notifications made within a repository, set `ignored` to `true`. If you would like to stop watching a repository, [delete the repository's subscription](https://docs.github.com/rest/reference/activity#delete-a-repository-subscription) completely.
+    * FROM: https://docs.github.com/rest/reference/activity#set-a-repository-subscription
+    */
     pub async fn activity_set_repo_subscription(
         &self,
         owner: &str,
@@ -39541,10 +39541,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * activity_delete_repo_subscription: DELETE /repos/{owner}/{repo}/subscription
-     * This endpoint should only be used to stop watching a repository. To control whether or not you wish to receive notifications from a repository, [set the repository's subscription manually](https://docs.github.com/rest/reference/activity#set-a-repository-subscription).
-     * FROM: https://docs.github.com/rest/reference/activity#delete-a-repository-subscription
-     */
+    * activity_delete_repo_subscription: DELETE /repos/{owner}/{repo}/subscription
+    * This endpoint should only be used to stop watching a repository. To control whether or not you wish to receive notifications from a repository, [set the repository's subscription manually](https://docs.github.com/rest/reference/activity#set-a-repository-subscription).
+    * FROM: https://docs.github.com/rest/reference/activity#delete-a-repository-subscription
+    */
     pub async fn activity_delete_repo_subscription(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/subscription",
@@ -39559,10 +39559,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_list_tags: GET /repos/{owner}/{repo}/tags
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#list-repository-tags
-     */
+    * repos_list_tags: GET /repos/{owner}/{repo}/tags
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#list-repository-tags
+    */
     pub async fn repos_list_tags(
         &self,
         owner: &str,
@@ -39571,24 +39571,24 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<Vec<types::Tag>> {
         let url = format!(
-            "/repos/{}/{}/tags?page={}&per_page={}",
+            "/repos/{}/{}/tags?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_download_tarball_archive: GET /repos/{owner}/{repo}/tarball/{ref}
-         * Gets a redirect URL to download a tar archive for a repository. If you omit `:ref`, the repository’s default branch (usually
+    * repos_download_tarball_archive: GET /repos/{owner}/{repo}/tarball/{ref}
+    * Gets a redirect URL to download a tar archive for a repository. If you omit `:ref`, the repository’s default branch (usually
     `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use
     the `Location` header to make a second `GET` request.
     **Note**: For private repositories, these links are temporary and expire after five minutes.
-         * FROM: https://docs.github.com/rest/reference/repos#download-a-repository-archive
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#download-a-repository-archive
+    */
     pub async fn repos_download_tarball_archive(
         &self,
         owner: &str,
@@ -39606,10 +39606,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_list_teams: GET /repos/{owner}/{repo}/teams
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#list-repository-teams
-     */
+    * repos_list_teams: GET /repos/{owner}/{repo}/teams
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#list-repository-teams
+    */
     pub async fn repos_list_teams(
         &self,
         owner: &str,
@@ -39618,21 +39618,21 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
-            "/repos/{}/{}/teams?per_page={}&page={}",
+            "/repos/{}/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * repos_get_all_topics: GET /repos/{owner}/{repo}/topics
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#get-all-repository-topics
-     */
+    * repos_get_all_topics: GET /repos/{owner}/{repo}/topics
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#get-all-repository-topics
+    */
     pub async fn repos_get_all_topics(
         &self,
         owner: &str,
@@ -39652,10 +39652,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_replace_all_topics: PUT /repos/{owner}/{repo}/topics
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#replace-all-repository-topics
-     */
+    * repos_replace_all_topics: PUT /repos/{owner}/{repo}/topics
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#replace-all-repository-topics
+    */
     pub async fn repos_replace_all_topics(
         &self,
         owner: &str,
@@ -39676,10 +39676,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_clones: GET /repos/{owner}/{repo}/traffic/clones
-     * Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
-     * FROM: https://docs.github.com/rest/reference/repos#get-repository-clones
-     */
+    * repos_get_clones: GET /repos/{owner}/{repo}/traffic/clones
+    * Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
+    * FROM: https://docs.github.com/rest/reference/repos#get-repository-clones
+    */
     pub async fn repos_get_clones(
         &self,
         owner: &str,
@@ -39697,10 +39697,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_top_paths: GET /repos/{owner}/{repo}/traffic/popular/paths
-     * Get the top 10 popular contents over the last 14 days.
-     * FROM: https://docs.github.com/rest/reference/repos#get-top-referral-paths
-     */
+    * repos_get_top_paths: GET /repos/{owner}/{repo}/traffic/popular/paths
+    * Get the top 10 popular contents over the last 14 days.
+    * FROM: https://docs.github.com/rest/reference/repos#get-top-referral-paths
+    */
     pub async fn repos_get_top_paths(
         &self,
         owner: &str,
@@ -39716,10 +39716,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_top_referrers: GET /repos/{owner}/{repo}/traffic/popular/referrers
-     * Get the top 10 referrers over the last 14 days.
-     * FROM: https://docs.github.com/rest/reference/repos#get-top-referral-sources
-     */
+    * repos_get_top_referrers: GET /repos/{owner}/{repo}/traffic/popular/referrers
+    * Get the top 10 referrers over the last 14 days.
+    * FROM: https://docs.github.com/rest/reference/repos#get-top-referral-sources
+    */
     pub async fn repos_get_top_referrers(
         &self,
         owner: &str,
@@ -39735,10 +39735,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_get_views: GET /repos/{owner}/{repo}/traffic/views
-     * Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
-     * FROM: https://docs.github.com/rest/reference/repos#get-page-views
-     */
+    * repos_get_views: GET /repos/{owner}/{repo}/traffic/views
+    * Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
+    * FROM: https://docs.github.com/rest/reference/repos#get-page-views
+    */
     pub async fn repos_get_views(
         &self,
         owner: &str,
@@ -39756,10 +39756,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_transfer: POST /repos/{owner}/{repo}/transfer
-     * A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://help.github.com/articles/about-repository-transfers/).
-     * FROM: https://docs.github.com/rest/reference/repos#transfer-a-repository
-     */
+    * repos_transfer: POST /repos/{owner}/{repo}/transfer
+    * A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://help.github.com/articles/about-repository-transfers/).
+    * FROM: https://docs.github.com/rest/reference/repos#transfer-a-repository
+    */
     pub async fn repos_transfer(
         &self,
         owner: &str,
@@ -39780,10 +39780,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_check_vulnerability_alerts: GET /repos/{owner}/{repo}/vulnerability-alerts
-     * Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
-     * FROM: https://docs.github.com/rest/reference/repos#check-if-vulnerability-alerts-are-enabled-for-a-repository
-     */
+    * repos_check_vulnerability_alerts: GET /repos/{owner}/{repo}/vulnerability-alerts
+    * Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
+    * FROM: https://docs.github.com/rest/reference/repos#check-if-vulnerability-alerts-are-enabled-for-a-repository
+    */
     pub async fn repos_check_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/vulnerability-alerts",
@@ -39795,10 +39795,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_enable_vulnerability_alerts: PUT /repos/{owner}/{repo}/vulnerability-alerts
-     * Enables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
-     * FROM: https://docs.github.com/rest/reference/repos#enable-vulnerability-alerts
-     */
+    * repos_enable_vulnerability_alerts: PUT /repos/{owner}/{repo}/vulnerability-alerts
+    * Enables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
+    * FROM: https://docs.github.com/rest/reference/repos#enable-vulnerability-alerts
+    */
     pub async fn repos_enable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/vulnerability-alerts",
@@ -39810,10 +39810,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * repos_disable_vulnerability_alerts: DELETE /repos/{owner}/{repo}/vulnerability-alerts
-     * Disables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
-     * FROM: https://docs.github.com/rest/reference/repos#disable-vulnerability-alerts
-     */
+    * repos_disable_vulnerability_alerts: DELETE /repos/{owner}/{repo}/vulnerability-alerts
+    * Disables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
+    * FROM: https://docs.github.com/rest/reference/repos#disable-vulnerability-alerts
+    */
     pub async fn repos_disable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/vulnerability-alerts",
@@ -39828,13 +39828,13 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_download_zipball_archive: GET /repos/{owner}/{repo}/zipball/{ref}
-         * Gets a redirect URL to download a zip archive for a repository. If you omit `:ref`, the repository’s default branch (usually
+    * repos_download_zipball_archive: GET /repos/{owner}/{repo}/zipball/{ref}
+    * Gets a redirect URL to download a zip archive for a repository. If you omit `:ref`, the repository’s default branch (usually
     `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use
     the `Location` header to make a second `GET` request.
     **Note**: For private repositories, these links are temporary and expire after five minutes.
-         * FROM: https://docs.github.com/rest/reference/repos#download-a-repository-archive
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#download-a-repository-archive
+    */
     pub async fn repos_download_zipball_archive(
         &self,
         owner: &str,
@@ -39852,8 +39852,8 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_create_using_template: POST /repos/{template_owner}/{template_repo}/generate
-         * Creates a new repository using a repository template. Use the `template_owner` and `template_repo` route parameters to specify the repository to use as the template. The authenticated user must own or be a member of an organization that owns the repository. To check if a repository is available to use as a template, get the repository's information using the [Get a repository](https://docs.github.com/rest/reference/repos#get-a-repository) endpoint and check that the `is_template` key is `true`.
+    * repos_create_using_template: POST /repos/{template_owner}/{template_repo}/generate
+    * Creates a new repository using a repository template. Use the `template_owner` and `template_repo` route parameters to specify the repository to use as the template. The authenticated user must own or be a member of an organization that owns the repository. To check if a repository is available to use as a template, get the repository's information using the [Get a repository](https://docs.github.com/rest/reference/repos#get-a-repository) endpoint and check that the `is_template` key is `true`.
 
     **OAuth scope requirements**
 
@@ -39861,8 +39861,8 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
 
     *   `public_repo` scope or `repo` scope to create a public repository. Note: For GitHub AE, use `repo` scope to create an internal repository.
     *   `repo` scope to create a private repository
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-repository-using-a-template
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-repository-using-a-template
+    */
     pub async fn repos_create_using_template(
         &self,
         template_owner: &str,
@@ -39883,14 +39883,14 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * repos_list_public: GET /repositories
-         * Lists all public repositories in the order that they were created.
+    * repos_list_public: GET /repositories
+    * Lists all public repositories in the order that they were created.
 
     Note:
     - For GitHub Enterprise Server, this endpoint will only list repositories available to all users on the enterprise.
     - Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of repositories.
-         * FROM: https://docs.github.com/rest/reference/repos#list-public-repositories
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-public-repositories
+    */
     pub async fn repos_list_public(&self, since: i64) -> Result<Vec<types::MinimalRepository>> {
         let url = format!("/repositories?since={}", format!("{}", since),);
 
@@ -39898,10 +39898,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * actions_list_environment_secrets: GET /repositories/{repository_id}/environments/{environment_name}/secrets
-     * Lists all secrets available in an environment without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#list-environment-secrets
-     */
+    * actions_list_environment_secrets: GET /repositories/{repository_id}/environments/{environment_name}/secrets
+    * Lists all secrets available in an environment without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#list-environment-secrets
+    */
     pub async fn actions_list_environment_secrets(
         &self,
         repository_id: i64,
@@ -39910,21 +39910,21 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         page: i64,
     ) -> Result<types::GetListEnvironmentSecretsOkResponse> {
         let url = format!(
-            "/repositories/{}/environments/{}/secrets?per_page={}&page={}",
+            "/repositories/{}/environments/{}/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * actions_get_environment_public_key: GET /repositories/{repository_id}/environments/{environment_name}/secrets/public-key
-     * Get the public key for an environment, which you need to encrypt environment secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-an-environment-public-key
-     */
+    * actions_get_environment_public_key: GET /repositories/{repository_id}/environments/{environment_name}/secrets/public-key
+    * Get the public key for an environment, which you need to encrypt environment secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-an-environment-public-key
+    */
     pub async fn actions_get_environment_public_key(
         &self,
         repository_id: i64,
@@ -39940,10 +39940,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * actions_get_environment_secret: GET /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}
-     * Gets a single environment secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#get-an-environment-secret
-     */
+    * actions_get_environment_secret: GET /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}
+    * Gets a single environment secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#get-an-environment-secret
+    */
     pub async fn actions_get_environment_secret(
         &self,
         repository_id: i64,
@@ -39961,8 +39961,8 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-         * actions_create_or_update_environment_secret: PUT /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}
-         * Creates or updates an environment secret with an encrypted value. Encrypt your secret using
+    * actions_create_or_update_environment_secret: PUT /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}
+    * Creates or updates an environment secret with an encrypted value. Encrypt your secret using
     [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). You must authenticate using an access
     token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use
     this endpoint.
@@ -40037,8 +40037,8 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     # Print the base64 encoded secret
     puts Base64.strict_encode64(encrypted_secret)
     ```
-         * FROM: https://docs.github.com/rest/reference/actions#create-or-update-an-environment-secret
-         */
+    * FROM: https://docs.github.com/rest/reference/actions#create-or-update-an-environment-secret
+    */
     pub async fn actions_create_or_update_environment_secret(
         &self,
         repository_id: i64,
@@ -40061,10 +40061,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * actions_delete_environment_secret: DELETE /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}
-     * Deletes a secret in an environment using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
-     * FROM: https://docs.github.com/rest/reference/actions#delete-an-environment-secret
-     */
+    * actions_delete_environment_secret: DELETE /repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}
+    * Deletes a secret in an environment using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+    * FROM: https://docs.github.com/rest/reference/actions#delete-an-environment-secret
+    */
     pub async fn actions_delete_environment_secret(
         &self,
         repository_id: i64,
@@ -40085,10 +40085,10 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
     }
 
     /**
-     * enterprise_admin_list_provisioned_groups_enterprise: GET /scim/v2/enterprises/{enterprise}/Groups
-     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-     * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-provisioned-scim-groups-for-an-enterprise
-     */
+    * enterprise_admin_list_provisioned_groups_enterprise: GET /scim/v2/enterprises/{enterprise}/Groups
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-provisioned-scim-groups-for-an-enterprise
+    */
     pub async fn enterprise_admin_list_provisioned_groups_enterprise(
         &self,
         enterprise: &str,
@@ -40097,20 +40097,20 @@ before.to_rfc3339(), since.to_rfc3339(), format!("{}", page), format!("{}", all)
         filter: &str,
         excluded_attributes: &str,
     ) -> Result<types::ScimGroupListEnterprise> {
-        let url = format!("/scim/v2/enterprises/{}/Groups?excluded_attributes={}&start_index={}&filter={}&count={}",
+        let url = format!("/scim/v2/enterprises/{}/Groups?filter={}&start_index={}&excluded_attributes={}&count={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(), format!("{}", count),         );
+filter.to_string(), format!("{}", start_index), excluded_attributes.to_string(), format!("{}", count),         );
 
         self.get(&url).await
     }
 
     /**
-         * enterprise_admin_provision_and_invite_enterprise_group: POST /scim/v2/enterprises/{enterprise}/Groups
-         * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * enterprise_admin_provision_and_invite_enterprise_group: POST /scim/v2/enterprises/{enterprise}/Groups
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
 
     Provision an enterprise group, and invite users to the group. This sends invitation emails to the email address of the invited users to join the GitHub organization that the SCIM group corresponds to.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#provision-a-scim-enterprise-group-and-invite-users
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#provision-a-scim-enterprise-group-and-invite-users
+    */
     pub async fn enterprise_admin_provision_and_invite_enterprise_group(
         &self,
         enterprise: &str,
@@ -40129,10 +40129,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * enterprise_admin_get_provisioning_information_for_enterprise_group: GET /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
-     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-     * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-scim-provisioning-information-for-an-enterprise-group
-     */
+    * enterprise_admin_get_provisioning_information_for_enterprise_group: GET /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-scim-provisioning-information-for-an-enterprise-group
+    */
     pub async fn enterprise_admin_get_provisioning_information_for_enterprise_group(
         &self,
         enterprise: &str,
@@ -40150,12 +40150,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * enterprise_admin_set_information_for_provisioned_enterprise_group: PUT /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
-         * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * enterprise_admin_set_information_for_provisioned_enterprise_group: PUT /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
 
     Replaces an existing provisioned group’s information. You must provide all the information required for the group as if you were provisioning it for the first time. Any existing group information that you don't provide will be removed, including group membership. If you want to only update a specific attribute, use the [Update an attribute for a SCIM enterprise group](#update-an-attribute-for-a-scim-enterprise-group) endpoint instead.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-scim-information-for-a-provisioned-enterprise-group
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-scim-information-for-a-provisioned-enterprise-group
+    */
     pub async fn enterprise_admin_set_information_for_provisioned_enterprise_group(
         &self,
         enterprise: &str,
@@ -40176,10 +40176,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * enterprise_admin_delete_scim_group_from_enterprise: DELETE /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
-     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-     * FROM: https://docs.github.com/rest/reference/enterprise-admin#delete-a-scim-group-from-an-enterprise
-     */
+    * enterprise_admin_delete_scim_group_from_enterprise: DELETE /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#delete-a-scim-group-from-an-enterprise
+    */
     pub async fn enterprise_admin_delete_scim_group_from_enterprise(
         &self,
         enterprise: &str,
@@ -40198,12 +40198,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * enterprise_admin_update_attribute_for_enterprise_group: PATCH /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
-         * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * enterprise_admin_update_attribute_for_enterprise_group: PATCH /scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
 
     Allows you to change a provisioned group’s individual attributes. To change a group’s values, you must provide a specific Operations JSON format that contains at least one of the add, remove, or replace operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#update-an-attribute-for-a-scim-enterprise-group
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#update-an-attribute-for-a-scim-enterprise-group
+    */
     pub async fn enterprise_admin_update_attribute_for_enterprise_group(
         &self,
         enterprise: &str,
@@ -40224,8 +40224,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * enterprise_admin_list_provisioned_identities_enterprise: GET /scim/v2/enterprises/{enterprise}/Users
-         * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * enterprise_admin_list_provisioned_identities_enterprise: GET /scim/v2/enterprises/{enterprise}/Users
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
 
     Retrieves a paginated list of all provisioned enterprise members, including pending invitations.
 
@@ -40243,8 +40243,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     1. After successfully authenticating with the SAML SSO IdP, the `null` external identity entry is created and the user is prompted to sign in to their GitHub account:
        - If the user signs in, their GitHub account is linked to this entry.
        - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub enterprise, and the external identity `null` entry remains in place.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-scim-provisioned-identities-for-an-enterprise
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#list-scim-provisioned-identities-for-an-enterprise
+    */
     pub async fn enterprise_admin_list_provisioned_identities_enterprise(
         &self,
         enterprise: &str,
@@ -40253,10 +40253,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         filter: &str,
     ) -> Result<types::ScimUserListEnterprise> {
         let url = format!(
-            "/scim/v2/enterprises/{}/Users?count={}&filter={}&start_index={}",
+            "/scim/v2/enterprises/{}/Users?filter={}&count={}&start_index={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-            format!("{}", count),
             filter.to_string(),
+            format!("{}", count),
             format!("{}", start_index),
         );
 
@@ -40264,14 +40264,14 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * enterprise_admin_provision_and_invite_enterprise_user: POST /scim/v2/enterprises/{enterprise}/Users
-         * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * enterprise_admin_provision_and_invite_enterprise_user: POST /scim/v2/enterprises/{enterprise}/Users
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
 
     Provision enterprise membership for a user, and send organization invitation emails to the email address.
 
     You can optionally include the groups a user will be invited to join. If you do not provide a list of `groups`, the user is provisioned for the enterprise, but no organization invitation emails will be sent.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#provision-and-invite-a-scim-enterprise-user
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#provision-and-invite-a-scim-enterprise-user
+    */
     pub async fn enterprise_admin_provision_and_invite_enterprise_user(
         &self,
         enterprise: &str,
@@ -40290,10 +40290,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * enterprise_admin_get_provisioning_information_for_enterprise_user: GET /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
-     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-     * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-scim-provisioning-information-for-an-enterprise-user
-     */
+    * enterprise_admin_get_provisioning_information_for_enterprise_user: GET /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#get-scim-provisioning-information-for-an-enterprise-user
+    */
     pub async fn enterprise_admin_get_provisioning_information_for_enterprise_user(
         &self,
         enterprise: &str,
@@ -40309,16 +40309,16 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * enterprise_admin_set_information_for_provisioned_enterprise_user: PUT /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
-         * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * enterprise_admin_set_information_for_provisioned_enterprise_user: PUT /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
 
     Replaces an existing provisioned user's information. You must provide all the information required for the user as if you were provisioning them for the first time. Any existing user information that you don't provide will be removed. If you want to only update a specific attribute, use the [Update an attribute for a SCIM user](#update-an-attribute-for-an-enterprise-scim-user) endpoint instead.
 
     You must at least provide the required values for the user: `userName`, `name`, and `emails`.
 
     **Warning:** Setting `active: false` removes the user from the enterprise, deletes the external identity, and deletes the associated `{scim_user_id}`.
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-scim-information-for-a-provisioned-enterprise-user
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#set-scim-information-for-a-provisioned-enterprise-user
+    */
     pub async fn enterprise_admin_set_information_for_provisioned_enterprise_user(
         &self,
         enterprise: &str,
@@ -40339,10 +40339,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * enterprise_admin_delete_user_from_enterprise: DELETE /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
-     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-     * FROM: https://docs.github.com/rest/reference/enterprise-admin#delete-a-scim-user-from-an-enterprise
-     */
+    * enterprise_admin_delete_user_from_enterprise: DELETE /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#delete-a-scim-user-from-an-enterprise
+    */
     pub async fn enterprise_admin_delete_user_from_enterprise(
         &self,
         enterprise: &str,
@@ -40361,8 +40361,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * enterprise_admin_update_attribute_for_enterprise_user: PATCH /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
-         * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+    * enterprise_admin_update_attribute_for_enterprise_user: PATCH /scim/v2/enterprises/{enterprise}/Users/{scim_user_id}
+    * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
 
     Allows you to change a provisioned user's individual attributes. To change a user's values, you must provide a specific `Operations` JSON format that contains at least one of the `add`, `remove`, or `replace` operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
 
@@ -40380,8 +40380,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
       }]
     }
     ```
-         * FROM: https://docs.github.com/rest/reference/enterprise-admin#update-an-attribute-for-a-scim-enterprise-user
-         */
+    * FROM: https://docs.github.com/rest/reference/enterprise-admin#update-an-attribute-for-a-scim-enterprise-user
+    */
     pub async fn enterprise_admin_update_attribute_for_enterprise_user(
         &self,
         enterprise: &str,
@@ -40402,8 +40402,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * scim_list_provisioned_identities: GET /scim/v2/organizations/{org}/Users
-         * Retrieves a paginated list of all provisioned organization members, including pending invitations. If you provide the `filter` parameter, the resources for all matching provisions members are returned.
+    * scim_list_provisioned_identities: GET /scim/v2/organizations/{org}/Users
+    * Retrieves a paginated list of all provisioned organization members, including pending invitations. If you provide the `filter` parameter, the resources for all matching provisions members are returned.
 
     When a user with a SAML-provisioned external identity leaves (or is removed from) an organization, the account's metadata is immediately removed. However, the returned list of user accounts might not always match the organization or enterprise member list you see on GitHub. This can happen in certain cases where an external identity associated with an organization will not match an organization member:
       - When a user with a SCIM-provisioned external identity is removed from an organization, the account's metadata is preserved to allow the user to re-join the organization in the future.
@@ -40419,8 +40419,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     1. After successfully authenticating with the SAML SSO IdP, the `null` external identity entry is created and the user is prompted to sign in to their GitHub account:
        - If the user signs in, their GitHub account is linked to this entry.
        - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub organization, and the external identity `null` entry remains in place.
-         * FROM: https://docs.github.com/rest/reference/scim#list-scim-provisioned-identities
-         */
+    * FROM: https://docs.github.com/rest/reference/scim#list-scim-provisioned-identities
+    */
     pub async fn scim_list_provisioned_identities(
         &self,
         org: &str,
@@ -40440,10 +40440,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * scim_provision_and_invite_user: POST /scim/v2/organizations/{org}/Users
-     * Provision organization membership for a user, and send an activation email to the email address.
-     * FROM: https://docs.github.com/rest/reference/scim#provision-and-invite-a-scim-user
-     */
+    * scim_provision_and_invite_user: POST /scim/v2/organizations/{org}/Users
+    * Provision organization membership for a user, and send an activation email to the email address.
+    * FROM: https://docs.github.com/rest/reference/scim#provision-and-invite-a-scim-user
+    */
     pub async fn scim_provision_and_invite_user(
         &self,
         org: &str,
@@ -40462,10 +40462,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * scim_get_provisioning_information_for_user: GET /scim/v2/organizations/{org}/Users/{scim_user_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/scim#get-scim-provisioning-information-for-a-user
-     */
+    * scim_get_provisioning_information_for_user: GET /scim/v2/organizations/{org}/Users/{scim_user_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/scim#get-scim-provisioning-information-for-a-user
+    */
     pub async fn scim_get_provisioning_information_for_user(
         &self,
         org: &str,
@@ -40481,14 +40481,14 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * scim_set_information_for_provisioned_user: PUT /scim/v2/organizations/{org}/Users/{scim_user_id}
-         * Replaces an existing provisioned user's information. You must provide all the information required for the user as if you were provisioning them for the first time. Any existing user information that you don't provide will be removed. If you want to only update a specific attribute, use the [Update an attribute for a SCIM user](https://docs.github.com/rest/reference/scim#update-an-attribute-for-a-scim-user) endpoint instead.
+    * scim_set_information_for_provisioned_user: PUT /scim/v2/organizations/{org}/Users/{scim_user_id}
+    * Replaces an existing provisioned user's information. You must provide all the information required for the user as if you were provisioning them for the first time. Any existing user information that you don't provide will be removed. If you want to only update a specific attribute, use the [Update an attribute for a SCIM user](https://docs.github.com/rest/reference/scim#update-an-attribute-for-a-scim-user) endpoint instead.
 
     You must at least provide the required values for the user: `userName`, `name`, and `emails`.
 
     **Warning:** Setting `active: false` removes the user from the organization, deletes the external identity, and deletes the associated `{scim_user_id}`.
-         * FROM: https://docs.github.com/rest/reference/scim#set-scim-information-for-a-provisioned-user
-         */
+    * FROM: https://docs.github.com/rest/reference/scim#set-scim-information-for-a-provisioned-user
+    */
     pub async fn scim_set_information_for_provisioned_user(
         &self,
         org: &str,
@@ -40509,10 +40509,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * scim_delete_user_from_org: DELETE /scim/v2/organizations/{org}/Users/{scim_user_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/scim#delete-a-scim-user-from-an-organization
-     */
+    * scim_delete_user_from_org: DELETE /scim/v2/organizations/{org}/Users/{scim_user_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/scim#delete-a-scim-user-from-an-organization
+    */
     pub async fn scim_delete_user_from_org(&self, org: &str, scim_user_id: &str) -> Result<()> {
         let url = format!(
             "/scim/v2/organizations/{}/Users/{}",
@@ -40527,8 +40527,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * scim_update_attribute_for_user: PATCH /scim/v2/organizations/{org}/Users/{scim_user_id}
-         * Allows you to change a provisioned user's individual attributes. To change a user's values, you must provide a specific `Operations` JSON format that contains at least one of the `add`, `remove`, or `replace` operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
+    * scim_update_attribute_for_user: PATCH /scim/v2/organizations/{org}/Users/{scim_user_id}
+    * Allows you to change a provisioned user's individual attributes. To change a user's values, you must provide a specific `Operations` JSON format that contains at least one of the `add`, `remove`, or `replace` operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
 
     **Note:** Complicated SCIM `path` selectors that include filters are not supported. For example, a `path` selector defined as `"path": "emails[type eq \"work\"]"` will not work.
 
@@ -40544,8 +40544,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
       }]
     }
     ```
-         * FROM: https://docs.github.com/rest/reference/scim#update-an-attribute-for-a-scim-user
-         */
+    * FROM: https://docs.github.com/rest/reference/scim#update-an-attribute-for-a-scim-user
+    */
     pub async fn scim_update_attribute_for_user(
         &self,
         org: &str,
@@ -40566,8 +40566,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * search_code: GET /search/code
-         * Searches for query terms inside of a file. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
+    * search_code: GET /search/code
+    * Searches for query terms inside of a file. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
 
     When searching for code, you can get text match metadata for the file **content** and file **path** fields when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://docs.github.com/rest/reference/search#text-match-metadata).
 
@@ -40585,8 +40585,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     *   Only files smaller than 384 KB are searchable.
     *   You must always include at least one search term when searching source code. For example, searching for [`language:go`](https://github.com/search?utf8=%E2%9C%93&q=language%3Ago&type=Code) is not valid, while [`amazing
     language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
-         * FROM: https://docs.github.com/rest/reference/search#search-code
-         */
+    * FROM: https://docs.github.com/rest/reference/search#search-code
+    */
     pub async fn search_code(
         &self,
         q: &str,
@@ -40596,20 +40596,20 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
         let url = format!(
-            "/search/code?per_page={}&q={}&sort={}&order={}&page={}",
-            format!("{}", per_page),
+            "/search/code?page={}&q={}&per_page={}&sort={}&order={}",
+            format!("{}", page),
             q.to_string(),
+            format!("{}", per_page),
             sort.to_string(),
             order.to_string(),
-            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * search_commits: GET /search/commits
-         * Find commits via various criteria on the default branch (usually `master`). This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
+    * search_commits: GET /search/commits
+    * Find commits via various criteria on the default branch (usually `master`). This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
 
     When searching for commits, you can get text match metadata for the **message** field when you provide the `text-match` media type. For more details about how to receive highlighted search results, see [Text match
     metadata](https://docs.github.com/rest/reference/search#text-match-metadata).
@@ -40617,8 +40617,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     For example, if you want to find commits related to CSS in the [octocat/Spoon-Knife](https://github.com/octocat/Spoon-Knife) repository. Your query would look something like this:
 
     `q=repo:octocat/Spoon-Knife+css`
-         * FROM: https://docs.github.com/rest/reference/search#search-commits
-         */
+    * FROM: https://docs.github.com/rest/reference/search#search-commits
+    */
     pub async fn search_commits(
         &self,
         q: &str,
@@ -40628,20 +40628,20 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
         let url = format!(
-            "/search/commits?sort={}&q={}&order={}&page={}&per_page={}",
-            sort.to_string(),
+            "/search/commits?per_page={}&q={}&order={}&page={}&sort={}",
+            format!("{}", per_page),
             q.to_string(),
             order.to_string(),
             format!("{}", page),
-            format!("{}", per_page),
+            sort.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * search_issues_and_pull_requests: GET /search/issues
-         * Find issues by state and keyword. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
+    * search_issues_and_pull_requests: GET /search/issues
+    * Find issues by state and keyword. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
 
     When searching for issues, you can get text match metadata for the issue **title**, issue **body**, and issue **comment body** fields when you pass the `text-match` media type. For more details about how to receive highlighted
     search results, see [Text match metadata](https://docs.github.com/rest/reference/search#text-match-metadata).
@@ -40653,8 +40653,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     This query searches for the keyword `windows`, within any open issue that is labeled as `bug`. The search runs across repositories whose primary language is Python. The results are sorted by creation date in ascending order, which means the oldest issues appear first in the search results.
 
     **Note:** For [user-to-server](https://docs.github.com/developers/apps/identifying-and-authorizing-users-for-github-apps#user-to-server-requests) GitHub App requests, you can't retrieve a combination of issues and pull requests in a single query. Requests that don't include the `is:issue` or `is:pull-request` qualifier will receive an HTTP `422 Unprocessable Entity` response. To get results for both issues and pull requests, you must send separate queries for issues and pull requests. For more information about the `is` qualifier, see "[Searching only issues or pull requests](https://docs.github.com/github/searching-for-information-on-github/searching-issues-and-pull-requests#search-only-issues-or-pull-requests)."
-         * FROM: https://docs.github.com/rest/reference/search#search-issues-and-pull-requests
-         */
+    * FROM: https://docs.github.com/rest/reference/search#search-issues-and-pull-requests
+    */
     pub async fn search_issues_and_pull_requests(
         &self,
         q: &str,
@@ -40664,20 +40664,20 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<types::GetSearchIssuesandPullRequestsOkResponse> {
         let url = format!(
-            "/search/issues?q={}&sort={}&page={}&order={}&per_page={}",
-            q.to_string(),
-            sort.to_string(),
+            "/search/issues?page={}&sort={}&order={}&per_page={}&q={}",
             format!("{}", page),
+            sort.to_string(),
             order.to_string(),
             format!("{}", per_page),
+            q.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * search_labels: GET /search/labels
-         * Find labels in a repository with names or descriptions that match search keywords. Returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
+    * search_labels: GET /search/labels
+    * Find labels in a repository with names or descriptions that match search keywords. Returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
 
     When searching for labels, you can get text match metadata for the label **name** and **description** fields when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://docs.github.com/rest/reference/search#text-match-metadata).
 
@@ -40686,8 +40686,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     `q=bug+defect+enhancement&repository_id=64778136`
 
     The labels that best match the query appear first in the search results.
-         * FROM: https://docs.github.com/rest/reference/search#search-labels
-         */
+    * FROM: https://docs.github.com/rest/reference/search#search-labels
+    */
     pub async fn search_labels(
         &self,
         repository_id: i64,
@@ -40698,21 +40698,21 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
         let url = format!(
-            "/search/labels?order={}&page={}&per_page={}&q={}&sort={}&repository_id={}",
-            order.to_string(),
-            format!("{}", page),
-            format!("{}", per_page),
-            q.to_string(),
-            sort.to_string(),
+            "/search/labels?repository_id={}&per_page={}&order={}&sort={}&page={}&q={}",
             format!("{}", repository_id),
+            format!("{}", per_page),
+            order.to_string(),
+            sort.to_string(),
+            format!("{}", page),
+            q.to_string(),
         );
 
         self.get(&url).await
     }
 
     /**
-         * search_repos: GET /search/repositories
-         * Find repositories via various criteria. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
+    * search_repos: GET /search/repositories
+    * Find repositories via various criteria. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
 
     When searching for repositories, you can get text match metadata for the **name** and **description** fields when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://docs.github.com/rest/reference/search#text-match-metadata).
 
@@ -40725,8 +40725,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     When you include the `mercy` preview header, you can also search for multiple topics by adding more `topic:` instances. For example, your query might look like this:
 
     `q=topic:ruby+topic:rails`
-         * FROM: https://docs.github.com/rest/reference/search#search-repositories
-         */
+    * FROM: https://docs.github.com/rest/reference/search#search-repositories
+    */
     pub async fn search_repos(
         &self,
         q: &str,
@@ -40736,20 +40736,20 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<types::GetSearchRepositoriesOkResponse> {
         let url = format!(
-            "/search/repositories?order={}&q={}&sort={}&per_page={}&page={}",
+            "/search/repositories?sort={}&page={}&order={}&q={}&per_page={}",
+            sort.to_string(),
+            format!("{}", page),
             order.to_string(),
             q.to_string(),
-            sort.to_string(),
             format!("{}", per_page),
-            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * search_topics: GET /search/topics
-         * Find topics via various criteria. Results are sorted by best match. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination). See "[Searching topics](https://help.github.com/articles/searching-topics/)" for a detailed list of qualifiers.
+    * search_topics: GET /search/topics
+    * Find topics via various criteria. Results are sorted by best match. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination). See "[Searching topics](https://help.github.com/articles/searching-topics/)" for a detailed list of qualifiers.
 
     When searching for topics, you can get text match metadata for the topic's **short\_description**, **description**, **name**, or **display\_name** field when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://docs.github.com/rest/reference/search#text-match-metadata).
 
@@ -40758,8 +40758,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     `q=ruby+is:featured`
 
     This query searches for topics with the keyword `ruby` and limits the results to find only topics that are featured. The topics that are the best match for the query appear first in the search results.
-         * FROM: https://docs.github.com/rest/reference/search#search-topics
-         */
+    * FROM: https://docs.github.com/rest/reference/search#search-topics
+    */
     pub async fn search_topics(
         &self,
         q: &str,
@@ -40767,18 +40767,18 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<types::GetSearchTopicsOkResponse> {
         let url = format!(
-            "/search/topics?q={}&per_page={}&page={}",
+            "/search/topics?page={}&q={}&per_page={}",
+            format!("{}", page),
             q.to_string(),
             format!("{}", per_page),
-            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * search_users: GET /search/users
-         * Find users via various criteria. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
+    * search_users: GET /search/users
+    * Find users via various criteria. This method returns up to 100 results [per page](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination).
 
     When searching for users, you can get text match metadata for the issue **login**, **email**, and **name** fields when you pass the `text-match` media type. For more details about highlighting search results, see [Text match metadata](https://docs.github.com/rest/reference/search#text-match-metadata). For more details about how to receive highlighted search results, see [Text match metadata](https://docs.github.com/rest/reference/search#text-match-metadata).
 
@@ -40787,8 +40787,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     `q=tom+repos:%3E42+followers:%3E1000`
 
     This query searches for users with the name `tom`. The results are restricted to users with more than 42 repositories and over 1,000 followers.
-         * FROM: https://docs.github.com/rest/reference/search#search-users
-         */
+    * FROM: https://docs.github.com/rest/reference/search#search-users
+    */
     pub async fn search_users(
         &self,
         q: &str,
@@ -40798,22 +40798,22 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
         let url = format!(
-            "/search/users?per_page={}&sort={}&q={}&page={}&order={}",
-            format!("{}", per_page),
+            "/search/users?sort={}&q={}&per_page={}&order={}&page={}",
             sort.to_string(),
             q.to_string(),
-            format!("{}", page),
+            format!("{}", per_page),
             order.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * teams_get_legacy: GET /teams/{team_id}
-     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the [Get a team by name](https://docs.github.com/rest/reference/teams#get-a-team-by-name) endpoint.
-     * FROM: https://docs.github.com/rest/reference/teams/#get-a-team-legacy
-     */
+    * teams_get_legacy: GET /teams/{team_id}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the [Get a team by name](https://docs.github.com/rest/reference/teams#get-a-team-by-name) endpoint.
+    * FROM: https://docs.github.com/rest/reference/teams/#get-a-team-legacy
+    */
     pub async fn teams_get_legacy(&self, team_id: i64) -> Result<types::TeamFull> {
         let url = format!(
             "/teams/{}",
@@ -40824,14 +40824,14 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_delete_legacy: DELETE /teams/{team_id}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a team](https://docs.github.com/rest/reference/teams#delete-a-team) endpoint.
+    * teams_delete_legacy: DELETE /teams/{team_id}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a team](https://docs.github.com/rest/reference/teams#delete-a-team) endpoint.
 
     To delete a team, the authenticated user must be an organization owner or team maintainer.
 
     If you are an organization owner, deleting a parent team will delete all of its child teams as well.
-         * FROM: https://docs.github.com/rest/reference/teams/#delete-a-team-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#delete-a-team-legacy
+    */
     pub async fn teams_delete_legacy(&self, team_id: i64) -> Result<()> {
         let url = format!(
             "/teams/{}",
@@ -40845,14 +40845,14 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_update_legacy: PATCH /teams/{team_id}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a team](https://docs.github.com/rest/reference/teams#update-a-team) endpoint.
+    * teams_update_legacy: PATCH /teams/{team_id}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a team](https://docs.github.com/rest/reference/teams#update-a-team) endpoint.
 
     To edit a team, the authenticated user must either be an organization owner or a team maintainer.
 
     **Note:** With nested teams, the `privacy` for parent teams cannot be `secret`.
-         * FROM: https://docs.github.com/rest/reference/teams/#update-a-team-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#update-a-team-legacy
+    */
     pub async fn teams_update_legacy(
         &self,
         team_id: i64,
@@ -40871,12 +40871,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_list_discussions_legacy: GET /teams/{team_id}/discussions
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List discussions`](https://docs.github.com/rest/reference/teams#list-discussions) endpoint.
+    * teams_list_discussions_legacy: GET /teams/{team_id}/discussions
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List discussions`](https://docs.github.com/rest/reference/teams#list-discussions) endpoint.
 
     List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/teams#list-discussions-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-discussions-legacy
+    */
     pub async fn teams_list_discussions_legacy(
         &self,
         team_id: i64,
@@ -40896,14 +40896,14 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_create_discussion_legacy: POST /teams/{team_id}/discussions
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create a discussion`](https://docs.github.com/rest/reference/teams#create-a-discussion) endpoint.
+    * teams_create_discussion_legacy: POST /teams/{team_id}/discussions
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create a discussion`](https://docs.github.com/rest/reference/teams#create-a-discussion) endpoint.
 
     Creates a new discussion post on a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
-         * FROM: https://docs.github.com/rest/reference/teams#create-a-discussion-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#create-a-discussion-legacy
+    */
     pub async fn teams_create_discussion_legacy(
         &self,
         team_id: i64,
@@ -40922,12 +40922,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_get_discussion_legacy: GET /teams/{team_id}/discussions/{discussion_number}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion](https://docs.github.com/rest/reference/teams#get-a-discussion) endpoint.
+    * teams_get_discussion_legacy: GET /teams/{team_id}/discussions/{discussion_number}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion](https://docs.github.com/rest/reference/teams#get-a-discussion) endpoint.
 
     Get a specific discussion on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/teams#get-a-discussion-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#get-a-discussion-legacy
+    */
     pub async fn teams_get_discussion_legacy(
         &self,
         team_id: i64,
@@ -40943,12 +40943,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_delete_discussion_legacy: DELETE /teams/{team_id}/discussions/{discussion_number}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Delete a discussion`](https://docs.github.com/rest/reference/teams#delete-a-discussion) endpoint.
+    * teams_delete_discussion_legacy: DELETE /teams/{team_id}/discussions/{discussion_number}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Delete a discussion`](https://docs.github.com/rest/reference/teams#delete-a-discussion) endpoint.
 
     Delete a discussion from a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/teams#delete-a-discussion-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#delete-a-discussion-legacy
+    */
     pub async fn teams_delete_discussion_legacy(
         &self,
         team_id: i64,
@@ -40967,12 +40967,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_update_discussion_legacy: PATCH /teams/{team_id}/discussions/{discussion_number}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion](https://docs.github.com/rest/reference/teams#update-a-discussion) endpoint.
+    * teams_update_discussion_legacy: PATCH /teams/{team_id}/discussions/{discussion_number}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion](https://docs.github.com/rest/reference/teams#update-a-discussion) endpoint.
 
     Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/teams#update-a-discussion-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#update-a-discussion-legacy
+    */
     pub async fn teams_update_discussion_legacy(
         &self,
         team_id: i64,
@@ -40993,12 +40993,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_list_discussion_comments_legacy: GET /teams/{team_id}/discussions/{discussion_number}/comments
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List discussion comments](https://docs.github.com/rest/reference/teams#list-discussion-comments) endpoint.
+    * teams_list_discussion_comments_legacy: GET /teams/{team_id}/discussions/{discussion_number}/comments
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List discussion comments](https://docs.github.com/rest/reference/teams#list-discussion-comments) endpoint.
 
     List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/teams#list-discussion-comments-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-discussion-comments-legacy
+    */
     pub async fn teams_list_discussion_comments_legacy(
         &self,
         team_id: i64,
@@ -41008,26 +41008,26 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
-            "/teams/{}/discussions/{}/comments?direction={}&page={}&per_page={}",
+            "/teams/{}/discussions/{}/comments?per_page={}&direction={}&page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
+            format!("{}", per_page),
             direction.to_string(),
             format!("{}", page),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * teams_create_discussion_comment_legacy: POST /teams/{team_id}/discussions/{discussion_number}/comments
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Create a discussion comment](https://docs.github.com/rest/reference/teams#create-a-discussion-comment) endpoint.
+    * teams_create_discussion_comment_legacy: POST /teams/{team_id}/discussions/{discussion_number}/comments
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Create a discussion comment](https://docs.github.com/rest/reference/teams#create-a-discussion-comment) endpoint.
 
     Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
     This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
-         * FROM: https://docs.github.com/rest/reference/teams#create-a-discussion-comment-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#create-a-discussion-comment-legacy
+    */
     pub async fn teams_create_discussion_comment_legacy(
         &self,
         team_id: i64,
@@ -41048,12 +41048,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_get_discussion_comment_legacy: GET /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion comment](https://docs.github.com/rest/reference/teams#get-a-discussion-comment) endpoint.
+    * teams_get_discussion_comment_legacy: GET /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion comment](https://docs.github.com/rest/reference/teams#get-a-discussion-comment) endpoint.
 
     Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/teams#get-a-discussion-comment-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#get-a-discussion-comment-legacy
+    */
     pub async fn teams_get_discussion_comment_legacy(
         &self,
         team_id: i64,
@@ -41071,12 +41071,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_delete_discussion_comment_legacy: DELETE /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a discussion comment](https://docs.github.com/rest/reference/teams#delete-a-discussion-comment) endpoint.
+    * teams_delete_discussion_comment_legacy: DELETE /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a discussion comment](https://docs.github.com/rest/reference/teams#delete-a-discussion-comment) endpoint.
 
     Deletes a comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/teams#delete-a-discussion-comment-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#delete-a-discussion-comment-legacy
+    */
     pub async fn teams_delete_discussion_comment_legacy(
         &self,
         team_id: i64,
@@ -41097,12 +41097,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_update_discussion_comment_legacy: PATCH /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion comment](https://docs.github.com/rest/reference/teams#update-a-discussion-comment) endpoint.
+    * teams_update_discussion_comment_legacy: PATCH /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion comment](https://docs.github.com/rest/reference/teams#update-a-discussion-comment) endpoint.
 
     Edits the body text of a discussion comment. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/teams#update-a-discussion-comment-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#update-a-discussion-comment-legacy
+    */
     pub async fn teams_update_discussion_comment_legacy(
         &self,
         team_id: i64,
@@ -41125,12 +41125,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * reactions_list_for_team_discussion_comment_legacy: GET /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List reactions for a team discussion comment`](https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment) endpoint.
+    * reactions_list_for_team_discussion_comment_legacy: GET /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List reactions for a team discussion comment`](https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment) endpoint.
 
     List the reactions to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-comment-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-comment-legacy
+    */
     pub async fn reactions_list_for_team_discussion_comment_legacy(
         &self,
         team_id: i64,
@@ -41154,12 +41154,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * reactions_create_for_team_discussion_comment_legacy: POST /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new "[Create reaction for a team discussion comment](https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion-comment)" endpoint.
+    * reactions_create_for_team_discussion_comment_legacy: POST /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new "[Create reaction for a team discussion comment](https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion-comment)" endpoint.
 
     Create a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion comment.
-         * FROM: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion-comment-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion-comment-legacy
+    */
     pub async fn reactions_create_for_team_discussion_comment_legacy(
         &self,
         team_id: i64,
@@ -41182,12 +41182,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * reactions_list_for_team_discussion_legacy: GET /teams/{team_id}/discussions/{discussion_number}/reactions
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List reactions for a team discussion`](https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion) endpoint.
+    * reactions_list_for_team_discussion_legacy: GET /teams/{team_id}/discussions/{discussion_number}/reactions
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List reactions for a team discussion`](https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion) endpoint.
 
     List the reactions to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-         * FROM: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-legacy
+    */
     pub async fn reactions_list_for_team_discussion_legacy(
         &self,
         team_id: i64,
@@ -41209,12 +41209,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * reactions_create_for_team_discussion_legacy: POST /teams/{team_id}/discussions/{discussion_number}/reactions
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create reaction for a team discussion`](https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion) endpoint.
+    * reactions_create_for_team_discussion_legacy: POST /teams/{team_id}/discussions/{discussion_number}/reactions
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create reaction for a team discussion`](https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion) endpoint.
 
     Create a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion.
-         * FROM: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion-legacy
+    */
     pub async fn reactions_create_for_team_discussion_legacy(
         &self,
         team_id: i64,
@@ -41235,12 +41235,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_list_pending_invitations_legacy: GET /teams/{team_id}/invitations
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List pending team invitations`](https://docs.github.com/rest/reference/teams#list-pending-team-invitations) endpoint.
+    * teams_list_pending_invitations_legacy: GET /teams/{team_id}/invitations
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List pending team invitations`](https://docs.github.com/rest/reference/teams#list-pending-team-invitations) endpoint.
 
     The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
-         * FROM: https://docs.github.com/rest/reference/teams#list-pending-team-invitations-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-pending-team-invitations-legacy
+    */
     pub async fn teams_list_pending_invitations_legacy(
         &self,
         team_id: i64,
@@ -41248,22 +41248,22 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
-            "/teams/{}/invitations?per_page={}&page={}",
+            "/teams/{}/invitations?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * teams_list_members_legacy: GET /teams/{team_id}/members
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team members`](https://docs.github.com/rest/reference/teams#list-team-members) endpoint.
+    * teams_list_members_legacy: GET /teams/{team_id}/members
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team members`](https://docs.github.com/rest/reference/teams#list-team-members) endpoint.
 
     Team members will include the members of child teams.
-         * FROM: https://docs.github.com/rest/reference/teams#list-team-members-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-team-members-legacy
+    */
     pub async fn teams_list_members_legacy(
         &self,
         team_id: i64,
@@ -41272,25 +41272,25 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/teams/{}/members?role={}&per_page={}&page={}",
+            "/teams/{}/members?page={}&role={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
+            format!("{}", page),
             role.to_string(),
             format!("{}", per_page),
-            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * teams_get_member_legacy: GET /teams/{team_id}/members/{username}
-         * The "Get team member" endpoint (described below) is deprecated.
+    * teams_get_member_legacy: GET /teams/{team_id}/members/{username}
+    * The "Get team member" endpoint (described below) is deprecated.
 
     We recommend using the [Get team membership for a user](https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user) endpoint instead. It allows you to get both active and pending memberships.
 
     To list members in a team, the team must be visible to the authenticated user.
-         * FROM: https://docs.github.com/rest/reference/teams#get-team-member-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#get-team-member-legacy
+    */
     pub async fn teams_get_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
             "/teams/{}/members/{}",
@@ -41302,8 +41302,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_add_member_legacy: PUT /teams/{team_id}/members/{username}
-         * The "Add team member" endpoint (described below) is deprecated.
+    * teams_add_member_legacy: PUT /teams/{team_id}/members/{username}
+    * The "Add team member" endpoint (described below) is deprecated.
 
     We recommend using the [Add or update team membership for a user](https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user) endpoint instead. It allows you to invite new organization members to your teams.
 
@@ -41314,8 +41314,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
 
     Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-         * FROM: https://docs.github.com/rest/reference/teams#add-team-member-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#add-team-member-legacy
+    */
     pub async fn teams_add_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
             "/teams/{}/members/{}",
@@ -41327,8 +41327,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_remove_member_legacy: DELETE /teams/{team_id}/members/{username}
-         * The "Remove team member" endpoint (described below) is deprecated.
+    * teams_remove_member_legacy: DELETE /teams/{team_id}/members/{username}
+    * The "Remove team member" endpoint (described below) is deprecated.
 
     We recommend using the [Remove team membership for a user](https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user) endpoint instead. It allows you to remove both active and pending memberships.
 
@@ -41337,8 +41337,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     To remove a team member, the authenticated user must have 'admin' permissions to the team or be an owner of the org that the team is associated with. Removing a team member does not delete the user, it just removes them from the team.
 
     **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
-         * FROM: https://docs.github.com/rest/reference/teams#remove-team-member-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#remove-team-member-legacy
+    */
     pub async fn teams_remove_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
             "/teams/{}/members/{}",
@@ -41353,8 +41353,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_get_membership_for_user_legacy: GET /teams/{team_id}/memberships/{username}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get team membership for a user](https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user) endpoint.
+    * teams_get_membership_for_user_legacy: GET /teams/{team_id}/memberships/{username}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get team membership for a user](https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user) endpoint.
 
     Team members will include the members of child teams.
 
@@ -41364,8 +41364,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     The response contains the `state` of the membership and the member's `role`.
 
     The `role` for organization owners is set to `maintainer`. For more information about `maintainer` roles, see [Create a team](https://docs.github.com/rest/reference/teams#create-a-team).
-         * FROM: https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user-legacy
+    */
     pub async fn teams_get_membership_for_user_legacy(
         &self,
         team_id: i64,
@@ -41381,8 +41381,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_add_or_update_membership_for_user_legacy: PUT /teams/{team_id}/memberships/{username}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team membership for a user](https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user) endpoint.
+    * teams_add_or_update_membership_for_user_legacy: PUT /teams/{team_id}/memberships/{username}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team membership for a user](https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user) endpoint.
 
     Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -41393,8 +41393,8 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     If the user is unaffiliated with the team's organization, this endpoint will send an invitation to the user via email. This newly-created membership will be in the "pending" state until the user accepts the invitation, at which point the membership will transition to the "active" state and the user will be added as a member of the team. To add a membership between an unaffiliated user and a team, the authenticated user must be an organization owner.
 
     If the user is already a member of the team, this endpoint will update the role of the team member's role. To update the membership of a team member, the authenticated user must be an organization owner or a team maintainer.
-         * FROM: https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user-legacy
+    */
     pub async fn teams_add_or_update_membership_for_user_legacy(
         &self,
         team_id: i64,
@@ -41415,16 +41415,16 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_remove_membership_for_user_legacy: DELETE /teams/{team_id}/memberships/{username}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove team membership for a user](https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user) endpoint.
+    * teams_remove_membership_for_user_legacy: DELETE /teams/{team_id}/memberships/{username}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove team membership for a user](https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user) endpoint.
 
     Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     To remove a membership between a user and a team, the authenticated user must have 'admin' permissions to the team or be an owner of the organization that the team is associated with. Removing team membership does not delete the user, it just removes their membership from the team.
 
     **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
-         * FROM: https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user-legacy
+    */
     pub async fn teams_remove_membership_for_user_legacy(
         &self,
         team_id: i64,
@@ -41443,12 +41443,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_list_projects_legacy: GET /teams/{team_id}/projects
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team projects`](https://docs.github.com/rest/reference/teams#list-team-projects) endpoint.
+    * teams_list_projects_legacy: GET /teams/{team_id}/projects
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team projects`](https://docs.github.com/rest/reference/teams#list-team-projects) endpoint.
 
     Lists the organization projects for a team.
-         * FROM: https://docs.github.com/rest/reference/teams/#list-team-projects-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#list-team-projects-legacy
+    */
     pub async fn teams_list_projects_legacy(
         &self,
         team_id: i64,
@@ -41456,22 +41456,22 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<Vec<types::TeamProject>> {
         let url = format!(
-            "/teams/{}/projects?per_page={}&page={}",
+            "/teams/{}/projects?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * teams_check_permissions_for_project_legacy: GET /teams/{team_id}/projects/{project_id}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Check team permissions for a project](https://docs.github.com/rest/reference/teams#check-team-permissions-for-a-project) endpoint.
+    * teams_check_permissions_for_project_legacy: GET /teams/{team_id}/projects/{project_id}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Check team permissions for a project](https://docs.github.com/rest/reference/teams#check-team-permissions-for-a-project) endpoint.
 
     Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
-         * FROM: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-project-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-project-legacy
+    */
     pub async fn teams_check_permissions_for_project_legacy(
         &self,
         team_id: i64,
@@ -41487,12 +41487,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_add_or_update_project_permissions_legacy: PUT /teams/{team_id}/projects/{project_id}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team project permissions](https://docs.github.com/rest/reference/teams#add-or-update-team-project-permissions) endpoint.
+    * teams_add_or_update_project_permissions_legacy: PUT /teams/{team_id}/projects/{project_id}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team project permissions](https://docs.github.com/rest/reference/teams#add-or-update-team-project-permissions) endpoint.
 
     Adds an organization project to a team. To add a project to a team or update the team's permission on a project, the authenticated user must have `admin` permissions for the project. The project and team must be part of the same organization.
-         * FROM: https://docs.github.com/rest/reference/teams/#add-or-update-team-project-permissions-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#add-or-update-team-project-permissions-legacy
+    */
     pub async fn teams_add_or_update_project_permissions_legacy(
         &self,
         team_id: i64,
@@ -41513,12 +41513,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_remove_project_legacy: DELETE /teams/{team_id}/projects/{project_id}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove a project from a team](https://docs.github.com/rest/reference/teams#remove-a-project-from-a-team) endpoint.
+    * teams_remove_project_legacy: DELETE /teams/{team_id}/projects/{project_id}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove a project from a team](https://docs.github.com/rest/reference/teams#remove-a-project-from-a-team) endpoint.
 
     Removes an organization project from a team. An organization owner or a team maintainer can remove any project from the team. To remove a project from a team as an organization member, the authenticated user must have `read` access to both the team and project, or `admin` access to the team or project. **Note:** This endpoint removes the project from the team, but does not delete it.
-         * FROM: https://docs.github.com/rest/reference/teams/#remove-a-project-from-a-team-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#remove-a-project-from-a-team-legacy
+    */
     pub async fn teams_remove_project_legacy(&self, team_id: i64, project_id: i64) -> Result<()> {
         let url = format!(
             "/teams/{}/projects/{}",
@@ -41533,10 +41533,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * teams_list_repos_legacy: GET /teams/{team_id}/repos
-     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://docs.github.com/rest/reference/teams#list-team-repositories) endpoint.
-     * FROM: https://docs.github.com/rest/reference/teams/#list-team-repositories-legacy
-     */
+    * teams_list_repos_legacy: GET /teams/{team_id}/repos
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://docs.github.com/rest/reference/teams#list-team-repositories) endpoint.
+    * FROM: https://docs.github.com/rest/reference/teams/#list-team-repositories-legacy
+    */
     pub async fn teams_list_repos_legacy(
         &self,
         team_id: i64,
@@ -41554,14 +41554,14 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_check_permissions_for_repo_legacy: GET /teams/{team_id}/repos/{owner}/{repo}
-         * **Note**: Repositories inherited through a parent team will also be checked.
+    * teams_check_permissions_for_repo_legacy: GET /teams/{team_id}/repos/{owner}/{repo}
+    * **Note**: Repositories inherited through a parent team will also be checked.
 
     **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Check team permissions for a repository](https://docs.github.com/rest/reference/teams#check-team-permissions-for-a-repository) endpoint.
 
     You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
-         * FROM: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-repository-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-repository-legacy
+    */
     pub async fn teams_check_permissions_for_repo_legacy(
         &self,
         team_id: i64,
@@ -41579,14 +41579,14 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_add_or_update_repo_permissions_legacy: PUT /teams/{team_id}/repos/{owner}/{repo}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new "[Add or update team repository permissions](https://docs.github.com/rest/reference/teams#add-or-update-team-repository-permissions)" endpoint.
+    * teams_add_or_update_repo_permissions_legacy: PUT /teams/{team_id}/repos/{owner}/{repo}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new "[Add or update team repository permissions](https://docs.github.com/rest/reference/teams#add-or-update-team-repository-permissions)" endpoint.
 
     To add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a `422 Unprocessable Entity` status if you attempt to add a repository to a team that is not owned by the organization.
 
     Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-         * FROM: https://docs.github.com/rest/reference/teams/#add-or-update-team-repository-permissions-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#add-or-update-team-repository-permissions-legacy
+    */
     pub async fn teams_add_or_update_repo_permissions_legacy(
         &self,
         team_id: i64,
@@ -41609,12 +41609,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_remove_repo_legacy: DELETE /teams/{team_id}/repos/{owner}/{repo}
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove a repository from a team](https://docs.github.com/rest/reference/teams#remove-a-repository-from-a-team) endpoint.
+    * teams_remove_repo_legacy: DELETE /teams/{team_id}/repos/{owner}/{repo}
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove a repository from a team](https://docs.github.com/rest/reference/teams#remove-a-repository-from-a-team) endpoint.
 
     If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. NOTE: This does not delete the repository, it just removes it from the team.
-         * FROM: https://docs.github.com/rest/reference/teams/#remove-a-repository-from-a-team-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams/#remove-a-repository-from-a-team-legacy
+    */
     pub async fn teams_remove_repo_legacy(
         &self,
         team_id: i64,
@@ -41635,14 +41635,14 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_list_idp_groups_for_legacy: GET /teams/{team_id}/team-sync/group-mappings
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List IdP groups for a team`](https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team) endpoint.
+    * teams_list_idp_groups_for_legacy: GET /teams/{team_id}/team-sync/group-mappings
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List IdP groups for a team`](https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team) endpoint.
 
     Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     List IdP groups connected to a team on GitHub.
-         * FROM: https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team-legacy
+    */
     pub async fn teams_list_idp_groups_for_legacy(
         &self,
         team_id: i64,
@@ -41656,14 +41656,14 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * teams_create_or_update_idp_group_connections_legacy: PATCH /teams/{team_id}/team-sync/group-mappings
-         * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create or update IdP group connections`](https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections) endpoint.
+    * teams_create_or_update_idp_group_connections_legacy: PATCH /teams/{team_id}/team-sync/group-mappings
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create or update IdP group connections`](https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections) endpoint.
 
     Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
     Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty `groups` array will remove all connections for a team.
-         * FROM: https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections-legacy
-         */
+    * FROM: https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections-legacy
+    */
     pub async fn teams_create_or_update_idp_group_connections_legacy(
         &self,
         team_id: i64,
@@ -41682,10 +41682,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * teams_list_child_legacy: GET /teams/{team_id}/teams
-     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List child teams`](https://docs.github.com/rest/reference/teams#list-child-teams) endpoint.
-     * FROM: https://docs.github.com/rest/reference/teams/#list-child-teams-legacy
-     */
+    * teams_list_child_legacy: GET /teams/{team_id}/teams
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List child teams`](https://docs.github.com/rest/reference/teams#list-child-teams) endpoint.
+    * FROM: https://docs.github.com/rest/reference/teams/#list-child-teams-legacy
+    */
     pub async fn teams_list_child_legacy(
         &self,
         team_id: i64,
@@ -41693,32 +41693,32 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         page: i64,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
-            "/teams/{}/teams?page={}&per_page={}",
+            "/teams/{}/teams?per_page={}&page={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * users_get_authenticated: GET /user
-         * If the authenticated user is authenticated through basic authentication or OAuth with the `user` scope, then the response lists public and private profile information.
+    * users_get_authenticated: GET /user
+    * If the authenticated user is authenticated through basic authentication or OAuth with the `user` scope, then the response lists public and private profile information.
 
     If the authenticated user is authenticated through OAuth without the `user` scope, then the response lists only public profile information.
-         * FROM: https://docs.github.com/rest/reference/users#get-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/users#get-the-authenticated-user
+    */
     pub async fn users_get_authenticated(&self) -> Result<types::GetOkResponse> {
         let url = "/user".to_string();
         self.get(&url).await
     }
 
     /**
-     * users_update_authenticated: PATCH /user
-     * **Note:** If your email is set to private and you send an `email` parameter as part of this request to update your profile, your privacy settings are still enforced: the email address will not be displayed on your public profile or via the API.
-     * FROM: https://docs.github.com/rest/reference/users/#update-the-authenticated-user
-     */
+    * users_update_authenticated: PATCH /user
+    * **Note:** If your email is set to private and you send an `email` parameter as part of this request to update your profile, your privacy settings are still enforced: the email address will not be displayed on your public profile or via the API.
+    * FROM: https://docs.github.com/rest/reference/users/#update-the-authenticated-user
+    */
     pub async fn users_update_authenticated(
         &self,
         body: &types::UpdateRequest,
@@ -41732,20 +41732,20 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_list_blocked_by_authenticated: GET /user/blocks
-     * List the users you've blocked on your personal account.
-     * FROM: https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user
-     */
+    * users_list_blocked_by_authenticated: GET /user/blocks
+    * List the users you've blocked on your personal account.
+    * FROM: https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user
+    */
     pub async fn users_list_blocked_by_authenticated(&self) -> Result<Vec<types::SimpleUser>> {
         let url = "/user/blocks".to_string();
         self.get(&url).await
     }
 
     /**
-     * users_check_blocked: GET /user/blocks/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/users#check-if-a-user-is-blocked-by-the-authenticated-user
-     */
+    * users_check_blocked: GET /user/blocks/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/users#check-if-a-user-is-blocked-by-the-authenticated-user
+    */
     pub async fn users_check_blocked(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/blocks/{}",
@@ -41756,10 +41756,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_block: PUT /user/blocks/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/users#block-a-user
-     */
+    * users_block: PUT /user/blocks/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/users#block-a-user
+    */
     pub async fn users_block(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/blocks/{}",
@@ -41770,10 +41770,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_unblock: DELETE /user/blocks/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/users#unblock-a-user
-     */
+    * users_unblock: DELETE /user/blocks/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/users#unblock-a-user
+    */
     pub async fn users_unblock(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/blocks/{}",
@@ -41787,10 +41787,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_set_primary_email_visibility_for_authenticated: PATCH /user/email/visibility
-     * Sets the visibility for your primary email addresses.
-     * FROM: https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user
-     */
+    * users_set_primary_email_visibility_for_authenticated: PATCH /user/email/visibility
+    * Sets the visibility for your primary email addresses.
+    * FROM: https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user
+    */
     pub async fn users_set_primary_email_visibility_for_authenticated(
         &self,
         body: &types::SetPrimaryEmailVisibilityRequest,
@@ -41804,29 +41804,29 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_list_emails_for_authenticated: GET /user/emails
-     * Lists all of your email addresses, and specifies which one is visible to the public. This endpoint is accessible with the `user:email` scope.
-     * FROM: https://docs.github.com/rest/reference/users#list-email-addresses-for-the-authenticated-user
-     */
+    * users_list_emails_for_authenticated: GET /user/emails
+    * Lists all of your email addresses, and specifies which one is visible to the public. This endpoint is accessible with the `user:email` scope.
+    * FROM: https://docs.github.com/rest/reference/users#list-email-addresses-for-the-authenticated-user
+    */
     pub async fn users_list_emails_for_authenticated(
         &self,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Email>> {
         let url = format!(
-            "/user/emails?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/emails?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * users_add_email_for_authenticated: POST /user/emails
-     * This endpoint is accessible with the `user` scope.
-     * FROM: https://docs.github.com/rest/reference/users#add-an-email-address-for-the-authenticated-user
-     */
+    * users_add_email_for_authenticated: POST /user/emails
+    * This endpoint is accessible with the `user` scope.
+    * FROM: https://docs.github.com/rest/reference/users#add-an-email-address-for-the-authenticated-user
+    */
     pub async fn users_add_email_for_authenticated(
         &self,
         body: &types::AddEmailAddressRequest,
@@ -41840,10 +41840,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_delete_email_for_authenticated: DELETE /user/emails
-     * This endpoint is accessible with the `user` scope.
-     * FROM: https://docs.github.com/rest/reference/users#delete-an-email-address-for-the-authenticated-user
-     */
+    * users_delete_email_for_authenticated: DELETE /user/emails
+    * This endpoint is accessible with the `user` scope.
+    * FROM: https://docs.github.com/rest/reference/users#delete-an-email-address-for-the-authenticated-user
+    */
     pub async fn users_delete_email_for_authenticated(
         &self,
         body: &types::DeleteEmailAddressRequest,
@@ -41862,10 +41862,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_list_followers_for_authenticated_user: GET /user/followers
-     * Lists the people following the authenticated user.
-     * FROM: https://docs.github.com/rest/reference/users#list-followers-of-the-authenticated-user
-     */
+    * users_list_followers_for_authenticated_user: GET /user/followers
+    * Lists the people following the authenticated user.
+    * FROM: https://docs.github.com/rest/reference/users#list-followers-of-the-authenticated-user
+    */
     pub async fn users_list_followers_for_authenticated_user(
         &self,
         per_page: i64,
@@ -41881,29 +41881,29 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_list_followed_by_authenticated: GET /user/following
-     * Lists the people who the authenticated user follows.
-     * FROM: https://docs.github.com/rest/reference/users#list-the-people-the-authenticated-user-follows
-     */
+    * users_list_followed_by_authenticated: GET /user/following
+    * Lists the people who the authenticated user follows.
+    * FROM: https://docs.github.com/rest/reference/users#list-the-people-the-authenticated-user-follows
+    */
     pub async fn users_list_followed_by_authenticated(
         &self,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/user/following?page={}&per_page={}",
-            format!("{}", page),
+            "/user/following?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * users_check_person_is_followed_by_authenticated: GET /user/following/{username}
-     *
-     * FROM: https://docs.github.com/rest/reference/users#check-if-a-person-is-followed-by-the-authenticated-user
-     */
+    * users_check_person_is_followed_by_authenticated: GET /user/following/{username}
+    *
+    * FROM: https://docs.github.com/rest/reference/users#check-if-a-person-is-followed-by-the-authenticated-user
+    */
     pub async fn users_check_person_is_followed_by_authenticated(
         &self,
         username: &str,
@@ -41917,12 +41917,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * users_follow: PUT /user/following/{username}
-         * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    * users_follow: PUT /user/following/{username}
+    * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
 
     Following a user requires the user to be logged in and authenticated with basic auth or OAuth with the `user:follow` scope.
-         * FROM: https://docs.github.com/rest/reference/users#follow-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/users#follow-a-user
+    */
     pub async fn users_follow(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/following/{}",
@@ -41933,10 +41933,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_unfollow: DELETE /user/following/{username}
-     * Unfollowing a user requires the user to be logged in and authenticated with basic auth or OAuth with the `user:follow` scope.
-     * FROM: https://docs.github.com/rest/reference/users#unfollow-a-user
-     */
+    * users_unfollow: DELETE /user/following/{username}
+    * Unfollowing a user requires the user to be logged in and authenticated with basic auth or OAuth with the `user:follow` scope.
+    * FROM: https://docs.github.com/rest/reference/users#unfollow-a-user
+    */
     pub async fn users_unfollow(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/following/{}",
@@ -41950,10 +41950,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_list_gpg_keys_for_authenticated: GET /user/gpg_keys
-     * Lists the current user's GPG keys. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-     * FROM: https://docs.github.com/rest/reference/users#list-gpg-keys-for-the-authenticated-user
-     */
+    * users_list_gpg_keys_for_authenticated: GET /user/gpg_keys
+    * Lists the current user's GPG keys. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * FROM: https://docs.github.com/rest/reference/users#list-gpg-keys-for-the-authenticated-user
+    */
     pub async fn users_list_gpg_keys_for_authenticated(
         &self,
         per_page: i64,
@@ -41969,10 +41969,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_create_gpg_key_for_authenticated: POST /user/gpg_keys
-     * Adds a GPG key to the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least `write:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-     * FROM: https://docs.github.com/rest/reference/users#create-a-gpg-key-for-the-authenticated-user
-     */
+    * users_create_gpg_key_for_authenticated: POST /user/gpg_keys
+    * Adds a GPG key to the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least `write:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * FROM: https://docs.github.com/rest/reference/users#create-a-gpg-key-for-the-authenticated-user
+    */
     pub async fn users_create_gpg_key_for_authenticated(
         &self,
         body: &types::CreateGpgKeyRequest,
@@ -41986,10 +41986,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_get_gpg_key_for_authenticated: GET /user/gpg_keys/{gpg_key_id}
-     * View extended details for a single GPG key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-     * FROM: https://docs.github.com/rest/reference/users#get-a-gpg-key-for-the-authenticated-user
-     */
+    * users_get_gpg_key_for_authenticated: GET /user/gpg_keys/{gpg_key_id}
+    * View extended details for a single GPG key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * FROM: https://docs.github.com/rest/reference/users#get-a-gpg-key-for-the-authenticated-user
+    */
     pub async fn users_get_gpg_key_for_authenticated(
         &self,
         gpg_key_id: i64,
@@ -42003,10 +42003,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * users_delete_gpg_key_for_authenticated: DELETE /user/gpg_keys/{gpg_key_id}
-     * Removes a GPG key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-     * FROM: https://docs.github.com/rest/reference/users#delete-a-gpg-key-for-the-authenticated-user
-     */
+    * users_delete_gpg_key_for_authenticated: DELETE /user/gpg_keys/{gpg_key_id}
+    * Removes a GPG key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * FROM: https://docs.github.com/rest/reference/users#delete-a-gpg-key-for-the-authenticated-user
+    */
     pub async fn users_delete_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> Result<()> {
         let url = format!(
             "/user/gpg_keys/{}",
@@ -42020,41 +42020,41 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * apps_list_installations_for_authenticated_user: GET /user/installations
-         * Lists installations of your GitHub App that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
+    * apps_list_installations_for_authenticated_user: GET /user/installations
+    * Lists installations of your GitHub App that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
 
     You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint.
 
     The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
 
     You can find the permissions for the installation under the `permissions` key.
-         * FROM: https://docs.github.com/rest/reference/apps#list-app-installations-accessible-to-the-user-access-token
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#list-app-installations-accessible-to-the-user-access-token
+    */
     pub async fn apps_list_installations_for_authenticated_user(
         &self,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListAppInstallationsAccessibleUserAccessTokenOkResponse> {
         let url = format!(
-            "/user/installations?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/installations?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * apps_list_installation_repos_for_authenticated_user: GET /user/installations/{installation_id}/repositories
-         * List repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access for an installation.
+    * apps_list_installation_repos_for_authenticated_user: GET /user/installations/{installation_id}/repositories
+    * List repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access for an installation.
 
     The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
 
     You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint.
 
     The access the user has to each repository is included in the hash under the `permissions` key.
-         * FROM: https://docs.github.com/rest/reference/apps#list-repositories-accessible-to-the-user-access-token
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#list-repositories-accessible-to-the-user-access-token
+    */
     pub async fn apps_list_installation_repos_for_authenticated_user(
         &self,
         installation_id: i64,
@@ -42072,12 +42072,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * apps_add_repo_to_installation: PUT /user/installations/{installation_id}/repositories/{repository_id}
-         * Add a single repository to an installation. The authenticated user must have admin access to the repository.
+    * apps_add_repo_to_installation: PUT /user/installations/{installation_id}/repositories/{repository_id}
+    * Add a single repository to an installation. The authenticated user must have admin access to the repository.
 
     You must use a personal access token (which you can create via the [command line](https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication)) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#add-a-repository-to-an-app-installation
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#add-a-repository-to-an-app-installation
+    */
     pub async fn apps_add_repo_to_installation(
         &self,
         installation_id: i64,
@@ -42093,12 +42093,12 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * apps_remove_repo_from_installation: DELETE /user/installations/{installation_id}/repositories/{repository_id}
-         * Remove a single repository from an installation. The authenticated user must have admin access to the repository.
+    * apps_remove_repo_from_installation: DELETE /user/installations/{installation_id}/repositories/{repository_id}
+    * Remove a single repository from an installation. The authenticated user must have admin access to the repository.
 
     You must use a personal access token (which you can create via the [command line](https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication)) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#remove-a-repository-from-an-app-installation
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#remove-a-repository-from-an-app-installation
+    */
     pub async fn apps_remove_repo_from_installation(
         &self,
         installation_id: i64,
@@ -42117,10 +42117,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * interactions_get_restrictions_for_authenticated_user: GET /user/interaction-limits
-     * Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
-     * FROM: https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-your-public-repositories
-     */
+    * interactions_get_restrictions_for_authenticated_user: GET /user/interaction-limits
+    * Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
+    * FROM: https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-your-public-repositories
+    */
     pub async fn interactions_get_restrictions_for_authenticated_user(
         &self,
     ) -> Result<types::GetInteractionRestrictionsPublicRepositoriesOkResponse> {
@@ -42129,10 +42129,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * interactions_set_restrictions_for_authenticated_user: PUT /user/interaction-limits
-     * Temporarily restricts which type of GitHub user can interact with your public repositories. Setting the interaction limit at the user level will overwrite any interaction limits that are set for individual repositories owned by the user.
-     * FROM: https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-your-public-repositories
-     */
+    * interactions_set_restrictions_for_authenticated_user: PUT /user/interaction-limits
+    * Temporarily restricts which type of GitHub user can interact with your public repositories. Setting the interaction limit at the user level will overwrite any interaction limits that are set for individual repositories owned by the user.
+    * FROM: https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-your-public-repositories
+    */
     pub async fn interactions_set_restrictions_for_authenticated_user(
         &self,
         body: &types::InteractionLimit,
@@ -42146,10 +42146,10 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-     * interactions_remove_restrictions_for_authenticated_user: DELETE /user/interaction-limits
-     * Removes any interaction restrictions from your public repositories.
-     * FROM: https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-from-your-public-repositories
-     */
+    * interactions_remove_restrictions_for_authenticated_user: DELETE /user/interaction-limits
+    * Removes any interaction restrictions from your public repositories.
+    * FROM: https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-from-your-public-repositories
+    */
     pub async fn interactions_remove_restrictions_for_authenticated_user(&self) -> Result<()> {
         let url = "/user/interaction-limits".to_string();
         let res = self.client.delete(url).send().await?.error_for_status()?;
@@ -42159,15 +42159,15 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
     }
 
     /**
-         * issues_list_for_authenticated_user: GET /user/issues
-         * List issues across owned and member repositories assigned to the authenticated user.
+    * issues_list_for_authenticated_user: GET /user/issues
+    * List issues across owned and member repositories assigned to the authenticated user.
 
     **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
     reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
     the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
     request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-         * FROM: https://docs.github.com/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user
+    */
     pub async fn issues_list_for_authenticated_user(
         &self,
         filter: &str,
@@ -42179,17 +42179,17 @@ excluded_attributes.to_string(), format!("{}", start_index), filter.to_string(),
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/user/issues?labels={}&sort={}&per_page={}&page={}&filter={}&direction={}&since={}&state={}",
-labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", page), filter.to_string(), direction.to_string(), since.to_rfc3339(), state.to_string(),         );
+        let url = format!("/user/issues?filter={}&since={}&direction={}&labels={}&state={}&sort={}&page={}&per_page={}",
+filter.to_string(), since.to_rfc3339(), direction.to_string(), labels.to_string(), state.to_string(), sort.to_string(), format!("{}", page), format!("{}", per_page),         );
 
         self.get(&url).await
     }
 
     /**
-     * users_list_public_ssh_keys_for_authenticated: GET /user/keys
-     * Lists the public SSH keys for the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-     * FROM: https://docs.github.com/rest/reference/users#list-public-ssh-keys-for-the-authenticated-user
-     */
+    * users_list_public_ssh_keys_for_authenticated: GET /user/keys
+    * Lists the public SSH keys for the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * FROM: https://docs.github.com/rest/reference/users#list-public-ssh-keys-for-the-authenticated-user
+    */
     pub async fn users_list_public_ssh_keys_for_authenticated(
         &self,
         per_page: i64,
@@ -42205,10 +42205,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * users_create_public_ssh_key_for_authenticated: POST /user/keys
-     * Adds a public SSH key to the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least `write:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-     * FROM: https://docs.github.com/rest/reference/users#create-a-public-ssh-key-for-the-authenticated-user
-     */
+    * users_create_public_ssh_key_for_authenticated: POST /user/keys
+    * Adds a public SSH key to the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least `write:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * FROM: https://docs.github.com/rest/reference/users#create-a-public-ssh-key-for-the-authenticated-user
+    */
     pub async fn users_create_public_ssh_key_for_authenticated(
         &self,
         body: &types::CreatePublicSshKeyRequest,
@@ -42222,10 +42222,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * users_get_public_ssh_key_for_authenticated: GET /user/keys/{key_id}
-     * View extended details for a single public SSH key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-     * FROM: https://docs.github.com/rest/reference/users#get-a-public-ssh-key-for-the-authenticated-user
-     */
+    * users_get_public_ssh_key_for_authenticated: GET /user/keys/{key_id}
+    * View extended details for a single public SSH key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * FROM: https://docs.github.com/rest/reference/users#get-a-public-ssh-key-for-the-authenticated-user
+    */
     pub async fn users_get_public_ssh_key_for_authenticated(
         &self,
         key_id: i64,
@@ -42239,10 +42239,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * users_delete_public_ssh_key_for_authenticated: DELETE /user/keys/{key_id}
-     * Removes a public SSH key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-     * FROM: https://docs.github.com/rest/reference/users#delete-a-public-ssh-key-for-the-authenticated-user
-     */
+    * users_delete_public_ssh_key_for_authenticated: DELETE /user/keys/{key_id}
+    * Removes a public SSH key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+    * FROM: https://docs.github.com/rest/reference/users#delete-a-public-ssh-key-for-the-authenticated-user
+    */
     pub async fn users_delete_public_ssh_key_for_authenticated(&self, key_id: i64) -> Result<()> {
         let url = format!(
             "/user/keys/{}",
@@ -42256,29 +42256,29 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * apps_list_subscriptions_for_authenticated_user: GET /user/marketplace_purchases
-     * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
-     * FROM: https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user
-     */
+    * apps_list_subscriptions_for_authenticated_user: GET /user/marketplace_purchases
+    * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
+    * FROM: https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user
+    */
     pub async fn apps_list_subscriptions_for_authenticated_user(
         &self,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
         let url = format!(
-            "/user/marketplace_purchases?page={}&per_page={}",
-            format!("{}", page),
+            "/user/marketplace_purchases?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * apps_list_subscriptions_for_authenticated_user_stubbed: GET /user/marketplace_purchases/stubbed
-     * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
-     * FROM: https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user-stubbed
-     */
+    * apps_list_subscriptions_for_authenticated_user_stubbed: GET /user/marketplace_purchases/stubbed
+    * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
+    * FROM: https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user-stubbed
+    */
     pub async fn apps_list_subscriptions_for_authenticated_user_stubbed(
         &self,
         per_page: i64,
@@ -42294,10 +42294,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_list_memberships_for_authenticated_user: GET /user/memberships/orgs
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#list-organization-memberships-for-the-authenticated-user
-     */
+    * orgs_list_memberships_for_authenticated_user: GET /user/memberships/orgs
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#list-organization-memberships-for-the-authenticated-user
+    */
     pub async fn orgs_list_memberships_for_authenticated_user(
         &self,
         state: &str,
@@ -42305,20 +42305,20 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
         page: i64,
     ) -> Result<Vec<types::OrgMembership>> {
         let url = format!(
-            "/user/memberships/orgs?page={}&state={}&per_page={}",
-            format!("{}", page),
+            "/user/memberships/orgs?state={}&per_page={}&page={}",
             state.to_string(),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * orgs_get_membership_for_authenticated_user: GET /user/memberships/orgs/{org}
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#get-an-organization-membership-for-the-authenticated-user
-     */
+    * orgs_get_membership_for_authenticated_user: GET /user/memberships/orgs/{org}
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#get-an-organization-membership-for-the-authenticated-user
+    */
     pub async fn orgs_get_membership_for_authenticated_user(
         &self,
         org: &str,
@@ -42332,10 +42332,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * orgs_update_membership_for_authenticated_user: PATCH /user/memberships/orgs/{org}
-     *
-     * FROM: https://docs.github.com/rest/reference/orgs#update-an-organization-membership-for-the-authenticated-user
-     */
+    * orgs_update_membership_for_authenticated_user: PATCH /user/memberships/orgs/{org}
+    *
+    * FROM: https://docs.github.com/rest/reference/orgs#update-an-organization-membership-for-the-authenticated-user
+    */
     pub async fn orgs_update_membership_for_authenticated_user(
         &self,
         org: &str,
@@ -42354,29 +42354,29 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * migrations_list_for_authenticated_user: GET /user/migrations
-     * Lists all migrations a user has started.
-     * FROM: https://docs.github.com/rest/reference/migrations#list-user-migrations
-     */
+    * migrations_list_for_authenticated_user: GET /user/migrations
+    * Lists all migrations a user has started.
+    * FROM: https://docs.github.com/rest/reference/migrations#list-user-migrations
+    */
     pub async fn migrations_list_for_authenticated_user(
         &self,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Migration>> {
         let url = format!(
-            "/user/migrations?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/migrations?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * migrations_start_for_authenticated_user: POST /user/migrations
-     * Initiates the generation of a user migration archive.
-     * FROM: https://docs.github.com/rest/reference/migrations#start-a-user-migration
-     */
+    * migrations_start_for_authenticated_user: POST /user/migrations
+    * Initiates the generation of a user migration archive.
+    * FROM: https://docs.github.com/rest/reference/migrations#start-a-user-migration
+    */
     pub async fn migrations_start_for_authenticated_user(
         &self,
         body: &types::StartUserMigrationRequest,
@@ -42390,8 +42390,8 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * migrations_get_status_for_authenticated_user: GET /user/migrations/{migration_id}
-         * Fetches a single user migration. The response includes the `state` of the migration, which can be one of the following values:
+    * migrations_get_status_for_authenticated_user: GET /user/migrations/{migration_id}
+    * Fetches a single user migration. The response includes the `state` of the migration, which can be one of the following values:
 
     *   `pending` - the migration hasn't started yet.
     *   `exporting` - the migration is in progress.
@@ -42399,8 +42399,8 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     *   `failed` - the migration failed.
 
     Once the migration has been `exported` you can [download the migration archive](https://docs.github.com/rest/reference/migrations#download-a-user-migration-archive).
-         * FROM: https://docs.github.com/rest/reference/migrations#get-a-user-migration-status
-         */
+    * FROM: https://docs.github.com/rest/reference/migrations#get-a-user-migration-status
+    */
     pub async fn migrations_get_status_for_authenticated_user(
         &self,
         migration_id: i64,
@@ -42416,8 +42416,8 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * migrations_get_archive_for_authenticated_user: GET /user/migrations/{migration_id}/archive
-         * Fetches the URL to download the migration archive as a `tar.gz` file. Depending on the resources your repository uses, the migration archive can contain JSON files with data for these objects:
+    * migrations_get_archive_for_authenticated_user: GET /user/migrations/{migration_id}/archive
+    * Fetches the URL to download the migration archive as a `tar.gz` file. Depending on the resources your repository uses, the migration archive can contain JSON files with data for these objects:
 
     *   attachments
     *   bases
@@ -42438,8 +42438,8 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     *   users
 
     The archive will also contain an `attachments` directory that includes all attachment files uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
-         * FROM: https://docs.github.com/rest/reference/migrations#download-a-user-migration-archive
-         */
+    * FROM: https://docs.github.com/rest/reference/migrations#download-a-user-migration-archive
+    */
     pub async fn migrations_get_archive_for_authenticated_user(
         &self,
         migration_id: i64,
@@ -42453,10 +42453,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * migrations_delete_archive_for_authenticated_user: DELETE /user/migrations/{migration_id}/archive
-     * Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://docs.github.com/rest/reference/migrations#list-user-migrations) and [Get a user migration status](https://docs.github.com/rest/reference/migrations#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
-     * FROM: https://docs.github.com/rest/reference/migrations#delete-a-user-migration-archive
-     */
+    * migrations_delete_archive_for_authenticated_user: DELETE /user/migrations/{migration_id}/archive
+    * Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://docs.github.com/rest/reference/migrations#list-user-migrations) and [Get a user migration status](https://docs.github.com/rest/reference/migrations#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
+    * FROM: https://docs.github.com/rest/reference/migrations#delete-a-user-migration-archive
+    */
     pub async fn migrations_delete_archive_for_authenticated_user(
         &self,
         migration_id: i64,
@@ -42473,10 +42473,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * migrations_unlock_repo_for_authenticated_user: DELETE /user/migrations/{migration_id}/repos/{repo_name}/lock
-     * Unlocks a repository. You can lock repositories when you [start a user migration](https://docs.github.com/rest/reference/migrations#start-a-user-migration). Once the migration is complete you can unlock each repository to begin using it again or [delete the repository](https://docs.github.com/rest/reference/repos#delete-a-repository) if you no longer need the source data. Returns a status of `404 Not Found` if the repository is not locked.
-     * FROM: https://docs.github.com/rest/reference/migrations#unlock-a-user-repository
-     */
+    * migrations_unlock_repo_for_authenticated_user: DELETE /user/migrations/{migration_id}/repos/{repo_name}/lock
+    * Unlocks a repository. You can lock repositories when you [start a user migration](https://docs.github.com/rest/reference/migrations#start-a-user-migration). Once the migration is complete you can unlock each repository to begin using it again or [delete the repository](https://docs.github.com/rest/reference/repos#delete-a-repository) if you no longer need the source data. Returns a status of `404 Not Found` if the repository is not locked.
+    * FROM: https://docs.github.com/rest/reference/migrations#unlock-a-user-repository
+    */
     pub async fn migrations_unlock_repo_for_authenticated_user(
         &self,
         migration_id: i64,
@@ -42495,10 +42495,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * migrations_list_repos_for_user: GET /user/migrations/{migration_id}/repositories
-     * Lists all the repositories for this user migration.
-     * FROM: https://docs.github.com/rest/reference/migrations#list-repositories-for-a-user-migration
-     */
+    * migrations_list_repos_for_user: GET /user/migrations/{migration_id}/repositories
+    * Lists all the repositories for this user migration.
+    * FROM: https://docs.github.com/rest/reference/migrations#list-repositories-for-a-user-migration
+    */
     pub async fn migrations_list_repos_for_user(
         &self,
         migration_id: i64,
@@ -42506,24 +42506,24 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/user/migrations/{}/repositories?page={}&per_page={}",
+            "/user/migrations/{}/repositories?per_page={}&page={}",
             progenitor_support::encode_path(&migration_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * orgs_list_for_authenticated_user: GET /user/orgs
-         * List organizations for the authenticated user.
+    * orgs_list_for_authenticated_user: GET /user/orgs
+    * List organizations for the authenticated user.
 
     **OAuth scope requirements**
 
     This only lists organizations that your authorization allows you to operate on in some way (e.g., you can list teams with `read:org` scope, you can publicize your organization membership with `user` scope, etc.). Therefore, this API requires at least `user` or `read:org` scope. OAuth requests with insufficient scope receive a `403 Forbidden` response.
-         * FROM: https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user
+    */
     pub async fn orgs_list_for_authenticated_user(
         &self,
         per_page: i64,
@@ -42539,13 +42539,13 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * packages_get_package_for_authenticated_user: GET /user/packages/{package_type}/{package_name}
-         * Gets a specific package for a package owned by the authenticated user.
+    * packages_get_package_for_authenticated_user: GET /user/packages/{package_type}/{package_name}
+    * Gets a specific package for a package owned by the authenticated user.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#get-a-package-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#get-a-package-for-the-authenticated-user
+    */
     pub async fn packages_get_package_for_authenticated_user(
         &self,
         package_type: &str,
@@ -42561,13 +42561,13 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * packages_delete_package_for_authenticated_user: DELETE /user/packages/{package_type}/{package_name}
-         * Deletes a package owned by the authenticated user. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
+    * packages_delete_package_for_authenticated_user: DELETE /user/packages/{package_type}/{package_name}
+    * Deletes a package owned by the authenticated user. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:delete` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#delete-a-package-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#delete-a-package-for-the-authenticated-user
+    */
     pub async fn packages_delete_package_for_authenticated_user(
         &self,
         package_type: &str,
@@ -42586,16 +42586,16 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * packages_restore_package_for_authenticated_user: POST /user/packages/{package_type}/{package_name}/restore
-         * Restores a package owned by the authenticated user.
+    * packages_restore_package_for_authenticated_user: POST /user/packages/{package_type}/{package_name}/restore
+    * Restores a package owned by the authenticated user.
 
     You can restore a deleted package under the following conditions:
       - The package was deleted within the last 30 days.
       - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scope. If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#restore-a-package-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#restore-a-package-for-the-authenticated-user
+    */
     pub async fn packages_restore_package_for_authenticated_user(
         &self,
         package_type: &str,
@@ -42613,13 +42613,13 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * packages_get_all_package_versions_for_package_owned_by_authenticated_user: GET /user/packages/{package_type}/{package_name}/versions
-         * Returns all package versions for a package owned by the authenticated user.
+    * packages_get_all_package_versions_for_package_owned_by_authenticated_user: GET /user/packages/{package_type}/{package_name}/versions
+    * Returns all package versions for a package owned by the authenticated user.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
+    */
     pub async fn packages_get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
         package_type: &str,
@@ -42629,11 +42629,11 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
         state: &str,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
-            "/user/packages/{}/{}/versions?per_page={}&page={}&state={}",
+            "/user/packages/{}/{}/versions?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
             state.to_string(),
         );
 
@@ -42641,13 +42641,13 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * packages_get_package_version_for_authenticated_user: GET /user/packages/{package_type}/{package_name}/versions/{package_version_id}
-         * Gets a specific package version for a package owned by the authenticated user.
+    * packages_get_package_version_for_authenticated_user: GET /user/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * Gets a specific package version for a package owned by the authenticated user.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#get-a-package-version-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#get-a-package-version-for-the-authenticated-user
+    */
     pub async fn packages_get_package_version_for_authenticated_user(
         &self,
         package_type: &str,
@@ -42665,13 +42665,13 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * packages_delete_package_version_for_authenticated_user: DELETE /user/packages/{package_type}/{package_name}/versions/{package_version_id}
-         * Deletes a specific package version for a package owned by the authenticated user.  If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
+    * packages_delete_package_version_for_authenticated_user: DELETE /user/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * Deletes a specific package version for a package owned by the authenticated user.  If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
 
     To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#delete-a-package-version-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#delete-a-package-version-for-the-authenticated-user
+    */
     pub async fn packages_delete_package_version_for_authenticated_user(
         &self,
         package_type: &str,
@@ -42692,16 +42692,16 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * packages_restore_package_version_for_authenticated_user: POST /user/packages/{package_type}/{package_name}/versions/{package_version_id}/restore
-         * Restores a package version owned by the authenticated user.
+    * packages_restore_package_version_for_authenticated_user: POST /user/packages/{package_type}/{package_name}/versions/{package_version_id}/restore
+    * Restores a package version owned by the authenticated user.
 
     You can restore a deleted package version under the following conditions:
       - The package was deleted within the last 30 days.
       - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scope. If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#restore-a-package-version-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#restore-a-package-version-for-the-authenticated-user
+    */
     pub async fn packages_restore_package_version_for_authenticated_user(
         &self,
         package_type: &str,
@@ -42719,10 +42719,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * projects_create_for_authenticated_user: POST /user/projects
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#create-a-user-project
-     */
+    * projects_create_for_authenticated_user: POST /user/projects
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#create-a-user-project
+    */
     pub async fn projects_create_for_authenticated_user(
         &self,
         body: &types::CreateUserProjectRequest,
@@ -42736,10 +42736,10 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-     * users_list_public_emails_for_authenticated: GET /user/public_emails
-     * Lists your publicly visible email address, which you can set with the [Set primary email visibility for the authenticated user](https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user) endpoint. This endpoint is accessible with the `user:email` scope.
-     * FROM: https://docs.github.com/rest/reference/users#list-public-email-addresses-for-the-authenticated-user
-     */
+    * users_list_public_emails_for_authenticated: GET /user/public_emails
+    * Lists your publicly visible email address, which you can set with the [Set primary email visibility for the authenticated user](https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user) endpoint. This endpoint is accessible with the `user:email` scope.
+    * FROM: https://docs.github.com/rest/reference/users#list-public-email-addresses-for-the-authenticated-user
+    */
     pub async fn users_list_public_emails_for_authenticated(
         &self,
         per_page: i64,
@@ -42755,12 +42755,12 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
     }
 
     /**
-         * repos_list_for_authenticated_user: GET /user/repos
-         * Lists repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
+    * repos_list_for_authenticated_user: GET /user/repos
+    * Lists repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
 
     The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
-         * FROM: https://docs.github.com/rest/reference/repos#list-repositories-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#list-repositories-for-the-authenticated-user
+    */
     pub async fn repos_list_for_authenticated_user(
         &self,
         visibility: &str,
@@ -42773,15 +42773,15 @@ labels.to_string(), sort.to_string(), format!("{}", per_page), format!("{}", pag
         since: DateTime<Utc>,
         before: DateTime<Utc>,
     ) -> Result<Vec<types::Repository>> {
-        let url = format!("/user/repos?sort={}&per_page={}&visibility={}&before={}&type={}&page={}&direction={}&affiliation={}&since={}",
-sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc3339(), type_, format!("{}", page), direction.to_string(), affiliation.to_string(), since.to_rfc3339(),         );
+        let url = format!("/user/repos?visibility={}&page={}&per_page={}&type={}&before={}&affiliation={}&sort={}&direction={}&since={}",
+visibility.to_string(), format!("{}", page), format!("{}", per_page), type_, before.to_rfc3339(), affiliation.to_string(), sort.to_string(), direction.to_string(), since.to_rfc3339(),         );
 
         self.get(&url).await
     }
 
     /**
-         * repos_create_for_authenticated_user: POST /user/repos
-         * Creates a new repository for the authenticated user.
+    * repos_create_for_authenticated_user: POST /user/repos
+    * Creates a new repository for the authenticated user.
 
     **OAuth scope requirements**
 
@@ -42789,8 +42789,8 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
 
     *   `public_repo` scope or `repo` scope to create a public repository. Note: For GitHub AE, use `repo` scope to create an internal repository.
     *   `repo` scope to create a private repository.
-         * FROM: https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user
+    */
     pub async fn repos_create_for_authenticated_user(
         &self,
         body: &types::CreateRepositoryRequest,
@@ -42804,10 +42804,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * repos_list_invitations_for_authenticated_user: GET /user/repository_invitations
-     * When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
-     * FROM: https://docs.github.com/rest/reference/repos#list-repository-invitations-for-the-authenticated-user
-     */
+    * repos_list_invitations_for_authenticated_user: GET /user/repository_invitations
+    * When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
+    * FROM: https://docs.github.com/rest/reference/repos#list-repository-invitations-for-the-authenticated-user
+    */
     pub async fn repos_list_invitations_for_authenticated_user(
         &self,
         per_page: i64,
@@ -42823,10 +42823,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * repos_decline_invitation: DELETE /user/repository_invitations/{invitation_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#decline-a-repository-invitation
-     */
+    * repos_decline_invitation: DELETE /user/repository_invitations/{invitation_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#decline-a-repository-invitation
+    */
     pub async fn repos_decline_invitation(&self, invitation_id: i64) -> Result<()> {
         let url = format!(
             "/user/repository_invitations/{}",
@@ -42840,10 +42840,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * repos_accept_invitation: PATCH /user/repository_invitations/{invitation_id}
-     *
-     * FROM: https://docs.github.com/rest/reference/repos#accept-a-repository-invitation
-     */
+    * repos_accept_invitation: PATCH /user/repository_invitations/{invitation_id}
+    *
+    * FROM: https://docs.github.com/rest/reference/repos#accept-a-repository-invitation
+    */
     pub async fn repos_accept_invitation(&self, invitation_id: i64) -> Result<()> {
         let url = format!(
             "/user/repository_invitations/{}",
@@ -42854,12 +42854,12 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * activity_list_repos_starred_by_authenticated_user: GET /user/starred
-         * Lists repositories the authenticated user has starred.
+    * activity_list_repos_starred_by_authenticated_user: GET /user/starred
+    * Lists repositories the authenticated user has starred.
 
     You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
-         * FROM: https://docs.github.com/rest/reference/activity#list-repositories-starred-by-the-authenticated-user
-         */
+    * FROM: https://docs.github.com/rest/reference/activity#list-repositories-starred-by-the-authenticated-user
+    */
     pub async fn activity_list_repos_starred_by_authenticated_user(
         &self,
         sort: &str,
@@ -42879,10 +42879,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * activity_check_repo_is_starred_by_authenticated_user: GET /user/starred/{owner}/{repo}
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#check-if-a-repository-is-starred-by-the-authenticated-user
-     */
+    * activity_check_repo_is_starred_by_authenticated_user: GET /user/starred/{owner}/{repo}
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#check-if-a-repository-is-starred-by-the-authenticated-user
+    */
     pub async fn activity_check_repo_is_starred_by_authenticated_user(
         &self,
         owner: &str,
@@ -42898,10 +42898,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * activity_star_repo_for_authenticated_user: PUT /user/starred/{owner}/{repo}
-     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-     * FROM: https://docs.github.com/rest/reference/activity#star-a-repository-for-the-authenticated-user
-     */
+    * activity_star_repo_for_authenticated_user: PUT /user/starred/{owner}/{repo}
+    * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    * FROM: https://docs.github.com/rest/reference/activity#star-a-repository-for-the-authenticated-user
+    */
     pub async fn activity_star_repo_for_authenticated_user(
         &self,
         owner: &str,
@@ -42917,10 +42917,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * activity_unstar_repo_for_authenticated_user: DELETE /user/starred/{owner}/{repo}
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#unstar-a-repository-for-the-authenticated-user
-     */
+    * activity_unstar_repo_for_authenticated_user: DELETE /user/starred/{owner}/{repo}
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#unstar-a-repository-for-the-authenticated-user
+    */
     pub async fn activity_unstar_repo_for_authenticated_user(
         &self,
         owner: &str,
@@ -42939,50 +42939,50 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * activity_list_watched_repos_for_authenticated_user: GET /user/subscriptions
-     * Lists repositories the authenticated user is watching.
-     * FROM: https://docs.github.com/rest/reference/activity#list-repositories-watched-by-the-authenticated-user
-     */
+    * activity_list_watched_repos_for_authenticated_user: GET /user/subscriptions
+    * Lists repositories the authenticated user is watching.
+    * FROM: https://docs.github.com/rest/reference/activity#list-repositories-watched-by-the-authenticated-user
+    */
     pub async fn activity_list_watched_repos_for_authenticated_user(
         &self,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/user/subscriptions?page={}&per_page={}",
-            format!("{}", page),
+            "/user/subscriptions?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * teams_list_for_authenticated_user: GET /user/teams
-     * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires `user`, `repo`, or `read:org` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://docs.github.com/apps/building-oauth-apps/).
-     * FROM: https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user
-     */
+    * teams_list_for_authenticated_user: GET /user/teams
+    * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires `user`, `repo`, or `read:org` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://docs.github.com/apps/building-oauth-apps/).
+    * FROM: https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user
+    */
     pub async fn teams_list_for_authenticated_user(
         &self,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamFull>> {
         let url = format!(
-            "/user/teams?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/teams?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * users_list: GET /users
-         * Lists all users, in the order that they signed up on GitHub. This list includes personal user accounts and organization accounts.
+    * users_list: GET /users
+    * Lists all users, in the order that they signed up on GitHub. This list includes personal user accounts and organization accounts.
 
     Note: Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of users.
-         * FROM: https://docs.github.com/rest/reference/users#list-users
-         */
+    * FROM: https://docs.github.com/rest/reference/users#list-users
+    */
     pub async fn users_list(&self, since: i64, per_page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/users?per_page={}&since={}",
@@ -42994,16 +42994,16 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * users_get_by_username: GET /users/{username}
-         * Provides publicly available information about someone with a GitHub account.
+    * users_get_by_username: GET /users/{username}
+    * Provides publicly available information about someone with a GitHub account.
 
     GitHub Apps with the `Plan` user permission can use this endpoint to retrieve information about a user's GitHub plan. The GitHub App must be authenticated as a user. See "[Identifying and authorizing users for GitHub Apps](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/)" for details about authentication. For an example response, see 'Response with GitHub plan information' below"
 
     The `email` key in the following response is the publicly visible email address from your GitHub [profile page](https://github.com/settings/profile). When setting up your profile, you can select a primary email address to be “public” which provides an email entry for this endpoint. If you do not set a public email address for `email`, then it will have a value of `null`. You only see publicly visible email addresses when authenticated with GitHub. For more information, see [Authentication](https://docs.github.com/rest/overview/resources-in-the-rest-api#authentication).
 
     The Emails API enables you to list all of your email addresses, and toggle a primary email to be visible publicly. For more information, see "[Emails API](https://docs.github.com/rest/reference/users#emails)".
-         * FROM: https://docs.github.com/rest/reference/users#get-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/users#get-a-user
+    */
     pub async fn users_get_by_username(&self, username: &str) -> Result<types::GetUserOkResponse> {
         let url = format!(
             "/users/{}",
@@ -43014,10 +43014,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * activity_list_events_for_authenticated_user: GET /users/{username}/events
-     * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
-     * FROM: https://docs.github.com/rest/reference/activity#list-events-for-the-authenticated-user
-     */
+    * activity_list_events_for_authenticated_user: GET /users/{username}/events
+    * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
+    * FROM: https://docs.github.com/rest/reference/activity#list-events-for-the-authenticated-user
+    */
     pub async fn activity_list_events_for_authenticated_user(
         &self,
         username: &str,
@@ -43035,10 +43035,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * activity_list_org_events_for_authenticated_user: GET /users/{username}/events/orgs/{org}
-     * This is the user's organization dashboard. You must be authenticated as the user to view this.
-     * FROM: https://docs.github.com/rest/reference/activity#list-organization-events-for-the-authenticated-user
-     */
+    * activity_list_org_events_for_authenticated_user: GET /users/{username}/events/orgs/{org}
+    * This is the user's organization dashboard. You must be authenticated as the user to view this.
+    * FROM: https://docs.github.com/rest/reference/activity#list-organization-events-for-the-authenticated-user
+    */
     pub async fn activity_list_org_events_for_authenticated_user(
         &self,
         username: &str,
@@ -43047,21 +43047,21 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/events/orgs/{}?per_page={}&page={}",
+            "/users/{}/events/orgs/{}?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * activity_list_public_events_for_user: GET /users/{username}/events/public
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#list-public-events-for-a-user
-     */
+    * activity_list_public_events_for_user: GET /users/{username}/events/public
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#list-public-events-for-a-user
+    */
     pub async fn activity_list_public_events_for_user(
         &self,
         username: &str,
@@ -43079,10 +43079,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * users_list_followers_for_user: GET /users/{username}/followers
-     * Lists the people following the specified user.
-     * FROM: https://docs.github.com/rest/reference/users#list-followers-of-a-user
-     */
+    * users_list_followers_for_user: GET /users/{username}/followers
+    * Lists the people following the specified user.
+    * FROM: https://docs.github.com/rest/reference/users#list-followers-of-a-user
+    */
     pub async fn users_list_followers_for_user(
         &self,
         username: &str,
@@ -43090,20 +43090,20 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/users/{}/followers?page={}&per_page={}",
+            "/users/{}/followers?per_page={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * users_list_following_for_user: GET /users/{username}/following
-     * Lists the people who the specified user follows.
-     * FROM: https://docs.github.com/rest/reference/users#list-the-people-a-user-follows
-     */
+    * users_list_following_for_user: GET /users/{username}/following
+    * Lists the people who the specified user follows.
+    * FROM: https://docs.github.com/rest/reference/users#list-the-people-a-user-follows
+    */
     pub async fn users_list_following_for_user(
         &self,
         username: &str,
@@ -43111,20 +43111,20 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/users/{}/following?page={}&per_page={}",
+            "/users/{}/following?per_page={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * users_check_following_for_user: GET /users/{username}/following/{target_user}
-     *
-     * FROM: https://docs.github.com/rest/reference/users#check-if-a-user-follows-another-user
-     */
+    * users_check_following_for_user: GET /users/{username}/following/{target_user}
+    *
+    * FROM: https://docs.github.com/rest/reference/users#check-if-a-user-follows-another-user
+    */
     pub async fn users_check_following_for_user(
         &self,
         username: &str,
@@ -43140,10 +43140,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * gists_list_for_user: GET /users/{username}/gists
-     * Lists public gists for the specified user:
-     * FROM: https://docs.github.com/rest/reference/gists#list-gists-for-a-user
-     */
+    * gists_list_for_user: GET /users/{username}/gists
+    * Lists public gists for the specified user:
+    * FROM: https://docs.github.com/rest/reference/gists#list-gists-for-a-user
+    */
     pub async fn gists_list_for_user(
         &self,
         username: &str,
@@ -43163,10 +43163,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * users_list_gpg_keys_for_user: GET /users/{username}/gpg_keys
-     * Lists the GPG keys for a user. This information is accessible by anyone.
-     * FROM: https://docs.github.com/rest/reference/users#list-gpg-keys-for-a-user
-     */
+    * users_list_gpg_keys_for_user: GET /users/{username}/gpg_keys
+    * Lists the GPG keys for a user. This information is accessible by anyone.
+    * FROM: https://docs.github.com/rest/reference/users#list-gpg-keys-for-a-user
+    */
     pub async fn users_list_gpg_keys_for_user(
         &self,
         username: &str,
@@ -43174,18 +43174,18 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
         page: i64,
     ) -> Result<Vec<types::GpgKey>> {
         let url = format!(
-            "/users/{}/gpg_keys?per_page={}&page={}",
+            "/users/{}/gpg_keys?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * users_get_context_for_user: GET /users/{username}/hovercard
-         * Provides hovercard information when authenticated through basic auth or OAuth with the `repo` scope. You can find out more about someone in relation to their pull requests, issues, repositories, and organizations.
+    * users_get_context_for_user: GET /users/{username}/hovercard
+    * Provides hovercard information when authenticated through basic auth or OAuth with the `repo` scope. You can find out more about someone in relation to their pull requests, issues, repositories, and organizations.
 
     The `subject_type` and `subject_id` parameters provide context for the person's hovercard, which returns more information than without the parameters. For example, if you wanted to find out more about `octocat` who owns the `Spoon-Knife` repository via cURL, it would look like this:
 
@@ -43193,8 +43193,8 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
      curl -u username:token
       https://api.github.com/users/octocat/hovercard?subject_type=repository&subject_id=1300192
     ```
-         * FROM: https://docs.github.com/rest/reference/users#get-contextual-information-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/users#get-contextual-information-for-a-user
+    */
     pub async fn users_get_context_for_user(
         &self,
         username: &str,
@@ -43212,12 +43212,12 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * apps_get_user_installation: GET /users/{username}/installation
-         * Enables an authenticated GitHub App to find the user’s installation information.
+    * apps_get_user_installation: GET /users/{username}/installation
+    * Enables an authenticated GitHub App to find the user’s installation information.
 
     You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
-         * FROM: https://docs.github.com/rest/reference/apps#get-a-user-installation-for-the-authenticated-app
-         */
+    * FROM: https://docs.github.com/rest/reference/apps#get-a-user-installation-for-the-authenticated-app
+    */
     pub async fn apps_get_user_installation(&self, username: &str) -> Result<types::Installation> {
         let url = format!(
             "/users/{}/installation",
@@ -43228,10 +43228,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * users_list_public_keys_for_user: GET /users/{username}/keys
-     * Lists the _verified_ public SSH keys for a user. This is accessible by anyone.
-     * FROM: https://docs.github.com/rest/reference/users#list-public-keys-for-a-user
-     */
+    * users_list_public_keys_for_user: GET /users/{username}/keys
+    * Lists the _verified_ public SSH keys for a user. This is accessible by anyone.
+    * FROM: https://docs.github.com/rest/reference/users#list-public-keys-for-a-user
+    */
     pub async fn users_list_public_keys_for_user(
         &self,
         username: &str,
@@ -43239,22 +43239,22 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
         page: i64,
     ) -> Result<Vec<types::KeySimple>> {
         let url = format!(
-            "/users/{}/keys?per_page={}&page={}",
+            "/users/{}/keys?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-         * orgs_list_for_user: GET /users/{username}/orgs
-         * List [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.
+    * orgs_list_for_user: GET /users/{username}/orgs
+    * List [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.
 
     This method only lists _public_ memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the [List organizations for the authenticated user](https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user) API instead.
-         * FROM: https://docs.github.com/rest/reference/orgs#list-organizations-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/orgs#list-organizations-for-a-user
+    */
     pub async fn orgs_list_for_user(
         &self,
         username: &str,
@@ -43272,13 +43272,13 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * packages_get_package_for_user: GET /users/{username}/packages/{package_type}/{package_name}
-         * Gets a specific package metadata for a public package owned by a user.
+    * packages_get_package_for_user: GET /users/{username}/packages/{package_type}/{package_name}
+    * Gets a specific package metadata for a public package owned by a user.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#get-a-package-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#get-a-package-for-a-user
+    */
     pub async fn packages_get_package_for_user(
         &self,
         package_type: &str,
@@ -43296,13 +43296,13 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * packages_get_all_package_versions_for_package_owned_by_user: GET /users/{username}/packages/{package_type}/{package_name}/versions
-         * Returns all package versions for a public package owned by a specified user.
+    * packages_get_all_package_versions_for_package_owned_by_user: GET /users/{username}/packages/{package_type}/{package_name}/versions
+    * Returns all package versions for a public package owned by a specified user.
 
     To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user
+    */
     pub async fn packages_get_all_package_versions_for_package_owned_by_user(
         &self,
         package_type: &str,
@@ -43320,13 +43320,13 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * packages_get_package_version_for_user: GET /users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}
-         * Gets a specific package version for a public package owned by a specified user.
+    * packages_get_package_version_for_user: GET /users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}
+    * Gets a specific package version for a public package owned by a specified user.
 
     At this time, to use this endpoint, you must authenticate using an access token with the `packages:read` scope.
     If `package_type` is not `container`, your token must also include the `repo` scope.
-         * FROM: https://docs.github.com/rest/reference/packages#get-a-package-version-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/packages#get-a-package-version-for-a-user
+    */
     pub async fn packages_get_package_version_for_user(
         &self,
         package_type: &str,
@@ -43346,10 +43346,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * projects_list_for_user: GET /users/{username}/projects
-     *
-     * FROM: https://docs.github.com/rest/reference/projects#list-user-projects
-     */
+    * projects_list_for_user: GET /users/{username}/projects
+    *
+    * FROM: https://docs.github.com/rest/reference/projects#list-user-projects
+    */
     pub async fn projects_list_for_user(
         &self,
         username: &str,
@@ -43358,21 +43358,21 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/users/{}/projects?state={}&per_page={}&page={}",
+            "/users/{}/projects?page={}&state={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
+            format!("{}", page),
             state.to_string(),
             format!("{}", per_page),
-            format!("{}", page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * activity_list_received_events_for_user: GET /users/{username}/received_events
-     * These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events.
-     * FROM: https://docs.github.com/rest/reference/activity#list-events-received-by-the-authenticated-user
-     */
+    * activity_list_received_events_for_user: GET /users/{username}/received_events
+    * These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events.
+    * FROM: https://docs.github.com/rest/reference/activity#list-events-received-by-the-authenticated-user
+    */
     pub async fn activity_list_received_events_for_user(
         &self,
         username: &str,
@@ -43390,10 +43390,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * activity_list_received_public_events_for_user: GET /users/{username}/received_events/public
-     *
-     * FROM: https://docs.github.com/rest/reference/activity#list-public-events-received-by-a-user
-     */
+    * activity_list_received_public_events_for_user: GET /users/{username}/received_events/public
+    *
+    * FROM: https://docs.github.com/rest/reference/activity#list-public-events-received-by-a-user
+    */
     pub async fn activity_list_received_public_events_for_user(
         &self,
         username: &str,
@@ -43401,20 +43401,20 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/received_events/public?per_page={}&page={}",
+            "/users/{}/received_events/public?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
     }
 
     /**
-     * repos_list_for_user: GET /users/{username}/repos
-     * Lists public repositories for the specified user. Note: For GitHub AE, this endpoint will list internal repositories for the specified user.
-     * FROM: https://docs.github.com/rest/reference/repos#list-repositories-for-a-user
-     */
+    * repos_list_for_user: GET /users/{username}/repos
+    * Lists public repositories for the specified user. Note: For GitHub AE, this endpoint will list internal repositories for the specified user.
+    * FROM: https://docs.github.com/rest/reference/repos#list-repositories-for-a-user
+    */
     pub async fn repos_list_for_user(
         &self,
         username: &str,
@@ -43425,10 +43425,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/users/{}/repos?page={}&type={}&direction={}&per_page={}&sort={}",
+            "/users/{}/repos?type={}&page={}&direction={}&per_page={}&sort={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
             type_,
+            format!("{}", page),
             direction.to_string(),
             format!("{}", per_page),
             sort.to_string(),
@@ -43438,14 +43438,14 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * billing_get_github_actions_billing_user: GET /users/{username}/settings/billing/actions
-         * Gets the summary of the free and paid GitHub Actions minutes used.
+    * billing_get_github_actions_billing_user: GET /users/{username}/settings/billing/actions
+    * Gets the summary of the free and paid GitHub Actions minutes used.
 
     Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage returned includes any minute multipliers for macOS and Windows runners, and is rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
     Access tokens must have the `user` scope.
-         * FROM: https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-a-user
+    */
     pub async fn billing_get_github_actions_billing_user(
         &self,
         username: &str,
@@ -43459,14 +43459,14 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * billing_get_github_packages_billing_user: GET /users/{username}/settings/billing/packages
-         * Gets the free and paid storage used for GitHub Packages in gigabytes.
+    * billing_get_github_packages_billing_user: GET /users/{username}/settings/billing/packages
+    * Gets the free and paid storage used for GitHub Packages in gigabytes.
 
     Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
     Access tokens must have the `user` scope.
-         * FROM: https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-a-user
+    */
     pub async fn billing_get_github_packages_billing_user(
         &self,
         username: &str,
@@ -43480,14 +43480,14 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * billing_get_shared_storage_billing_user: GET /users/{username}/settings/billing/shared-storage
-         * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
+    * billing_get_shared_storage_billing_user: GET /users/{username}/settings/billing/shared-storage
+    * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
 
     Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
     Access tokens must have the `user` scope.
-         * FROM: https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-a-user
+    */
     pub async fn billing_get_shared_storage_billing_user(
         &self,
         username: &str,
@@ -43501,12 +43501,12 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-         * activity_list_repos_starred_by_user: GET /users/{username}/starred
-         * Lists repositories a user has starred.
+    * activity_list_repos_starred_by_user: GET /users/{username}/starred
+    * Lists repositories a user has starred.
 
     You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
-         * FROM: https://docs.github.com/rest/reference/activity#list-repositories-starred-by-a-user
-         */
+    * FROM: https://docs.github.com/rest/reference/activity#list-repositories-starred-by-a-user
+    */
     pub async fn activity_list_repos_starred_by_user(
         &self,
         username: &str,
@@ -43516,11 +43516,11 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
         page: i64,
     ) -> Result<Vec<types::StarredRepository>> {
         let url = format!(
-            "/users/{}/starred?direction={}&sort={}&page={}&per_page={}",
+            "/users/{}/starred?sort={}&page={}&direction={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            direction.to_string(),
             sort.to_string(),
             format!("{}", page),
+            direction.to_string(),
             format!("{}", per_page),
         );
 
@@ -43528,10 +43528,10 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * activity_list_repos_watched_by_user: GET /users/{username}/subscriptions
-     * Lists repositories a user is watching.
-     * FROM: https://docs.github.com/rest/reference/activity#list-repositories-watched-by-a-user
-     */
+    * activity_list_repos_watched_by_user: GET /users/{username}/subscriptions
+    * Lists repositories a user is watching.
+    * FROM: https://docs.github.com/rest/reference/activity#list-repositories-watched-by-a-user
+    */
     pub async fn activity_list_repos_watched_by_user(
         &self,
         username: &str,
@@ -43549,9 +43549,9 @@ sort.to_string(), format!("{}", per_page), visibility.to_string(), before.to_rfc
     }
 
     /**
-     * meta_get_zen: GET /zen
-     * Get a random sentence from the Zen of GitHub
-     */
+    * meta_get_zen: GET /zen
+    * Get a random sentence from the Zen of GitHub
+    */
     pub async fn meta_get_zen(&self) -> Result<String> {
         let url = "/zen".to_string();
         self.get(&url).await
