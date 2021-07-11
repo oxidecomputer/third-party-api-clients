@@ -1464,7 +1464,6 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                             // Try to render the docs.
                             let p = ts.render_docs(tid);
                             if !p.is_empty() && p != desc {
-                                println!("p: '{}'\ndesc: '{}'", p, desc);
                                 a(&p);
                             }
 
@@ -2039,7 +2038,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                             let tid = match s {
                                 openapiv3::ReferenceOr::Reference { reference } => ts.select_ref(None, reference.as_str())?,
                                 openapiv3::ReferenceOr::Item(item) => {
-                                    let object_name = format!("{} request", summary_to_object_name("", o.summary.as_ref().unwrap()));
+                                    let object_name = format!("{} request", summary_to_object_name("", oid));
                                     ts.select_schema(Some(&object_name), item, "", false)?
                                 }
                             };
@@ -2208,7 +2207,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                             let status_code = StatusCode::from_u16(*c).unwrap();
                                             let object_name = format!(
                                                 "{} {} Response",
-                                                summary_to_object_name(m, o.summary.as_ref().unwrap()),
+                                                summary_to_object_name(m, oid),
                                                 status_code.canonical_reason().unwrap().to_lowercase()
                                             );
                                             ts.select_schema(Some(&object_name), item, "", false)?
@@ -2253,7 +2252,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                                 let status_code = StatusCode::from_u16(*c).unwrap();
                                                 let object_name = format!(
                                                     "{} {} Response",
-                                                    summary_to_object_name(m, o.summary.as_ref().unwrap()),
+                                                    summary_to_object_name(m, oid),
                                                     status_code.canonical_reason().unwrap().to_lowercase()
                                                 );
                                                 ts.select_schema(Some(&object_name), item, "", false)?
@@ -2491,6 +2490,9 @@ fn main() -> Result<()> {
 
         let grab = |pn: &str, m: &str, o: Option<&openapiv3::Operation>, ts: &mut TypeSpace| -> Result<()> {
             if let Some(o) = o {
+                let mut oid = o.operation_id.as_deref().unwrap().to_string();
+                oid = oid.replace("-", "_").replace("/", "_");
+
                 /*
                  * Get the request body type, if this operation has one:
                  */
@@ -2498,7 +2500,7 @@ fn main() -> Result<()> {
                     if !body.is_binary()? {
                         if let Ok(mt) = body.content_json().with_context(|| anyhow!("{} {} request", m, pn)) {
                             if let Some(s) = &mt.schema {
-                                let object_name = format!("{} request", summary_to_object_name("", o.summary.as_ref().unwrap()));
+                                let object_name = format!("{} request", summary_to_object_name("", oid));
                                 let id = ts.select(Some(&object_name), s, false)?;
                                 println!("    {} {} request body -> '{}' {:?}", pn, m, object_name, id);
                             }
@@ -2532,7 +2534,7 @@ fn main() -> Result<()> {
                                             let status_code = StatusCode::from_u16(*c).unwrap();
                                             let object_name = format!(
                                                 "{} {} Response",
-                                                summary_to_object_name(m, o.summary.as_ref().unwrap()),
+                                                summary_to_object_name(m, oid),
                                                 status_code.canonical_reason().unwrap().to_lowercase()
                                             );
                                             let id = ts.select(Some(&object_name), s, false)?;
