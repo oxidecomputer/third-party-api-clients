@@ -91,45 +91,6 @@ impl From<MediaType> for mime::Mime {
     }
 }
 
-/*/// "unfold" paginated results of a list of github entities
-fn unfold<D, I>(
-    client: crate::lib::Client,
-    first: Future<(Option<hyperx::header::Link>, D)>,
-    into_items: fn(D) -> Vec<I>,
-) -> Stream<I>
-where
-    D: serde::de::DeserializeOwned + 'static + Send,
-    I: 'static + Send,
-{
-    Box::pin(
-        first
-            .map_ok(move |(link, payload)| {
-                let mut items = into_items(payload);
-                items.reverse();
-                stream::try_unfold(
-                    (github, link, items),
-                    move |(github, link, mut items)| async move {
-                        match items.pop() {
-                            Some(item) => Ok(Some((item, (github, link, items)))),
-                            None => match link.and_then(|l| next_link(&l)) {
-                                Some(url) => {
-                                    let url = Url::from_str(&url).unwrap();
-                                    let (link, payload) = github.get_pages_url(&url).await?;
-                                    let mut items = into_items(payload);
-                                    let item = items.remove(0);
-                                    items.reverse();
-                                    Ok(Some((item, (github, link, items))))
-                                }
-                                None => Ok(None),
-                            },
-                        }
-                    },
-                )
-            })
-            .try_flatten_stream(),
-    )
-}*/
-
 pub mod deserialize_null_string {
     use serde::{self, Deserialize, Deserializer};
 

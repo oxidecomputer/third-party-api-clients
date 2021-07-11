@@ -132,10 +132,10 @@
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
 //!
+#![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(missing_docs)]
 
-#[doc(inline)]
 pub mod auth;
 #[cfg(feature = "httpcache")]
 pub mod http_cache;
@@ -25386,7 +25386,14 @@ impl Client {
         .await
     }
 
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, D)>
+    async fn get_all_pages<D>(&self, uri: &str) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.unfold(uri).await
+    }
+
+    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -25403,7 +25410,7 @@ impl Client {
     async fn get_pages_url<D>(
         &self,
         url: &reqwest::Url,
-    ) -> Result<(Option<hyperx::header::Link>, D)>
+    ) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -25516,6 +25523,33 @@ impl Client {
             crate::auth::AuthenticationConstraint::Unconstrained,
         )
         .await
+    }
+
+    /// "unfold" paginated results of a vector of items
+    async fn unfold<D>(&self, uri: &str) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let mut global_items = Vec::new();
+        let (new_link, mut items) = self.get_pages(uri).await.unwrap();
+        let mut link = new_link;
+        items.reverse();
+        while !items.is_empty() {
+            match items.pop() {
+                Some(item) => global_items.push(item),
+                // We need to get the next link.
+                None => {
+                    if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
+                        let url = reqwest::Url::parse(&url).unwrap();
+                        let (new_link, new_items) = self.get_pages_url(&url).await?;
+                        link = new_link;
+                        items = new_items;
+                    }
+                }
+            }
+        }
+
+        Ok(global_items)
     }
 
     /**

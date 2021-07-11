@@ -523,7 +523,7 @@ impl TypeSpace {
      * Emit a human-readable diagnostic description for this type ID.
      */
     fn describe(&self, tid: &TypeId) -> String {
-        if let Some(te) = self.id_to_entry.get(&tid) {
+        if let Some(te) = self.id_to_entry.get(tid) {
             match &te.details {
                 TypeDetails::Basic => {
                     if let Some(n) = &te.name {
@@ -533,7 +533,7 @@ impl TypeSpace {
                     }
                 }
                 TypeDetails::NamedType(itid) => {
-                    if let Some(ite) = self.id_to_entry.get(&itid) {
+                    if let Some(ite) = self.id_to_entry.get(itid) {
                         if let Some(n) = &ite.name {
                             return format!("named type of {} <{}>", n, itid.0);
                         }
@@ -546,7 +546,7 @@ impl TypeSpace {
                     format!("named type of {}", self.describe(itid))
                 }
                 TypeDetails::Enum(itid) => {
-                    if let Some(ite) = self.id_to_entry.get(&itid) {
+                    if let Some(ite) = self.id_to_entry.get(itid) {
                         if let Some(n) = &ite.name {
                             return format!("enum of {} <{}>", n, itid.0);
                         }
@@ -559,7 +559,7 @@ impl TypeSpace {
                     format!("enum of {}", self.describe(itid))
                 }
                 TypeDetails::Array(itid) => {
-                    if let Some(ite) = self.id_to_entry.get(&itid) {
+                    if let Some(ite) = self.id_to_entry.get(itid) {
                         if let Some(n) = &ite.name {
                             return format!("array of {} <{}>", n, itid.0);
                         }
@@ -572,7 +572,7 @@ impl TypeSpace {
                     format!("array of {}", self.describe(itid))
                 }
                 TypeDetails::Optional(itid) => {
-                    if let Some(ite) = self.id_to_entry.get(&itid) {
+                    if let Some(ite) = self.id_to_entry.get(itid) {
                         if let Some(n) = &ite.name {
                             return format!("option of {} <{}>", n, itid.0);
                         }
@@ -601,7 +601,7 @@ impl TypeSpace {
     }
 
     fn render_type(&self, tid: &TypeId, in_mod: bool) -> Result<String> {
-        if let Some(te) = self.id_to_entry.get(&tid) {
+        if let Some(te) = self.id_to_entry.get(tid) {
             match &te.details {
                 TypeDetails::Basic => {
                     if let Some(n) = &te.name {
@@ -626,7 +626,7 @@ impl TypeSpace {
                 }
                 TypeDetails::Object(_) => {
                     if let Some(n) = &te.name {
-                        let struct_name = struct_name(&n);
+                        let struct_name = struct_name(n);
                         if in_mod {
                             Ok(struct_name)
                         } else {
@@ -737,11 +737,11 @@ impl TypeSpace {
                      * Object types must have a consistent name.
                      */
                     let name = clean_name(match (name, s.schema_data.title.as_deref()) {
-                        (Some(n), None) => &n,
-                        (Some(n), Some("")) => &n,
-                        (None, Some(t)) => &t,
-                        (Some(""), Some(t)) => &t,
-                        (Some(n), Some(_)) => &n,
+                        (Some(n), None) => n,
+                        (Some(n), Some("")) => n,
+                        (None, Some(t)) => t,
+                        (Some(""), Some(t)) => t,
+                        (Some(n), Some(_)) => n,
                         (None, None) => {
                             bail!("types need a name? {:?} {:?}", name, s)
                         }
@@ -751,7 +751,7 @@ impl TypeSpace {
                     for (n, rb) in o.properties.iter() {
                         let itid = self.select_box(
                             Some(n),
-                            &rb,
+                            rb,
                             &format!("{} {} {}", parent_name, name, clean_name(n)),
                         )?;
                         if o.required.contains(n) {
@@ -1157,10 +1157,10 @@ fn gen(
 //!"#,
         n, n, n, n, n, n
     ));
+    a("#![feature(async_stream)]");
     a("#![allow(clippy::too_many_arguments)]");
     a("#![allow(missing_docs)]"); // TODO: Make this a deny.
     a("");
-    a("#[doc(inline)]");
     a("pub mod auth;");
     a(r#"#[cfg(feature = "httpcache")]"#);
     a("pub mod http_cache;");
@@ -1219,7 +1219,7 @@ fn gen(
     a("");
     for te in ts.id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
-            let struct_name = struct_name(&sn);
+            let struct_name = struct_name(sn);
             match &te.details {
                 TypeDetails::Object(omap) => {
                     a("    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
@@ -1596,7 +1596,14 @@ fn gen(
         ).await
     }
 
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, D)>
+    async fn get_all_pages<D>(&self, uri: &str) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.unfold(uri).await
+    }
+
+    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -1609,7 +1616,7 @@ fn gen(
         ).await
     }
 
-    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, D)>
+    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -1704,6 +1711,34 @@ fn gen(
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
+    }
+
+    /// "unfold" paginated results of a vector of items
+    async fn unfold<D>(
+        &self,
+        uri: &str,
+    ) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let mut global_items = Vec::new();
+        let (new_link, mut items) = self.get_pages(uri).await.unwrap();
+        let mut link = new_link;
+        items.reverse();
+        while !items.is_empty() {
+            match items.pop() {
+                Some(item) => global_items.push(item),
+                // We need to get the next link.
+                None => if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
+                    let url = reqwest::Url::parse(&url).unwrap();
+                    let (new_link, new_items) = self.get_pages_url(&url).await?;
+                    link = new_link;
+                    items = new_items;
+                },
+            }
+        }
+
+        Ok(global_items)
     }"#);
     a("");
 
@@ -1767,7 +1802,7 @@ fn gen(
                                 openapiv3::ReferenceOr::Item(item) => {
                                     let object_name = format!(
                                         "{} request",
-                                        summary_to_object_name("", &o.summary.as_ref().unwrap())
+                                        summary_to_object_name("", o.summary.as_ref().unwrap())
                                     );
                                     ts.select_schema(Some(&object_name), item, "", false)?
                                 }
@@ -1953,7 +1988,7 @@ fn gen(
                                                 "{} {} Response",
                                                 summary_to_object_name(
                                                     m,
-                                                    &o.summary.as_ref().unwrap()
+                                                    o.summary.as_ref().unwrap()
                                                 ),
                                                 status_code
                                                     .canonical_reason()
@@ -2011,7 +2046,7 @@ fn gen(
                                                     "{} {} Response",
                                                     summary_to_object_name(
                                                         m,
-                                                        &o.summary.as_ref().unwrap()
+                                                        o.summary.as_ref().unwrap()
                                                     ),
                                                     status_code
                                                         .canonical_reason()
@@ -2140,7 +2175,7 @@ fn gen(
 }
 
 fn struct_name(s: &str) -> String {
-    titlecase::titlecase(&s)
+    titlecase::titlecase(s)
         .replace(" ", "")
         .replace("Self", "SelfData")
 }
@@ -2275,7 +2310,7 @@ fn main() -> Result<()> {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!(
                                     "{} request",
-                                    summary_to_object_name("", &o.summary.as_ref().unwrap())
+                                    summary_to_object_name("", o.summary.as_ref().unwrap())
                                 );
                                 let id = ts.select(Some(&object_name), s, false)?;
                                 println!(
@@ -2320,7 +2355,7 @@ fn main() -> Result<()> {
                                                 "{} {} Response",
                                                 summary_to_object_name(
                                                     m,
-                                                    &o.summary.as_ref().unwrap()
+                                                    o.summary.as_ref().unwrap()
                                                 ),
                                                 status_code
                                                     .canonical_reason()
