@@ -190,7 +190,7 @@ pub mod types {
     /// - `all` - returns both web and Git events
     ///
     /// The default is `web`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AuditLogInclude {
         Web,
@@ -220,7 +220,7 @@ pub mod types {
     /// The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
     ///
     /// The default is `desc`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AuditLogOrder {
         Desc,
@@ -246,7 +246,7 @@ pub mod types {
     }
 
     /// One of `asc` (ascending) or `desc` (descending).
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Direction {
         Asc,
@@ -272,7 +272,7 @@ pub mod types {
     }
 
     /// Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Order {
         Desc,
@@ -298,7 +298,7 @@ pub mod types {
     }
 
     /// The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PackageType {
         Npm,
@@ -324,7 +324,7 @@ pub mod types {
     }
 
     /// Must be one of: `day`, `week`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Per {
         Day,
@@ -350,7 +350,7 @@ pub mod types {
     }
 
     /// One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Sort {
         Created,
@@ -376,7 +376,7 @@ pub mod types {
     }
 
     /// Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum StatusParam {
         Queued,
@@ -404,7 +404,7 @@ pub mod types {
     }
 
     /// Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum WorkflowRunStatus {
         Completed,
@@ -924,7 +924,7 @@ pub mod types {
     }
 
     /// The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Actions {
         Read,
@@ -948,8 +948,9 @@ pub mod types {
             Actions::Noop
         }
     }
+
     /// The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Administration {
         Read,
@@ -973,8 +974,9 @@ pub mod types {
             Administration::Noop
         }
     }
+
     /// The level of permission to grant the access token for checks on code. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Checks {
         Read,
@@ -998,8 +1000,9 @@ pub mod types {
             Checks::Noop
         }
     }
+
     /// The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ContentReferences {
         Read,
@@ -1023,8 +1026,9 @@ pub mod types {
             ContentReferences::Noop
         }
     }
+
     /// The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Contents {
         Read,
@@ -1048,8 +1052,9 @@ pub mod types {
             Contents::Noop
         }
     }
+
     /// The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Deployments {
         Read,
@@ -1073,8 +1078,9 @@ pub mod types {
             Deployments::Noop
         }
     }
+
     /// The level of permission to grant the access token for managing repository environments. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Environments {
         Read,
@@ -1098,8 +1104,9 @@ pub mod types {
             Environments::Noop
         }
     }
+
     /// The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Issues {
         Read,
@@ -1123,8 +1130,9 @@ pub mod types {
             Issues::Noop
         }
     }
+
     /// The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Metadata {
         Read,
@@ -1148,8 +1156,9 @@ pub mod types {
             Metadata::Noop
         }
     }
+
     /// The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Packages {
         Read,
@@ -1173,8 +1182,9 @@ pub mod types {
             Packages::Noop
         }
     }
+
     /// The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Pages {
         Read,
@@ -1198,8 +1208,9 @@ pub mod types {
             Pages::Noop
         }
     }
+
     /// The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullRequests {
         Read,
@@ -1223,8 +1234,9 @@ pub mod types {
             PullRequests::Noop
         }
     }
+
     /// The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositoryHooks {
         Read,
@@ -1248,8 +1260,9 @@ pub mod types {
             RepositoryHooks::Noop
         }
     }
+
     /// The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositoryProjects {
         Read,
@@ -1275,8 +1288,9 @@ pub mod types {
             RepositoryProjects::Noop
         }
     }
+
     /// The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecretScanningAlerts {
         Read,
@@ -1300,8 +1314,9 @@ pub mod types {
             SecretScanningAlerts::Noop
         }
     }
+
     /// The level of permission to grant the access token to manage repository secrets. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Secrets {
         Read,
@@ -1325,8 +1340,9 @@ pub mod types {
             Secrets::Noop
         }
     }
+
     /// The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecurityEvents {
         Read,
@@ -1350,8 +1366,9 @@ pub mod types {
             SecurityEvents::Noop
         }
     }
+
     /// The level of permission to grant the access token to manage just a single file. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SingleFile {
         Read,
@@ -1375,8 +1392,9 @@ pub mod types {
             SingleFile::Noop
         }
     }
+
     /// The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Statuses {
         Read,
@@ -1400,8 +1418,9 @@ pub mod types {
             Statuses::Noop
         }
     }
+
     /// The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum VulnerabilityAlerts {
         Read,
@@ -1423,8 +1442,9 @@ pub mod types {
             VulnerabilityAlerts::Noop
         }
     }
+
     /// The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Workflows {
         Write,
@@ -1446,8 +1466,9 @@ pub mod types {
             Workflows::Noop
         }
     }
+
     /// The level of permission to grant the access token for organization teams and members. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Members {
         Read,
@@ -1471,8 +1492,9 @@ pub mod types {
             Members::Noop
         }
     }
+
     /// The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationAdministration {
         Read,
@@ -1496,8 +1518,9 @@ pub mod types {
             OrganizationAdministration::Noop
         }
     }
+
     /// The level of permission to grant the access token to manage the post-receive hooks for an organization. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationHooks {
         Read,
@@ -1521,8 +1544,9 @@ pub mod types {
             OrganizationHooks::Noop
         }
     }
+
     /// The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationPlan {
         Read,
@@ -1544,8 +1568,9 @@ pub mod types {
             OrganizationPlan::Noop
         }
     }
+
     /// The level of permission to grant the access token to manage organization projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationProjects {
         Read,
@@ -1571,8 +1596,9 @@ pub mod types {
             OrganizationProjects::Noop
         }
     }
+
     /// The level of permission to grant the access token for organization packages published to GitHub Packages. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationPackages {
         Read,
@@ -1596,8 +1622,9 @@ pub mod types {
             OrganizationPackages::Noop
         }
     }
+
     /// The level of permission to grant the access token to manage organization secrets. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationSecrets {
         Read,
@@ -1621,33 +1648,35 @@ pub mod types {
             OrganizationSecrets::Noop
         }
     }
+
     /// The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum OrganizationSelfDataHostedRunners {
+    pub enum OrganizationSelfDataDataHostedRunners {
         Read,
         Write,
         Noop,
     }
 
-    impl std::fmt::Display for OrganizationSelfDataHostedRunners {
+    impl std::fmt::Display for OrganizationSelfDataDataHostedRunners {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                OrganizationSelfDataHostedRunners::Read => "read",
-                OrganizationSelfDataHostedRunners::Write => "write",
-                OrganizationSelfDataHostedRunners::Noop => "",
+                OrganizationSelfDataDataHostedRunners::Read => "read",
+                OrganizationSelfDataDataHostedRunners::Write => "write",
+                OrganizationSelfDataDataHostedRunners::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for OrganizationSelfDataHostedRunners {
-        fn default() -> OrganizationSelfDataHostedRunners {
-            OrganizationSelfDataHostedRunners::Noop
+    impl Default for OrganizationSelfDataDataHostedRunners {
+        fn default() -> OrganizationSelfDataDataHostedRunners {
+            OrganizationSelfDataDataHostedRunners::Noop
         }
     }
+
     /// The level of permission to grant the access token to view and manage users blocked by the organization. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationUserBlocking {
         Read,
@@ -1671,8 +1700,9 @@ pub mod types {
             OrganizationUserBlocking::Noop
         }
     }
+
     /// The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamDiscussions {
         Read,
@@ -1696,6 +1726,7 @@ pub mod types {
             TeamDiscussions::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AppPermissions {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -1884,7 +1915,7 @@ pub mod types {
     }
 
     /// Describe whether all repositories have been selected or there's a selection involved
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositorySelection {
         All,
@@ -1908,6 +1939,7 @@ pub mod types {
             RepositorySelection::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SuspendedBy {
         #[serde(
@@ -3175,7 +3207,7 @@ pub mod types {
         pub watchers_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum InstallationTokenRepositorySelection {
         All,
@@ -3199,6 +3231,7 @@ pub mod types {
             InstallationTokenRepositorySelection::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InstallationToken {
         #[serde(
@@ -3583,7 +3616,7 @@ pub mod types {
     }
 
     /// The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum EnabledOrganizations {
         All,
@@ -3609,8 +3642,9 @@ pub mod types {
             EnabledOrganizations::Noop
         }
     }
+
     /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AllowedActions {
         All,
@@ -3636,6 +3670,7 @@ pub mod types {
             AllowedActions::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsEnterprisePermissions {
         pub allowed_actions: AllowedActions,
@@ -3767,7 +3802,7 @@ pub mod types {
     }
 
     /// The type of label. Read-only labels are applied automatically when the runner is configured.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Type {
         ReadOnly,
@@ -3791,6 +3826,7 @@ pub mod types {
             Type::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Labels {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -4190,7 +4226,7 @@ pub mod types {
     }
 
     /// The state of the milestone.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum State {
         Open,
@@ -4214,6 +4250,7 @@ pub mod types {
             State::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Creator {
         #[serde(
@@ -4386,7 +4423,7 @@ pub mod types {
     }
 
     /// How the author is associated with the repository.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AuthorAssociation {
         Collaborator,
@@ -4422,6 +4459,7 @@ pub mod types {
             AuthorAssociation::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Assignee {
         #[serde(
@@ -6774,7 +6812,7 @@ pub mod types {
     }
 
     /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum EnabledRepositories {
         All,
@@ -6800,6 +6838,7 @@ pub mod types {
             EnabledRepositories::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsOrganizationPermissions {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -6854,7 +6893,7 @@ pub mod types {
     }
 
     /// Visibility of a secret
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Visibility {
         All,
@@ -6880,6 +6919,7 @@ pub mod types {
             Visibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrganizationActionsSecret {
         pub created_at: DateTime<Utc>,
@@ -7106,7 +7146,7 @@ pub mod types {
     }
 
     /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum InteractionGroup {
         ExistingUsers,
@@ -7132,6 +7172,7 @@ pub mod types {
             InteractionGroup::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InteractionLimitResponse {
         pub expires_at: DateTime<Utc>,
@@ -7145,7 +7186,7 @@ pub mod types {
     }
 
     /// The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum InteractionExpiry {
         OneDay,
@@ -7175,6 +7216,7 @@ pub mod types {
             InteractionExpiry::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InteractionLimit {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -7402,7 +7444,7 @@ pub mod types {
     }
 
     /// The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrgMembershipState {
         Active,
@@ -7426,8 +7468,9 @@ pub mod types {
             OrgMembershipState::Noop
         }
     }
+
     /// The user's membership type in the organization.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Role {
         Admin,
@@ -7453,6 +7496,7 @@ pub mod types {
             Role::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct OrgMembershipPermissions {
         pub can_create_repository: bool,
@@ -7524,39 +7568,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "snake_case")]
-    pub enum PackageType {
-        Npm,
-        Maven,
-        Rubygems,
-        Docker,
-        Nuget,
-        Container,
-        Noop,
-    }
-
-    impl std::fmt::Display for PackageType {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                PackageType::Npm => "npm",
-                PackageType::Maven => "maven",
-                PackageType::Rubygems => "rubygems",
-                PackageType::Docker => "docker",
-                PackageType::Nuget => "nuget",
-                PackageType::Container => "container",
-                PackageType::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for PackageType {
-        fn default() -> PackageType {
-            PackageType::Noop
-        }
-    }
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PackageVisibility {
         Private,
@@ -7580,6 +7592,7 @@ pub mod types {
             PackageVisibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PackageRepository {
         #[serde(
@@ -8054,7 +8067,7 @@ pub mod types {
     }
 
     /// The baseline permission that all organization members have on this project. Only present if owner is an organization.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationPermission {
         Read,
@@ -8082,6 +8095,7 @@ pub mod types {
             OrganizationPermission::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Project {
         #[serde(
@@ -8184,7 +8198,7 @@ pub mod types {
     }
 
     /// The level of privacy this team should have
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Privacy {
         Closed,
@@ -8208,6 +8222,7 @@ pub mod types {
             Privacy::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamFull {
         pub created_at: DateTime<Utc>,
@@ -8525,7 +8540,7 @@ pub mod types {
     }
 
     /// The reaction to use
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Content {
         PlusOne,
@@ -8561,6 +8576,7 @@ pub mod types {
             Content::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Reaction {
         pub content: Content,
@@ -8576,7 +8592,7 @@ pub mod types {
     }
 
     /// The role of the user in the team.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamMembershipRole {
         Member,
@@ -8600,8 +8616,9 @@ pub mod types {
             TeamMembershipRole::Noop
         }
     }
+
     /// The state of the user's membership in the team.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamMembershipState {
         Active,
@@ -8625,6 +8642,7 @@ pub mod types {
             TeamMembershipState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamMembership {
         pub role: Role,
@@ -9271,30 +9289,6 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct FullRepositoryTemplateRepository {}
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
-    #[serde(rename_all = "snake_case")]
-    pub enum Status {
-        Enabled,
-        Disabled,
-        Noop,
-    }
-
-    impl std::fmt::Display for Status {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                Status::Enabled => "enabled",
-                Status::Disabled => "disabled",
-                Status::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for Status {
-        fn default() -> Status {
-            Status::Noop
-        }
-    }
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AdvancedSecurity {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -9725,7 +9719,7 @@ pub mod types {
     }
 
     /// The phase of the lifecycle that the job is currently in.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum JobStatus {
         Queued,
@@ -9751,8 +9745,9 @@ pub mod types {
             JobStatus::Noop
         }
     }
+
     /// The phase of the lifecycle that the job is currently in.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum JobStepsStepsStatus {
         Queued,
@@ -9778,6 +9773,7 @@ pub mod types {
             JobStepsStepsStatus::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Steps {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -10158,7 +10154,7 @@ pub mod types {
     }
 
     /// Whether deployment to the environment(s) was approved or rejected
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum EnvironmentApprovalsState {
         Approved,
@@ -10182,6 +10178,7 @@ pub mod types {
             EnvironmentApprovalsState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnvironmentApprovals {
         #[serde(
@@ -10197,7 +10194,7 @@ pub mod types {
     }
 
     /// The type of reviewer. Must be one of: `User` or `Team`
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum DeploymentReviewerType {
         User,
@@ -10221,6 +10218,7 @@ pub mod types {
             DeploymentReviewerType::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Environment {
         #[serde(
@@ -10516,7 +10514,7 @@ pub mod types {
         pub updated_at: DateTime<Utc>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum WorkflowState {
         Active,
@@ -10546,6 +10544,7 @@ pub mod types {
             WorkflowState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Workflow {
         #[serde(
@@ -11846,7 +11845,7 @@ pub mod types {
     }
 
     /// The phase of the lifecycle that the check is currently in.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CheckRunStatus {
         Queued,
@@ -11872,7 +11871,8 @@ pub mod types {
             CheckRunStatus::Noop
         }
     }
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Conclusion {
         Success,
@@ -11906,6 +11906,7 @@ pub mod types {
             Conclusion::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Output {
         pub annotations_count: i64,
@@ -12114,7 +12115,7 @@ pub mod types {
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CheckSuiteStatus {
         Queued,
@@ -12140,6 +12141,7 @@ pub mod types {
             CheckSuiteStatus::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckSuiteApp {
         #[serde(
@@ -12289,7 +12291,7 @@ pub mod types {
     }
 
     /// State of a code scanning alert.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CodeScanningAlertState {
         Open,
@@ -12317,8 +12319,9 @@ pub mod types {
             CodeScanningAlertState::Noop
         }
     }
+
     /// The severity of the alert.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Severity {
         None,
@@ -12346,6 +12349,7 @@ pub mod types {
             Severity::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertRuleSummary {
         #[serde(
@@ -12411,7 +12415,7 @@ pub mod types {
     }
 
     /// A classification of the file. For example to identify it as generated.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CodeScanningAlertClassification {
         Source,
@@ -12439,6 +12443,7 @@ pub mod types {
             CodeScanningAlertClassification::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Message {
         #[serde(
@@ -12524,7 +12529,7 @@ pub mod types {
     }
 
     /// The security severity of the alert.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecuritySeverityLevel {
         Low,
@@ -12552,6 +12557,7 @@ pub mod types {
             SecuritySeverityLevel::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAlertRule {
         #[serde(
@@ -12626,7 +12632,7 @@ pub mod types {
     }
 
     /// Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CodeScanningAlertSetState {
         Open,
@@ -12650,6 +12656,7 @@ pub mod types {
             CodeScanningAlertSetState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningAnalysis {
         #[serde(
@@ -12786,7 +12793,7 @@ pub mod types {
     }
 
     /// `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProcessingStatus {
         Pending,
@@ -12810,6 +12817,7 @@ pub mod types {
             ProcessingStatus::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningSarifsStatus {
         #[serde(
@@ -13189,7 +13197,7 @@ pub mod types {
     }
 
     /// The permission associated with the invitation.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositoryInvitationPermissions {
         Read,
@@ -13219,6 +13227,7 @@ pub mod types {
             RepositoryInvitationPermissions::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepositoryInvitation {
         pub created_at: DateTime<Utc>,
@@ -13321,7 +13330,7 @@ pub mod types {
     }
 
     /// The merge method to use.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum MergeMethod {
         Merge,
@@ -13347,6 +13356,7 @@ pub mod types {
             MergeMethod::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AutoMerge {
         #[serde(
@@ -13945,7 +13955,7 @@ pub mod types {
         pub status: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CommitComparisonStatus {
         Diverged,
@@ -13973,6 +13983,7 @@ pub mod types {
             CommitComparisonStatus::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitComparison {
         pub ahead_by: i64,
@@ -14913,7 +14924,7 @@ pub mod types {
     }
 
     /// The state of the status.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum DeploymentStatusState {
         Error,
@@ -14947,6 +14958,7 @@ pub mod types {
             DeploymentStatusState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeploymentStatus {
         pub created_at: DateTime<Utc>,
@@ -15536,7 +15548,7 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ImportStatus {
         Auth,
@@ -15588,6 +15600,7 @@ pub mod types {
             ImportStatus::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProjectChoices {
         #[serde(
@@ -17691,7 +17704,7 @@ pub mod types {
     }
 
     /// The side of the first line of the range for a multi-line comment.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum StartSide {
         Left,
@@ -17715,8 +17728,9 @@ pub mod types {
             StartSide::Noop
         }
     }
+
     /// The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Side {
         Left,
@@ -17740,6 +17754,7 @@ pub mod types {
             Side::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewComment {
         pub links: Links,
@@ -18109,7 +18124,7 @@ pub mod types {
         pub path: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PagesHttpsCertificateState {
         New,
@@ -18153,6 +18168,7 @@ pub mod types {
             PagesHttpsCertificateState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PagesHttpsCertificate {
         #[serde(
@@ -18168,7 +18184,7 @@ pub mod types {
     }
 
     /// The status of the most recent build of the Page.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PageStatus {
         Built,
@@ -18194,6 +18210,7 @@ pub mod types {
             PageStatus::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Page {
         #[serde(
@@ -18576,7 +18593,7 @@ pub mod types {
     }
 
     /// State of this Pull Request. Either `open` or `closed`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullRequestState {
         Open,
@@ -18600,6 +18617,7 @@ pub mod types {
             PullRequestState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestLabels {
         #[serde(
@@ -20226,7 +20244,7 @@ pub mod types {
     }
 
     /// The side of the first line of the range for a multi-line comment.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReviewCommentSide {
         Left,
@@ -20250,6 +20268,7 @@ pub mod types {
             ReviewCommentSide::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewComment {
         pub links: Links,
@@ -20346,7 +20365,7 @@ pub mod types {
     }
 
     /// State of the release asset.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReleaseAssetState {
         Uploaded,
@@ -20370,6 +20389,7 @@ pub mod types {
             ReleaseAssetState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Uploader {
         #[serde(
@@ -20637,7 +20657,7 @@ pub mod types {
     }
 
     /// Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecretScanningAlertState {
         Open,
@@ -20661,6 +20681,7 @@ pub mod types {
             SecretScanningAlertState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SecretScanningAlert {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -21185,7 +21206,7 @@ pub mod types {
         pub resource_type: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Op {
         Add,
@@ -21211,6 +21232,7 @@ pub mod types {
             Op::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Operations {
         pub op: Op,
@@ -23320,30 +23342,31 @@ pub mod types {
     }
 
     /// Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected`
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+    pub enum CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
         Selected,
         All,
         Noop,
     }
 
-    impl std::fmt::Display for CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+    impl std::fmt::Display for CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
-                CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
-                CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
+                CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
+                CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
+                CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
-        fn default() -> CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
-            CreateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Noop
+    impl Default for CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
+        fn default() -> CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
+            CreateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateSelfDataHostedRunnerGroupEnterpriseRequest {
         #[serde(
@@ -23361,30 +23384,31 @@ pub mod types {
     }
 
     /// Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+    pub enum UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
         Selected,
         All,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
+    impl std::fmt::Display for UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
-                UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
-                UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
+                UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Selected => "selected",
+                UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::All => "all",
+                UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
-        fn default() -> UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility {
-            UpdateSelfDataHostedRunnerGroupEnterpriseRequestVisibility::Noop
+    impl Default for UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
+        fn default() -> UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility {
+            UpdateSelfDataDataHostedRunnerGroupEnterpriseRequestVisibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateSelfDataHostedRunnerGroupEnterpriseRequest {
         #[serde(
@@ -23499,7 +23523,7 @@ pub mod types {
     }
 
     /// The rendering mode.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Mode {
         Markdown,
@@ -23523,6 +23547,7 @@ pub mod types {
             Mode::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RenderMarkdownDocumentRequest {
         #[serde(
@@ -23570,7 +23595,7 @@ pub mod types {
     /// \* `write` - can pull and push, but not administer this repository.  
     /// \* `admin` - can pull, push, and administer this repository.  
     /// \* `none` - no permissions granted by default.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum DefaultRepositoryPermission {
         Read,
@@ -23598,12 +23623,13 @@ pub mod types {
             DefaultRepositoryPermission::Noop
         }
     }
+
     /// Specifies which types of repositories non-admin organization members can create. Can be one of:  
     /// \* `all` - all organization members can create public and private repositories.  
     /// \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  
     /// \* `none` - only admin members can create repositories.  
     /// **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum MembersAllowedRepositoryCreationType {
         All,
@@ -23629,6 +23655,7 @@ pub mod types {
             MembersAllowedRepositoryCreationType::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateOrganizationRequest {
         #[serde(
@@ -23749,32 +23776,33 @@ pub mod types {
     }
 
     /// Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+    pub enum CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
         Selected,
         All,
         Private,
         Noop,
     }
 
-    impl std::fmt::Display for CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+    impl std::fmt::Display for CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
-                CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::All => "all",
-                CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
-                CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
+                CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
+                CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::All => "all",
+                CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
+                CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
-        fn default() -> CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
-            CreateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Noop
+    impl Default for CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
+        fn default() -> CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
+            CreateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateSelfDataHostedRunnerGroupOrganizationRequest {
         #[serde(
@@ -23792,32 +23820,33 @@ pub mod types {
     }
 
     /// Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+    pub enum UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
         Selected,
         All,
         Private,
         Noop,
     }
 
-    impl std::fmt::Display for UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
+    impl std::fmt::Display for UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
-                UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::All => "all",
-                UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
-                UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
+                UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Selected => "selected",
+                UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::All => "all",
+                UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Private => "private",
+                UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
-        fn default() -> UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility {
-            UpdateSelfDataHostedRunnerGroupOrganizationRequestVisibility::Noop
+    impl Default for UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
+        fn default() -> UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility {
+            UpdateSelfDataDataHostedRunnerGroupOrganizationRequestVisibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateSelfDataHostedRunnerGroupOrganizationRequest {
         #[serde(
@@ -23874,7 +23903,7 @@ pub mod types {
     /// \- `all` - All repositories in an organization can access the secret.  
     /// \- `private` - Private repositories in an organization can access the secret.  
     /// \- `selected` - Only specific repositories can access the secret.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateUpdateOrganizationSecretRequestVisibility {
         All,
@@ -23900,6 +23929,7 @@ pub mod types {
             CreateUpdateOrganizationSecretRequestVisibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateUpdateOrganizationSecretRequest {
         #[serde(
@@ -24082,7 +24112,7 @@ pub mod types {
     /// \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  
     /// \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
     /// \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateOrganizationInvitationRequestRole {
         Admin,
@@ -24108,6 +24138,7 @@ pub mod types {
             CreateOrganizationInvitationRequestRole::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateOrganizationInvitationRequest {
         #[serde(
@@ -24127,7 +24158,7 @@ pub mod types {
     /// The role to give the user in the organization. Can be one of:  
     /// \* `admin` - The user will become an owner of the organization.  
     /// \* `member` - The user will become a non-owner member of the organization.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SetOrganizationMembershipUserRequestRole {
         Admin,
@@ -24151,13 +24182,14 @@ pub mod types {
             SetOrganizationMembershipUserRequestRole::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetOrganizationMembershipUserRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub role: Option<Role>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Exclude {
         Repositories,
@@ -24179,6 +24211,7 @@ pub mod types {
             Exclude::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct StartOrganizationMigrationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -24228,7 +24261,7 @@ pub mod types {
 
     /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
     /// The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateOrganizationRepositoryRequestVisibility {
         Public,
@@ -24256,6 +24289,7 @@ pub mod types {
             CreateOrganizationRepositoryRequestVisibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateOrganizationRepositoryRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24322,7 +24356,7 @@ pub mod types {
     /// **For a parent or child team:**  
     /// \* `closed` - visible to all members of this organization.  
     /// Default for child team: `closed`
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateTeamRequestPrivacy {
         Secret,
@@ -24346,11 +24380,12 @@ pub mod types {
             CreateTeamRequestPrivacy::Noop
         }
     }
+
     /// **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
     /// \* `pull` - team members can pull, but not push to or administer newly-added repositories.  
     /// \* `push` - team members can pull and push, but not administer newly-added repositories.  
     /// \* `admin` - team members can pull, push and administer newly-added repositories.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Permission {
         Pull,
@@ -24376,6 +24411,7 @@ pub mod types {
             Permission::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateTeamRequest {
         #[serde(
@@ -24408,7 +24444,7 @@ pub mod types {
     /// \* `closed` - visible to all members of this organization.  
     /// **For a parent or child team:**  
     /// \* `closed` - visible to all members of this organization.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateTeamRequestPrivacy {
         Secret,
@@ -24432,6 +24468,7 @@ pub mod types {
             UpdateTeamRequestPrivacy::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateTeamRequest {
         #[serde(
@@ -24509,7 +24546,7 @@ pub mod types {
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReactionTeamDiscussionCommentRequestContent {
         PlusOne,
@@ -24545,13 +24582,14 @@ pub mod types {
             CreateReactionTeamDiscussionCommentRequestContent::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionTeamDiscussionCommentRequest {
         pub content: Content,
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReactionTeamDiscussionRequestContent {
         PlusOne,
@@ -24587,6 +24625,7 @@ pub mod types {
             CreateReactionTeamDiscussionRequestContent::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionTeamDiscussionRequest {
         pub content: Content,
@@ -24595,7 +24634,7 @@ pub mod types {
     /// The role that this user should have in the team. Can be one of:  
     /// \* `member` - a normal member of the team.  
     /// \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddUpdateTeamMembershipUserRequestRole {
         Member,
@@ -24619,6 +24658,7 @@ pub mod types {
             AddUpdateTeamMembershipUserRequestRole::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddUpdateTeamMembershipUserRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24630,7 +24670,7 @@ pub mod types {
     /// \* `write` - team members can read and write, but not administer this project.  
     /// \* `admin` - team members can read, write and administer this project.  
     /// Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddUpdateTeamProjectPermissionsRequestPermission {
         Read,
@@ -24656,6 +24696,7 @@ pub mod types {
             AddUpdateTeamProjectPermissionsRequestPermission::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddUpdateTeamProjectPermissionsRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24686,7 +24727,7 @@ pub mod types {
     /// \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  
     ///   
     /// If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddUpdateTeamRepositoryPermissionsRequestPermission {
         Pull,
@@ -24716,6 +24757,7 @@ pub mod types {
             AddUpdateTeamRepositoryPermissionsRequestPermission::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddUpdateTeamRepositoryPermissionsRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24991,7 +25033,7 @@ pub mod types {
     }
 
     /// The baseline permission that all organization members have on this project
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateProjectRequestOrganizationPermission {
         Read,
@@ -25019,6 +25061,7 @@ pub mod types {
             UpdateProjectRequestOrganizationPermission::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateProjectRequest {
         #[serde(
@@ -25064,7 +25107,7 @@ pub mod types {
     }
 
     /// The permission to grant the collaborator.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddProjectCollaboratorRequestPermission {
         Read,
@@ -25090,6 +25133,7 @@ pub mod types {
             AddProjectCollaboratorRequestPermission::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddProjectCollaboratorRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25123,7 +25167,7 @@ pub mod types {
     }
 
     /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateRepositoryRequestVisibility {
         Public,
@@ -25151,6 +25195,7 @@ pub mod types {
             UpdateRepositoryRequestVisibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateRepositoryRequestSecurityAndAnalysisSecurityAndAnalysisAdvancedSecurity {
         #[serde(
@@ -25277,7 +25322,7 @@ pub mod types {
     }
 
     /// Whether to approve or reject deployment to the specified environments. Must be one of: `approved` or `rejected`
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReviewPendingDeploymentsWorkflowRunRequestState {
         Approved,
@@ -25301,6 +25346,7 @@ pub mod types {
             ReviewPendingDeploymentsWorkflowRunRequestState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReviewPendingDeploymentsWorkflowRunRequest {
         #[serde(
@@ -25537,7 +25583,7 @@ pub mod types {
     }
 
     /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateCheckRunRequestStatus {
         Queued,
@@ -25563,9 +25609,10 @@ pub mod types {
             CreateCheckRunRequestStatus::Noop
         }
     }
+
     /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
     /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateCheckRunRequestConclusion {
         ActionRequired,
@@ -25601,8 +25648,9 @@ pub mod types {
             CreateCheckRunRequestConclusion::Noop
         }
     }
+
     /// The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AnnotationLevel {
         Notice,
@@ -25628,6 +25676,7 @@ pub mod types {
             AnnotationLevel::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Annotations {
         pub annotation_level: AnnotationLevel,
@@ -25774,7 +25823,7 @@ pub mod types {
     }
 
     /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateCheckRunRequestStatus {
         Queued,
@@ -25800,9 +25849,10 @@ pub mod types {
             UpdateCheckRunRequestStatus::Noop
         }
     }
+
     /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.  
     /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateCheckRunRequestConclusion {
         ActionRequired,
@@ -25838,6 +25888,7 @@ pub mod types {
             UpdateCheckRunRequestConclusion::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateCheckRunRequestOutput {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -25996,7 +26047,7 @@ pub mod types {
     /// \* `admin` - can pull, push and administer this repository.  
     /// \* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.  
     /// \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AddRepositoryCollaboratorRequestPermission {
         Pull,
@@ -26026,6 +26077,7 @@ pub mod types {
             AddRepositoryCollaboratorRequestPermission::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AddRepositoryCollaboratorRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26049,7 +26101,7 @@ pub mod types {
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReactionCommitCommentRequestContent {
         PlusOne,
@@ -26085,6 +26137,7 @@ pub mod types {
             CreateReactionCommitCommentRequestContent::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionCommitCommentRequest {
         pub content: Content,
@@ -26385,7 +26438,7 @@ pub mod types {
     }
 
     /// The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateDeploymentStatusRequestState {
         Error,
@@ -26419,8 +26472,9 @@ pub mod types {
             CreateDeploymentStatusRequestState::Noop
         }
     }
+
     /// Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateDeploymentStatusRequestEnvironment {
         Production,
@@ -26446,6 +26500,7 @@ pub mod types {
             CreateDeploymentStatusRequestEnvironment::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateDeploymentStatusRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26646,7 +26701,7 @@ pub mod types {
     }
 
     /// The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateTagObjectRequestType {
         Commit,
@@ -26672,6 +26727,7 @@ pub mod types {
             CreateTagObjectRequestType::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateTagObjectRequestTagger {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26717,7 +26773,7 @@ pub mod types {
     }
 
     /// The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateTreeRequestTreeTreeMode {
         FileBlob,
@@ -26747,8 +26803,9 @@ pub mod types {
             CreateTreeRequestTreeTreeMode::Noop
         }
     }
+
     /// Either `blob`, `tree`, or `commit`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateTreeRequestTreeTreeType {
         Blob,
@@ -26774,6 +26831,7 @@ pub mod types {
             CreateTreeRequestTreeTreeType::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateTreeRequestTree {
         #[serde(
@@ -26951,7 +27009,7 @@ pub mod types {
     }
 
     /// The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Vcs {
         Subversion,
@@ -26979,6 +27037,7 @@ pub mod types {
             Vcs::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct StartImportRequest {
         #[serde(
@@ -27054,7 +27113,7 @@ pub mod types {
     }
 
     /// Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UseLfs {
         OptIn,
@@ -27078,6 +27137,7 @@ pub mod types {
             UseLfs::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateGitLfsPreferenceRequest {
         pub use_lfs: UseLfs,
@@ -27096,7 +27156,7 @@ pub mod types {
     }
 
     /// The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateRepositoryInvitationRequestPermissions {
         Read,
@@ -27126,6 +27186,7 @@ pub mod types {
             UpdateRepositoryInvitationRequestPermissions::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateRepositoryInvitationRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27171,7 +27232,7 @@ pub mod types {
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReactionIssueCommentRequestContent {
         PlusOne,
@@ -27207,13 +27268,14 @@ pub mod types {
             CreateReactionIssueCommentRequestContent::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionIssueCommentRequest {
         pub content: Content,
     }
 
     /// State of the issue. Either `open` or `closed`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateIssueRequestState {
         Open,
@@ -27237,6 +27299,7 @@ pub mod types {
             UpdateIssueRequestState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateIssueRequest {
         #[serde(
@@ -27306,7 +27369,7 @@ pub mod types {
     /// \* `too heated`  
     /// \* `resolved`  
     /// \* `spam`
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum LockReason {
         OffTopic,
@@ -27334,6 +27397,7 @@ pub mod types {
             LockReason::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LockIssueRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27341,7 +27405,7 @@ pub mod types {
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReactionIssueRequestContent {
         PlusOne,
@@ -27377,6 +27441,7 @@ pub mod types {
             CreateReactionIssueRequestContent::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionIssueRequest {
         pub content: Content,
@@ -27467,7 +27532,7 @@ pub mod types {
     }
 
     /// The state of the milestone. Either `open` or `closed`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateMilestoneRequestState {
         Open,
@@ -27491,6 +27556,7 @@ pub mod types {
             CreateMilestoneRequestState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateMilestoneRequest {
         #[serde(
@@ -27512,7 +27578,7 @@ pub mod types {
     }
 
     /// The state of the milestone. Either `open` or `closed`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateMilestoneRequestState {
         Open,
@@ -27536,6 +27602,7 @@ pub mod types {
             UpdateMilestoneRequestState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateMilestoneRequest {
         #[serde(
@@ -27579,7 +27646,7 @@ pub mod types {
     }
 
     /// The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Path {
         Root,
@@ -27603,6 +27670,7 @@ pub mod types {
             Path::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateGithubPagesSiteRequestSource {
         #[serde(
@@ -27621,7 +27689,7 @@ pub mod types {
     }
 
     /// Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SourceData {
         GhPages,
@@ -27647,6 +27715,7 @@ pub mod types {
             SourceData::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateInformationAboutGithubPagesSiteRequest {
         #[serde(
@@ -27724,7 +27793,7 @@ pub mod types {
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReactionPullRequestReviewCommentRequestContent {
         PlusOne,
@@ -27760,13 +27829,14 @@ pub mod types {
             CreateReactionPullRequestReviewCommentRequestContent::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionPullRequestReviewCommentRequest {
         pub content: Content,
     }
 
     /// State of this Pull Request. Either `open` or `closed`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdatePullRequestRequestState {
         Open,
@@ -27790,6 +27860,7 @@ pub mod types {
             UpdatePullRequestRequestState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdatePullRequestRequest {
         #[serde(
@@ -27817,7 +27888,7 @@ pub mod types {
     }
 
     /// **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReviewCommentPullRequestRequestSide {
         Left,
@@ -27841,8 +27912,9 @@ pub mod types {
             CreateReviewCommentPullRequestRequestSide::Noop
         }
     }
+
     /// **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReviewCommentPullRequestRequestStartSide {
         Left,
@@ -27868,6 +27940,7 @@ pub mod types {
             CreateReviewCommentPullRequestRequestStartSide::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReviewCommentPullRequestRequest {
         #[serde(
@@ -27913,7 +27986,7 @@ pub mod types {
     }
 
     /// Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum MergePullRequestRequestMergeMethod {
         Merge,
@@ -27939,6 +28012,7 @@ pub mod types {
             MergePullRequestRequestMergeMethod::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MergePullRequestRequest {
         #[serde(
@@ -28012,7 +28086,7 @@ pub mod types {
     }
 
     /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReviewPullRequestRequestEvent {
         Approve,
@@ -28038,6 +28112,7 @@ pub mod types {
             CreateReviewPullRequestRequestEvent::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Comments {
         #[serde(
@@ -28119,7 +28194,7 @@ pub mod types {
     }
 
     /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SubmitReviewPullRequestRequestEvent {
         Approve,
@@ -28145,6 +28220,7 @@ pub mod types {
             SubmitReviewPullRequestRequestEvent::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SubmitReviewPullRequestRequest {
         #[serde(
@@ -28281,7 +28357,7 @@ pub mod types {
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateReactionReleaseRequestContent {
         PlusOne,
@@ -28313,6 +28389,7 @@ pub mod types {
             CreateReactionReleaseRequestContent::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateReactionReleaseRequest {
         pub content: Content,
@@ -28326,7 +28403,7 @@ pub mod types {
     }
 
     /// The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CreateCommitStatusRequestState {
         Error,
@@ -28354,6 +28431,7 @@ pub mod types {
             CreateCommitStatusRequestState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateCommitStatusRequest {
         #[serde(
@@ -28500,7 +28578,7 @@ pub mod types {
         pub schemas: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp {
         Add,
@@ -28532,6 +28610,7 @@ pub mod types {
             UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateAttributeScimEnterpriseGroupRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -29140,7 +29219,7 @@ pub mod types {
     }
 
     /// Denotes whether an email is publicly visible.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SetPrimaryEmailVisibilityRequestVisibility {
         Public,
@@ -29164,6 +29243,7 @@ pub mod types {
             SetPrimaryEmailVisibilityRequestVisibility::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetPrimaryEmailVisibilityRequest {
         pub visibility: Visibility,
@@ -29240,7 +29320,7 @@ pub mod types {
     }
 
     /// The state that the membership should be in. Only `"active"` will be accepted.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UpdateOrganizationMembershipRequestState {
         Active,
@@ -29262,13 +29342,14 @@ pub mod types {
             UpdateOrganizationMembershipRequestState::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateOrganizationMembershipRequest {
         pub state: State,
     }
 
     /// Allowed values that can be passed to the exclude param.
-    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum StartUserMigrationRequestExclude {
         Repositories,
@@ -29290,6 +29371,7 @@ pub mod types {
             StartUserMigrationRequestExclude::Noop
         }
     }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct StartUserMigrationRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]

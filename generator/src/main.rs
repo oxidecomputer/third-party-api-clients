@@ -992,7 +992,46 @@ impl TypeSpace {
         }
     }
 }
-fn render_param(n: &str, parameter_data: openapiv3::ParameterData) -> String {
+
+fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::ParameterData> {
+    match param {
+        openapiv3::Parameter::Path {
+            parameter_data,
+            style: openapiv3::PathStyle::Simple,
+        } => return Some(parameter_data),
+        openapiv3::Parameter::Query {
+            parameter_data,
+            allow_reserved: _,
+            style: openapiv3::QueryStyle::Form,
+            allow_empty_value: _,
+        } => {
+            return Some(parameter_data);
+        }
+        _ => (),
+    }
+
+    None
+}
+
+fn render_raw_param(n: &str, param: &openapiv3::Parameter) -> String {
+    if let Some(parameter_data) = get_parameter_data(param) {
+        if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
+            if let Ok(s) = s.item() {
+                if let openapiv3::SchemaKind::Type(openapiv3::Type::String(st)) = &s.schema_kind {
+                    let mut desc = "".to_string();
+                    if let Some(d) = &parameter_data.description {
+                        desc = d.to_string();
+                    }
+                    return render_param(n, &st.enumeration.clone(), parameter_data.required, &desc);
+                }
+            }
+        }
+    }
+
+    "".to_string()
+}
+
+fn render_param(n: &str, enums: &[String], required: bool, description: &str) -> String {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1000,72 +1039,66 @@ fn render_param(n: &str, parameter_data: openapiv3::ParameterData) -> String {
         out.push('\n');
     };
 
-    if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
-        if let Ok(s) = s.item() {
-            if let openapiv3::SchemaKind::Type(openapiv3::Type::String(st)) = &s.schema_kind {
-                if st.enumeration.is_empty() {
-                    return out.to_string();
-                }
+    if enums.is_empty() {
+        return out.to_string();
+    }
 
-                if let Some(description) = &parameter_data.description {
-                    a(&format!("/// {}", description.replace('\n', "\n/// ")));
-                }
+    if !description.is_empty() {
+        a(&format!("/// {}", description.replace('\n', "\n/// ")));
+    }
 
-                let mut sn = struct_name(n);
-                // TODO: have a more automated way of making sure there aren't
-                // duplicates of enums.
-                if sn == "Status" {
-                    sn = format!("{}Param", sn);
-                }
+    let mut sn = struct_name(n);
+    // TODO: have a more automated way of making sure there aren't
+    // duplicates of enums.
+    /*if sn == "Status" {
+        sn = format!("{}Param", sn);
+    }*/
 
-                a("#[derive(Serialize, Deserialize, Debug, Clone)]");
-                a(r#"#[serde(rename_all = "snake_case")]"#);
-                a(&format!("pub enum {} {{", sn));
-                for e in &st.enumeration {
-                    if struct_name(e).is_empty() {
-                        // TODO: do something for empty(?)
-                        continue;
-                    }
-                    a(&format!("{},", struct_name(e)));
-                }
-                if !parameter_data.required {
-                    a("Noop,");
-                }
-                a("}");
-                a("");
-
-                a(&format!("impl std::fmt::Display for {} {{", sn));
-                a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
-                a(r#"match *self {"#);
-                for e in &st.enumeration {
-                    if struct_name(e).is_empty() {
-                        // TODO: do something for empty(?)
-                        continue;
-                    }
-                    a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
-                }
-                if !parameter_data.required {
-                    a(&format!(r#"{}::Noop => "","#, sn,));
-                }
-                a("}");
-                a(".fmt(f)");
-                a("}");
-                a("}");
-                a("");
-
-                // Add a default for the enum if it is not required.
-                // TODO: use the default that can be passed to the OpenAPI,
-                // github is not using that currently but we might want to
-                // in the future.
-                if !parameter_data.required {
-                    a(&format!("impl Default for {} {{", sn));
-                    a(&format!("fn default() -> {} {{", sn));
-                    a(&format!("{}::Noop", sn));
-                    a("}");
-                    a("}");
-                }
-            }
+    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+    a(r#"#[serde(rename_all = "snake_case")]"#);
+    a(&format!("pub enum {} {{", sn));
+    for e in enums {
+        if struct_name(e).is_empty() {
+            // TODO: do something for empty(?)
+            continue;
         }
+        a(&format!("{},", struct_name(e)));
+    }
+    if !required {
+        a("Noop,");
+    }
+    a("}");
+    a("");
+
+    a(&format!("impl std::fmt::Display for {} {{", sn));
+    a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
+    a(r#"match *self {"#);
+    for e in enums {
+        if struct_name(e).is_empty() {
+            // TODO: do something for empty(?)
+            continue;
+        }
+        a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
+    }
+    if !required {
+        a(&format!(r#"{}::Noop => "","#, sn,));
+    }
+    a("}");
+    a(".fmt(f)");
+    a("}");
+    a("}");
+    a("");
+
+    // Add a default for the enum if it is not required.
+    // TODO: use the default that can be passed to the OpenAPI,
+    // github is not using that currently but we might want to
+    // in the future.
+    if !required {
+        a(&format!("impl Default for {} {{", sn));
+        a(&format!("fn default() -> {} {{", sn));
+        a(&format!("{}::Noop", sn));
+        a("}");
+        a("}");
     }
 
     out.to_string()
@@ -1293,26 +1326,10 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
 
     // Let's iterate over the parameters and create all the enums.
     for (name, param) in &parameters {
-        match param {
-            openapiv3::Parameter::Path {
-                parameter_data,
-                style: openapiv3::PathStyle::Simple,
-            } => {
-                let p = render_param(name.as_str(), parameter_data.clone());
-                a(&p);
-            }
-            openapiv3::Parameter::Query {
-                parameter_data,
-                allow_reserved: _,
-                style: openapiv3::QueryStyle::Form,
-                allow_empty_value: _,
-            } => {
-                let p = render_param(name.as_str(), parameter_data.clone());
-                a(&p);
-            }
-            _ => (),
-        }
+        let p = render_raw_param(name.as_str(), &(*param).clone());
+        a(&p);
     }
+
     for te in ts.id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
             let sn = struct_name(sn);
@@ -1320,54 +1337,28 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 TypeDetails::Enum(vals, schema_data) => {
                     // Check if it already exists in params and skip it if so.
                     if let Some(t) = parameters.get(&sn) {
-                        //bail!("thing exists: {:?}", t);
-                        // continue;
-                    }
-
-                    if let Some(description) = &schema_data.description {
-                        a(&format!("/// {}", description.replace('\n', "\n/// ")));
-                    }
-
-                    a("#[derive(Serialize, Deserialize, Debug, Clone)]");
-                    a(r#"#[serde(rename_all = "snake_case")]"#);
-                    a(&format!("pub enum {} {{", sn));
-                    for e in vals.iter() {
-                        if struct_name(e).is_empty() {
-                            // TODO: do something for empty(?)
-                            continue;
+                        if let Some(parameter_data) = get_parameter_data(t) {
+                            if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
+                                if let Ok(s) = s.item() {
+                                    if let openapiv3::SchemaKind::Type(openapiv3::Type::String(st)) = &s.schema_kind {
+                                        if st.enumeration == *vals {
+                                            println!("enum {} already exists:\n\texisting -> {:?}\n\tnew -> {:?}", sn, st.enumeration, vals);
+                                            continue;
+                                        } else {
+                                            bail!("enum {} already exists:\n\texisting -> {:?}\n\tnew -> {:?}", sn, st.enumeration, vals);
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        a(&format!("{},", struct_name(e)));
                     }
-                    a("Noop,");
-                    a("}");
-                    a("");
 
-                    a(&format!("impl std::fmt::Display for {} {{", sn));
-                    a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
-                    a(r#"match *self {"#);
-                    for e in vals.iter() {
-                        if struct_name(e).is_empty() {
-                            // TODO: do something for empty(?)
-                            continue;
-                        }
-                        a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
+                    let mut desc = "".to_string();
+                    if let Some(d) = &schema_data.description {
+                        desc = d.to_string();
                     }
-                    a(&format!(r#"{}::Noop => "","#, sn,));
-                    a("}");
-                    a(".fmt(f)");
-                    a("}");
-                    a("}");
-                    a("");
-
-                    // Add a default for the enum if it is not required.
-                    // TODO: use the default that can be passed to the OpenAPI,
-                    // github is not using that currently but we might want to
-                    // in the future.
-                    a(&format!("impl Default for {} {{", sn));
-                    a(&format!("fn default() -> {} {{", sn));
-                    a(&format!("{}::Noop", sn));
-                    a("}");
-                    a("}");
+                    let p = render_param(sn.as_str(), vals, false, &desc);
+                    a(&p);
                 }
                 TypeDetails::Object(omap, _) => {
                     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
