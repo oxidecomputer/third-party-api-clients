@@ -618,8 +618,8 @@ impl TypeSpace {
                 TypeDetails::Array(itid) => Ok(format!("Vec<{}>", self.render_type(itid, in_mod)?)),
                 TypeDetails::Optional(itid) => {
                     let rt = self.render_type(itid, in_mod)?;
-                    if rt == "String" {
-                        Ok("String".to_string())
+                    if rt == "String" || rt.starts_with("Vec<") {
+                        Ok(rt)
                     } else {
                         Ok(format!("Option<{}>", rt))
                     }
