@@ -189,7 +189,7 @@ pub mod types {
     /// - `all` - returns both web and Git events
     ///
     /// The default is `web`.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "lowercase")]
     pub enum AuditLogInclude {
         Web,
@@ -200,7 +200,7 @@ pub mod types {
     /// The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
     ///
     /// The default is `desc`.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "lowercase")]
     pub enum AuditLogOrder {
         Desc,
@@ -208,7 +208,7 @@ pub mod types {
     }
 
     /// One of `asc` (ascending) or `desc` (descending).
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "lowercase")]
     pub enum Direction {
         Asc,
@@ -216,15 +216,27 @@ pub mod types {
     }
 
     /// Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "lowercase")]
     pub enum Order {
         Desc,
         Asc,
     }
 
+    /// The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+    #[derive(Serialize, Deserialize, Debug, Clone)]
+    #[serde(rename_all = "lowercase")]
+    pub enum PackageType {
+        Npm,
+        Maven,
+        Rubygems,
+        Docker,
+        Nuget,
+        Container,
+    }
+
     /// Must be one of: `day`, `week`.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "lowercase")]
     pub enum Per {
         Day,
@@ -232,7 +244,7 @@ pub mod types {
     }
 
     /// One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "lowercase")]
     pub enum Sort {
         Created,
@@ -240,7 +252,7 @@ pub mod types {
     }
 
     /// Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "lowercase")]
     pub enum StatusParam {
         Queued,
@@ -249,7 +261,7 @@ pub mod types {
     }
 
     /// Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "lowercase")]
     pub enum WorkflowRunStatus {
         Completed,

@@ -1267,11 +1267,6 @@ fn gen(
                             }
                             a("}");
                             a("");
-
-                            println!(
-                                "XXX query enumeration {} {:?}: {:?} {:?}",
-                                name, allow_empty_value, st, parameter_data
-                            );
                         }
                     }
                 }
@@ -1280,7 +1275,7 @@ fn gen(
                 parameter_data,
                 allow_reserved: _,
                 style: openapiv3::QueryStyle::Form,
-                allow_empty_value,
+                allow_empty_value: _,
             } => {
                 if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
                     if let Ok(s) = s.item() {
@@ -1312,11 +1307,6 @@ fn gen(
                             }
                             a("}");
                             a("");
-
-                            println!(
-                                "XXX query enumeration {} {:?}: {:?} {:?}",
-                                name, allow_empty_value, st, parameter_data
-                            );
                         }
                     }
                 }
