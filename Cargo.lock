@@ -227,8 +227,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "github"
-version = "0.0.0"
+name = "github-api-client"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",

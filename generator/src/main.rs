@@ -1562,6 +1562,7 @@ fn main() -> Result<()> {
     opts.reqopt("o", "", "Generated Rust crate directory", "OUTPUT");
     opts.reqopt("n", "", "Target Rust crate name", "CRATE");
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
+    opts.reqopt("d", "", "Target Rust crate description", "DESCRIPTION");
 
     let args = match opts.parse(std::env::args().skip(1)) {
         Ok(args) => {
@@ -1758,6 +1759,7 @@ fn main() -> Result<()> {
         Ok(out) => {
             let name = args.opt_str("n").unwrap();
             let version = args.opt_str("v").unwrap();
+            let description = args.opt_str("d").unwrap();
 
             /*
              * Create the top-level crate directory:
@@ -1773,6 +1775,7 @@ fn main() -> Result<()> {
             let tomlout = format!(
                 r#"[package]
 name = "{}"
+description = "{}"
 version = "{}"
 edition = "2018"
 
@@ -1784,7 +1787,7 @@ reqwest = {{ version = "0.11", features = ["json"] }}
 schemars = {{ version = "0.8", features = ["chrono", "uuid"] }}
 serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1""#,
-                name, version,
+                name, description, version,
             );
             save(&toml, tomlout.as_str())?;
 
