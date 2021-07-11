@@ -1231,6 +1231,10 @@ fn gen(
                                 a(
                                     r#"#[serde(default, skip_serializing_if = "String::is_empty", deserialize_with = "crate::utils::deserialize_null_string::deserialize","#,
                                 );
+                            } else if rt.starts_with("Vec<") {
+                                a(r#"#[serde(default, skip_serializing_if = "Vec::is_empty")]"#);
+                            } else if rt.starts_with("Option<") {
+                                a(r#"#[serde(default, skip_serializing_if = "Option::is_none")]"#);
                             }
                             if name == "ref" || name == "type" || name == "self" {
                                 if rt == "String" {
@@ -1478,7 +1482,7 @@ fn gen(
         }
 
         if let Some(body) = body {
-            println!("Body: {:?}", &body);
+            //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
             req = req.body(body);
         }
         println!("Request: {:?}", &req);
@@ -1548,8 +1552,9 @@ fn gen(
                     unreachable!("this should not be reachable without the httpcache feature enabled")
                 }
         } else {
-            println!("error response payload {}",
-                String::from_utf8_lossy(&response_body)
+            println!("error status: {:?}, response payload: {}",
+                status,
+                String::from_utf8_lossy(&response_body),
             );
             let error = match (remaining, reset) {
                 (Some(remaining), Some(reset)) if remaining == 0 => {
@@ -1559,7 +1564,13 @@ fn gen(
                         .as_secs();
                     anyhow!("rate limit exceeded, will reset in {} seconds", u64::from(reset) - now)
                 },
-                _ => anyhow!("code: {}, error: {:?}", status, serde_json::from_slice(&response_body)?),
+                _ => {
+                    if response_body.is_empty() {
+                        anyhow!("code: {}, empty response", status)
+                    } else {
+                        anyhow!("code: {}, error: {:?}", status, serde_json::from_slice(&response_body)?)
+                    }
+                }
             };
             Err(error)
         }
@@ -2125,7 +2136,7 @@ fn gen(
                 a(r#"self.post_media(
                         &url,
                         Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-                        crate::utils::MediaType::Preview("machine-man"),
+                        crate::utils::MediaType::Json,
                         crate::auth::AuthenticationConstraint::JWT,
                     ).await"#);
             }

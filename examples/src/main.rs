@@ -43,10 +43,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .repos_list_for_org("oxidecomputer", "all", "created", "dec", 100, 1)
         .await
         .unwrap();
-    println!("length: {}", repos.len());
-    for repo in repos {
+    for repo in &repos {
         println!("repo: {:?}", repo);
     }
+    println!("length: {}", repos.len());
 
     Ok(())
 }
