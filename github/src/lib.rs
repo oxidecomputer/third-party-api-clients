@@ -25365,6 +25365,20 @@ impl Client {
         .await
     }
 
+    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::DELETE,
+            &(self.host.clone() + uri),
+            message,
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        )
+        .await
+    }
+
     /**
     * GitHub API Root
     *
@@ -25479,11 +25493,11 @@ impl Client {
         outdated: &str,
     ) -> Result<Vec<types::Installation>> {
         let url = format!(
-            "/app/installations?outdated={}&since={}&page={}&per_page={}",
-            outdated.to_string(),
+            "/app/installations?since={}&page={}&per_page={}&outdated={}",
             since.to_rfc3339(),
             format!("{}", page),
             format!("{}", per_page),
+            outdated.to_string(),
         );
 
         self.get(&url).await
@@ -25526,10 +25540,7 @@ impl Client {
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -25601,10 +25612,7 @@ impl Client {
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -25625,10 +25633,10 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::ApplicationGrant>> {
         let url = format!(
-            "/applications/grants?per_page={}&client_id={}&page={}",
+            "/applications/grants?per_page={}&page={}&client_id={}",
             format!("{}", per_page),
-            client_id.to_string(),
             format!("{}", page),
+            client_id.to_string(),
         );
 
         self.get(&url).await
@@ -25672,10 +25680,7 @@ impl Client {
             progenitor_support::encode_path(&grant_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -25698,16 +25703,11 @@ impl Client {
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -25734,10 +25734,7 @@ impl Client {
             progenitor_support::encode_path(&access_token.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -25785,16 +25782,11 @@ impl Client {
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -25921,10 +25913,7 @@ impl Client {
             progenitor_support::encode_path(&access_token.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -25963,10 +25952,10 @@ impl Client {
         client_id: &str,
     ) -> Result<Vec<types::Authorization>> {
         let url = format!(
-            "/authorizations?per_page={}&page={}&client_id={}",
-            format!("{}", per_page),
-            format!("{}", page),
+            "/authorizations?client_id={}&page={}&per_page={}",
             client_id.to_string(),
+            format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -26110,10 +26099,7 @@ impl Client {
             progenitor_support::encode_path(&authorization_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -26266,10 +26252,10 @@ impl Client {
         page: i64,
     ) -> Result<types::GetListSelectedOrganizationsEnabledGithubActionsinEnterpriseOkResponse> {
         let url = format!(
-            "/enterprises/{}/actions/permissions/organizations?per_page={}&page={}",
+            "/enterprises/{}/actions/permissions/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -26350,10 +26336,7 @@ impl Client {
             progenitor_support::encode_path(&org_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -26509,10 +26492,7 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -26565,11 +26545,11 @@ impl Client {
     ) -> Result<types::GetListOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseOkResponse>
     {
         let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/organizations?per_page={}&page={}",
+            "/enterprises/{}/actions/runner-groups/{}/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -26656,10 +26636,7 @@ impl Client {
             progenitor_support::encode_path(&org_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -26681,11 +26658,11 @@ impl Client {
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersinGroupEnterpriseOkResponse> {
         let url = format!(
-            "/enterprises/{}/actions/runner-groups/{}/runners?per_page={}&page={}",
+            "/enterprises/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -26773,10 +26750,7 @@ impl Client {
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -26797,10 +26771,10 @@ impl Client {
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersEnterpriseOkResponse> {
         let url = format!(
-            "/enterprises/{}/actions/runners?per_page={}&page={}",
+            "/enterprises/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -26939,10 +26913,7 @@ impl Client {
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -26965,9 +26936,9 @@ impl Client {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("/enterprises/{}/audit-log?page={}&per_page={}&order={}&phrase={}&include={}&after={}&before={}",
+        let url = format!("/enterprises/{}/audit-log?order={}&page={}&per_page={}&phrase={}&include={}&after={}&before={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_string(), include.to_string(), after.to_string(), before.to_string(),         );
+order.to_string(), format!("{}", page), format!("{}", per_page), phrase.to_string(), include.to_string(), after.to_string(), before.to_string(),         );
 
         self.get(&url).await
     }
@@ -27062,9 +27033,9 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/events?per_page={}&page={}",
-            format!("{}", per_page),
+            "/events?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27110,9 +27081,9 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/gists?per_page={}&since={}&page={}",
-            format!("{}", per_page),
+            "/gists?since={}&per_page={}&page={}",
             since.to_rfc3339(),
+            format!("{}", per_page),
             format!("{}", page),
         );
 
@@ -27182,10 +27153,10 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/gists/starred?since={}&per_page={}&page={}",
-            since.to_rfc3339(),
+            "/gists/starred?per_page={}&page={}&since={}",
             format!("{}", per_page),
             format!("{}", page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
@@ -27224,10 +27195,7 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -27272,10 +27240,10 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
         page: i64,
     ) -> Result<Vec<types::GistComment>> {
         let url = format!(
-            "/gists/{}/comments?per_page={}&page={}",
+            "/gists/{}/comments?page={}&per_page={}",
             progenitor_support::encode_path(&gist_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27346,10 +27314,7 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -27421,10 +27386,10 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
         page: i64,
     ) -> Result<Vec<types::GistSimple>> {
         let url = format!(
-            "/gists/{}/forks?page={}&per_page={}",
+            "/gists/{}/forks?per_page={}&page={}",
             progenitor_support::encode_path(&gist_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -27499,10 +27464,7 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -27597,10 +27559,7 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
     */
     pub async fn apps_revoke_installation_access_token(&self) -> Result<()> {
         let url = "/installation/token".to_string();
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -27635,8 +27594,8 @@ format!("{}", page), format!("{}", per_page), order.to_string(), phrase.to_strin
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/issues?collab={}&sort={}&per_page={}&page={}&orgs={}&filter={}&direction={}&since={}&owned={}&pulls={}&state={}&labels={}",
-format!("{}", collab), sort.to_string(), format!("{}", per_page), format!("{}", page), format!("{}", orgs), filter.to_string(), direction.to_string(), since.to_rfc3339(), format!("{}", owned), format!("{}", pulls), state.to_string(), labels.to_string(),         );
+        let url = format!("/issues?labels={}&direction={}&state={}&since={}&orgs={}&collab={}&pulls={}&per_page={}&owned={}&filter={}&page={}&sort={}",
+labels.to_string(), direction.to_string(), state.to_string(), since.to_rfc3339(), format!("{}", orgs), format!("{}", collab), format!("{}", pulls), format!("{}", per_page), format!("{}", owned), filter.to_string(), format!("{}", page), sort.to_string(),         );
 
         self.get(&url).await
     }
@@ -27657,9 +27616,9 @@ format!("{}", collab), sort.to_string(), format!("{}", per_page), format!("{}", 
         page: i64,
     ) -> Result<Vec<types::LicenseSimple>> {
         let url = format!(
-            "/licenses?per_page={}&page={}&featured={}",
-            format!("{}", per_page),
+            "/licenses?page={}&per_page={}&featured={}",
             format!("{}", page),
+            format!("{}", per_page),
             format!("{}", featured),
         );
 
@@ -27759,9 +27718,9 @@ format!("{}", collab), sort.to_string(), format!("{}", per_page), format!("{}", 
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = format!(
-            "/marketplace_listing/plans?per_page={}&page={}",
-            format!("{}", per_page),
+            "/marketplace_listing/plans?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27787,12 +27746,12 @@ format!("{}", collab), sort.to_string(), format!("{}", per_page), format!("{}", 
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
         let url = format!(
-            "/marketplace_listing/plans/{}/accounts?per_page={}&sort={}&page={}&direction={}",
+            "/marketplace_listing/plans/{}/accounts?sort={}&per_page={}&direction={}&page={}",
             progenitor_support::encode_path(&plan_id.to_string()),
-            format!("{}", per_page),
             sort.to_string(),
-            format!("{}", page),
+            format!("{}", per_page),
             direction.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -27865,9 +27824,9 @@ format!("{}", collab), sort.to_string(), format!("{}", per_page), format!("{}", 
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
-        let url = format!("/marketplace_listing/stubbed/plans/{}/accounts?sort={}&per_page={}&page={}&direction={}",
+        let url = format!("/marketplace_listing/stubbed/plans/{}/accounts?per_page={}&page={}&sort={}&direction={}",
             progenitor_support::encode_path(&plan_id.to_string()),
-sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_string(),         );
+format!("{}", per_page), format!("{}", page), sort.to_string(), direction.to_string(),         );
 
         self.get(&url).await
     }
@@ -27905,11 +27864,11 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/networks/{}/{}/events?per_page={}&page={}",
+            "/networks/{}/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -27934,12 +27893,12 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<Vec<types::Thread>> {
         let url = format!(
-            "/notifications?per_page={}&all={}&since={}&page={}&before={}&participating={}",
-            format!("{}", per_page),
-            format!("{}", all),
+            "/notifications?since={}&per_page={}&page={}&before={}&all={}&participating={}",
             since.to_rfc3339(),
+            format!("{}", per_page),
             format!("{}", page),
             before.to_rfc3339(),
+            format!("{}", all),
             format!("{}", participating),
         );
 
@@ -28071,10 +28030,7 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -28109,9 +28065,9 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         per_page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!(
-            "/organizations?per_page={}&since={}",
-            format!("{}", per_page),
+            "/organizations?since={}&per_page={}",
             format!("{}", since),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -28237,10 +28193,10 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
     ) -> Result<types::GetListSelectedRepositoriesEnabledGithubActionsinOrganizationOkResponse>
     {
         let url = format!(
-            "/orgs/{}/actions/permissions/repositories?page={}&per_page={}",
+            "/orgs/{}/actions/permissions/repositories?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -28321,10 +28277,7 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -28402,10 +28355,10 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnerGroupsOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/runner-groups?per_page={}&page={}",
+            "/orgs/{}/actions/runner-groups?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -28492,10 +28445,7 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -28552,11 +28502,11 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
     ) -> Result<types::GetListRepositoryAccessSelfDataHostedRunnerGroupinOrganizationOkResponse>
     {
         let url = format!(
-            "/orgs/{}/actions/runner-groups/{}/repositories?per_page={}&page={}",
+            "/orgs/{}/actions/runner-groups/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -28652,10 +28602,7 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -28779,10 +28726,7 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -28803,10 +28747,10 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersOrganizationOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/runners?page={}&per_page={}",
+            "/orgs/{}/actions/runners?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -28945,10 +28889,7 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -28967,10 +28908,10 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         page: i64,
     ) -> Result<types::GetListOrganizationSecretsOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/secrets?page={}&per_page={}",
+            "/orgs/{}/actions/secrets?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -29135,10 +29076,7 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -29158,11 +29096,11 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         per_page: i64,
     ) -> Result<types::GetListSelectedRepositoriesOrganizationSecretOkResponse> {
         let url = format!(
-            "/orgs/{}/actions/secrets/{}/repositories?per_page={}&page={}",
+            "/orgs/{}/actions/secrets/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -29243,10 +29181,7 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -29271,9 +29206,9 @@ sort.to_string(), format!("{}", per_page), format!("{}", page), direction.to_str
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("/orgs/{}/audit-log?per_page={}&page={}&include={}&after={}&phrase={}&before={}&order={}",
+        let url = format!("/orgs/{}/audit-log?include={}&phrase={}&per_page={}&before={}&page={}&after={}&order={}",
             progenitor_support::encode_path(&org.to_string()),
-format!("{}", per_page), format!("{}", page), include.to_string(), after.to_string(), phrase.to_string(), before.to_string(), order.to_string(),         );
+include.to_string(), phrase.to_string(), format!("{}", per_page), before.to_string(), format!("{}", page), after.to_string(), order.to_string(),         );
 
         self.get(&url).await
     }
@@ -29350,10 +29285,7 @@ format!("{}", per_page), format!("{}", page), include.to_string(), after.to_stri
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -29401,10 +29333,7 @@ format!("{}", per_page), format!("{}", page), include.to_string(), after.to_stri
             progenitor_support::encode_path(&credential_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -29423,10 +29352,10 @@ format!("{}", per_page), format!("{}", page), include.to_string(), after.to_stri
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/orgs/{}/events?page={}&per_page={}",
+            "/orgs/{}/events?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -29473,10 +29402,10 @@ format!("{}", per_page), format!("{}", page), include.to_string(), after.to_stri
         page: i64,
     ) -> Result<Vec<types::OrgHook>> {
         let url = format!(
-            "/orgs/{}/hooks?page={}&per_page={}",
+            "/orgs/{}/hooks?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -29543,10 +29472,7 @@ format!("{}", per_page), format!("{}", page), include.to_string(), after.to_stri
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -29758,10 +29684,7 @@ format!("{}", per_page), format!("{}", page), include.to_string(), after.to_stri
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -29835,10 +29758,7 @@ format!("{}", per_page), format!("{}", page), include.to_string(), after.to_stri
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -29894,9 +29814,9 @@ format!("{}", per_page), format!("{}", page), include.to_string(), after.to_stri
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/orgs/{}/issues?state={}&per_page={}&page={}&filter={}&labels={}&sort={}&since={}&direction={}",
+        let url = format!("/orgs/{}/issues?labels={}&page={}&state={}&direction={}&filter={}&since={}&per_page={}&sort={}",
             progenitor_support::encode_path(&org.to_string()),
-state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_string(), labels.to_string(), sort.to_string(), since.to_rfc3339(), direction.to_string(),         );
+labels.to_string(), format!("{}", page), state.to_string(), direction.to_string(), filter.to_string(), since.to_rfc3339(), format!("{}", per_page), sort.to_string(),         );
 
         self.get(&url).await
     }
@@ -29919,11 +29839,11 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/members?filter={}&role={}&per_page={}&page={}",
+            "/orgs/{}/members?role={}&per_page={}&filter={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
-            filter.to_string(),
             role.to_string(),
             format!("{}", per_page),
+            filter.to_string(),
             format!("{}", page),
         );
 
@@ -29965,10 +29885,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -30048,10 +29965,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -30182,10 +30096,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -30210,10 +30121,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&repo_name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -30233,11 +30141,11 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/orgs/{}/migrations/{}/repositories?per_page={}&page={}",
+            "/orgs/{}/migrations/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -30309,10 +30217,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -30369,10 +30274,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -30502,10 +30404,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -30560,11 +30459,11 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/orgs/{}/projects?page={}&state={}&per_page={}",
+            "/orgs/{}/projects?per_page={}&page={}&state={}",
             progenitor_support::encode_path(&org.to_string()),
+            format!("{}", per_page),
             format!("{}", page),
             state.to_string(),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -30689,10 +30588,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -30714,13 +30610,13 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/orgs/{}/repos?direction={}&sort={}&type={}&per_page={}&page={}",
+            "/orgs/{}/repos?page={}&direction={}&sort={}&type={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
+            format!("{}", page),
             direction.to_string(),
             sort.to_string(),
             type_,
             format!("{}", per_page),
-            format!("{}", page),
         );
 
         self.get(&url).await
@@ -30957,10 +30853,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -31014,13 +30907,13 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         pinned: &str,
     ) -> Result<Vec<types::TeamDiscussion>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions?direction={}&page={}&pinned={}&per_page={}",
+            "/orgs/{}/teams/{}/discussions?direction={}&per_page={}&pinned={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             direction.to_string(),
-            format!("{}", page),
-            pinned.to_string(),
             format!("{}", per_page),
+            pinned.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -31109,10 +31002,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -31168,13 +31058,13 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments?per_page={}&page={}&direction={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments?direction={}&page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            format!("{}", per_page),
-            format!("{}", page),
             direction.to_string(),
+            format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -31269,10 +31159,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -31331,14 +31218,14 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?content={}&page={}&per_page={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?per_page={}&page={}&content={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
-            content.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
+            content.to_string(),
         );
 
         self.get(&url).await
@@ -31406,10 +31293,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -31503,10 +31387,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -31528,11 +31409,11 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
-            "/orgs/{}/teams/{}/invitations?page={}&per_page={}",
+            "/orgs/{}/teams/{}/invitations?per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -31558,12 +31439,12 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/orgs/{}/teams/{}/members?role={}&page={}&per_page={}",
+            "/orgs/{}/teams/{}/members?role={}&per_page={}&page={}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             role.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -31671,10 +31552,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -31789,10 +31667,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -31919,10 +31794,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -32046,10 +31918,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -32137,10 +32006,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -32186,11 +32052,11 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::ProjectCard>> {
         let url = format!(
-            "/projects/columns/{}/cards?page={}&per_page={}&archived_state={}",
+            "/projects/columns/{}/cards?page={}&archived_state={}&per_page={}",
             progenitor_support::encode_path(&column_id.to_string()),
             format!("{}", page),
-            format!("{}", per_page),
             archived_state.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -32281,10 +32147,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -32388,10 +32251,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -32501,10 +32361,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -32547,10 +32404,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -32655,10 +32509,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&artifact_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -32878,11 +32729,11 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersRepositoryOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runners?per_page={}&page={}",
+            "/repos/{}/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -33030,10 +32881,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -33059,15 +32907,15 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<types::GetListWorkflowRunsRepositoryOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runs?page={}&branch={}&event={}&per_page={}&actor={}&status={}",
+            "/repos/{}/{}/actions/runs?page={}&actor={}&event={}&branch={}&status={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", page),
-            branch.to_string(),
-            event.to_string(),
-            format!("{}", per_page),
             actor.to_string(),
+            event.to_string(),
+            branch.to_string(),
             status.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -33122,10 +32970,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -33255,13 +33100,13 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<types::GetListJobsWorkflowRunOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/runs/{}/jobs?page={}&per_page={}&filter={}",
+            "/repos/{}/{}/actions/runs/{}/jobs?per_page={}&filter={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
             filter.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -33317,10 +33162,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -33451,11 +33293,11 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<types::GetListRepositorySecretsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/secrets?per_page={}&page={}",
+            "/repos/{}/{}/actions/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -33635,10 +33477,7 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -33658,11 +33497,11 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         page: i64,
     ) -> Result<types::GetListRepositoryWorkflowsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/workflows?page={}&per_page={}",
+            "/repos/{}/{}/actions/workflows?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -33804,11 +33643,11 @@ state.to_string(), format!("{}", per_page), format!("{}", page), filter.to_strin
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListWorkflowRunsOkResponse> {
-        let url = format!("/repos/{}/{}/actions/workflows/{}/runs?page={}&branch={}&event={}&actor={}&status={}&per_page={}",
+        let url = format!("/repos/{}/{}/actions/workflows/{}/runs?branch={}&event={}&page={}&actor={}&status={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
-format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), status.to_string(), format!("{}", per_page),         );
+branch.to_string(), event.to_string(), format!("{}", page), actor.to_string(), status.to_string(), format!("{}", per_page),         );
 
         self.get(&url).await
     }
@@ -33857,11 +33696,11 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/repos/{}/{}/assignees?page={}&per_page={}",
+            "/repos/{}/{}/assignees?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -33939,10 +33778,7 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -33963,12 +33799,12 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
         page: i64,
     ) -> Result<Vec<types::ShortBranch>> {
         let url = format!(
-            "/repos/{}/{}/branches?protected={}&page={}&per_page={}",
+            "/repos/{}/{}/branches?protected={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", protected),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -34082,10 +33918,7 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -34164,10 +33997,7 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -34217,10 +34047,7 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -34337,10 +34164,7 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -34390,10 +34214,7 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -34536,15 +34357,11 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -34600,10 +34417,7 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -34734,15 +34548,11 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -34873,15 +34683,11 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -35012,15 +34818,11 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -35294,11 +35096,11 @@ format!("{}", page), branch.to_string(), event.to_string(), actor.to_string(), s
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListCheckRunsinCheckSuiteOkResponse> {
-        let url = format!("/repos/{}/{}/check-suites/{}/check-runs?check_name={}&per_page={}&page={}&filter={}&status={}",
+        let url = format!("/repos/{}/{}/check-suites/{}/check-runs?status={}&check_name={}&filter={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
-check_name.to_string(), format!("{}", per_page), format!("{}", page), filter.to_string(), status.to_string(),         );
+status.to_string(), check_name.to_string(), filter.to_string(), format!("{}", per_page), format!("{}", page),         );
 
         self.get(&url).await
     }
@@ -35358,10 +35160,10 @@ check_name.to_string(), format!("{}", per_page), format!("{}", page), filter.to_
         ref_: &&str,
         state: &str,
     ) -> Result<Vec<types::CodeScanningAlertItems>> {
-        let url = format!("/repos/{}/{}/code-scanning/alerts?tool_guid={}&page={}&per_page={}&state={}&ref={}&tool_name={}",
+        let url = format!("/repos/{}/{}/code-scanning/alerts?tool_guid={}&per_page={}&tool_name={}&ref={}&page={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-tool_guid.to_string(), format!("{}", page), format!("{}", per_page), state.to_string(), ref_, tool_name.to_string(),         );
+tool_guid.to_string(), format!("{}", per_page), tool_name.to_string(), ref_, format!("{}", page), state.to_string(),         );
 
         self.get(&url).await
     }
@@ -35443,13 +35245,13 @@ tool_guid.to_string(), format!("{}", page), format!("{}", per_page), state.to_st
         ref_: &&str,
     ) -> Result<Vec<types::CodeScanningAlertInstance>> {
         let url = format!(
-            "/repos/{}/{}/code-scanning/alerts/{}/instances?ref={}&page={}&per_page={}",
+            "/repos/{}/{}/code-scanning/alerts/{}/instances?per_page={}&ref={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
+            format!("{}", per_page),
             ref_,
             format!("{}", page),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -35490,10 +35292,10 @@ tool_guid.to_string(), format!("{}", page), format!("{}", per_page), state.to_st
         ref_: &&str,
         sarif_id: &str,
     ) -> Result<Vec<types::CodeScanningAnalysis>> {
-        let url = format!("/repos/{}/{}/code-scanning/analyses?tool_name={}&per_page={}&page={}&tool_guid={}&sarif_id={}&ref={}",
+        let url = format!("/repos/{}/{}/code-scanning/analyses?tool_name={}&per_page={}&page={}&ref={}&sarif_id={}&tool_guid={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.to_string(), sarif_id.to_string(), ref_,         );
+tool_name.to_string(), format!("{}", per_page), format!("{}", page), ref_, sarif_id.to_string(), tool_guid.to_string(),         );
 
         self.get(&url).await
     }
@@ -35630,15 +35432,7 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
             confirm_delete.to_string(),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .query(&[("confirm_delete", confirm_delete.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(&url, None).await
     }
 
     /**
@@ -35730,11 +35524,11 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
         page: i64,
     ) -> Result<Vec<types::Collaborator>> {
         let url = format!(
-            "/repos/{}/{}/collaborators?per_page={}&affiliation={}&page={}",
+            "/repos/{}/{}/collaborators?affiliation={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             affiliation.to_string(),
+            format!("{}", per_page),
             format!("{}", page),
         );
 
@@ -35830,10 +35624,7 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -35937,10 +35728,7 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -35992,12 +35780,12 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/comments/{}/reactions?per_page={}&content={}&page={}",
+            "/repos/{}/{}/comments/{}/reactions?content={}&per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
-            format!("{}", per_page),
             content.to_string(),
+            format!("{}", per_page),
             format!("{}", page),
         );
 
@@ -36060,10 +35848,7 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -36115,15 +35900,15 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
         page: i64,
     ) -> Result<Vec<types::Commit>> {
         let url = format!(
-            "/repos/{}/{}/commits?until={}&sha={}&page={}&path={}&author={}&since={}&per_page={}",
+            "/repos/{}/{}/commits?page={}&since={}&until={}&sha={}&author={}&path={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            format!("{}", page),
+            since.to_rfc3339(),
             until.to_rfc3339(),
             sha.to_string(),
-            format!("{}", page),
-            path.to_string(),
             author.to_string(),
-            since.to_rfc3339(),
+            path.to_string(),
             format!("{}", per_page),
         );
 
@@ -36175,12 +35960,12 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
         page: i64,
     ) -> Result<Vec<types::CommitComment>> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/comments?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/comments?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -36236,12 +36021,12 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
         page: i64,
     ) -> Result<Vec<types::PullRequestSimple>> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/pulls?per_page={}&page={}",
+            "/repos/{}/{}/commits/{}/pulls?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -36334,11 +36119,11 @@ tool_name.to_string(), format!("{}", per_page), format!("{}", page), tool_guid.t
         page: i64,
         app_id: i64,
     ) -> Result<types::GetListCheckRunsGitReferenceOkResponse> {
-        let url = format!("/repos/{}/{}/commits/{}/check-runs?page={}&app_id={}&filter={}&check_name={}&status={}&per_page={}",
+        let url = format!("/repos/{}/{}/commits/{}/check-runs?page={}&check_name={}&status={}&filter={}&per_page={}&app_id={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_string(), status.to_string(), format!("{}", per_page),         );
+format!("{}", page), check_name.to_string(), status.to_string(), filter.to_string(), format!("{}", per_page), format!("{}", app_id),         );
 
         self.get(&url).await
     }
@@ -36365,14 +36150,14 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<types::GetListCheckSuitesGitReferenceOkResponse> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/check-suites?page={}&check_name={}&per_page={}&app_id={}",
+            "/repos/{}/{}/commits/{}/check-suites?check_name={}&page={}&app_id={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", page),
             check_name.to_string(),
-            format!("{}", per_page),
+            format!("{}", page),
             format!("{}", app_id),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -36404,12 +36189,12 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<types::CombinedCommitStatus> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/status?per_page={}&page={}",
+            "/repos/{}/{}/commits/{}/status?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -36435,12 +36220,12 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<Vec<types::Status>> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/statuses?per_page={}&page={}",
+            "/repos/{}/{}/commits/{}/statuses?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -36562,12 +36347,12 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         basehead: &str,
     ) -> Result<types::CommitComparison> {
         let url = format!(
-            "/repos/{}/{}/compare/{}?per_page={}&page={}",
+            "/repos/{}/{}/compare/{}?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&basehead.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -36724,15 +36509,11 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
             progenitor_support::encode_path(&path.to_string()),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -36755,12 +36536,12 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<Vec<types::Contributor>> {
         let url = format!(
-            "/repos/{}/{}/contributors?anon={}&per_page={}&page={}",
+            "/repos/{}/{}/contributors?page={}&per_page={}&anon={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            anon.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
+            anon.to_string(),
         );
 
         self.get(&url).await
@@ -36787,15 +36568,15 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<Vec<types::Deployment>> {
         let url = format!(
-            "/repos/{}/{}/deployments?ref={}&sha={}&task={}&page={}&environment={}&per_page={}",
+            "/repos/{}/{}/deployments?ref={}&sha={}&environment={}&page={}&per_page={}&task={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             ref_,
             sha.to_string(),
-            task.to_string(),
-            format!("{}", page),
             environment.to_string(),
+            format!("{}", page),
             format!("{}", per_page),
+            task.to_string(),
         );
 
         self.get(&url).await
@@ -36927,10 +36708,7 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
             progenitor_support::encode_path(&deployment_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -37166,10 +36944,7 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -37189,11 +36964,11 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/repos/{}/{}/events?per_page={}&page={}",
+            "/repos/{}/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -37217,12 +36992,12 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/repos/{}/{}/forks?per_page={}&page={}&sort={}",
+            "/repos/{}/{}/forks?sort={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
-            format!("{}", page),
             sort.to_string(),
+            format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -37448,12 +37223,12 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<Vec<types::GitRef>> {
         let url = format!(
-            "/repos/{}/{}/git/matching-refs/{}?per_page={}&page={}",
+            "/repos/{}/{}/git/matching-refs/{}?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -37526,10 +37301,7 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -37747,11 +37519,11 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<Vec<types::Hook>> {
         let url = format!(
-            "/repos/{}/{}/hooks?per_page={}&page={}",
+            "/repos/{}/{}/hooks?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -37828,10 +37600,7 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -38070,10 +37839,7 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -38309,10 +38075,7 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -38332,11 +38095,11 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         page: i64,
     ) -> Result<Vec<types::RepositoryInvitation>> {
         let url = format!(
-            "/repos/{}/{}/invitations?page={}&per_page={}",
+            "/repos/{}/{}/invitations?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -38364,10 +38127,7 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -38430,10 +38190,10 @@ format!("{}", page), format!("{}", app_id), filter.to_string(), check_name.to_st
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::IssueSimple>> {
-        let url = format!("/repos/{}/{}/issues?page={}&state={}&since={}&per_page={}&labels={}&assignee={}&milestone={}&mentioned={}&creator={}&sort={}&direction={}",
+        let url = format!("/repos/{}/{}/issues?assignee={}&creator={}&page={}&state={}&milestone={}&mentioned={}&direction={}&since={}&labels={}&sort={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_page), labels.to_string(), assignee.to_string(), milestone.to_string(), mentioned.to_string(), creator.to_string(), sort.to_string(), direction.to_string(),         );
+assignee.to_string(), creator.to_string(), format!("{}", page), state.to_string(), milestone.to_string(), mentioned.to_string(), direction.to_string(), since.to_rfc3339(), labels.to_string(), sort.to_string(), format!("{}", per_page),         );
 
         self.get(&url).await
     }
@@ -38488,14 +38248,14 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::IssueComment>> {
         let url = format!(
-            "/repos/{}/{}/issues/comments?per_page={}&sort={}&page={}&since={}&direction={}",
+            "/repos/{}/{}/issues/comments?per_page={}&sort={}&direction={}&page={}&since={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", per_page),
             sort.to_string(),
+            direction.to_string(),
             format!("{}", page),
             since.to_rfc3339(),
-            direction.to_string(),
         );
 
         self.get(&url).await
@@ -38548,10 +38308,7 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -38603,13 +38360,13 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/issues/comments/{}/reactions?page={}&content={}&per_page={}",
+            "/repos/{}/{}/issues/comments/{}/reactions?per_page={}&content={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
-            format!("{}", page),
-            content.to_string(),
             format!("{}", per_page),
+            content.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -38671,10 +38428,7 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -38694,11 +38448,11 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::IssueEvent>> {
         let url = format!(
-            "/repos/{}/{}/issues/events?per_page={}&page={}",
+            "/repos/{}/{}/issues/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -38847,15 +38601,11 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38877,13 +38627,13 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::IssueComment>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/comments?since={}&page={}&per_page={}",
+            "/repos/{}/{}/issues/{}/comments?page={}&per_page={}&since={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            since.to_rfc3339(),
             format!("{}", page),
             format!("{}", per_page),
+            since.to_rfc3339(),
         );
 
         self.get(&url).await
@@ -38937,12 +38687,12 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::IssueEventforIssue>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/events?per_page={}&page={}",
+            "/repos/{}/{}/issues/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -38966,12 +38716,12 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::Label>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/labels?per_page={}&page={}",
+            "/repos/{}/{}/issues/{}/labels?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -39059,10 +38809,7 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -39089,9 +38836,7 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(&url, None).await
     }
 
     /**
@@ -39143,10 +38888,7 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -39168,13 +38910,13 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/repos/{}/{}/issues/{}/reactions?per_page={}&content={}&page={}",
+            "/repos/{}/{}/issues/{}/reactions?per_page={}&page={}&content={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
             format!("{}", per_page),
-            content.to_string(),
             format!("{}", page),
+            content.to_string(),
         );
 
         self.get(&url).await
@@ -39236,10 +38978,7 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -39288,11 +39027,11 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::DeployKey>> {
         let url = format!(
-            "/repos/{}/{}/keys?per_page={}&page={}",
+            "/repos/{}/{}/keys?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -39373,10 +39112,7 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -39396,11 +39132,11 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::Label>> {
         let url = format!(
-            "/repos/{}/{}/labels?per_page={}&page={}",
+            "/repos/{}/{}/labels?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -39476,10 +39212,7 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -39604,14 +39337,14 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::Milestone>> {
         let url = format!(
-            "/repos/{}/{}/milestones?sort={}&direction={}&state={}&per_page={}&page={}",
+            "/repos/{}/{}/milestones?sort={}&direction={}&state={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             sort.to_string(),
             direction.to_string(),
             state.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -39692,10 +39425,7 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
             progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -39746,12 +39476,12 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         page: i64,
     ) -> Result<Vec<types::Label>> {
         let url = format!(
-            "/repos/{}/{}/milestones/{}/labels?page={}&per_page={}",
+            "/repos/{}/{}/milestones/{}/labels?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -39777,10 +39507,10 @@ format!("{}", page), state.to_string(), since.to_rfc3339(), format!("{}", per_pa
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Thread>> {
-        let url = format!("/repos/{}/{}/notifications?since={}&participating={}&all={}&before={}&per_page={}&page={}",
+        let url = format!("/repos/{}/{}/notifications?page={}&participating={}&since={}&per_page={}&before={}&all={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_rfc3339(), format!("{}", per_page), format!("{}", page),         );
+format!("{}", page), format!("{}", participating), since.to_rfc3339(), format!("{}", per_page), before.to_rfc3339(), format!("{}", all),         );
 
         self.get(&url).await
     }
@@ -39904,10 +39634,7 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -39927,11 +39654,11 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         page: i64,
     ) -> Result<Vec<types::PageBuild>> {
         let url = format!(
-            "/repos/{}/{}/pages/builds?per_page={}&page={}",
+            "/repos/{}/{}/pages/builds?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -40116,16 +39843,16 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         page: i64,
     ) -> Result<Vec<types::PullRequestSimple>> {
         let url = format!(
-            "/repos/{}/{}/pulls?head={}&sort={}&per_page={}&state={}&base={}&direction={}&page={}",
+            "/repos/{}/{}/pulls?state={}&sort={}&per_page={}&page={}&base={}&direction={}&head={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            head.to_string(),
+            state.to_string(),
             sort.to_string(),
             format!("{}", per_page),
-            state.to_string(),
+            format!("{}", page),
             base.to_string(),
             direction.to_string(),
-            format!("{}", page),
+            head.to_string(),
         );
 
         self.get(&url).await
@@ -40185,14 +39912,14 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
-            "/repos/{}/{}/pulls/comments?per_page={}&sort={}&direction={}&page={}&since={}",
+            "/repos/{}/{}/pulls/comments?per_page={}&page={}&since={}&direction={}&sort={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", per_page),
-            sort.to_string(),
-            direction.to_string(),
             format!("{}", page),
             since.to_rfc3339(),
+            direction.to_string(),
+            sort.to_string(),
         );
 
         self.get(&url).await
@@ -40245,10 +39972,7 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -40368,10 +40092,7 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -40466,14 +40187,14 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/comments?sort={}&since={}&page={}&direction={}&per_page={}",
+            "/repos/{}/{}/pulls/{}/comments?page={}&sort={}&direction={}&since={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            sort.to_string(),
-            since.to_rfc3339(),
             format!("{}", page),
+            sort.to_string(),
             direction.to_string(),
+            since.to_rfc3339(),
             format!("{}", per_page),
         );
 
@@ -40569,12 +40290,12 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         page: i64,
     ) -> Result<Vec<types::Commit>> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/commits?per_page={}&page={}",
+            "/repos/{}/{}/pulls/{}/commits?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -40682,12 +40403,12 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         page: i64,
     ) -> Result<types::PullRequestReviewRequest> {
         let url = format!(
-            "/repos/{}/{}/pulls/{}/requested_reviewers?per_page={}&page={}",
+            "/repos/{}/{}/pulls/{}/requested_reviewers?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -40746,15 +40467,11 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40905,9 +40622,7 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.delete(&url, None).await
     }
 
     /**
@@ -41110,11 +40825,11 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         page: i64,
     ) -> Result<Vec<types::Release>> {
         let url = format!(
-            "/repos/{}/{}/releases?page={}&per_page={}",
+            "/repos/{}/{}/releases?per_page={}&page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -41197,10 +40912,7 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&asset_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -41330,10 +41042,7 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -41431,12 +41140,12 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         body: T,
     ) -> Result<types::ReleaseAsset> {
         let url = format!(
-            "/repos/{}/{}/releases/{}/assets?name={}&label={}",
+            "/repos/{}/{}/releases/{}/assets?label={}&name={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
-            name.to_string(),
             label.to_string(),
+            name.to_string(),
         );
 
         self.post(&url, Some(body.into())).await
@@ -41493,13 +41202,13 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         per_page: i64,
     ) -> Result<Vec<types::SecretScanningAlert>> {
         let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts?state={}&secret_type={}&per_page={}&page={}",
+            "/repos/{}/{}/secret-scanning/alerts?page={}&state={}&secret_type={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
+            format!("{}", page),
             state.to_string(),
             secret_type.to_string(),
             format!("{}", per_page),
-            format!("{}", page),
         );
 
         self.get(&url).await
@@ -41771,11 +41480,11 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/repos/{}/{}/subscribers?per_page={}&page={}",
+            "/repos/{}/{}/subscribers?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -41848,10 +41557,7 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -42169,10 +41875,7 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -42274,11 +41977,11 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         page: i64,
     ) -> Result<types::GetListEnvironmentSecretsOkResponse> {
         let url = format!(
-            "/repositories/{}/environments/{}/secrets?page={}&per_page={}",
+            "/repositories/{}/environments/{}/secrets?per_page={}&page={}",
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -42458,10 +42161,7 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -42481,9 +42181,9 @@ since.to_rfc3339(), format!("{}", participating), format!("{}", all), before.to_
         filter: &str,
         excluded_attributes: &str,
     ) -> Result<types::ScimGroupListEnterprise> {
-        let url = format!("/scim/v2/enterprises/{}/Groups?start_index={}&filter={}&excluded_attributes={}&count={}",
+        let url = format!("/scim/v2/enterprises/{}/Groups?filter={}&excluded_attributes={}&start_index={}&count={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(), format!("{}", count),         );
+filter.to_string(), excluded_attributes.to_string(), format!("{}", start_index), format!("{}", count),         );
 
         self.get(&url).await
     }
@@ -42591,10 +42291,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -42661,11 +42358,11 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         filter: &str,
     ) -> Result<types::ScimUserListEnterprise> {
         let url = format!(
-            "/scim/v2/enterprises/{}/Users?filter={}&start_index={}&count={}",
+            "/scim/v2/enterprises/{}/Users?start_index={}&count={}&filter={}",
             progenitor_support::encode_path(&enterprise.to_string()),
-            filter.to_string(),
             format!("{}", start_index),
             format!("{}", count),
+            filter.to_string(),
         );
 
         self.get(&url).await
@@ -42778,10 +42475,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -42861,11 +42555,11 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         filter: &str,
     ) -> Result<types::ScimUserList> {
         let url = format!(
-            "/scim/v2/organizations/{}/Users?count={}&filter={}&start_index={}",
+            "/scim/v2/organizations/{}/Users?filter={}&start_index={}&count={}",
             progenitor_support::encode_path(&org.to_string()),
-            format!("{}", count),
             filter.to_string(),
             format!("{}", start_index),
+            format!("{}", count),
         );
 
         self.get(&url).await
@@ -42968,10 +42662,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -43052,9 +42743,9 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
         let url = format!(
-            "/search/code?order={}&q={}&sort={}&per_page={}&page={}",
-            order.to_string(),
+            "/search/code?q={}&order={}&sort={}&per_page={}&page={}",
             q.to_string(),
+            order.to_string(),
             sort.to_string(),
             format!("{}", per_page),
             format!("{}", page),
@@ -43088,12 +42779,12 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
         let url = format!(
-            "/search/commits?page={}&q={}&sort={}&order={}&per_page={}",
+            "/search/commits?order={}&page={}&per_page={}&q={}&sort={}",
+            order.to_string(),
             format!("{}", page),
+            format!("{}", per_page),
             q.to_string(),
             sort.to_string(),
-            order.to_string(),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -43128,12 +42819,12 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<types::GetSearchIssuesandPullRequestsOkResponse> {
         let url = format!(
-            "/search/issues?q={}&order={}&per_page={}&sort={}&page={}",
+            "/search/issues?sort={}&page={}&q={}&order={}&per_page={}",
+            sort.to_string(),
+            format!("{}", page),
             q.to_string(),
             order.to_string(),
             format!("{}", per_page),
-            sort.to_string(),
-            format!("{}", page),
         );
 
         self.get(&url).await
@@ -43166,13 +42857,13 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
         let url = format!(
-            "/search/labels?sort={}&repository_id={}&per_page={}&q={}&page={}&order={}",
-            sort.to_string(),
-            format!("{}", repository_id),
-            format!("{}", per_page),
+            "/search/labels?q={}&order={}&per_page={}&repository_id={}&sort={}&page={}",
             q.to_string(),
-            format!("{}", page),
             order.to_string(),
+            format!("{}", per_page),
+            format!("{}", repository_id),
+            sort.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -43208,11 +42899,11 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<types::GetSearchRepositoriesOkResponse> {
         let url = format!(
-            "/search/repositories?sort={}&page={}&q={}&per_page={}&order={}",
-            sort.to_string(),
+            "/search/repositories?page={}&per_page={}&q={}&sort={}&order={}",
             format!("{}", page),
-            q.to_string(),
             format!("{}", per_page),
+            q.to_string(),
+            sort.to_string(),
             order.to_string(),
         );
 
@@ -43243,10 +42934,10 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<types::GetSearchTopicsOkResponse> {
         let url = format!(
-            "/search/topics?q={}&page={}&per_page={}",
+            "/search/topics?per_page={}&q={}&page={}",
+            format!("{}", per_page),
             q.to_string(),
             format!("{}", page),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -43278,12 +42969,12 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
         let url = format!(
-            "/search/users?q={}&order={}&sort={}&page={}&per_page={}",
+            "/search/users?q={}&per_page={}&page={}&order={}&sort={}",
             q.to_string(),
+            format!("{}", per_page),
+            format!("{}", page),
             order.to_string(),
             sort.to_string(),
-            format!("{}", page),
-            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -43326,10 +43017,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -43381,11 +43069,11 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<Vec<types::TeamDiscussion>> {
         let url = format!(
-            "/teams/{}/discussions?page={}&per_page={}&direction={}",
+            "/teams/{}/discussions?page={}&direction={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             format!("{}", page),
-            format!("{}", per_page),
             direction.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -43468,10 +43156,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -43524,12 +43209,12 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
         let url = format!(
-            "/teams/{}/discussions/{}/comments?page={}&per_page={}&direction={}",
+            "/teams/{}/discussions/{}/comments?per_page={}&direction={}&page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
             direction.to_string(),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -43618,10 +43303,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -43677,13 +43359,13 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/teams/{}/discussions/{}/comments/{}/reactions?content={}&page={}&per_page={}",
+            "/teams/{}/discussions/{}/comments/{}/reactions?content={}&per_page={}&page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
             content.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -43741,12 +43423,12 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
         let url = format!(
-            "/teams/{}/discussions/{}/reactions?content={}&per_page={}&page={}",
+            "/teams/{}/discussions/{}/reactions?page={}&content={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
+            format!("{}", page),
             content.to_string(),
             format!("{}", per_page),
-            format!("{}", page),
         );
 
         self.get(&url).await
@@ -43828,11 +43510,11 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/teams/{}/members?role={}&per_page={}&page={}",
+            "/teams/{}/members?per_page={}&page={}&role={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            role.to_string(),
             format!("{}", per_page),
             format!("{}", page),
+            role.to_string(),
         );
 
         self.get(&url).await
@@ -43914,10 +43596,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -44016,10 +43695,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -44122,10 +43798,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -44144,10 +43817,10 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/teams/{}/repos?per_page={}&page={}",
+            "/teams/{}/repos?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -44240,10 +43913,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -44317,10 +43987,10 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
-            "/teams/{}/teams?per_page={}&page={}",
+            "/teams/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -44428,10 +44098,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -44513,16 +44180,11 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         body: &types::DeleteEmailAddressRequest,
     ) -> Result<()> {
         let url = "/user/emails".to_string();
-        let res = self
-            .client
-            .delete(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44563,9 +44225,9 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/user/following?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/following?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -44627,10 +44289,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -44648,9 +44307,9 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<Vec<types::GpgKey>> {
         let url = format!(
-            "/user/gpg_keys?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/gpg_keys?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -44713,10 +44372,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -44740,9 +44396,9 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<types::GetListAppInstallationsAccessibleUserAccessTokenOkResponse> {
         let url = format!(
-            "/user/installations?page={}&per_page={}",
-            format!("{}", page),
+            "/user/installations?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -44770,10 +44426,10 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         page: i64,
     ) -> Result<types::GetListRepositoriesAccessibleUserAccessTokenOkResponse> {
         let url = format!(
-            "/user/installations/{}/repositories?per_page={}&page={}",
+            "/user/installations/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&installation_id.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -44826,10 +44482,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -44880,10 +44533,7 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
     */
     pub async fn interactions_remove_restrictions_for_authenticated_user(&self) -> Result<()> {
         let url = "/user/interaction-limits".to_string();
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -44911,8 +44561,8 @@ format!("{}", start_index), filter.to_string(), excluded_attributes.to_string(),
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("/user/issues?since={}&labels={}&per_page={}&filter={}&state={}&sort={}&direction={}&page={}",
-since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_string(), state.to_string(), sort.to_string(), direction.to_string(), format!("{}", page),         );
+        let url = format!("/user/issues?sort={}&labels={}&per_page={}&page={}&since={}&direction={}&state={}&filter={}",
+sort.to_string(), labels.to_string(), format!("{}", per_page), format!("{}", page), since.to_rfc3339(), direction.to_string(), state.to_string(), filter.to_string(),         );
 
         self.get(&url).await
     }
@@ -44932,9 +44582,9 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::Key>> {
         let url = format!(
-            "/user/keys?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/keys?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -44997,10 +44647,7 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -45041,9 +44688,9 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
         let url = format!(
-            "/user/marketplace_purchases/stubbed?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/marketplace_purchases/stubbed?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45065,10 +44712,10 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::OrgMembership>> {
         let url = format!(
-            "/user/memberships/orgs?state={}&per_page={}&page={}",
+            "/user/memberships/orgs?state={}&page={}&per_page={}",
             state.to_string(),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45136,9 +44783,9 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::Migration>> {
         let url = format!(
-            "/user/migrations?page={}&per_page={}",
-            format!("{}", page),
+            "/user/migrations?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -45254,10 +44901,7 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -45280,10 +44924,7 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
             progenitor_support::encode_path(&repo_name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -45387,10 +45028,7 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -45445,12 +45083,12 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
         state: &str,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
-            "/user/packages/{}/{}/versions?per_page={}&state={}&page={}",
+            "/user/packages/{}/{}/versions?per_page={}&page={}&state={}",
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
             format!("{}", per_page),
-            state.to_string(),
             format!("{}", page),
+            state.to_string(),
         );
 
         self.get(&url).await
@@ -45509,10 +45147,7 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -45582,9 +45217,9 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
         page: i64,
     ) -> Result<Vec<types::Email>> {
         let url = format!(
-            "/user/public_emails?per_page={}&page={}",
-            format!("{}", per_page),
+            "/user/public_emails?page={}&per_page={}",
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -45613,8 +45248,8 @@ since.to_rfc3339(), labels.to_string(), format!("{}", per_page), filter.to_strin
         since: DateTime<Utc>,
         before: DateTime<Utc>,
     ) -> Result<Vec<types::Repository>> {
-        let url = format!("/user/repos?before={}&page={}&since={}&affiliation={}&visibility={}&sort={}&direction={}&per_page={}&type={}",
-before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_string(), visibility.to_string(), sort.to_string(), direction.to_string(), format!("{}", per_page), type_,         );
+        let url = format!("/user/repos?type={}&page={}&per_page={}&before={}&sort={}&visibility={}&direction={}&since={}&affiliation={}",
+type_, format!("{}", page), format!("{}", per_page), before.to_rfc3339(), sort.to_string(), visibility.to_string(), direction.to_string(), since.to_rfc3339(), affiliation.to_string(),         );
 
         self.get(&url).await
     }
@@ -45685,10 +45320,7 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -45728,11 +45360,11 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         page: i64,
     ) -> Result<Vec<types::Repository>> {
         let url = format!(
-            "/user/starred?page={}&sort={}&direction={}&per_page={}",
-            format!("{}", page),
+            "/user/starred?sort={}&direction={}&per_page={}&page={}",
             sort.to_string(),
             direction.to_string(),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -45804,10 +45436,7 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.delete(&url, None).await
     }
 
     /**
@@ -45848,9 +45477,9 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         page: i64,
     ) -> Result<Vec<types::TeamFull>> {
         let url = format!(
-            "/user/teams?page={}&per_page={}",
-            format!("{}", page),
+            "/user/teams?per_page={}&page={}",
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -45869,9 +45498,9 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
     */
     pub async fn users_list(&self, since: i64, per_page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
-            "/users?since={}&per_page={}",
-            format!("{}", since),
+            "/users?per_page={}&since={}",
             format!("{}", per_page),
+            format!("{}", since),
         );
 
         self.get(&url).await
@@ -45917,10 +45546,10 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/events?page={}&per_page={}",
+            "/users/{}/events?per_page={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -45969,10 +45598,10 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/events/public?page={}&per_page={}",
+            "/users/{}/events/public?per_page={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -46068,11 +45697,11 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
-            "/users/{}/gists?per_page={}&page={}&since={}",
+            "/users/{}/gists?since={}&per_page={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
+            since.to_rfc3339(),
             format!("{}", per_page),
             format!("{}", page),
-            since.to_rfc3339(),
         );
 
         self.get(&url).await
@@ -46126,10 +45755,10 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         subject_id: &str,
     ) -> Result<types::Hovercard> {
         let url = format!(
-            "/users/{}/hovercard?subject_id={}&subject_type={}",
+            "/users/{}/hovercard?subject_type={}&subject_id={}",
             progenitor_support::encode_path(&username.to_string()),
-            subject_id.to_string(),
             subject_type.to_string(),
+            subject_id.to_string(),
         );
 
         self.get(&url).await
@@ -46310,11 +45939,11 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         page: i64,
     ) -> Result<Vec<types::Project>> {
         let url = format!(
-            "/users/{}/projects?state={}&page={}&per_page={}",
+            "/users/{}/projects?state={}&per_page={}&page={}",
             progenitor_support::encode_path(&username.to_string()),
             state.to_string(),
-            format!("{}", page),
             format!("{}", per_page),
+            format!("{}", page),
         );
 
         self.get(&url).await
@@ -46361,10 +45990,10 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         page: i64,
     ) -> Result<Vec<types::Event>> {
         let url = format!(
-            "/users/{}/received_events/public?per_page={}&page={}",
+            "/users/{}/received_events/public?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
             format!("{}", page),
+            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -46389,13 +46018,13 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
-            "/users/{}/repos?sort={}&direction={}&page={}&type={}&per_page={}",
+            "/users/{}/repos?page={}&per_page={}&sort={}&direction={}&type={}",
             progenitor_support::encode_path(&username.to_string()),
+            format!("{}", page),
+            format!("{}", per_page),
             sort.to_string(),
             direction.to_string(),
-            format!("{}", page),
             type_,
-            format!("{}", per_page),
         );
 
         self.get(&url).await
@@ -46496,12 +46125,12 @@ before.to_rfc3339(), format!("{}", page), since.to_rfc3339(), affiliation.to_str
         page: i64,
     ) -> Result<Vec<types::StarredRepository>> {
         let url = format!(
-            "/users/{}/starred?per_page={}&sort={}&direction={}&page={}",
+            "/users/{}/starred?direction={}&page={}&sort={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
-            format!("{}", per_page),
-            sort.to_string(),
             direction.to_string(),
             format!("{}", page),
+            sort.to_string(),
+            format!("{}", per_page),
         );
 
         self.get(&url).await

@@ -1547,6 +1547,19 @@ fn gen(
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
+    }
+
+    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::DELETE,
+            &(self.host.clone() + uri),
+            message,
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        ).await
     }"#);
     a("");
 
@@ -1908,7 +1921,8 @@ fn gen(
                 a(&format!("       self.{}(&url).await", m.to_lowercase()));
             } else if (m == http::Method::POST
                 || m == http::Method::PATCH
-                || m == http::Method::PUT)
+                || m == http::Method::PUT
+                || m == http::Method::DELETE)
                 && oid != "apps_create_installation_access_token"
             {
                 let body = if let Some(f) = &body_func {
@@ -1926,6 +1940,10 @@ fn gen(
                     body
                 ));
             } else {
+                if oid != "apps_create_installation_access_token" {
+                    panic!("function {} should be authenticated", oid);
+                }
+
                 a(&format!(
                     "        let res = self.client.{}(url)",
                     m.to_lowercase()
