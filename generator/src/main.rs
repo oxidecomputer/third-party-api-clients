@@ -1398,7 +1398,10 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     let p = render_param(sn.as_str(), vals, false, &desc);
                     a(&p);
                 }
-                TypeDetails::Object(omap, _) => {
+                TypeDetails::Object(omap, schema_data) => {
+                    if let Some(description) = &schema_data.description {
+                        a(&format!("/// {}", description.replace('\n', "\n/// ")));
+                    }
                     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
                     a(&format!("pub struct {} {{", sn));
                     for (name, tid) in omap.iter() {
