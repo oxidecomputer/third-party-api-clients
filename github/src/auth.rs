@@ -1,3 +1,4 @@
+//! For performing functions related to authentication for the API.
 use std::fmt;
 use std::sync::{Arc, Mutex};
 use std::time;

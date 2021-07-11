@@ -1201,6 +1201,7 @@ fn gen(
     /*
      * Declare named types we know about:
      */
+    a("/// The data types sent to and returned from the API client.");
     a("pub mod types {");
     a("    use chrono::{DateTime, Utc, NaiveDate};");
     a("    use schemars::JsonSchema;");

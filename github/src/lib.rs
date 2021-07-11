@@ -156,6 +156,7 @@ mod progenitor_support {
     }
 }
 
+/// The data types sent to and returned from the API client.
 pub mod types {
     use chrono::{DateTime, NaiveDate, Utc};
     use schemars::JsonSchema;
