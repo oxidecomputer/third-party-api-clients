@@ -59,3 +59,34 @@ pub fn get_header_values(
     #[cfg(not(feature = "httpcache"))]
     (remaining, reset)
 }
+
+/// GitHub defined Media types
+/// See [this doc](https://developer.github.com/v3/media/) for more for more information
+#[derive(Clone, Copy)]
+pub enum MediaType {
+    /// Return json (the default)
+    Json,
+    /// Return json in preview form
+    Preview(&'static str),
+}
+
+impl Default for MediaType {
+    fn default() -> MediaType {
+        MediaType::Json
+    }
+}
+
+impl From<MediaType> for mime::Mime {
+    fn from(media: MediaType) -> mime::Mime {
+        match media {
+            MediaType::Json => "application/vnd.github.v3+json".parse().unwrap(),
+            MediaType::Preview(codename) => {
+                format!("application/vnd.github.{}-preview+json", codename)
+                    .parse()
+                    .unwrap_or_else(|_| {
+                        panic!("could not parse media type for preview {}", codename)
+                    })
+            }
+        }
+    }
+}

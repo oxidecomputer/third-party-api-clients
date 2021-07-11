@@ -8737,7 +8737,7 @@ impl Client {
         method: http::Method,
         uri: &str,
         body: Option<Vec<u8>>,
-        //media_type: MediaType,
+        media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
     where
@@ -8745,7 +8745,7 @@ impl Client {
     {
         let (url, auth) = self.url_and_auth(uri, authentication).await?;
 
-        let instance = self.clone();
+        let instance = <&Client>::clone(&self);
 
         #[cfg(not(feature = "httpcache"))]
         let mut req = instance.client.request(method, url);
@@ -8763,10 +8763,10 @@ impl Client {
         };
 
         req = req.header(http::header::USER_AGENT, &*instance.agent);
-        /*req = req.header(
+        req = req.header(
             http::header::ACCEPT,
-            &*format!("{}", qitem::<Mime>(From::from(media_type))),
-        );*/
+            &*format!("{}", hyperx::header::qitem::<Mime>(From::from(media_type))),
+        );
 
         if let Some(auth_str) = auth {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
@@ -8780,7 +8780,7 @@ impl Client {
         let response = req.send().await?;
 
         #[cfg(feature = "httpcache")]
-        let instance2 = self.clone();
+        let instance2 = <&Client>::clone(&self);
 
         #[cfg(feature = "httpcache")]
         let uri3 = uri.to_string();
@@ -8831,29 +8831,22 @@ impl Client {
             // header when cargo builds with --cfg feature="httpcache"
             #[cfg(feature = "httpcache")]
             {
-                instance2
-                    .http_cache
-                    .lookup_body(&uri3)
-                    .map_err(Error::from)
-                    .and_then(|body| {
-                        serde_json::from_str::<Out>(&body)
-                            .map_err(Error::from)
-                            .and_then(|out| {
-                                let link = match link {
-                                    Some(link) => Ok(Some(link)),
-                                    None => instance2.http_cache.lookup_next_link(&uri3).map(
-                                        |next_link| {
-                                            next_link.map(|next| {
-                                                let next = hyperx::header::LinkValue::new(next)
-                                                    .push_rel(hyperx::header::RelationType::Next);
-                                                hyperx::header::Link::new(vec![next])
-                                            })
-                                        },
-                                    ),
-                                };
-                                link.map(|link| (link, out))
+                let body = instance2.http_cache.lookup_body(&uri3).unwrap();
+                let out = serde_json::from_str::<Out>(&body).unwrap();
+                let link = match link {
+                    Some(link) => Ok(Some(link)),
+                    None => instance2
+                        .http_cache
+                        .lookup_next_link(&uri3)
+                        .map(|next_link| {
+                            next_link.map(|next| {
+                                let next = hyperx::header::LinkValue::new(next)
+                                    .push_rel(hyperx::header::RelationType::Next);
+                                hyperx::header::Link::new(vec![next])
                             })
-                    })
+                        }),
+                };
+                link.map(|link| (link, out))
             }
             #[cfg(not(feature = "httpcache"))]
             {
@@ -8868,11 +8861,11 @@ impl Client {
                         .as_secs();
                     anyhow!(
                         "rate limit exceeded, will reset in {} seconds",
-                        std::time::Duration::from_secs(u64::from(reset) - now)
+                        u64::from(reset) - now
                     )
                 }
                 _ => anyhow!(
-                    "code: {}, error: {}",
+                    "code: {}, error: {:?}",
                     status,
                     serde_json::from_slice(&response_body)?
                 ),
