@@ -1269,15 +1269,16 @@ fn gen(
         }
     }
 
-    async fn request<Out>(
+    async fn request<B, Out>(
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<Vec<u8>>,
+        body: Option<B>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
     where
+        B: Into<reqwest::Body>,
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         #[cfg(feature = "httpcache")]
@@ -1313,7 +1314,7 @@ fn gen(
 
         println!("Body: {:?}", &body);
         if let Some(body) = body {
-            req = req.body(reqwest::Body::from(body));
+            req = req.body(body);
         }
         println!("Request: {:?}", &req);
         let response = req.send().await?;
@@ -1396,15 +1397,16 @@ fn gen(
         }
     }
 
-    async fn request_entity<D>(
+    async fn request_entity<B, D>(
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<Vec<u8>>,
+        body: Option<B>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
     where
+        B: Into<reqwest::Body>,
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let (_ , r) = self.request(method, uri, body, media_type, authentication).await?;
@@ -1428,6 +1430,65 @@ fn gen(
             None,
             media,
             self::auth::AuthenticationConstraint::Unconstrained,
+        ).await
+    }
+
+    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, D)>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request(
+            http::Method::GET,
+            &(self.host.clone() + uri),
+            None,
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        ).await
+    }
+
+    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, D)>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request(
+            http::Method::GET,
+            url.as_str(),
+            None,
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        ).await
+    }
+
+    async fn post<B, D>(&self, uri: &str, message: B) -> Result<D>
+    where
+        B: Into<reqwest::Body>,
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.post_media(
+            uri,
+            message,
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        ).await
+    }
+
+    async fn post_media<B, D>(
+        &self,
+        uri: &str,
+        message: B,
+        media: crate::utils::MediaType,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> Result<D>
+    where
+        B: Into<reqwest::Body>,
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::POST,
+            &(self.host.clone() + uri),
+            Some(message),
+            media,
+            authentication,
         ).await
     }"#);
     a("");
@@ -1758,6 +1819,11 @@ fn gen(
              */
             if m == http::Method::GET {
                 a(&format!("       self.{}(&url).await", m.to_lowercase()));
+            } else if m == http::Method::POST {
+                a(&format!(
+                    "       self.{}(&url, body).await",
+                    m.to_lowercase(),
+                ));
             } else {
                 a(&format!(
                     "        let res = self.client.{}(url)",

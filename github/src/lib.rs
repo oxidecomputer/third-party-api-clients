@@ -8732,15 +8732,16 @@ impl Client {
         }
     }
 
-    async fn request<Out>(
+    async fn request<B, Out>(
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<Vec<u8>>,
+        body: Option<B>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
     where
+        B: Into<reqwest::Body>,
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         #[cfg(feature = "httpcache")]
@@ -8779,7 +8780,7 @@ impl Client {
 
         println!("Body: {:?}", &body);
         if let Some(body) = body {
-            req = req.body(reqwest::Body::from(body));
+            req = req.body(body);
         }
         println!("Request: {:?}", &req);
         let response = req.send().await?;
@@ -8879,15 +8880,16 @@ impl Client {
         }
     }
 
-    async fn request_entity<D>(
+    async fn request_entity<B, D>(
         &self,
         method: http::Method,
         uri: &str,
-        body: Option<Vec<u8>>,
+        body: Option<B>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
     where
+        B: Into<reqwest::Body>,
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let (_, r) = self
@@ -8913,6 +8915,72 @@ impl Client {
             None,
             media,
             self::auth::AuthenticationConstraint::Unconstrained,
+        )
+        .await
+    }
+
+    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, D)>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request(
+            http::Method::GET,
+            &(self.host.clone() + uri),
+            None,
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        )
+        .await
+    }
+
+    async fn get_pages_url<D>(
+        &self,
+        url: &reqwest::Url,
+    ) -> Result<(Option<hyperx::header::Link>, D)>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request(
+            http::Method::GET,
+            url.as_str(),
+            None,
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        )
+        .await
+    }
+
+    async fn post<B, D>(&self, uri: &str, message: B) -> Result<D>
+    where
+        B: Into<reqwest::Body>,
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.post_media(
+            uri,
+            message,
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        )
+        .await
+    }
+
+    async fn post_media<B, D>(
+        &self,
+        uri: &str,
+        message: B,
+        media: crate::utils::MediaType,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> Result<D>
+    where
+        B: Into<reqwest::Body>,
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::POST,
+            &(self.host.clone() + uri),
+            Some(message),
+            media,
+            authentication,
         )
         .await
     }
@@ -8946,15 +9014,7 @@ impl Client {
             progenitor_support::encode_path(&code.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -9038,15 +9098,7 @@ impl Client {
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -9180,15 +9232,7 @@ impl Client {
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -9253,15 +9297,7 @@ impl Client {
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -9295,9 +9331,7 @@ impl Client {
             progenitor_support::encode_path(&access_token.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -9353,15 +9387,7 @@ impl Client {
         body: &types::CreateNewAuthorizationRequest,
     ) -> Result<types::Authorization> {
         let url = "/authorizations".to_string();
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -9696,15 +9722,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -9995,9 +10013,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -10012,9 +10028,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -10159,15 +10173,7 @@ impl Client {
      */
     pub async fn gists_create(&self, body: &types::CreateGistRequest) -> Result<types::GistSimple> {
         let url = "/gists".to_string();
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -10277,15 +10283,7 @@ impl Client {
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -10390,9 +10388,7 @@ impl Client {
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -10548,15 +10544,7 @@ impl Client {
         body: &types::RenderMarkdownDocumentRequest,
     ) -> Result<String> {
         let url = "/markdown".to_string();
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.text().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -10564,15 +10552,7 @@ impl Client {
      */
     pub async fn markdown_render_raw<T: Into<reqwest::Body>>(&self, body: T) -> Result<String> {
         let url = "/markdown/raw".to_string();
-        let res = self
-            .client
-            .post(url)
-            .body(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.text().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -11059,15 +11039,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -11358,9 +11330,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -11375,9 +11345,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -11773,15 +11741,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -11892,10 +11852,7 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.post(&url, body).await
     }
 
     /**
@@ -12011,15 +11968,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -12218,15 +12167,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -12436,16 +12377,7 @@ impl Client {
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .query(&[("token", token.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.post(&url, body).await
     }
 
     /**
@@ -12533,10 +12465,7 @@ impl Client {
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.post(&url, body).await
     }
 
     /**
@@ -12570,15 +12499,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -12688,15 +12609,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -12791,15 +12704,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -12893,15 +12798,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -13012,15 +12909,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -13141,15 +13030,7 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -13217,15 +13098,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -13670,15 +13543,7 @@ impl Client {
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -13763,15 +13628,7 @@ impl Client {
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -13787,15 +13644,7 @@ impl Client {
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -13961,15 +13810,7 @@ impl Client {
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -14307,9 +14148,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -14326,9 +14165,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -14471,9 +14308,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -14513,9 +14348,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -14617,15 +14450,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -14644,9 +14469,7 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -14850,16 +14673,7 @@ impl Client {
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.post(&url, body).await
     }
 
     /**
@@ -15149,9 +14963,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -15280,9 +15092,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -15440,15 +15250,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -15584,15 +15386,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -15687,15 +15481,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -15790,15 +15576,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -15846,15 +15624,7 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -15872,15 +15642,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -15966,15 +15728,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -16062,9 +15816,7 @@ impl Client {
             progenitor_support::encode_path(&check_suite_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -16244,15 +15996,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -16509,15 +16253,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -16625,15 +16361,7 @@ impl Client {
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -16840,15 +16568,7 @@ impl Client {
             progenitor_support::encode_path(&content_reference_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -16985,15 +16705,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -17075,15 +16787,7 @@ impl Client {
             progenitor_support::encode_path(&deployment_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -17122,16 +16826,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.post(&url, body).await
     }
 
     /**
@@ -17274,15 +16969,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -17300,15 +16987,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -17345,15 +17024,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -17425,15 +17096,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -17496,15 +17159,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -17541,15 +17196,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -17606,15 +17253,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -17739,10 +17378,7 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.post(&url, body).await
     }
 
     /**
@@ -17761,10 +17397,7 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.post(&url, body).await
     }
 
     /**
@@ -18133,15 +17766,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -18274,15 +17899,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -18411,15 +18028,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -18489,15 +18098,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -18587,15 +18188,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -18728,15 +18321,7 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -18818,15 +18403,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -18904,15 +18481,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19024,15 +18593,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19072,15 +18633,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19277,15 +18830,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19337,9 +18882,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19430,15 +18973,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19480,15 +19015,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19621,15 +19148,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19744,15 +19263,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19774,15 +19285,7 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19912,15 +19415,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -19989,15 +19484,7 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -20146,15 +19633,7 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -20257,15 +19736,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -20482,16 +19953,7 @@ impl Client {
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .query(&[("name", name.to_string()), ("label", label.to_string())])
-            .body(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -20511,15 +19973,7 @@ impl Client {
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -20711,15 +20165,7 @@ impl Client {
             progenitor_support::encode_path(&sha.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -20987,15 +20433,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -21077,15 +20515,7 @@ impl Client {
             progenitor_support::encode_path(&template_repo.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -21233,15 +20663,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -21365,15 +20787,7 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -21496,15 +20910,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -21778,15 +21184,7 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -21887,15 +21285,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -22006,15 +21396,7 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -22052,15 +21434,7 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -22542,15 +21916,7 @@ impl Client {
         body: &types::AddEmailAddressRequest,
     ) -> Result<Vec<types::Email>> {
         let url = "/user/emails".to_string();
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -22662,15 +22028,7 @@ impl Client {
         body: &types::CreateGpgKeyRequest,
     ) -> Result<types::GpgKey> {
         let url = "/user/gpg_keys".to_string();
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -22850,15 +22208,7 @@ impl Client {
         body: &types::CreatePublicSshKeyRequest,
     ) -> Result<types::Key> {
         let url = "/user/keys".to_string();
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -22987,15 +22337,7 @@ impl Client {
         body: &types::StartUserMigrationRequest,
     ) -> Result<types::Migration> {
         let url = "/user/migrations".to_string();
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -23148,16 +22490,7 @@ impl Client {
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self
-            .client
-            .post(url)
-            .query(&[("token", token.to_string())])
-            .send()
-            .await?
-            .error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.post(&url, body).await
     }
 
     /**
@@ -23237,10 +22570,7 @@ impl Client {
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.post(url).send().await?.error_for_status()?;
-
-        let _ = res.text().await?;
-        Ok(())
+        self.post(&url, body).await
     }
 
     /**
@@ -23251,15 +22581,7 @@ impl Client {
         body: &types::CreateUserProjectRequest,
     ) -> Result<types::Project> {
         let url = "/user/projects".to_string();
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
@@ -23301,15 +22623,7 @@ impl Client {
         body: &types::CreateRepositoryRequest,
     ) -> Result<types::Repository> {
         let url = "/user/repos".to_string();
-        let res = self
-            .client
-            .post(url)
-            .json(body)
-            .send()
-            .await?
-            .error_for_status()?;
-
-        Ok(res.json().await?)
+        self.post(&url, body).await
     }
 
     /**
