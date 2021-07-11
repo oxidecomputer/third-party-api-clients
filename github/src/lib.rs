@@ -198,6 +198,17 @@ pub mod types {
         All,
     }
 
+    impl std::fmt::Display for AuditLogInclude {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AuditLogInclude::Web => "web",
+                AuditLogInclude::Git => "git",
+                AuditLogInclude::All => "all",
+            }
+            .fmt(f)
+        }
+    }
+
     /// The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
     ///
     /// The default is `desc`.
@@ -208,6 +219,16 @@ pub mod types {
         Asc,
     }
 
+    impl std::fmt::Display for AuditLogOrder {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AuditLogOrder::Desc => "desc",
+                AuditLogOrder::Asc => "asc",
+            }
+            .fmt(f)
+        }
+    }
+
     /// One of `asc` (ascending) or `desc` (descending).
     #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "snake_case")]
@@ -216,12 +237,32 @@ pub mod types {
         Desc,
     }
 
+    impl std::fmt::Display for Direction {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Direction::Asc => "asc",
+                Direction::Desc => "desc",
+            }
+            .fmt(f)
+        }
+    }
+
     /// Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
     #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "snake_case")]
     pub enum Order {
         Desc,
         Asc,
+    }
+
+    impl std::fmt::Display for Order {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Order::Desc => "desc",
+                Order::Asc => "asc",
+            }
+            .fmt(f)
+        }
     }
 
     /// The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
@@ -258,12 +299,32 @@ pub mod types {
         Week,
     }
 
+    impl std::fmt::Display for Per {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Per::Day => "day",
+                Per::Week => "week",
+            }
+            .fmt(f)
+        }
+    }
+
     /// One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
     #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(rename_all = "snake_case")]
     pub enum Sort {
         Created,
         Updated,
+    }
+
+    impl std::fmt::Display for Sort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Sort::Created => "created",
+                Sort::Updated => "updated",
+            }
+            .fmt(f)
+        }
     }
 
     /// Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
@@ -273,6 +334,17 @@ pub mod types {
         Queued,
         InProgress,
         Completed,
+    }
+
+    impl std::fmt::Display for StatusParam {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                StatusParam::Queued => "queued",
+                StatusParam::InProgress => "in_progress",
+                StatusParam::Completed => "completed",
+            }
+            .fmt(f)
+        }
     }
 
     /// Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
@@ -292,6 +364,27 @@ pub mod types {
         Queued,
         Requested,
         Waiting,
+    }
+
+    impl std::fmt::Display for WorkflowRunStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                WorkflowRunStatus::Completed => "completed",
+                WorkflowRunStatus::ActionRequired => "action_required",
+                WorkflowRunStatus::Cancelled => "cancelled",
+                WorkflowRunStatus::Failure => "failure",
+                WorkflowRunStatus::Neutral => "neutral",
+                WorkflowRunStatus::Skipped => "skipped",
+                WorkflowRunStatus::Stale => "stale",
+                WorkflowRunStatus::Success => "success",
+                WorkflowRunStatus::TimedOut => "timed_out",
+                WorkflowRunStatus::InProgress => "in_progress",
+                WorkflowRunStatus::Queued => "queued",
+                WorkflowRunStatus::Requested => "requested",
+                WorkflowRunStatus::Waiting => "waiting",
+            }
+            .fmt(f)
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
