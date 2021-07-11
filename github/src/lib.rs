@@ -8716,7 +8716,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -8756,7 +8757,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -8771,7 +8773,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -8830,7 +8833,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -8855,7 +8859,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -8875,7 +8880,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -8925,7 +8931,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9035,7 +9042,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9184,7 +9192,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9294,7 +9303,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9348,7 +9358,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9368,7 +9379,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9388,7 +9400,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9431,7 +9444,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9525,7 +9539,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9611,7 +9626,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9633,7 +9649,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9655,7 +9672,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9713,7 +9731,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9735,7 +9754,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9757,7 +9777,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -9880,7 +9901,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -10133,7 +10155,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -10248,7 +10271,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -10363,7 +10387,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -10378,7 +10403,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -10393,7 +10419,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -10470,7 +10497,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -10575,7 +10603,7 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        Ok(res.text().await?)
     }
 
     /**
@@ -10592,7 +10620,7 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        Ok(res.text().await?)
     }
 
     /**
@@ -10866,7 +10894,8 @@ impl Client {
 
         let res = self.client.patch(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -10924,7 +10953,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -10941,7 +10971,7 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        Ok(res.text().await?)
     }
 
     /**
@@ -11048,7 +11078,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11103,7 +11134,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11123,7 +11155,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11143,7 +11176,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11186,7 +11220,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11280,7 +11315,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11366,7 +11402,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11388,7 +11425,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11410,7 +11448,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11468,7 +11507,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11490,7 +11530,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11512,7 +11553,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11635,7 +11677,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11742,7 +11785,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11800,7 +11844,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11822,7 +11867,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11844,7 +11890,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11914,7 +11961,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11930,7 +11978,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11946,7 +11995,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -11984,7 +12034,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12128,7 +12179,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12218,7 +12270,8 @@ impl Client {
 
         let res = self.client.post(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12320,7 +12373,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12390,7 +12444,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12511,7 +12566,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12527,7 +12583,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12590,7 +12647,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12693,7 +12751,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12713,7 +12772,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12735,7 +12795,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12833,7 +12894,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12877,7 +12939,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12906,7 +12969,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -12989,7 +13053,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -13013,7 +13078,8 @@ impl Client {
 
         let res = self.client.post(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -13118,7 +13184,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -13138,7 +13205,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -13158,7 +13226,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -13387,7 +13456,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -13520,7 +13590,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -13661,7 +13732,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -13786,7 +13858,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -13874,7 +13947,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14011,7 +14085,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14093,7 +14168,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14115,7 +14191,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14201,7 +14278,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14225,7 +14303,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14333,7 +14412,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14413,7 +14493,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14549,7 +14630,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14632,7 +14714,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14652,7 +14735,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14752,7 +14836,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14784,7 +14869,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14886,7 +14972,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14910,7 +14997,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -14954,7 +15042,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15001,7 +15090,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15048,7 +15138,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15183,7 +15274,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15266,7 +15358,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15422,7 +15515,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15444,7 +15538,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15663,7 +15758,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15738,7 +15834,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15767,7 +15864,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15789,7 +15887,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15905,7 +16004,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15925,7 +16025,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -15945,7 +16046,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -16073,7 +16175,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -16139,7 +16242,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -16183,7 +16287,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -16278,7 +16383,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -16322,7 +16428,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -16504,7 +16611,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -17427,7 +17535,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -17478,7 +17587,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -17575,7 +17685,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -17692,7 +17803,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -18359,7 +18471,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -18472,7 +18585,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -18565,7 +18679,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -18848,7 +18963,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -19079,7 +19195,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -19176,7 +19293,8 @@ impl Client {
 
         let res = self.client.post(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -19198,7 +19316,8 @@ impl Client {
 
         let res = self.client.post(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -19261,7 +19380,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -19478,7 +19598,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -19531,7 +19652,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -19717,7 +19839,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -19834,7 +19957,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -20206,7 +20330,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -20259,7 +20384,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -20276,7 +20402,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -20364,7 +20491,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -20499,7 +20627,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -20596,7 +20725,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -20796,7 +20926,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -20967,7 +21098,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -21010,7 +21142,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -21332,7 +21465,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -21449,7 +21583,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -21687,7 +21822,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -22232,7 +22368,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -22347,7 +22484,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -22810,7 +22948,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -22863,7 +23002,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -23089,7 +23229,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -23105,7 +23246,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -23121,7 +23263,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -23143,7 +23286,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -23311,7 +23455,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -23443,7 +23588,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -23593,7 +23739,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -23739,7 +23886,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24004,7 +24152,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24125,7 +24274,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24256,7 +24406,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24485,7 +24636,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24501,7 +24653,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24517,7 +24670,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24584,7 +24738,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24660,7 +24815,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24676,7 +24832,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24756,7 +24913,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24778,7 +24936,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24907,7 +25066,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24922,7 +25082,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -24937,7 +25098,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25021,7 +25183,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25087,7 +25250,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25102,7 +25266,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25117,7 +25282,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25194,7 +25360,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25267,7 +25434,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25287,7 +25455,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25331,7 +25500,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25444,7 +25614,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25648,7 +25819,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25666,7 +25838,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25686,7 +25859,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25779,7 +25953,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25806,7 +25981,8 @@ impl Client {
             .await?
             .error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25883,7 +26059,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -25905,7 +26082,8 @@ impl Client {
 
         let res = self.client.post(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -26046,7 +26224,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -26061,7 +26240,8 @@ impl Client {
 
         let res = self.client.patch(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -26109,7 +26289,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -26129,7 +26310,8 @@ impl Client {
 
         let res = self.client.put(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -26149,7 +26331,8 @@ impl Client {
 
         let res = self.client.delete(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -26399,7 +26582,8 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        let _ = res.text().await?;
+        Ok(())
     }
 
     /**
@@ -26880,6 +27064,6 @@ impl Client {
 
         let res = self.client.get(url).send().await?.error_for_status()?;
 
-        Ok(res.json().await?)
+        Ok(res.text().await?)
     }
 }

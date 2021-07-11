@@ -1300,7 +1300,7 @@ fn gen(
             }
 
             // Only do the first.
-            if let Some(only) = o.responses.responses.first() {
+            let response_type = if let Some(only) = o.responses.responses.first() {
                 match only.0 {
                     openapiv3::StatusCode::Code(n) => {
                         // 302 is the code returned from /orgs/{org}/migrations/{migration_id}/archive GET
@@ -1329,6 +1329,7 @@ fn gen(
                  */
                 if i.content.is_empty() {
                     a("    ) -> Result<()> {");
+                    "()".to_string()
                 } else {
                     match i.content.get("application/json") {
                         Some(mt) => {
@@ -1363,6 +1364,8 @@ fn gen(
                                 };
                                 if let Ok(rt) = ts.render_type(&tid, false) {
                                     a(&format!("    ) -> Result<{}> {{", rt));
+
+                                    "json".to_string()
                                 } else {
                                     bail!("rendering type {:?}: {:?} failed", tid, s);
                                 }
@@ -1382,6 +1385,8 @@ fn gen(
                                     let rt = ts.render_type(&tid, false)?;
 
                                     a(&format!("    ) -> Result<{}> {{", rt));
+
+                                    rt
                                 } else {
                                     bail!("media type encoding, no schema: {:#?}", mt);
                                 }
@@ -1425,9 +1430,10 @@ fn gen(
                                     };
                                     if let Ok(rt) = ts.render_type(&tid, false) {
                                         a(&format!("    ) -> Result<{}> {{", rt));
+
+                                        "json".to_string()
                                     } else {
-                                        // TODO: fix this
-                                        println!("rendering type {:?} failed", tid);
+                                        bail!("rendering type {:?} failed", tid);
                                     }
                                 } else {
                                     bail!("media type encoding, no schema: {:#?}", mt);
@@ -1440,7 +1446,7 @@ fn gen(
                 }
             } else {
                 bail!("responses? {:#?}", o.responses);
-            }
+            };
 
             /*
              * Generate the URL for the request.
@@ -1470,7 +1476,16 @@ fn gen(
 
             a("");
 
-            a("        Ok(res.json().await?)");
+            if response_type == "json" {
+                a("        Ok(res.json().await?)");
+            } else if response_type == "()" {
+                a("        let _ = res.text().await?;");
+                a("        Ok(())");
+            } else if response_type == "String" {
+                a("        Ok(res.text().await?)");
+            } else {
+                panic!("response type: {}", response_type);
+            }
             a("    }");
             a("");
 
