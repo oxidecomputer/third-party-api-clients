@@ -1237,53 +1237,45 @@ fn gen(
                     a(&format!("pub struct {} {{", struct_name));
                     for (name, tid) in omap.iter() {
                         if let Ok(rt) = ts.render_type(tid, true) {
-                            if rt == "String" {
-                                a(
-                                    r#"#[serde(default, skip_serializing_if = "String::is_empty", deserialize_with = "crate::utils::deserialize_null_string::deserialize","#,
-                                );
-                            } else if rt.starts_with("Vec<") {
-                                a(r#"#[serde(default, skip_serializing_if = "Vec::is_empty","#);
-                            } else if rt.starts_with("Option<") {
-                                a(r#"#[serde(default, skip_serializing_if = "Option::is_none","#);
-                            }
+                            let mut prop = name.to_string();
                             if name == "ref" || name == "type" || name == "self" {
-                                if rt == "String"
-                                    || rt.starts_with("Vec<")
-                                    || rt.starts_with("Option<")
-                                {
-                                    a(&format!(r#"rename = "{}")]"#, name));
-                                } else {
-                                    a(&format!(r#"#[serde(rename = "{}")]"#, name));
-                                }
-                                a(&format!("pub {}_: {},", name, rt));
+                                prop = format!("{}_", name);
                             } else if name == "$ref" {
-                                a(r#"rename = "$ref")]"#);
-                                a(&format!("pub ref_: {},", rt));
+                                prop = format!("{}_", name.replace('$', ""));
                             } else if name == "+1" {
-                                a(r#"#[serde(rename = "+1")]"#);
-                                a(&format!("pub plus_one: {},", rt));
+                                prop = "plus_one".to_string()
                             } else if name == "-1" {
-                                a(r#"        #[serde(rename = "-1")]"#);
-                                a(&format!("pub minus_one: {},", rt));
+                                prop = "minus_one".to_string()
                             } else if name.starts_with('@') {
-                                if rt == "String"
-                                    || rt.starts_with("Vec<")
-                                    || rt.starts_with("Option<")
-                                {
+                                prop = name.replace('@', "");
+                            }
+
+                            if rt == "String" || rt.starts_with("Vec<") || rt.starts_with("Option<")
+                            {
+                                a(r#"#[serde(default,"#);
+                                if rt == "String" {
+                                    a(
+                                        r#"skip_serializing_if = "String::is_empty", deserialize_with = "crate::utils::deserialize_null_string::deserialize","#,
+                                    );
+                                } else if rt.starts_with("Vec<") {
+                                    a(r#"skip_serializing_if = "Vec::is_empty","#);
+                                } else if rt.starts_with("Option<") {
+                                    a(r#"skip_serializing_if = "Option::is_none","#);
+                                }
+
+                                if *name != prop {
                                     a(&format!(r#"rename = "{}")]"#, name));
                                 } else {
-                                    a(&format!(r#"#[serde(rename = "{}")]"#, name));
-                                }
-                                a(&format!("pub {}: {},", name.replace('@', ""), rt));
-                            } else {
-                                if rt == "String"
-                                    || rt.starts_with("Vec<")
-                                    || rt.starts_with("Option<")
-                                {
                                     a(r#")]"#);
                                 }
-                                a(&format!("        pub {}: {},", to_snake_case(name), rt));
+                            } else if *name != prop {
+                                a(&format!(r#"#[serde(rename = "{}")]"#, name));
                             }
+
+                            if !prop.ends_with('_') {
+                                prop = to_snake_case(&prop);
+                            }
+                            a(&format!("pub {}: {},", prop, rt));
                         } else {
                             bail!("rendering type {} {:?} failed", name, tid);
                         }
@@ -2269,8 +2261,8 @@ fn main() -> Result<()> {
 
             println!();
         }
-
         println!();
+
         for (i, (pn, p)) in components.parameters.iter().enumerate() {
             println!(
                 "PARAMETER {}/{}: {}",

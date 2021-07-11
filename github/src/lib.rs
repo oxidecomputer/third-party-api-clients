@@ -8,16 +8,16 @@
 //! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! [dependencies]
-//! github-api-client = "0.1.0"
+//! github_api_client = "0.1.0"
 //!
 //!
 //! ## Basic example
 //!
 //! Typical use will require intializing a `Client`. This requires
-//! a user agent string and set of `Credentials`.
+//! a user agent string and set of `auth::Credentials`.
 //!
 //! ```
-//! use github-api-client::{auth::Credentials, Client};
+//! use github_api_client::{auth::Credentials, Client};
 //!
 //! let github = Client::new(
 //!   String::from("user-agent-name"),
@@ -42,7 +42,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! github-api-client = { version = "0.1.0", features = ["httpcache"] }
+//! github_api_client = { version = "0.1.0", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -50,9 +50,9 @@
 //! Here is an example:
 //!
 //! ```
-//! use github-api-client::{auth::Credentials, Client};
+//! use github_api_client::{auth::Credentials, Client};
 //! #[cfg(feature = "httpcache")]
-//! use github-api-client::http_cache::HttpCache;
+//! use github_api_client::http_cache::HttpCache;
 //!
 //! #[cfg(feature = "httpcache")]
 //! let http_cache = HttpCache::in_home_dir();
@@ -87,9 +87,9 @@
 //! ```rust
 //! use std::env;
 //!
-//! use github-api-client::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
+//! use github_api_client::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
 //! #[cfg(feature = "httpcache")]
-//! use github-api-client::http_cache::FileBasedCache;
+//! use github_api_client::http_cache::FileBasedCache;
 //!
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
