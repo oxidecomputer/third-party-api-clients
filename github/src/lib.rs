@@ -1,10 +1,8 @@
-
 use anyhow::Result;
 use chrono::{DateTime, Utc};
 
-
 mod progenitor_support {
-    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
+    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')
@@ -23,9 +21,9 @@ mod progenitor_support {
 }
 
 pub mod types {
-    use chrono::{DateTime, Utc, NaiveDate};
+    use chrono::{DateTime, NaiveDate, Utc};
     use schemars::JsonSchema;
-    use serde::{Serialize, Deserialize};
+    use serde::{Deserialize, Serialize};
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SimpleUser {
@@ -711,8 +709,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AuthenticationTokenPermissions {
-    }
+    pub struct AuthenticationTokenPermissions {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AuthenticationToken {
@@ -730,8 +727,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Data {
-    }
+    pub struct Data {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AuditLogEvent {
@@ -1069,8 +1065,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Files {
-    }
+    pub struct Files {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BaseGist {
@@ -1401,8 +1396,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MinimalRepositoryOwner {
-    }
+    pub struct MinimalRepositoryOwner {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MinimalRepositoryPermissions {
@@ -1414,8 +1408,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MinimalRepositoryTemplateRepository {
-    }
+    pub struct MinimalRepositoryTemplateRepository {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MinimalRepositoryLicense {
@@ -1647,8 +1640,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EmptyObject {
-    }
+    pub struct EmptyObject {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CredentialAuthorization {
@@ -2114,8 +2106,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamRepositoryTemplateRepository {
-    }
+    pub struct TeamRepositoryTemplateRepository {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamRepository {
@@ -2282,8 +2273,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FullRepositoryTemplateRepository {
-    }
+    pub struct FullRepositoryTemplateRepository {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AdvancedSecurity {
@@ -2606,8 +2596,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PayloadData {
-    }
+    pub struct PayloadData {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Deployment {
@@ -3042,7 +3031,8 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
+    pub struct ProtectedBranchRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions
+    {
         pub teams: Vec<Team>,
         pub teams_url: String,
         pub url: String,
@@ -4912,8 +4902,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineIssueEvents {
-    }
+    pub struct TimelineIssueEvents {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeployKey {
@@ -4927,8 +4916,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Language {
-    }
+    pub struct Language {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LicenseContentLinks {
@@ -6432,8 +6420,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateGithubAppFromManifestRequest {
-    }
+    pub struct CreateGithubAppFromManifestRequest {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostCreateGithubAppFromManifestCreatedResponse {
@@ -6557,8 +6544,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetEmojisOkResponse {
-    }
+    pub struct GetEmojisOkResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SetGithubActionsPermissionsEnterpriseRequest {
@@ -6649,8 +6635,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetCheckifGistIsStarredNotFoundResponse {
-    }
+    pub struct GetCheckifGistIsStarredNotFoundResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositoriesAccessibleAppInstallationOkResponse {
@@ -6879,8 +6864,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutConvertOrganizationMemberOutsideCollaboratorAcceptedResponse {
-    }
+    pub struct PutConvertOrganizationMemberOutsideCollaboratorAcceptedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteRemoveOutsideCollaboratorFromOrganizationUnprocessableEntityResponse {
@@ -7021,8 +7005,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectCardCreatedResponse {
-    }
+    pub struct PostMoveProjectCardCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostMoveProjectCardForbiddenResponseErrors {
@@ -7090,8 +7073,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostMoveProjectColumnCreatedResponse {
-    }
+    pub struct PostMoveProjectColumnCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteProjectForbiddenResponse {
@@ -7183,8 +7165,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostCancelWorkflowRunAcceptedResponse {
-    }
+    pub struct PostCancelWorkflowRunAcceptedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListJobsWorkflowRunOkResponse {
@@ -7200,8 +7181,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostReRunWorkflowCreatedResponse {
-    }
+    pub struct PostReRunWorkflowCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositorySecretsOkResponse {
@@ -7216,8 +7196,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutCreateUpdateRepositorySecretCreatedResponse {
-    }
+    pub struct PutCreateUpdateRepositorySecretCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositoryWorkflowsOkResponse {
@@ -7226,8 +7205,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Inputs {
-    }
+    pub struct Inputs {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateWorkflowDispatchEventRequest {
@@ -7249,7 +7227,8 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateBranchProtectionRequestRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
+    pub struct UpdateBranchProtectionRequestRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions
+    {
         pub teams: Option<Vec<String>>,
         pub users: Option<Vec<String>>,
     }
@@ -7455,8 +7434,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostRerequestCheckSuiteCreatedResponse {
-    }
+    pub struct PostRerequestCheckSuiteCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateCodeScanningAlertRequest {
@@ -7609,8 +7587,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ClientPayload {
-    }
+    pub struct ClientPayload {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CreateRepositoryDispatchEventRequest {
@@ -8251,8 +8228,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateAttributeScimEnterpriseUserRequestOperations {
-    }
+    pub struct UpdateAttributeScimEnterpriseUserRequestOperations {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UpdateAttributeScimEnterpriseUserRequest {
@@ -8584,7 +8560,6 @@ pub mod types {
         pub updated_at: DateTime<Utc>,
         pub url: String,
     }
-
 }
 
 pub struct Client {
@@ -8610,17 +8585,10 @@ impl Client {
     /**
      * meta_root: GET /
      */
-    pub async fn meta_root(
-        &self,
-    ) -> Result<types::GetGithubApiRootOkResponse> {
-        let url = format!("{}",
-            self.baseurl,
-        );
+    pub async fn meta_root(&self) -> Result<types::GetGithubApiRootOkResponse> {
+        let url = format!("{}", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8628,17 +8596,10 @@ impl Client {
     /**
      * apps_get_authenticated: GET /app
      */
-    pub async fn apps_get_authenticated(
-        &self,
-    ) -> Result<types::Integration> {
-        let url = format!("{}/app",
-            self.baseurl,
-        );
+    pub async fn apps_get_authenticated(&self) -> Result<types::Integration> {
+        let url = format!("{}/app", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8651,12 +8612,15 @@ impl Client {
         code: &str,
         body: &types::CreateGithubAppFromManifestRequest,
     ) -> Result<types::PostCreateGithubAppFromManifestCreatedResponse> {
-        let url = format!("{}/app-manifests/{}/conversions",
+        let url = format!(
+            "{}/app-manifests/{}/conversions",
             self.baseurl,
             progenitor_support::encode_path(&code.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -8668,17 +8632,10 @@ impl Client {
     /**
      * apps_get_webhook_config_for_app: GET /app/hook/config
      */
-    pub async fn apps_get_webhook_config_for_app(
-        &self,
-    ) -> Result<types::WebhookConfig> {
-        let url = format!("{}/app/hook/config",
-            self.baseurl,
-        );
+    pub async fn apps_get_webhook_config_for_app(&self) -> Result<types::WebhookConfig> {
+        let url = format!("{}/app/hook/config", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8690,11 +8647,11 @@ impl Client {
         &self,
         body: &types::UpdateWebhookConfigurationAppRequest,
     ) -> Result<types::WebhookConfig> {
-        let url = format!("{}/app/hook/config",
-            self.baseurl,
-        );
+        let url = format!("{}/app/hook/config", self.baseurl,);
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -8713,11 +8670,17 @@ impl Client {
         since: DateTime<Utc>,
         outdated: &str,
     ) -> Result<Vec<types::Installation>> {
-        let url = format!("{}/app/installations",
-            self.baseurl,
-        );
+        let url = format!("{}/app/installations", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+                ("since", since.to_rfc3339()),
+                ("outdated", outdated.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -8728,19 +8691,14 @@ impl Client {
     /**
      * apps_get_installation: GET /app/installations/{installation_id}
      */
-    pub async fn apps_get_installation(
-        &self,
-        installation_id: i64,
-    ) -> Result<types::Installation> {
-        let url = format!("{}/app/installations/{}",
+    pub async fn apps_get_installation(&self, installation_id: i64) -> Result<types::Installation> {
+        let url = format!(
+            "{}/app/installations/{}",
             self.baseurl,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8748,19 +8706,14 @@ impl Client {
     /**
      * apps_delete_installation: DELETE /app/installations/{installation_id}
      */
-    pub async fn apps_delete_installation(
-        &self,
-        installation_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/app/installations/{}",
+    pub async fn apps_delete_installation(&self, installation_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/app/installations/{}",
             self.baseurl,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8773,12 +8726,15 @@ impl Client {
         installation_id: i64,
         body: &types::CreateInstallationAccessTokenAppRequest,
     ) -> Result<types::InstallationToken> {
-        let url = format!("{}/app/installations/{}/access_tokens",
+        let url = format!(
+            "{}/app/installations/{}/access_tokens",
             self.baseurl,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -8790,19 +8746,14 @@ impl Client {
     /**
      * apps_suspend_installation: PUT /app/installations/{installation_id}/suspended
      */
-    pub async fn apps_suspend_installation(
-        &self,
-        installation_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/app/installations/{}/suspended",
+    pub async fn apps_suspend_installation(&self, installation_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/app/installations/{}/suspended",
             self.baseurl,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8810,19 +8761,14 @@ impl Client {
     /**
      * apps_unsuspend_installation: DELETE /app/installations/{installation_id}/suspended
      */
-    pub async fn apps_unsuspend_installation(
-        &self,
-        installation_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/app/installations/{}/suspended",
+    pub async fn apps_unsuspend_installation(&self, installation_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/app/installations/{}/suspended",
             self.baseurl,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8836,11 +8782,16 @@ impl Client {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<types::ApplicationGrant>> {
-        let url = format!("{}/applications/grants",
-            self.baseurl,
-        );
+        let url = format!("{}/applications/grants", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+                ("client_id", client_id.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -8855,15 +8806,13 @@ impl Client {
         &self,
         grant_id: i64,
     ) -> Result<types::ApplicationGrant> {
-        let url = format!("{}/applications/grants/{}",
+        let url = format!(
+            "{}/applications/grants/{}",
             self.baseurl,
             progenitor_support::encode_path(&grant_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8871,19 +8820,14 @@ impl Client {
     /**
      * oauth_authorizations_delete_grant: DELETE /applications/grants/{grant_id}
      */
-    pub async fn oauth_authorizations_delete_grant(
-        &self,
-        grant_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/applications/grants/{}",
+    pub async fn oauth_authorizations_delete_grant(&self, grant_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/applications/grants/{}",
             self.baseurl,
             progenitor_support::encode_path(&grant_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8896,12 +8840,15 @@ impl Client {
         client_id: &str,
         body: &types::DeleteAppAuthorizationRequest,
     ) -> Result<()> {
-        let url = format!("{}/applications/{}/grant",
+        let url = format!(
+            "{}/applications/{}/grant",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -8918,16 +8865,14 @@ impl Client {
         client_id: &str,
         access_token: &str,
     ) -> Result<()> {
-        let url = format!("{}/applications/{}/grants/{}",
+        let url = format!(
+            "{}/applications/{}/grants/{}",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&access_token.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -8940,12 +8885,15 @@ impl Client {
         client_id: &str,
         body: &types::CheckTokenRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/applications/{}/token",
+        let url = format!(
+            "{}/applications/{}/token",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -8962,12 +8910,15 @@ impl Client {
         client_id: &str,
         body: &types::DeleteAppTokenRequest,
     ) -> Result<()> {
-        let url = format!("{}/applications/{}/token",
+        let url = format!(
+            "{}/applications/{}/token",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -8984,12 +8935,15 @@ impl Client {
         client_id: &str,
         body: &types::ResetTokenRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/applications/{}/token",
+        let url = format!(
+            "{}/applications/{}/token",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -9006,12 +8960,15 @@ impl Client {
         client_id: &str,
         body: &types::CreateScopedAccessTokenRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/applications/{}/token/scoped",
+        let url = format!(
+            "{}/applications/{}/token/scoped",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -9028,16 +8985,14 @@ impl Client {
         client_id: &str,
         access_token: &str,
     ) -> Result<types::GetCheckAuthorizationOkResponse> {
-        let url = format!("{}/applications/{}/tokens/{}",
+        let url = format!(
+            "{}/applications/{}/tokens/{}",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&access_token.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9050,16 +9005,14 @@ impl Client {
         client_id: &str,
         access_token: &str,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/applications/{}/tokens/{}",
+        let url = format!(
+            "{}/applications/{}/tokens/{}",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&access_token.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9072,16 +9025,14 @@ impl Client {
         client_id: &str,
         access_token: &str,
     ) -> Result<()> {
-        let url = format!("{}/applications/{}/tokens/{}",
+        let url = format!(
+            "{}/applications/{}/tokens/{}",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&access_token.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9089,19 +9040,14 @@ impl Client {
     /**
      * apps_get_by_slug: GET /apps/{app_slug}
      */
-    pub async fn apps_get_by_slug(
-        &self,
-        app_slug: &str,
-    ) -> Result<types::Integration> {
-        let url = format!("{}/apps/{}",
+    pub async fn apps_get_by_slug(&self, app_slug: &str) -> Result<types::Integration> {
+        let url = format!(
+            "{}/apps/{}",
             self.baseurl,
             progenitor_support::encode_path(&app_slug.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9115,11 +9061,16 @@ impl Client {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<types::Authorization>> {
-        let url = format!("{}/authorizations",
-            self.baseurl,
-        );
+        let url = format!("{}/authorizations", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+                ("client_id", client_id.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -9134,11 +9085,11 @@ impl Client {
         &self,
         body: &types::CreateNewAuthorizationRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/authorizations",
-            self.baseurl,
-        );
+        let url = format!("{}/authorizations", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -9155,12 +9106,15 @@ impl Client {
         client_id: &str,
         body: &types::GetorCreateAuthorizationSpecificAppRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/authorizations/clients/{}",
+        let url = format!(
+            "{}/authorizations/clients/{}",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -9178,13 +9132,16 @@ impl Client {
         fingerprint: &str,
         body: &types::GetorCreateAuthorizationSpecificAppandFingerprintRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/authorizations/clients/{}/{}",
+        let url = format!(
+            "{}/authorizations/clients/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&client_id.to_string()),
             progenitor_support::encode_path(&fingerprint.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -9200,15 +9157,13 @@ impl Client {
         &self,
         authorization_id: i64,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/authorizations/{}",
+        let url = format!(
+            "{}/authorizations/{}",
             self.baseurl,
             progenitor_support::encode_path(&authorization_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9220,15 +9175,13 @@ impl Client {
         &self,
         authorization_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/authorizations/{}",
+        let url = format!(
+            "{}/authorizations/{}",
             self.baseurl,
             progenitor_support::encode_path(&authorization_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9241,12 +9194,15 @@ impl Client {
         authorization_id: i64,
         body: &types::UpdateExistingAuthorizationRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("{}/authorizations/{}",
+        let url = format!(
+            "{}/authorizations/{}",
             self.baseurl,
             progenitor_support::encode_path(&authorization_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -9261,14 +9217,9 @@ impl Client {
     pub async fn codes_of_conduct_get_all_codes_of_conduct(
         &self,
     ) -> Result<Vec<types::CodeofConduct>> {
-        let url = format!("{}/codes_of_conduct",
-            self.baseurl,
-        );
+        let url = format!("{}/codes_of_conduct", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9280,15 +9231,13 @@ impl Client {
         &self,
         key: &str,
     ) -> Result<types::CodeofConduct> {
-        let url = format!("{}/codes_of_conduct/{}",
+        let url = format!(
+            "{}/codes_of_conduct/{}",
             self.baseurl,
             progenitor_support::encode_path(&key.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9296,17 +9245,10 @@ impl Client {
     /**
      * emojis_get: GET /emojis
      */
-    pub async fn emojis_get(
-        &self,
-    ) -> Result<types::GetEmojisOkResponse> {
-        let url = format!("{}/emojis",
-            self.baseurl,
-        );
+    pub async fn emojis_get(&self) -> Result<types::GetEmojisOkResponse> {
+        let url = format!("{}/emojis", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9318,15 +9260,13 @@ impl Client {
         &self,
         enterprise: &str,
     ) -> Result<types::ActionsEnterprisePermissions> {
-        let url = format!("{}/enterprises/{}/actions/permissions",
+        let url = format!(
+            "{}/enterprises/{}/actions/permissions",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9339,12 +9279,15 @@ impl Client {
         enterprise: &str,
         body: &types::SetGithubActionsPermissionsEnterpriseRequest,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/permissions",
+        let url = format!(
+            "{}/enterprises/{}/actions/permissions",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -9362,12 +9305,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListSelectedOrganizationsEnabledGithubActionsinEnterpriseOkResponse> {
-        let url = format!("{}/enterprises/{}/actions/permissions/organizations",
+        let url = format!(
+            "{}/enterprises/{}/actions/permissions/organizations",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -9383,12 +9333,15 @@ impl Client {
         enterprise: &str,
         body: &types::SetSelectedOrganizationsEnabledGithubActionsinEnterpriseRequest,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/permissions/organizations",
+        let url = format!(
+            "{}/enterprises/{}/actions/permissions/organizations",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -9405,16 +9358,14 @@ impl Client {
         enterprise: &str,
         org_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/permissions/organizations/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/permissions/organizations/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&org_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9427,16 +9378,14 @@ impl Client {
         enterprise: &str,
         org_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/permissions/organizations/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/permissions/organizations/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&org_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9448,15 +9397,13 @@ impl Client {
         &self,
         enterprise: &str,
     ) -> Result<types::SelectedActions> {
-        let url = format!("{}/enterprises/{}/actions/permissions/selected-actions",
+        let url = format!(
+            "{}/enterprises/{}/actions/permissions/selected-actions",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9469,12 +9416,15 @@ impl Client {
         enterprise: &str,
         body: &types::SelectedActions,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/permissions/selected-actions",
+        let url = format!(
+            "{}/enterprises/{}/actions/permissions/selected-actions",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -9492,12 +9442,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnerGroupsEnterpriseOkResponse> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -9513,12 +9470,15 @@ impl Client {
         enterprise: &str,
         body: &types::CreateSelfDataHostedRunnerGroupEnterpriseRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -9535,16 +9495,14 @@ impl Client {
         enterprise: &str,
         runner_group_id: i64,
     ) -> Result<types::RunnerGroupsEnterprise> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9557,16 +9515,14 @@ impl Client {
         enterprise: &str,
         runner_group_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9580,13 +9536,16 @@ impl Client {
         runner_group_id: i64,
         body: &types::UpdateSelfDataHostedRunnerGroupEnterpriseRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -9604,14 +9563,22 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseOkResponse> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}/organizations",
+    ) -> Result<types::GetListOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseOkResponse>
+    {
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}/organizations",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -9628,13 +9595,16 @@ impl Client {
         runner_group_id: i64,
         body: &types::SetOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseRequest,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}/organizations",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}/organizations",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -9652,17 +9622,15 @@ impl Client {
         runner_group_id: i64,
         org_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}/organizations/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}/organizations/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&org_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9676,17 +9644,15 @@ impl Client {
         runner_group_id: i64,
         org_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}/organizations/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}/organizations/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&org_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9701,13 +9667,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersinGroupEnterpriseOkResponse> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}/runners",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}/runners",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -9724,13 +9697,16 @@ impl Client {
         runner_group_id: i64,
         body: &types::SetSelfDataHostedRunnersinGroupEnterpriseRequest,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}/runners",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}/runners",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -9748,17 +9724,15 @@ impl Client {
         runner_group_id: i64,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}/runners/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9772,17 +9746,15 @@ impl Client {
         runner_group_id: i64,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/runner-groups/{}/runners/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/runner-groups/{}/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9796,12 +9768,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersEnterpriseOkResponse> {
-        let url = format!("{}/enterprises/{}/actions/runners",
+        let url = format!(
+            "{}/enterprises/{}/actions/runners",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -9816,15 +9795,13 @@ impl Client {
         &self,
         enterprise: &str,
     ) -> Result<Vec<types::RunnerApplication>> {
-        let url = format!("{}/enterprises/{}/actions/runners/downloads",
+        let url = format!(
+            "{}/enterprises/{}/actions/runners/downloads",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9836,15 +9813,13 @@ impl Client {
         &self,
         enterprise: &str,
     ) -> Result<types::AuthenticationToken> {
-        let url = format!("{}/enterprises/{}/actions/runners/registration-token",
+        let url = format!(
+            "{}/enterprises/{}/actions/runners/registration-token",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9856,15 +9831,13 @@ impl Client {
         &self,
         enterprise: &str,
     ) -> Result<types::AuthenticationToken> {
-        let url = format!("{}/enterprises/{}/actions/runners/remove-token",
+        let url = format!(
+            "{}/enterprises/{}/actions/runners/remove-token",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9877,16 +9850,14 @@ impl Client {
         enterprise: &str,
         runner_id: i64,
     ) -> Result<types::Runner> {
-        let url = format!("{}/enterprises/{}/actions/runners/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9899,16 +9870,14 @@ impl Client {
         enterprise: &str,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/enterprises/{}/actions/runners/{}",
+        let url = format!(
+            "{}/enterprises/{}/actions/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9927,12 +9896,24 @@ impl Client {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("{}/enterprises/{}/audit-log",
+        let url = format!(
+            "{}/enterprises/{}/audit-log",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("phrase", phrase.to_string()),
+                ("include", include.to_string()),
+                ("after", after.to_string()),
+                ("before", before.to_string()),
+                ("order", order.to_string()),
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -9947,15 +9928,13 @@ impl Client {
         &self,
         enterprise: &str,
     ) -> Result<types::ActionsBillingUsage> {
-        let url = format!("{}/enterprises/{}/settings/billing/actions",
+        let url = format!(
+            "{}/enterprises/{}/settings/billing/actions",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9967,15 +9946,13 @@ impl Client {
         &self,
         enterprise: &str,
     ) -> Result<types::PackagesBillingUsage> {
-        let url = format!("{}/enterprises/{}/settings/billing/packages",
+        let url = format!(
+            "{}/enterprises/{}/settings/billing/packages",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -9987,15 +9964,13 @@ impl Client {
         &self,
         enterprise: &str,
     ) -> Result<types::CombinedBillingUsage> {
-        let url = format!("{}/enterprises/{}/settings/billing/shared-storage",
+        let url = format!(
+            "{}/enterprises/{}/settings/billing/shared-storage",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10008,11 +9983,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/events",
-            self.baseurl,
-        );
+        let url = format!("{}/events", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10023,17 +10002,10 @@ impl Client {
     /**
      * activity_get_feeds: GET /feeds
      */
-    pub async fn activity_get_feeds(
-        &self,
-    ) -> Result<types::Feed> {
-        let url = format!("{}/feeds",
-            self.baseurl,
-        );
+    pub async fn activity_get_feeds(&self) -> Result<types::Feed> {
+        let url = format!("{}/feeds", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10047,11 +10019,16 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
-        let url = format!("{}/gists",
-            self.baseurl,
-        );
+        let url = format!("{}/gists", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10062,15 +10039,12 @@ impl Client {
     /**
      * gists_create: POST /gists
      */
-    pub async fn gists_create(
-        &self,
-        body: &types::CreateGistRequest,
-    ) -> Result<types::GistSimple> {
-        let url = format!("{}/gists",
-            self.baseurl,
-        );
+    pub async fn gists_create(&self, body: &types::CreateGistRequest) -> Result<types::GistSimple> {
+        let url = format!("{}/gists", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -10088,11 +10062,16 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
-        let url = format!("{}/gists/public",
-            self.baseurl,
-        );
+        let url = format!("{}/gists/public", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10109,11 +10088,16 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
-        let url = format!("{}/gists/starred",
-            self.baseurl,
-        );
+        let url = format!("{}/gists/starred", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10124,19 +10108,14 @@ impl Client {
     /**
      * gists_get: GET /gists/{gist_id}
      */
-    pub async fn gists_get(
-        &self,
-        gist_id: &str,
-    ) -> Result<types::GistSimple> {
-        let url = format!("{}/gists/{}",
+    pub async fn gists_get(&self, gist_id: &str) -> Result<types::GistSimple> {
+        let url = format!(
+            "{}/gists/{}",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10144,19 +10123,14 @@ impl Client {
     /**
      * gists_delete: DELETE /gists/{gist_id}
      */
-    pub async fn gists_delete(
-        &self,
-        gist_id: &str,
-    ) -> Result<()> {
-        let url = format!("{}/gists/{}",
+    pub async fn gists_delete(&self, gist_id: &str) -> Result<()> {
+        let url = format!(
+            "{}/gists/{}",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10169,12 +10143,15 @@ impl Client {
         gist_id: &str,
         body: &types::UpdateGistRequest,
     ) -> Result<types::GistSimple> {
-        let url = format!("{}/gists/{}",
+        let url = format!(
+            "{}/gists/{}",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -10192,12 +10169,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::GistComment>> {
-        let url = format!("{}/gists/{}/comments",
+        let url = format!(
+            "{}/gists/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10213,12 +10197,15 @@ impl Client {
         gist_id: &str,
         body: &types::CreateGistCommentRequest,
     ) -> Result<types::GistComment> {
-        let url = format!("{}/gists/{}/comments",
+        let url = format!(
+            "{}/gists/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -10235,16 +10222,14 @@ impl Client {
         gist_id: &str,
         comment_id: i64,
     ) -> Result<types::GistComment> {
-        let url = format!("{}/gists/{}/comments/{}",
+        let url = format!(
+            "{}/gists/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10252,21 +10237,15 @@ impl Client {
     /**
      * gists_delete_comment: DELETE /gists/{gist_id}/comments/{comment_id}
      */
-    pub async fn gists_delete_comment(
-        &self,
-        gist_id: &str,
-        comment_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/gists/{}/comments/{}",
+    pub async fn gists_delete_comment(&self, gist_id: &str, comment_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/gists/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10280,13 +10259,16 @@ impl Client {
         comment_id: i64,
         body: &types::UpdateGistCommentRequest,
     ) -> Result<types::GistComment> {
-        let url = format!("{}/gists/{}/comments/{}",
+        let url = format!(
+            "{}/gists/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -10304,12 +10286,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::GistCommit>> {
-        let url = format!("{}/gists/{}/commits",
+        let url = format!(
+            "{}/gists/{}/commits",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10326,12 +10315,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::GistSimple>> {
-        let url = format!("{}/gists/{}/forks",
+        let url = format!(
+            "{}/gists/{}/forks",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10342,19 +10338,14 @@ impl Client {
     /**
      * gists_fork: POST /gists/{gist_id}/forks
      */
-    pub async fn gists_fork(
-        &self,
-        gist_id: &str,
-    ) -> Result<types::BaseGist> {
-        let url = format!("{}/gists/{}/forks",
+    pub async fn gists_fork(&self, gist_id: &str) -> Result<types::BaseGist> {
+        let url = format!(
+            "{}/gists/{}/forks",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10362,19 +10353,14 @@ impl Client {
     /**
      * gists_check_is_starred: GET /gists/{gist_id}/star
      */
-    pub async fn gists_check_is_starred(
-        &self,
-        gist_id: &str,
-    ) -> Result<()> {
-        let url = format!("{}/gists/{}/star",
+    pub async fn gists_check_is_starred(&self, gist_id: &str) -> Result<()> {
+        let url = format!(
+            "{}/gists/{}/star",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10382,19 +10368,14 @@ impl Client {
     /**
      * gists_star: PUT /gists/{gist_id}/star
      */
-    pub async fn gists_star(
-        &self,
-        gist_id: &str,
-    ) -> Result<()> {
-        let url = format!("{}/gists/{}/star",
+    pub async fn gists_star(&self, gist_id: &str) -> Result<()> {
+        let url = format!(
+            "{}/gists/{}/star",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10402,19 +10383,14 @@ impl Client {
     /**
      * gists_unstar: DELETE /gists/{gist_id}/star
      */
-    pub async fn gists_unstar(
-        &self,
-        gist_id: &str,
-    ) -> Result<()> {
-        let url = format!("{}/gists/{}/star",
+    pub async fn gists_unstar(&self, gist_id: &str) -> Result<()> {
+        let url = format!(
+            "{}/gists/{}/star",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10422,21 +10398,15 @@ impl Client {
     /**
      * gists_get_revision: GET /gists/{gist_id}/{sha}
      */
-    pub async fn gists_get_revision(
-        &self,
-        gist_id: &str,
-        sha: &str,
-    ) -> Result<types::GistSimple> {
-        let url = format!("{}/gists/{}/{}",
+    pub async fn gists_get_revision(&self, gist_id: &str, sha: &str) -> Result<types::GistSimple> {
+        let url = format!(
+            "{}/gists/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&gist_id.to_string()),
             progenitor_support::encode_path(&sha.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10444,17 +10414,10 @@ impl Client {
     /**
      * gitignore_get_all_templates: GET /gitignore/templates
      */
-    pub async fn gitignore_get_all_templates(
-        &self,
-    ) -> Result<Vec<String>> {
-        let url = format!("{}/gitignore/templates",
-            self.baseurl,
-        );
+    pub async fn gitignore_get_all_templates(&self) -> Result<Vec<String>> {
+        let url = format!("{}/gitignore/templates", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10462,19 +10425,14 @@ impl Client {
     /**
      * gitignore_get_template: GET /gitignore/templates/{name}
      */
-    pub async fn gitignore_get_template(
-        &self,
-        name: &str,
-    ) -> Result<types::GitignoreTemplate> {
-        let url = format!("{}/gitignore/templates/{}",
+    pub async fn gitignore_get_template(&self, name: &str) -> Result<types::GitignoreTemplate> {
+        let url = format!(
+            "{}/gitignore/templates/{}",
             self.baseurl,
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10487,11 +10445,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListRepositoriesAccessibleAppInstallationOkResponse> {
-        let url = format!("{}/installation/repositories",
-            self.baseurl,
-        );
+        let url = format!("{}/installation/repositories", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10502,17 +10464,10 @@ impl Client {
     /**
      * apps_revoke_installation_access_token: DELETE /installation/token
      */
-    pub async fn apps_revoke_installation_access_token(
-        &self,
-    ) -> Result<()> {
-        let url = format!("{}/installation/token",
-            self.baseurl,
-        );
+    pub async fn apps_revoke_installation_access_token(&self) -> Result<()> {
+        let url = format!("{}/installation/token", self.baseurl,);
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10535,11 +10490,25 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("{}/issues",
-            self.baseurl,
-        );
+        let url = format!("{}/issues", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("filter", filter.to_string()),
+                ("state", state.to_string()),
+                ("labels", labels.to_string()),
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("since", since.to_rfc3339()),
+                ("collab", format!("{}", collab)),
+                ("orgs", format!("{}", orgs)),
+                ("owned", format!("{}", owned)),
+                ("pulls", format!("{}", pulls)),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10556,11 +10525,16 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::LicenseSimple>> {
-        let url = format!("{}/licenses",
-            self.baseurl,
-        );
+        let url = format!("{}/licenses", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("featured", format!("{}", featured)),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10571,19 +10545,14 @@ impl Client {
     /**
      * licenses_get: GET /licenses/{license}
      */
-    pub async fn licenses_get(
-        &self,
-        license: &str,
-    ) -> Result<types::License> {
-        let url = format!("{}/licenses/{}",
+    pub async fn licenses_get(&self, license: &str) -> Result<types::License> {
+        let url = format!(
+            "{}/licenses/{}",
             self.baseurl,
             progenitor_support::encode_path(&license.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10595,11 +10564,11 @@ impl Client {
         &self,
         body: &types::RenderMarkdownDocumentRequest,
     ) -> Result<String> {
-        let url = format!("{}/markdown",
-            self.baseurl,
-        );
+        let url = format!("{}/markdown", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -10611,15 +10580,12 @@ impl Client {
     /**
      * markdown_render_raw: POST /markdown/raw
      */
-    pub async fn markdown_render_raw<T: Into<reqwest::Body>>(
-        &self,
-        body: T,
-    ) -> Result<String> {
-        let url = format!("{}/markdown/raw",
-            self.baseurl,
-        );
+    pub async fn markdown_render_raw<T: Into<reqwest::Body>>(&self, body: T) -> Result<String> {
+        let url = format!("{}/markdown/raw", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .body(body)
             .send()
             .await?
@@ -10635,15 +10601,13 @@ impl Client {
         &self,
         account_id: i64,
     ) -> Result<types::MarketplacePurchase> {
-        let url = format!("{}/marketplace_listing/accounts/{}",
+        let url = format!(
+            "{}/marketplace_listing/accounts/{}",
             self.baseurl,
             progenitor_support::encode_path(&account_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10656,11 +10620,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
-        let url = format!("{}/marketplace_listing/plans",
-            self.baseurl,
-        );
+        let url = format!("{}/marketplace_listing/plans", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10679,12 +10647,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
-        let url = format!("{}/marketplace_listing/plans/{}/accounts",
+        let url = format!(
+            "{}/marketplace_listing/plans/{}/accounts",
             self.baseurl,
             progenitor_support::encode_path(&plan_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10699,15 +10676,13 @@ impl Client {
         &self,
         account_id: i64,
     ) -> Result<types::MarketplacePurchase> {
-        let url = format!("{}/marketplace_listing/stubbed/accounts/{}",
+        let url = format!(
+            "{}/marketplace_listing/stubbed/accounts/{}",
             self.baseurl,
             progenitor_support::encode_path(&account_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10720,11 +10695,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplaceListingPlan>> {
-        let url = format!("{}/marketplace_listing/stubbed/plans",
-            self.baseurl,
-        );
+        let url = format!("{}/marketplace_listing/stubbed/plans", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10743,12 +10722,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
-        let url = format!("{}/marketplace_listing/stubbed/plans/{}/accounts",
+        let url = format!(
+            "{}/marketplace_listing/stubbed/plans/{}/accounts",
             self.baseurl,
             progenitor_support::encode_path(&plan_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10759,17 +10747,10 @@ impl Client {
     /**
      * meta_get: GET /meta
      */
-    pub async fn meta_get(
-        &self,
-    ) -> Result<types::ApiOverview> {
-        let url = format!("{}/meta",
-            self.baseurl,
-        );
+    pub async fn meta_get(&self) -> Result<types::ApiOverview> {
+        let url = format!("{}/meta", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10784,13 +10765,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/networks/{}/{}/events",
+        let url = format!(
+            "{}/networks/{}/{}/events",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10810,11 +10798,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Thread>> {
-        let url = format!("{}/notifications",
-            self.baseurl,
-        );
+        let url = format!("{}/notifications", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("all", format!("{}", all)),
+                ("participating", format!("{}", participating)),
+                ("since", since.to_rfc3339()),
+                ("before", before.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10829,11 +10825,11 @@ impl Client {
         &self,
         body: &types::MarkNotificationsasReadRequest,
     ) -> Result<types::PutMarkNotificationsasReadAcceptedResponse> {
-        let url = format!("{}/notifications",
-            self.baseurl,
-        );
+        let url = format!("{}/notifications", self.baseurl,);
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -10845,19 +10841,14 @@ impl Client {
     /**
      * activity_get_thread: GET /notifications/threads/{thread_id}
      */
-    pub async fn activity_get_thread(
-        &self,
-        thread_id: i64,
-    ) -> Result<types::Thread> {
-        let url = format!("{}/notifications/threads/{}",
+    pub async fn activity_get_thread(&self, thread_id: i64) -> Result<types::Thread> {
+        let url = format!(
+            "{}/notifications/threads/{}",
             self.baseurl,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10865,19 +10856,14 @@ impl Client {
     /**
      * activity_mark_thread_as_read: PATCH /notifications/threads/{thread_id}
      */
-    pub async fn activity_mark_thread_as_read(
-        &self,
-        thread_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/notifications/threads/{}",
+    pub async fn activity_mark_thread_as_read(&self, thread_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/notifications/threads/{}",
             self.baseurl,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
-        let res = self.client.patch(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.patch(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10889,15 +10875,13 @@ impl Client {
         &self,
         thread_id: i64,
     ) -> Result<types::ThreadSubscription> {
-        let url = format!("{}/notifications/threads/{}/subscription",
+        let url = format!(
+            "{}/notifications/threads/{}/subscription",
             self.baseurl,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10910,12 +10894,15 @@ impl Client {
         thread_id: i64,
         body: &types::SetThreadSubscriptionRequest,
     ) -> Result<types::ThreadSubscription> {
-        let url = format!("{}/notifications/threads/{}/subscription",
+        let url = format!(
+            "{}/notifications/threads/{}/subscription",
             self.baseurl,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -10927,19 +10914,14 @@ impl Client {
     /**
      * activity_delete_thread_subscription: DELETE /notifications/threads/{thread_id}/subscription
      */
-    pub async fn activity_delete_thread_subscription(
-        &self,
-        thread_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/notifications/threads/{}/subscription",
+    pub async fn activity_delete_thread_subscription(&self, thread_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/notifications/threads/{}/subscription",
             self.baseurl,
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -10947,15 +10929,13 @@ impl Client {
     /**
      * meta_get_octocat: GET /octocat
      */
-    pub async fn meta_get_octocat(
-        &self,
-        s: &str,
-    ) -> Result<String> {
-        let url = format!("{}/octocat",
-            self.baseurl,
-        );
+    pub async fn meta_get_octocat(&self, s: &str) -> Result<String> {
+        let url = format!("{}/octocat", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("s", s.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -10971,11 +10951,15 @@ impl Client {
         since: i64,
         per_page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
-        let url = format!("{}/organizations",
-            self.baseurl,
-        );
+        let url = format!("{}/organizations", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("since", format!("{}", since)),
+                ("per_page", format!("{}", per_page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -10986,19 +10970,14 @@ impl Client {
     /**
      * orgs_get: GET /orgs/{org}
      */
-    pub async fn orgs_get(
-        &self,
-        org: &str,
-    ) -> Result<types::OrganizationFull> {
-        let url = format!("{}/orgs/{}",
+    pub async fn orgs_get(&self, org: &str) -> Result<types::OrganizationFull> {
+        let url = format!(
+            "{}/orgs/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11011,12 +10990,15 @@ impl Client {
         org: &str,
         body: &types::UpdateOrganizationRequest,
     ) -> Result<types::OrganizationFull> {
-        let url = format!("{}/orgs/{}",
+        let url = format!(
+            "{}/orgs/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -11032,15 +11014,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<types::ActionsOrganizationPermissions> {
-        let url = format!("{}/orgs/{}/actions/permissions",
+        let url = format!(
+            "{}/orgs/{}/actions/permissions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11053,12 +11033,15 @@ impl Client {
         org: &str,
         body: &types::SetGithubActionsPermissionsOrganizationRequest,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/permissions",
+        let url = format!(
+            "{}/orgs/{}/actions/permissions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -11075,13 +11058,21 @@ impl Client {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelectedRepositoriesEnabledGithubActionsinOrganizationOkResponse> {
-        let url = format!("{}/orgs/{}/actions/permissions/repositories",
+    ) -> Result<types::GetListSelectedRepositoriesEnabledGithubActionsinOrganizationOkResponse>
+    {
+        let url = format!(
+            "{}/orgs/{}/actions/permissions/repositories",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -11097,12 +11088,15 @@ impl Client {
         org: &str,
         body: &types::SetSelectedRepositoriesEnabledGithubActionsinOrganizationRequest,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/permissions/repositories",
+        let url = format!(
+            "{}/orgs/{}/actions/permissions/repositories",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -11119,16 +11113,14 @@ impl Client {
         org: &str,
         repository_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/permissions/repositories/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/permissions/repositories/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11141,16 +11133,14 @@ impl Client {
         org: &str,
         repository_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/permissions/repositories/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/permissions/repositories/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11162,15 +11152,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<types::SelectedActions> {
-        let url = format!("{}/orgs/{}/actions/permissions/selected-actions",
+        let url = format!(
+            "{}/orgs/{}/actions/permissions/selected-actions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11183,12 +11171,15 @@ impl Client {
         org: &str,
         body: &types::SelectedActions,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/permissions/selected-actions",
+        let url = format!(
+            "{}/orgs/{}/actions/permissions/selected-actions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -11206,12 +11197,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnerGroupsOrganizationOkResponse> {
-        let url = format!("{}/orgs/{}/actions/runner-groups",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -11227,12 +11225,15 @@ impl Client {
         org: &str,
         body: &types::CreateSelfDataHostedRunnerGroupOrganizationRequest,
     ) -> Result<types::RunnerGroupsOrg> {
-        let url = format!("{}/orgs/{}/actions/runner-groups",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -11249,16 +11250,14 @@ impl Client {
         org: &str,
         runner_group_id: i64,
     ) -> Result<types::RunnerGroupsOrg> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11271,16 +11270,14 @@ impl Client {
         org: &str,
         runner_group_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11294,13 +11291,16 @@ impl Client {
         runner_group_id: i64,
         body: &types::UpdateSelfDataHostedRunnerGroupOrganizationRequest,
     ) -> Result<types::RunnerGroupsOrg> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -11318,14 +11318,22 @@ impl Client {
         runner_group_id: i64,
         page: i64,
         per_page: i64,
-    ) -> Result<types::GetListRepositoryAccessSelfDataHostedRunnerGroupinOrganizationOkResponse> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}/repositories",
+    ) -> Result<types::GetListRepositoryAccessSelfDataHostedRunnerGroupinOrganizationOkResponse>
+    {
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}/repositories",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -11342,13 +11350,16 @@ impl Client {
         runner_group_id: i64,
         body: &types::SetRepositoryAccessSelfDataHostedRunnerGroupinOrganizationRequest,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}/repositories",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}/repositories",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -11366,17 +11377,15 @@ impl Client {
         runner_group_id: i64,
         repository_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}/repositories/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}/repositories/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11390,17 +11399,15 @@ impl Client {
         runner_group_id: i64,
         repository_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}/repositories/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}/repositories/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11415,13 +11422,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersinGroupOrganizationOkResponse> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}/runners",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}/runners",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -11438,13 +11452,16 @@ impl Client {
         runner_group_id: i64,
         body: &types::SetSelfDataHostedRunnersinGroupOrganizationRequest,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}/runners",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}/runners",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -11462,17 +11479,15 @@ impl Client {
         runner_group_id: i64,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}/runners/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11486,17 +11501,15 @@ impl Client {
         runner_group_id: i64,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/runner-groups/{}/runners/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/runner-groups/{}/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_group_id.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11510,12 +11523,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersOrganizationOkResponse> {
-        let url = format!("{}/orgs/{}/actions/runners",
+        let url = format!(
+            "{}/orgs/{}/actions/runners",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -11530,15 +11550,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<Vec<types::RunnerApplication>> {
-        let url = format!("{}/orgs/{}/actions/runners/downloads",
+        let url = format!(
+            "{}/orgs/{}/actions/runners/downloads",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11550,15 +11568,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<types::AuthenticationToken> {
-        let url = format!("{}/orgs/{}/actions/runners/registration-token",
+        let url = format!(
+            "{}/orgs/{}/actions/runners/registration-token",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11570,15 +11586,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<types::AuthenticationToken> {
-        let url = format!("{}/orgs/{}/actions/runners/remove-token",
+        let url = format!(
+            "{}/orgs/{}/actions/runners/remove-token",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11591,16 +11605,14 @@ impl Client {
         org: &str,
         runner_id: i64,
     ) -> Result<types::Runner> {
-        let url = format!("{}/orgs/{}/actions/runners/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11613,16 +11625,14 @@ impl Client {
         org: &str,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/runners/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11636,12 +11646,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListOrganizationSecretsOkResponse> {
-        let url = format!("{}/orgs/{}/actions/secrets",
+        let url = format!(
+            "{}/orgs/{}/actions/secrets",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -11652,19 +11669,14 @@ impl Client {
     /**
      * actions_get_org_public_key: GET /orgs/{org}/actions/secrets/public-key
      */
-    pub async fn actions_get_org_public_key(
-        &self,
-        org: &str,
-    ) -> Result<types::ActionsPublicKey> {
-        let url = format!("{}/orgs/{}/actions/secrets/public-key",
+    pub async fn actions_get_org_public_key(&self, org: &str) -> Result<types::ActionsPublicKey> {
+        let url = format!(
+            "{}/orgs/{}/actions/secrets/public-key",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11677,16 +11689,14 @@ impl Client {
         org: &str,
         secret_name: &str,
     ) -> Result<types::OrganizationActionsSecret> {
-        let url = format!("{}/orgs/{}/actions/secrets/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/secrets/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11700,13 +11710,16 @@ impl Client {
         secret_name: &str,
         body: &types::CreateUpdateOrganizationSecretRequest,
     ) -> Result<types::EmptyObject> {
-        let url = format!("{}/orgs/{}/actions/secrets/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/secrets/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -11718,21 +11731,15 @@ impl Client {
     /**
      * actions_delete_org_secret: DELETE /orgs/{org}/actions/secrets/{secret_name}
      */
-    pub async fn actions_delete_org_secret(
-        &self,
-        org: &str,
-        secret_name: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/secrets/{}",
+    pub async fn actions_delete_org_secret(&self, org: &str, secret_name: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/actions/secrets/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11747,13 +11754,20 @@ impl Client {
         page: i64,
         per_page: i64,
     ) -> Result<types::GetListSelectedRepositoriesOrganizationSecretOkResponse> {
-        let url = format!("{}/orgs/{}/actions/secrets/{}/repositories",
+        let url = format!(
+            "{}/orgs/{}/actions/secrets/{}/repositories",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -11770,13 +11784,16 @@ impl Client {
         secret_name: &str,
         body: &types::SetSelectedRepositoriesOrganizationSecretRequest,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/secrets/{}/repositories",
+        let url = format!(
+            "{}/orgs/{}/actions/secrets/{}/repositories",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -11794,17 +11811,15 @@ impl Client {
         secret_name: &str,
         repository_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/secrets/{}/repositories/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/secrets/{}/repositories/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11818,17 +11833,15 @@ impl Client {
         secret_name: &str,
         repository_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/actions/secrets/{}/repositories/{}",
+        let url = format!(
+            "{}/orgs/{}/actions/secrets/{}/repositories/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11847,12 +11860,24 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
-        let url = format!("{}/orgs/{}/audit-log",
+        let url = format!(
+            "{}/orgs/{}/audit-log",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("phrase", phrase.to_string()),
+                ("include", include.to_string()),
+                ("after", after.to_string()),
+                ("before", before.to_string()),
+                ("order", order.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -11863,19 +11888,14 @@ impl Client {
     /**
      * orgs_list_blocked_users: GET /orgs/{org}/blocks
      */
-    pub async fn orgs_list_blocked_users(
-        &self,
-        org: &str,
-    ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/orgs/{}/blocks",
+    pub async fn orgs_list_blocked_users(&self, org: &str) -> Result<Vec<types::SimpleUser>> {
+        let url = format!(
+            "{}/orgs/{}/blocks",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11883,21 +11903,15 @@ impl Client {
     /**
      * orgs_check_blocked_user: GET /orgs/{org}/blocks/{username}
      */
-    pub async fn orgs_check_blocked_user(
-        &self,
-        org: &str,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/blocks/{}",
+    pub async fn orgs_check_blocked_user(&self, org: &str, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/blocks/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11905,21 +11919,15 @@ impl Client {
     /**
      * orgs_block_user: PUT /orgs/{org}/blocks/{username}
      */
-    pub async fn orgs_block_user(
-        &self,
-        org: &str,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/blocks/{}",
+    pub async fn orgs_block_user(&self, org: &str, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/blocks/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11927,21 +11935,15 @@ impl Client {
     /**
      * orgs_unblock_user: DELETE /orgs/{org}/blocks/{username}
      */
-    pub async fn orgs_unblock_user(
-        &self,
-        org: &str,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/blocks/{}",
+    pub async fn orgs_unblock_user(&self, org: &str, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/blocks/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11953,15 +11955,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<Vec<types::CredentialAuthorization>> {
-        let url = format!("{}/orgs/{}/credential-authorizations",
+        let url = format!(
+            "{}/orgs/{}/credential-authorizations",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11974,16 +11974,14 @@ impl Client {
         org: &str,
         credential_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/credential-authorizations/{}",
+        let url = format!(
+            "{}/orgs/{}/credential-authorizations/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&credential_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -11997,12 +11995,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/orgs/{}/events",
+        let url = format!(
+            "{}/orgs/{}/events",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12019,12 +12024,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
-        let url = format!("{}/orgs/{}/failed_invitations",
+        let url = format!(
+            "{}/orgs/{}/failed_invitations",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12041,12 +12053,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrgHook>> {
-        let url = format!("{}/orgs/{}/hooks",
+        let url = format!(
+            "{}/orgs/{}/hooks",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12062,12 +12081,15 @@ impl Client {
         org: &str,
         body: &types::CreateOrganizationWebhookRequest,
     ) -> Result<types::OrgHook> {
-        let url = format!("{}/orgs/{}/hooks",
+        let url = format!(
+            "{}/orgs/{}/hooks",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -12079,21 +12101,15 @@ impl Client {
     /**
      * orgs_get_webhook: GET /orgs/{org}/hooks/{hook_id}
      */
-    pub async fn orgs_get_webhook(
-        &self,
-        org: &str,
-        hook_id: i64,
-    ) -> Result<types::OrgHook> {
-        let url = format!("{}/orgs/{}/hooks/{}",
+    pub async fn orgs_get_webhook(&self, org: &str, hook_id: i64) -> Result<types::OrgHook> {
+        let url = format!(
+            "{}/orgs/{}/hooks/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12101,21 +12117,15 @@ impl Client {
     /**
      * orgs_delete_webhook: DELETE /orgs/{org}/hooks/{hook_id}
      */
-    pub async fn orgs_delete_webhook(
-        &self,
-        org: &str,
-        hook_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/hooks/{}",
+    pub async fn orgs_delete_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/hooks/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12129,13 +12139,16 @@ impl Client {
         hook_id: i64,
         body: &types::UpdateOrganizationWebhookRequest,
     ) -> Result<types::OrgHook> {
-        let url = format!("{}/orgs/{}/hooks/{}",
+        let url = format!(
+            "{}/orgs/{}/hooks/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -12152,16 +12165,14 @@ impl Client {
         org: &str,
         hook_id: i64,
     ) -> Result<types::WebhookConfig> {
-        let url = format!("{}/orgs/{}/hooks/{}/config",
+        let url = format!(
+            "{}/orgs/{}/hooks/{}/config",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12175,13 +12186,16 @@ impl Client {
         hook_id: i64,
         body: &types::UpdateWebhookConfigurationOrganizationRequest,
     ) -> Result<types::WebhookConfig> {
-        let url = format!("{}/orgs/{}/hooks/{}/config",
+        let url = format!(
+            "{}/orgs/{}/hooks/{}/config",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -12193,21 +12207,15 @@ impl Client {
     /**
      * orgs_ping_webhook: POST /orgs/{org}/hooks/{hook_id}/pings
      */
-    pub async fn orgs_ping_webhook(
-        &self,
-        org: &str,
-        hook_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/hooks/{}/pings",
+    pub async fn orgs_ping_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/hooks/{}/pings",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12215,19 +12223,14 @@ impl Client {
     /**
      * apps_get_org_installation: GET /orgs/{org}/installation
      */
-    pub async fn apps_get_org_installation(
-        &self,
-        org: &str,
-    ) -> Result<types::Installation> {
-        let url = format!("{}/orgs/{}/installation",
+    pub async fn apps_get_org_installation(&self, org: &str) -> Result<types::Installation> {
+        let url = format!(
+            "{}/orgs/{}/installation",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12241,12 +12244,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListAppInstallationsOrganizationOkResponse> {
-        let url = format!("{}/orgs/{}/installations",
+        let url = format!(
+            "{}/orgs/{}/installations",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12261,15 +12271,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<types::GetInteractionRestrictionsOrganizationOkResponse> {
-        let url = format!("{}/orgs/{}/interaction-limits",
+        let url = format!(
+            "{}/orgs/{}/interaction-limits",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12282,12 +12290,15 @@ impl Client {
         org: &str,
         body: &types::InteractionLimit,
     ) -> Result<types::InteractionLimitResponse> {
-        let url = format!("{}/orgs/{}/interaction-limits",
+        let url = format!(
+            "{}/orgs/{}/interaction-limits",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -12299,19 +12310,14 @@ impl Client {
     /**
      * interactions_remove_restrictions_for_org: DELETE /orgs/{org}/interaction-limits
      */
-    pub async fn interactions_remove_restrictions_for_org(
-        &self,
-        org: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/interaction-limits",
+    pub async fn interactions_remove_restrictions_for_org(&self, org: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/interaction-limits",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12325,12 +12331,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
-        let url = format!("{}/orgs/{}/invitations",
+        let url = format!(
+            "{}/orgs/{}/invitations",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12346,12 +12359,15 @@ impl Client {
         org: &str,
         body: &types::CreateOrganizationInvitationRequest,
     ) -> Result<types::OrganizationInvitation> {
-        let url = format!("{}/orgs/{}/invitations",
+        let url = format!(
+            "{}/orgs/{}/invitations",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -12363,21 +12379,15 @@ impl Client {
     /**
      * orgs_cancel_invitation: DELETE /orgs/{org}/invitations/{invitation_id}
      */
-    pub async fn orgs_cancel_invitation(
-        &self,
-        org: &str,
-        invitation_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/invitations/{}",
+    pub async fn orgs_cancel_invitation(&self, org: &str, invitation_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/invitations/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12392,13 +12402,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Team>> {
-        let url = format!("{}/orgs/{}/invitations/{}/teams",
+        let url = format!(
+            "{}/orgs/{}/invitations/{}/teams",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12421,12 +12438,25 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("{}/orgs/{}/issues",
+        let url = format!(
+            "{}/orgs/{}/issues",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("filter", filter.to_string()),
+                ("state", state.to_string()),
+                ("labels", labels.to_string()),
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12445,12 +12475,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/orgs/{}/members",
+        let url = format!(
+            "{}/orgs/{}/members",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("filter", filter.to_string()),
+                ("role", role.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12461,21 +12500,15 @@ impl Client {
     /**
      * orgs_check_membership_for_user: GET /orgs/{org}/members/{username}
      */
-    pub async fn orgs_check_membership_for_user(
-        &self,
-        org: &str,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/members/{}",
+    pub async fn orgs_check_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/members/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12483,21 +12516,15 @@ impl Client {
     /**
      * orgs_remove_member: DELETE /orgs/{org}/members/{username}
      */
-    pub async fn orgs_remove_member(
-        &self,
-        org: &str,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/members/{}",
+    pub async fn orgs_remove_member(&self, org: &str, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/members/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12510,16 +12537,14 @@ impl Client {
         org: &str,
         username: &str,
     ) -> Result<types::OrgMembership> {
-        let url = format!("{}/orgs/{}/memberships/{}",
+        let url = format!(
+            "{}/orgs/{}/memberships/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12533,13 +12558,16 @@ impl Client {
         username: &str,
         body: &types::SetOrganizationMembershipUserRequest,
     ) -> Result<types::OrgMembership> {
-        let url = format!("{}/orgs/{}/memberships/{}",
+        let url = format!(
+            "{}/orgs/{}/memberships/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -12551,21 +12579,15 @@ impl Client {
     /**
      * orgs_remove_membership_for_user: DELETE /orgs/{org}/memberships/{username}
      */
-    pub async fn orgs_remove_membership_for_user(
-        &self,
-        org: &str,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/memberships/{}",
+    pub async fn orgs_remove_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/memberships/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12580,12 +12602,20 @@ impl Client {
         page: i64,
         exclude: &[String],
     ) -> Result<Vec<types::Migration>> {
-        let url = format!("{}/orgs/{}/migrations",
+        let url = format!(
+            "{}/orgs/{}/migrations",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+                ("exclude", exclude.join(" ")),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12601,12 +12631,15 @@ impl Client {
         org: &str,
         body: &types::StartOrganizationMigrationRequest,
     ) -> Result<types::Migration> {
-        let url = format!("{}/orgs/{}/migrations",
+        let url = format!(
+            "{}/orgs/{}/migrations",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -12624,13 +12657,17 @@ impl Client {
         migration_id: i64,
         exclude: &[String],
     ) -> Result<types::Migration> {
-        let url = format!("{}/orgs/{}/migrations/{}",
+        let url = format!(
+            "{}/orgs/{}/migrations/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("exclude", exclude.join(" "))])
             .send()
             .await?
             .error_for_status()?;
@@ -12646,16 +12683,14 @@ impl Client {
         org: &str,
         migration_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/migrations/{}/archive",
+        let url = format!(
+            "{}/orgs/{}/migrations/{}/archive",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12668,16 +12703,14 @@ impl Client {
         org: &str,
         migration_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/migrations/{}/archive",
+        let url = format!(
+            "{}/orgs/{}/migrations/{}/archive",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12691,17 +12724,15 @@ impl Client {
         migration_id: i64,
         repo_name: &str,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/migrations/{}/repos/{}/lock",
+        let url = format!(
+            "{}/orgs/{}/migrations/{}/repos/{}/lock",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
             progenitor_support::encode_path(&repo_name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12716,13 +12747,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/orgs/{}/migrations/{}/repositories",
+        let url = format!(
+            "{}/orgs/{}/migrations/{}/repositories",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12740,12 +12778,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/orgs/{}/outside_collaborators",
+        let url = format!(
+            "{}/orgs/{}/outside_collaborators",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("filter", filter.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12761,16 +12807,14 @@ impl Client {
         org: &str,
         username: &str,
     ) -> Result<types::PutConvertOrganizationMemberOutsideCollaboratorAcceptedResponse> {
-        let url = format!("{}/orgs/{}/outside_collaborators/{}",
+        let url = format!(
+            "{}/orgs/{}/outside_collaborators/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12778,21 +12822,15 @@ impl Client {
     /**
      * orgs_remove_outside_collaborator: DELETE /orgs/{org}/outside_collaborators/{username}
      */
-    pub async fn orgs_remove_outside_collaborator(
-        &self,
-        org: &str,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/outside_collaborators/{}",
+    pub async fn orgs_remove_outside_collaborator(&self, org: &str, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/outside_collaborators/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12806,17 +12844,15 @@ impl Client {
         package_name: &str,
         org: &str,
     ) -> Result<types::Package> {
-        let url = format!("{}/orgs/{}/packages/{}/{}",
+        let url = format!(
+            "{}/orgs/{}/packages/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12830,17 +12866,15 @@ impl Client {
         package_name: &str,
         org: &str,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/packages/{}/{}",
+        let url = format!(
+            "{}/orgs/{}/packages/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12855,14 +12889,18 @@ impl Client {
         org: &str,
         token: &str,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/packages/{}/{}/restore",
+        let url = format!(
+            "{}/orgs/{}/packages/{}/{}/restore",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
+            .query(&[("token", token.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -12882,14 +12920,22 @@ impl Client {
         per_page: i64,
         state: &str,
     ) -> Result<Vec<types::PackageVersion>> {
-        let url = format!("{}/orgs/{}/packages/{}/{}/versions",
+        let url = format!(
+            "{}/orgs/{}/packages/{}/{}/versions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+                ("state", state.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -12907,7 +12953,8 @@ impl Client {
         org: &str,
         package_version_id: i64,
     ) -> Result<types::PackageVersion> {
-        let url = format!("{}/orgs/{}/packages/{}/{}/versions/{}",
+        let url = format!(
+            "{}/orgs/{}/packages/{}/{}/versions/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
@@ -12915,10 +12962,7 @@ impl Client {
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12933,7 +12977,8 @@ impl Client {
         org: &str,
         package_version_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/packages/{}/{}/versions/{}",
+        let url = format!(
+            "{}/orgs/{}/packages/{}/{}/versions/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
@@ -12941,10 +12986,7 @@ impl Client {
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12959,7 +13001,8 @@ impl Client {
         org: &str,
         package_version_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/packages/{}/{}/versions/{}/restore",
+        let url = format!(
+            "{}/orgs/{}/packages/{}/{}/versions/{}/restore",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
@@ -12967,10 +13010,7 @@ impl Client {
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -12985,12 +13025,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Project>> {
-        let url = format!("{}/orgs/{}/projects",
+        let url = format!(
+            "{}/orgs/{}/projects",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("state", state.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13006,12 +13054,15 @@ impl Client {
         org: &str,
         body: &types::CreateOrganizationProjectRequest,
     ) -> Result<types::Project> {
-        let url = format!("{}/orgs/{}/projects",
+        let url = format!(
+            "{}/orgs/{}/projects",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -13029,12 +13080,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/orgs/{}/public_members",
+        let url = format!(
+            "{}/orgs/{}/public_members",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13050,16 +13108,14 @@ impl Client {
         org: &str,
         username: &str,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/public_members/{}",
+        let url = format!(
+            "{}/orgs/{}/public_members/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13072,16 +13128,14 @@ impl Client {
         org: &str,
         username: &str,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/public_members/{}",
+        let url = format!(
+            "{}/orgs/{}/public_members/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13094,16 +13148,14 @@ impl Client {
         org: &str,
         username: &str,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/public_members/{}",
+        let url = format!(
+            "{}/orgs/{}/public_members/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13114,18 +13166,28 @@ impl Client {
     pub async fn repos_list_for_org(
         &self,
         org: &str,
-        type_: &str,
+        type_: &&str,
         sort: &str,
         direction: &str,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/orgs/{}/repos",
+        let url = format!(
+            "{}/orgs/{}/repos",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("type", type_.to_string()),
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13141,12 +13203,15 @@ impl Client {
         org: &str,
         body: &types::CreateOrganizationRepositoryRequest,
     ) -> Result<types::Repository> {
-        let url = format!("{}/orgs/{}/repos",
+        let url = format!(
+            "{}/orgs/{}/repos",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -13162,15 +13227,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<types::ActionsBillingUsage> {
-        let url = format!("{}/orgs/{}/settings/billing/actions",
+        let url = format!(
+            "{}/orgs/{}/settings/billing/actions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13182,15 +13245,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<types::PackagesBillingUsage> {
-        let url = format!("{}/orgs/{}/settings/billing/packages",
+        let url = format!(
+            "{}/orgs/{}/settings/billing/packages",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13202,15 +13263,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<types::CombinedBillingUsage> {
-        let url = format!("{}/orgs/{}/settings/billing/shared-storage",
+        let url = format!(
+            "{}/orgs/{}/settings/billing/shared-storage",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13224,12 +13283,19 @@ impl Client {
         per_page: i64,
         page: &str,
     ) -> Result<types::GroupMapping> {
-        let url = format!("{}/orgs/{}/team-sync/groups",
+        let url = format!(
+            "{}/orgs/{}/team-sync/groups",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", page.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13246,12 +13312,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Team>> {
-        let url = format!("{}/orgs/{}/teams",
+        let url = format!(
+            "{}/orgs/{}/teams",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13267,12 +13340,15 @@ impl Client {
         org: &str,
         body: &types::CreateTeamRequest,
     ) -> Result<types::TeamFull> {
-        let url = format!("{}/orgs/{}/teams",
+        let url = format!(
+            "{}/orgs/{}/teams",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -13284,21 +13360,15 @@ impl Client {
     /**
      * teams_get_by_name: GET /orgs/{org}/teams/{team_slug}
      */
-    pub async fn teams_get_by_name(
-        &self,
-        org: &str,
-        team_slug: &str,
-    ) -> Result<types::TeamFull> {
-        let url = format!("{}/orgs/{}/teams/{}",
+    pub async fn teams_get_by_name(&self, org: &str, team_slug: &str) -> Result<types::TeamFull> {
+        let url = format!(
+            "{}/orgs/{}/teams/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13306,21 +13376,15 @@ impl Client {
     /**
      * teams_delete_in_org: DELETE /orgs/{org}/teams/{team_slug}
      */
-    pub async fn teams_delete_in_org(
-        &self,
-        org: &str,
-        team_slug: &str,
-    ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}",
+    pub async fn teams_delete_in_org(&self, org: &str, team_slug: &str) -> Result<()> {
+        let url = format!(
+            "{}/orgs/{}/teams/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13334,13 +13398,16 @@ impl Client {
         team_slug: &str,
         body: &types::UpdateTeamRequest,
     ) -> Result<types::TeamFull> {
-        let url = format!("{}/orgs/{}/teams/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -13361,13 +13428,22 @@ impl Client {
         page: i64,
         pinned: &str,
     ) -> Result<Vec<types::TeamDiscussion>> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+                ("pinned", pinned.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13384,13 +13460,16 @@ impl Client {
         team_slug: &str,
         body: &types::CreateDiscussionRequest,
     ) -> Result<types::TeamDiscussion> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -13408,17 +13487,15 @@ impl Client {
         team_slug: &str,
         discussion_number: i64,
     ) -> Result<types::TeamDiscussion> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13432,17 +13509,15 @@ impl Client {
         team_slug: &str,
         discussion_number: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13457,14 +13532,17 @@ impl Client {
         discussion_number: i64,
         body: &types::UpdateDiscussionRequest,
     ) -> Result<types::TeamDiscussion> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -13485,14 +13563,22 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13510,14 +13596,17 @@ impl Client {
         discussion_number: i64,
         body: &types::CreateDiscussionCommentRequest,
     ) -> Result<types::TeamDiscussionComment> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -13536,7 +13625,8 @@ impl Client {
         discussion_number: i64,
         comment_number: i64,
     ) -> Result<types::TeamDiscussionComment> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -13544,10 +13634,7 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13562,7 +13649,8 @@ impl Client {
         discussion_number: i64,
         comment_number: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -13570,10 +13658,7 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13589,7 +13674,8 @@ impl Client {
         comment_number: i64,
         body: &types::UpdateDiscussionCommentRequest,
     ) -> Result<types::TeamDiscussionComment> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -13597,7 +13683,9 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -13619,7 +13707,8 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -13627,7 +13716,14 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("content", content.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13646,7 +13742,8 @@ impl Client {
         comment_number: i64,
         body: &types::CreateReactionTeamDiscussionCommentRequest,
     ) -> Result<types::Reaction> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -13654,7 +13751,9 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -13674,7 +13773,8 @@ impl Client {
         comment_number: i64,
         reaction_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -13683,10 +13783,7 @@ impl Client {
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13703,14 +13800,22 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/reactions",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("content", content.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13728,14 +13833,17 @@ impl Client {
         discussion_number: i64,
         body: &types::CreateReactionTeamDiscussionRequest,
     ) -> Result<types::Reaction> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/reactions",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -13754,7 +13862,8 @@ impl Client {
         discussion_number: i64,
         reaction_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}/discussions/{}/reactions/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/discussions/{}/reactions/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -13762,10 +13871,7 @@ impl Client {
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13780,13 +13886,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
-        let url = format!("{}/orgs/{}/teams/{}/invitations",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/invitations",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13805,13 +13918,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/orgs/{}/teams/{}/members",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/members",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("role", role.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13828,17 +13949,15 @@ impl Client {
         team_slug: &str,
         username: &str,
     ) -> Result<types::TeamMembership> {
-        let url = format!("{}/orgs/{}/teams/{}/memberships/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/memberships/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13853,14 +13972,17 @@ impl Client {
         username: &str,
         body: &types::AddUpdateTeamMembershipUserRequest,
     ) -> Result<types::TeamMembership> {
-        let url = format!("{}/orgs/{}/teams/{}/memberships/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/memberships/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -13878,17 +14000,15 @@ impl Client {
         team_slug: &str,
         username: &str,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}/memberships/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/memberships/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13903,13 +14023,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamProject>> {
-        let url = format!("{}/orgs/{}/teams/{}/projects",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/projects",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -13926,17 +14053,15 @@ impl Client {
         team_slug: &str,
         project_id: i64,
     ) -> Result<types::TeamProject> {
-        let url = format!("{}/orgs/{}/teams/{}/projects/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/projects/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -13951,14 +14076,17 @@ impl Client {
         project_id: i64,
         body: &types::AddUpdateTeamProjectPermissionsRequest,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}/projects/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/projects/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -13976,17 +14104,15 @@ impl Client {
         team_slug: &str,
         project_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}/projects/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/projects/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14001,13 +14127,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/orgs/{}/teams/{}/repos",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/repos",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -14025,7 +14158,8 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::TeamRepository> {
-        let url = format!("{}/orgs/{}/teams/{}/repos/{}/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/repos/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -14033,10 +14167,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14052,7 +14183,8 @@ impl Client {
         repo: &str,
         body: &types::AddUpdateTeamRepositoryPermissionsRequest,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}/repos/{}/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/repos/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -14060,7 +14192,9 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -14079,7 +14213,8 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!("{}/orgs/{}/teams/{}/repos/{}/{}",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/repos/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
@@ -14087,10 +14222,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14103,16 +14235,14 @@ impl Client {
         org: &str,
         team_slug: &str,
     ) -> Result<types::GroupMapping> {
-        let url = format!("{}/orgs/{}/teams/{}/team-sync/group-mappings",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/team-sync/group-mappings",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14126,13 +14256,16 @@ impl Client {
         team_slug: &str,
         body: &types::CreateUpdateIdpGroupConnectionsRequest,
     ) -> Result<types::GroupMapping> {
-        let url = format!("{}/orgs/{}/teams/{}/team-sync/group-mappings",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/team-sync/group-mappings",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -14151,13 +14284,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Team>> {
-        let url = format!("{}/orgs/{}/teams/{}/teams",
+        let url = format!(
+            "{}/orgs/{}/teams/{}/teams",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -14168,19 +14308,14 @@ impl Client {
     /**
      * projects_get_card: GET /projects/columns/cards/{card_id}
      */
-    pub async fn projects_get_card(
-        &self,
-        card_id: i64,
-    ) -> Result<types::ProjectCard> {
-        let url = format!("{}/projects/columns/cards/{}",
+    pub async fn projects_get_card(&self, card_id: i64) -> Result<types::ProjectCard> {
+        let url = format!(
+            "{}/projects/columns/cards/{}",
             self.baseurl,
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14188,19 +14323,14 @@ impl Client {
     /**
      * projects_delete_card: DELETE /projects/columns/cards/{card_id}
      */
-    pub async fn projects_delete_card(
-        &self,
-        card_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/projects/columns/cards/{}",
+    pub async fn projects_delete_card(&self, card_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/projects/columns/cards/{}",
             self.baseurl,
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14213,12 +14343,15 @@ impl Client {
         card_id: i64,
         body: &types::UpdateExistingProjectCardRequest,
     ) -> Result<types::ProjectCard> {
-        let url = format!("{}/projects/columns/cards/{}",
+        let url = format!(
+            "{}/projects/columns/cards/{}",
             self.baseurl,
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -14235,12 +14368,15 @@ impl Client {
         card_id: i64,
         body: &types::MoveProjectCardRequest,
     ) -> Result<types::PostMoveProjectCardCreatedResponse> {
-        let url = format!("{}/projects/columns/cards/{}/moves",
+        let url = format!(
+            "{}/projects/columns/cards/{}/moves",
             self.baseurl,
             progenitor_support::encode_path(&card_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -14252,19 +14388,14 @@ impl Client {
     /**
      * projects_get_column: GET /projects/columns/{column_id}
      */
-    pub async fn projects_get_column(
-        &self,
-        column_id: i64,
-    ) -> Result<types::ProjectColumn> {
-        let url = format!("{}/projects/columns/{}",
+    pub async fn projects_get_column(&self, column_id: i64) -> Result<types::ProjectColumn> {
+        let url = format!(
+            "{}/projects/columns/{}",
             self.baseurl,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14272,19 +14403,14 @@ impl Client {
     /**
      * projects_delete_column: DELETE /projects/columns/{column_id}
      */
-    pub async fn projects_delete_column(
-        &self,
-        column_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/projects/columns/{}",
+    pub async fn projects_delete_column(&self, column_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/projects/columns/{}",
             self.baseurl,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14297,12 +14423,15 @@ impl Client {
         column_id: i64,
         body: &types::UpdateExistingProjectColumnRequest,
     ) -> Result<types::ProjectColumn> {
-        let url = format!("{}/projects/columns/{}",
+        let url = format!(
+            "{}/projects/columns/{}",
             self.baseurl,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -14321,12 +14450,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::ProjectCard>> {
-        let url = format!("{}/projects/columns/{}/cards",
+        let url = format!(
+            "{}/projects/columns/{}/cards",
             self.baseurl,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("archived_state", archived_state.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -14342,12 +14479,15 @@ impl Client {
         column_id: i64,
         body: &types::CreateProjectCardRequest,
     ) -> Result<types::ProjectCard> {
-        let url = format!("{}/projects/columns/{}/cards",
+        let url = format!(
+            "{}/projects/columns/{}/cards",
             self.baseurl,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -14364,12 +14504,15 @@ impl Client {
         column_id: i64,
         body: &types::MoveProjectColumnRequest,
     ) -> Result<types::PostMoveProjectColumnCreatedResponse> {
-        let url = format!("{}/projects/columns/{}/moves",
+        let url = format!(
+            "{}/projects/columns/{}/moves",
             self.baseurl,
             progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -14381,19 +14524,14 @@ impl Client {
     /**
      * projects_get: GET /projects/{project_id}
      */
-    pub async fn projects_get(
-        &self,
-        project_id: i64,
-    ) -> Result<types::Project> {
-        let url = format!("{}/projects/{}",
+    pub async fn projects_get(&self, project_id: i64) -> Result<types::Project> {
+        let url = format!(
+            "{}/projects/{}",
             self.baseurl,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14401,19 +14539,14 @@ impl Client {
     /**
      * projects_delete: DELETE /projects/{project_id}
      */
-    pub async fn projects_delete(
-        &self,
-        project_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/projects/{}",
+    pub async fn projects_delete(&self, project_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/projects/{}",
             self.baseurl,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14426,12 +14559,15 @@ impl Client {
         project_id: i64,
         body: &types::UpdateProjectRequest,
     ) -> Result<types::Project> {
-        let url = format!("{}/projects/{}",
+        let url = format!(
+            "{}/projects/{}",
             self.baseurl,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -14450,12 +14586,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/projects/{}/collaborators",
+        let url = format!(
+            "{}/projects/{}/collaborators",
             self.baseurl,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("affiliation", affiliation.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -14472,13 +14616,16 @@ impl Client {
         username: &str,
         body: &types::AddProjectCollaboratorRequest,
     ) -> Result<()> {
-        let url = format!("{}/projects/{}/collaborators/{}",
+        let url = format!(
+            "{}/projects/{}/collaborators/{}",
             self.baseurl,
             progenitor_support::encode_path(&project_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -14495,16 +14642,14 @@ impl Client {
         project_id: i64,
         username: &str,
     ) -> Result<()> {
-        let url = format!("{}/projects/{}/collaborators/{}",
+        let url = format!(
+            "{}/projects/{}/collaborators/{}",
             self.baseurl,
             progenitor_support::encode_path(&project_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14517,16 +14662,14 @@ impl Client {
         project_id: i64,
         username: &str,
     ) -> Result<types::RepositoryCollaboratorPermission> {
-        let url = format!("{}/projects/{}/collaborators/{}/permission",
+        let url = format!(
+            "{}/projects/{}/collaborators/{}/permission",
             self.baseurl,
             progenitor_support::encode_path(&project_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14540,12 +14683,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::ProjectColumn>> {
-        let url = format!("{}/projects/{}/columns",
+        let url = format!(
+            "{}/projects/{}/columns",
             self.baseurl,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -14561,12 +14711,15 @@ impl Client {
         project_id: i64,
         body: &types::CreateProjectColumnRequest,
     ) -> Result<types::ProjectColumn> {
-        let url = format!("{}/projects/{}/columns",
+        let url = format!(
+            "{}/projects/{}/columns",
             self.baseurl,
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -14578,17 +14731,10 @@ impl Client {
     /**
      * rate_limit_get: GET /rate_limit
      */
-    pub async fn rate_limit_get(
-        &self,
-    ) -> Result<types::RateLimitOverview> {
-        let url = format!("{}/rate_limit",
-            self.baseurl,
-        );
+    pub async fn rate_limit_get(&self) -> Result<types::RateLimitOverview> {
+        let url = format!("{}/rate_limit", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14596,19 +14742,14 @@ impl Client {
     /**
      * reactions_delete_legacy: DELETE /reactions/{reaction_id}
      */
-    pub async fn reactions_delete_legacy(
-        &self,
-        reaction_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/reactions/{}",
+    pub async fn reactions_delete_legacy(&self, reaction_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/reactions/{}",
             self.baseurl,
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14616,21 +14757,15 @@ impl Client {
     /**
      * repos_get: GET /repos/{owner}/{repo}
      */
-    pub async fn repos_get(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<types::FullRepository> {
-        let url = format!("{}/repos/{}/{}",
+    pub async fn repos_get(&self, owner: &str, repo: &str) -> Result<types::FullRepository> {
+        let url = format!(
+            "{}/repos/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14638,21 +14773,15 @@ impl Client {
     /**
      * repos_delete: DELETE /repos/{owner}/{repo}
      */
-    pub async fn repos_delete(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}",
+    pub async fn repos_delete(&self, owner: &str, repo: &str) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14666,13 +14795,16 @@ impl Client {
         repo: &str,
         body: &types::UpdateRepositoryRequest,
     ) -> Result<types::FullRepository> {
-        let url = format!("{}/repos/{}/{}",
+        let url = format!(
+            "{}/repos/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -14691,13 +14823,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListArtifactsRepositoryOkResponse> {
-        let url = format!("{}/repos/{}/{}/actions/artifacts",
+        let url = format!(
+            "{}/repos/{}/{}/actions/artifacts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -14714,17 +14853,15 @@ impl Client {
         repo: &str,
         artifact_id: i64,
     ) -> Result<types::Artifact> {
-        let url = format!("{}/repos/{}/{}/actions/artifacts/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/artifacts/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&artifact_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14738,17 +14875,15 @@ impl Client {
         repo: &str,
         artifact_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/artifacts/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/artifacts/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&artifact_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14763,7 +14898,8 @@ impl Client {
         artifact_id: i64,
         archive_format: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/artifacts/{}/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/artifacts/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -14771,10 +14907,7 @@ impl Client {
             progenitor_support::encode_path(&archive_format.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14788,17 +14921,15 @@ impl Client {
         repo: &str,
         job_id: i64,
     ) -> Result<types::Job> {
-        let url = format!("{}/repos/{}/{}/actions/jobs/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/jobs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&job_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14812,17 +14943,15 @@ impl Client {
         repo: &str,
         job_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/jobs/{}/logs",
+        let url = format!(
+            "{}/repos/{}/{}/actions/jobs/{}/logs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&job_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14835,16 +14964,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::ActionsRepositoryPermissions> {
-        let url = format!("{}/repos/{}/{}/actions/permissions",
+        let url = format!(
+            "{}/repos/{}/{}/actions/permissions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14858,13 +14985,16 @@ impl Client {
         repo: &str,
         body: &types::SetGithubActionsPermissionsRepositoryRequest,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/permissions",
+        let url = format!(
+            "{}/repos/{}/{}/actions/permissions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -14881,16 +15011,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::SelectedActions> {
-        let url = format!("{}/repos/{}/{}/actions/permissions/selected-actions",
+        let url = format!(
+            "{}/repos/{}/{}/actions/permissions/selected-actions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14904,13 +15032,16 @@ impl Client {
         repo: &str,
         body: &types::SelectedActions,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/permissions/selected-actions",
+        let url = format!(
+            "{}/repos/{}/{}/actions/permissions/selected-actions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -14929,13 +15060,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListSelfDataHostedRunnersRepositoryOkResponse> {
-        let url = format!("{}/repos/{}/{}/actions/runners",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runners",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -14951,16 +15089,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<types::RunnerApplication>> {
-        let url = format!("{}/repos/{}/{}/actions/runners/downloads",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runners/downloads",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14973,16 +15109,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::AuthenticationToken> {
-        let url = format!("{}/repos/{}/{}/actions/runners/registration-token",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runners/registration-token",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -14995,16 +15129,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::AuthenticationToken> {
-        let url = format!("{}/repos/{}/{}/actions/runners/remove-token",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runners/remove-token",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15018,17 +15150,15 @@ impl Client {
         repo: &str,
         runner_id: i64,
     ) -> Result<types::Runner> {
-        let url = format!("{}/repos/{}/{}/actions/runners/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15042,17 +15172,15 @@ impl Client {
         repo: &str,
         runner_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/runners/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runners/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15071,13 +15199,24 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListWorkflowRunsRepositoryOkResponse> {
-        let url = format!("{}/repos/{}/{}/actions/runs",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("actor", actor.to_string()),
+                ("branch", branch.to_string()),
+                ("event", event.to_string()),
+                ("status", status.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -15094,17 +15233,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<types::WorkflowRun> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15118,17 +15255,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15142,17 +15277,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<Vec<types::EnvironmentApprovals>> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/approvals",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/approvals",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15166,17 +15299,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<types::EmptyObject> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/approve",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/approve",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15192,14 +15323,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListWorkflowRunArtifactsOkResponse> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/artifacts",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/artifacts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -15216,17 +15354,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<types::PostCancelWorkflowRunAcceptedResponse> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/cancel",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/cancel",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15243,14 +15379,22 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListJobsWorkflowRunOkResponse> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/jobs",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/jobs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("filter", filter.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -15267,17 +15411,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/logs",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/logs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15291,17 +15433,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/logs",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/logs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15315,17 +15455,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<Vec<types::PendingDeployment>> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/pending_deployments",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/pending_deployments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15340,14 +15478,17 @@ impl Client {
         run_id: i64,
         body: &types::ReviewPendingDeploymentsWorkflowRunRequest,
     ) -> Result<Vec<types::Deployment>> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/pending_deployments",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/pending_deployments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -15365,17 +15506,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<types::PostReRunWorkflowCreatedResponse> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/rerun",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/rerun",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15389,17 +15528,15 @@ impl Client {
         repo: &str,
         run_id: i64,
     ) -> Result<types::WorkflowRunUsage> {
-        let url = format!("{}/repos/{}/{}/actions/runs/{}/timing",
+        let url = format!(
+            "{}/repos/{}/{}/actions/runs/{}/timing",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15414,13 +15551,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListRepositorySecretsOkResponse> {
-        let url = format!("{}/repos/{}/{}/actions/secrets",
+        let url = format!(
+            "{}/repos/{}/{}/actions/secrets",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -15436,16 +15580,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::ActionsPublicKey> {
-        let url = format!("{}/repos/{}/{}/actions/secrets/public-key",
+        let url = format!(
+            "{}/repos/{}/{}/actions/secrets/public-key",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15459,17 +15601,15 @@ impl Client {
         repo: &str,
         secret_name: &str,
     ) -> Result<types::ActionsSecret> {
-        let url = format!("{}/repos/{}/{}/actions/secrets/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/secrets/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15484,14 +15624,17 @@ impl Client {
         secret_name: &str,
         body: &types::CreateUpdateRepositorySecretRequest,
     ) -> Result<types::PutCreateUpdateRepositorySecretCreatedResponse> {
-        let url = format!("{}/repos/{}/{}/actions/secrets/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/secrets/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -15509,17 +15652,15 @@ impl Client {
         repo: &str,
         secret_name: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/secrets/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/secrets/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15534,13 +15675,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListRepositoryWorkflowsOkResponse> {
-        let url = format!("{}/repos/{}/{}/actions/workflows",
+        let url = format!(
+            "{}/repos/{}/{}/actions/workflows",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -15557,17 +15705,15 @@ impl Client {
         repo: &str,
         workflow_id: &str,
     ) -> Result<types::Workflow> {
-        let url = format!("{}/repos/{}/{}/actions/workflows/{}",
+        let url = format!(
+            "{}/repos/{}/{}/actions/workflows/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15581,17 +15727,15 @@ impl Client {
         repo: &str,
         workflow_id: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/workflows/{}/disable",
+        let url = format!(
+            "{}/repos/{}/{}/actions/workflows/{}/disable",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15606,14 +15750,17 @@ impl Client {
         workflow_id: &str,
         body: &types::CreateWorkflowDispatchEventRequest,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/workflows/{}/dispatches",
+        let url = format!(
+            "{}/repos/{}/{}/actions/workflows/{}/dispatches",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -15631,17 +15778,15 @@ impl Client {
         repo: &str,
         workflow_id: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/actions/workflows/{}/enable",
+        let url = format!(
+            "{}/repos/{}/{}/actions/workflows/{}/enable",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15661,14 +15806,25 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListWorkflowRunsOkResponse> {
-        let url = format!("{}/repos/{}/{}/actions/workflows/{}/runs",
+        let url = format!(
+            "{}/repos/{}/{}/actions/workflows/{}/runs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("actor", actor.to_string()),
+                ("branch", branch.to_string()),
+                ("event", event.to_string()),
+                ("status", status.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -15685,17 +15841,15 @@ impl Client {
         repo: &str,
         workflow_id: &str,
     ) -> Result<types::WorkflowUsage> {
-        let url = format!("{}/repos/{}/{}/actions/workflows/{}/timing",
+        let url = format!(
+            "{}/repos/{}/{}/actions/workflows/{}/timing",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15710,13 +15864,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/repos/{}/{}/assignees",
+        let url = format!(
+            "{}/repos/{}/{}/assignees",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -15733,17 +15894,15 @@ impl Client {
         repo: &str,
         assignee: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/assignees/{}",
+        let url = format!(
+            "{}/repos/{}/{}/assignees/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&assignee.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15756,16 +15915,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/automated-security-fixes",
+        let url = format!(
+            "{}/repos/{}/{}/automated-security-fixes",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15778,16 +15935,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/automated-security-fixes",
+        let url = format!(
+            "{}/repos/{}/{}/automated-security-fixes",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15803,13 +15958,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::ShortBranch>> {
-        let url = format!("{}/repos/{}/{}/branches",
+        let url = format!(
+            "{}/repos/{}/{}/branches",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("protected", format!("{}", protected)),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -15826,17 +15989,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<types::BranchWithProtection> {
-        let url = format!("{}/repos/{}/{}/branches/{}",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15850,17 +16011,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<types::BranchProtection> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15875,14 +16034,17 @@ impl Client {
         branch: &str,
         body: &types::UpdateBranchProtectionRequest,
     ) -> Result<types::ProtectedBranch> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -15900,17 +16062,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15924,17 +16084,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<types::ProtectedBranchAdminEnforced> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/enforce_admins",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/enforce_admins",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15948,17 +16106,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<types::ProtectedBranchAdminEnforced> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/enforce_admins",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/enforce_admins",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15972,17 +16128,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/enforce_admins",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/enforce_admins",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -15996,17 +16150,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<types::ProtectedBranchPullRequestReview> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16020,17 +16172,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16045,14 +16195,17 @@ impl Client {
         branch: &str,
         body: &types::UpdatePullRequestReviewProtectionRequest,
     ) -> Result<types::ProtectedBranchPullRequestReview> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -16070,17 +16223,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<types::ProtectedBranchAdminEnforced> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_signatures",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_signatures",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16094,17 +16245,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<types::ProtectedBranchAdminEnforced> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_signatures",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_signatures",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16118,17 +16267,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_signatures",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_signatures",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16142,17 +16289,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<types::StatusCheckPolicy> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_status_checks",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16166,17 +16311,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_status_checks",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16191,14 +16334,17 @@ impl Client {
         branch: &str,
         body: &types::UpdateStatusCheckProtectionRequest,
     ) -> Result<types::StatusCheckPolicy> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_status_checks",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -16216,17 +16362,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<Vec<String>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16241,14 +16385,17 @@ impl Client {
         branch: &str,
         body: &types::SetStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -16267,14 +16414,17 @@ impl Client {
         branch: &str,
         body: &types::AddStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -16293,14 +16443,17 @@ impl Client {
         branch: &str,
         body: &types::RemoveStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -16318,17 +16471,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<types::BranchRestrictionPolicy> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16342,17 +16493,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16366,17 +16515,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<Vec<types::Integration>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16391,14 +16538,17 @@ impl Client {
         branch: &str,
         body: &types::SetAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -16417,14 +16567,17 @@ impl Client {
         branch: &str,
         body: &types::AddAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -16443,14 +16596,17 @@ impl Client {
         branch: &str,
         body: &types::RemoveAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/apps",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -16468,17 +16624,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<Vec<types::Team>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16493,14 +16647,17 @@ impl Client {
         branch: &str,
         body: &types::SetTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -16519,14 +16676,17 @@ impl Client {
         branch: &str,
         body: &types::AddTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -16545,14 +16705,17 @@ impl Client {
         branch: &str,
         body: &types::RemoveTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/teams",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -16570,17 +16733,15 @@ impl Client {
         repo: &str,
         branch: &str,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/users",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/users",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16595,14 +16756,17 @@ impl Client {
         branch: &str,
         body: &types::SetUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/users",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/users",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -16621,14 +16785,17 @@ impl Client {
         branch: &str,
         body: &types::AddUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/users",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/users",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -16647,14 +16814,17 @@ impl Client {
         branch: &str,
         body: &types::RemoveUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/repos/{}/{}/branches/{}/protection/restrictions/users",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/protection/restrictions/users",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -16673,14 +16843,17 @@ impl Client {
         branch: &str,
         body: &types::RenameBranchRequest,
     ) -> Result<types::BranchWithProtection> {
-        let url = format!("{}/repos/{}/{}/branches/{}/rename",
+        let url = format!(
+            "{}/repos/{}/{}/branches/{}/rename",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -16698,13 +16871,16 @@ impl Client {
         repo: &str,
         body: &types::CreateCheckRunRequest,
     ) -> Result<types::CheckRun> {
-        let url = format!("{}/repos/{}/{}/check-runs",
+        let url = format!(
+            "{}/repos/{}/{}/check-runs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -16722,17 +16898,15 @@ impl Client {
         repo: &str,
         check_run_id: i64,
     ) -> Result<types::CheckRun> {
-        let url = format!("{}/repos/{}/{}/check-runs/{}",
+        let url = format!(
+            "{}/repos/{}/{}/check-runs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16747,14 +16921,17 @@ impl Client {
         check_run_id: i64,
         body: &types::UpdateCheckRunRequest,
     ) -> Result<types::CheckRun> {
-        let url = format!("{}/repos/{}/{}/check-runs/{}",
+        let url = format!(
+            "{}/repos/{}/{}/check-runs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -16774,14 +16951,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::CheckAnnotation>> {
-        let url = format!("{}/repos/{}/{}/check-runs/{}/annotations",
+        let url = format!(
+            "{}/repos/{}/{}/check-runs/{}/annotations",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -16798,13 +16982,16 @@ impl Client {
         repo: &str,
         body: &types::CreateCheckSuiteRequest,
     ) -> Result<types::CheckSuite> {
-        let url = format!("{}/repos/{}/{}/check-suites",
+        let url = format!(
+            "{}/repos/{}/{}/check-suites",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -16822,13 +17009,16 @@ impl Client {
         repo: &str,
         body: &types::UpdateRepositoryPreferencesCheckSuitesRequest,
     ) -> Result<types::CheckSuitePreference> {
-        let url = format!("{}/repos/{}/{}/check-suites/preferences",
+        let url = format!(
+            "{}/repos/{}/{}/check-suites/preferences",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -16846,17 +17036,15 @@ impl Client {
         repo: &str,
         check_suite_id: i64,
     ) -> Result<types::CheckSuite> {
-        let url = format!("{}/repos/{}/{}/check-suites/{}",
+        let url = format!(
+            "{}/repos/{}/{}/check-suites/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16875,14 +17063,24 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListCheckRunsinCheckSuiteOkResponse> {
-        let url = format!("{}/repos/{}/{}/check-suites/{}/check-runs",
+        let url = format!(
+            "{}/repos/{}/{}/check-suites/{}/check-runs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("check_name", check_name.to_string()),
+                ("status", status.to_string()),
+                ("filter", filter.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -16899,17 +17097,15 @@ impl Client {
         repo: &str,
         check_suite_id: i64,
     ) -> Result<types::PostRerequestCheckSuiteCreatedResponse> {
-        let url = format!("{}/repos/{}/{}/check-suites/{}/rerequest",
+        let url = format!(
+            "{}/repos/{}/{}/check-suites/{}/rerequest",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16925,16 +17121,27 @@ impl Client {
         tool_guid: &str,
         page: i64,
         per_page: i64,
-        ref_: &str,
+        ref_: &&str,
         state: &str,
     ) -> Result<Vec<types::CodeScanningAlertItems>> {
-        let url = format!("{}/repos/{}/{}/code-scanning/alerts",
+        let url = format!(
+            "{}/repos/{}/{}/code-scanning/alerts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("tool_name", tool_name.to_string()),
+                ("tool_guid", tool_guid.to_string()),
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+                ("ref", ref_.to_string()),
+                ("state", state.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -16951,17 +17158,15 @@ impl Client {
         repo: &str,
         alert_number: &str,
     ) -> Result<types::CodeScanningAlert> {
-        let url = format!("{}/repos/{}/{}/code-scanning/alerts/{}",
+        let url = format!(
+            "{}/repos/{}/{}/code-scanning/alerts/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -16976,14 +17181,17 @@ impl Client {
         alert_number: &str,
         body: &types::UpdateCodeScanningAlertRequest,
     ) -> Result<types::CodeScanningAlert> {
-        let url = format!("{}/repos/{}/{}/code-scanning/alerts/{}",
+        let url = format!(
+            "{}/repos/{}/{}/code-scanning/alerts/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -17002,16 +17210,24 @@ impl Client {
         alert_number: &str,
         page: i64,
         per_page: i64,
-        ref_: &str,
+        ref_: &&str,
     ) -> Result<Vec<types::CodeScanningAlertInstance>> {
-        let url = format!("{}/repos/{}/{}/code-scanning/alerts/{}/instances",
+        let url = format!(
+            "{}/repos/{}/{}/code-scanning/alerts/{}/instances",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+                ("ref", ref_.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17030,16 +17246,27 @@ impl Client {
         tool_guid: &str,
         page: i64,
         per_page: i64,
-        ref_: &str,
+        ref_: &&str,
         sarif_id: &str,
     ) -> Result<Vec<types::CodeScanningAnalysis>> {
-        let url = format!("{}/repos/{}/{}/code-scanning/analyses",
+        let url = format!(
+            "{}/repos/{}/{}/code-scanning/analyses",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("tool_name", tool_name.to_string()),
+                ("tool_guid", tool_guid.to_string()),
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+                ("ref", ref_.to_string()),
+                ("sarif_id", sarif_id.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17056,17 +17283,15 @@ impl Client {
         repo: &str,
         analysis_id: i64,
     ) -> Result<types::CodeScanningAnalysis> {
-        let url = format!("{}/repos/{}/{}/code-scanning/analyses/{}",
+        let url = format!(
+            "{}/repos/{}/{}/code-scanning/analyses/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&analysis_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17081,14 +17306,18 @@ impl Client {
         analysis_id: i64,
         confirm_delete: &str,
     ) -> Result<types::CodeScanningAnalysisDeletion> {
-        let url = format!("{}/repos/{}/{}/code-scanning/analyses/{}",
+        let url = format!(
+            "{}/repos/{}/{}/code-scanning/analyses/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&analysis_id.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
+            .query(&[("confirm_delete", confirm_delete.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -17105,13 +17334,16 @@ impl Client {
         repo: &str,
         body: &types::UploadAnalysisasSarifDataRequest,
     ) -> Result<types::CodeScanningSarifsReceipt> {
-        let url = format!("{}/repos/{}/{}/code-scanning/sarifs",
+        let url = format!(
+            "{}/repos/{}/{}/code-scanning/sarifs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -17129,17 +17361,15 @@ impl Client {
         repo: &str,
         sarif_id: &str,
     ) -> Result<types::CodeScanningSarifsStatus> {
-        let url = format!("{}/repos/{}/{}/code-scanning/sarifs/{}",
+        let url = format!(
+            "{}/repos/{}/{}/code-scanning/sarifs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&sarif_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17155,13 +17385,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Collaborator>> {
-        let url = format!("{}/repos/{}/{}/collaborators",
+        let url = format!(
+            "{}/repos/{}/{}/collaborators",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("affiliation", affiliation.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17178,17 +17416,15 @@ impl Client {
         repo: &str,
         username: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/collaborators/{}",
+        let url = format!(
+            "{}/repos/{}/{}/collaborators/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17203,14 +17439,17 @@ impl Client {
         username: &str,
         body: &types::AddRepositoryCollaboratorRequest,
     ) -> Result<types::RepositoryInvitation> {
-        let url = format!("{}/repos/{}/{}/collaborators/{}",
+        let url = format!(
+            "{}/repos/{}/{}/collaborators/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -17228,17 +17467,15 @@ impl Client {
         repo: &str,
         username: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/collaborators/{}",
+        let url = format!(
+            "{}/repos/{}/{}/collaborators/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17252,17 +17489,15 @@ impl Client {
         repo: &str,
         username: &str,
     ) -> Result<types::RepositoryCollaboratorPermission> {
-        let url = format!("{}/repos/{}/{}/collaborators/{}/permission",
+        let url = format!(
+            "{}/repos/{}/{}/collaborators/{}/permission",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17277,13 +17512,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::CommitComment>> {
-        let url = format!("{}/repos/{}/{}/comments",
+        let url = format!(
+            "{}/repos/{}/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17300,17 +17542,15 @@ impl Client {
         repo: &str,
         comment_id: i64,
     ) -> Result<types::CommitComment> {
-        let url = format!("{}/repos/{}/{}/comments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17324,17 +17564,15 @@ impl Client {
         repo: &str,
         comment_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/comments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17349,14 +17587,17 @@ impl Client {
         comment_id: i64,
         body: &types::UpdateCommitCommentRequest,
     ) -> Result<types::CommitComment> {
-        let url = format!("{}/repos/{}/{}/comments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -17377,14 +17618,22 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
-        let url = format!("{}/repos/{}/{}/comments/{}/reactions",
+        let url = format!(
+            "{}/repos/{}/{}/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("content", content.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17402,14 +17651,17 @@ impl Client {
         comment_id: i64,
         body: &types::CreateReactionCommitCommentRequest,
     ) -> Result<types::Reaction> {
-        let url = format!("{}/repos/{}/{}/comments/{}/reactions",
+        let url = format!(
+            "{}/repos/{}/{}/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -17428,7 +17680,8 @@ impl Client {
         comment_id: i64,
         reaction_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/comments/{}/reactions/{}",
+        let url = format!(
+            "{}/repos/{}/{}/comments/{}/reactions/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -17436,10 +17689,7 @@ impl Client {
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17459,13 +17709,25 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Commit>> {
-        let url = format!("{}/repos/{}/{}/commits",
+        let url = format!(
+            "{}/repos/{}/{}/commits",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sha", sha.to_string()),
+                ("path", path.to_string()),
+                ("author", author.to_string()),
+                ("since", since.to_rfc3339()),
+                ("until", until.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17482,17 +17744,15 @@ impl Client {
         repo: &str,
         commit_sha: &str,
     ) -> Result<Vec<types::BranchShort>> {
-        let url = format!("{}/repos/{}/{}/commits/{}/branches-where-head",
+        let url = format!(
+            "{}/repos/{}/{}/commits/{}/branches-where-head",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17508,14 +17768,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::CommitComment>> {
-        let url = format!("{}/repos/{}/{}/commits/{}/comments",
+        let url = format!(
+            "{}/repos/{}/{}/commits/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17533,14 +17800,17 @@ impl Client {
         commit_sha: &str,
         body: &types::CreateCommitCommentRequest,
     ) -> Result<types::CommitComment> {
-        let url = format!("{}/repos/{}/{}/commits/{}/comments",
+        let url = format!(
+            "{}/repos/{}/{}/commits/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -17560,14 +17830,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::PullRequestSimple>> {
-        let url = format!("{}/repos/{}/{}/commits/{}/pulls",
+        let url = format!(
+            "{}/repos/{}/{}/commits/{}/pulls",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17586,14 +17863,21 @@ impl Client {
         per_page: i64,
         ref_: &str,
     ) -> Result<types::Commit> {
-        let url = format!("{}/repos/{}/{}/commits/{}",
+        let url = format!(
+            "{}/repos/{}/{}/commits/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17616,14 +17900,25 @@ impl Client {
         page: i64,
         app_id: i64,
     ) -> Result<types::GetListCheckRunsGitReferenceOkResponse> {
-        let url = format!("{}/repos/{}/{}/commits/{}/check-runs",
+        let url = format!(
+            "{}/repos/{}/{}/commits/{}/check-runs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("check_name", check_name.to_string()),
+                ("status", status.to_string()),
+                ("filter", filter.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+                ("app_id", format!("{}", app_id)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17644,14 +17939,23 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListCheckSuitesGitReferenceOkResponse> {
-        let url = format!("{}/repos/{}/{}/commits/{}/check-suites",
+        let url = format!(
+            "{}/repos/{}/{}/commits/{}/check-suites",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("app_id", format!("{}", app_id)),
+                ("check_name", check_name.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17670,14 +17974,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::CombinedCommitStatus> {
-        let url = format!("{}/repos/{}/{}/commits/{}/status",
+        let url = format!(
+            "{}/repos/{}/{}/commits/{}/status",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17696,14 +18007,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Status>> {
-        let url = format!("{}/repos/{}/{}/commits/{}/statuses",
+        let url = format!(
+            "{}/repos/{}/{}/commits/{}/statuses",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17719,16 +18037,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::CodeofConduct> {
-        let url = format!("{}/repos/{}/{}/community/code_of_conduct",
+        let url = format!(
+            "{}/repos/{}/{}/community/code_of_conduct",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17741,16 +18057,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::CommunityProfile> {
-        let url = format!("{}/repos/{}/{}/community/profile",
+        let url = format!(
+            "{}/repos/{}/{}/community/profile",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17766,14 +18080,21 @@ impl Client {
         per_page: i64,
         basehead: &str,
     ) -> Result<types::CommitComparison> {
-        let url = format!("{}/repos/{}/{}/compare/{}",
+        let url = format!(
+            "{}/repos/{}/{}/compare/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&basehead.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17791,14 +18112,17 @@ impl Client {
         content_reference_id: i64,
         body: &types::CreateContentAttachmentRequest,
     ) -> Result<types::ContentReferenceAttachment> {
-        let url = format!("{}/repos/{}/{}/content_references/{}/attachments",
+        let url = format!(
+            "{}/repos/{}/{}/content_references/{}/attachments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&content_reference_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -17815,16 +18139,20 @@ impl Client {
         owner: &str,
         repo: &str,
         path: &str,
-        ref_: &str,
+        ref_: &&str,
     ) -> Result<types::GetRepositoryContentOkResponse> {
-        let url = format!("{}/repos/{}/{}/contents/{}",
+        let url = format!(
+            "{}/repos/{}/{}/contents/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&path.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("ref", ref_.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -17842,14 +18170,17 @@ impl Client {
         path: &str,
         body: &types::CreateUpdateFileContentsRequest,
     ) -> Result<types::FileCommit> {
-        let url = format!("{}/repos/{}/{}/contents/{}",
+        let url = format!(
+            "{}/repos/{}/{}/contents/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&path.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -17868,14 +18199,17 @@ impl Client {
         path: &str,
         body: &types::DeleteFileRequest,
     ) -> Result<types::FileCommit> {
-        let url = format!("{}/repos/{}/{}/contents/{}",
+        let url = format!(
+            "{}/repos/{}/{}/contents/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&path.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -17895,13 +18229,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Contributor>> {
-        let url = format!("{}/repos/{}/{}/contributors",
+        let url = format!(
+            "{}/repos/{}/{}/contributors",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("anon", anon.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17917,19 +18259,30 @@ impl Client {
         owner: &str,
         repo: &str,
         sha: &str,
-        ref_: &str,
+        ref_: &&str,
         task: &str,
         environment: &str,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Deployment>> {
-        let url = format!("{}/repos/{}/{}/deployments",
+        let url = format!(
+            "{}/repos/{}/{}/deployments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sha", sha.to_string()),
+                ("ref", ref_.to_string()),
+                ("task", task.to_string()),
+                ("environment", environment.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -17946,13 +18299,16 @@ impl Client {
         repo: &str,
         body: &types::CreateDeploymentRequest,
     ) -> Result<types::Deployment> {
-        let url = format!("{}/repos/{}/{}/deployments",
+        let url = format!(
+            "{}/repos/{}/{}/deployments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -17970,17 +18326,15 @@ impl Client {
         repo: &str,
         deployment_id: i64,
     ) -> Result<types::Deployment> {
-        let url = format!("{}/repos/{}/{}/deployments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/deployments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -17994,17 +18348,15 @@ impl Client {
         repo: &str,
         deployment_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/deployments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/deployments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18020,14 +18372,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::DeploymentStatus>> {
-        let url = format!("{}/repos/{}/{}/deployments/{}/statuses",
+        let url = format!(
+            "{}/repos/{}/{}/deployments/{}/statuses",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -18045,14 +18404,17 @@ impl Client {
         deployment_id: i64,
         body: &types::CreateDeploymentStatusRequest,
     ) -> Result<types::DeploymentStatus> {
-        let url = format!("{}/repos/{}/{}/deployments/{}/statuses",
+        let url = format!(
+            "{}/repos/{}/{}/deployments/{}/statuses",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&deployment_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -18071,7 +18433,8 @@ impl Client {
         deployment_id: i64,
         status_id: i64,
     ) -> Result<types::DeploymentStatus> {
-        let url = format!("{}/repos/{}/{}/deployments/{}/statuses/{}",
+        let url = format!(
+            "{}/repos/{}/{}/deployments/{}/statuses/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -18079,10 +18442,7 @@ impl Client {
             progenitor_support::encode_path(&status_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18096,13 +18456,16 @@ impl Client {
         repo: &str,
         body: &types::CreateRepositoryDispatchEventRequest,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/dispatches",
+        let url = format!(
+            "{}/repos/{}/{}/dispatches",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -18119,16 +18482,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::GetAllEnvironmentsOkResponse> {
-        let url = format!("{}/repos/{}/{}/environments",
+        let url = format!(
+            "{}/repos/{}/{}/environments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18142,17 +18503,15 @@ impl Client {
         repo: &str,
         environment_name: &str,
     ) -> Result<types::Environment> {
-        let url = format!("{}/repos/{}/{}/environments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/environments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18167,14 +18526,17 @@ impl Client {
         environment_name: &str,
         body: &types::CreateUpdateEnvironmentRequest,
     ) -> Result<types::Environment> {
-        let url = format!("{}/repos/{}/{}/environments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/environments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -18192,17 +18554,15 @@ impl Client {
         repo: &str,
         environment_name: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/environments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/environments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18217,13 +18577,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/repos/{}/{}/events",
+        let url = format!(
+            "{}/repos/{}/{}/events",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -18242,13 +18609,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/repos/{}/{}/forks",
+        let url = format!(
+            "{}/repos/{}/{}/forks",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sort", sort.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -18265,13 +18640,16 @@ impl Client {
         repo: &str,
         body: &types::CreateForkRequest,
     ) -> Result<types::FullRepository> {
-        let url = format!("{}/repos/{}/{}/forks",
+        let url = format!(
+            "{}/repos/{}/{}/forks",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -18289,13 +18667,16 @@ impl Client {
         repo: &str,
         body: &types::CreateBlobRequest,
     ) -> Result<types::ShortBlob> {
-        let url = format!("{}/repos/{}/{}/git/blobs",
+        let url = format!(
+            "{}/repos/{}/{}/git/blobs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -18313,17 +18694,15 @@ impl Client {
         repo: &str,
         file_sha: &str,
     ) -> Result<types::Blob> {
-        let url = format!("{}/repos/{}/{}/git/blobs/{}",
+        let url = format!(
+            "{}/repos/{}/{}/git/blobs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&file_sha.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18337,13 +18716,16 @@ impl Client {
         repo: &str,
         body: &types::CreateCommitRequest,
     ) -> Result<types::GitCommit> {
-        let url = format!("{}/repos/{}/{}/git/commits",
+        let url = format!(
+            "{}/repos/{}/{}/git/commits",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -18361,17 +18743,15 @@ impl Client {
         repo: &str,
         commit_sha: &str,
     ) -> Result<types::GitCommit> {
-        let url = format!("{}/repos/{}/{}/git/commits/{}",
+        let url = format!(
+            "{}/repos/{}/{}/git/commits/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18387,14 +18767,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::GitRef>> {
-        let url = format!("{}/repos/{}/{}/git/matching-refs/{}",
+        let url = format!(
+            "{}/repos/{}/{}/git/matching-refs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -18405,23 +18792,16 @@ impl Client {
     /**
      * git_get_ref: GET /repos/{owner}/{repo}/git/ref/{ref}
      */
-    pub async fn git_get_ref(
-        &self,
-        owner: &str,
-        repo: &str,
-        ref_: &str,
-    ) -> Result<types::GitRef> {
-        let url = format!("{}/repos/{}/{}/git/ref/{}",
+    pub async fn git_get_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<types::GitRef> {
+        let url = format!(
+            "{}/repos/{}/{}/git/ref/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18435,13 +18815,16 @@ impl Client {
         repo: &str,
         body: &types::CreateReferenceRequest,
     ) -> Result<types::GitRef> {
-        let url = format!("{}/repos/{}/{}/git/refs",
+        let url = format!(
+            "{}/repos/{}/{}/git/refs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -18453,23 +18836,16 @@ impl Client {
     /**
      * git_delete_ref: DELETE /repos/{owner}/{repo}/git/refs/{ref}
      */
-    pub async fn git_delete_ref(
-        &self,
-        owner: &str,
-        repo: &str,
-        ref_: &str,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/git/refs/{}",
+    pub async fn git_delete_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/git/refs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18484,14 +18860,17 @@ impl Client {
         ref_: &str,
         body: &types::UpdateReferenceRequest,
     ) -> Result<types::GitRef> {
-        let url = format!("{}/repos/{}/{}/git/refs/{}",
+        let url = format!(
+            "{}/repos/{}/{}/git/refs/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -18509,13 +18888,16 @@ impl Client {
         repo: &str,
         body: &types::CreateTagObjectRequest,
     ) -> Result<types::GitTag> {
-        let url = format!("{}/repos/{}/{}/git/tags",
+        let url = format!(
+            "{}/repos/{}/{}/git/tags",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -18533,17 +18915,15 @@ impl Client {
         repo: &str,
         tag_sha: &str,
     ) -> Result<types::GitTag> {
-        let url = format!("{}/repos/{}/{}/git/tags/{}",
+        let url = format!(
+            "{}/repos/{}/{}/git/tags/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&tag_sha.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18557,13 +18937,16 @@ impl Client {
         repo: &str,
         body: &types::CreateTreeRequest,
     ) -> Result<types::GitTree> {
-        let url = format!("{}/repos/{}/{}/git/trees",
+        let url = format!(
+            "{}/repos/{}/{}/git/trees",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -18582,14 +18965,18 @@ impl Client {
         tree_sha: &str,
         recursive: &str,
     ) -> Result<types::GitTree> {
-        let url = format!("{}/repos/{}/{}/git/trees/{}",
+        let url = format!(
+            "{}/repos/{}/{}/git/trees/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&tree_sha.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("recursive", recursive.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -18607,13 +18994,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Hook>> {
-        let url = format!("{}/repos/{}/{}/hooks",
+        let url = format!(
+            "{}/repos/{}/{}/hooks",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -18630,13 +19024,16 @@ impl Client {
         repo: &str,
         body: &types::CreateRepositoryWebhookRequest,
     ) -> Result<types::Hook> {
-        let url = format!("{}/repos/{}/{}/hooks",
+        let url = format!(
+            "{}/repos/{}/{}/hooks",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -18654,17 +19051,15 @@ impl Client {
         repo: &str,
         hook_id: i64,
     ) -> Result<types::Hook> {
-        let url = format!("{}/repos/{}/{}/hooks/{}",
+        let url = format!(
+            "{}/repos/{}/{}/hooks/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18672,23 +19067,16 @@ impl Client {
     /**
      * repos_delete_webhook: DELETE /repos/{owner}/{repo}/hooks/{hook_id}
      */
-    pub async fn repos_delete_webhook(
-        &self,
-        owner: &str,
-        repo: &str,
-        hook_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/hooks/{}",
+    pub async fn repos_delete_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/hooks/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18703,14 +19091,17 @@ impl Client {
         hook_id: i64,
         body: &types::UpdateRepositoryWebhookRequest,
     ) -> Result<types::Hook> {
-        let url = format!("{}/repos/{}/{}/hooks/{}",
+        let url = format!(
+            "{}/repos/{}/{}/hooks/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -18728,17 +19119,15 @@ impl Client {
         repo: &str,
         hook_id: i64,
     ) -> Result<types::WebhookConfig> {
-        let url = format!("{}/repos/{}/{}/hooks/{}/config",
+        let url = format!(
+            "{}/repos/{}/{}/hooks/{}/config",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18753,14 +19142,17 @@ impl Client {
         hook_id: i64,
         body: &types::UpdateWebhookConfigurationRepositoryRequest,
     ) -> Result<types::WebhookConfig> {
-        let url = format!("{}/repos/{}/{}/hooks/{}/config",
+        let url = format!(
+            "{}/repos/{}/{}/hooks/{}/config",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -18772,23 +19164,16 @@ impl Client {
     /**
      * repos_ping_webhook: POST /repos/{owner}/{repo}/hooks/{hook_id}/pings
      */
-    pub async fn repos_ping_webhook(
-        &self,
-        owner: &str,
-        repo: &str,
-        hook_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/hooks/{}/pings",
+    pub async fn repos_ping_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/hooks/{}/pings",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18802,17 +19187,15 @@ impl Client {
         repo: &str,
         hook_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/hooks/{}/tests",
+        let url = format!(
+            "{}/repos/{}/{}/hooks/{}/tests",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18825,16 +19208,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::Import> {
-        let url = format!("{}/repos/{}/{}/import",
+        let url = format!(
+            "{}/repos/{}/{}/import",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18848,13 +19229,16 @@ impl Client {
         repo: &str,
         body: &types::StartImportRequest,
     ) -> Result<types::Import> {
-        let url = format!("{}/repos/{}/{}/import",
+        let url = format!(
+            "{}/repos/{}/{}/import",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -18866,21 +19250,15 @@ impl Client {
     /**
      * migrations_cancel_import: DELETE /repos/{owner}/{repo}/import
      */
-    pub async fn migrations_cancel_import(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/import",
+    pub async fn migrations_cancel_import(&self, owner: &str, repo: &str) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/import",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18894,13 +19272,16 @@ impl Client {
         repo: &str,
         body: &types::UpdateImportRequest,
     ) -> Result<types::Import> {
-        let url = format!("{}/repos/{}/{}/import",
+        let url = format!(
+            "{}/repos/{}/{}/import",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -18918,13 +19299,17 @@ impl Client {
         repo: &str,
         since: i64,
     ) -> Result<Vec<types::PorterAuthor>> {
-        let url = format!("{}/repos/{}/{}/import/authors",
+        let url = format!(
+            "{}/repos/{}/{}/import/authors",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("since", format!("{}", since))])
             .send()
             .await?
             .error_for_status()?;
@@ -18942,14 +19327,17 @@ impl Client {
         author_id: i64,
         body: &types::MapCommitAuthorRequest,
     ) -> Result<types::PorterAuthor> {
-        let url = format!("{}/repos/{}/{}/import/authors/{}",
+        let url = format!(
+            "{}/repos/{}/{}/import/authors/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&author_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -18966,16 +19354,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<types::PorterLargeFile>> {
-        let url = format!("{}/repos/{}/{}/import/large_files",
+        let url = format!(
+            "{}/repos/{}/{}/import/large_files",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -18989,13 +19375,16 @@ impl Client {
         repo: &str,
         body: &types::UpdateGitLfsPreferenceRequest,
     ) -> Result<types::Import> {
-        let url = format!("{}/repos/{}/{}/import/lfs",
+        let url = format!(
+            "{}/repos/{}/{}/import/lfs",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -19012,16 +19401,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::Installation> {
-        let url = format!("{}/repos/{}/{}/installation",
+        let url = format!(
+            "{}/repos/{}/{}/installation",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19034,16 +19421,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::GetInteractionRestrictionsRepositoryOkResponse> {
-        let url = format!("{}/repos/{}/{}/interaction-limits",
+        let url = format!(
+            "{}/repos/{}/{}/interaction-limits",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19057,13 +19442,16 @@ impl Client {
         repo: &str,
         body: &types::InteractionLimit,
     ) -> Result<types::InteractionLimitResponse> {
-        let url = format!("{}/repos/{}/{}/interaction-limits",
+        let url = format!(
+            "{}/repos/{}/{}/interaction-limits",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -19080,16 +19468,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/interaction-limits",
+        let url = format!(
+            "{}/repos/{}/{}/interaction-limits",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19104,13 +19490,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::RepositoryInvitation>> {
-        let url = format!("{}/repos/{}/{}/invitations",
+        let url = format!(
+            "{}/repos/{}/{}/invitations",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19127,17 +19520,15 @@ impl Client {
         repo: &str,
         invitation_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/invitations/{}",
+        let url = format!(
+            "{}/repos/{}/{}/invitations/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19152,14 +19543,17 @@ impl Client {
         invitation_id: i64,
         body: &types::UpdateRepositoryInvitationRequest,
     ) -> Result<types::RepositoryInvitation> {
-        let url = format!("{}/repos/{}/{}/invitations/{}",
+        let url = format!(
+            "{}/repos/{}/{}/invitations/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -19187,13 +19581,29 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::IssueSimple>> {
-        let url = format!("{}/repos/{}/{}/issues",
+        let url = format!(
+            "{}/repos/{}/{}/issues",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("milestone", milestone.to_string()),
+                ("state", state.to_string()),
+                ("assignee", assignee.to_string()),
+                ("creator", creator.to_string()),
+                ("mentioned", mentioned.to_string()),
+                ("labels", labels.to_string()),
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19210,13 +19620,16 @@ impl Client {
         repo: &str,
         body: &types::CreateIssueRequest,
     ) -> Result<types::Issue> {
-        let url = format!("{}/repos/{}/{}/issues",
+        let url = format!(
+            "{}/repos/{}/{}/issues",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -19238,13 +19651,23 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::IssueComment>> {
-        let url = format!("{}/repos/{}/{}/issues/comments",
+        let url = format!(
+            "{}/repos/{}/{}/issues/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19261,17 +19684,15 @@ impl Client {
         repo: &str,
         comment_id: i64,
     ) -> Result<types::IssueComment> {
-        let url = format!("{}/repos/{}/{}/issues/comments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/issues/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19285,17 +19706,15 @@ impl Client {
         repo: &str,
         comment_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/issues/comments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/issues/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19310,14 +19729,17 @@ impl Client {
         comment_id: i64,
         body: &types::UpdateIssueCommentRequest,
     ) -> Result<types::IssueComment> {
-        let url = format!("{}/repos/{}/{}/issues/comments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/issues/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -19338,14 +19760,22 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
-        let url = format!("{}/repos/{}/{}/issues/comments/{}/reactions",
+        let url = format!(
+            "{}/repos/{}/{}/issues/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("content", content.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19363,14 +19793,17 @@ impl Client {
         comment_id: i64,
         body: &types::CreateReactionIssueCommentRequest,
     ) -> Result<types::Reaction> {
-        let url = format!("{}/repos/{}/{}/issues/comments/{}/reactions",
+        let url = format!(
+            "{}/repos/{}/{}/issues/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -19389,7 +19822,8 @@ impl Client {
         comment_id: i64,
         reaction_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/issues/comments/{}/reactions/{}",
+        let url = format!(
+            "{}/repos/{}/{}/issues/comments/{}/reactions/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -19397,10 +19831,7 @@ impl Client {
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19415,13 +19846,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::IssueEvent>> {
-        let url = format!("{}/repos/{}/{}/issues/events",
+        let url = format!(
+            "{}/repos/{}/{}/issues/events",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19438,17 +19876,15 @@ impl Client {
         repo: &str,
         event_id: i64,
     ) -> Result<types::IssueEvent> {
-        let url = format!("{}/repos/{}/{}/issues/events/{}",
+        let url = format!(
+            "{}/repos/{}/{}/issues/events/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&event_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19462,17 +19898,15 @@ impl Client {
         repo: &str,
         issue_number: i64,
     ) -> Result<types::Issue> {
-        let url = format!("{}/repos/{}/{}/issues/{}",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19487,14 +19921,17 @@ impl Client {
         issue_number: i64,
         body: &types::UpdateIssueRequest,
     ) -> Result<types::Issue> {
-        let url = format!("{}/repos/{}/{}/issues/{}",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -19513,14 +19950,17 @@ impl Client {
         issue_number: i64,
         body: &types::AddAssigneesIssueRequest,
     ) -> Result<types::IssueSimple> {
-        let url = format!("{}/repos/{}/{}/issues/{}/assignees",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/assignees",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -19539,14 +19979,17 @@ impl Client {
         issue_number: i64,
         body: &types::RemoveAssigneesFromIssueRequest,
     ) -> Result<types::IssueSimple> {
-        let url = format!("{}/repos/{}/{}/issues/{}/assignees",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/assignees",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -19567,14 +20010,22 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::IssueComment>> {
-        let url = format!("{}/repos/{}/{}/issues/{}/comments",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19592,14 +20043,17 @@ impl Client {
         issue_number: i64,
         body: &types::CreateIssueCommentRequest,
     ) -> Result<types::IssueComment> {
-        let url = format!("{}/repos/{}/{}/issues/{}/comments",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -19619,14 +20073,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::IssueEventforIssue>> {
-        let url = format!("{}/repos/{}/{}/issues/{}/events",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/events",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19645,14 +20106,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Label>> {
-        let url = format!("{}/repos/{}/{}/issues/{}/labels",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/labels",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19670,14 +20138,17 @@ impl Client {
         issue_number: i64,
         body: &types::SetLabelsIssueRequest,
     ) -> Result<Vec<types::Label>> {
-        let url = format!("{}/repos/{}/{}/issues/{}/labels",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/labels",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -19696,14 +20167,17 @@ impl Client {
         issue_number: i64,
         body: &types::AddLabelsIssueRequest,
     ) -> Result<Vec<types::Label>> {
-        let url = format!("{}/repos/{}/{}/issues/{}/labels",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/labels",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -19721,17 +20195,15 @@ impl Client {
         repo: &str,
         issue_number: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/issues/{}/labels",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/labels",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19746,7 +20218,8 @@ impl Client {
         issue_number: i64,
         name: &str,
     ) -> Result<Vec<types::Label>> {
-        let url = format!("{}/repos/{}/{}/issues/{}/labels/{}",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/labels/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -19754,10 +20227,7 @@ impl Client {
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19772,14 +20242,17 @@ impl Client {
         issue_number: i64,
         body: &types::LockIssueRequest,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/issues/{}/lock",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/lock",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -19791,23 +20264,16 @@ impl Client {
     /**
      * issues_unlock: DELETE /repos/{owner}/{repo}/issues/{issue_number}/lock
      */
-    pub async fn issues_unlock(
-        &self,
-        owner: &str,
-        repo: &str,
-        issue_number: i64,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/issues/{}/lock",
+    pub async fn issues_unlock(&self, owner: &str, repo: &str, issue_number: i64) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/lock",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19824,14 +20290,22 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
-        let url = format!("{}/repos/{}/{}/issues/{}/reactions",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("content", content.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19849,14 +20323,17 @@ impl Client {
         issue_number: i64,
         body: &types::CreateReactionIssueRequest,
     ) -> Result<types::Reaction> {
-        let url = format!("{}/repos/{}/{}/issues/{}/reactions",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -19875,7 +20352,8 @@ impl Client {
         issue_number: i64,
         reaction_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/issues/{}/reactions/{}",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/reactions/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -19883,10 +20361,7 @@ impl Client {
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19902,14 +20377,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TimelineIssueEvents>> {
-        let url = format!("{}/repos/{}/{}/issues/{}/timeline",
+        let url = format!(
+            "{}/repos/{}/{}/issues/{}/timeline",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19927,13 +20409,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::DeployKey>> {
-        let url = format!("{}/repos/{}/{}/keys",
+        let url = format!(
+            "{}/repos/{}/{}/keys",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -19950,13 +20439,16 @@ impl Client {
         repo: &str,
         body: &types::CreateDeployKeyRequest,
     ) -> Result<types::DeployKey> {
-        let url = format!("{}/repos/{}/{}/keys",
+        let url = format!(
+            "{}/repos/{}/{}/keys",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -19974,17 +20466,15 @@ impl Client {
         repo: &str,
         key_id: i64,
     ) -> Result<types::DeployKey> {
-        let url = format!("{}/repos/{}/{}/keys/{}",
+        let url = format!(
+            "{}/repos/{}/{}/keys/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -19998,17 +20488,15 @@ impl Client {
         repo: &str,
         key_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/keys/{}",
+        let url = format!(
+            "{}/repos/{}/{}/keys/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20023,13 +20511,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Label>> {
-        let url = format!("{}/repos/{}/{}/labels",
+        let url = format!(
+            "{}/repos/{}/{}/labels",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20046,13 +20541,16 @@ impl Client {
         repo: &str,
         body: &types::CreateLabelRequest,
     ) -> Result<types::Label> {
-        let url = format!("{}/repos/{}/{}/labels",
+        let url = format!(
+            "{}/repos/{}/{}/labels",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -20070,17 +20568,15 @@ impl Client {
         repo: &str,
         name: &str,
     ) -> Result<types::Label> {
-        let url = format!("{}/repos/{}/{}/labels/{}",
+        let url = format!(
+            "{}/repos/{}/{}/labels/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20088,23 +20584,16 @@ impl Client {
     /**
      * issues_delete_label: DELETE /repos/{owner}/{repo}/labels/{name}
      */
-    pub async fn issues_delete_label(
-        &self,
-        owner: &str,
-        repo: &str,
-        name: &str,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/labels/{}",
+    pub async fn issues_delete_label(&self, owner: &str, repo: &str, name: &str) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/labels/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20119,14 +20608,17 @@ impl Client {
         name: &str,
         body: &types::UpdateLabelRequest,
     ) -> Result<types::Label> {
-        let url = format!("{}/repos/{}/{}/labels/{}",
+        let url = format!(
+            "{}/repos/{}/{}/labels/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -20138,21 +20630,15 @@ impl Client {
     /**
      * repos_list_languages: GET /repos/{owner}/{repo}/languages
      */
-    pub async fn repos_list_languages(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<types::Language> {
-        let url = format!("{}/repos/{}/{}/languages",
+    pub async fn repos_list_languages(&self, owner: &str, repo: &str) -> Result<types::Language> {
+        let url = format!(
+            "{}/repos/{}/{}/languages",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20165,16 +20651,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::LicenseContent> {
-        let url = format!("{}/repos/{}/{}/license",
+        let url = format!(
+            "{}/repos/{}/{}/license",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20188,13 +20672,16 @@ impl Client {
         repo: &str,
         body: &types::MergeBranchRequest,
     ) -> Result<types::Commit> {
-        let url = format!("{}/repos/{}/{}/merges",
+        let url = format!(
+            "{}/repos/{}/{}/merges",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -20216,13 +20703,23 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Milestone>> {
-        let url = format!("{}/repos/{}/{}/milestones",
+        let url = format!(
+            "{}/repos/{}/{}/milestones",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("state", state.to_string()),
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20239,13 +20736,16 @@ impl Client {
         repo: &str,
         body: &types::CreateMilestoneRequest,
     ) -> Result<types::Milestone> {
-        let url = format!("{}/repos/{}/{}/milestones",
+        let url = format!(
+            "{}/repos/{}/{}/milestones",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -20263,17 +20763,15 @@ impl Client {
         repo: &str,
         milestone_number: i64,
     ) -> Result<types::Milestone> {
-        let url = format!("{}/repos/{}/{}/milestones/{}",
+        let url = format!(
+            "{}/repos/{}/{}/milestones/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20287,17 +20785,15 @@ impl Client {
         repo: &str,
         milestone_number: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/milestones/{}",
+        let url = format!(
+            "{}/repos/{}/{}/milestones/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20312,14 +20808,17 @@ impl Client {
         milestone_number: i64,
         body: &types::UpdateMilestoneRequest,
     ) -> Result<types::Milestone> {
-        let url = format!("{}/repos/{}/{}/milestones/{}",
+        let url = format!(
+            "{}/repos/{}/{}/milestones/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -20339,14 +20838,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Label>> {
-        let url = format!("{}/repos/{}/{}/milestones/{}/labels",
+        let url = format!(
+            "{}/repos/{}/{}/milestones/{}/labels",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20368,13 +20874,24 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Thread>> {
-        let url = format!("{}/repos/{}/{}/notifications",
+        let url = format!(
+            "{}/repos/{}/{}/notifications",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("all", format!("{}", all)),
+                ("participating", format!("{}", participating)),
+                ("since", since.to_rfc3339()),
+                ("before", before.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20391,13 +20908,16 @@ impl Client {
         repo: &str,
         body: &types::MarkRepositoryNotificationsasReadRequest,
     ) -> Result<types::PutMarkRepositoryNotificationsasReadAcceptedResponse> {
-        let url = format!("{}/repos/{}/{}/notifications",
+        let url = format!(
+            "{}/repos/{}/{}/notifications",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -20409,21 +20929,15 @@ impl Client {
     /**
      * repos_get_pages: GET /repos/{owner}/{repo}/pages
      */
-    pub async fn repos_get_pages(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<types::Page> {
-        let url = format!("{}/repos/{}/{}/pages",
+    pub async fn repos_get_pages(&self, owner: &str, repo: &str) -> Result<types::Page> {
+        let url = format!(
+            "{}/repos/{}/{}/pages",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20437,13 +20951,16 @@ impl Client {
         repo: &str,
         body: &types::UpdateInformationAboutGithubPagesSiteRequest,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/pages",
+        let url = format!(
+            "{}/repos/{}/{}/pages",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -20461,13 +20978,16 @@ impl Client {
         repo: &str,
         body: &types::CreateGithubPagesSiteRequest,
     ) -> Result<types::Page> {
-        let url = format!("{}/repos/{}/{}/pages",
+        let url = format!(
+            "{}/repos/{}/{}/pages",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -20479,21 +20999,15 @@ impl Client {
     /**
      * repos_delete_pages_site: DELETE /repos/{owner}/{repo}/pages
      */
-    pub async fn repos_delete_pages_site(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/pages",
+    pub async fn repos_delete_pages_site(&self, owner: &str, repo: &str) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/pages",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20508,13 +21022,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::PageBuild>> {
-        let url = format!("{}/repos/{}/{}/pages/builds",
+        let url = format!(
+            "{}/repos/{}/{}/pages/builds",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20530,16 +21051,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::PageBuildStatus> {
-        let url = format!("{}/repos/{}/{}/pages/builds",
+        let url = format!(
+            "{}/repos/{}/{}/pages/builds",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20552,16 +21071,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::PageBuild> {
-        let url = format!("{}/repos/{}/{}/pages/builds/latest",
+        let url = format!(
+            "{}/repos/{}/{}/pages/builds/latest",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20575,17 +21092,15 @@ impl Client {
         repo: &str,
         build_id: i64,
     ) -> Result<types::PageBuild> {
-        let url = format!("{}/repos/{}/{}/pages/builds/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pages/builds/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&build_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20598,16 +21113,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::PagesHealthCheck> {
-        let url = format!("{}/repos/{}/{}/pages/health",
+        let url = format!(
+            "{}/repos/{}/{}/pages/health",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20623,13 +21136,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Project>> {
-        let url = format!("{}/repos/{}/{}/projects",
+        let url = format!(
+            "{}/repos/{}/{}/projects",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("state", state.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20646,13 +21167,16 @@ impl Client {
         repo: &str,
         body: &types::CreateRepositoryProjectRequest,
     ) -> Result<types::Project> {
-        let url = format!("{}/repos/{}/{}/projects",
+        let url = format!(
+            "{}/repos/{}/{}/projects",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -20676,13 +21200,25 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::PullRequestSimple>> {
-        let url = format!("{}/repos/{}/{}/pulls",
+        let url = format!(
+            "{}/repos/{}/{}/pulls",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("state", state.to_string()),
+                ("head", head.to_string()),
+                ("base", base.to_string()),
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20699,13 +21235,16 @@ impl Client {
         repo: &str,
         body: &types::CreatePullRequestRequest,
     ) -> Result<types::PullRequest> {
-        let url = format!("{}/repos/{}/{}/pulls",
+        let url = format!(
+            "{}/repos/{}/{}/pulls",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -20727,13 +21266,23 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
-        let url = format!("{}/repos/{}/{}/pulls/comments",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20750,17 +21299,15 @@ impl Client {
         repo: &str,
         comment_id: i64,
     ) -> Result<types::PullRequestReviewComment> {
-        let url = format!("{}/repos/{}/{}/pulls/comments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20774,17 +21321,15 @@ impl Client {
         repo: &str,
         comment_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/pulls/comments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20799,14 +21344,17 @@ impl Client {
         comment_id: i64,
         body: &types::UpdateReviewCommentPullRequestRequest,
     ) -> Result<types::PullRequestReviewComment> {
-        let url = format!("{}/repos/{}/{}/pulls/comments/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -20827,14 +21375,22 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
-        let url = format!("{}/repos/{}/{}/pulls/comments/{}/reactions",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("content", content.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20852,14 +21408,17 @@ impl Client {
         comment_id: i64,
         body: &types::CreateReactionPullRequestReviewCommentRequest,
     ) -> Result<types::Reaction> {
-        let url = format!("{}/repos/{}/{}/pulls/comments/{}/reactions",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -20878,7 +21437,8 @@ impl Client {
         comment_id: i64,
         reaction_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/pulls/comments/{}/reactions/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/comments/{}/reactions/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -20886,10 +21446,7 @@ impl Client {
             progenitor_support::encode_path(&reaction_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20903,17 +21460,15 @@ impl Client {
         repo: &str,
         pull_number: i64,
     ) -> Result<types::PullRequest> {
-        let url = format!("{}/repos/{}/{}/pulls/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -20928,14 +21483,17 @@ impl Client {
         pull_number: i64,
         body: &types::UpdatePullRequestRequest,
     ) -> Result<types::PullRequest> {
-        let url = format!("{}/repos/{}/{}/pulls/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -20958,14 +21516,24 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::PullRequestReviewComment>> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/comments",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -20983,14 +21551,17 @@ impl Client {
         pull_number: i64,
         body: &types::CreateReviewCommentPullRequestRequest,
     ) -> Result<types::PullRequestReviewComment> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/comments",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -21010,7 +21581,8 @@ impl Client {
         comment_id: i64,
         body: &types::CreateReplyReviewCommentRequest,
     ) -> Result<types::PullRequestReviewComment> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/comments/{}/replies",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/comments/{}/replies",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -21018,7 +21590,9 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -21038,14 +21612,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Commit>> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/commits",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/commits",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -21064,14 +21645,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::DiffEntry>> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/files",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/files",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -21088,17 +21676,15 @@ impl Client {
         repo: &str,
         pull_number: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/merge",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/merge",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21113,14 +21699,17 @@ impl Client {
         pull_number: i64,
         body: &types::MergePullRequestRequest,
     ) -> Result<types::PullRequestMergeResult> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/merge",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/merge",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -21140,14 +21729,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::PullRequestReviewRequest> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/requested_reviewers",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/requested_reviewers",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -21165,14 +21761,17 @@ impl Client {
         pull_number: i64,
         body: &types::RequestReviewersPullRequestRequest,
     ) -> Result<types::PullRequestSimple> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/requested_reviewers",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/requested_reviewers",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -21191,14 +21790,17 @@ impl Client {
         pull_number: i64,
         body: &types::RemoveRequestedReviewersFromPullRequestRequest,
     ) -> Result<types::PullRequestSimple> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/requested_reviewers",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/requested_reviewers",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -21218,14 +21820,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::PullRequestReview>> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/reviews",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/reviews",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -21243,14 +21852,17 @@ impl Client {
         pull_number: i64,
         body: &types::CreateReviewPullRequestRequest,
     ) -> Result<types::PullRequestReview> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/reviews",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/reviews",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -21269,7 +21881,8 @@ impl Client {
         pull_number: i64,
         review_id: i64,
     ) -> Result<types::PullRequestReview> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/reviews/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/reviews/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -21277,10 +21890,7 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21296,7 +21906,8 @@ impl Client {
         review_id: i64,
         body: &types::UpdateReviewPullRequestRequest,
     ) -> Result<types::PullRequestReview> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/reviews/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/reviews/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -21304,7 +21915,9 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -21323,7 +21936,8 @@ impl Client {
         pull_number: i64,
         review_id: i64,
     ) -> Result<types::PullRequestReview> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/reviews/{}",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/reviews/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -21331,10 +21945,7 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21351,7 +21962,8 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::ReviewComment>> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/reviews/{}/comments",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/reviews/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -21359,7 +21971,13 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -21378,7 +21996,8 @@ impl Client {
         review_id: i64,
         body: &types::DismissReviewPullRequestRequest,
     ) -> Result<types::PullRequestReview> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -21386,7 +22005,9 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -21406,7 +22027,8 @@ impl Client {
         review_id: i64,
         body: &types::SubmitReviewPullRequestRequest,
     ) -> Result<types::PullRequestReview> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/reviews/{}/events",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/reviews/{}/events",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
@@ -21414,7 +22036,9 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -21433,14 +22057,17 @@ impl Client {
         pull_number: i64,
         body: &types::UpdatePullRequestBranchRequest,
     ) -> Result<types::PutUpdatePullRequestBranchAcceptedResponse> {
-        let url = format!("{}/repos/{}/{}/pulls/{}/update-branch",
+        let url = format!(
+            "{}/repos/{}/{}/pulls/{}/update-branch",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -21456,15 +22083,19 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        ref_: &str,
+        ref_: &&str,
     ) -> Result<types::ContentFile> {
-        let url = format!("{}/repos/{}/{}/readme",
+        let url = format!(
+            "{}/repos/{}/{}/readme",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("ref", ref_.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -21480,16 +22111,20 @@ impl Client {
         owner: &str,
         repo: &str,
         dir: &str,
-        ref_: &str,
+        ref_: &&str,
     ) -> Result<types::ContentFile> {
-        let url = format!("{}/repos/{}/{}/readme/{}",
+        let url = format!(
+            "{}/repos/{}/{}/readme/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&dir.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("ref", ref_.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -21507,13 +22142,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Release>> {
-        let url = format!("{}/repos/{}/{}/releases",
+        let url = format!(
+            "{}/repos/{}/{}/releases",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -21530,13 +22172,16 @@ impl Client {
         repo: &str,
         body: &types::CreateReleaseRequest,
     ) -> Result<types::Release> {
-        let url = format!("{}/repos/{}/{}/releases",
+        let url = format!(
+            "{}/repos/{}/{}/releases",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -21554,17 +22199,15 @@ impl Client {
         repo: &str,
         asset_id: i64,
     ) -> Result<types::ReleaseAsset> {
-        let url = format!("{}/repos/{}/{}/releases/assets/{}",
+        let url = format!(
+            "{}/repos/{}/{}/releases/assets/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&asset_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21578,17 +22221,15 @@ impl Client {
         repo: &str,
         asset_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/releases/assets/{}",
+        let url = format!(
+            "{}/repos/{}/{}/releases/assets/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&asset_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21603,14 +22244,17 @@ impl Client {
         asset_id: i64,
         body: &types::UpdateReleaseAssetRequest,
     ) -> Result<types::ReleaseAsset> {
-        let url = format!("{}/repos/{}/{}/releases/assets/{}",
+        let url = format!(
+            "{}/repos/{}/{}/releases/assets/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&asset_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -21627,16 +22271,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::Release> {
-        let url = format!("{}/repos/{}/{}/releases/latest",
+        let url = format!(
+            "{}/repos/{}/{}/releases/latest",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21650,17 +22292,15 @@ impl Client {
         repo: &str,
         tag: &str,
     ) -> Result<types::Release> {
-        let url = format!("{}/repos/{}/{}/releases/tags/{}",
+        let url = format!(
+            "{}/repos/{}/{}/releases/tags/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&tag.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21674,17 +22314,15 @@ impl Client {
         repo: &str,
         release_id: i64,
     ) -> Result<types::Release> {
-        let url = format!("{}/repos/{}/{}/releases/{}",
+        let url = format!(
+            "{}/repos/{}/{}/releases/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21698,17 +22336,15 @@ impl Client {
         repo: &str,
         release_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/releases/{}",
+        let url = format!(
+            "{}/repos/{}/{}/releases/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21723,14 +22359,17 @@ impl Client {
         release_id: i64,
         body: &types::UpdateReleaseRequest,
     ) -> Result<types::Release> {
-        let url = format!("{}/repos/{}/{}/releases/{}",
+        let url = format!(
+            "{}/repos/{}/{}/releases/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -21750,14 +22389,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::ReleaseAsset>> {
-        let url = format!("{}/repos/{}/{}/releases/{}/assets",
+        let url = format!(
+            "{}/repos/{}/{}/releases/{}/assets",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -21777,14 +22423,18 @@ impl Client {
         label: &str,
         body: T,
     ) -> Result<types::ReleaseAsset> {
-        let url = format!("{}/repos/{}/{}/releases/{}/assets",
+        let url = format!(
+            "{}/repos/{}/{}/releases/{}/assets",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
+            .query(&[("name", name.to_string()), ("label", label.to_string())])
             .body(body)
             .send()
             .await?
@@ -21803,14 +22453,17 @@ impl Client {
         release_id: i64,
         body: &types::CreateReactionReleaseRequest,
     ) -> Result<types::Reaction> {
-        let url = format!("{}/repos/{}/{}/releases/{}/reactions",
+        let url = format!(
+            "{}/repos/{}/{}/releases/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -21831,13 +22484,22 @@ impl Client {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<types::SecretScanningAlert>> {
-        let url = format!("{}/repos/{}/{}/secret-scanning/alerts",
+        let url = format!(
+            "{}/repos/{}/{}/secret-scanning/alerts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("state", state.to_string()),
+                ("secret_type", secret_type.to_string()),
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -21854,17 +22516,15 @@ impl Client {
         repo: &str,
         alert_number: &str,
     ) -> Result<types::SecretScanningAlert> {
-        let url = format!("{}/repos/{}/{}/secret-scanning/alerts/{}",
+        let url = format!(
+            "{}/repos/{}/{}/secret-scanning/alerts/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21879,14 +22539,17 @@ impl Client {
         alert_number: &str,
         body: &types::UpdateSecretScanningAlertRequest,
     ) -> Result<types::SecretScanningAlert> {
-        let url = format!("{}/repos/{}/{}/secret-scanning/alerts/{}",
+        let url = format!(
+            "{}/repos/{}/{}/secret-scanning/alerts/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -21905,13 +22568,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/repos/{}/{}/stargazers",
+        let url = format!(
+            "{}/repos/{}/{}/stargazers",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -21927,16 +22597,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<Vec<i64>>> {
-        let url = format!("{}/repos/{}/{}/stats/code_frequency",
+        let url = format!(
+            "{}/repos/{}/{}/stats/code_frequency",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21949,16 +22617,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<types::CommitActivity>> {
-        let url = format!("{}/repos/{}/{}/stats/commit_activity",
+        let url = format!(
+            "{}/repos/{}/{}/stats/commit_activity",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21971,16 +22637,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<types::ContributorActivity>> {
-        let url = format!("{}/repos/{}/{}/stats/contributors",
+        let url = format!(
+            "{}/repos/{}/{}/stats/contributors",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -21993,16 +22657,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::ParticipationStats> {
-        let url = format!("{}/repos/{}/{}/stats/participation",
+        let url = format!(
+            "{}/repos/{}/{}/stats/participation",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22015,16 +22677,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<Vec<i64>>> {
-        let url = format!("{}/repos/{}/{}/stats/punch_card",
+        let url = format!(
+            "{}/repos/{}/{}/stats/punch_card",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22039,14 +22699,17 @@ impl Client {
         sha: &str,
         body: &types::CreateCommitStatusRequest,
     ) -> Result<types::Status> {
-        let url = format!("{}/repos/{}/{}/statuses/{}",
+        let url = format!(
+            "{}/repos/{}/{}/statuses/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&sha.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -22065,13 +22728,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/repos/{}/{}/subscribers",
+        let url = format!(
+            "{}/repos/{}/{}/subscribers",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -22087,16 +22757,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::RepositorySubscription> {
-        let url = format!("{}/repos/{}/{}/subscription",
+        let url = format!(
+            "{}/repos/{}/{}/subscription",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22110,13 +22778,16 @@ impl Client {
         repo: &str,
         body: &types::SetRepositorySubscriptionRequest,
     ) -> Result<types::RepositorySubscription> {
-        let url = format!("{}/repos/{}/{}/subscription",
+        let url = format!(
+            "{}/repos/{}/{}/subscription",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -22128,21 +22799,15 @@ impl Client {
     /**
      * activity_delete_repo_subscription: DELETE /repos/{owner}/{repo}/subscription
      */
-    pub async fn activity_delete_repo_subscription(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/subscription",
+    pub async fn activity_delete_repo_subscription(&self, owner: &str, repo: &str) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/subscription",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22157,13 +22822,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Tag>> {
-        let url = format!("{}/repos/{}/{}/tags",
+        let url = format!(
+            "{}/repos/{}/{}/tags",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -22180,17 +22852,15 @@ impl Client {
         repo: &str,
         ref_: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/tarball/{}",
+        let url = format!(
+            "{}/repos/{}/{}/tarball/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22205,13 +22875,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Team>> {
-        let url = format!("{}/repos/{}/{}/teams",
+        let url = format!(
+            "{}/repos/{}/{}/teams",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -22229,13 +22906,20 @@ impl Client {
         page: i64,
         per_page: i64,
     ) -> Result<types::Topic> {
-        let url = format!("{}/repos/{}/{}/topics",
+        let url = format!(
+            "{}/repos/{}/{}/topics",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -22252,13 +22936,16 @@ impl Client {
         repo: &str,
         body: &types::ReplaceAllRepositoryTopicsRequest,
     ) -> Result<types::Topic> {
-        let url = format!("{}/repos/{}/{}/topics",
+        let url = format!(
+            "{}/repos/{}/{}/topics",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -22276,13 +22963,17 @@ impl Client {
         repo: &str,
         per: &str,
     ) -> Result<types::CloneTraffic> {
-        let url = format!("{}/repos/{}/{}/traffic/clones",
+        let url = format!(
+            "{}/repos/{}/{}/traffic/clones",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("per", per.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -22298,16 +22989,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<types::ContentTraffic>> {
-        let url = format!("{}/repos/{}/{}/traffic/popular/paths",
+        let url = format!(
+            "{}/repos/{}/{}/traffic/popular/paths",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22320,16 +23009,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<types::ReferrerTraffic>> {
-        let url = format!("{}/repos/{}/{}/traffic/popular/referrers",
+        let url = format!(
+            "{}/repos/{}/{}/traffic/popular/referrers",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22343,13 +23030,17 @@ impl Client {
         repo: &str,
         per: &str,
     ) -> Result<types::ViewTraffic> {
-        let url = format!("{}/repos/{}/{}/traffic/views",
+        let url = format!(
+            "{}/repos/{}/{}/traffic/views",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("per", per.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -22366,13 +23057,16 @@ impl Client {
         repo: &str,
         body: &types::TransferRepositoryRequest,
     ) -> Result<types::MinimalRepository> {
-        let url = format!("{}/repos/{}/{}/transfer",
+        let url = format!(
+            "{}/repos/{}/{}/transfer",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -22384,21 +23078,15 @@ impl Client {
     /**
      * repos_check_vulnerability_alerts: GET /repos/{owner}/{repo}/vulnerability-alerts
      */
-    pub async fn repos_check_vulnerability_alerts(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/vulnerability-alerts",
+    pub async fn repos_check_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/vulnerability-alerts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22406,21 +23094,15 @@ impl Client {
     /**
      * repos_enable_vulnerability_alerts: PUT /repos/{owner}/{repo}/vulnerability-alerts
      */
-    pub async fn repos_enable_vulnerability_alerts(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/vulnerability-alerts",
+    pub async fn repos_enable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/vulnerability-alerts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22428,21 +23110,15 @@ impl Client {
     /**
      * repos_disable_vulnerability_alerts: DELETE /repos/{owner}/{repo}/vulnerability-alerts
      */
-    pub async fn repos_disable_vulnerability_alerts(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/vulnerability-alerts",
+    pub async fn repos_disable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
+        let url = format!(
+            "{}/repos/{}/{}/vulnerability-alerts",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22456,17 +23132,15 @@ impl Client {
         repo: &str,
         ref_: &str,
     ) -> Result<()> {
-        let url = format!("{}/repos/{}/{}/zipball/{}",
+        let url = format!(
+            "{}/repos/{}/{}/zipball/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22480,13 +23154,16 @@ impl Client {
         template_repo: &str,
         body: &types::CreateRepositoryUsingTemplateRequest,
     ) -> Result<types::Repository> {
-        let url = format!("{}/repos/{}/{}/generate",
+        let url = format!(
+            "{}/repos/{}/{}/generate",
             self.baseurl,
             progenitor_support::encode_path(&template_owner.to_string()),
             progenitor_support::encode_path(&template_repo.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -22498,15 +23175,13 @@ impl Client {
     /**
      * repos_list_public: GET /repositories
      */
-    pub async fn repos_list_public(
-        &self,
-        since: i64,
-    ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/repositories",
-            self.baseurl,
-        );
+    pub async fn repos_list_public(&self, since: i64) -> Result<Vec<types::MinimalRepository>> {
+        let url = format!("{}/repositories", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("since", format!("{}", since))])
             .send()
             .await?
             .error_for_status()?;
@@ -22524,13 +23199,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListEnvironmentSecretsOkResponse> {
-        let url = format!("{}/repositories/{}/environments/{}/secrets",
+        let url = format!(
+            "{}/repositories/{}/environments/{}/secrets",
             self.baseurl,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -22546,16 +23228,14 @@ impl Client {
         repository_id: i64,
         environment_name: &str,
     ) -> Result<types::ActionsPublicKey> {
-        let url = format!("{}/repositories/{}/environments/{}/secrets/public-key",
+        let url = format!(
+            "{}/repositories/{}/environments/{}/secrets/public-key",
             self.baseurl,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22569,17 +23249,15 @@ impl Client {
         environment_name: &str,
         secret_name: &str,
     ) -> Result<types::ActionsSecret> {
-        let url = format!("{}/repositories/{}/environments/{}/secrets/{}",
+        let url = format!(
+            "{}/repositories/{}/environments/{}/secrets/{}",
             self.baseurl,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22594,14 +23272,17 @@ impl Client {
         secret_name: &str,
         body: &types::CreateUpdateEnvironmentSecretRequest,
     ) -> Result<types::EmptyObject> {
-        let url = format!("{}/repositories/{}/environments/{}/secrets/{}",
+        let url = format!(
+            "{}/repositories/{}/environments/{}/secrets/{}",
             self.baseurl,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -22619,17 +23300,15 @@ impl Client {
         environment_name: &str,
         secret_name: &str,
     ) -> Result<()> {
-        let url = format!("{}/repositories/{}/environments/{}/secrets/{}",
+        let url = format!(
+            "{}/repositories/{}/environments/{}/secrets/{}",
             self.baseurl,
             progenitor_support::encode_path(&repository_id.to_string()),
             progenitor_support::encode_path(&environment_name.to_string()),
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22645,12 +23324,21 @@ impl Client {
         filter: &str,
         excludedAttributes: &str,
     ) -> Result<types::ScimGroupListEnterprise> {
-        let url = format!("{}/scim/v2/enterprises/{}/Groups",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Groups",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("startIndex", format!("{}", startIndex)),
+                ("count", format!("{}", count)),
+                ("filter", filter.to_string()),
+                ("excludedAttributes", excludedAttributes.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -22666,12 +23354,15 @@ impl Client {
         enterprise: &str,
         body: &types::ProvisionScimEnterpriseGroupandInviteUsersRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
-        let url = format!("{}/scim/v2/enterprises/{}/Groups",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Groups",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -22689,13 +23380,17 @@ impl Client {
         scim_group_id: &str,
         excludedAttributes: &str,
     ) -> Result<types::ScimEnterpriseGroup> {
-        let url = format!("{}/scim/v2/enterprises/{}/Groups/{}",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("excludedAttributes", excludedAttributes.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -22712,13 +23407,16 @@ impl Client {
         scim_group_id: &str,
         body: &types::SetScimInformationProvisionedEnterpriseGroupRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
-        let url = format!("{}/scim/v2/enterprises/{}/Groups/{}",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -22735,16 +23433,14 @@ impl Client {
         enterprise: &str,
         scim_group_id: &str,
     ) -> Result<()> {
-        let url = format!("{}/scim/v2/enterprises/{}/Groups/{}",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22758,13 +23454,16 @@ impl Client {
         scim_group_id: &str,
         body: &types::UpdateAttributeScimEnterpriseGroupRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
-        let url = format!("{}/scim/v2/enterprises/{}/Groups/{}",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Groups/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -22783,12 +23482,20 @@ impl Client {
         count: i64,
         filter: &str,
     ) -> Result<types::ScimUserListEnterprise> {
-        let url = format!("{}/scim/v2/enterprises/{}/Users",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Users",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("startIndex", format!("{}", startIndex)),
+                ("count", format!("{}", count)),
+                ("filter", filter.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -22804,12 +23511,15 @@ impl Client {
         enterprise: &str,
         body: &types::ProvisionandInviteScimEnterpriseUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
-        let url = format!("{}/scim/v2/enterprises/{}/Users",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Users",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -22826,16 +23536,14 @@ impl Client {
         enterprise: &str,
         scim_user_id: &str,
     ) -> Result<types::ScimEnterpriseUser> {
-        let url = format!("{}/scim/v2/enterprises/{}/Users/{}",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Users/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22849,13 +23557,16 @@ impl Client {
         scim_user_id: &str,
         body: &types::SetScimInformationProvisionedEnterpriseUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
-        let url = format!("{}/scim/v2/enterprises/{}/Users/{}",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Users/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -22872,16 +23583,14 @@ impl Client {
         enterprise: &str,
         scim_user_id: &str,
     ) -> Result<()> {
-        let url = format!("{}/scim/v2/enterprises/{}/Users/{}",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Users/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22895,13 +23604,16 @@ impl Client {
         scim_user_id: &str,
         body: &types::UpdateAttributeScimEnterpriseUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
-        let url = format!("{}/scim/v2/enterprises/{}/Users/{}",
+        let url = format!(
+            "{}/scim/v2/enterprises/{}/Users/{}",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -22920,12 +23632,20 @@ impl Client {
         count: i64,
         filter: &str,
     ) -> Result<types::ScimUserList> {
-        let url = format!("{}/scim/v2/organizations/{}/Users",
+        let url = format!(
+            "{}/scim/v2/organizations/{}/Users",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("startIndex", format!("{}", startIndex)),
+                ("count", format!("{}", count)),
+                ("filter", filter.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -22941,12 +23661,15 @@ impl Client {
         org: &str,
         body: &types::ProvisionandInviteScimUserRequest,
     ) -> Result<types::ScimUser> {
-        let url = format!("{}/scim/v2/organizations/{}/Users",
+        let url = format!(
+            "{}/scim/v2/organizations/{}/Users",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -22963,16 +23686,14 @@ impl Client {
         org: &str,
         scim_user_id: &str,
     ) -> Result<types::ScimUser> {
-        let url = format!("{}/scim/v2/organizations/{}/Users/{}",
+        let url = format!(
+            "{}/scim/v2/organizations/{}/Users/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -22986,13 +23707,16 @@ impl Client {
         scim_user_id: &str,
         body: &types::UpdateProvisionedOrganizationMembershipRequest,
     ) -> Result<types::ScimUser> {
-        let url = format!("{}/scim/v2/organizations/{}/Users/{}",
+        let url = format!(
+            "{}/scim/v2/organizations/{}/Users/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -23004,21 +23728,15 @@ impl Client {
     /**
      * scim_delete_user_from_org: DELETE /scim/v2/organizations/{org}/Users/{scim_user_id}
      */
-    pub async fn scim_delete_user_from_org(
-        &self,
-        org: &str,
-        scim_user_id: &str,
-    ) -> Result<()> {
-        let url = format!("{}/scim/v2/organizations/{}/Users/{}",
+    pub async fn scim_delete_user_from_org(&self, org: &str, scim_user_id: &str) -> Result<()> {
+        let url = format!(
+            "{}/scim/v2/organizations/{}/Users/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23032,13 +23750,16 @@ impl Client {
         scim_user_id: &str,
         body: &types::UpdateAttributeScimUserRequest,
     ) -> Result<types::ScimUser> {
-        let url = format!("{}/scim/v2/organizations/{}/Users/{}",
+        let url = format!(
+            "{}/scim/v2/organizations/{}/Users/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -23058,11 +23779,18 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
-        let url = format!("{}/search/code",
-            self.baseurl,
-        );
+        let url = format!("{}/search/code", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("q", q.to_string()),
+                ("sort", sort.to_string()),
+                ("order", order.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23081,11 +23809,18 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
-        let url = format!("{}/search/commits",
-            self.baseurl,
-        );
+        let url = format!("{}/search/commits", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("q", q.to_string()),
+                ("sort", sort.to_string()),
+                ("order", order.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23104,11 +23839,18 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchIssuesandPullRequestsOkResponse> {
-        let url = format!("{}/search/issues",
-            self.baseurl,
-        );
+        let url = format!("{}/search/issues", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("q", q.to_string()),
+                ("sort", sort.to_string()),
+                ("order", order.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23128,11 +23870,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
-        let url = format!("{}/search/labels",
-            self.baseurl,
-        );
+        let url = format!("{}/search/labels", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("repository_id", format!("{}", repository_id)),
+                ("q", q.to_string()),
+                ("sort", sort.to_string()),
+                ("order", order.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23151,11 +23901,18 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchRepositoriesOkResponse> {
-        let url = format!("{}/search/repositories",
-            self.baseurl,
-        );
+        let url = format!("{}/search/repositories", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("q", q.to_string()),
+                ("sort", sort.to_string()),
+                ("order", order.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23172,11 +23929,16 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchTopicsOkResponse> {
-        let url = format!("{}/search/topics",
-            self.baseurl,
-        );
+        let url = format!("{}/search/topics", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("q", q.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23195,11 +23957,18 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
-        let url = format!("{}/search/users",
-            self.baseurl,
-        );
+        let url = format!("{}/search/users", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("q", q.to_string()),
+                ("sort", sort.to_string()),
+                ("order", order.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23210,19 +23979,14 @@ impl Client {
     /**
      * teams_get_legacy: GET /teams/{team_id}
      */
-    pub async fn teams_get_legacy(
-        &self,
-        team_id: i64,
-    ) -> Result<types::TeamFull> {
-        let url = format!("{}/teams/{}",
+    pub async fn teams_get_legacy(&self, team_id: i64) -> Result<types::TeamFull> {
+        let url = format!(
+            "{}/teams/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23230,19 +23994,14 @@ impl Client {
     /**
      * teams_delete_legacy: DELETE /teams/{team_id}
      */
-    pub async fn teams_delete_legacy(
-        &self,
-        team_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/teams/{}",
+    pub async fn teams_delete_legacy(&self, team_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/teams/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23255,12 +24014,15 @@ impl Client {
         team_id: i64,
         body: &types::UpdateTeamRequest,
     ) -> Result<types::TeamFull> {
-        let url = format!("{}/teams/{}",
+        let url = format!(
+            "{}/teams/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -23279,12 +24041,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamDiscussion>> {
-        let url = format!("{}/teams/{}/discussions",
+        let url = format!(
+            "{}/teams/{}/discussions",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23300,12 +24070,15 @@ impl Client {
         team_id: i64,
         body: &types::CreateDiscussionRequest,
     ) -> Result<types::TeamDiscussion> {
-        let url = format!("{}/teams/{}/discussions",
+        let url = format!(
+            "{}/teams/{}/discussions",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -23322,16 +24095,14 @@ impl Client {
         team_id: i64,
         discussion_number: i64,
     ) -> Result<types::TeamDiscussion> {
-        let url = format!("{}/teams/{}/discussions/{}",
+        let url = format!(
+            "{}/teams/{}/discussions/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23344,16 +24115,14 @@ impl Client {
         team_id: i64,
         discussion_number: i64,
     ) -> Result<()> {
-        let url = format!("{}/teams/{}/discussions/{}",
+        let url = format!(
+            "{}/teams/{}/discussions/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23367,13 +24136,16 @@ impl Client {
         discussion_number: i64,
         body: &types::UpdateDiscussionRequest,
     ) -> Result<types::TeamDiscussion> {
-        let url = format!("{}/teams/{}/discussions/{}",
+        let url = format!(
+            "{}/teams/{}/discussions/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -23393,13 +24165,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamDiscussionComment>> {
-        let url = format!("{}/teams/{}/discussions/{}/comments",
+        let url = format!(
+            "{}/teams/{}/discussions/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23416,13 +24196,16 @@ impl Client {
         discussion_number: i64,
         body: &types::CreateDiscussionCommentRequest,
     ) -> Result<types::TeamDiscussionComment> {
-        let url = format!("{}/teams/{}/discussions/{}/comments",
+        let url = format!(
+            "{}/teams/{}/discussions/{}/comments",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -23440,17 +24223,15 @@ impl Client {
         discussion_number: i64,
         comment_number: i64,
     ) -> Result<types::TeamDiscussionComment> {
-        let url = format!("{}/teams/{}/discussions/{}/comments/{}",
+        let url = format!(
+            "{}/teams/{}/discussions/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23464,17 +24245,15 @@ impl Client {
         discussion_number: i64,
         comment_number: i64,
     ) -> Result<()> {
-        let url = format!("{}/teams/{}/discussions/{}/comments/{}",
+        let url = format!(
+            "{}/teams/{}/discussions/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23489,14 +24268,17 @@ impl Client {
         comment_number: i64,
         body: &types::UpdateDiscussionCommentRequest,
     ) -> Result<types::TeamDiscussionComment> {
-        let url = format!("{}/teams/{}/discussions/{}/comments/{}",
+        let url = format!(
+            "{}/teams/{}/discussions/{}/comments/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -23517,14 +24299,22 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
-        let url = format!("{}/teams/{}/discussions/{}/comments/{}/reactions",
+        let url = format!(
+            "{}/teams/{}/discussions/{}/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("content", content.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23542,14 +24332,17 @@ impl Client {
         comment_number: i64,
         body: &types::CreateReactionTeamDiscussionCommentRequest,
     ) -> Result<types::Reaction> {
-        let url = format!("{}/teams/{}/discussions/{}/comments/{}/reactions",
+        let url = format!(
+            "{}/teams/{}/discussions/{}/comments/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -23569,13 +24362,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
-        let url = format!("{}/teams/{}/discussions/{}/reactions",
+        let url = format!(
+            "{}/teams/{}/discussions/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("content", content.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23592,13 +24393,16 @@ impl Client {
         discussion_number: i64,
         body: &types::CreateReactionTeamDiscussionRequest,
     ) -> Result<types::Reaction> {
-        let url = format!("{}/teams/{}/discussions/{}/reactions",
+        let url = format!(
+            "{}/teams/{}/discussions/{}/reactions",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -23616,12 +24420,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrganizationInvitation>> {
-        let url = format!("{}/teams/{}/invitations",
+        let url = format!(
+            "{}/teams/{}/invitations",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23639,12 +24450,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/teams/{}/members",
+        let url = format!(
+            "{}/teams/{}/members",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("role", role.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23655,21 +24474,15 @@ impl Client {
     /**
      * teams_get_member_legacy: GET /teams/{team_id}/members/{username}
      */
-    pub async fn teams_get_member_legacy(
-        &self,
-        team_id: i64,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/teams/{}/members/{}",
+    pub async fn teams_get_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/teams/{}/members/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23677,21 +24490,15 @@ impl Client {
     /**
      * teams_add_member_legacy: PUT /teams/{team_id}/members/{username}
      */
-    pub async fn teams_add_member_legacy(
-        &self,
-        team_id: i64,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/teams/{}/members/{}",
+    pub async fn teams_add_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/teams/{}/members/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23699,21 +24506,15 @@ impl Client {
     /**
      * teams_remove_member_legacy: DELETE /teams/{team_id}/members/{username}
      */
-    pub async fn teams_remove_member_legacy(
-        &self,
-        team_id: i64,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/teams/{}/members/{}",
+    pub async fn teams_remove_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/teams/{}/members/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23726,16 +24527,14 @@ impl Client {
         team_id: i64,
         username: &str,
     ) -> Result<types::TeamMembership> {
-        let url = format!("{}/teams/{}/memberships/{}",
+        let url = format!(
+            "{}/teams/{}/memberships/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23749,13 +24548,16 @@ impl Client {
         username: &str,
         body: &types::AddUpdateTeamMembershipUserRequest,
     ) -> Result<types::TeamMembership> {
-        let url = format!("{}/teams/{}/memberships/{}",
+        let url = format!(
+            "{}/teams/{}/memberships/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -23772,16 +24574,14 @@ impl Client {
         team_id: i64,
         username: &str,
     ) -> Result<()> {
-        let url = format!("{}/teams/{}/memberships/{}",
+        let url = format!(
+            "{}/teams/{}/memberships/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23795,12 +24595,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamProject>> {
-        let url = format!("{}/teams/{}/projects",
+        let url = format!(
+            "{}/teams/{}/projects",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23816,16 +24623,14 @@ impl Client {
         team_id: i64,
         project_id: i64,
     ) -> Result<types::TeamProject> {
-        let url = format!("{}/teams/{}/projects/{}",
+        let url = format!(
+            "{}/teams/{}/projects/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23839,13 +24644,16 @@ impl Client {
         project_id: i64,
         body: &types::AddUpdateTeamProjectPermissionsRequest,
     ) -> Result<()> {
-        let url = format!("{}/teams/{}/projects/{}",
+        let url = format!(
+            "{}/teams/{}/projects/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -23857,21 +24665,15 @@ impl Client {
     /**
      * teams_remove_project_legacy: DELETE /teams/{team_id}/projects/{project_id}
      */
-    pub async fn teams_remove_project_legacy(
-        &self,
-        team_id: i64,
-        project_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/teams/{}/projects/{}",
+    pub async fn teams_remove_project_legacy(&self, team_id: i64, project_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/teams/{}/projects/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23885,12 +24687,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/teams/{}/repos",
+        let url = format!(
+            "{}/teams/{}/repos",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -23907,17 +24716,15 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<types::TeamRepository> {
-        let url = format!("{}/teams/{}/repos/{}/{}",
+        let url = format!(
+            "{}/teams/{}/repos/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23932,14 +24739,17 @@ impl Client {
         repo: &str,
         body: &types::AddUpdateTeamRepositoryPermissionsRequest,
     ) -> Result<()> {
-        let url = format!("{}/teams/{}/repos/{}/{}",
+        let url = format!(
+            "{}/teams/{}/repos/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -23957,17 +24767,15 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!("{}/teams/{}/repos/{}/{}",
+        let url = format!(
+            "{}/teams/{}/repos/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -23979,15 +24787,13 @@ impl Client {
         &self,
         team_id: i64,
     ) -> Result<types::GroupMapping> {
-        let url = format!("{}/teams/{}/team-sync/group-mappings",
+        let url = format!(
+            "{}/teams/{}/team-sync/group-mappings",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24000,12 +24806,15 @@ impl Client {
         team_id: i64,
         body: &types::CreateUpdateIdpGroupConnectionsRequest,
     ) -> Result<types::GroupMapping> {
-        let url = format!("{}/teams/{}/team-sync/group-mappings",
+        let url = format!(
+            "{}/teams/{}/team-sync/group-mappings",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -24023,12 +24832,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Team>> {
-        let url = format!("{}/teams/{}/teams",
+        let url = format!(
+            "{}/teams/{}/teams",
             self.baseurl,
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24039,17 +24855,10 @@ impl Client {
     /**
      * users_get_authenticated: GET /user
      */
-    pub async fn users_get_authenticated(
-        &self,
-    ) -> Result<types::GetOkResponse> {
-        let url = format!("{}/user",
-            self.baseurl,
-        );
+    pub async fn users_get_authenticated(&self) -> Result<types::GetOkResponse> {
+        let url = format!("{}/user", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24061,11 +24870,11 @@ impl Client {
         &self,
         body: &types::UpdateRequest,
     ) -> Result<types::PrivateUser> {
-        let url = format!("{}/user",
-            self.baseurl,
-        );
+        let url = format!("{}/user", self.baseurl,);
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -24077,17 +24886,10 @@ impl Client {
     /**
      * users_list_blocked_by_authenticated: GET /user/blocks
      */
-    pub async fn users_list_blocked_by_authenticated(
-        &self,
-    ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/user/blocks",
-            self.baseurl,
-        );
+    pub async fn users_list_blocked_by_authenticated(&self) -> Result<Vec<types::SimpleUser>> {
+        let url = format!("{}/user/blocks", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24095,19 +24897,14 @@ impl Client {
     /**
      * users_check_blocked: GET /user/blocks/{username}
      */
-    pub async fn users_check_blocked(
-        &self,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/user/blocks/{}",
+    pub async fn users_check_blocked(&self, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/user/blocks/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24115,19 +24912,14 @@ impl Client {
     /**
      * users_block: PUT /user/blocks/{username}
      */
-    pub async fn users_block(
-        &self,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/user/blocks/{}",
+    pub async fn users_block(&self, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/user/blocks/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24135,19 +24927,14 @@ impl Client {
     /**
      * users_unblock: DELETE /user/blocks/{username}
      */
-    pub async fn users_unblock(
-        &self,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/user/blocks/{}",
+    pub async fn users_unblock(&self, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/user/blocks/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24159,11 +24946,11 @@ impl Client {
         &self,
         body: &types::SetPrimaryEmailVisibilityRequest,
     ) -> Result<Vec<types::Email>> {
-        let url = format!("{}/user/email/visibility",
-            self.baseurl,
-        );
+        let url = format!("{}/user/email/visibility", self.baseurl,);
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -24180,11 +24967,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Email>> {
-        let url = format!("{}/user/emails",
-            self.baseurl,
-        );
+        let url = format!("{}/user/emails", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24199,11 +24990,11 @@ impl Client {
         &self,
         body: &types::AddEmailAddressRequest,
     ) -> Result<Vec<types::Email>> {
-        let url = format!("{}/user/emails",
-            self.baseurl,
-        );
+        let url = format!("{}/user/emails", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -24219,11 +25010,11 @@ impl Client {
         &self,
         body: &types::DeleteEmailAddressRequest,
     ) -> Result<()> {
-        let url = format!("{}/user/emails",
-            self.baseurl,
-        );
+        let url = format!("{}/user/emails", self.baseurl,);
 
-        let res = self.client.delete(url)
+        let res = self
+            .client
+            .delete(url)
             .json(body)
             .send()
             .await?
@@ -24240,11 +25031,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/user/followers",
-            self.baseurl,
-        );
+        let url = format!("{}/user/followers", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24260,11 +25055,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/user/following",
-            self.baseurl,
-        );
+        let url = format!("{}/user/following", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24279,15 +25078,13 @@ impl Client {
         &self,
         username: &str,
     ) -> Result<()> {
-        let url = format!("{}/user/following/{}",
+        let url = format!(
+            "{}/user/following/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24295,19 +25092,14 @@ impl Client {
     /**
      * users_follow: PUT /user/following/{username}
      */
-    pub async fn users_follow(
-        &self,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/user/following/{}",
+    pub async fn users_follow(&self, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/user/following/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24315,19 +25107,14 @@ impl Client {
     /**
      * users_unfollow: DELETE /user/following/{username}
      */
-    pub async fn users_unfollow(
-        &self,
-        username: &str,
-    ) -> Result<()> {
-        let url = format!("{}/user/following/{}",
+    pub async fn users_unfollow(&self, username: &str) -> Result<()> {
+        let url = format!(
+            "{}/user/following/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24340,11 +25127,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::GpgKey>> {
-        let url = format!("{}/user/gpg_keys",
-            self.baseurl,
-        );
+        let url = format!("{}/user/gpg_keys", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24359,11 +25150,11 @@ impl Client {
         &self,
         body: &types::CreateGpgKeyRequest,
     ) -> Result<types::GpgKey> {
-        let url = format!("{}/user/gpg_keys",
-            self.baseurl,
-        );
+        let url = format!("{}/user/gpg_keys", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -24379,15 +25170,13 @@ impl Client {
         &self,
         gpg_key_id: i64,
     ) -> Result<types::GpgKey> {
-        let url = format!("{}/user/gpg_keys/{}",
+        let url = format!(
+            "{}/user/gpg_keys/{}",
             self.baseurl,
             progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24395,19 +25184,14 @@ impl Client {
     /**
      * users_delete_gpg_key_for_authenticated: DELETE /user/gpg_keys/{gpg_key_id}
      */
-    pub async fn users_delete_gpg_key_for_authenticated(
-        &self,
-        gpg_key_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/user/gpg_keys/{}",
+    pub async fn users_delete_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/user/gpg_keys/{}",
             self.baseurl,
             progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24420,11 +25204,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListAppInstallationsAccessibleUserAccessTokenOkResponse> {
-        let url = format!("{}/user/installations",
-            self.baseurl,
-        );
+        let url = format!("{}/user/installations", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24441,12 +25229,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetListRepositoriesAccessibleUserAccessTokenOkResponse> {
-        let url = format!("{}/user/installations/{}/repositories",
+        let url = format!(
+            "{}/user/installations/{}/repositories",
             self.baseurl,
             progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24462,16 +25257,14 @@ impl Client {
         installation_id: i64,
         repository_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/user/installations/{}/repositories/{}",
+        let url = format!(
+            "{}/user/installations/{}/repositories/{}",
             self.baseurl,
             progenitor_support::encode_path(&installation_id.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24484,16 +25277,14 @@ impl Client {
         installation_id: i64,
         repository_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/user/installations/{}/repositories/{}",
+        let url = format!(
+            "{}/user/installations/{}/repositories/{}",
             self.baseurl,
             progenitor_support::encode_path(&installation_id.to_string()),
             progenitor_support::encode_path(&repository_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24504,14 +25295,9 @@ impl Client {
     pub async fn interactions_get_restrictions_for_authenticated_user(
         &self,
     ) -> Result<types::GetInteractionRestrictionsPublicRepositoriesOkResponse> {
-        let url = format!("{}/user/interaction-limits",
-            self.baseurl,
-        );
+        let url = format!("{}/user/interaction-limits", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24523,11 +25309,11 @@ impl Client {
         &self,
         body: &types::InteractionLimit,
     ) -> Result<types::InteractionLimitResponse> {
-        let url = format!("{}/user/interaction-limits",
-            self.baseurl,
-        );
+        let url = format!("{}/user/interaction-limits", self.baseurl,);
 
-        let res = self.client.put(url)
+        let res = self
+            .client
+            .put(url)
             .json(body)
             .send()
             .await?
@@ -24539,17 +25325,10 @@ impl Client {
     /**
      * interactions_remove_restrictions_for_authenticated_user: DELETE /user/interaction-limits
      */
-    pub async fn interactions_remove_restrictions_for_authenticated_user(
-        &self,
-    ) -> Result<()> {
-        let url = format!("{}/user/interaction-limits",
-            self.baseurl,
-        );
+    pub async fn interactions_remove_restrictions_for_authenticated_user(&self) -> Result<()> {
+        let url = format!("{}/user/interaction-limits", self.baseurl,);
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24568,11 +25347,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Issue>> {
-        let url = format!("{}/user/issues",
-            self.baseurl,
-        );
+        let url = format!("{}/user/issues", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("filter", filter.to_string()),
+                ("state", state.to_string()),
+                ("labels", labels.to_string()),
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24588,11 +25377,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Key>> {
-        let url = format!("{}/user/keys",
-            self.baseurl,
-        );
+        let url = format!("{}/user/keys", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24607,11 +25400,11 @@ impl Client {
         &self,
         body: &types::CreatePublicSshKeyRequest,
     ) -> Result<types::Key> {
-        let url = format!("{}/user/keys",
-            self.baseurl,
-        );
+        let url = format!("{}/user/keys", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -24627,15 +25420,13 @@ impl Client {
         &self,
         key_id: i64,
     ) -> Result<types::Key> {
-        let url = format!("{}/user/keys/{}",
+        let url = format!(
+            "{}/user/keys/{}",
             self.baseurl,
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24643,19 +25434,14 @@ impl Client {
     /**
      * users_delete_public_ssh_key_for_authenticated: DELETE /user/keys/{key_id}
      */
-    pub async fn users_delete_public_ssh_key_for_authenticated(
-        &self,
-        key_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/user/keys/{}",
+    pub async fn users_delete_public_ssh_key_for_authenticated(&self, key_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/user/keys/{}",
             self.baseurl,
             progenitor_support::encode_path(&key_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24668,11 +25454,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
-        let url = format!("{}/user/marketplace_purchases",
-            self.baseurl,
-        );
+        let url = format!("{}/user/marketplace_purchases", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24688,11 +25478,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::UserMarketplacePurchase>> {
-        let url = format!("{}/user/marketplace_purchases/stubbed",
-            self.baseurl,
-        );
+        let url = format!("{}/user/marketplace_purchases/stubbed", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24709,11 +25503,16 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrgMembership>> {
-        let url = format!("{}/user/memberships/orgs",
-            self.baseurl,
-        );
+        let url = format!("{}/user/memberships/orgs", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("state", state.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24728,15 +25527,13 @@ impl Client {
         &self,
         org: &str,
     ) -> Result<types::OrgMembership> {
-        let url = format!("{}/user/memberships/orgs/{}",
+        let url = format!(
+            "{}/user/memberships/orgs/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24749,12 +25546,15 @@ impl Client {
         org: &str,
         body: &types::UpdateOrganizationMembershipRequest,
     ) -> Result<types::OrgMembership> {
-        let url = format!("{}/user/memberships/orgs/{}",
+        let url = format!(
+            "{}/user/memberships/orgs/{}",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.patch(url)
+        let res = self
+            .client
+            .patch(url)
             .json(body)
             .send()
             .await?
@@ -24771,11 +25571,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Migration>> {
-        let url = format!("{}/user/migrations",
-            self.baseurl,
-        );
+        let url = format!("{}/user/migrations", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24790,11 +25594,11 @@ impl Client {
         &self,
         body: &types::StartUserMigrationRequest,
     ) -> Result<types::Migration> {
-        let url = format!("{}/user/migrations",
-            self.baseurl,
-        );
+        let url = format!("{}/user/migrations", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -24811,12 +25615,16 @@ impl Client {
         migration_id: i64,
         exclude: &[String],
     ) -> Result<types::Migration> {
-        let url = format!("{}/user/migrations/{}",
+        let url = format!(
+            "{}/user/migrations/{}",
             self.baseurl,
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[("exclude", exclude.join(" "))])
             .send()
             .await?
             .error_for_status()?;
@@ -24831,15 +25639,13 @@ impl Client {
         &self,
         migration_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/user/migrations/{}/archive",
+        let url = format!(
+            "{}/user/migrations/{}/archive",
             self.baseurl,
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24851,15 +25657,13 @@ impl Client {
         &self,
         migration_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/user/migrations/{}/archive",
+        let url = format!(
+            "{}/user/migrations/{}/archive",
             self.baseurl,
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24872,16 +25676,14 @@ impl Client {
         migration_id: i64,
         repo_name: &str,
     ) -> Result<()> {
-        let url = format!("{}/user/migrations/{}/repos/{}/lock",
+        let url = format!(
+            "{}/user/migrations/{}/repos/{}/lock",
             self.baseurl,
             progenitor_support::encode_path(&migration_id.to_string()),
             progenitor_support::encode_path(&repo_name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24895,12 +25697,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/user/migrations/{}/repositories",
+        let url = format!(
+            "{}/user/migrations/{}/repositories",
             self.baseurl,
             progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24916,11 +25725,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
-        let url = format!("{}/user/orgs",
-            self.baseurl,
-        );
+        let url = format!("{}/user/orgs", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -24936,16 +25749,14 @@ impl Client {
         package_type: &str,
         package_name: &str,
     ) -> Result<types::Package> {
-        let url = format!("{}/user/packages/{}/{}",
+        let url = format!(
+            "{}/user/packages/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24958,16 +25769,14 @@ impl Client {
         package_type: &str,
         package_name: &str,
     ) -> Result<()> {
-        let url = format!("{}/user/packages/{}/{}",
+        let url = format!(
+            "{}/user/packages/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -24981,13 +25790,17 @@ impl Client {
         package_name: &str,
         token: &str,
     ) -> Result<()> {
-        let url = format!("{}/user/packages/{}/{}/restore",
+        let url = format!(
+            "{}/user/packages/{}/{}/restore",
             self.baseurl,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
+            .query(&[("token", token.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -25006,13 +25819,21 @@ impl Client {
         per_page: i64,
         state: &str,
     ) -> Result<Vec<types::PackageVersion>> {
-        let url = format!("{}/user/packages/{}/{}/versions",
+        let url = format!(
+            "{}/user/packages/{}/{}/versions",
             self.baseurl,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("page", format!("{}", page)),
+                ("per_page", format!("{}", per_page)),
+                ("state", state.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25029,17 +25850,15 @@ impl Client {
         package_name: &str,
         package_version_id: i64,
     ) -> Result<types::PackageVersion> {
-        let url = format!("{}/user/packages/{}/{}/versions/{}",
+        let url = format!(
+            "{}/user/packages/{}/{}/versions/{}",
             self.baseurl,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25053,17 +25872,15 @@ impl Client {
         package_name: &str,
         package_version_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/user/packages/{}/{}/versions/{}",
+        let url = format!(
+            "{}/user/packages/{}/{}/versions/{}",
             self.baseurl,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25077,17 +25894,15 @@ impl Client {
         package_name: &str,
         package_version_id: i64,
     ) -> Result<()> {
-        let url = format!("{}/user/packages/{}/{}/versions/{}/restore",
+        let url = format!(
+            "{}/user/packages/{}/{}/versions/{}/restore",
             self.baseurl,
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.post(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.post(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25099,11 +25914,11 @@ impl Client {
         &self,
         body: &types::CreateUserProjectRequest,
     ) -> Result<types::Project> {
-        let url = format!("{}/user/projects",
-            self.baseurl,
-        );
+        let url = format!("{}/user/projects", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -25120,11 +25935,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Email>> {
-        let url = format!("{}/user/public_emails",
-            self.baseurl,
-        );
+        let url = format!("{}/user/public_emails", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25139,7 +25958,7 @@ impl Client {
         &self,
         visibility: &str,
         affiliation: &str,
-        type_: &str,
+        type_: &&str,
         sort: &str,
         direction: &str,
         per_page: i64,
@@ -25147,11 +25966,22 @@ impl Client {
         since: DateTime<Utc>,
         before: DateTime<Utc>,
     ) -> Result<Vec<types::Repository>> {
-        let url = format!("{}/user/repos",
-            self.baseurl,
-        );
+        let url = format!("{}/user/repos", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("visibility", visibility.to_string()),
+                ("affiliation", affiliation.to_string()),
+                ("type", type_.to_string()),
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+                ("since", since.to_rfc3339()),
+                ("before", before.to_rfc3339()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25166,11 +25996,11 @@ impl Client {
         &self,
         body: &types::CreateRepositoryRequest,
     ) -> Result<types::Repository> {
-        let url = format!("{}/user/repos",
-            self.baseurl,
-        );
+        let url = format!("{}/user/repos", self.baseurl,);
 
-        let res = self.client.post(url)
+        let res = self
+            .client
+            .post(url)
             .json(body)
             .send()
             .await?
@@ -25187,11 +26017,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::RepositoryInvitation>> {
-        let url = format!("{}/user/repository_invitations",
-            self.baseurl,
-        );
+        let url = format!("{}/user/repository_invitations", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25202,19 +26036,14 @@ impl Client {
     /**
      * repos_decline_invitation: DELETE /user/repository_invitations/{invitation_id}
      */
-    pub async fn repos_decline_invitation(
-        &self,
-        invitation_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/user/repository_invitations/{}",
+    pub async fn repos_decline_invitation(&self, invitation_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/user/repository_invitations/{}",
             self.baseurl,
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25222,19 +26051,14 @@ impl Client {
     /**
      * repos_accept_invitation: PATCH /user/repository_invitations/{invitation_id}
      */
-    pub async fn repos_accept_invitation(
-        &self,
-        invitation_id: i64,
-    ) -> Result<()> {
-        let url = format!("{}/user/repository_invitations/{}",
+    pub async fn repos_accept_invitation(&self, invitation_id: i64) -> Result<()> {
+        let url = format!(
+            "{}/user/repository_invitations/{}",
             self.baseurl,
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        let res = self.client.patch(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.patch(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25249,11 +26073,17 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Repository>> {
-        let url = format!("{}/user/starred",
-            self.baseurl,
-        );
+        let url = format!("{}/user/starred", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25269,16 +26099,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!("{}/user/starred/{}/{}",
+        let url = format!(
+            "{}/user/starred/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25291,16 +26119,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!("{}/user/starred/{}/{}",
+        let url = format!(
+            "{}/user/starred/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.put(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.put(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25313,16 +26139,14 @@ impl Client {
         owner: &str,
         repo: &str,
     ) -> Result<()> {
-        let url = format!("{}/user/starred/{}/{}",
+        let url = format!(
+            "{}/user/starred/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        let res = self.client.delete(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.delete(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25335,11 +26159,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/user/subscriptions",
-            self.baseurl,
-        );
+        let url = format!("{}/user/subscriptions", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25355,11 +26183,15 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::TeamFull>> {
-        let url = format!("{}/user/teams",
-            self.baseurl,
-        );
+        let url = format!("{}/user/teams", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25370,16 +26202,16 @@ impl Client {
     /**
      * users_list: GET /users
      */
-    pub async fn users_list(
-        &self,
-        since: i64,
-        per_page: i64,
-    ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/users",
-            self.baseurl,
-        );
+    pub async fn users_list(&self, since: i64, per_page: i64) -> Result<Vec<types::SimpleUser>> {
+        let url = format!("{}/users", self.baseurl,);
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("since", format!("{}", since)),
+                ("per_page", format!("{}", per_page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25390,19 +26222,14 @@ impl Client {
     /**
      * users_get_by_username: GET /users/{username}
      */
-    pub async fn users_get_by_username(
-        &self,
-        username: &str,
-    ) -> Result<types::GetUserOkResponse> {
-        let url = format!("{}/users/{}",
+    pub async fn users_get_by_username(&self, username: &str) -> Result<types::GetUserOkResponse> {
+        let url = format!(
+            "{}/users/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25416,12 +26243,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/users/{}/events",
+        let url = format!(
+            "{}/users/{}/events",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25439,13 +26273,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/users/{}/events/orgs/{}",
+        let url = format!(
+            "{}/users/{}/events/orgs/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25462,12 +26303,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/users/{}/events/public",
+        let url = format!(
+            "{}/users/{}/events/public",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25484,12 +26332,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/users/{}/followers",
+        let url = format!(
+            "{}/users/{}/followers",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25506,12 +26361,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
-        let url = format!("{}/users/{}/following",
+        let url = format!(
+            "{}/users/{}/following",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25527,16 +26389,14 @@ impl Client {
         username: &str,
         target_user: &str,
     ) -> Result<()> {
-        let url = format!("{}/users/{}/following/{}",
+        let url = format!(
+            "{}/users/{}/following/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&target_user.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25551,12 +26411,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::BaseGist>> {
-        let url = format!("{}/users/{}/gists",
+        let url = format!(
+            "{}/users/{}/gists",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("since", since.to_rfc3339()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25573,12 +26441,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::GpgKey>> {
-        let url = format!("{}/users/{}/gpg_keys",
+        let url = format!(
+            "{}/users/{}/gpg_keys",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25595,12 +26470,19 @@ impl Client {
         subject_type: &str,
         subject_id: &str,
     ) -> Result<types::Hovercard> {
-        let url = format!("{}/users/{}/hovercard",
+        let url = format!(
+            "{}/users/{}/hovercard",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("subject_type", subject_type.to_string()),
+                ("subject_id", subject_id.to_string()),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25611,19 +26493,14 @@ impl Client {
     /**
      * apps_get_user_installation: GET /users/{username}/installation
      */
-    pub async fn apps_get_user_installation(
-        &self,
-        username: &str,
-    ) -> Result<types::Installation> {
-        let url = format!("{}/users/{}/installation",
+    pub async fn apps_get_user_installation(&self, username: &str) -> Result<types::Installation> {
+        let url = format!(
+            "{}/users/{}/installation",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25637,12 +26514,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::KeySimple>> {
-        let url = format!("{}/users/{}/keys",
+        let url = format!(
+            "{}/users/{}/keys",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25659,12 +26543,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::OrganizationSimple>> {
-        let url = format!("{}/users/{}/orgs",
+        let url = format!(
+            "{}/users/{}/orgs",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25681,17 +26572,15 @@ impl Client {
         package_name: &str,
         username: &str,
     ) -> Result<types::Package> {
-        let url = format!("{}/users/{}/packages/{}/{}",
+        let url = format!(
+            "{}/users/{}/packages/{}/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25705,17 +26594,15 @@ impl Client {
         package_name: &str,
         username: &str,
     ) -> Result<Vec<types::PackageVersion>> {
-        let url = format!("{}/users/{}/packages/{}/{}/versions",
+        let url = format!(
+            "{}/users/{}/packages/{}/{}/versions",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
             progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25730,7 +26617,8 @@ impl Client {
         package_version_id: i64,
         username: &str,
     ) -> Result<types::PackageVersion> {
-        let url = format!("{}/users/{}/packages/{}/{}/versions/{}",
+        let url = format!(
+            "{}/users/{}/packages/{}/{}/versions/{}",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
             progenitor_support::encode_path(&package_type.to_string()),
@@ -25738,10 +26626,7 @@ impl Client {
             progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25756,12 +26641,20 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Project>> {
-        let url = format!("{}/users/{}/projects",
+        let url = format!(
+            "{}/users/{}/projects",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("state", state.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25778,12 +26671,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/users/{}/received_events",
+        let url = format!(
+            "{}/users/{}/received_events",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25800,12 +26700,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Event>> {
-        let url = format!("{}/users/{}/received_events/public",
+        let url = format!(
+            "{}/users/{}/received_events/public",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25819,18 +26726,28 @@ impl Client {
     pub async fn repos_list_for_user(
         &self,
         username: &str,
-        type_: &str,
+        type_: &&str,
         sort: &str,
         direction: &str,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/users/{}/repos",
+        let url = format!(
+            "{}/users/{}/repos",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("type", type_.to_string()),
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25845,15 +26762,13 @@ impl Client {
         &self,
         username: &str,
     ) -> Result<types::ActionsBillingUsage> {
-        let url = format!("{}/users/{}/settings/billing/actions",
+        let url = format!(
+            "{}/users/{}/settings/billing/actions",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25865,15 +26780,13 @@ impl Client {
         &self,
         username: &str,
     ) -> Result<types::PackagesBillingUsage> {
-        let url = format!("{}/users/{}/settings/billing/packages",
+        let url = format!(
+            "{}/users/{}/settings/billing/packages",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25885,15 +26798,13 @@ impl Client {
         &self,
         username: &str,
     ) -> Result<types::CombinedBillingUsage> {
-        let url = format!("{}/users/{}/settings/billing/shared-storage",
+        let url = format!(
+            "{}/users/{}/settings/billing/shared-storage",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
@@ -25909,12 +26820,21 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::StarredRepository>> {
-        let url = format!("{}/users/{}/starred",
+        let url = format!(
+            "{}/users/{}/starred",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("sort", sort.to_string()),
+                ("direction", direction.to_string()),
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25931,12 +26851,19 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("{}/users/{}/subscriptions",
+        let url = format!(
+            "{}/users/{}/subscriptions",
             self.baseurl,
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        let res = self.client.get(url)
+        let res = self
+            .client
+            .get(url)
+            .query(&[
+                ("per_page", format!("{}", per_page)),
+                ("page", format!("{}", page)),
+            ])
             .send()
             .await?
             .error_for_status()?;
@@ -25947,19 +26874,11 @@ impl Client {
     /**
      * meta_get_zen: GET /zen
      */
-    pub async fn meta_get_zen(
-        &self,
-    ) -> Result<String> {
-        let url = format!("{}/zen",
-            self.baseurl,
-        );
+    pub async fn meta_get_zen(&self) -> Result<String> {
+        let url = format!("{}/zen", self.baseurl,);
 
-        let res = self.client.get(url)
-            .send()
-            .await?
-            .error_for_status()?;
+        let res = self.client.get(url).send().await?.error_for_status()?;
 
         Ok(res.json().await?)
     }
-
 }

@@ -1217,6 +1217,7 @@ fn gen(
             }
             a("        &self,");
 
+            let mut query_params: Vec<String> = Default::default();
             for par in o.parameters.iter() {
                 let item = match par {
                     openapiv3::ReferenceOr::Reference { reference } => {
@@ -1268,9 +1269,25 @@ fn gen(
                         let nam = &parameter_data.name;
                         let typ = parameter_data.render_type()?;
                         if nam == "ref" || nam == "type" {
-                            a(&format!("        {}_: {},", nam, typ));
+                            a(&format!("        {}_: &{},", nam, typ));
+                            query_params.push(format!(r#"("{}", {}_.to_string())"#, nam, nam));
                         } else {
                             a(&format!("        {}: {},", nam, typ));
+                            if typ == "DateTime<Utc>" {
+                                query_params.push(format!(r#"("{}", {}.to_rfc3339())"#, nam, nam));
+                            } else if typ == "i64" || typ == "bool" {
+                                query_params
+                                    .push(format!(r#"("{}", format!("{{}}", {}))"#, nam, nam));
+                            } else if typ == "&str" {
+                                query_params.push(format!(r#"("{}", {}.to_string())"#, nam, nam));
+                            } else if typ == "&[String]" {
+                                // TODO: I have no idea how these should be seperated and the docs
+                                // don't give any answers either, for "exclude".
+                                // https://docs.github.com/en/rest/reference/migrations
+                                query_params.push(format!(r#"("{}", {}.join(" "))"#, nam, nam));
+                            } else {
+                                query_params.push(format!(r#"("{}", {})"#, nam, nam));
+                            }
                         }
                     }
                     x => bail!("unhandled parameter type: {:#?}", x),
@@ -1437,6 +1454,12 @@ fn gen(
                 "        let res = self.client.{}(url)",
                 m.to_lowercase()
             ));
+            if !query_params.is_empty() {
+                a(&format!(
+                    "            .query(&[{}])",
+                    query_params.join(", ")
+                ));
+            }
             if let Some(f) = &body_func {
                 a(&format!("            .{}(body)", f));
             }
