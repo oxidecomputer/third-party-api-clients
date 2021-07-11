@@ -182,6 +182,91 @@ pub mod types {
     use schemars::JsonSchema;
     use serde::{Deserialize, Serialize};
 
+    /// The event types to include:
+    ///
+    /// - `web` - returns web (non-Git) events
+    /// - `git` - returns Git events
+    /// - `all` - returns both web and Git events
+    ///
+    /// The default is `web`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "lowercase")]
+    pub enum AuditLogInclude {
+        Web,
+        Git,
+        All,
+    }
+
+    /// The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+    ///
+    /// The default is `desc`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "lowercase")]
+    pub enum AuditLogOrder {
+        Desc,
+        Asc,
+    }
+
+    /// One of `asc` (ascending) or `desc` (descending).
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "lowercase")]
+    pub enum Direction {
+        Asc,
+        Desc,
+    }
+
+    /// Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "lowercase")]
+    pub enum Order {
+        Desc,
+        Asc,
+    }
+
+    /// Must be one of: `day`, `week`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "lowercase")]
+    pub enum Per {
+        Day,
+        Week,
+    }
+
+    /// One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "lowercase")]
+    pub enum Sort {
+        Created,
+        Updated,
+    }
+
+    /// Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "lowercase")]
+    pub enum StatusParam {
+        Queued,
+        InProgress,
+        Completed,
+    }
+
+    /// Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "lowercase")]
+    pub enum WorkflowRunStatus {
+        Completed,
+        ActionRequired,
+        Cancelled,
+        Failure,
+        Neutral,
+        Skipped,
+        Stale,
+        Success,
+        TimedOut,
+        InProgress,
+        Queued,
+        Requested,
+        Waiting,
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SimpleUser {
         #[serde(

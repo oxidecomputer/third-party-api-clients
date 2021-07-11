@@ -194,7 +194,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                             }
                             if !st.enumeration.is_empty() {
                                 // TODO: figure out enums
-                                println!("XXX enumeration {}: {:?}", self.name, st);
+                                //println!("XXX enumeration {}: {:?}", self.name, st);
                             }
                             if st.min_length.is_some() || st.max_length.is_some() {
                                 bail!("XXX min/max length");
@@ -1228,6 +1228,102 @@ fn gen(
     a("    use schemars::JsonSchema;");
     a("    use serde::{Serialize, Deserialize};");
     a("");
+
+    // Let's iterate over the parameters and create all the enums.
+    for (name, param) in &parameters {
+        use openapiv3::{SchemaKind, Type};
+        match param {
+            openapiv3::Parameter::Path {
+                parameter_data,
+                style: openapiv3::PathStyle::Simple,
+            } => {
+                if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
+                    if let Ok(s) = s.item() {
+                        if let SchemaKind::Type(Type::String(st)) = &s.schema_kind {
+                            if st.enumeration.is_empty() {
+                                continue;
+                            }
+
+                            if let Some(description) = &parameter_data.description {
+                                a(&format!("/// {}", description.replace('\n', "\n/// ")));
+                            }
+
+                            let mut sn = struct_name(name);
+                            // TODO: have a more automated way of making sure there aren't
+                            // duplicates of enums.
+                            if sn == "Status" {
+                                sn = format!("{}Param", sn);
+                            }
+
+                            a("#[derive(Serialize, Deserialize, Debug, Clone)]");
+                            a(r#"#[serde(rename_all = "lowercase")]"#);
+                            a(&format!("pub enum {} {{", sn));
+                            for e in &st.enumeration {
+                                if struct_name(e).is_empty() {
+                                    // TODO: do something for empty(?)
+                                    continue;
+                                }
+                                a(&format!("{},", struct_name(e)));
+                            }
+                            a("}");
+                            a("");
+
+                            println!(
+                                "XXX query enumeration {} {:?}: {:?} {:?}",
+                                name, allow_empty_value, st, parameter_data
+                            );
+                        }
+                    }
+                }
+            }
+            openapiv3::Parameter::Query {
+                parameter_data,
+                allow_reserved: _,
+                style: openapiv3::QueryStyle::Form,
+                allow_empty_value,
+            } => {
+                if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
+                    if let Ok(s) = s.item() {
+                        if let SchemaKind::Type(Type::String(st)) = &s.schema_kind {
+                            if st.enumeration.is_empty() {
+                                continue;
+                            }
+
+                            if let Some(description) = &parameter_data.description {
+                                a(&format!("/// {}", description.replace('\n', "\n/// ")));
+                            }
+
+                            let mut sn = struct_name(name);
+                            // TODO: have a more automated way of making sure there aren't
+                            // duplicates of enums.
+                            if sn == "Status" {
+                                sn = format!("{}Param", sn);
+                            }
+
+                            a("#[derive(Serialize, Deserialize, Debug, Clone)]");
+                            a(r#"#[serde(rename_all = "lowercase")]"#);
+                            a(&format!("pub enum {} {{", sn));
+                            for e in &st.enumeration {
+                                if struct_name(e).is_empty() {
+                                    // TODO: do something for empty(?)
+                                    continue;
+                                }
+                                a(&format!("{},", struct_name(e)));
+                            }
+                            a("}");
+                            a("");
+
+                            println!(
+                                "XXX query enumeration {} {:?}: {:?} {:?}",
+                                name, allow_empty_value, st, parameter_data
+                            );
+                        }
+                    }
+                }
+            }
+            _ => (),
+        }
+    }
     for te in ts.id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
             let struct_name = struct_name(sn);
@@ -1292,6 +1388,7 @@ fn gen(
             }
         }
     }
+
     a("}");
     a("");
 
@@ -2173,7 +2270,7 @@ fn gen(
 }
 
 fn struct_name(s: &str) -> String {
-    titlecase::titlecase(s)
+    titlecase::titlecase(&clean_name(s))
         .replace(" ", "")
         .replace("Self", "SelfData")
 }
