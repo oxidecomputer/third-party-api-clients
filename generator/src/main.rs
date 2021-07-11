@@ -1014,6 +1014,7 @@ fn gen(
     /*
      * Deal with any dependencies we require to produce this client.
      */
+    a("#![allow(clippy::too_many_arguments)]");
     a("");
     a("use anyhow::Result;"); /* XXX */
     a("use chrono::{DateTime, Utc};");
@@ -1242,7 +1243,7 @@ fn gen(
                          * XXX Parameter types should probably go through
                          * the type space...
                          */
-                        let nam = &parameter_data.name;
+                        let nam = &to_snake_case(&parameter_data.name);
                         let typ = parameter_data.render_type()?;
                         if nam == "ref" || nam == "type" {
                             a(&format!("        {}_: {},", nam, typ));
@@ -1266,7 +1267,7 @@ fn gen(
                          * XXX Parameter types should probably go through
                          * the type space...
                          */
-                        let nam = &parameter_data.name;
+                        let nam = &to_snake_case(&parameter_data.name);
                         let typ = parameter_data.render_type()?;
                         if nam == "ref" || nam == "type" {
                             a(&format!("        {}_: &{},", nam, typ));

@@ -1,3 +1,5 @@
+#![allow(clippy::too_many_arguments)]
+
 use anyhow::Result;
 use chrono::{DateTime, Utc};
 
@@ -23318,10 +23320,10 @@ impl Client {
     pub async fn enterprise_admin_list_provisioned_groups_enterprise(
         &self,
         enterprise: &str,
-        startIndex: i64,
+        start_index: i64,
         count: i64,
         filter: &str,
-        excludedAttributes: &str,
+        excluded_attributes: &str,
     ) -> Result<types::ScimGroupListEnterprise> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Groups",
@@ -23333,10 +23335,10 @@ impl Client {
             .client
             .get(url)
             .query(&[
-                ("startIndex", format!("{}", startIndex)),
+                ("start_index", format!("{}", start_index)),
                 ("count", format!("{}", count)),
                 ("filter", filter.to_string()),
-                ("excludedAttributes", excludedAttributes.to_string()),
+                ("excluded_attributes", excluded_attributes.to_string()),
             ])
             .send()
             .await?
@@ -23377,7 +23379,7 @@ impl Client {
         &self,
         enterprise: &str,
         scim_group_id: &str,
-        excludedAttributes: &str,
+        excluded_attributes: &str,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!(
             "{}/scim/v2/enterprises/{}/Groups/{}",
@@ -23389,7 +23391,7 @@ impl Client {
         let res = self
             .client
             .get(url)
-            .query(&[("excludedAttributes", excludedAttributes.to_string())])
+            .query(&[("excluded_attributes", excluded_attributes.to_string())])
             .send()
             .await?
             .error_for_status()?;
@@ -23477,7 +23479,7 @@ impl Client {
     pub async fn enterprise_admin_list_provisioned_identities_enterprise(
         &self,
         enterprise: &str,
-        startIndex: i64,
+        start_index: i64,
         count: i64,
         filter: &str,
     ) -> Result<types::ScimUserListEnterprise> {
@@ -23491,7 +23493,7 @@ impl Client {
             .client
             .get(url)
             .query(&[
-                ("startIndex", format!("{}", startIndex)),
+                ("start_index", format!("{}", start_index)),
                 ("count", format!("{}", count)),
                 ("filter", filter.to_string()),
             ])
@@ -23627,7 +23629,7 @@ impl Client {
     pub async fn scim_list_provisioned_identities(
         &self,
         org: &str,
-        startIndex: i64,
+        start_index: i64,
         count: i64,
         filter: &str,
     ) -> Result<types::ScimUserList> {
@@ -23641,7 +23643,7 @@ impl Client {
             .client
             .get(url)
             .query(&[
-                ("startIndex", format!("{}", startIndex)),
+                ("start_index", format!("{}", start_index)),
                 ("count", format!("{}", count)),
                 ("filter", filter.to_string()),
             ])
