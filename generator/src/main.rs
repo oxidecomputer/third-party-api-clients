@@ -1232,12 +1232,15 @@ fn gen(
                                     r#"#[serde(default, skip_serializing_if = "String::is_empty", deserialize_with = "crate::utils::deserialize_null_string::deserialize","#,
                                 );
                             } else if rt.starts_with("Vec<") {
-                                a(r#"#[serde(default, skip_serializing_if = "Vec::is_empty")]"#);
+                                a(r#"#[serde(default, skip_serializing_if = "Vec::is_empty","#);
                             } else if rt.starts_with("Option<") {
-                                a(r#"#[serde(default, skip_serializing_if = "Option::is_none")]"#);
+                                a(r#"#[serde(default, skip_serializing_if = "Option::is_none","#);
                             }
                             if name == "ref" || name == "type" || name == "self" {
-                                if rt == "String" {
+                                if rt == "String"
+                                    || rt.starts_with("Vec<")
+                                    || rt.starts_with("Option<")
+                                {
                                     a(&format!(r#"rename = "{}")]"#, name));
                                 } else {
                                     a(&format!(r#"#[serde(rename = "{}")]"#, name));
@@ -1253,14 +1256,20 @@ fn gen(
                                 a(r#"        #[serde(rename = "-1")]"#);
                                 a(&format!("        pub minus_one: {},", rt));
                             } else if name.starts_with('@') {
-                                if rt == "String" {
+                                if rt == "String"
+                                    || rt.starts_with("Vec<")
+                                    || rt.starts_with("Option<")
+                                {
                                     a(&format!(r#"rename = "{}")]"#, name));
                                 } else {
                                     a(&format!(r#"#[serde(rename = "{}")]"#, name));
                                 }
                                 a(&format!("        pub {}: {},", name.replace('@', ""), rt));
                             } else {
-                                if rt == "String" {
+                                if rt == "String"
+                                    || rt.starts_with("Vec<")
+                                    || rt.starts_with("Option<")
+                                {
                                     a(r#")]"#);
                                 }
                                 a(&format!("        pub {}: {},", to_snake_case(name), rt));

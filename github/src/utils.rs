@@ -91,6 +91,7 @@ impl From<MediaType> for mime::Mime {
     }
 }
 
+// TODO: we should add a function for deserializing a null vector.
 pub mod deserialize_null_string {
     use serde::{self, Deserialize, Deserializer};
 
