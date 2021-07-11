@@ -762,7 +762,7 @@ impl TypeSpace {
 
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
-                        let itid = self.select_box(Some(n), rb, &format!("{} {} {}", parent_name, name, clean_name(n)))?;
+                        let itid = self.select_box(Some(n), rb, &clean_name(&format!("{} {} {}", &parent_name, name, n)))?;
                         if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
                         } else {
@@ -780,8 +780,25 @@ impl TypeSpace {
                     };
 
                     if !st.enumeration.is_empty() {
+                        // Enum types must have a consistent name.
+                        let mut name = clean_name(match (name, s.schema_data.title.as_deref()) {
+                            (Some(n), None) => n,
+                            (Some(n), Some("")) => n,
+                            (None, Some(t)) => t,
+                            (Some(""), Some(t)) => t,
+                            (Some(n), Some(_)) => n,
+                            (None, None) => {
+                                bail!("types need a name? {:?} {:?}", name, s)
+                            }
+                        });
+
+                        if name == "status" {
+                            // We can't have an enum named status.
+                            name = format!("{} {}", parent_name, name);
+                        }
+
                         // We have an enumeration.
-                        (Some(nam), TypeDetails::Enum(st.enumeration.clone(), s.schema_data.clone()))
+                        (Some(clean_name(&name)), TypeDetails::Enum(st.enumeration.clone(), s.schema_data.clone()))
                     } else if is_schema {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
                         (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
@@ -1031,6 +1048,20 @@ fn render_raw_param(n: &str, param: &openapiv3::Parameter) -> String {
     "".to_string()
 }
 
+fn get_enums_for_param(param: &openapiv3::Parameter) -> Vec<String> {
+    if let Some(parameter_data) = get_parameter_data(param) {
+        if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
+            if let Ok(s) = s.item() {
+                if let openapiv3::SchemaKind::Type(openapiv3::Type::String(st)) = &s.schema_kind {
+                    return st.enumeration.to_vec();
+                }
+            }
+        }
+    }
+
+    vec![]
+}
+
 fn render_param(n: &str, enums: &[String], required: bool, description: &str) -> String {
     let mut out = String::new();
 
@@ -1050,9 +1081,9 @@ fn render_param(n: &str, enums: &[String], required: bool, description: &str) ->
     let mut sn = struct_name(n);
     // TODO: have a more automated way of making sure there aren't
     // duplicates of enums.
-    /*if sn == "Status" {
+    if sn == "Status" {
         sn = format!("{}Param", sn);
-    }*/
+    }
 
     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
     a(r#"#[serde(rename_all = "snake_case")]"#);
@@ -1337,19 +1368,12 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 TypeDetails::Enum(vals, schema_data) => {
                     // Check if it already exists in params and skip it if so.
                     if let Some(t) = parameters.get(&sn) {
-                        if let Some(parameter_data) = get_parameter_data(t) {
-                            if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
-                                if let Ok(s) = s.item() {
-                                    if let openapiv3::SchemaKind::Type(openapiv3::Type::String(st)) = &s.schema_kind {
-                                        if st.enumeration == *vals {
-                                            println!("enum {} already exists:\n\texisting -> {:?}\n\tnew -> {:?}", sn, st.enumeration, vals);
-                                            continue;
-                                        } else {
-                                            bail!("enum {} already exists:\n\texisting -> {:?}\n\tnew -> {:?}", sn, st.enumeration, vals);
-                                        }
-                                    }
-                                }
-                            }
+                        let enums = get_enums_for_param(t);
+                        if enums == *vals {
+                            println!("enum {} already exists:\n\texisting -> {:?}\n\tnew -> {:?}", sn, enums, vals);
+                            continue;
+                        } else {
+                            bail!("enum {} already exists:\n\texisting -> {:?}\n\tnew -> {:?}", sn, enums, vals);
                         }
                     }
 
@@ -2262,7 +2286,7 @@ fn clean_name(t: &str) -> String {
         s = "root";
     }
 
-    to_snake_case(
+    let st = to_snake_case(
         &s.replace("+1", "plus_one")
             .replace("-1", "minus_one")
             .replace("100644", "file_blob")
@@ -2270,12 +2294,33 @@ fn clean_name(t: &str) -> String {
             .replace("040000", "subdirectory_tree")
             .replace("160000", "submodule_commit")
             .replace("120000", "symlink_path_blob")
+            .replace("commit commit ", "commit ")
+            .replace(" an ", " ")
+            .replace(" or ", " ")
+            .replace(" for ", " ")
+            .replace(" to ", " ")
+            .replace(" your ", " ")
+            .replace(" is ", " ")
+            .replace(" and ", " ")
+            .replace(" the ", " ")
             .replace("/", " ")
             .replace("-", " "),
     )
     .replace("_", " ")
     .trim()
-    .to_string()
+    .to_string();
+
+    let mut words: Vec<String> = Default::default();
+    // Only get a string with unique words.
+    let split = st.split(' ');
+    for s in split {
+        if words.contains(&s.to_string()) {
+            continue;
+        }
+        words.push(s.to_string());
+    }
+
+    words.join(" ")
 }
 
 fn summary_to_object_name(m: &str, s: &str) -> String {
@@ -2288,6 +2333,8 @@ fn summary_to_object_name(m: &str, s: &str) -> String {
         .replace(" for ", " ")
         .replace(" to ", " ")
         .replace(" your ", " ")
+        .replace(" is ", " ")
+        .replace(" and ", " ")
         .replace(" the ", " ")
         .replace("(beta)", "")
         .replace("(legacy)", "")

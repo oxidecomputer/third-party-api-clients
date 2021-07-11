@@ -2336,7 +2336,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RepositoryTemplateRepositoryTemplateRepositoryOwner {
+    pub struct RepositoryTemplateOwner {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2441,7 +2441,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RepositoryTemplateRepositoryTemplateRepositoryPermissions {
+    pub struct RepositoryTemplatePermissions {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub admin: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -4887,7 +4887,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EventPayloadPayloadPages {
+    pub struct EventPayloadPages {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -6106,7 +6106,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MinimalRepositoryTemplateRepository {}
+    pub struct MinimalRepositoryTemplate {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MinimalRepositoryLicense {
@@ -8750,7 +8750,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamRepositoryTemplateRepository {}
+    pub struct TeamRepositoryTemplate {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamRepository {
@@ -9287,22 +9287,72 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FullRepositoryTemplateRepository {}
+    pub struct FullRepositoryTemplate {}
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum FullRepositorySecurityAnalysisAdvancedStatus {
+        Enabled,
+        Disabled,
+        Noop,
+    }
+
+    impl std::fmt::Display for FullRepositorySecurityAnalysisAdvancedStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                FullRepositorySecurityAnalysisAdvancedStatus::Enabled => "enabled",
+                FullRepositorySecurityAnalysisAdvancedStatus::Disabled => "disabled",
+                FullRepositorySecurityAnalysisAdvancedStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for FullRepositorySecurityAnalysisAdvancedStatus {
+        fn default() -> FullRepositorySecurityAnalysisAdvancedStatus {
+            FullRepositorySecurityAnalysisAdvancedStatus::Noop
+        }
+    }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AdvancedSecurity {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub status: Option<Status>,
+        pub status: Option<FullRepositorySecurityAnalysisAdvancedStatus>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum FullRepositorySecurityAnalysisSecretScanningStatus {
+        Enabled,
+        Disabled,
+        Noop,
+    }
+
+    impl std::fmt::Display for FullRepositorySecurityAnalysisSecretScanningStatus {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                FullRepositorySecurityAnalysisSecretScanningStatus::Enabled => "enabled",
+                FullRepositorySecurityAnalysisSecretScanningStatus::Disabled => "disabled",
+                FullRepositorySecurityAnalysisSecretScanningStatus::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for FullRepositorySecurityAnalysisSecretScanningStatus {
+        fn default() -> FullRepositorySecurityAnalysisSecretScanningStatus {
+            FullRepositorySecurityAnalysisSecretScanningStatus::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SecretScanning {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub status: Option<Status>,
+        pub status: Option<FullRepositorySecurityAnalysisSecretScanningStatus>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SecurityAndAnalysis {
+    pub struct SecurityAnalysis {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub advanced_security: Option<AdvancedSecurity>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -9597,7 +9647,7 @@ pub mod types {
         )]
         pub releases_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub security_and_analysis: Option<SecurityAndAnalysis>,
+        pub security_and_analysis: Option<SecurityAnalysis>,
         pub size: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub source: Option<Repository>,
@@ -9749,28 +9799,28 @@ pub mod types {
     /// The phase of the lifecycle that the job is currently in.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum JobStepsStepsStatus {
+    pub enum JobStepsStatus {
         Queued,
         InProgress,
         Completed,
         Noop,
     }
 
-    impl std::fmt::Display for JobStepsStepsStatus {
+    impl std::fmt::Display for JobStepsStatus {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                JobStepsStepsStatus::Queued => "queued",
-                JobStepsStepsStatus::InProgress => "in_progress",
-                JobStepsStepsStatus::Completed => "completed",
-                JobStepsStepsStatus::Noop => "",
+                JobStepsStatus::Queued => "queued",
+                JobStepsStatus::InProgress => "in_progress",
+                JobStepsStatus::Completed => "completed",
+                JobStepsStatus::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for JobStepsStepsStatus {
-        fn default() -> JobStepsStepsStatus {
-            JobStepsStepsStatus::Noop
+    impl Default for JobStepsStatus {
+        fn default() -> JobStepsStatus {
+            JobStepsStatus::Noop
         }
     }
 
@@ -9793,7 +9843,7 @@ pub mod types {
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
-        pub status: Status,
+        pub status: JobStepsStatus,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -9844,7 +9894,7 @@ pub mod types {
         )]
         pub run_url: String,
         pub started_at: DateTime<Utc>,
-        pub status: Status,
+        pub status: JobStatus,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub steps: Vec<Steps>,
         #[serde(
@@ -10592,19 +10642,19 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct WorkflowUsageBillableBillableUbuntu {
+    pub struct WorkflowUsageBillableUbuntu {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub total_ms: Option<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct WorkflowUsageBillableBillableMacos {
+    pub struct WorkflowUsageBillableMacos {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub total_ms: Option<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct WorkflowUsageBillableBillableWindows {
+    pub struct WorkflowUsageBillableWindows {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub total_ms: Option<i64>,
     }
@@ -10845,7 +10895,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct BranchRestrictionPolicyAppsAppsOwner {
+    pub struct BranchRestrictionPolicyAppsOwner {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -10980,7 +11030,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct BranchRestrictionPolicyAppsAppsPermissions {
+    pub struct BranchRestrictionPolicyAppsPermissions {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11286,7 +11336,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitCommitCommitAuthor {
+    pub struct CommitAuthor {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11308,7 +11358,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitCommitCommitCommitter {
+    pub struct CommitCommitter {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11337,149 +11387,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitCommit {
-        pub author: Author,
-        pub comment_count: i64,
-        pub committer: Committer,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-        pub tree: Tree,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub verification: Option<Verification>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitCommitter {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11686,7 +11593,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
+    pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<Team>,
         #[serde(
@@ -12062,7 +11969,7 @@ pub mod types {
         pub output: Output,
         pub pull_requests: serde_json::Value,
         pub started_at: DateTime<Utc>,
-        pub status: Status,
+        pub status: CheckRunStatus,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -12262,7 +12169,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub pull_requests: Vec<PullRequestMinimal>,
         pub repository: MinimalRepository,
-        pub status: Status,
+        pub status: CheckSuiteStatus,
         pub updated_at: DateTime<Utc>,
         #[serde(
             default,
@@ -13685,7 +13592,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct StatusData {
+    pub struct Status {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13761,7 +13668,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommunityProfileFilesFilesCodeOfConduct {
+    pub struct CommunityProfileFilesCodeOfConduct {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14018,7 +13925,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub permalink_url: String,
-        pub status: Status,
+        pub status: CommitComparisonStatus,
         pub total_commits: i64,
         #[serde(
             default,
@@ -14052,7 +13959,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentTreeEntriesEntriesLinks {
+    pub struct ContentTreeEntriesLinks {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14570,7 +14477,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitContentContentLinks {
+    pub struct FileCommitContentLinks {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14650,7 +14557,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitCommitCommitAuthor {
+    pub struct FileCommitAuthor {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14672,7 +14579,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitCommitCommitCommitter {
+    pub struct FileCommitCommitter {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14694,7 +14601,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitCommitCommitTree {
+    pub struct FileCommitTree {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14710,7 +14617,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitCommitCommitParents {
+    pub struct FileCommitParents {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14732,7 +14639,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitCommitCommitVerification {
+    pub struct FileCommitVerification {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14756,7 +14663,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitCommit {
+    pub struct FileCommit {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub author: Option<Author>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -14800,7 +14707,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommit {
+    pub struct FileCommitData {
         pub commit: Commit,
         pub content: Content,
     }
@@ -15369,7 +15276,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GitTreeTree {
+    pub struct GitTree {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15406,7 +15313,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GitTree {
+    pub struct GitTreeData {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15677,7 +15584,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub repository_url: String,
-        pub status: Status,
+        pub status: ImportStatus,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17027,7 +16934,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddedToProjectIssueEventProjectCard {
+    pub struct AddedProjectIssueEventCard {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17057,7 +16964,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddedToProjectIssueEvent {
+    pub struct AddedProjectIssueEvent {
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17102,7 +17009,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MovedColumnInProjectIssueEventProjectCard {
+    pub struct MovedColumnInProjectIssueEventCard {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17177,7 +17084,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemovedFromProjectIssueEventProjectCard {
+    pub struct RemovedFromProjectIssueEventCard {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17252,7 +17159,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ConvertedNoteToIssueIssueEventProjectCard {
+    pub struct ConvertedNoteIssueEventProjectCard {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17282,7 +17189,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ConvertedNoteToIssueIssueEvent {
+    pub struct ConvertedNoteIssueEvent {
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17327,7 +17234,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct IssueEventForIssue {
+    pub struct IssueEventFor {
         pub actor: SimpleUser,
         #[serde(
             default,
@@ -17596,7 +17503,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineReviewedEventLinksLinksPullRequest {
+    pub struct TimelineReviewedEventLinksPullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17686,21 +17593,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewCommentLinksLinksPullRequest {
+    pub struct PullRequestReviewCommentLinks {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewCommentLinks {
-        pub html: Html,
-        pub pull_request: PullRequest,
-        #[serde(rename = "self")]
-        pub self_: SelfData,
     }
 
     /// The side of the first line of the range for a multi-line comment.
@@ -18233,7 +18132,7 @@ pub mod types {
         pub public: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub source: Option<PagesSourceHash>,
-        pub status: Status,
+        pub status: PageStatus,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18657,7 +18556,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestHeadHeadRepoRepoOwner {
+    pub struct PullRequestHeadRepoOwner {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18760,14 +18659,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestHeadHeadRepoRepoPermissions {
+    pub struct PullRequestHeadRepoPermissions {
         pub admin: bool,
         pub pull: bool,
         pub push: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestHeadHeadRepoRepoLicense {
+    pub struct PullRequestHeadRepoLicense {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18801,7 +18700,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestHeadHeadRepo {
+    pub struct PullRequestHeadRepo {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allow_merge_commit: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -19150,7 +19049,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestHeadHeadUser {
+    pub struct PullRequestHeadUser {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19278,7 +19177,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestBaseBaseRepoRepoOwner {
+    pub struct PullRequestBaseRepoOwner {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19381,14 +19280,14 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestBaseBaseRepoRepoPermissions {
+    pub struct PullRequestBaseRepoPermissions {
         pub admin: bool,
         pub pull: bool,
         pub push: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestBaseBaseRepo {
+    pub struct PullRequestBaseRepo {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allow_merge_commit: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -19737,7 +19636,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestBaseBaseUser {
+    pub struct PullRequestBaseUser {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -20154,7 +20053,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewRequest {
+    pub struct PullRequestReview {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<Team>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -20162,7 +20061,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewLinksLinksPullRequest {
+    pub struct PullRequestReviewLinks {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -20172,13 +20071,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewLinks {
-        pub html: Html,
-        pub pull_request: PullRequest,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReview {
+    pub struct PullRequestReviewData {
         pub links: Links,
         pub author_association: AuthorAssociation,
         #[serde(
@@ -20878,7 +20771,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimGroupListEnterpriseResourcesResourcesMembers {
+    pub struct ScimGroupListEnterpriseResourcesMembers {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -21054,7 +20947,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimUserListEnterpriseResourcesResourcesGroups {
+    pub struct ScimUserListEnterpriseResourcesGroups {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -21401,7 +21294,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitSearchResultItemCommitCommitAuthor {
+    pub struct CommitSearchResultItemAuthor {
         pub date: DateTime<Utc>,
         #[serde(
             default,
@@ -21415,50 +21308,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitSearchResultItemCommitCommitCommitter {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub date: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitSearchResultItemCommit {
-        pub author: Author,
-        pub comment_count: i64,
-        pub committer: Committer,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-        pub tree: Tree,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub verification: Option<Verification>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -21484,6 +21333,28 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitSearchResultItem {
+        pub author: Author,
+        pub comment_count: i64,
+        pub committer: Committer,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub message: String,
+        pub tree: Tree,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub url: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub verification: Option<Verification>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitSearchResultItemParents {
         #[serde(
             default,
@@ -21506,7 +21377,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitSearchResultItem {
+    pub struct CommitSearchResultItemData {
         pub author: Author,
         #[serde(
             default,
@@ -23230,7 +23101,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetOrCreateAuthorizationSpecificAppRequest {
+    pub struct GetCreateAuthorizationSpecificAppRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23260,7 +23131,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetOrCreateAuthorizationSpecificAppAndFingerprintRequest {
+    pub struct GetCreateAuthorizationSpecificAppFingerprintRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23507,7 +23378,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetCheckIfGistIsStarredNotFoundResponse {}
+    pub struct GetCheckIfGistStarredNotFoundResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetListRepositoriesAccessibleAppInstallationOkResponse {
@@ -25197,7 +25068,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequestSecurityAndAnalysisSecurityAndAnalysisAdvancedSecurity {
+    pub struct UpdateRepositoryRequestSecurityAnalysisAdvanced {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25207,7 +25078,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequestSecurityAndAnalysisSecurityAndAnalysisSecretScanning {
+    pub struct UpdateRepositoryRequestSecurityAnalysisSecretScanning {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25217,7 +25088,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateRepositoryRequestSecurityAndAnalysis {
+    pub struct UpdateRepositoryRequestSecurityAnalysis {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub advanced_security: Option<AdvancedSecurity>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25271,7 +25142,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub private: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub security_and_analysis: Option<SecurityAndAnalysis>,
+        pub security_and_analysis: Option<SecurityAnalysis>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub visibility: Option<Visibility>,
     }
@@ -25427,7 +25298,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateBranchProtectionRequestRequiredPullRequestReviewsRequiredPullRequestReviewsDismissalRestrictions {
+    pub struct UpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<String>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -25435,7 +25306,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateBranchProtectionRequestRequiredPullRequestReviews {
+    pub struct UpdateBranchProtectionRequestRequiredPullReviews {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismiss_stale_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25473,7 +25344,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdatePullRequestReviewProtectionRequestDismissalRestrictions {
+    pub struct UpdatePullRequestReviewProtectionDismissalRestrictions {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<String>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -25481,7 +25352,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdatePullRequestReviewProtectionRequest {
+    pub struct UpdatePullRequestReviewProtection {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismiss_stale_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25819,7 +25690,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub status: Option<Status>,
+        pub status: Option<CreateCheckRunRequestStatus>,
     }
 
     /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
@@ -25968,7 +25839,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub status: Option<Status>,
+        pub status: Option<UpdateCheckRunRequestStatus>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25988,7 +25859,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListCheckRunsInCheckSuiteOkResponse {
+    pub struct GetListCheckRunsInSuiteOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_runs: Vec<CheckRun>,
         pub total_count: i64,
@@ -26775,7 +26646,7 @@ pub mod types {
     /// The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateTreeRequestTreeTreeMode {
+    pub enum CreateTreeRequestMode {
         FileBlob,
         ExecutableBlob,
         SubdirectoryTree,
@@ -26784,56 +26655,56 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateTreeRequestTreeTreeMode {
+    impl std::fmt::Display for CreateTreeRequestMode {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateTreeRequestTreeTreeMode::FileBlob => "100644",
-                CreateTreeRequestTreeTreeMode::ExecutableBlob => "100755",
-                CreateTreeRequestTreeTreeMode::SubdirectoryTree => "040000",
-                CreateTreeRequestTreeTreeMode::SubmoduleCommit => "160000",
-                CreateTreeRequestTreeTreeMode::SymlinkPathBlob => "120000",
-                CreateTreeRequestTreeTreeMode::Noop => "",
+                CreateTreeRequestMode::FileBlob => "100644",
+                CreateTreeRequestMode::ExecutableBlob => "100755",
+                CreateTreeRequestMode::SubdirectoryTree => "040000",
+                CreateTreeRequestMode::SubmoduleCommit => "160000",
+                CreateTreeRequestMode::SymlinkPathBlob => "120000",
+                CreateTreeRequestMode::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateTreeRequestTreeTreeMode {
-        fn default() -> CreateTreeRequestTreeTreeMode {
-            CreateTreeRequestTreeTreeMode::Noop
+    impl Default for CreateTreeRequestMode {
+        fn default() -> CreateTreeRequestMode {
+            CreateTreeRequestMode::Noop
         }
     }
 
     /// Either `blob`, `tree`, or `commit`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateTreeRequestTreeTreeType {
+    pub enum CreateTreeRequestType {
         Blob,
         Tree,
         Commit,
         Noop,
     }
 
-    impl std::fmt::Display for CreateTreeRequestTreeTreeType {
+    impl std::fmt::Display for CreateTreeRequestType {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateTreeRequestTreeTreeType::Blob => "blob",
-                CreateTreeRequestTreeTreeType::Tree => "tree",
-                CreateTreeRequestTreeTreeType::Commit => "commit",
-                CreateTreeRequestTreeTreeType::Noop => "",
+                CreateTreeRequestType::Blob => "blob",
+                CreateTreeRequestType::Tree => "tree",
+                CreateTreeRequestType::Commit => "commit",
+                CreateTreeRequestType::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateTreeRequestTreeTreeType {
-        fn default() -> CreateTreeRequestTreeTreeType {
-            CreateTreeRequestTreeTreeType::Noop
+    impl Default for CreateTreeRequestType {
+        fn default() -> CreateTreeRequestType {
+            CreateTreeRequestType::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateTreeRequestTree {
+    pub struct CreateTreeRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -26859,7 +26730,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateTreeRequest {
+    pub struct CreateTreeRequestData {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27749,7 +27620,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreatePullRequestRequest {
+    pub struct CreatePullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27783,7 +27654,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateReviewCommentPullRequestRequest {
+    pub struct UpdateReviewCommentPullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27795,7 +27666,7 @@ pub mod types {
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReactionPullRequestReviewCommentRequestContent {
+    pub enum CreateReactionPullRequestReviewCommentContent {
         PlusOne,
         MinusOne,
         Laugh,
@@ -27807,62 +27678,62 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for CreateReactionPullRequestReviewCommentRequestContent {
+    impl std::fmt::Display for CreateReactionPullRequestReviewCommentContent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReactionPullRequestReviewCommentRequestContent::PlusOne => "+1",
-                CreateReactionPullRequestReviewCommentRequestContent::MinusOne => "-1",
-                CreateReactionPullRequestReviewCommentRequestContent::Laugh => "laugh",
-                CreateReactionPullRequestReviewCommentRequestContent::Confused => "confused",
-                CreateReactionPullRequestReviewCommentRequestContent::Heart => "heart",
-                CreateReactionPullRequestReviewCommentRequestContent::Hooray => "hooray",
-                CreateReactionPullRequestReviewCommentRequestContent::Rocket => "rocket",
-                CreateReactionPullRequestReviewCommentRequestContent::Eyes => "eyes",
-                CreateReactionPullRequestReviewCommentRequestContent::Noop => "",
+                CreateReactionPullRequestReviewCommentContent::PlusOne => "+1",
+                CreateReactionPullRequestReviewCommentContent::MinusOne => "-1",
+                CreateReactionPullRequestReviewCommentContent::Laugh => "laugh",
+                CreateReactionPullRequestReviewCommentContent::Confused => "confused",
+                CreateReactionPullRequestReviewCommentContent::Heart => "heart",
+                CreateReactionPullRequestReviewCommentContent::Hooray => "hooray",
+                CreateReactionPullRequestReviewCommentContent::Rocket => "rocket",
+                CreateReactionPullRequestReviewCommentContent::Eyes => "eyes",
+                CreateReactionPullRequestReviewCommentContent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReactionPullRequestReviewCommentRequestContent {
-        fn default() -> CreateReactionPullRequestReviewCommentRequestContent {
-            CreateReactionPullRequestReviewCommentRequestContent::Noop
+    impl Default for CreateReactionPullRequestReviewCommentContent {
+        fn default() -> CreateReactionPullRequestReviewCommentContent {
+            CreateReactionPullRequestReviewCommentContent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionPullRequestReviewCommentRequest {
+    pub struct CreateReactionPullRequestReviewComment {
         pub content: Content,
     }
 
     /// State of this Pull Request. Either `open` or `closed`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdatePullRequestRequestState {
+    pub enum UpdatePullRequestState {
         Open,
         Closed,
         Noop,
     }
 
-    impl std::fmt::Display for UpdatePullRequestRequestState {
+    impl std::fmt::Display for UpdatePullRequestState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdatePullRequestRequestState::Open => "open",
-                UpdatePullRequestRequestState::Closed => "closed",
-                UpdatePullRequestRequestState::Noop => "",
+                UpdatePullRequestState::Open => "open",
+                UpdatePullRequestState::Closed => "closed",
+                UpdatePullRequestState::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdatePullRequestRequestState {
-        fn default() -> UpdatePullRequestRequestState {
-            UpdatePullRequestRequestState::Noop
+    impl Default for UpdatePullRequestState {
+        fn default() -> UpdatePullRequestState {
+            UpdatePullRequestState::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdatePullRequestRequest {
+    pub struct UpdatePullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27890,59 +27761,59 @@ pub mod types {
     /// **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReviewCommentPullRequestRequestSide {
+    pub enum CreateReviewCommentPullRequestSide {
         Left,
         Right,
         Noop,
     }
 
-    impl std::fmt::Display for CreateReviewCommentPullRequestRequestSide {
+    impl std::fmt::Display for CreateReviewCommentPullRequestSide {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReviewCommentPullRequestRequestSide::Left => "LEFT",
-                CreateReviewCommentPullRequestRequestSide::Right => "RIGHT",
-                CreateReviewCommentPullRequestRequestSide::Noop => "",
+                CreateReviewCommentPullRequestSide::Left => "LEFT",
+                CreateReviewCommentPullRequestSide::Right => "RIGHT",
+                CreateReviewCommentPullRequestSide::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReviewCommentPullRequestRequestSide {
-        fn default() -> CreateReviewCommentPullRequestRequestSide {
-            CreateReviewCommentPullRequestRequestSide::Noop
+    impl Default for CreateReviewCommentPullRequestSide {
+        fn default() -> CreateReviewCommentPullRequestSide {
+            CreateReviewCommentPullRequestSide::Noop
         }
     }
 
     /// **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReviewCommentPullRequestRequestStartSide {
+    pub enum CreateReviewCommentPullRequestStartSide {
         Left,
         Right,
         Side,
         Noop,
     }
 
-    impl std::fmt::Display for CreateReviewCommentPullRequestRequestStartSide {
+    impl std::fmt::Display for CreateReviewCommentPullRequestStartSide {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReviewCommentPullRequestRequestStartSide::Left => "LEFT",
-                CreateReviewCommentPullRequestRequestStartSide::Right => "RIGHT",
-                CreateReviewCommentPullRequestRequestStartSide::Side => "side",
-                CreateReviewCommentPullRequestRequestStartSide::Noop => "",
+                CreateReviewCommentPullRequestStartSide::Left => "LEFT",
+                CreateReviewCommentPullRequestStartSide::Right => "RIGHT",
+                CreateReviewCommentPullRequestStartSide::Side => "side",
+                CreateReviewCommentPullRequestStartSide::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReviewCommentPullRequestRequestStartSide {
-        fn default() -> CreateReviewCommentPullRequestRequestStartSide {
-            CreateReviewCommentPullRequestRequestStartSide::Noop
+    impl Default for CreateReviewCommentPullRequestStartSide {
+        fn default() -> CreateReviewCommentPullRequestStartSide {
+            CreateReviewCommentPullRequestStartSide::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReviewCommentPullRequestRequest {
+    pub struct CreateReviewCommentPullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27988,33 +27859,33 @@ pub mod types {
     /// Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum MergePullRequestRequestMergeMethod {
+    pub enum MergePullRequestMethod {
         Merge,
         Squash,
         Rebase,
         Noop,
     }
 
-    impl std::fmt::Display for MergePullRequestRequestMergeMethod {
+    impl std::fmt::Display for MergePullRequestMethod {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                MergePullRequestRequestMergeMethod::Merge => "merge",
-                MergePullRequestRequestMergeMethod::Squash => "squash",
-                MergePullRequestRequestMergeMethod::Rebase => "rebase",
-                MergePullRequestRequestMergeMethod::Noop => "",
+                MergePullRequestMethod::Merge => "merge",
+                MergePullRequestMethod::Squash => "squash",
+                MergePullRequestMethod::Rebase => "rebase",
+                MergePullRequestMethod::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for MergePullRequestRequestMergeMethod {
-        fn default() -> MergePullRequestRequestMergeMethod {
-            MergePullRequestRequestMergeMethod::Noop
+    impl Default for MergePullRequestMethod {
+        fn default() -> MergePullRequestMethod {
+            MergePullRequestMethod::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MergePullRequestRequest {
+    pub struct MergePullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28070,7 +27941,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RequestReviewersPullRequestRequest {
+    pub struct RequestReviewersPull {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub reviewers: Vec<String>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -28078,7 +27949,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemoveRequestedReviewersFromPullRequestRequest {
+    pub struct RemoveRequestedReviewersFromPullRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub reviewers: Vec<String>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -28088,28 +27959,28 @@ pub mod types {
     /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum CreateReviewPullRequestRequestEvent {
+    pub enum CreateReviewPullRequestEvent {
         Approve,
         RequestChanges,
         Comment,
         Noop,
     }
 
-    impl std::fmt::Display for CreateReviewPullRequestRequestEvent {
+    impl std::fmt::Display for CreateReviewPullRequestEvent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                CreateReviewPullRequestRequestEvent::Approve => "APPROVE",
-                CreateReviewPullRequestRequestEvent::RequestChanges => "REQUEST_CHANGES",
-                CreateReviewPullRequestRequestEvent::Comment => "COMMENT",
-                CreateReviewPullRequestRequestEvent::Noop => "",
+                CreateReviewPullRequestEvent::Approve => "APPROVE",
+                CreateReviewPullRequestEvent::RequestChanges => "REQUEST_CHANGES",
+                CreateReviewPullRequestEvent::Comment => "COMMENT",
+                CreateReviewPullRequestEvent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for CreateReviewPullRequestRequestEvent {
-        fn default() -> CreateReviewPullRequestRequestEvent {
-            CreateReviewPullRequestRequestEvent::Noop
+    impl Default for CreateReviewPullRequestEvent {
+        fn default() -> CreateReviewPullRequestEvent {
+            CreateReviewPullRequestEvent::Noop
         }
     }
 
@@ -28148,7 +28019,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReviewPullRequestRequest {
+    pub struct CreateReviewPullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28168,7 +28039,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateReviewPullRequestRequest {
+    pub struct UpdateReviewPullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28178,7 +28049,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DismissReviewPullRequestRequest {
+    pub struct DismissReviewPullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28196,33 +28067,33 @@ pub mod types {
     /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum SubmitReviewPullRequestRequestEvent {
+    pub enum SubmitReviewPullRequestEvent {
         Approve,
         RequestChanges,
         Comment,
         Noop,
     }
 
-    impl std::fmt::Display for SubmitReviewPullRequestRequestEvent {
+    impl std::fmt::Display for SubmitReviewPullRequestEvent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                SubmitReviewPullRequestRequestEvent::Approve => "APPROVE",
-                SubmitReviewPullRequestRequestEvent::RequestChanges => "REQUEST_CHANGES",
-                SubmitReviewPullRequestRequestEvent::Comment => "COMMENT",
-                SubmitReviewPullRequestRequestEvent::Noop => "",
+                SubmitReviewPullRequestEvent::Approve => "APPROVE",
+                SubmitReviewPullRequestEvent::RequestChanges => "REQUEST_CHANGES",
+                SubmitReviewPullRequestEvent::Comment => "COMMENT",
+                SubmitReviewPullRequestEvent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for SubmitReviewPullRequestRequestEvent {
-        fn default() -> SubmitReviewPullRequestRequestEvent {
-            SubmitReviewPullRequestRequestEvent::Noop
+    impl Default for SubmitReviewPullRequestEvent {
+        fn default() -> SubmitReviewPullRequestEvent {
+            SubmitReviewPullRequestEvent::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SubmitReviewPullRequestRequest {
+    pub struct SubmitReviewPullRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28233,7 +28104,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdatePullRequestBranchRequest {
+    pub struct UpdatePullRequestBranch {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28531,7 +28402,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionScimEnterpriseGroupAndInviteUsersRequestMembers {
+    pub struct ProvisionScimEnterpriseGroupInviteUsersRequestMembers {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28541,7 +28412,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionScimEnterpriseGroupAndInviteUsersRequest {
+    pub struct ProvisionScimEnterpriseGroupInviteUsersRequest {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28580,7 +28451,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp {
+    pub enum UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
         Add,
         Add,
         Remove,
@@ -28590,24 +28461,24 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp {
+    impl std::fmt::Display for UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Add => "add",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Add => "Add",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Remove => "remove",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Remove => "Remove",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Replace => "replace",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Replace => "Replace",
-                UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Noop => "",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Add => "add",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Add => "Add",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Remove => "remove",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Remove => "Remove",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Replace => "replace",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Replace => "Replace",
+                UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp {
-        fn default() -> UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp {
-            UpdateAttributeScimEnterpriseGroupRequestOperationsOperationsOp::Noop
+    impl Default for UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
+        fn default() -> UpdateAttributeScimEnterpriseGroupRequestOperationsOp {
+            UpdateAttributeScimEnterpriseGroupRequestOperationsOp::Noop
         }
     }
 
@@ -28620,7 +28491,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionAndInviteScimEnterpriseUserRequestName {
+    pub struct ProvisionInviteScimEnterpriseUserRequestName {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28636,7 +28507,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionAndInviteScimEnterpriseUserRequestEmails {
+    pub struct ProvisionInviteScimEnterpriseUserRequestEmails {
         pub primary: bool,
         #[serde(
             default,
@@ -28654,7 +28525,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionAndInviteScimEnterpriseUserRequestGroups {
+    pub struct ProvisionInviteScimEnterpriseUserRequestGroups {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28664,7 +28535,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionAndInviteScimEnterpriseUserRequest {
+    pub struct ProvisionInviteScimEnterpriseUserRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub emails: Vec<Emails>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -28753,7 +28624,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionAndInviteScimUserRequestName {
+    pub struct ProvisionInviteScimUserRequestName {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28775,7 +28646,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionAndInviteScimUserRequestEmails {
+    pub struct ProvisionInviteScimUserRequestEmails {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub primary: Option<bool>,
         #[serde(
@@ -28794,7 +28665,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProvisionAndInviteScimUserRequest {
+    pub struct ProvisionInviteScimUserRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
         #[serde(
@@ -28921,7 +28792,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetSearchIssuesAndPullRequestsOkResponse {
+    pub struct GetSearchIssuesPullRequestsOkResponse {
         pub incomplete_results: bool,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub items: Vec<IssueSearchResultItem>,
@@ -29221,31 +29092,31 @@ pub mod types {
     /// Denotes whether an email is publicly visible.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum SetPrimaryEmailVisibilityRequestVisibility {
+    pub enum SetPrimaryEmailVisibilityRequest {
         Public,
         Private,
         Noop,
     }
 
-    impl std::fmt::Display for SetPrimaryEmailVisibilityRequestVisibility {
+    impl std::fmt::Display for SetPrimaryEmailVisibilityRequest {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                SetPrimaryEmailVisibilityRequestVisibility::Public => "public",
-                SetPrimaryEmailVisibilityRequestVisibility::Private => "private",
-                SetPrimaryEmailVisibilityRequestVisibility::Noop => "",
+                SetPrimaryEmailVisibilityRequest::Public => "public",
+                SetPrimaryEmailVisibilityRequest::Private => "private",
+                SetPrimaryEmailVisibilityRequest::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for SetPrimaryEmailVisibilityRequestVisibility {
-        fn default() -> SetPrimaryEmailVisibilityRequestVisibility {
-            SetPrimaryEmailVisibilityRequestVisibility::Noop
+    impl Default for SetPrimaryEmailVisibilityRequest {
+        fn default() -> SetPrimaryEmailVisibilityRequest {
+            SetPrimaryEmailVisibilityRequest::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetPrimaryEmailVisibilityRequest {
+    pub struct SetPrimaryEmailVisibilityRequestData {
         pub visibility: Visibility,
     }
 
@@ -30581,7 +30452,7 @@ impl Client {
     pub async fn oauth_authorizations_get_or_create_authorization_for_app(
         &self,
         client_id: &str,
-        body: &types::GetOrCreateAuthorizationSpecificAppRequest,
+        body: &types::GetCreateAuthorizationSpecificAppRequest,
     ) -> Result<types::Authorization> {
         let url = format!("/authorizations/clients/{}", progenitor_support::encode_path(&client_id.to_string()),);
 
@@ -30607,7 +30478,7 @@ impl Client {
         &self,
         client_id: &str,
         fingerprint: &str,
-        body: &types::GetOrCreateAuthorizationSpecificAppAndFingerprintRequest,
+        body: &types::GetCreateAuthorizationSpecificAppFingerprintRequest,
     ) -> Result<types::Authorization> {
         let url = format!(
             "/authorizations/clients/{}/{}",
@@ -37553,7 +37424,7 @@ impl Client {
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::UpdatePullRequestReviewProtectionRequest,
+        body: &types::UpdatePullRequestReviewProtection,
     ) -> Result<types::ProtectedBranchPullRequestReview> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
@@ -38428,7 +38299,7 @@ impl Client {
         filter: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListCheckRunsInCheckSuiteOkResponse> {
+    ) -> Result<types::GetListCheckRunsInSuiteOkResponse> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/check-runs?check_name={}&filter={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41575,7 +41446,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         issue_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<types::IssueEventForIssue>> {
+    ) -> Result<Vec<types::IssueEventFor>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42584,7 +42455,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#create-a-pull-request>
     */
-    pub async fn pulls_create(&self, owner: &str, repo: &str, body: &types::CreatePullRequestRequest) -> Result<types::PullRequest> {
+    pub async fn pulls_create(&self, owner: &str, repo: &str, body: &types::CreatePullRequest) -> Result<types::PullRequest> {
         let url = format!(
             "/repos/{}/{}/pulls",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42681,7 +42552,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::UpdateReviewCommentPullRequestRequest,
+        body: &types::UpdateReviewCommentPullRequest,
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}",
@@ -42738,7 +42609,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &types::CreateReactionPullRequestReviewCommentRequest,
+        body: &types::CreateReactionPullRequestReviewComment,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions",
@@ -42818,13 +42689,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/pulls/#update-a-pull-request>
     */
-    pub async fn pulls_update(
-        &self,
-        owner: &str,
-        repo: &str,
-        pull_number: i64,
-        body: &types::UpdatePullRequestRequest,
-    ) -> Result<types::PullRequest> {
+    pub async fn pulls_update(&self, owner: &str, repo: &str, pull_number: i64, body: &types::UpdatePullRequest) -> Result<types::PullRequest> {
         let url = format!(
             "/repos/{}/{}/pulls/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42891,7 +42756,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::CreateReviewCommentPullRequestRequest,
+        body: &types::CreateReviewCommentPullRequest,
     ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/comments",
@@ -43011,7 +42876,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::MergePullRequestRequest,
+        body: &types::MergePullRequest,
     ) -> Result<types::PullRequestMergeResult> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/merge",
@@ -43039,7 +42904,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         pull_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::PullRequestReviewRequest> {
+    ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/requested_reviewers?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43066,7 +42931,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::RequestReviewersPullRequestRequest,
+        body: &types::RequestReviewersPull,
     ) -> Result<types::PullRequestSimple> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/requested_reviewers",
@@ -43092,7 +42957,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::RemoveRequestedReviewersFromPullRequestRequest,
+        body: &types::RemoveRequestedReviewersFromPullRequest,
     ) -> Result<types::PullRequestSimple> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/requested_reviewers",
@@ -43153,7 +43018,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::CreateReviewPullRequestRequest,
+        body: &types::CreateReviewPullRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews",
@@ -43201,7 +43066,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repo: &str,
         pull_number: i64,
         review_id: i64,
-        body: &types::UpdateReviewPullRequestRequest,
+        body: &types::UpdateReviewPullRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}",
@@ -43281,7 +43146,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repo: &str,
         pull_number: i64,
         review_id: i64,
-        body: &types::DismissReviewPullRequestRequest,
+        body: &types::DismissReviewPullRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
@@ -43309,7 +43174,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repo: &str,
         pull_number: i64,
         review_id: i64,
-        body: &types::SubmitReviewPullRequestRequest,
+        body: &types::SubmitReviewPullRequest,
     ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}/events",
@@ -43336,7 +43201,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         pull_number: i64,
-        body: &types::UpdatePullRequestBranchRequest,
+        body: &types::UpdatePullRequestBranch,
     ) -> Result<types::PutUpdatePullRequestBranchAcceptedResponse> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/update-branch",
@@ -44598,7 +44463,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn enterprise_admin_provision_and_invite_enterprise_group(
         &self,
         enterprise: &str,
-        body: &types::ProvisionScimEnterpriseGroupAndInviteUsersRequest,
+        body: &types::ProvisionScimEnterpriseGroupInviteUsersRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!("/scim/v2/enterprises/{}/Groups", progenitor_support::encode_path(&enterprise.to_string()),);
 
@@ -44761,7 +44626,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn enterprise_admin_provision_and_invite_enterprise_user(
         &self,
         enterprise: &str,
-        body: &types::ProvisionAndInviteScimEnterpriseUserRequest,
+        body: &types::ProvisionInviteScimEnterpriseUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!("/scim/v2/enterprises/{}/Users", progenitor_support::encode_path(&enterprise.to_string()),);
 
@@ -44926,7 +44791,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/scim#provision-and-invite-a-scim-user>
     */
-    pub async fn scim_provision_and_invite_user(&self, org: &str, body: &types::ProvisionAndInviteScimUserRequest) -> Result<types::ScimUser> {
+    pub async fn scim_provision_and_invite_user(&self, org: &str, body: &types::ProvisionInviteScimUserRequest) -> Result<types::ScimUser> {
         let url = format!("/scim/v2/organizations/{}/Users", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -45146,7 +45011,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetSearchIssuesAndPullRequestsOkResponse> {
+    ) -> Result<types::GetSearchIssuesPullRequestsOkResponse> {
         let url = format!(
             "/search/issues?order={}&page={}&per_page={}&q={}&sort={}",
             order,
