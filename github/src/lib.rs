@@ -1,4 +1,3 @@
-//!
 //! A fully generated, opinionated API client library for GitHub.
 //!
 //! # Examples
@@ -42,10 +41,24 @@
 //! Here is an example:
 //!
 //! ```
-//! use github_api_client::{auth::Credentials, Client, http_cache::HttpCache};
+//! use github_api_client::{auth::Credentials, Client};
+//! #[cfg(feature = "httpcache")]
+//! use github_api_client::http_cache::HttpCache;
 //!
+//! #[cfg(feature = "httpcache")]
 //! let http_cache = HttpCache::in_home_dir();
-
+//!
+//! #[cfg(not(feature = "httpcache"))]
+//! let github = Client::custom(
+//!     "https://api.github.com",
+//!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
+//!     Credentials::Token(
+//!       String::from("personal-access-token")
+//!     ),
+//!     reqwest::Client::builder().build().unwrap(),
+//! );
+//!
+//! #[cfg(feature = "httpcache")]
 //! let github = Client::custom(
 //!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
@@ -62,10 +75,17 @@
 //! Here is an example:
 //!
 //! ```rust
-//! use github_api_client::{Client, http_cache::FileBasedCache, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
+//! use std::env;
+//!
+//! use github_api_client::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
+//! #[cfg(feature = "httpcache")]
+//! use github_api_client::http_cache::FileBasedCache;
 //!
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
+//!
+//! let app_installation_id_str = env::var("GH_APP_INSTALLATION_ID").unwrap();
+//! let app_installation_id = app_installation_id_str.parse::<u64>().unwrap();
 //!
 //! let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
 //! let private_key = base64::decode(encoded_private_key).unwrap();
@@ -76,11 +96,25 @@
 //! // Get the JWT credentials.
 //! let jwt = JWTCredentials::new(app_id, key.data).unwrap();
 //!
-//! // Create the HTTP cache.
-//! let http_cache = Box::new(FileBasedCache::new(format!("{}/.cache/github", env::var("HOME").unwrap())));
+//! #[cfg(feature = "httpcache")]
+//! {
+//!     // Create the HTTP cache.
+//!     let mut dir = dirs::home_dir().expect("Expected a home dir");
+//!     dir.push(".cache/github");
+//!     let http_cache = Box::new(FileBasedCache::new(dir));
+//! }
 //!
-//! let token_generator = InstallationTokenGenerator::new("{github_app_installation_id}", jwt);
+//! let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
 //!
+//! #[cfg(not(feature = "httpcache"))]
+//! let github = Client::custom(
+//!     "https://api.github.com",
+//!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
+//!     Credentials::InstallationToken(token_generator),
+//!     reqwest::Client::builder().build().unwrap(),
+//! );
+//!
+//! #[cfg(feature = "httpcache")]
 //! let github = Client::custom(
 //!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
