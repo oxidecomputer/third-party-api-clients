@@ -4819,7 +4819,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Self {
+    pub struct SelfData {
         pub href: String,
     }
 
@@ -4833,7 +4833,7 @@ pub mod types {
         pub html: Html,
         pub pull_request: PullRequest,
         #[serde(rename = "self")]
-        pub self_: Self,
+        pub self_: SelfData,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6578,13 +6578,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnerGroupsEnterpriseOkResponse {
+    pub struct GetListSelfDataHostedRunnerGroupsEnterpriseOkResponse {
         pub runner_groups: Vec<RunnerGroupsEnterprise>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateSelfHostedRunnerGroupEnterpriseRequest {
+    pub struct CreateSelfDataHostedRunnerGroupEnterpriseRequest {
         pub name: String,
         pub runners: Option<Vec<i64>>,
         pub selected_organization_ids: Option<Vec<i64>>,
@@ -6592,35 +6592,35 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateSelfHostedRunnerGroupEnterpriseRequest {
+    pub struct UpdateSelfDataHostedRunnerGroupEnterpriseRequest {
         pub name: Option<String>,
         pub visibility: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListOrganizationAccessSelfHostedRunnerGroupinEnterpriseOkResponse {
+    pub struct GetListOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseOkResponse {
         pub organizations: Vec<OrganizationSimple>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetOrganizationAccessSelfHostedRunnerGroupinEnterpriseRequest {
+    pub struct SetOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseRequest {
         pub selected_organization_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersinGroupEnterpriseOkResponse {
+    pub struct GetListSelfDataHostedRunnersinGroupEnterpriseOkResponse {
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelfHostedRunnersinGroupEnterpriseRequest {
+    pub struct SetSelfDataHostedRunnersinGroupEnterpriseRequest {
         pub runners: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersEnterpriseOkResponse {
+    pub struct GetListSelfDataHostedRunnersEnterpriseOkResponse {
         pub runners: Option<Vec<Runner>>,
         pub total_count: Option<f64>,
     }
@@ -6730,13 +6730,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnerGroupsOrganizationOkResponse {
+    pub struct GetListSelfDataHostedRunnerGroupsOrganizationOkResponse {
         pub runner_groups: Vec<RunnerGroupsOrg>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateSelfHostedRunnerGroupOrganizationRequest {
+    pub struct CreateSelfDataHostedRunnerGroupOrganizationRequest {
         pub name: String,
         pub runners: Option<Vec<i64>>,
         pub selected_repository_ids: Option<Vec<i64>>,
@@ -6744,35 +6744,35 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateSelfHostedRunnerGroupOrganizationRequest {
+    pub struct UpdateSelfDataHostedRunnerGroupOrganizationRequest {
         pub name: Option<String>,
         pub visibility: Option<String>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListRepositoryAccessSelfHostedRunnerGroupinOrganizationOkResponse {
+    pub struct GetListRepositoryAccessSelfDataHostedRunnerGroupinOrganizationOkResponse {
         pub repositories: Vec<MinimalRepository>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetRepositoryAccessSelfHostedRunnerGroupinOrganizationRequest {
+    pub struct SetRepositoryAccessSelfDataHostedRunnerGroupinOrganizationRequest {
         pub selected_repository_ids: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersinGroupOrganizationOkResponse {
+    pub struct GetListSelfDataHostedRunnersinGroupOrganizationOkResponse {
         pub runners: Vec<Runner>,
         pub total_count: f64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SetSelfHostedRunnersinGroupOrganizationRequest {
+    pub struct SetSelfDataHostedRunnersinGroupOrganizationRequest {
         pub runners: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersOrganizationOkResponse {
+    pub struct GetListSelfDataHostedRunnersOrganizationOkResponse {
         pub runners: Vec<Runner>,
         pub total_count: i64,
     }
@@ -7170,7 +7170,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetListSelfHostedRunnersRepositoryOkResponse {
+    pub struct GetListSelfDataHostedRunnersRepositoryOkResponse {
         pub runners: Vec<Runner>,
         pub total_count: i64,
     }
@@ -8454,7 +8454,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateTeamRequest {
+    pub struct UpdateTeamRequestData {
         pub description: Option<String>,
         pub name: String,
         pub parent_team_id: Option<i64>,
@@ -8463,71 +8463,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateDiscussionRequest {
-        pub body: String,
-        pub private: Option<bool>,
-        pub title: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateDiscussionRequest {
-        pub body: Option<String>,
-        pub title: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateDiscussionCommentRequest {
-        pub body: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UpdateDiscussionCommentRequest {
-        pub body: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionTeamDiscussionCommentRequest {
-        pub content: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateReactionTeamDiscussionRequest {
-        pub content: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddUpdateTeamMembershipUserRequest {
-        pub role: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddUpdateTeamProjectPermissionsRequest {
-        pub permission: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutAddUpdateTeamProjectPermissionsForbiddenResponse {
-        pub documentation_url: Option<String>,
-        pub message: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AddUpdateTeamRepositoryPermissionsRequest {
-        pub permission: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateIdpGroupConnectionsRequestGroups {
-        pub description: Option<String>,
-        pub group_description: String,
-        pub group_id: String,
-        pub group_name: String,
-        pub id: Option<String>,
-        pub name: Option<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CreateUpdateIdpGroupConnectionsRequest {
+    pub struct CreateUpdateIdpGroupConnectionsRequestData {
         pub groups: Vec<Groups>,
         pub synced_at: Option<String>,
     }
@@ -9640,7 +9576,7 @@ impl Client {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnerGroupsEnterpriseOkResponse> {
+    ) -> Result<types::GetListSelfDataHostedRunnerGroupsEnterpriseOkResponse> {
         let url = format!("{}/enterprises/{}/actions/runner-groups",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -9660,7 +9596,7 @@ impl Client {
     pub async fn enterprise_admin_create_self_hosted_runner_group_for_enterprise(
         &self,
         enterprise: &str,
-        body: &types::CreateSelfHostedRunnerGroupEnterpriseRequest,
+        body: &types::CreateSelfDataHostedRunnerGroupEnterpriseRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!("{}/enterprises/{}/actions/runner-groups",
             self.baseurl,
@@ -9727,7 +9663,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::UpdateSelfHostedRunnerGroupEnterpriseRequest,
+        body: &types::UpdateSelfDataHostedRunnerGroupEnterpriseRequest,
     ) -> Result<types::RunnerGroupsEnterprise> {
         let url = format!("{}/enterprises/{}/actions/runner-groups/{}",
             self.baseurl,
@@ -9753,7 +9689,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListOrganizationAccessSelfHostedRunnerGroupinEnterpriseOkResponse> {
+    ) -> Result<types::GetListOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseOkResponse> {
         let url = format!("{}/enterprises/{}/actions/runner-groups/{}/organizations",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -9775,7 +9711,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::SetOrganizationAccessSelfHostedRunnerGroupinEnterpriseRequest,
+        body: &types::SetOrganizationAccessSelfDataHostedRunnerGroupinEnterpriseRequest,
     ) -> Result<()> {
         let url = format!("{}/enterprises/{}/actions/runner-groups/{}/organizations",
             self.baseurl,
@@ -9849,7 +9785,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersinGroupEnterpriseOkResponse> {
+    ) -> Result<types::GetListSelfDataHostedRunnersinGroupEnterpriseOkResponse> {
         let url = format!("{}/enterprises/{}/actions/runner-groups/{}/runners",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -9871,7 +9807,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::SetSelfHostedRunnersinGroupEnterpriseRequest,
+        body: &types::SetSelfDataHostedRunnersinGroupEnterpriseRequest,
     ) -> Result<()> {
         let url = format!("{}/enterprises/{}/actions/runner-groups/{}/runners",
             self.baseurl,
@@ -9944,7 +9880,7 @@ impl Client {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersEnterpriseOkResponse> {
+    ) -> Result<types::GetListSelfDataHostedRunnersEnterpriseOkResponse> {
         let url = format!("{}/enterprises/{}/actions/runners",
             self.baseurl,
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -11354,7 +11290,7 @@ impl Client {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnerGroupsOrganizationOkResponse> {
+    ) -> Result<types::GetListSelfDataHostedRunnerGroupsOrganizationOkResponse> {
         let url = format!("{}/orgs/{}/actions/runner-groups",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
@@ -11374,7 +11310,7 @@ impl Client {
     pub async fn actions_create_self_hosted_runner_group_for_org(
         &self,
         org: &str,
-        body: &types::CreateSelfHostedRunnerGroupOrganizationRequest,
+        body: &types::CreateSelfDataHostedRunnerGroupOrganizationRequest,
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!("{}/orgs/{}/actions/runner-groups",
             self.baseurl,
@@ -11441,7 +11377,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::UpdateSelfHostedRunnerGroupOrganizationRequest,
+        body: &types::UpdateSelfDataHostedRunnerGroupOrganizationRequest,
     ) -> Result<types::RunnerGroupsOrg> {
         let url = format!("{}/orgs/{}/actions/runner-groups/{}",
             self.baseurl,
@@ -11467,7 +11403,7 @@ impl Client {
         runner_group_id: i64,
         page: i64,
         per_page: i64,
-    ) -> Result<types::GetListRepositoryAccessSelfHostedRunnerGroupinOrganizationOkResponse> {
+    ) -> Result<types::GetListRepositoryAccessSelfDataHostedRunnerGroupinOrganizationOkResponse> {
         let url = format!("{}/orgs/{}/actions/runner-groups/{}/repositories",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
@@ -11489,7 +11425,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::SetRepositoryAccessSelfHostedRunnerGroupinOrganizationRequest,
+        body: &types::SetRepositoryAccessSelfDataHostedRunnerGroupinOrganizationRequest,
     ) -> Result<()> {
         let url = format!("{}/orgs/{}/actions/runner-groups/{}/repositories",
             self.baseurl,
@@ -11563,7 +11499,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersinGroupOrganizationOkResponse> {
+    ) -> Result<types::GetListSelfDataHostedRunnersinGroupOrganizationOkResponse> {
         let url = format!("{}/orgs/{}/actions/runner-groups/{}/runners",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
@@ -11585,7 +11521,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::SetSelfHostedRunnersinGroupOrganizationRequest,
+        body: &types::SetSelfDataHostedRunnersinGroupOrganizationRequest,
     ) -> Result<()> {
         let url = format!("{}/orgs/{}/actions/runner-groups/{}/runners",
             self.baseurl,
@@ -11658,7 +11594,7 @@ impl Client {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersOrganizationOkResponse> {
+    ) -> Result<types::GetListSelfDataHostedRunnersOrganizationOkResponse> {
         let url = format!("{}/orgs/{}/actions/runners",
             self.baseurl,
             progenitor_support::encode_path(&org.to_string()),
@@ -15077,7 +15013,7 @@ impl Client {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetListSelfHostedRunnersRepositoryOkResponse> {
+    ) -> Result<types::GetListSelfDataHostedRunnersRepositoryOkResponse> {
         let url = format!("{}/repos/{}/{}/actions/runners",
             self.baseurl,
             progenitor_support::encode_path(&owner.to_string()),

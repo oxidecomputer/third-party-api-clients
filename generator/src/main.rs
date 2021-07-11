@@ -910,11 +910,9 @@ impl TypeSpace {
                             // We can get here if there are two objects with the same name
                             // that have properties that are different.
                             // Let's rename the new object with the parent name.
-                            bail!(
+                            println!(
                                 "object details for {} do not match: {:?} != {:?}",
-                                pn,
-                                pet.details,
-                                details,
+                                pn, pet.details, details,
                             );
                         }
                     } else {
@@ -1362,7 +1360,6 @@ fn gen(
                                 if let Some(s) = &mt.schema {
                                     let tid = ts.select(None, s, false)?;
                                     let rt = ts.render_type(&tid, false)?;
-                                    println!("ct {} render_type {}", ct, rt);
 
                                     a(&format!("    ) -> Result<{}> {{", rt));
                                 } else {
@@ -1470,11 +1467,17 @@ fn gen(
 }
 
 fn struct_name(s: &str) -> String {
-    titlecase::titlecase(&s).replace(" ", "")
+    titlecase::titlecase(&s)
+        .replace(" ", "")
+        .replace("Self", "SelfData")
 }
 
 fn clean_name(s: &str) -> String {
-    s.replace("_", " ").replace("-", " ").to_lowercase()
+    s.replace("_", " ")
+        .replace("-", " ")
+        .to_lowercase()
+        .trim()
+        .to_string()
 }
 
 fn summary_to_object_name(m: &str, s: &str) -> String {
@@ -1495,7 +1498,9 @@ fn summary_to_object_name(m: &str, s: &str) -> String {
         .replace("'", "")
         .replace(" of ", " ")
         .replace("authenticated user", "")
-        .replace("  ", " ");
+        .replace("  ", " ")
+        .trim()
+        .to_string();
 
     if m.is_empty() || cleaned.starts_with(&m.to_lowercase()) {
         cleaned
@@ -1599,7 +1604,10 @@ fn main() -> Result<()> {
                                     summary_to_object_name("", &o.summary.as_ref().unwrap())
                                 );
                                 let id = ts.select(Some(&object_name), s, false)?;
-                                println!("    {} {} request body -> {:?}", pn, m, id);
+                                println!(
+                                    "    {} {} request body -> '{}' {:?}",
+                                    pn, m, object_name, id
+                                );
                             }
                         } else if let Some((ct, mt)) = body.content.first() {
                             if ct == "text/plain" || ct == "text/html" {
