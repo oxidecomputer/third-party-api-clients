@@ -460,7 +460,7 @@ impl<T> ReferenceOrExt<T> for openapiv3::ReferenceOr<T> {
 #[derive(Debug, PartialEq, Clone)]
 enum TypeDetails {
     Unknown,
-    Basic,
+    Basic(String, openapiv3::SchemaData),
     NamedType(TypeId, openapiv3::SchemaData),
     Enum(Vec<String>, openapiv3::SchemaData),
     Array(TypeId, openapiv3::SchemaData),
@@ -531,13 +531,7 @@ impl TypeSpace {
     fn describe(&self, tid: &TypeId) -> String {
         if let Some(te) = self.id_to_entry.get(tid) {
             match &te.details {
-                TypeDetails::Basic => {
-                    if let Some(n) = &te.name {
-                        n.to_string()
-                    } else {
-                        format!("[BASIC {} !NONAME?]", tid.0)
-                    }
-                }
+                TypeDetails::Basic(t, ..) => t.to_string(),
                 TypeDetails::NamedType(itid, _) => {
                     if let Some(ite) = self.id_to_entry.get(itid) {
                         if let Some(n) = &ite.name {
@@ -610,7 +604,7 @@ impl TypeSpace {
 
         let schema = if let Some(te) = self.id_to_entry.get(tid) {
             match &te.details {
-                TypeDetails::Basic => None,
+                TypeDetails::Basic(_, schema_data) => Some(schema_data),
                 TypeDetails::NamedType(_, schema_data) => Some(schema_data),
                 TypeDetails::Enum(_, schema_data) => Some(schema_data),
                 TypeDetails::Array(_, schema_data) => Some(schema_data),
@@ -623,6 +617,7 @@ impl TypeSpace {
         };
 
         if let Some(s) = schema {
+            println!("schema data for rendering docs: {:?}", s);
             if let Some(description) = &s.description {
                 a(&format!("/// {}", description.replace('\n', "\n/// ")));
             }
@@ -638,13 +633,7 @@ impl TypeSpace {
     fn render_type(&self, tid: &TypeId, in_mod: bool) -> Result<String> {
         if let Some(te) = self.id_to_entry.get(tid) {
             match &te.details {
-                TypeDetails::Basic => {
-                    if let Some(n) = &te.name {
-                        Ok(n.to_string())
-                    } else {
-                        bail!("basic type {:?} does not have a name?", tid);
-                    }
-                }
+                TypeDetails::Basic(t, _) => Ok(t.to_string()),
                 TypeDetails::NamedType(itid, _) => self.render_type(itid, in_mod),
                 TypeDetails::Enum(..) => {
                     if let Some(n) = &te.name {
@@ -839,21 +828,26 @@ impl TypeSpace {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
                         (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                     } else {
+                        // Generate a UUID for this type.
+                        let uid = uuid::Uuid::new_v4();
                         match &st.format {
                             Item(DateTime) => {
                                 self.import_chrono = true;
-                                (Some("DateTime<Utc>".to_string()), TypeDetails::Basic)
+                                (
+                                    Some(uid.to_string()),
+                                    TypeDetails::Basic("DateTime<Utc>".to_string(), s.schema_data.clone()),
+                                )
                             }
                             Item(Date) => {
                                 self.import_chrono = true;
-                                (Some("NaiveDate".to_string()), TypeDetails::Basic)
+                                (Some(uid.to_string()), TypeDetails::Basic("NaiveDate".to_string(), s.schema_data.clone()))
                             }
-                            Empty => (Some("String".to_string()), TypeDetails::Basic),
+                            Empty => (Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone())),
                             Unknown(f) => match f.as_str() {
-                                "float" => (Some("f64".to_string()), TypeDetails::Basic),
-                                "uri" => (Some("String".to_string()), TypeDetails::Basic),
-                                "uri-template" => (Some("String".to_string()), TypeDetails::Basic),
-                                "email" => (Some("String".to_string()), TypeDetails::Basic),
+                                "float" => (Some(uid.to_string()), TypeDetails::Basic("f64".to_string(), s.schema_data.clone())),
+                                "uri" => (Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone())),
+                                "uri-template" => (Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone())),
+                                "email" => (Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone())),
                                 f => bail!("XXX unknown string format {}", f),
                             },
                             x => {
@@ -863,27 +857,33 @@ impl TypeSpace {
                     }
                 }
                 openapiv3::Type::Boolean {} => {
+                    // Generate a UUID for this type.
+                    let uid = uuid::Uuid::new_v4();
                     if is_schema {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
                         (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                     } else {
-                        (Some("bool".to_string()), TypeDetails::Basic)
+                        (Some(uid.to_string()), TypeDetails::Basic("bool".to_string(), s.schema_data.clone()))
                     }
                 }
                 openapiv3::Type::Number(_) => {
+                    // Generate a UUID for this type.
+                    let uid = uuid::Uuid::new_v4();
                     if is_schema {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
                         (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                     } else {
-                        (Some("f64".to_string()), TypeDetails::Basic)
+                        (Some(uid.to_string()), TypeDetails::Basic("f64".to_string(), s.schema_data.clone()))
                     }
                 }
                 openapiv3::Type::Integer(_) => {
+                    // Generate a UUID for this type.
+                    let uid = uuid::Uuid::new_v4();
                     if is_schema {
                         let id = self.select_schema(Some(&nam), s, parent_name, false)?;
                         (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                     } else {
-                        (Some("i64".to_string()), TypeDetails::Basic)
+                        (Some(uid.to_string()), TypeDetails::Basic("i64".to_string(), s.schema_data.clone()))
                     }
                 }
             },
@@ -939,12 +939,12 @@ impl TypeSpace {
                 }
             }
             openapiv3::SchemaKind::Any(_a) => {
-                // Then we use the serde_json type.
                 if is_schema {
                     let id = self.select_schema(Some(&nam), s, parent_name, false)?;
                     (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
                 } else {
-                    (Some("serde_json::Value".to_string()), TypeDetails::Basic)
+                    // Then we use the serde_json type.
+                    (Some(nam), TypeDetails::Basic("serde_json::Value".to_string(), s.schema_data.clone()))
                 }
             }
         };
@@ -1504,7 +1504,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     a("}");
                     a("");
                 }
-                TypeDetails::Basic => {}
+                TypeDetails::Basic(..) => {}
                 TypeDetails::Unknown => {}
                 TypeDetails::NamedType(..) => {}
                 TypeDetails::Array(..) => {}
