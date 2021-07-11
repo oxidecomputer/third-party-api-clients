@@ -616,7 +616,12 @@ impl TypeSpace {
                 }
                 TypeDetails::Array(itid) => Ok(format!("Vec<{}>", self.render_type(itid, in_mod)?)),
                 TypeDetails::Optional(itid) => {
-                    Ok(format!("Option<{}>", self.render_type(itid, in_mod)?))
+                    let rt = self.render_type(itid, in_mod)?;
+                    if rt == "String" {
+                        Ok("String".to_string())
+                    } else {
+                        Ok(format!("Option<{}>", rt))
+                    }
                 }
                 TypeDetails::Object(_) => {
                     if let Some(n) = &te.name {
@@ -1078,11 +1083,20 @@ fn gen(
                     a(&format!("    pub struct {} {{", struct_name));
                     for (name, tid) in omap.iter() {
                         if let Ok(rt) = ts.render_type(tid, true) {
+                            if rt == "String" {
+                                a(
+                                    r#"#[serde(default, skip_serializing_if = "String::is_empty", deserialize_with = "crate::utils::deserialize_null_string::deserialize","#,
+                                );
+                            }
                             if name == "ref" || name == "type" || name == "self" {
-                                a(&format!(r#"        #[serde(rename = "{}")]"#, name));
+                                if rt == "String" {
+                                    a(&format!(r#"rename = "{}")]"#, name));
+                                } else {
+                                    a(&format!(r#"#[serde(rename = "{}")]"#, name));
+                                }
                                 a(&format!("        pub {}_: {},", name, rt));
                             } else if name == "$ref" {
-                                a(r#"        #[serde(rename = "$ref")]"#);
+                                a(r#"rename = "$ref")]"#);
                                 a(&format!("        pub ref_: {},", rt));
                             } else if name == "+1" {
                                 a(r#"        #[serde(rename = "+1")]"#);
@@ -1091,9 +1105,16 @@ fn gen(
                                 a(r#"        #[serde(rename = "-1")]"#);
                                 a(&format!("        pub minus_one: {},", rt));
                             } else if name.starts_with('@') {
-                                a(&format!(r#"        #[serde(rename = "{}")]"#, name));
+                                if rt == "String" {
+                                    a(&format!(r#"rename = "{}")]"#, name));
+                                } else {
+                                    a(&format!(r#"#[serde(rename = "{}")]"#, name));
+                                }
                                 a(&format!("        pub {}: {},", name.replace('@', ""), rt));
                             } else {
+                                if rt == "String" {
+                                    a(r#")]"#);
+                                }
                                 a(&format!("        pub {}: {},", to_snake_case(name), rt));
                             }
                         } else {
@@ -1183,7 +1204,7 @@ fn gen(
     }
 
     #[cfg(not(feature = "httpcache"))]
-    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: Client) -> Self
+    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: reqwest::Client) -> Self
     where
         H: Into<String>,
         A: Into<String>,
@@ -1486,6 +1507,46 @@ fn gen(
             media,
             authentication,
         ).await
+    }
+
+    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::PATCH,
+            &(self.host.clone() + uri),
+            message,
+            media,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        ).await
+    }
+
+    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.patch_media(uri, message, crate::utils::MediaType::Json).await
+    }
+
+    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.put_media(uri, message, crate::utils::MediaType::Json).await
+    }
+
+    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::PUT,
+            &(self.host.clone() + uri),
+            message,
+            media,
+            crate::auth::AuthenticationConstraint::Unconstrained,
+        ).await
     }"#);
     a("");
 
@@ -1508,9 +1569,15 @@ fn gen(
 
             let mut oid = o.operation_id.as_deref().unwrap().to_string();
             oid = oid.replace("-", "_").replace("/", "_");
-            a("    /**");
-            a(&format!("     * {}: {} {}", oid, m, p));
-            a("     */");
+            a("/**");
+            a(&format!("* {}: {} {}", oid, m, p));
+            if let Some(description) = &o.description {
+                a(&format!("* {}", description));
+            }
+            if let Some(external_docs) = &o.external_docs {
+                a(&format!("* FROM: {}", external_docs.url));
+            }
+            a("*/");
 
             let mut bounds: Vec<String> = Vec::new();
 
@@ -1830,7 +1897,11 @@ fn gen(
              */
             if m == http::Method::GET {
                 a(&format!("       self.{}(&url).await", m.to_lowercase()));
-            } else if m == http::Method::POST && oid != "apps_create_installation_access_token" {
+            } else if (m == http::Method::POST
+                || m == http::Method::PATCH
+                || m == http::Method::PUT)
+                && oid != "apps_create_installation_access_token"
+            {
                 let body = if let Some(f) = &body_func {
                     if f == "json" {
                         "Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))"

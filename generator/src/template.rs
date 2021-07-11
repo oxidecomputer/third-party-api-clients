@@ -79,7 +79,7 @@ impl Template {
                     }
                 }
                 if !query_params.is_empty() {
-                    for (key) in query_params.values() {
+                    for key in query_params.values() {
                         out.push_str(&format!("{}, ", key));
                     }
                 }
