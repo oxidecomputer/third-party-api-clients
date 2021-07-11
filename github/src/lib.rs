@@ -3,8 +3,9 @@
 pub mod auth;
 #[cfg(feature = "httpcache")]
 pub mod http_cache;
+pub mod utils;
 
-use anyhow::{Error, Result};
+use anyhow::{anyhow, Error, Result};
 use chrono::{DateTime, Utc};
 
 const DEFAULT_HOST: &str = "https://api.github.com";
@@ -8740,12 +8741,9 @@ impl Client {
         authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<(Option<hyperx::header::Link>, Out)>
     where
-        Out: DeserializeOwned + 'static + Send,
+        Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let (url, auth) = self
-            .url_and_auth(uri, authentication)
-            .await
-            .map_err(Error::from);
+        let (url, auth) = self.url_and_auth(uri, authentication).await?;
 
         let instance = self.clone();
 
@@ -8756,9 +8754,9 @@ impl Client {
         let uri2 = uri.to_string();
         let mut req = {
             let mut req = instance.client.request(method.clone(), url);
-            if method == Method::GET {
+            if method == http::Method::GET {
                 if let Ok(etag) = instance.http_cache.lookup_etag(&uri2) {
-                    req = req.header(IF_NONE_MATCH, etag);
+                    req = req.header(http::header::IF_NONE_MATCH, etag);
                 }
             }
             req
@@ -8779,7 +8777,7 @@ impl Client {
             req = req.body(reqwest::Body::from(body));
         }
         println!("Request: {:?}", &req);
-        let response = req.send().await.map_err(Error::from);
+        let response = req.send().await?;
 
         #[cfg(feature = "httpcache")]
         let instance2 = self.clone();
@@ -8788,10 +8786,10 @@ impl Client {
         let uri3 = uri.to_string();
 
         #[cfg(not(feature = "httpcache"))]
-        let (remaining, reset) = get_header_values(response.headers());
+        let (remaining, reset) = crate::utils::get_header_values(response.headers());
 
         #[cfg(feature = "httpcache")]
-        let (remaining, reset, etag) = get_header_values(response.headers());
+        let (remaining, reset, etag) = crate::utils::get_header_values(response.headers());
 
         let status = response.status();
         let link = response
@@ -8800,7 +8798,7 @@ impl Client {
             .and_then(|l| l.to_str().ok())
             .and_then(|l| l.parse().ok());
 
-        let response_body = response.bytes().await.map_err(Error::from);
+        let response_body = response.bytes().await?;
 
         if status.is_success() {
             println!(
@@ -8810,7 +8808,7 @@ impl Client {
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {
-                    let next_link = link.as_ref().and_then(|l| next_link(&l));
+                    let next_link = link.as_ref().and_then(|l| crate::utils::next_link(&l));
                     if let Err(e) = instance2.http_cache.cache_response(
                         &uri3,
                         &response_body,
@@ -8822,13 +8820,13 @@ impl Client {
                     }
                 }
             }
-            let parsed_response = if status == StatusCode::NO_CONTENT {
+            let parsed_response = if status == http::StatusCode::NO_CONTENT {
                 serde_json::from_str("null")
             } else {
                 serde_json::from_slice::<Out>(&response_body)
             };
-            parsed_response.map(|out| (link, out)).map_err(Error::Codec)
-        } else if status == StatusCode::NOT_MODIFIED {
+            parsed_response.map(|out| (link, out)).map_err(Error::from)
+        } else if status == http::StatusCode::NOT_MODIFIED {
             // only supported case is when client provides if-none-match
             // header when cargo builds with --cfg feature="httpcache"
             #[cfg(feature = "httpcache")]
@@ -8847,7 +8845,7 @@ impl Client {
                                         |next_link| {
                                             next_link.map(|next| {
                                                 let next = hyperx::header::LinkValue::new(next)
-                                                    .push_rel(RelationType::Next);
+                                                    .push_rel(hyperx::header::RelationType::Next);
                                                 hyperx::header::Link::new(vec![next])
                                             })
                                         },
@@ -8868,14 +8866,16 @@ impl Client {
                         .duration_since(std::time::UNIX_EPOCH)
                         .unwrap()
                         .as_secs();
-                    Error::RateLimit {
-                        reset: std::time::Duration::from_secs(u64::from(reset) - now),
-                    }
+                    anyhow!(
+                        "rate limit exceeded, will reset in {} seconds",
+                        std::time::Duration::from_secs(u64::from(reset) - now)
+                    )
                 }
-                _ => Error::Fault {
-                    code: status,
-                    error: serde_json::from_slice(&response_body)?,
-                },
+                _ => anyhow!(
+                    "code: {}, error: {}",
+                    status,
+                    serde_json::from_slice(&response_body)?
+                ),
             };
             Err(error)
         }
