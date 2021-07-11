@@ -196,6 +196,7 @@ pub mod types {
         Web,
         Git,
         All,
+        Noop,
     }
 
     impl std::fmt::Display for AuditLogInclude {
@@ -204,6 +205,7 @@ pub mod types {
                 AuditLogInclude::Web => "web",
                 AuditLogInclude::Git => "git",
                 AuditLogInclude::All => "all",
+                AuditLogInclude::Noop => "",
             }
             .fmt(f)
         }
@@ -217,6 +219,7 @@ pub mod types {
     pub enum AuditLogOrder {
         Desc,
         Asc,
+        Noop,
     }
 
     impl std::fmt::Display for AuditLogOrder {
@@ -224,6 +227,7 @@ pub mod types {
             match *self {
                 AuditLogOrder::Desc => "desc",
                 AuditLogOrder::Asc => "asc",
+                AuditLogOrder::Noop => "",
             }
             .fmt(f)
         }
@@ -235,6 +239,7 @@ pub mod types {
     pub enum Direction {
         Asc,
         Desc,
+        Noop,
     }
 
     impl std::fmt::Display for Direction {
@@ -242,6 +247,7 @@ pub mod types {
             match *self {
                 Direction::Asc => "asc",
                 Direction::Desc => "desc",
+                Direction::Noop => "",
             }
             .fmt(f)
         }
@@ -253,6 +259,7 @@ pub mod types {
     pub enum Order {
         Desc,
         Asc,
+        Noop,
     }
 
     impl std::fmt::Display for Order {
@@ -260,6 +267,7 @@ pub mod types {
             match *self {
                 Order::Desc => "desc",
                 Order::Asc => "asc",
+                Order::Noop => "",
             }
             .fmt(f)
         }
@@ -297,6 +305,7 @@ pub mod types {
     pub enum Per {
         Day,
         Week,
+        Noop,
     }
 
     impl std::fmt::Display for Per {
@@ -304,6 +313,7 @@ pub mod types {
             match *self {
                 Per::Day => "day",
                 Per::Week => "week",
+                Per::Noop => "",
             }
             .fmt(f)
         }
@@ -315,6 +325,7 @@ pub mod types {
     pub enum Sort {
         Created,
         Updated,
+        Noop,
     }
 
     impl std::fmt::Display for Sort {
@@ -322,6 +333,7 @@ pub mod types {
             match *self {
                 Sort::Created => "created",
                 Sort::Updated => "updated",
+                Sort::Noop => "",
             }
             .fmt(f)
         }
@@ -334,6 +346,7 @@ pub mod types {
         Queued,
         InProgress,
         Completed,
+        Noop,
     }
 
     impl std::fmt::Display for StatusParam {
@@ -342,6 +355,7 @@ pub mod types {
                 StatusParam::Queued => "queued",
                 StatusParam::InProgress => "in_progress",
                 StatusParam::Completed => "completed",
+                StatusParam::Noop => "",
             }
             .fmt(f)
         }
@@ -364,6 +378,7 @@ pub mod types {
         Queued,
         Requested,
         Waiting,
+        Noop,
     }
 
     impl std::fmt::Display for WorkflowRunStatus {
@@ -382,6 +397,7 @@ pub mod types {
                 WorkflowRunStatus::Queued => "queued",
                 WorkflowRunStatus::Requested => "requested",
                 WorkflowRunStatus::Waiting => "waiting",
+                WorkflowRunStatus::Noop => "",
             }
             .fmt(f)
         }

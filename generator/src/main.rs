@@ -1281,6 +1281,9 @@ fn gen(
                                 }
                                 a(&format!("{},", struct_name(e)));
                             }
+                            if !parameter_data.required {
+                                a("Noop,");
+                            }
                             a("}");
                             a("");
 
@@ -1296,11 +1299,26 @@ fn gen(
                                 }
                                 a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
                             }
+                            if !parameter_data.required {
+                                a(&format!(r#"{}::Noop => "","#, sn,));
+                            }
                             a("}");
                             a(".fmt(f)");
                             a("}");
                             a("}");
                             a("");
+
+                            // Add a default for the enum if it is not required.
+                            // TODO: use the default that can be passed to the OpenAPI,
+                            // github is not using that currently but we might want to
+                            // in the future.
+                            if !parameter_data.required {
+                                a(&format!("impl Default for {} {{", sn));
+                                a(&format!("fn default() -> {} {{", sn));
+                                a(&format!("{}::Noop", sn));
+                                a("}");
+                                a("}");
+                            }
                         }
                     }
                 }
@@ -1339,6 +1357,9 @@ fn gen(
                                 }
                                 a(&format!("{},", struct_name(e)));
                             }
+                            if !parameter_data.required {
+                                a("Noop,");
+                            }
                             a("}");
                             a("");
 
@@ -1354,11 +1375,16 @@ fn gen(
                                 }
                                 a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
                             }
+                            if !parameter_data.required {
+                                a(&format!(r#"{}::Noop => "","#, sn,));
+                            }
                             a("}");
                             a(".fmt(f)");
                             a("}");
                             a("}");
                             a("");
+
+                            println!("PARAMETER: {}, {:?}", name, parameter_data);
                         }
                     }
                 }
