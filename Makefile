@@ -5,11 +5,10 @@ generate: target/debug/generator $(GITHUB_SPEC)
 		-o github \
 		-n github-api-client \
 		-d "A fully generated & opinionated API client for the GitHub API."
-
 	cargo fmt
 
 target/debug/generator: generator/src/*.rs generator/Cargo.toml
 	cargo build --bin generator
 
-examples: github/examples/*.rs
+examples: generate github/examples/*.rs
 	cargo build --examples

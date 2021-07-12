@@ -2397,6 +2397,10 @@ tokio = {{ version = "1.8.0", features = ["full"] }}
 [features]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
+
+[[example]]
+name = "list_repos_for_org"
+required-features = ["httpcache"]
 "#,
                 name, description, version, name, name
             );

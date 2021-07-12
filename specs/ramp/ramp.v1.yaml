@@ -1,0 +1,1504 @@
+openapi: 3.0.0
+info:
+  title: Ramp developer
+  version: '1.0'
+  description: >-
+    Ramp's developer API makes it easier for companies to programmatically set
+    up and manage their card program.
+
+
+    It provides the ability to automate card issuing and the ability to
+    integrate features like reporting with other software platforms.
+  termsOfService: 'https://ramp.com/developer-agreement'
+servers:
+  - url: 'https://api.ramp.com/developer/v1'
+paths:
+  /users/<id>:
+    parameters: []
+    get:
+      summary: Get User Info by User ID
+      tags:
+        - User
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/User.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-users-userId
+      description: Retrieve the information of the user with the matching user ID.
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      security:
+        - OAuth 2.0:
+            - 'users:read'
+    patch:
+      summary: Modify Existing User
+      operationId: patch-users-id
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+      description: Modify information about a user.
+      security:
+        - OAuth 2.0:
+            - 'users:write'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  enum:
+                    - BUSINESS_USER
+                    - BUSINESS_BOOKKEEPER
+                    - BUSINESS_ADMIN
+                    - BUSINESS_OWNER
+                department_id:
+                  type: string
+                  format: uuid
+                location_id:
+                  type: string
+                  format: uuid
+                direct_manager_id:
+                  type: string
+                  format: uuid
+      tags:
+        - User
+    delete:
+      summary: ''
+      operationId: delete-users-id
+      responses:
+        '204':
+          description: No Content
+      description: >-
+        Suspends a user. Does not delete the user's cards. Currently this action
+        is not reversible.
+      security:
+        - OAuth 2.0:
+            - 'users:write'
+      tags:
+        - User
+  /transactions:
+    get:
+      summary: List transactions
+      tags:
+        - Transaction
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        format: uri
+                  data:
+                    type: array
+                    items:
+                      $ref: ../models/Transaction.v1.yaml
+              examples: {}
+        '400':
+          $ref: '#/components/responses/error-response'
+      operationId: get-transaction
+      description: >-
+        Retrieves all transactions for the business. This endpoint supports
+        filtering and ordering. NOTE: only one ordering param is supported.
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+        - schema:
+            type: string
+            format: uuid
+          in: query
+          name: department_id
+        - schema:
+            type: string
+            format: uuid
+          in: query
+          name: location_id
+        - schema:
+            type: string
+            format: date-time
+          in: query
+          name: from_date
+        - schema:
+            type: string
+            format: date-time
+          in: query
+          name: to_date
+        - schema:
+            type: string
+          in: query
+          name: merchant_id
+        - schema:
+            type: string
+          in: query
+          name: sk_category_id
+        - schema:
+            type: boolean
+          in: query
+          name: order_by_date_desc
+        - schema:
+            type: boolean
+          in: query
+          name: order_by_date_asc
+        - schema:
+            type: boolean
+          in: query
+          name: order_by_amount_desc
+        - schema:
+            type: boolean
+          in: query
+          name: order_by_amount_asc
+        - schema:
+            type: string
+          in: query
+          name: state
+        - schema:
+            type: number
+          in: query
+          name: min_amount
+        - schema:
+            type: number
+          in: query
+          name: max_amount
+        - $ref: '#/components/parameters/pagination-param'
+        - $ref: '#/components/parameters/page-size-param'
+        - schema:
+            type: boolean
+          in: query
+          name: requires_memo
+          description: >-
+            Filters for transactions which require a memo, but do not have one.
+            This can only be set to true.
+      security:
+        - OAuth 2.0:
+            - 'transactions:read'
+    parameters: []
+  /locations:
+    get:
+      summary: List locations
+      tags:
+        - Location
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: ../models/Location.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-location
+      description: Retrieves all locations for your business.
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+        - $ref: '#/components/parameters/pagination-param'
+        - $ref: '#/components/parameters/page-size-param'
+      security:
+        - OAuth 2.0:
+            - 'locations:read'
+    post:
+      summary: Create new location
+      operationId: post-location
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Location.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+      description: 'Creates a new location for the business. '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+              required:
+                - name
+            examples: {}
+        description: ''
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      tags:
+        - Location
+      security:
+        - OAuth 2.0:
+            - 'locations:write'
+    parameters: []
+  /users:
+    get:
+      summary: List users
+      tags:
+        - User
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  page:
+                    type: object
+                    required:
+                      - next
+                    properties:
+                      next:
+                        type: string
+                        minLength: 1
+                        format: uri
+                  data:
+                    type: array
+                    items:
+                      $ref: ../models/User.v1.yaml
+                required:
+                  - page
+                  - data
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-users
+      description: 'Retrieve all users of the business. '
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+        - $ref: '#/components/parameters/pagination-param'
+        - $ref: '#/components/parameters/page-size-param'
+        - schema:
+            type: string
+            format: uuid
+          in: query
+          name: department_id
+        - schema:
+            type: string
+            format: uuid
+          in: query
+          name: location_id
+      security:
+        - OAuth 2.0:
+            - 'users:read'
+    parameters: []
+  /locations/<id>:
+    parameters: []
+    get:
+      summary: GET a location
+      tags:
+        - Location
+      operationId: get-locations-location_id
+      description: 'Retrieve a specific location. '
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Location.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      security:
+        - OAuth 2.0:
+            - 'locations:read'
+    patch:
+      summary: Update location
+      operationId: patch-locations-location_id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Location.v1.yaml
+      description: 'Modifies a specific location. '
+      tags:
+        - Location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: New name of location
+              required:
+                - name
+            examples:
+              example-1:
+                value:
+                  name: string
+      security:
+        - OAuth 2.0:
+            - 'locations:write'
+  /departments:
+    get:
+      summary: List departments
+      tags:
+        - Department
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: ../models/Department.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-departments
+      description: Retrieve all departments.
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+        - $ref: '#/components/parameters/pagination-param'
+        - $ref: '#/components/parameters/page-size-param'
+      security:
+        - OAuth 2.0:
+            - 'departments:read'
+    post:
+      summary: Create department
+      operationId: post-departments
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Department.v1.yaml
+      description: Create a new department.
+      parameters: []
+      tags:
+        - Department
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+                - name
+      security:
+        - OAuth 2.0:
+            - 'departments:write'
+    parameters: []
+  /departments/<id>:
+    parameters: []
+    get:
+      summary: GET a department
+      tags:
+        - Department
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Department.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-department-department_id
+      description: Retrieve a single department.
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      security:
+        - OAuth 2.0:
+            - 'departments:read'
+    patch:
+      summary: Update department
+      operationId: patch-department-department_id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Department.v1.yaml
+      description: 'Modify a department. '
+      tags:
+        - Department
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: New department name
+              required:
+                - name
+            examples:
+              example-1:
+                value:
+                  name: string
+      security:
+        - OAuth 2.0:
+            - 'departments:write'
+  /cards:
+    get:
+      summary: List cards
+      tags:
+        - Card
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        format: uuid
+                  cards:
+                    type: array
+                    items:
+                      $ref: ../models/Card.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    page:
+                      next: 7d617674-5c21-42c8-80ae-b0ab590cb046
+                    cards:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        is_physical: true
+                        display_name: string
+                        last_four: stri
+        '400':
+          $ref: '#/components/responses/error-response'
+      operationId: get-cards
+      description: Retrieve all cards.
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+        - $ref: '#/components/parameters/pagination-param'
+        - $ref: '#/components/parameters/page-size-param'
+        - schema:
+            type: string
+            format: uuid
+          in: query
+          name: user_id
+      security:
+        - OAuth 2.0:
+            - 'cards:read'
+    parameters: []
+  /cards/<id>:
+    parameters: []
+    get:
+      summary: GET a card
+      tags:
+        - Card
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Card.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    is_physical: true
+                    display_name: string
+                    last_four: stri
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-cards-card_id
+      description: Retrieve a single card.
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      security:
+        - OAuth 2.0:
+            - 'cards:read'
+    patch:
+      summary: Update card
+      operationId: patch-resources-cards-card_id
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      description: Update card details
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                display_name:
+                  type: string
+                  description: Cosmetic display name of the card.
+                has_notifications_enabled:
+                  type: boolean
+                  description: Flag to set to enable or disable notifications.
+                spending_restrictions:
+                  $ref: ../models/CardSpendingRestrictions.v1.yaml
+            examples:
+              example-1:
+                value:
+                  display_name: string
+                  has_notifications_enabled: true
+                  spending_restrictions:
+                    amount: 0
+                    interval: DAILY
+                    lock_date: '2019-08-24T14:15:22Z'
+                    categories:
+                      - 0
+                    transaction_amount_limit: 0
+      tags:
+        - Card
+      security:
+        - OAuth 2.0:
+            - 'cards:write'
+  /custom-id-provider:
+    parameters: []
+    get:
+      summary: GET the Custom ID provider linked to the current OAuth token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  custom_id_provider:
+                    type: string
+                    format: uuid
+                required:
+                  - custom_id_provider
+              examples:
+                example-1:
+                  value:
+                    custom_id_provider: 11111111-1111-1111-1111-111111111111
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-custom_id-custom-id-provider
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      tags:
+        - Custom ID
+      security:
+        - OAuth 2.0: []
+    post:
+      summary: Create a Custom ID provider
+      operationId: postcustom-id-provider
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: 'Authorization: Bearer 111111111111'
+          description: OAuth Access token
+          required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  provider_id:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    custom_id_provider_uuid: 11111111-1111-1111-1111-111111111111
+        '400':
+          description: Bad Request
+      description: ''
+      tags:
+        - Custom ID
+  /custom-id-provider/application-link:
+    post:
+      summary: ''
+      operationId: post-custom-id-provider-application-link
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/error-response'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_id_provider:
+                  type: string
+                  format: uuid
+              required:
+                - custom_id_provider
+            examples:
+              example-1:
+                value:
+                  custom_id_provider: ead7e7bb-3b00-4078-b743-9b11d5cca0ee
+      description: Register an access token with a custom ID provider
+      tags:
+        - Custom ID
+      security:
+        - OAuth 2.0: []
+  /business:
+    get:
+      summary: GET business metadata
+      tags:
+        - Business
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Business.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+      operationId: get-resources-business
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      description: Gets metadata about a business.
+      security:
+        - OAuth 2.0:
+            - 'business:read'
+  /transactions/<id>:
+    parameters: []
+    get:
+      summary: GET a transaction
+      tags:
+        - Transaction
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Transaction.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-resources-transactions-transaction_id
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      description: ''
+      security:
+        - OAuth 2.0:
+            - 'transactions:read'
+  /cards/deferred/physical:
+    post:
+      summary: Create a physical card
+      operationId: post-resources-card-physical
+      responses:
+        '201':
+          $ref: '#/components/responses/task-response'
+        '400':
+          $ref: '#/components/responses/error-response'
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      tags:
+        - Card
+      description: ''
+      security:
+        - OAuth 2.0:
+            - 'cards:write'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                display_name:
+                  type: string
+                user_id:
+                  type: string
+                  format: uuid
+                spending_restrictions:
+                  $ref: ../models/CardSpendingRestrictions.v1.yaml
+                fulfillment:
+                  $ref: ../models/CardFulfillment.v1.yaml
+                idempotency_key:
+                  type: string
+                  description: Optional idempotency key
+              required:
+                - display_name
+                - user_id
+                - spending_restrictions
+                - fulfillment
+            examples:
+              example-1:
+                value:
+                  display_name: string
+                  user_id: a169451c-8525-4352-b8ca-070dd449a1a5
+                  spending_restrictions:
+                    amount: 0
+                    interval: DAILY
+                    lock_date: '2019-08-24T14:15:22Z'
+                    categories:
+                      - 0
+                    transaction_amount_limit: 0
+                  fulfillment:
+                    shipping:
+                      recipient_address:
+                        address1: string
+                        city: string
+                        country: string
+                        first_name: string
+                        last_name: string
+                        postal_code: string
+                        state: string
+                  idempotency_key: string
+    parameters: []
+  /cards/deferred/virtual:
+    post:
+      summary: Create a virtual card
+      operationId: post-resources-card-virtual
+      responses:
+        '201':
+          $ref: '#/components/responses/task-response'
+        '400':
+          $ref: '#/components/responses/error-response'
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      tags:
+        - Card
+      description: ''
+      security:
+        - OAuth 2.0:
+            - 'cards:write'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                display_name:
+                  type: string
+                user_id:
+                  type: string
+                  format: uuid
+                spending_restrictions:
+                  $ref: ../models/CardSpendingRestrictions.v1.yaml
+                idempotency_key:
+                  type: string
+                  description: Optional idempotency key
+              required:
+                - display_name
+                - user_id
+                - spending_restrictions
+            examples:
+              example-1:
+                value:
+                  display_name: string
+                  user_id: a169451c-8525-4352-b8ca-070dd449a1a5
+                  spending_restrictions:
+                    amount: 0
+                    interval: DAILY
+                    lock_date: '2019-08-24T14:15:22Z'
+                    categories:
+                      - 0
+                    transaction_amount_limit: 0
+                  idempotency_key: string
+    parameters: []
+  /token:
+    post:
+      summary: Get OAuth2 token
+      operationId: post-token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/OAuth-Token.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - authorization_code
+                    - refresh_token
+                    - client_credentials
+                code:
+                  type: string
+                redirect_uri:
+                  type: string
+                  format: uri
+                refresh_token:
+                  type: string
+              required:
+                - grant_type
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Basic \<base64-encoded client_id:client_secret\>'
+      tags:
+        - Auth
+      description: >-
+        Returns an access token for accessing endpoints. There are three methods
+        to get an access token:
+
+        * "authorization\_code": Authorization Code Grant method, used for
+        retrieving an access token for the first time
+
+        * "refresh\_token": Refresh Token method, used for retrieving subsequent
+        access tokens using the refresh token provided from authorization code
+        grant
+
+        * "client\_credentials": Client Credentials method, allows direct
+        retrieval of access tokens with only client id and secret.
+
+
+        There are two main flows: Authorization Code Grant + Refresh Token; or
+        Client Credentials.
+
+
+        For Authorization Code Grant + Refresh Token, the flow would be as
+        follows:
+
+        * Follow authorization process to get an authorization code
+
+        * Use authorization code to retrieve an access token and refresh token
+        from this endpoint
+
+        * Use refresh token to retrieve new access tokens from this endpoint
+        (without having to go through authorization process again)
+
+
+        For Client Credentials:
+
+        * Call token endpoint with client credentials to retrieve access token
+
+
+        The request body is different for the methods:
+
+        * grant\_type = "authorization\_code"
+          * code
+          * redirect\_uri
+        * grant\_type = "refresh\_token"
+          * refresh\_token
+        * grant\_type = "client\_credentials"
+          * no additional data
+
+        Some important notes:
+
+        * Unlike other endpoints, the data format must be
+        "application/x-www-form-urlencoded", according to [RFC
+        specifications](https://datatracker.ietf.org/doc/html/rfc6749#appendix-B)
+
+        * To use a particular code grant, it must be included in the "Grant
+        Types" section of the App Settings modal in app.ramp.com
+
+        * Only the authorization code grant returns a refresh token
+          * Additionally, the "Refresh Token" grant type must be selected in App Settings for the refresh token to be returned
+        * The token endpoint used to be "/public/v1/customer/token" - this
+        endpoint is now deprecated and should not be used
+  /business/balance:
+    get:
+      summary: GET current info about a business
+      tags:
+        - Business
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/BusinessCurrentStatus.v1.yaml
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-resources-business-current
+      description: Gets current information about a business.
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      security:
+        - OAuth 2.0:
+            - 'business:read'
+  /cards/<id>/deferred/termination:
+    parameters: []
+    post:
+      summary: Delete a card
+      operationId: post-resources-cards-card_id-termination
+      responses:
+        '200':
+          $ref: '#/components/responses/task-response'
+        '400':
+          $ref: '#/components/responses/error-response'
+        '404':
+          $ref: '#/components/responses/error-response'
+      tags:
+        - Card
+      description: Terminates a card permanently.
+      security:
+        - OAuth 2.0:
+            - 'cards:write'
+  custom-id-provider/<entity-type>/<custom-id>/ramp-id:
+    parameters: []
+    get:
+      summary: Convert custom id to ramp id
+      tags:
+        - Custom ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ramp_id:
+                    type: string
+                    format: uuid
+        '400':
+          $ref: '#/components/responses/error-response'
+      operationId: get-entity_type-custom_id-ramp-id
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      description: ''
+      security:
+        - OAuth 2.0: []
+  custom-id-provider/<entity-type>/<ramp-id>/custom-id:
+    parameters: []
+    get:
+      summary: Convert ramp id to custom id
+      tags:
+        - Custom ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  custom_id:
+                    type: string
+        '400':
+          $ref: '#/components/responses/error-response'
+      operationId: get-entity_type-ramp_id-custom-id
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      security:
+        - OAuth 2.0: []
+  /cards/deferred/status/<id>:
+    parameters: []
+    get:
+      summary: Get status of a deferred card task
+      tags:
+        - Card
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  data:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        nullable: true
+                      id:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      misc:
+                        type: string
+                        nullable: true
+                      card_id:
+                        type: string
+                        nullable: true
+                  status:
+                    type: string
+                    enum:
+                      - STARTED
+                      - IN_PROGRESS
+                      - ERROR
+                      - SUCCESS
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    data:
+                      error: null
+                      id: null
+                      misc: null
+                    status: STARTED
+        '404':
+          $ref: '#/components/responses/error-response'
+      operationId: get-resources-cards-deferred-id
+      description: Gets status of a deferred task for cards
+      parameters:
+        - $ref: '#/components/parameters/oauth-token-header'
+      security:
+        - OAuth 2.0:
+            - 'cards:write'
+  /users/deferred:
+    post:
+      summary: Invite a new user
+      operationId: post-users-deferred
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: ../models/User.v1.yaml
+      description: >-
+        Creates an invite for the user to accept. Also optionally sets
+        department, location, and manager.
+      security:
+        - OAuth 2.0:
+            - 'users:write'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+                role:
+                  type: string
+                  enum:
+                    - BUSINESS_ADMIN
+                    - BUSINESS_USER
+                    - BUSINESS_OWNER
+                    - BUSINESS_BOOKKEEPER
+                department_id:
+                  type: string
+                  format: uuid
+                location_id:
+                  type: string
+                  format: uuid
+                direct_manager_id:
+                  type: string
+                  format: uuid
+              required:
+                - first_name
+                - last_name
+                - email
+                - phone
+                - role
+      tags:
+        - User
+  /users/deferred/status/<id>:
+    get:
+      summary: Get status of a deferred user task
+      tags:
+        - User
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    data:
+                      error: null
+                      id: null
+                      misc: null
+                    status: STARTED
+                properties:
+                  id:
+                    type: string
+                    minLength: 1
+                  data:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        nullable: true
+                      id:
+                        type: string
+                        format: uuid
+                        nullable: true
+                      misc:
+                        type: string
+                        nullable: true
+                      user_id:
+                        type: string
+                        format: uuid
+                        nullable: true
+                  status:
+                    type: string
+                    minLength: 1
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    error:
+                      message: string
+                      details: {}
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        minLength: 1
+                      details:
+                        type: object
+                        description: >-
+                          Extra metadata about the error, may be empty. Usually
+                          depends on the error type.
+      operationId: get-users-deferred-status-id
+      description: Gets status of a deferred task for users
+      security:
+        - OAuth 2.0:
+            - 'users:write'
+  /receipts:
+    get:
+      summary: List receipts
+      tags:
+        - Receipt
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        format: uri
+                  data:
+                    type: array
+                    items:
+                      $ref: ../models/Receipt.v1.yaml
+      operationId: get-receipts
+      description: Returns description of all receipts of a business.
+      security:
+        - OAuth 2.0:
+            - 'receipts:read'
+      parameters:
+        - schema:
+            type: string
+            format: date-time
+            example: '2020-12-02T00:00:00'
+          in: query
+          name: from_date
+          description: >-
+            Filter for receipts related to transactions which occurred after the
+            specified date.
+        - schema:
+            type: string
+            example: '2020-12-02T00:00:00'
+            format: date-time
+          in: query
+          name: to_date
+          description: >-
+            Filter for receipts related to transactions which occurred before
+            the specified date.
+        - schema:
+            type: string
+            example: '2020-12-02T00:00:00'
+            format: date-time
+          in: query
+          name: created_after
+          description: Filter for receipts that were created after the specified date.
+        - schema:
+            type: string
+            example: '2020-12-02T00:00:00'
+            format: date-time
+          in: query
+          name: created_before
+          description: Filter for receipts that were created before the specified date.
+        - $ref: '#/components/parameters/pagination-param'
+        - $ref: '#/components/parameters/page-size-param'
+  /receipts/<id>:
+    get:
+      summary: Get details for one receipt
+      tags:
+        - Receipt
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Receipt.v1.yaml
+        '404':
+          description: Not Found
+      operationId: get-receipts-receipt_id
+      description: ''
+      security:
+        - OAuth 2.0:
+            - 'receipts:read'
+    parameters: []
+  /reimbursements:
+    get:
+      summary: List Reimbursements
+      tags:
+        - Reimbursement
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        format: uri
+                  data:
+                    $ref: ../models/Reimbursement.v1.yaml
+        '400':
+          description: Bad Request
+      operationId: get-reimbursements
+      parameters:
+        - $ref: '#/components/parameters/pagination-param'
+        - $ref: '#/components/parameters/page-size-param'
+      security:
+        - OAuth 2.0:
+            - 'reimbursements:read'
+  /reimbursements/<id>:
+    get:
+      summary: Get details for one reimbursement
+      tags:
+        - Reimbursement
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Reimbursement.v1.yaml
+        '404':
+          description: Not Found
+      operationId: get-reimbursements-id
+      security:
+        - OAuth 2.0:
+            - 'reimbursements:read'
+  /custom-id-provider/<entity-type>/custom-id-link:
+    post:
+      summary: Create custom id link
+      operationId: post-custom-id-provider-entity-type-custom-id-link
+      responses:
+        '201':
+          description: Created
+      security:
+        - OAuth 2.0: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_id:
+                  type: string
+                ramp_id:
+                  type: string
+                  format: uuid
+      description: >-
+        Create a mapping between custom\_id and ramp\_id under the namespace
+        specified by entity\_type.
+      tags:
+        - Custom Id
+components:
+  schemas: {}
+  securitySchemes:
+    OAuth 2.0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            'transactions:read': ''
+            'cards:read': ''
+            'cards:write': ''
+            'users:read': ''
+            'users:write': ''
+            'locations:read': ''
+            'locations:write': ''
+            'departments:read': ''
+            'departments:write': ''
+            'business:read': ''
+            'receipts:read': ''
+            'reimbursements:read': ''
+          tokenUrl: 'https://api.ramp.com/v1/public/customer/token'
+          refreshUrl: 'https://api.ramp.com/v1/public/customer/token'
+          authorizationUrl: 'https://app.ramp.com/v1/authorize'
+        clientCredentials:
+          tokenUrl: ''
+          refreshUrl: ''
+          scopes: {}
+  responses:
+    error-response:
+      description: Standard error response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  details:
+                    type: object
+                    description: >-
+                      Extra metadata about the error, may be empty. Usually
+                      depends on the error type.
+          examples:
+            example-1:
+              value:
+                error:
+                  message: string
+                  details: {}
+    task-response:
+      description: >-
+        Response with the ID of a potentially long-running job. Task status can
+        be checked via a GET call to `.../deferred/<id>`.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: ID of the job started.
+          examples:
+            example-1:
+              value:
+                id: string
+  parameters:
+    oauth-token-header:
+      name: Authorization
+      in: header
+      schema:
+        type: string
+        example: Bearer x1x1x1x1x1x1x1x1x1x1
+      description: The OAuth2 token header
+      required: true
+    path-param:
+      name: path param
+      in: path
+      required: true
+      schema:
+        type: string
+    pagination-param:
+      name: start
+      in: query
+      required: false
+      schema:
+        type: string
+        format: uuid
+      description: >-
+        The ID of the last entity of the previous page, used for pagination to
+        get the next page.
+    page-size-param:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: number
+      description: >-
+        The number of results to be returned in each page. The value must be
+        between 2 and 10,000. If not specified, the default will be 1,000.
+  examples: {}
