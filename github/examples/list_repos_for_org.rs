@@ -28,7 +28,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Create the HTTP cache.
     #[cfg(feature = "httpcache")]
     let mut dir = dirs::home_dir().expect("Expected a home dir");
+    #[cfg(feature = "httpcache")]
     dir.push(".cache/github");
+    #[cfg(feature = "httpcache")]
     let http_cache = Box::new(FileBasedCache::new(dir));
 
     let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
