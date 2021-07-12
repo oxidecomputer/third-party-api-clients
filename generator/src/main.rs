@@ -858,7 +858,7 @@ impl TypeSpace {
                     // If it's an object we will always have a named type so it's fine.
                 } else {
                     // For everything else ensure we have a named type.
-                    let id = self.select_schema(Some(&nam), &s, parent_name, false)?;
+                    let id = self.select_schema(Some(&nam), s, parent_name, false)?;
                     return Ok((Some(nam), TypeDetails::NamedType(id, s.schema_data.clone())));
                 }
             }
