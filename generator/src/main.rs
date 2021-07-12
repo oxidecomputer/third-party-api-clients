@@ -699,11 +699,11 @@ impl TypeSpace {
 
         if let Some(s) = schema {
             if let Some(description) = &s.description {
-                a(&format!("/// {}", description.replace("\n", "\n/// ")));
+                a(&format!("* {}", description.replace("\n", "\n*  ")));
             }
             if let Some(external_docs) = &s.external_docs {
-                a("///");
-                a(&format!("/// FROM: <{}>", external_docs.url));
+                a("*");
+                a(&format!("* FROM: <{}>", external_docs.url));
             }
         }
 
@@ -1513,9 +1513,11 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                             }
 
                             // Try to render the docs.
-                            let p = ts.render_docs(tid).replace("\\*", "*").replace("\\-", "-");
+                            let p = ts.render_docs(tid);
                             if !p.is_empty() && p != desc {
+                                a("/**");
                                 a(&p);
+                                a("*/");
                             }
 
                             // Render the serde string.
@@ -1633,10 +1635,10 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     if !d.is_empty() && d.len() > docs.len() {
                         docs = format!(" -- {}.", d.trim_end_matches('.').replace("\n", "\n*   "));
                     } else if !docs.is_empty() {
-                        docs = format!(" -- {}.", docs.trim().replace("///", "").replace("\n", "\n*   ").trim_end_matches('.'));
+                        docs = format!(" -- {}.", docs.trim().trim_end_matches('.'));
                     }
                 } else if !docs.is_empty() {
-                    docs = format!(" -- {}.", docs.trim().replace("///", "").replace("\n", "\n*   ").trim_end_matches('.'));
+                    docs = format!(" -- {}.", docs.trim().trim_end_matches('.'));
                 }
 
                 let nam = &to_snake_case(&clean_name(&parameter_data.name));
