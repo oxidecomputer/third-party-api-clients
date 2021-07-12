@@ -11375,6 +11375,65 @@ pub mod types {
         pub status: String,
     }
 
+    /// Commit
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitDataType {
+        /**
+         * Simple User
+         */
+        #[serde()]
+        pub author: SimpleUser,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub comments_url: String,
+        #[serde()]
+        pub commit: CommitData,
+        /**
+         * Simple User
+         */
+        #[serde()]
+        pub committer: SimpleUser,
+        /**
+         * Commit
+         */
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub files: Vec<Files>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub html_url: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub node_id: String,
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub parents: Vec<Parents>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub sha: String,
+        /**
+         * Commit
+         */
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub stats: Option<ChangeStatus>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub url: String,
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchWithProtectionLinks {
         #[serde(
