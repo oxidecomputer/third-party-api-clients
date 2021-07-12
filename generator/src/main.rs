@@ -855,7 +855,7 @@ impl TypeSpace {
                     // name of the two structs and ensure that is the one we have
                     // in our set.
                     // Only do this if we have an Enum or an Object.
-                    if details.is_enum() || details.is_object() {
+                    if details.is_object() {
                         let existing_name = if let Some(n) = &te.name { n.to_string() } else { "".to_string() };
                         let new_name = if let Some(n) = &name { n.to_string() } else { "".to_string() };
 

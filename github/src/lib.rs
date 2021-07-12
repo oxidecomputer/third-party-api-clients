@@ -24147,24 +24147,24 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum PackagesGetAllPackageVersionsOwnedByState {
+    pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
         Active,
         Deleted,
     }
 
-    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByState {
+    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByOrgState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PackagesGetAllPackageVersionsOwnedByState::Active => "active",
-                PackagesGetAllPackageVersionsOwnedByState::Deleted => "deleted",
+                PackagesGetAllPackageVersionsOwnedByOrgState::Active => "active",
+                PackagesGetAllPackageVersionsOwnedByOrgState::Deleted => "deleted",
             }
             .fmt(f)
         }
     }
 
-    impl Default for PackagesGetAllPackageVersionsOwnedByState {
-        fn default() -> PackagesGetAllPackageVersionsOwnedByState {
-            PackagesGetAllPackageVersionsOwnedByState::Active
+    impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
+        fn default() -> PackagesGetAllPackageVersionsOwnedByOrgState {
+            PackagesGetAllPackageVersionsOwnedByOrgState::Active
         }
     }
 
@@ -24258,28 +24258,28 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ReposListSort {
+    pub enum ReposListOrgSort {
         Created,
         FullName,
         Pushed,
         Updated,
     }
 
-    impl std::fmt::Display for ReposListSort {
+    impl std::fmt::Display for ReposListOrgSort {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ReposListSort::Created => "created",
-                ReposListSort::FullName => "full_name",
-                ReposListSort::Pushed => "pushed",
-                ReposListSort::Updated => "updated",
+                ReposListOrgSort::Created => "created",
+                ReposListOrgSort::FullName => "full_name",
+                ReposListOrgSort::Pushed => "pushed",
+                ReposListOrgSort::Updated => "updated",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ReposListSort {
-        fn default() -> ReposListSort {
-            ReposListSort::FullName
+    impl Default for ReposListOrgSort {
+        fn default() -> ReposListOrgSort {
+            ReposListOrgSort::Created
         }
     }
 
@@ -26219,24 +26219,24 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ChecksListRefFilter {
+    pub enum ChecksListSuiteFilter {
         All,
         Latest,
     }
 
-    impl std::fmt::Display for ChecksListRefFilter {
+    impl std::fmt::Display for ChecksListSuiteFilter {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ChecksListRefFilter::All => "all",
-                ChecksListRefFilter::Latest => "latest",
+                ChecksListSuiteFilter::All => "all",
+                ChecksListSuiteFilter::Latest => "latest",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ChecksListRefFilter {
-        fn default() -> ChecksListRefFilter {
-            ChecksListRefFilter::Latest
+    impl Default for ChecksListSuiteFilter {
+        fn default() -> ChecksListSuiteFilter {
+            ChecksListSuiteFilter::Latest
         }
     }
 
@@ -28540,26 +28540,26 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum PullsListReviewCommentsDirection {
+    pub enum PullsListReviewCommentsRepoDirection {
         Asc,
         Desc,
         Noop,
     }
 
-    impl std::fmt::Display for PullsListReviewCommentsDirection {
+    impl std::fmt::Display for PullsListReviewCommentsRepoDirection {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PullsListReviewCommentsDirection::Asc => "asc",
-                PullsListReviewCommentsDirection::Desc => "desc",
-                PullsListReviewCommentsDirection::Noop => "",
+                PullsListReviewCommentsRepoDirection::Asc => "asc",
+                PullsListReviewCommentsRepoDirection::Desc => "desc",
+                PullsListReviewCommentsRepoDirection::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for PullsListReviewCommentsDirection {
-        fn default() -> PullsListReviewCommentsDirection {
-            PullsListReviewCommentsDirection::Noop
+    impl Default for PullsListReviewCommentsRepoDirection {
+        fn default() -> PullsListReviewCommentsRepoDirection {
+            PullsListReviewCommentsRepoDirection::Noop
         }
     }
 
@@ -33241,7 +33241,7 @@ impl Client {
      *
      * **Parameters:**
      *
-     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
+     * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
      *  \* `assigned`: Issues assigned to you  
      *  \* `created`: Issues created by you  
      *  \* `mentioned`: Issues mentioning you  
@@ -33261,7 +33261,7 @@ impl Client {
      */
     pub async fn issues_list(
         &self,
-        filter: crate::types::Filter,
+        filter: crate::types::IssuesListFilter,
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
@@ -35629,7 +35629,7 @@ impl Client {
      * **Parameters:**
      *
      * * `org: &str`
-     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
+     * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
      *  \* `assigned`: Issues assigned to you  
      *  \* `created`: Issues created by you  
      *  \* `mentioned`: Issues mentioning you  
@@ -35646,7 +35646,7 @@ impl Client {
     pub async fn issues_list_for_org(
         &self,
         org: &str,
-        filter: crate::types::Filter,
+        filter: crate::types::IssuesListFilter,
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
@@ -36245,7 +36245,7 @@ impl Client {
      * * `org: &str`
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
-     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByState` -- The state of the package, either active or deleted.
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_org(
         &self,
@@ -36254,7 +36254,7 @@ impl Client {
         org: &str,
         page: i64,
         per_page: i64,
-        state: crate::types::PackagesGetAllPackageVersionsOwnedByState,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -36552,7 +36552,7 @@ impl Client {
      *
      * * `org: &str`
      * * `type_: crate::types::ReposListOrgType` -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
-     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -36561,7 +36561,7 @@ impl Client {
         &self,
         org: &str,
         type_: crate::types::ReposListOrgType,
-        sort: crate::types::ReposListSort,
+        sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -38095,14 +38095,14 @@ impl Client {
      * **Parameters:**
      *
      * * `column_id: i64` -- column_id parameter.
-     * * `archived_state: crate::types::ArchivedState` -- Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
+     * * `archived_state: crate::types::ProjectsListCardsArchivedState` -- Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
     pub async fn projects_list_cards(
         &self,
         column_id: i64,
-        archived_state: crate::types::ArchivedState,
+        archived_state: crate::types::ProjectsListCardsArchivedState,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::ProjectCard>> {
@@ -38224,7 +38224,7 @@ impl Client {
      * **Parameters:**
      *
      * * `project_id: i64`
-     * * `affiliation: crate::types::Affiliation` -- Filters the collaborators by their affiliation. Can be one of:  
+     * * `affiliation: crate::types::ProjectsListCollaboratorsAffiliation` -- Filters the collaborators by their affiliation. Can be one of:  
      *  \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
      *  \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
      *  \* `all`: All collaborators the authenticated user can see.
@@ -38234,7 +38234,7 @@ impl Client {
     pub async fn projects_list_collaborators(
         &self,
         project_id: i64,
-        affiliation: crate::types::Affiliation,
+        affiliation: crate::types::ProjectsListCollaboratorsAffiliation,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::User>> {
@@ -41814,7 +41814,7 @@ impl Client {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `affiliation: crate::types::Affiliation` -- Filter collaborators returned by their affiliation. Can be one of:  
+     * * `affiliation: crate::types::ProjectsListCollaboratorsAffiliation` -- Filter collaborators returned by their affiliation. Can be one of:  
      *  \* `outside`: All outside collaborators of an organization-owned repository.  
      *  \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  
      *  \* `all`: All collaborators the authenticated user can see.
@@ -41825,7 +41825,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        affiliation: crate::types::Affiliation,
+        affiliation: crate::types::ProjectsListCollaboratorsAffiliation,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Collaborator>> {
@@ -51493,7 +51493,7 @@ impl Client {
      *
      * **Parameters:**
      *
-     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
+     * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
      *  \* `assigned`: Issues assigned to you  
      *  \* `created`: Issues created by you  
      *  \* `mentioned`: Issues mentioning you  
@@ -51509,7 +51509,7 @@ impl Client {
      */
     pub async fn issues_list_for_authenticated_user(
         &self,
-        filter: crate::types::Filter,
+        filter: crate::types::IssuesListFilter,
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
@@ -52043,7 +52043,7 @@ impl Client {
      * * `package_name: &str` -- The name of the package.
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
-     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByState` -- The state of the package, either active or deleted.
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
@@ -52051,7 +52051,7 @@ impl Client {
         package_name: &str,
         page: i64,
         per_page: i64,
-        state: crate::types::PackagesGetAllPackageVersionsOwnedByState,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/user/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -52225,7 +52225,7 @@ impl Client {
      * * `type_: crate::types::ReposListType` -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
      *    
      *  Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
-     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -52237,7 +52237,7 @@ impl Client {
         visibility: crate::types::ReposListVisibility,
         affiliation: &str,
         type_: crate::types::ReposListType,
-        sort: crate::types::ReposListSort,
+        sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -52779,13 +52779,13 @@ impl Client {
      * **Parameters:**
      *
      * * `username: &str`
-     * * `subject_type: crate::types::SubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
+     * * `subject_type: crate::types::UsersGetContextUserSubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
      * * `subject_id: &str` -- Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.
      */
     pub async fn users_get_context_for_user(
         &self,
         username: &str,
-        subject_type: crate::types::SubjectType,
+        subject_type: crate::types::UsersGetContextUserSubjectType,
         subject_id: &str,
     ) -> Result<types::Hovercard> {
         let url = format!(
@@ -53077,7 +53077,7 @@ impl Client {
      *
      * * `username: &str`
      * * `type_: crate::types::ReposListUserType` -- Can be one of `all`, `owner`, `member`.
-     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -53086,7 +53086,7 @@ impl Client {
         &self,
         username: &str,
         type_: crate::types::ReposListUserType,
-        sort: crate::types::ReposListSort,
+        sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
