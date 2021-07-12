@@ -6,7 +6,10 @@ const X_RATELIMIT_RESET: &str = "x-ratelimit-reset";
 pub fn next_link(l: &hyperx::header::Link) -> Option<String> {
     l.values().iter().find_map(|value| {
         value.rel().and_then(|rels| {
-            if rels.iter().any(|rel| rel == &hyperx::header::RelationType::Next) {
+            if rels
+                .iter()
+                .any(|rel| rel == &hyperx::header::RelationType::Next)
+            {
                 Some(value.link().into())
             } else {
                 None
@@ -20,7 +23,9 @@ type HeaderValues = (Option<u32>, Option<u32>);
 #[cfg(feature = "httpcache")]
 type HeaderValues = (Option<u32>, Option<u32>, Option<Vec<u8>>);
 
-pub fn get_header_values(headers: &http::header::HeaderMap<http::header::HeaderValue>) -> HeaderValues {
+pub fn get_header_values(
+    headers: &http::header::HeaderMap<http::header::HeaderValue>,
+) -> HeaderValues {
     if let Some(value) = headers.get(X_GITHUB_REQUEST_ID) {
         println!("x-github-request-id: {:?}", value)
     }
@@ -75,9 +80,13 @@ impl From<MediaType> for mime::Mime {
     fn from(media: MediaType) -> mime::Mime {
         match media {
             MediaType::Json => "application/vnd.github.v3+json".parse().unwrap(),
-            MediaType::Preview(codename) => format!("application/vnd.github.{}-preview+json", codename)
-                .parse()
-                .unwrap_or_else(|_| panic!("could not parse media type for preview {}", codename)),
+            MediaType::Preview(codename) => {
+                format!("application/vnd.github.{}-preview+json", codename)
+                    .parse()
+                    .unwrap_or_else(|_| {
+                        panic!("could not parse media type for preview {}", codename)
+                    })
+            }
         }
     }
 }

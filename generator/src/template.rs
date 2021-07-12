@@ -64,9 +64,15 @@ impl Template {
                 for c in self.components.iter() {
                     if let Component::Parameter(n) = &c {
                         if n == "type" || n == "ref" {
-                            out.push_str(&format!("            progenitor_support::encode_path(&{}_.to_string()),\n", n));
+                            out.push_str(&format!(
+                                "            progenitor_support::encode_path(&{}_.to_string()),\n",
+                                n
+                            ));
                         } else {
-                            out.push_str(&format!("            progenitor_support::encode_path(&{}.to_string()),\n", n));
+                            out.push_str(&format!(
+                                "            progenitor_support::encode_path(&{}.to_string()),\n",
+                                n
+                            ));
                         }
                     }
                 }
@@ -178,7 +184,10 @@ mod test {
             (
                 "/measure/{number}",
                 Template {
-                    components: vec![Component::Constant("measure".into()), Component::Parameter("number".into())],
+                    components: vec![
+                        Component::Constant("measure".into()),
+                        Component::Parameter("number".into()),
+                    ],
                 },
             ),
             (
@@ -205,7 +214,8 @@ mod test {
     fn compile() -> Result<()> {
         let t = parse("/measure/{number}")?;
         let out = t.compile(Default::default());
-        let want = "        let url = format!(\"/measure/{}\",\n            progenitor_support::encode_path(&number.to_string()),\n        );\n";
+        let want = "        let url = format!(\"/measure/{}\",\n            \
+                    progenitor_support::encode_path(&number.to_string()),\n        );\n";
         assert_eq!(want, &out);
         Ok(())
     }

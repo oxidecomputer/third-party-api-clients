@@ -1,8 +1,9 @@
 use std::env;
 
+#[cfg(feature = "httpcache")]
+use github_api_client::http_cache::FileBasedCache;
 use github_api_client::{
     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
-    http_cache::FileBasedCache,
     types::{Direction, ReposListOrgSort, ReposListOrgType},
     Client,
 };
@@ -24,13 +25,25 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Get the JWT credentials.
     let jwt = JWTCredentials::new(app_id, key.data).unwrap();
 
-    // Create the HTTP cache.
-    let mut dir = dirs::home_dir().expect("Expected a home dir");
-    dir.push(".cache/github");
-    let http_cache = Box::new(FileBasedCache::new(dir));
+    #[cfg(feature = "httpcache")]
+    {
+        // Create the HTTP cache.
+        let mut dir = dirs::home_dir().expect("Expected a home dir");
+        dir.push(".cache/github");
+        let http_cache = Box::new(FileBasedCache::new(dir));
+    }
 
     let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
 
+    #[cfg(not(feature = "httpcache"))]
+    let github = Client::custom(
+        "https://api.github.com",
+        concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
+        Credentials::InstallationToken(token_generator),
+        reqwest::Client::builder().build().unwrap(),
+    );
+
+    #[cfg(feature = "httpcache")]
     let github = Client::custom(
         "https://api.github.com",
         concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
@@ -41,7 +54,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // List the repos for an org.
     let repos = github
-        .repos_list_for_org("oxidecomputer", ReposListOrgType::All, ReposListOrgSort::Created, Direction::Desc, 100, 1)
+        .repos_list_for_org(
+            "oxidecomputer",
+            ReposListOrgType::All,
+            ReposListOrgSort::Created,
+            Direction::Desc,
+            100,
+            1,
+        )
         .await
         .unwrap();
     for repo in &repos {

@@ -31,8 +31,3 @@ tokio = { version = "1.8.0", features = ["full"] }
 [features]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
-
-[[example]]
-name = "list_repos_for_org"
-crate-type = ["bin"]
-required-features = ["httpcache"]

@@ -20,7 +20,11 @@ where
     P: AsRef<Path>,
 {
     let p = p.as_ref();
-    let mut f = OpenOptions::new().create(true).truncate(true).write(true).open(p)?;
+    let mut f = OpenOptions::new()
+        .create(true)
+        .truncate(true)
+        .write(true)
+        .open(p)?;
     f.write_all(data.as_bytes())?;
     f.flush()?;
     Ok(())
@@ -63,10 +67,6 @@ where
         println!("security not presently supported");
     }
 
-    if !api.tags.is_empty() {
-        println!("tags not presently supported");
-    }
-
     if let Some(components) = api.components.as_ref() {
         if !components.security_schemes.is_empty() {
             println!("component security schemes not supported");
@@ -98,14 +98,17 @@ where
 
         /*
          * XXX Ignoring "examples" and "extensions" for now.
-         * Explicitly allowing "schemas" through.
          */
     }
 
+    // TODO: add external docs etc to the README/Cargo generation.
+
     /*
-     * XXX Ignoring "external_docs" and "extensions" for now, as they seem not
+     * XXX Ignoring "extensions" for now, as they seem not
      * to immediately affect our code generation.
      */
+
+    // TODO: tags
 
     let mut opids = HashSet::new();
     for p in api.paths.iter() {
@@ -199,7 +202,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                     openapiv3::ReferenceOr::Item(s) => {
                         match &s.schema_kind {
                             SchemaKind::Type(Type::Boolean {}) => "bool".to_string(),
-                            SchemaKind::Type(Type::Array(_at)) => "&[String]".to_string(), // TODO: make this smarter
+                            SchemaKind::Type(Type::Array(_at)) => "&[String]".to_string(), /* TODO: make this smarter */
                             SchemaKind::Type(Type::String(st)) => {
                                 use openapiv3::{
                                     StringFormat::{Date, DateTime},
@@ -224,7 +227,9 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     for te in ts.id_to_entry.values() {
                                         if let Some(sn) = te.name.as_deref() {
                                             let sn = struct_name(sn);
-                                            if let TypeDetails::Enum(vals, _schema_data) = &te.details {
+                                            if let TypeDetails::Enum(vals, _schema_data) =
+                                                &te.details
+                                            {
                                                 if st.enumeration == *vals {
                                                     return Ok(format!("crate::types::{}", sn));
                                                 }
@@ -232,7 +237,12 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         }
                                     }
 
-                                    bail!("parameter {} that enumerates should have a pre-defined type: {:?}", name, s);
+                                    bail!(
+                                        "parameter {} that enumerates should have a pre-defined \
+                                         type: {:?}",
+                                        name,
+                                        s
+                                    );
                                 }
 
                                 if st.min_length.is_some() || st.max_length.is_some() {
@@ -308,7 +318,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     format!("i{}", width)
                                 }
                             }
-                            openapiv3::SchemaKind::OneOf { one_of: _ } => "&str".to_string(), // TODO: make this smarter.
+                            openapiv3::SchemaKind::OneOf { one_of: _ } => "&str".to_string(), /* TODO: make this smarter. */
                             x => bail!("unexpected type {:#?}", x),
                         }
                     }
@@ -331,7 +341,10 @@ impl ExtractJsonMediaType for openapiv3::Response {
         if let Some(mt) = self.content.get("application/json") {
             Ok(mt.clone())
         } else {
-            bail!("could not find application/json, only found {}", self.content.keys().next().unwrap());
+            bail!(
+                "could not find application/json, only found {}",
+                self.content.keys().next().unwrap()
+            );
         }
     }
 
@@ -399,7 +412,10 @@ impl ExtractJsonMediaType for openapiv3::RequestBody {
         if let Some(mt) = self.content.get("application/json") {
             Ok(mt.clone())
         } else {
-            bail!("could not find application/json, only found {}", self.content.keys().next().unwrap());
+            bail!(
+                "could not find application/json, only found {}",
+                self.content.keys().next().unwrap()
+            );
         }
     }
 
@@ -758,7 +774,9 @@ impl TypeSpace {
                         bail!("enum type {:?} does not have a name?", tid);
                     }
                 }
-                TypeDetails::Array(itid, _) => Ok(format!("Vec<{}>", self.render_type(itid, in_mod)?)),
+                TypeDetails::Array(itid, _) => {
+                    Ok(format!("Vec<{}>", self.render_type(itid, in_mod)?))
+                }
                 TypeDetails::Optional(itid, _) => {
                     let rt = self.render_type(itid, in_mod)?;
                     if rt == "String" || rt.starts_with("Vec<") {
@@ -813,7 +831,9 @@ impl TypeSpace {
     fn id_for_optional(&mut self, want: &TypeId, sd: openapiv3::SchemaData) -> TypeId {
         for (oid, oent) in self.id_to_entry.iter() {
             match &oent.details {
-                TypeDetails::Optional(id, schema_data) if id == want && *schema_data == sd => return oid.clone(),
+                TypeDetails::Optional(id, schema_data) if id == want && *schema_data == sd => {
+                    return oid.clone()
+                }
                 _ => continue,
             }
         }
@@ -840,7 +860,13 @@ impl TypeSpace {
         Ok(self.id_for_name(&r))
     }
 
-    fn add_if_not_exists(&mut self, name: Option<String>, details: TypeDetails, parent_name: &str, is_schema: bool) -> Result<TypeId> {
+    fn add_if_not_exists(
+        &mut self,
+        name: Option<String>,
+        details: TypeDetails,
+        parent_name: &str,
+        is_schema: bool,
+    ) -> Result<TypeId> {
         /*
          * We can have types that are references that are never explicitly called
          * but are duplicated all over. Let's ensure that we don't have a type with a different
@@ -855,8 +881,16 @@ impl TypeSpace {
                     // name of the two structs and ensure that is the one we have
                     // in our set.
                     // Only do this if we have an Enum or an Object.
-                    let existing_name = if let Some(n) = &te.name { n.to_string() } else { "".to_string() };
-                    let new_name = if let Some(n) = &name { n.to_string() } else { "".to_string() };
+                    let existing_name = if let Some(n) = &te.name {
+                        n.to_string()
+                    } else {
+                        "".to_string()
+                    };
+                    let new_name = if let Some(n) = &name {
+                        n.to_string()
+                    } else {
+                        "".to_string()
+                    };
                     if details.is_object() || details.is_enum() {
                         if existing_name == new_name {
                             // Return early.
@@ -874,7 +908,10 @@ impl TypeSpace {
 
                                 // Make sure the type we found is not something
                                 // we care about.
-                                if nt.details.is_enum() || nt.details.is_object() || nt.details.is_named_type() {
+                                if nt.details.is_enum()
+                                    || nt.details.is_object()
+                                    || nt.details.is_named_type()
+                                {
                                     // Return early we definitely don't want to do any funny business.
                                     return Ok(tid.clone());
                                 }
@@ -936,17 +973,32 @@ impl TypeSpace {
                     if !parent_name.is_empty() {
                         // We have a parent name, let's append it to the real name.
                         let pname = format!("{} {}", parent_name, name);
-                        return self.add_if_not_exists(Some(clean_name(&pname)), details, "", is_schema);
+                        return self.add_if_not_exists(
+                            Some(clean_name(&pname)),
+                            details,
+                            "",
+                            is_schema,
+                        );
                     }
 
                     if !name.contains("data") {
                         // Let's try to append "data" onto the end and see if that helps.
                         let new_name = format!("{} data", name);
-                        return self.add_if_not_exists(Some(clean_name(&new_name)), details, "", is_schema);
+                        return self.add_if_not_exists(
+                            Some(clean_name(&new_name)),
+                            details,
+                            "",
+                            is_schema,
+                        );
                     } else if !name.contains("type") {
                         // Let's try to append "type" onto the end and see if that helps.
                         let new_name = format!("{} type", name);
-                        return self.add_if_not_exists(Some(clean_name(&new_name)), details, "", is_schema);
+                        return self.add_if_not_exists(
+                            Some(clean_name(&new_name)),
+                            details,
+                            "",
+                            is_schema,
+                        );
                     }
 
                     // If we don't have anything to append, let's bail.
@@ -998,9 +1050,16 @@ impl TypeSpace {
         }
     }
 
-    fn select_param(&mut self, name: Option<&str>, p: &openapiv3::ReferenceOr<openapiv3::Parameter>, is_schema: bool) -> Result<TypeId> {
+    fn select_param(
+        &mut self,
+        name: Option<&str>,
+        p: &openapiv3::ReferenceOr<openapiv3::Parameter>,
+        is_schema: bool,
+    ) -> Result<TypeId> {
         match p {
-            openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
+            openapiv3::ReferenceOr::Reference { reference } => {
+                self.select_ref(name, reference.as_str())
+            }
             openapiv3::ReferenceOr::Item(p) => self.select_parameter(name, p, is_schema),
         }
     }
@@ -1013,15 +1072,28 @@ impl TypeSpace {
         additional_description: &str,
     ) -> Result<TypeId> {
         match s {
-            openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
-            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s, "", is_schema, additional_description),
+            openapiv3::ReferenceOr::Reference { reference } => {
+                self.select_ref(name, reference.as_str())
+            }
+            openapiv3::ReferenceOr::Item(s) => {
+                self.select_schema(name, s, "", is_schema, additional_description)
+            }
         }
     }
 
-    fn select_box(&mut self, name: Option<&str>, s: &openapiv3::ReferenceOr<Box<openapiv3::Schema>>, parent_name: &str) -> Result<TypeId> {
+    fn select_box(
+        &mut self,
+        name: Option<&str>,
+        s: &openapiv3::ReferenceOr<Box<openapiv3::Schema>>,
+        parent_name: &str,
+    ) -> Result<TypeId> {
         match s {
-            openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
-            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s.as_ref(), parent_name, false, ""),
+            openapiv3::ReferenceOr::Reference { reference } => {
+                self.select_ref(name, reference.as_str())
+            }
+            openapiv3::ReferenceOr::Item(s) => {
+                self.select_schema(name, s.as_ref(), parent_name, false, "")
+            }
         }
     }
 
@@ -1033,7 +1105,13 @@ impl TypeSpace {
         is_schema: bool,
         additional_description: &str,
     ) -> Result<TypeId> {
-        let (n, details) = self.get_type_name_and_details(name, s, parent_name, is_schema, additional_description)?;
+        let (n, details) = self.get_type_name_and_details(
+            name,
+            s,
+            parent_name,
+            is_schema,
+            additional_description,
+        )?;
 
         self.add_if_not_exists(n, details, parent_name, is_schema)
     }
@@ -1046,7 +1124,11 @@ impl TypeSpace {
         is_schema: bool,
         additional_description: &str,
     ) -> Result<(Option<String>, TypeDetails)> {
-        let nam = if let Some(n) = name { n.to_string() } else { "".to_string() };
+        let nam = if let Some(n) = name {
+            n.to_string()
+        } else {
+            "".to_string()
+        };
 
         let mut s = sc.clone();
 
@@ -1074,12 +1156,24 @@ impl TypeSpace {
                     // If it's an enum we will always have a named type so it's fine.
                     if st.enumeration.is_empty() {
                         // Handle the non-enums.
-                        let id = self.select_schema(Some(&nam), &s, parent_name, false, additional_description)?;
+                        let id = self.select_schema(
+                            Some(&nam),
+                            &s,
+                            parent_name,
+                            false,
+                            additional_description,
+                        )?;
                         return Ok((Some(nam), TypeDetails::NamedType(id, s.schema_data.clone())));
                     }
                 } else {
                     // For everything else ensure we have a named type.
-                    let id = self.select_schema(Some(&nam), &s, parent_name, false, additional_description)?;
+                    let id = self.select_schema(
+                        Some(&nam),
+                        &s,
+                        parent_name,
+                        false,
+                        additional_description,
+                    )?;
                     return Ok((Some(nam), TypeDetails::NamedType(id, s.schema_data.clone())));
                 }
             }
@@ -1110,12 +1204,19 @@ impl TypeSpace {
 
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
-                        let itid = self.select_box(Some(n), rb, &clean_name(&format!("{} {}", &parent_name, name)))?;
+                        let itid = self.select_box(
+                            Some(n),
+                            rb,
+                            &clean_name(&format!("{} {}", &parent_name, name)),
+                        )?;
                         if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
                         } else {
                             // This is an optional member.
-                            omap.insert(n.to_string(), self.id_for_optional(&itid, s.schema_data.clone()));
+                            omap.insert(
+                                n.to_string(),
+                                self.id_for_optional(&itid, s.schema_data.clone()),
+                            );
                         }
                     }
                     Ok((Some(name), TypeDetails::Object(omap, s.schema_data.clone())))
@@ -1148,7 +1249,10 @@ impl TypeSpace {
                             name = format!("{} {}", parent_name, name);
                         }
 
-                        return Ok((Some(clean_name(&name)), TypeDetails::Enum(st.enumeration.clone(), s.schema_data.clone())));
+                        return Ok((
+                            Some(clean_name(&name)),
+                            TypeDetails::Enum(st.enumeration.clone(), s.schema_data.clone()),
+                        ));
                     }
 
                     match &st.format {
@@ -1156,19 +1260,40 @@ impl TypeSpace {
                             self.import_chrono = true;
                             Ok((
                                 Some(uid.to_string()),
-                                TypeDetails::Basic("DateTime<Utc>".to_string(), s.schema_data.clone()),
+                                TypeDetails::Basic(
+                                    "DateTime<Utc>".to_string(),
+                                    s.schema_data.clone(),
+                                ),
                             ))
                         }
                         Item(Date) => {
                             self.import_chrono = true;
-                            Ok((Some(uid.to_string()), TypeDetails::Basic("NaiveDate".to_string(), s.schema_data.clone())))
+                            Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("NaiveDate".to_string(), s.schema_data.clone()),
+                            ))
                         }
-                        Empty => Ok((Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone()))),
+                        Empty => Ok((
+                            Some(uid.to_string()),
+                            TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                        )),
                         Unknown(f) => match f.as_str() {
-                            "float" => Ok((Some(uid.to_string()), TypeDetails::Basic("f64".to_string(), s.schema_data.clone()))),
-                            "uri" => Ok((Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone()))),
-                            "uri-template" => Ok((Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone()))),
-                            "email" => Ok((Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone()))),
+                            "float" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("f64".to_string(), s.schema_data.clone()),
+                            )),
+                            "uri" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            )),
+                            "uri-template" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            )),
+                            "email" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            )),
                             f => bail!("XXX unknown string format {}", f),
                         },
                         x => {
@@ -1176,9 +1301,18 @@ impl TypeSpace {
                         }
                     }
                 }
-                openapiv3::Type::Boolean {} => Ok((Some(uid.to_string()), TypeDetails::Basic("bool".to_string(), s.schema_data.clone()))),
-                openapiv3::Type::Number(_) => Ok((Some(uid.to_string()), TypeDetails::Basic("f64".to_string(), s.schema_data.clone()))),
-                openapiv3::Type::Integer(_) => Ok((Some(uid.to_string()), TypeDetails::Basic("i64".to_string(), s.schema_data.clone()))),
+                openapiv3::Type::Boolean {} => Ok((
+                    Some(uid.to_string()),
+                    TypeDetails::Basic("bool".to_string(), s.schema_data.clone()),
+                )),
+                openapiv3::Type::Number(_) => Ok((
+                    Some(uid.to_string()),
+                    TypeDetails::Basic("f64".to_string(), s.schema_data.clone()),
+                )),
+                openapiv3::Type::Integer(_) => Ok((
+                    Some(uid.to_string()),
+                    TypeDetails::Basic("i64".to_string(), s.schema_data.clone()),
+                )),
             },
             openapiv3::SchemaKind::AllOf { all_of } => {
                 // TODO: Actually combine all the types.
@@ -1233,13 +1367,25 @@ impl TypeSpace {
             }
             openapiv3::SchemaKind::Any(_a) => {
                 // Then we use the serde_json type.
-                Ok((Some(nam), TypeDetails::Basic("serde_json::Value".to_string(), s.schema_data.clone())))
+                Ok((
+                    Some(nam),
+                    TypeDetails::Basic("serde_json::Value".to_string(), s.schema_data.clone()),
+                ))
             }
         }
     }
 
-    fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter, is_schema: bool) -> Result<TypeId> {
-        let nam = if let Some(n) = name { n.to_string() } else { "".to_string() };
+    fn select_parameter(
+        &mut self,
+        name: Option<&str>,
+        p: &openapiv3::Parameter,
+        is_schema: bool,
+    ) -> Result<TypeId> {
+        let nam = if let Some(n) = name {
+            n.to_string()
+        } else {
+            "".to_string()
+        };
 
         if let Some(parameter_data) = get_parameter_data(p) {
             if let openapiv3::ParameterSchemaOrContent::Schema(st) = &parameter_data.format {
@@ -1250,8 +1396,12 @@ impl TypeSpace {
                 };
 
                 match st {
-                    openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
-                    openapiv3::ReferenceOr::Item(s) => self.select_schema(Some(&parameter_data.name), s, &nam, is_schema, &desc),
+                    openapiv3::ReferenceOr::Reference { reference } => {
+                        self.select_ref(name, reference.as_str())
+                    }
+                    openapiv3::ReferenceOr::Item(s) => {
+                        self.select_schema(Some(&parameter_data.name), s, &nam, is_schema, &desc)
+                    }
                 }
             } else {
                 bail!("could not get parameter_schema for {:?}: {:?}", name, p);
@@ -1282,7 +1432,13 @@ fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::Parame
     None
 }
 
-fn render_param(sn: &str, en: &[String], required: bool, description: &str, default: Option<&serde_json::Value>) -> String {
+fn render_param(
+    sn: &str,
+    en: &[String],
+    required: bool,
+    description: &str,
+    default: Option<&serde_json::Value>,
+) -> String {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1301,7 +1457,10 @@ fn render_param(sn: &str, en: &[String], required: bool, description: &str, defa
     let mut enums: Vec<String> = Default::default();
     for e in &enumsd {
         // Find any duplicates that are capitalized differently.
-        if enums.contains(e) || enums.contains(&to_snake_case(e)) || enums.contains(&to_title_case(e)) {
+        if enums.contains(e)
+            || enums.contains(&to_snake_case(e))
+            || enums.contains(&to_title_case(e))
+        {
             continue;
         }
         enums.push(e.to_string());
@@ -1356,7 +1515,11 @@ fn render_param(sn: &str, en: &[String], required: bool, description: &str, defa
             // in the future.
             a(&format!("impl Default for {} {{", sn));
             a(&format!("fn default() -> {} {{", sn));
-            a(&format!("{}::{}", sn, struct_name(&d.to_string().replace('"', ""))));
+            a(&format!(
+                "{}::{}",
+                sn,
+                struct_name(&d.to_string().replace('"', ""))
+            ));
             a("}");
             a("}");
         } else {
@@ -1371,7 +1534,13 @@ fn render_param(sn: &str, en: &[String], required: bool, description: &str, defa
     out.to_string()
 }
 
-fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv3::Parameter>, n: &str, version: &str) -> Result<String> {
+fn gen(
+    api: &OpenAPI,
+    ts: &mut TypeSpace,
+    parameters: BTreeMap<String, &openapiv3::Parameter>,
+    n: &str,
+    version: &str,
+) -> Result<String> {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1609,7 +1778,13 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     if let Some(d) = &schema_data.description {
                         desc = d.to_string();
                     }
-                    let p = render_param(sn.as_str(), vals, false, &desc, schema_data.default.as_ref());
+                    let p = render_param(
+                        sn.as_str(),
+                        vals,
+                        false,
+                        &desc,
+                        schema_data.default.as_ref(),
+                    );
                     a(&p);
                     rendered.push(sn.to_string());
                 }
@@ -1650,7 +1825,8 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                             }
 
                             // Render the serde string.
-                            if rt == "String" || rt.starts_with("Vec<") || rt.starts_with("Option<") {
+                            if rt == "String" || rt.starts_with("Vec<") || rt.starts_with("Option<")
+                            {
                                 a(r#"#[serde(default,"#);
                                 if rt == "String" {
                                     a(
@@ -1661,7 +1837,14 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                 } else if rt.starts_with("Option<") {
                                     a(r#"skip_serializing_if = "Option::is_none","#);
                                 }
-                            } else if rt == "bool" || rt == "i32" || rt == "i64" || rt == "f32" || rt == "f64" || rt == "u32" || rt == "u64" {
+                            } else if rt == "bool"
+                                || rt == "i32"
+                                || rt == "i64"
+                                || rt == "f32"
+                                || rt == "f64"
+                                || rt == "u32"
+                                || rt == "u64"
+                            {
                                 a(r#"#[serde(default,"#);
                             } else {
                                 a(r#"#[serde("#);
@@ -1727,7 +1910,10 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 a(&format!("* {}.", summary.trim_end_matches('.')));
                 a("*");
             }
-            a(&format!("* This function performs a `{}` to the `{}` endpoint.", m, p));
+            a(&format!(
+                "* This function performs a `{}` to the `{}` endpoint.",
+                m, p
+            ));
             if let Some(description) = &o.description {
                 a("*");
                 a(&format!("* {}", description.replace('\n', "\n* ")));
@@ -1746,7 +1932,8 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 let mut param_name = "".to_string();
                 let item = match par {
                     openapiv3::ReferenceOr::Reference { reference } => {
-                        param_name = struct_name(&reference.replace("#/components/parameters/", ""));
+                        param_name =
+                            struct_name(&reference.replace("#/components/parameters/", ""));
                         // Get the parameter from our BTreeMap.
                         if let Some(param) = parameters.get(&param_name) {
                             param
@@ -1765,10 +1952,16 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     if !d.is_empty() && d.len() > docs.len() {
                         docs = format!(" -- {}.", d.trim_end_matches('.').replace("\n", "\n*   "));
                     } else if !docs.is_empty() {
-                        docs = format!(" -- {}.", docs.trim_start_matches('*').trim_end_matches('.').trim());
+                        docs = format!(
+                            " -- {}.",
+                            docs.trim_start_matches('*').trim_end_matches('.').trim()
+                        );
                     }
                 } else if !docs.is_empty() {
-                    docs = format!(" -- {}.", docs.trim_start_matches('*').trim_end_matches('.').trim());
+                    docs = format!(
+                        " -- {}.",
+                        docs.trim_start_matches('*').trim_end_matches('.').trim()
+                    );
                 }
 
                 let nam = &to_snake_case(&clean_name(&parameter_data.name));
@@ -1840,7 +2033,8 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 let mut param_name = "".to_string();
                 let item = match par {
                     openapiv3::ReferenceOr::Reference { reference } => {
-                        param_name = struct_name(&reference.replace("#/components/parameters/", ""));
+                        param_name =
+                            struct_name(&reference.replace("#/components/parameters/", ""));
                         // Get the parameter from our BTreeMap.
                         if let Some(param) = parameters.get(&param_name) {
                             param
@@ -1885,21 +2079,30 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                         } else {
                             a(&format!("        {}: {},", nam, typ));
                             if typ == "DateTime<Utc>" {
-                                query_params_str.push(format!(r#"("{}", {}.to_rfc3339())"#, nam, nam));
-                                query_params.insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
+                                query_params_str
+                                    .push(format!(r#"("{}", {}.to_rfc3339())"#, nam, nam));
+                                query_params
+                                    .insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
                             } else if typ == "i64" || typ == "bool" {
-                                query_params_str.push(format!(r#"("{}", format!("{{}}", {}))"#, nam, nam));
-                                query_params.insert(nam.to_string(), format!(r#"format!("{{}}", {})"#, nam));
+                                query_params_str
+                                    .push(format!(r#"("{}", format!("{{}}", {}))"#, nam, nam));
+                                query_params.insert(
+                                    nam.to_string(),
+                                    format!(r#"format!("{{}}", {})"#, nam),
+                                );
                             } else if typ == "&str" {
-                                query_params_str.push(format!(r#"("{}", {}.to_string())"#, nam, nam));
-                                query_params.insert(nam.to_string(), format!("{}.to_string()", nam));
+                                query_params_str
+                                    .push(format!(r#"("{}", {}.to_string())"#, nam, nam));
+                                query_params
+                                    .insert(nam.to_string(), format!("{}.to_string()", nam));
                             } else if typ == "&[String]" {
                                 // TODO: I have no idea how these should be seperated and the docs
                                 // don't give any answers either, for an array sent through query
                                 // params.
                                 // https://docs.github.com/en/rest/reference/migrations
                                 query_params_str.push(format!(r#"("{}", {}.join(" "))"#, nam, nam));
-                                query_params.insert(nam.to_string(), format!("{}.join(\" \")", nam));
+                                query_params
+                                    .insert(nam.to_string(), format!("{}.join(\" \")", nam));
                             } else {
                                 query_params_str.push(format!(r#"("{}", {})"#, nam, nam));
                                 query_params.insert(nam.to_string(), nam.to_string());
@@ -1954,16 +2157,27 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
 
                             if let Some(s) = &mt.schema {
                                 let tid = match s {
-                                    openapiv3::ReferenceOr::Reference { reference } => ts.select_ref(None, reference.as_str())?,
+                                    openapiv3::ReferenceOr::Reference { reference } => {
+                                        ts.select_ref(None, reference.as_str())?
+                                    }
                                     openapiv3::ReferenceOr::Item(item) => {
                                         if let openapiv3::StatusCode::Code(c) = only.0 {
                                             let status_code = StatusCode::from_u16(*c).unwrap();
                                             let object_name = format!(
                                                 "{} {} Response",
                                                 oid_to_object_name(m, &oid),
-                                                status_code.canonical_reason().unwrap().to_lowercase()
+                                                status_code
+                                                    .canonical_reason()
+                                                    .unwrap()
+                                                    .to_lowercase()
                                             );
-                                            ts.select_schema(Some(&object_name), item, "", false, "")?
+                                            ts.select_schema(
+                                                Some(&object_name),
+                                                item,
+                                                "",
+                                                false,
+                                                "",
+                                            )?
                                         } else {
                                             bail!("got a range and not a code for {:?}", only.0);
                                         }
@@ -1982,7 +2196,11 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                         }
                         None => {
                             let (ct, mt) = i.content.first().unwrap();
-                            if ct == "text/plain" || ct == "text/html" || ct == "application/octocat-stream" || ct == "*/*" {
+                            if ct == "text/plain"
+                                || ct == "text/html"
+                                || ct == "application/octocat-stream"
+                                || ct == "*/*"
+                            {
                                 if let Some(s) = &mt.schema {
                                     let tid = ts.select(None, s, false, "")?;
                                     let rt = ts.render_type(&tid, false)?;
@@ -1999,18 +2217,32 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
 
                                 if let Some(s) = &mt.schema {
                                     let tid = match s {
-                                        openapiv3::ReferenceOr::Reference { reference } => ts.select_ref(None, reference.as_str())?,
+                                        openapiv3::ReferenceOr::Reference { reference } => {
+                                            ts.select_ref(None, reference.as_str())?
+                                        }
                                         openapiv3::ReferenceOr::Item(item) => {
                                             if let openapiv3::StatusCode::Code(c) = only.0 {
                                                 let status_code = StatusCode::from_u16(*c).unwrap();
                                                 let object_name = format!(
                                                     "{} {} response",
                                                     oid_to_object_name(m, &oid),
-                                                    status_code.canonical_reason().unwrap().to_lowercase()
+                                                    status_code
+                                                        .canonical_reason()
+                                                        .unwrap()
+                                                        .to_lowercase()
                                                 );
-                                                ts.select_schema(Some(&object_name), item, "", false, "")?
+                                                ts.select_schema(
+                                                    Some(&object_name),
+                                                    item,
+                                                    "",
+                                                    false,
+                                                    "",
+                                                )?
                                             } else {
-                                                bail!("got a range and not a code for {:?}", only.0);
+                                                bail!(
+                                                    "got a range and not a code for {:?}",
+                                                    only.0
+                                                );
                                             }
                                         }
                                     };
@@ -2049,7 +2281,10 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 } else {
                     a(&format!("self.{}(&url).await", m.to_lowercase()));
                 }
-            } else if (m == http::Method::POST || m == http::Method::PATCH || m == http::Method::PUT || m == http::Method::DELETE)
+            } else if (m == http::Method::POST
+                || m == http::Method::PATCH
+                || m == http::Method::PUT
+                || m == http::Method::DELETE)
                 && oid != "apps_create_installation_access_token"
             {
                 let body = if let Some(f) = &body_func {
@@ -2182,7 +2417,12 @@ fn oid_to_object_name(m: &str, s: &str) -> String {
 fn main() -> Result<()> {
     let mut opts = getopts::Options::new();
     opts.parsing_style(getopts::ParsingStyle::StopAtFirstFree);
-    opts.reqopt("i", "", "OpenAPI definition document (JSON | YAML)", "INPUT");
+    opts.reqopt(
+        "i",
+        "",
+        "OpenAPI definition document (JSON | YAML)",
+        "INPUT",
+    );
     opts.reqopt("o", "", "Generated Rust crate directory", "OUTPUT");
     opts.reqopt("n", "", "Target Rust crate name", "CRATE");
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
@@ -2221,7 +2461,12 @@ fn main() -> Result<()> {
         // Populate a type to describe each entry in the schemas section.
         for (i, (sn, s)) in components.schemas.iter().enumerate() {
             let name = clean_name(sn);
-            debug(&format!("SCHEMA {}/{}: {}", i + 1, components.schemas.len(), name));
+            debug(&format!(
+                "SCHEMA {}/{}: {}",
+                i + 1,
+                components.schemas.len(),
+                name
+            ));
 
             let id = ts.select(Some(name.as_str()), s, true, "")?;
             debug(&format!("    -> {:?}", id));
@@ -2231,7 +2476,12 @@ fn main() -> Result<()> {
         // Populate a type to describe each entry in the parameters section.
         for (i, (pn, p)) in components.parameters.iter().enumerate() {
             let name = clean_name(pn);
-            debug(&format!("PARAMETER {}/{}: {}", i + 1, components.parameters.len(), name));
+            debug(&format!(
+                "PARAMETER {}/{}: {}",
+                i + 1,
+                components.parameters.len(),
+                name
+            ));
 
             let id = ts.select_param(Some(name.as_str()), p, true)?;
 
@@ -2253,7 +2503,11 @@ fn main() -> Result<()> {
     for (pn, p) in api.paths.iter() {
         let op = p.item()?;
 
-        let grab = |pn: &str, m: &str, o: Option<&openapiv3::Operation>, ts: &mut TypeSpace| -> Result<()> {
+        let grab = |pn: &str,
+                    m: &str,
+                    o: Option<&openapiv3::Operation>,
+                    ts: &mut TypeSpace|
+         -> Result<()> {
             if let Some(o) = o {
                 let mut oid = o.operation_id.as_deref().unwrap().to_string();
                 oid = oid.replace("-", "_").replace("/", "_");
@@ -2269,7 +2523,8 @@ fn main() -> Result<()> {
                     for (ct, mt) in &body.content {
                         if ct == "application/json" {
                             if let Some(s) = &mt.schema {
-                                let object_name = format!("{} request", oid_to_object_name("", &oid));
+                                let object_name =
+                                    format!("{} request", oid_to_object_name("", &oid));
                                 let id = ts.select(Some(&object_name), s, false, "")?;
                                 let rt = ts.render_type(&id, true)?;
                                 req.push(format!("{} {:?}", rt, id));
@@ -2278,12 +2533,19 @@ fn main() -> Result<()> {
                             req.push(ct.to_string());
                         }
                     }
-                } else if let Some(openapiv3::ReferenceOr::Reference { reference }) = &o.request_body {
+                } else if let Some(openapiv3::ReferenceOr::Reference { reference }) =
+                    &o.request_body
+                {
                     let id = ts.select_ref(None, reference.as_str())?;
                     req.push(format!("{:?}", id));
                 }
                 if !req.is_empty() {
-                    debug(&format!("\t{} {} request body -> {}", pn, m, req.join(" | ")));
+                    debug(&format!(
+                        "\t{} {} request body -> {}",
+                        pn,
+                        m,
+                        req.join(" | ")
+                    ));
                 }
 
                 /*
@@ -2309,7 +2571,10 @@ fn main() -> Result<()> {
                                             let object_name = format!(
                                                 "{} {} response",
                                                 oid_to_object_name(m, &oid),
-                                                status_code.canonical_reason().unwrap().to_lowercase()
+                                                status_code
+                                                    .canonical_reason()
+                                                    .unwrap()
+                                                    .to_lowercase()
                                             );
                                             let id = ts.select(Some(&object_name), s, false, "")?;
                                             let rt = ts.render_type(&id, true)?;
@@ -2329,7 +2594,12 @@ fn main() -> Result<()> {
                         }
                     }
                 }
-                debug(&format!("\t{} {} response body -> {}", pn, m, res.join(" | ")));
+                debug(&format!(
+                    "\t{} {} response body -> {}",
+                    pn,
+                    m,
+                    res.join(" | ")
+                ));
             }
 
             Ok(())
@@ -2397,11 +2667,6 @@ tokio = {{ version = "1.8.0", features = ["full"] }}
 [features]
 # enable etag-based http_cache functionality
 httpcache = ["dirs"]
-
-[[example]]
-name = "list_repos_for_org"
-crate-type = ["bin"]
-required-features = ["httpcache"]
 "#,
                 name, description, version, name, name
             );

@@ -20,7 +20,10 @@
 //! ```
 //! use github_api_client::{auth::Credentials, Client};
 //!
-//! let github = Client::new(String::from("user-agent-name"), Credentials::Token(String::from("personal-access-token")));
+//! let github = Client::new(
+//!     String::from("user-agent-name"),
+//!     Credentials::Token(String::from("personal-access-token")),
+//! );
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
@@ -3549,7 +3552,11 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AuditLogEvent {
-        #[serde(default, skip_serializing_if = "Option::is_none", rename = "@timestamp")]
+        #[serde(
+            default,
+            skip_serializing_if = "Option::is_none",
+            rename = "@timestamp"
+        )]
         pub timestamp: Option<i64>,
         #[serde(
             default,
@@ -11545,7 +11552,8 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismiss_stale_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub dismissal_restrictions: Option<ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions>,
+        pub dismissal_restrictions:
+            Option<ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub require_code_owner_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -25631,7 +25639,8 @@ pub mod types {
          * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub dismissal_restrictions: Option<ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions>,
+        pub dismissal_restrictions:
+            Option<ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions>,
         /**
          * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
          */
@@ -25701,7 +25710,8 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismiss_stale_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub dismissal_restrictions: Option<ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions>,
+        pub dismissal_restrictions:
+            Option<ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub require_code_owner_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -30564,7 +30574,13 @@ impl Client {
         let http = reqwest::Client::builder().build()?;
         #[cfg(feature = "httpcache")]
         {
-            Ok(Self::custom(host, agent, credentials, http, <dyn crate::http_cache::HttpCache>::noop()))
+            Ok(Self::custom(
+                host,
+                agent,
+                credentials,
+                http,
+                <dyn crate::http_cache::HttpCache>::noop(),
+            ))
         }
         #[cfg(not(feature = "httpcache"))]
         {
@@ -30573,7 +30589,13 @@ impl Client {
     }
 
     #[cfg(feature = "httpcache")]
-    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: reqwest::Client, http_cache: crate::http_cache::BoxedHttpCache) -> Self
+    pub fn custom<H, A, CR>(
+        host: H,
+        agent: A,
+        credentials: CR,
+        http: reqwest::Client,
+        http_cache: crate::http_cache::BoxedHttpCache,
+    ) -> Self
     where
         H: Into<String>,
         A: Into<String>,
@@ -30610,25 +30632,43 @@ impl Client {
         self.credentials = credentials.into();
     }
 
-    fn credentials(&self, authentication: crate::auth::AuthenticationConstraint) -> Option<&crate::auth::Credentials> {
+    fn credentials(
+        &self,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> Option<&crate::auth::Credentials> {
         match (authentication, self.credentials.as_ref()) {
             (crate::auth::AuthenticationConstraint::Unconstrained, creds) => creds,
-            (crate::auth::AuthenticationConstraint::JWT, creds @ Some(&crate::auth::Credentials::JWT(_))) => creds,
-            (crate::auth::AuthenticationConstraint::JWT, Some(&crate::auth::Credentials::InstallationToken(ref apptoken))) => Some(apptoken.jwt()),
+            (
+                crate::auth::AuthenticationConstraint::JWT,
+                creds @ Some(&crate::auth::Credentials::JWT(_)),
+            ) => creds,
+            (
+                crate::auth::AuthenticationConstraint::JWT,
+                Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
+            ) => Some(apptoken.jwt()),
             (crate::auth::AuthenticationConstraint::JWT, creds) => {
-                println!("Request needs JWT authentication but only {:?} available", creds);
+                println!(
+                    "Request needs JWT authentication but only {:?} available",
+                    creds
+                );
                 None
             }
         }
     }
 
-    async fn url_and_auth(&self, uri: &str, authentication: crate::auth::AuthenticationConstraint) -> Result<(reqwest::Url, Option<String>)> {
+    async fn url_and_auth(
+        &self,
+        uri: &str,
+        authentication: crate::auth::AuthenticationConstraint,
+    ) -> Result<(reqwest::Url, Option<String>)> {
         let parsed_url = uri.parse::<reqwest::Url>();
 
         match self.credentials(authentication) {
             Some(&crate::auth::Credentials::Client(ref id, ref secret)) => parsed_url
                 .map(|mut u| {
-                    u.query_pairs_mut().append_pair("client_id", id).append_pair("client_secret", secret);
+                    u.query_pairs_mut()
+                        .append_pair("client_id", id)
+                        .append_pair("client_secret", secret);
                     (u, None)
                 })
                 .map_err(Error::from),
@@ -30703,7 +30743,10 @@ impl Client {
         req = req.header(http::header::USER_AGENT, &*instance.agent);
         req = req.header(
             http::header::ACCEPT,
-            &*format!("{}", hyperx::header::qitem::<mime::Mime>(From::from(media_type))),
+            &*format!(
+                "{}",
+                hyperx::header::qitem::<mime::Mime>(From::from(media_type))
+            ),
         );
 
         if let Some(auth_str) = auth {
@@ -30739,12 +30782,20 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            println!("response payload {}", String::from_utf8_lossy(&response_body));
+            println!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {
                     let next_link = link.as_ref().and_then(|l| crate::utils::next_link(l));
-                    if let Err(e) = instance2.http_cache.cache_response(&uri3, &response_body, &etag, &next_link) {
+                    if let Err(e) = instance2.http_cache.cache_response(
+                        &uri3,
+                        &response_body,
+                        &etag,
+                        &next_link,
+                    ) {
                         // failing to cache isn't fatal, so just log & swallow the error
                         println!("Failed to cache body & etag: {}", e);
                     }
@@ -30765,12 +30816,16 @@ impl Client {
                 let out = serde_json::from_str::<Out>(&body).unwrap();
                 let link = match link {
                     Some(link) => Ok(Some(link)),
-                    None => instance2.http_cache.lookup_next_link(&uri3).map(|next_link| {
-                        next_link.map(|next| {
-                            let next = hyperx::header::LinkValue::new(next).push_rel(hyperx::header::RelationType::Next);
-                            hyperx::header::Link::new(vec![next])
-                        })
-                    }),
+                    None => instance2
+                        .http_cache
+                        .lookup_next_link(&uri3)
+                        .map(|next_link| {
+                            next_link.map(|next| {
+                                let next = hyperx::header::LinkValue::new(next)
+                                    .push_rel(hyperx::header::RelationType::Next);
+                                hyperx::header::Link::new(vec![next])
+                            })
+                        }),
                 };
                 link.map(|link| (link, out))
             }
@@ -30786,14 +30841,24 @@ impl Client {
             );
             let error = match (remaining, reset) {
                 (Some(remaining), Some(reset)) if remaining == 0 => {
-                    let now = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs();
-                    anyhow!("rate limit exceeded, will reset in {} seconds", u64::from(reset) - now)
+                    let now = std::time::SystemTime::now()
+                        .duration_since(std::time::UNIX_EPOCH)
+                        .unwrap()
+                        .as_secs();
+                    anyhow!(
+                        "rate limit exceeded, will reset in {} seconds",
+                        u64::from(reset) - now
+                    )
                 }
                 _ => {
                     if response_body.is_empty() {
                         anyhow!("code: {}, empty response", status)
                     } else {
-                        anyhow!("code: {}, error: {:?}", status, serde_json::from_slice(&response_body)?)
+                        anyhow!(
+                            "code: {}, error: {:?}",
+                            status,
+                            serde_json::from_slice(&response_body)?
+                        )
                     }
                 }
             };
@@ -30812,7 +30877,9 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let (_, r) = self.request(method, uri, body, media_type, authentication).await?;
+        let (_, r) = self
+            .request(method, uri, body, media_type, authentication)
+            .await?;
         Ok(r)
     }
 
@@ -30858,7 +30925,10 @@ impl Client {
         .await
     }
 
-    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    async fn get_pages_url<D>(
+        &self,
+        url: &reqwest::Url,
+    ) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -30895,11 +30965,22 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::POST, &(self.host.clone() + uri), message, media, authentication)
-            .await
+        self.request_entity(
+            http::Method::POST,
+            &(self.host.clone() + uri),
+            message,
+            media,
+            authentication,
+        )
+        .await
     }
 
-    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    async fn patch_media<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        media: crate::utils::MediaType,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -30917,17 +30998,24 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.patch_media(uri, message, crate::utils::MediaType::Json).await
+        self.patch_media(uri, message, crate::utils::MediaType::Json)
+            .await
     }
 
     async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.put_media(uri, message, crate::utils::MediaType::Json).await
+        self.put_media(uri, message, crate::utils::MediaType::Json)
+            .await
     }
 
-    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    async fn put_media<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        media: crate::utils::MediaType,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -31025,10 +31113,21 @@ impl Client {
      *
      * * `code: &str`
      */
-    pub async fn apps_create_from_manifest(&self, code: &str, body: &types::Data) -> Result<types::Integration> {
-        let url = format!("/app-manifests/{}/conversions", progenitor_support::encode_path(&code.to_string()),);
+    pub async fn apps_create_from_manifest(
+        &self,
+        code: &str,
+        body: &types::Data,
+    ) -> Result<types::Integration> {
+        let url = format!(
+            "/app-manifests/{}/conversions",
+            progenitor_support::encode_path(&code.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31058,9 +31157,16 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#update-a-webhook-configuration-for-an-app>
      */
-    pub async fn apps_update_webhook_config_for_app(&self, body: &types::AppsUpdateWebhookConfigAppRequest) -> Result<types::WebhookConfig> {
+    pub async fn apps_update_webhook_config_for_app(
+        &self,
+        body: &types::AppsUpdateWebhookConfigAppRequest,
+    ) -> Result<types::WebhookConfig> {
         let url = "/app/hook/config".to_string();
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31081,7 +31187,13 @@ impl Client {
      * * `since: DateTime<Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `outdated: &str`
      */
-    pub async fn apps_list_installations(&self, per_page: i64, page: i64, since: DateTime<Utc>, outdated: &str) -> Result<Vec<types::Installation>> {
+    pub async fn apps_list_installations(
+        &self,
+        per_page: i64,
+        page: i64,
+        since: DateTime<Utc>,
+        outdated: &str,
+    ) -> Result<Vec<types::Installation>> {
         let url = format!(
             "/app/installations?outdated={}&page={}&per_page={}&since={}",
             outdated.to_string(),
@@ -31109,7 +31221,10 @@ impl Client {
      * * `installation_id: i64` -- installation_id parameter.
      */
     pub async fn apps_get_installation(&self, installation_id: i64) -> Result<types::Installation> {
-        let url = format!("/app/installations/{}", progenitor_support::encode_path(&installation_id.to_string()),);
+        let url = format!(
+            "/app/installations/{}",
+            progenitor_support::encode_path(&installation_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -31130,7 +31245,10 @@ impl Client {
      * * `installation_id: i64` -- installation_id parameter.
      */
     pub async fn apps_delete_installation(&self, installation_id: i64) -> Result<()> {
-        let url = format!("/app/installations/{}", progenitor_support::encode_path(&installation_id.to_string()),);
+        let url = format!(
+            "/app/installations/{}",
+            progenitor_support::encode_path(&installation_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -31235,7 +31353,12 @@ impl Client {
      * * `page: i64` -- Page number of the results to fetch.
      * * `client_id: &str` -- The client ID of your GitHub app.
      */
-    pub async fn oauth_authorizations_list_grants(&self, per_page: i64, page: i64, client_id: &str) -> Result<Vec<types::ApplicationGrant>> {
+    pub async fn oauth_authorizations_list_grants(
+        &self,
+        per_page: i64,
+        page: i64,
+        client_id: &str,
+    ) -> Result<Vec<types::ApplicationGrant>> {
         let url = format!(
             "/applications/grants?client_id={}&page={}&per_page={}",
             client_id.to_string(),
@@ -31259,8 +31382,14 @@ impl Client {
      *
      * * `grant_id: i64` -- grant_id parameter.
      */
-    pub async fn oauth_authorizations_get_grant(&self, grant_id: i64) -> Result<types::ApplicationGrant> {
-        let url = format!("/applications/grants/{}", progenitor_support::encode_path(&grant_id.to_string()),);
+    pub async fn oauth_authorizations_get_grant(
+        &self,
+        grant_id: i64,
+    ) -> Result<types::ApplicationGrant> {
+        let url = format!(
+            "/applications/grants/{}",
+            progenitor_support::encode_path(&grant_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -31281,7 +31410,10 @@ impl Client {
      * * `grant_id: i64` -- grant_id parameter.
      */
     pub async fn oauth_authorizations_delete_grant(&self, grant_id: i64) -> Result<()> {
-        let url = format!("/applications/grants/{}", progenitor_support::encode_path(&grant_id.to_string()),);
+        let url = format!(
+            "/applications/grants/{}",
+            progenitor_support::encode_path(&grant_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -31300,10 +31432,21 @@ impl Client {
      *
      * * `client_id: &str` -- The client ID of your GitHub app.
      */
-    pub async fn apps_delete_authorization(&self, client_id: &str, body: &types::AppsDeleteAuthorizationRequest) -> Result<()> {
-        let url = format!("/applications/{}/grant", progenitor_support::encode_path(&client_id.to_string()),);
+    pub async fn apps_delete_authorization(
+        &self,
+        client_id: &str,
+        body: &types::AppsDeleteAuthorizationRequest,
+    ) -> Result<()> {
+        let url = format!(
+            "/applications/{}/grant",
+            progenitor_support::encode_path(&client_id.to_string()),
+        );
 
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31324,7 +31467,11 @@ impl Client {
      * * `client_id: &str` -- The client ID of your GitHub app.
      * * `access_token: &str`
      */
-    pub async fn apps_revoke_grant_for_application(&self, client_id: &str, access_token: &str) -> Result<()> {
+    pub async fn apps_revoke_grant_for_application(
+        &self,
+        client_id: &str,
+        access_token: &str,
+    ) -> Result<()> {
         let url = format!(
             "/applications/{}/grants/{}",
             progenitor_support::encode_path(&client_id.to_string()),
@@ -31347,10 +31494,21 @@ impl Client {
      *
      * * `client_id: &str` -- The client ID of your GitHub app.
      */
-    pub async fn apps_check_token(&self, client_id: &str, body: &types::AppsCheckTokenRequest) -> Result<types::Authorization> {
-        let url = format!("/applications/{}/token", progenitor_support::encode_path(&client_id.to_string()),);
+    pub async fn apps_check_token(
+        &self,
+        client_id: &str,
+        body: &types::AppsCheckTokenRequest,
+    ) -> Result<types::Authorization> {
+        let url = format!(
+            "/applications/{}/token",
+            progenitor_support::encode_path(&client_id.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31366,10 +31524,21 @@ impl Client {
      *
      * * `client_id: &str` -- The client ID of your GitHub app.
      */
-    pub async fn apps_delete_token(&self, client_id: &str, body: &types::AppsDeleteTokenRequest) -> Result<()> {
-        let url = format!("/applications/{}/token", progenitor_support::encode_path(&client_id.to_string()),);
+    pub async fn apps_delete_token(
+        &self,
+        client_id: &str,
+        body: &types::AppsDeleteTokenRequest,
+    ) -> Result<()> {
+        let url = format!(
+            "/applications/{}/token",
+            progenitor_support::encode_path(&client_id.to_string()),
+        );
 
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31385,10 +31554,21 @@ impl Client {
      *
      * * `client_id: &str` -- The client ID of your GitHub app.
      */
-    pub async fn apps_reset_token(&self, client_id: &str, body: &types::AppsCheckTokenRequest) -> Result<types::Authorization> {
-        let url = format!("/applications/{}/token", progenitor_support::encode_path(&client_id.to_string()),);
+    pub async fn apps_reset_token(
+        &self,
+        client_id: &str,
+        body: &types::AppsCheckTokenRequest,
+    ) -> Result<types::Authorization> {
+        let url = format!(
+            "/applications/{}/token",
+            progenitor_support::encode_path(&client_id.to_string()),
+        );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31404,10 +31584,21 @@ impl Client {
      *
      * * `client_id: &str` -- The client ID of your GitHub app.
      */
-    pub async fn apps_scope_token(&self, client_id: &str, body: &types::AppsScopeTokenRequest) -> Result<types::Authorization> {
-        let url = format!("/applications/{}/token/scoped", progenitor_support::encode_path(&client_id.to_string()),);
+    pub async fn apps_scope_token(
+        &self,
+        client_id: &str,
+        body: &types::AppsScopeTokenRequest,
+    ) -> Result<types::Authorization> {
+        let url = format!(
+            "/applications/{}/token/scoped",
+            progenitor_support::encode_path(&client_id.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31426,7 +31617,11 @@ impl Client {
      * * `client_id: &str` -- The client ID of your GitHub app.
      * * `access_token: &str`
      */
-    pub async fn apps_check_authorization(&self, client_id: &str, access_token: &str) -> Result<types::Authorization> {
+    pub async fn apps_check_authorization(
+        &self,
+        client_id: &str,
+        access_token: &str,
+    ) -> Result<types::Authorization> {
         let url = format!(
             "/applications/{}/tokens/{}",
             progenitor_support::encode_path(&client_id.to_string()),
@@ -31452,7 +31647,11 @@ impl Client {
      * * `client_id: &str` -- The client ID of your GitHub app.
      * * `access_token: &str`
      */
-    pub async fn apps_reset_authorization(&self, client_id: &str, access_token: &str) -> Result<types::Authorization> {
+    pub async fn apps_reset_authorization(
+        &self,
+        client_id: &str,
+        access_token: &str,
+    ) -> Result<types::Authorization> {
         let url = format!(
             "/applications/{}/tokens/{}",
             progenitor_support::encode_path(&client_id.to_string()),
@@ -31478,7 +31677,11 @@ impl Client {
      * * `client_id: &str` -- The client ID of your GitHub app.
      * * `access_token: &str`
      */
-    pub async fn apps_revoke_authorization_for_application(&self, client_id: &str, access_token: &str) -> Result<()> {
+    pub async fn apps_revoke_authorization_for_application(
+        &self,
+        client_id: &str,
+        access_token: &str,
+    ) -> Result<()> {
         let url = format!(
             "/applications/{}/tokens/{}",
             progenitor_support::encode_path(&client_id.to_string()),
@@ -31504,7 +31707,10 @@ impl Client {
      * * `app_slug: &str`
      */
     pub async fn apps_get_by_slug(&self, app_slug: &str) -> Result<types::Integration> {
-        let url = format!("/apps/{}", progenitor_support::encode_path(&app_slug.to_string()),);
+        let url = format!(
+            "/apps/{}",
+            progenitor_support::encode_path(&app_slug.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -31524,7 +31730,12 @@ impl Client {
      * * `page: i64` -- Page number of the results to fetch.
      * * `client_id: &str` -- The client ID of your GitHub app.
      */
-    pub async fn oauth_authorizations_list_authorizations(&self, per_page: i64, page: i64, client_id: &str) -> Result<Vec<types::Authorization>> {
+    pub async fn oauth_authorizations_list_authorizations(
+        &self,
+        per_page: i64,
+        page: i64,
+        client_id: &str,
+    ) -> Result<Vec<types::Authorization>> {
         let url = format!(
             "/authorizations?client_id={}&page={}&per_page={}",
             client_id.to_string(),
@@ -31559,7 +31770,11 @@ impl Client {
         body: &types::OauthAuthorizationsCreateAuthorizationRequest,
     ) -> Result<types::Authorization> {
         let url = "/authorizations".to_string();
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31588,9 +31803,16 @@ impl Client {
         client_id: &str,
         body: &types::OauthAuthorizationsGetCreateAuthorizationAppRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("/authorizations/clients/{}", progenitor_support::encode_path(&client_id.to_string()),);
+        let url = format!(
+            "/authorizations/clients/{}",
+            progenitor_support::encode_path(&client_id.to_string()),
+        );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31625,7 +31847,11 @@ impl Client {
             progenitor_support::encode_path(&fingerprint.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31641,8 +31867,14 @@ impl Client {
      *
      * * `authorization_id: i64` -- authorization_id parameter.
      */
-    pub async fn oauth_authorizations_get_authorization(&self, authorization_id: i64) -> Result<types::Authorization> {
-        let url = format!("/authorizations/{}", progenitor_support::encode_path(&authorization_id.to_string()),);
+    pub async fn oauth_authorizations_get_authorization(
+        &self,
+        authorization_id: i64,
+    ) -> Result<types::Authorization> {
+        let url = format!(
+            "/authorizations/{}",
+            progenitor_support::encode_path(&authorization_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -31660,8 +31892,14 @@ impl Client {
      *
      * * `authorization_id: i64` -- authorization_id parameter.
      */
-    pub async fn oauth_authorizations_delete_authorization(&self, authorization_id: i64) -> Result<()> {
-        let url = format!("/authorizations/{}", progenitor_support::encode_path(&authorization_id.to_string()),);
+    pub async fn oauth_authorizations_delete_authorization(
+        &self,
+        authorization_id: i64,
+    ) -> Result<()> {
+        let url = format!(
+            "/authorizations/{}",
+            progenitor_support::encode_path(&authorization_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -31688,9 +31926,16 @@ impl Client {
         authorization_id: i64,
         body: &types::OauthAuthorizationsUpdateAuthorizationRequest,
     ) -> Result<types::Authorization> {
-        let url = format!("/authorizations/{}", progenitor_support::encode_path(&authorization_id.to_string()),);
+        let url = format!(
+            "/authorizations/{}",
+            progenitor_support::encode_path(&authorization_id.to_string()),
+        );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31702,7 +31947,9 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
      */
-    pub async fn codes_of_conduct_get_all_codes_of_conduct(&self) -> Result<Vec<types::CodeOfConduct>> {
+    pub async fn codes_of_conduct_get_all_codes_of_conduct(
+        &self,
+    ) -> Result<Vec<types::CodeOfConduct>> {
         let url = "/codes_of_conduct".to_string();
         self.get_all_pages(&url).await
     }
@@ -31720,8 +31967,14 @@ impl Client {
      *
      * * `key: &str`
      */
-    pub async fn codes_of_conduct_get_conduct_code(&self, key: &str) -> Result<types::CodeOfConduct> {
-        let url = format!("/codes_of_conduct/{}", progenitor_support::encode_path(&key.to_string()),);
+    pub async fn codes_of_conduct_get_conduct_code(
+        &self,
+        key: &str,
+    ) -> Result<types::CodeOfConduct> {
+        let url = format!(
+            "/codes_of_conduct/{}",
+            progenitor_support::encode_path(&key.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -31755,7 +32008,10 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn enterprise_admin_get_github_actions_permissions_enterprise(&self, enterprise: &str) -> Result<types::ActionsEnterprisePermissions> {
+    pub async fn enterprise_admin_get_github_actions_permissions_enterprise(
+        &self,
+        enterprise: &str,
+    ) -> Result<types::ActionsEnterprisePermissions> {
         let url = format!(
             "/enterprises/{}/actions/permissions",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -31789,7 +32045,11 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31850,7 +32110,11 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -31869,7 +32133,11 @@ impl Client {
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      * * `org_id: i64` -- Unique identifier of an organization.
      */
-    pub async fn enterprise_admin_enable_selected_organization_github_actions_enterprise(&self, enterprise: &str, org_id: i64) -> Result<()> {
+    pub async fn enterprise_admin_enable_selected_organization_github_actions_enterprise(
+        &self,
+        enterprise: &str,
+        org_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations/{}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -31895,7 +32163,11 @@ impl Client {
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      * * `org_id: i64` -- Unique identifier of an organization.
      */
-    pub async fn enterprise_admin_disable_selected_organization_github_actions_enterprise(&self, enterprise: &str, org_id: i64) -> Result<()> {
+    pub async fn enterprise_admin_disable_selected_organization_github_actions_enterprise(
+        &self,
+        enterprise: &str,
+        org_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations/{}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -31920,7 +32192,10 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn enterprise_admin_get_allowed_actions_enterprise(&self, enterprise: &str) -> Result<types::SelectedActions> {
+    pub async fn enterprise_admin_get_allowed_actions_enterprise(
+        &self,
+        enterprise: &str,
+    ) -> Result<types::SelectedActions> {
         let url = format!(
             "/enterprises/{}/actions/permissions/selected-actions",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -31944,13 +32219,21 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn enterprise_admin_set_allowed_actions_enterprise(&self, enterprise: &str, body: &types::SelectedActions) -> Result<()> {
+    pub async fn enterprise_admin_set_allowed_actions_enterprise(
+        &self,
+        enterprise: &str,
+        body: &types::SelectedActions,
+    ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/permissions/selected-actions",
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -32011,7 +32294,11 @@ impl Client {
             progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -32060,7 +32347,11 @@ impl Client {
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
      */
-    pub async fn enterprise_admin_delete_self_hosted_runner_group_from_enterprise(&self, enterprise: &str, runner_group_id: i64) -> Result<()> {
+    pub async fn enterprise_admin_delete_self_hosted_runner_group_from_enterprise(
+        &self,
+        enterprise: &str,
+        runner_group_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32098,7 +32389,11 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -32165,7 +32460,11 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -32298,7 +32597,11 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -32416,7 +32719,10 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn enterprise_admin_list_runner_applications_for_enterprise(&self, enterprise: &str) -> Result<Vec<types::RunnerApplication>> {
+    pub async fn enterprise_admin_list_runner_applications_for_enterprise(
+        &self,
+        enterprise: &str,
+    ) -> Result<Vec<types::RunnerApplication>> {
         let url = format!(
             "/enterprises/{}/actions/runners/downloads",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32448,7 +32754,10 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn enterprise_admin_create_registration_token_for_enterprise(&self, enterprise: &str) -> Result<types::AuthenticationToken> {
+    pub async fn enterprise_admin_create_registration_token_for_enterprise(
+        &self,
+        enterprise: &str,
+    ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "/enterprises/{}/actions/runners/registration-token",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32481,7 +32790,10 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn enterprise_admin_create_remove_token_for_enterprise(&self, enterprise: &str) -> Result<types::AuthenticationToken> {
+    pub async fn enterprise_admin_create_remove_token_for_enterprise(
+        &self,
+        enterprise: &str,
+    ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "/enterprises/{}/actions/runners/remove-token",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32506,7 +32818,11 @@ impl Client {
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
      */
-    pub async fn enterprise_admin_get_self_hosted_runner_for_enterprise(&self, enterprise: &str, runner_id: i64) -> Result<types::Runner> {
+    pub async fn enterprise_admin_get_self_hosted_runner_for_enterprise(
+        &self,
+        enterprise: &str,
+        runner_id: i64,
+    ) -> Result<types::Runner> {
         let url = format!(
             "/enterprises/{}/actions/runners/{}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32532,7 +32848,11 @@ impl Client {
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
      */
-    pub async fn enterprise_admin_delete_self_hosted_runner_from_enterprise(&self, enterprise: &str, runner_id: i64) -> Result<()> {
+    pub async fn enterprise_admin_delete_self_hosted_runner_from_enterprise(
+        &self,
+        enterprise: &str,
+        runner_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/runners/{}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32582,7 +32902,8 @@ impl Client {
         per_page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
         let url = format!(
-            "/enterprises/{}/audit-log?after={}&before={}&include={}&order={}&page={}&per_page={}&phrase={}",
+            "/enterprises/{}/audit-log?after={}&before={}&include={}&order={}&page={}&per_page={}&\
+             phrase={}",
             progenitor_support::encode_path(&enterprise.to_string()),
             after.to_string(),
             before.to_string(),
@@ -32613,7 +32934,10 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn billing_get_github_actions_billing_ghe(&self, enterprise: &str) -> Result<types::ActionsBillingUsage> {
+    pub async fn billing_get_github_actions_billing_ghe(
+        &self,
+        enterprise: &str,
+    ) -> Result<types::ActionsBillingUsage> {
         let url = format!(
             "/enterprises/{}/settings/billing/actions",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32639,7 +32963,10 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn billing_get_github_packages_billing_ghe(&self, enterprise: &str) -> Result<types::PackagesBillingUsage> {
+    pub async fn billing_get_github_packages_billing_ghe(
+        &self,
+        enterprise: &str,
+    ) -> Result<types::PackagesBillingUsage> {
         let url = format!(
             "/enterprises/{}/settings/billing/packages",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32665,7 +32992,10 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn billing_get_shared_storage_billing_ghe(&self, enterprise: &str) -> Result<types::CombinedBillingUsage> {
+    pub async fn billing_get_shared_storage_billing_ghe(
+        &self,
+        enterprise: &str,
+    ) -> Result<types::CombinedBillingUsage> {
         let url = format!(
             "/enterprises/{}/settings/billing/shared-storage",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32688,8 +33018,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_public_events(&self, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
-        let url = format!("/events?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn activity_list_public_events(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Event>> {
+        let url = format!(
+            "/events?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -32733,7 +33071,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn gists_list(&self, since: DateTime<Utc>, per_page: i64, page: i64) -> Result<Vec<types::BaseGist>> {
+    pub async fn gists_list(
+        &self,
+        since: DateTime<Utc>,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
             "/gists?page={}&per_page={}&since={}",
             format!("{}", page),
@@ -32755,9 +33098,16 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#create-a-gist>
      */
-    pub async fn gists_create(&self, body: &types::GistsCreateRequest) -> Result<types::GistSimple> {
+    pub async fn gists_create(
+        &self,
+        body: &types::GistsCreateRequest,
+    ) -> Result<types::GistSimple> {
         let url = "/gists".to_string();
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -32777,7 +33127,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn gists_list_public(&self, since: DateTime<Utc>, per_page: i64, page: i64) -> Result<Vec<types::BaseGist>> {
+    pub async fn gists_list_public(
+        &self,
+        since: DateTime<Utc>,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
             "/gists/public?page={}&per_page={}&since={}",
             format!("{}", page),
@@ -32803,7 +33158,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn gists_list_starred(&self, since: DateTime<Utc>, per_page: i64, page: i64) -> Result<Vec<types::BaseGist>> {
+    pub async fn gists_list_starred(
+        &self,
+        since: DateTime<Utc>,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
             "/gists/starred?page={}&per_page={}&since={}",
             format!("{}", page),
@@ -32828,7 +33188,10 @@ impl Client {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn gists_get(&self, gist_id: &str) -> Result<types::GistSimple> {
-        let url = format!("/gists/{}", progenitor_support::encode_path(&gist_id.to_string()),);
+        let url = format!(
+            "/gists/{}",
+            progenitor_support::encode_path(&gist_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -32847,7 +33210,10 @@ impl Client {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn gists_delete(&self, gist_id: &str) -> Result<()> {
-        let url = format!("/gists/{}", progenitor_support::encode_path(&gist_id.to_string()),);
+        let url = format!(
+            "/gists/{}",
+            progenitor_support::encode_path(&gist_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -32865,10 +33231,21 @@ impl Client {
      *
      * * `gist_id: &str` -- gist_id parameter.
      */
-    pub async fn gists_update(&self, gist_id: &str, body: &types::GistsUpdateRequest) -> Result<types::GistSimple> {
-        let url = format!("/gists/{}", progenitor_support::encode_path(&gist_id.to_string()),);
+    pub async fn gists_update(
+        &self,
+        gist_id: &str,
+        body: &types::GistsUpdateRequest,
+    ) -> Result<types::GistSimple> {
+        let url = format!(
+            "/gists/{}",
+            progenitor_support::encode_path(&gist_id.to_string()),
+        );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -32886,7 +33263,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn gists_list_comments(&self, gist_id: &str, per_page: i64, page: i64) -> Result<Vec<types::GistComment>> {
+    pub async fn gists_list_comments(
+        &self,
+        gist_id: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::GistComment>> {
         let url = format!(
             "/gists/{}/comments?page={}&per_page={}",
             progenitor_support::encode_path(&gist_id.to_string()),
@@ -32910,10 +33292,21 @@ impl Client {
      *
      * * `gist_id: &str` -- gist_id parameter.
      */
-    pub async fn gists_create_comment(&self, gist_id: &str, body: &types::GistsCreateCommentRequest) -> Result<types::GistComment> {
-        let url = format!("/gists/{}/comments", progenitor_support::encode_path(&gist_id.to_string()),);
+    pub async fn gists_create_comment(
+        &self,
+        gist_id: &str,
+        body: &types::GistsCreateCommentRequest,
+    ) -> Result<types::GistComment> {
+        let url = format!(
+            "/gists/{}/comments",
+            progenitor_support::encode_path(&gist_id.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -32930,7 +33323,11 @@ impl Client {
      * * `gist_id: &str` -- gist_id parameter.
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn gists_get_comment(&self, gist_id: &str, comment_id: i64) -> Result<types::GistComment> {
+    pub async fn gists_get_comment(
+        &self,
+        gist_id: &str,
+        comment_id: i64,
+    ) -> Result<types::GistComment> {
         let url = format!(
             "/gists/{}/comments/{}",
             progenitor_support::encode_path(&gist_id.to_string()),
@@ -32978,14 +33375,23 @@ impl Client {
      * * `gist_id: &str` -- gist_id parameter.
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn gists_update_comment(&self, gist_id: &str, comment_id: i64, body: &types::GistsCreateCommentRequest) -> Result<types::GistComment> {
+    pub async fn gists_update_comment(
+        &self,
+        gist_id: &str,
+        comment_id: i64,
+        body: &types::GistsCreateCommentRequest,
+    ) -> Result<types::GistComment> {
         let url = format!(
             "/gists/{}/comments/{}",
             progenitor_support::encode_path(&gist_id.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -33003,7 +33409,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn gists_list_commits(&self, gist_id: &str, per_page: i64, page: i64) -> Result<Vec<types::GistCommit>> {
+    pub async fn gists_list_commits(
+        &self,
+        gist_id: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::GistCommit>> {
         let url = format!(
             "/gists/{}/commits?page={}&per_page={}",
             progenitor_support::encode_path(&gist_id.to_string()),
@@ -33029,7 +33440,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn gists_list_forks(&self, gist_id: &str, per_page: i64, page: i64) -> Result<Vec<types::GistSimple>> {
+    pub async fn gists_list_forks(
+        &self,
+        gist_id: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::GistSimple>> {
         let url = format!(
             "/gists/{}/forks?page={}&per_page={}",
             progenitor_support::encode_path(&gist_id.to_string()),
@@ -33054,7 +33470,10 @@ impl Client {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn gists_fork(&self, gist_id: &str) -> Result<types::BaseGist> {
-        let url = format!("/gists/{}/forks", progenitor_support::encode_path(&gist_id.to_string()),);
+        let url = format!(
+            "/gists/{}/forks",
+            progenitor_support::encode_path(&gist_id.to_string()),
+        );
 
         self.post(&url, None).await
     }
@@ -33073,7 +33492,10 @@ impl Client {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn gists_check_is_starred(&self, gist_id: &str) -> Result<()> {
-        let url = format!("/gists/{}/star", progenitor_support::encode_path(&gist_id.to_string()),);
+        let url = format!(
+            "/gists/{}/star",
+            progenitor_support::encode_path(&gist_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -33092,7 +33514,10 @@ impl Client {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn gists_star(&self, gist_id: &str) -> Result<()> {
-        let url = format!("/gists/{}/star", progenitor_support::encode_path(&gist_id.to_string()),);
+        let url = format!(
+            "/gists/{}/star",
+            progenitor_support::encode_path(&gist_id.to_string()),
+        );
 
         self.put(&url, None).await
     }
@@ -33111,7 +33536,10 @@ impl Client {
      * * `gist_id: &str` -- gist_id parameter.
      */
     pub async fn gists_unstar(&self, gist_id: &str) -> Result<()> {
-        let url = format!("/gists/{}/star", progenitor_support::encode_path(&gist_id.to_string()),);
+        let url = format!(
+            "/gists/{}/star",
+            progenitor_support::encode_path(&gist_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -33169,7 +33597,10 @@ impl Client {
      * * `name: &str`
      */
     pub async fn gitignore_get_template(&self, name: &str) -> Result<types::GitignoreTemplate> {
-        let url = format!("/gitignore/templates/{}", progenitor_support::encode_path(&name.to_string()),);
+        let url = format!(
+            "/gitignore/templates/{}",
+            progenitor_support::encode_path(&name.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -33275,7 +33706,8 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Issue>> {
         let url = format!(
-            "/issues?collab={}&direction={}&filter={}&labels={}&orgs={}&owned={}&page={}&per_page={}&pulls={}&since={}&sort={}&state={}",
+            "/issues?collab={}&direction={}&filter={}&labels={}&orgs={}&owned={}&page={}&\
+             per_page={}&pulls={}&since={}&sort={}&state={}",
             format!("{}", collab),
             direction,
             filter,
@@ -33308,7 +33740,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn licenses_get_all_commonly_used(&self, featured: bool, per_page: i64, page: i64) -> Result<Vec<types::License>> {
+    pub async fn licenses_get_all_commonly_used(
+        &self,
+        featured: bool,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::License>> {
         let url = format!(
             "/licenses?featured={}&page={}&per_page={}",
             format!("{}", featured),
@@ -33333,7 +33770,10 @@ impl Client {
      * * `license: &str`
      */
     pub async fn licenses_get(&self, license: &str) -> Result<types::License> {
-        let url = format!("/licenses/{}", progenitor_support::encode_path(&license.to_string()),);
+        let url = format!(
+            "/licenses/{}",
+            progenitor_support::encode_path(&license.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -33349,7 +33789,11 @@ impl Client {
      */
     pub async fn markdown_render(&self, body: &types::MarkdownRenderRequest) -> Result<String> {
         let url = "/markdown".to_string();
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -33381,7 +33825,10 @@ impl Client {
      *
      * * `account_id: i64` -- account_id parameter.
      */
-    pub async fn apps_get_subscription_plan_for_account(&self, account_id: i64) -> Result<types::MarketplacePurchase> {
+    pub async fn apps_get_subscription_plan_for_account(
+        &self,
+        account_id: i64,
+    ) -> Result<types::MarketplacePurchase> {
         let url = format!(
             "/marketplace_listing/accounts/{}",
             progenitor_support::encode_path(&account_id.to_string()),
@@ -33406,7 +33853,11 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn apps_list_plans(&self, per_page: i64, page: i64) -> Result<Vec<types::MarketplaceListingPlan>> {
+    pub async fn apps_list_plans(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = format!(
             "/marketplace_listing/plans?page={}&per_page={}",
             format!("{}", page),
@@ -33470,7 +33921,10 @@ impl Client {
      *
      * * `account_id: i64` -- account_id parameter.
      */
-    pub async fn apps_get_subscription_plan_for_account_stubbed(&self, account_id: i64) -> Result<types::MarketplacePurchase> {
+    pub async fn apps_get_subscription_plan_for_account_stubbed(
+        &self,
+        account_id: i64,
+    ) -> Result<types::MarketplacePurchase> {
         let url = format!(
             "/marketplace_listing/stubbed/accounts/{}",
             progenitor_support::encode_path(&account_id.to_string()),
@@ -33495,7 +33949,11 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn apps_list_plans_stubbed(&self, per_page: i64, page: i64) -> Result<Vec<types::MarketplaceListingPlan>> {
+    pub async fn apps_list_plans_stubbed(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = format!(
             "/marketplace_listing/stubbed/plans?page={}&per_page={}",
             format!("{}", page),
@@ -33533,7 +33991,8 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::MarketplacePurchase>> {
         let url = format!(
-            "/marketplace_listing/stubbed/plans/{}/accounts?direction={}&page={}&per_page={}&sort={}",
+            "/marketplace_listing/stubbed/plans/{}/accounts?direction={}&page={}&per_page={}&\
+             sort={}",
             progenitor_support::encode_path(&plan_id.to_string()),
             direction,
             format!("{}", page),
@@ -33576,7 +34035,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_public_events_for_repo_network(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
+    pub async fn activity_list_public_events_for_repo_network(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Event>> {
         let url = format!(
             "/networks/{}/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -33642,7 +34107,11 @@ impl Client {
         body: &types::ActivityMarkNotificationsAsReadRequest,
     ) -> Result<types::PostReposCreateDeploymentAcceptedResponse> {
         let url = "/notifications".to_string();
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -33659,7 +34128,10 @@ impl Client {
      * * `thread_id: i64` -- thread_id parameter.
      */
     pub async fn activity_get_thread(&self, thread_id: i64) -> Result<types::Thread> {
-        let url = format!("/notifications/threads/{}", progenitor_support::encode_path(&thread_id.to_string()),);
+        let url = format!(
+            "/notifications/threads/{}",
+            progenitor_support::encode_path(&thread_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -33678,7 +34150,10 @@ impl Client {
      * * `thread_id: i64` -- thread_id parameter.
      */
     pub async fn activity_mark_thread_as_read(&self, thread_id: i64) -> Result<()> {
-        let url = format!("/notifications/threads/{}", progenitor_support::encode_path(&thread_id.to_string()),);
+        let url = format!(
+            "/notifications/threads/{}",
+            progenitor_support::encode_path(&thread_id.to_string()),
+        );
 
         self.patch(&url, None).await
     }
@@ -33698,7 +34173,10 @@ impl Client {
      *
      * * `thread_id: i64` -- thread_id parameter.
      */
-    pub async fn activity_get_thread_subscription_for_authenticated_user(&self, thread_id: i64) -> Result<types::ThreadSubscription> {
+    pub async fn activity_get_thread_subscription_for_authenticated_user(
+        &self,
+        thread_id: i64,
+    ) -> Result<types::ThreadSubscription> {
         let url = format!(
             "/notifications/threads/{}/subscription",
             progenitor_support::encode_path(&thread_id.to_string()),
@@ -33734,7 +34212,11 @@ impl Client {
             progenitor_support::encode_path(&thread_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -33794,8 +34276,16 @@ impl Client {
      * * `since: i64` -- An organization ID. Only return organizations with an ID greater than this ID.
      * * `per_page: i64` -- Results per page (max 100).
      */
-    pub async fn orgs_list(&self, since: i64, per_page: i64) -> Result<Vec<types::OrganizationSimple>> {
-        let url = format!("/organizations?per_page={}&since={}", format!("{}", per_page), format!("{}", since),);
+    pub async fn orgs_list(
+        &self,
+        since: i64,
+        per_page: i64,
+    ) -> Result<Vec<types::OrganizationSimple>> {
+        let url = format!(
+            "/organizations?per_page={}&since={}",
+            format!("{}", per_page),
+            format!("{}", since),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -33816,7 +34306,10 @@ impl Client {
      * * `org: &str`
      */
     pub async fn orgs_get(&self, org: &str) -> Result<types::OrganizationFull> {
-        let url = format!("/orgs/{}", progenitor_support::encode_path(&org.to_string()),);
+        let url = format!(
+            "/orgs/{}",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -33836,10 +34329,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn orgs_update(&self, org: &str, body: &types::OrgsUpdateRequest) -> Result<types::OrganizationFull> {
-        let url = format!("/orgs/{}", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn orgs_update(
+        &self,
+        org: &str,
+        body: &types::OrgsUpdateRequest,
+    ) -> Result<types::OrganizationFull> {
+        let url = format!(
+            "/orgs/{}",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -33857,8 +34361,14 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn actions_get_github_actions_permissions_organization(&self, org: &str) -> Result<types::ActionsOrganizationPermissions> {
-        let url = format!("/orgs/{}/actions/permissions", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn actions_get_github_actions_permissions_organization(
+        &self,
+        org: &str,
+    ) -> Result<types::ActionsOrganizationPermissions> {
+        let url = format!(
+            "/orgs/{}/actions/permissions",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -33885,9 +34395,16 @@ impl Client {
         org: &str,
         body: &types::ActionsSetGithubPermissionsOrganizationRequest,
     ) -> Result<()> {
-        let url = format!("/orgs/{}/actions/permissions", progenitor_support::encode_path(&org.to_string()),);
+        let url = format!(
+            "/orgs/{}/actions/permissions",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -33948,7 +34465,11 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -33967,7 +34488,11 @@ impl Client {
      * * `org: &str`
      * * `repository_id: i64`
      */
-    pub async fn actions_enable_selected_repository_github_actions_organization(&self, org: &str, repository_id: i64) -> Result<()> {
+    pub async fn actions_enable_selected_repository_github_actions_organization(
+        &self,
+        org: &str,
+        repository_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -33993,7 +34518,11 @@ impl Client {
      * * `org: &str`
      * * `repository_id: i64`
      */
-    pub async fn actions_disable_selected_repository_github_actions_organization(&self, org: &str, repository_id: i64) -> Result<()> {
+    pub async fn actions_disable_selected_repository_github_actions_organization(
+        &self,
+        org: &str,
+        repository_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34018,7 +34547,10 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn actions_get_allowed_actions_organization(&self, org: &str) -> Result<types::SelectedActions> {
+    pub async fn actions_get_allowed_actions_organization(
+        &self,
+        org: &str,
+    ) -> Result<types::SelectedActions> {
         let url = format!(
             "/orgs/{}/actions/permissions/selected-actions",
             progenitor_support::encode_path(&org.to_string()),
@@ -34046,13 +34578,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn actions_set_allowed_actions_organization(&self, org: &str, body: &types::SelectedActions) -> Result<()> {
+    pub async fn actions_set_allowed_actions_organization(
+        &self,
+        org: &str,
+        body: &types::SelectedActions,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/selected-actions",
             progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -34112,9 +34652,16 @@ impl Client {
         org: &str,
         body: &types::ActionsCreateSelfHostedRunnerGroupOrgRequest,
     ) -> Result<types::RunnerGroupsOrg> {
-        let url = format!("/orgs/{}/actions/runner-groups", progenitor_support::encode_path(&org.to_string()),);
+        let url = format!(
+            "/orgs/{}/actions/runner-groups",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -34135,7 +34682,11 @@ impl Client {
      * * `org: &str`
      * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
      */
-    pub async fn actions_get_self_hosted_runner_group_for_org(&self, org: &str, runner_group_id: i64) -> Result<types::RunnerGroupsOrg> {
+    pub async fn actions_get_self_hosted_runner_group_for_org(
+        &self,
+        org: &str,
+        runner_group_id: i64,
+    ) -> Result<types::RunnerGroupsOrg> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34163,7 +34714,11 @@ impl Client {
      * * `org: &str`
      * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
      */
-    pub async fn actions_delete_self_hosted_runner_group_from_org(&self, org: &str, runner_group_id: i64) -> Result<()> {
+    pub async fn actions_delete_self_hosted_runner_group_from_org(
+        &self,
+        org: &str,
+        runner_group_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34203,7 +34758,11 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -34274,7 +34833,11 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -34418,7 +34981,11 @@ impl Client {
             progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -34442,7 +35009,12 @@ impl Client {
      * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
      * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
      */
-    pub async fn actions_add_self_hosted_runner_to_group_for_org(&self, org: &str, runner_group_id: i64, runner_id: i64) -> Result<()> {
+    pub async fn actions_add_self_hosted_runner_to_group_for_org(
+        &self,
+        org: &str,
+        runner_group_id: i64,
+        runner_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34473,7 +35045,12 @@ impl Client {
      * * `runner_group_id: i64` -- Unique identifier of the self-hosted runner group.
      * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
      */
-    pub async fn actions_remove_self_hosted_runner_from_group_for_org(&self, org: &str, runner_group_id: i64, runner_id: i64) -> Result<()> {
+    pub async fn actions_remove_self_hosted_runner_from_group_for_org(
+        &self,
+        org: &str,
+        runner_group_id: i64,
+        runner_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34532,8 +35109,14 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn actions_list_runner_applications_for_org(&self, org: &str) -> Result<Vec<types::RunnerApplication>> {
-        let url = format!("/orgs/{}/actions/runners/downloads", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn actions_list_runner_applications_for_org(
+        &self,
+        org: &str,
+    ) -> Result<Vec<types::RunnerApplication>> {
+        let url = format!(
+            "/orgs/{}/actions/runners/downloads",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -34561,7 +35144,10 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn actions_create_registration_token_for_org(&self, org: &str) -> Result<types::AuthenticationToken> {
+    pub async fn actions_create_registration_token_for_org(
+        &self,
+        org: &str,
+    ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "/orgs/{}/actions/runners/registration-token",
             progenitor_support::encode_path(&org.to_string()),
@@ -34594,8 +35180,14 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn actions_create_remove_token_for_org(&self, org: &str) -> Result<types::AuthenticationToken> {
-        let url = format!("/orgs/{}/actions/runners/remove-token", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn actions_create_remove_token_for_org(
+        &self,
+        org: &str,
+    ) -> Result<types::AuthenticationToken> {
+        let url = format!(
+            "/orgs/{}/actions/runners/remove-token",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.post(&url, None).await
     }
@@ -34616,7 +35208,11 @@ impl Client {
      * * `org: &str`
      * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
      */
-    pub async fn actions_get_self_hosted_runner_for_org(&self, org: &str, runner_id: i64) -> Result<types::Runner> {
+    pub async fn actions_get_self_hosted_runner_for_org(
+        &self,
+        org: &str,
+        runner_id: i64,
+    ) -> Result<types::Runner> {
         let url = format!(
             "/orgs/{}/actions/runners/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34642,7 +35238,11 @@ impl Client {
      * * `org: &str`
      * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
      */
-    pub async fn actions_delete_self_hosted_runner_from_org(&self, org: &str, runner_id: i64) -> Result<()> {
+    pub async fn actions_delete_self_hosted_runner_from_org(
+        &self,
+        org: &str,
+        runner_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runners/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34667,7 +35267,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn actions_list_org_secrets(&self, org: &str, per_page: i64, page: i64) -> Result<types::GetActionsListOrgSecretsOkResponse> {
+    pub async fn actions_list_org_secrets(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<types::GetActionsListOrgSecretsOkResponse> {
         let url = format!(
             "/orgs/{}/actions/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34692,7 +35297,10 @@ impl Client {
      * * `org: &str`
      */
     pub async fn actions_get_org_public_key(&self, org: &str) -> Result<types::ActionsPublicKey> {
-        let url = format!("/orgs/{}/actions/secrets/public-key", progenitor_support::encode_path(&org.to_string()),);
+        let url = format!(
+            "/orgs/{}/actions/secrets/public-key",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -34711,7 +35319,11 @@ impl Client {
      * * `org: &str`
      * * `secret_name: &str` -- secret_name parameter.
      */
-    pub async fn actions_get_org_secret(&self, org: &str, secret_name: &str) -> Result<types::OrganizationActionsSecret> {
+    pub async fn actions_get_org_secret(
+        &self,
+        org: &str,
+        secret_name: &str,
+    ) -> Result<types::OrganizationActionsSecret> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34821,7 +35433,11 @@ impl Client {
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -34908,7 +35524,11 @@ impl Client {
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -34926,7 +35546,12 @@ impl Client {
      * * `secret_name: &str` -- secret_name parameter.
      * * `repository_id: i64`
      */
-    pub async fn actions_add_selected_repo_to_org_secret(&self, org: &str, secret_name: &str, repository_id: i64) -> Result<()> {
+    pub async fn actions_add_selected_repo_to_org_secret(
+        &self,
+        org: &str,
+        secret_name: &str,
+        repository_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34952,7 +35577,12 @@ impl Client {
      * * `secret_name: &str` -- secret_name parameter.
      * * `repository_id: i64`
      */
-    pub async fn actions_remove_selected_repo_from_org_secret(&self, org: &str, secret_name: &str, repository_id: i64) -> Result<()> {
+    pub async fn actions_remove_selected_repo_from_org_secret(
+        &self,
+        org: &str,
+        secret_name: &str,
+        repository_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35005,7 +35635,8 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
         let url = format!(
-            "/orgs/{}/audit-log?after={}&before={}&include={}&order={}&page={}&per_page={}&phrase={}",
+            "/orgs/{}/audit-log?after={}&before={}&include={}&order={}&page={}&per_page={}&\
+             phrase={}",
             progenitor_support::encode_path(&org.to_string()),
             after.to_string(),
             before.to_string(),
@@ -35033,7 +35664,10 @@ impl Client {
      * * `org: &str`
      */
     pub async fn orgs_list_blocked_users(&self, org: &str) -> Result<Vec<types::User>> {
-        let url = format!("/orgs/{}/blocks", progenitor_support::encode_path(&org.to_string()),);
+        let url = format!(
+            "/orgs/{}/blocks",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -35125,8 +35759,14 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn orgs_list_saml_sso_authorizations(&self, org: &str) -> Result<Vec<types::CredentialAuthorization>> {
-        let url = format!("/orgs/{}/credential-authorizations", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn orgs_list_saml_sso_authorizations(
+        &self,
+        org: &str,
+    ) -> Result<Vec<types::CredentialAuthorization>> {
+        let url = format!(
+            "/orgs/{}/credential-authorizations",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -35147,7 +35787,11 @@ impl Client {
      * * `org: &str`
      * * `credential_id: i64`
      */
-    pub async fn orgs_remove_saml_sso_authorization(&self, org: &str, credential_id: i64) -> Result<()> {
+    pub async fn orgs_remove_saml_sso_authorization(
+        &self,
+        org: &str,
+        credential_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/credential-authorizations/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35172,7 +35816,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_public_org_events(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
+    pub async fn activity_list_public_org_events(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Event>> {
         let url = format!(
             "/orgs/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35198,7 +35847,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_failed_invitations(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::OrganizationInvitation>> {
+    pub async fn orgs_list_failed_invitations(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
             "/orgs/{}/failed_invitations?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35224,7 +35878,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_webhooks(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::OrgHook>> {
+    pub async fn orgs_list_webhooks(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::OrgHook>> {
         let url = format!(
             "/orgs/{}/hooks?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35248,10 +35907,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn orgs_create_webhook(&self, org: &str, body: &types::OrgsCreateWebhookRequest) -> Result<types::OrgHook> {
-        let url = format!("/orgs/{}/hooks", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn orgs_create_webhook(
+        &self,
+        org: &str,
+        body: &types::OrgsCreateWebhookRequest,
+    ) -> Result<types::OrgHook> {
+        let url = format!(
+            "/orgs/{}/hooks",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -35316,14 +35986,23 @@ impl Client {
      * * `org: &str`
      * * `hook_id: i64`
      */
-    pub async fn orgs_update_webhook(&self, org: &str, hook_id: i64, body: &types::OrgsUpdateWebhookRequest) -> Result<types::OrgHook> {
+    pub async fn orgs_update_webhook(
+        &self,
+        org: &str,
+        hook_id: i64,
+        body: &types::OrgsUpdateWebhookRequest,
+    ) -> Result<types::OrgHook> {
         let url = format!(
             "/orgs/{}/hooks/{}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -35342,7 +36021,11 @@ impl Client {
      * * `org: &str`
      * * `hook_id: i64`
      */
-    pub async fn orgs_get_webhook_config_for_org(&self, org: &str, hook_id: i64) -> Result<types::WebhookConfig> {
+    pub async fn orgs_get_webhook_config_for_org(
+        &self,
+        org: &str,
+        hook_id: i64,
+    ) -> Result<types::WebhookConfig> {
         let url = format!(
             "/orgs/{}/hooks/{}/config",
             progenitor_support::encode_path(&org.to_string()),
@@ -35380,7 +36063,11 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -35423,7 +36110,10 @@ impl Client {
      * * `org: &str`
      */
     pub async fn apps_get_org_installation(&self, org: &str) -> Result<types::Installation> {
-        let url = format!("/orgs/{}/installation", progenitor_support::encode_path(&org.to_string()),);
+        let url = format!(
+            "/orgs/{}/installation",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -35443,7 +36133,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_app_installations(&self, org: &str, per_page: i64, page: i64) -> Result<types::GetAppsListInstallationsOkResponse> {
+    pub async fn orgs_list_app_installations(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<types::GetAppsListInstallationsOkResponse> {
         let url = format!(
             "/orgs/{}/installations?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35467,8 +36162,14 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn interactions_get_restrictions_for_org(&self, org: &str) -> Result<types::InteractionLimitResponse> {
-        let url = format!("/orgs/{}/interaction-limits", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn interactions_get_restrictions_for_org(
+        &self,
+        org: &str,
+    ) -> Result<types::InteractionLimitResponse> {
+        let url = format!(
+            "/orgs/{}/interaction-limits",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -35486,10 +36187,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn interactions_set_restrictions_for_org(&self, org: &str, body: &types::InteractionLimit) -> Result<types::InteractionLimitResponse> {
-        let url = format!("/orgs/{}/interaction-limits", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn interactions_set_restrictions_for_org(
+        &self,
+        org: &str,
+        body: &types::InteractionLimit,
+    ) -> Result<types::InteractionLimitResponse> {
+        let url = format!(
+            "/orgs/{}/interaction-limits",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -35506,7 +36218,10 @@ impl Client {
      * * `org: &str`
      */
     pub async fn interactions_remove_restrictions_for_org(&self, org: &str) -> Result<()> {
-        let url = format!("/orgs/{}/interaction-limits", progenitor_support::encode_path(&org.to_string()),);
+        let url = format!(
+            "/orgs/{}/interaction-limits",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -35526,7 +36241,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_pending_invitations(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::OrganizationInvitation>> {
+    pub async fn orgs_list_pending_invitations(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
             "/orgs/{}/invitations?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35552,10 +36272,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn orgs_create_invitation(&self, org: &str, body: &types::OrgsCreateInvitationRequest) -> Result<types::OrganizationInvitation> {
-        let url = format!("/orgs/{}/invitations", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn orgs_create_invitation(
+        &self,
+        org: &str,
+        body: &types::OrgsCreateInvitationRequest,
+    ) -> Result<types::OrganizationInvitation> {
+        let url = format!(
+            "/orgs/{}/invitations",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -35600,7 +36331,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_invitation_teams(&self, org: &str, invitation_id: i64, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
+    pub async fn orgs_list_invitation_teams(
+        &self,
+        org: &str,
+        invitation_id: i64,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/orgs/{}/invitations/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35656,7 +36393,8 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Issue>> {
         let url = format!(
-            "/orgs/{}/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&state={}",
+            "/orgs/{}/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&\
+             sort={}&state={}",
             progenitor_support::encode_path(&org.to_string()),
             direction,
             filter,
@@ -35775,7 +36513,11 @@ impl Client {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn orgs_get_membership_for_user(&self, org: &str, username: &str) -> Result<types::OrgMembership> {
+    pub async fn orgs_get_membership_for_user(
+        &self,
+        org: &str,
+        username: &str,
+    ) -> Result<types::OrgMembership> {
         let url = format!(
             "/orgs/{}/memberships/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35819,7 +36561,11 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -35864,7 +36610,13 @@ impl Client {
      * * `page: i64` -- Page number of the results to fetch.
      * * `exclude: &[String]` -- Exclude attributes from the API response to improve performance.
      */
-    pub async fn migrations_list_for_org(&self, org: &str, per_page: i64, page: i64, exclude: &[String]) -> Result<Vec<types::Migration>> {
+    pub async fn migrations_list_for_org(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: i64,
+        exclude: &[String],
+    ) -> Result<Vec<types::Migration>> {
         let url = format!(
             "/orgs/{}/migrations?exclude={}&page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35889,10 +36641,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn migrations_start_for_org(&self, org: &str, body: &types::MigrationsStartOrgRequest) -> Result<types::Migration> {
-        let url = format!("/orgs/{}/migrations", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn migrations_start_for_org(
+        &self,
+        org: &str,
+        body: &types::MigrationsStartOrgRequest,
+    ) -> Result<types::Migration> {
+        let url = format!(
+            "/orgs/{}/migrations",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -35917,7 +36680,12 @@ impl Client {
      * * `migration_id: i64` -- migration_id parameter.
      * * `exclude: &[String]` -- Exclude attributes from the API response to improve performance.
      */
-    pub async fn migrations_get_status_for_org(&self, org: &str, migration_id: i64, exclude: &[String]) -> Result<types::Migration> {
+    pub async fn migrations_get_status_for_org(
+        &self,
+        org: &str,
+        migration_id: i64,
+        exclude: &[String],
+    ) -> Result<types::Migration> {
         let url = format!(
             "/orgs/{}/migrations/{}?exclude={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35942,7 +36710,11 @@ impl Client {
      * * `org: &str`
      * * `migration_id: i64` -- migration_id parameter.
      */
-    pub async fn migrations_download_archive_for_org(&self, org: &str, migration_id: i64) -> Result<()> {
+    pub async fn migrations_download_archive_for_org(
+        &self,
+        org: &str,
+        migration_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/migrations/{}/archive",
             progenitor_support::encode_path(&org.to_string()),
@@ -35966,7 +36738,11 @@ impl Client {
      * * `org: &str`
      * * `migration_id: i64` -- migration_id parameter.
      */
-    pub async fn migrations_delete_archive_for_org(&self, org: &str, migration_id: i64) -> Result<()> {
+    pub async fn migrations_delete_archive_for_org(
+        &self,
+        org: &str,
+        migration_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/migrations/{}/archive",
             progenitor_support::encode_path(&org.to_string()),
@@ -35991,7 +36767,12 @@ impl Client {
      * * `migration_id: i64` -- migration_id parameter.
      * * `repo_name: &str` -- repo_name parameter.
      */
-    pub async fn migrations_unlock_repo_for_org(&self, org: &str, migration_id: i64, repo_name: &str) -> Result<()> {
+    pub async fn migrations_unlock_repo_for_org(
+        &self,
+        org: &str,
+        migration_id: i64,
+        repo_name: &str,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/migrations/{}/repos/{}/lock",
             progenitor_support::encode_path(&org.to_string()),
@@ -36086,7 +36867,11 @@ impl Client {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn orgs_convert_member_to_outside_collaborator(&self, org: &str, username: &str) -> Result<types::Data> {
+    pub async fn orgs_convert_member_to_outside_collaborator(
+        &self,
+        org: &str,
+        username: &str,
+    ) -> Result<types::Data> {
         let url = format!(
             "/orgs/{}/outside_collaborators/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36173,7 +36958,12 @@ impl Client {
      * * `package_name: &str` -- The name of the package.
      * * `org: &str`
      */
-    pub async fn packages_delete_package_for_org(&self, package_type: crate::types::PackageType, package_name: &str, org: &str) -> Result<()> {
+    pub async fn packages_delete_package_for_org(
+        &self,
+        package_type: crate::types::PackageType,
+        package_name: &str,
+        org: &str,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/packages/{}/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36433,10 +37223,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn projects_create_for_org(&self, org: &str, body: &types::ProjectsCreateOrgRequest) -> Result<types::Project> {
-        let url = format!("/orgs/{}/projects", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn projects_create_for_org(
+        &self,
+        org: &str,
+        body: &types::ProjectsCreateOrgRequest,
+    ) -> Result<types::Project> {
+        let url = format!(
+            "/orgs/{}/projects",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -36454,7 +37255,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_public_members(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
+    pub async fn orgs_list_public_members(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/orgs/{}/public_members?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36479,7 +37285,11 @@ impl Client {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn orgs_check_public_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn orgs_check_public_membership_for_user(
+        &self,
+        org: &str,
+        username: &str,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/public_members/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36505,7 +37315,11 @@ impl Client {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn orgs_set_public_membership_for_authenticated_user(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn orgs_set_public_membership_for_authenticated_user(
+        &self,
+        org: &str,
+        username: &str,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/public_members/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36529,7 +37343,11 @@ impl Client {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn orgs_remove_public_membership_for_authenticated_user(&self, org: &str, username: &str) -> Result<()> {
+    pub async fn orgs_remove_public_membership_for_authenticated_user(
+        &self,
+        org: &str,
+        username: &str,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/public_members/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36599,10 +37417,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn repos_create_in_org(&self, org: &str, body: &types::ReposCreateInOrgRequest) -> Result<types::Repository> {
-        let url = format!("/orgs/{}/repos", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn repos_create_in_org(
+        &self,
+        org: &str,
+        body: &types::ReposCreateInOrgRequest,
+    ) -> Result<types::Repository> {
+        let url = format!(
+            "/orgs/{}/repos",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -36622,8 +37451,14 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn billing_get_github_actions_billing_org(&self, org: &str) -> Result<types::ActionsBillingUsage> {
-        let url = format!("/orgs/{}/settings/billing/actions", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn billing_get_github_actions_billing_org(
+        &self,
+        org: &str,
+    ) -> Result<types::ActionsBillingUsage> {
+        let url = format!(
+            "/orgs/{}/settings/billing/actions",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -36645,8 +37480,14 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn billing_get_github_packages_billing_org(&self, org: &str) -> Result<types::PackagesBillingUsage> {
-        let url = format!("/orgs/{}/settings/billing/packages", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn billing_get_github_packages_billing_org(
+        &self,
+        org: &str,
+    ) -> Result<types::PackagesBillingUsage> {
+        let url = format!(
+            "/orgs/{}/settings/billing/packages",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -36668,7 +37509,10 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn billing_get_shared_storage_billing_org(&self, org: &str) -> Result<types::CombinedBillingUsage> {
+    pub async fn billing_get_shared_storage_billing_org(
+        &self,
+        org: &str,
+    ) -> Result<types::CombinedBillingUsage> {
         let url = format!(
             "/orgs/{}/settings/billing/shared-storage",
             progenitor_support::encode_path(&org.to_string()),
@@ -36696,7 +37540,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: &str` -- Page token.
      */
-    pub async fn teams_list_idp_groups_for_org(&self, org: &str, per_page: i64, page: &str) -> Result<types::GroupMapping> {
+    pub async fn teams_list_idp_groups_for_org(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: &str,
+    ) -> Result<types::GroupMapping> {
         let url = format!(
             "/orgs/{}/team-sync/groups?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36722,7 +37571,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn teams_list(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
+    pub async fn teams_list(
+        &self,
+        org: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/orgs/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36748,10 +37602,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn teams_create(&self, org: &str, body: &types::TeamsCreateRequest) -> Result<types::TeamFull> {
-        let url = format!("/orgs/{}/teams", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn teams_create(
+        &self,
+        org: &str,
+        body: &types::TeamsCreateRequest,
+    ) -> Result<types::TeamFull> {
+        let url = format!(
+            "/orgs/{}/teams",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -36824,14 +37689,23 @@ impl Client {
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
      */
-    pub async fn teams_update_in_org(&self, org: &str, team_slug: &str, body: &types::TeamsUpdateInOrgRequest) -> Result<types::TeamFull> {
+    pub async fn teams_update_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        body: &types::TeamsUpdateInOrgRequest,
+    ) -> Result<types::TeamFull> {
         let url = format!(
             "/orgs/{}/teams/{}",
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -36906,7 +37780,11 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -36926,7 +37804,12 @@ impl Client {
      * * `team_slug: &str` -- team_slug parameter.
      * * `discussion_number: i64`
      */
-    pub async fn teams_get_discussion_in_org(&self, org: &str, team_slug: &str, discussion_number: i64) -> Result<types::TeamDiscussion> {
+    pub async fn teams_get_discussion_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        discussion_number: i64,
+    ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36954,7 +37837,12 @@ impl Client {
      * * `team_slug: &str` -- team_slug parameter.
      * * `discussion_number: i64`
      */
-    pub async fn teams_delete_discussion_in_org(&self, org: &str, team_slug: &str, discussion_number: i64) -> Result<()> {
+    pub async fn teams_delete_discussion_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        discussion_number: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36996,7 +37884,11 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -37074,7 +37966,11 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -37183,7 +38079,11 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -37265,7 +38165,11 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -37380,7 +38284,11 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -37401,7 +38309,13 @@ impl Client {
      * * `discussion_number: i64`
      * * `reaction_id: i64`
      */
-    pub async fn reactions_delete_for_team_discussion(&self, org: &str, team_slug: &str, discussion_number: i64, reaction_id: i64) -> Result<()> {
+    pub async fn reactions_delete_for_team_discussion(
+        &self,
+        org: &str,
+        team_slug: &str,
+        discussion_number: i64,
+        reaction_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37515,7 +38429,12 @@ impl Client {
      * * `team_slug: &str` -- team_slug parameter.
      * * `username: &str`
      */
-    pub async fn teams_get_membership_for_user_in_org(&self, org: &str, team_slug: &str, username: &str) -> Result<types::TeamMembership> {
+    pub async fn teams_get_membership_for_user_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        username: &str,
+    ) -> Result<types::TeamMembership> {
         let url = format!(
             "/orgs/{}/teams/{}/memberships/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37565,7 +38484,11 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -37589,7 +38512,12 @@ impl Client {
      * * `team_slug: &str` -- team_slug parameter.
      * * `username: &str`
      */
-    pub async fn teams_remove_membership_for_user_in_org(&self, org: &str, team_slug: &str, username: &str) -> Result<()> {
+    pub async fn teams_remove_membership_for_user_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        username: &str,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/memberships/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37618,7 +38546,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn teams_list_projects_in_org(&self, org: &str, team_slug: &str, per_page: i64, page: i64) -> Result<Vec<types::TeamProject>> {
+    pub async fn teams_list_projects_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::TeamProject>> {
         let url = format!(
             "/orgs/{}/teams/{}/projects?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37647,7 +38581,12 @@ impl Client {
      * * `team_slug: &str` -- team_slug parameter.
      * * `project_id: i64`
      */
-    pub async fn teams_check_permissions_for_project_in_org(&self, org: &str, team_slug: &str, project_id: i64) -> Result<types::TeamProject> {
+    pub async fn teams_check_permissions_for_project_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        project_id: i64,
+    ) -> Result<types::TeamProject> {
         let url = format!(
             "/orgs/{}/teams/{}/projects/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37689,7 +38628,11 @@ impl Client {
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -37709,7 +38652,12 @@ impl Client {
      * * `team_slug: &str` -- team_slug parameter.
      * * `project_id: i64`
      */
-    pub async fn teams_remove_project_in_org(&self, org: &str, team_slug: &str, project_id: i64) -> Result<()> {
+    pub async fn teams_remove_project_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        project_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/projects/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37738,7 +38686,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn teams_list_repos_in_org(&self, org: &str, team_slug: &str, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
+    pub async fn teams_list_repos_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "/orgs/{}/teams/{}/repos?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37826,7 +38780,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -37847,7 +38805,13 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn teams_remove_repo_in_org(&self, org: &str, team_slug: &str, owner: &str, repo: &str) -> Result<()> {
+    pub async fn teams_remove_repo_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        owner: &str,
+        repo: &str,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/repos/{}/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37877,7 +38841,11 @@ impl Client {
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
      */
-    pub async fn teams_list_idp_groups_in_org(&self, org: &str, team_slug: &str) -> Result<types::GroupMapping> {
+    pub async fn teams_list_idp_groups_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+    ) -> Result<types::GroupMapping> {
         let url = format!(
             "/orgs/{}/teams/{}/team-sync/group-mappings",
             progenitor_support::encode_path(&org.to_string()),
@@ -37917,7 +38885,11 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -37938,7 +38910,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn teams_list_child_in_org(&self, org: &str, team_slug: &str, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
+    pub async fn teams_list_child_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/orgs/{}/teams/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37964,7 +38942,10 @@ impl Client {
      * * `card_id: i64` -- card_id parameter.
      */
     pub async fn projects_get_card(&self, card_id: i64) -> Result<types::ProjectCard> {
-        let url = format!("/projects/columns/cards/{}", progenitor_support::encode_path(&card_id.to_string()),);
+        let url = format!(
+            "/projects/columns/cards/{}",
+            progenitor_support::encode_path(&card_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -37983,7 +38964,10 @@ impl Client {
      * * `card_id: i64` -- card_id parameter.
      */
     pub async fn projects_delete_card(&self, card_id: i64) -> Result<()> {
-        let url = format!("/projects/columns/cards/{}", progenitor_support::encode_path(&card_id.to_string()),);
+        let url = format!(
+            "/projects/columns/cards/{}",
+            progenitor_support::encode_path(&card_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -38001,10 +38985,21 @@ impl Client {
      *
      * * `card_id: i64` -- card_id parameter.
      */
-    pub async fn projects_update_card(&self, card_id: i64, body: &types::ProjectsUpdateCardRequest) -> Result<types::ProjectCard> {
-        let url = format!("/projects/columns/cards/{}", progenitor_support::encode_path(&card_id.to_string()),);
+    pub async fn projects_update_card(
+        &self,
+        card_id: i64,
+        body: &types::ProjectsUpdateCardRequest,
+    ) -> Result<types::ProjectCard> {
+        let url = format!(
+            "/projects/columns/cards/{}",
+            progenitor_support::encode_path(&card_id.to_string()),
+        );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38020,10 +39015,21 @@ impl Client {
      *
      * * `card_id: i64` -- card_id parameter.
      */
-    pub async fn projects_move_card(&self, card_id: i64, body: &types::ProjectsMoveCardRequest) -> Result<types::Data> {
-        let url = format!("/projects/columns/cards/{}/moves", progenitor_support::encode_path(&card_id.to_string()),);
+    pub async fn projects_move_card(
+        &self,
+        card_id: i64,
+        body: &types::ProjectsMoveCardRequest,
+    ) -> Result<types::Data> {
+        let url = format!(
+            "/projects/columns/cards/{}/moves",
+            progenitor_support::encode_path(&card_id.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38040,7 +39046,10 @@ impl Client {
      * * `column_id: i64` -- column_id parameter.
      */
     pub async fn projects_get_column(&self, column_id: i64) -> Result<types::ProjectColumn> {
-        let url = format!("/projects/columns/{}", progenitor_support::encode_path(&column_id.to_string()),);
+        let url = format!(
+            "/projects/columns/{}",
+            progenitor_support::encode_path(&column_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -38059,7 +39068,10 @@ impl Client {
      * * `column_id: i64` -- column_id parameter.
      */
     pub async fn projects_delete_column(&self, column_id: i64) -> Result<()> {
-        let url = format!("/projects/columns/{}", progenitor_support::encode_path(&column_id.to_string()),);
+        let url = format!(
+            "/projects/columns/{}",
+            progenitor_support::encode_path(&column_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -38077,10 +39089,21 @@ impl Client {
      *
      * * `column_id: i64` -- column_id parameter.
      */
-    pub async fn projects_update_column(&self, column_id: i64, body: &types::ProjectsUpdateColumnRequest) -> Result<types::ProjectColumn> {
-        let url = format!("/projects/columns/{}", progenitor_support::encode_path(&column_id.to_string()),);
+    pub async fn projects_update_column(
+        &self,
+        column_id: i64,
+        body: &types::ProjectsUpdateColumnRequest,
+    ) -> Result<types::ProjectColumn> {
+        let url = format!(
+            "/projects/columns/{}",
+            progenitor_support::encode_path(&column_id.to_string()),
+        );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38130,10 +39153,21 @@ impl Client {
      *
      * * `column_id: i64` -- column_id parameter.
      */
-    pub async fn projects_create_card(&self, column_id: i64, body: &types::ProjectsCreateCardRequest) -> Result<types::ProjectCard> {
-        let url = format!("/projects/columns/{}/cards", progenitor_support::encode_path(&column_id.to_string()),);
+    pub async fn projects_create_card(
+        &self,
+        column_id: i64,
+        body: &types::ProjectsCreateCardRequest,
+    ) -> Result<types::ProjectCard> {
+        let url = format!(
+            "/projects/columns/{}/cards",
+            progenitor_support::encode_path(&column_id.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38149,10 +39183,21 @@ impl Client {
      *
      * * `column_id: i64` -- column_id parameter.
      */
-    pub async fn projects_move_column(&self, column_id: i64, body: &types::ProjectsMoveColumnRequest) -> Result<types::Data> {
-        let url = format!("/projects/columns/{}/moves", progenitor_support::encode_path(&column_id.to_string()),);
+    pub async fn projects_move_column(
+        &self,
+        column_id: i64,
+        body: &types::ProjectsMoveColumnRequest,
+    ) -> Result<types::Data> {
+        let url = format!(
+            "/projects/columns/{}/moves",
+            progenitor_support::encode_path(&column_id.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38169,7 +39214,10 @@ impl Client {
      * * `project_id: i64`
      */
     pub async fn projects_get(&self, project_id: i64) -> Result<types::Project> {
-        let url = format!("/projects/{}", progenitor_support::encode_path(&project_id.to_string()),);
+        let url = format!(
+            "/projects/{}",
+            progenitor_support::encode_path(&project_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -38188,7 +39236,10 @@ impl Client {
      * * `project_id: i64`
      */
     pub async fn projects_delete(&self, project_id: i64) -> Result<()> {
-        let url = format!("/projects/{}", progenitor_support::encode_path(&project_id.to_string()),);
+        let url = format!(
+            "/projects/{}",
+            progenitor_support::encode_path(&project_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -38206,10 +39257,21 @@ impl Client {
      *
      * * `project_id: i64`
      */
-    pub async fn projects_update(&self, project_id: i64, body: &types::ProjectsUpdateRequest) -> Result<types::Project> {
-        let url = format!("/projects/{}", progenitor_support::encode_path(&project_id.to_string()),);
+    pub async fn projects_update(
+        &self,
+        project_id: i64,
+        body: &types::ProjectsUpdateRequest,
+    ) -> Result<types::Project> {
+        let url = format!(
+            "/projects/{}",
+            progenitor_support::encode_path(&project_id.to_string()),
+        );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38263,14 +39325,23 @@ impl Client {
      * * `project_id: i64`
      * * `username: &str`
      */
-    pub async fn projects_add_collaborator(&self, project_id: i64, username: &str, body: &types::ProjectsAddCollaboratorRequest) -> Result<()> {
+    pub async fn projects_add_collaborator(
+        &self,
+        project_id: i64,
+        username: &str,
+        body: &types::ProjectsAddCollaboratorRequest,
+    ) -> Result<()> {
         let url = format!(
             "/projects/{}/collaborators/{}",
             progenitor_support::encode_path(&project_id.to_string()),
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38287,7 +39358,11 @@ impl Client {
      * * `project_id: i64`
      * * `username: &str`
      */
-    pub async fn projects_remove_collaborator(&self, project_id: i64, username: &str) -> Result<()> {
+    pub async fn projects_remove_collaborator(
+        &self,
+        project_id: i64,
+        username: &str,
+    ) -> Result<()> {
         let url = format!(
             "/projects/{}/collaborators/{}",
             progenitor_support::encode_path(&project_id.to_string()),
@@ -38311,7 +39386,11 @@ impl Client {
      * * `project_id: i64`
      * * `username: &str`
      */
-    pub async fn projects_get_permission_for_user(&self, project_id: i64, username: &str) -> Result<types::RepositoryCollaboratorPermission> {
+    pub async fn projects_get_permission_for_user(
+        &self,
+        project_id: i64,
+        username: &str,
+    ) -> Result<types::RepositoryCollaboratorPermission> {
         let url = format!(
             "/projects/{}/collaborators/{}/permission",
             progenitor_support::encode_path(&project_id.to_string()),
@@ -38336,7 +39415,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn projects_list_columns(&self, project_id: i64, per_page: i64, page: i64) -> Result<Vec<types::ProjectColumn>> {
+    pub async fn projects_list_columns(
+        &self,
+        project_id: i64,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::ProjectColumn>> {
         let url = format!(
             "/projects/{}/columns?page={}&per_page={}",
             progenitor_support::encode_path(&project_id.to_string()),
@@ -38360,10 +39444,21 @@ impl Client {
      *
      * * `project_id: i64`
      */
-    pub async fn projects_create_column(&self, project_id: i64, body: &types::ProjectsUpdateColumnRequest) -> Result<types::ProjectColumn> {
-        let url = format!("/projects/{}/columns", progenitor_support::encode_path(&project_id.to_string()),);
+    pub async fn projects_create_column(
+        &self,
+        project_id: i64,
+        body: &types::ProjectsUpdateColumnRequest,
+    ) -> Result<types::ProjectColumn> {
+        let url = format!(
+            "/projects/{}/columns",
+            progenitor_support::encode_path(&project_id.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38398,7 +39493,10 @@ impl Client {
      * * `reaction_id: i64`
      */
     pub async fn reactions_delete_legacy(&self, reaction_id: i64) -> Result<()> {
-        let url = format!("/reactions/{}", progenitor_support::encode_path(&reaction_id.to_string()),);
+        let url = format!(
+            "/reactions/{}",
+            progenitor_support::encode_path(&reaction_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -38470,14 +39568,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_update(&self, owner: &str, repo: &str, body: &types::ReposUpdateRequest) -> Result<types::FullRepository> {
+    pub async fn repos_update(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposUpdateRequest,
+    ) -> Result<types::FullRepository> {
         let url = format!(
             "/repos/{}/{}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38529,7 +39636,12 @@ impl Client {
      * * `repo: &str`
      * * `artifact_id: i64` -- artifact_id parameter.
      */
-    pub async fn actions_get_artifact(&self, owner: &str, repo: &str, artifact_id: i64) -> Result<types::Artifact> {
+    pub async fn actions_get_artifact(
+        &self,
+        owner: &str,
+        repo: &str,
+        artifact_id: i64,
+    ) -> Result<types::Artifact> {
         let url = format!(
             "/repos/{}/{}/actions/artifacts/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38555,7 +39667,12 @@ impl Client {
      * * `repo: &str`
      * * `artifact_id: i64` -- artifact_id parameter.
      */
-    pub async fn actions_delete_artifact(&self, owner: &str, repo: &str, artifact_id: i64) -> Result<()> {
+    pub async fn actions_delete_artifact(
+        &self,
+        owner: &str,
+        repo: &str,
+        artifact_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/artifacts/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38585,7 +39702,13 @@ impl Client {
      * * `artifact_id: i64` -- artifact_id parameter.
      * * `archive_format: &str`
      */
-    pub async fn actions_download_artifact(&self, owner: &str, repo: &str, artifact_id: i64, archive_format: &str) -> Result<()> {
+    pub async fn actions_download_artifact(
+        &self,
+        owner: &str,
+        repo: &str,
+        artifact_id: i64,
+        archive_format: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/artifacts/{}/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38612,7 +39735,12 @@ impl Client {
      * * `repo: &str`
      * * `job_id: i64` -- job_id parameter.
      */
-    pub async fn actions_get_job_for_workflow_run(&self, owner: &str, repo: &str, job_id: i64) -> Result<types::Job> {
+    pub async fn actions_get_job_for_workflow_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        job_id: i64,
+    ) -> Result<types::Job> {
         let url = format!(
             "/repos/{}/{}/actions/jobs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38641,7 +39769,12 @@ impl Client {
      * * `repo: &str`
      * * `job_id: i64` -- job_id parameter.
      */
-    pub async fn actions_download_job_logs_for_workflow_run(&self, owner: &str, repo: &str, job_id: i64) -> Result<()> {
+    pub async fn actions_download_job_logs_for_workflow_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        job_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/jobs/{}/logs",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38669,7 +39802,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn actions_get_github_actions_permissions_repository(&self, owner: &str, repo: &str) -> Result<types::ActionsRepositoryPermissions> {
+    pub async fn actions_get_github_actions_permissions_repository(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::ActionsRepositoryPermissions> {
         let url = format!(
             "/repos/{}/{}/actions/permissions",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38709,7 +39846,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38728,7 +39869,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn actions_get_allowed_actions_repository(&self, owner: &str, repo: &str) -> Result<types::SelectedActions> {
+    pub async fn actions_get_allowed_actions_repository(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::SelectedActions> {
         let url = format!(
             "/repos/{}/{}/actions/permissions/selected-actions",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38758,14 +39903,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn actions_set_allowed_actions_repository(&self, owner: &str, repo: &str, body: &types::SelectedActions) -> Result<()> {
+    pub async fn actions_set_allowed_actions_repository(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::SelectedActions,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/permissions/selected-actions",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -38818,7 +39972,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn actions_list_runner_applications_for_repo(&self, owner: &str, repo: &str) -> Result<Vec<types::RunnerApplication>> {
+    pub async fn actions_list_runner_applications_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<types::RunnerApplication>> {
         let url = format!(
             "/repos/{}/{}/actions/runners/downloads",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38851,7 +40009,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn actions_create_registration_token_for_repo(&self, owner: &str, repo: &str) -> Result<types::AuthenticationToken> {
+    pub async fn actions_create_registration_token_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "/repos/{}/{}/actions/runners/registration-token",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38884,7 +40046,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn actions_create_remove_token_for_repo(&self, owner: &str, repo: &str) -> Result<types::AuthenticationToken> {
+    pub async fn actions_create_remove_token_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::AuthenticationToken> {
         let url = format!(
             "/repos/{}/{}/actions/runners/remove-token",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38912,7 +40078,12 @@ impl Client {
      * * `repo: &str`
      * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
      */
-    pub async fn actions_get_self_hosted_runner_for_repo(&self, owner: &str, repo: &str, runner_id: i64) -> Result<types::Runner> {
+    pub async fn actions_get_self_hosted_runner_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        runner_id: i64,
+    ) -> Result<types::Runner> {
         let url = format!(
             "/repos/{}/{}/actions/runners/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -38941,7 +40112,12 @@ impl Client {
      * * `repo: &str`
      * * `runner_id: i64` -- Unique identifier of the self-hosted runner.
      */
-    pub async fn actions_delete_self_hosted_runner_from_repo(&self, owner: &str, repo: &str, runner_id: i64) -> Result<()> {
+    pub async fn actions_delete_self_hosted_runner_from_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        runner_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runners/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39015,7 +40191,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_get_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::WorkflowRun> {
+    pub async fn actions_get_workflow_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<types::WorkflowRun> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39043,7 +40224,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_delete_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
+    pub async fn actions_delete_workflow_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39069,7 +40255,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_get_reviews_for_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<Vec<types::EnvironmentApprovals>> {
+    pub async fn actions_get_reviews_for_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<Vec<types::EnvironmentApprovals>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/approvals",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39099,7 +40290,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_approve_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::EmptyObject> {
+    pub async fn actions_approve_workflow_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<types::EmptyObject> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/approve",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39162,7 +40358,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_cancel_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::Data> {
+    pub async fn actions_cancel_workflow_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<types::Data> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/cancel",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39233,7 +40434,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_download_workflow_run_logs(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
+    pub async fn actions_download_workflow_run_logs(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/logs",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39259,7 +40465,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_delete_workflow_run_logs(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
+    pub async fn actions_delete_workflow_run_logs(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/logs",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39287,7 +40498,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_get_pending_deployments_for_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<Vec<types::PendingDeployment>> {
+    pub async fn actions_get_pending_deployments_for_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<Vec<types::PendingDeployment>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/pending_deployments",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39329,7 +40545,11 @@ impl Client {
             progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -39347,7 +40567,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::Data> {
+    pub async fn actions_re_run_workflow(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<types::Data> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/rerun",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39375,7 +40600,12 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_get_workflow_run_usage(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::WorkflowRunUsage> {
+    pub async fn actions_get_workflow_run_usage(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<types::WorkflowRunUsage> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/timing",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39434,7 +40664,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn actions_get_repo_public_key(&self, owner: &str, repo: &str) -> Result<types::ActionsPublicKey> {
+    pub async fn actions_get_repo_public_key(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::ActionsPublicKey> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/public-key",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39459,7 +40693,12 @@ impl Client {
      * * `repo: &str`
      * * `secret_name: &str` -- secret_name parameter.
      */
-    pub async fn actions_get_repo_secret(&self, owner: &str, repo: &str, secret_name: &str) -> Result<types::ActionsSecret> {
+    pub async fn actions_get_repo_secret(
+        &self,
+        owner: &str,
+        repo: &str,
+        secret_name: &str,
+    ) -> Result<types::ActionsSecret> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39573,7 +40812,11 @@ impl Client {
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -39591,7 +40834,12 @@ impl Client {
      * * `repo: &str`
      * * `secret_name: &str` -- secret_name parameter.
      */
-    pub async fn actions_delete_repo_secret(&self, owner: &str, repo: &str, secret_name: &str) -> Result<()> {
+    pub async fn actions_delete_repo_secret(
+        &self,
+        owner: &str,
+        repo: &str,
+        secret_name: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39651,7 +40899,12 @@ impl Client {
      * * `repo: &str`
      * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
-    pub async fn actions_get_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<types::Workflow> {
+    pub async fn actions_get_workflow(
+        &self,
+        owner: &str,
+        repo: &str,
+        workflow_id: &str,
+    ) -> Result<types::Workflow> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39679,7 +40932,12 @@ impl Client {
      * * `repo: &str`
      * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
-    pub async fn actions_disable_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<()> {
+    pub async fn actions_disable_workflow(
+        &self,
+        owner: &str,
+        repo: &str,
+        workflow_id: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/disable",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39723,7 +40981,11 @@ impl Client {
             progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -39743,7 +41005,12 @@ impl Client {
      * * `repo: &str`
      * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
-    pub async fn actions_enable_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<()> {
+    pub async fn actions_enable_workflow(
+        &self,
+        owner: &str,
+        repo: &str,
+        workflow_id: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/enable",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39790,7 +41057,8 @@ impl Client {
         page: i64,
     ) -> Result<types::GetActionsListWorkflowRunsOkResponse> {
         let url = format!(
-            "/repos/{}/{}/actions/workflows/{}/runs?actor={}&branch={}&event={}&page={}&per_page={}&status={}",
+            "/repos/{}/{}/actions/workflows/{}/runs?actor={}&branch={}&event={}&page={}&\
+             per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&workflow_id.to_string()),
@@ -39822,7 +41090,12 @@ impl Client {
      * * `repo: &str`
      * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
-    pub async fn actions_get_workflow_usage(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<types::WorkflowUsage> {
+    pub async fn actions_get_workflow_usage(
+        &self,
+        owner: &str,
+        repo: &str,
+        workflow_id: &str,
+    ) -> Result<types::WorkflowUsage> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/timing",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39849,7 +41122,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn issues_list_assignees(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
+    pub async fn issues_list_assignees(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/assignees?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39880,7 +41159,12 @@ impl Client {
      * * `repo: &str`
      * * `assignee: &str`
      */
-    pub async fn issues_check_user_can_be_assigned(&self, owner: &str, repo: &str, assignee: &str) -> Result<()> {
+    pub async fn issues_check_user_can_be_assigned(
+        &self,
+        owner: &str,
+        repo: &str,
+        assignee: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/assignees/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39905,7 +41189,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_enable_automated_security_fixes(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn repos_enable_automated_security_fixes(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/automated-security-fixes",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39929,7 +41217,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_disable_automated_security_fixes(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn repos_disable_automated_security_fixes(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/automated-security-fixes",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39956,7 +41248,14 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_branches(&self, owner: &str, repo: &str, protected: bool, per_page: i64, page: i64) -> Result<Vec<types::ShortBranch>> {
+    pub async fn repos_list_branches(
+        &self,
+        owner: &str,
+        repo: &str,
+        protected: bool,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::ShortBranch>> {
         let url = format!(
             "/repos/{}/{}/branches?page={}&per_page={}&protected={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39984,7 +41283,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<types::BranchWithProtection> {
+    pub async fn repos_get_branch(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<types::BranchWithProtection> {
         let url = format!(
             "/repos/{}/{}/branches/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40010,7 +41314,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::BranchProtection> {
+    pub async fn repos_get_branch_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<types::BranchProtection> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40056,7 +41365,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40074,7 +41387,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_delete_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
+    pub async fn repos_delete_branch_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40100,7 +41418,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_admin_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::ProtectedBranchAdminEnforced> {
+    pub async fn repos_get_admin_branch_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/enforce_admins",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40128,7 +41451,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_set_admin_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::ProtectedBranchAdminEnforced> {
+    pub async fn repos_set_admin_branch_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/enforce_admins",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40156,7 +41484,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_delete_admin_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
+    pub async fn repos_delete_admin_branch_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/enforce_admins",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40213,7 +41546,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_delete_pull_request_review_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
+    pub async fn repos_delete_pull_request_review_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_pull_request_reviews",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40257,7 +41595,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40279,7 +41621,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_commit_signature_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::ProtectedBranchAdminEnforced> {
+    pub async fn repos_get_commit_signature_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_signatures",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40340,7 +41687,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_delete_commit_signature_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
+    pub async fn repos_delete_commit_signature_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_signatures",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40366,7 +41718,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_status_checks_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::StatusCheckPolicy> {
+    pub async fn repos_get_status_checks_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<types::StatusCheckPolicy> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40392,7 +41749,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_remove_status_check_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
+    pub async fn repos_remove_status_check_protection(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40434,7 +41796,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40452,7 +41818,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_all_status_check_contexts(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<String>> {
+    pub async fn repos_get_all_status_check_contexts(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<Vec<String>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40492,7 +41863,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40524,7 +41899,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40556,7 +41935,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40578,7 +41961,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_access_restrictions(&self, owner: &str, repo: &str, branch: &str) -> Result<types::BranchRestrictionPolicy> {
+    pub async fn repos_get_access_restrictions(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<types::BranchRestrictionPolicy> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40606,7 +41994,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_delete_access_restrictions(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
+    pub async fn repos_delete_access_restrictions(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40634,7 +42027,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_apps_with_access_to_protected_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<types::Integration>> {
+    pub async fn repos_get_apps_with_access_to_protected_branch(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40680,7 +42078,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40718,7 +42120,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40756,7 +42162,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40776,7 +42186,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_teams_with_access_to_protected_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<types::Team>> {
+    pub async fn repos_get_teams_with_access_to_protected_branch(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/teams",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40822,7 +42237,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40860,7 +42279,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40898,7 +42321,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -40918,7 +42345,12 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_users_with_access_to_protected_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<types::User>> {
+    pub async fn repos_get_users_with_access_to_protected_branch(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40964,7 +42396,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41002,7 +42438,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41040,7 +42480,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41086,7 +42530,11 @@ impl Client {
             progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41107,14 +42555,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn checks_create(&self, owner: &str, repo: &str, body: &types::ChecksCreateRequest) -> Result<types::CheckRun> {
+    pub async fn checks_create(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ChecksCreateRequest,
+    ) -> Result<types::CheckRun> {
         let url = format!(
             "/repos/{}/{}/check-runs",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41134,7 +42591,12 @@ impl Client {
      * * `repo: &str`
      * * `check_run_id: i64` -- check_run_id parameter.
      */
-    pub async fn checks_get(&self, owner: &str, repo: &str, check_run_id: i64) -> Result<types::CheckRun> {
+    pub async fn checks_get(
+        &self,
+        owner: &str,
+        repo: &str,
+        check_run_id: i64,
+    ) -> Result<types::CheckRun> {
         let url = format!(
             "/repos/{}/{}/check-runs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41162,7 +42624,13 @@ impl Client {
      * * `repo: &str`
      * * `check_run_id: i64` -- check_run_id parameter.
      */
-    pub async fn checks_update(&self, owner: &str, repo: &str, check_run_id: i64, body: &types::ChecksUpdateRequest) -> Result<types::CheckRun> {
+    pub async fn checks_update(
+        &self,
+        owner: &str,
+        repo: &str,
+        check_run_id: i64,
+        body: &types::ChecksUpdateRequest,
+    ) -> Result<types::CheckRun> {
         let url = format!(
             "/repos/{}/{}/check-runs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41170,7 +42638,11 @@ impl Client {
             progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41226,14 +42698,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn checks_create_suite(&self, owner: &str, repo: &str, body: &types::ChecksCreateSuiteRequest) -> Result<types::CheckSuite> {
+    pub async fn checks_create_suite(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ChecksCreateSuiteRequest,
+    ) -> Result<types::CheckSuite> {
         let url = format!(
             "/repos/{}/{}/check-suites",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41262,7 +42743,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41282,7 +42767,12 @@ impl Client {
      * * `repo: &str`
      * * `check_suite_id: i64` -- check_suite_id parameter.
      */
-    pub async fn checks_get_suite(&self, owner: &str, repo: &str, check_suite_id: i64) -> Result<types::CheckSuite> {
+    pub async fn checks_get_suite(
+        &self,
+        owner: &str,
+        repo: &str,
+        check_suite_id: i64,
+    ) -> Result<types::CheckSuite> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41327,7 +42817,8 @@ impl Client {
         page: i64,
     ) -> Result<types::GetChecksListRefOkResponse> {
         let url = format!(
-            "/repos/{}/{}/check-suites/{}/check-runs?check_name={}&filter={}&page={}&per_page={}&status={}",
+            "/repos/{}/{}/check-suites/{}/check-runs?check_name={}&filter={}&page={}&per_page={}&\
+             status={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
@@ -41358,7 +42849,12 @@ impl Client {
      * * `repo: &str`
      * * `check_suite_id: i64` -- check_suite_id parameter.
      */
-    pub async fn checks_rerequest_suite(&self, owner: &str, repo: &str, check_suite_id: i64) -> Result<types::Data> {
+    pub async fn checks_rerequest_suite(
+        &self,
+        owner: &str,
+        repo: &str,
+        check_suite_id: i64,
+    ) -> Result<types::Data> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/rerequest",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41409,7 +42905,8 @@ impl Client {
         state: types::CodeScanningAlertState,
     ) -> Result<Vec<types::CodeScanningAlertItems>> {
         let url = format!(
-            "/repos/{}/{}/code-scanning/alerts?page={}&per_page={}&ref={}&state={}&tool_guid={}&tool_name={}",
+            "/repos/{}/{}/code-scanning/alerts?page={}&per_page={}&ref={}&state={}&tool_guid={}&\
+             tool_name={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", page),
@@ -41441,7 +42938,12 @@ impl Client {
      * * `repo: &str`
      * * `alert_number: i64` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
      */
-    pub async fn code_scanning_get_alert(&self, owner: &str, repo: &str, alert_number: i64) -> Result<types::CodeScanningAlert> {
+    pub async fn code_scanning_get_alert(
+        &self,
+        owner: &str,
+        repo: &str,
+        alert_number: i64,
+    ) -> Result<types::CodeScanningAlert> {
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41481,7 +42983,11 @@ impl Client {
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41571,7 +43077,8 @@ impl Client {
         sarif_id: &str,
     ) -> Result<Vec<types::CodeScanningAnalysis>> {
         let url = format!(
-            "/repos/{}/{}/code-scanning/analyses?page={}&per_page={}&ref={}&sarif_id={}&tool_guid={}&tool_name={}",
+            "/repos/{}/{}/code-scanning/analyses?page={}&per_page={}&ref={}&sarif_id={}&\
+             tool_guid={}&tool_name={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", page),
@@ -41620,7 +43127,12 @@ impl Client {
      * * `repo: &str`
      * * `analysis_id: i64` -- The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
      */
-    pub async fn code_scanning_get_analysis(&self, owner: &str, repo: &str, analysis_id: i64) -> Result<types::CodeScanningAnalysis> {
+    pub async fn code_scanning_get_analysis(
+        &self,
+        owner: &str,
+        repo: &str,
+        analysis_id: i64,
+    ) -> Result<types::CodeScanningAnalysis> {
         let url = format!(
             "/repos/{}/{}/code-scanning/analyses/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41770,7 +43282,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41788,7 +43304,12 @@ impl Client {
      * * `repo: &str`
      * * `sarif_id: &str` -- The SARIF ID obtained after uploading.
      */
-    pub async fn code_scanning_get_sarif(&self, owner: &str, repo: &str, sarif_id: &str) -> Result<types::CodeScanningSarifsStatus> {
+    pub async fn code_scanning_get_sarif(
+        &self,
+        owner: &str,
+        repo: &str,
+        sarif_id: &str,
+    ) -> Result<types::CodeScanningSarifsStatus> {
         let url = format!(
             "/repos/{}/{}/code-scanning/sarifs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41858,7 +43379,12 @@ impl Client {
      * * `repo: &str`
      * * `username: &str`
      */
-    pub async fn repos_check_collaborator(&self, owner: &str, repo: &str, username: &str) -> Result<()> {
+    pub async fn repos_check_collaborator(
+        &self,
+        owner: &str,
+        repo: &str,
+        username: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/collaborators/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41908,7 +43434,11 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -41926,7 +43456,12 @@ impl Client {
      * * `repo: &str`
      * * `username: &str`
      */
-    pub async fn repos_remove_collaborator(&self, owner: &str, repo: &str, username: &str) -> Result<()> {
+    pub async fn repos_remove_collaborator(
+        &self,
+        owner: &str,
+        repo: &str,
+        username: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/collaborators/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41986,7 +43521,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_commit_comments_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::CommitComment>> {
+    pub async fn repos_list_commit_comments_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::CommitComment>> {
         let url = format!(
             "/repos/{}/{}/comments?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42013,7 +43554,12 @@ impl Client {
      * * `repo: &str`
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn repos_get_commit_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<types::CommitComment> {
+    pub async fn repos_get_commit_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+    ) -> Result<types::CommitComment> {
         let url = format!(
             "/repos/{}/{}/comments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42039,7 +43585,12 @@ impl Client {
      * * `repo: &str`
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn repos_delete_commit_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<()> {
+    pub async fn repos_delete_commit_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/comments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42079,7 +43630,11 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -42151,7 +43706,11 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -42172,7 +43731,13 @@ impl Client {
      * * `comment_id: i64` -- comment_id parameter.
      * * `reaction_id: i64`
      */
-    pub async fn reactions_delete_for_commit_comment(&self, owner: &str, repo: &str, comment_id: i64, reaction_id: i64) -> Result<()> {
+    pub async fn reactions_delete_for_commit_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+        reaction_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42277,7 +43842,12 @@ impl Client {
      * * `repo: &str`
      * * `commit_sha: &str` -- commit_sha parameter.
      */
-    pub async fn repos_list_branches_for_head_commit(&self, owner: &str, repo: &str, commit_sha: &str) -> Result<Vec<types::BranchShort>> {
+    pub async fn repos_list_branches_for_head_commit(
+        &self,
+        owner: &str,
+        repo: &str,
+        commit_sha: &str,
+    ) -> Result<Vec<types::BranchShort>> {
         let url = format!(
             "/repos/{}/{}/commits/{}/branches-where-head",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42356,7 +43926,11 @@ impl Client {
             progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -42448,7 +44022,14 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `ref_: &str` -- ref parameter.
      */
-    pub async fn repos_get_commit(&self, owner: &str, repo: &str, page: i64, per_page: i64, ref_: &str) -> Result<types::Tree> {
+    pub async fn repos_get_commit(
+        &self,
+        owner: &str,
+        repo: &str,
+        page: i64,
+        per_page: i64,
+        ref_: &str,
+    ) -> Result<types::Tree> {
         let url = format!(
             "/repos/{}/{}/commits/{}?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42497,7 +44078,8 @@ impl Client {
         app_id: i64,
     ) -> Result<types::GetChecksListRefOkResponse> {
         let url = format!(
-            "/repos/{}/{}/commits/{}/check-runs?app_id={}&check_name={}&filter={}&page={}&per_page={}&status={}",
+            "/repos/{}/{}/commits/{}/check-runs?app_id={}&check_name={}&filter={}&page={}&\
+             per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&ref_.to_string()),
@@ -42657,7 +44239,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn codes_of_conduct_get_for_repo(&self, owner: &str, repo: &str) -> Result<types::CodeOfConduct> {
+    pub async fn codes_of_conduct_get_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::CodeOfConduct> {
         let url = format!(
             "/repos/{}/{}/community/code_of_conduct",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42692,7 +44278,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_community_profile_metrics(&self, owner: &str, repo: &str) -> Result<types::CommunityProfile> {
+    pub async fn repos_get_community_profile_metrics(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::CommunityProfile> {
         let url = format!(
             "/repos/{}/{}/community/profile",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42758,7 +44348,14 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `basehead: &str` -- The base branch and head branch to compare. This parameter expects the format `{base}...{head}`.
      */
-    pub async fn repos_compare_commits(&self, owner: &str, repo: &str, page: i64, per_page: i64, basehead: &str) -> Result<types::CommitComparison> {
+    pub async fn repos_compare_commits(
+        &self,
+        owner: &str,
+        repo: &str,
+        page: i64,
+        per_page: i64,
+        basehead: &str,
+    ) -> Result<types::CommitComparison> {
         let url = format!(
             "/repos/{}/{}/compare/{}?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42804,7 +44401,11 @@ impl Client {
             progenitor_support::encode_path(&content_reference_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -42854,7 +44455,13 @@ impl Client {
      * * `path: &str` -- path parameter.
      * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
-    pub async fn repos_get_content(&self, owner: &str, repo: &str, path: &str, ref_: &str) -> Result<Vec<types::Entries>> {
+    pub async fn repos_get_content(
+        &self,
+        owner: &str,
+        repo: &str,
+        path: &str,
+        ref_: &str,
+    ) -> Result<Vec<types::Entries>> {
         let url = format!(
             "/repos/{}/{}/contents/{}?ref={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42895,7 +44502,11 @@ impl Client {
             progenitor_support::encode_path(&path.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -42919,7 +44530,13 @@ impl Client {
      * * `repo: &str`
      * * `path: &str` -- path parameter.
      */
-    pub async fn repos_delete_file(&self, owner: &str, repo: &str, path: &str, body: &types::ReposDeleteFileRequest) -> Result<types::FileCommit> {
+    pub async fn repos_delete_file(
+        &self,
+        owner: &str,
+        repo: &str,
+        path: &str,
+        body: &types::ReposDeleteFileRequest,
+    ) -> Result<types::FileCommit> {
         let url = format!(
             "/repos/{}/{}/contents/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42927,7 +44544,11 @@ impl Client {
             progenitor_support::encode_path(&path.to_string()),
         );
 
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -42949,7 +44570,14 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_contributors(&self, owner: &str, repo: &str, anon: &str, per_page: i64, page: i64) -> Result<Vec<types::Contributor>> {
+    pub async fn repos_list_contributors(
+        &self,
+        owner: &str,
+        repo: &str,
+        anon: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Contributor>> {
         let url = format!(
             "/repos/{}/{}/contributors?anon={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43066,14 +44694,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_create_deployment(&self, owner: &str, repo: &str, body: &types::ReposCreateDeploymentRequest) -> Result<types::Deployment> {
+    pub async fn repos_create_deployment(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposCreateDeploymentRequest,
+    ) -> Result<types::Deployment> {
         let url = format!(
             "/repos/{}/{}/deployments",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43091,7 +44728,12 @@ impl Client {
      * * `repo: &str`
      * * `deployment_id: i64` -- deployment_id parameter.
      */
-    pub async fn repos_get_deployment(&self, owner: &str, repo: &str, deployment_id: i64) -> Result<types::Deployment> {
+    pub async fn repos_get_deployment(
+        &self,
+        owner: &str,
+        repo: &str,
+        deployment_id: i64,
+    ) -> Result<types::Deployment> {
         let url = format!(
             "/repos/{}/{}/deployments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43124,7 +44766,12 @@ impl Client {
      * * `repo: &str`
      * * `deployment_id: i64` -- deployment_id parameter.
      */
-    pub async fn repos_delete_deployment(&self, owner: &str, repo: &str, deployment_id: i64) -> Result<()> {
+    pub async fn repos_delete_deployment(
+        &self,
+        owner: &str,
+        repo: &str,
+        deployment_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/deployments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43203,7 +44850,11 @@ impl Client {
             progenitor_support::encode_path(&deployment_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43222,7 +44873,13 @@ impl Client {
      * * `deployment_id: i64` -- deployment_id parameter.
      * * `status_id: i64`
      */
-    pub async fn repos_get_deployment_status(&self, owner: &str, repo: &str, deployment_id: i64, status_id: i64) -> Result<types::DeploymentStatus> {
+    pub async fn repos_get_deployment_status(
+        &self,
+        owner: &str,
+        repo: &str,
+        deployment_id: i64,
+        status_id: i64,
+    ) -> Result<types::DeploymentStatus> {
         let url = format!(
             "/repos/{}/{}/deployments/{}/statuses/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43257,14 +44914,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_create_dispatch_event(&self, owner: &str, repo: &str, body: &types::ReposCreateDispatchEventRequest) -> Result<()> {
+    pub async fn repos_create_dispatch_event(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposCreateDispatchEventRequest,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/dispatches",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43283,7 +44949,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_all_environments(&self, owner: &str, repo: &str) -> Result<types::GetReposAllEnvironmentsOkResponse> {
+    pub async fn repos_get_all_environments(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::GetReposAllEnvironmentsOkResponse> {
         let url = format!(
             "/repos/{}/{}/environments",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43308,7 +44978,12 @@ impl Client {
      * * `repo: &str`
      * * `environment_name: &str` -- The name of the environment.
      */
-    pub async fn repos_get_environment(&self, owner: &str, repo: &str, environment_name: &str) -> Result<types::Environment> {
+    pub async fn repos_get_environment(
+        &self,
+        owner: &str,
+        repo: &str,
+        environment_name: &str,
+    ) -> Result<types::Environment> {
         let url = format!(
             "/repos/{}/{}/environments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43354,7 +45029,11 @@ impl Client {
             progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43372,7 +45051,12 @@ impl Client {
      * * `repo: &str`
      * * `environment_name: &str` -- The name of the environment.
      */
-    pub async fn repos_delete_an_environment(&self, owner: &str, repo: &str, environment_name: &str) -> Result<()> {
+    pub async fn repos_delete_an_environment(
+        &self,
+        owner: &str,
+        repo: &str,
+        environment_name: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/environments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43399,7 +45083,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_repo_events(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
+    pub async fn activity_list_repo_events(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Event>> {
         let url = format!(
             "/repos/{}/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43464,14 +45154,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_create_fork(&self, owner: &str, repo: &str, body: &types::ReposCreateForkRequest) -> Result<types::FullRepository> {
+    pub async fn repos_create_fork(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposCreateForkRequest,
+    ) -> Result<types::FullRepository> {
         let url = format!(
             "/repos/{}/{}/forks",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43488,14 +45187,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn git_create_blob(&self, owner: &str, repo: &str, body: &types::GitCreateBlobRequest) -> Result<types::ShortBlob> {
+    pub async fn git_create_blob(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::GitCreateBlobRequest,
+    ) -> Result<types::ShortBlob> {
         let url = format!(
             "/repos/{}/{}/git/blobs",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43515,7 +45223,12 @@ impl Client {
      * * `repo: &str`
      * * `file_sha: &str`
      */
-    pub async fn git_get_blob(&self, owner: &str, repo: &str, file_sha: &str) -> Result<types::Blob> {
+    pub async fn git_get_blob(
+        &self,
+        owner: &str,
+        repo: &str,
+        file_sha: &str,
+    ) -> Result<types::Blob> {
         let url = format!(
             "/repos/{}/{}/git/blobs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43569,14 +45282,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn git_create_commit(&self, owner: &str, repo: &str, body: &types::GitCreateCommitRequest) -> Result<types::GitCommit> {
+    pub async fn git_create_commit(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::GitCreateCommitRequest,
+    ) -> Result<types::GitCommit> {
         let url = format!(
             "/repos/{}/{}/git/commits",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43623,7 +45345,12 @@ impl Client {
      * * `repo: &str`
      * * `commit_sha: &str` -- commit_sha parameter.
      */
-    pub async fn git_get_commit(&self, owner: &str, repo: &str, commit_sha: &str) -> Result<types::GitCommit> {
+    pub async fn git_get_commit(
+        &self,
+        owner: &str,
+        repo: &str,
+        commit_sha: &str,
+    ) -> Result<types::GitCommit> {
         let url = format!(
             "/repos/{}/{}/git/commits/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43657,7 +45384,14 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn git_list_matching_refs(&self, owner: &str, repo: &str, ref_: &str, per_page: i64, page: i64) -> Result<Vec<types::GitRef>> {
+    pub async fn git_list_matching_refs(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::GitRef>> {
         let url = format!(
             "/repos/{}/{}/git/matching-refs/{}?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43712,14 +45446,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn git_create_ref(&self, owner: &str, repo: &str, body: &types::GitCreateRefRequest) -> Result<types::GitRef> {
+    pub async fn git_create_ref(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::GitCreateRefRequest,
+    ) -> Result<types::GitRef> {
         let url = format!(
             "/repos/{}/{}/git/refs",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43763,7 +45506,13 @@ impl Client {
      * * `repo: &str`
      * * `ref_: &str` -- ref parameter.
      */
-    pub async fn git_update_ref(&self, owner: &str, repo: &str, ref_: &str, body: &types::GitUpdateRefRequest) -> Result<types::GitRef> {
+    pub async fn git_update_ref(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+        body: &types::GitUpdateRefRequest,
+    ) -> Result<types::GitRef> {
         let url = format!(
             "/repos/{}/{}/git/refs/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43771,7 +45520,11 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43817,14 +45570,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn git_create_tag(&self, owner: &str, repo: &str, body: &types::GitCreateTagRequest) -> Result<types::GitTag> {
+    pub async fn git_create_tag(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::GitCreateTagRequest,
+    ) -> Result<types::GitTag> {
         let url = format!(
             "/repos/{}/{}/git/tags",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43869,7 +45631,12 @@ impl Client {
      * * `repo: &str`
      * * `tag_sha: &str`
      */
-    pub async fn git_get_tag(&self, owner: &str, repo: &str, tag_sha: &str) -> Result<types::GitTag> {
+    pub async fn git_get_tag(
+        &self,
+        owner: &str,
+        repo: &str,
+        tag_sha: &str,
+    ) -> Result<types::GitTag> {
         let url = format!(
             "/repos/{}/{}/git/tags/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43896,14 +45663,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn git_create_tree(&self, owner: &str, repo: &str, body: &types::GitCreateTreeRequestData) -> Result<types::GitTree> {
+    pub async fn git_create_tree(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::GitCreateTreeRequestData,
+    ) -> Result<types::GitTree> {
         let url = format!(
             "/repos/{}/{}/git/trees",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -43924,7 +45700,13 @@ impl Client {
      * * `tree_sha: &str`
      * * `recursive: &str` -- Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees.
      */
-    pub async fn git_get_tree(&self, owner: &str, repo: &str, tree_sha: &str, recursive: &str) -> Result<types::GitTree> {
+    pub async fn git_get_tree(
+        &self,
+        owner: &str,
+        repo: &str,
+        tree_sha: &str,
+        recursive: &str,
+    ) -> Result<types::GitTree> {
         let url = format!(
             "/repos/{}/{}/git/trees/{}?recursive={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43952,7 +45734,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_webhooks(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Hook>> {
+    pub async fn repos_list_webhooks(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Hook>> {
         let url = format!(
             "/repos/{}/{}/hooks?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43979,14 +45767,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_create_webhook(&self, owner: &str, repo: &str, body: &types::ReposCreateWebhookRequest) -> Result<types::Hook> {
+    pub async fn repos_create_webhook(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposCreateWebhookRequest,
+    ) -> Result<types::Hook> {
         let url = format!(
             "/repos/{}/{}/hooks",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44004,7 +45801,12 @@ impl Client {
      * * `repo: &str`
      * * `hook_id: i64`
      */
-    pub async fn repos_get_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<types::Hook> {
+    pub async fn repos_get_webhook(
+        &self,
+        owner: &str,
+        repo: &str,
+        hook_id: i64,
+    ) -> Result<types::Hook> {
         let url = format!(
             "/repos/{}/{}/hooks/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44056,7 +45858,13 @@ impl Client {
      * * `repo: &str`
      * * `hook_id: i64`
      */
-    pub async fn repos_update_webhook(&self, owner: &str, repo: &str, hook_id: i64, body: &types::ReposUpdateWebhookRequest) -> Result<types::Hook> {
+    pub async fn repos_update_webhook(
+        &self,
+        owner: &str,
+        repo: &str,
+        hook_id: i64,
+        body: &types::ReposUpdateWebhookRequest,
+    ) -> Result<types::Hook> {
         let url = format!(
             "/repos/{}/{}/hooks/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44064,7 +45872,11 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44084,7 +45896,12 @@ impl Client {
      * * `repo: &str`
      * * `hook_id: i64`
      */
-    pub async fn repos_get_webhook_config_for_repo(&self, owner: &str, repo: &str, hook_id: i64) -> Result<types::WebhookConfig> {
+    pub async fn repos_get_webhook_config_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        hook_id: i64,
+    ) -> Result<types::WebhookConfig> {
         let url = format!(
             "/repos/{}/{}/hooks/{}/config",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44126,7 +45943,11 @@ impl Client {
             progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44172,7 +45993,12 @@ impl Client {
      * * `repo: &str`
      * * `hook_id: i64`
      */
-    pub async fn repos_test_push_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
+    pub async fn repos_test_push_webhook(
+        &self,
+        owner: &str,
+        repo: &str,
+        hook_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/hooks/{}/tests",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44230,7 +46056,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn migrations_get_import_status(&self, owner: &str, repo: &str) -> Result<types::Import> {
+    pub async fn migrations_get_import_status(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::Import> {
         let url = format!(
             "/repos/{}/{}/import",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44254,14 +46084,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn migrations_start_import(&self, owner: &str, repo: &str, body: &types::MigrationsStartImportRequest) -> Result<types::Import> {
+    pub async fn migrations_start_import(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::MigrationsStartImportRequest,
+    ) -> Result<types::Import> {
         let url = format!(
             "/repos/{}/{}/import",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44303,14 +46142,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn migrations_update_import(&self, owner: &str, repo: &str, body: &types::MigrationsUpdateImportRequest) -> Result<types::Import> {
+    pub async fn migrations_update_import(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::MigrationsUpdateImportRequest,
+    ) -> Result<types::Import> {
         let url = format!(
             "/repos/{}/{}/import",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44330,7 +46178,12 @@ impl Client {
      * * `repo: &str`
      * * `since: i64` -- A user ID. Only return users with an ID greater than this ID.
      */
-    pub async fn migrations_get_commit_authors(&self, owner: &str, repo: &str, since: i64) -> Result<Vec<types::PorterAuthor>> {
+    pub async fn migrations_get_commit_authors(
+        &self,
+        owner: &str,
+        repo: &str,
+        since: i64,
+    ) -> Result<Vec<types::PorterAuthor>> {
         let url = format!(
             "/repos/{}/{}/import/authors?since={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44370,7 +46223,11 @@ impl Client {
             progenitor_support::encode_path(&author_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44387,7 +46244,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn migrations_get_large_files(&self, owner: &str, repo: &str) -> Result<Vec<types::PorterLargeFile>> {
+    pub async fn migrations_get_large_files(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<types::PorterLargeFile>> {
         let url = format!(
             "/repos/{}/{}/import/large_files",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44423,7 +46284,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44442,7 +46307,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn apps_get_repo_installation(&self, owner: &str, repo: &str) -> Result<types::Installation> {
+    pub async fn apps_get_repo_installation(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::Installation> {
         let url = format!(
             "/repos/{}/{}/installation",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44466,7 +46335,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn interactions_get_restrictions_for_repo(&self, owner: &str, repo: &str) -> Result<types::InteractionLimitResponse> {
+    pub async fn interactions_get_restrictions_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::InteractionLimitResponse> {
         let url = format!(
             "/repos/{}/{}/interaction-limits",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44502,7 +46375,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44519,7 +46396,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn interactions_remove_restrictions_for_repo(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn interactions_remove_restrictions_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/interaction-limits",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44545,7 +46426,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_invitations(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::RepositoryInvitation>> {
+    pub async fn repos_list_invitations(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::RepositoryInvitation>> {
         let url = format!(
             "/repos/{}/{}/invitations?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44572,7 +46459,12 @@ impl Client {
      * * `repo: &str`
      * * `invitation_id: i64` -- invitation_id parameter.
      */
-    pub async fn repos_delete_invitation(&self, owner: &str, repo: &str, invitation_id: i64) -> Result<()> {
+    pub async fn repos_delete_invitation(
+        &self,
+        owner: &str,
+        repo: &str,
+        invitation_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/invitations/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44612,7 +46504,11 @@ impl Client {
             progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44662,8 +46558,8 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::IssueSimple>> {
         let url = format!(
-            "/repos/{}/{}/issues?assignee={}&creator={}&direction={}&labels={}&mentioned={}&milestone={}&page={}&per_page={}&since={}&sort={}&\
-             state={}",
+            "/repos/{}/{}/issues?assignee={}&creator={}&direction={}&labels={}&mentioned={}&\
+             milestone={}&page={}&per_page={}&since={}&sort={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             assignee.to_string(),
@@ -44698,14 +46594,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn issues_create(&self, owner: &str, repo: &str, body: &types::IssuesCreateRequest) -> Result<types::Issue> {
+    pub async fn issues_create(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::IssuesCreateRequest,
+    ) -> Result<types::Issue> {
         let url = format!(
             "/repos/{}/{}/issues",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44766,7 +46671,12 @@ impl Client {
      * * `repo: &str`
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn issues_get_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<types::IssueComment> {
+    pub async fn issues_get_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+    ) -> Result<types::IssueComment> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44792,7 +46702,12 @@ impl Client {
      * * `repo: &str`
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn issues_delete_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<()> {
+    pub async fn issues_delete_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44832,7 +46747,11 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44904,7 +46823,11 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -44925,7 +46848,13 @@ impl Client {
      * * `comment_id: i64` -- comment_id parameter.
      * * `reaction_id: i64`
      */
-    pub async fn reactions_delete_for_issue_comment(&self, owner: &str, repo: &str, comment_id: i64, reaction_id: i64) -> Result<()> {
+    pub async fn reactions_delete_for_issue_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+        reaction_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44953,7 +46882,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn issues_list_events_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::IssueEvent>> {
+    pub async fn issues_list_events_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::IssueEvent>> {
         let url = format!(
             "/repos/{}/{}/issues/events?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44980,7 +46915,12 @@ impl Client {
      * * `repo: &str`
      * * `event_id: i64`
      */
-    pub async fn issues_get_event(&self, owner: &str, repo: &str, event_id: i64) -> Result<types::IssueEvent> {
+    pub async fn issues_get_event(
+        &self,
+        owner: &str,
+        repo: &str,
+        event_id: i64,
+    ) -> Result<types::IssueEvent> {
         let url = format!(
             "/repos/{}/{}/issues/events/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45016,7 +46956,12 @@ impl Client {
      * * `repo: &str`
      * * `issue_number: i64` -- issue_number parameter.
      */
-    pub async fn issues_get(&self, owner: &str, repo: &str, issue_number: i64) -> Result<types::Issue> {
+    pub async fn issues_get(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+    ) -> Result<types::Issue> {
         let url = format!(
             "/repos/{}/{}/issues/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45042,7 +46987,13 @@ impl Client {
      * * `repo: &str`
      * * `issue_number: i64` -- issue_number parameter.
      */
-    pub async fn issues_update(&self, owner: &str, repo: &str, issue_number: i64, body: &types::IssuesUpdateRequest) -> Result<types::Issue> {
+    pub async fn issues_update(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+        body: &types::IssuesUpdateRequest,
+    ) -> Result<types::Issue> {
         let url = format!(
             "/repos/{}/{}/issues/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45050,7 +47001,11 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45082,7 +47037,11 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45114,7 +47073,11 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45186,7 +47149,11 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45292,7 +47259,11 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45324,7 +47295,11 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45342,7 +47317,12 @@ impl Client {
      * * `repo: &str`
      * * `issue_number: i64` -- issue_number parameter.
      */
-    pub async fn issues_remove_all_labels(&self, owner: &str, repo: &str, issue_number: i64) -> Result<()> {
+    pub async fn issues_remove_all_labels(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45369,7 +47349,13 @@ impl Client {
      * * `issue_number: i64` -- issue_number parameter.
      * * `name: &str`
      */
-    pub async fn issues_remove_label(&self, owner: &str, repo: &str, issue_number: i64, name: &str) -> Result<Vec<types::Label>> {
+    pub async fn issues_remove_label(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+        name: &str,
+    ) -> Result<Vec<types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45398,7 +47384,13 @@ impl Client {
      * * `repo: &str`
      * * `issue_number: i64` -- issue_number parameter.
      */
-    pub async fn issues_lock(&self, owner: &str, repo: &str, issue_number: i64, body: &types::IssuesLockRequest) -> Result<()> {
+    pub async fn issues_lock(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+        body: &types::IssuesLockRequest,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/{}/lock",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45406,7 +47398,11 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45504,7 +47500,11 @@ impl Client {
             progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45525,7 +47525,13 @@ impl Client {
      * * `issue_number: i64` -- issue_number parameter.
      * * `reaction_id: i64`
      */
-    pub async fn reactions_delete_for_issue(&self, owner: &str, repo: &str, issue_number: i64, reaction_id: i64) -> Result<()> {
+    pub async fn reactions_delete_for_issue(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+        reaction_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45590,7 +47596,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_deploy_keys(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::DeployKey>> {
+    pub async fn repos_list_deploy_keys(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::DeployKey>> {
         let url = format!(
             "/repos/{}/{}/keys?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45616,14 +47628,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_create_deploy_key(&self, owner: &str, repo: &str, body: &types::ReposCreateDeployKeyRequest) -> Result<types::DeployKey> {
+    pub async fn repos_create_deploy_key(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposCreateDeployKeyRequest,
+    ) -> Result<types::DeployKey> {
         let url = format!(
             "/repos/{}/{}/keys",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45641,7 +47662,12 @@ impl Client {
      * * `repo: &str`
      * * `key_id: i64` -- key_id parameter.
      */
-    pub async fn repos_get_deploy_key(&self, owner: &str, repo: &str, key_id: i64) -> Result<types::DeployKey> {
+    pub async fn repos_get_deploy_key(
+        &self,
+        owner: &str,
+        repo: &str,
+        key_id: i64,
+    ) -> Result<types::DeployKey> {
         let url = format!(
             "/repos/{}/{}/keys/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45667,7 +47693,12 @@ impl Client {
      * * `repo: &str`
      * * `key_id: i64` -- key_id parameter.
      */
-    pub async fn repos_delete_deploy_key(&self, owner: &str, repo: &str, key_id: i64) -> Result<()> {
+    pub async fn repos_delete_deploy_key(
+        &self,
+        owner: &str,
+        repo: &str,
+        key_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/keys/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45694,7 +47725,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn issues_list_labels_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Label>> {
+    pub async fn issues_list_labels_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Label>> {
         let url = format!(
             "/repos/{}/{}/labels?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45720,14 +47757,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn issues_create_label(&self, owner: &str, repo: &str, body: &types::IssuesCreateLabelRequest) -> Result<types::Label> {
+    pub async fn issues_create_label(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::IssuesCreateLabelRequest,
+    ) -> Result<types::Label> {
         let url = format!(
             "/repos/{}/{}/labels",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45745,7 +47791,12 @@ impl Client {
      * * `repo: &str`
      * * `name: &str`
      */
-    pub async fn issues_get_label(&self, owner: &str, repo: &str, name: &str) -> Result<types::Label> {
+    pub async fn issues_get_label(
+        &self,
+        owner: &str,
+        repo: &str,
+        name: &str,
+    ) -> Result<types::Label> {
         let url = format!(
             "/repos/{}/{}/labels/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45797,7 +47848,13 @@ impl Client {
      * * `repo: &str`
      * * `name: &str`
      */
-    pub async fn issues_update_label(&self, owner: &str, repo: &str, name: &str, body: &types::IssuesUpdateLabelRequest) -> Result<types::Label> {
+    pub async fn issues_update_label(
+        &self,
+        owner: &str,
+        repo: &str,
+        name: &str,
+        body: &types::IssuesUpdateLabelRequest,
+    ) -> Result<types::Label> {
         let url = format!(
             "/repos/{}/{}/labels/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45805,7 +47862,11 @@ impl Client {
             progenitor_support::encode_path(&name.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45848,7 +47909,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn licenses_get_for_repo(&self, owner: &str, repo: &str) -> Result<types::LicenseContent> {
+    pub async fn licenses_get_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::LicenseContent> {
         let url = format!(
             "/repos/{}/{}/license",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45872,14 +47937,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_merge(&self, owner: &str, repo: &str, body: &types::ReposMergeRequest) -> Result<types::Tree> {
+    pub async fn repos_merge(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposMergeRequest,
+    ) -> Result<types::Tree> {
         let url = format!(
             "/repos/{}/{}/merges",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45939,14 +48013,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn issues_create_milestone(&self, owner: &str, repo: &str, body: &types::IssuesCreateMilestoneRequest) -> Result<types::Milestone> {
+    pub async fn issues_create_milestone(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::IssuesCreateMilestoneRequest,
+    ) -> Result<types::Milestone> {
         let url = format!(
             "/repos/{}/{}/milestones",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -45964,7 +48047,12 @@ impl Client {
      * * `repo: &str`
      * * `milestone_number: i64` -- milestone_number parameter.
      */
-    pub async fn issues_get_milestone(&self, owner: &str, repo: &str, milestone_number: i64) -> Result<types::Milestone> {
+    pub async fn issues_get_milestone(
+        &self,
+        owner: &str,
+        repo: &str,
+        milestone_number: i64,
+    ) -> Result<types::Milestone> {
         let url = format!(
             "/repos/{}/{}/milestones/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45990,7 +48078,12 @@ impl Client {
      * * `repo: &str`
      * * `milestone_number: i64` -- milestone_number parameter.
      */
-    pub async fn issues_delete_milestone(&self, owner: &str, repo: &str, milestone_number: i64) -> Result<()> {
+    pub async fn issues_delete_milestone(
+        &self,
+        owner: &str,
+        repo: &str,
+        milestone_number: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/milestones/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46030,7 +48123,11 @@ impl Client {
             progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46102,7 +48199,8 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Thread>> {
         let url = format!(
-            "/repos/{}/{}/notifications?all={}&before={}&page={}&participating={}&per_page={}&since={}",
+            "/repos/{}/{}/notifications?all={}&before={}&page={}&participating={}&per_page={}&\
+             since={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", all),
@@ -46142,7 +48240,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46195,7 +48297,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46212,14 +48318,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_create_pages_site(&self, owner: &str, repo: &str, body: &types::ReposCreatePagesSiteRequest) -> Result<types::Page> {
+    pub async fn repos_create_pages_site(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposCreatePagesSiteRequest,
+    ) -> Result<types::Page> {
         let url = format!(
             "/repos/{}/{}/pages",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46262,7 +48377,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_pages_builds(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::PageBuild>> {
+    pub async fn repos_list_pages_builds(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::PageBuild>> {
         let url = format!(
             "/repos/{}/{}/pages/builds?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46290,7 +48411,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_request_pages_build(&self, owner: &str, repo: &str) -> Result<types::PageBuildStatus> {
+    pub async fn repos_request_pages_build(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::PageBuildStatus> {
         let url = format!(
             "/repos/{}/{}/pages/builds",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46314,7 +48439,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_latest_pages_build(&self, owner: &str, repo: &str) -> Result<types::PageBuild> {
+    pub async fn repos_get_latest_pages_build(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::PageBuild> {
         let url = format!(
             "/repos/{}/{}/pages/builds/latest",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46339,7 +48468,12 @@ impl Client {
      * * `repo: &str`
      * * `build_id: i64`
      */
-    pub async fn repos_get_pages_build(&self, owner: &str, repo: &str, build_id: i64) -> Result<types::PageBuild> {
+    pub async fn repos_get_pages_build(
+        &self,
+        owner: &str,
+        repo: &str,
+        build_id: i64,
+    ) -> Result<types::PageBuild> {
         let url = format!(
             "/repos/{}/{}/pages/builds/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46368,7 +48502,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_pages_health_check(&self, owner: &str, repo: &str) -> Result<types::PagesHealthCheck> {
+    pub async fn repos_get_pages_health_check(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::PagesHealthCheck> {
         let url = format!(
             "/repos/{}/{}/pages/health",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46429,14 +48567,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn projects_create_for_repo(&self, owner: &str, repo: &str, body: &types::ProjectsCreateOrgRequest) -> Result<types::Project> {
+    pub async fn projects_create_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ProjectsCreateOrgRequest,
+    ) -> Result<types::Project> {
         let url = format!(
             "/repos/{}/{}/projects",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46508,14 +48655,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn pulls_create(&self, owner: &str, repo: &str, body: &types::PullsCreateRequest) -> Result<types::PullRequest> {
+    pub async fn pulls_create(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::PullsCreateRequest,
+    ) -> Result<types::PullRequest> {
         let url = format!(
             "/repos/{}/{}/pulls",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46576,7 +48732,12 @@ impl Client {
      * * `repo: &str`
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn pulls_get_review_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<types::PullRequestReviewComment> {
+    pub async fn pulls_get_review_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+    ) -> Result<types::PullRequestReviewComment> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46602,7 +48763,12 @@ impl Client {
      * * `repo: &str`
      * * `comment_id: i64` -- comment_id parameter.
      */
-    pub async fn pulls_delete_review_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<()> {
+    pub async fn pulls_delete_review_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46642,7 +48808,11 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46714,7 +48884,11 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46735,7 +48909,13 @@ impl Client {
      * * `comment_id: i64` -- comment_id parameter.
      * * `reaction_id: i64`
      */
-    pub async fn reactions_delete_for_pull_request_comment(&self, owner: &str, repo: &str, comment_id: i64, reaction_id: i64) -> Result<()> {
+    pub async fn reactions_delete_for_pull_request_comment(
+        &self,
+        owner: &str,
+        repo: &str,
+        comment_id: i64,
+        reaction_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46776,7 +48956,12 @@ impl Client {
      * * `repo: &str`
      * * `pull_number: i64`
      */
-    pub async fn pulls_get(&self, owner: &str, repo: &str, pull_number: i64) -> Result<types::PullRequest> {
+    pub async fn pulls_get(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+    ) -> Result<types::PullRequest> {
         let url = format!(
             "/repos/{}/{}/pulls/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46804,7 +48989,13 @@ impl Client {
      * * `repo: &str`
      * * `pull_number: i64`
      */
-    pub async fn pulls_update(&self, owner: &str, repo: &str, pull_number: i64, body: &types::PullsUpdateRequest) -> Result<types::PullRequest> {
+    pub async fn pulls_update(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+        body: &types::PullsUpdateRequest,
+    ) -> Result<types::PullRequest> {
         let url = format!(
             "/repos/{}/{}/pulls/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46812,7 +49003,11 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46897,7 +49092,11 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46934,7 +49133,11 @@ impl Client {
             progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -46954,7 +49157,14 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn pulls_list_commits(&self, owner: &str, repo: &str, pull_number: i64, per_page: i64, page: i64) -> Result<Vec<types::Tree>> {
+    pub async fn pulls_list_commits(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Tree>> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/commits?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46984,7 +49194,14 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn pulls_list_files(&self, owner: &str, repo: &str, pull_number: i64, per_page: i64, page: i64) -> Result<Vec<types::DiffEntry>> {
+    pub async fn pulls_list_files(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::DiffEntry>> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/files?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47012,7 +49229,12 @@ impl Client {
      * * `repo: &str`
      * * `pull_number: i64`
      */
-    pub async fn pulls_check_if_merged(&self, owner: &str, repo: &str, pull_number: i64) -> Result<()> {
+    pub async fn pulls_check_if_merged(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/merge",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47052,7 +49274,11 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47121,7 +49347,11 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47153,7 +49383,11 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47228,7 +49462,11 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47247,7 +49485,13 @@ impl Client {
      * * `pull_number: i64`
      * * `review_id: i64` -- review_id parameter.
      */
-    pub async fn pulls_get_review(&self, owner: &str, repo: &str, pull_number: i64, review_id: i64) -> Result<types::PullRequestReview> {
+    pub async fn pulls_get_review(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+        review_id: i64,
+    ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47291,7 +49535,11 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47310,7 +49558,13 @@ impl Client {
      * * `pull_number: i64`
      * * `review_id: i64` -- review_id parameter.
      */
-    pub async fn pulls_delete_pending_review(&self, owner: &str, repo: &str, pull_number: i64, review_id: i64) -> Result<types::PullRequestReview> {
+    pub async fn pulls_delete_pending_review(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+        review_id: i64,
+    ) -> Result<types::PullRequestReview> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47394,7 +49648,11 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47429,7 +49687,11 @@ impl Client {
             progenitor_support::encode_path(&review_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47461,7 +49723,11 @@ impl Client {
             progenitor_support::encode_path(&pull_number.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47481,7 +49747,12 @@ impl Client {
      * * `repo: &str`
      * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
-    pub async fn repos_get_readme(&self, owner: &str, repo: &str, ref_: &str) -> Result<types::ContentFile> {
+    pub async fn repos_get_readme(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+    ) -> Result<types::ContentFile> {
         let url = format!(
             "/repos/{}/{}/readme?ref={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47510,7 +49781,13 @@ impl Client {
      * * `dir: &str` -- The alternate path to look for a README file.
      * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
-    pub async fn repos_get_readme_in_directory(&self, owner: &str, repo: &str, dir: &str, ref_: &str) -> Result<types::ContentFile> {
+    pub async fn repos_get_readme_in_directory(
+        &self,
+        owner: &str,
+        repo: &str,
+        dir: &str,
+        ref_: &str,
+    ) -> Result<types::ContentFile> {
         let url = format!(
             "/repos/{}/{}/readme/{}?ref={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47540,7 +49817,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_releases(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Release>> {
+    pub async fn repos_list_releases(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Release>> {
         let url = format!(
             "/repos/{}/{}/releases?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47568,14 +49851,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_create_release(&self, owner: &str, repo: &str, body: &types::ReposCreateReleaseRequest) -> Result<types::Release> {
+    pub async fn repos_create_release(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposCreateReleaseRequest,
+    ) -> Result<types::Release> {
         let url = format!(
             "/repos/{}/{}/releases",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47593,7 +49885,12 @@ impl Client {
      * * `repo: &str`
      * * `asset_id: i64` -- asset_id parameter.
      */
-    pub async fn repos_get_release_asset(&self, owner: &str, repo: &str, asset_id: i64) -> Result<types::ReleaseAsset> {
+    pub async fn repos_get_release_asset(
+        &self,
+        owner: &str,
+        repo: &str,
+        asset_id: i64,
+    ) -> Result<types::ReleaseAsset> {
         let url = format!(
             "/repos/{}/{}/releases/assets/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47619,7 +49916,12 @@ impl Client {
      * * `repo: &str`
      * * `asset_id: i64` -- asset_id parameter.
      */
-    pub async fn repos_delete_release_asset(&self, owner: &str, repo: &str, asset_id: i64) -> Result<()> {
+    pub async fn repos_delete_release_asset(
+        &self,
+        owner: &str,
+        repo: &str,
+        asset_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/releases/assets/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47659,7 +49961,11 @@ impl Client {
             progenitor_support::encode_path(&asset_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47678,7 +49984,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_latest_release(&self, owner: &str, repo: &str) -> Result<types::Release> {
+    pub async fn repos_get_latest_release(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::Release> {
         let url = format!(
             "/repos/{}/{}/releases/latest",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47703,7 +50013,12 @@ impl Client {
      * * `repo: &str`
      * * `tag: &str` -- tag parameter.
      */
-    pub async fn repos_get_release_by_tag(&self, owner: &str, repo: &str, tag: &str) -> Result<types::Release> {
+    pub async fn repos_get_release_by_tag(
+        &self,
+        owner: &str,
+        repo: &str,
+        tag: &str,
+    ) -> Result<types::Release> {
         let url = format!(
             "/repos/{}/{}/releases/tags/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47729,7 +50044,12 @@ impl Client {
      * * `repo: &str`
      * * `release_id: i64` -- release_id parameter.
      */
-    pub async fn repos_get_release(&self, owner: &str, repo: &str, release_id: i64) -> Result<types::Release> {
+    pub async fn repos_get_release(
+        &self,
+        owner: &str,
+        repo: &str,
+        release_id: i64,
+    ) -> Result<types::Release> {
         let url = format!(
             "/repos/{}/{}/releases/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47755,7 +50075,12 @@ impl Client {
      * * `repo: &str`
      * * `release_id: i64` -- release_id parameter.
      */
-    pub async fn repos_delete_release(&self, owner: &str, repo: &str, release_id: i64) -> Result<()> {
+    pub async fn repos_delete_release(
+        &self,
+        owner: &str,
+        repo: &str,
+        release_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/releases/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47795,7 +50120,11 @@ impl Client {
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47919,7 +50248,11 @@ impl Client {
             progenitor_support::encode_path(&release_id.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -47981,7 +50314,12 @@ impl Client {
      * * `repo: &str`
      * * `alert_number: i64` -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
      */
-    pub async fn secret_scanning_get_alert(&self, owner: &str, repo: &str, alert_number: i64) -> Result<types::SecretScanningAlert> {
+    pub async fn secret_scanning_get_alert(
+        &self,
+        owner: &str,
+        repo: &str,
+        alert_number: i64,
+    ) -> Result<types::SecretScanningAlert> {
         let url = format!(
             "/repos/{}/{}/secret-scanning/alerts/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48023,7 +50361,11 @@ impl Client {
             progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -48044,7 +50386,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_stargazers_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
+    pub async fn activity_list_stargazers_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/stargazers?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48070,7 +50418,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_code_frequency_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
+    pub async fn repos_get_code_frequency_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<Vec<i64>>> {
         let url = format!(
             "/repos/{}/{}/stats/code_frequency",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48094,7 +50446,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_commit_activity_stats(&self, owner: &str, repo: &str) -> Result<Vec<types::CommitActivity>> {
+    pub async fn repos_get_commit_activity_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<types::CommitActivity>> {
         let url = format!(
             "/repos/{}/{}/stats/commit_activity",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48124,7 +50480,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_contributors_stats(&self, owner: &str, repo: &str) -> Result<Vec<types::ContributorActivity>> {
+    pub async fn repos_get_contributors_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<types::ContributorActivity>> {
         let url = format!(
             "/repos/{}/{}/stats/contributors",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48150,7 +50510,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_participation_stats(&self, owner: &str, repo: &str) -> Result<types::ParticipationStats> {
+    pub async fn repos_get_participation_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::ParticipationStats> {
         let url = format!(
             "/repos/{}/{}/stats/participation",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48180,7 +50544,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_punch_card_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
+    pub async fn repos_get_punch_card_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<Vec<i64>>> {
         let url = format!(
             "/repos/{}/{}/stats/punch_card",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48221,7 +50589,11 @@ impl Client {
             progenitor_support::encode_path(&sha.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -48240,7 +50612,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_watchers_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
+    pub async fn activity_list_watchers_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/subscribers?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48266,7 +50644,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn activity_get_repo_subscription(&self, owner: &str, repo: &str) -> Result<types::RepositorySubscription> {
+    pub async fn activity_get_repo_subscription(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::RepositorySubscription> {
         let url = format!(
             "/repos/{}/{}/subscription",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48302,7 +50684,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -48345,7 +50731,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_tags(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Tag>> {
+    pub async fn repos_list_tags(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Tag>> {
         let url = format!(
             "/repos/{}/{}/tags?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48375,7 +50767,12 @@ impl Client {
      * * `repo: &str`
      * * `ref_: &str`
      */
-    pub async fn repos_download_tarball_archive(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
+    pub async fn repos_download_tarball_archive(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/tarball/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48402,7 +50799,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_teams(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
+    pub async fn repos_list_teams(
+        &self,
+        owner: &str,
+        repo: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/repos/{}/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48430,7 +50833,13 @@ impl Client {
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
      */
-    pub async fn repos_get_all_topics(&self, owner: &str, repo: &str, page: i64, per_page: i64) -> Result<types::Topic> {
+    pub async fn repos_get_all_topics(
+        &self,
+        owner: &str,
+        repo: &str,
+        page: i64,
+        per_page: i64,
+    ) -> Result<types::Topic> {
         let url = format!(
             "/repos/{}/{}/topics?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48456,14 +50865,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_replace_all_topics(&self, owner: &str, repo: &str, body: &types::ReposReplaceAllTopicsRequest) -> Result<types::Topic> {
+    pub async fn repos_replace_all_topics(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposReplaceAllTopicsRequest,
+    ) -> Result<types::Topic> {
         let url = format!(
             "/repos/{}/{}/topics",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -48481,7 +50899,12 @@ impl Client {
      * * `repo: &str`
      * * `per: crate::types::Per` -- Must be one of: `day`, `week`.
      */
-    pub async fn repos_get_clones(&self, owner: &str, repo: &str, per: crate::types::Per) -> Result<types::CloneTraffic> {
+    pub async fn repos_get_clones(
+        &self,
+        owner: &str,
+        repo: &str,
+        per: crate::types::Per,
+    ) -> Result<types::CloneTraffic> {
         let url = format!(
             "/repos/{}/{}/traffic/clones?per={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48506,7 +50929,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_top_paths(&self, owner: &str, repo: &str) -> Result<Vec<types::ContentTraffic>> {
+    pub async fn repos_get_top_paths(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<types::ContentTraffic>> {
         let url = format!(
             "/repos/{}/{}/traffic/popular/paths",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48530,7 +50957,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_get_top_referrers(&self, owner: &str, repo: &str) -> Result<Vec<types::ReferrerTraffic>> {
+    pub async fn repos_get_top_referrers(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<types::ReferrerTraffic>> {
         let url = format!(
             "/repos/{}/{}/traffic/popular/referrers",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48555,7 +50986,12 @@ impl Client {
      * * `repo: &str`
      * * `per: crate::types::Per` -- Must be one of: `day`, `week`.
      */
-    pub async fn repos_get_views(&self, owner: &str, repo: &str, per: crate::types::Per) -> Result<types::ViewTraffic> {
+    pub async fn repos_get_views(
+        &self,
+        owner: &str,
+        repo: &str,
+        per: crate::types::Per,
+    ) -> Result<types::ViewTraffic> {
         let url = format!(
             "/repos/{}/{}/traffic/views?per={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48580,14 +51016,23 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_transfer(&self, owner: &str, repo: &str, body: &types::ReposTransferRequest) -> Result<types::MinimalRepository> {
+    pub async fn repos_transfer(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &types::ReposTransferRequest,
+    ) -> Result<types::MinimalRepository> {
         let url = format!(
             "/repos/{}/{}/transfer",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -48680,7 +51125,12 @@ impl Client {
      * * `repo: &str`
      * * `ref_: &str`
      */
-    pub async fn repos_download_zipball_archive(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
+    pub async fn repos_download_zipball_archive(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/zipball/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48724,7 +51174,11 @@ impl Client {
             progenitor_support::encode_path(&template_repo.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -48798,7 +51252,11 @@ impl Client {
      * * `repository_id: i64`
      * * `environment_name: &str` -- The name of the environment.
      */
-    pub async fn actions_get_environment_public_key(&self, repository_id: i64, environment_name: &str) -> Result<types::ActionsPublicKey> {
+    pub async fn actions_get_environment_public_key(
+        &self,
+        repository_id: i64,
+        environment_name: &str,
+    ) -> Result<types::ActionsPublicKey> {
         let url = format!(
             "/repositories/{}/environments/{}/secrets/public-key",
             progenitor_support::encode_path(&repository_id.to_string()),
@@ -48942,7 +51400,11 @@ impl Client {
             progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -48960,7 +51422,12 @@ impl Client {
      * * `environment_name: &str` -- The name of the environment.
      * * `secret_name: &str` -- secret_name parameter.
      */
-    pub async fn actions_delete_environment_secret(&self, repository_id: i64, environment_name: &str, secret_name: &str) -> Result<()> {
+    pub async fn actions_delete_environment_secret(
+        &self,
+        repository_id: i64,
+        environment_name: &str,
+        secret_name: &str,
+    ) -> Result<()> {
         let url = format!(
             "/repositories/{}/environments/{}/secrets/{}",
             progenitor_support::encode_path(&repository_id.to_string()),
@@ -48997,7 +51464,8 @@ impl Client {
         excluded_attributes: &str,
     ) -> Result<types::ScimGroupListEnterprise> {
         let url = format!(
-            "/scim/v2/enterprises/{}/Groups?count={}&excluded_attributes={}&filter={}&start_index={}",
+            "/scim/v2/enterprises/{}/Groups?count={}&excluded_attributes={}&filter={}&\
+             start_index={}",
             progenitor_support::encode_path(&enterprise.to_string()),
             format!("{}", count),
             excluded_attributes.to_string(),
@@ -49028,9 +51496,16 @@ impl Client {
         enterprise: &str,
         body: &types::EnterpriseAdminProvisionInviteGroupRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
-        let url = format!("/scim/v2/enterprises/{}/Groups", progenitor_support::encode_path(&enterprise.to_string()),);
+        let url = format!(
+            "/scim/v2/enterprises/{}/Groups",
+            progenitor_support::encode_path(&enterprise.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49092,7 +51567,11 @@ impl Client {
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49109,7 +51588,11 @@ impl Client {
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      * * `scim_group_id: &str` -- Identifier generated by the GitHub SCIM endpoint.
      */
-    pub async fn enterprise_admin_delete_scim_group_from_enterprise(&self, enterprise: &str, scim_group_id: &str) -> Result<()> {
+    pub async fn enterprise_admin_delete_scim_group_from_enterprise(
+        &self,
+        enterprise: &str,
+        scim_group_id: &str,
+    ) -> Result<()> {
         let url = format!(
             "/scim/v2/enterprises/{}/Groups/{}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -49147,7 +51630,11 @@ impl Client {
             progenitor_support::encode_path(&scim_group_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49223,9 +51710,16 @@ impl Client {
         enterprise: &str,
         body: &types::EnterpriseAdminProvisionInviteUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
-        let url = format!("/scim/v2/enterprises/{}/Users", progenitor_support::encode_path(&enterprise.to_string()),);
+        let url = format!(
+            "/scim/v2/enterprises/{}/Users",
+            progenitor_support::encode_path(&enterprise.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49288,7 +51782,11 @@ impl Client {
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49305,7 +51803,11 @@ impl Client {
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      * * `scim_user_id: &str` -- scim_user_id parameter.
      */
-    pub async fn enterprise_admin_delete_user_from_enterprise(&self, enterprise: &str, scim_user_id: &str) -> Result<()> {
+    pub async fn enterprise_admin_delete_user_from_enterprise(
+        &self,
+        enterprise: &str,
+        scim_user_id: &str,
+    ) -> Result<()> {
         let url = format!(
             "/scim/v2/enterprises/{}/Users/{}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -49358,7 +51860,11 @@ impl Client {
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49398,7 +51904,13 @@ impl Client {
      *  
      *  `?filter=emails%20eq%20\"octocat@github.com\"`.
      */
-    pub async fn scim_list_provisioned_identities(&self, org: &str, start_index: i64, count: i64, filter: &str) -> Result<types::ScimUserList> {
+    pub async fn scim_list_provisioned_identities(
+        &self,
+        org: &str,
+        start_index: i64,
+        count: i64,
+        filter: &str,
+    ) -> Result<types::ScimUserList> {
         let url = format!(
             "/scim/v2/organizations/{}/Users?count={}&filter={}&start_index={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -49423,10 +51935,21 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn scim_provision_and_invite_user(&self, org: &str, body: &types::ScimProvisionInviteUserRequest) -> Result<types::ScimUser> {
-        let url = format!("/scim/v2/organizations/{}/Users", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn scim_provision_and_invite_user(
+        &self,
+        org: &str,
+        body: &types::ScimProvisionInviteUserRequest,
+    ) -> Result<types::ScimUser> {
+        let url = format!(
+            "/scim/v2/organizations/{}/Users",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49443,7 +51966,11 @@ impl Client {
      * * `org: &str`
      * * `scim_user_id: &str` -- scim_user_id parameter.
      */
-    pub async fn scim_get_provisioning_information_for_user(&self, org: &str, scim_user_id: &str) -> Result<types::ScimUser> {
+    pub async fn scim_get_provisioning_information_for_user(
+        &self,
+        org: &str,
+        scim_user_id: &str,
+    ) -> Result<types::ScimUser> {
         let url = format!(
             "/scim/v2/organizations/{}/Users/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -49483,7 +52010,11 @@ impl Client {
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49551,7 +52082,11 @@ impl Client {
             progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49820,7 +52355,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn search_topics(&self, q: &str, per_page: i64, page: i64) -> Result<types::GetSearchTopicsOkResponse> {
+    pub async fn search_topics(
+        &self,
+        q: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<types::GetSearchTopicsOkResponse> {
         let url = format!(
             "/search/topics?page={}&per_page={}&q={}",
             format!("{}", page),
@@ -49890,7 +52430,10 @@ impl Client {
      * * `team_id: i64`
      */
     pub async fn teams_get_legacy(&self, team_id: i64) -> Result<types::TeamFull> {
-        let url = format!("/teams/{}", progenitor_support::encode_path(&team_id.to_string()),);
+        let url = format!(
+            "/teams/{}",
+            progenitor_support::encode_path(&team_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -49913,7 +52456,10 @@ impl Client {
      * * `team_id: i64`
      */
     pub async fn teams_delete_legacy(&self, team_id: i64) -> Result<()> {
-        let url = format!("/teams/{}", progenitor_support::encode_path(&team_id.to_string()),);
+        let url = format!(
+            "/teams/{}",
+            progenitor_support::encode_path(&team_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -49935,10 +52481,21 @@ impl Client {
      *
      * * `team_id: i64`
      */
-    pub async fn teams_update_legacy(&self, team_id: i64, body: &types::TeamsUpdateLegacyRequest) -> Result<types::TeamFull> {
-        let url = format!("/teams/{}", progenitor_support::encode_path(&team_id.to_string()),);
+    pub async fn teams_update_legacy(
+        &self,
+        team_id: i64,
+        body: &types::TeamsUpdateLegacyRequest,
+    ) -> Result<types::TeamFull> {
+        let url = format!(
+            "/teams/{}",
+            progenitor_support::encode_path(&team_id.to_string()),
+        );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -49999,9 +52556,16 @@ impl Client {
         team_id: i64,
         body: &types::TeamsCreateDiscussionInOrgRequest,
     ) -> Result<types::TeamDiscussion> {
-        let url = format!("/teams/{}/discussions", progenitor_support::encode_path(&team_id.to_string()),);
+        let url = format!(
+            "/teams/{}/discussions",
+            progenitor_support::encode_path(&team_id.to_string()),
+        );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50020,7 +52584,11 @@ impl Client {
      * * `team_id: i64`
      * * `discussion_number: i64`
      */
-    pub async fn teams_get_discussion_legacy(&self, team_id: i64, discussion_number: i64) -> Result<types::TeamDiscussion> {
+    pub async fn teams_get_discussion_legacy(
+        &self,
+        team_id: i64,
+        discussion_number: i64,
+    ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "/teams/{}/discussions/{}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50046,7 +52614,11 @@ impl Client {
      * * `team_id: i64`
      * * `discussion_number: i64`
      */
-    pub async fn teams_delete_discussion_legacy(&self, team_id: i64, discussion_number: i64) -> Result<()> {
+    pub async fn teams_delete_discussion_legacy(
+        &self,
+        team_id: i64,
+        discussion_number: i64,
+    ) -> Result<()> {
         let url = format!(
             "/teams/{}/discussions/{}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50084,7 +52656,11 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50156,7 +52732,11 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50209,7 +52789,12 @@ impl Client {
      * * `discussion_number: i64`
      * * `comment_number: i64`
      */
-    pub async fn teams_delete_discussion_comment_legacy(&self, team_id: i64, discussion_number: i64, comment_number: i64) -> Result<()> {
+    pub async fn teams_delete_discussion_comment_legacy(
+        &self,
+        team_id: i64,
+        discussion_number: i64,
+        comment_number: i64,
+    ) -> Result<()> {
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50251,7 +52836,11 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50327,7 +52916,11 @@ impl Client {
             progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50397,7 +52990,11 @@ impl Client {
             progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50417,7 +53014,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn teams_list_pending_invitations_legacy(&self, team_id: i64, per_page: i64, page: i64) -> Result<Vec<types::OrganizationInvitation>> {
+    pub async fn teams_list_pending_invitations_legacy(
+        &self,
+        team_id: i64,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
             "/teams/{}/invitations?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50584,7 +53186,11 @@ impl Client {
      * * `team_id: i64`
      * * `username: &str`
      */
-    pub async fn teams_get_membership_for_user_legacy(&self, team_id: i64, username: &str) -> Result<types::TeamMembership> {
+    pub async fn teams_get_membership_for_user_legacy(
+        &self,
+        team_id: i64,
+        username: &str,
+    ) -> Result<types::TeamMembership> {
         let url = format!(
             "/teams/{}/memberships/{}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50630,7 +53236,11 @@ impl Client {
             progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50653,7 +53263,11 @@ impl Client {
      * * `team_id: i64`
      * * `username: &str`
      */
-    pub async fn teams_remove_membership_for_user_legacy(&self, team_id: i64, username: &str) -> Result<()> {
+    pub async fn teams_remove_membership_for_user_legacy(
+        &self,
+        team_id: i64,
+        username: &str,
+    ) -> Result<()> {
         let url = format!(
             "/teams/{}/memberships/{}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50680,7 +53294,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn teams_list_projects_legacy(&self, team_id: i64, per_page: i64, page: i64) -> Result<Vec<types::TeamProject>> {
+    pub async fn teams_list_projects_legacy(
+        &self,
+        team_id: i64,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::TeamProject>> {
         let url = format!(
             "/teams/{}/projects?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50707,7 +53326,11 @@ impl Client {
      * * `team_id: i64`
      * * `project_id: i64`
      */
-    pub async fn teams_check_permissions_for_project_legacy(&self, team_id: i64, project_id: i64) -> Result<types::TeamProject> {
+    pub async fn teams_check_permissions_for_project_legacy(
+        &self,
+        team_id: i64,
+        project_id: i64,
+    ) -> Result<types::TeamProject> {
         let url = format!(
             "/teams/{}/projects/{}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50745,7 +53368,11 @@ impl Client {
             progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50789,7 +53416,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn teams_list_repos_legacy(&self, team_id: i64, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
+    pub async fn teams_list_repos_legacy(
+        &self,
+        team_id: i64,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "/teams/{}/repos?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50819,7 +53451,12 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn teams_check_permissions_for_repo_legacy(&self, team_id: i64, owner: &str, repo: &str) -> Result<types::TeamRepository> {
+    pub async fn teams_check_permissions_for_repo_legacy(
+        &self,
+        team_id: i64,
+        owner: &str,
+        repo: &str,
+    ) -> Result<types::TeamRepository> {
         let url = format!(
             "/teams/{}/repos/{}/{}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50863,7 +53500,11 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50883,7 +53524,12 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn teams_remove_repo_legacy(&self, team_id: i64, owner: &str, repo: &str) -> Result<()> {
+    pub async fn teams_remove_repo_legacy(
+        &self,
+        team_id: i64,
+        owner: &str,
+        repo: &str,
+    ) -> Result<()> {
         let url = format!(
             "/teams/{}/repos/{}/{}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50911,7 +53557,10 @@ impl Client {
      *
      * * `team_id: i64`
      */
-    pub async fn teams_list_idp_groups_for_legacy(&self, team_id: i64) -> Result<types::GroupMapping> {
+    pub async fn teams_list_idp_groups_for_legacy(
+        &self,
+        team_id: i64,
+    ) -> Result<types::GroupMapping> {
         let url = format!(
             "/teams/{}/team-sync/group-mappings",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -50947,7 +53596,11 @@ impl Client {
             progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -50965,7 +53618,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn teams_list_child_legacy(&self, team_id: i64, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
+    pub async fn teams_list_child_legacy(
+        &self,
+        team_id: i64,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/teams/{}/teams?page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -51001,9 +53659,16 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/users/#update-the-authenticated-user>
      */
-    pub async fn users_update_authenticated(&self, body: &types::UsersUpdateAuthenticatedRequest) -> Result<types::PrivateUser> {
+    pub async fn users_update_authenticated(
+        &self,
+        body: &types::UsersUpdateAuthenticatedRequest,
+    ) -> Result<types::PrivateUser> {
         let url = "/user".to_string();
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -51034,7 +53699,10 @@ impl Client {
      * * `username: &str`
      */
     pub async fn users_check_blocked(&self, username: &str) -> Result<()> {
-        let url = format!("/user/blocks/{}", progenitor_support::encode_path(&username.to_string()),);
+        let url = format!(
+            "/user/blocks/{}",
+            progenitor_support::encode_path(&username.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -51053,7 +53721,10 @@ impl Client {
      * * `username: &str`
      */
     pub async fn users_block(&self, username: &str) -> Result<()> {
-        let url = format!("/user/blocks/{}", progenitor_support::encode_path(&username.to_string()),);
+        let url = format!(
+            "/user/blocks/{}",
+            progenitor_support::encode_path(&username.to_string()),
+        );
 
         self.put(&url, None).await
     }
@@ -51072,7 +53743,10 @@ impl Client {
      * * `username: &str`
      */
     pub async fn users_unblock(&self, username: &str) -> Result<()> {
-        let url = format!("/user/blocks/{}", progenitor_support::encode_path(&username.to_string()),);
+        let url = format!(
+            "/user/blocks/{}",
+            progenitor_support::encode_path(&username.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -51091,7 +53765,11 @@ impl Client {
         body: &types::UsersSetPrimaryEmailVisibilityAuthenticatedRequestData,
     ) -> Result<Vec<types::Email>> {
         let url = "/user/email/visibility".to_string();
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -51108,8 +53786,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_emails_for_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::Email>> {
-        let url = format!("/user/emails?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn users_list_emails_for_authenticated(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Email>> {
+        let url = format!(
+            "/user/emails?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -51123,9 +53809,16 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/users#add-an-email-address-for-the-authenticated-user>
      */
-    pub async fn users_add_email_for_authenticated(&self, body: &types::UsersAddEmailAuthenticatedRequest) -> Result<Vec<types::Email>> {
+    pub async fn users_add_email_for_authenticated(
+        &self,
+        body: &types::UsersAddEmailAuthenticatedRequest,
+    ) -> Result<Vec<types::Email>> {
         let url = "/user/emails".to_string();
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -51137,9 +53830,16 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/users#delete-an-email-address-for-the-authenticated-user>
      */
-    pub async fn users_delete_email_for_authenticated(&self, body: &types::UsersDeleteEmailAuthenticatedRequest) -> Result<()> {
+    pub async fn users_delete_email_for_authenticated(
+        &self,
+        body: &types::UsersDeleteEmailAuthenticatedRequest,
+    ) -> Result<()> {
         let url = "/user/emails".to_string();
-        self.delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.delete(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -51156,8 +53856,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_followers_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::User>> {
-        let url = format!("/user/followers?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn users_list_followers_for_authenticated_user(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::User>> {
+        let url = format!(
+            "/user/followers?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -51176,8 +53884,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_followed_by_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::User>> {
-        let url = format!("/user/following?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn users_list_followed_by_authenticated(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::User>> {
+        let url = format!(
+            "/user/following?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -51195,8 +53911,14 @@ impl Client {
      *
      * * `username: &str`
      */
-    pub async fn users_check_person_is_followed_by_authenticated(&self, username: &str) -> Result<()> {
-        let url = format!("/user/following/{}", progenitor_support::encode_path(&username.to_string()),);
+    pub async fn users_check_person_is_followed_by_authenticated(
+        &self,
+        username: &str,
+    ) -> Result<()> {
+        let url = format!(
+            "/user/following/{}",
+            progenitor_support::encode_path(&username.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -51217,7 +53939,10 @@ impl Client {
      * * `username: &str`
      */
     pub async fn users_follow(&self, username: &str) -> Result<()> {
-        let url = format!("/user/following/{}", progenitor_support::encode_path(&username.to_string()),);
+        let url = format!(
+            "/user/following/{}",
+            progenitor_support::encode_path(&username.to_string()),
+        );
 
         self.put(&url, None).await
     }
@@ -51236,7 +53961,10 @@ impl Client {
      * * `username: &str`
      */
     pub async fn users_unfollow(&self, username: &str) -> Result<()> {
-        let url = format!("/user/following/{}", progenitor_support::encode_path(&username.to_string()),);
+        let url = format!(
+            "/user/following/{}",
+            progenitor_support::encode_path(&username.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -51255,8 +53983,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_gpg_keys_for_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::GpgKey>> {
-        let url = format!("/user/gpg_keys?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn users_list_gpg_keys_for_authenticated(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::GpgKey>> {
+        let url = format!(
+            "/user/gpg_keys?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -51270,9 +54006,16 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/users#create-a-gpg-key-for-the-authenticated-user>
      */
-    pub async fn users_create_gpg_key_for_authenticated(&self, body: &types::UsersCreateGpgKeyAuthenticatedRequest) -> Result<types::GpgKey> {
+    pub async fn users_create_gpg_key_for_authenticated(
+        &self,
+        body: &types::UsersCreateGpgKeyAuthenticatedRequest,
+    ) -> Result<types::GpgKey> {
         let url = "/user/gpg_keys".to_string();
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -51288,8 +54031,14 @@ impl Client {
      *
      * * `gpg_key_id: i64` -- gpg_key_id parameter.
      */
-    pub async fn users_get_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> Result<types::GpgKey> {
-        let url = format!("/user/gpg_keys/{}", progenitor_support::encode_path(&gpg_key_id.to_string()),);
+    pub async fn users_get_gpg_key_for_authenticated(
+        &self,
+        gpg_key_id: i64,
+    ) -> Result<types::GpgKey> {
+        let url = format!(
+            "/user/gpg_keys/{}",
+            progenitor_support::encode_path(&gpg_key_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -51308,7 +54057,10 @@ impl Client {
      * * `gpg_key_id: i64` -- gpg_key_id parameter.
      */
     pub async fn users_delete_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> Result<()> {
-        let url = format!("/user/gpg_keys/{}", progenitor_support::encode_path(&gpg_key_id.to_string()),);
+        let url = format!(
+            "/user/gpg_keys/{}",
+            progenitor_support::encode_path(&gpg_key_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -51338,7 +54090,11 @@ impl Client {
         per_page: i64,
         page: i64,
     ) -> Result<types::GetAppsListInstallationsOkResponse> {
-        let url = format!("/user/installations?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+        let url = format!(
+            "/user/installations?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get(&url).await
     }
@@ -51396,7 +54152,11 @@ impl Client {
      * * `installation_id: i64` -- installation_id parameter.
      * * `repository_id: i64`
      */
-    pub async fn apps_add_repo_to_installation(&self, installation_id: i64, repository_id: i64) -> Result<()> {
+    pub async fn apps_add_repo_to_installation(
+        &self,
+        installation_id: i64,
+        repository_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/user/installations/{}/repositories/{}",
             progenitor_support::encode_path(&installation_id.to_string()),
@@ -51422,7 +54182,11 @@ impl Client {
      * * `installation_id: i64` -- installation_id parameter.
      * * `repository_id: i64`
      */
-    pub async fn apps_remove_repo_from_installation(&self, installation_id: i64, repository_id: i64) -> Result<()> {
+    pub async fn apps_remove_repo_from_installation(
+        &self,
+        installation_id: i64,
+        repository_id: i64,
+    ) -> Result<()> {
         let url = format!(
             "/user/installations/{}/repositories/{}",
             progenitor_support::encode_path(&installation_id.to_string()),
@@ -51441,7 +54205,9 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-your-public-repositories>
      */
-    pub async fn interactions_get_restrictions_for_authenticated_user(&self) -> Result<types::InteractionLimitResponse> {
+    pub async fn interactions_get_restrictions_for_authenticated_user(
+        &self,
+    ) -> Result<types::InteractionLimitResponse> {
         let url = "/user/interaction-limits".to_string();
         self.get(&url).await
     }
@@ -51460,7 +54226,11 @@ impl Client {
         body: &types::InteractionLimit,
     ) -> Result<types::InteractionLimitResponse> {
         let url = "/user/interaction-limits".to_string();
-        self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.put(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -51519,7 +54289,8 @@ impl Client {
         page: i64,
     ) -> Result<Vec<types::Issue>> {
         let url = format!(
-            "/user/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&state={}",
+            "/user/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&\
+             state={}",
             direction,
             filter,
             labels.to_string(),
@@ -51547,8 +54318,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_public_ssh_keys_for_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::Key>> {
-        let url = format!("/user/keys?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn users_list_public_ssh_keys_for_authenticated(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Key>> {
+        let url = format!(
+            "/user/keys?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -51567,7 +54346,11 @@ impl Client {
         body: &types::UsersCreatePublicSshKeyAuthenticatedRequest,
     ) -> Result<types::Key> {
         let url = "/user/keys".to_string();
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -51583,8 +54366,14 @@ impl Client {
      *
      * * `key_id: i64` -- key_id parameter.
      */
-    pub async fn users_get_public_ssh_key_for_authenticated(&self, key_id: i64) -> Result<types::Key> {
-        let url = format!("/user/keys/{}", progenitor_support::encode_path(&key_id.to_string()),);
+    pub async fn users_get_public_ssh_key_for_authenticated(
+        &self,
+        key_id: i64,
+    ) -> Result<types::Key> {
+        let url = format!(
+            "/user/keys/{}",
+            progenitor_support::encode_path(&key_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -51603,7 +54392,10 @@ impl Client {
      * * `key_id: i64` -- key_id parameter.
      */
     pub async fn users_delete_public_ssh_key_for_authenticated(&self, key_id: i64) -> Result<()> {
-        let url = format!("/user/keys/{}", progenitor_support::encode_path(&key_id.to_string()),);
+        let url = format!(
+            "/user/keys/{}",
+            progenitor_support::encode_path(&key_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -51622,7 +54414,11 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn apps_list_subscriptions_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::UserMarketplacePurchase>> {
+    pub async fn apps_list_subscriptions_for_authenticated_user(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::UserMarketplacePurchase>> {
         let url = format!(
             "/user/marketplace_purchases?page={}&per_page={}",
             format!("{}", page),
@@ -51704,8 +54500,14 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn orgs_get_membership_for_authenticated_user(&self, org: &str) -> Result<types::OrgMembership> {
-        let url = format!("/user/memberships/orgs/{}", progenitor_support::encode_path(&org.to_string()),);
+    pub async fn orgs_get_membership_for_authenticated_user(
+        &self,
+        org: &str,
+    ) -> Result<types::OrgMembership> {
+        let url = format!(
+            "/user/memberships/orgs/{}",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -51728,9 +54530,16 @@ impl Client {
         org: &str,
         body: &types::OrgsUpdateMembershipRequest,
     ) -> Result<types::OrgMembership> {
-        let url = format!("/user/memberships/orgs/{}", progenitor_support::encode_path(&org.to_string()),);
+        let url = format!(
+            "/user/memberships/orgs/{}",
+            progenitor_support::encode_path(&org.to_string()),
+        );
 
-        self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.patch(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -51747,8 +54556,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn migrations_list_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::Migration>> {
-        let url = format!("/user/migrations?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn migrations_list_for_authenticated_user(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Migration>> {
+        let url = format!(
+            "/user/migrations?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -51762,9 +54579,16 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/migrations#start-a-user-migration>
      */
-    pub async fn migrations_start_for_authenticated_user(&self, body: &types::MigrationsStartRequest) -> Result<types::Migration> {
+    pub async fn migrations_start_for_authenticated_user(
+        &self,
+        body: &types::MigrationsStartRequest,
+    ) -> Result<types::Migration> {
         let url = "/user/migrations".to_string();
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -51788,7 +54612,11 @@ impl Client {
      * * `migration_id: i64` -- migration_id parameter.
      * * `exclude: &[String]`
      */
-    pub async fn migrations_get_status_for_authenticated_user(&self, migration_id: i64, exclude: &[String]) -> Result<types::Migration> {
+    pub async fn migrations_get_status_for_authenticated_user(
+        &self,
+        migration_id: i64,
+        exclude: &[String],
+    ) -> Result<types::Migration> {
         let url = format!(
             "/user/migrations/{}?exclude={}",
             progenitor_support::encode_path(&migration_id.to_string()),
@@ -51831,8 +54659,14 @@ impl Client {
      *
      * * `migration_id: i64` -- migration_id parameter.
      */
-    pub async fn migrations_get_archive_for_authenticated_user(&self, migration_id: i64) -> Result<()> {
-        let url = format!("/user/migrations/{}/archive", progenitor_support::encode_path(&migration_id.to_string()),);
+    pub async fn migrations_get_archive_for_authenticated_user(
+        &self,
+        migration_id: i64,
+    ) -> Result<()> {
+        let url = format!(
+            "/user/migrations/{}/archive",
+            progenitor_support::encode_path(&migration_id.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -51850,8 +54684,14 @@ impl Client {
      *
      * * `migration_id: i64` -- migration_id parameter.
      */
-    pub async fn migrations_delete_archive_for_authenticated_user(&self, migration_id: i64) -> Result<()> {
-        let url = format!("/user/migrations/{}/archive", progenitor_support::encode_path(&migration_id.to_string()),);
+    pub async fn migrations_delete_archive_for_authenticated_user(
+        &self,
+        migration_id: i64,
+    ) -> Result<()> {
+        let url = format!(
+            "/user/migrations/{}/archive",
+            progenitor_support::encode_path(&migration_id.to_string()),
+        );
 
         self.delete(&url, None).await
     }
@@ -51870,7 +54710,11 @@ impl Client {
      * * `migration_id: i64` -- migration_id parameter.
      * * `repo_name: &str` -- repo_name parameter.
      */
-    pub async fn migrations_unlock_repo_for_authenticated_user(&self, migration_id: i64, repo_name: &str) -> Result<()> {
+    pub async fn migrations_unlock_repo_for_authenticated_user(
+        &self,
+        migration_id: i64,
+        repo_name: &str,
+    ) -> Result<()> {
         let url = format!(
             "/user/migrations/{}/repos/{}/lock",
             progenitor_support::encode_path(&migration_id.to_string()),
@@ -51895,7 +54739,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn migrations_list_repos_for_user(&self, migration_id: i64, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
+    pub async fn migrations_list_repos_for_user(
+        &self,
+        migration_id: i64,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "/user/migrations/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&migration_id.to_string()),
@@ -51924,8 +54773,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::OrganizationSimple>> {
-        let url = format!("/user/orgs?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn orgs_list_for_authenticated_user(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::OrganizationSimple>> {
+        let url = format!(
+            "/user/orgs?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -51978,7 +54835,11 @@ impl Client {
      * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
      * * `package_name: &str` -- The name of the package.
      */
-    pub async fn packages_delete_package_for_authenticated_user(&self, package_type: crate::types::PackageType, package_name: &str) -> Result<()> {
+    pub async fn packages_delete_package_for_authenticated_user(
+        &self,
+        package_type: crate::types::PackageType,
+        package_name: &str,
+    ) -> Result<()> {
         let url = format!(
             "/user/packages/{}/{}",
             progenitor_support::encode_path(&package_type.to_string()),
@@ -52179,9 +55040,16 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/projects#create-a-user-project>
      */
-    pub async fn projects_create_for_authenticated_user(&self, body: &types::ProjectsCreateRequest) -> Result<types::Project> {
+    pub async fn projects_create_for_authenticated_user(
+        &self,
+        body: &types::ProjectsCreateRequest,
+    ) -> Result<types::Project> {
         let url = "/user/projects".to_string();
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -52198,8 +55066,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_public_emails_for_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::Email>> {
-        let url = format!("/user/public_emails?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn users_list_public_emails_for_authenticated(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Email>> {
+        let url = format!(
+            "/user/public_emails?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -52245,7 +55121,8 @@ impl Client {
         before: DateTime<Utc>,
     ) -> Result<Vec<types::Repository>> {
         let url = format!(
-            "/user/repos?affiliation={}&before={}&direction={}&page={}&per_page={}&since={}&sort={}&type={}&visibility={}",
+            "/user/repos?affiliation={}&before={}&direction={}&page={}&per_page={}&since={}&\
+             sort={}&type={}&visibility={}",
             affiliation.to_string(),
             before.to_rfc3339(),
             direction,
@@ -52276,9 +55153,16 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user>
      */
-    pub async fn repos_create_for_authenticated_user(&self, body: &types::ReposCreateRequest) -> Result<types::Repository> {
+    pub async fn repos_create_for_authenticated_user(
+        &self,
+        body: &types::ReposCreateRequest,
+    ) -> Result<types::Repository> {
         let url = "/user/repos".to_string();
-        self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+        self.post(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+        )
+        .await
     }
 
     /**
@@ -52295,7 +55179,11 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn repos_list_invitations_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::RepositoryInvitation>> {
+    pub async fn repos_list_invitations_for_authenticated_user(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::RepositoryInvitation>> {
         let url = format!(
             "/user/repository_invitations?page={}&per_page={}",
             format!("{}", page),
@@ -52399,7 +55287,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn activity_check_repo_is_starred_by_authenticated_user(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn activity_check_repo_is_starred_by_authenticated_user(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<()> {
         let url = format!(
             "/user/starred/{}/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -52423,7 +55315,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn activity_star_repo_for_authenticated_user(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn activity_star_repo_for_authenticated_user(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<()> {
         let url = format!(
             "/user/starred/{}/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -52447,7 +55343,11 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn activity_unstar_repo_for_authenticated_user(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn activity_unstar_repo_for_authenticated_user(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<()> {
         let url = format!(
             "/user/starred/{}/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -52471,8 +55371,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_watched_repos_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
-        let url = format!("/user/subscriptions?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn activity_list_watched_repos_for_authenticated_user(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::MinimalRepository>> {
+        let url = format!(
+            "/user/subscriptions?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -52491,8 +55399,16 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn teams_list_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::TeamFull>> {
-        let url = format!("/user/teams?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
+    pub async fn teams_list_for_authenticated_user(
+        &self,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::TeamFull>> {
+        let url = format!(
+            "/user/teams?page={}&per_page={}",
+            format!("{}", page),
+            format!("{}", per_page),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -52514,7 +55430,11 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      */
     pub async fn users_list(&self, since: i64, per_page: i64) -> Result<Vec<types::User>> {
-        let url = format!("/users?per_page={}&since={}", format!("{}", per_page), format!("{}", since),);
+        let url = format!(
+            "/users?per_page={}&since={}",
+            format!("{}", per_page),
+            format!("{}", since),
+        );
 
         self.get_all_pages(&url).await
     }
@@ -52539,7 +55459,10 @@ impl Client {
      * * `username: &str`
      */
     pub async fn users_get_by_username(&self, username: &str) -> Result<types::PrivateUser> {
-        let url = format!("/users/{}", progenitor_support::encode_path(&username.to_string()),);
+        let url = format!(
+            "/users/{}",
+            progenitor_support::encode_path(&username.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -52559,7 +55482,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_events_for_authenticated_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
+    pub async fn activity_list_events_for_authenticated_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Event>> {
         let url = format!(
             "/users/{}/events?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52619,7 +55547,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_public_events_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
+    pub async fn activity_list_public_events_for_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Event>> {
         let url = format!(
             "/users/{}/events/public?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52645,7 +55578,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_followers_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
+    pub async fn users_list_followers_for_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/users/{}/followers?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52671,7 +55609,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_following_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
+    pub async fn users_list_following_for_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/users/{}/following?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52696,7 +55639,11 @@ impl Client {
      * * `username: &str`
      * * `target_user: &str`
      */
-    pub async fn users_check_following_for_user(&self, username: &str, target_user: &str) -> Result<()> {
+    pub async fn users_check_following_for_user(
+        &self,
+        username: &str,
+        target_user: &str,
+    ) -> Result<()> {
         let url = format!(
             "/users/{}/following/{}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52722,7 +55669,13 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn gists_list_for_user(&self, username: &str, since: DateTime<Utc>, per_page: i64, page: i64) -> Result<Vec<types::BaseGist>> {
+    pub async fn gists_list_for_user(
+        &self,
+        username: &str,
+        since: DateTime<Utc>,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::BaseGist>> {
         let url = format!(
             "/users/{}/gists?page={}&per_page={}&since={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52749,7 +55702,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_gpg_keys_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::GpgKey>> {
+    pub async fn users_list_gpg_keys_for_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::GpgKey>> {
         let url = format!(
             "/users/{}/gpg_keys?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52814,7 +55772,10 @@ impl Client {
      * * `username: &str`
      */
     pub async fn apps_get_user_installation(&self, username: &str) -> Result<types::Installation> {
-        let url = format!("/users/{}/installation", progenitor_support::encode_path(&username.to_string()),);
+        let url = format!(
+            "/users/{}/installation",
+            progenitor_support::encode_path(&username.to_string()),
+        );
 
         self.get(&url).await
     }
@@ -52834,7 +55795,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_public_keys_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::KeySimple>> {
+    pub async fn users_list_public_keys_for_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::KeySimple>> {
         let url = format!(
             "/users/{}/keys?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52862,7 +55828,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::OrganizationSimple>> {
+    pub async fn orgs_list_for_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!(
             "/users/{}/orgs?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -53027,7 +55998,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_received_events_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
+    pub async fn activity_list_received_events_for_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Event>> {
         let url = format!(
             "/users/{}/received_events?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -53053,7 +56029,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_received_public_events_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
+    pub async fn activity_list_received_public_events_for_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Event>> {
         let url = format!(
             "/users/{}/received_events/public?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -53121,7 +56102,10 @@ impl Client {
      *
      * * `username: &str`
      */
-    pub async fn billing_get_github_actions_billing_user(&self, username: &str) -> Result<types::ActionsBillingUsage> {
+    pub async fn billing_get_github_actions_billing_user(
+        &self,
+        username: &str,
+    ) -> Result<types::ActionsBillingUsage> {
         let url = format!(
             "/users/{}/settings/billing/actions",
             progenitor_support::encode_path(&username.to_string()),
@@ -53147,7 +56131,10 @@ impl Client {
      *
      * * `username: &str`
      */
-    pub async fn billing_get_github_packages_billing_user(&self, username: &str) -> Result<types::PackagesBillingUsage> {
+    pub async fn billing_get_github_packages_billing_user(
+        &self,
+        username: &str,
+    ) -> Result<types::PackagesBillingUsage> {
         let url = format!(
             "/users/{}/settings/billing/packages",
             progenitor_support::encode_path(&username.to_string()),
@@ -53173,7 +56160,10 @@ impl Client {
      *
      * * `username: &str`
      */
-    pub async fn billing_get_shared_storage_billing_user(&self, username: &str) -> Result<types::CombinedBillingUsage> {
+    pub async fn billing_get_shared_storage_billing_user(
+        &self,
+        username: &str,
+    ) -> Result<types::CombinedBillingUsage> {
         let url = format!(
             "/users/{}/settings/billing/shared-storage",
             progenitor_support::encode_path(&username.to_string()),
@@ -53236,7 +56226,12 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_repos_watched_by_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
+    pub async fn activity_list_repos_watched_by_user(
+        &self,
+        username: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "/users/{}/subscriptions?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
