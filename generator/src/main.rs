@@ -1096,9 +1096,14 @@ impl TypeSpace {
     }
 
     fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter, is_schema: bool) -> Result<TypeId> {
+        let mut nam = if let Some(n) = name { n.to_string() } else { "".to_string() };
+
         if let Some(parameter_data) = get_parameter_data(p) {
+            if nam.is_empty() && !parameter_data.name.is_empty() {
+                nam = clean_name(&parameter_data.name);
+            }
             if let openapiv3::ParameterSchemaOrContent::Schema(st) = &parameter_data.format {
-                self.select(name, st, is_schema)
+                self.select(Some(&nam), st, is_schema)
             } else {
                 bail!("could not get parameter_schema for {:?}: {:?}", name, p);
             }
@@ -2084,39 +2089,8 @@ fn main() -> Result<()> {
                  * Get the request parameters, those might have lingering enums.
                  */
                 for par in o.parameters.iter() {
-                    let item = match par {
-                        openapiv3::ReferenceOr::Reference { reference } => {
-                            let param_name = struct_name(&reference.replace("#/components/parameters/", ""));
-                            // Get the parameter from our BTreeMap.
-                            // TODO: change this to our select.
-                            if let Some(param) = parameters.get(&param_name) {
-                                param
-                            } else {
-                                bail!("could not find parameter with reference: {}", reference);
-                            }
-                        }
-                        openapiv3::ReferenceOr::Item(item) => item,
-                    };
-
-                    match item {
-                        openapiv3::Parameter::Path {
-                            parameter_data,
-                            style: openapiv3::PathStyle::Simple,
-                        } => {
-                            let nam = &to_snake_case(&parameter_data.name);
-                            ts.select_param(Some(nam), par, false)?;
-                        }
-                        openapiv3::Parameter::Query {
-                            parameter_data,
-                            allow_reserved: _,
-                            style: openapiv3::QueryStyle::Form,
-                            allow_empty_value: _,
-                        } => {
-                            let nam = &to_snake_case(&parameter_data.name);
-                            ts.select_param(Some(nam), par, false)?;
-                        }
-                        x => bail!("unhandled parameter type: {:#?}", x),
-                    }
+                    // The name will be filled in by the parameter data.
+                    ts.select_param(None, par, false)?;
                 }
 
                 /*
