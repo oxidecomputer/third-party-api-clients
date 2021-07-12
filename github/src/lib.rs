@@ -36725,6 +36725,36 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct ValueData {
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub active: Option<bool>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub external_id: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub family_name: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub given_name: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub user_name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUpdateAttributeUserRequestOperations {
         #[serde()]
         pub op: Op,

@@ -1123,8 +1123,7 @@ impl TypeSpace {
                 // an empty object.
                 let mut id = TypeId(0);
                 for o in one_of {
-                    if let Ok(i) = self.select(name, o, true, "") {
-                        // TODO why is this true
+                    if let Ok(i) = self.select(name, o, is_schema, "") {
                         id = i;
                         break;
                     }
