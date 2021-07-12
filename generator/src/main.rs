@@ -2400,6 +2400,7 @@ httpcache = ["dirs"]
 
 [[example]]
 name = "list_repos_for_org"
+crate-type = ["bin"]
 required-features = ["httpcache"]
 "#,
                 name, description, version, name, name
