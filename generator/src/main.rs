@@ -1637,10 +1637,10 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     if !d.is_empty() && d.len() > docs.len() {
                         docs = format!(" -- {}.", d.trim_end_matches('.').replace("\n", "\n*   "));
                     } else if !docs.is_empty() {
-                        docs = format!(" -- {}.", docs.trim().trim_end_matches('.'));
+                        docs = format!(" -- {}.", docs.trim_start_matches("*").trim_end_matches('.').trim());
                     }
                 } else if !docs.is_empty() {
-                    docs = format!(" -- {}.", docs.trim().trim_end_matches('.'));
+                    docs = format!(" -- {}.", docs.trim_start_matches("*").trim_end_matches('.').trim());
                 }
 
                 let nam = &to_snake_case(&clean_name(&parameter_data.name));

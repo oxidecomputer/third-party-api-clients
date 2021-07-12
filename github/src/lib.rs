@@ -784,7 +784,9 @@ pub mod types {
         pub website_url: String,
     }
 
-    /// The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Actions {
@@ -810,7 +812,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Administration {
@@ -836,7 +840,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for checks on code. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for checks on code. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Checks {
@@ -862,7 +868,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ContentReferences {
@@ -888,7 +896,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Contents {
@@ -914,7 +924,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Deployments {
@@ -940,7 +952,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for managing repository environments. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for managing repository environments. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Environments {
@@ -966,7 +980,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Issues {
@@ -992,7 +1008,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Metadata {
@@ -1018,7 +1036,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Packages {
@@ -1044,7 +1064,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Pages {
@@ -1070,7 +1092,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullRequests {
@@ -1096,7 +1120,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositoryHooks {
@@ -1122,7 +1148,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+    /*
+    * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositoryProjects {
@@ -1150,7 +1178,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecretScanningAlerts {
@@ -1176,7 +1206,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to manage repository secrets. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to manage repository secrets. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Secrets {
@@ -1202,7 +1234,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecurityEvents {
@@ -1228,7 +1262,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to manage just a single file. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to manage just a single file. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SingleFile {
@@ -1254,7 +1290,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Statuses {
@@ -1280,7 +1318,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
+    /*
+    * The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum VulnerabilityAlerts {
@@ -1304,7 +1344,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
+    /*
+    * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Workflows {
@@ -1328,7 +1370,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for organization teams and members. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for organization teams and members. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Members {
@@ -1354,7 +1398,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationAdministration {
@@ -1380,7 +1426,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to manage the post-receive hooks for an organization. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to manage the post-receive hooks for an organization. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationHooks {
@@ -1406,7 +1454,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
+    /*
+    * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationPlan {
@@ -1430,7 +1480,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to manage organization projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+    /*
+    * The level of permission to grant the access token to manage organization projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationProjects {
@@ -1458,7 +1510,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token for organization packages published to GitHub Packages. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token for organization packages published to GitHub Packages. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationPackages {
@@ -1484,7 +1538,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to manage organization secrets. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to manage organization secrets. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationSecrets {
@@ -1510,7 +1566,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationSelfHostedRunners {
@@ -1536,7 +1594,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to view and manage users blocked by the organization. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to view and manage users blocked by the organization. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationUserBlocking {
@@ -1562,7 +1622,9 @@ pub mod types {
         }
     }
 
-    /// The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
+    /*
+    * The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamDiscussions {
@@ -1881,7 +1943,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// Describe whether all repositories have been selected or there's a selection involved
+    /*
+    * Describe whether all repositories have been selected or there's a selection involved
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositorySelection {
@@ -3867,7 +3931,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    /*
+    * The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum EnabledOrganizations {
@@ -3895,7 +3961,9 @@ pub mod types {
         }
     }
 
-    /// The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+    /*
+    * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AllowedActions {
@@ -4066,7 +4134,9 @@ pub mod types {
         pub visibility: String,
     }
 
-    /// The type of label. Read-only labels are applied automatically when the runner is configured.
+    /*
+    * The type of label. Read-only labels are applied automatically when the runner is configured.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Type {
@@ -4586,7 +4656,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The state of the milestone.
+    /*
+    * The state of the milestone.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum State {
@@ -4816,7 +4888,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// How the author is associated with the repository.
+    /*
+    * How the author is associated with the repository.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AuthorAssociation {
@@ -7969,7 +8043,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    /*
+    * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum EnabledRepositories {
@@ -8058,7 +8134,9 @@ pub mod types {
         pub visibility: String,
     }
 
-    /// Visibility of a secret
+    /*
+    * Visibility of a secret
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Visibility {
@@ -8399,7 +8477,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+    /*
+    * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum InteractionGroup {
@@ -8445,7 +8525,9 @@ pub mod types {
         pub origin: String,
     }
 
-    /// The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
+    /*
+    * The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum InteractionExpiry {
@@ -8774,7 +8856,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
+    /*
+    * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrgMembershipState {
@@ -8800,7 +8884,9 @@ pub mod types {
         }
     }
 
-    /// The user's membership type in the organization.
+    /*
+    * The user's membership type in the organization.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Role {
@@ -9638,7 +9724,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The baseline permission that all organization members have on this project. Only present if owner is an organization.
+    /*
+    * The baseline permission that all organization members have on this project. Only present if owner is an organization.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrganizationPermission {
@@ -9806,7 +9894,9 @@ pub mod types {
         pub groups: Vec<Groups>,
     }
 
-    /// The level of privacy this team should have
+    /*
+    * The level of privacy this team should have
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Privacy {
@@ -10245,7 +10335,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The reaction to use
+    /*
+    * The reaction to use
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Content {
@@ -10308,7 +10400,9 @@ pub mod types {
         pub user: User,
     }
 
-    /// The role of the user in the team.
+    /*
+    * The role of the user in the team.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamMembershipRole {
@@ -10332,7 +10426,9 @@ pub mod types {
         }
     }
 
-    /// The state of the user's membership in the team.
+    /*
+    * The state of the user's membership in the team.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamMembershipState {
@@ -11767,7 +11863,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The phase of the lifecycle that the job is currently in.
+    /*
+    * The phase of the lifecycle that the job is currently in.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum JobStatus {
@@ -11795,7 +11893,9 @@ pub mod types {
         }
     }
 
-    /// The phase of the lifecycle that the job is currently in.
+    /*
+    * The phase of the lifecycle that the job is currently in.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum JobStepsStatus {
@@ -12376,7 +12476,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// Whether deployment to the environment(s) was approved or rejected
+    /*
+    * Whether deployment to the environment(s) was approved or rejected
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum EnvironmentApprovalsState {
@@ -12431,7 +12533,9 @@ pub mod types {
         pub user: SimpleUser,
     }
 
-    /// The type of reviewer. Must be one of: `User` or `Team`
+    /*
+    * The type of reviewer. Must be one of: `User` or `Team`
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum DeploymentReviewerType {
@@ -14231,7 +14335,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The phase of the lifecycle that the check is currently in.
+    /*
+    * The phase of the lifecycle that the check is currently in.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CheckRunStatus {
@@ -14814,7 +14920,9 @@ pub mod types {
         pub repository: MinimalRepository,
     }
 
-    /// State of a code scanning alert.
+    /*
+    * State of a code scanning alert.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CodeScanningAlertState {
@@ -14844,7 +14952,9 @@ pub mod types {
         }
     }
 
-    /// The severity of the alert.
+    /*
+    * The severity of the alert.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Severity {
@@ -14954,7 +15064,9 @@ pub mod types {
         pub start_line: Option<i64>,
     }
 
-    /// A classification of the file. For example to identify it as generated.
+    /*
+    * A classification of the file. For example to identify it as generated.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CodeScanningAlertClassification {
@@ -15104,7 +15216,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The security severity of the alert.
+    /*
+    * The security severity of the alert.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecuritySeverityLevel {
@@ -15243,7 +15357,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
+    /*
+    * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum CodeScanningAlertSetState {
@@ -15470,7 +15586,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
+    /*
+    * `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProcessingStatus {
@@ -15913,7 +16031,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The permission associated with the invitation.
+    /*
+    * The permission associated with the invitation.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum RepositoryInvitationPermissions {
@@ -16111,7 +16231,9 @@ pub mod types {
         pub href: String,
     }
 
-    /// The merge method to use.
+    /*
+    * The merge method to use.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum MergeMethod {
@@ -17973,7 +18095,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The state of the status.
+    /*
+    * The state of the status.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum DeploymentStatusState {
@@ -21490,7 +21614,9 @@ pub mod types {
         pub href: String,
     }
 
-    /// The side of the first line of the range for a multi-line comment.
+    /*
+    * The side of the first line of the range for a multi-line comment.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum StartSide {
@@ -21514,7 +21640,9 @@ pub mod types {
         }
     }
 
-    /// The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
+    /*
+    * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Side {
@@ -22123,7 +22251,9 @@ pub mod types {
         pub state: State,
     }
 
-    /// The status of the most recent build of the Page.
+    /*
+    * The status of the most recent build of the Page.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PageStatus {
@@ -22592,7 +22722,9 @@ pub mod types {
         pub domain: Option<Domain>,
     }
 
-    /// State of this Pull Request. Either `open` or `closed`.
+    /*
+    * State of this Pull Request. Either `open` or `closed`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullRequestState {
@@ -24490,7 +24622,9 @@ pub mod types {
         pub self_: Link,
     }
 
-    /// The side of the first line of the range for a multi-line comment.
+    /*
+    * The side of the first line of the range for a multi-line comment.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReviewCommentSide {
@@ -24655,7 +24789,9 @@ pub mod types {
         pub user: User,
     }
 
-    /// State of the release asset.
+    /*
+    * State of the release asset.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReleaseAssetState {
@@ -25013,7 +25149,9 @@ pub mod types {
         pub zipball_url: String,
     }
 
-    /// Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
+    /*
+    * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecretScanningAlertState {
@@ -28604,7 +28742,9 @@ pub mod types {
         pub total_count: f64,
     }
 
-    /// Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected`
+    /*
+    * Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected`
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
@@ -28649,7 +28789,9 @@ pub mod types {
         pub visibility: Option<Visibility>,
     }
 
-    /// Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
+    /*
+    * Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
@@ -28885,7 +29027,9 @@ pub mod types {
         }
     }
 
-    /// The rendering mode.
+    /*
+    * The rendering mode.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Mode {
@@ -29004,11 +29148,13 @@ pub mod types {
         pub ignored: Option<bool>,
     }
 
-    /// Default permission level members have for organization repositories:  
-    /// \* `read` - can pull, but not push to or administer this repository.  
-    /// \* `write` - can pull and push, but not administer this repository.  
-    /// \* `admin` - can pull, push, and administer this repository.  
-    /// \* `none` - no permissions granted by default.
+    /*
+    * Default permission level members have for organization repositories:
+    *  \* `read` - can pull, but not push to or administer this repository.
+    *  \* `write` - can pull and push, but not administer this repository.
+    *  \* `admin` - can pull, push, and administer this repository.
+    *  \* `none` - no permissions granted by default.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum DefaultRepositoryPermission {
@@ -29036,11 +29182,13 @@ pub mod types {
         }
     }
 
-    /// Specifies which types of repositories non-admin organization members can create. Can be one of:  
-    /// \* `all` - all organization members can create public and private repositories.  
-    /// \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  
-    /// \* `none` - only admin members can create repositories.  
-    /// **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
+    /*
+    * Specifies which types of repositories non-admin organization members can create. Can be one of:
+    *  \* `all` - all organization members can create public and private repositories.
+    *  \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.
+    *  \* `none` - only admin members can create repositories.
+    *  **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum MembersAllowedRepositoryCreationType {
@@ -29200,7 +29348,9 @@ pub mod types {
         pub total_count: f64,
     }
 
-    /// Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
+    /*
+    * Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
@@ -29245,7 +29395,9 @@ pub mod types {
         pub visibility: Option<Visibility>,
     }
 
-    /// Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`.
+    /*
+    * Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
@@ -29335,10 +29487,12 @@ pub mod types {
         pub total_count: i64,
     }
 
-    /// Configures the access that repositories have to the organization secret. Can be one of:  
-    /// \- `all` - All repositories in an organization can access the secret.  
-    /// \- `private` - Private repositories in an organization can access the secret.  
-    /// \- `selected` - Only specific repositories can access the secret.
+    /*
+    * Configures the access that repositories have to the organization secret. Can be one of:
+    *  \- `all` - All repositories in an organization can access the secret.
+    *  \- `private` - Private repositories in an organization can access the secret.
+    *  \- `selected` - Only specific repositories can access the secret.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ActionsCreateUpdateOrgSecretRequestVisibility {
@@ -29592,10 +29746,12 @@ pub mod types {
         pub origin: String,
     }
 
-    /// Specify role for new member. Can be one of:  
-    /// \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  
-    /// \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
-    /// \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
+    /*
+    * Specify role for new member. Can be one of:
+    *  \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.
+    *  \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.
+    *  \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrgsCreateInvitationRequestRole {
@@ -29766,9 +29922,11 @@ pub mod types {
         }
     }
 
-    /// The role to give the user in the organization. Can be one of:  
-    /// \* `admin` - The user will become an owner of the organization.  
-    /// \* `member` - The user will become a non-owner member of the organization.
+    /*
+    * The role to give the user in the organization. Can be one of:
+    *  \* `admin` - The user will become an owner of the organization.
+    *  \* `member` - The user will become a non-owner member of the organization.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrgsSetMembershipUserRequestRole {
@@ -29798,7 +29956,9 @@ pub mod types {
         pub role: Option<Role>,
     }
 
-    /// Allowed values that can be passed to the exclude param.
+    /*
+    * Allowed values that can be passed to the exclude param.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum MigrationsListOrgExclude {
@@ -29860,7 +30020,9 @@ pub mod types {
         pub repositories: Vec<String>,
     }
 
-    /// Allowed values that can be passed to the exclude param.
+    /*
+    * Allowed values that can be passed to the exclude param.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum MigrationsGetStatusOrgExclude {
@@ -30080,8 +30242,10 @@ pub mod types {
         }
     }
 
-    /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
-    /// The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
+    /*
+    * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.
+    *  The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposCreateInOrgRequestVisibility {
@@ -30172,14 +30336,16 @@ pub mod types {
         pub visibility: Option<Visibility>,
     }
 
-    /// The level of privacy this team should have. The options are:  
-    /// **For a non-nested team:**  
-    /// \* `secret` - only visible to organization owners and members of this team.  
-    /// \* `closed` - visible to all members of this organization.  
-    /// Default: `secret`  
-    /// **For a parent or child team:**  
-    /// \* `closed` - visible to all members of this organization.  
-    /// Default for child team: `closed`
+    /*
+    * The level of privacy this team should have. The options are:
+    *  **For a non-nested team:**
+    *  \* `secret` - only visible to organization owners and members of this team.
+    *  \* `closed` - visible to all members of this organization.
+    *  Default: `secret`
+    *  **For a parent or child team:**
+    *  \* `closed` - visible to all members of this organization.
+    *  Default for child team: `closed`
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsCreateRequestPrivacy {
@@ -30205,10 +30371,12 @@ pub mod types {
         }
     }
 
-    /// **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
-    /// \* `pull` - team members can pull, but not push to or administer newly-added repositories.  
-    /// \* `push` - team members can pull and push, but not administer newly-added repositories.  
-    /// \* `admin` - team members can pull, push and administer newly-added repositories.
+    /*
+    * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
+    *  \* `pull` - team members can pull, but not push to or administer newly-added repositories.
+    *  \* `push` - team members can pull and push, but not administer newly-added repositories.
+    *  \* `admin` - team members can pull, push and administer newly-added repositories.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Permission {
@@ -30263,12 +30431,14 @@ pub mod types {
         pub repo_names: Vec<String>,
     }
 
-    /// The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. When a team is nested, the `privacy` for parent teams cannot be `secret`. The options are:  
-    /// **For a non-nested team:**  
-    /// \* `secret` - only visible to organization owners and members of this team.  
-    /// \* `closed` - visible to all members of this organization.  
-    /// **For a parent or child team:**  
-    /// \* `closed` - visible to all members of this organization.
+    /*
+    * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. When a team is nested, the `privacy` for parent teams cannot be `secret`. The options are:
+    *  **For a non-nested team:**
+    *  \* `secret` - only visible to organization owners and members of this team.
+    *  \* `closed` - visible to all members of this organization.
+    *  **For a parent or child team:**
+    *  \* `closed` - visible to all members of this organization.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsUpdateInOrgRequestPrivacy {
@@ -30419,7 +30589,9 @@ pub mod types {
         }
     }
 
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
+    /*
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
@@ -30503,7 +30675,9 @@ pub mod types {
         }
     }
 
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
+    /*
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsCreateTeamDiscussionInOrgRequestContent {
@@ -30575,9 +30749,11 @@ pub mod types {
         }
     }
 
-    /// The role that this user should have in the team. Can be one of:  
-    /// \* `member` - a normal member of the team.  
-    /// \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
+    /*
+    * The role that this user should have in the team. Can be one of:
+    *  \* `member` - a normal member of the team.
+    *  \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsAddUpdateMembershipUserInOrgRequestRole {
@@ -30607,11 +30783,13 @@ pub mod types {
         pub role: Option<Role>,
     }
 
-    /// The permission to grant to the team for this project. Can be one of:  
-    /// \* `read` - team members can read, but not write to or administer this project.  
-    /// \* `write` - team members can read and write, but not administer this project.  
-    /// \* `admin` - team members can read, write and administer this project.  
-    /// Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    /*
+    * The permission to grant to the team for this project. Can be one of:
+    *  \* `read` - team members can read, but not write to or administer this project.
+    *  \* `write` - team members can read and write, but not administer this project.
+    *  \* `admin` - team members can read, write and administer this project.
+    *  Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
@@ -30661,14 +30839,16 @@ pub mod types {
         pub message: String,
     }
 
-    /// The permission to grant the team on this repository. Can be one of:  
-    /// \* `pull` - team members can pull, but not push to or administer this repository.  
-    /// \* `push` - team members can pull and push, but not administer this repository.  
-    /// \* `admin` - team members can pull, push and administer this repository.  
-    /// \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  
-    /// \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  
-    ///   
-    /// If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
+    /*
+    * The permission to grant the team on this repository. Can be one of:
+    *  \* `pull` - team members can pull, but not push to or administer this repository.
+    *  \* `push` - team members can pull and push, but not administer this repository.
+    *  \* `admin` - team members can pull, push and administer this repository.
+    *  \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.
+    *  \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.
+    *
+    *  If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
@@ -31024,7 +31204,9 @@ pub mod types {
         pub message: String,
     }
 
-    /// The baseline permission that all organization members have on this project
+    /*
+    * The baseline permission that all organization members have on this project
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProjectsUpdateRequestOrganizationPermission {
@@ -31123,7 +31305,9 @@ pub mod types {
         }
     }
 
-    /// The permission to grant the collaborator.
+    /*
+    * The permission to grant the collaborator.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProjectsAddCollaboratorRequestPermission {
@@ -31184,7 +31368,9 @@ pub mod types {
         pub message: String,
     }
 
-    /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header.
+    /*
+    * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposUpdateRequestVisibility {
@@ -31386,7 +31572,9 @@ pub mod types {
         pub total_count: i64,
     }
 
-    /// Whether to approve or reject deployment to the specified environments. Must be one of: `approved` or `rejected`
+    /*
+    * Whether to approve or reject deployment to the specified environments. Must be one of: `approved` or `rejected`
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ActionsReviewPendingDeploymentsRunRequestState {
@@ -31758,7 +31946,9 @@ pub mod types {
         pub new_name: String,
     }
 
-    /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
+    /*
+    * The current status. Can be one of `queued`, `in_progress`, or `completed`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ChecksCreateRequestStatus {
@@ -31784,8 +31974,10 @@ pub mod types {
         }
     }
 
-    /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
-    /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
+    /*
+    * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.
+    *  **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ChecksCreateRequestConclusion {
@@ -31823,7 +32015,9 @@ pub mod types {
         }
     }
 
-    /// The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
+    /*
+    * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AnnotationLevel {
@@ -32051,7 +32245,9 @@ pub mod types {
         pub status: Option<ChecksCreateRequestStatus>,
     }
 
-    /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
+    /*
+    * The current status. Can be one of `queued`, `in_progress`, or `completed`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ChecksUpdateRequestStatus {
@@ -32079,8 +32275,10 @@ pub mod types {
         }
     }
 
-    /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.  
-    /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
+    /*
+    * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.
+    *  **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ChecksUpdateRequestConclusion {
@@ -32456,12 +32654,14 @@ pub mod types {
         }
     }
 
-    /// The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  
-    /// \* `pull` - can pull, but not push to or administer this repository.  
-    /// \* `push` - can pull and push, but not administer this repository.  
-    /// \* `admin` - can pull, push and administer this repository.  
-    /// \* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.  
-    /// \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
+    /*
+    * The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:
+    *  \* `pull` - can pull, but not push to or administer this repository.
+    *  \* `push` - can pull and push, but not administer this repository.
+    *  \* `admin` - can pull, push and administer this repository.
+    *  \* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.
+    *  \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposAddCollaboratorRequestPermission {
@@ -32553,7 +32753,9 @@ pub mod types {
         }
     }
 
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
+    /*
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsCreateCommitCommentRequestContent {
@@ -32979,7 +33181,9 @@ pub mod types {
         pub message: String,
     }
 
-    /// The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub.
+    /*
+    * The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposCreateDeploymentStatusRequestState {
@@ -33015,7 +33219,9 @@ pub mod types {
         }
     }
 
-    /// Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
+    /*
+    * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposCreateDeploymentStatusRequestEnvironment {
@@ -33315,7 +33521,9 @@ pub mod types {
         pub sha: String,
     }
 
-    /// The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
+    /*
+    * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum GitCreateTagRequestType {
@@ -33409,7 +33617,9 @@ pub mod types {
         pub type_: Type,
     }
 
-    /// The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
+    /*
+    * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum GitCreateTreeRequestMode {
@@ -33441,7 +33651,9 @@ pub mod types {
         }
     }
 
-    /// Either `blob`, `tree`, or `commit`.
+    /*
+    * Either `blob`, `tree`, or `commit`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum GitCreateTreeRequestType {
@@ -33686,7 +33898,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
+    /*
+    * The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Vcs {
@@ -33793,7 +34007,9 @@ pub mod types {
         pub name: String,
     }
 
-    /// Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
+    /*
+    * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UseLfs {
@@ -33846,7 +34062,9 @@ pub mod types {
         pub origin: String,
     }
 
-    /// The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
+    /*
+    * The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposUpdateInvitationRequestPermissions {
@@ -34037,7 +34255,9 @@ pub mod types {
         }
     }
 
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
+    /*
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsCreateIssueCommentRequestContent {
@@ -34084,7 +34304,9 @@ pub mod types {
         pub content: Content,
     }
 
-    /// State of the issue. Either `open` or `closed`.
+    /*
+    * State of the issue. Either `open` or `closed`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesUpdateRequestState {
@@ -34177,11 +34399,13 @@ pub mod types {
         pub labels: Vec<String>,
     }
 
-    /// The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:  
-    /// \* `off-topic`  
-    /// \* `too heated`  
-    /// \* `resolved`  
-    /// \* `spam`
+    /*
+    * The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:
+    *  \* `off-topic`
+    *  \* `too heated`
+    *  \* `resolved`
+    *  \* `spam`
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum LockReason {
@@ -34254,7 +34478,9 @@ pub mod types {
         }
     }
 
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
+    /*
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsCreateIssueRequestContent {
@@ -34468,7 +34694,9 @@ pub mod types {
         }
     }
 
-    /// The state of the milestone. Either `open` or `closed`.
+    /*
+    * The state of the milestone. Either `open` or `closed`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesCreateMilestoneRequestState {
@@ -34515,7 +34743,9 @@ pub mod types {
         pub title: String,
     }
 
-    /// The state of the milestone. Either `open` or `closed`.
+    /*
+    * The state of the milestone. Either `open` or `closed`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesUpdateMilestoneRequestState {
@@ -34581,7 +34811,9 @@ pub mod types {
         pub url: String,
     }
 
-    /// The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
+    /*
+    * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Path {
@@ -34631,7 +34863,9 @@ pub mod types {
         pub source: Source,
     }
 
-    /// Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
+    /*
+    * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SourceData {
@@ -34938,7 +35172,9 @@ pub mod types {
         }
     }
 
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
+    /*
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsCreatePullRequestReviewCommentContent {
@@ -34985,7 +35221,9 @@ pub mod types {
         pub content: Content,
     }
 
-    /// State of this Pull Request. Either `open` or `closed`.
+    /*
+    * State of this Pull Request. Either `open` or `closed`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsUpdateRequestState {
@@ -35062,7 +35300,9 @@ pub mod types {
         }
     }
 
-    /// **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
+    /*
+    * **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsCreateReviewCommentRequestSide {
@@ -35088,7 +35328,9 @@ pub mod types {
         }
     }
 
-    /// **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
+    /*
+    * **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsCreateReviewCommentRequestStartSide {
@@ -35166,7 +35408,9 @@ pub mod types {
         pub body: String,
     }
 
-    /// Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`.
+    /*
+    * Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsMergeRequestMethod {
@@ -35269,7 +35513,9 @@ pub mod types {
         pub team_reviewers: Vec<String>,
     }
 
-    /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
+    /*
+    * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsCreateReviewRequestEvent {
@@ -35389,7 +35635,9 @@ pub mod types {
         pub message: String,
     }
 
-    /// The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action.
+    /*
+    * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsSubmitReviewRequestEvent {
@@ -35559,7 +35807,9 @@ pub mod types {
         pub target_commitish: String,
     }
 
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
+    /*
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsCreateReleaseRequestContent {
@@ -35638,7 +35888,9 @@ pub mod types {
         pub state: SecretScanningAlertState,
     }
 
-    /// The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
+    /*
+    * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposCreateCommitStatusRequestState {
@@ -36525,12 +36777,14 @@ pub mod types {
         pub total_count: i64,
     }
 
-    /// The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. The options are:  
-    /// **For a non-nested team:**  
-    /// \* `secret` - only visible to organization owners and members of this team.  
-    /// \* `closed` - visible to all members of this organization.  
-    /// **For a parent or child team:**  
-    /// \* `closed` - visible to all members of this organization.
+    /*
+    * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. The options are:
+    *  **For a non-nested team:**
+    *  \* `secret` - only visible to organization owners and members of this team.
+    *  \* `closed` - visible to all members of this organization.
+    *  **For a parent or child team:**
+    *  \* `closed` - visible to all members of this organization.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsUpdateLegacyRequestPrivacy {
@@ -36684,7 +36938,9 @@ pub mod types {
         }
     }
 
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
+    /*
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
@@ -36768,7 +37024,9 @@ pub mod types {
         }
     }
 
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
+    /*
+    * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsCreateTeamDiscussionLegacyRequestContent {
@@ -36840,9 +37098,11 @@ pub mod types {
         }
     }
 
-    /// The role that this user should have in the team. Can be one of:  
-    /// \* `member` - a normal member of the team.  
-    /// \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
+    /*
+    * The role that this user should have in the team. Can be one of:
+    *  \* `member` - a normal member of the team.
+    *  \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsAddUpdateMembershipUserLegacyRequestRole {
@@ -36872,11 +37132,13 @@ pub mod types {
         pub role: Option<Role>,
     }
 
-    /// The permission to grant to the team for this project. Can be one of:  
-    /// \* `read` - team members can read, but not write to or administer this project.  
-    /// \* `write` - team members can read and write, but not administer this project.  
-    /// \* `admin` - team members can read, write and administer this project.  
-    /// Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    /*
+    * The permission to grant to the team for this project. Can be one of:
+    *  \* `read` - team members can read, but not write to or administer this project.
+    *  \* `write` - team members can read and write, but not administer this project.
+    *  \* `admin` - team members can read, write and administer this project.
+    *  Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsAddUpdateProjectPermissionsLegacyRequestPermission {
@@ -36926,12 +37188,14 @@ pub mod types {
         pub message: String,
     }
 
-    /// The permission to grant the team on this repository. Can be one of:  
-    /// \* `pull` - team members can pull, but not push to or administer this repository.  
-    /// \* `push` - team members can pull and push, but not administer this repository.  
-    /// \* `admin` - team members can pull, push and administer this repository.  
-    ///   
-    /// If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
+    /*
+    * The permission to grant the team on this repository. Can be one of:
+    *  \* `pull` - team members can pull, but not push to or administer this repository.
+    *  \* `push` - team members can pull and push, but not administer this repository.
+    *  \* `admin` - team members can pull, push and administer this repository.
+    *
+    *  If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
@@ -37278,7 +37542,9 @@ pub mod types {
         pub twitter_username: String,
     }
 
-    /// Denotes whether an email is publicly visible.
+    /*
+    * Denotes whether an email is publicly visible.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
@@ -37429,7 +37695,9 @@ pub mod types {
         }
     }
 
-    /// The state that the membership should be in. Only `"active"` will be accepted.
+    /*
+    * The state that the membership should be in. Only `"active"` will be accepted.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrgsUpdateMembershipRequestState {
@@ -37462,7 +37730,9 @@ pub mod types {
         pub state: State,
     }
 
-    /// Allowed values that can be passed to the exclude param.
+    /*
+    * Allowed values that can be passed to the exclude param.
+    */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum MigrationsStartRequestExclude {
@@ -60593,7 +60863,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Parameters:**
     *
     * * `username: &str`
-    * * `type_: crate::types::ReposListUserType` -- * The type of label. Read-only labels are applied automatically when the runner is configured.
+    * * `type_: crate::types::ReposListUserType` -- The type of label. Read-only labels are applied automatically when the runner is configured.
     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
     * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
     * * `per_page: i64` -- Results per page (max 100).
