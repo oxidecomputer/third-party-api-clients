@@ -829,13 +829,13 @@ impl TypeSpace {
          * name that is this exact same type.
          */
         // TODO: focus here
-        /*if !is_schema {
+        if !is_schema {
             for (tid, te) in self.id_to_entry.iter() {
                 if te.details == details {
                     return Ok(tid.clone());
                 }
             }
-        }*/
+        }
 
         if let Some(name) = &name {
             /*
@@ -1669,14 +1669,10 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
 
                     if ct == "application/json" {
                         if let Some(s) = &mt.schema {
-                            let tid = match s {
-                                openapiv3::ReferenceOr::Reference { reference } => ts.select_ref(None, reference.as_str())?,
-                                openapiv3::ReferenceOr::Item(item) => {
-                                    let object_name = format!("{} request", oid_to_object_name("", &oid));
-                                    ts.select_schema(Some(&object_name), item, "", false)?
-                                }
-                            };
-                            (Some(format!("&{}", ts.render_type(&tid, false)?)), Some("json".to_string()))
+                            let object_name = format!("{} request", oid_to_object_name("", &oid));
+                            let tid = ts.select(Some(&object_name), s, false)?;
+                            let rt = ts.render_type(&tid, false)?;
+                            (Some(format!("&{}", rt)), Some("json".to_string()))
                         } else {
                             bail!("media type encoding, no schema: {:#?}", mt);
                         }
