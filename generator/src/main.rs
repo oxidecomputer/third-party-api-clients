@@ -742,212 +742,7 @@ impl TypeSpace {
     }
 
     fn select_schema(&mut self, name: Option<&str>, s: &openapiv3::Schema, parent_name: &str, is_schema: bool) -> Result<TypeId> {
-        let nam = if let Some(n) = name { n.to_string() } else { "".to_string() };
-
-        // TODO: refactor this function somehow.
-        /*if is_schema {
-            // If we are on a parent schema that as been defined in the spec, we want to ensure,
-            // that type gets a named type. This is so that we can find all these types later on, even
-            // arrays and basic types like numberserand strings.
-            if let openapiv3::SchemaKind::Type(t) = s.schema_kind {
-                if let openapiv3::Type::Object(_) = t {
-                    // If it's an object we will always have a named type so it's fine.
-                } else {
-                    // For everything else ensure we have a named type.
-                    let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                    (Some(nam), TypeDetails::NamedType(id))
-                }
-            }
-        }*/
-
-        let (name, details) = match &s.schema_kind {
-            openapiv3::SchemaKind::Type(t) => match t {
-                openapiv3::Type::Array(at) => {
-                    if is_schema {
-                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
-                    } else {
-                        // Determine the type of item that will be in this array.
-                        let itid = self.select_box(Some(&clean_name(&nam)), &at.items, parent_name)?;
-                        (None, TypeDetails::Array(itid, s.schema_data.clone()))
-                    }
-                }
-                openapiv3::Type::Object(o) => {
-                    // Object types must have a consistent name.
-                    let name = clean_name(match (name, s.schema_data.title.as_deref()) {
-                        (Some(n), None) => n,
-                        (Some(n), Some("")) => n,
-                        (None, Some(t)) => t,
-                        (Some(""), Some(t)) => t,
-                        (Some(n), Some(_)) => n,
-                        (None, None) => {
-                            bail!("types need a name? {:?} {:?}", name, s)
-                        }
-                    });
-
-                    let mut omap = BTreeMap::new();
-                    for (n, rb) in o.properties.iter() {
-                        let itid = self.select_box(Some(n), rb, &clean_name(&format!("{} {} {}", &parent_name, name, n)))?;
-                        if o.required.contains(n) {
-                            omap.insert(n.to_string(), itid);
-                        } else {
-                            // This is an optional member.
-                            omap.insert(n.to_string(), self.id_for_optional(&itid, s.schema_data.clone()));
-                        }
-                    }
-                    (Some(name), TypeDetails::Object(omap, s.schema_data.clone()))
-                }
-                openapiv3::Type::String(st) => {
-                    use openapiv3::{
-                        StringFormat::Date,
-                        StringFormat::DateTime,
-                        VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
-                    };
-
-                    if !st.enumeration.is_empty() {
-                        // Enum types must have a consistent name.
-                        let mut name = clean_name(match (name, s.schema_data.title.as_deref()) {
-                            (Some(n), None) => n,
-                            (Some(n), Some("")) => n,
-                            (None, Some(t)) => t,
-                            (Some(""), Some(t)) => t,
-                            (Some(n), Some(_)) => n,
-                            (None, None) => {
-                                bail!("types need a name? {:?} {:?}", name, s)
-                            }
-                        });
-
-                        if name == "status" {
-                            // We can't have an enum named status.
-                            name = format!("{} {}", parent_name, name);
-                        }
-
-                        // We have an enumeration.
-                        (Some(clean_name(&name)), TypeDetails::Enum(st.enumeration.clone(), s.schema_data.clone()))
-                    } else if is_schema {
-                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
-                    } else {
-                        // Generate a UUID for this type.
-                        let uid = uuid::Uuid::new_v4();
-                        match &st.format {
-                            Item(DateTime) => {
-                                self.import_chrono = true;
-                                (
-                                    Some(uid.to_string()),
-                                    TypeDetails::Basic("DateTime<Utc>".to_string(), s.schema_data.clone()),
-                                )
-                            }
-                            Item(Date) => {
-                                self.import_chrono = true;
-                                (Some(uid.to_string()), TypeDetails::Basic("NaiveDate".to_string(), s.schema_data.clone()))
-                            }
-                            Empty => (Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone())),
-                            Unknown(f) => match f.as_str() {
-                                "float" => (Some(uid.to_string()), TypeDetails::Basic("f64".to_string(), s.schema_data.clone())),
-                                "uri" => (Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone())),
-                                "uri-template" => (Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone())),
-                                "email" => (Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone())),
-                                f => bail!("XXX unknown string format {}", f),
-                            },
-                            x => {
-                                bail!("XXX string format {:?}", x);
-                            }
-                        }
-                    }
-                }
-                openapiv3::Type::Boolean {} => {
-                    // Generate a UUID for this type.
-                    let uid = uuid::Uuid::new_v4();
-                    if is_schema {
-                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
-                    } else {
-                        (Some(uid.to_string()), TypeDetails::Basic("bool".to_string(), s.schema_data.clone()))
-                    }
-                }
-                openapiv3::Type::Number(_) => {
-                    // Generate a UUID for this type.
-                    let uid = uuid::Uuid::new_v4();
-                    if is_schema {
-                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
-                    } else {
-                        (Some(uid.to_string()), TypeDetails::Basic("f64".to_string(), s.schema_data.clone()))
-                    }
-                }
-                openapiv3::Type::Integer(_) => {
-                    // Generate a UUID for this type.
-                    let uid = uuid::Uuid::new_v4();
-                    if is_schema {
-                        let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                        (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
-                    } else {
-                        (Some(uid.to_string()), TypeDetails::Basic("i64".to_string(), s.schema_data.clone()))
-                    }
-                }
-            },
-            openapiv3::SchemaKind::AllOf { all_of } => {
-                // TODO: Actually combine all the types.
-                let id = self.select(name, all_of.get(0).unwrap(), is_schema)?;
-                if let Some(et) = self.id_to_entry.get(&id) {
-                    if let Some(n) = name {
-                        if let TypeDetails::Object(..) = et.details {
-                            (Some(clean_name(n)), et.details.clone())
-                        } else {
-                            (Some(n.to_string()), et.details.clone())
-                        }
-                    } else {
-                        bail!("all_of types need a name? {:?} {:?}", name, all_of)
-                    }
-                } else {
-                    bail!("allof schema kind: {:?} {:?} {:?}", id, name, s,);
-                }
-            }
-            openapiv3::SchemaKind::OneOf { one_of } => {
-                // Iterate over each one of an select the first one that is not
-                // an empty object.
-                let mut id = TypeId(0);
-                for o in one_of {
-                    if let Ok(i) = self.select(name, o, true) {
-                        id = i;
-                        break;
-                    }
-                }
-
-                if let Some(et) = self.id_to_entry.get(&id) {
-                    if let Some(n) = name {
-                        (Some(n.to_string()), et.details.clone())
-                    } else {
-                        bail!("one_of types need a name? {:?} {:?}", name, one_of)
-                    }
-                } else {
-                    bail!("oneof schema kind: {:?} {:?}\n{:?}", name, s, one_of);
-                }
-            }
-            openapiv3::SchemaKind::AnyOf { any_of } => {
-                // TODO: Actually combine all the types.
-                let id = self.select(name, any_of.get(0).unwrap(), is_schema)?;
-                if let Some(et) = self.id_to_entry.get(&id) {
-                    if let Some(n) = name {
-                        (Some(n.to_string()), et.details.clone())
-                    } else {
-                        bail!("any_of types need a name? {:?} {:?}", name, any_of)
-                    }
-                } else {
-                    bail!("anyof schema kind: {:?} {:?}\n{:?}", name, s, any_of);
-                }
-            }
-            openapiv3::SchemaKind::Any(_a) => {
-                if is_schema {
-                    let id = self.select_schema(Some(&nam), s, parent_name, false)?;
-                    (Some(nam), TypeDetails::NamedType(id, s.schema_data.clone()))
-                } else {
-                    // Then we use the serde_json type.
-                    (Some(nam), TypeDetails::Basic("serde_json::Value".to_string(), s.schema_data.clone()))
-                }
-            }
-        };
+        let (name, details) = self.get_type_name_and_details(name, s, parent_name, is_schema)?;
 
         if let Some(name) = &name {
             /*
@@ -1042,6 +837,180 @@ impl TypeSpace {
         match s {
             openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
             openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s.as_ref(), parent_name, false),
+        }
+    }
+
+    fn get_type_name_and_details(
+        &mut self,
+        name: Option<&str>,
+        s: &openapiv3::Schema,
+        parent_name: &str,
+        is_schema: bool,
+    ) -> Result<(Option<String>, TypeDetails)> {
+        let nam = if let Some(n) = name { n.to_string() } else { "".to_string() };
+
+        if is_schema {
+            // If we are on a parent schema that as been defined in the spec, we want to ensure,
+            // that type gets a named type. This is so that we can find all these types later on, even
+            // arrays and basic types like numbers and strings.
+            if let openapiv3::SchemaKind::Type(t) = &s.schema_kind {
+                if let openapiv3::Type::Object(_) = t {
+                    // If it's an object we will always have a named type so it's fine.
+                } else {
+                    // For everything else ensure we have a named type.
+                    let id = self.select_schema(Some(&nam), &s, parent_name, false)?;
+                    return Ok((Some(nam), TypeDetails::NamedType(id, s.schema_data.clone())));
+                }
+            }
+        }
+        // Generate a UUID for this type.
+        let uid = uuid::Uuid::new_v4();
+
+        match &s.schema_kind {
+            openapiv3::SchemaKind::Type(t) => match t {
+                openapiv3::Type::Array(at) => {
+                    // Determine the type of item that will be in this array.
+                    let itid = self.select_box(Some(&clean_name(&nam)), &at.items, parent_name)?;
+                    Ok((None, TypeDetails::Array(itid, s.schema_data.clone())))
+                }
+                openapiv3::Type::Object(o) => {
+                    // Object types must have a consistent name.
+                    let name = clean_name(match (name, s.schema_data.title.as_deref()) {
+                        (Some(n), None) => n,
+                        (Some(n), Some("")) => n,
+                        (None, Some(t)) => t,
+                        (Some(""), Some(t)) => t,
+                        (Some(n), Some(_)) => n,
+                        (None, None) => {
+                            bail!("types need a name? {:?} {:?}", name, s)
+                        }
+                    });
+
+                    let mut omap = BTreeMap::new();
+                    for (n, rb) in o.properties.iter() {
+                        let itid = self.select_box(Some(n), rb, &clean_name(&format!("{} {} {}", &parent_name, name, n)))?;
+                        if o.required.contains(n) {
+                            omap.insert(n.to_string(), itid);
+                        } else {
+                            // This is an optional member.
+                            omap.insert(n.to_string(), self.id_for_optional(&itid, s.schema_data.clone()));
+                        }
+                    }
+                    Ok((Some(name), TypeDetails::Object(omap, s.schema_data.clone())))
+                }
+                openapiv3::Type::String(st) => {
+                    use openapiv3::{
+                        StringFormat::Date,
+                        StringFormat::DateTime,
+                        VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
+                    };
+
+                    if !st.enumeration.is_empty() {
+                        // Enum types must have a consistent name.
+                        let mut name = clean_name(match (name, s.schema_data.title.as_deref()) {
+                            (Some(n), None) => n,
+                            (Some(n), Some("")) => n,
+                            (None, Some(t)) => t,
+                            (Some(""), Some(t)) => t,
+                            (Some(n), Some(_)) => n,
+                            (None, None) => {
+                                bail!("types need a name? {:?} {:?}", name, s)
+                            }
+                        });
+
+                        if name == "status" {
+                            // We can't have an enum named status.
+                            name = format!("{} {}", parent_name, name);
+                        }
+
+                        // We have an enumeration.
+                        return Ok((Some(clean_name(&name)), TypeDetails::Enum(st.enumeration.clone(), s.schema_data.clone())));
+                    }
+
+                    match &st.format {
+                        Item(DateTime) => {
+                            self.import_chrono = true;
+                            Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("DateTime<Utc>".to_string(), s.schema_data.clone()),
+                            ))
+                        }
+                        Item(Date) => {
+                            self.import_chrono = true;
+                            Ok((Some(uid.to_string()), TypeDetails::Basic("NaiveDate".to_string(), s.schema_data.clone())))
+                        }
+                        Empty => Ok((Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone()))),
+                        Unknown(f) => match f.as_str() {
+                            "float" => Ok((Some(uid.to_string()), TypeDetails::Basic("f64".to_string(), s.schema_data.clone()))),
+                            "uri" => Ok((Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone()))),
+                            "uri-template" => Ok((Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone()))),
+                            "email" => Ok((Some(uid.to_string()), TypeDetails::Basic("String".to_string(), s.schema_data.clone()))),
+                            f => bail!("XXX unknown string format {}", f),
+                        },
+                        x => {
+                            bail!("XXX string format {:?}", x);
+                        }
+                    }
+                }
+                openapiv3::Type::Boolean {} => Ok((Some(uid.to_string()), TypeDetails::Basic("bool".to_string(), s.schema_data.clone()))),
+                openapiv3::Type::Number(_) => Ok((Some(uid.to_string()), TypeDetails::Basic("f64".to_string(), s.schema_data.clone()))),
+                openapiv3::Type::Integer(_) => Ok((Some(uid.to_string()), TypeDetails::Basic("i64".to_string(), s.schema_data.clone()))),
+            },
+            openapiv3::SchemaKind::AllOf { all_of } => {
+                // TODO: Actually combine all the types.
+                let id = self.select(name, all_of.get(0).unwrap(), is_schema)?;
+                if let Some(et) = self.id_to_entry.get(&id) {
+                    if let Some(n) = name {
+                        if let TypeDetails::Object(..) = et.details {
+                            Ok((Some(clean_name(n)), et.details.clone()))
+                        } else {
+                            Ok((Some(n.to_string()), et.details.clone()))
+                        }
+                    } else {
+                        bail!("all_of types need a name? {:?} {:?}", name, all_of)
+                    }
+                } else {
+                    bail!("allof schema kind: {:?} {:?} {:?}", id, name, s,);
+                }
+            }
+            openapiv3::SchemaKind::OneOf { one_of } => {
+                // Iterate over each one of an select the first one that is not
+                // an empty object.
+                let mut id = TypeId(0);
+                for o in one_of {
+                    if let Ok(i) = self.select(name, o, true) {
+                        id = i;
+                        break;
+                    }
+                }
+
+                if let Some(et) = self.id_to_entry.get(&id) {
+                    if let Some(n) = name {
+                        Ok((Some(n.to_string()), et.details.clone()))
+                    } else {
+                        bail!("one_of types need a name? {:?} {:?}", name, one_of)
+                    }
+                } else {
+                    bail!("oneof schema kind: {:?} {:?}\n{:?}", name, s, one_of);
+                }
+            }
+            openapiv3::SchemaKind::AnyOf { any_of } => {
+                // TODO: Actually combine all the types.
+                let id = self.select(name, any_of.get(0).unwrap(), is_schema)?;
+                if let Some(et) = self.id_to_entry.get(&id) {
+                    if let Some(n) = name {
+                        Ok((Some(n.to_string()), et.details.clone()))
+                    } else {
+                        bail!("any_of types need a name? {:?} {:?}", name, any_of)
+                    }
+                } else {
+                    bail!("anyof schema kind: {:?} {:?}\n{:?}", name, s, any_of);
+                }
+            }
+            openapiv3::SchemaKind::Any(_a) => {
+                // Then we use the serde_json type.
+                Ok((Some(nam), TypeDetails::Basic("serde_json::Value".to_string(), s.schema_data.clone())))
+            }
         }
     }
 }
