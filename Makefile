@@ -12,3 +12,6 @@ target/debug/generator: generator/src/*.rs generator/Cargo.toml
 
 examples: generate github/examples/*.rs
 	cargo build --examples --features="httpcache"
+	cargo build --examples
+	cargo clippy --examples --features="httpcache"
+	cargo clippy --examples
