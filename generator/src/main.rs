@@ -841,9 +841,7 @@ impl TypeSpace {
         }
 
         if let Some(name) = &name {
-            /*
-             * First, determine what ID we will use to identify this named type.
-             */
+            // First, determine what ID we will use to identify this named type.
             let id = self.id_for_name(name);
 
             /*
@@ -853,38 +851,22 @@ impl TypeSpace {
              */
             if let Some(et) = self.id_to_entry.get(&id) {
                 if et.details != details {
-                    // TODO: if these are enums and one contains a subset of the other, hande it.
                     // We can get here if there are two objects with the same name
                     // that have properties that are different.
-                    // Let's check if we already have an object with the parent name.
-                    let mut pn = parent_name.to_string();
                     if parent_name.is_empty() {
-                        // Append "Data" to the name.
-                        pn = format!("{} Data", name);
-                    }
-                    let parent_id = self.id_for_name(&pn);
-                    if let Some(pet) = self.id_to_entry.get(&parent_id) {
-                        // We already have an item with the parent name!
-                        if pet.details != details {
-                            // We can get here if there are two objects with the same name
-                            // that have properties that are different.
-                            // Let's rename the new object with the parent name.
-                            println!("object details for {} do not match: {:?} != {:?}", pn, pet.details, details,);
-                        }
-                    } else {
-                        // Let's rename the new object with the parent name.
-                        // Insert the new one with the parent name.
-                        self.id_to_entry.insert(
-                            parent_id.clone(),
-                            TypeEntry {
-                                id: parent_id.clone(),
-                                name: Some(pn),
-                                details,
-                            },
+                        // If we don't have a parent_name to append, let's bail.
+                        println!(
+                            "no parent_name and object details for {} do not match: {:?} != {:?}",
+                            name, et.details, details,
                         );
+                    } else {
+                        // If we have a parent name, let's append it to the real name.
+                        let mut pname = format!("{} {}", parent_name, name);
+                        return self.add_if_not_exists(Some(clean_name(&pname)), details, "", is_schema);
                     }
                 }
             } else {
+                // We don't have an entry for this type ID so let's add it!
                 self.id_to_entry.insert(
                     id.clone(),
                     TypeEntry {
@@ -1035,7 +1017,7 @@ impl TypeSpace {
 
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
-                        let itid = self.select_box(Some(n), rb, &clean_name(&format!("{} {} {}", &parent_name, name, n)))?;
+                        let itid = self.select_box(Some(n), rb, &clean_name(&format!("{} {}", &parent_name, name)))?;
                         if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
                         } else {
@@ -1051,6 +1033,7 @@ impl TypeSpace {
                         VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
 
+                    // We have an enumeration.
                     if !st.enumeration.is_empty() {
                         // Enum types must have a consistent name.
                         let mut name = clean_name(match (name, s.schema_data.title.as_deref()) {
@@ -1064,17 +1047,14 @@ impl TypeSpace {
                             }
                         });
 
-                        /*if name == "status" {
+                        if name == "status" {
                             // We can't have an enum named status, we know there will
                             // be a struct named after this so it's best to just not
                             // even attempt it.
                             // */
                             name = format!("{} {}", parent_name, name);
-                       // }
-                       // // TODO: clean this up, we basically want to insert the enum here and
-                       // return the id all in one swoop.
+                        }
 
-                        // We have an enumeration.
                         return Ok((Some(clean_name(&name)), TypeDetails::Enum(st.enumeration.clone(), s.schema_data.clone())));
                     }
 
@@ -2173,8 +2153,8 @@ fn main() -> Result<()> {
                 let mut oid = o.operation_id.as_deref().unwrap().to_string();
                 oid = oid.replace("-", "_").replace("/", "_");
 
-                println!();
-                println!("{}", oid);
+                // println!();
+                // println!("{}", oid);
 
                 /*
                  * Get the request body type, if this operation has one.
@@ -2198,7 +2178,7 @@ fn main() -> Result<()> {
                     req.push(format!("{:?}", id));
                 }
                 if !req.is_empty() {
-                    println!("\t{} {} request body -> {}", pn, m, req.join(" | "));
+                    // println!("\t{} {} request body -> {}", pn, m, req.join(" | "));
                 }
 
                 /*
@@ -2244,7 +2224,7 @@ fn main() -> Result<()> {
                         }
                     }
                 }
-                println!("\t{} {} response body -> {}", pn, m, res.join(" | "));
+                // println!("\t{} {} response body -> {}", pn, m, res.join(" | "));
             }
 
             Ok(())
