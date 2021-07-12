@@ -7,7 +7,7 @@ use std::fs::{File, OpenOptions};
 use std::io::Write;
 use std::path::{Path, PathBuf};
 
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{bail, Result};
 use http::status::StatusCode;
 use inflector::cases::{snakecase::to_snake_case, titlecase::to_title_case};
 use openapiv3::OpenAPI;
@@ -162,11 +162,11 @@ where
 }
 
 trait ParameterDataExt {
-    fn render_type(&self, name: &str) -> Result<String>;
+    fn render_type(&self, name: &str, ts: &TypeSpace) -> Result<String>;
 }
 
 impl ParameterDataExt for openapiv3::ParameterData {
-    fn render_type(&self, name: &str) -> Result<String> {
+    fn render_type(&self, name: &str, ts: &TypeSpace) -> Result<String> {
         use openapiv3::{SchemaKind, Type};
 
         Ok(match &self.format {
@@ -192,8 +192,20 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
                             if !st.enumeration.is_empty() {
                                 if name.is_empty() {
+                                    // Try to find the parameter among our types.
+                                    for te in ts.id_to_entry.values() {
+                                        if let Some(sn) = te.name.as_deref() {
+                                            let sn = struct_name(sn);
+                                            if let TypeDetails::Enum(vals, _schema_data) = &te.details {
+                                                if st.enumeration == *vals {
+                                                    return Ok(format!("crate::types::{}", sn));
+                                                }
+                                            }
+                                        }
+                                    }
+
                                     // TODO: fix this.
-                                    println!("parameter that enumerates should have a pre-defined type: {:?}", st);
+                                    println!("parameter {} that enumerates should have a pre-defined type: {:?}", name, s);
                                 } else {
                                     // We have an enum.
                                     // Let's return the correct enum struct name.
@@ -617,7 +629,6 @@ impl TypeSpace {
         };
 
         if let Some(s) = schema {
-            println!("schema data for rendering docs: {:?}", s);
             if let Some(description) = &s.description {
                 a(&format!("/// {}", description.replace('\n', "\n/// ")));
             }
@@ -741,14 +752,23 @@ impl TypeSpace {
         })
     }
 
-    fn select_schema(&mut self, name: Option<&str>, s: &openapiv3::Schema, parent_name: &str, is_schema: bool) -> Result<TypeId> {
-        let (name, details) = self.get_type_name_and_details(name, s, parent_name, is_schema)?;
+    fn add_if_not_exists(&mut self, name: Option<String>, details: TypeDetails, parent_name: &str) -> Result<TypeId> {
+        /*
+         * We can have types that are references that are never explicitly called
+         * but are duplicated all over. Let's ensure that we don't have a type with a different
+         * name that is this exact same type. // TODO
+         */
+        /*for (tid, te) in self.id_to_entry.iter() {
+            if te.name.is_none() && te.details == details {
+                return Ok(tid.clone());
+            }
+        }*/
 
         if let Some(name) = &name {
             /*
              * First, determine what ID we will use to identify this named type.
              */
-            let id = self.id_for_name(name.as_str());
+            let id = self.id_for_name(name);
 
             /*
              * If there is already an entry for this type ID, ensure that it
@@ -792,7 +812,7 @@ impl TypeSpace {
                     id.clone(),
                     TypeEntry {
                         id: id.clone(),
-                        name: Some(name.clone()),
+                        name: Some(name.to_string()),
                         details,
                     },
                 );
@@ -826,6 +846,13 @@ impl TypeSpace {
         }
     }
 
+    fn select_param(&mut self, name: Option<&str>, p: &openapiv3::ReferenceOr<openapiv3::Parameter>, is_schema: bool) -> Result<TypeId> {
+        match p {
+            openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
+            openapiv3::ReferenceOr::Item(p) => self.select_parameter(name, p, "", is_schema),
+        }
+    }
+
     fn select(&mut self, name: Option<&str>, s: &openapiv3::ReferenceOr<openapiv3::Schema>, is_schema: bool) -> Result<TypeId> {
         match s {
             openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
@@ -838,6 +865,12 @@ impl TypeSpace {
             openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
             openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s.as_ref(), parent_name, false),
         }
+    }
+
+    fn select_schema(&mut self, name: Option<&str>, s: &openapiv3::Schema, parent_name: &str, is_schema: bool) -> Result<TypeId> {
+        let (n, details) = self.get_type_name_and_details(name, s, parent_name, is_schema)?;
+
+        self.add_if_not_exists(n, details, &parent_name)
     }
 
     fn get_type_name_and_details(
@@ -919,7 +952,9 @@ impl TypeSpace {
                         });
 
                         if name == "status" {
-                            // We can't have an enum named status.
+                            // We can't have an enum named status, we know there will
+                            // be a struct named after this so it's best to just not
+                            // even attempt it.
                             name = format!("{} {}", parent_name, name);
                         }
 
@@ -1012,6 +1047,13 @@ impl TypeSpace {
                 Ok((Some(nam), TypeDetails::Basic("serde_json::Value".to_string(), s.schema_data.clone())))
             }
         }
+
+        fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter, parent_name: &str, is_schema: bool) -> Result<TypeId> {
+            /*let (n, details) = self.get_type_name_and_details_param(name, p, parent_name, is_schema)?;
+
+            self.add_if_not_exists(n, details, &parent_name)*/
+            bail!("we need to implement this");
+        }
     }
 }
 
@@ -1044,7 +1086,7 @@ fn render_raw_param(n: &str, param: &openapiv3::Parameter) -> String {
                     if let Some(d) = &parameter_data.description {
                         desc = d.to_string();
                     }
-                    return render_param(n, &st.enumeration.clone(), parameter_data.required, &desc);
+                    return render_param(n, &st.enumeration.clone(), parameter_data.required, &desc, s.schema_data.default.as_ref());
                 }
             }
         }
@@ -1067,7 +1109,7 @@ fn get_enums_for_param(param: &openapiv3::Parameter) -> Vec<String> {
     vec![]
 }
 
-fn render_param(n: &str, en: &[String], required: bool, description: &str) -> String {
+fn render_param(n: &str, en: &[String], required: bool, description: &str, default: Option<&serde_json::Value>) -> String {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1113,7 +1155,7 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str) -> St
         }
         a(&format!("{},", struct_name(e)));
     }
-    if !required {
+    if !required && default.is_none() {
         a("Noop,");
     }
     a("}");
@@ -1129,7 +1171,7 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str) -> St
         }
         a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
     }
-    if !required {
+    if !required && default.is_none() {
         a(&format!(r#"{}::Noop => "","#, sn,));
     }
     a("}");
@@ -1139,15 +1181,23 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str) -> St
     a("");
 
     // Add a default for the enum if it is not required.
-    // TODO: use the default that can be passed to the OpenAPI,
-    // github is not using that currently but we might want to
-    // in the future.
-    if !required {
-        a(&format!("impl Default for {} {{", sn));
-        a(&format!("fn default() -> {} {{", sn));
-        a(&format!("{}::Noop", sn));
-        a("}");
-        a("}");
+    if !required || default.is_some() {
+        if let Some(d) = default {
+            // Use the default that can be passed to the OpenAPI,
+            // github is not using that currently for everything but we might want to
+            // in the future.
+            a(&format!("impl Default for {} {{", sn));
+            a(&format!("fn default() -> {} {{", sn));
+            a(&format!("{}::{}", sn, struct_name(&d.to_string().replace('"', ""))));
+            a("}");
+            a("}");
+        } else {
+            a(&format!("impl Default for {} {{", sn));
+            a(&format!("fn default() -> {} {{", sn));
+            a(&format!("{}::Noop", sn));
+            a("}");
+            a("}");
+        }
     }
 
     out.to_string()
@@ -1389,10 +1439,14 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     if let Some(t) = parameters.get(&sn) {
                         let enums = get_enums_for_param(t);
                         if enums == *vals {
-                            println!("enum {} already exists:\n\texisting -> {:?}\n\tnew -> {:?}", sn, enums, vals);
                             continue;
                         } else {
-                            bail!("enum {} already exists:\n\texisting -> {:?}\n\tnew -> {:?}", sn, enums, vals);
+                            bail!(
+                                "enum with name {} already exists but the values do not match:\n\texisting -> {:?}\n\tnew -> {:?}",
+                                sn,
+                                enums,
+                                vals
+                            );
                         }
                     }
 
@@ -1400,7 +1454,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     if let Some(d) = &schema_data.description {
                         desc = d.to_string();
                     }
-                    let p = render_param(sn.as_str(), vals, false, &desc);
+                    let p = render_param(sn.as_str(), vals, false, &desc, schema_data.default.as_ref());
                     a(&p);
                 }
                 TypeDetails::Object(omap, schema_data) => {
@@ -1572,16 +1626,18 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 (None, None)
             };
 
+            // For this one function, we need it to be recursive since this is how you get
+            // an access token when authenicating on behalf of an app with a JWT.
             if oid == "apps_create_installation_access_token" {
                 a("#[async_recursion]");
             }
 
             if bounds.is_empty() {
-                a(&format!("    pub async fn {}(", oid));
+                a(&format!("pub async fn {}(", oid));
             } else {
-                a(&format!("    pub async fn {}<{}>(", oid, bounds.join(", ")));
+                a(&format!("pub async fn {}<{}>(", oid, bounds.join(", ")));
             }
-            a("        &self,");
+            a("&self,");
 
             let mut query_params_str: Vec<String> = Default::default();
             /*
@@ -1610,7 +1666,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                         style: openapiv3::PathStyle::Simple,
                     } => {
                         let nam = &to_snake_case(&parameter_data.name);
-                        let typ = parameter_data.render_type(&param_name)?;
+                        let typ = parameter_data.render_type(&param_name, ts)?;
                         if nam == "ref" || nam == "type" {
                             a(&format!("{}_: {},", nam, typ));
                         } else {
@@ -1630,7 +1686,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                         }
 
                         let nam = &to_snake_case(&parameter_data.name);
-                        let typ = parameter_data.render_type(&param_name)?;
+                        let typ = parameter_data.render_type(&param_name, ts)?;
                         if nam == "ref" || nam == "type" {
                             a(&format!("        {}_: {},", nam, typ));
                             query_params_str.push(format!(r#"("{}", {}_.to_string())"#, nam, nam));
@@ -1648,7 +1704,8 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                 query_params.insert(nam.to_string(), format!("{}.to_string()", nam));
                             } else if typ == "&[String]" {
                                 // TODO: I have no idea how these should be seperated and the docs
-                                // don't give any answers either, for "exclude".
+                                // don't give any answers either, for an array sent through query
+                                // params.
                                 // https://docs.github.com/en/rest/reference/migrations
                                 query_params_str.push(format!(r#"("{}", {}.join(" "))"#, nam, nam));
                                 query_params.insert(nam.to_string(), format!("{}.join(\" \")", nam));
@@ -1663,7 +1720,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
             }
 
             if let Some(bp) = &body_param {
-                a(&format!("        body: {},", bp));
+                a(&format!("body: {},", bp));
             }
 
             // Only do the first.
@@ -1695,7 +1752,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                  * JSON-formatted response.
                  */
                 if i.content.is_empty() {
-                    a("    ) -> Result<()> {");
+                    a(") -> Result<()> {");
                     false
                 } else {
                     match i.content.get("application/json") {
@@ -1722,7 +1779,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                     }
                                 };
                                 if let Ok(rt) = ts.render_type(&tid, false) {
-                                    a(&format!("    ) -> Result<{}> {{", rt));
+                                    a(&format!(") -> Result<{}> {{", rt));
 
                                     rt.starts_with("Vec<")
                                 } else {
@@ -1756,7 +1813,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                             if let openapiv3::StatusCode::Code(c) = only.0 {
                                                 let status_code = StatusCode::from_u16(*c).unwrap();
                                                 let object_name = format!(
-                                                    "{} {} Response",
+                                                    "{} {} response",
                                                     oid_to_object_name(m, &oid),
                                                     status_code.canonical_reason().unwrap().to_lowercase()
                                                 );
@@ -1975,8 +2032,12 @@ fn main() -> Result<()> {
 
         // Populate a type to describe each entry in the parameters section.
         for (i, (pn, p)) in components.parameters.iter().enumerate() {
-            println!("PARAMETER {}/{}: {}", i + 1, components.parameters.len(), pn);
+            let name = clean_name(pn);
+            println!("PARAMETER {}/{}: {}", i + 1, components.parameters.len(), name);
 
+            let id = ts.select_param(Some(name.as_str()), p, true)?;
+            println!("    -> {:?}", id);
+            println!();
             if let openapiv3::ReferenceOr::Item(item) = p {
                 parameters.insert(struct_name(&pn.to_string()), item);
             } else {
@@ -1998,76 +2059,70 @@ fn main() -> Result<()> {
                 let mut oid = o.operation_id.as_deref().unwrap().to_string();
                 oid = oid.replace("-", "_").replace("/", "_");
 
+                println!();
+                println!("{}", oid);
+
                 /*
-                 * Get the request body type, if this operation has one:
+                 * Get the request body type, if this operation has one.
                  */
+                let mut req: Vec<String> = Default::default();
                 if let Some(openapiv3::ReferenceOr::Item(body)) = &o.request_body {
-                    if !body.is_binary()? {
-                        if let Ok(mt) = body.content_json().with_context(|| anyhow!("{} {} request", m, pn)) {
+                    for (ct, mt) in &body.content {
+                        if ct == "application/json" {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!("{} request", oid_to_object_name("", &oid));
                                 let id = ts.select(Some(&object_name), s, false)?;
-                                println!("    {} {} request body -> '{}' {:?}", pn, m, object_name, id);
-                            }
-                        } else if let Some((ct, mt)) = body.content.first() {
-                            if ct == "text/plain" || ct == "text/html" {
-                                println!("    {} {} request body -> &str", pn, m,);
-                            } else if let Some(s) = &mt.schema {
-                                println!("    {} {} request body -> {:?}", pn, m, s);
-                            } else {
-                                bail!("unknown request content: {} {} {:?}", pn, m, body.content);
+                                req.push(format!("{} {:?}", struct_name(&object_name), id));
                             }
                         } else {
-                            bail!("unknown request content: {} {} {:?}", pn, m, body.content);
+                            req.push(ct.to_string());
                         }
                     }
                 } else if let Some(openapiv3::ReferenceOr::Reference { reference }) = &o.request_body {
                     let id = ts.select_ref(None, reference.as_str())?;
-                    println!("    {} {} request body -> {:?}", pn, m, id);
+                    req.push(format!("{:?}", id));
+                }
+                if !req.is_empty() {
+                    println!("\t{} {} request body -> {}", pn, m, req.join(" | "));
                 }
 
                 /*
                  * Get the response body type for each status code:
                  */
+                let mut res: Vec<String> = Default::default();
                 for (code, r) in o.responses.responses.iter() {
                     match r {
                         openapiv3::ReferenceOr::Item(ri) => {
-                            if !ri.is_binary()? && !ri.content.is_empty() {
-                                if let Ok(mt) = ri.content_json().with_context(|| anyhow!("{} {} {}", m, pn, code)) {
+                            for (ct, mt) in &ri.content {
+                                if ct == "application/json" {
                                     if let Some(s) = &mt.schema {
                                         if let openapiv3::StatusCode::Code(c) = code {
                                             let status_code = StatusCode::from_u16(*c).unwrap();
                                             let object_name = format!(
-                                                "{} {} Response",
+                                                "{} {} response",
                                                 oid_to_object_name(m, &oid),
                                                 status_code.canonical_reason().unwrap().to_lowercase()
                                             );
                                             let id = ts.select(Some(&object_name), s, false)?;
-                                            println!("    {} {} {} response body -> {:?}", pn, m, code, id);
+                                            res.push(format!("{} {:?}", struct_name(&object_name), id));
                                         } else {
                                             bail!("got a range and not a code for {:?}", code);
                                         }
                                     }
-                                } else if let Some((ct, mt)) = ri.content.first() {
-                                    if ct == "text/plain" || ct == "text/html" {
-                                        println!("    {} {} {} response body -> String", pn, m, code,);
-                                    } else if let Some(s) = &mt.schema {
-                                        println!("    {} {} {} response body -> {:?}", pn, m, code, s);
-                                    } else {
-                                        bail!("unknown response content: {} {} {} {:?}", pn, m, code, ri.content);
-                                    }
                                 } else {
-                                    bail!("unknown response content: {} {} {} {:?}", pn, m, code, ri.content);
+                                    res.push(ct.to_string());
                                 }
                             }
                         }
                         openapiv3::ReferenceOr::Reference { reference } => {
                             let id = ts.select_ref(None, reference.as_str())?;
-                            println!("    {} {} {} response body -> {:?}", pn, m, code, id);
+                            res.push(format!("{:?}", id));
                         }
                     }
                 }
+                println!("\t{} {} response body -> {}", pn, m, res.join(" | "));
             }
+
             Ok(())
         };
 
@@ -2080,6 +2135,7 @@ fn main() -> Result<()> {
         grab(pn, "PATCH", op.patch.as_ref(), &mut ts)?;
         grab(pn, "TRACE", op.trace.as_ref(), &mut ts)?;
     }
+    println!();
 
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();

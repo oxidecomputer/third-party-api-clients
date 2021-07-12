@@ -252,7 +252,6 @@ pub mod types {
     pub enum Direction {
         Asc,
         Desc,
-        Noop,
     }
 
     impl std::fmt::Display for Direction {
@@ -260,7 +259,6 @@ pub mod types {
             match *self {
                 Direction::Asc => "asc",
                 Direction::Desc => "desc",
-                Direction::Noop => "",
             }
             .fmt(f)
         }
@@ -268,7 +266,7 @@ pub mod types {
 
     impl Default for Direction {
         fn default() -> Direction {
-            Direction::Noop
+            Direction::Desc
         }
     }
 
@@ -278,7 +276,6 @@ pub mod types {
     pub enum Order {
         Asc,
         Desc,
-        Noop,
     }
 
     impl std::fmt::Display for Order {
@@ -286,7 +283,6 @@ pub mod types {
             match *self {
                 Order::Asc => "asc",
                 Order::Desc => "desc",
-                Order::Noop => "",
             }
             .fmt(f)
         }
@@ -294,7 +290,7 @@ pub mod types {
 
     impl Default for Order {
         fn default() -> Order {
-            Order::Noop
+            Order::Desc
         }
     }
 
@@ -330,7 +326,6 @@ pub mod types {
     pub enum Per {
         Day,
         Week,
-        Noop,
     }
 
     impl std::fmt::Display for Per {
@@ -338,7 +333,6 @@ pub mod types {
             match *self {
                 Per::Day => "day",
                 Per::Week => "week",
-                Per::Noop => "",
             }
             .fmt(f)
         }
@@ -346,7 +340,7 @@ pub mod types {
 
     impl Default for Per {
         fn default() -> Per {
-            Per::Noop
+            Per::Day
         }
     }
 
@@ -356,7 +350,6 @@ pub mod types {
     pub enum Sort {
         Created,
         Updated,
-        Noop,
     }
 
     impl std::fmt::Display for Sort {
@@ -364,7 +357,6 @@ pub mod types {
             match *self {
                 Sort::Created => "created",
                 Sort::Updated => "updated",
-                Sort::Noop => "",
             }
             .fmt(f)
         }
@@ -372,7 +364,7 @@ pub mod types {
 
     impl Default for Sort {
         fn default() -> Sort {
-            Sort::Noop
+            Sort::Created
         }
     }
 
@@ -4427,7 +4419,6 @@ pub mod types {
     pub enum State {
         Closed,
         Open,
-        Noop,
     }
 
     impl std::fmt::Display for State {
@@ -4435,7 +4426,6 @@ pub mod types {
             match *self {
                 State::Closed => "closed",
                 State::Open => "open",
-                State::Noop => "",
             }
             .fmt(f)
         }
@@ -4443,7 +4433,7 @@ pub mod types {
 
     impl Default for State {
         fn default() -> State {
-            State::Noop
+            State::Open
         }
     }
 
@@ -9191,7 +9181,6 @@ pub mod types {
     pub enum TeamMembershipRole {
         Maintainer,
         Member,
-        Noop,
     }
 
     impl std::fmt::Display for TeamMembershipRole {
@@ -9199,7 +9188,6 @@ pub mod types {
             match *self {
                 TeamMembershipRole::Maintainer => "maintainer",
                 TeamMembershipRole::Member => "member",
-                TeamMembershipRole::Noop => "",
             }
             .fmt(f)
         }
@@ -9207,7 +9195,7 @@ pub mod types {
 
     impl Default for TeamMembershipRole {
         fn default() -> TeamMembershipRole {
-            TeamMembershipRole::Noop
+            TeamMembershipRole::Member
         }
     }
 
@@ -19167,7 +19155,6 @@ pub mod types {
     pub enum StartSide {
         Left,
         Right,
-        Noop,
     }
 
     impl std::fmt::Display for StartSide {
@@ -19175,7 +19162,6 @@ pub mod types {
             match *self {
                 StartSide::Left => "LEFT",
                 StartSide::Right => "RIGHT",
-                StartSide::Noop => "",
             }
             .fmt(f)
         }
@@ -19183,7 +19169,7 @@ pub mod types {
 
     impl Default for StartSide {
         fn default() -> StartSide {
-            StartSide::Noop
+            StartSide::Right
         }
     }
 
@@ -19193,7 +19179,6 @@ pub mod types {
     pub enum Side {
         Left,
         Right,
-        Noop,
     }
 
     impl std::fmt::Display for Side {
@@ -19201,7 +19186,6 @@ pub mod types {
             match *self {
                 Side::Left => "LEFT",
                 Side::Right => "RIGHT",
-                Side::Noop => "",
             }
             .fmt(f)
         }
@@ -19209,7 +19193,7 @@ pub mod types {
 
     impl Default for Side {
         fn default() -> Side {
-            Side::Noop
+            Side::Right
         }
     }
 
@@ -21933,7 +21917,6 @@ pub mod types {
     pub enum ReviewCommentSide {
         Left,
         Right,
-        Noop,
     }
 
     impl std::fmt::Display for ReviewCommentSide {
@@ -21941,7 +21924,6 @@ pub mod types {
             match *self {
                 ReviewCommentSide::Left => "LEFT",
                 ReviewCommentSide::Right => "RIGHT",
-                ReviewCommentSide::Noop => "",
             }
             .fmt(f)
         }
@@ -21949,7 +21931,7 @@ pub mod types {
 
     impl Default for ReviewCommentSide {
         fn default() -> ReviewCommentSide {
-            ReviewCommentSide::Noop
+            ReviewCommentSide::Right
         }
     }
 
@@ -25523,7 +25505,6 @@ pub mod types {
     pub enum EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
         All,
         Selected,
-        Noop,
     }
 
     impl std::fmt::Display for EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
@@ -25531,7 +25512,6 @@ pub mod types {
             match *self {
                 EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::All => "all",
                 EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::Selected => "selected",
-                EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
@@ -25539,7 +25519,7 @@ pub mod types {
 
     impl Default for EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
         fn default() -> EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
-            EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::Noop
+            EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::All
         }
     }
 
@@ -25672,7 +25652,6 @@ pub mod types {
     pub enum Mode {
         Gfm,
         Markdown,
-        Noop,
     }
 
     impl std::fmt::Display for Mode {
@@ -25680,7 +25659,6 @@ pub mod types {
             match *self {
                 Mode::Gfm => "gfm",
                 Mode::Markdown => "markdown",
-                Mode::Noop => "",
             }
             .fmt(f)
         }
@@ -25688,7 +25666,7 @@ pub mod types {
 
     impl Default for Mode {
         fn default() -> Mode {
-            Mode::Noop
+            Mode::Markdown
         }
     }
 
@@ -25747,7 +25725,6 @@ pub mod types {
         None,
         Read,
         Write,
-        Noop,
     }
 
     impl std::fmt::Display for DefaultRepositoryPermission {
@@ -25757,7 +25734,6 @@ pub mod types {
                 DefaultRepositoryPermission::None => "none",
                 DefaultRepositoryPermission::Read => "read",
                 DefaultRepositoryPermission::Write => "write",
-                DefaultRepositoryPermission::Noop => "",
             }
             .fmt(f)
         }
@@ -25765,7 +25741,7 @@ pub mod types {
 
     impl Default for DefaultRepositoryPermission {
         fn default() -> DefaultRepositoryPermission {
-            DefaultRepositoryPermission::Noop
+            DefaultRepositoryPermission::Read
         }
     }
 
@@ -25933,7 +25909,6 @@ pub mod types {
         All,
         Private,
         Selected,
-        Noop,
     }
 
     impl std::fmt::Display for ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
@@ -25942,7 +25917,6 @@ pub mod types {
                 ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::All => "all",
                 ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Private => "private",
                 ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Selected => "selected",
-                ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Noop => "",
             }
             .fmt(f)
         }
@@ -25950,7 +25924,7 @@ pub mod types {
 
     impl Default for ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
         fn default() -> ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
-            ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Noop
+            ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::All
         }
     }
 
@@ -26290,7 +26264,6 @@ pub mod types {
         Admin,
         BillingManager,
         DirectMember,
-        Noop,
     }
 
     impl std::fmt::Display for OrgsCreateInvitationRequestRole {
@@ -26299,7 +26272,6 @@ pub mod types {
                 OrgsCreateInvitationRequestRole::Admin => "admin",
                 OrgsCreateInvitationRequestRole::BillingManager => "billing_manager",
                 OrgsCreateInvitationRequestRole::DirectMember => "direct_member",
-                OrgsCreateInvitationRequestRole::Noop => "",
             }
             .fmt(f)
         }
@@ -26307,7 +26279,7 @@ pub mod types {
 
     impl Default for OrgsCreateInvitationRequestRole {
         fn default() -> OrgsCreateInvitationRequestRole {
-            OrgsCreateInvitationRequestRole::Noop
+            OrgsCreateInvitationRequestRole::DirectMember
         }
     }
 
@@ -26335,7 +26307,6 @@ pub mod types {
     pub enum OrgsSetMembershipUserRequestRole {
         Admin,
         Member,
-        Noop,
     }
 
     impl std::fmt::Display for OrgsSetMembershipUserRequestRole {
@@ -26343,7 +26314,6 @@ pub mod types {
             match *self {
                 OrgsSetMembershipUserRequestRole::Admin => "admin",
                 OrgsSetMembershipUserRequestRole::Member => "member",
-                OrgsSetMembershipUserRequestRole::Noop => "",
             }
             .fmt(f)
         }
@@ -26351,7 +26321,7 @@ pub mod types {
 
     impl Default for OrgsSetMembershipUserRequestRole {
         fn default() -> OrgsSetMembershipUserRequestRole {
-            OrgsSetMembershipUserRequestRole::Noop
+            OrgsSetMembershipUserRequestRole::Member
         }
     }
 
@@ -26566,7 +26536,6 @@ pub mod types {
         Admin,
         Pull,
         Push,
-        Noop,
     }
 
     impl std::fmt::Display for Permission {
@@ -26575,7 +26544,6 @@ pub mod types {
                 Permission::Admin => "admin",
                 Permission::Pull => "pull",
                 Permission::Push => "push",
-                Permission::Noop => "",
             }
             .fmt(f)
         }
@@ -26583,7 +26551,7 @@ pub mod types {
 
     impl Default for Permission {
         fn default() -> Permission {
-            Permission::Noop
+            Permission::Pull
         }
     }
 
@@ -26823,7 +26791,6 @@ pub mod types {
     pub enum TeamsAddUpdateMembershipUserInOrgRequestRole {
         Maintainer,
         Member,
-        Noop,
     }
 
     impl std::fmt::Display for TeamsAddUpdateMembershipUserInOrgRequestRole {
@@ -26831,7 +26798,6 @@ pub mod types {
             match *self {
                 TeamsAddUpdateMembershipUserInOrgRequestRole::Maintainer => "maintainer",
                 TeamsAddUpdateMembershipUserInOrgRequestRole::Member => "member",
-                TeamsAddUpdateMembershipUserInOrgRequestRole::Noop => "",
             }
             .fmt(f)
         }
@@ -26839,7 +26805,7 @@ pub mod types {
 
     impl Default for TeamsAddUpdateMembershipUserInOrgRequestRole {
         fn default() -> TeamsAddUpdateMembershipUserInOrgRequestRole {
-            TeamsAddUpdateMembershipUserInOrgRequestRole::Noop
+            TeamsAddUpdateMembershipUserInOrgRequestRole::Member
         }
     }
 
@@ -27305,7 +27271,6 @@ pub mod types {
         Admin,
         Read,
         Write,
-        Noop,
     }
 
     impl std::fmt::Display for ProjectsAddCollaboratorRequestPermission {
@@ -27314,7 +27279,6 @@ pub mod types {
                 ProjectsAddCollaboratorRequestPermission::Admin => "admin",
                 ProjectsAddCollaboratorRequestPermission::Read => "read",
                 ProjectsAddCollaboratorRequestPermission::Write => "write",
-                ProjectsAddCollaboratorRequestPermission::Noop => "",
             }
             .fmt(f)
         }
@@ -27322,7 +27286,7 @@ pub mod types {
 
     impl Default for ProjectsAddCollaboratorRequestPermission {
         fn default() -> ProjectsAddCollaboratorRequestPermission {
-            ProjectsAddCollaboratorRequestPermission::Noop
+            ProjectsAddCollaboratorRequestPermission::Write
         }
     }
 
@@ -27830,7 +27794,6 @@ pub mod types {
         Completed,
         InProgress,
         Queued,
-        Noop,
     }
 
     impl std::fmt::Display for ChecksCreateRequestStatus {
@@ -27839,7 +27802,6 @@ pub mod types {
                 ChecksCreateRequestStatus::Completed => "completed",
                 ChecksCreateRequestStatus::InProgress => "in_progress",
                 ChecksCreateRequestStatus::Queued => "queued",
-                ChecksCreateRequestStatus::Noop => "",
             }
             .fmt(f)
         }
@@ -27847,7 +27809,7 @@ pub mod types {
 
     impl Default for ChecksCreateRequestStatus {
         fn default() -> ChecksCreateRequestStatus {
-            ChecksCreateRequestStatus::Noop
+            ChecksCreateRequestStatus::Queued
         }
     }
 
@@ -28404,7 +28366,6 @@ pub mod types {
         Pull,
         Push,
         Triage,
-        Noop,
     }
 
     impl std::fmt::Display for ReposAddCollaboratorRequestPermission {
@@ -28415,7 +28376,6 @@ pub mod types {
                 ReposAddCollaboratorRequestPermission::Pull => "pull",
                 ReposAddCollaboratorRequestPermission::Push => "push",
                 ReposAddCollaboratorRequestPermission::Triage => "triage",
-                ReposAddCollaboratorRequestPermission::Noop => "",
             }
             .fmt(f)
         }
@@ -28423,7 +28383,7 @@ pub mod types {
 
     impl Default for ReposAddCollaboratorRequestPermission {
         fn default() -> ReposAddCollaboratorRequestPermission {
-            ReposAddCollaboratorRequestPermission::Noop
+            ReposAddCollaboratorRequestPermission::Push
         }
     }
 
@@ -29951,7 +29911,6 @@ pub mod types {
     pub enum IssuesCreateMilestoneRequestState {
         Closed,
         Open,
-        Noop,
     }
 
     impl std::fmt::Display for IssuesCreateMilestoneRequestState {
@@ -29959,7 +29918,6 @@ pub mod types {
             match *self {
                 IssuesCreateMilestoneRequestState::Closed => "closed",
                 IssuesCreateMilestoneRequestState::Open => "open",
-                IssuesCreateMilestoneRequestState::Noop => "",
             }
             .fmt(f)
         }
@@ -29967,7 +29925,7 @@ pub mod types {
 
     impl Default for IssuesCreateMilestoneRequestState {
         fn default() -> IssuesCreateMilestoneRequestState {
-            IssuesCreateMilestoneRequestState::Noop
+            IssuesCreateMilestoneRequestState::Open
         }
     }
 
@@ -29998,7 +29956,6 @@ pub mod types {
     pub enum IssuesUpdateMilestoneRequestState {
         Closed,
         Open,
-        Noop,
     }
 
     impl std::fmt::Display for IssuesUpdateMilestoneRequestState {
@@ -30006,7 +29963,6 @@ pub mod types {
             match *self {
                 IssuesUpdateMilestoneRequestState::Closed => "closed",
                 IssuesUpdateMilestoneRequestState::Open => "open",
-                IssuesUpdateMilestoneRequestState::Noop => "",
             }
             .fmt(f)
         }
@@ -30014,7 +29970,7 @@ pub mod types {
 
     impl Default for IssuesUpdateMilestoneRequestState {
         fn default() -> IssuesUpdateMilestoneRequestState {
-            IssuesUpdateMilestoneRequestState::Noop
+            IssuesUpdateMilestoneRequestState::Open
         }
     }
 
@@ -30066,7 +30022,6 @@ pub mod types {
     pub enum Path {
         Root,
         Docs,
-        Noop,
     }
 
     impl std::fmt::Display for Path {
@@ -30074,7 +30029,6 @@ pub mod types {
             match *self {
                 Path::Root => "/",
                 Path::Docs => "/docs",
-                Path::Noop => "",
             }
             .fmt(f)
         }
@@ -30082,7 +30036,7 @@ pub mod types {
 
     impl Default for Path {
         fn default() -> Path {
-            Path::Noop
+            Path::Root
         }
     }
 
@@ -31696,7 +31650,6 @@ pub mod types {
     pub enum TeamsAddUpdateMembershipUserLegacyRequestRole {
         Maintainer,
         Member,
-        Noop,
     }
 
     impl std::fmt::Display for TeamsAddUpdateMembershipUserLegacyRequestRole {
@@ -31704,7 +31657,6 @@ pub mod types {
             match *self {
                 TeamsAddUpdateMembershipUserLegacyRequestRole::Maintainer => "maintainer",
                 TeamsAddUpdateMembershipUserLegacyRequestRole::Member => "member",
-                TeamsAddUpdateMembershipUserLegacyRequestRole::Noop => "",
             }
             .fmt(f)
         }
@@ -31712,7 +31664,7 @@ pub mod types {
 
     impl Default for TeamsAddUpdateMembershipUserLegacyRequestRole {
         fn default() -> TeamsAddUpdateMembershipUserLegacyRequestRole {
-            TeamsAddUpdateMembershipUserLegacyRequestRole::Noop
+            TeamsAddUpdateMembershipUserLegacyRequestRole::Member
         }
     }
 
@@ -38050,7 +38002,7 @@ impl Client {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-        content: &str,
+        content: crate::types::Content,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
@@ -38060,7 +38012,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
-            content.to_string(),
+            content,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -38145,7 +38097,7 @@ impl Client {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        content: &str,
+        content: crate::types::Content,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
@@ -38154,7 +38106,7 @@ impl Client {
             progenitor_support::encode_path(&org.to_string()),
             progenitor_support::encode_path(&team_slug.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            content.to_string(),
+            content,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -41994,7 +41946,7 @@ impl Client {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        content: &str,
+        content: crate::types::Content,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
@@ -42003,7 +41955,7 @@ impl Client {
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
-            content.to_string(),
+            content,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -44211,7 +44163,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         comment_id: i64,
-        content: &str,
+        content: crate::types::Content,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
@@ -44220,7 +44172,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
-            content.to_string(),
+            content,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -44684,7 +44636,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         issue_number: i64,
-        content: &str,
+        content: crate::types::Content,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
@@ -44693,7 +44645,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&issue_number.to_string()),
-            content.to_string(),
+            content,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -45625,7 +45577,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         owner: &str,
         repo: &str,
         comment_id: i64,
-        content: &str,
+        content: crate::types::Content,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
@@ -45634,7 +45586,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&comment_id.to_string()),
-            content.to_string(),
+            content,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -46639,7 +46591,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        state: &str,
+        state: crate::types::SecretScanningAlertState,
         secret_type: &str,
         page: i64,
         per_page: i64,
@@ -46651,7 +46603,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             secret_type.to_string(),
-            state.to_string(),
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -48547,7 +48499,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-        content: &str,
+        content: crate::types::Content,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
@@ -48556,7 +48508,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
             progenitor_support::encode_path(&comment_number.to_string()),
-            content.to_string(),
+            content,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -48607,7 +48559,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         team_id: i64,
         discussion_number: i64,
-        content: &str,
+        content: crate::types::Content,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Reaction>> {
@@ -48615,7 +48567,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             "/teams/{}/discussions/{}/reactions?content={}&page={}&per_page={}",
             progenitor_support::encode_path(&team_id.to_string()),
             progenitor_support::encode_path(&discussion_number.to_string()),
-            content.to_string(),
+            content,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -49695,12 +49647,17 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-memberships-for-the-authenticated-user>
     */
-    pub async fn orgs_list_memberships_for_authenticated_user(&self, state: &str, per_page: i64, page: i64) -> Result<Vec<types::OrgMembership>> {
+    pub async fn orgs_list_memberships_for_authenticated_user(
+        &self,
+        state: crate::types::OrgMembershipState,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::OrgMembership>> {
         let url = format!(
             "/user/memberships/orgs?page={}&per_page={}&state={}",
             format!("{}", page),
             format!("{}", per_page),
-            state.to_string(),
+            state,
         );
 
         self.get_all_pages(&url).await
