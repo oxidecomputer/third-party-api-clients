@@ -24147,24 +24147,24 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
+    pub enum PackagesGetAllPackageVersionsOwnedByState {
         Active,
         Deleted,
     }
 
-    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByOrgState {
+    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PackagesGetAllPackageVersionsOwnedByOrgState::Active => "active",
-                PackagesGetAllPackageVersionsOwnedByOrgState::Deleted => "deleted",
+                PackagesGetAllPackageVersionsOwnedByState::Active => "active",
+                PackagesGetAllPackageVersionsOwnedByState::Deleted => "deleted",
             }
             .fmt(f)
         }
     }
 
-    impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
-        fn default() -> PackagesGetAllPackageVersionsOwnedByOrgState {
-            PackagesGetAllPackageVersionsOwnedByOrgState::Active
+    impl Default for PackagesGetAllPackageVersionsOwnedByState {
+        fn default() -> PackagesGetAllPackageVersionsOwnedByState {
+            PackagesGetAllPackageVersionsOwnedByState::Active
         }
     }
 
@@ -24258,28 +24258,28 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ReposListOrgSort {
+    pub enum ReposListSort {
         Created,
         FullName,
         Pushed,
         Updated,
     }
 
-    impl std::fmt::Display for ReposListOrgSort {
+    impl std::fmt::Display for ReposListSort {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ReposListOrgSort::Created => "created",
-                ReposListOrgSort::FullName => "full_name",
-                ReposListOrgSort::Pushed => "pushed",
-                ReposListOrgSort::Updated => "updated",
+                ReposListSort::Created => "created",
+                ReposListSort::FullName => "full_name",
+                ReposListSort::Pushed => "pushed",
+                ReposListSort::Updated => "updated",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ReposListOrgSort {
-        fn default() -> ReposListOrgSort {
-            ReposListOrgSort::Created
+    impl Default for ReposListSort {
+        fn default() -> ReposListSort {
+            ReposListSort::FullName
         }
     }
 
@@ -26219,24 +26219,24 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ChecksListSuiteFilter {
+    pub enum ChecksListRefFilter {
         All,
         Latest,
     }
 
-    impl std::fmt::Display for ChecksListSuiteFilter {
+    impl std::fmt::Display for ChecksListRefFilter {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ChecksListSuiteFilter::All => "all",
-                ChecksListSuiteFilter::Latest => "latest",
+                ChecksListRefFilter::All => "all",
+                ChecksListRefFilter::Latest => "latest",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ChecksListSuiteFilter {
-        fn default() -> ChecksListSuiteFilter {
-            ChecksListSuiteFilter::Latest
+    impl Default for ChecksListRefFilter {
+        fn default() -> ChecksListRefFilter {
+            ChecksListRefFilter::Latest
         }
     }
 
@@ -28540,26 +28540,26 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum PullsListReviewCommentsRepoDirection {
+    pub enum PullsListReviewCommentsDirection {
         Asc,
         Desc,
         Noop,
     }
 
-    impl std::fmt::Display for PullsListReviewCommentsRepoDirection {
+    impl std::fmt::Display for PullsListReviewCommentsDirection {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PullsListReviewCommentsRepoDirection::Asc => "asc",
-                PullsListReviewCommentsRepoDirection::Desc => "desc",
-                PullsListReviewCommentsRepoDirection::Noop => "",
+                PullsListReviewCommentsDirection::Asc => "asc",
+                PullsListReviewCommentsDirection::Desc => "desc",
+                PullsListReviewCommentsDirection::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for PullsListReviewCommentsRepoDirection {
-        fn default() -> PullsListReviewCommentsRepoDirection {
-            PullsListReviewCommentsRepoDirection::Noop
+    impl Default for PullsListReviewCommentsDirection {
+        fn default() -> PullsListReviewCommentsDirection {
+            PullsListReviewCommentsDirection::Noop
         }
     }
 
@@ -36245,7 +36245,7 @@ impl Client {
      * * `org: &str`
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
-     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByState` -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_org(
         &self,
@@ -36254,7 +36254,7 @@ impl Client {
         org: &str,
         page: i64,
         per_page: i64,
-        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -36552,7 +36552,7 @@ impl Client {
      *
      * * `org: &str`
      * * `type_: crate::types::ReposListOrgType` -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -36561,7 +36561,7 @@ impl Client {
         &self,
         org: &str,
         type_: crate::types::ReposListOrgType,
-        sort: crate::types::ReposListOrgSort,
+        sort: crate::types::ReposListSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -52043,7 +52043,7 @@ impl Client {
      * * `package_name: &str` -- The name of the package.
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
-     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByState` -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
@@ -52051,7 +52051,7 @@ impl Client {
         package_name: &str,
         page: i64,
         per_page: i64,
-        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/user/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -52225,7 +52225,7 @@ impl Client {
      * * `type_: crate::types::ReposListType` -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
      *    
      *  Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -52237,7 +52237,7 @@ impl Client {
         visibility: crate::types::ReposListVisibility,
         affiliation: &str,
         type_: crate::types::ReposListType,
-        sort: crate::types::ReposListOrgSort,
+        sort: crate::types::ReposListSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -53077,7 +53077,7 @@ impl Client {
      *
      * * `username: &str`
      * * `type_: crate::types::ReposListUserType` -- Can be one of `all`, `owner`, `member`.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -53086,7 +53086,7 @@ impl Client {
         &self,
         username: &str,
         type_: crate::types::ReposListUserType,
-        sort: crate::types::ReposListOrgSort,
+        sort: crate::types::ReposListSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,

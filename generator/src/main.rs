@@ -855,10 +855,16 @@ impl TypeSpace {
                     // name of the two structs and ensure that is the one we have
                     // in our set.
                     // Only do this if we have an Enum or an Object.
-                    if details.is_object() {
-                        let existing_name = if let Some(n) = &te.name { n.to_string() } else { "".to_string() };
-                        let new_name = if let Some(n) = &name { n.to_string() } else { "".to_string() };
-
+                    let existing_name = if let Some(n) = &te.name { n.to_string() } else { "".to_string() };
+                    let new_name = if let Some(n) = &name { n.to_string() } else { "".to_string() };
+                    if details.is_object()
+                        // TODO: fix this.
+                        || (details.is_enum()
+                            && new_name != "filter"
+                            && new_name != "subject type"
+                            && new_name != "affiliation"
+                            && new_name != "archived state")
+                    {
                         if existing_name == new_name {
                             // Return early.
                             return Ok(tid.clone());
