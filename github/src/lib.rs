@@ -36293,33 +36293,33 @@ impl Client {
     }
 
     /**
-    * Get the audit log for an enterprise.
-    *
-    * This function performs a `GET` to the `/enterprises/{enterprise}/audit-log` endpoint.
-    *
-    * Gets the audit log for an enterprise. To use this endpoint, you must be an enterprise admin, and you must use an access token with the `admin:enterprise` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-the-audit-log-for-an-enterprise>
-    *
-    * **Parameters:**
-    *
-    * * enterprise: &str -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-    * * phrase: &str -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
-    * * include: crate::types::AuditLogInclude -- The event types to include:
-
-    - `web` - returns web (non-Git) events
-    - `git` - returns Git events
-    - `all` - returns both web and Git events
-
-    The default is `web`.
-    * * after: &str -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
-    * * before: &str -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-    * * order: crate::types::AuditLogOrder -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-
-    The default is `desc`.
-    * * page: i64 -- Page number of the results to fetch.
-    * * per_page: i64 -- Results per page (max 100).
-    */
+     * Get the audit log for an enterprise.
+     *
+     * This function performs a `GET` to the `/enterprises/{enterprise}/audit-log` endpoint.
+     *
+     * Gets the audit log for an enterprise. To use this endpoint, you must be an enterprise admin, and you must use an access token with the `admin:enterprise` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-the-audit-log-for-an-enterprise>
+     *
+     * **Parameters:**
+     *
+     * * enterprise: &str -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+     * * phrase: &str -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
+     * * include: crate::types::AuditLogInclude -- The event types to include:
+     *
+     *   - `web` - returns web (non-Git) events
+     *   - `git` - returns Git events
+     *   - `all` - returns both web and Git events
+     *
+     *   The default is `web`.
+     * * after: &str -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
+     * * before: &str -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
+     * * order: crate::types::AuditLogOrder -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * page: i64 -- Page number of the results to fetch.
+     * * per_page: i64 -- Results per page (max 100).
+     */
     pub async fn enterprise_admin_get_audit_log(
         &self,
         enterprise: &str,
@@ -36973,42 +36973,42 @@ impl Client {
     }
 
     /**
-    * List issues assigned to the authenticated user.
-    *
-    * This function performs a `GET` to the `/issues` endpoint.
-    *
-    * List issues assigned to the authenticated user across all visible repositories including owned repositories, member
-    * repositories, and organization repositories. You can use the `filter` query parameter to fetch issues that are not
-    * necessarily assigned to you.
-    *
-    *
-    * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
-    * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
-    * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
-    * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-    *
-    * FROM: <https://docs.github.com/rest/reference/issues#list-issues-assigned-to-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * filter: crate::types::IssuesListFilter -- Indicates which sorts of issues to return. Can be one of:
-    \* `assigned`: Issues assigned to you
-    \* `created`: Issues created by you
-    \* `mentioned`: Issues mentioning you
-    \* `subscribed`: Issues you're subscribed to updates for
-    \* `all`: All issues the authenticated user can see, regardless of participation or creation.
-    * * state: crate::types::IssuesListState --  The state of the milestone.
-    * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
-    * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
-    * * direction: crate::types::Direction -- One of `asc` (ascending) or `desc` (descending).
-    * * since: DateTime<Utc> -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-    * * collab: bool
-    * * orgs: bool
-    * * owned: bool
-    * * pulls: bool
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    */
+     * List issues assigned to the authenticated user.
+     *
+     * This function performs a `GET` to the `/issues` endpoint.
+     *
+     * List issues assigned to the authenticated user across all visible repositories including owned repositories, member
+     * repositories, and organization repositories. You can use the `filter` query parameter to fetch issues that are not
+     * necessarily assigned to you.
+     *
+     *
+     * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
+     * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
+     * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
+     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-issues-assigned-to-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * filter: crate::types::IssuesListFilter -- Indicates which sorts of issues to return. Can be one of:
+     *   \* `assigned`: Issues assigned to you
+     *   \* `created`: Issues created by you
+     *   \* `mentioned`: Issues mentioning you
+     *   \* `subscribed`: Issues you're subscribed to updates for
+     *   \* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     * * state: crate::types::IssuesListState -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
+     * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * direction: crate::types::Direction -- One of `asc` (ascending) or `desc` (descending).
+     * * since: DateTime<Utc> -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * collab: bool
+     * * orgs: bool
+     * * owned: bool
+     * * pulls: bool
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     */
     pub async fn issues_list(
         &self,
         filter: crate::types::IssuesListFilter,
@@ -38714,35 +38714,35 @@ impl Client {
     }
 
     /**
-    * Get the audit log for an organization.
-    *
-    * This function performs a `GET` to the `/orgs/{org}/audit-log` endpoint.
-    *
-    * Gets the audit log for an organization. For more information, see "[Reviewing the audit log for your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization)."
-    *
-    * To use this endpoint, you must be an organization owner, and you must use an access token with the `admin:org` scope. GitHub Apps must have the `organization_administration` read permission to use this endpoint.
-    *
-    * FROM: <https://docs.github.com/rest/reference/orgs#get-audit-log>
-    *
-    * **Parameters:**
-    *
-    * * org: &str
-    * * phrase: &str -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
-    * * include: crate::types::AuditLogInclude -- The event types to include:
-
-    - `web` - returns web (non-Git) events
-    - `git` - returns Git events
-    - `all` - returns both web and Git events
-
-    The default is `web`.
-    * * after: &str -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
-    * * before: &str -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-    * * order: crate::types::AuditLogOrder -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-
-    The default is `desc`.
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    */
+     * Get the audit log for an organization.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/audit-log` endpoint.
+     *
+     * Gets the audit log for an organization. For more information, see "[Reviewing the audit log for your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization)."
+     *
+     * To use this endpoint, you must be an organization owner, and you must use an access token with the `admin:org` scope. GitHub Apps must have the `organization_administration` read permission to use this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/orgs#get-audit-log>
+     *
+     * **Parameters:**
+     *
+     * * org: &str
+     * * phrase: &str -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
+     * * include: crate::types::AuditLogInclude -- The event types to include:
+     *
+     *   - `web` - returns web (non-Git) events
+     *   - `git` - returns Git events
+     *   - `all` - returns both web and Git events
+     *
+     *   The default is `web`.
+     * * after: &str -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
+     * * before: &str -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
+     * * order: crate::types::AuditLogOrder -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *
+     *   The default is `desc`.
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     */
     pub async fn orgs_get_audit_log(
         &self,
         org: &str,
@@ -39363,36 +39363,36 @@ impl Client {
     }
 
     /**
-    * List organization issues assigned to the authenticated user.
-    *
-    * This function performs a `GET` to the `/orgs/{org}/issues` endpoint.
-    *
-    * List issues in an organization assigned to the authenticated user.
-    *
-    * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
-    * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
-    * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
-    * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-    *
-    * FROM: <https://docs.github.com/rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * org: &str
-    * * filter: crate::types::IssuesListFilter -- Indicates which sorts of issues to return. Can be one of:
-    \* `assigned`: Issues assigned to you
-    \* `created`: Issues created by you
-    \* `mentioned`: Issues mentioning you
-    \* `subscribed`: Issues you're subscribed to updates for
-    \* `all`: All issues the authenticated user can see, regardless of participation or creation.
-    * * state: crate::types::IssuesListState --  The state of the milestone.
-    * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
-    * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
-    * * direction: crate::types::Direction -- One of `asc` (ascending) or `desc` (descending).
-    * * since: DateTime<Utc> -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    */
+     * List organization issues assigned to the authenticated user.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/issues` endpoint.
+     *
+     * List issues in an organization assigned to the authenticated user.
+     *
+     * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
+     * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
+     * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
+     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * org: &str
+     * * filter: crate::types::IssuesListFilter -- Indicates which sorts of issues to return. Can be one of:
+     *   \* `assigned`: Issues assigned to you
+     *   \* `created`: Issues created by you
+     *   \* `mentioned`: Issues mentioning you
+     *   \* `subscribed`: Issues you're subscribed to updates for
+     *   \* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     * * state: crate::types::IssuesListState -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
+     * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * direction: crate::types::Direction -- One of `asc` (ascending) or `desc` (descending).
+     * * since: DateTime<Utc> -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     */
     pub async fn issues_list_for_org(
         &self,
         org: &str,
@@ -39422,24 +39422,27 @@ impl Client {
     }
 
     /**
-    * List organization members.
-    *
-    * This function performs a `GET` to the `/orgs/{org}/members` endpoint.
-    *
-    * List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
-    *
-    * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-members>
-    *
-    * **Parameters:**
-    *
-    * * org: &str
-    * * filter: crate::types::OrgsListMembersFilter -- Filter members returned in the list. Can be one of:
-    \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.
-    \* `all` - All members the authenticated user can see.
-    * * role: crate::types::OrgsListMembersRole --  The user's membership type in the organization.
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    */
+     * List organization members.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/members` endpoint.
+     *
+     * List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
+     *
+     * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-members>
+     *
+     * **Parameters:**
+     *
+     * * org: &str
+     * * filter: crate::types::OrgsListMembersFilter -- Filter members returned in the list. Can be one of:
+     *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.
+     *   \* `all` - All members the authenticated user can see.
+     * * role: crate::types::OrgsListMembersRole -- Filter members returned by their role. Can be one of:
+     *   \* `all` - All members of the organization, regardless of role.
+     *   \* `admin` - Organization owners.
+     *   \* `member` - Non-owner organization members.
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     */
     pub async fn orgs_list_members(
         &self,
         org: &str,
@@ -39784,23 +39787,23 @@ impl Client {
     }
 
     /**
-    * List outside collaborators for an organization.
-    *
-    * This function performs a `GET` to the `/orgs/{org}/outside_collaborators` endpoint.
-    *
-    * List all users who are outside collaborators of an organization.
-    *
-    * FROM: <https://docs.github.com/rest/reference/orgs#list-outside-collaborators-for-an-organization>
-    *
-    * **Parameters:**
-    *
-    * * org: &str
-    * * filter: crate::types::OrgsListMembersFilter -- Filter the list of outside collaborators. Can be one of:
-    \* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.
-    \* `all`: All outside collaborators.
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    */
+     * List outside collaborators for an organization.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/outside_collaborators` endpoint.
+     *
+     * List all users who are outside collaborators of an organization.
+     *
+     * FROM: <https://docs.github.com/rest/reference/orgs#list-outside-collaborators-for-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * org: &str
+     * * filter: crate::types::OrgsListMembersFilter -- Filter the list of outside collaborators. Can be one of:
+     *   \* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.
+     *   \* `all`: All outside collaborators.
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     */
     pub async fn orgs_list_outside_collaborators(
         &self,
         org: &str,
@@ -39996,7 +39999,7 @@ impl Client {
      * * org: &str
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
-     * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState --  The state of the milestone.
+     * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_org(
         &self,
@@ -40149,7 +40152,7 @@ impl Client {
      * **Parameters:**
      *
      * * org: &str
-     * * state: crate::types::IssuesListState --  The state of the milestone.
+     * * state: crate::types::IssuesListState -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -40302,7 +40305,7 @@ impl Client {
      * **Parameters:**
      *
      * * org: &str
-     * * type_: crate::types::ReposListOrgType --  The type of label. Read-only labels are applied automatically when the runner is configured.
+     * * type_: crate::types::ReposListOrgType -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
      * * sort: crate::types::ReposListOrgSort -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * direction: crate::types::Direction -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
      * * per_page: i64 -- Results per page (max 100).
@@ -40954,7 +40957,7 @@ impl Client {
      * * team_slug: &str -- team_slug parameter.
      * * discussion_number: i64
      * * comment_number: i64
-     * * content: crate::types::Content --  The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -41074,7 +41077,7 @@ impl Client {
      * * org: &str
      * * team_slug: &str -- team_slug parameter.
      * * discussion_number: i64
-     * * content: crate::types::Content --  The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -41215,7 +41218,10 @@ impl Client {
      *
      * * org: &str
      * * team_slug: &str -- team_slug parameter.
-     * * role: crate::types::TeamsListMembersInOrgRole --  The user's membership type in the organization.
+     * * role: crate::types::TeamsListMembersInOrgRole -- Filters members returned by their role in the team. Can be one of:
+     *   \* `member` - normal members of the team.
+     *   \* `maintainer` - team maintainers.
+     *   \* `all` - all members of the team.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -41969,24 +41975,24 @@ impl Client {
     }
 
     /**
-    * List project collaborators.
-    *
-    * This function performs a `GET` to the `/projects/{project_id}/collaborators` endpoint.
-    *
-    * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
-    *
-    * FROM: <https://docs.github.com/rest/reference/projects#list-project-collaborators>
-    *
-    * **Parameters:**
-    *
-    * * project_id: i64
-    * * affiliation: crate::types::ProjectsListCollaboratorsAffiliation -- Filters the collaborators by their affiliation. Can be one of:
-    \* `outside`: Outside collaborators of a project that are not a member of the project's organization.
-    \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.
-    \* `all`: All collaborators the authenticated user can see.
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    */
+     * List project collaborators.
+     *
+     * This function performs a `GET` to the `/projects/{project_id}/collaborators` endpoint.
+     *
+     * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
+     *
+     * FROM: <https://docs.github.com/rest/reference/projects#list-project-collaborators>
+     *
+     * **Parameters:**
+     *
+     * * project_id: i64
+     * * affiliation: crate::types::ProjectsListCollaboratorsAffiliation -- Filters the collaborators by their affiliation. Can be one of:
+     *   \* `outside`: Outside collaborators of a project that are not a member of the project's organization.
+     *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.
+     *   \* `all`: All collaborators the authenticated user can see.
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     */
     pub async fn projects_list_collaborators(
         &self,
         project_id: i64,
@@ -42935,25 +42941,25 @@ impl Client {
     }
 
     /**
-    * List jobs for a workflow run.
-    *
-    * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/jobs` endpoint.
-    *
-    * Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
-    *
-    * FROM: <https://docs.github.com/rest/reference/actions#list-jobs-for-a-workflow-run>
-    *
-    * **Parameters:**
-    *
-    * * owner: &str
-    * * repo: &str
-    * * run_id: i64 -- The id of the workflow run.
-    * * filter: crate::types::ActionsListJobsWorkflowRunFilter -- Filters jobs by their `completed_at` timestamp. Can be one of:
-    \* `latest`: Returns jobs from the most recent execution of the workflow run.
-    \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    */
+     * List jobs for a workflow run.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/jobs` endpoint.
+     *
+     * Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
+     *
+     * FROM: <https://docs.github.com/rest/reference/actions#list-jobs-for-a-workflow-run>
+     *
+     * **Parameters:**
+     *
+     * * owner: &str
+     * * repo: &str
+     * * run_id: i64 -- The id of the workflow run.
+     * * filter: crate::types::ActionsListJobsWorkflowRunFilter -- Filters jobs by their `completed_at` timestamp. Can be one of:
+     *   \* `latest`: Returns jobs from the most recent execution of the workflow run.
+     *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     */
     pub async fn actions_list_jobs_for_workflow_run(
         &self,
         owner: &str,
@@ -45161,7 +45167,7 @@ impl Client {
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
      * * ref_: &str -- The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
-     * * state: types::CodeScanningAlertState --  State of a code scanning alert.
+     * * state: types::CodeScanningAlertState -- Set to `open`, `fixed`, or `dismissed` to list code scanning alerts in a specific state.
      */
     pub async fn code_scanning_list_alerts_for_repo(
         &self,
@@ -45322,9 +45328,8 @@ impl Client {
      * * tool_guid: &str -- The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
-     * * ref_: &str --  The full Git reference, formatted as `refs/heads/<branch name>`,
-     *    `refs/pull/<number>/merge`, or `refs/pull/<number>/head`.
-     * * sarif_id: &str --  An identifier for the upload.
+     * * ref_: &str -- The Git reference for the analyses you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+     * * sarif_id: &str -- Filter analyses belonging to the same SARIF upload.
      */
     pub async fn code_scanning_list_recent_analyses(
         &self,
@@ -45567,27 +45572,27 @@ impl Client {
     }
 
     /**
-    * List repository collaborators.
-    *
-    * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators` endpoint.
-    *
-    * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
-    *
-    * Team members will include the members of child teams.
-    *
-    * FROM: <https://docs.github.com/rest/reference/repos#list-repository-collaborators>
-    *
-    * **Parameters:**
-    *
-    * * owner: &str
-    * * repo: &str
-    * * affiliation: crate::types::ProjectsListCollaboratorsAffiliation -- Filter collaborators returned by their affiliation. Can be one of:
-    \* `outside`: All outside collaborators of an organization-owned repository.
-    \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.
-    \* `all`: All collaborators the authenticated user can see.
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    */
+     * List repository collaborators.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators` endpoint.
+     *
+     * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
+     *
+     * Team members will include the members of child teams.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-collaborators>
+     *
+     * **Parameters:**
+     *
+     * * owner: &str
+     * * repo: &str
+     * * affiliation: crate::types::ProjectsListCollaboratorsAffiliation -- Filter collaborators returned by their affiliation. Can be one of:
+     *   \* `outside`: All outside collaborators of an organization-owned repository.
+     *   \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.
+     *   \* `all`: All collaborators the authenticated user can see.
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     */
     pub async fn repos_list_collaborators(
         &self,
         owner: &str,
@@ -45863,7 +45868,7 @@ impl Client {
      * * owner: &str
      * * repo: &str
      * * comment_id: i64 -- comment_id parameter.
-     * * content: crate::types::Content --  The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -48401,7 +48406,7 @@ impl Client {
      * * owner: &str
      * * repo: &str
      * * milestone: &str -- If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
-     * * state: crate::types::IssuesListState --  The state of the milestone.
+     * * state: crate::types::IssuesListState -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * assignee: &str -- Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user.
      * * creator: &str -- The user that created the issue.
      * * mentioned: &str -- A user that's mentioned in the issue.
@@ -48603,7 +48608,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * owner: &str
      * * repo: &str
      * * comment_id: i64 -- comment_id parameter.
-     * * content: crate::types::Content --  The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -49203,7 +49208,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * owner: &str
      * * repo: &str
      * * issue_number: i64 -- issue_number parameter.
-     * * content: crate::types::Content --  The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -49649,7 +49654,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     * * state: crate::types::IssuesListState --  The state of the milestone.
+     * * state: crate::types::IssuesListState -- The state of the milestone. Either `open`, `closed`, or `all`.
      * * sort: crate::types::IssuesListMilestonesSort -- What to sort results by. Either `due_on` or `completeness`.
      * * direction: crate::types::Direction -- The direction of the sort. Either `asc` or `desc`.
      * * per_page: i64 -- Results per page (max 100).
@@ -50145,7 +50150,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     * * state: crate::types::IssuesListState --  The state of the milestone.
+     * * state: crate::types::IssuesListState -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -50206,7 +50211,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     * * state: crate::types::IssuesListState --  The state of the milestone.
+     * * state: crate::types::IssuesListState -- Either `open`, `closed`, or `all` to filter by state.
      * * head: &str -- Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`.
      * * base: &str -- Filter pulls by base branch name. Example: `gh-pages`.
      * * sort: crate::types::PullsListSort -- What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
@@ -50413,7 +50418,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * owner: &str
      * * repo: &str
      * * comment_id: i64 -- comment_id parameter.
-     * * content: crate::types::Content --  The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -51691,7 +51696,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     * * state: crate::types::SecretScanningAlertState --  The state of the milestone.
+     * * state: crate::types::SecretScanningAlertState -- Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
      * * secret_type: &str -- A comma separated list of secret types to return. By default all secret types are returned.
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
@@ -53116,42 +53121,42 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     }
 
     /**
-    * List SCIM provisioned identities.
-    *
-    * This function performs a `GET` to the `/scim/v2/organizations/{org}/Users` endpoint.
-    *
-    * Retrieves a paginated list of all provisioned organization members, including pending invitations. If you provide the `filter` parameter, the resources for all matching provisions members are returned.
-    *
-    * When a user with a SAML-provisioned external identity leaves (or is removed from) an organization, the account's metadata is immediately removed. However, the returned list of user accounts might not always match the organization or enterprise member list you see on GitHub. This can happen in certain cases where an external identity associated with an organization will not match an organization member:
-    *   - When a user with a SCIM-provisioned external identity is removed from an organization, the account's metadata is preserved to allow the user to re-join the organization in the future.
-    *   - When inviting a user to join an organization, you can expect to see their external identity in the results before they accept the invitation, or if the invitation is cancelled (or never accepted).
-    *   - When a user is invited over SCIM, an external identity is created that matches with the invitee's email address. However, this identity is only linked to a user account when the user accepts the invitation by going through SAML SSO.
-    *
-    * The returned list of external identities can include an entry for a `null` user. These are unlinked SAML identities that are created when a user goes through the following Single Sign-On (SSO) process but does not sign in to their GitHub account after completing SSO:
-    *
-    * 1. The user is granted access by the IdP and is not a member of the GitHub organization.
-    *
-    * 1. The user attempts to access the GitHub organization and initiates the SAML SSO process, and is not currently signed in to their GitHub account.
-    *
-    * 1. After successfully authenticating with the SAML SSO IdP, the `null` external identity entry is created and the user is prompted to sign in to their GitHub account:
-    *    - If the user signs in, their GitHub account is linked to this entry.
-    *    - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub organization, and the external identity `null` entry remains in place.
-    *
-    * FROM: <https://docs.github.com/rest/reference/scim#list-scim-provisioned-identities>
-    *
-    * **Parameters:**
-    *
-    * * org: &str
-    * * start_index: i64 -- Used for pagination: the index of the first result to return.
-    * * count: i64 -- Used for pagination: the number of results to return.
-    * * filter: &str -- Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query:
-
-    `?filter=userName%20eq%20\"Octocat\"`.
-
-    To filter results for the identity with the email `octocat@github.com`, you would use this query:
-
-    `?filter=emails%20eq%20\"octocat@github.com\"`.
-    */
+     * List SCIM provisioned identities.
+     *
+     * This function performs a `GET` to the `/scim/v2/organizations/{org}/Users` endpoint.
+     *
+     * Retrieves a paginated list of all provisioned organization members, including pending invitations. If you provide the `filter` parameter, the resources for all matching provisions members are returned.
+     *
+     * When a user with a SAML-provisioned external identity leaves (or is removed from) an organization, the account's metadata is immediately removed. However, the returned list of user accounts might not always match the organization or enterprise member list you see on GitHub. This can happen in certain cases where an external identity associated with an organization will not match an organization member:
+     *   - When a user with a SCIM-provisioned external identity is removed from an organization, the account's metadata is preserved to allow the user to re-join the organization in the future.
+     *   - When inviting a user to join an organization, you can expect to see their external identity in the results before they accept the invitation, or if the invitation is cancelled (or never accepted).
+     *   - When a user is invited over SCIM, an external identity is created that matches with the invitee's email address. However, this identity is only linked to a user account when the user accepts the invitation by going through SAML SSO.
+     *
+     * The returned list of external identities can include an entry for a `null` user. These are unlinked SAML identities that are created when a user goes through the following Single Sign-On (SSO) process but does not sign in to their GitHub account after completing SSO:
+     *
+     * 1. The user is granted access by the IdP and is not a member of the GitHub organization.
+     *
+     * 1. The user attempts to access the GitHub organization and initiates the SAML SSO process, and is not currently signed in to their GitHub account.
+     *
+     * 1. After successfully authenticating with the SAML SSO IdP, the `null` external identity entry is created and the user is prompted to sign in to their GitHub account:
+     *    - If the user signs in, their GitHub account is linked to this entry.
+     *    - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub organization, and the external identity `null` entry remains in place.
+     *
+     * FROM: <https://docs.github.com/rest/reference/scim#list-scim-provisioned-identities>
+     *
+     * **Parameters:**
+     *
+     * * org: &str
+     * * start_index: i64 -- Used for pagination: the index of the first result to return.
+     * * count: i64 -- Used for pagination: the number of results to return.
+     * * filter: &str -- Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query:
+     *
+     *   `?filter=userName%20eq%20\"Octocat\"`.
+     *
+     *   To filter results for the identity with the email `octocat@github.com`, you would use this query:
+     *
+     *   `?filter=emails%20eq%20\"octocat@github.com\"`.
+     */
     pub async fn scim_list_provisioned_identities(&self, org: &str, start_index: i64, count: i64, filter: &str) -> Result<types::ScimUserList> {
         let url = format!(
             "/scim/v2/organizations/{}/Users?count={}&filter={}&start_index={}",
@@ -54024,7 +54029,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * team_id: i64
      * * discussion_number: i64
      * * comment_number: i64
-     * * content: crate::types::Content --  The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -54099,7 +54104,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * team_id: i64
      * * discussion_number: i64
-     * * content: crate::types::Content --  The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -54196,7 +54201,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * **Parameters:**
      *
      * * team_id: i64
-     * * role: crate::types::TeamsListMembersInOrgRole --  The user's membership type in the organization.
+     * * role: crate::types::TeamsListMembersInOrgRole -- Filters members returned by their role in the team. Can be one of:
+     *   \* `member` - normal members of the team.
+     *   \* `maintainer` - team maintainers.
+     *   \* `all` - all members of the team.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -55229,35 +55237,35 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     }
 
     /**
-    * List user account issues assigned to the authenticated user.
-    *
-    * This function performs a `GET` to the `/user/issues` endpoint.
-    *
-    * List issues across owned and member repositories assigned to the authenticated user.
-    *
-    * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
-    * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
-    * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
-    * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-    *
-    * FROM: <https://docs.github.com/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * filter: crate::types::IssuesListFilter -- Indicates which sorts of issues to return. Can be one of:
-    \* `assigned`: Issues assigned to you
-    \* `created`: Issues created by you
-    \* `mentioned`: Issues mentioning you
-    \* `subscribed`: Issues you're subscribed to updates for
-    \* `all`: All issues the authenticated user can see, regardless of participation or creation.
-    * * state: crate::types::IssuesListState --  The state of the milestone.
-    * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
-    * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
-    * * direction: crate::types::Direction -- One of `asc` (ascending) or `desc` (descending).
-    * * since: DateTime<Utc> -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    */
+     * List user account issues assigned to the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/issues` endpoint.
+     *
+     * List issues across owned and member repositories assigned to the authenticated user.
+     *
+     * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
+     * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
+     * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
+     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * filter: crate::types::IssuesListFilter -- Indicates which sorts of issues to return. Can be one of:
+     *   \* `assigned`: Issues assigned to you
+     *   \* `created`: Issues created by you
+     *   \* `mentioned`: Issues mentioning you
+     *   \* `subscribed`: Issues you're subscribed to updates for
+     *   \* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     * * state: crate::types::IssuesListState -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
+     * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * direction: crate::types::Direction -- One of `asc` (ascending) or `desc` (descending).
+     * * since: DateTime<Utc> -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     */
     pub async fn issues_list_for_authenticated_user(
         &self,
         filter: crate::types::IssuesListFilter,
@@ -55422,7 +55430,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * **Parameters:**
      *
-     * * state: crate::types::OrgMembershipState --  The state of the milestone.
+     * * state: crate::types::OrgMembershipState -- Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -55794,7 +55802,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * package_name: &str -- The name of the package.
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
-     * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState --  The state of the milestone.
+     * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
@@ -55956,31 +55964,33 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     }
 
     /**
-    * List repositories for the authenticated user.
-    *
-    * This function performs a `GET` to the `/user/repos` endpoint.
-    *
-    * Lists repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
-    *
-    * The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
-    *
-    * FROM: <https://docs.github.com/rest/reference/repos#list-repositories-for-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * visibility: crate::types::ReposListVisibility --  Visibility of a secret.
-    * * affiliation: &str -- Comma-separated list of values. Can include:
-    \* `owner`: Repositories that are owned by the authenticated user.
-    \* `collaborator`: Repositories that the user has been added to as a collaborator.
-    \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
-    * * type_: crate::types::ReposListType --  The type of label. Read-only labels are applied automatically when the runner is configured.
-    * * sort: crate::types::ReposListOrgSort -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-    * * direction: crate::types::Direction -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
-    * * per_page: i64 -- Results per page (max 100).
-    * * page: i64 -- Page number of the results to fetch.
-    * * since: DateTime<Utc> -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-    * * before: DateTime<Utc> -- Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-    */
+     * List repositories for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/repos` endpoint.
+     *
+     * Lists repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
+     *
+     * The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repositories-for-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * visibility: crate::types::ReposListVisibility -- Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
+     * * affiliation: &str -- Comma-separated list of values. Can include:
+     *   \* `owner`: Repositories that are owned by the authenticated user.
+     *   \* `collaborator`: Repositories that the user has been added to as a collaborator.
+     *   \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
+     * * type_: crate::types::ReposListType -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`
+     *
+     *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
+     * * sort: crate::types::ReposListOrgSort -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * direction: crate::types::Direction -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
+     * * per_page: i64 -- Results per page (max 100).
+     * * page: i64 -- Page number of the results to fetch.
+     * * since: DateTime<Utc> -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * * before: DateTime<Utc> -- Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+     */
     pub async fn repos_list_for_authenticated_user(
         &self,
         visibility: crate::types::ReposListVisibility,
@@ -56739,7 +56749,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * **Parameters:**
      *
      * * username: &str
-     * * state: crate::types::IssuesListState --  The state of the milestone.
+     * * state: crate::types::IssuesListState -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */

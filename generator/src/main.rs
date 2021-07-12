@@ -699,7 +699,7 @@ impl TypeSpace {
 
         if let Some(s) = schema {
             if let Some(description) = &s.description {
-                a(&format!("/// {}", description.replace('\n', "\n/// ")));
+                a(&format!("/// {}", description.replace("\n", "\n/// ")));
             }
             if let Some(external_docs) = &s.external_docs {
                 a("///");
@@ -1629,12 +1629,14 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
 
                 let pid = ts.select_param(None, par, false)?;
                 let mut docs = ts.render_docs(&pid);
-                if !docs.is_empty() {
-                    docs = format!(" -- {}.", docs.trim().replace("///", "").replace("\n", "\n*   ").trim_end_matches('.'));
-                } else if let Some(d) = &parameter_data.description {
-                    if !d.is_empty() {
-                        docs = format!(" -- {}.", d.trim_end_matches('.'));
+                if let Some(d) = &parameter_data.description {
+                    if !d.is_empty() && d.len() > docs.len() {
+                        docs = format!(" -- {}.", d.trim_end_matches('.').replace("\n", "\n*   "));
+                    } else if !docs.is_empty() {
+                        docs = format!(" -- {}.", docs.trim().replace("///", "").replace("\n", "\n*   ").trim_end_matches('.'));
                     }
+                } else if !docs.is_empty() {
+                    docs = format!(" -- {}.", docs.trim().replace("///", "").replace("\n", "\n*   ").trim_end_matches('.'));
                 }
 
                 let nam = &to_snake_case(&clean_name(&parameter_data.name));
