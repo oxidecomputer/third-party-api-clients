@@ -22260,28 +22260,28 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum AuditLogInclude {
+    pub enum Include {
         All,
         Git,
         Web,
         Noop,
     }
 
-    impl std::fmt::Display for AuditLogInclude {
+    impl std::fmt::Display for Include {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AuditLogInclude::All => "all",
-                AuditLogInclude::Git => "git",
-                AuditLogInclude::Web => "web",
-                AuditLogInclude::Noop => "",
+                Include::All => "all",
+                Include::Git => "git",
+                Include::Web => "web",
+                Include::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for AuditLogInclude {
-        fn default() -> AuditLogInclude {
-            AuditLogInclude::Noop
+    impl Default for Include {
+        fn default() -> Include {
+            Include::Noop
         }
     }
 
@@ -22292,26 +22292,26 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum AuditLogOrder {
+    pub enum Order {
         Asc,
         Desc,
         Noop,
     }
 
-    impl std::fmt::Display for AuditLogOrder {
+    impl std::fmt::Display for Order {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                AuditLogOrder::Asc => "asc",
-                AuditLogOrder::Desc => "desc",
-                AuditLogOrder::Noop => "",
+                Order::Asc => "asc",
+                Order::Desc => "desc",
+                Order::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for AuditLogOrder {
-        fn default() -> AuditLogOrder {
-            AuditLogOrder::Noop
+    impl Default for Order {
+        fn default() -> Order {
+            Order::Noop
         }
     }
 
@@ -22514,24 +22514,24 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum Order {
+    pub enum OrderData {
         Asc,
         Desc,
     }
 
-    impl std::fmt::Display for Order {
+    impl std::fmt::Display for OrderData {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                Order::Asc => "asc",
-                Order::Desc => "desc",
+                OrderData::Asc => "asc",
+                OrderData::Desc => "desc",
             }
             .fmt(f)
         }
     }
 
-    impl Default for Order {
-        fn default() -> Order {
-            Order::Desc
+    impl Default for OrderData {
+        fn default() -> OrderData {
+            OrderData::Desc
         }
     }
 
@@ -23191,7 +23191,7 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum IssuesListFilter {
+    pub enum Filter {
         All,
         Assigned,
         Created,
@@ -23200,23 +23200,23 @@ pub mod types {
         Subscribed,
     }
 
-    impl std::fmt::Display for IssuesListFilter {
+    impl std::fmt::Display for Filter {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                IssuesListFilter::All => "all",
-                IssuesListFilter::Assigned => "assigned",
-                IssuesListFilter::Created => "created",
-                IssuesListFilter::Mentioned => "mentioned",
-                IssuesListFilter::Repos => "repos",
-                IssuesListFilter::Subscribed => "subscribed",
+                Filter::All => "all",
+                Filter::Assigned => "assigned",
+                Filter::Created => "created",
+                Filter::Mentioned => "mentioned",
+                Filter::Repos => "repos",
+                Filter::Subscribed => "subscribed",
             }
             .fmt(f)
         }
     }
 
-    impl Default for IssuesListFilter {
-        fn default() -> IssuesListFilter {
-            IssuesListFilter::Assigned
+    impl Default for Filter {
+        fn default() -> Filter {
+            Filter::Assigned
         }
     }
 
@@ -24039,29 +24039,6 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum MigrationsListOrgExclude {
-        Repositories,
-        Noop,
-    }
-
-    impl std::fmt::Display for MigrationsListOrgExclude {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                MigrationsListOrgExclude::Repositories => "repositories",
-                MigrationsListOrgExclude::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for MigrationsListOrgExclude {
-        fn default() -> MigrationsListOrgExclude {
-            MigrationsListOrgExclude::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
     pub enum Exclude {
         Repositories,
         Noop,
@@ -24084,9 +24061,32 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum MigrationsStartOrgRequestExclude {
+        Repositories,
+        Noop,
+    }
+
+    impl std::fmt::Display for MigrationsStartOrgRequestExclude {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                MigrationsStartOrgRequestExclude::Repositories => "repositories",
+                MigrationsStartOrgRequestExclude::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for MigrationsStartOrgRequestExclude {
+        fn default() -> MigrationsStartOrgRequestExclude {
+            MigrationsStartOrgRequestExclude::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MigrationsStartOrgRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub exclude: Vec<Exclude>,
+        pub exclude: Vec<MigrationsStartOrgRequestExclude>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub exclude_attachments: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24147,24 +24147,24 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum PackagesGetAllPackageVersionsOwnedByState {
+    pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
         Active,
         Deleted,
     }
 
-    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByState {
+    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByOrgState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PackagesGetAllPackageVersionsOwnedByState::Active => "active",
-                PackagesGetAllPackageVersionsOwnedByState::Deleted => "deleted",
+                PackagesGetAllPackageVersionsOwnedByOrgState::Active => "active",
+                PackagesGetAllPackageVersionsOwnedByOrgState::Deleted => "deleted",
             }
             .fmt(f)
         }
     }
 
-    impl Default for PackagesGetAllPackageVersionsOwnedByState {
-        fn default() -> PackagesGetAllPackageVersionsOwnedByState {
-            PackagesGetAllPackageVersionsOwnedByState::Active
+    impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
+        fn default() -> PackagesGetAllPackageVersionsOwnedByOrgState {
+            PackagesGetAllPackageVersionsOwnedByOrgState::Active
         }
     }
 
@@ -24258,28 +24258,28 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ReposListSort {
+    pub enum ReposListOrgSort {
         Created,
         FullName,
         Pushed,
         Updated,
     }
 
-    impl std::fmt::Display for ReposListSort {
+    impl std::fmt::Display for ReposListOrgSort {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ReposListSort::Created => "created",
-                ReposListSort::FullName => "full_name",
-                ReposListSort::Pushed => "pushed",
-                ReposListSort::Updated => "updated",
+                ReposListOrgSort::Created => "created",
+                ReposListOrgSort::FullName => "full_name",
+                ReposListOrgSort::Pushed => "pushed",
+                ReposListOrgSort::Updated => "updated",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ReposListSort {
-        fn default() -> ReposListSort {
-            ReposListSort::FullName
+    impl Default for ReposListOrgSort {
+        fn default() -> ReposListOrgSort {
+            ReposListOrgSort::Created
         }
     }
 
@@ -25124,26 +25124,26 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ProjectsListCardsArchivedState {
+    pub enum ArchivedState {
         All,
         Archived,
         NotArchived,
     }
 
-    impl std::fmt::Display for ProjectsListCardsArchivedState {
+    impl std::fmt::Display for ArchivedState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ProjectsListCardsArchivedState::All => "all",
-                ProjectsListCardsArchivedState::Archived => "archived",
-                ProjectsListCardsArchivedState::NotArchived => "not_archived",
+                ArchivedState::All => "all",
+                ArchivedState::Archived => "archived",
+                ArchivedState::NotArchived => "not_archived",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ProjectsListCardsArchivedState {
-        fn default() -> ProjectsListCardsArchivedState {
-            ProjectsListCardsArchivedState::NotArchived
+    impl Default for ArchivedState {
+        fn default() -> ArchivedState {
+            ArchivedState::NotArchived
         }
     }
 
@@ -25239,26 +25239,26 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ProjectsListCollaboratorsAffiliation {
+    pub enum Affiliation {
         All,
         Direct,
         Outside,
     }
 
-    impl std::fmt::Display for ProjectsListCollaboratorsAffiliation {
+    impl std::fmt::Display for Affiliation {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ProjectsListCollaboratorsAffiliation::All => "all",
-                ProjectsListCollaboratorsAffiliation::Direct => "direct",
-                ProjectsListCollaboratorsAffiliation::Outside => "outside",
+                Affiliation::All => "all",
+                Affiliation::Direct => "direct",
+                Affiliation::Outside => "outside",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ProjectsListCollaboratorsAffiliation {
-        fn default() -> ProjectsListCollaboratorsAffiliation {
-            ProjectsListCollaboratorsAffiliation::All
+    impl Default for Affiliation {
+        fn default() -> Affiliation {
+            Affiliation::All
         }
     }
 
@@ -26219,24 +26219,24 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ChecksListRefFilter {
+    pub enum ChecksListSuiteFilter {
         All,
         Latest,
     }
 
-    impl std::fmt::Display for ChecksListRefFilter {
+    impl std::fmt::Display for ChecksListSuiteFilter {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ChecksListRefFilter::All => "all",
-                ChecksListRefFilter::Latest => "latest",
+                ChecksListSuiteFilter::All => "all",
+                ChecksListSuiteFilter::Latest => "latest",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ChecksListRefFilter {
-        fn default() -> ChecksListRefFilter {
-            ChecksListRefFilter::Latest
+    impl Default for ChecksListSuiteFilter {
+        fn default() -> ChecksListSuiteFilter {
+            ChecksListSuiteFilter::Latest
         }
     }
 
@@ -28540,26 +28540,26 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum PullsListReviewCommentsDirection {
+    pub enum PullsListReviewCommentsRepoDirection {
         Asc,
         Desc,
         Noop,
     }
 
-    impl std::fmt::Display for PullsListReviewCommentsDirection {
+    impl std::fmt::Display for PullsListReviewCommentsRepoDirection {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PullsListReviewCommentsDirection::Asc => "asc",
-                PullsListReviewCommentsDirection::Desc => "desc",
-                PullsListReviewCommentsDirection::Noop => "",
+                PullsListReviewCommentsRepoDirection::Asc => "asc",
+                PullsListReviewCommentsRepoDirection::Desc => "desc",
+                PullsListReviewCommentsRepoDirection::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for PullsListReviewCommentsDirection {
-        fn default() -> PullsListReviewCommentsDirection {
-            PullsListReviewCommentsDirection::Noop
+    impl Default for PullsListReviewCommentsRepoDirection {
+        fn default() -> PullsListReviewCommentsRepoDirection {
+            PullsListReviewCommentsRepoDirection::Noop
         }
     }
 
@@ -30296,7 +30296,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MigrationsStartRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub exclude: Vec<MigrationsListOrgExclude>,
+        pub exclude: Vec<Exclude>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub exclude_attachments: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -30480,7 +30480,7 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum UsersGetContextUserSubjectType {
+    pub enum SubjectType {
         Issue,
         Organization,
         PullRequest,
@@ -30488,22 +30488,22 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for UsersGetContextUserSubjectType {
+    impl std::fmt::Display for SubjectType {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                UsersGetContextUserSubjectType::Issue => "issue",
-                UsersGetContextUserSubjectType::Organization => "organization",
-                UsersGetContextUserSubjectType::PullRequest => "pull_request",
-                UsersGetContextUserSubjectType::Repository => "repository",
-                UsersGetContextUserSubjectType::Noop => "",
+                SubjectType::Issue => "issue",
+                SubjectType::Organization => "organization",
+                SubjectType::PullRequest => "pull_request",
+                SubjectType::Repository => "repository",
+                SubjectType::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for UsersGetContextUserSubjectType {
-        fn default() -> UsersGetContextUserSubjectType {
-            UsersGetContextUserSubjectType::Noop
+    impl Default for SubjectType {
+        fn default() -> SubjectType {
+            SubjectType::Noop
         }
     }
 
@@ -32555,7 +32555,7 @@ impl Client {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      * * `phrase: &str` -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
-     * * `include: crate::types::AuditLogInclude` -- The event types to include:
+     * * `include: crate::types::Include` -- The event types to include:
      *   
      *   - `web` - returns web (non-Git) events
      *   - `git` - returns Git events
@@ -32564,7 +32564,7 @@ impl Client {
      *   The default is `web`.
      * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
      * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-     * * `order: crate::types::AuditLogOrder` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     * * `order: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
      *   
      *   The default is `desc`.
      * * `page: i64` -- Page number of the results to fetch.
@@ -32574,10 +32574,10 @@ impl Client {
         &self,
         enterprise: &str,
         phrase: &str,
-        include: crate::types::AuditLogInclude,
+        include: crate::types::Include,
         after: &str,
         before: &str,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         page: i64,
         per_page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
@@ -33241,7 +33241,7 @@ impl Client {
      *
      * **Parameters:**
      *
-     * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
      *  \* `assigned`: Issues assigned to you  
      *  \* `created`: Issues created by you  
      *  \* `mentioned`: Issues mentioning you  
@@ -33261,7 +33261,7 @@ impl Client {
      */
     pub async fn issues_list(
         &self,
-        filter: crate::types::IssuesListFilter,
+        filter: crate::types::Filter,
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
@@ -34978,7 +34978,7 @@ impl Client {
      *
      * * `org: &str`
      * * `phrase: &str` -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
-     * * `include: crate::types::AuditLogInclude` -- The event types to include:
+     * * `include: crate::types::Include` -- The event types to include:
      *   
      *   - `web` - returns web (non-Git) events
      *   - `git` - returns Git events
@@ -34987,7 +34987,7 @@ impl Client {
      *   The default is `web`.
      * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
      * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-     * * `order: crate::types::AuditLogOrder` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     * * `order: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
      *   
      *   The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
@@ -34997,10 +34997,10 @@ impl Client {
         &self,
         org: &str,
         phrase: &str,
-        include: crate::types::AuditLogInclude,
+        include: crate::types::Include,
         after: &str,
         before: &str,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::AuditLogEvent>> {
@@ -35629,7 +35629,7 @@ impl Client {
      * **Parameters:**
      *
      * * `org: &str`
-     * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
      *  \* `assigned`: Issues assigned to you  
      *  \* `created`: Issues created by you  
      *  \* `mentioned`: Issues mentioning you  
@@ -35646,7 +35646,7 @@ impl Client {
     pub async fn issues_list_for_org(
         &self,
         org: &str,
-        filter: crate::types::IssuesListFilter,
+        filter: crate::types::Filter,
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
@@ -36245,7 +36245,7 @@ impl Client {
      * * `org: &str`
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
-     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByState` -- The state of the package, either active or deleted.
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_org(
         &self,
@@ -36254,7 +36254,7 @@ impl Client {
         org: &str,
         page: i64,
         per_page: i64,
-        state: crate::types::PackagesGetAllPackageVersionsOwnedByState,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -36552,7 +36552,7 @@ impl Client {
      *
      * * `org: &str`
      * * `type_: crate::types::ReposListOrgType` -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
-     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -36561,7 +36561,7 @@ impl Client {
         &self,
         org: &str,
         type_: crate::types::ReposListOrgType,
-        sort: crate::types::ReposListSort,
+        sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -38095,14 +38095,14 @@ impl Client {
      * **Parameters:**
      *
      * * `column_id: i64` -- column_id parameter.
-     * * `archived_state: crate::types::ProjectsListCardsArchivedState` -- Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
+     * * `archived_state: crate::types::ArchivedState` -- Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
     pub async fn projects_list_cards(
         &self,
         column_id: i64,
-        archived_state: crate::types::ProjectsListCardsArchivedState,
+        archived_state: crate::types::ArchivedState,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::ProjectCard>> {
@@ -38224,7 +38224,7 @@ impl Client {
      * **Parameters:**
      *
      * * `project_id: i64`
-     * * `affiliation: crate::types::ProjectsListCollaboratorsAffiliation` -- Filters the collaborators by their affiliation. Can be one of:  
+     * * `affiliation: crate::types::Affiliation` -- Filters the collaborators by their affiliation. Can be one of:  
      *  \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
      *  \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
      *  \* `all`: All collaborators the authenticated user can see.
@@ -38234,7 +38234,7 @@ impl Client {
     pub async fn projects_list_collaborators(
         &self,
         project_id: i64,
-        affiliation: crate::types::ProjectsListCollaboratorsAffiliation,
+        affiliation: crate::types::Affiliation,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::User>> {
@@ -41814,7 +41814,7 @@ impl Client {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `affiliation: crate::types::ProjectsListCollaboratorsAffiliation` -- Filter collaborators returned by their affiliation. Can be one of:  
+     * * `affiliation: crate::types::Affiliation` -- Filter collaborators returned by their affiliation. Can be one of:  
      *  \* `outside`: All outside collaborators of an organization-owned repository.  
      *  \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  
      *  \* `all`: All collaborators the authenticated user can see.
@@ -41825,7 +41825,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        affiliation: crate::types::ProjectsListCollaboratorsAffiliation,
+        affiliation: crate::types::Affiliation,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Collaborator>> {
@@ -49584,7 +49584,7 @@ impl Client {
      *
      * * `q: &str` -- The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching code](https://help.github.com/articles/searching-code/)" for a detailed list of qualifiers.
      * * `sort: crate::types::SearchCodeSort` -- Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results).
-     * * `order: crate::types::AuditLogOrder` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+     * * `order: crate::types::Order` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -49592,7 +49592,7 @@ impl Client {
         &self,
         q: &str,
         sort: crate::types::SearchCodeSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
@@ -49628,7 +49628,7 @@ impl Client {
      *
      * * `q: &str` -- The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching commits](https://help.github.com/articles/searching-commits/)" for a detailed list of qualifiers.
      * * `sort: crate::types::SearchCommitsSort` -- Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results).
-     * * `order: crate::types::AuditLogOrder` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+     * * `order: crate::types::Order` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -49636,7 +49636,7 @@ impl Client {
         &self,
         q: &str,
         sort: crate::types::SearchCommitsSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
@@ -49676,7 +49676,7 @@ impl Client {
      *
      * * `q: &str` -- The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching issues and pull requests](https://help.github.com/articles/searching-issues-and-pull-requests/)" for a detailed list of qualifiers.
      * * `sort: crate::types::SearchIssuesPullRequestsSort` -- Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results).
-     * * `order: crate::types::AuditLogOrder` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+     * * `order: crate::types::Order` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -49684,7 +49684,7 @@ impl Client {
         &self,
         q: &str,
         sort: crate::types::SearchIssuesPullRequestsSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchIssuesPullRequestsOkResponse> {
@@ -49722,7 +49722,7 @@ impl Client {
      * * `repository_id: i64` -- The id of the repository.
      * * `q: &str` -- The search keywords. This endpoint does not accept qualifiers in the query. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query).
      * * `sort: crate::types::Sort` -- Sorts the results of your query by when the label was `created` or `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results).
-     * * `order: crate::types::AuditLogOrder` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+     * * `order: crate::types::Order` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -49731,7 +49731,7 @@ impl Client {
         repository_id: i64,
         q: &str,
         sort: crate::types::Sort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
@@ -49773,7 +49773,7 @@ impl Client {
      *
      * * `q: &str` -- The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching for repositories](https://help.github.com/articles/searching-for-repositories/)" for a detailed list of qualifiers.
      * * `sort: crate::types::SearchReposSort` -- Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results).
-     * * `order: crate::types::AuditLogOrder` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+     * * `order: crate::types::Order` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -49781,7 +49781,7 @@ impl Client {
         &self,
         q: &str,
         sort: crate::types::SearchReposSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchReposOkResponse> {
@@ -49852,7 +49852,7 @@ impl Client {
      *
      * * `q: &str` -- The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching users](https://help.github.com/articles/searching-users/)" for a detailed list of qualifiers.
      * * `sort: crate::types::SearchUsersSort` -- Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results).
-     * * `order: crate::types::AuditLogOrder` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+     * * `order: crate::types::Order` -- Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -49860,7 +49860,7 @@ impl Client {
         &self,
         q: &str,
         sort: crate::types::SearchUsersSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
@@ -51493,7 +51493,7 @@ impl Client {
      *
      * **Parameters:**
      *
-     * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
      *  \* `assigned`: Issues assigned to you  
      *  \* `created`: Issues created by you  
      *  \* `mentioned`: Issues mentioning you  
@@ -51509,7 +51509,7 @@ impl Client {
      */
     pub async fn issues_list_for_authenticated_user(
         &self,
-        filter: crate::types::IssuesListFilter,
+        filter: crate::types::Filter,
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
@@ -52043,7 +52043,7 @@ impl Client {
      * * `package_name: &str` -- The name of the package.
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
-     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByState` -- The state of the package, either active or deleted.
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
@@ -52051,7 +52051,7 @@ impl Client {
         package_name: &str,
         page: i64,
         per_page: i64,
-        state: crate::types::PackagesGetAllPackageVersionsOwnedByState,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/user/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -52225,7 +52225,7 @@ impl Client {
      * * `type_: crate::types::ReposListType` -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
      *    
      *  Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
-     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -52237,7 +52237,7 @@ impl Client {
         visibility: crate::types::ReposListVisibility,
         affiliation: &str,
         type_: crate::types::ReposListType,
-        sort: crate::types::ReposListSort,
+        sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -52779,13 +52779,13 @@ impl Client {
      * **Parameters:**
      *
      * * `username: &str`
-     * * `subject_type: crate::types::UsersGetContextUserSubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
+     * * `subject_type: crate::types::SubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
      * * `subject_id: &str` -- Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.
      */
     pub async fn users_get_context_for_user(
         &self,
         username: &str,
-        subject_type: crate::types::UsersGetContextUserSubjectType,
+        subject_type: crate::types::SubjectType,
         subject_id: &str,
     ) -> Result<types::Hovercard> {
         let url = format!(
@@ -53077,7 +53077,7 @@ impl Client {
      *
      * * `username: &str`
      * * `type_: crate::types::ReposListUserType` -- Can be one of `all`, `owner`, `member`.
-     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -53086,7 +53086,7 @@ impl Client {
         &self,
         username: &str,
         type_: crate::types::ReposListUserType,
-        sort: crate::types::ReposListSort,
+        sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,

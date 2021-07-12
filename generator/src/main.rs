@@ -857,14 +857,7 @@ impl TypeSpace {
                     // Only do this if we have an Enum or an Object.
                     let existing_name = if let Some(n) = &te.name { n.to_string() } else { "".to_string() };
                     let new_name = if let Some(n) = &name { n.to_string() } else { "".to_string() };
-                    if details.is_object()
-                        // TODO: fix this.
-                        || (details.is_enum()
-                            && new_name != "filter"
-                            && new_name != "subject type"
-                            && new_name != "affiliation"
-                            && new_name != "archived state")
-                    {
+                    if details.is_object() || details.is_enum() {
                         if existing_name == new_name {
                             // Return early.
                             return Ok(tid.clone());
@@ -1246,14 +1239,9 @@ impl TypeSpace {
     }
 
     fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter, is_schema: bool) -> Result<TypeId> {
-        let mut nam = if let Some(n) = name { n.to_string() } else { "".to_string() };
+        let nam = if let Some(n) = name { n.to_string() } else { "".to_string() };
 
         if let Some(parameter_data) = get_parameter_data(p) {
-            if nam.is_empty() && !parameter_data.name.is_empty() {
-                nam = clean_name(&parameter_data.name);
-            } else {
-                nam = clean_name(&format!("{} {}", nam, parameter_data.name));
-            }
             if let openapiv3::ParameterSchemaOrContent::Schema(st) = &parameter_data.format {
                 let desc = if let Some(d) = &parameter_data.description {
                     d.to_string()
@@ -1261,7 +1249,10 @@ impl TypeSpace {
                     "".to_string()
                 };
 
-                self.select(Some(&nam), st, is_schema, &desc)
+                match st {
+                    openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
+                    openapiv3::ReferenceOr::Item(s) => self.select_schema(Some(&parameter_data.name), s, &nam, is_schema, &desc),
+                }
             } else {
                 bail!("could not get parameter_schema for {:?}: {:?}", name, p);
             }
@@ -1606,7 +1597,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
         if let Some(sn) = te.name.as_deref() {
             let sn = struct_name(sn);
 
-            if rendered.contains(&sn) && sn != "Filter" {
+            if rendered.contains(&sn) {
                 // Skip duplicates, this is stupid but since I chose to pick the smaller of the
                 // names of the structs, we get duplicates.
                 continue;
