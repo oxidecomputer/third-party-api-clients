@@ -469,7 +469,7 @@ impl<T> ReferenceOrExt<T> for openapiv3::ReferenceOr<T> {
 }
 
 #[allow(dead_code)]
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, Clone)]
 enum TypeDetails {
     Unknown,
     Basic(String, openapiv3::SchemaData),
@@ -482,6 +482,48 @@ enum TypeDetails {
      * order in the generated code.
      */
     Object(BTreeMap<String, TypeId>, openapiv3::SchemaData),
+}
+
+impl PartialEq for TypeDetails {
+    fn eq(&self, other: &Self) -> bool {
+        match self {
+            TypeDetails::Basic(s, d) => {
+                if let TypeDetails::Basic(os, od) = other {
+                    return s == os && d.description == od.description;
+                }
+            }
+            TypeDetails::NamedType(i, d) => {
+                if let TypeDetails::NamedType(oi, od) = other {
+                    return i == oi && d.description == od.description;
+                }
+            }
+            TypeDetails::Enum(s, d) => {
+                if let TypeDetails::Enum(os, od) = other {
+                    return s == os /*&& d.description == od.description*/;
+                }
+            }
+            TypeDetails::Array(i, d) => {
+                if let TypeDetails::Array(oi, od) = other {
+                    return i == oi && d.description == od.description;
+                }
+            }
+            TypeDetails::Optional(i, d) => {
+                if let TypeDetails::Optional(oi, od) = other {
+                    return i == oi && d.description == od.description;
+                }
+            }
+            TypeDetails::Object(s, d) => {
+                if let TypeDetails::Object(os, od) = other {
+                    return s == os && d.description == od.description;
+                }
+            }
+            TypeDetails::Unknown => {
+                return self == other;
+            }
+        }
+
+        false
+    }
 }
 
 #[derive(Debug)]
@@ -777,6 +819,9 @@ impl TypeSpace {
              */
             if let Some(et) = self.id_to_entry.get(&id) {
                 if et.details != details {
+                    if name == "sort" {
+                        bail!("object details for {} do not match: {:?} != {:?}", name, et.details, details,);
+                    }
                     // We can get here if there are two objects with the same name
                     // that have properties that are different.
                     // Let's check if we already have an object with the parent name.
@@ -870,7 +915,7 @@ impl TypeSpace {
     fn select_schema(&mut self, name: Option<&str>, s: &openapiv3::Schema, parent_name: &str, is_schema: bool) -> Result<TypeId> {
         let (n, details) = self.get_type_name_and_details(name, s, parent_name, is_schema)?;
 
-        self.add_if_not_exists(n, details, &parent_name)
+        self.add_if_not_exists(n, details, parent_name)
     }
 
     fn get_type_name_and_details(
@@ -1051,7 +1096,6 @@ impl TypeSpace {
 
     fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter, is_schema: bool) -> Result<TypeId> {
         if let Some(parameter_data) = get_parameter_data(p) {
-            println!("param data {:?} is ok: {:?}", name, p);
             if let openapiv3::ParameterSchemaOrContent::Schema(st) = &parameter_data.format {
                 self.select(name, st, is_schema)
             } else {
@@ -1417,21 +1461,6 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
             let sn = struct_name(sn);
             match &te.details {
                 TypeDetails::Enum(vals, schema_data) => {
-                    // Check if it already exists in params and skip it if so.
-                    if let Some(t) = parameters.get(&sn) {
-                        let enums = get_enums_for_param(t);
-                        if enums == *vals {
-                            continue;
-                        } else {
-                            bail!(
-                                "enum with name {} already exists but the values do not match:\n\texisting -> {:?}\n\tnew -> {:?}",
-                                sn,
-                                enums,
-                                vals
-                            );
-                        }
-                    }
-
                     let mut desc = "".to_string();
                     if let Some(d) = &schema_data.description {
                         desc = d.to_string();
@@ -2017,7 +2046,7 @@ fn main() -> Result<()> {
             let name = clean_name(pn);
             println!("PARAMETER {}/{}: {}", i + 1, components.parameters.len(), name);
 
-            let id = ts.select_param(Some(name.as_str()), p, true)?;
+            let id = ts.select_param(Some(name.as_str()), p, false)?;
             println!("    -> {:?}", id);
             println!();
             if let openapiv3::ReferenceOr::Item(item) = p {
