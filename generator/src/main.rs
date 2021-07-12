@@ -1188,7 +1188,9 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str, defau
     }
 
     if !description.is_empty() {
-        a(&format!("/// {}", description.replace('\n', "\n/// ")));
+        a("/*");
+        a(&format!("* {}", description.replace("\n", "\n*  ")));
+        a("*/");
     }
 
     let sn = struct_name(n);
