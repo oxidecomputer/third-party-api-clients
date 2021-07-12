@@ -25,13 +25,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Get the JWT credentials.
     let jwt = JWTCredentials::new(app_id, key.data).unwrap();
 
+    // Create the HTTP cache.
     #[cfg(feature = "httpcache")]
-    {
-        // Create the HTTP cache.
-        let mut dir = dirs::home_dir().expect("Expected a home dir");
-        dir.push(".cache/github");
-        let http_cache = Box::new(FileBasedCache::new(dir));
-    }
+    let mut dir = dirs::home_dir().expect("Expected a home dir");
+    dir.push(".cache/github");
+    let http_cache = Box::new(FileBasedCache::new(dir));
 
     let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
 
