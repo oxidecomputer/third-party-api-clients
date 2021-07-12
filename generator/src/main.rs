@@ -927,22 +927,35 @@ impl TypeSpace {
         }
     }
 
-    fn select(&mut self, name: Option<&str>, s: &openapiv3::ReferenceOr<openapiv3::Schema>, is_schema: bool) -> Result<TypeId> {
+    fn select(
+        &mut self,
+        name: Option<&str>,
+        s: &openapiv3::ReferenceOr<openapiv3::Schema>,
+        is_schema: bool,
+        additional_description: &str,
+    ) -> Result<TypeId> {
         match s {
             openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
-            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s, "", is_schema),
+            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s, "", is_schema, additional_description),
         }
     }
 
     fn select_box(&mut self, name: Option<&str>, s: &openapiv3::ReferenceOr<Box<openapiv3::Schema>>, parent_name: &str) -> Result<TypeId> {
         match s {
             openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
-            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s.as_ref(), parent_name, false),
+            openapiv3::ReferenceOr::Item(s) => self.select_schema(name, s.as_ref(), parent_name, false, ""),
         }
     }
 
-    fn select_schema(&mut self, name: Option<&str>, s: &openapiv3::Schema, parent_name: &str, is_schema: bool) -> Result<TypeId> {
-        let (n, details) = self.get_type_name_and_details(name, s, parent_name, is_schema)?;
+    fn select_schema(
+        &mut self,
+        name: Option<&str>,
+        s: &openapiv3::Schema,
+        parent_name: &str,
+        is_schema: bool,
+        additional_description: &str,
+    ) -> Result<TypeId> {
+        let (n, details) = self.get_type_name_and_details(name, s, parent_name, is_schema, additional_description)?;
 
         self.add_if_not_exists(n, details, parent_name, is_schema)
     }
@@ -950,11 +963,27 @@ impl TypeSpace {
     fn get_type_name_and_details(
         &mut self,
         name: Option<&str>,
-        s: &openapiv3::Schema,
+        sc: &openapiv3::Schema,
         parent_name: &str,
         is_schema: bool,
+        additional_description: &str,
     ) -> Result<(Option<String>, TypeDetails)> {
         let nam = if let Some(n) = name { n.to_string() } else { "".to_string() };
+
+        let mut s = sc.clone();
+
+        // If we have an additional description and it is better than our original,
+        // use it instead.
+        if !additional_description.is_empty() {
+            let desc = if let Some(d) = &sc.schema_data.description {
+                d.to_string()
+            } else {
+                "".to_string()
+            };
+            if additional_description.len() > desc.len() {
+                s.schema_data.description = Some(additional_description.to_string());
+            }
+        }
 
         if is_schema {
             // If we are on a parent schema that as been defined in the spec, we want to ensure,
@@ -963,13 +992,21 @@ impl TypeSpace {
             if let openapiv3::SchemaKind::Type(t) = &s.schema_kind {
                 if let openapiv3::Type::Object(_) = t {
                     // If it's an object we will always have a named type so it's fine.
+                } else if let openapiv3::Type::String(st) = t {
+                    // If it's an enum we will always have a named type so it's fine.
+                    if st.enumeration.is_empty() {
+                        // Handle the non-enums.
+                        let id = self.select_schema(Some(&nam), &s, parent_name, false, additional_description)?;
+                        return Ok((Some(nam), TypeDetails::NamedType(id, s.schema_data.clone())));
+                    }
                 } else {
                     // For everything else ensure we have a named type.
-                    let id = self.select_schema(Some(&nam), s, parent_name, false)?;
+                    let id = self.select_schema(Some(&nam), &s, parent_name, false, additional_description)?;
                     return Ok((Some(nam), TypeDetails::NamedType(id, s.schema_data.clone())));
                 }
             }
         }
+
         // Generate a UUID for this type.
         let uid = uuid::Uuid::new_v4();
 
@@ -1066,7 +1103,7 @@ impl TypeSpace {
             },
             openapiv3::SchemaKind::AllOf { all_of } => {
                 // TODO: Actually combine all the types.
-                let id = self.select(name, all_of.get(0).unwrap(), is_schema)?;
+                let id = self.select(name, all_of.get(0).unwrap(), is_schema, "")?;
                 if let Some(et) = self.id_to_entry.get(&id) {
                     if let Some(n) = name {
                         if let TypeDetails::Object(..) = et.details {
@@ -1086,7 +1123,8 @@ impl TypeSpace {
                 // an empty object.
                 let mut id = TypeId(0);
                 for o in one_of {
-                    if let Ok(i) = self.select(name, o, true) {
+                    if let Ok(i) = self.select(name, o, true, "") {
+                        // TODO why is this true
                         id = i;
                         break;
                     }
@@ -1104,7 +1142,7 @@ impl TypeSpace {
             }
             openapiv3::SchemaKind::AnyOf { any_of } => {
                 // TODO: Actually combine all the types.
-                let id = self.select(name, any_of.get(0).unwrap(), is_schema)?;
+                let id = self.select(name, any_of.get(0).unwrap(), is_schema, "")?;
                 if let Some(et) = self.id_to_entry.get(&id) {
                     if let Some(n) = name {
                         Ok((Some(n.to_string()), et.details.clone()))
@@ -1132,7 +1170,13 @@ impl TypeSpace {
                 nam = clean_name(&format!("{} {}", nam, parameter_data.name));
             }
             if let openapiv3::ParameterSchemaOrContent::Schema(st) = &parameter_data.format {
-                self.select(Some(&nam), st, is_schema)
+                let desc = if let Some(d) = &parameter_data.description {
+                    d.to_string()
+                } else {
+                    "".to_string()
+                };
+
+                self.select(Some(&nam), st, is_schema, &desc)
             } else {
                 bail!("could not get parameter_schema for {:?}: {:?}", name, p);
             }
@@ -1670,7 +1714,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     if ct == "application/json" {
                         if let Some(s) = &mt.schema {
                             let object_name = format!("{} request", oid_to_object_name("", &oid));
-                            let tid = ts.select(Some(&object_name), s, false)?;
+                            let tid = ts.select(Some(&object_name), s, false, "")?;
                             let rt = ts.render_type(&tid, false)?;
                             (Some(format!("&{}", rt)), Some("json".to_string()))
                         } else {
@@ -1678,7 +1722,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                         }
                     } else if ct == "text/plain" || ct == "*/*" {
                         if let Some(s) = &mt.schema {
-                            let tid = ts.select(None, s, false)?;
+                            let tid = ts.select(None, s, false, "")?;
                             let rt = ts.render_type(&tid, false)?;
                             bounds.push("T: Into<reqwest::Body>".to_string());
                             if rt == "String" {
@@ -1843,7 +1887,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                                 oid_to_object_name(m, &oid),
                                                 status_code.canonical_reason().unwrap().to_lowercase()
                                             );
-                                            ts.select_schema(Some(&object_name), item, "", false)?
+                                            ts.select_schema(Some(&object_name), item, "", false, "")?
                                         } else {
                                             bail!("got a range and not a code for {:?}", only.0);
                                         }
@@ -1864,7 +1908,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                             let (ct, mt) = i.content.first().unwrap();
                             if ct == "text/plain" || ct == "text/html" || ct == "application/octocat-stream" || ct == "*/*" {
                                 if let Some(s) = &mt.schema {
-                                    let tid = ts.select(None, s, false)?;
+                                    let tid = ts.select(None, s, false, "")?;
                                     let rt = ts.render_type(&tid, false)?;
 
                                     a(&format!("    ) -> Result<{}> {{", rt));
@@ -1888,7 +1932,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                                                     oid_to_object_name(m, &oid),
                                                     status_code.canonical_reason().unwrap().to_lowercase()
                                                 );
-                                                ts.select_schema(Some(&object_name), item, "", false)?
+                                                ts.select_schema(Some(&object_name), item, "", false, "")?
                                             } else {
                                                 bail!("got a range and not a code for {:?}", only.0);
                                             }
@@ -2097,7 +2141,7 @@ fn main() -> Result<()> {
             let name = clean_name(sn);
             println!("SCHEMA {}/{}: {}", i + 1, components.schemas.len(), name);
 
-            let id = ts.select(Some(name.as_str()), s, true)?;
+            let id = ts.select(Some(name.as_str()), s, true, "")?;
             println!("    -> {:?}", id);
             println!();
         }
@@ -2144,7 +2188,7 @@ fn main() -> Result<()> {
                         if ct == "application/json" {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!("{} request", oid_to_object_name("", &oid));
-                                let id = ts.select(Some(&object_name), s, false)?;
+                                let id = ts.select(Some(&object_name), s, false, "")?;
                                 req.push(format!("{} {:?}", struct_name(&object_name), id));
                             }
                         } else {
@@ -2184,7 +2228,7 @@ fn main() -> Result<()> {
                                                 oid_to_object_name(m, &oid),
                                                 status_code.canonical_reason().unwrap().to_lowercase()
                                             );
-                                            let id = ts.select(Some(&object_name), s, false)?;
+                                            let id = ts.select(Some(&object_name), s, false, "")?;
                                             res.push(format!("{} {:?}", struct_name(&object_name), id));
                                         } else {
                                             bail!("got a range and not a code for {:?}", code);
