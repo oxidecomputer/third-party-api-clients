@@ -162,146 +162,155 @@ where
 }
 
 trait ParameterDataExt {
-    fn render_type(&self, name: &str, ts: &TypeSpace) -> Result<String>;
+    fn render_type(&self, name: &str, ts: &mut TypeSpace) -> Result<String>;
 }
 
 impl ParameterDataExt for openapiv3::ParameterData {
-    fn render_type(&self, name: &str, ts: &TypeSpace) -> Result<String> {
+    fn render_type(&self, name: &str, ts: &mut TypeSpace) -> Result<String> {
         use openapiv3::{SchemaKind, Type};
+
+        // Cleanup the name.
+        let mut n = "".to_string();
+        if name.is_empty() {
+            n = self.name.to_string();
+        }
+
+        let mut sn = clean_name(&n);
+        // TODO: have a more automated way of making sure there aren't
+        // duplicates of enums.
+        if sn == "status" {
+            sn = format!("{} data", sn);
+        }
 
         Ok(match &self.format {
             openapiv3::ParameterSchemaOrContent::Schema(s) => {
-                if let Ok(s) = s.item() {
-                    match &s.schema_kind {
-                        SchemaKind::Type(Type::Boolean {}) => "bool".to_string(),
-                        SchemaKind::Type(Type::Array(_at)) => "&[String]".to_string(), // TODO: make this smarter
-                        SchemaKind::Type(Type::String(st)) => {
-                            use openapiv3::{
-                                StringFormat::Date,
-                                StringFormat::DateTime,
-                                VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
-                            };
+                match s {
+                    openapiv3::ReferenceOr::Reference { reference } => {
+                        let tid = ts.select_ref(Some(name), reference.as_str())?;
+                        let t = ts.render_type(&tid, false)?;
+                        if t == "String" {
+                            return Ok("&str".to_string());
+                        }
 
-                            if st.pattern.is_some() {
-                                bail!("XXX pattern");
-                            }
+                        t
+                    }
+                    openapiv3::ReferenceOr::Item(s) => {
+                        match &s.schema_kind {
+                            SchemaKind::Type(Type::Boolean {}) => "bool".to_string(),
+                            SchemaKind::Type(Type::Array(_at)) => "&[String]".to_string(), // TODO: make this smarter
+                            SchemaKind::Type(Type::String(st)) => {
+                                use openapiv3::{
+                                    StringFormat::Date,
+                                    StringFormat::DateTime,
+                                    VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
+                                };
 
-                            if !st.enumeration.is_empty() {
-                                // We have an enum.
-                                // Let's return the correct enum struct name.
-                                let mut sn = struct_name(name);
-                                // TODO: have a more automated way of making sure there aren't
-                                // duplicates of enums.
-                                if sn == "Status" {
-                                    sn = format!("{}Data", sn);
+                                if st.pattern.is_some() {
+                                    bail!("XXX pattern");
                                 }
 
-                                // Make sure we actually have a type, we might have
-                                // not added the type since it is a duplicate of another type.
-                                if !name.is_empty() && ts.name_to_id.get(&clean_name(&sn)).is_some() {
-                                    return Ok(format!("crate::types::{}", sn));
-                                }
+                                if !st.enumeration.is_empty() {
+                                    // We have an enum.
+                                    // Let's return the correct enum struct name.
 
-                                if name == "path" {
-                                    bail!("we got path");
-                                }
+                                    // Make sure we actually have a type, we might have
+                                    // not added the type since it is a duplicate of another type.
+                                    if !name.is_empty() && ts.name_to_id.get(&sn).is_some() {
+                                        return Ok(format!("crate::types::{}", struct_name(&sn)));
+                                    }
 
-                                // Try to find the parameter among our types.
-                                for te in ts.id_to_entry.values() {
-                                    if let Some(sn) = te.name.as_deref() {
-                                        let sn = struct_name(sn);
-                                        if let TypeDetails::Enum(vals, _schema_data) = &te.details {
-                                            if st.enumeration == *vals {
-                                                return Ok(format!("crate::types::{}", sn));
+                                    // Try to find the parameter among our types.
+                                    for te in ts.id_to_entry.values() {
+                                        if let Some(sn) = te.name.as_deref() {
+                                            let sn = struct_name(sn);
+                                            if let TypeDetails::Enum(vals, _schema_data) = &te.details {
+                                                if st.enumeration == *vals {
+                                                    return Ok(format!("crate::types::{}", sn));
+                                                }
                                             }
                                         }
                                     }
+
+                                    bail!("parameter {} that enumerates should have a pre-defined type: {:?}", name, s);
                                 }
 
-                                bail!("parameter {} that enumerates should have a pre-defined type: {:?}", name, s);
-                            }
+                                if st.min_length.is_some() || st.max_length.is_some() {
+                                    bail!("XXX min/max length");
+                                }
 
-                            if st.min_length.is_some() || st.max_length.is_some() {
-                                bail!("XXX min/max length");
-                            }
-
-                            match &st.format {
-                                Item(DateTime) => "DateTime<Utc>".to_string(),
-                                Item(Date) => "NaiveDate".to_string(),
-                                Empty => "&str".to_string(),
-                                Unknown(f) => match f.as_str() {
-                                    "float" => "f64".to_string(),
-                                    "uri" => "&str".to_string(),
-                                    "uri-template" => "&str".to_string(),
-                                    "email" => "&str".to_string(),
-                                    f => {
-                                        bail!("XXX unknown string format {}", f)
+                                match &st.format {
+                                    Item(DateTime) => "DateTime<Utc>".to_string(),
+                                    Item(Date) => "NaiveDate".to_string(),
+                                    Empty => "&str".to_string(),
+                                    Unknown(f) => match f.as_str() {
+                                        "float" => "f64".to_string(),
+                                        "uri" => "&str".to_string(),
+                                        "uri-template" => "&str".to_string(),
+                                        "email" => "&str".to_string(),
+                                        f => {
+                                            bail!("XXX unknown string format {}", f)
+                                        }
+                                    },
+                                    x => {
+                                        bail!("XXX string format {:?}", x);
                                     }
-                                },
-                                x => {
-                                    bail!("XXX string format {:?}", x);
                                 }
                             }
-                        }
-                        SchemaKind::Type(Type::Integer(it)) => {
-                            let mut uint;
-                            let width;
+                            SchemaKind::Type(Type::Integer(it)) => {
+                                let mut uint;
+                                let width;
 
-                            use openapiv3::VariantOrUnknownOrEmpty::Unknown;
-                            if let Unknown(f) = &it.format {
-                                match f.as_str() {
-                                    "uint" | "uint32" => {
-                                        uint = true;
-                                        width = 32;
+                                use openapiv3::VariantOrUnknownOrEmpty::Unknown;
+                                if let Unknown(f) = &it.format {
+                                    match f.as_str() {
+                                        "uint" | "uint32" => {
+                                            uint = true;
+                                            width = 32;
+                                        }
+                                        "uint64" => {
+                                            uint = true;
+                                            width = 32;
+                                        }
+                                        f => bail!("XXX unknown integer format {}", f),
                                     }
-                                    "uint64" => {
-                                        uint = true;
-                                        width = 32;
-                                    }
-                                    f => bail!("XXX unknown integer format {}", f),
-                                }
-                            } else {
-                                // The format was empty, let's assume it's just a normal
-                                // i64.
-                                uint = false;
-                                width = 64;
-                            }
-
-                            if it.multiple_of.is_some() {
-                                bail!("XXX multiple_of");
-                            }
-                            if it.exclusive_minimum || it.exclusive_maximum {
-                                bail!("XXX exclusive");
-                            }
-
-                            if let Some(min) = it.minimum {
-                                if min == 0 {
-                                    uint = true;
                                 } else {
-                                    bail!("XXX invalid minimum: {}", min);
+                                    // The format was empty, let's assume it's just a normal
+                                    // i64.
+                                    uint = false;
+                                    width = 64;
+                                }
+
+                                if it.multiple_of.is_some() {
+                                    bail!("XXX multiple_of");
+                                }
+                                if it.exclusive_minimum || it.exclusive_maximum {
+                                    bail!("XXX exclusive");
+                                }
+
+                                if let Some(min) = it.minimum {
+                                    if min == 0 {
+                                        uint = true;
+                                    } else {
+                                        bail!("XXX invalid minimum: {}", min);
+                                    }
+                                }
+
+                                if it.maximum.is_some() {
+                                    bail!("XXX maximum");
+                                }
+                                if !it.enumeration.is_empty() {
+                                    bail!("XXX enumeration {}: {:?}", self.name, it);
+                                }
+                                if uint {
+                                    format!("u{}", width)
+                                } else {
+                                    format!("i{}", width)
                                 }
                             }
-
-                            if it.maximum.is_some() {
-                                bail!("XXX maximum");
-                            }
-                            if !it.enumeration.is_empty() {
-                                bail!("XXX enumeration {}: {:?}", self.name, it);
-                            }
-                            if uint {
-                                format!("u{}", width)
-                            } else {
-                                format!("i{}", width)
-                            }
+                            openapiv3::SchemaKind::OneOf { one_of: _ } => "&str".to_string(), // TODO: make this smarter.
+                            x => bail!("unexpected type {:#?}", x),
                         }
-                        openapiv3::SchemaKind::OneOf { one_of: _ } => "&str".to_string(), // TODO: make this smarter.
-                        x => bail!("unexpected type {:#?}", x),
                     }
-                } else {
-                    // We have a reference to a type. We could handle it, but for now
-                    // easier to return a string.
-                    // TODO: handle in the future.
-                    "&str".to_string()
                 }
             }
             x => bail!("XXX param format {:#?}", x),
@@ -840,9 +849,6 @@ impl TypeSpace {
              */
             if let Some(et) = self.id_to_entry.get(&id) {
                 if et.details != details {
-                    /*if name == "sort" {
-                        bail!("object details for {} do not match: {:?} != {:?}", name, et.details, details,);
-                    }*/
                     // TODO: if these are enums and one contains a subset of the other, hande it.
                     // We can get here if there are two objects with the same name
                     // that have properties that are different.
@@ -859,7 +865,7 @@ impl TypeSpace {
                             // We can get here if there are two objects with the same name
                             // that have properties that are different.
                             // Let's rename the new object with the parent name.
-                            println!("object details for {} do not match: {:?} != {:?}", pn, pet.details, details,);
+                            // println!("object details for {} do not match: {:?} != {:?}", pn, pet.details, details,);
                         }
                     } else {
                         // Let's rename the new object with the parent name.
@@ -1619,15 +1625,24 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     openapiv3::ReferenceOr::Item(item) => item,
                 };
 
+                let parameter_data = get_parameter_data(item).unwrap();
+
                 let pid = ts.select_param(None, par, true)?;
                 let mut docs = ts.render_docs(&pid);
                 if !docs.is_empty() {
-                    docs = format!(" -- {}", docs.trim().replace("/// ", ""));
+                    docs = format!(" -- {}.", docs.trim().replace("/// ", "").trim_end_matches('.'));
+                } else if let Some(d) = &parameter_data.description {
+                    if !d.is_empty() {
+                        docs = format!(" -- {}.", d.trim_end_matches('.'));
+                    }
                 }
 
-                let parameter_data = get_parameter_data(item).unwrap();
-                let nam = &to_snake_case(&parameter_data.name);
+                let nam = &to_snake_case(&clean_name(&parameter_data.name));
                 let typ = parameter_data.render_type(&param_name, ts)?;
+
+                if nam == "path" {
+                    println!("we got path: {} {:?}", typ, parameter_data);
+                }
 
                 if nam == "ref" || nam == "type" {
                     a(&format!("*  * {}_: {}{}", nam, typ, docs));
