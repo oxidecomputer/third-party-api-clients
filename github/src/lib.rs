@@ -53294,7 +53294,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * * q: &str
     * * sort: crate::types::SearchCodeSort
-    * * order: crate::types::AuditLogOrder
+    * * order: crate::types::Order
     * * per_page: i64
     * * page: i64
     */
@@ -53302,7 +53302,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         q: &str,
         sort: crate::types::SearchCodeSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
@@ -53338,7 +53338,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * * q: &str
     * * sort: crate::types::SearchCommitsSort
-    * * order: crate::types::AuditLogOrder
+    * * order: crate::types::Order
     * * per_page: i64
     * * page: i64
     */
@@ -53346,7 +53346,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         q: &str,
         sort: crate::types::SearchCommitsSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
@@ -53386,7 +53386,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * * q: &str
     * * sort: crate::types::SearchIssuesPullRequestsSort
-    * * order: crate::types::AuditLogOrder
+    * * order: crate::types::Order
     * * per_page: i64
     * * page: i64
     */
@@ -53394,7 +53394,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         q: &str,
         sort: crate::types::SearchIssuesPullRequestsSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchIssuesPullRequestsOkResponse> {
@@ -53432,7 +53432,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * * repository_id: i64
     * * q: &str
     * * sort: crate::types::Sort
-    * * order: crate::types::AuditLogOrder
+    * * order: crate::types::Order
     * * per_page: i64
     * * page: i64
     */
@@ -53441,7 +53441,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repository_id: i64,
         q: &str,
         sort: crate::types::Sort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
@@ -53483,7 +53483,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * * q: &str
     * * sort: crate::types::SearchReposSort
-    * * order: crate::types::AuditLogOrder
+    * * order: crate::types::Order
     * * per_page: i64
     * * page: i64
     */
@@ -53491,7 +53491,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         q: &str,
         sort: crate::types::SearchReposSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchReposOkResponse> {
@@ -53562,7 +53562,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * * q: &str
     * * sort: crate::types::SearchUsersSort
-    * * order: crate::types::AuditLogOrder
+    * * order: crate::types::Order
     * * per_page: i64
     * * page: i64
     */
@@ -53570,7 +53570,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         q: &str,
         sort: crate::types::SearchUsersSort,
-        order: crate::types::AuditLogOrder,
+        order: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {

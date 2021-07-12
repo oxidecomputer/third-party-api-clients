@@ -198,8 +198,12 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
                                 // Make sure we actually have a type, we might have
                                 // not added the type since it is a duplicate of another type.
-                                if !name.is_empty() && ts.name_to_id.get(&sn).is_some() {
+                                if !name.is_empty() && ts.name_to_id.get(&clean_name(&sn)).is_some() {
                                     return Ok(format!("crate::types::{}", sn));
+                                }
+
+                                if name == "path" {
+                                    bail!("we got path");
                                 }
 
                                 // Try to find the parameter among our types.
@@ -2090,7 +2094,7 @@ fn main() -> Result<()> {
             let name = clean_name(pn);
             println!("PARAMETER {}/{}: {}", i + 1, components.parameters.len(), name);
 
-            let id = ts.select_param(Some(name.as_str()), p, false)?;
+            let id = ts.select_param(Some(name.as_str()), p, true)?;
 
             println!("    -> {:?}", id);
             println!();
