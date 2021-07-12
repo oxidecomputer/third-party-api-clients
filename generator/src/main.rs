@@ -499,7 +499,7 @@ impl PartialEq for TypeDetails {
             }
             TypeDetails::Enum(s, d) => {
                 if let TypeDetails::Enum(os, od) = other {
-                    return s == os /*&& d.description == od.description*/;
+                    return s == os && d.description == od.description;
                 }
             }
             TypeDetails::Array(i, d) => {
@@ -819,9 +819,10 @@ impl TypeSpace {
              */
             if let Some(et) = self.id_to_entry.get(&id) {
                 if et.details != details {
-                    if name == "sort" {
+                    /*if name == "sort" {
                         bail!("object details for {} do not match: {:?} != {:?}", name, et.details, details,);
-                    }
+                    }*/
+                    // TODO: if these are enums and one contains a subset of the other, hande it.
                     // We can get here if there are two objects with the same name
                     // that have properties that are different.
                     // Let's check if we already have an object with the parent name.
@@ -1914,6 +1915,7 @@ fn clean_name(t: &str) -> String {
     let st = to_snake_case(
         &s.replace("+1", "plus_one")
             .replace("-1", "minus_one")
+            .replace("2fa", "two_fa")
             .replace("100644", "file_blob")
             .replace("100755", "executable_blob")
             .replace("040000", "subdirectory_tree")
@@ -2076,6 +2078,45 @@ fn main() -> Result<()> {
                 }
                 if !req.is_empty() {
                     println!("\t{} {} request body -> {}", pn, m, req.join(" | "));
+                }
+
+                /*
+                 * Get the request parameters, those might have lingering enums.
+                 */
+                for par in o.parameters.iter() {
+                    let item = match par {
+                        openapiv3::ReferenceOr::Reference { reference } => {
+                            let param_name = struct_name(&reference.replace("#/components/parameters/", ""));
+                            // Get the parameter from our BTreeMap.
+                            // TODO: change this to our select.
+                            if let Some(param) = parameters.get(&param_name) {
+                                param
+                            } else {
+                                bail!("could not find parameter with reference: {}", reference);
+                            }
+                        }
+                        openapiv3::ReferenceOr::Item(item) => item,
+                    };
+
+                    match item {
+                        openapiv3::Parameter::Path {
+                            parameter_data,
+                            style: openapiv3::PathStyle::Simple,
+                        } => {
+                            let nam = &to_snake_case(&parameter_data.name);
+                            ts.select_param(Some(nam), par, false)?;
+                        }
+                        openapiv3::Parameter::Query {
+                            parameter_data,
+                            allow_reserved: _,
+                            style: openapiv3::QueryStyle::Form,
+                            allow_empty_value: _,
+                        } => {
+                            let nam = &to_snake_case(&parameter_data.name);
+                            ts.select_param(Some(nam), par, false)?;
+                        }
+                        x => bail!("unhandled parameter type: {:#?}", x),
+                    }
                 }
 
                 /*

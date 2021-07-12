@@ -3036,6 +3036,31 @@ pub mod types {
         pub watchers_count: i64,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum InstallationTokenRepositorySelection {
+        All,
+        Selected,
+        Noop,
+    }
+
+    impl std::fmt::Display for InstallationTokenRepositorySelection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                InstallationTokenRepositorySelection::All => "all",
+                InstallationTokenRepositorySelection::Selected => "selected",
+                InstallationTokenRepositorySelection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for InstallationTokenRepositorySelection {
+        fn default() -> InstallationTokenRepositorySelection {
+            InstallationTokenRepositorySelection::Noop
+        }
+    }
+
     /// Authentication token for a GitHub App installed on a user or org.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct InstallationToken {
@@ -19861,6 +19886,32 @@ pub mod types {
         pub domain: Option<Domain>,
     }
 
+    /// State of this Pull Request. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullRequestState {
+        Closed,
+        Open,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullRequestState::Closed => "closed",
+                PullRequestState::Open => "open",
+                PullRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullRequestState {
+        fn default() -> PullRequestState {
+            PullRequestState::Noop
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestLabels {
         #[serde(
@@ -21631,6 +21682,30 @@ pub mod types {
         /// Hypermedia Link
         #[serde(rename = "self")]
         pub self_: Link,
+    }
+
+    /// The side of the first line of the range for a multi-line comment.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReviewCommentSide {
+        Left,
+        Right,
+    }
+
+    impl std::fmt::Display for ReviewCommentSide {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReviewCommentSide::Left => "LEFT",
+                ReviewCommentSide::Right => "RIGHT",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReviewCommentSide {
+        fn default() -> ReviewCommentSide {
+            ReviewCommentSide::Right
+        }
     }
 
     /// Legacy Review Comment
@@ -25562,6 +25637,87 @@ pub mod types {
         pub total_count: i64,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Filter {
+        All,
+        Assigned,
+        Created,
+        Mentioned,
+        Repos,
+        Subscribed,
+    }
+
+    impl std::fmt::Display for Filter {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Filter::All => "all",
+                Filter::Assigned => "assigned",
+                Filter::Created => "created",
+                Filter::Mentioned => "mentioned",
+                Filter::Repos => "repos",
+                Filter::Subscribed => "subscribed",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Filter {
+        fn default() -> Filter {
+            Filter::Assigned
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum StateData {
+        All,
+        Closed,
+        Open,
+    }
+
+    impl std::fmt::Display for StateData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                StateData::All => "all",
+                StateData::Closed => "closed",
+                StateData::Open => "open",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for StateData {
+        fn default() -> StateData {
+            StateData::Open
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SortData {
+        Comments,
+        Created,
+        Updated,
+    }
+
+    impl std::fmt::Display for SortData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SortData::Comments => "comments",
+                SortData::Created => "created",
+                SortData::Updated => "updated",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SortData {
+        fn default() -> SortData {
+            SortData::Created
+        }
+    }
+
     /// The rendering mode.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -25947,6 +26103,37 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /// Configures the access that repositories have to the organization secret. Can be one of:  
+    /// \- `all` - All repositories in an organization can access the secret.  
+    /// \- `private` - Private repositories in an organization can access the secret.  
+    /// \- `selected` - Only specific repositories can access the secret.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ActionsCreateUpdateOrgSecretRequestVisibility {
+        All,
+        Private,
+        Selected,
+        Noop,
+    }
+
+    impl std::fmt::Display for ActionsCreateUpdateOrgSecretRequestVisibility {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ActionsCreateUpdateOrgSecretRequestVisibility::All => "all",
+                ActionsCreateUpdateOrgSecretRequestVisibility::Private => "private",
+                ActionsCreateUpdateOrgSecretRequestVisibility::Selected => "selected",
+                ActionsCreateUpdateOrgSecretRequestVisibility::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ActionsCreateUpdateOrgSecretRequestVisibility {
+        fn default() -> ActionsCreateUpdateOrgSecretRequestVisibility {
+            ActionsCreateUpdateOrgSecretRequestVisibility::Noop
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsCreateUpdateOrgSecretRequest {
         #[serde(
@@ -26184,6 +26371,54 @@ pub mod types {
         pub team_ids: Vec<i64>,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum FilterData {
+        TwoFaDisabled,
+        All,
+    }
+
+    impl std::fmt::Display for FilterData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                FilterData::TwoFaDisabled => "2fa_disabled",
+                FilterData::All => "all",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for FilterData {
+        fn default() -> FilterData {
+            FilterData::All
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum RoleData {
+        Admin,
+        All,
+        Member,
+    }
+
+    impl std::fmt::Display for RoleData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                RoleData::Admin => "admin",
+                RoleData::All => "all",
+                RoleData::Member => "member",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for RoleData {
+        fn default() -> RoleData {
+            RoleData::All
+        }
+    }
+
     /// The role to give the user in the organization. Can be one of:  
     /// \* `admin` - The user will become an owner of the organization.  
     /// \* `member` - The user will become a non-owner member of the organization.
@@ -26214,6 +26449,30 @@ pub mod types {
     pub struct OrgsSetMembershipUserRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub role: Option<Role>,
+    }
+
+    /// Allowed values that can be passed to the exclude param.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ExcludeData {
+        Repositories,
+        Noop,
+    }
+
+    impl std::fmt::Display for ExcludeData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ExcludeData::Repositories => "repositories",
+                ExcludeData::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ExcludeData {
+        fn default() -> ExcludeData {
+            ExcludeData::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26286,6 +26545,41 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TypeData {
+        All,
+        Forks,
+        Internal,
+        Member,
+        Private,
+        Public,
+        Sources,
+        Noop,
+    }
+
+    impl std::fmt::Display for TypeData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TypeData::All => "all",
+                TypeData::Forks => "forks",
+                TypeData::Internal => "internal",
+                TypeData::Member => "member",
+                TypeData::Private => "private",
+                TypeData::Public => "public",
+                TypeData::Sources => "sources",
+                TypeData::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TypeData {
+        fn default() -> TypeData {
+            TypeData::Noop
+        }
     }
 
     /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
@@ -26579,10 +26873,123 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ContentData {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ContentData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ContentData::PlusOne => "+1",
+                ContentData::MinusOne => "-1",
+                ContentData::Confused => "confused",
+                ContentData::Eyes => "eyes",
+                ContentData::Heart => "heart",
+                ContentData::Hooray => "hooray",
+                ContentData::Laugh => "laugh",
+                ContentData::Rocket => "rocket",
+                ContentData::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ContentData {
+        fn default() -> ContentData {
+            ContentData::Noop
+        }
+    }
+
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::PlusOne => "+1",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::MinusOne => "-1",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Confused => "confused",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Eyes => "eyes",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Heart => "heart",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Hooray => "hooray",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Laugh => "laugh",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Rocket => "rocket",
+                ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
+        fn default() -> ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
+            ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateTeamDiscussionCommentInOrgRequest {
         /// The reaction to use
         #[serde()]
         pub content: Content,
+    }
+
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreateTeamDiscussionInOrgRequestContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreateTeamDiscussionInOrgRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreateTeamDiscussionInOrgRequestContent::PlusOne => "+1",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::MinusOne => "-1",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Confused => "confused",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Eyes => "eyes",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Heart => "heart",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Hooray => "hooray",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Laugh => "laugh",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Rocket => "rocket",
+                ReactionsCreateTeamDiscussionInOrgRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreateTeamDiscussionInOrgRequestContent {
+        fn default() -> ReactionsCreateTeamDiscussionInOrgRequestContent {
+            ReactionsCreateTeamDiscussionInOrgRequestContent::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26898,6 +27305,31 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ArchivedState {
+        All,
+        Archived,
+        NotArchived,
+    }
+
+    impl std::fmt::Display for ArchivedState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ArchivedState::All => "all",
+                ArchivedState::Archived => "archived",
+                ArchivedState::NotArchived => "not_archived",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ArchivedState {
+        fn default() -> ArchivedState {
+            ArchivedState::NotArchived
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProjectsCreateCardRequest {
         /// The project card's note
         #[serde(
@@ -26999,6 +27431,36 @@ pub mod types {
         pub message: String,
     }
 
+    /// The baseline permission that all organization members have on this project
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ProjectsUpdateRequestOrganizationPermission {
+        Admin,
+        None,
+        Read,
+        Write,
+        Noop,
+    }
+
+    impl std::fmt::Display for ProjectsUpdateRequestOrganizationPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ProjectsUpdateRequestOrganizationPermission::Admin => "admin",
+                ProjectsUpdateRequestOrganizationPermission::None => "none",
+                ProjectsUpdateRequestOrganizationPermission::Read => "read",
+                ProjectsUpdateRequestOrganizationPermission::Write => "write",
+                ProjectsUpdateRequestOrganizationPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ProjectsUpdateRequestOrganizationPermission {
+        fn default() -> ProjectsUpdateRequestOrganizationPermission {
+            ProjectsUpdateRequestOrganizationPermission::Noop
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProjectsUpdateRequest {
         #[serde(
@@ -27041,6 +27503,31 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub message: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum Affiliation {
+        All,
+        Direct,
+        Outside,
+    }
+
+    impl std::fmt::Display for Affiliation {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                Affiliation::All => "all",
+                Affiliation::Direct => "direct",
+                Affiliation::Outside => "outside",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for Affiliation {
+        fn default() -> Affiliation {
+            Affiliation::All
+        }
     }
 
     /// The permission to grant the collaborator.
@@ -28187,6 +28674,44 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
+    }
+
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreateCommitCommentRequestContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreateCommitCommentRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreateCommitCommentRequestContent::PlusOne => "+1",
+                ReactionsCreateCommitCommentRequestContent::MinusOne => "-1",
+                ReactionsCreateCommitCommentRequestContent::Confused => "confused",
+                ReactionsCreateCommitCommentRequestContent::Eyes => "eyes",
+                ReactionsCreateCommitCommentRequestContent::Heart => "heart",
+                ReactionsCreateCommitCommentRequestContent::Hooray => "hooray",
+                ReactionsCreateCommitCommentRequestContent::Laugh => "laugh",
+                ReactionsCreateCommitCommentRequestContent::Rocket => "rocket",
+                ReactionsCreateCommitCommentRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreateCommitCommentRequestContent {
+        fn default() -> ReactionsCreateCommitCommentRequestContent {
+            ReactionsCreateCommitCommentRequestContent::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29337,11 +29862,75 @@ pub mod types {
         pub body: String,
     }
 
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreateIssueCommentRequestContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreateIssueCommentRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreateIssueCommentRequestContent::PlusOne => "+1",
+                ReactionsCreateIssueCommentRequestContent::MinusOne => "-1",
+                ReactionsCreateIssueCommentRequestContent::Confused => "confused",
+                ReactionsCreateIssueCommentRequestContent::Eyes => "eyes",
+                ReactionsCreateIssueCommentRequestContent::Heart => "heart",
+                ReactionsCreateIssueCommentRequestContent::Hooray => "hooray",
+                ReactionsCreateIssueCommentRequestContent::Laugh => "laugh",
+                ReactionsCreateIssueCommentRequestContent::Rocket => "rocket",
+                ReactionsCreateIssueCommentRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreateIssueCommentRequestContent {
+        fn default() -> ReactionsCreateIssueCommentRequestContent {
+            ReactionsCreateIssueCommentRequestContent::Noop
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateIssueCommentRequest {
         /// The reaction to use
         #[serde()]
         pub content: Content,
+    }
+
+    /// State of the issue. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesUpdateRequestState {
+        Closed,
+        Open,
+        Noop,
+    }
+
+    impl std::fmt::Display for IssuesUpdateRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesUpdateRequestState::Closed => "closed",
+                IssuesUpdateRequestState::Open => "open",
+                IssuesUpdateRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesUpdateRequestState {
+        fn default() -> IssuesUpdateRequestState {
+            IssuesUpdateRequestState::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29449,6 +30038,44 @@ pub mod types {
         pub lock_reason: Option<LockReason>,
     }
 
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreateIssueRequestContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreateIssueRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreateIssueRequestContent::PlusOne => "+1",
+                ReactionsCreateIssueRequestContent::MinusOne => "-1",
+                ReactionsCreateIssueRequestContent::Confused => "confused",
+                ReactionsCreateIssueRequestContent::Eyes => "eyes",
+                ReactionsCreateIssueRequestContent::Heart => "heart",
+                ReactionsCreateIssueRequestContent::Hooray => "hooray",
+                ReactionsCreateIssueRequestContent::Laugh => "laugh",
+                ReactionsCreateIssueRequestContent::Rocket => "rocket",
+                ReactionsCreateIssueRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreateIssueRequestContent {
+        fn default() -> ReactionsCreateIssueRequestContent {
+            ReactionsCreateIssueRequestContent::Noop
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateIssueRequest {
         /// The reaction to use
@@ -29544,6 +30171,30 @@ pub mod types {
         pub head: String,
     }
 
+    /// The state of the milestone. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesCreateMilestoneRequestState {
+        Closed,
+        Open,
+    }
+
+    impl std::fmt::Display for IssuesCreateMilestoneRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesCreateMilestoneRequestState::Closed => "closed",
+                IssuesCreateMilestoneRequestState::Open => "open",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesCreateMilestoneRequestState {
+        fn default() -> IssuesCreateMilestoneRequestState {
+            IssuesCreateMilestoneRequestState::Open
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssuesCreateMilestoneRequest {
         #[serde(
@@ -29563,6 +30214,30 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+    }
+
+    /// The state of the milestone. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesUpdateMilestoneRequestState {
+        Closed,
+        Open,
+    }
+
+    impl std::fmt::Display for IssuesUpdateMilestoneRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesUpdateMilestoneRequestState::Closed => "closed",
+                IssuesUpdateMilestoneRequestState::Open => "open",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesUpdateMilestoneRequestState {
+        fn default() -> IssuesUpdateMilestoneRequestState {
+            IssuesUpdateMilestoneRequestState::Open
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29760,11 +30435,75 @@ pub mod types {
         pub body: String,
     }
 
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreatePullRequestReviewCommentContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreatePullRequestReviewCommentContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreatePullRequestReviewCommentContent::PlusOne => "+1",
+                ReactionsCreatePullRequestReviewCommentContent::MinusOne => "-1",
+                ReactionsCreatePullRequestReviewCommentContent::Confused => "confused",
+                ReactionsCreatePullRequestReviewCommentContent::Eyes => "eyes",
+                ReactionsCreatePullRequestReviewCommentContent::Heart => "heart",
+                ReactionsCreatePullRequestReviewCommentContent::Hooray => "hooray",
+                ReactionsCreatePullRequestReviewCommentContent::Laugh => "laugh",
+                ReactionsCreatePullRequestReviewCommentContent::Rocket => "rocket",
+                ReactionsCreatePullRequestReviewCommentContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreatePullRequestReviewCommentContent {
+        fn default() -> ReactionsCreatePullRequestReviewCommentContent {
+            ReactionsCreatePullRequestReviewCommentContent::Noop
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreatePullRequestReviewComment {
         /// The reaction to use
         #[serde()]
         pub content: Content,
+    }
+
+    /// State of this Pull Request. Either `open` or `closed`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullsUpdateRequestState {
+        Closed,
+        Open,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullsUpdateRequestState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullsUpdateRequestState::Closed => "closed",
+                PullsUpdateRequestState::Open => "open",
+                PullsUpdateRequestState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullsUpdateRequestState {
+        fn default() -> PullsUpdateRequestState {
+            PullsUpdateRequestState::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29791,6 +30530,32 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+    }
+
+    /// **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullsCreateReviewCommentRequestSide {
+        Left,
+        Right,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullsCreateReviewCommentRequestSide {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullsCreateReviewCommentRequestSide::Left => "LEFT",
+                PullsCreateReviewCommentRequestSide::Right => "RIGHT",
+                PullsCreateReviewCommentRequestSide::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullsCreateReviewCommentRequestSide {
+        fn default() -> PullsCreateReviewCommentRequestSide {
+            PullsCreateReviewCommentRequestSide::Noop
+        }
     }
 
     /// **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
@@ -29865,6 +30630,34 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
+    }
+
+    /// Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullsMergeRequestMethod {
+        Merge,
+        Rebase,
+        Squash,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullsMergeRequestMethod {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullsMergeRequestMethod::Merge => "merge",
+                PullsMergeRequestMethod::Rebase => "rebase",
+                PullsMergeRequestMethod::Squash => "squash",
+                PullsMergeRequestMethod::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullsMergeRequestMethod {
+        fn default() -> PullsMergeRequestMethod {
+            PullsMergeRequestMethod::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31025,11 +31818,87 @@ pub mod types {
         pub body: String,
     }
 
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::PlusOne => "+1",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::MinusOne => "-1",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Confused => "confused",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Eyes => "eyes",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Heart => "heart",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Hooray => "hooray",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Laugh => "laugh",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Rocket => "rocket",
+                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
+        fn default() -> ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
+            ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Noop
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateTeamDiscussionCommentLegacyRequest {
         /// The reaction to use
         #[serde()]
         pub content: Content,
+    }
+
+    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsCreateTeamDiscussionLegacyRequestContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsCreateTeamDiscussionLegacyRequestContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsCreateTeamDiscussionLegacyRequestContent::PlusOne => "+1",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::MinusOne => "-1",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Confused => "confused",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Eyes => "eyes",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Heart => "heart",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Hooray => "hooray",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Laugh => "laugh",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Rocket => "rocket",
+                ReactionsCreateTeamDiscussionLegacyRequestContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsCreateTeamDiscussionLegacyRequestContent {
+        fn default() -> ReactionsCreateTeamDiscussionLegacyRequestContent {
+            ReactionsCreateTeamDiscussionLegacyRequestContent::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31123,6 +31992,39 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub message: String,
+    }
+
+    /// The permission to grant the team on this repository. Can be one of:  
+    /// \* `pull` - team members can pull, but not push to or administer this repository.  
+    /// \* `push` - team members can pull and push, but not administer this repository.  
+    /// \* `admin` - team members can pull, push and administer this repository.  
+    ///   
+    /// If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+        Admin,
+        Pull,
+        Push,
+        Noop,
+    }
+
+    impl std::fmt::Display for TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Admin => "admin",
+                TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Pull => "pull",
+                TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Push => "push",
+                TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+        fn default() -> TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+            TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31620,6 +32522,31 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum VisibilityData {
+        All,
+        Private,
+        Public,
+    }
+
+    impl std::fmt::Display for VisibilityData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                VisibilityData::All => "all",
+                VisibilityData::Private => "private",
+                VisibilityData::Public => "public",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for VisibilityData {
+        fn default() -> VisibilityData {
+            VisibilityData::All
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReposCreateRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allow_merge_commit: Option<bool>,
@@ -31862,6 +32789,35 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SubjectType {
+        Issue,
+        Organization,
+        PullRequest,
+        Repository,
+        Noop,
+    }
+
+    impl std::fmt::Display for SubjectType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SubjectType::Issue => "issue",
+                SubjectType::Organization => "organization",
+                SubjectType::PullRequest => "pull_request",
+                SubjectType::Repository => "repository",
+                SubjectType::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SubjectType {
+        fn default() -> SubjectType {
+            SubjectType::Noop
+        }
     }
 }
 
@@ -34184,10 +35140,10 @@ impl Client {
     */
     pub async fn issues_list(
         &self,
-        filter: &str,
-        state: &str,
+        filter: crate::types::Filter,
+        state: crate::types::StateData,
         labels: &str,
-        sort: &str,
+        sort: crate::types::SortData,
         direction: crate::types::Direction,
         since: DateTime<Utc>,
         collab: bool,
@@ -34201,7 +35157,7 @@ impl Client {
             "/issues?collab={}&direction={}&filter={}&labels={}&orgs={}&owned={}&page={}&per_page={}&pulls={}&since={}&sort={}&state={}",
             format!("{}", collab),
             direction,
-            filter.to_string(),
+            filter,
             labels.to_string(),
             format!("{}", orgs),
             format!("{}", owned),
@@ -34209,8 +35165,8 @@ impl Client {
             format!("{}", per_page),
             format!("{}", pulls),
             since.to_rfc3339(),
-            sort.to_string(),
-            state.to_string(),
+            sort,
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -36126,10 +37082,10 @@ impl Client {
     pub async fn issues_list_for_org(
         &self,
         org: &str,
-        filter: &str,
-        state: &str,
+        filter: crate::types::Filter,
+        state: crate::types::StateData,
         labels: &str,
-        sort: &str,
+        sort: crate::types::SortData,
         direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
@@ -36139,13 +37095,13 @@ impl Client {
             "/orgs/{}/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&state={}",
             progenitor_support::encode_path(&org.to_string()),
             direction,
-            filter.to_string(),
+            filter,
             labels.to_string(),
             format!("{}", page),
             format!("{}", per_page),
             since.to_rfc3339(),
-            sort.to_string(),
-            state.to_string(),
+            sort,
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -36160,14 +37116,21 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-members>
     */
-    pub async fn orgs_list_members(&self, org: &str, filter: &str, role: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn orgs_list_members(
+        &self,
+        org: &str,
+        filter: crate::types::FilterData,
+        role: crate::types::RoleData,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/orgs/{}/members?filter={}&page={}&per_page={}&role={}",
             progenitor_support::encode_path(&org.to_string()),
-            filter.to_string(),
+            filter,
             format!("{}", page),
             format!("{}", per_page),
-            role.to_string(),
+            role,
         );
 
         self.get_all_pages(&url).await
@@ -36440,11 +37403,17 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-outside-collaborators-for-an-organization>
     */
-    pub async fn orgs_list_outside_collaborators(&self, org: &str, filter: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn orgs_list_outside_collaborators(
+        &self,
+        org: &str,
+        filter: crate::types::FilterData,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/orgs/{}/outside_collaborators?filter={}&page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
-            filter.to_string(),
+            filter,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -36720,13 +37689,13 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-organization-projects>
     */
-    pub async fn projects_list_for_org(&self, org: &str, state: &str, per_page: i64, page: i64) -> Result<Vec<types::Project>> {
+    pub async fn projects_list_for_org(&self, org: &str, state: crate::types::StateData, per_page: i64, page: i64) -> Result<Vec<types::Project>> {
         let url = format!(
             "/orgs/{}/projects?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&org.to_string()),
             format!("{}", page),
             format!("{}", per_page),
-            state.to_string(),
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -36838,7 +37807,7 @@ impl Client {
     pub async fn repos_list_for_org(
         &self,
         org: &str,
-        type_: &str,
+        type_: crate::types::TypeData,
         sort: &str,
         direction: crate::types::Direction,
         per_page: i64,
@@ -38078,11 +39047,17 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-project-cards>
     */
-    pub async fn projects_list_cards(&self, column_id: i64, archived_state: &str, per_page: i64, page: i64) -> Result<Vec<types::ProjectCard>> {
+    pub async fn projects_list_cards(
+        &self,
+        column_id: i64,
+        archived_state: crate::types::ArchivedState,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::ProjectCard>> {
         let url = format!(
             "/projects/columns/{}/cards?archived_state={}&page={}&per_page={}",
             progenitor_support::encode_path(&column_id.to_string()),
-            archived_state.to_string(),
+            archived_state,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -38178,11 +39153,17 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-project-collaborators>
     */
-    pub async fn projects_list_collaborators(&self, project_id: i64, affiliation: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn projects_list_collaborators(
+        &self,
+        project_id: i64,
+        affiliation: crate::types::Affiliation,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/projects/{}/collaborators?affiliation={}&page={}&per_page={}",
             progenitor_support::encode_path(&project_id.to_string()),
-            affiliation.to_string(),
+            affiliation,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -41088,7 +42069,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        affiliation: &str,
+        affiliation: crate::types::Affiliation,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Collaborator>> {
@@ -41096,7 +42077,7 @@ impl Client {
             "/repos/{}/{}/collaborators?affiliation={}&page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-            affiliation.to_string(),
+            affiliation,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -43374,12 +44355,12 @@ impl Client {
         owner: &str,
         repo: &str,
         milestone: &str,
-        state: &str,
+        state: crate::types::StateData,
         assignee: &str,
         creator: &str,
         mentioned: &str,
         labels: &str,
-        sort: &str,
+        sort: crate::types::SortData,
         direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
@@ -43388,7 +44369,7 @@ impl Client {
         let url = format!("/repos/{}/{}/issues?assignee={}&creator={}&direction={}&labels={}&mentioned={}&milestone={}&page={}&per_page={}&since={}&sort={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
-assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentioned.to_string(), milestone.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort.to_string(), state.to_string(),         );
+assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentioned.to_string(), milestone.to_string(), format!("{}", page), format!("{}", per_page), since.to_rfc3339(), sort, state,         );
 
         self.get_all_pages(&url).await
     }
@@ -44347,7 +45328,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        state: &str,
+        state: crate::types::StateData,
         sort: &str,
         direction: crate::types::Direction,
         per_page: i64,
@@ -44361,7 +45342,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             sort.to_string(),
-            state.to_string(),
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -44734,14 +45715,21 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-repository-projects>
     */
-    pub async fn projects_list_for_repo(&self, owner: &str, repo: &str, state: &str, per_page: i64, page: i64) -> Result<Vec<types::Project>> {
+    pub async fn projects_list_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        state: crate::types::StateData,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Project>> {
         let url = format!(
             "/repos/{}/{}/projects?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", page),
             format!("{}", per_page),
-            state.to_string(),
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -44779,7 +45767,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        state: &str,
+        state: crate::types::StateData,
         head: &str,
         base: &str,
         sort: &str,
@@ -44797,7 +45785,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             sort.to_string(),
-            state.to_string(),
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -48874,10 +49862,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     */
     pub async fn issues_list_for_authenticated_user(
         &self,
-        filter: &str,
-        state: &str,
+        filter: crate::types::Filter,
+        state: crate::types::StateData,
         labels: &str,
-        sort: &str,
+        sort: crate::types::SortData,
         direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
@@ -48886,13 +49874,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         let url = format!(
             "/user/issues?direction={}&filter={}&labels={}&page={}&per_page={}&since={}&sort={}&state={}",
             direction,
-            filter.to_string(),
+            filter,
             labels.to_string(),
             format!("{}", page),
             format!("{}", per_page),
             since.to_rfc3339(),
-            sort.to_string(),
-            state.to_string(),
+            sort,
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -49464,7 +50452,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     */
     pub async fn repos_list_for_authenticated_user(
         &self,
-        visibility: &str,
+        visibility: crate::types::VisibilityData,
         affiliation: &str,
         type_: &str,
         sort: &str,
@@ -49484,7 +50472,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             since.to_rfc3339(),
             sort.to_string(),
             type_,
-            visibility.to_string(),
+            visibility,
         );
 
         self.get_all_pages(&url).await
@@ -49903,12 +50891,17 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/users#get-contextual-information-for-a-user>
     */
-    pub async fn users_get_context_for_user(&self, username: &str, subject_type: &str, subject_id: &str) -> Result<types::Hovercard> {
+    pub async fn users_get_context_for_user(
+        &self,
+        username: &str,
+        subject_type: crate::types::SubjectType,
+        subject_id: &str,
+    ) -> Result<types::Hovercard> {
         let url = format!(
             "/users/{}/hovercard?subject_id={}&subject_type={}",
             progenitor_support::encode_path(&username.to_string()),
             subject_id.to_string(),
-            subject_type.to_string(),
+            subject_type,
         );
 
         self.get(&url).await
@@ -50068,13 +51061,19 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-user-projects>
     */
-    pub async fn projects_list_for_user(&self, username: &str, state: &str, per_page: i64, page: i64) -> Result<Vec<types::Project>> {
+    pub async fn projects_list_for_user(
+        &self,
+        username: &str,
+        state: crate::types::StateData,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Project>> {
         let url = format!(
             "/users/{}/projects?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&username.to_string()),
             format!("{}", page),
             format!("{}", per_page),
-            state.to_string(),
+            state,
         );
 
         self.get_all_pages(&url).await
