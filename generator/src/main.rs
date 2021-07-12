@@ -514,35 +514,39 @@ impl TypeDetails {
 
 impl PartialEq for TypeDetails {
     fn eq(&self, other: &Self) -> bool {
+        if self.description() != other.description() {
+            return false;
+        }
+
         match self {
-            TypeDetails::Basic(s, d) => {
-                if let TypeDetails::Basic(os, od) = other {
-                    return s == os && d.description == od.description;
+            TypeDetails::Basic(s, _d) => {
+                if let TypeDetails::Basic(os, _od) = other {
+                    return s == os;
                 }
             }
-            TypeDetails::NamedType(i, d) => {
-                if let TypeDetails::NamedType(oi, od) = other {
-                    return i == oi && d.description == od.description;
+            TypeDetails::NamedType(i, _d) => {
+                if let TypeDetails::NamedType(oi, _od) = other {
+                    return i == oi;
                 }
             }
-            TypeDetails::Enum(s, d) => {
-                if let TypeDetails::Enum(os, od) = other {
-                    return s == os && d.description == od.description;
+            TypeDetails::Enum(s, _d) => {
+                if let TypeDetails::Enum(os, _od) = other {
+                    return s == os;
                 }
             }
-            TypeDetails::Array(i, d) => {
-                if let TypeDetails::Array(oi, od) = other {
-                    return i == oi && d.description == od.description;
+            TypeDetails::Array(i, _d) => {
+                if let TypeDetails::Array(oi, _od) = other {
+                    return i == oi;
                 }
             }
-            TypeDetails::Optional(i, d) => {
-                if let TypeDetails::Optional(oi, od) = other {
-                    return i == oi && d.description == od.description;
+            TypeDetails::Optional(i, _d) => {
+                if let TypeDetails::Optional(oi, _od) = other {
+                    return i == oi;
                 }
             }
-            TypeDetails::Object(s, d) => {
-                if let TypeDetails::Object(os, od) = other {
-                    return s == os && d.description == od.description;
+            TypeDetails::Object(s, _d) => {
+                if let TypeDetails::Object(os, _od) = other {
+                    return s == os;
                 }
             }
             TypeDetails::Unknown => {
@@ -828,14 +832,13 @@ impl TypeSpace {
          * but are duplicated all over. Let's ensure that we don't have a type with a different
          * name that is this exact same type.
          */
-        // TODO: focus here
-        /*if !is_schema {
+        if !is_schema {
             for (tid, te) in self.id_to_entry.iter() {
                 if te.details == details {
                     return Ok(tid.clone());
                 }
             }
-        }*/
+        }
 
         if let Some(name) = &name {
             /*
@@ -1061,12 +1064,15 @@ impl TypeSpace {
                             }
                         });
 
-                        if name == "status" {
+                        /*if name == "status" {
                             // We can't have an enum named status, we know there will
                             // be a struct named after this so it's best to just not
                             // even attempt it.
+                            // */
                             name = format!("{} {}", parent_name, name);
-                        }
+                       // }
+                       // // TODO: clean this up, we basically want to insert the enum here and
+                       // return the id all in one swoop.
 
                         // We have an enumeration.
                         return Ok((Some(clean_name(&name)), TypeDetails::Enum(st.enumeration.clone(), s.schema_data.clone())));
@@ -1119,7 +1125,7 @@ impl TypeSpace {
                 }
             }
             openapiv3::SchemaKind::OneOf { one_of } => {
-                // Iterate over each one of an select the first one that is not
+                // Iterate over each one of and select the first one that is not
                 // an empty object.
                 let mut id = TypeId(0);
                 for o in one_of {
@@ -1706,34 +1712,26 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     (Some("B".to_string()), Some("body".to_string()))
                 } else {
                     let (ct, mt) = b.content.first().unwrap();
-                    if !mt.encoding.is_empty() {
-                        bail!("media type encoding not empty: {:#?}", mt);
-                    }
-
                     if ct == "application/json" {
                         if let Some(s) = &mt.schema {
                             let object_name = format!("{} request", oid_to_object_name("", &oid));
-                            let tid = ts.select(Some(&object_name), s, false, "")?;
-                            let rt = ts.render_type(&tid, false)?;
+                            let id = ts.select(Some(&object_name), s, false, "")?;
+                            let rt = ts.render_type(&id, false)?;
                             (Some(format!("&{}", rt)), Some("json".to_string()))
                         } else {
-                            bail!("media type encoding, no schema: {:#?}", mt);
+                            (None, None)
                         }
-                    } else if ct == "text/plain" || ct == "*/*" {
-                        if let Some(s) = &mt.schema {
-                            let tid = ts.select(None, s, false, "")?;
-                            let rt = ts.render_type(&tid, false)?;
-                            bounds.push("T: Into<reqwest::Body>".to_string());
-                            if rt == "String" {
-                                (Some("T".to_string()), Some("body".to_string()))
-                            } else {
-                                (Some(rt), Some("body".to_string()))
-                            }
+                    } else if let Some(s) = &mt.schema {
+                        let tid = ts.select(None, s, false, "")?;
+                        let rt = ts.render_type(&tid, false)?;
+                        bounds.push("T: Into<reqwest::Body>".to_string());
+                        if rt == "String" {
+                            (Some("T".to_string()), Some("body".to_string()))
                         } else {
-                            bail!("media type encoding, no schema: {:#?}", mt);
+                            (Some(rt), Some("body".to_string()))
                         }
                     } else {
-                        bail!("unhandled request content type: {}", ct);
+                        (None, None)
                     }
                 }
             } else {
@@ -2188,7 +2186,8 @@ fn main() -> Result<()> {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!("{} request", oid_to_object_name("", &oid));
                                 let id = ts.select(Some(&object_name), s, false, "")?;
-                                req.push(format!("{} {:?}", struct_name(&object_name), id));
+                                let rt = ts.render_type(&id, true)?;
+                                req.push(format!("{} {:?}", rt, id));
                             }
                         } else {
                             req.push(ct.to_string());
@@ -2228,7 +2227,8 @@ fn main() -> Result<()> {
                                                 status_code.canonical_reason().unwrap().to_lowercase()
                                             );
                                             let id = ts.select(Some(&object_name), s, false, "")?;
-                                            res.push(format!("{} {:?}", struct_name(&object_name), id));
+                                            let rt = ts.render_type(&id, true)?;
+                                            res.push(format!("{} {:?}", rt, id));
                                         } else {
                                             bail!("got a range and not a code for {:?}", code);
                                         }
