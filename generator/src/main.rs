@@ -1677,13 +1677,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
 
                 let pid = ts.select_param(None, par, false)?;
                 let mut docs = ts.render_docs(&pid);
-                if let Some(d) = &parameter_data.description {
-                    if !d.is_empty() && d.len() > docs.len() {
-                        docs = format!(" -- {}.", d.trim_end_matches('.').replace("\n", "\n*   "));
-                    } else if !docs.is_empty() {
-                        docs = format!(" -- {}.", docs.trim_start_matches('*').trim_end_matches('.').trim());
-                    }
-                } else if !docs.is_empty() {
+                if !docs.is_empty() {
                     docs = format!(" -- {}.", docs.trim_start_matches('*').trim_end_matches('.').trim());
                 }
 
