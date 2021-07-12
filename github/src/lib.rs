@@ -27853,6 +27853,15 @@ pub mod types {
         pub key: String,
     }
 
+    /**
+     * The event types to include:
+     *   
+     *   - `web` - returns web (non-Git) events
+     *   - `git` - returns Git events
+     *   - `all` - returns both web and Git events
+     *   
+     *   The default is `web`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AuditLogInclude {
@@ -27880,6 +27889,11 @@ pub mod types {
         }
     }
 
+    /**
+     * The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *   
+     *   The default is `desc`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AuditLogOrder {
@@ -27905,6 +27919,9 @@ pub mod types {
         }
     }
 
+    /**
+     * One of `asc` (ascending) or `desc` (descending).
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Direction {
@@ -27928,6 +27945,9 @@ pub mod types {
         }
     }
 
+    /**
+     * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Sort {
@@ -27951,6 +27971,45 @@ pub mod types {
         }
     }
 
+    /**
+     * The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     */
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PackageTypeData {
+        Container,
+        Docker,
+        Maven,
+        Npm,
+        Nuget,
+        Rubygems,
+        Noop,
+    }
+
+    impl std::fmt::Display for PackageTypeData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PackageTypeData::Container => "container",
+                PackageTypeData::Docker => "docker",
+                PackageTypeData::Maven => "maven",
+                PackageTypeData::Npm => "npm",
+                PackageTypeData::Nuget => "nuget",
+                PackageTypeData::Rubygems => "rubygems",
+                PackageTypeData::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PackageTypeData {
+        fn default() -> PackageTypeData {
+            PackageTypeData::Noop
+        }
+    }
+
+    /**
+     * Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum WorkflowRunStatus {
@@ -27998,6 +28057,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum StatusData {
@@ -28025,6 +28087,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Must be one of: `day`, `week`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Per {
@@ -28048,6 +28113,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum Order {
@@ -28939,6 +29007,14 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /**
+     * Indicates which sorts of issues to return. Can be one of:  
+     *   \* `assigned`: Issues assigned to you  
+     *   \* `created`: Issues created by you  
+     *   \* `mentioned`: Issues mentioning you  
+     *   \* `subscribed`: Issues you're subscribed to updates for  
+     *   \* `all`: All issues the authenticated user can see, regardless of participation or creation
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListFilter {
@@ -28970,6 +29046,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListState {
@@ -28995,6 +29074,9 @@ pub mod types {
         }
     }
 
+    /**
+     * What to sort results by. Can be either `created`, `updated`, `comments`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListSort {
@@ -29067,6 +29149,9 @@ pub mod types {
         pub text: String,
     }
 
+    /**
+     * To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AppsListAccountsPlanDirection {
@@ -29092,6 +29177,9 @@ pub mod types {
         }
     }
 
+    /**
+     * To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum AppsListAccountsPlanStubbedDirection {
@@ -29786,6 +29874,14 @@ pub mod types {
         pub team_ids: Vec<i64>,
     }
 
+    /**
+     * Indicates which sorts of issues to return. Can be one of:  
+     *   \* `assigned`: Issues assigned to you  
+     *   \* `created`: Issues created by you  
+     *   \* `mentioned`: Issues mentioning you  
+     *   \* `subscribed`: Issues you're subscribed to updates for  
+     *   \* `all`: All issues the authenticated user can see, regardless of participation or creation
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListOrgFilter {
@@ -29817,6 +29913,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListOrgState {
@@ -29842,6 +29941,9 @@ pub mod types {
         }
     }
 
+    /**
+     * What to sort results by. Can be either `created`, `updated`, `comments`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListOrgSort {
@@ -29867,6 +29969,11 @@ pub mod types {
         }
     }
 
+    /**
+     * Filter members returned in the list. Can be one of:  
+     *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  
+     *   \* `all` - All members the authenticated user can see.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrgsListMembersFilter {
@@ -29890,6 +29997,12 @@ pub mod types {
         }
     }
 
+    /**
+     * Filter members returned by their role. Can be one of:  
+     *   \* `all` - All members of the organization, regardless of role.  
+     *   \* `admin` - Organization owners.  
+     *   \* `member` - Non-owner organization members.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrgsListMembersRole {
@@ -30039,6 +30152,11 @@ pub mod types {
         }
     }
 
+    /**
+     * Filter the list of outside collaborators. Can be one of:  
+     *   \* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.  
+     *   \* `all`: All outside collaborators.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrgsListOutsideCollaboratorsFilter {
@@ -30081,6 +30199,9 @@ pub mod types {
         pub message: String,
     }
 
+    /**
+     * The state of the package, either active or deleted.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
@@ -30104,6 +30225,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProjectsListOrgState {
@@ -30148,6 +30272,9 @@ pub mod types {
         pub name: String,
     }
 
+    /**
+     * Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListOrgType {
@@ -30183,6 +30310,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Can be one of `created`, `updated`, `pushed`, `full_name`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListOrgSort {
@@ -30210,6 +30340,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListOrgDirection {
@@ -30545,6 +30678,9 @@ pub mod types {
         pub body: String,
     }
 
+    /**
+     * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsListTeamDiscussionCommentInOrgContent {
@@ -30631,6 +30767,9 @@ pub mod types {
         pub content: Content,
     }
 
+    /**
+     * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsListTeamDiscussionInOrgContent {
@@ -30717,6 +30856,12 @@ pub mod types {
         pub content: Content,
     }
 
+    /**
+     * Filters members returned by their role in the team. Can be one of:  
+     *   \* `member` - normal members of the team.  
+     *   \* `maintainer` - team maintainers.  
+     *   \* `all` - all members of the team.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsListMembersInOrgRole {
@@ -31063,6 +31208,9 @@ pub mod types {
         pub name: String,
     }
 
+    /**
+     * Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProjectsListCardsArchivedState {
@@ -31273,6 +31421,12 @@ pub mod types {
         pub message: String,
     }
 
+    /**
+     * Filters the collaborators by their affiliation. Can be one of:  
+     *   \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
+     *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
+     *   \* `all`: All collaborators the authenticated user can see.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProjectsListCollaboratorsAffiliation {
@@ -31534,6 +31688,11 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostActionsCancelWorkflowRunAcceptedResponse {}
 
+    /**
+     * Filters jobs by their `completed_at` timestamp. Can be one of:  
+     *   \* `latest`: Returns jobs from the most recent execution of the workflow run.  
+     *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ActionsListJobsWorkflowRunFilter {
@@ -32530,6 +32689,9 @@ pub mod types {
         pub auto_trigger_checks: Vec<AutoTriggerChecks>,
     }
 
+    /**
+     * Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ChecksListSuiteFilter {
@@ -32622,6 +32784,12 @@ pub mod types {
         pub tool_name: String,
     }
 
+    /**
+     * Filter collaborators returned by their affiliation. Can be one of:  
+     *   \* `outside`: All outside collaborators of an organization-owned repository.  
+     *   \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  
+     *   \* `all`: All collaborators the authenticated user can see.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListCollaboratorsAffiliation {
@@ -32709,6 +32877,9 @@ pub mod types {
         pub body: String,
     }
 
+    /**
+     * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsListCommitCommentContent {
@@ -32818,6 +32989,9 @@ pub mod types {
         pub position: Option<i64>,
     }
 
+    /**
+     * Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ChecksListRefFilter {
@@ -33324,6 +33498,9 @@ pub mod types {
         pub wait_timer: Option<i64>,
     }
 
+    /**
+     * The sort order. Can be either `newest`, `oldest`, or `stargazers`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListForksSort {
@@ -34095,6 +34272,9 @@ pub mod types {
         pub permissions: Option<Permissions>,
     }
 
+    /**
+     * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListRepoState {
@@ -34120,6 +34300,9 @@ pub mod types {
         }
     }
 
+    /**
+     * What to sort results by. Can be either `created`, `updated`, `comments`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListRepoSort {
@@ -34173,6 +34356,9 @@ pub mod types {
         pub title: String,
     }
 
+    /**
+     * Either `asc` or `desc`. Ignored without the `sort` parameter.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListCommentsRepoDirection {
@@ -34211,6 +34397,9 @@ pub mod types {
         pub body: String,
     }
 
+    /**
+     * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsListIssueCommentContent {
@@ -34434,6 +34623,9 @@ pub mod types {
         pub lock_reason: Option<LockReason>,
     }
 
+    /**
+     * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsListIssueContent {
@@ -34616,6 +34808,9 @@ pub mod types {
         pub head: String,
     }
 
+    /**
+     * The state of the milestone. Either `open`, `closed`, or `all`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListMilestonesState {
@@ -34641,6 +34836,9 @@ pub mod types {
         }
     }
 
+    /**
+     * What to sort results by. Either `due_on` or `completeness`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListMilestonesSort {
@@ -34664,6 +34862,9 @@ pub mod types {
         }
     }
 
+    /**
+     * The direction of the sort. Either `asc` or `desc`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum IssuesListMilestonesDirection {
@@ -34902,6 +35103,9 @@ pub mod types {
         pub source: Option<Source>,
     }
 
+    /**
+     * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProjectsListRepoState {
@@ -34946,6 +35150,9 @@ pub mod types {
         pub name: String,
     }
 
+    /**
+     * Either `open`, `closed`, or `all` to filter by state.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsListState {
@@ -34971,6 +35178,9 @@ pub mod types {
         }
     }
 
+    /**
+     * What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsListSort {
@@ -34998,6 +35208,9 @@ pub mod types {
         }
     }
 
+    /**
+     * The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsListDirection {
@@ -35090,6 +35303,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Can be either `asc` or `desc`. Ignored without `sort` parameter.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsListReviewCommentsRepoDirection {
@@ -35128,6 +35344,9 @@ pub mod types {
         pub body: String,
     }
 
+    /**
+     * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsListPullRequestReviewCommentContent {
@@ -35268,6 +35487,9 @@ pub mod types {
         pub title: String,
     }
 
+    /**
+     * Can be either `asc` or `desc`. Ignored without `sort` parameter.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PullsListReviewCommentsDirection {
@@ -35845,6 +36067,9 @@ pub mod types {
         pub content: Content,
     }
 
+    /**
+     * Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SecretScanningListAlertsRepoState {
@@ -36528,6 +36753,9 @@ pub mod types {
         pub schemas: Vec<String>,
     }
 
+    /**
+     * Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SearchCodeSort {
@@ -36561,6 +36789,9 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /**
+     * Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SearchCommitsSort {
@@ -36596,6 +36827,9 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /**
+     * Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SearchIssuesPullRequestsSort {
@@ -36649,6 +36883,9 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /**
+     * Sorts the results of your query by when the label was `created` or `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SearchLabelsSort {
@@ -36684,6 +36921,9 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /**
+     * Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SearchReposSort {
@@ -36733,6 +36973,9 @@ pub mod types {
         pub total_count: i64,
     }
 
+    /**
+     * Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum SearchUsersSort {
@@ -36894,6 +37137,9 @@ pub mod types {
         pub body: String,
     }
 
+    /**
+     * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsListTeamDiscussionCommentLegacyContent {
@@ -36980,6 +37226,9 @@ pub mod types {
         pub content: Content,
     }
 
+    /**
+     * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsListTeamDiscussionLegacyContent {
@@ -37066,6 +37315,12 @@ pub mod types {
         pub content: Content,
     }
 
+    /**
+     * Filters members returned by their role in the team. Can be one of:  
+     *   \* `member` - normal members of the team.  
+     *   \* `maintainer` - team maintainers.  
+     *   \* `all` - all members of the team.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum TeamsListMembersLegacyRole {
@@ -37663,6 +37918,9 @@ pub mod types {
         pub title: String,
     }
 
+    /**
+     * Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum OrgsListMembershipsState {
@@ -37761,6 +38019,9 @@ pub mod types {
         pub repositories: Vec<String>,
     }
 
+    /**
+     * The state of the package, either active or deleted.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum PackagesGetAllPackageVersionsOwnedByState {
@@ -37803,6 +38064,9 @@ pub mod types {
         pub name: String,
     }
 
+    /**
+     * Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListVisibility {
@@ -37828,6 +38092,11 @@ pub mod types {
         }
     }
 
+    /**
+     * Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
+     *     
+     *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListType {
@@ -37857,6 +38126,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Can be one of `created`, `updated`, `pushed`, `full_name`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListSort {
@@ -37884,6 +38156,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListDirection {
@@ -38171,6 +38446,9 @@ pub mod types {
         pub url: String,
     }
 
+    /**
+     * Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UsersGetContextUserSubjectType {
@@ -38200,6 +38478,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProjectsListUserState {
@@ -38225,6 +38506,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Can be one of `all`, `owner`, `member`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListUserType {
@@ -38250,6 +38534,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Can be one of `created`, `updated`, `pushed`, `full_name`.
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListUserSort {
@@ -38277,6 +38564,9 @@ pub mod types {
         }
     }
 
+    /**
+     * Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`
+     */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReposListUserDirection {
@@ -41013,14 +41303,14 @@ impl Client {
      * **Parameters:**
      *
      * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
-     *   \* `assigned`: Issues assigned to you  
-     *   \* `created`: Issues created by you  
-     *   \* `mentioned`: Issues mentioning you  
-     *   \* `subscribed`: Issues you're subscribed to updates for  
-     *   \* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     *  \* `assigned`: Issues assigned to you  
+     *  \* `created`: Issues created by you  
+     *  \* `mentioned`: Issues mentioning you  
+     *  \* `subscribed`: Issues you're subscribed to updates for  
+     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
-     * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * `sort: crate::types::IssuesListSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
      * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
      * * `since: DateTime<Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `collab: bool`
@@ -43401,14 +43691,14 @@ impl Client {
      *
      * * `org: &str`
      * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
-     *   \* `assigned`: Issues assigned to you  
-     *   \* `created`: Issues created by you  
-     *   \* `mentioned`: Issues mentioning you  
-     *   \* `subscribed`: Issues you're subscribed to updates for  
-     *   \* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     *  \* `assigned`: Issues assigned to you  
+     *  \* `created`: Issues created by you  
+     *  \* `mentioned`: Issues mentioning you  
+     *  \* `subscribed`: Issues you're subscribed to updates for  
+     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
-     * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * `sort: crate::types::IssuesListSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
      * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
      * * `since: DateTime<Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
@@ -43454,9 +43744,12 @@ impl Client {
      * **Parameters:**
      *
      * * `org: &str`
-     * * `filter: crate::types::OrgsListMembersFilter` -- Filter members returned in the list. Can be one of:  
-     *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  
-     *   \* `all` - All members the authenticated user can see.
+     * * `filter: crate::types::OrgsListMembersFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     *  \* `assigned`: Issues assigned to you  
+     *  \* `created`: Issues created by you  
+     *  \* `mentioned`: Issues mentioning you  
+     *  \* `subscribed`: Issues you're subscribed to updates for  
+     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `role: crate::types::OrgsListMembersRole` -- Filter members returned by their role. Can be one of:  
      *   \* `all` - All members of the organization, regardless of role.  
      *   \* `admin` - Organization owners.  
@@ -43819,9 +44112,12 @@ impl Client {
      * **Parameters:**
      *
      * * `org: &str`
-     * * `filter: crate::types::OrgsListMembersFilter` -- Filter the list of outside collaborators. Can be one of:  
-     *   \* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.  
-     *   \* `all`: All outside collaborators.
+     * * `filter: crate::types::OrgsListMembersFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     *  \* `assigned`: Issues assigned to you  
+     *  \* `created`: Issues created by you  
+     *  \* `mentioned`: Issues mentioning you  
+     *  \* `subscribed`: Issues you're subscribed to updates for  
+     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -44327,7 +44623,7 @@ impl Client {
      *
      * * `org: &str`
      * * `type_: crate::types::ReposListOrgType` -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListOrgSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -46008,9 +46304,9 @@ impl Client {
      *
      * * `project_id: i64`
      * * `affiliation: crate::types::ProjectsListCollaboratorsAffiliation` -- Filters the collaborators by their affiliation. Can be one of:  
-     *   \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
-     *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
-     *   \* `all`: All collaborators the authenticated user can see.
+     *  \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
+     *  \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
+     *  \* `all`: All collaborators the authenticated user can see.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -46975,9 +47271,12 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
-     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters jobs by their `completed_at` timestamp. Can be one of:  
-     *   \* `latest`: Returns jobs from the most recent execution of the workflow run.  
-     *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
+     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     *  \* `assigned`: Issues assigned to you  
+     *  \* `created`: Issues created by you  
+     *  \* `mentioned`: Issues mentioning you  
+     *  \* `subscribed`: Issues you're subscribed to updates for  
+     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -49099,7 +49398,12 @@ impl Client {
      * * `check_suite_id: i64` -- check_suite_id parameter.
      * * `check_name: &str` -- Returns check runs with the specified `name`.
      * * `status: crate::types::JobStatus` -- Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
-     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
+     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     *  \* `assigned`: Issues assigned to you  
+     *  \* `created`: Issues created by you  
+     *  \* `mentioned`: Issues mentioning you  
+     *  \* `subscribed`: Issues you're subscribed to updates for  
+     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -49607,10 +49911,10 @@ impl Client {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `affiliation: crate::types::ProjectsListCollaboratorsAffiliation` -- Filter collaborators returned by their affiliation. Can be one of:  
-     *   \* `outside`: All outside collaborators of an organization-owned repository.  
-     *   \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  
-     *   \* `all`: All collaborators the authenticated user can see.
+     * * `affiliation: crate::types::ProjectsListCollaboratorsAffiliation` -- Filters the collaborators by their affiliation. Can be one of:  
+     *  \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
+     *  \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
+     *  \* `all`: All collaborators the authenticated user can see.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -50272,7 +50576,12 @@ impl Client {
      * * `ref_: &str` -- ref parameter.
      * * `check_name: &str` -- Returns check runs with the specified `name`.
      * * `status: crate::types::JobStatus` -- Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
-     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
+     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     *  \* `assigned`: Issues assigned to you  
+     *  \* `created`: Issues created by you  
+     *  \* `mentioned`: Issues mentioning you  
+     *  \* `subscribed`: Issues you're subscribed to updates for  
+     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      * * `app_id: i64`
@@ -51217,7 +51526,7 @@ impl Client {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `sort: crate::types::ReposListForksSort` -- The sort order. Can be either `newest`, `oldest`, or `stargazers`.
+     * * `sort: crate::types::ReposListForksSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -52432,7 +52741,7 @@ impl Client {
      * * `creator: &str` -- The user that created the issue.
      * * `mentioned: &str` -- A user that's mentioned in the issue.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
-     * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * `sort: crate::types::IssuesListSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
      * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
      * * `since: DateTime<Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
@@ -53689,8 +53998,8 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      * * `state: crate::types::IssuesListState` -- The state of the milestone. Either `open`, `closed`, or `all`.
-     * * `sort: crate::types::IssuesListMilestonesSort` -- What to sort results by. Either `due_on` or `completeness`.
-     * * `direction: crate::types::Direction` -- The direction of the sort. Either `asc` or `desc`.
+     * * `sort: crate::types::IssuesListMilestonesSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
+     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -54324,7 +54633,7 @@ impl Client {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `sort: crate::types::PullsListReviewCommentsRepoSort`
+     * * `sort: crate::types::PullsListReviewCommentsRepoSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
      * * `direction: crate::types::Direction` -- Can be either `asc` or `desc`. Ignored without `sort` parameter.
      * * `since: DateTime<Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
@@ -57184,12 +57493,12 @@ impl Client {
      * * `start_index: i64` -- Used for pagination: the index of the first result to return.
      * * `count: i64` -- Used for pagination: the number of results to return.
      * * `filter: &str` -- Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query:
-     *   
-     *   `?filter=userName%20eq%20\"Octocat\"`.
-     *   
-     *   To filter results for the identity with the email `octocat@github.com`, you would use this query:
-     *   
-     *   `?filter=emails%20eq%20\"octocat@github.com\"`.
+     *  
+     *  `?filter=userName%20eq%20\"Octocat\"`.
+     *  
+     *  To filter results for the identity with the email `octocat@github.com`, you would use this query:
+     *  
+     *  `?filter=emails%20eq%20\"octocat@github.com\"`.
      */
     pub async fn scim_list_provisioned_identities(&self, org: &str, start_index: i64, count: i64, filter: &str) -> Result<types::ScimUserList> {
         let url = format!(
@@ -59287,14 +59596,14 @@ impl Client {
      * **Parameters:**
      *
      * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
-     *   \* `assigned`: Issues assigned to you  
-     *   \* `created`: Issues created by you  
-     *   \* `mentioned`: Issues mentioning you  
-     *   \* `subscribed`: Issues you're subscribed to updates for  
-     *   \* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     *  \* `assigned`: Issues assigned to you  
+     *  \* `created`: Issues created by you  
+     *  \* `mentioned`: Issues mentioning you  
+     *  \* `subscribed`: Issues you're subscribed to updates for  
+     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
-     * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
+     * * `sort: crate::types::IssuesListSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
      * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
      * * `since: DateTime<Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
@@ -60012,13 +60321,13 @@ impl Client {
      *
      * * `visibility: crate::types::ReposListVisibility` -- Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
      * * `affiliation: &str` -- Comma-separated list of values. Can include:  
-     *   \* `owner`: Repositories that are owned by the authenticated user.  
-     *   \* `collaborator`: Repositories that the user has been added to as a collaborator.  
-     *   \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
+     *  \* `owner`: Repositories that are owned by the authenticated user.  
+     *  \* `collaborator`: Repositories that the user has been added to as a collaborator.  
+     *  \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
      * * `type_: crate::types::ReposListType` -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
      *     
      *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListOrgSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -60870,7 +61179,7 @@ impl Client {
      *
      * * `username: &str`
      * * `type_: crate::types::ReposListUserType` -- The type of label. Read-only labels are applied automatically when the runner is configured.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListOrgSort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
