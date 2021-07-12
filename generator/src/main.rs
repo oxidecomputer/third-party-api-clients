@@ -861,7 +861,7 @@ impl TypeSpace {
                         );
                     } else {
                         // If we have a parent name, let's append it to the real name.
-                        let mut pname = format!("{} {}", parent_name, name);
+                        let pname = format!("{} {}", parent_name, name);
                         return self.add_if_not_exists(Some(clean_name(&pname)), details, "", is_schema);
                     }
                 }
