@@ -35468,7 +35468,7 @@ impl Client {
      *
      * **Parameters:**
      *
-     * * key: &str -- Key.
+     * * key: &str
      */
     pub async fn codes_of_conduct_get_conduct_code(&self, key: &str) -> Result<types::CodeOfConduct> {
         let url = format!("/codes_of_conduct/{}", progenitor_support::encode_path(&key.to_string()),);
@@ -36997,7 +36997,7 @@ impl Client {
     \* `mentioned`: Issues mentioning you
     \* `subscribed`: Issues you're subscribed to updates for
     \* `all`: All issues the authenticated user can see, regardless of participation or creation.
-    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * state: crate::types::IssuesListState -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
     * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
     * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
     * * direction: crate::types::Direction -- One of `asc` (ascending) or `desc` (descending).
@@ -37080,7 +37080,7 @@ impl Client {
      *
      * **Parameters:**
      *
-     * * license: &str -- License Simple.
+     * * license: &str
      */
     pub async fn licenses_get(&self, license: &str) -> Result<types::License> {
         let url = format!("/licenses/{}", progenitor_support::encode_path(&license.to_string()),);
@@ -39385,7 +39385,7 @@ impl Client {
     \* `mentioned`: Issues mentioning you
     \* `subscribed`: Issues you're subscribed to updates for
     \* `all`: All issues the authenticated user can see, regardless of participation or creation.
-    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * state: crate::types::IssuesListState -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
     * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
     * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
     * * direction: crate::types::Direction -- One of `asc` (ascending) or `desc` (descending).
@@ -39436,7 +39436,10 @@ impl Client {
     * * filter: crate::types::OrgsListMembersFilter -- Filter members returned in the list. Can be one of:
     \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.
     \* `all` - All members the authenticated user can see.
-    * * role: crate::types::OrgsListMembersRole -- The user's membership type in the organization.
+    * * role: crate::types::OrgsListMembersRole -- Filter members returned by their role. Can be one of:
+    \* `all` - All members of the organization, regardless of role.
+    \* `admin` - Organization owners.
+    \* `member` - Non-owner organization members.
     * * per_page: i64 -- Results per page (max 100).
     * * page: i64 -- Page number of the results to fetch.
     */
@@ -39996,7 +39999,7 @@ impl Client {
      * * org: &str
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
-     * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState -- The state of the milestone.
+     * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_org(
         &self,
@@ -40149,7 +40152,7 @@ impl Client {
      * **Parameters:**
      *
      * * org: &str
-     * * state: crate::types::IssuesListState -- The state of the milestone.
+     * * state: crate::types::IssuesListState -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -40302,7 +40305,7 @@ impl Client {
      * **Parameters:**
      *
      * * org: &str
-     *  * type_: crate::types::ReposListOrgType -- The type of label. Read-only labels are applied automatically when the runner is configured.
+     * * type_: crate::types::ReposListOrgType -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
      * * sort: crate::types::ReposListOrgSort -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * direction: crate::types::Direction -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
      * * per_page: i64 -- Results per page (max 100).
@@ -40445,7 +40448,7 @@ impl Client {
      *
      * * org: &str
      * * per_page: i64 -- Results per page (max 100).
-     * * page: &str -- The configuration for GitHub Pages for a repository.
+     * * page: &str -- Page token.
      */
     pub async fn teams_list_idp_groups_for_org(&self, org: &str, per_page: i64, page: &str) -> Result<types::GroupMapping> {
         let url = format!(
@@ -40954,7 +40957,7 @@ impl Client {
      * * team_slug: &str -- team_slug parameter.
      * * discussion_number: i64
      * * comment_number: i64
-     * * content: crate::types::Content -- The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -41074,7 +41077,7 @@ impl Client {
      * * org: &str
      * * team_slug: &str -- team_slug parameter.
      * * discussion_number: i64
-     * * content: crate::types::Content -- The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -41201,24 +41204,27 @@ impl Client {
     }
 
     /**
-     * List team members.
-     *
-     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/members` endpoint.
-     *
-     * Team members will include the members of child teams.
-     *
-     * To list members in a team, the team must be visible to the authenticated user.
-     *
-     * FROM: <https://docs.github.com/rest/reference/teams#list-team-members>
-     *
-     * **Parameters:**
-     *
-     * * org: &str
-     * * team_slug: &str -- team_slug parameter.
-     * * role: crate::types::TeamsListMembersInOrgRole -- The user's membership type in the organization.
-     * * per_page: i64 -- Results per page (max 100).
-     * * page: i64 -- Page number of the results to fetch.
-     */
+    * List team members.
+    *
+    * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/members` endpoint.
+    *
+    * Team members will include the members of child teams.
+    *
+    * To list members in a team, the team must be visible to the authenticated user.
+    *
+    * FROM: <https://docs.github.com/rest/reference/teams#list-team-members>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str -- team_slug parameter.
+    * * role: crate::types::TeamsListMembersInOrgRole -- Filters members returned by their role in the team. Can be one of:
+    \* `member` - normal members of the team.
+    \* `maintainer` - team maintainers.
+    \* `all` - all members of the team.
+    * * per_page: i64 -- Results per page (max 100).
+    * * page: i64 -- Page number of the results to fetch.
+    */
     pub async fn teams_list_members_in_org(
         &self,
         org: &str,
@@ -43639,7 +43645,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     * * assignee: &str -- Simple User.
+     * * assignee: &str
      */
     pub async fn issues_check_user_can_be_assigned(&self, owner: &str, repo: &str, assignee: &str) -> Result<()> {
         let url = format!(
@@ -45160,7 +45166,7 @@ impl Client {
      * * tool_guid: &str -- The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
-     *  * ref_: &str -- The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+     * * ref_: &str -- The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
      * * state: types::CodeScanningAlertState -- State of a code scanning alert.
      */
     pub async fn code_scanning_list_alerts_for_repo(
@@ -45266,7 +45272,7 @@ impl Client {
      * * alert_number: i64 -- The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
-     *  * ref_: &str -- The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+     * * ref_: &str -- The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
      */
     pub async fn code_scanning_list_alert_instances(
         &self,
@@ -45322,7 +45328,7 @@ impl Client {
     * * tool_guid: &str -- The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
     * * page: i64 -- Page number of the results to fetch.
     * * per_page: i64 -- Results per page (max 100).
-    *  * ref_: &str -- The full Git reference, formatted as `refs/heads/<branch name>`,
+    * * ref_: &str -- The full Git reference, formatted as `refs/heads/<branch name>`,
     `refs/pull/<number>/merge`, or `refs/pull/<number>/head`.
     * * sarif_id: &str -- An identifier for the upload.
     */
@@ -45863,7 +45869,7 @@ impl Client {
      * * owner: &str
      * * repo: &str
      * * comment_id: i64 -- comment_id parameter.
-     * * content: crate::types::Content -- The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -45992,8 +45998,8 @@ impl Client {
      * * owner: &str
      * * repo: &str
      * * sha: &str -- SHA or branch to start listing commits from. Default: the repository’s default branch (usually `master`).
-     * * path: &str -- The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`.
-     * * author: &str -- Simple User.
+     * * path: &str -- Only commits containing this file path will be returned.
+     * * author: &str -- GitHub login or email address by which to filter by commit author.
      * * since: DateTime<Utc> -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * until: DateTime<Utc> -- Only commits before this date will be returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * per_page: i64 -- Results per page (max 100).
@@ -46213,7 +46219,7 @@ impl Client {
      * * repo: &str
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
-     *  * ref_: &str -- ref parameter.
+     * * ref_: &str -- ref parameter.
      */
     pub async fn repos_get_commit(&self, owner: &str, repo: &str, page: i64, per_page: i64, ref_: &str) -> Result<types::Commit> {
         let url = format!(
@@ -46243,7 +46249,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str -- ref parameter.
+     * * ref_: &str -- ref parameter.
      * * check_name: &str -- Returns check runs with the specified `name`.
      * * status: crate::types::JobStatus -- Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
      * * filter: crate::types::ActionsListJobsWorkflowRunFilter -- Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
@@ -46294,7 +46300,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str -- ref parameter.
+     * * ref_: &str -- ref parameter.
      * * app_id: i64 -- Filters check suites by GitHub App `id`.
      * * check_name: &str -- Returns check runs with the specified `name`.
      * * per_page: i64 -- Results per page (max 100).
@@ -46345,7 +46351,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str -- ref parameter.
+     * * ref_: &str -- ref parameter.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -46384,7 +46390,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str -- ref parameter.
+     * * ref_: &str -- ref parameter.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -46553,7 +46559,7 @@ impl Client {
      *
      * **Parameters:**
      *
-     * * owner: &str -- Simple User.
+     * * owner: &str -- The owner of the repository. Determined from the `repository` `full_name` of the `content_reference` event.
      * * repo: &str -- The name of the repository. Determined from the `repository` `full_name` of the `content_reference` event.
      * * content_reference_id: i64 -- The `id` of the `content_reference` event.
      */
@@ -46618,8 +46624,8 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     * * path: &str -- The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`.
-     *  * ref_: &str -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * path: &str -- path parameter.
+     * * ref_: &str -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
     pub async fn repos_get_content(&self, owner: &str, repo: &str, path: &str, ref_: &str) -> Result<types::GetReposContentOkResponse> {
         let url = format!(
@@ -46646,7 +46652,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     * * path: &str -- The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`.
+     * * path: &str -- path parameter.
      */
     pub async fn repos_create_or_update_file_contents(
         &self,
@@ -46684,7 +46690,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     * * path: &str -- The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`.
+     * * path: &str -- path parameter.
      */
     pub async fn repos_delete_file(&self, owner: &str, repo: &str, path: &str, body: &types::ReposDeleteFileRequest) -> Result<types::FileCommit> {
         let url = format!(
@@ -46743,7 +46749,7 @@ impl Client {
      * * owner: &str
      * * repo: &str
      * * sha: &str -- The SHA recorded at creation time.
-     *  * ref_: &str -- The name of the ref. This can be a branch, tag, or SHA.
+     * * ref_: &str -- The name of the ref. This can be a branch, tag, or SHA.
      * * task: &str -- The name of the task for the deployment (e.g., `deploy` or `deploy:migrations`).
      * * environment: &str -- The name of the environment that was deployed to (e.g., `staging` or `production`).
      * * per_page: i64 -- Results per page (max 100).
@@ -47420,7 +47426,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str -- ref parameter.
+     * * ref_: &str -- ref parameter.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -47452,7 +47458,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str -- ref parameter.
+     * * ref_: &str -- ref parameter.
      */
     pub async fn git_get_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<types::GitRef> {
         let url = format!(
@@ -47502,7 +47508,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str -- ref parameter.
+     * * ref_: &str -- ref parameter.
      */
     pub async fn git_delete_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
         let url = format!(
@@ -47528,7 +47534,7 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str -- ref parameter.
+     * * ref_: &str -- ref parameter.
      */
     pub async fn git_update_ref(&self, owner: &str, repo: &str, ref_: &str, body: &types::GitUpdateRefRequest) -> Result<types::GitRef> {
         let url = format!(
@@ -48400,10 +48406,10 @@ impl Client {
      *
      * * owner: &str
      * * repo: &str
-     * * milestone: &str -- A collection of related issues and pull requests.
-     * * state: crate::types::IssuesListState -- The state of the milestone.
-     * * assignee: &str -- Simple User.
-     * * creator: &str -- Simple User.
+     * * milestone: &str -- If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
+     * * state: crate::types::IssuesListState -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+     * * assignee: &str -- Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user.
+     * * creator: &str -- The user that created the issue.
      * * mentioned: &str -- A user that's mentioned in the issue.
      * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
@@ -48603,7 +48609,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * owner: &str
      * * repo: &str
      * * comment_id: i64 -- comment_id parameter.
-     * * content: crate::types::Content -- The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -49203,7 +49209,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * owner: &str
      * * repo: &str
      * * issue_number: i64 -- issue_number parameter.
-     * * content: crate::types::Content -- The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -49649,7 +49655,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     * * state: crate::types::IssuesListState -- The state of the milestone.
+     * * state: crate::types::IssuesListState -- The state of the milestone. Either `open`, `closed`, or `all`.
      * * sort: crate::types::IssuesListMilestonesSort -- What to sort results by. Either `due_on` or `completeness`.
      * * direction: crate::types::Direction -- The direction of the sort. Either `asc` or `desc`.
      * * per_page: i64 -- Results per page (max 100).
@@ -50145,7 +50151,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     * * state: crate::types::IssuesListState -- The state of the milestone.
+     * * state: crate::types::IssuesListState -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -50206,7 +50212,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     * * state: crate::types::IssuesListState -- The state of the milestone.
+     * * state: crate::types::IssuesListState -- Either `open`, `closed`, or `all` to filter by state.
      * * head: &str -- Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`.
      * * base: &str -- Filter pulls by base branch name. Example: `gh-pages`.
      * * sort: crate::types::PullsListSort -- What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
@@ -50413,7 +50419,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * owner: &str
      * * repo: &str
      * * comment_id: i64 -- comment_id parameter.
-     * * content: crate::types::Content -- The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -51233,7 +51239,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * ref_: &str -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
     pub async fn repos_get_readme(&self, owner: &str, repo: &str, ref_: &str) -> Result<types::ContentFile> {
         let url = format!(
@@ -51262,7 +51268,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * owner: &str
      * * repo: &str
      * * dir: &str -- The alternate path to look for a README file.
-     *  * ref_: &str -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     * * ref_: &str -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
     pub async fn repos_get_readme_in_directory(&self, owner: &str, repo: &str, dir: &str, ref_: &str) -> Result<types::ContentFile> {
         let url = format!(
@@ -51621,7 +51627,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * repo: &str
      * * release_id: i64 -- release_id parameter.
      * * name: &str
-     * * label: &str -- Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
+     * * label: &str
      */
     pub async fn repos_upload_release_asset<T: Into<reqwest::Body>>(
         &self,
@@ -51691,7 +51697,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     * * state: crate::types::SecretScanningAlertState -- The state of the milestone.
+     * * state: crate::types::SecretScanningAlertState -- Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
      * * secret_type: &str -- A comma separated list of secret types to return. By default all secret types are returned.
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
@@ -52127,7 +52133,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str
+     * * ref_: &str
      */
     pub async fn repos_download_tarball_archive(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
         let url = format!(
@@ -52432,7 +52438,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * owner: &str
      * * repo: &str
-     *  * ref_: &str
+     * * ref_: &str
      */
     pub async fn repos_download_zipball_archive(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
         let url = format!(
@@ -54024,7 +54030,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * team_id: i64
      * * discussion_number: i64
      * * comment_number: i64
-     * * content: crate::types::Content -- The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -54099,7 +54105,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * * team_id: i64
      * * discussion_number: i64
-     * * content: crate::types::Content -- The reaction to use.
+     * * content: crate::types::Content -- Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -54183,23 +54189,26 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     }
 
     /**
-     * List team members (Legacy).
-     *
-     * This function performs a `GET` to the `/teams/{team_id}/members` endpoint.
-     *
-     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team members`](https://docs.github.com/rest/reference/teams#list-team-members) endpoint.
-     *
-     * Team members will include the members of child teams.
-     *
-     * FROM: <https://docs.github.com/rest/reference/teams#list-team-members-legacy>
-     *
-     * **Parameters:**
-     *
-     * * team_id: i64
-     * * role: crate::types::TeamsListMembersInOrgRole -- The user's membership type in the organization.
-     * * per_page: i64 -- Results per page (max 100).
-     * * page: i64 -- Page number of the results to fetch.
-     */
+    * List team members (Legacy).
+    *
+    * This function performs a `GET` to the `/teams/{team_id}/members` endpoint.
+    *
+    * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team members`](https://docs.github.com/rest/reference/teams#list-team-members) endpoint.
+    *
+    * Team members will include the members of child teams.
+    *
+    * FROM: <https://docs.github.com/rest/reference/teams#list-team-members-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * role: crate::types::TeamsListMembersInOrgRole -- Filters members returned by their role in the team. Can be one of:
+    \* `member` - normal members of the team.
+    \* `maintainer` - team maintainers.
+    \* `all` - all members of the team.
+    * * per_page: i64 -- Results per page (max 100).
+    * * page: i64 -- Page number of the results to fetch.
+    */
     pub async fn teams_list_members_legacy(
         &self,
         team_id: i64,
@@ -55250,7 +55259,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     \* `mentioned`: Issues mentioning you
     \* `subscribed`: Issues you're subscribed to updates for
     \* `all`: All issues the authenticated user can see, regardless of participation or creation.
-    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * state: crate::types::IssuesListState -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
     * * labels: &str -- A list of comma separated label names. Example: `bug,ui,@high`.
     * * sort: crate::types::IssuesListSort -- What to sort results by. Can be either `created`, `updated`, `comments`.
     * * direction: crate::types::Direction -- One of `asc` (ascending) or `desc` (descending).
@@ -55422,7 +55431,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      *
      * **Parameters:**
      *
-     * * state: crate::types::OrgMembershipState -- The state of the milestone.
+     * * state: crate::types::OrgMembershipState -- Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -55794,7 +55803,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * * package_name: &str -- The name of the package.
      * * page: i64 -- Page number of the results to fetch.
      * * per_page: i64 -- Results per page (max 100).
-     * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState -- The state of the milestone.
+     * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
@@ -55968,12 +55977,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * **Parameters:**
     *
-    * * visibility: crate::types::ReposListVisibility -- Visibility of a secret.
+    * * visibility: crate::types::ReposListVisibility -- Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
     * * affiliation: &str -- Comma-separated list of values. Can include:
     \* `owner`: Repositories that are owned by the authenticated user.
     \* `collaborator`: Repositories that the user has been added to as a collaborator.
     \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
-    *  * type_: crate::types::ReposListType -- The type of label. Read-only labels are applied automatically when the runner is configured.
+    * * type_: crate::types::ReposListType -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`
+
+    Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
     * * sort: crate::types::ReposListOrgSort -- Can be one of `created`, `updated`, `pushed`, `full_name`.
     * * direction: crate::types::Direction -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
     * * per_page: i64 -- Results per page (max 100).
@@ -56739,7 +56750,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * **Parameters:**
      *
      * * username: &str
-     * * state: crate::types::IssuesListState -- The state of the milestone.
+     * * state: crate::types::IssuesListState -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
      * * per_page: i64 -- Results per page (max 100).
      * * page: i64 -- Page number of the results to fetch.
      */
@@ -56825,7 +56836,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
      * **Parameters:**
      *
      * * username: &str
-     *  * type_: crate::types::ReposListUserType -- The type of label. Read-only labels are applied automatically when the runner is configured.
+     * * type_: crate::types::ReposListUserType -- Can be one of `all`, `owner`, `member`.
      * * sort: crate::types::ReposListOrgSort -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * direction: crate::types::Direction -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * per_page: i64 -- Results per page (max 100).

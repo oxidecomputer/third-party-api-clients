@@ -865,7 +865,7 @@ impl TypeSpace {
                             // We can get here if there are two objects with the same name
                             // that have properties that are different.
                             // Let's rename the new object with the parent name.
-                            // println!("object details for {} do not match: {:?} != {:?}", pn, pet.details, details,);
+                            println!("object details for {} do not match: {:?} != {:?}", pn, pet.details, details,);
                         }
                     } else {
                         // Let's rename the new object with the parent name.
@@ -1627,10 +1627,10 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
 
                 let parameter_data = get_parameter_data(item).unwrap();
 
-                let pid = ts.select_param(None, par, true)?;
+                let pid = ts.select_param(None, par, false)?;
                 let mut docs = ts.render_docs(&pid);
                 if !docs.is_empty() {
-                    docs = format!(" -- {}.", docs.trim().replace("/// ", "").trim_end_matches('.'));
+                    docs = format!(" -- {}.", docs.trim().replace("///", "").replace("\n", "\n*   ").trim_end_matches('.'));
                 } else if let Some(d) = &parameter_data.description {
                     if !d.is_empty() {
                         docs = format!(" -- {}.", d.trim_end_matches('.'));
@@ -1640,12 +1640,8 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 let nam = &to_snake_case(&clean_name(&parameter_data.name));
                 let typ = parameter_data.render_type(&param_name, ts)?;
 
-                if nam == "path" {
-                    println!("we got path: {} {:?}", typ, parameter_data);
-                }
-
                 if nam == "ref" || nam == "type" {
-                    a(&format!("*  * {}_: {}{}", nam, typ, docs));
+                    a(&format!("* * {}_: {}{}", nam, typ, docs));
                 } else {
                     a(&format!("* * {}: {}{}", nam, typ, docs));
                 }
