@@ -493,6 +493,27 @@ enum TypeDetails {
 
 #[allow(dead_code)]
 impl TypeDetails {
+    pub fn is_enum(&self) -> bool {
+        if let TypeDetails::Enum(..) = self {
+            return true;
+        }
+        false
+    }
+
+    pub fn is_object(&self) -> bool {
+        if let TypeDetails::Object(..) = self {
+            return true;
+        }
+        false
+    }
+
+    pub fn is_named_type(&self) -> bool {
+        if let TypeDetails::NamedType(..) = self {
+            return true;
+        }
+        false
+    }
+
     pub fn description(&self) -> String {
         let desc = match self {
             TypeDetails::Basic(_, d) => d.description.as_ref(),
@@ -816,14 +837,7 @@ impl TypeSpace {
          * As this is a reference, all we can do for now is determine
          * the type ID.
          */
-        Ok(if let Some(id) = self.name_to_id.get(&r) {
-            // we got the id.
-            id.clone()
-        } else {
-            let id = self.assign();
-            self.name_to_id.insert(r.to_string(), id.clone());
-            id
-        })
+        Ok(self.id_for_name(&r))
     }
 
     fn add_if_not_exists(&mut self, name: Option<String>, details: TypeDetails, parent_name: &str, is_schema: bool) -> Result<TypeId> {
@@ -832,10 +846,76 @@ impl TypeSpace {
          * but are duplicated all over. Let's ensure that we don't have a type with a different
          * name that is this exact same type.
          */
-        // TODO: use the smaller of the names
         if !is_schema {
             for (tid, te) in self.id_to_entry.iter() {
                 if te.details == details {
+                    let id = tid.clone();
+
+                    // We have a match! Okay, now we want to keep the shorter
+                    // name of the two structs and ensure that is the one we have
+                    // in our set.
+                    // Only do this if we have an Enum or an Object.
+                    if details.is_enum() || details.is_object() {
+                        let existing_name = if let Some(n) = &te.name { n.to_string() } else { "".to_string() };
+                        let new_name = if let Some(n) = &name { n.to_string() } else { "".to_string() };
+
+                        if existing_name == new_name {
+                            // Return early.
+                            return Ok(tid.clone());
+                        }
+
+                        if !new_name.is_empty() && new_name.len() < existing_name.len() {
+                            // Let's make sure we don't already have a type with this name.
+                            if let Some(nidd) = self.name_to_id.get(&new_name) {
+                                let nid = nidd.clone();
+
+                                // Well we already have an id for this type.
+                                // Let's get the details.
+                                let nt = self.id_to_entry.get(&nid).unwrap();
+
+                                // Make sure the type we found is not something
+                                // we care about.
+                                if nt.details.is_enum() || nt.details.is_object() || nt.details.is_named_type() {
+                                    // Return early we definitely don't want to do any funny business.
+                                    return Ok(tid.clone());
+                                }
+                                let ntdetails = nt.details.clone();
+
+                                // We have some other type...
+                                // Let's name it our old name.
+                                self.id_to_entry.insert(
+                                    nid.clone(),
+                                    TypeEntry {
+                                        id: nid.clone(),
+                                        name: Some(existing_name.to_string()),
+                                        details: ntdetails,
+                                    },
+                                );
+                                self.name_to_id.insert(existing_name, nid.clone());
+                            }
+
+                            // Let's keep the new_name instead.
+                            // This ensure's that since we can't always know the order in which we
+                            // parse types, that we will always have the cleaner set of named types.
+
+                            // Update the type entry in our set.
+                            self.id_to_entry.insert(
+                                id.clone(),
+                                TypeEntry {
+                                    id: id.clone(),
+                                    name: Some(new_name.to_string()),
+                                    details,
+                                },
+                            );
+                            self.name_to_id.insert(new_name, id.clone());
+
+                            // Remove the old name from the set.
+                            // TODO: somehow don't remove any of the ones we need to keep.
+                            // self.name_to_id.remove(&existing_name);
+                            return Ok(id);
+                        }
+                    }
+
                     return Ok(tid.clone());
                 }
             }
@@ -879,17 +959,17 @@ impl TypeSpace {
                         details,
                     );
                 }
-            } else {
-                // We don't have an entry for this type ID so let's add it!
-                self.id_to_entry.insert(
-                    id.clone(),
-                    TypeEntry {
-                        id: id.clone(),
-                        name: Some(name.to_string()),
-                        details,
-                    },
-                );
             }
+
+            // We don't have an entry for this type ID so let's add it!
+            self.id_to_entry.insert(
+                id.clone(),
+                TypeEntry {
+                    id: id.clone(),
+                    name: Some(name.to_string()),
+                    details,
+                },
+            );
 
             Ok(id)
         } else {
@@ -1205,7 +1285,7 @@ fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::Parame
     None
 }
 
-fn render_param(n: &str, en: &[String], required: bool, description: &str, default: Option<&serde_json::Value>) -> String {
+fn render_param(sn: &str, en: &[String], required: bool, description: &str, default: Option<&serde_json::Value>) -> String {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1235,8 +1315,6 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str, defau
         a(&format!("* {}", description.replace("\n", "\n*   ")));
         a("*/");
     }
-
-    let sn = struct_name(n);
 
     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
     a(r#"#[serde(rename_all = "snake_case")]"#);
@@ -1517,9 +1595,17 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
     a("    use serde::{Serialize, Deserialize};");
     a("");
 
+    let mut rendered: Vec<String> = Default::default();
     for te in ts.id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
             let sn = struct_name(sn);
+
+            if rendered.contains(&sn) && sn != "Filter" {
+                // Skip duplicates, this is stupid but since I chose to pick the smaller of the
+                // names of the structs, we get duplicates.
+                continue;
+            }
+
             match &te.details {
                 TypeDetails::Enum(vals, schema_data) => {
                     let mut desc = "".to_string();
@@ -1528,6 +1614,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     }
                     let p = render_param(sn.as_str(), vals, false, &desc, schema_data.default.as_ref());
                     a(&p);
+                    rendered.push(sn.to_string());
                 }
                 TypeDetails::Object(omap, schema_data) => {
                     let desc = if let Some(description) = &schema_data.description {
@@ -1600,6 +1687,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                     }
                     a("}");
                     a("");
+                    rendered.push(sn.to_string());
                 }
                 TypeDetails::Basic(..) => {}
                 TypeDetails::Unknown => {}
@@ -2102,7 +2190,7 @@ fn main() -> Result<()> {
     opts.reqopt("n", "", "Target Rust crate name", "CRATE");
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
     opts.reqopt("d", "", "Target Rust crate description", "DESCRIPTION");
-    opts.optflag("", "ts", "Print the type space upon completion");
+    opts.optflag("", "debug", "Print debug output");
 
     let args = match opts.parse(std::env::args().skip(1)) {
         Ok(args) => {
@@ -2120,6 +2208,12 @@ fn main() -> Result<()> {
 
     let api = load_api(&args.opt_str("i").unwrap())?;
 
+    let debug = |s: &str| {
+        if args.opt_present("debug") {
+            println!("{}", s);
+        }
+    };
+
     /*
      * Grab all the types defined by schemas and parameters.
      */
@@ -2130,28 +2224,28 @@ fn main() -> Result<()> {
         // Populate a type to describe each entry in the schemas section.
         for (i, (sn, s)) in components.schemas.iter().enumerate() {
             let name = clean_name(sn);
-            println!("SCHEMA {}/{}: {}", i + 1, components.schemas.len(), name);
+            debug(&format!("SCHEMA {}/{}: {}", i + 1, components.schemas.len(), name));
 
             let id = ts.select(Some(name.as_str()), s, true, "")?;
-            println!("    -> {:?}", id);
-            println!();
+            debug(&format!("    -> {:?}", id));
+            debug("");
         }
 
         // Populate a type to describe each entry in the parameters section.
         for (i, (pn, p)) in components.parameters.iter().enumerate() {
             let name = clean_name(pn);
-            println!("PARAMETER {}/{}: {}", i + 1, components.parameters.len(), name);
+            debug(&format!("PARAMETER {}/{}: {}", i + 1, components.parameters.len(), name));
 
             let id = ts.select_param(Some(name.as_str()), p, true)?;
 
-            println!("    -> {:?}", id);
-            println!();
+            debug(&format!("    -> {:?}", id));
+            debug("");
             if let openapiv3::ReferenceOr::Item(item) = p {
                 parameters.insert(struct_name(&pn.to_string()), item);
             } else {
                 bail!("parameter {} uses reference, unsupported: {:?}", pn, p);
             }
-            println!();
+            debug("");
         }
     }
 
@@ -2167,8 +2261,8 @@ fn main() -> Result<()> {
                 let mut oid = o.operation_id.as_deref().unwrap().to_string();
                 oid = oid.replace("-", "_").replace("/", "_");
 
-                println!();
-                println!("{}", oid);
+                debug("");
+                debug(&oid);
 
                 /*
                  * Get the request body type, if this operation has one.
@@ -2192,7 +2286,7 @@ fn main() -> Result<()> {
                     req.push(format!("{:?}", id));
                 }
                 if !req.is_empty() {
-                    println!("\t{} {} request body -> {}", pn, m, req.join(" | "));
+                    debug(&format!("\t{} {} request body -> {}", pn, m, req.join(" | ")));
                 }
 
                 /*
@@ -2238,7 +2332,7 @@ fn main() -> Result<()> {
                         }
                     }
                 }
-                println!("\t{} {} response body -> {}", pn, m, res.join(" | "));
+                debug(&format!("\t{} {} response body -> {}", pn, m, res.join(" | ")));
             }
 
             Ok(())
@@ -2253,11 +2347,10 @@ fn main() -> Result<()> {
         grab(pn, "PATCH", op.patch.as_ref(), &mut ts)?;
         grab(pn, "TRACE", op.trace.as_ref(), &mut ts)?;
     }
-    println!();
+    debug("");
 
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();
-
     let fail = match gen(&api, &mut ts, parameters, &name.replace("-", "_"), &version) {
         Ok(out) => {
             let description = args.opt_str("d").unwrap();
@@ -2332,17 +2425,15 @@ httpcache = ["dirs"]
         }
     };
 
-    if args.opt_present("ts") {
-        println!("-----------------------------------------------------");
-        println!(" TYPE SPACE");
-        println!("-----------------------------------------------------");
-        for te in ts.id_to_entry.values() {
-            let n = ts.describe(&te.id);
-            println!("{:>4}  {}", te.id.0, n);
-        }
-        println!("-----------------------------------------------------");
-        println!();
+    debug("-----------------------------------------------------");
+    debug(" TYPE SPACE");
+    debug("-----------------------------------------------------");
+    for te in ts.id_to_entry.values() {
+        let n = ts.describe(&te.id);
+        debug(&format!("{:>4}  {}", te.id.0, n));
     }
+    debug("-----------------------------------------------------");
+    debug("");
 
     if fail {
         bail!("generation experienced errors");

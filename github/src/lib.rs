@@ -179,7 +179,7 @@ pub mod types {
 
     /// Simple User
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SimpleUser {
+    pub struct User {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -435,7 +435,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub owner: SimpleUser,
+        pub owner: User,
         /**
          * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
          */
@@ -1711,7 +1711,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub account: SimpleUser,
+        pub account: User,
         #[serde(default)]
         pub app_id: i64,
         #[serde(
@@ -1782,7 +1782,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub suspended_by: SimpleUser,
+        pub suspended_by: User,
         /**
          * The ID of the user or organization this token is being scoped to.
          */
@@ -1800,7 +1800,7 @@ pub mod types {
 
     /// License Simple
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct LicenseSimple {
+    pub struct License {
         /**
          * License Simple
          */
@@ -1857,7 +1857,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Owner {
+    pub struct Users {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2242,7 +2242,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub open_issues_count: Option<i64>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub owner: Option<Owner>,
+        pub owner: Option<Users>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<RepositoryTemplatePermissions>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -2627,7 +2627,7 @@ pub mod types {
          * License Simple
          */
         #[serde()]
-        pub license: LicenseSimple,
+        pub license: License,
         /**
          * A git repository
          */
@@ -2689,12 +2689,12 @@ pub mod types {
          * A git repository
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub organization: Option<SimpleUser>,
+        pub organization: Option<User>,
         /**
          * Simple User
          */
         #[serde()]
-        pub owner: SimpleUser,
+        pub owner: User,
         /**
          * A git repository
          */
@@ -3012,7 +3012,7 @@ pub mod types {
          * The authorization associated with an OAuth Access.
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub user: Option<SimpleUser>,
+        pub user: Option<User>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3021,7 +3021,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub account: SimpleUser,
+        pub account: User,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub has_multiple_single_files: Option<bool>,
         /**
@@ -3117,7 +3117,7 @@ pub mod types {
          * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub user: Option<SimpleUser>,
+        pub user: Option<User>,
     }
 
     /// Code Of Conduct
@@ -3492,7 +3492,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AuthenticationTokenPermissions {}
+    pub struct Data {}
 
     /// Authentication Token
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3506,7 +3506,7 @@ pub mod types {
          * Authentication Token
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permissions: Option<AuthenticationTokenPermissions>,
+        pub permissions: Option<Data>,
         /**
          * Authentication Token
          */
@@ -3602,7 +3602,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub created_at: Option<i64>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub data: Option<AuthenticationTokenPermissions>,
+        pub data: Option<Data>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -3919,7 +3919,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub creator: SimpleUser,
+        pub creator: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -4065,12 +4065,12 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub assignee: SimpleUser,
+        pub assignee: User,
         /**
          * Issue Simple
          */
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub assignees: Vec<SimpleUser>,
+        pub assignees: Vec<User>,
         /**
          * How the author is associated with the repository.
          */
@@ -4206,7 +4206,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -4322,7 +4322,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -4574,7 +4574,7 @@ pub mod types {
         )]
         pub description: String,
         #[serde()]
-        pub files: AuthenticationTokenPermissions,
+        pub files: Data,
         /**
          * Base Gist
          */
@@ -4625,7 +4625,7 @@ pub mod types {
          * Base Gist
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub owner: Option<SimpleUser>,
+        pub owner: Option<User>,
         #[serde(default)]
         pub public: bool,
         /**
@@ -4645,7 +4645,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -4865,7 +4865,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ChangeStatus {
+    pub struct Stats {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub additions: Option<i64>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -4881,7 +4881,7 @@ pub mod types {
          * Gist History
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub change_status: Option<ChangeStatus>,
+        pub change_status: Option<Stats>,
         /**
          * Gist History
          */
@@ -4900,7 +4900,7 @@ pub mod types {
          * Gist History
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub user: Option<SimpleUser>,
+        pub user: Option<User>,
         /**
          * Gist History
          */
@@ -4960,7 +4960,7 @@ pub mod types {
         )]
         pub description: String,
         #[serde()]
-        pub files: AuthenticationTokenPermissions,
+        pub files: Data,
         /**
          * Gist
          */
@@ -5011,7 +5011,7 @@ pub mod types {
          * Gist
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub owner: Option<SimpleUser>,
+        pub owner: Option<User>,
         #[serde(default)]
         pub public: bool,
         /**
@@ -5031,7 +5031,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /// Gist Simple
@@ -5082,7 +5082,7 @@ pub mod types {
          * Gist Simple
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub files: Option<AuthenticationTokenPermissions>,
+        pub files: Option<Data>,
         /**
          * Gist Simple
          */
@@ -5156,7 +5156,7 @@ pub mod types {
          * Gist Simple
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub owner: Option<SimpleUser>,
+        pub owner: Option<User>,
         /**
          * Gist Simple
          */
@@ -5235,14 +5235,14 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /// Gist Commit
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GistCommit {
         #[serde()]
-        pub change_status: ChangeStatus,
+        pub change_status: Stats,
         #[serde()]
         pub committed_at: DateTime<Utc>,
         #[serde(
@@ -5255,7 +5255,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -5297,12 +5297,12 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub assignee: SimpleUser,
+        pub assignee: User,
         /**
          * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
          */
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub assignees: Vec<SimpleUser>,
+        pub assignees: Vec<User>,
         /**
          * How the author is associated with the repository.
          */
@@ -5341,7 +5341,7 @@ pub mod types {
          * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub closed_by: Option<SimpleUser>,
+        pub closed_by: Option<User>,
         #[serde(default)]
         pub comments: i64,
         #[serde(
@@ -5463,12 +5463,12 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /// License
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct License {
+    pub struct LicenseData {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -6157,7 +6157,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub open_issues_count: Option<i64>,
         #[serde()]
-        pub owner: AuthenticationTokenPermissions,
+        pub owner: Data,
         /**
          * Minimal Repository
          */
@@ -6264,7 +6264,7 @@ pub mod types {
          * Minimal Repository
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub template_repository: Option<AuthenticationTokenPermissions>,
+        pub template_repository: Option<Data>,
         /**
          * Minimal Repository
          */
@@ -7045,7 +7045,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub inviter: SimpleUser,
+        pub inviter: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -7237,7 +7237,7 @@ pub mod types {
 
     /// Groups of organization members that gives permissions on specified repositories.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamSimple {
+    pub struct Parent {
         /**
          * Description of the team
          */
@@ -7382,7 +7382,7 @@ pub mod types {
          * Groups of organization members that gives permissions on specified repositories.
          */
         #[serde()]
-        pub parent: TeamSimple,
+        pub parent: Parent,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -7526,7 +7526,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /// A migration.
@@ -7570,7 +7570,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub owner: SimpleUser,
+        pub owner: User,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
         #[serde(
@@ -7676,7 +7676,7 @@ pub mod types {
          * A software package
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub owner: Option<SimpleUser>,
+        pub owner: Option<User>,
         #[serde()]
         pub package_type: PackageType,
         /**
@@ -7851,7 +7851,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub creator: SimpleUser,
+        pub creator: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -8056,7 +8056,7 @@ pub mod types {
          * Groups of organization members that gives permissions on specified repositories.
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub parent: Option<TeamSimple>,
+        pub parent: Option<Parent>,
         /**
          * Permission that the team will have for its repositories
          */
@@ -8105,7 +8105,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub author: SimpleUser,
+        pub author: User,
         /**
          * The main text of the discussion.
          */
@@ -8206,7 +8206,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub author: SimpleUser,
+        pub author: User,
         /**
          * The main text of the comment.
          */
@@ -8335,7 +8335,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /**
@@ -8448,7 +8448,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub creator: SimpleUser,
+        pub creator: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -8785,7 +8785,7 @@ pub mod types {
          * License Simple
          */
         #[serde()]
-        pub license: LicenseSimple,
+        pub license: License,
         /**
          * A team's access to a repository.
          */
@@ -8847,7 +8847,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub owner: SimpleUser,
+        pub owner: User,
         /**
          * A team's access to a repository.
          */
@@ -8942,7 +8942,7 @@ pub mod types {
          * A team's access to a repository.
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub template_repository: Option<AuthenticationTokenPermissions>,
+        pub template_repository: Option<Data>,
         /**
          * A team's access to a repository.
          */
@@ -9015,7 +9015,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub creator: SimpleUser,
+        pub creator: User,
         /**
          * The project card's ID
          */
@@ -9118,7 +9118,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -9223,7 +9223,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AdvancedSecurity {
+    pub struct SecretScanning {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub status: Option<FullRepositorySecurityAnalysisAdvancedStatus>,
     }
@@ -9231,9 +9231,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SecurityAnalysis {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub advanced_security: Option<AdvancedSecurity>,
+        pub advanced_security: Option<SecretScanning>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub secret_scanning: Option<AdvancedSecurity>,
+        pub secret_scanning: Option<SecretScanning>,
     }
 
     /// Full Repository
@@ -9497,7 +9497,7 @@ pub mod types {
          * License Simple
          */
         #[serde()]
-        pub license: LicenseSimple,
+        pub license: License,
         /**
          * Full Repository
          */
@@ -9553,12 +9553,12 @@ pub mod types {
          * Full Repository
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub organization: Option<SimpleUser>,
+        pub organization: Option<User>,
         /**
          * Simple User
          */
         #[serde()]
-        pub owner: SimpleUser,
+        pub owner: User,
         /**
          * Full Repository
          */
@@ -9662,7 +9662,7 @@ pub mod types {
          * Full Repository
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub template_repository: Option<AuthenticationTokenPermissions>,
+        pub template_repository: Option<Data>,
         /**
          * Full Repository
          */
@@ -9977,7 +9977,7 @@ pub mod types {
 
     /// Simple Commit
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SimpleCommit {
+    pub struct HeadCommit {
         #[serde()]
         pub author: Author,
         #[serde()]
@@ -10072,7 +10072,7 @@ pub mod types {
          * Simple Commit
          */
         #[serde()]
-        pub head_commit: SimpleCommit,
+        pub head_commit: HeadCommit,
         /**
          * Minimal Repository
          */
@@ -10278,7 +10278,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /**
@@ -10342,7 +10342,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Reviewers {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub reviewer: Option<SimpleUser>,
+        pub reviewer: Option<User>,
         #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
         pub type_: Option<DeploymentReviewerType>,
     }
@@ -10383,7 +10383,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub creator: SimpleUser,
+        pub creator: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -10420,7 +10420,7 @@ pub mod types {
         )]
         pub original_environment: String,
         #[serde()]
-        pub payload: AuthenticationTokenPermissions,
+        pub payload: Data,
         /**
          * A request for a specific ref(branch,sha,tag) to be deployed
          */
@@ -10484,7 +10484,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Ubuntu {
+    pub struct Macos {
         #[serde(default)]
         pub jobs: i64,
         #[serde(default)]
@@ -10494,11 +10494,11 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Billable {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub macos: Option<Ubuntu>,
+        pub macos: Option<Macos>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub ubuntu: Option<Ubuntu>,
+        pub ubuntu: Option<Macos>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub windows: Option<Ubuntu>,
+        pub windows: Option<Macos>,
     }
 
     /// Workflow Run Usage
@@ -10617,7 +10617,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct WorkflowUsageBillableUbuntu {
+    pub struct Windows {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub total_ms: Option<i64>,
     }
@@ -10625,11 +10625,11 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct WorkflowUsageBillable {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub macos: Option<WorkflowUsageBillableUbuntu>,
+        pub macos: Option<Windows>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub ubuntu: Option<WorkflowUsageBillableUbuntu>,
+        pub ubuntu: Option<Windows>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub windows: Option<WorkflowUsageBillableUbuntu>,
+        pub windows: Option<Windows>,
     }
 
     /// Workflow Usage
@@ -10669,7 +10669,7 @@ pub mod types {
         )]
         pub url: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub users: Vec<SimpleUser>,
+        pub users: Vec<User>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11027,7 +11027,7 @@ pub mod types {
         )]
         pub url: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub users: Vec<Owner>,
+        pub users: Vec<Users>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11063,13 +11063,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RequiredLinearHistory {
+    pub struct AllowDeletions {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub enabled: Option<bool>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RequiredSignatures {
+    pub struct EnforceAdmins {
         #[serde(default)]
         pub enabled: bool,
         #[serde(
@@ -11087,12 +11087,12 @@ pub mod types {
          * Branch Protection
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub allow_deletions: Option<RequiredLinearHistory>,
+        pub allow_deletions: Option<AllowDeletions>,
         /**
          * Branch Protection
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub allow_force_pushes: Option<RequiredLinearHistory>,
+        pub allow_force_pushes: Option<AllowDeletions>,
         /**
          * Branch Protection
          */
@@ -11125,12 +11125,12 @@ pub mod types {
          * Branch Protection
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub required_conversation_resolution: Option<RequiredLinearHistory>,
+        pub required_conversation_resolution: Option<AllowDeletions>,
         /**
          * Branch Protection
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub required_linear_history: Option<RequiredLinearHistory>,
+        pub required_linear_history: Option<AllowDeletions>,
         /**
          * Branch Protection
          */
@@ -11140,7 +11140,7 @@ pub mod types {
          * Branch Protection
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub required_signatures: Option<RequiredSignatures>,
+        pub required_signatures: Option<EnforceAdmins>,
         /**
          * Branch Protection
          */
@@ -11163,7 +11163,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Commit {
+    pub struct Tree {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11182,7 +11182,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ShortBranch {
         #[serde()]
-        pub commit: Commit,
+        pub commit: Tree,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11284,7 +11284,7 @@ pub mod types {
         )]
         pub message: String,
         #[serde()]
-        pub tree: Commit,
+        pub tree: Tree,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11382,7 +11382,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub author: SimpleUser,
+        pub author: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11395,7 +11395,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub committer: SimpleUser,
+        pub committer: User,
         /**
          * Commit
          */
@@ -11425,7 +11425,7 @@ pub mod types {
          * Commit
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub stats: Option<ChangeStatus>,
+        pub stats: Option<Stats>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11457,7 +11457,7 @@ pub mod types {
         #[serde()]
         pub links: BranchWithProtectionLinks,
         #[serde()]
-        pub commit: Commit,
+        pub commit: Tree,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11531,7 +11531,7 @@ pub mod types {
         )]
         pub url: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub users: Vec<SimpleUser>,
+        pub users: Vec<User>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11581,12 +11581,12 @@ pub mod types {
          * Branch protections protect branches
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub enforce_admins: Option<RequiredSignatures>,
+        pub enforce_admins: Option<EnforceAdmins>,
         /**
          * Branch protections protect branches
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub required_conversation_resolution: Option<RequiredLinearHistory>,
+        pub required_conversation_resolution: Option<AllowDeletions>,
         /**
          * Branch protections protect branches
          */
@@ -11601,7 +11601,7 @@ pub mod types {
          * Branch protections protect branches
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub required_signatures: Option<RequiredSignatures>,
+        pub required_signatures: Option<EnforceAdmins>,
         /**
          * Branch protections protect branches
          */
@@ -12008,7 +12008,7 @@ pub mod types {
          * Simple Commit
          */
         #[serde()]
-        pub head_commit: SimpleCommit,
+        pub head_commit: HeadCommit,
         /**
          * The SHA of the head commit that is being checked.
          */
@@ -12318,7 +12318,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub dismissed_by: SimpleUser,
+        pub dismissed_by: User,
         /**
          * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
          */
@@ -12457,7 +12457,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub dismissed_by: SimpleUser,
+        pub dismissed_by: User,
         /**
          * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
          */
@@ -12967,12 +12967,12 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub invitee: SimpleUser,
+        pub invitee: User,
         /**
          * Simple User
          */
         #[serde()]
-        pub inviter: SimpleUser,
+        pub inviter: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13063,14 +13063,14 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /// Branch Short
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchShort {
         #[serde()]
-        pub commit: Commit,
+        pub commit: Tree,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13147,7 +13147,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub enabled_by: SimpleUser,
+        pub enabled_by: User,
         /**
          * The merge method to use.
          */
@@ -13194,7 +13194,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestSimpleHead {
+    pub struct Base {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13223,7 +13223,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -13288,12 +13288,12 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub assignee: SimpleUser,
+        pub assignee: User,
         /**
          * Pull Request Simple
          */
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub assignees: Vec<SimpleUser>,
+        pub assignees: Vec<User>,
         /**
          * How the author is associated with the repository.
          */
@@ -13305,7 +13305,7 @@ pub mod types {
         #[serde()]
         pub auto_merge: AutoMerge,
         #[serde()]
-        pub base: PullRequestSimpleHead,
+        pub base: Base,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13340,7 +13340,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub draft: Option<bool>,
         #[serde()]
-        pub head: PullRequestSimpleHead,
+        pub head: Base,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13390,7 +13390,7 @@ pub mod types {
          * Pull Request Simple
          */
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub requested_reviewers: Vec<SimpleUser>,
+        pub requested_reviewers: Vec<User>,
         /**
          * Pull Request Simple
          */
@@ -13438,7 +13438,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -13558,7 +13558,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub creator: SimpleUser,
+        pub creator: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13600,7 +13600,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommunityHealthFile {
+    pub struct Readme {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13623,20 +13623,20 @@ pub mod types {
         #[serde()]
         pub code_of_conduct: CodeOfConductSimple,
         #[serde()]
-        pub code_of_conduct_file: CommunityHealthFile,
+        pub code_of_conduct_file: Readme,
         #[serde()]
-        pub contributing: CommunityHealthFile,
+        pub contributing: Readme,
         #[serde()]
-        pub issue_template: CommunityHealthFile,
+        pub issue_template: Readme,
         /**
          * License Simple
          */
         #[serde()]
-        pub license: LicenseSimple,
+        pub license: License,
         #[serde()]
-        pub pull_request_template: CommunityHealthFile,
+        pub pull_request_template: Readme,
         #[serde()]
-        pub readme: CommunityHealthFile,
+        pub readme: Readme,
     }
 
     /// Community Profile
@@ -13767,11 +13767,11 @@ pub mod types {
         #[serde(default)]
         pub ahead_by: i64,
         #[serde()]
-        pub base_commit: Commit,
+        pub base_commit: Tree,
         #[serde(default)]
         pub behind_by: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub commits: Vec<Commit>,
+        pub commits: Vec<Tree>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13790,7 +13790,7 @@ pub mod types {
         )]
         pub html_url: String,
         #[serde()]
-        pub merge_base_commit: Commit,
+        pub merge_base_commit: Tree,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14298,7 +14298,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitAuthor {
+    pub struct Committer {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14320,7 +14320,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Tree {
+    pub struct FileCommitTree {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14384,9 +14384,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct FileCommit {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub author: Option<FileCommitAuthor>,
+        pub author: Option<Committer>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub committer: Option<FileCommitAuthor>,
+        pub committer: Option<Committer>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14414,7 +14414,7 @@ pub mod types {
         )]
         pub sha: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub tree: Option<Tree>,
+        pub tree: Option<FileCommitTree>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14658,7 +14658,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub creator: SimpleUser,
+        pub creator: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15793,17 +15793,17 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         /**
          * Issue Event
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub assignee: Option<SimpleUser>,
+        pub assignee: Option<User>,
         /**
          * Issue Event
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub assigner: Option<SimpleUser>,
+        pub assigner: Option<User>,
         /**
          * Issue Event
          */
@@ -15885,7 +15885,7 @@ pub mod types {
          * Issue Event
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub requested_reviewer: Option<SimpleUser>,
+        pub requested_reviewer: Option<User>,
         /**
          * Issue Event
          */
@@ -15895,7 +15895,7 @@ pub mod types {
          * Issue Event
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub review_requester: Option<SimpleUser>,
+        pub review_requester: Option<User>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15927,7 +15927,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15982,7 +15982,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16037,17 +16037,17 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         /**
          * Simple User
          */
         #[serde()]
-        pub assignee: SimpleUser,
+        pub assignee: User,
         /**
          * Simple User
          */
         #[serde()]
-        pub assigner: SimpleUser,
+        pub assigner: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16100,17 +16100,17 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         /**
          * Simple User
          */
         #[serde()]
-        pub assignee: SimpleUser,
+        pub assignee: User,
         /**
          * Simple User
          */
         #[serde()]
-        pub assigner: SimpleUser,
+        pub assigner: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16173,7 +16173,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16228,7 +16228,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16299,7 +16299,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16354,7 +16354,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16396,7 +16396,7 @@ pub mod types {
          * Review Requested Issue Event
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub requested_reviewer: Option<SimpleUser>,
+        pub requested_reviewer: Option<User>,
         /**
          * Review Requested Issue Event
          */
@@ -16406,7 +16406,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub review_requester: SimpleUser,
+        pub review_requester: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16422,7 +16422,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16464,7 +16464,7 @@ pub mod types {
          * Review Request Removed Issue Event
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub requested_reviewer: Option<SimpleUser>,
+        pub requested_reviewer: Option<User>,
         /**
          * Review Request Removed Issue Event
          */
@@ -16474,7 +16474,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub review_requester: SimpleUser,
+        pub review_requester: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16514,7 +16514,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16569,7 +16569,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16660,7 +16660,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16718,7 +16718,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16776,7 +16776,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16834,7 +16834,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16892,7 +16892,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16947,7 +16947,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         /**
          * How the author is associated with the repository.
          */
@@ -17036,7 +17036,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17059,7 +17059,7 @@ pub mod types {
          * Timeline Cross Referenced Event
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub actor: Option<SimpleUser>,
+        pub actor: Option<User>,
         #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
@@ -17248,7 +17248,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17490,7 +17490,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /// Timeline Line Commented Event
@@ -17565,12 +17565,12 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         /**
          * Simple User
          */
         #[serde()]
-        pub assignee: SimpleUser,
+        pub assignee: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17623,12 +17623,12 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub actor: SimpleUser,
+        pub actor: User,
         /**
          * Simple User
          */
         #[serde()]
-        pub assignee: SimpleUser,
+        pub assignee: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17756,7 +17756,7 @@ pub mod types {
          * License Simple
          */
         #[serde()]
-        pub license: LicenseSimple,
+        pub license: License,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17993,7 +17993,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub pusher: SimpleUser,
+        pub pusher: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19004,7 +19004,7 @@ pub mod types {
          * License Simple
          */
         #[serde()]
-        pub license: LicenseSimple,
+        pub license: License,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19152,7 +19152,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Base {
+    pub struct PullRequestBase {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19198,12 +19198,12 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub assignee: SimpleUser,
+        pub assignee: User,
         /**
          * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
          */
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub assignees: Vec<SimpleUser>,
+        pub assignees: Vec<User>,
         /**
          * How the author is associated with the repository.
          */
@@ -19215,7 +19215,7 @@ pub mod types {
         #[serde()]
         pub auto_merge: AutoMerge,
         #[serde()]
-        pub base: Base,
+        pub base: PullRequestBase,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19304,7 +19304,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub merged_by: SimpleUser,
+        pub merged_by: User,
         /**
          * A collection of related issues and pull requests.
          */
@@ -19336,12 +19336,12 @@ pub mod types {
          * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
          */
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub requested_reviewers: Vec<SimpleUser>,
+        pub requested_reviewers: Vec<User>,
         /**
          * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
          */
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub requested_teams: Vec<TeamSimple>,
+        pub requested_teams: Vec<Parent>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19388,7 +19388,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /// Pull Request Merge Result
@@ -19416,7 +19416,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub teams: Vec<Team>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub users: Vec<SimpleUser>,
+        pub users: Vec<User>,
     }
 
     /// Pull Request Reviews are reviews on pull requests.
@@ -19503,7 +19503,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -19663,7 +19663,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /**
@@ -19749,7 +19749,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub uploader: SimpleUser,
+        pub uploader: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19773,7 +19773,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub author: SimpleUser,
+        pub author: User,
         /**
          * A release.
          */
@@ -19938,7 +19938,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub resolved_at: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub resolved_by: Option<SimpleUser>,
+        pub resolved_by: Option<User>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19970,7 +19970,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /// Commit Activity
@@ -20003,7 +20003,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub author: SimpleUser,
+        pub author: User,
         #[serde(default)]
         pub total: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -20057,7 +20057,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Tag {
         #[serde()]
-        pub commit: Commit,
+        pub commit: Tree,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -20754,7 +20754,7 @@ pub mod types {
         )]
         pub message: String,
         #[serde()]
-        pub tree: Commit,
+        pub tree: Tree,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -20772,7 +20772,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub author: SimpleUser,
+        pub author: User,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -20842,12 +20842,12 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub assignee: SimpleUser,
+        pub assignee: User,
         /**
          * Issue Search Result Item
          */
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub assignees: Vec<SimpleUser>,
+        pub assignees: Vec<User>,
         /**
          * How the author is associated with the repository.
          */
@@ -20995,7 +20995,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub user: SimpleUser,
+        pub user: User,
     }
 
     /// Label Search Result Item
@@ -21290,7 +21290,7 @@ pub mod types {
          * License Simple
          */
         #[serde()]
-        pub license: LicenseSimple,
+        pub license: License,
         /**
          * Repo Search Result Item
          */
@@ -21344,7 +21344,7 @@ pub mod types {
          * Simple User
          */
         #[serde()]
-        pub owner: SimpleUser,
+        pub owner: User,
         /**
          * Repo Search Result Item
          */
@@ -22974,7 +22974,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetEnterpriseAdminListSelectedOrganizationsEnabledGithubActionsOkResponse {
+    pub struct GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub organizations: Vec<OrganizationSimple>,
         #[serde(default)]
@@ -23093,7 +23093,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetEnterpriseAdminListSelfHostedRunnersInGroupOkResponse {
+    pub struct GetActionsListSelfHostedRunnersInGroupOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub runners: Vec<Runner>,
         #[serde(default)]
@@ -23101,7 +23101,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EnterpriseAdminSetSelfHostedRunnersInGroupRequest {
+    pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
         /**
          * List of runner IDs to add to the runner group.
          */
@@ -23168,7 +23168,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetAppsListReposAccessibleInstallationOkResponse {
+    pub struct GetAppsListInstallationReposOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
         #[serde(
@@ -23360,7 +23360,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutActivityMarkNotificationsAsReadAcceptedResponse {
+    pub struct PostReposCreateDeploymentAcceptedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23887,7 +23887,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetOrgsListAppInstallationsOkResponse {
+    pub struct GetAppsListInstallationsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub installations: Vec<Installation>,
         #[serde(default)]
@@ -24127,7 +24127,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteOrgsRemoveOutsideCollaboratorUnprocessableEntityResponse {
+    pub struct DeleteReposForbiddenResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24147,24 +24147,24 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
+    pub enum PackagesGetAllPackageVersionsOwnedByState {
         Active,
         Deleted,
     }
 
-    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByOrgState {
+    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PackagesGetAllPackageVersionsOwnedByOrgState::Active => "active",
-                PackagesGetAllPackageVersionsOwnedByOrgState::Deleted => "deleted",
+                PackagesGetAllPackageVersionsOwnedByState::Active => "active",
+                PackagesGetAllPackageVersionsOwnedByState::Deleted => "deleted",
             }
             .fmt(f)
         }
     }
 
-    impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
-        fn default() -> PackagesGetAllPackageVersionsOwnedByOrgState {
-            PackagesGetAllPackageVersionsOwnedByOrgState::Active
+    impl Default for PackagesGetAllPackageVersionsOwnedByState {
+        fn default() -> PackagesGetAllPackageVersionsOwnedByState {
+            PackagesGetAllPackageVersionsOwnedByState::Active
         }
     }
 
@@ -24258,28 +24258,28 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ReposListOrgSort {
+    pub enum ReposListSort {
         Created,
         FullName,
         Pushed,
         Updated,
     }
 
-    impl std::fmt::Display for ReposListOrgSort {
+    impl std::fmt::Display for ReposListSort {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ReposListOrgSort::Created => "created",
-                ReposListOrgSort::FullName => "full_name",
-                ReposListOrgSort::Pushed => "pushed",
-                ReposListOrgSort::Updated => "updated",
+                ReposListSort::Created => "created",
+                ReposListSort::FullName => "full_name",
+                ReposListSort::Pushed => "pushed",
+                ReposListSort::Updated => "updated",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ReposListOrgSort {
-        fn default() -> ReposListOrgSort {
-            ReposListOrgSort::Created
+    impl Default for ReposListSort {
+        fn default() -> ReposListSort {
+            ReposListSort::FullName
         }
     }
 
@@ -24976,7 +24976,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteProjectsCardForbiddenResponse {
+    pub struct DeleteProjectsForbiddenResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -25344,7 +25344,7 @@ pub mod types {
 
     /// Use the `status` property to enable or disable secret scanning for this repository. For more information, see "[About secret scanning](/code-security/secret-security/about-secret-scanning)."
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SecretScanning {
+    pub struct ReposUpdateRequestSecurityAnalysisSecretScanning {
         /**
          * Use the `status` property to enable or disable secret scanning for this repository. For more information, see "[About secret scanning](/code-security/secret-security/about-secret-scanning)."
          */
@@ -25368,7 +25368,7 @@ pub mod types {
          * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
          */
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub secret_scanning: Option<SecretScanning>,
+        pub secret_scanning: Option<ReposUpdateRequestSecurityAnalysisSecretScanning>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25443,7 +25443,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetActionsListWorkflowRunsRepoOkResponse {
+    pub struct GetActionsListWorkflowRunsOkResponse {
         #[serde(default)]
         pub total_count: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -26219,29 +26219,29 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ChecksListSuiteFilter {
+    pub enum ChecksListRefFilter {
         All,
         Latest,
     }
 
-    impl std::fmt::Display for ChecksListSuiteFilter {
+    impl std::fmt::Display for ChecksListRefFilter {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ChecksListSuiteFilter::All => "all",
-                ChecksListSuiteFilter::Latest => "latest",
+                ChecksListRefFilter::All => "all",
+                ChecksListRefFilter::Latest => "latest",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ChecksListSuiteFilter {
-        fn default() -> ChecksListSuiteFilter {
-            ChecksListSuiteFilter::Latest
+    impl Default for ChecksListRefFilter {
+        fn default() -> ChecksListRefFilter {
+            ChecksListRefFilter::Latest
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetChecksListSuiteOkResponse {
+    pub struct GetChecksListRefOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_runs: Vec<CheckRun>,
         #[serde(default)]
@@ -26543,7 +26543,7 @@ pub mod types {
 
     /// The person that committed the file. Default: the authenticated user.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Committer {
+    pub struct ReposCreateUpdateFileContentsRequestCommitter {
         /**
          * The person that committed the file. Default: the authenticated user.
          */
@@ -26616,7 +26616,7 @@ pub mod types {
         )]
         pub branch: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub committer: Option<Committer>,
+        pub committer: Option<ReposCreateUpdateFileContentsRequestCommitter>,
         /**
          * The new file content, using Base64 encoding.
          */
@@ -26738,7 +26738,7 @@ pub mod types {
         )]
         pub environment: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub payload: Option<AuthenticationTokenPermissions>,
+        pub payload: Option<Data>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub production_environment: Option<bool>,
         /**
@@ -28266,7 +28266,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutActivityMarkRepoNotificationsAsReadAcceptedResponse {
+    pub struct PutPullsUpdateBranchAcceptedResponse {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28540,26 +28540,26 @@ pub mod types {
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum PullsListReviewCommentsRepoDirection {
+    pub enum PullsListReviewCommentsDirection {
         Asc,
         Desc,
         Noop,
     }
 
-    impl std::fmt::Display for PullsListReviewCommentsRepoDirection {
+    impl std::fmt::Display for PullsListReviewCommentsDirection {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                PullsListReviewCommentsRepoDirection::Asc => "asc",
-                PullsListReviewCommentsRepoDirection::Desc => "desc",
-                PullsListReviewCommentsRepoDirection::Noop => "",
+                PullsListReviewCommentsDirection::Asc => "asc",
+                PullsListReviewCommentsDirection::Desc => "desc",
+                PullsListReviewCommentsDirection::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for PullsListReviewCommentsRepoDirection {
-        fn default() -> PullsListReviewCommentsRepoDirection {
-            PullsListReviewCommentsRepoDirection::Noop
+    impl Default for PullsListReviewCommentsDirection {
+        fn default() -> PullsListReviewCommentsDirection {
+            PullsListReviewCommentsDirection::Noop
         }
     }
 
@@ -29545,7 +29545,7 @@ pub mod types {
          * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
          */
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub operations: Vec<AuthenticationTokenPermissions>,
+        pub operations: Vec<Data>,
         /**
          * The SCIM schema URIs.
          */
@@ -31025,7 +31025,7 @@ impl Client {
      *
      * * `code: &str`
      */
-    pub async fn apps_create_from_manifest(&self, code: &str, body: &types::AuthenticationTokenPermissions) -> Result<types::Integration> {
+    pub async fn apps_create_from_manifest(&self, code: &str, body: &types::Data) -> Result<types::Integration> {
         let url = format!("/app-manifests/{}/conversions", progenitor_support::encode_path(&code.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -31735,7 +31735,7 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/emojis#get-emojis>
      */
-    pub async fn emojis_get(&self) -> Result<types::AuthenticationTokenPermissions> {
+    pub async fn emojis_get(&self) -> Result<types::Data> {
         let url = "/emojis".to_string();
         self.get(&url).await
     }
@@ -31814,7 +31814,7 @@ impl Client {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetEnterpriseAdminListSelectedOrganizationsEnabledGithubActionsOkResponse> {
+    ) -> Result<types::GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32125,7 +32125,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetEnterpriseAdminListSelectedOrganizationsEnabledGithubActionsOkResponse> {
+    ) -> Result<types::GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32258,7 +32258,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetEnterpriseAdminListSelfHostedRunnersInGroupOkResponse> {
+    ) -> Result<types::GetActionsListSelfHostedRunnersInGroupOrgOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -32290,7 +32290,7 @@ impl Client {
         &self,
         enterprise: &str,
         runner_group_id: i64,
-        body: &types::EnterpriseAdminSetSelfHostedRunnersInGroupRequest,
+        body: &types::ActionsSetSelfHostedRunnersInGroupOrgRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners",
@@ -33194,7 +33194,7 @@ impl Client {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetAppsListReposAccessibleInstallationOkResponse> {
+    ) -> Result<types::GetAppsListInstallationReposOkResponse> {
         let url = format!(
             "/installation/repositories?page={}&per_page={}",
             format!("{}", page),
@@ -33241,7 +33241,7 @@ impl Client {
      *
      * **Parameters:**
      *
-     * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
      *  \* `assigned`: Issues assigned to you  
      *  \* `created`: Issues created by you  
      *  \* `mentioned`: Issues mentioning you  
@@ -33261,7 +33261,7 @@ impl Client {
      */
     pub async fn issues_list(
         &self,
-        filter: crate::types::IssuesListFilter,
+        filter: crate::types::Filter,
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
@@ -33308,7 +33308,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn licenses_get_all_commonly_used(&self, featured: bool, per_page: i64, page: i64) -> Result<Vec<types::LicenseSimple>> {
+    pub async fn licenses_get_all_commonly_used(&self, featured: bool, per_page: i64, page: i64) -> Result<Vec<types::License>> {
         let url = format!(
             "/licenses?featured={}&page={}&per_page={}",
             format!("{}", featured),
@@ -33640,7 +33640,7 @@ impl Client {
     pub async fn activity_mark_notifications_as_read(
         &self,
         body: &types::ActivityMarkNotificationsAsReadRequest,
-    ) -> Result<types::PutActivityMarkNotificationsAsReadAcceptedResponse> {
+    ) -> Result<types::PostReposCreateDeploymentAcceptedResponse> {
         let url = "/notifications".to_string();
         self.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
     }
@@ -34376,7 +34376,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetEnterpriseAdminListSelfHostedRunnersInGroupOkResponse> {
+    ) -> Result<types::GetActionsListSelfHostedRunnersInGroupOrgOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -34410,7 +34410,7 @@ impl Client {
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::EnterpriseAdminSetSelfHostedRunnersInGroupRequest,
+        body: &types::ActionsSetSelfHostedRunnersInGroupOrgRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners",
@@ -35032,7 +35032,7 @@ impl Client {
      *
      * * `org: &str`
      */
-    pub async fn orgs_list_blocked_users(&self, org: &str) -> Result<Vec<types::SimpleUser>> {
+    pub async fn orgs_list_blocked_users(&self, org: &str) -> Result<Vec<types::User>> {
         let url = format!("/orgs/{}/blocks", progenitor_support::encode_path(&org.to_string()),);
 
         self.get_all_pages(&url).await
@@ -35443,7 +35443,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_app_installations(&self, org: &str, per_page: i64, page: i64) -> Result<types::GetOrgsListAppInstallationsOkResponse> {
+    pub async fn orgs_list_app_installations(&self, org: &str, per_page: i64, page: i64) -> Result<types::GetAppsListInstallationsOkResponse> {
         let url = format!(
             "/orgs/{}/installations?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -35629,7 +35629,7 @@ impl Client {
      * **Parameters:**
      *
      * * `org: &str`
-     * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
      *  \* `assigned`: Issues assigned to you  
      *  \* `created`: Issues created by you  
      *  \* `mentioned`: Issues mentioning you  
@@ -35646,7 +35646,7 @@ impl Client {
     pub async fn issues_list_for_org(
         &self,
         org: &str,
-        filter: crate::types::IssuesListFilter,
+        filter: crate::types::Filter,
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
@@ -35700,7 +35700,7 @@ impl Client {
         role: crate::types::OrgsListMembersRole,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<types::SimpleUser>> {
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/orgs/{}/members?filter={}&page={}&per_page={}&role={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36060,7 +36060,7 @@ impl Client {
         filter: crate::types::OrgsListMembersFilter,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<types::SimpleUser>> {
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/orgs/{}/outside_collaborators?filter={}&page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36086,7 +36086,7 @@ impl Client {
      * * `org: &str`
      * * `username: &str`
      */
-    pub async fn orgs_convert_member_to_outside_collaborator(&self, org: &str, username: &str) -> Result<types::AuthenticationTokenPermissions> {
+    pub async fn orgs_convert_member_to_outside_collaborator(&self, org: &str, username: &str) -> Result<types::Data> {
         let url = format!(
             "/orgs/{}/outside_collaborators/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36245,7 +36245,7 @@ impl Client {
      * * `org: &str`
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
-     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByState` -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_org(
         &self,
@@ -36254,7 +36254,7 @@ impl Client {
         org: &str,
         page: i64,
         per_page: i64,
-        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -36454,7 +36454,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn orgs_list_public_members(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn orgs_list_public_members(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
         let url = format!(
             "/orgs/{}/public_members?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -36552,7 +36552,7 @@ impl Client {
      *
      * * `org: &str`
      * * `type_: crate::types::ReposListOrgType` -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -36561,7 +36561,7 @@ impl Client {
         &self,
         org: &str,
         type_: crate::types::ReposListOrgType,
-        sort: crate::types::ReposListOrgSort,
+        sort: crate::types::ReposListSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -37478,7 +37478,7 @@ impl Client {
         role: crate::types::TeamsListMembersInOrgRole,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<types::SimpleUser>> {
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/orgs/{}/teams/{}/members?page={}&per_page={}&role={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -38020,7 +38020,7 @@ impl Client {
      *
      * * `card_id: i64` -- card_id parameter.
      */
-    pub async fn projects_move_card(&self, card_id: i64, body: &types::ProjectsMoveCardRequest) -> Result<types::AuthenticationTokenPermissions> {
+    pub async fn projects_move_card(&self, card_id: i64, body: &types::ProjectsMoveCardRequest) -> Result<types::Data> {
         let url = format!("/projects/columns/cards/{}/moves", progenitor_support::encode_path(&card_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -38095,14 +38095,14 @@ impl Client {
      * **Parameters:**
      *
      * * `column_id: i64` -- column_id parameter.
-     * * `archived_state: crate::types::ProjectsListCardsArchivedState` -- Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
+     * * `archived_state: crate::types::ArchivedState` -- Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
     pub async fn projects_list_cards(
         &self,
         column_id: i64,
-        archived_state: crate::types::ProjectsListCardsArchivedState,
+        archived_state: crate::types::ArchivedState,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::ProjectCard>> {
@@ -38149,11 +38149,7 @@ impl Client {
      *
      * * `column_id: i64` -- column_id parameter.
      */
-    pub async fn projects_move_column(
-        &self,
-        column_id: i64,
-        body: &types::ProjectsMoveColumnRequest,
-    ) -> Result<types::AuthenticationTokenPermissions> {
+    pub async fn projects_move_column(&self, column_id: i64, body: &types::ProjectsMoveColumnRequest) -> Result<types::Data> {
         let url = format!("/projects/columns/{}/moves", progenitor_support::encode_path(&column_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -38228,7 +38224,7 @@ impl Client {
      * **Parameters:**
      *
      * * `project_id: i64`
-     * * `affiliation: crate::types::ProjectsListCollaboratorsAffiliation` -- Filters the collaborators by their affiliation. Can be one of:  
+     * * `affiliation: crate::types::Affiliation` -- Filters the collaborators by their affiliation. Can be one of:  
      *  \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
      *  \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
      *  \* `all`: All collaborators the authenticated user can see.
@@ -38238,10 +38234,10 @@ impl Client {
     pub async fn projects_list_collaborators(
         &self,
         project_id: i64,
-        affiliation: crate::types::ProjectsListCollaboratorsAffiliation,
+        affiliation: crate::types::Affiliation,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<types::SimpleUser>> {
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/projects/{}/collaborators?affiliation={}&page={}&per_page={}",
             progenitor_support::encode_path(&project_id.to_string()),
@@ -38988,7 +38984,7 @@ impl Client {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetActionsListWorkflowRunsRepoOkResponse> {
+    ) -> Result<types::GetActionsListWorkflowRunsOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs?actor={}&branch={}&event={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39166,7 +39162,7 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_cancel_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::AuthenticationTokenPermissions> {
+    pub async fn actions_cancel_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::Data> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/cancel",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39351,7 +39347,7 @@ impl Client {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn actions_re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::AuthenticationTokenPermissions> {
+    pub async fn actions_re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::Data> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/rerun",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39569,7 +39565,7 @@ impl Client {
         repo: &str,
         secret_name: &str,
         body: &types::ActionsCreateUpdateRepoSecretRequest,
-    ) -> Result<types::AuthenticationTokenPermissions> {
+    ) -> Result<types::Data> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39792,7 +39788,7 @@ impl Client {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetActionsListWorkflowRunsRepoOkResponse> {
+    ) -> Result<types::GetActionsListWorkflowRunsOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/runs?actor={}&branch={}&event={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -39853,7 +39849,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn issues_list_assignees(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn issues_list_assignees(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/assignees?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40922,7 +40918,7 @@ impl Client {
      * * `repo: &str`
      * * `branch: &str` -- The name of the branch.
      */
-    pub async fn repos_get_users_with_access_to_protected_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<types::SimpleUser>> {
+    pub async fn repos_get_users_with_access_to_protected_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40960,7 +40956,7 @@ impl Client {
         repo: &str,
         branch: &str,
         body: &types::ReposAddUserAccessRestrictionsRequest,
-    ) -> Result<Vec<types::SimpleUser>> {
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             progenitor_support::encode_path(&owner.to_string()),
@@ -40998,7 +40994,7 @@ impl Client {
         repo: &str,
         branch: &str,
         body: &types::ReposAddUserAccessRestrictionsRequest,
-    ) -> Result<Vec<types::SimpleUser>> {
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41036,7 +41032,7 @@ impl Client {
         repo: &str,
         branch: &str,
         body: &types::ReposAddUserAccessRestrictionsRequest,
-    ) -> Result<Vec<types::SimpleUser>> {
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41329,7 +41325,7 @@ impl Client {
         filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetChecksListSuiteOkResponse> {
+    ) -> Result<types::GetChecksListRefOkResponse> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/check-runs?check_name={}&filter={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41362,7 +41358,7 @@ impl Client {
      * * `repo: &str`
      * * `check_suite_id: i64` -- check_suite_id parameter.
      */
-    pub async fn checks_rerequest_suite(&self, owner: &str, repo: &str, check_suite_id: i64) -> Result<types::AuthenticationTokenPermissions> {
+    pub async fn checks_rerequest_suite(&self, owner: &str, repo: &str, check_suite_id: i64) -> Result<types::Data> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/rerequest",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41818,7 +41814,7 @@ impl Client {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `affiliation: crate::types::ProjectsListCollaboratorsAffiliation` -- Filter collaborators returned by their affiliation. Can be one of:  
+     * * `affiliation: crate::types::Affiliation` -- Filter collaborators returned by their affiliation. Can be one of:  
      *  \* `outside`: All outside collaborators of an organization-owned repository.  
      *  \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  
      *  \* `all`: All collaborators the authenticated user can see.
@@ -41829,7 +41825,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        affiliation: crate::types::ProjectsListCollaboratorsAffiliation,
+        affiliation: crate::types::Affiliation,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Collaborator>> {
@@ -42247,7 +42243,7 @@ impl Client {
         until: DateTime<Utc>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<types::Commit>> {
+    ) -> Result<Vec<types::Tree>> {
         let url = format!(
             "/repos/{}/{}/commits?author={}&page={}&path={}&per_page={}&sha={}&since={}&until={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42452,7 +42448,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `ref_: &str` -- ref parameter.
      */
-    pub async fn repos_get_commit(&self, owner: &str, repo: &str, page: i64, per_page: i64, ref_: &str) -> Result<types::Commit> {
+    pub async fn repos_get_commit(&self, owner: &str, repo: &str, page: i64, per_page: i64, ref_: &str) -> Result<types::Tree> {
         let url = format!(
             "/repos/{}/{}/commits/{}?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -42499,7 +42495,7 @@ impl Client {
         per_page: i64,
         page: i64,
         app_id: i64,
-    ) -> Result<types::GetChecksListSuiteOkResponse> {
+    ) -> Result<types::GetChecksListRefOkResponse> {
         let url = format!(
             "/repos/{}/{}/commits/{}/check-runs?app_id={}&check_name={}&filter={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45876,7 +45872,7 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn repos_merge(&self, owner: &str, repo: &str, body: &types::ReposMergeRequest) -> Result<types::Commit> {
+    pub async fn repos_merge(&self, owner: &str, repo: &str, body: &types::ReposMergeRequest) -> Result<types::Tree> {
         let url = format!(
             "/repos/{}/{}/merges",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46139,7 +46135,7 @@ impl Client {
         owner: &str,
         repo: &str,
         body: &types::ActivityMarkRepoNotificationsAsReadRequest,
-    ) -> Result<types::PutActivityMarkRepoNotificationsAsReadAcceptedResponse> {
+    ) -> Result<types::PutPullsUpdateBranchAcceptedResponse> {
         let url = format!(
             "/repos/{}/{}/notifications",
             progenitor_support::encode_path(&owner.to_string()),
@@ -46958,7 +46954,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn pulls_list_commits(&self, owner: &str, repo: &str, pull_number: i64, per_page: i64, page: i64) -> Result<Vec<types::Commit>> {
+    pub async fn pulls_list_commits(&self, owner: &str, repo: &str, pull_number: i64, per_page: i64, page: i64) -> Result<Vec<types::Tree>> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/commits?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47457,7 +47453,7 @@ impl Client {
         repo: &str,
         pull_number: i64,
         body: &types::PullsUpdateBranchRequest,
-    ) -> Result<types::PutActivityMarkRepoNotificationsAsReadAcceptedResponse> {
+    ) -> Result<types::PutPullsUpdateBranchAcceptedResponse> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/update-branch",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48048,7 +48044,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_stargazers_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn activity_list_stargazers_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/stargazers?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48244,7 +48240,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn activity_list_watchers_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn activity_list_watchers_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
         let url = format!(
             "/repos/{}/{}/subscribers?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -50459,7 +50455,7 @@ impl Client {
         role: crate::types::TeamsListMembersInOrgRole,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<types::SimpleUser>> {
+    ) -> Result<Vec<types::User>> {
         let url = format!(
             "/teams/{}/members?page={}&per_page={}&role={}",
             progenitor_support::encode_path(&team_id.to_string()),
@@ -51019,7 +51015,7 @@ impl Client {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user>
      */
-    pub async fn users_list_blocked_by_authenticated(&self) -> Result<Vec<types::SimpleUser>> {
+    pub async fn users_list_blocked_by_authenticated(&self) -> Result<Vec<types::User>> {
         let url = "/user/blocks".to_string();
         self.get_all_pages(&url).await
     }
@@ -51160,7 +51156,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_followers_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn users_list_followers_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::User>> {
         let url = format!("/user/followers?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
 
         self.get_all_pages(&url).await
@@ -51180,7 +51176,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_followed_by_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn users_list_followed_by_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::User>> {
         let url = format!("/user/following?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
 
         self.get_all_pages(&url).await
@@ -51341,7 +51337,7 @@ impl Client {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetOrgsListAppInstallationsOkResponse> {
+    ) -> Result<types::GetAppsListInstallationsOkResponse> {
         let url = format!("/user/installations?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
 
         self.get(&url).await
@@ -51373,7 +51369,7 @@ impl Client {
         installation_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetAppsListReposAccessibleInstallationOkResponse> {
+    ) -> Result<types::GetAppsListInstallationReposOkResponse> {
         let url = format!(
             "/user/installations/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&installation_id.to_string()),
@@ -51497,7 +51493,7 @@ impl Client {
      *
      * **Parameters:**
      *
-     * * `filter: crate::types::IssuesListFilter` -- Indicates which sorts of issues to return. Can be one of:  
+     * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
      *  \* `assigned`: Issues assigned to you  
      *  \* `created`: Issues created by you  
      *  \* `mentioned`: Issues mentioning you  
@@ -51513,7 +51509,7 @@ impl Client {
      */
     pub async fn issues_list_for_authenticated_user(
         &self,
-        filter: crate::types::IssuesListFilter,
+        filter: crate::types::Filter,
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
@@ -52047,7 +52043,7 @@ impl Client {
      * * `package_name: &str` -- The name of the package.
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
-     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByState` -- The state of the package, either active or deleted.
      */
     pub async fn packages_get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
@@ -52055,7 +52051,7 @@ impl Client {
         package_name: &str,
         page: i64,
         per_page: i64,
-        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/user/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -52229,7 +52225,7 @@ impl Client {
      * * `type_: crate::types::ReposListType` -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
      *    
      *  Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -52241,7 +52237,7 @@ impl Client {
         visibility: crate::types::ReposListVisibility,
         affiliation: &str,
         type_: crate::types::ReposListType,
-        sort: crate::types::ReposListOrgSort,
+        sort: crate::types::ReposListSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -52517,7 +52513,7 @@ impl Client {
      * * `since: i64` -- A user ID. Only return users with an ID greater than this ID.
      * * `per_page: i64` -- Results per page (max 100).
      */
-    pub async fn users_list(&self, since: i64, per_page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn users_list(&self, since: i64, per_page: i64) -> Result<Vec<types::User>> {
         let url = format!("/users?per_page={}&since={}", format!("{}", per_page), format!("{}", since),);
 
         self.get_all_pages(&url).await
@@ -52649,7 +52645,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_followers_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn users_list_followers_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
         let url = format!(
             "/users/{}/followers?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52675,7 +52671,7 @@ impl Client {
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
-    pub async fn users_list_following_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn users_list_following_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::User>> {
         let url = format!(
             "/users/{}/following?page={}&per_page={}",
             progenitor_support::encode_path(&username.to_string()),
@@ -52783,13 +52779,13 @@ impl Client {
      * **Parameters:**
      *
      * * `username: &str`
-     * * `subject_type: crate::types::UsersGetContextUserSubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
+     * * `subject_type: crate::types::SubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
      * * `subject_id: &str` -- Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.
      */
     pub async fn users_get_context_for_user(
         &self,
         username: &str,
-        subject_type: crate::types::UsersGetContextUserSubjectType,
+        subject_type: crate::types::SubjectType,
         subject_id: &str,
     ) -> Result<types::Hovercard> {
         let url = format!(
@@ -53081,7 +53077,7 @@ impl Client {
      *
      * * `username: &str`
      * * `type_: crate::types::ReposListUserType` -- Can be one of `all`, `owner`, `member`.
-     * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * * `sort: crate::types::ReposListSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -53090,7 +53086,7 @@ impl Client {
         &self,
         username: &str,
         type_: crate::types::ReposListUserType,
-        sort: crate::types::ReposListOrgSort,
+        sort: crate::types::ReposListSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
