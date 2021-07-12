@@ -829,13 +829,13 @@ impl TypeSpace {
          * name that is this exact same type.
          */
         // TODO: focus here
-        if !is_schema {
+        /*if !is_schema {
             for (tid, te) in self.id_to_entry.iter() {
                 if te.details == details {
                     return Ok(tid.clone());
                 }
             }
-        }
+        }*/
 
         if let Some(name) = &name {
             /*
@@ -1189,7 +1189,7 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str, defau
 
     if !description.is_empty() {
         a("/**");
-        a(&format!("* {}", description));
+        a(&format!("* {}", description.replace("\n", "\n*   ")));
         a("*/");
     }
 
