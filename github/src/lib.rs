@@ -5646,6 +5646,57 @@ pub mod types {
         pub updated_at: String,
     }
 
+    /// Marketplace Purchase
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct MarketplacePurchaseData {
+        /**
+         * Marketplace Purchase
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub email: String,
+        #[serde(default)]
+        pub id: i64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub login: String,
+        /**
+         * Marketplace Purchase
+         */
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub marketplace_pending_change: Option<MarketplacePendingChange>,
+        #[serde()]
+        pub marketplace_purchase: MarketplacePurchase,
+        /**
+         * Marketplace Purchase
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub organization_billing_email: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+            rename = "type"
+        )]
+        pub type_: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub url: String,
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SshKeyFingerprints {
         #[serde(
@@ -11213,6 +11264,38 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitData {
+        /**
+         * Metaproperties for Git author/committer information.
+         */
+        #[serde()]
+        pub author: GitUser,
+        #[serde(default)]
+        pub comment_count: i64,
+        /**
+         * Metaproperties for Git author/committer information.
+         */
+        #[serde()]
+        pub committer: GitUser,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub message: String,
+        #[serde()]
+        pub tree: Commit,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub url: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub verification: Option<Verification>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Parents {
         #[serde(
             default,
@@ -11824,6 +11907,85 @@ pub mod types {
         fn default() -> CheckSuiteStatus {
             CheckSuiteStatus::Noop
         }
+    }
+
+    /// A suite of checks performed on the code of a given code change
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CheckSuiteData {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub after: String,
+        /**
+         * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+         */
+        #[serde()]
+        pub app: Integration,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub before: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub check_runs_url: String,
+        #[serde()]
+        pub conclusion: Conclusion,
+        #[serde()]
+        pub created_at: DateTime<Utc>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub head_branch: String,
+        /**
+         * Simple Commit
+         */
+        #[serde()]
+        pub head_commit: SimpleCommit,
+        /**
+         * The SHA of the head commit that is being checked.
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub head_sha: String,
+        #[serde(default)]
+        pub id: i64,
+        #[serde(default)]
+        pub latest_check_runs_count: i64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub node_id: String,
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub pull_requests: Vec<PullRequestMinimal>,
+        /**
+         * Minimal Repository
+         */
+        #[serde()]
+        pub repository: MinimalRepository,
+        #[serde()]
+        pub status: CheckSuiteStatus,
+        #[serde()]
+        pub updated_at: DateTime<Utc>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub url: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14204,6 +14366,15 @@ pub mod types {
         pub verification: Option<FileCommitVerification>,
     }
 
+    /// File Commit
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct FileCommitData {
+        #[serde()]
+        pub commit: FileCommit,
+        #[serde()]
+        pub content: FileCommitContent,
+    }
+
     /// Contributor
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Contributor {
@@ -14548,6 +14719,63 @@ pub mod types {
         pub type_: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub wait_timer: Option<i64>,
+    }
+
+    /// Details of a deployment environment
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct EnvironmentData {
+        /**
+         * The time that the environment was created, in ISO 8601 format.
+         */
+        #[serde()]
+        pub created_at: DateTime<Utc>,
+        /**
+         * Details of a deployment environment
+         */
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub deployment_branch_policy: Option<DeploymentBranchPolicy>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub html_url: String,
+        /**
+         * The id of the environment.
+         */
+        #[serde(default)]
+        pub id: i64,
+        /**
+         * The name of the environment.
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub name: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub node_id: String,
+        /**
+         * Details of a deployment environment
+         */
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub protection_rules: Vec<ProtectionRules>,
+        /**
+         * The time that the environment was last updated, in ISO 8601 format.
+         */
+        #[serde()]
+        pub updated_at: DateTime<Utc>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub url: String,
     }
 
     /// Short Blob
@@ -14921,6 +15149,30 @@ pub mod types {
             rename = "type"
         )]
         pub type_: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub url: String,
+    }
+
+    /// The hierarchy between files in a Git repository.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct GitTreeData {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub sha: String,
+        /**
+         * Objects specifying a tree structure
+         */
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub tree: Vec<GitTree>,
+        #[serde(default)]
+        pub truncated: bool,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18867,6 +19119,219 @@ pub mod types {
         pub user: PullRequestHeadRepoOwner,
     }
 
+    /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestData {
+        #[serde()]
+        pub links: PullRequestSimpleLinks,
+        /**
+         * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub active_lock_reason: String,
+        #[serde(default)]
+        pub additions: i64,
+        /**
+         * Simple User
+         */
+        #[serde()]
+        pub assignee: SimpleUser,
+        /**
+         * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+         */
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub assignees: Vec<SimpleUser>,
+        /**
+         * How the author is associated with the repository.
+         */
+        #[serde()]
+        pub author_association: AuthorAssociation,
+        /**
+         * The status of auto merging a pull request.
+         */
+        #[serde()]
+        pub auto_merge: AutoMerge,
+        #[serde()]
+        pub base: Base,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub body: String,
+        #[serde(default)]
+        pub changed_files: i64,
+        #[serde()]
+        pub closed_at: DateTime<Utc>,
+        #[serde(default)]
+        pub comments: i64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub comments_url: String,
+        #[serde(default)]
+        pub commits: i64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub commits_url: String,
+        #[serde()]
+        pub created_at: DateTime<Utc>,
+        #[serde(default)]
+        pub deletions: i64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub diff_url: String,
+        /**
+         * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+         */
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub draft: Option<bool>,
+        #[serde()]
+        pub head: PullRequestHead,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub html_url: String,
+        #[serde(default)]
+        pub id: i64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub issue_url: String,
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub labels: Vec<PullRequestSimpleLabels>,
+        #[serde(default)]
+        pub locked: bool,
+        /**
+         * Indicates whether maintainers can modify the pull request.
+         */
+        #[serde(default)]
+        pub maintainer_can_modify: bool,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub merge_commit_sha: String,
+        #[serde(default)]
+        pub mergeable: bool,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub mergeable_state: String,
+        #[serde(default)]
+        pub merged: bool,
+        #[serde()]
+        pub merged_at: DateTime<Utc>,
+        /**
+         * Simple User
+         */
+        #[serde()]
+        pub merged_by: SimpleUser,
+        /**
+         * A collection of related issues and pull requests.
+         */
+        #[serde()]
+        pub milestone: Milestone,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub node_id: String,
+        /**
+         * Number uniquely identifying the pull request within its repository.
+         */
+        #[serde(default)]
+        pub number: i64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub patch_url: String,
+        /**
+         * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+         */
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub rebaseable: Option<bool>,
+        /**
+         * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+         */
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub requested_reviewers: Vec<SimpleUser>,
+        /**
+         * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+         */
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub requested_teams: Vec<TeamSimple>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub review_comment_url: String,
+        #[serde(default)]
+        pub review_comments: i64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub review_comments_url: String,
+        /**
+         * State of this Pull Request. Either `open` or `closed`.
+         */
+        #[serde()]
+        pub state: PullRequestState,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub statuses_url: String,
+        /**
+         * The title of the pull request.
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub title: String,
+        #[serde()]
+        pub updated_at: DateTime<Utc>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub url: String,
+        /**
+         * Simple User
+         */
+        #[serde()]
+        pub user: SimpleUser,
+    }
+
     /// Pull Request Merge Result
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestMergeResult {
@@ -18893,6 +19358,93 @@ pub mod types {
         pub teams: Vec<Team>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub users: Vec<SimpleUser>,
+    }
+
+    /// Pull Request Reviews are reviews on pull requests.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct PullRequestReviewData {
+        #[serde()]
+        pub links: TimelineReviewedEventLinks,
+        /**
+         * How the author is associated with the repository.
+         */
+        #[serde()]
+        pub author_association: AuthorAssociation,
+        /**
+         * The text of the review.
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub body: String,
+        /**
+         * Pull Request Reviews are reviews on pull requests.
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub body_html: String,
+        /**
+         * Pull Request Reviews are reviews on pull requests.
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub body_text: String,
+        /**
+         * A commit SHA for the review.
+         */
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub commit_id: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub html_url: String,
+        /**
+         * Unique identifier of the review
+         */
+        #[serde(default)]
+        pub id: i64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub node_id: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub pull_request_url: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub state: String,
+        /**
+         * Pull Request Reviews are reviews on pull requests.
+         */
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub submitted_at: Option<DateTime<Utc>>,
+        /**
+         * Simple User
+         */
+        #[serde()]
+        pub user: SimpleUser,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20152,6 +20704,67 @@ pub mod types {
         pub url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub verification: Option<Verification>,
+    }
+
+    /// Commit Search Result Item
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct CommitSearchResultItemData {
+        /**
+         * Simple User
+         */
+        #[serde()]
+        pub author: SimpleUser,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub comments_url: String,
+        #[serde()]
+        pub commit: CommitSearchResultItem,
+        /**
+         * Metaproperties for Git author/committer information.
+         */
+        #[serde()]
+        pub committer: GitUser,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub html_url: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub node_id: String,
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub parents: Vec<FileCommitParents>,
+        /**
+         * Minimal Repository
+         */
+        #[serde()]
+        pub repository: MinimalRepository,
+        #[serde(default)]
+        pub score: f64,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub sha: String,
+        /**
+         * Commit Search Result Item
+         */
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub text_matches: Option<SearchResultTextMatches>,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub url: String,
     }
 
     /// Issue Search Result Item
@@ -21696,6 +22309,42 @@ pub mod types {
     }
 
     /**
+     * The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     */
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PackageTypeData {
+        Container,
+        Docker,
+        Maven,
+        Npm,
+        Nuget,
+        Rubygems,
+        Noop,
+    }
+
+    impl std::fmt::Display for PackageTypeData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PackageTypeData::Container => "container",
+                PackageTypeData::Docker => "docker",
+                PackageTypeData::Maven => "maven",
+                PackageTypeData::Npm => "npm",
+                PackageTypeData::Nuget => "nuget",
+                PackageTypeData::Rubygems => "rubygems",
+                PackageTypeData::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PackageTypeData {
+        fn default() -> PackageTypeData {
+            PackageTypeData::Noop
+        }
+    }
+
+    /**
      * Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
      */
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -21742,6 +22391,36 @@ pub mod types {
     impl Default for WorkflowRunStatus {
         fn default() -> WorkflowRunStatus {
             WorkflowRunStatus::Noop
+        }
+    }
+
+    /**
+     * Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
+     */
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum StatusData {
+        Completed,
+        InProgress,
+        Queued,
+        Noop,
+    }
+
+    impl std::fmt::Display for StatusData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                StatusData::Completed => "completed",
+                StatusData::InProgress => "in_progress",
+                StatusData::Queued => "queued",
+                StatusData::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for StatusData {
+        fn default() -> StatusData {
+            StatusData::Noop
         }
     }
 
@@ -26554,6 +27233,21 @@ pub mod types {
         pub type_: Option<GitCreateTreeRequestType>,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct GitCreateTreeRequestData {
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub base_tree: String,
+        /**
+         * Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure.
+         */
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        pub tree: Vec<GitCreateTreeRequest>,
+    }
+
     /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReposCreateWebhookRequestConfig {
@@ -27583,6 +28277,36 @@ pub mod types {
         pub source: ReposCreatePagesSiteRequestSource,
     }
 
+    /**
+     * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
+     */
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SourceData {
+        GhPages,
+        Master,
+        MasterDocs,
+        Noop,
+    }
+
+    impl std::fmt::Display for SourceData {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SourceData::GhPages => "gh-pages",
+                SourceData::Master => "master",
+                SourceData::MasterDocs => "master /docs",
+                SourceData::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SourceData {
+        fn default() -> SourceData {
+            SourceData::Noop
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReposUpdateInformationAboutPagesSiteRequest {
         #[serde(
@@ -27596,7 +28320,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub public: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub source: Option<Source>,
+        pub source: Option<SourceData>,
     }
 
     /**
@@ -29385,6 +30109,15 @@ pub mod types {
         fn default() -> UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
             UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Noop
         }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    pub struct UsersSetPrimaryEmailVisibilityAuthenticatedRequestData {
+        /**
+         * Denotes whether an email is publicly visible.
+         */
+        #[serde()]
+        pub visibility: UsersSetPrimaryEmailVisibilityAuthenticatedRequest,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -43108,7 +43841,7 @@ impl Client {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn git_create_tree(&self, owner: &str, repo: &str, body: &types::GitCreateTreeRequest) -> Result<types::GitTree> {
+    pub async fn git_create_tree(&self, owner: &str, repo: &str, body: &types::GitCreateTreeRequestData) -> Result<types::GitTree> {
         let url = format!(
             "/repos/{}/{}/git/trees",
             progenitor_support::encode_path(&owner.to_string()),
@@ -50300,7 +51033,7 @@ impl Client {
      */
     pub async fn users_set_primary_email_visibility_for_authenticated(
         &self,
-        body: &types::UsersSetPrimaryEmailVisibilityAuthenticatedRequest,
+        body: &types::UsersSetPrimaryEmailVisibilityAuthenticatedRequestData,
     ) -> Result<Vec<types::Email>> {
         let url = "/user/email/visibility".to_string();
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await

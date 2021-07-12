@@ -853,16 +853,20 @@ impl TypeSpace {
                 if et.details != details {
                     // We can get here if there are two objects with the same name
                     // that have properties that are different.
-                    if parent_name.is_empty() {
+                    if parent_name.is_empty() && !name.contains("data") {
+                        // Let's try to append "data" onto the end and see if that helps.
+                        let new_name = format!("{} data", name);
+                        return self.add_if_not_exists(Some(clean_name(&new_name)), details, "", is_schema);
                         // If we don't have a parent_name to append, let's bail.
+                    } else if !parent_name.is_empty() {
+                        // If we have a parent name, let's append it to the real name.
+                        let pname = format!("{} {}", parent_name, name);
+                        return self.add_if_not_exists(Some(clean_name(&pname)), details, "", is_schema);
+                    } else {
                         println!(
                             "no parent_name and object details for {} do not match: {:?} != {:?}",
                             name, et.details, details,
                         );
-                    } else {
-                        // If we have a parent name, let's append it to the real name.
-                        let pname = format!("{} {}", parent_name, name);
-                        return self.add_if_not_exists(Some(clean_name(&pname)), details, "", is_schema);
                     }
                 }
             } else {
