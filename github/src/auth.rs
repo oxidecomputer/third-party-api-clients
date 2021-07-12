@@ -1,7 +1,9 @@
 //! For performing functions related to authentication for the API.
-use std::fmt;
-use std::sync::{Arc, Mutex};
-use std::time;
+use std::{
+    fmt,
+    sync::{Arc, Mutex},
+    time,
+};
 
 use anyhow::Result;
 use jsonwebtoken as jwt;

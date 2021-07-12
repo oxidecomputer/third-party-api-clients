@@ -1,11 +1,13 @@
 //! Implements <https://tools.ietf.org/html/rfc7232> Conditional Requests.
-use std::collections::hash_map::DefaultHasher;
-use std::ffi::OsStr;
-use std::fmt::Debug;
-use std::fs;
-use std::hash::{Hash, Hasher};
-use std::io;
-use std::path::{Path, PathBuf};
+use std::{
+    collections::hash_map::DefaultHasher,
+    ffi::OsStr,
+    fmt::Debug,
+    fs,
+    hash::{Hash, Hasher},
+    io,
+    path::{Path, PathBuf},
+};
 
 use anyhow::{Error, Result};
 use http::Uri;
@@ -114,15 +116,27 @@ impl HttpCache for FileBasedCache {
 /// # use std::path::PathBuf;
 /// # use github_api_client::http_cache::cache_path;
 /// assert_eq!(
-///     cache_path(&PathBuf::from("/home/.github_api_client/cache"), "https://api.github.com/users/dwijnand/repos", "json"),
+///     cache_path(
+///         &PathBuf::from("/home/.github_api_client/cache"),
+///         "https://api.github.com/users/dwijnand/repos",
+///         "json"
+///     ),
 ///     PathBuf::from("/home/.github_api_client/cache/v1/https/api.github.com/users/dwijnand/repos.json"),
 /// );
 /// assert_eq!(
-///     cache_path(&PathBuf::from("/home/.github_api_client/cache"), "https://api.github.com/users/dwijnand/repos?page=2", "json"),
+///     cache_path(
+///         &PathBuf::from("/home/.github_api_client/cache"),
+///         "https://api.github.com/users/dwijnand/repos?page=2",
+///         "json"
+///     ),
 ///     PathBuf::from("/home/.github_api_client/cache/v1/https/api.github.com/users/dwijnand/repos/6dd58bde8abb0869.json"),
 /// );
 /// assert_eq!(
-///     cache_path(&PathBuf::from("/home/.github_api_client/cache"), "https://api.github.com/users/dwijnand/repos?page=2&per_page=5", "json"),
+///     cache_path(
+///         &PathBuf::from("/home/.github_api_client/cache"),
+///         "https://api.github.com/users/dwijnand/repos?page=2&per_page=5",
+///         "json"
+///     ),
 ///     PathBuf::from("/home/.github_api_client/cache/v1/https/api.github.com/users/dwijnand/repos/d862dcd2d85cebca.json"),
 /// );
 /// ```

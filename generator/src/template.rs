@@ -64,17 +64,9 @@ impl Template {
                 for c in self.components.iter() {
                     if let Component::Parameter(n) = &c {
                         if n == "type" || n == "ref" {
-                            out.push_str(&format!(
-                                "            \
-                    progenitor_support::encode_path(&{}_.to_string()),\n",
-                                n
-                            ));
+                            out.push_str(&format!("            progenitor_support::encode_path(&{}_.to_string()),\n", n));
                         } else {
-                            out.push_str(&format!(
-                                "            \
-                    progenitor_support::encode_path(&{}.to_string()),\n",
-                                n
-                            ));
+                            out.push_str(&format!("            progenitor_support::encode_path(&{}.to_string()),\n", n));
                         }
                     }
                 }
@@ -170,8 +162,9 @@ fn parse_inner(t: &str) -> Result<Template> {
 
 #[cfg(test)]
 mod test {
-    use super::{parse, Component, Template};
     use anyhow::{anyhow, Context, Result};
+
+    use super::{parse, Component, Template};
 
     #[test]
     fn basic() -> Result<()> {
@@ -212,9 +205,7 @@ mod test {
     fn compile() -> Result<()> {
         let t = parse("/measure/{number}")?;
         let out = t.compile(Default::default());
-        let want = "        let url = format!(\"/measure/{}\",\
-            \n            progenitor_support::encode_path(&number.to_string()),\
-            \n        );\n";
+        let want = "        let url = format!(\"/measure/{}\",\n            progenitor_support::encode_path(&number.to_string()),\n        );\n";
         assert_eq!(want, &out);
         Ok(())
     }

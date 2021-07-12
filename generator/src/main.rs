@@ -1,11 +1,13 @@
 mod client;
 mod template;
 
-use std::collections::{BTreeMap, HashSet};
-use std::ffi::OsStr;
-use std::fs::{File, OpenOptions};
-use std::io::Write;
-use std::path::{Path, PathBuf};
+use std::{
+    collections::{BTreeMap, HashSet},
+    ffi::OsStr,
+    fs::{File, OpenOptions},
+    io::Write,
+    path::{Path, PathBuf},
+};
 
 use anyhow::{bail, Result};
 use http::status::StatusCode;
@@ -200,8 +202,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                             SchemaKind::Type(Type::Array(_at)) => "&[String]".to_string(), // TODO: make this smarter
                             SchemaKind::Type(Type::String(st)) => {
                                 use openapiv3::{
-                                    StringFormat::Date,
-                                    StringFormat::DateTime,
+                                    StringFormat::{Date, DateTime},
                                     VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                                 };
 
@@ -1006,8 +1007,7 @@ impl TypeSpace {
                 }
                 openapiv3::Type::String(st) => {
                     use openapiv3::{
-                        StringFormat::Date,
-                        StringFormat::DateTime,
+                        StringFormat::{Date, DateTime},
                         VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
 
@@ -1188,8 +1188,8 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str, defau
     }
 
     if !description.is_empty() {
-        a("/*");
-        a(&format!("* {}", description.replace("\n", "\n*  ")));
+        a("/**");
+        a(&format!("* {}", description));
         a("*/");
     }
 
