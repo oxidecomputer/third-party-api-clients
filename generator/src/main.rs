@@ -1513,7 +1513,7 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                             }
 
                             // Try to render the docs.
-                            let p = ts.render_docs(tid);
+                            let p = ts.render_docs(tid).replace("\\*", "*").replace("\\-", "-");
                             if !p.is_empty() && p != desc {
                                 a(&p);
                             }
@@ -1643,9 +1643,9 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 let typ = parameter_data.render_type(&param_name, ts)?;
 
                 if nam == "ref" || nam == "type" {
-                    a(&format!("* * {}_: {}{}", nam, typ, docs));
+                    a(&format!("* * `{}_: {}`{}", nam, typ, docs));
                 } else {
-                    a(&format!("* * {}: {}{}", nam, typ, docs));
+                    a(&format!("* * `{}: {}`{}", nam, typ, docs));
                 }
             }
             a("*/");
