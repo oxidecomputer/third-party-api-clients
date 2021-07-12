@@ -174,11 +174,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                 if let Ok(s) = s.item() {
                     match &s.schema_kind {
                         SchemaKind::Type(Type::Boolean {}) => "bool".to_string(),
-                        SchemaKind::Type(Type::Array(at)) => {
-                            // TODO: actually get the array type.
-                            println!("XXX array type: {:?}", at);
-                            "&[String]".to_string()
-                        }
+                        SchemaKind::Type(Type::Array(_at)) => "&[String]".to_string(), // TODO: make this smarter
                         SchemaKind::Type(Type::String(st)) => {
                             use openapiv3::{
                                 StringFormat::Date,
@@ -191,32 +187,36 @@ impl ParameterDataExt for openapiv3::ParameterData {
                             }
 
                             if !st.enumeration.is_empty() {
-                                if name.is_empty() {
-                                    // Try to find the parameter among our types.
-                                    for te in ts.id_to_entry.values() {
-                                        if let Some(sn) = te.name.as_deref() {
-                                            let sn = struct_name(sn);
-                                            if let TypeDetails::Enum(vals, _schema_data) = &te.details {
-                                                if st.enumeration == *vals {
-                                                    return Ok(format!("crate::types::{}", sn));
-                                                }
+                                // We have an enum.
+                                // Let's return the correct enum struct name.
+                                let mut sn = struct_name(name);
+                                // TODO: have a more automated way of making sure there aren't
+                                // duplicates of enums.
+                                if sn == "Status" {
+                                    sn = format!("{}Data", sn);
+                                }
+
+                                // Make sure we actually have a type, we might have
+                                // not added the type since it is a duplicate of another type.
+                                if !name.is_empty() {
+                                    if let Some(_) = ts.name_to_id.get(&sn) {
+                                        return Ok(format!("crate::types::{}", sn));
+                                    }
+                                }
+
+                                // Try to find the parameter among our types.
+                                for te in ts.id_to_entry.values() {
+                                    if let Some(sn) = te.name.as_deref() {
+                                        let sn = struct_name(sn);
+                                        if let TypeDetails::Enum(vals, _schema_data) = &te.details {
+                                            if st.enumeration == *vals {
+                                                return Ok(format!("crate::types::{}", sn));
                                             }
                                         }
                                     }
-
-                                    bail!("parameter {} that enumerates should have a pre-defined type: {:?}", name, s);
-                                } else {
-                                    // We have an enum.
-                                    // Let's return the correct enum struct name.
-                                    let mut sn = struct_name(name);
-                                    // TODO: have a more automated way of making sure there aren't
-                                    // duplicates of enums.
-                                    if sn == "Status" {
-                                        sn = format!("{}Data", sn);
-                                    }
-
-                                    return Ok(format!("crate::types::{}", sn));
                                 }
+
+                                bail!("parameter {} that enumerates should have a pre-defined type: {:?}", name, s);
                             }
 
                             if st.min_length.is_some() || st.max_length.is_some() {
@@ -292,11 +292,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 format!("i{}", width)
                             }
                         }
-                        openapiv3::SchemaKind::OneOf { one_of: _ } => {
-                            // TODO: make this smarter, but for now just make it a string.
-                            println!("oneof parameter: {:?}", self);
-                            "&str".to_string()
-                        }
+                        openapiv3::SchemaKind::OneOf { one_of: _ } => "&str".to_string(), // TODO: make this smarter.
                         x => bail!("unexpected type {:#?}", x),
                     }
                 } else {
@@ -481,6 +477,27 @@ enum TypeDetails {
      * order in the generated code.
      */
     Object(BTreeMap<String, TypeId>, openapiv3::SchemaData),
+}
+
+#[allow(dead_code)]
+impl TypeDetails {
+    pub fn description(&self) -> String {
+        let desc = match self {
+            TypeDetails::Basic(_, d) => d.description.as_ref(),
+            TypeDetails::NamedType(_, d) => d.description.as_ref(),
+            TypeDetails::Enum(_, d) => d.description.as_ref(),
+            TypeDetails::Array(_, d) => d.description.as_ref(),
+            TypeDetails::Optional(_, d) => d.description.as_ref(),
+            TypeDetails::Object(_, d) => d.description.as_ref(),
+            TypeDetails::Unknown => None,
+        };
+
+        if let Some(n) = desc {
+            n.to_string()
+        } else {
+            "".to_string()
+        }
+    }
 }
 
 impl PartialEq for TypeDetails {
@@ -793,15 +810,18 @@ impl TypeSpace {
         })
     }
 
-    fn add_if_not_exists(&mut self, name: Option<String>, details: TypeDetails, parent_name: &str) -> Result<TypeId> {
+    fn add_if_not_exists(&mut self, name: Option<String>, details: TypeDetails, parent_name: &str, is_schema: bool) -> Result<TypeId> {
         /*
          * We can have types that are references that are never explicitly called
          * but are duplicated all over. Let's ensure that we don't have a type with a different
-         * name that is this exact same type. // TODO
+         * name that is this exact same type.
          */
-        /*for (tid, te) in self.id_to_entry.iter() {
-            if te.name.is_none() && te.details == details {
-                return Ok(tid.clone());
+        // TODO: focus here
+        /*if !is_schema {
+            for (tid, te) in self.id_to_entry.iter() {
+                if te.details == details {
+                    return Ok(tid.clone());
+                }
             }
         }*/
 
@@ -915,7 +935,7 @@ impl TypeSpace {
     fn select_schema(&mut self, name: Option<&str>, s: &openapiv3::Schema, parent_name: &str, is_schema: bool) -> Result<TypeId> {
         let (n, details) = self.get_type_name_and_details(name, s, parent_name, is_schema)?;
 
-        self.add_if_not_exists(n, details, parent_name)
+        self.add_if_not_exists(n, details, parent_name, is_schema)
     }
 
     fn get_type_name_and_details(
@@ -1576,6 +1596,43 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
                 a("*");
                 a(&format!("* FROM: <{}>", external_docs.url));
             }
+            if !o.parameters.is_empty() {
+                a("*");
+                a("* **Parameters:**");
+                a("*");
+            }
+            // Iterate over the function parameters and add any data those had as well.
+            for par in o.parameters.iter() {
+                let mut param_name = "".to_string();
+                let item = match par {
+                    openapiv3::ReferenceOr::Reference { reference } => {
+                        param_name = struct_name(&reference.replace("#/components/parameters/", ""));
+                        // Get the parameter from our BTreeMap.
+                        if let Some(param) = parameters.get(&param_name) {
+                            param
+                        } else {
+                            bail!("could not find parameter with reference: {}", reference);
+                        }
+                    }
+                    openapiv3::ReferenceOr::Item(item) => item,
+                };
+
+                let pid = ts.select_param(None, par, true)?;
+                let mut docs = ts.render_docs(&pid);
+                if !docs.is_empty() {
+                    docs = format!(" -- {}", docs.trim().replace("/// ", ""));
+                }
+
+                let parameter_data = get_parameter_data(item).unwrap();
+                let nam = &to_snake_case(&parameter_data.name);
+                let typ = parameter_data.render_type(&param_name, ts)?;
+
+                if nam == "ref" || nam == "type" {
+                    a(&format!("*  * {}_: {}{}", nam, typ, docs));
+                } else {
+                    a(&format!("* * {}: {}{}", nam, typ, docs));
+                }
+            }
             a("*/");
 
             let mut bounds: Vec<String> = Vec::new();
@@ -2036,6 +2093,7 @@ fn main() -> Result<()> {
             println!("PARAMETER {}/{}: {}", i + 1, components.parameters.len(), name);
 
             let id = ts.select_param(Some(name.as_str()), p, false)?;
+
             println!("    -> {:?}", id);
             println!();
             if let openapiv3::ReferenceOr::Item(item) = p {

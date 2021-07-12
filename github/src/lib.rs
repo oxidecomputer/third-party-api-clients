@@ -308,130 +308,6 @@ pub mod types {
         pub url: String,
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Owner {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// The set of permissions for the GitHub app
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Permissions {
@@ -525,7 +401,7 @@ pub mod types {
         pub node_id: String,
         /// Simple User
         #[serde()]
-        pub owner: Owner,
+        pub owner: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -1555,130 +1431,6 @@ pub mod types {
         pub workflows: Option<Workflows>,
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Account {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Describe whether all repositories have been selected or there's a selection involved
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -1705,130 +1457,6 @@ pub mod types {
         }
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SuspendedBy {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Installation
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Installation {
@@ -1840,7 +1468,7 @@ pub mod types {
         pub access_tokens_url: String,
         /// Simple User
         #[serde()]
-        pub account: Account,
+        pub account: SimpleUser,
         #[serde(default)]
         pub app_id: i64,
         #[serde(
@@ -1894,7 +1522,7 @@ pub mod types {
         pub suspended_at: DateTime<Utc>,
         /// Simple User
         #[serde()]
-        pub suspended_by: SuspendedBy,
+        pub suspended_by: SimpleUser,
         /// The ID of the user or organization this token is being scoped to.
         #[serde(default)]
         pub target_id: i64,
@@ -1949,171 +1577,6 @@ pub mod types {
         pub url: String,
     }
 
-    /// License Simple
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct License {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub key: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub spdx_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Organization {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RepositoryPermissions {
         #[serde(default)]
@@ -2129,7 +1592,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RepositoryTemplateOwner {
+    pub struct Owner {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2866,7 +2329,7 @@ pub mod types {
         pub languages_url: String,
         /// License Simple
         #[serde()]
-        pub license: License,
+        pub license: LicenseSimple,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -2917,10 +2380,10 @@ pub mod types {
         #[serde(default)]
         pub open_issues_count: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub organization: Option<Organization>,
+        pub organization: Option<SimpleUser>,
         /// Simple User
         #[serde()]
-        pub owner: Owner,
+        pub owner: SimpleUser,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
         /// Whether the repository is private or public.
@@ -3171,130 +2634,6 @@ pub mod types {
         pub url: String,
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct User {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// The authorization associated with an OAuth Access.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ApplicationGrant {
@@ -3315,62 +2654,11 @@ pub mod types {
         )]
         pub url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub user: Option<User>,
+        pub user: Option<SimpleUser>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScopedInstallation {
-        /// Simple User
-        #[serde()]
-        pub account: SimpleUser,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub has_multiple_single_files: Option<bool>,
-        /// The permissions granted to the user-to-server access token.
-        #[serde()]
-        pub permissions: AppPermissions,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repositories_url: String,
-        /// Describe whether all repositories have been selected or there's a selection involved
-        #[serde()]
-        pub repository_selection: RepositorySelection,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub single_file_name: String,
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub single_file_paths: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AuthorizationApp {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub client_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AuthorizationInstallation {
         /// Simple User
         #[serde()]
         pub account: SimpleUser,
@@ -3420,7 +2708,7 @@ pub mod types {
         #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub installation: Option<Installation>,
+        pub installation: Option<ScopedInstallation>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -3457,7 +2745,7 @@ pub mod types {
         )]
         pub url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub user: Option<User>,
+        pub user: Option<SimpleUser>,
     }
 
     /// Code Of Conduct
@@ -3845,9 +3133,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Data {}
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AuditLogEvent {
         #[serde(default, skip_serializing_if = "Option::is_none", rename = "@timestamp")]
         pub timestamp: Option<i64>,
@@ -3902,7 +3187,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub created_at: Option<i64>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub data: Option<Data>,
+        pub data: Option<AuthenticationTokenPermissions>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -4177,130 +3462,6 @@ pub mod types {
         }
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Creator {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// A collection of related issues and pull requests.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Milestone {
@@ -4312,7 +3473,7 @@ pub mod types {
         pub created_at: DateTime<Utc>,
         /// Simple User
         #[serde()]
-        pub creator: Creator,
+        pub creator: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -4404,130 +3565,6 @@ pub mod types {
         }
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Assignee {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequest {
         #[serde(
@@ -4558,90 +3595,6 @@ pub mod types {
         pub url: String,
     }
 
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PerformedViaGithubApp {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub client_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub client_secret: String,
-        #[serde()]
-        pub created_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub description: String,
-        /// The list of events for the GitHub app
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub events: Vec<String>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub external_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        /// Unique identifier of the GitHub app
-        #[serde(default)]
-        pub id: i64,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub installations_count: Option<i64>,
-        /// The name of the GitHub app
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        /// Simple User
-        #[serde()]
-        pub owner: Owner,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub pem: String,
-        /// The set of permissions for the GitHub app
-        #[serde()]
-        pub permissions: Permissions,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub slug: String,
-        #[serde()]
-        pub updated_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub webhook_secret: String,
-    }
-
     /// Issue Simple
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueSimple {
@@ -4653,7 +3606,7 @@ pub mod types {
         pub active_lock_reason: String,
         /// Simple User
         #[serde()]
-        pub assignee: Assignee,
+        pub assignee: SimpleUser,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
@@ -4725,7 +3678,7 @@ pub mod types {
         #[serde(default)]
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedViaGithubApp>,
+        pub performed_via_github_app: Option<Integration>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub pull_request: Option<PullRequest>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -4764,7 +3717,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -4843,7 +3796,7 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedViaGithubApp>,
+        pub performed_via_github_app: Option<Integration>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
         #[serde()]
@@ -4857,7 +3810,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5056,9 +4009,6 @@ pub mod types {
         pub user_url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Files {}
-
     /// Base Gist
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BaseGist {
@@ -5085,7 +4035,7 @@ pub mod types {
         )]
         pub description: String,
         #[serde()]
-        pub files: Files,
+        pub files: AuthenticationTokenPermissions,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub forks: Vec<serde_json::Value>,
         #[serde(
@@ -5127,7 +4077,7 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub owner: Option<Owner>,
+        pub owner: Option<SimpleUser>,
         #[serde(default)]
         pub public: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -5142,7 +4092,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5371,7 +4321,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GistSimpleForks {
+    pub struct Forks {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub created_at: Option<DateTime<Utc>>,
         #[serde(
@@ -5418,7 +4368,7 @@ pub mod types {
         )]
         pub description: String,
         #[serde()]
-        pub files: Files,
+        pub files: AuthenticationTokenPermissions,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub forks: Vec<serde_json::Value>,
         #[serde(
@@ -5460,7 +4410,7 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub owner: Option<Owner>,
+        pub owner: Option<SimpleUser>,
         #[serde(default)]
         pub public: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -5475,7 +4425,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     /// Gist Simple
@@ -5508,11 +4458,11 @@ pub mod types {
         )]
         pub description: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub files: Option<Files>,
+        pub files: Option<AuthenticationTokenPermissions>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub fork_of: Option<ForkOf>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub forks: Vec<serde_json::Value>,
+        pub forks: Vec<Forks>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -5610,17 +4560,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GistCommitChangeStatus {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub additions: Option<i64>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub deletions: Option<i64>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub total: Option<i64>,
+        pub user: SimpleUser,
     }
 
     /// Gist Commit
@@ -5638,7 +4578,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -5664,160 +4604,6 @@ pub mod types {
         pub source: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct IssuePullRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub diff_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub merged_at: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub patch_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ClosedBy {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Issue {
@@ -5829,7 +4615,7 @@ pub mod types {
         pub active_lock_reason: String,
         /// Simple User
         #[serde()]
-        pub assignee: Assignee,
+        pub assignee: SimpleUser,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
@@ -5856,7 +4642,7 @@ pub mod types {
         #[serde()]
         pub closed_at: DateTime<Utc>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub closed_by: Option<ClosedBy>,
+        pub closed_by: Option<SimpleUser>,
         #[serde(default)]
         pub comments: i64,
         #[serde(
@@ -5905,7 +4691,7 @@ pub mod types {
         #[serde(default)]
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedViaGithubApp>,
+        pub performed_via_github_app: Option<Integration>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub pull_request: Option<PullRequest>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -5949,12 +4735,12 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     /// License
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct LicenseData {
+    pub struct License {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -6218,9 +5004,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MinimalRepositoryOwner {}
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MinimalRepositoryPermissions {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub admin: Option<bool>,
@@ -6233,9 +5016,6 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub triage: Option<bool>,
     }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MinimalRepositoryTemplate {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MinimalRepositoryLicense {
@@ -6540,9 +5320,8 @@ pub mod types {
         pub open_issues: Option<i64>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub open_issues_count: Option<i64>,
-        /// Simple User
         #[serde()]
-        pub owner: Owner,
+        pub owner: AuthenticationTokenPermissions,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permissions: Option<Permissions>,
         #[serde(default)]
@@ -6622,7 +5401,7 @@ pub mod types {
         )]
         pub temp_clone_token: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub template_repository: Option<TemplateRepository>,
+        pub template_repository: Option<AuthenticationTokenPermissions>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub topics: Vec<String>,
         #[serde(
@@ -7515,84 +6294,6 @@ pub mod types {
 
     /// Groups of organization members that gives permissions on specified repositories.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Parent {
-        /// Description of the team
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub description: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        /// Unique identifier of the team
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub ldap_dn: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub members_url: String,
-        /// Name of the team
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        /// Permission that the team will have for its repositories
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub permission: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub privacy: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repositories_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub slug: String,
-        /// URL for the team
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    /// Groups of organization members that gives permissions on specified repositories.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Team {
         #[serde(
             default,
@@ -7627,7 +6328,7 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde()]
-        pub parent: Parent,
+        pub parent: TeamSimple,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -7750,7 +6451,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     /// A migration.
@@ -7786,7 +6487,7 @@ pub mod types {
         pub node_id: String,
         /// Simple User
         #[serde()]
-        pub owner: Owner,
+        pub owner: SimpleUser,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<Repository>,
         #[serde(
@@ -7863,386 +6564,6 @@ pub mod types {
         }
     }
 
-    /// Minimal Repository
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PackageRepository {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub archive_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub archived: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub assignees_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub blobs_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub branches_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub clone_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub code_of_conduct: Option<CodeOfConduct>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub collaborators_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub comments_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub commits_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub compare_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub contents_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub contributors_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub created_at: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub default_branch: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub delete_branch_on_merge: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub deployments_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub description: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub disabled: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub downloads_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(default)]
-        pub fork: bool,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub forks: Option<i64>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub forks_count: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub forks_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub full_name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git_commits_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git_refs_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git_tags_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub has_downloads: Option<bool>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub has_issues: Option<bool>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub has_pages: Option<bool>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub has_projects: Option<bool>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub has_wiki: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub homepage: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub hooks_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub is_template: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub issue_comment_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub issue_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub issues_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub keys_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub labels_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub language: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub languages_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub license: Option<License>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub merges_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub milestones_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub mirror_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub network_count: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub notifications_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub open_issues: Option<i64>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub open_issues_count: Option<i64>,
-        /// Simple User
-        #[serde()]
-        pub owner: Owner,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permissions: Option<Permissions>,
-        #[serde(default)]
-        pub private: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub pulls_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub pushed_at: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub releases_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub size: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub ssh_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub stargazers_count: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub stargazers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub statuses_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub subscribers_count: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscribers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscription_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub svn_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub tags_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub teams_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub temp_clone_token: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub template_repository: Option<TemplateRepository>,
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub topics: Vec<String>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub trees_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub updated_at: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub visibility: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub watchers: Option<i64>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub watchers_count: Option<i64>,
-    }
-
     /// A software package
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Package {
@@ -8265,11 +6586,11 @@ pub mod types {
         )]
         pub name: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub owner: Option<Owner>,
+        pub owner: Option<SimpleUser>,
         #[serde()]
         pub package_type: PackageType,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub repository: Option<Repository>,
+        pub repository: Option<MinimalRepository>,
         #[serde()]
         pub updated_at: DateTime<Utc>,
         #[serde(
@@ -8411,7 +6732,7 @@ pub mod types {
         pub created_at: DateTime<Utc>,
         /// Simple User
         #[serde()]
-        pub creator: Creator,
+        pub creator: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -8583,7 +6904,7 @@ pub mod types {
         #[serde()]
         pub organization: OrganizationFull,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub parent: Option<Parent>,
+        pub parent: Option<TeamSimple>,
         /// Permission that the team will have for its repositories
         #[serde(
             default,
@@ -8618,136 +6939,12 @@ pub mod types {
         pub url: String,
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Author {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// A team discussion is a persistent record of a free-form conversation within a team.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamDiscussion {
         /// Simple User
         #[serde()]
-        pub author: Author,
+        pub author: SimpleUser,
         /// The main text of the discussion.
         #[serde(
             default,
@@ -8831,7 +7028,7 @@ pub mod types {
     pub struct TeamDiscussionComment {
         /// Simple User
         #[serde()]
-        pub author: Author,
+        pub author: SimpleUser,
         /// The main text of the comment.
         #[serde(
             default,
@@ -8945,7 +7142,7 @@ pub mod types {
         pub node_id: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     /// The role of the user in the team.
@@ -9107,23 +7304,6 @@ pub mod types {
         )]
         pub url: String,
     }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamRepositoryPermissions {
-        #[serde(default)]
-        pub admin: bool,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub maintain: Option<bool>,
-        #[serde(default)]
-        pub pull: bool,
-        #[serde(default)]
-        pub push: bool,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub triage: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamRepositoryTemplate {}
 
     /// A team's access to a repository.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -9364,7 +7544,7 @@ pub mod types {
         pub languages_url: String,
         /// License Simple
         #[serde()]
-        pub license: License,
+        pub license: LicenseSimple,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -9416,9 +7596,9 @@ pub mod types {
         pub open_issues_count: i64,
         /// Simple User
         #[serde()]
-        pub owner: Owner,
+        pub owner: SimpleUser,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permissions: Option<Permissions>,
+        pub permissions: Option<RepositoryPermissions>,
         /// Whether the repository is private or public.
         #[serde(default)]
         pub private: bool,
@@ -9497,7 +7677,7 @@ pub mod types {
         )]
         pub temp_clone_token: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub template_repository: Option<TemplateRepository>,
+        pub template_repository: Option<AuthenticationTokenPermissions>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub topics: Vec<String>,
         #[serde(
@@ -9553,7 +7733,7 @@ pub mod types {
         pub created_at: DateTime<Utc>,
         /// Simple User
         #[serde()]
-        pub creator: Creator,
+        pub creator: SimpleUser,
         /// The project card's ID
         #[serde(default)]
         pub id: i64,
@@ -9645,7 +7825,7 @@ pub mod types {
         pub permission: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -9725,9 +7905,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FullRepositoryTemplate {}
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum FullRepositorySecurityAnalysisAdvancedStatus {
         Disabled,
@@ -9759,42 +7936,11 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum FullRepositorySecurityAnalysisSecretScanningStatus {
-        Disabled,
-        Enabled,
-        Noop,
-    }
-
-    impl std::fmt::Display for FullRepositorySecurityAnalysisSecretScanningStatus {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                FullRepositorySecurityAnalysisSecretScanningStatus::Disabled => "disabled",
-                FullRepositorySecurityAnalysisSecretScanningStatus::Enabled => "enabled",
-                FullRepositorySecurityAnalysisSecretScanningStatus::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for FullRepositorySecurityAnalysisSecretScanningStatus {
-        fn default() -> FullRepositorySecurityAnalysisSecretScanningStatus {
-            FullRepositorySecurityAnalysisSecretScanningStatus::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SecretScanning {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub status: Option<FullRepositorySecurityAnalysisSecretScanningStatus>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SecurityAnalysis {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub advanced_security: Option<AdvancedSecurity>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub secret_scanning: Option<SecretScanning>,
+        pub secret_scanning: Option<AdvancedSecurity>,
     }
 
     /// Full Repository
@@ -10033,7 +8179,7 @@ pub mod types {
         pub languages_url: String,
         /// License Simple
         #[serde()]
-        pub license: License,
+        pub license: LicenseSimple,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -10083,7 +8229,7 @@ pub mod types {
         #[serde(default)]
         pub open_issues_count: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub organization: Option<Organization>,
+        pub organization: Option<SimpleUser>,
         /// Simple User
         #[serde()]
         pub owner: SimpleUser,
@@ -10172,7 +8318,7 @@ pub mod types {
         )]
         pub temp_clone_token: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub template_repository: Option<TemplateRepository>,
+        pub template_repository: Option<AuthenticationTokenPermissions>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub topics: Vec<String>,
         #[serde(
@@ -10273,34 +8419,6 @@ pub mod types {
         }
     }
 
-    /// The phase of the lifecycle that the job is currently in.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum JobStepsStatus {
-        Completed,
-        InProgress,
-        Queued,
-        Noop,
-    }
-
-    impl std::fmt::Display for JobStepsStatus {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                JobStepsStatus::Completed => "completed",
-                JobStepsStatus::InProgress => "in_progress",
-                JobStepsStatus::Queued => "queued",
-                JobStepsStatus::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for JobStepsStatus {
-        fn default() -> JobStepsStatus {
-            JobStepsStatus::Noop
-        }
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Steps {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -10325,7 +8443,7 @@ pub mod types {
         pub started_at: Option<DateTime<Utc>>,
         /// The phase of the lifecycle that the job is currently in.
         #[serde()]
-        pub status: JobStepsStatus,
+        pub status: JobStatus,
     }
 
     /// Information of a job execution in a workflow run
@@ -10418,62 +8536,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestMinimalHeadRepo {
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Head {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "ref"
-        )]
-        pub ref_: String,
-        #[serde()]
-        pub repo: Repo,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestMinimalBaseRepo {
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Base {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -10494,7 +8557,7 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestMinimal {
         #[serde()]
-        pub base: Base,
+        pub base: Head,
         #[serde()]
         pub head: Head,
         #[serde(default)]
@@ -10510,23 +8573,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SimpleCommitAuthor {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Committer {
+    pub struct Author {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -10544,41 +8591,10 @@ pub mod types {
     /// Simple Commit
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct SimpleCommit {
-        /// Simple User
         #[serde()]
         pub author: Author,
         #[serde()]
-        pub committer: Committer,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-        #[serde()]
-        pub timestamp: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub tree_id: String,
-    }
-
-    /// Simple Commit
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct HeadCommit {
-        /// Simple User
-        #[serde()]
-        pub author: Author,
-        #[serde()]
-        pub committer: Committer,
+        pub committer: Author,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -10655,7 +8671,7 @@ pub mod types {
         pub head_branch: String,
         /// Simple Commit
         #[serde()]
-        pub head_commit: HeadCommit,
+        pub head_commit: SimpleCommit,
         /// Minimal Repository
         #[serde()]
         pub head_repository: MinimalRepository,
@@ -10882,134 +8898,10 @@ pub mod types {
         pub url: String,
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Reviewer {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Reviewers {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub reviewer: Option<Reviewer>,
+        pub reviewer: Option<SimpleUser>,
         #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
         pub type_: Option<DeploymentReviewerType>,
     }
@@ -11043,7 +8935,7 @@ pub mod types {
         pub created_at: DateTime<Utc>,
         /// Simple User
         #[serde()]
-        pub creator: Creator,
+        pub creator: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11075,7 +8967,7 @@ pub mod types {
         #[serde()]
         pub payload: Payload,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedViaGithubApp>,
+        pub performed_via_github_app: Option<Integration>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub production_environment: Option<bool>,
         /// The ref to deploy. This can be a branch, tag, or sha.
@@ -11132,29 +9024,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Macos {
-        #[serde(default)]
-        pub jobs: i64,
-        #[serde(default)]
-        pub total_ms: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Windows {
-        #[serde(default)]
-        pub jobs: i64,
-        #[serde(default)]
-        pub total_ms: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Billable {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub macos: Option<Macos>,
+        pub macos: Option<Ubuntu>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub ubuntu: Option<Ubuntu>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub windows: Option<Windows>,
+        pub windows: Option<Ubuntu>,
     }
 
     /// Workflow Run Usage
@@ -11272,15 +9148,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct WorkflowUsageBillableMacos {
+    pub struct WorkflowUsageBillable {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub total_ms: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct WorkflowUsageBillableWindows {
+        pub macos: Option<WorkflowUsageBillableUbuntu>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub total_ms: Option<i64>,
+        pub ubuntu: Option<Ubuntu>,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub windows: Option<WorkflowUsageBillableUbuntu>,
     }
 
     /// Workflow Usage
@@ -11340,111 +9214,6 @@ pub mod types {
         pub require_code_owner_reviews: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub required_approving_review_count: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Users {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub site_admin: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11774,7 +9543,7 @@ pub mod types {
         )]
         pub url: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub users: Vec<Users>,
+        pub users: Vec<Owner>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -11816,24 +9585,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AllowForcePushes {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub enabled: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AllowDeletions {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub enabled: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RequiredConversationResolution {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub enabled: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct RequiredSignatures {
         #[serde(default)]
         pub enabled: bool,
@@ -11849,9 +9600,9 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct BranchProtection {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub allow_deletions: Option<AllowDeletions>,
+        pub allow_deletions: Option<RequiredLinearHistory>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub allow_force_pushes: Option<AllowForcePushes>,
+        pub allow_force_pushes: Option<RequiredLinearHistory>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub enabled: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -11869,7 +9620,7 @@ pub mod types {
         )]
         pub protection_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub required_conversation_resolution: Option<RequiredConversationResolution>,
+        pub required_conversation_resolution: Option<RequiredLinearHistory>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub required_linear_history: Option<RequiredLinearHistory>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -11974,68 +9725,6 @@ pub mod types {
         pub verified: bool,
     }
 
-    /// Metaproperties for Git author/committer information.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitAuthor {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub date: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    /// Metaproperties for Git author/committer information.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitCommitter {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub date: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Tree {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Parents {
         #[serde(
@@ -12059,17 +9748,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Stats {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub additions: Option<i64>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub deletions: Option<i64>,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub total: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitFiles {
+    pub struct Files {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub additions: Option<i64>,
         #[serde(
@@ -12131,7 +9810,7 @@ pub mod types {
     pub struct CommitData {
         /// Simple User
         #[serde()]
-        pub author: Author,
+        pub author: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -12140,8 +9819,9 @@ pub mod types {
         pub comments_url: String,
         #[serde()]
         pub commit: Commit,
+        /// Simple User
         #[serde()]
-        pub committer: Committer,
+        pub committer: SimpleUser,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub files: Vec<Files>,
         #[serde(
@@ -12165,7 +9845,7 @@ pub mod types {
         )]
         pub sha: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub stats: Option<Stats>,
+        pub stats: Option<ChangeStatus>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -12291,64 +9971,22 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchRequiredSignatures {
-        #[serde(default)]
-        pub enabled: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EnforceAdmins {
-        #[serde(default)]
-        pub enabled: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranchRequiredLinearHistory {
         #[serde(default)]
         pub enabled: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchAllowForcePushes {
-        #[serde(default)]
-        pub enabled: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchAllowDeletions {
-        #[serde(default)]
-        pub enabled: bool,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProtectedBranchRequiredConversationResolution {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub enabled: Option<bool>,
     }
 
     /// Branch protections protect branches
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProtectedBranch {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub allow_deletions: Option<AllowDeletions>,
+        pub allow_deletions: Option<ProtectedBranchRequiredLinearHistory>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub allow_force_pushes: Option<AllowForcePushes>,
+        pub allow_force_pushes: Option<ProtectedBranchRequiredLinearHistory>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub enforce_admins: Option<EnforceAdmins>,
+        pub enforce_admins: Option<RequiredSignatures>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub required_conversation_resolution: Option<RequiredConversationResolution>,
+        pub required_conversation_resolution: Option<RequiredLinearHistory>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub required_linear_history: Option<RequiredLinearHistory>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -12401,7 +10039,7 @@ pub mod types {
         )]
         pub original_environment: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedViaGithubApp>,
+        pub performed_via_github_app: Option<Integration>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub production_environment: Option<bool>,
         #[serde(
@@ -12534,95 +10172,12 @@ pub mod types {
         pub id: i64,
     }
 
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CheckRunApp {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub client_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub client_secret: String,
-        #[serde()]
-        pub created_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub description: String,
-        /// The list of events for the GitHub app
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub events: Vec<String>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub external_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        /// Unique identifier of the GitHub app
-        #[serde(default)]
-        pub id: i64,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub installations_count: Option<i64>,
-        /// The name of the GitHub app
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        /// Simple User
-        #[serde()]
-        pub owner: Owner,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub pem: String,
-        /// The set of permissions for the GitHub app
-        #[serde()]
-        pub permissions: Permissions,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub slug: String,
-        #[serde()]
-        pub updated_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub webhook_secret: String,
-    }
-
     /// A check performed on the code of a given code change
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckRun {
+        /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
         #[serde()]
-        pub app: App,
+        pub app: Integration,
         #[serde()]
         pub check_suite: CheckSuite,
         #[serde()]
@@ -12765,90 +10320,6 @@ pub mod types {
         }
     }
 
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CheckSuiteApp {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub client_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub client_secret: String,
-        #[serde()]
-        pub created_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub description: String,
-        /// The list of events for the GitHub app
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub events: Vec<String>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub external_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        /// Unique identifier of the GitHub app
-        #[serde(default)]
-        pub id: i64,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub installations_count: Option<i64>,
-        /// The name of the GitHub app
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        /// Simple User
-        #[serde()]
-        pub owner: Owner,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub pem: String,
-        /// The set of permissions for the GitHub app
-        #[serde()]
-        pub permissions: Permissions,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub slug: String,
-        #[serde()]
-        pub updated_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub webhook_secret: String,
-    }
-
     /// A suite of checks performed on the code of a given code change
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CheckSuiteData {
@@ -12858,8 +10329,9 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub after: String,
+        /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
         #[serde()]
-        pub app: App,
+        pub app: Integration,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13542,16 +11014,6 @@ pub mod types {
         pub processing_status: Option<ProcessingStatus>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CollaboratorPermissions {
-        #[serde(default)]
-        pub admin: bool,
-        #[serde(default)]
-        pub pull: bool,
-        #[serde(default)]
-        pub push: bool,
-    }
-
     /// Collaborator
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Collaborator {
@@ -13630,7 +11092,7 @@ pub mod types {
         )]
         pub organizations_url: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permissions: Option<Permissions>,
+        pub permissions: Option<FullRepositoryPermissions>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13645,254 +11107,6 @@ pub mod types {
         pub repos_url: String,
         #[serde(default)]
         pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Invitee {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Inviter {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -13970,10 +11184,10 @@ pub mod types {
         pub id: i64,
         /// Simple User
         #[serde()]
-        pub invitee: Invitee,
+        pub invitee: SimpleUser,
         /// Simple User
         #[serde()]
-        pub inviter: Inviter,
+        pub inviter: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14051,23 +11265,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct BranchShortCommit {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
+        pub user: SimpleUser,
     }
 
     /// Branch Short
@@ -14213,36 +11411,7 @@ pub mod types {
         pub sha: String,
         /// Simple User
         #[serde()]
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestSimpleBase {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub label: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "ref"
-        )]
-        pub ref_: String,
-        /// A git repository
-        #[serde()]
-        pub repo: Repository,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        /// Simple User
-        #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14286,7 +11455,7 @@ pub mod types {
         pub active_lock_reason: String,
         /// Simple User
         #[serde()]
-        pub assignee: Assignee,
+        pub assignee: SimpleUser,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
@@ -14296,7 +11465,7 @@ pub mod types {
         #[serde()]
         pub auto_merge: AutoMerge,
         #[serde()]
-        pub base: Base,
+        pub base: PullRequestSimpleHead,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -14416,7 +11585,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14589,133 +11758,24 @@ pub mod types {
         pub url: String,
     }
 
-    /// Code of Conduct Simple
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommunityProfileFilesCodeOfConduct {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub key: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CodeOfConductFile {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Contributing {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Readme {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct IssueTemplate {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestTemplate {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommunityProfileFiles {
-        /// Code Of Conduct
+        /// Code of Conduct Simple
         #[serde()]
-        pub code_of_conduct: CodeOfConduct,
+        pub code_of_conduct: CodeOfConductSimple,
         #[serde()]
-        pub code_of_conduct_file: CodeOfConductFile,
+        pub code_of_conduct_file: CommunityHealthFile,
         #[serde()]
-        pub contributing: Contributing,
+        pub contributing: CommunityHealthFile,
         #[serde()]
-        pub issue_template: IssueTemplate,
+        pub issue_template: CommunityHealthFile,
         /// License Simple
         #[serde()]
-        pub license: License,
+        pub license: LicenseSimple,
         #[serde()]
-        pub pull_request_template: PullRequestTemplate,
+        pub pull_request_template: CommunityHealthFile,
         #[serde()]
-        pub readme: Readme,
+        pub readme: CommunityHealthFile,
     }
 
     /// Community Profile
@@ -14996,34 +12056,11 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentTreeLinks {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "self"
-        )]
-        pub self_: String,
-    }
-
     /// Content Tree
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentTree {
         #[serde()]
-        pub links: Links,
+        pub links: ContentTreeEntriesLinks,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15080,32 +12117,9 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentDirectoryLinks {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "self"
-        )]
-        pub self_: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentDirectory {
         #[serde()]
-        pub links: Links,
+        pub links: ContentTreeEntriesLinks,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15165,34 +12179,11 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentFileLinks {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "self"
-        )]
-        pub self_: String,
-    }
-
     /// Content File
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentFile {
         #[serde()]
-        pub links: Links,
+        pub links: ContentTreeEntriesLinks,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15270,34 +12261,11 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentSymlinkLinks {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "self"
-        )]
-        pub self_: String,
-    }
-
     /// An object describing a symlink
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentSymlink {
         #[serde()]
-        pub links: Links,
+        pub links: ContentTreeEntriesLinks,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15357,34 +12325,11 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ContentSubmoduleLinks {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "self"
-        )]
-        pub self_: String,
-    }
-
     /// An object describing a symlink
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ContentSubmodule {
         #[serde()]
-        pub links: Links,
+        pub links: ContentTreeEntriesLinks,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15547,29 +12492,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitCommitter {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub date: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct FileCommitTree {
+    pub struct Tree {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15635,7 +12558,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub author: Option<Author>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub committer: Option<Committer>,
+        pub committer: Option<FileCommitAuthor>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15847,7 +12770,7 @@ pub mod types {
         pub created_at: DateTime<Utc>,
         /// Simple User
         #[serde()]
-        pub creator: Creator,
+        pub creator: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -15888,7 +12811,7 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedViaGithubApp>,
+        pub performed_via_github_app: Option<Integration>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16072,28 +12995,6 @@ pub mod types {
         pub name: String,
     }
 
-    /// Identifying information for the git-user
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GitCommitCommitter {
-        /// Timestamp of the commit
-        #[serde()]
-        pub date: DateTime<Utc>,
-        /// Git email address of the user
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        /// Name of the git user
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitCommitTree {
         /// SHA for the commit
@@ -16134,38 +13035,14 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GitCommitVerification {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub payload: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub reason: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub signature: String,
-        #[serde(default)]
-        pub verified: bool,
-    }
-
     /// Low-level Git commit operations within a repository
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GitCommit {
-        /// Simple User
         #[serde()]
         pub author: Author,
+        /// Identifying information for the git-user
         #[serde()]
-        pub committer: Committer,
+        pub committer: GitCommitAuthor,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -16889,512 +13766,16 @@ pub mod types {
         pub to: String,
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct IssueEventActor {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Assigner {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReviewRequester {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RequestedReviewer {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Issue Event
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueEvent {
-        /// Actor
+        /// Simple User
         #[serde()]
-        pub actor: Actor,
+        pub actor: SimpleUser,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub assignee: Option<Assignee>,
+        pub assignee: Option<SimpleUser>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub assigner: Option<Assigner>,
+        pub assigner: Option<SimpleUser>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub author_association: Option<AuthorAssociation>,
         #[serde(
@@ -17440,17 +13821,17 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedViaGithubApp>,
+        pub performed_via_github_app: Option<Integration>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub project_card: Option<IssueEventProjectCard>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub rename: Option<IssueEventRename>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub requested_reviewer: Option<RequestedReviewer>,
+        pub requested_reviewer: Option<SimpleUser>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub requested_team: Option<Team>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub review_requester: Option<ReviewRequester>,
+        pub review_requester: Option<SimpleUser>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17527,22 +13908,6 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct UnlabeledIssueEventLabel {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub color: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
     /// Unlabeled Issue Event
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UnlabeledIssueEvent {
@@ -17575,9 +13940,8 @@ pub mod types {
         pub event: String,
         #[serde(default)]
         pub id: i64,
-        /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
         #[serde()]
-        pub label: Label,
+        pub label: LabeledIssueEventLabel,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -17767,16 +14131,6 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DemilestonedIssueEventMilestone {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub title: String,
-    }
-
     /// Demilestoned Issue Event
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DemilestonedIssueEvent {
@@ -17809,9 +14163,8 @@ pub mod types {
         pub event: String,
         #[serde(default)]
         pub id: i64,
-        /// A collection of related issues and pull requests.
         #[serde()]
-        pub milestone: Milestone,
+        pub milestone: MilestonedIssueEventMilestone,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18221,38 +14574,6 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MovedColumnInProjectIssueEventCard {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub column_name: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub previous_column_name: String,
-        #[serde(default)]
-        pub project_id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub project_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Moved Column in Project Issue Event
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MovedColumnInProjectIssueEvent {
@@ -18295,39 +14616,7 @@ pub mod types {
         #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub project_card: Option<ProjectCard>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RemovedFromProjectIssueEventCard {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub column_name: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub previous_column_name: String,
-        #[serde(default)]
-        pub project_id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub project_url: String,
+        pub project_card: Option<AddedProjectIssueEventCard>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18378,39 +14667,7 @@ pub mod types {
         #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub project_card: Option<ProjectCard>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ConvertedNoteIssueEventProjectCard {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub column_name: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub previous_column_name: String,
-        #[serde(default)]
-        pub project_id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub project_url: String,
+        pub project_card: Option<AddedProjectIssueEventCard>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18461,7 +14718,7 @@ pub mod types {
         #[serde()]
         pub performed_via_github_app: Integration,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub project_card: Option<ProjectCard>,
+        pub project_card: Option<AddedProjectIssueEventCard>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18628,122 +14885,15 @@ pub mod types {
         pub updated_at: DateTime<Utc>,
     }
 
-    /// Identifying information for the git-user
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineCommittedEventAuthor {
-        /// Timestamp of the commit
-        #[serde()]
-        pub date: DateTime<Utc>,
-        /// Git email address of the user
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        /// Name of the git user
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    /// Identifying information for the git-user
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineCommittedEventCommitter {
-        /// Timestamp of the commit
-        #[serde()]
-        pub date: DateTime<Utc>,
-        /// Git email address of the user
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        /// Name of the git user
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineCommittedEventTree {
-        /// SHA for the commit
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineCommittedEventParents {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        /// SHA for the commit
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineCommittedEventVerification {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub payload: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub reason: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub signature: String,
-        #[serde(default)]
-        pub verified: bool,
-    }
-
     /// Timeline Committed Event
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineCommittedEvent {
-        /// Simple User
+        /// Identifying information for the git-user
         #[serde()]
-        pub author: Author,
+        pub author: GitCommitAuthor,
+        /// Identifying information for the git-user
         #[serde()]
-        pub committer: Committer,
+        pub committer: GitCommitAuthor,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18770,7 +14920,7 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub parents: Vec<Parents>,
+        pub parents: Vec<GitCommitParents>,
         /// SHA for the commit
         #[serde(
             default,
@@ -18779,7 +14929,7 @@ pub mod types {
         )]
         pub sha: String,
         #[serde()]
-        pub tree: Tree,
+        pub tree: GitCommitTree,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -18801,21 +14951,11 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TimelineReviewedEventLinksPullRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TimelineReviewedEventLinks {
         #[serde()]
         pub html: Html,
         #[serde()]
-        pub pull_request: PullRequest,
+        pub pull_request: Html,
     }
 
     /// Timeline Reviewed Event
@@ -18893,33 +15033,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct SelfData {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewCommentLinksHtml {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewCommentLinks {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub href: String,
+        #[serde()]
+        pub html: Html,
+        #[serde()]
+        pub pull_request: Html,
+        #[serde(rename = "self")]
+        pub self_: Html,
     }
 
     /// The side of the first line of the range for a multi-line comment.
@@ -19281,34 +15401,11 @@ pub mod types {
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct Language {}
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct LicenseContentLinks {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "self"
-        )]
-        pub self_: String,
-    }
-
     /// License Content
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct LicenseContent {
         #[serde()]
-        pub links: Links,
+        pub links: ContentTreeEntriesLinks,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19341,7 +15438,7 @@ pub mod types {
         pub html_url: String,
         /// License Simple
         #[serde()]
-        pub license: License,
+        pub license: LicenseSimple,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19534,130 +15631,6 @@ pub mod types {
         pub message: String,
     }
 
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Pusher {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Page Build
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PageBuild {
@@ -19675,7 +15648,7 @@ pub mod types {
         pub error: Error,
         /// Simple User
         #[serde()]
-        pub pusher: Pusher,
+        pub pusher: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -19913,44 +15886,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestLabels {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub color: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub default: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub description: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestHeadRepoOwner {
         #[serde(
             default,
@@ -20053,16 +15988,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestHeadRepoPermissions {
-        #[serde(default)]
-        pub admin: bool,
-        #[serde(default)]
-        pub pull: bool,
-        #[serde(default)]
-        pub push: bool,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20323,7 +16248,7 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub languages_url: String,
-        /// License Simple
+        /// License
         #[serde()]
         pub license: License,
         #[serde(
@@ -20372,11 +16297,10 @@ pub mod types {
         pub open_issues: i64,
         #[serde(default)]
         pub open_issues_count: i64,
-        /// Simple User
         #[serde()]
         pub owner: Owner,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permissions: Option<Permissions>,
+        pub permissions: Option<FullRepositoryPermissions>,
         #[serde(default)]
         pub private: bool,
         #[serde(
@@ -20474,111 +16398,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestHeadUser {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestHead {
         #[serde(
             default,
@@ -20601,124 +16420,8 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
-        /// Simple User
         #[serde()]
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestBaseRepoOwner {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestBaseRepoPermissions {
-        #[serde(default)]
-        pub admin: bool,
-        #[serde(default)]
-        pub pull: bool,
-        #[serde(default)]
-        pub push: bool,
+        pub user: PullRequestHeadRepoOwner,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20947,7 +16650,7 @@ pub mod types {
         pub languages_url: String,
         /// License Simple
         #[serde()]
-        pub license: License,
+        pub license: LicenseSimple,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -20994,11 +16697,10 @@ pub mod types {
         pub open_issues: i64,
         #[serde(default)]
         pub open_issues_count: i64,
-        /// Simple User
         #[serde()]
-        pub owner: Owner,
+        pub owner: PullRequestHeadRepoOwner,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permissions: Option<Permissions>,
+        pub permissions: Option<FullRepositoryPermissions>,
         #[serde(default)]
         pub private: bool,
         #[serde(
@@ -21095,296 +16797,11 @@ pub mod types {
         pub watchers_count: i64,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestBaseUser {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestBase {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub label: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "ref"
-        )]
-        pub ref_: String,
-        #[serde()]
-        pub repo: Repo,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        /// Simple User
-        #[serde()]
-        pub user: User,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestLinks {
-        /// Hypermedia Link
-        #[serde()]
-        pub comments: Link,
-        /// Hypermedia Link
-        #[serde()]
-        pub commits: Link,
-        /// Hypermedia Link
-        #[serde()]
-        pub html: Link,
-        /// Hypermedia Link
-        #[serde()]
-        pub issue: Link,
-        /// Hypermedia Link
-        #[serde()]
-        pub review_comment: Link,
-        /// Hypermedia Link
-        #[serde()]
-        pub review_comments: Link,
-        /// Hypermedia Link
-        #[serde(rename = "self")]
-        pub self_: Link,
-        /// Hypermedia Link
-        #[serde()]
-        pub statuses: Link,
-    }
-
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct MergedBy {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestData {
         #[serde()]
-        pub links: Links,
+        pub links: PullRequestSimpleLinks,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -21395,7 +16812,7 @@ pub mod types {
         pub additions: i64,
         /// Simple User
         #[serde()]
-        pub assignee: Assignee,
+        pub assignee: SimpleUser,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
@@ -21405,7 +16822,7 @@ pub mod types {
         #[serde()]
         pub auto_merge: AutoMerge,
         #[serde()]
-        pub base: Base,
+        pub base: PullRequestHead,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -21461,7 +16878,7 @@ pub mod types {
         )]
         pub issue_url: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub labels: Vec<Labels>,
+        pub labels: Vec<PullRequestSimpleLabels>,
         #[serde(default)]
         pub locked: bool,
         /// Indicates whether maintainers can modify the pull request.
@@ -21487,7 +16904,7 @@ pub mod types {
         pub merged_at: DateTime<Utc>,
         /// Simple User
         #[serde()]
-        pub merged_by: MergedBy,
+        pub merged_by: SimpleUser,
         /// A collection of related issues and pull requests.
         #[serde()]
         pub milestone: Milestone,
@@ -21552,7 +16969,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     /// Pull Request Merge Result
@@ -21583,31 +17000,11 @@ pub mod types {
         pub users: Vec<SimpleUser>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewLinksHtml {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub href: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PullRequestReviewLinks {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub href: String,
-    }
-
     /// Pull Request Reviews are reviews on pull requests.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullRequestReviewData {
         #[serde()]
-        pub links: Links,
+        pub links: TimelineReviewedEventLinks,
         /// How the author is associated with the repository.
         #[serde()]
         pub author_association: AuthorAssociation,
@@ -21668,7 +17065,7 @@ pub mod types {
         pub submitted_at: Option<DateTime<Utc>>,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -21682,30 +17079,6 @@ pub mod types {
         /// Hypermedia Link
         #[serde(rename = "self")]
         pub self_: Link,
-    }
-
-    /// The side of the first line of the range for a multi-line comment.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReviewCommentSide {
-        Left,
-        Right,
-    }
-
-    impl std::fmt::Display for ReviewCommentSide {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReviewCommentSide::Left => "LEFT",
-                ReviewCommentSide::Right => "RIGHT",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReviewCommentSide {
-        fn default() -> ReviewCommentSide {
-            ReviewCommentSide::Right
-        }
     }
 
     /// Legacy Review Comment
@@ -21797,7 +17170,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub reactions: Option<ReactionRollup>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub side: Option<Side>,
+        pub side: Option<StartSide>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub start_line: Option<i64>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -21812,7 +17185,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     /// State of the release asset.
@@ -21839,130 +17212,6 @@ pub mod types {
         fn default() -> ReleaseAssetState {
             ReleaseAssetState::Noop
         }
-    }
-
-    /// Simple User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Uploader {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_at: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
     }
 
     /// Data related to a release.
@@ -22014,7 +17263,7 @@ pub mod types {
         pub updated_at: DateTime<Utc>,
         /// Simple User
         #[serde()]
-        pub uploader: Uploader,
+        pub uploader: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -22206,7 +17455,7 @@ pub mod types {
         pub starred_at: DateTime<Utc>,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     /// Commit Activity
@@ -22237,7 +17486,7 @@ pub mod types {
     pub struct ContributorActivity {
         /// Simple User
         #[serde()]
-        pub author: Author,
+        pub author: SimpleUser,
         #[serde(default)]
         pub total: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -22283,25 +17532,9 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TagCommit {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Tag
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TagData {
+    pub struct Tag {
         #[serde()]
         pub commit: Commit,
         #[serde(
@@ -22499,57 +17732,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimEnterpriseGroupMembers {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "$ref"
-        )]
-        pub ref_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub display: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub value: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimEnterpriseGroupMeta {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub created: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub last_modified: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub location: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub resource_type: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimEnterpriseGroup {
         #[serde(
             default,
@@ -22570,7 +17752,7 @@ pub mod types {
         )]
         pub id: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub members: Vec<Members>,
+        pub members: Vec<ScimGroupListEnterpriseResourcesMembers>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub meta: Option<Meta>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -22623,34 +17805,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimUserListEnterpriseResourcesMeta {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub created: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub last_modified: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub location: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub resource_type: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimUserListEnterpriseResources {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
@@ -22699,79 +17853,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimEnterpriseUserName {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub family_name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub given_name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimEnterpriseUserEmails {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub primary: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub value: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimEnterpriseUserGroups {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub value: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimEnterpriseUserMeta {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub created: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub last_modified: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub location: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub resource_type: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ScimEnterpriseUser {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub active: Option<bool>,
@@ -22784,7 +17865,7 @@ pub mod types {
         )]
         pub external_id: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub groups: Vec<Groups>,
+        pub groups: Vec<ScimUserListEnterpriseResourcesGroups>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -22927,7 +18008,7 @@ pub mod types {
         )]
         pub external_id: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub groups: Vec<Groups>,
+        pub groups: Vec<serde_json::Value>,
         /// Unique identifier of an external identity
         #[serde(
             default,
@@ -23091,54 +18172,15 @@ pub mod types {
         pub name: String,
     }
 
-    /// Metaproperties for Git author/committer information.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitSearchResultItemCommitter {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub date: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitSearchResultItemTree {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitSearchResultItem {
-        /// Simple User
         #[serde()]
         pub author: Author,
         #[serde(default)]
         pub comment_count: i64,
+        /// Metaproperties for Git author/committer information.
         #[serde()]
-        pub committer: Committer,
+        pub committer: GitUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23146,7 +18188,7 @@ pub mod types {
         )]
         pub message: String,
         #[serde()]
-        pub tree: Tree,
+        pub tree: Commit,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23157,34 +18199,12 @@ pub mod types {
         pub verification: Option<Verification>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct CommitSearchResultItemParents {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Commit Search Result Item
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CommitSearchResultItemData {
         /// Simple User
         #[serde()]
-        pub author: Author,
+        pub author: SimpleUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23193,8 +18213,9 @@ pub mod types {
         pub comments_url: String,
         #[serde()]
         pub commit: Commit,
+        /// Metaproperties for Git author/committer information.
         #[serde()]
-        pub committer: Committer,
+        pub committer: GitUser,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23208,7 +18229,7 @@ pub mod types {
         )]
         pub node_id: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub parents: Vec<Parents>,
+        pub parents: Vec<FileCommitParents>,
         /// Minimal Repository
         #[serde()]
         pub repository: MinimalRepository,
@@ -23230,74 +18251,6 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct IssueSearchResultItemLabels {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub color: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub default: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub description: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct IssueSearchResultItemPullRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub diff_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub merged_at: Option<DateTime<Utc>>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub patch_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// Issue Search Result Item
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssueSearchResultItem {
@@ -23309,7 +18262,7 @@ pub mod types {
         pub active_lock_reason: String,
         /// Simple User
         #[serde()]
-        pub assignee: Assignee,
+        pub assignee: SimpleUser,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub assignees: Vec<SimpleUser>,
         /// How the author is associated with the repository.
@@ -23362,7 +18315,7 @@ pub mod types {
         #[serde(default)]
         pub id: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub labels: Vec<Labels>,
+        pub labels: Vec<PullRequestSimpleLabels>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23383,7 +18336,7 @@ pub mod types {
         #[serde(default)]
         pub number: i64,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub performed_via_github_app: Option<PerformedViaGithubApp>,
+        pub performed_via_github_app: Option<Integration>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub pull_request: Option<PullRequest>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -23426,7 +18379,7 @@ pub mod types {
         pub url: String,
         /// Simple User
         #[serde()]
-        pub user: User,
+        pub user: SimpleUser,
     }
 
     /// Label Search Result Item
@@ -23470,16 +18423,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct RepoSearchResultItemPermissions {
-        #[serde(default)]
-        pub admin: bool,
-        #[serde(default)]
-        pub pull: bool,
-        #[serde(default)]
-        pub push: bool,
     }
 
     /// Repo Search Result Item
@@ -23712,7 +18655,7 @@ pub mod types {
         pub languages_url: String,
         /// License Simple
         #[serde()]
-        pub license: License,
+        pub license: LicenseSimple,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -23761,9 +18704,9 @@ pub mod types {
         pub open_issues_count: i64,
         /// Simple User
         #[serde()]
-        pub owner: Owner,
+        pub owner: SimpleUser,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permissions: Option<Permissions>,
+        pub permissions: Option<FullRepositoryPermissions>,
         #[serde(default)]
         pub private: bool,
         #[serde(
@@ -23890,37 +18833,11 @@ pub mod types {
         pub topic_relation: Option<TopicRelation>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TopicSearchResultItemAliasesRelation {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub id: Option<i64>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub relation_type: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub topic_id: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct Aliases {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub topic_relation: Option<TopicRelation>,
-    }
-
     /// Topic Search Result Item
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TopicSearchResultItem {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub aliases: Vec<Aliases>,
+        pub aliases: Vec<Related>,
         #[serde()]
         pub created_at: DateTime<Utc>,
         #[serde(
@@ -24143,22 +19060,6 @@ pub mod types {
         pub url: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PrivateUserPlan {
-        #[serde(default)]
-        pub collaborators: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(default)]
-        pub private_repos: i64,
-        #[serde(default)]
-        pub space: i64,
-    }
-
     /// Private User
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PrivateUser {
@@ -24379,7 +19280,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GpgKeySubkeys {
+    pub struct Subkeys {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub can_certify: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -24395,7 +19296,7 @@ pub mod types {
         )]
         pub created_at: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub emails: Vec<Emails>,
+        pub emails: Vec<serde_json::Value>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -24468,7 +19369,7 @@ pub mod types {
         )]
         pub raw_key: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub subkeys: Vec<serde_json::Value>,
+        pub subkeys: Vec<Subkeys>,
     }
 
     /// Key
@@ -24764,33 +19665,6 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum StatusData {
-        Completed,
-        InProgress,
-        Queued,
-        Noop,
-    }
-
-    impl std::fmt::Display for StatusData {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                StatusData::Completed => "completed",
-                StatusData::InProgress => "in_progress",
-                StatusData::Queued => "queued",
-                StatusData::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for StatusData {
-        fn default() -> StatusData {
-            StatusData::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
     pub enum Per {
         Day,
         Week,
@@ -24809,29 +19683,6 @@ pub mod types {
     impl Default for Per {
         fn default() -> Per {
             Per::Day
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum Order {
-        Asc,
-        Desc,
-    }
-
-    impl std::fmt::Display for Order {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                Order::Asc => "asc",
-                Order::Desc => "desc",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for Order {
-        fn default() -> Order {
-            Order::Desc
         }
     }
 
@@ -25038,93 +19889,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AppsCreateFromManifestRequest {}
-
-    /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostAppsCreateFromManifestCreatedResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub client_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub client_secret: String,
-        #[serde()]
-        pub created_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub description: String,
-        /// The list of events for the GitHub app
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub events: Vec<String>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub external_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        /// Unique identifier of the GitHub app
-        #[serde(default)]
-        pub id: i64,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub installations_count: Option<i64>,
-        /// The name of the GitHub app
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        /// Simple User
-        #[serde()]
-        pub owner: Owner,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub pem: String,
-        /// The set of permissions for the GitHub app
-        #[serde()]
-        pub permissions: Permissions,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub slug: String,
-        #[serde()]
-        pub updated_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub webhook_secret: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AppsUpdateWebhookConfigAppRequest {
         #[serde(
             default,
@@ -25195,17 +19959,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct AppsResetTokenRequest {
-        /// The access_token of the OAuth application.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub access_token: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct AppsScopeTokenRequest {
         /// The OAuth access token used to authenticate to the GitHub API.
         #[serde(
@@ -25228,68 +19981,6 @@ pub mod types {
         pub target: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub target_id: Option<i64>,
-    }
-
-    /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetAppsCheckAuthorizationOkResponse {
-        #[serde()]
-        pub app: App,
-        #[serde()]
-        pub created_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub fingerprint: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub hashed_token: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub installation: Option<Installation>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub note: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub note_url: String,
-        /// A list of scopes that this authorization is in.
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub scopes: Vec<String>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub token: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub token_last_eight: String,
-        #[serde()]
-        pub updated_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub user: Option<User>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25413,9 +20104,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetEmojisOkResponse {}
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allowed_actions: Option<AllowedActions>,
@@ -25527,14 +20215,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub organizations: Vec<OrganizationSimple>,
-        #[serde(default)]
-        pub total_count: f64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
         /// List of organization IDs that can access the runner group.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -25608,20 +20288,6 @@ pub mod types {
         )]
         pub body: String,
     }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GistsUpdateCommentRequest {
-        /// The comment text.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub body: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetGistsCheckStarredNotFoundResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetAppsListReposAccessibleInstallationOkResponse {
@@ -25759,56 +20425,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub text: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum AppsListAccountsPlanDirection {
-        Asc,
-        Desc,
-        Noop,
-    }
-
-    impl std::fmt::Display for AppsListAccountsPlanDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                AppsListAccountsPlanDirection::Asc => "asc",
-                AppsListAccountsPlanDirection::Desc => "desc",
-                AppsListAccountsPlanDirection::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for AppsListAccountsPlanDirection {
-        fn default() -> AppsListAccountsPlanDirection {
-            AppsListAccountsPlanDirection::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum AppsListAccountsPlanStubbedDirection {
-        Asc,
-        Desc,
-        Noop,
-    }
-
-    impl std::fmt::Display for AppsListAccountsPlanStubbedDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                AppsListAccountsPlanStubbedDirection::Asc => "asc",
-                AppsListAccountsPlanStubbedDirection::Desc => "desc",
-                AppsListAccountsPlanStubbedDirection::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for AppsListAccountsPlanStubbedDirection {
-        fn default() -> AppsListAccountsPlanStubbedDirection {
-            AppsListAccountsPlanStubbedDirection::Noop
-        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25973,25 +20589,6 @@ pub mod types {
         pub twitter_username: String,
     }
 
-    /// Validation Error
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchOrgsUpdateUnprocessableEntityResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub documentation_url: String,
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub errors: Vec<Errors>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsSetGithubPermissionsOrganizationRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26096,18 +20693,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub visibility: Option<Visibility>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetActionsListRepoAccessSelfHostedRunnerGroupInOrgOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<MinimalRepository>,
@@ -26120,21 +20705,6 @@ pub mod types {
         /// List of repository IDs that can access the runner group.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub selected_repository_ids: Vec<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetActionsListSelfHostedRunnersInGroupOrgOkResponse {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub runners: Vec<Runner>,
-        #[serde(default)]
-        pub total_count: f64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
-        /// List of runner IDs to add to the runner group.
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub runners: Vec<i64>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26325,55 +20895,11 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct OrgsUpdateWebhookConfigOrgRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content_type: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub insecure_ssl: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub secret: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetOrgsListAppInstallationsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub installations: Vec<Installation>,
         #[serde(default)]
         pub total_count: i64,
-    }
-
-    /// Interaction limit settings.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetInteractionsRestrictionsOrgOkResponse {
-        #[serde()]
-        pub expires_at: DateTime<Utc>,
-        /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
-        #[serde()]
-        pub limit: InteractionGroup,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub origin: String,
     }
 
     /// Specify role for new member. Can be one of:  
@@ -26419,87 +20945,6 @@ pub mod types {
         pub role: Option<Role>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub team_ids: Vec<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum IssuesListOrgFilter {
-        All,
-        Assigned,
-        Created,
-        Mentioned,
-        Repos,
-        Subscribed,
-    }
-
-    impl std::fmt::Display for IssuesListOrgFilter {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                IssuesListOrgFilter::All => "all",
-                IssuesListOrgFilter::Assigned => "assigned",
-                IssuesListOrgFilter::Created => "created",
-                IssuesListOrgFilter::Mentioned => "mentioned",
-                IssuesListOrgFilter::Repos => "repos",
-                IssuesListOrgFilter::Subscribed => "subscribed",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for IssuesListOrgFilter {
-        fn default() -> IssuesListOrgFilter {
-            IssuesListOrgFilter::Assigned
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum IssuesListOrgState {
-        All,
-        Closed,
-        Open,
-    }
-
-    impl std::fmt::Display for IssuesListOrgState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                IssuesListOrgState::All => "all",
-                IssuesListOrgState::Closed => "closed",
-                IssuesListOrgState::Open => "open",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for IssuesListOrgState {
-        fn default() -> IssuesListOrgState {
-            IssuesListOrgState::Open
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum IssuesListOrgSort {
-        Comments,
-        Created,
-        Updated,
-    }
-
-    impl std::fmt::Display for IssuesListOrgSort {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                IssuesListOrgSort::Comments => "comments",
-                IssuesListOrgSort::Created => "created",
-                IssuesListOrgSort::Updated => "updated",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for IssuesListOrgSort {
-        fn default() -> IssuesListOrgSort {
-            IssuesListOrgSort::Created
-        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26608,31 +21053,31 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum MigrationsStartOrgRequestExclude {
+    pub enum Exclude {
         Repositories,
         Noop,
     }
 
-    impl std::fmt::Display for MigrationsStartOrgRequestExclude {
+    impl std::fmt::Display for Exclude {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                MigrationsStartOrgRequestExclude::Repositories => "repositories",
-                MigrationsStartOrgRequestExclude::Noop => "",
+                Exclude::Repositories => "repositories",
+                Exclude::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for MigrationsStartOrgRequestExclude {
-        fn default() -> MigrationsStartOrgRequestExclude {
-            MigrationsStartOrgRequestExclude::Noop
+    impl Default for Exclude {
+        fn default() -> Exclude {
+            Exclude::Noop
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MigrationsStartOrgRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub exclude: Vec<serde_json::Value>,
+        pub exclude: Vec<Exclude>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub exclude_attachments: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26641,56 +21086,6 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<String>,
     }
-
-    /// Allowed values that can be passed to the exclude param.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum MigrationsGetStatusOrgExclude {
-        Repositories,
-        Noop,
-    }
-
-    impl std::fmt::Display for MigrationsGetStatusOrgExclude {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                MigrationsGetStatusOrgExclude::Repositories => "repositories",
-                MigrationsGetStatusOrgExclude::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for MigrationsGetStatusOrgExclude {
-        fn default() -> MigrationsGetStatusOrgExclude {
-            MigrationsGetStatusOrgExclude::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum OrgsListOutsideCollaboratorsFilter {
-        TwoFaDisabled,
-        All,
-    }
-
-    impl std::fmt::Display for OrgsListOutsideCollaboratorsFilter {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                OrgsListOutsideCollaboratorsFilter::TwoFaDisabled => "2fa_disabled",
-                OrgsListOutsideCollaboratorsFilter::All => "all",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for OrgsListOutsideCollaboratorsFilter {
-        fn default() -> OrgsListOutsideCollaboratorsFilter {
-            OrgsListOutsideCollaboratorsFilter::All
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutOrgsConvertMemberOutsideCollaboratorAcceptedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct DeleteOrgsRemoveOutsideCollaboratorUnprocessableEntityResponse {
@@ -26728,31 +21123,6 @@ pub mod types {
     impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
         fn default() -> PackagesGetAllPackageVersionsOwnedByOrgState {
             PackagesGetAllPackageVersionsOwnedByOrgState::Active
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ProjectsListOrgState {
-        All,
-        Closed,
-        Open,
-    }
-
-    impl std::fmt::Display for ProjectsListOrgState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ProjectsListOrgState::All => "all",
-                ProjectsListOrgState::Closed => "closed",
-                ProjectsListOrgState::Open => "open",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ProjectsListOrgState {
-        fn default() -> ProjectsListOrgState {
-            ProjectsListOrgState::Open
         }
     }
 
@@ -26832,31 +21202,6 @@ pub mod types {
     impl Default for ReposListOrgSort {
         fn default() -> ReposListOrgSort {
             ReposListOrgSort::Created
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReposListOrgDirection {
-        Asc,
-        Desc,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReposListOrgDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReposListOrgDirection::Asc => "asc",
-                ReposListOrgDirection::Desc => "desc",
-                ReposListOrgDirection::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReposListOrgDirection {
-        fn default() -> ReposListOrgDirection {
-            ReposListOrgDirection::Noop
         }
     }
 
@@ -27140,17 +21485,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamsUpdateDiscussionCommentInOrgRequest {
-        /// The discussion comment's body text.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub body: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ReactionsListTeamDiscussionCommentInOrgContent {
         PlusOne,
@@ -27232,43 +21566,6 @@ pub mod types {
         pub content: Content,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReactionsListTeamDiscussionInOrgContent {
-        PlusOne,
-        MinusOne,
-        Confused,
-        Eyes,
-        Heart,
-        Hooray,
-        Laugh,
-        Rocket,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReactionsListTeamDiscussionInOrgContent {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReactionsListTeamDiscussionInOrgContent::PlusOne => "+1",
-                ReactionsListTeamDiscussionInOrgContent::MinusOne => "-1",
-                ReactionsListTeamDiscussionInOrgContent::Confused => "confused",
-                ReactionsListTeamDiscussionInOrgContent::Eyes => "eyes",
-                ReactionsListTeamDiscussionInOrgContent::Heart => "heart",
-                ReactionsListTeamDiscussionInOrgContent::Hooray => "hooray",
-                ReactionsListTeamDiscussionInOrgContent::Laugh => "laugh",
-                ReactionsListTeamDiscussionInOrgContent::Rocket => "rocket",
-                ReactionsListTeamDiscussionInOrgContent::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReactionsListTeamDiscussionInOrgContent {
-        fn default() -> ReactionsListTeamDiscussionInOrgContent {
-            ReactionsListTeamDiscussionInOrgContent::Noop
-        }
-    }
-
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -27305,13 +21602,6 @@ pub mod types {
         fn default() -> ReactionsCreateTeamDiscussionInOrgRequestContent {
             ReactionsCreateTeamDiscussionInOrgRequestContent::Noop
         }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReactionsCreateTeamDiscussionInOrgRequest {
-        /// The reaction to use
-        #[serde()]
-        pub content: Content,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27365,12 +21655,6 @@ pub mod types {
         }
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamsAddUpdateMembershipUserInOrgRequest {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub role: Option<Role>,
-    }
-
     /// The permission to grant to the team for this project. Can be one of:  
     /// \* `read` - team members can read, but not write to or administer this project.  
     /// \* `write` - team members can read and write, but not administer this project.  
@@ -27407,22 +21691,6 @@ pub mod types {
     pub struct TeamsAddUpdateProjectPermissionsInOrgRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub permission: Option<Permission>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutTeamsAddUpdateProjectPermissionsInOrgForbiddenResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub documentation_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
     }
 
     /// The permission to grant the team on this repository. Can be one of:  
@@ -27543,9 +21811,6 @@ pub mod types {
         )]
         pub position: String,
     }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProjectsMoveCardCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProjectsMoveCardForbiddenResponseErrors {
@@ -27680,41 +21945,6 @@ pub mod types {
         pub note: String,
     }
 
-    /// Validation Error
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProjectsCreateCardUnprocessableEntityResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub documentation_url: String,
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub errors: Vec<Errors>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProjectsCreateCardServiceUnavailableResponseErrors {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub code: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostProjectsCreateCardServiceUnavailableResponse {
         #[serde(
@@ -27730,7 +21960,7 @@ pub mod types {
         )]
         pub documentation_url: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub errors: Vec<Errors>,
+        pub errors: Vec<PostProjectsMoveCardServiceUnavailableResponseErrors>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -27748,27 +21978,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub position: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostProjectsMoveColumnCreatedResponse {}
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteProjectsForbiddenResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub documentation_url: String,
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub errors: Vec<String>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
     }
 
     /// The baseline permission that all organization members have on this project
@@ -27828,24 +22037,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PatchProjectsUpdateForbiddenResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub documentation_url: String,
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub errors: Vec<String>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum ProjectsListCollaboratorsAffiliation {
         All,
@@ -27896,39 +22087,6 @@ pub mod types {
         }
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProjectsAddCollaboratorRequest {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permission: Option<Permission>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProjectsCreateColumnRequest {
-        /// Name of the project column
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct DeleteReposForbiddenResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub documentation_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-    }
-
     /// Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -27972,7 +22130,7 @@ pub mod types {
 
     /// Use the `status` property to enable or disable secret scanning for this repository. For more information, see "[About secret scanning](/code-security/secret-security/about-secret-scanning)."
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReposUpdateRequestSecurityAnalysisSecretScanning {
+    pub struct SecretScanning {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -28060,31 +22218,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetActionsListSelfHostedRunnersRepoOkResponse {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub runners: Vec<Runner>,
-        #[serde(default)]
-        pub total_count: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetActionsListWorkflowRunsRepoOkResponse {
         #[serde(default)]
         pub total_count: i64,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub workflow_runs: Vec<WorkflowRun>,
     }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetActionsListWorkflowRunArtifactsOkResponse {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub artifacts: Vec<Artifact>,
-        #[serde(default)]
-        pub total_count: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostActionsCancelWorkflowRunAcceptedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -28161,9 +22300,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostActionsReRunWorkflowCreatedResponse {}
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetActionsListRepoSecretsOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub secrets: Vec<ActionsSecret>,
@@ -28186,9 +22322,6 @@ pub mod types {
         )]
         pub key_id: String,
     }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutActionsCreateUpdateRepoSecretCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetActionsListRepoWorkflowsOkResponse {
@@ -28214,14 +22347,6 @@ pub mod types {
             rename = "ref"
         )]
         pub ref_: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetActionsListWorkflowRunsOkResponse {
-        #[serde(default)]
-        pub total_count: i64,
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub workflow_runs: Vec<WorkflowRun>,
     }
 
     /// Require status checks to pass before merging. Set to `null` to disable.
@@ -28292,21 +22417,12 @@ pub mod types {
         pub restrictions: Restrictions,
     }
 
-    /// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReposUpdatePullRequestReviewProtectionDismissalRestrictions {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub teams: Vec<String>,
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub users: Vec<String>,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReposUpdatePullRequestReviewProtection {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub dismiss_stale_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub dismissal_restrictions: Option<DismissalRestrictions>,
+        pub dismissal_restrictions: Option<ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub require_code_owner_reviews: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -28672,34 +22788,6 @@ pub mod types {
         pub status: Option<ChecksCreateRequestStatus>,
     }
 
-    /// The current status. Can be one of `queued`, `in_progress`, or `completed`.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ChecksUpdateRequestStatus {
-        Completed,
-        InProgress,
-        Queued,
-        Noop,
-    }
-
-    impl std::fmt::Display for ChecksUpdateRequestStatus {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ChecksUpdateRequestStatus::Completed => "completed",
-                ChecksUpdateRequestStatus::InProgress => "in_progress",
-                ChecksUpdateRequestStatus::Queued => "queued",
-                ChecksUpdateRequestStatus::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ChecksUpdateRequestStatus {
-        fn default() -> ChecksUpdateRequestStatus {
-            ChecksUpdateRequestStatus::Noop
-        }
-    }
-
     /// **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.  
     /// **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -28739,73 +22827,6 @@ pub mod types {
         }
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ChecksUpdateRequestOutputAnnotations {
-        /// The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
-        #[serde()]
-        pub annotation_level: AnnotationLevel,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub end_column: Option<i64>,
-        /// The end line of the annotation.
-        #[serde(default)]
-        pub end_line: i64,
-        /// A short description of the feedback for these lines of code. The maximum size is 64 KB.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-        /// The path of the file to add an annotation to. For example, `assets/css/main.css`.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub path: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub raw_details: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub start_column: Option<i64>,
-        /// The start line of the annotation.
-        #[serde(default)]
-        pub start_line: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub title: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ChecksUpdateRequestOutputImages {
-        /// The alternative text for the image.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub alt: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub caption: String,
-        /// The full URL of the image.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub image_url: String,
-    }
-
     /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ChecksUpdateRequestOutput {
@@ -28835,34 +22856,9 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ChecksUpdateRequestActions {
-        /// A short explanation of what this action would do. The maximum size is 40 characters.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub description: String,
-        /// A reference for the action on the integrator's system. The maximum size is 20 characters.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub identifier: String,
-        /// The text to be displayed on a button in the web UI. The maximum size is 20 characters.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub label: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ChecksUpdateRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub actions: Vec<Actions>,
+        pub actions: Vec<ChecksCreateRequestActions>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub completed_at: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -28890,7 +22886,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub started_at: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub status: Option<ChecksUpdateRequestStatus>,
+        pub status: Option<ChecksCreateRequestStatus>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -28921,38 +22917,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ChecksListSuiteFilter {
-        All,
-        Latest,
-    }
-
-    impl std::fmt::Display for ChecksListSuiteFilter {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ChecksListSuiteFilter::All => "all",
-                ChecksListSuiteFilter::Latest => "latest",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ChecksListSuiteFilter {
-        fn default() -> ChecksListSuiteFilter {
-            ChecksListSuiteFilter::Latest
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetChecksListSuiteOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_runs: Vec<CheckRun>,
         #[serde(default)]
         pub total_count: i64,
     }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostChecksRerequestSuiteCreatedResponse {}
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct CodeScanningUpdateAlertRequest {
@@ -29002,31 +22972,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub tool_name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReposListCollaboratorsAffiliation {
-        All,
-        Direct,
-        Outside,
-    }
-
-    impl std::fmt::Display for ReposListCollaboratorsAffiliation {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReposListCollaboratorsAffiliation::All => "all",
-                ReposListCollaboratorsAffiliation::Direct => "direct",
-                ReposListCollaboratorsAffiliation::Outside => "outside",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReposListCollaboratorsAffiliation {
-        fn default() -> ReposListCollaboratorsAffiliation {
-            ReposListCollaboratorsAffiliation::All
-        }
     }
 
     /// The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  
@@ -29087,43 +23032,6 @@ pub mod types {
         pub body: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReactionsListCommitCommentContent {
-        PlusOne,
-        MinusOne,
-        Confused,
-        Eyes,
-        Heart,
-        Hooray,
-        Laugh,
-        Rocket,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReactionsListCommitCommentContent {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReactionsListCommitCommentContent::PlusOne => "+1",
-                ReactionsListCommitCommentContent::MinusOne => "-1",
-                ReactionsListCommitCommentContent::Confused => "confused",
-                ReactionsListCommitCommentContent::Eyes => "eyes",
-                ReactionsListCommitCommentContent::Heart => "heart",
-                ReactionsListCommitCommentContent::Hooray => "hooray",
-                ReactionsListCommitCommentContent::Laugh => "laugh",
-                ReactionsListCommitCommentContent::Rocket => "rocket",
-                ReactionsListCommitCommentContent::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReactionsListCommitCommentContent {
-        fn default() -> ReactionsListCommitCommentContent {
-            ReactionsListCommitCommentContent::Noop
-        }
-    }
-
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -29163,13 +23071,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReactionsCreateCommitCommentRequest {
-        /// The reaction to use
-        #[serde()]
-        pub content: Content,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReposCreateCommitCommentRequest {
         /// The contents of the comment.
         #[serde(
@@ -29188,37 +23089,6 @@ pub mod types {
         pub path: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub position: Option<i64>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ChecksListRefFilter {
-        All,
-        Latest,
-    }
-
-    impl std::fmt::Display for ChecksListRefFilter {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ChecksListRefFilter::All => "all",
-                ChecksListRefFilter::Latest => "latest",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ChecksListRefFilter {
-        fn default() -> ChecksListRefFilter {
-            ChecksListRefFilter::Latest
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetChecksListRefOkResponse {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub check_runs: Vec<CheckRun>,
-        #[serde(default)]
-        pub total_count: i64,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29247,72 +23117,9 @@ pub mod types {
         pub title: String,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetReposContentOkResponse {
-        #[serde()]
-        pub links: Links,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub download_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub git_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub path: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub sha: String,
-        #[serde(default)]
-        pub size: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// The person that committed the file. Default: the authenticated user.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReposCreateUpdateFileContentsRequestCommitter {
+    pub struct Committer {
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -29494,16 +23301,6 @@ pub mod types {
         pub task: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub transient_environment: Option<bool>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PostReposCreateDeploymentAcceptedResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
     }
 
     /// The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub.
@@ -30101,34 +23898,6 @@ pub mod types {
         pub remove_events: Vec<String>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReposUpdateWebhookConfigRepoRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub content_type: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub insecure_ssl: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub secret: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     /// The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -30267,22 +24036,6 @@ pub mod types {
         pub use_lfs: UseLfs,
     }
 
-    /// Interaction limit settings.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetInteractionsRestrictionsRepoOkResponse {
-        #[serde()]
-        pub expires_at: DateTime<Utc>,
-        /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
-        #[serde()]
-        pub limit: InteractionGroup,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub origin: String,
-    }
-
     /// The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -30322,56 +24075,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum IssuesListRepoState {
-        All,
-        Closed,
-        Open,
-    }
-
-    impl std::fmt::Display for IssuesListRepoState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                IssuesListRepoState::All => "all",
-                IssuesListRepoState::Closed => "closed",
-                IssuesListRepoState::Open => "open",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for IssuesListRepoState {
-        fn default() -> IssuesListRepoState {
-            IssuesListRepoState::Open
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum IssuesListRepoSort {
-        Comments,
-        Created,
-        Updated,
-    }
-
-    impl std::fmt::Display for IssuesListRepoSort {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                IssuesListRepoSort::Comments => "comments",
-                IssuesListRepoSort::Created => "created",
-                IssuesListRepoSort::Updated => "updated",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for IssuesListRepoSort {
-        fn default() -> IssuesListRepoSort {
-            IssuesListRepoSort::Created
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssuesCreateRequest {
         #[serde(
             default,
@@ -30400,31 +24103,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum IssuesListCommentsRepoDirection {
-        Asc,
-        Desc,
-        Noop,
-    }
-
-    impl std::fmt::Display for IssuesListCommentsRepoDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                IssuesListCommentsRepoDirection::Asc => "asc",
-                IssuesListCommentsRepoDirection::Desc => "desc",
-                IssuesListCommentsRepoDirection::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for IssuesListCommentsRepoDirection {
-        fn default() -> IssuesListCommentsRepoDirection {
-            IssuesListCommentsRepoDirection::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssuesUpdateCommentRequest {
         /// The contents of the comment.
         #[serde(
@@ -30433,43 +24111,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReactionsListIssueCommentContent {
-        PlusOne,
-        MinusOne,
-        Confused,
-        Eyes,
-        Heart,
-        Hooray,
-        Laugh,
-        Rocket,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReactionsListIssueCommentContent {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReactionsListIssueCommentContent::PlusOne => "+1",
-                ReactionsListIssueCommentContent::MinusOne => "-1",
-                ReactionsListIssueCommentContent::Confused => "confused",
-                ReactionsListIssueCommentContent::Eyes => "eyes",
-                ReactionsListIssueCommentContent::Heart => "heart",
-                ReactionsListIssueCommentContent::Hooray => "hooray",
-                ReactionsListIssueCommentContent::Laugh => "laugh",
-                ReactionsListIssueCommentContent::Rocket => "rocket",
-                ReactionsListIssueCommentContent::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReactionsListIssueCommentContent {
-        fn default() -> ReactionsListIssueCommentContent {
-            ReactionsListIssueCommentContent::Noop
-        }
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
@@ -30508,13 +24149,6 @@ pub mod types {
         fn default() -> ReactionsCreateIssueCommentRequestContent {
             ReactionsCreateIssueCommentRequestContent::Noop
         }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReactionsCreateIssueCommentRequest {
-        /// The reaction to use
-        #[serde()]
-        pub content: Content,
     }
 
     /// State of the issue. Either `open` or `closed`.
@@ -30586,24 +24220,7 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct IssuesCreateCommentRequest {
-        /// The contents of the comment.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub body: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssuesAddLabelsRequest {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub labels: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct IssuesSetLabelsRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub labels: Vec<String>,
     }
@@ -30648,43 +24265,6 @@ pub mod types {
         pub lock_reason: Option<LockReason>,
     }
 
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReactionsListIssueContent {
-        PlusOne,
-        MinusOne,
-        Confused,
-        Eyes,
-        Heart,
-        Hooray,
-        Laugh,
-        Rocket,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReactionsListIssueContent {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReactionsListIssueContent::PlusOne => "+1",
-                ReactionsListIssueContent::MinusOne => "-1",
-                ReactionsListIssueContent::Confused => "confused",
-                ReactionsListIssueContent::Eyes => "eyes",
-                ReactionsListIssueContent::Heart => "heart",
-                ReactionsListIssueContent::Hooray => "hooray",
-                ReactionsListIssueContent::Laugh => "laugh",
-                ReactionsListIssueContent::Rocket => "rocket",
-                ReactionsListIssueContent::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReactionsListIssueContent {
-        fn default() -> ReactionsListIssueContent {
-            ReactionsListIssueContent::Noop
-        }
-    }
-
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -30721,13 +24301,6 @@ pub mod types {
         fn default() -> ReactionsCreateIssueRequestContent {
             ReactionsCreateIssueRequestContent::Noop
         }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReactionsCreateIssueRequest {
-        /// The reaction to use
-        #[serde()]
-        pub content: Content,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -30820,31 +24393,6 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum IssuesListMilestonesState {
-        All,
-        Closed,
-        Open,
-    }
-
-    impl std::fmt::Display for IssuesListMilestonesState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                IssuesListMilestonesState::All => "all",
-                IssuesListMilestonesState::Closed => "closed",
-                IssuesListMilestonesState::Open => "open",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for IssuesListMilestonesState {
-        fn default() -> IssuesListMilestonesState {
-            IssuesListMilestonesState::Open
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
     pub enum IssuesListMilestonesSort {
         Completeness,
         DueOn,
@@ -30863,29 +24411,6 @@ pub mod types {
     impl Default for IssuesListMilestonesSort {
         fn default() -> IssuesListMilestonesSort {
             IssuesListMilestonesSort::DueOn
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum IssuesListMilestonesDirection {
-        Asc,
-        Desc,
-    }
-
-    impl std::fmt::Display for IssuesListMilestonesDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                IssuesListMilestonesDirection::Asc => "asc",
-                IssuesListMilestonesDirection::Desc => "desc",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for IssuesListMilestonesDirection {
-        fn default() -> IssuesListMilestonesDirection {
-            IssuesListMilestonesDirection::Asc
         }
     }
 
@@ -30934,30 +24459,6 @@ pub mod types {
         pub title: String,
     }
 
-    /// The state of the milestone. Either `open` or `closed`.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum IssuesUpdateMilestoneRequestState {
-        Closed,
-        Open,
-    }
-
-    impl std::fmt::Display for IssuesUpdateMilestoneRequestState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                IssuesUpdateMilestoneRequestState::Closed => "closed",
-                IssuesUpdateMilestoneRequestState::Open => "open",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for IssuesUpdateMilestoneRequestState {
-        fn default() -> IssuesUpdateMilestoneRequestState {
-            IssuesUpdateMilestoneRequestState::Open
-        }
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssuesUpdateMilestoneRequest {
         #[serde(
@@ -30969,7 +24470,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub due_on: Option<DateTime<Utc>>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub state: Option<State>,
+        pub state: Option<IssuesCreateMilestoneRequestState>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -31091,73 +24592,6 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ProjectsListRepoState {
-        All,
-        Closed,
-        Open,
-    }
-
-    impl std::fmt::Display for ProjectsListRepoState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ProjectsListRepoState::All => "all",
-                ProjectsListRepoState::Closed => "closed",
-                ProjectsListRepoState::Open => "open",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ProjectsListRepoState {
-        fn default() -> ProjectsListRepoState {
-            ProjectsListRepoState::Open
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ProjectsCreateRepoRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub body: String,
-        /// The name of the project.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum PullsListState {
-        All,
-        Closed,
-        Open,
-    }
-
-    impl std::fmt::Display for PullsListState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                PullsListState::All => "all",
-                PullsListState::Closed => "closed",
-                PullsListState::Open => "open",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for PullsListState {
-        fn default() -> PullsListState {
-            PullsListState::Open
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
     pub enum PullsListSort {
         Created,
         LongRunning,
@@ -31180,31 +24614,6 @@ pub mod types {
     impl Default for PullsListSort {
         fn default() -> PullsListSort {
             PullsListSort::Created
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum PullsListDirection {
-        Asc,
-        Desc,
-        Noop,
-    }
-
-    impl std::fmt::Display for PullsListDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                PullsListDirection::Asc => "asc",
-                PullsListDirection::Desc => "desc",
-                PullsListDirection::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for PullsListDirection {
-        fn default() -> PullsListDirection {
-            PullsListDirection::Noop
         }
     }
 
@@ -31272,31 +24681,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum PullsListReviewCommentsRepoDirection {
-        Asc,
-        Desc,
-        Noop,
-    }
-
-    impl std::fmt::Display for PullsListReviewCommentsRepoDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                PullsListReviewCommentsRepoDirection::Asc => "asc",
-                PullsListReviewCommentsRepoDirection::Desc => "desc",
-                PullsListReviewCommentsRepoDirection::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for PullsListReviewCommentsRepoDirection {
-        fn default() -> PullsListReviewCommentsRepoDirection {
-            PullsListReviewCommentsRepoDirection::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullsUpdateReviewCommentRequest {
         /// The text of the reply to the review comment.
         #[serde(
@@ -31305,43 +24689,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReactionsListPullRequestReviewCommentContent {
-        PlusOne,
-        MinusOne,
-        Confused,
-        Eyes,
-        Heart,
-        Hooray,
-        Laugh,
-        Rocket,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReactionsListPullRequestReviewCommentContent {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReactionsListPullRequestReviewCommentContent::PlusOne => "+1",
-                ReactionsListPullRequestReviewCommentContent::MinusOne => "-1",
-                ReactionsListPullRequestReviewCommentContent::Confused => "confused",
-                ReactionsListPullRequestReviewCommentContent::Eyes => "eyes",
-                ReactionsListPullRequestReviewCommentContent::Heart => "heart",
-                ReactionsListPullRequestReviewCommentContent::Hooray => "hooray",
-                ReactionsListPullRequestReviewCommentContent::Laugh => "laugh",
-                ReactionsListPullRequestReviewCommentContent::Rocket => "rocket",
-                ReactionsListPullRequestReviewCommentContent::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReactionsListPullRequestReviewCommentContent {
-        fn default() -> ReactionsListPullRequestReviewCommentContent {
-            ReactionsListPullRequestReviewCommentContent::Noop
-        }
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
@@ -31383,39 +24730,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReactionsCreatePullRequestReviewComment {
-        /// The reaction to use
-        #[serde()]
-        pub content: Content,
-    }
-
-    /// State of this Pull Request. Either `open` or `closed`.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum PullsUpdateRequestState {
-        Closed,
-        Open,
-        Noop,
-    }
-
-    impl std::fmt::Display for PullsUpdateRequestState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                PullsUpdateRequestState::Closed => "closed",
-                PullsUpdateRequestState::Open => "open",
-                PullsUpdateRequestState::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for PullsUpdateRequestState {
-        fn default() -> PullsUpdateRequestState {
-            PullsUpdateRequestState::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullsUpdateRequest {
         #[serde(
             default,
@@ -31432,38 +24746,13 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub maintainer_can_modify: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub state: Option<State>,
+        pub state: Option<PullRequestState>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum PullsListReviewCommentsDirection {
-        Asc,
-        Desc,
-        Noop,
-    }
-
-    impl std::fmt::Display for PullsListReviewCommentsDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                PullsListReviewCommentsDirection::Asc => "asc",
-                PullsListReviewCommentsDirection::Desc => "desc",
-                PullsListReviewCommentsDirection::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for PullsListReviewCommentsDirection {
-        fn default() -> PullsListReviewCommentsDirection {
-            PullsListReviewCommentsDirection::Noop
-        }
     }
 
     /// **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
@@ -31616,38 +24905,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub sha: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutPullsMergeMethodNotAllowedResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub documentation_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutPullsMergeConflictResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub documentation_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31831,22 +25088,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutPullsUpdateBranchAcceptedResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReposCreateReleaseRequest {
         #[serde(
             default,
@@ -31977,13 +25218,6 @@ pub mod types {
         fn default() -> ReactionsCreateReleaseRequestContent {
             ReactionsCreateReleaseRequestContent::Noop
         }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ReactionsCreateReleaseRequest {
-        /// The reaction to use
-        #[serde()]
-        pub content: Content,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -32131,14 +25365,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetActionsListEnvironmentSecretsOkResponse {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub secrets: Vec<ActionsSecret>,
-        #[serde(default)]
-        pub total_count: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ActionsCreateUpdateEnvironmentSecretRequest {
         #[serde(
             default,
@@ -32182,17 +25408,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EnterpriseAdminSetInformationProvisionedGroupRequestMembers {
-        /// The SCIM user ID for a user.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub value: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnterpriseAdminSetInformationProvisionedGroupRequest {
         /// The name of the SCIM group. This must match the GitHub organization that the group maps to.
         #[serde(
@@ -32202,7 +25417,7 @@ pub mod types {
         )]
         pub display_name: String,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub members: Vec<Members>,
+        pub members: Vec<EnterpriseAdminProvisionInviteGroupRequestMembers>,
         /// The SCIM schema URIs.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
@@ -32233,24 +25448,6 @@ pub mod types {
         fn default() -> EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
             EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Noop
         }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
-        #[serde()]
-        pub op: Op,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub path: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub value: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -32304,22 +25501,12 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EnterpriseAdminProvisionInviteUserRequestGroups {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub value: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnterpriseAdminProvisionInviteUserRequest {
         /// List of user emails.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub emails: Vec<Emails>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub groups: Vec<Groups>,
+        pub groups: Vec<ScimUserListEnterpriseResourcesGroups>,
         #[serde()]
         pub name: Name,
         /// The SCIM schema URIs.
@@ -32332,67 +25519,17 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub user_name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EnterpriseAdminSetInformationProvisionedUserRequestName {
-        /// The last name of the user.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub family_name: String,
-        /// The first name of the user.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub given_name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EnterpriseAdminSetInformationProvisionedUserRequestEmails {
-        /// Whether this email address is the primary address.
-        #[serde(default)]
-        pub primary: bool,
-        /// The type of email address.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        /// The email address.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub value: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EnterpriseAdminSetInformationProvisionedUserRequestGroups {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub value: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnterpriseAdminSetInformationProvisionedUserRequest {
         /// List of user emails.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub emails: Vec<Emails>,
+        pub emails: Vec<EnterpriseAdminProvisionInviteUserRequestEmails>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub groups: Vec<Groups>,
+        pub groups: Vec<ScimUserListEnterpriseResourcesGroups>,
         #[serde()]
-        pub name: Name,
+        pub name: EnterpriseAdminProvisionInviteUserRequestName,
         /// The SCIM schema URIs.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
@@ -32406,38 +25543,13 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct EnterpriseAdminUpdateAttributeUserRequestOperations {}
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct EnterpriseAdminUpdateAttributeUserRequest {
         /// Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub operations: Vec<Operations>,
+        pub operations: Vec<AuthenticationTokenPermissions>,
         /// The SCIM schema URIs.
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimProvisionInviteUserRequestName {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub family_name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub formatted: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub given_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -32481,7 +25593,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub groups: Vec<String>,
         #[serde()]
-        pub name: Name,
+        pub name: ScimUserName,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
         /// Configured by the admin. Could be an email, login, or username
@@ -32491,47 +25603,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub user_name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimSetInformationProvisionedUserRequestName {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub family_name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub formatted: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub given_name: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimSetInformationProvisionedUserRequestEmails {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub primary: Option<bool>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub value: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -32546,7 +25617,7 @@ pub mod types {
         pub display_name: String,
         /// user emails
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub emails: Vec<Emails>,
+        pub emails: Vec<ScimProvisionInviteUserRequestEmails>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
@@ -32556,7 +25627,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub groups: Vec<String>,
         #[serde()]
-        pub name: Name,
+        pub name: ScimUserName,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub schemas: Vec<String>,
         /// Configured by the admin. Could be an email, login, or username
@@ -32569,21 +25640,33 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct ScimUpdateAttributeUserRequestOperations {
-        #[serde()]
-        pub op: Op,
+    pub struct ValueData {
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        pub active: Option<bool>,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
-        pub path: String,
+        pub external_id: String,
         #[serde(
             default,
             skip_serializing_if = "String::is_empty",
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
-        pub value: String,
+        pub family_name: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub given_name: String,
+        #[serde(
+            default,
+            skip_serializing_if = "String::is_empty",
+            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        )]
+        pub user_name: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -32714,31 +25797,6 @@ pub mod types {
         pub items: Vec<IssueSearchResultItem>,
         #[serde(default)]
         pub total_count: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum SearchLabelsSort {
-        Created,
-        Updated,
-        Noop,
-    }
-
-    impl std::fmt::Display for SearchLabelsSort {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                SearchLabelsSort::Created => "created",
-                SearchLabelsSort::Updated => "updated",
-                SearchLabelsSort::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for SearchLabelsSort {
-        fn default() -> SearchLabelsSort {
-            SearchLabelsSort::Noop
-        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -32892,336 +25950,29 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamsCreateDiscussionLegacyRequest {
-        /// The discussion post's body text.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub body: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub private: Option<bool>,
-        /// The discussion post's title.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub title: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamsUpdateDiscussionLegacyRequest {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub body: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub title: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamsCreateDiscussionCommentLegacyRequest {
-        /// The discussion comment's body text.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub body: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamsUpdateDiscussionCommentLegacyRequest {
-        /// The discussion comment's body text.
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub body: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReactionsListTeamDiscussionCommentLegacyContent {
-        PlusOne,
-        MinusOne,
-        Confused,
-        Eyes,
-        Heart,
-        Hooray,
-        Laugh,
-        Rocket,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReactionsListTeamDiscussionCommentLegacyContent {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReactionsListTeamDiscussionCommentLegacyContent::PlusOne => "+1",
-                ReactionsListTeamDiscussionCommentLegacyContent::MinusOne => "-1",
-                ReactionsListTeamDiscussionCommentLegacyContent::Confused => "confused",
-                ReactionsListTeamDiscussionCommentLegacyContent::Eyes => "eyes",
-                ReactionsListTeamDiscussionCommentLegacyContent::Heart => "heart",
-                ReactionsListTeamDiscussionCommentLegacyContent::Hooray => "hooray",
-                ReactionsListTeamDiscussionCommentLegacyContent::Laugh => "laugh",
-                ReactionsListTeamDiscussionCommentLegacyContent::Rocket => "rocket",
-                ReactionsListTeamDiscussionCommentLegacyContent::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReactionsListTeamDiscussionCommentLegacyContent {
-        fn default() -> ReactionsListTeamDiscussionCommentLegacyContent {
-            ReactionsListTeamDiscussionCommentLegacyContent::Noop
-        }
-    }
-
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
-        PlusOne,
-        MinusOne,
-        Confused,
-        Eyes,
-        Heart,
-        Hooray,
-        Laugh,
-        Rocket,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::PlusOne => "+1",
-                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::MinusOne => "-1",
-                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Confused => "confused",
-                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Eyes => "eyes",
-                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Heart => "heart",
-                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Hooray => "hooray",
-                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Laugh => "laugh",
-                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Rocket => "rocket",
-                ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
-        fn default() -> ReactionsCreateTeamDiscussionCommentLegacyRequestContent {
-            ReactionsCreateTeamDiscussionCommentLegacyRequestContent::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateTeamDiscussionCommentLegacyRequest {
-        /// The reaction to use
+        /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
         #[serde()]
-        pub content: Content,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReactionsListTeamDiscussionLegacyContent {
-        PlusOne,
-        MinusOne,
-        Confused,
-        Eyes,
-        Heart,
-        Hooray,
-        Laugh,
-        Rocket,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReactionsListTeamDiscussionLegacyContent {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReactionsListTeamDiscussionLegacyContent::PlusOne => "+1",
-                ReactionsListTeamDiscussionLegacyContent::MinusOne => "-1",
-                ReactionsListTeamDiscussionLegacyContent::Confused => "confused",
-                ReactionsListTeamDiscussionLegacyContent::Eyes => "eyes",
-                ReactionsListTeamDiscussionLegacyContent::Heart => "heart",
-                ReactionsListTeamDiscussionLegacyContent::Hooray => "hooray",
-                ReactionsListTeamDiscussionLegacyContent::Laugh => "laugh",
-                ReactionsListTeamDiscussionLegacyContent::Rocket => "rocket",
-                ReactionsListTeamDiscussionLegacyContent::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReactionsListTeamDiscussionLegacyContent {
-        fn default() -> ReactionsListTeamDiscussionLegacyContent {
-            ReactionsListTeamDiscussionLegacyContent::Noop
-        }
-    }
-
-    /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReactionsCreateTeamDiscussionLegacyRequestContent {
-        PlusOne,
-        MinusOne,
-        Confused,
-        Eyes,
-        Heart,
-        Hooray,
-        Laugh,
-        Rocket,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReactionsCreateTeamDiscussionLegacyRequestContent {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReactionsCreateTeamDiscussionLegacyRequestContent::PlusOne => "+1",
-                ReactionsCreateTeamDiscussionLegacyRequestContent::MinusOne => "-1",
-                ReactionsCreateTeamDiscussionLegacyRequestContent::Confused => "confused",
-                ReactionsCreateTeamDiscussionLegacyRequestContent::Eyes => "eyes",
-                ReactionsCreateTeamDiscussionLegacyRequestContent::Heart => "heart",
-                ReactionsCreateTeamDiscussionLegacyRequestContent::Hooray => "hooray",
-                ReactionsCreateTeamDiscussionLegacyRequestContent::Laugh => "laugh",
-                ReactionsCreateTeamDiscussionLegacyRequestContent::Rocket => "rocket",
-                ReactionsCreateTeamDiscussionLegacyRequestContent::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReactionsCreateTeamDiscussionLegacyRequestContent {
-        fn default() -> ReactionsCreateTeamDiscussionLegacyRequestContent {
-            ReactionsCreateTeamDiscussionLegacyRequestContent::Noop
-        }
+        pub content: ReactionsCreateTeamDiscussionCommentInOrgRequestContent,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReactionsCreateTeamDiscussionLegacyRequest {
-        /// The reaction to use
+        /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
         #[serde()]
-        pub content: Content,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum TeamsListMembersLegacyRole {
-        All,
-        Maintainer,
-        Member,
-    }
-
-    impl std::fmt::Display for TeamsListMembersLegacyRole {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                TeamsListMembersLegacyRole::All => "all",
-                TeamsListMembersLegacyRole::Maintainer => "maintainer",
-                TeamsListMembersLegacyRole::Member => "member",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for TeamsListMembersLegacyRole {
-        fn default() -> TeamsListMembersLegacyRole {
-            TeamsListMembersLegacyRole::All
-        }
-    }
-
-    /// The role that this user should have in the team. Can be one of:  
-    /// \* `member` - a normal member of the team.  
-    /// \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum TeamsAddUpdateMembershipUserLegacyRequestRole {
-        Maintainer,
-        Member,
-    }
-
-    impl std::fmt::Display for TeamsAddUpdateMembershipUserLegacyRequestRole {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                TeamsAddUpdateMembershipUserLegacyRequestRole::Maintainer => "maintainer",
-                TeamsAddUpdateMembershipUserLegacyRequestRole::Member => "member",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for TeamsAddUpdateMembershipUserLegacyRequestRole {
-        fn default() -> TeamsAddUpdateMembershipUserLegacyRequestRole {
-            TeamsAddUpdateMembershipUserLegacyRequestRole::Member
-        }
+        pub content: ReactionsCreateTeamDiscussionInOrgRequestContent,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamsAddUpdateMembershipUserLegacyRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub role: Option<Role>,
-    }
-
-    /// The permission to grant to the team for this project. Can be one of:  
-    /// \* `read` - team members can read, but not write to or administer this project.  
-    /// \* `write` - team members can read and write, but not administer this project.  
-    /// \* `admin` - team members can read, write and administer this project.  
-    /// Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum TeamsAddUpdateProjectPermissionsLegacyRequestPermission {
-        Admin,
-        Read,
-        Write,
-        Noop,
-    }
-
-    impl std::fmt::Display for TeamsAddUpdateProjectPermissionsLegacyRequestPermission {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Admin => "admin",
-                TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Read => "read",
-                TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Write => "write",
-                TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for TeamsAddUpdateProjectPermissionsLegacyRequestPermission {
-        fn default() -> TeamsAddUpdateProjectPermissionsLegacyRequestPermission {
-            TeamsAddUpdateProjectPermissionsLegacyRequestPermission::Noop
-        }
+        pub role: Option<TeamsAddUpdateMembershipUserInOrgRequestRole>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permission: Option<Permission>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct PutTeamsAddUpdateProjectPermissionsLegacyForbiddenResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub documentation_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub message: String,
+        pub permission: Option<TeamsAddUpdateProjectPermissionsInOrgRequestPermission>,
     }
 
     /// The permission to grant the team on this repository. Can be one of:  
@@ -33255,12 +26006,6 @@ pub mod types {
         fn default() -> TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
             TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Noop
         }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct TeamsAddUpdateRepoPermissionsLegacyRequest {
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub permission: Option<Permission>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -33317,192 +26062,6 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub synced_at: String,
-    }
-
-    /// Private User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetUsersAuthenticatedOkResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub bio: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub blog: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub business_plus: Option<bool>,
-        #[serde(default)]
-        pub collaborators: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub company: String,
-        #[serde()]
-        pub created_at: DateTime<Utc>,
-        #[serde(default)]
-        pub disk_usage: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(default)]
-        pub followers: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(default)]
-        pub following: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(default)]
-        pub hireable: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub ldap_dn: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub location: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(default)]
-        pub owned_private_repos: i64,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub plan: Option<Plan>,
-        #[serde(default)]
-        pub private_gists: i64,
-        #[serde(default)]
-        pub public_gists: i64,
-        #[serde(default)]
-        pub public_repos: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub suspended_at: Option<DateTime<Utc>>,
-        #[serde(default)]
-        pub total_private_repos: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub twitter_username: String,
-        #[serde(default)]
-        pub two_factor_authentication: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde()]
-        pub updated_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -33613,44 +26172,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetAppsListInstallationsOkResponse {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub installations: Vec<Installation>,
-        #[serde(default)]
-        pub total_count: i64,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetAppsListInstallationReposOkResponse {
-        #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub repositories: Vec<Repository>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repository_selection: String,
-        #[serde(default)]
-        pub total_count: i64,
-    }
-
-    /// Interaction limit settings.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetInteractionsRestrictionsOkResponse {
-        #[serde()]
-        pub expires_at: DateTime<Utc>,
-        /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
-        #[serde()]
-        pub limit: InteractionGroup,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub origin: String,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct UsersCreatePublicSshKeyAuthenticatedRequest {
         /// The public SSH key to add to your GitHub account.
         #[serde(
@@ -33723,63 +26244,16 @@ pub mod types {
         pub state: State,
     }
 
-    /// Allowed values that can be passed to the exclude param.
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum MigrationsStartRequestExclude {
-        Repositories,
-        Noop,
-    }
-
-    impl std::fmt::Display for MigrationsStartRequestExclude {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                MigrationsStartRequestExclude::Repositories => "repositories",
-                MigrationsStartRequestExclude::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for MigrationsStartRequestExclude {
-        fn default() -> MigrationsStartRequestExclude {
-            MigrationsStartRequestExclude::Noop
-        }
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct MigrationsStartRequest {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
-        pub exclude: Vec<serde_json::Value>,
+        pub exclude: Vec<MigrationsListOrgExclude>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub exclude_attachments: Option<bool>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub lock_repositories: Option<bool>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub repositories: Vec<String>,
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum PackagesGetAllPackageVersionsOwnedByState {
-        Active,
-        Deleted,
-    }
-
-    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                PackagesGetAllPackageVersionsOwnedByState::Active => "active",
-                PackagesGetAllPackageVersionsOwnedByState::Deleted => "deleted",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for PackagesGetAllPackageVersionsOwnedByState {
-        fn default() -> PackagesGetAllPackageVersionsOwnedByState {
-            PackagesGetAllPackageVersionsOwnedByState::Active
-        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -33854,58 +26328,6 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReposListSort {
-        Created,
-        FullName,
-        Pushed,
-        Updated,
-    }
-
-    impl std::fmt::Display for ReposListSort {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReposListSort::Created => "created",
-                ReposListSort::FullName => "full_name",
-                ReposListSort::Pushed => "pushed",
-                ReposListSort::Updated => "updated",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReposListSort {
-        fn default() -> ReposListSort {
-            ReposListSort::FullName
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReposListDirection {
-        Asc,
-        Desc,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReposListDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReposListDirection::Asc => "asc",
-                ReposListDirection::Desc => "desc",
-                ReposListDirection::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReposListDirection {
-        fn default() -> ReposListDirection {
-            ReposListDirection::Noop
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ReposCreateRequest {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub allow_merge_commit: Option<bool>,
@@ -33964,192 +26386,6 @@ pub mod types {
         pub team_id: Option<i64>,
     }
 
-    /// Private User
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    pub struct GetUsersByUsernameOkResponse {
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub avatar_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub bio: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub blog: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub business_plus: Option<bool>,
-        #[serde(default)]
-        pub collaborators: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub company: String,
-        #[serde()]
-        pub created_at: DateTime<Utc>,
-        #[serde(default)]
-        pub disk_usage: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub email: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub events_url: String,
-        #[serde(default)]
-        pub followers: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub followers_url: String,
-        #[serde(default)]
-        pub following: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub following_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gists_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub gravatar_id: String,
-        #[serde(default)]
-        pub hireable: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub html_url: String,
-        #[serde(default)]
-        pub id: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub ldap_dn: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub location: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub login: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub name: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub node_id: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub organizations_url: String,
-        #[serde(default)]
-        pub owned_private_repos: i64,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub plan: Option<Plan>,
-        #[serde(default)]
-        pub private_gists: i64,
-        #[serde(default)]
-        pub public_gists: i64,
-        #[serde(default)]
-        pub public_repos: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub received_events_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub repos_url: String,
-        #[serde(default)]
-        pub site_admin: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub starred_url: String,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub subscriptions_url: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        pub suspended_at: Option<DateTime<Utc>>,
-        #[serde(default)]
-        pub total_private_repos: i64,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub twitter_username: String,
-        #[serde(default)]
-        pub two_factor_authentication: bool,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-            rename = "type"
-        )]
-        pub type_: String,
-        #[serde()]
-        pub updated_at: DateTime<Utc>,
-        #[serde(
-            default,
-            skip_serializing_if = "String::is_empty",
-            deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-        )]
-        pub url: String,
-    }
-
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
     pub enum UsersGetContextUserSubjectType {
@@ -34181,31 +26417,6 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ProjectsListUserState {
-        All,
-        Closed,
-        Open,
-    }
-
-    impl std::fmt::Display for ProjectsListUserState {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ProjectsListUserState::All => "all",
-                ProjectsListUserState::Closed => "closed",
-                ProjectsListUserState::Open => "open",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ProjectsListUserState {
-        fn default() -> ProjectsListUserState {
-            ProjectsListUserState::Open
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
     pub enum ReposListUserType {
         All,
         Member,
@@ -34226,58 +26437,6 @@ pub mod types {
     impl Default for ReposListUserType {
         fn default() -> ReposListUserType {
             ReposListUserType::Owner
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReposListUserSort {
-        Created,
-        FullName,
-        Pushed,
-        Updated,
-    }
-
-    impl std::fmt::Display for ReposListUserSort {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReposListUserSort::Created => "created",
-                ReposListUserSort::FullName => "full_name",
-                ReposListUserSort::Pushed => "pushed",
-                ReposListUserSort::Updated => "updated",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReposListUserSort {
-        fn default() -> ReposListUserSort {
-            ReposListUserSort::FullName
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-    #[serde(rename_all = "snake_case")]
-    pub enum ReposListUserDirection {
-        Asc,
-        Desc,
-        Noop,
-    }
-
-    impl std::fmt::Display for ReposListUserDirection {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            match *self {
-                ReposListUserDirection::Asc => "asc",
-                ReposListUserDirection::Desc => "desc",
-                ReposListUserDirection::Noop => "",
-            }
-            .fmt(f)
-        }
-    }
-
-    impl Default for ReposListUserDirection {
-        fn default() -> ReposListUserDirection {
-            ReposListUserDirection::Noop
         }
     }
 }
@@ -34766,12 +26925,12 @@ impl Client {
     * Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create a GitHub App with the manifest flow, you receive a temporary `code` used to retrieve the GitHub App's `id`, `pem` (private key), and `webhook_secret`.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#create-a-github-app-from-a-manifest>
+    *
+    * **Parameters:**
+    *
+    * * code: &str
     */
-    pub async fn apps_create_from_manifest(
-        &self,
-        code: &str,
-        body: &types::AppsCreateFromManifestRequest,
-    ) -> Result<types::PostAppsCreateFromManifestCreatedResponse> {
+    pub async fn apps_create_from_manifest(&self, code: &str, body: &types::AuthenticationTokenPermissions) -> Result<types::Integration> {
         let url = format!("/app-manifests/{}/conversions", progenitor_support::encode_path(&code.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -34819,6 +26978,13 @@ impl Client {
     * The permissions the installation has are included under the `permissions` key.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
+    * * since: DateTime<Utc>
+    * * outdated: &str
     */
     pub async fn apps_list_installations(&self, per_page: i64, page: i64, since: DateTime<Utc>, outdated: &str) -> Result<Vec<types::Installation>> {
         let url = format!(
@@ -34842,6 +27008,10 @@ impl Client {
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#get-an-installation-for-the-authenticated-app>
+    *
+    * **Parameters:**
+    *
+    * * installation_id: i64
     */
     pub async fn apps_get_installation(&self, installation_id: i64) -> Result<types::Installation> {
         let url = format!("/app/installations/{}", progenitor_support::encode_path(&installation_id.to_string()),);
@@ -34859,6 +27029,10 @@ impl Client {
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#delete-an-installation-for-the-authenticated-app>
+    *
+    * **Parameters:**
+    *
+    * * installation_id: i64
     */
     pub async fn apps_delete_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!("/app/installations/{}", progenitor_support::encode_path(&installation_id.to_string()),);
@@ -34876,6 +27050,10 @@ impl Client {
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps/#create-an-installation-access-token-for-an-app>
+    *
+    * **Parameters:**
+    *
+    * * installation_id: i64
     */
     #[async_recursion]
     pub async fn apps_create_installation_access_token(
@@ -34907,6 +27085,10 @@ impl Client {
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#suspend-an-app-installation>
+    *
+    * **Parameters:**
+    *
+    * * installation_id: i64
     */
     pub async fn apps_suspend_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
@@ -34927,6 +27109,10 @@ impl Client {
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#unsuspend-an-app-installation>
+    *
+    * **Parameters:**
+    *
+    * * installation_id: i64
     */
     pub async fn apps_unsuspend_installation(&self, installation_id: i64) -> Result<()> {
         let url = format!(
@@ -34947,6 +27133,12 @@ impl Client {
     * You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `["repo", "user"]`.
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#list-your-grants>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
+    * * client_id: &str
     */
     pub async fn oauth_authorizations_list_grants(&self, per_page: i64, page: i64, client_id: &str) -> Result<Vec<types::ApplicationGrant>> {
         let url = format!(
@@ -34967,6 +27159,10 @@ impl Client {
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#get-a-single-grant>
+    *
+    * **Parameters:**
+    *
+    * * grant_id: i64
     */
     pub async fn oauth_authorizations_get_grant(&self, grant_id: i64) -> Result<types::ApplicationGrant> {
         let url = format!("/applications/grants/{}", progenitor_support::encode_path(&grant_id.to_string()),);
@@ -34984,6 +27180,10 @@ impl Client {
     * Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for your user. Once deleted, the application has no access to your account and is no longer listed on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#delete-a-grant>
+    *
+    * **Parameters:**
+    *
+    * * grant_id: i64
     */
     pub async fn oauth_authorizations_delete_grant(&self, grant_id: i64) -> Result<()> {
         let url = format!("/applications/grants/{}", progenitor_support::encode_path(&grant_id.to_string()),);
@@ -35000,6 +27200,10 @@ impl Client {
     * Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for the user. Once deleted, the application will have no access to the user's account and will no longer be listed on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
     *
     * FROM: <https://docs.github.com/rest/reference/apps#delete-an-app-authorization>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
     */
     pub async fn apps_delete_authorization(&self, client_id: &str, body: &types::AppsDeleteAuthorizationRequest) -> Result<()> {
         let url = format!("/applications/{}/grant", progenitor_support::encode_path(&client_id.to_string()),);
@@ -35019,6 +27223,11 @@ impl Client {
     * Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for the user. Once deleted, the application will have no access to the user's account and will no longer be listed on [the Applications settings page under "Authorized OAuth Apps" on GitHub](https://github.com/settings/applications#authorized).
     *
     * FROM: <https://docs.github.com/rest/reference/apps#revoke-a-grant-for-an-application>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
+    * * access_token: &str
     */
     pub async fn apps_revoke_grant_for_application(&self, client_id: &str, access_token: &str) -> Result<()> {
         let url = format!(
@@ -35038,6 +27247,10 @@ impl Client {
     * OAuth applications can use a special API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) to use this endpoint, where the username is the OAuth application `client_id` and the password is its `client_secret`. Invalid tokens will return `404 NOT FOUND`.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#check-a-token>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
     */
     pub async fn apps_check_token(&self, client_id: &str, body: &types::AppsCheckTokenRequest) -> Result<types::Authorization> {
         let url = format!("/applications/{}/token", progenitor_support::encode_path(&client_id.to_string()),);
@@ -35053,6 +27266,10 @@ impl Client {
     * OAuth application owners can revoke a single token for an OAuth application. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#delete-an-app-token>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
     */
     pub async fn apps_delete_token(&self, client_id: &str, body: &types::AppsDeleteTokenRequest) -> Result<()> {
         let url = format!("/applications/{}/token", progenitor_support::encode_path(&client_id.to_string()),);
@@ -35068,8 +27285,12 @@ impl Client {
     * OAuth applications can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the "token" property in the response because changes take effect immediately. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#reset-a-token>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
     */
-    pub async fn apps_reset_token(&self, client_id: &str, body: &types::AppsResetTokenRequest) -> Result<types::Authorization> {
+    pub async fn apps_reset_token(&self, client_id: &str, body: &types::AppsCheckTokenRequest) -> Result<types::Authorization> {
         let url = format!("/applications/{}/token", progenitor_support::encode_path(&client_id.to_string()),);
 
         self.patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -35083,6 +27304,10 @@ impl Client {
     * Use a non-scoped user-to-server OAuth access token to create a repository scoped and/or permission scoped user-to-server OAuth access token. You can specify which repositories the token can access and which permissions are granted to the token. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#create-a-scoped-access-token>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
     */
     pub async fn apps_scope_token(&self, client_id: &str, body: &types::AppsScopeTokenRequest) -> Result<types::Authorization> {
         let url = format!("/applications/{}/token/scoped", progenitor_support::encode_path(&client_id.to_string()),);
@@ -35100,8 +27325,13 @@ impl Client {
     * OAuth applications can use a special API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#check-an-authorization>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
+    * * access_token: &str
     */
-    pub async fn apps_check_authorization(&self, client_id: &str, access_token: &str) -> Result<types::GetAppsCheckAuthorizationOkResponse> {
+    pub async fn apps_check_authorization(&self, client_id: &str, access_token: &str) -> Result<types::Authorization> {
         let url = format!(
             "/applications/{}/tokens/{}",
             progenitor_support::encode_path(&client_id.to_string()),
@@ -35121,6 +27351,11 @@ impl Client {
     * OAuth applications can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the "token" property in the response because changes take effect immediately. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#reset-an-authorization>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
+    * * access_token: &str
     */
     pub async fn apps_reset_authorization(&self, client_id: &str, access_token: &str) -> Result<types::Authorization> {
         let url = format!(
@@ -35142,6 +27377,11 @@ impl Client {
     * OAuth application owners can revoke a single token for an OAuth application. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#revoke-an-authorization-for-an-application>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
+    * * access_token: &str
     */
     pub async fn apps_revoke_authorization_for_application(&self, client_id: &str, access_token: &str) -> Result<()> {
         let url = format!(
@@ -35163,6 +27403,10 @@ impl Client {
     * If the GitHub App you specify is public, you can access this endpoint without authenticating. If the GitHub App you specify is private, you must authenticate with a [personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps/#get-an-app>
+    *
+    * **Parameters:**
+    *
+    * * app_slug: &str
     */
     pub async fn apps_get_by_slug(&self, app_slug: &str) -> Result<types::Integration> {
         let url = format!("/apps/{}", progenitor_support::encode_path(&app_slug.to_string()),);
@@ -35178,6 +27422,12 @@ impl Client {
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
+    * * client_id: &str
     */
     pub async fn oauth_authorizations_list_authorizations(&self, per_page: i64, page: i64, client_id: &str) -> Result<Vec<types::Authorization>> {
         let url = format!(
@@ -35233,6 +27483,10 @@ impl Client {
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#get-or-create-an-authorization-for-a-specific-app>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
     */
     pub async fn oauth_authorizations_get_or_create_authorization_for_app(
         &self,
@@ -35258,6 +27512,11 @@ impl Client {
     * If you have two-factor authentication setup, Basic Authentication for this endpoint requires that you use a one-time password (OTP) and your username and password instead of tokens. For more information, see "[Working with two-factor authentication](https://docs.github.com/rest/overview/other-authentication-methods#working-with-two-factor-authentication)."
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#get-or-create-an-authorization-for-a-specific-app-and-fingerprint>
+    *
+    * **Parameters:**
+    *
+    * * client_id: &str
+    * * fingerprint: &str
     */
     pub async fn oauth_authorizations_get_or_create_authorization_for_app_and_fingerprint(
         &self,
@@ -35282,6 +27541,10 @@ impl Client {
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#get-a-single-authorization>
+    *
+    * **Parameters:**
+    *
+    * * authorization_id: i64
     */
     pub async fn oauth_authorizations_get_authorization(&self, authorization_id: i64) -> Result<types::Authorization> {
         let url = format!("/authorizations/{}", progenitor_support::encode_path(&authorization_id.to_string()),);
@@ -35297,6 +27560,10 @@ impl Client {
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#delete-an-authorization>
+    *
+    * **Parameters:**
+    *
+    * * authorization_id: i64
     */
     pub async fn oauth_authorizations_delete_authorization(&self, authorization_id: i64) -> Result<()> {
         let url = format!("/authorizations/{}", progenitor_support::encode_path(&authorization_id.to_string()),);
@@ -35316,6 +27583,10 @@ impl Client {
     * You can only send one of these scope keys at a time.
     *
     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#update-an-existing-authorization>
+    *
+    * **Parameters:**
+    *
+    * * authorization_id: i64
     */
     pub async fn oauth_authorizations_update_authorization(
         &self,
@@ -35349,6 +27620,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-a-code-of-conduct>
+    *
+    * **Parameters:**
+    *
+    * * key: &str -- Key
     */
     pub async fn codes_of_conduct_get_conduct_code(&self, key: &str) -> Result<types::CodeOfConduct> {
         let url = format!("/codes_of_conduct/{}", progenitor_support::encode_path(&key.to_string()),);
@@ -35365,7 +27640,7 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/emojis#get-emojis>
     */
-    pub async fn emojis_get(&self) -> Result<types::GetEmojisOkResponse> {
+    pub async fn emojis_get(&self) -> Result<types::AuthenticationTokenPermissions> {
         let url = "/emojis".to_string();
         self.get(&url).await
     }
@@ -35380,6 +27655,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-github-actions-permissions-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_get_github_actions_permissions_enterprise(&self, enterprise: &str) -> Result<types::ActionsEnterprisePermissions> {
         let url = format!(
@@ -35400,6 +27679,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#set-github-actions-permissions-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_set_github_actions_permissions_enterprise(
         &self,
@@ -35424,6 +27707,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-selected-organizations-enabled-for-github-actions-in-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn enterprise_admin_list_selected_organizations_enabled_github_actions_enterprise(
         &self,
@@ -35451,6 +27740,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#set-selected-organizations-enabled-for-github-actions-in-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_set_selected_organizations_enabled_github_actions_enterprise(
         &self,
@@ -35475,6 +27768,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#enable-a-selected-organization-for-github-actions-in-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * org_id: i64
     */
     pub async fn enterprise_admin_enable_selected_organization_github_actions_enterprise(&self, enterprise: &str, org_id: i64) -> Result<()> {
         let url = format!(
@@ -35496,6 +27794,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#disable-a-selected-organization-for-github-actions-in-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * org_id: i64
     */
     pub async fn enterprise_admin_disable_selected_organization_github_actions_enterprise(&self, enterprise: &str, org_id: i64) -> Result<()> {
         let url = format!(
@@ -35517,6 +27820,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-allowed-actions-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_get_allowed_actions_enterprise(&self, enterprise: &str) -> Result<types::SelectedActions> {
         let url = format!(
@@ -35537,6 +27844,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#set-allowed-actions-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_set_allowed_actions_enterprise(&self, enterprise: &str, body: &types::SelectedActions) -> Result<()> {
         let url = format!(
@@ -35557,6 +27868,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-self-hosted-runner-groups-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn enterprise_admin_list_self_hosted_runner_groups_for_enterprise(
         &self,
@@ -35584,6 +27901,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#create-self-hosted-runner-group-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_create_self_hosted_runner_group_for_enterprise(
         &self,
@@ -35608,6 +27929,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-a-self-hosted-runner-group-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
     */
     pub async fn enterprise_admin_get_self_hosted_runner_group_for_enterprise(
         &self,
@@ -35633,6 +27959,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#delete-a-self-hosted-runner-group-from-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
     */
     pub async fn enterprise_admin_delete_self_hosted_runner_group_from_enterprise(&self, enterprise: &str, runner_group_id: i64) -> Result<()> {
         let url = format!(
@@ -35654,6 +27985,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#update-a-self-hosted-runner-group-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
     */
     pub async fn enterprise_admin_update_self_hosted_runner_group_for_enterprise(
         &self,
@@ -35680,6 +28016,13 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-organization-access-to-a-self-hosted-runner-group-in-a-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn enterprise_admin_list_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
@@ -35687,7 +28030,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse> {
+    ) -> Result<types::GetEnterpriseAdminListSelectedOrganizationsEnabledGithubActionsOkResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations?page={}&per_page={}",
             progenitor_support::encode_path(&enterprise.to_string()),
@@ -35709,6 +28052,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#set-organization-access-to-a-self-hosted-runner-group-in-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
     */
     pub async fn enterprise_admin_set_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
@@ -35735,6 +28083,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#add-organization-access-to-a-self-hosted-runner-group-in-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
+    * * org_id: i64
     */
     pub async fn enterprise_admin_add_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
@@ -35762,6 +28116,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#remove-organization-access-to-a-self-hosted-runner-group-in-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
+    * * org_id: i64
     */
     pub async fn enterprise_admin_remove_org_access_to_self_hosted_runner_group_in_enterprise(
         &self,
@@ -35789,6 +28149,13 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-self-hosted-runners-in-a-group-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn enterprise_admin_list_self_hosted_runners_in_group_for_enterprise(
         &self,
@@ -35818,6 +28185,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#set-self-hosted-runners-in-a-group-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
     */
     pub async fn enterprise_admin_set_self_hosted_runners_in_group_for_enterprise(
         &self,
@@ -35845,6 +28217,12 @@ impl Client {
     * scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#add-a-self-hosted-runner-to-a-group-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
+    * * runner_id: i64
     */
     pub async fn enterprise_admin_add_self_hosted_runner_to_group_for_enterprise(
         &self,
@@ -35872,6 +28250,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#remove-a-self-hosted-runner-from-a-group-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_group_id: i64
+    * * runner_id: i64
     */
     pub async fn enterprise_admin_remove_self_hosted_runner_from_group_for_enterprise(
         &self,
@@ -35899,6 +28283,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-self-hosted-runners-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn enterprise_admin_list_self_hosted_runners_for_enterprise(
         &self,
@@ -35926,6 +28316,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-runner-applications-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_list_runner_applications_for_enterprise(&self, enterprise: &str) -> Result<Vec<types::RunnerApplication>> {
         let url = format!(
@@ -35954,6 +28348,10 @@ impl Client {
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#create-a-registration-token-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_create_registration_token_for_enterprise(&self, enterprise: &str) -> Result<types::AuthenticationToken> {
         let url = format!(
@@ -35983,6 +28381,10 @@ impl Client {
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#create-a-remove-token-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_create_remove_token_for_enterprise(&self, enterprise: &str) -> Result<types::AuthenticationToken> {
         let url = format!(
@@ -36003,6 +28405,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-a-self-hosted-runner-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_id: i64
     */
     pub async fn enterprise_admin_get_self_hosted_runner_for_enterprise(&self, enterprise: &str, runner_id: i64) -> Result<types::Runner> {
         let url = format!(
@@ -36024,6 +28431,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#delete-self-hosted-runner-from-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * runner_id: i64
     */
     pub async fn enterprise_admin_delete_self_hosted_runner_from_enterprise(&self, enterprise: &str, runner_id: i64) -> Result<()> {
         let url = format!(
@@ -36043,6 +28455,17 @@ impl Client {
     * Gets the audit log for an enterprise. To use this endpoint, you must be an enterprise admin, and you must use an access token with the `admin:enterprise` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-the-audit-log-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * phrase: &str
+    * * include: crate::types::AuditLogInclude
+    * * after: &str
+    * * before: &str
+    * * order: crate::types::AuditLogOrder
+    * * page: i64
+    * * per_page: i64
     */
     pub async fn enterprise_admin_get_audit_log(
         &self,
@@ -36082,6 +28505,10 @@ impl Client {
     * The authenticated user must be an enterprise admin.
     *
     * FROM: <https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn billing_get_github_actions_billing_ghe(&self, enterprise: &str) -> Result<types::ActionsBillingUsage> {
         let url = format!(
@@ -36104,6 +28531,10 @@ impl Client {
     * The authenticated user must be an enterprise admin.
     *
     * FROM: <https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn billing_get_github_packages_billing_ghe(&self, enterprise: &str) -> Result<types::PackagesBillingUsage> {
         let url = format!(
@@ -36126,6 +28557,10 @@ impl Client {
     * The authenticated user must be an enterprise admin.
     *
     * FROM: <https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn billing_get_shared_storage_billing_ghe(&self, enterprise: &str) -> Result<types::CombinedBillingUsage> {
         let url = format!(
@@ -36144,6 +28579,11 @@ impl Client {
     * We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-public-events>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_public_events(&self, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
         let url = format!("/events?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -36183,6 +28623,12 @@ impl Client {
     * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
     *
     * FROM: <https://docs.github.com/rest/reference/gists#list-gists-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn gists_list(&self, since: DateTime<Utc>, per_page: i64, page: i64) -> Result<Vec<types::BaseGist>> {
         let url = format!(
@@ -36221,6 +28667,12 @@ impl Client {
     * Note: With [pagination](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
     *
     * FROM: <https://docs.github.com/rest/reference/gists#list-public-gists>
+    *
+    * **Parameters:**
+    *
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn gists_list_public(&self, since: DateTime<Utc>, per_page: i64, page: i64) -> Result<Vec<types::BaseGist>> {
         let url = format!(
@@ -36241,6 +28693,12 @@ impl Client {
     * List the authenticated user's starred gists:
     *
     * FROM: <https://docs.github.com/rest/reference/gists#list-starred-gists>
+    *
+    * **Parameters:**
+    *
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn gists_list_starred(&self, since: DateTime<Utc>, per_page: i64, page: i64) -> Result<Vec<types::BaseGist>> {
         let url = format!(
@@ -36261,6 +28719,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#get-a-gist>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
     */
     pub async fn gists_get(&self, gist_id: &str) -> Result<types::GistSimple> {
         let url = format!("/gists/{}", progenitor_support::encode_path(&gist_id.to_string()),);
@@ -36276,6 +28738,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#delete-a-gist>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
     */
     pub async fn gists_delete(&self, gist_id: &str) -> Result<()> {
         let url = format!("/gists/{}", progenitor_support::encode_path(&gist_id.to_string()),);
@@ -36291,6 +28757,10 @@ impl Client {
     * Allows you to update or delete a gist file and rename gist files. Files from the previous version of the gist that aren't explicitly changed during an edit are unchanged.
     *
     * FROM: <https://docs.github.com/rest/reference/gists/#update-a-gist>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
     */
     pub async fn gists_update(&self, gist_id: &str, body: &types::GistsUpdateRequest) -> Result<types::GistSimple> {
         let url = format!("/gists/{}", progenitor_support::encode_path(&gist_id.to_string()),);
@@ -36306,6 +28776,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-comments>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn gists_list_comments(&self, gist_id: &str, per_page: i64, page: i64) -> Result<Vec<types::GistComment>> {
         let url = format!(
@@ -36326,6 +28802,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#create-a-gist-comment>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
     */
     pub async fn gists_create_comment(&self, gist_id: &str, body: &types::GistsCreateCommentRequest) -> Result<types::GistComment> {
         let url = format!("/gists/{}/comments", progenitor_support::encode_path(&gist_id.to_string()),);
@@ -36341,6 +28821,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#get-a-gist-comment>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
+    * * comment_id: i64
     */
     pub async fn gists_get_comment(&self, gist_id: &str, comment_id: i64) -> Result<types::GistComment> {
         let url = format!(
@@ -36360,6 +28845,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#delete-a-gist-comment>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
+    * * comment_id: i64
     */
     pub async fn gists_delete_comment(&self, gist_id: &str, comment_id: i64) -> Result<()> {
         let url = format!(
@@ -36379,8 +28869,13 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#update-a-gist-comment>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
+    * * comment_id: i64
     */
-    pub async fn gists_update_comment(&self, gist_id: &str, comment_id: i64, body: &types::GistsUpdateCommentRequest) -> Result<types::GistComment> {
+    pub async fn gists_update_comment(&self, gist_id: &str, comment_id: i64, body: &types::GistsCreateCommentRequest) -> Result<types::GistComment> {
         let url = format!(
             "/gists/{}/comments/{}",
             progenitor_support::encode_path(&gist_id.to_string()),
@@ -36398,6 +28893,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-commits>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn gists_list_commits(&self, gist_id: &str, per_page: i64, page: i64) -> Result<Vec<types::GistCommit>> {
         let url = format!(
@@ -36418,6 +28919,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-forks>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn gists_list_forks(&self, gist_id: &str, per_page: i64, page: i64) -> Result<Vec<types::GistSimple>> {
         let url = format!(
@@ -36438,6 +28945,10 @@ impl Client {
     * **Note**: This was previously `/gists/:gist_id/fork`.
     *
     * FROM: <https://docs.github.com/rest/reference/gists#fork-a-gist>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
     */
     pub async fn gists_fork(&self, gist_id: &str) -> Result<types::BaseGist> {
         let url = format!("/gists/{}/forks", progenitor_support::encode_path(&gist_id.to_string()),);
@@ -36453,6 +28964,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#check-if-a-gist-is-starred>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
     */
     pub async fn gists_check_is_starred(&self, gist_id: &str) -> Result<()> {
         let url = format!("/gists/{}/star", progenitor_support::encode_path(&gist_id.to_string()),);
@@ -36468,6 +28983,10 @@ impl Client {
     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
     * FROM: <https://docs.github.com/rest/reference/gists#star-a-gist>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
     */
     pub async fn gists_star(&self, gist_id: &str) -> Result<()> {
         let url = format!("/gists/{}/star", progenitor_support::encode_path(&gist_id.to_string()),);
@@ -36483,6 +29002,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#unstar-a-gist>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
     */
     pub async fn gists_unstar(&self, gist_id: &str) -> Result<()> {
         let url = format!("/gists/{}/star", progenitor_support::encode_path(&gist_id.to_string()),);
@@ -36498,6 +29021,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/gists#get-a-gist-revision>
+    *
+    * **Parameters:**
+    *
+    * * gist_id: &str
+    * * sha: &str
     */
     pub async fn gists_get_revision(&self, gist_id: &str, sha: &str) -> Result<types::GistSimple> {
         let url = format!(
@@ -36532,6 +29060,10 @@ impl Client {
     * Use the raw [media type](https://docs.github.com/rest/overview/media-types/) to get the raw contents.
     *
     * FROM: <https://docs.github.com/rest/reference/gitignore#get-a-gitignore-template>
+    *
+    * **Parameters:**
+    *
+    * * name: &str
     */
     pub async fn gitignore_get_template(&self, name: &str) -> Result<types::GitignoreTemplate> {
         let url = format!("/gitignore/templates/{}", progenitor_support::encode_path(&name.to_string()),);
@@ -36549,6 +29081,11 @@ impl Client {
     * You must use an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-repositories-accessible-to-the-app-installation>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn apps_list_repos_accessible_to_installation(
         &self,
@@ -36598,6 +29135,21 @@ impl Client {
     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-issues-assigned-to-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * filter: crate::types::IssuesListFilter
+    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * labels: &str
+    * * sort: crate::types::IssuesListSort
+    * * direction: crate::types::Direction
+    * * since: DateTime<Utc>
+    * * collab: bool
+    * * orgs: bool
+    * * owned: bool
+    * * pulls: bool
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list(
         &self,
@@ -36641,6 +29193,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
+    *
+    * **Parameters:**
+    *
+    * * featured: bool
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn licenses_get_all_commonly_used(&self, featured: bool, per_page: i64, page: i64) -> Result<Vec<types::LicenseSimple>> {
         let url = format!(
@@ -36661,6 +29219,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/licenses#get-a-license>
+    *
+    * **Parameters:**
+    *
+    * * license: &str -- License
     */
     pub async fn licenses_get(&self, license: &str) -> Result<types::License> {
         let url = format!("/licenses/{}", progenitor_support::encode_path(&license.to_string()),);
@@ -36706,6 +29268,10 @@ impl Client {
     * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#get-a-subscription-plan-for-an-account>
+    *
+    * **Parameters:**
+    *
+    * * account_id: i64
     */
     pub async fn apps_get_subscription_plan_for_account(&self, account_id: i64) -> Result<types::MarketplacePurchase> {
         let url = format!(
@@ -36726,6 +29292,11 @@ impl Client {
     * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-plans>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn apps_list_plans(&self, per_page: i64, page: i64) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = format!(
@@ -36747,6 +29318,14 @@ impl Client {
     * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan>
+    *
+    * **Parameters:**
+    *
+    * * plan_id: i64
+    * * sort: crate::types::Sort
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn apps_list_accounts_for_plan(
         &self,
@@ -36778,6 +29357,10 @@ impl Client {
     * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#get-a-subscription-plan-for-an-account-stubbed>
+    *
+    * **Parameters:**
+    *
+    * * account_id: i64
     */
     pub async fn apps_get_subscription_plan_for_account_stubbed(&self, account_id: i64) -> Result<types::MarketplacePurchase> {
         let url = format!(
@@ -36798,6 +29381,11 @@ impl Client {
     * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-plans-stubbed>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn apps_list_plans_stubbed(&self, per_page: i64, page: i64) -> Result<Vec<types::MarketplaceListingPlan>> {
         let url = format!(
@@ -36819,6 +29407,14 @@ impl Client {
     * GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan-stubbed>
+    *
+    * **Parameters:**
+    *
+    * * plan_id: i64
+    * * sort: crate::types::Sort
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn apps_list_accounts_for_plan_stubbed(
         &self,
@@ -36864,6 +29460,13 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-network-of-repositories>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_public_events_for_repo_network(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
         let url = format!(
@@ -36885,6 +29488,15 @@ impl Client {
     * List all notifications for the current user, sorted by most recently updated.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-notifications-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * all: bool
+    * * participating: bool
+    * * since: DateTime<Utc>
+    * * before: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_notifications_for_authenticated_user(
         &self,
@@ -36933,6 +29545,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#get-a-thread>
+    *
+    * **Parameters:**
+    *
+    * * thread_id: i64
     */
     pub async fn activity_get_thread(&self, thread_id: i64) -> Result<types::Thread> {
         let url = format!("/notifications/threads/{}", progenitor_support::encode_path(&thread_id.to_string()),);
@@ -36948,6 +29564,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#mark-a-thread-as-read>
+    *
+    * **Parameters:**
+    *
+    * * thread_id: i64
     */
     pub async fn activity_mark_thread_as_read(&self, thread_id: i64) -> Result<()> {
         let url = format!("/notifications/threads/{}", progenitor_support::encode_path(&thread_id.to_string()),);
@@ -36965,6 +29585,10 @@ impl Client {
     * Note that subscriptions are only generated if a user is participating in a conversation--for example, they've replied to the thread, were **@mentioned**, or manually subscribe to a thread.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#get-a-thread-subscription-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * thread_id: i64
     */
     pub async fn activity_get_thread_subscription_for_authenticated_user(&self, thread_id: i64) -> Result<types::ThreadSubscription> {
         let url = format!(
@@ -36987,6 +29611,10 @@ impl Client {
     * Unsubscribing from a conversation in a repository that you are not watching is functionally equivalent to the [Delete a thread subscription](https://docs.github.com/rest/reference/activity#delete-a-thread-subscription) endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#set-a-thread-subscription>
+    *
+    * **Parameters:**
+    *
+    * * thread_id: i64
     */
     pub async fn activity_set_thread_subscription(
         &self,
@@ -37009,6 +29637,10 @@ impl Client {
     * Mutes all future notifications for a conversation until you comment on the thread or get an **@mention**. If you are watching the repository of the thread, you will still receive notifications. To ignore future notifications for a repository you are watching, use the [Set a thread subscription](https://docs.github.com/rest/reference/activity#set-a-thread-subscription) endpoint and set `ignore` to `true`.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#delete-a-thread-subscription>
+    *
+    * **Parameters:**
+    *
+    * * thread_id: i64
     */
     pub async fn activity_delete_thread_subscription(&self, thread_id: i64) -> Result<()> {
         let url = format!(
@@ -37027,6 +29659,10 @@ impl Client {
     * Get the octocat as ASCII art
     *
     * FROM: <https://docs.github.com/rest/reference/meta#get-octocat>
+    *
+    * **Parameters:**
+    *
+    * * s: &str
     */
     pub async fn meta_get_octocat(&self, s: &str) -> Result<String> {
         let url = format!("/octocat?s={}", s.to_string(),);
@@ -37044,6 +29680,11 @@ impl Client {
     * **Note:** Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of organizations.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-organizations>
+    *
+    * **Parameters:**
+    *
+    * * since: i64
+    * * per_page: i64
     */
     pub async fn orgs_list(&self, since: i64, per_page: i64) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!("/organizations?per_page={}&since={}", format!("{}", per_page), format!("{}", since),);
@@ -37061,6 +29702,10 @@ impl Client {
     * GitHub Apps with the `Organization plan` permission can use this endpoint to retrieve information about an organization's GitHub plan. See "[Authenticating with GitHub Apps](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/)" for details. For an example response, see 'Response with GitHub plan information' below."
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#get-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn orgs_get(&self, org: &str) -> Result<types::OrganizationFull> {
         let url = format!("/orgs/{}", progenitor_support::encode_path(&org.to_string()),);
@@ -37078,6 +29723,10 @@ impl Client {
     * Enables an authenticated organization owner with the `admin:org` scope to update the organization's profile and member privileges.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs/#update-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn orgs_update(&self, org: &str, body: &types::OrgsUpdateRequest) -> Result<types::OrganizationFull> {
         let url = format!("/orgs/{}", progenitor_support::encode_path(&org.to_string()),);
@@ -37095,6 +29744,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-github-actions-permissions-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_get_github_actions_permissions_organization(&self, org: &str) -> Result<types::ActionsOrganizationPermissions> {
         let url = format!("/orgs/{}/actions/permissions", progenitor_support::encode_path(&org.to_string()),);
@@ -37114,6 +29767,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#set-github-actions-permissions-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_set_github_actions_permissions_organization(
         &self,
@@ -37135,6 +29792,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-selected-repositories-enabled-for-github-actions-in-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_selected_repositories_enabled_github_actions_organization(
         &self,
@@ -37162,6 +29825,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#set-selected-repositories-enabled-for-github-actions-in-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_set_selected_repositories_enabled_github_actions_organization(
         &self,
@@ -37186,6 +29853,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#enable-a-selected-repository-for-github-actions-in-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * repository_id: i64
     */
     pub async fn actions_enable_selected_repository_github_actions_organization(&self, org: &str, repository_id: i64) -> Result<()> {
         let url = format!(
@@ -37207,6 +29879,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#disable-a-selected-repository-for-github-actions-in-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * repository_id: i64
     */
     pub async fn actions_disable_selected_repository_github_actions_organization(&self, org: &str, repository_id: i64) -> Result<()> {
         let url = format!(
@@ -37228,6 +29905,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-allowed-actions-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_get_allowed_actions_organization(&self, org: &str) -> Result<types::SelectedActions> {
         let url = format!(
@@ -37252,6 +29933,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `administration` organization permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#set-allowed-actions-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_set_allowed_actions_organization(&self, org: &str, body: &types::SelectedActions) -> Result<()> {
         let url = format!(
@@ -37274,6 +29959,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-self-hosted-runner-groups-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_self_hosted_runner_groups_for_org(
         &self,
@@ -37303,6 +29994,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#create-a-self-hosted-runner-group-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_create_self_hosted_runner_group_for_org(
         &self,
@@ -37326,6 +30021,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-a-self-hosted-runner-group-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
     */
     pub async fn actions_get_self_hosted_runner_group_for_org(&self, org: &str, runner_group_id: i64) -> Result<types::RunnerGroupsOrg> {
         let url = format!(
@@ -37349,6 +30049,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#delete-a-self-hosted-runner-group-from-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
     */
     pub async fn actions_delete_self_hosted_runner_group_from_org(&self, org: &str, runner_group_id: i64) -> Result<()> {
         let url = format!(
@@ -37372,6 +30077,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#update-a-self-hosted-runner-group-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
     */
     pub async fn actions_update_self_hosted_runner_group_for_org(
         &self,
@@ -37400,6 +30110,13 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-repository-access-to-a-self-hosted-runner-group-in-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
+    * * page: i64
+    * * per_page: i64
     */
     pub async fn actions_list_repo_access_to_self_hosted_runner_group_in_org(
         &self,
@@ -37431,6 +30148,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#set-repository-access-to-a-self-hosted-runner-group-in-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
     */
     pub async fn actions_set_repo_access_to_self_hosted_runner_group_in_org(
         &self,
@@ -37461,6 +30183,12 @@ impl Client {
     * scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#add-repository-acess-to-a-self-hosted-runner-group-in-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
+    * * repository_id: i64
     */
     pub async fn actions_add_repo_access_to_self_hosted_runner_group_in_org(
         &self,
@@ -37491,6 +30219,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#remove-repository-access-to-a-self-hosted-runner-group-in-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
+    * * repository_id: i64
     */
     pub async fn actions_remove_repo_access_to_self_hosted_runner_group_in_org(
         &self,
@@ -37520,6 +30254,13 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-self-hosted-runners-in-a-group-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_self_hosted_runners_in_group_for_org(
         &self,
@@ -37527,7 +30268,7 @@ impl Client {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetActionsListSelfHostedRunnersInGroupOrgOkResponse> {
+    ) -> Result<types::GetEnterpriseAdminListSelfHostedRunnersInGroupOkResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37551,12 +30292,17 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#set-self-hosted-runners-in-a-group-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
     */
     pub async fn actions_set_self_hosted_runners_in_group_for_org(
         &self,
         org: &str,
         runner_group_id: i64,
-        body: &types::ActionsSetSelfHostedRunnersInGroupOrgRequest,
+        body: &types::EnterpriseAdminSetSelfHostedRunnersInGroupRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners",
@@ -37581,6 +30327,12 @@ impl Client {
     * scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#add-a-self-hosted-runner-to-a-group-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
+    * * runner_id: i64
     */
     pub async fn actions_add_self_hosted_runner_to_group_for_org(&self, org: &str, runner_group_id: i64, runner_id: i64) -> Result<()> {
         let url = format!(
@@ -37606,6 +30358,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#remove-a-self-hosted-runner-from-a-group-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_group_id: i64
+    * * runner_id: i64
     */
     pub async fn actions_remove_self_hosted_runner_from_group_for_org(&self, org: &str, runner_group_id: i64, runner_id: i64) -> Result<()> {
         let url = format!(
@@ -37628,6 +30386,12 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-self-hosted-runners-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_self_hosted_runners_for_org(
         &self,
@@ -37655,6 +30419,10 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-runner-applications-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_list_runner_applications_for_org(&self, org: &str) -> Result<Vec<types::RunnerApplication>> {
         let url = format!("/orgs/{}/actions/runners/downloads", progenitor_support::encode_path(&org.to_string()),);
@@ -37680,6 +30448,10 @@ impl Client {
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/actions#create-a-registration-token-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_create_registration_token_for_org(&self, org: &str) -> Result<types::AuthenticationToken> {
         let url = format!(
@@ -37709,6 +30481,10 @@ impl Client {
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/actions#create-a-remove-token-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_create_remove_token_for_org(&self, org: &str) -> Result<types::AuthenticationToken> {
         let url = format!("/orgs/{}/actions/runners/remove-token", progenitor_support::encode_path(&org.to_string()),);
@@ -37726,6 +30502,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-a-self-hosted-runner-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_id: i64
     */
     pub async fn actions_get_self_hosted_runner_for_org(&self, org: &str, runner_id: i64) -> Result<types::Runner> {
         let url = format!(
@@ -37747,6 +30528,11 @@ impl Client {
     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#delete-a-self-hosted-runner-from-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * runner_id: i64
     */
     pub async fn actions_delete_self_hosted_runner_from_org(&self, org: &str, runner_id: i64) -> Result<()> {
         let url = format!(
@@ -37766,6 +30552,12 @@ impl Client {
     * Lists all secrets available in an organization without revealing their encrypted values. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-organization-secrets>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_org_secrets(&self, org: &str, per_page: i64, page: i64) -> Result<types::GetActionsListOrgSecretsOkResponse> {
         let url = format!(
@@ -37786,6 +30578,10 @@ impl Client {
     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-an-organization-public-key>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn actions_get_org_public_key(&self, org: &str) -> Result<types::ActionsPublicKey> {
         let url = format!("/orgs/{}/actions/secrets/public-key", progenitor_support::encode_path(&org.to_string()),);
@@ -37801,6 +30597,11 @@ impl Client {
     * Gets a single organization secret without revealing its encrypted value. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-an-organization-secret>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * secret_name: &str
     */
     pub async fn actions_get_org_secret(&self, org: &str, secret_name: &str) -> Result<types::OrganizationActionsSecret> {
         let url = format!(
@@ -37894,6 +30695,11 @@ impl Client {
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * secret_name: &str
     */
     pub async fn actions_create_or_update_org_secret(
         &self,
@@ -37918,6 +30724,11 @@ impl Client {
     * Deletes a secret in an organization using the secret name. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#delete-an-organization-secret>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * secret_name: &str
     */
     pub async fn actions_delete_org_secret(&self, org: &str, secret_name: &str) -> Result<()> {
         let url = format!(
@@ -37937,6 +30748,13 @@ impl Client {
     * Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to `selected`. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-selected-repositories-for-an-organization-secret>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * secret_name: &str
+    * * page: i64
+    * * per_page: i64
     */
     pub async fn actions_list_selected_repos_for_org_secret(
         &self,
@@ -37964,6 +30782,11 @@ impl Client {
     * Replaces all repositories for an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#set-selected-repositories-for-an-organization-secret>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * secret_name: &str
     */
     pub async fn actions_set_selected_repos_for_org_secret(
         &self,
@@ -37988,6 +30811,12 @@ impl Client {
     * Adds a repository to an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#add-selected-repository-to-an-organization-secret>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * secret_name: &str
+    * * repository_id: i64
     */
     pub async fn actions_add_selected_repo_to_org_secret(&self, org: &str, secret_name: &str, repository_id: i64) -> Result<()> {
         let url = format!(
@@ -38008,6 +30837,12 @@ impl Client {
     * Removes a repository from an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/actions#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#remove-selected-repository-from-an-organization-secret>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * secret_name: &str
+    * * repository_id: i64
     */
     pub async fn actions_remove_selected_repo_from_org_secret(&self, org: &str, secret_name: &str, repository_id: i64) -> Result<()> {
         let url = format!(
@@ -38030,6 +30865,17 @@ impl Client {
     * To use this endpoint, you must be an organization owner, and you must use an access token with the `admin:org` scope. GitHub Apps must have the `organization_administration` read permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#get-audit-log>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * phrase: &str
+    * * include: crate::types::AuditLogInclude
+    * * after: &str
+    * * before: &str
+    * * order: crate::types::AuditLogOrder
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_get_audit_log(
         &self,
@@ -38065,6 +30911,10 @@ impl Client {
     * List the users blocked by an organization.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-users-blocked-by-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn orgs_list_blocked_users(&self, org: &str) -> Result<Vec<types::SimpleUser>> {
         let url = format!("/orgs/{}/blocks", progenitor_support::encode_path(&org.to_string()),);
@@ -38080,6 +30930,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#check-if-a-user-is-blocked-by-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_check_blocked_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -38099,6 +30954,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#block-a-user-from-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_block_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -38118,6 +30978,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#unblock-a-user-from-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_unblock_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -38139,6 +31004,10 @@ impl Client {
     * An authenticated organization owner with the `read:org` scope can list all credential authorizations for an organization that uses SAML single sign-on (SSO). The credentials are either personal access tokens or SSH keys that organization members have authorized for the organization. For more information, see [About authentication with SAML single sign-on](https://help.github.com/en/articles/about-authentication-with-saml-single-sign-on).
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-saml-sso-authorizations-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn orgs_list_saml_sso_authorizations(&self, org: &str) -> Result<Vec<types::CredentialAuthorization>> {
         let url = format!("/orgs/{}/credential-authorizations", progenitor_support::encode_path(&org.to_string()),);
@@ -38156,6 +31025,11 @@ impl Client {
     * An authenticated organization owner with the `admin:org` scope can remove a credential authorization for an organization that uses SAML SSO. Once you remove someone's credential authorization, they will need to create a new personal access token or SSH key and authorize it for the organization they want to access.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#remove-a-saml-sso-authorization-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * credential_id: i64
     */
     pub async fn orgs_remove_saml_sso_authorization(&self, org: &str, credential_id: i64) -> Result<()> {
         let url = format!(
@@ -38175,6 +31049,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-public-organization-events>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_public_org_events(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
         let url = format!(
@@ -38195,6 +31075,12 @@ impl Client {
     * The return hash contains `failed_at` and `failed_reason` fields which represent the time at which the invitation failed and the reason for the failure.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-failed-organization-invitations>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_failed_invitations(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
@@ -38215,6 +31101,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-webhooks>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_webhooks(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::OrgHook>> {
         let url = format!(
@@ -38235,6 +31127,10 @@ impl Client {
     * Here's how you can create a hook that posts payloads in JSON format:
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#create-an-organization-webhook>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn orgs_create_webhook(&self, org: &str, body: &types::OrgsCreateWebhookRequest) -> Result<types::OrgHook> {
         let url = format!("/orgs/{}/hooks", progenitor_support::encode_path(&org.to_string()),);
@@ -38250,6 +31146,11 @@ impl Client {
     * Returns a webhook configured in an organization. To get only the webhook `config` properties, see "[Get a webhook configuration for an organization](/rest/reference/orgs#get-a-webhook-configuration-for-an-organization)."
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#get-an-organization-webhook>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * hook_id: i64
     */
     pub async fn orgs_get_webhook(&self, org: &str, hook_id: i64) -> Result<types::OrgHook> {
         let url = format!(
@@ -38269,6 +31170,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#delete-an-organization-webhook>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * hook_id: i64
     */
     pub async fn orgs_delete_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
         let url = format!(
@@ -38288,6 +31194,11 @@ impl Client {
     * Updates a webhook configured in an organization. When you update a webhook, the `secret` will be overwritten. If you previously had a `secret` set, you must provide the same `secret` or set a new `secret` or the secret will be removed. If you are only updating individual webhook `config` properties, use "[Update a webhook configuration for an organization](/rest/reference/orgs#update-a-webhook-configuration-for-an-organization)."
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#update-an-organization-webhook>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * hook_id: i64
     */
     pub async fn orgs_update_webhook(&self, org: &str, hook_id: i64, body: &types::OrgsUpdateWebhookRequest) -> Result<types::OrgHook> {
         let url = format!(
@@ -38309,6 +31220,11 @@ impl Client {
     * Access tokens must have the `admin:org_hook` scope, and GitHub Apps must have the `organization_hooks:read` permission.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#get-a-webhook-configuration-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * hook_id: i64
     */
     pub async fn orgs_get_webhook_config_for_org(&self, org: &str, hook_id: i64) -> Result<types::WebhookConfig> {
         let url = format!(
@@ -38330,12 +31246,17 @@ impl Client {
     * Access tokens must have the `admin:org_hook` scope, and GitHub Apps must have the `organization_hooks:write` permission.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#update-a-webhook-configuration-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * hook_id: i64
     */
     pub async fn orgs_update_webhook_config_for_org(
         &self,
         org: &str,
         hook_id: i64,
-        body: &types::OrgsUpdateWebhookConfigOrgRequest,
+        body: &types::AppsUpdateWebhookConfigAppRequest,
     ) -> Result<types::WebhookConfig> {
         let url = format!(
             "/orgs/{}/hooks/{}/config",
@@ -38354,6 +31275,11 @@ impl Client {
     * This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#ping-an-organization-webhook>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * hook_id: i64
     */
     pub async fn orgs_ping_webhook(&self, org: &str, hook_id: i64) -> Result<()> {
         let url = format!(
@@ -38375,6 +31301,10 @@ impl Client {
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#get-an-organization-installation-for-the-authenticated-app>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn apps_get_org_installation(&self, org: &str) -> Result<types::Installation> {
         let url = format!("/orgs/{}/installation", progenitor_support::encode_path(&org.to_string()),);
@@ -38390,6 +31320,12 @@ impl Client {
     * Lists all GitHub Apps in an organization. The installation count includes all GitHub Apps installed on repositories in the organization. You must be an organization owner with `admin:read` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-app-installations-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_app_installations(&self, org: &str, per_page: i64, page: i64) -> Result<types::GetOrgsListAppInstallationsOkResponse> {
         let url = format!(
@@ -38410,8 +31346,12 @@ impl Client {
     * Shows which type of GitHub user can interact with this organization and when the restriction expires. If there is no restrictions, you will see an empty response.
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
-    pub async fn interactions_get_restrictions_for_org(&self, org: &str) -> Result<types::GetInteractionsRestrictionsOrgOkResponse> {
+    pub async fn interactions_get_restrictions_for_org(&self, org: &str) -> Result<types::InteractionLimitResponse> {
         let url = format!("/orgs/{}/interaction-limits", progenitor_support::encode_path(&org.to_string()),);
 
         self.get(&url).await
@@ -38425,6 +31365,10 @@ impl Client {
     * Temporarily restricts interactions to a certain type of GitHub user in any public repository in the given organization. You must be an organization owner to set these restrictions. Setting the interaction limit at the organization level will overwrite any interaction limits that are set for individual repositories owned by the organization.
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn interactions_set_restrictions_for_org(&self, org: &str, body: &types::InteractionLimit) -> Result<types::InteractionLimitResponse> {
         let url = format!("/orgs/{}/interaction-limits", progenitor_support::encode_path(&org.to_string()),);
@@ -38440,6 +31384,10 @@ impl Client {
     * Removes all interaction restrictions from public repositories in the given organization. You must be an organization owner to remove restrictions.
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn interactions_remove_restrictions_for_org(&self, org: &str) -> Result<()> {
         let url = format!("/orgs/{}/interaction-limits", progenitor_support::encode_path(&org.to_string()),);
@@ -38455,6 +31403,12 @@ impl Client {
     * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-pending-organization-invitations>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_pending_invitations(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
@@ -38477,6 +31431,10 @@ impl Client {
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#create-an-organization-invitation>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn orgs_create_invitation(&self, org: &str, body: &types::OrgsCreateInvitationRequest) -> Result<types::OrganizationInvitation> {
         let url = format!("/orgs/{}/invitations", progenitor_support::encode_path(&org.to_string()),);
@@ -38494,6 +31452,11 @@ impl Client {
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications).
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#cancel-an-organization-invitation>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * invitation_id: i64
     */
     pub async fn orgs_cancel_invitation(&self, org: &str, invitation_id: i64) -> Result<()> {
         let url = format!(
@@ -38513,6 +31476,13 @@ impl Client {
     * List all teams associated with an invitation. In order to see invitations in an organization, the authenticated user must be an organization owner.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-invitation-teams>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * invitation_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_invitation_teams(&self, org: &str, invitation_id: i64, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
         let url = format!(
@@ -38539,6 +31509,18 @@ impl Client {
     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * filter: crate::types::IssuesListFilter
+    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * labels: &str
+    * * sort: crate::types::IssuesListSort
+    * * direction: crate::types::Direction
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_for_org(
         &self,
@@ -38576,6 +31558,14 @@ impl Client {
     * List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-members>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * filter: crate::types::OrgsListMembersFilter
+    * * role: crate::types::OrgsListMembersRole -- The user's membership type in the organization.
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_members(
         &self,
@@ -38605,6 +31595,11 @@ impl Client {
     * Check if a user is, publicly or privately, a member of the organization.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#check-organization-membership-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_check_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -38624,6 +31619,11 @@ impl Client {
     * Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#remove-an-organization-member>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_remove_member(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -38643,6 +31643,11 @@ impl Client {
     * In order to get a user's membership with an organization, the authenticated user must be an organization member. The `state` parameter in the response can be used to identify the user's membership status.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#get-organization-membership-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_get_membership_for_user(&self, org: &str, username: &str) -> Result<types::OrgMembership> {
         let url = format!(
@@ -38670,6 +31675,11 @@ impl Client {
     * To prevent abuse, the authenticated user is limited to 50 organization invitations per 24 hour period. If the organization is more than one month old or on a paid plan, the limit is 500 invitations per 24 hour period.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#set-organization-membership-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_set_membership_for_user(
         &self,
@@ -38696,6 +31706,11 @@ impl Client {
     * If the specified user is an active member of the organization, this will remove them from the organization. If the specified user has been invited to the organization, this will cancel their invitation. The specified user will receive an email notification in both cases.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#remove-organization-membership-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_remove_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -38715,6 +31730,13 @@ impl Client {
     * Lists the most recent migrations.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#list-organization-migrations>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
+    * * exclude: &[String]
     */
     pub async fn migrations_list_for_org(&self, org: &str, per_page: i64, page: i64, exclude: &[String]) -> Result<Vec<types::Migration>> {
         let url = format!(
@@ -38736,6 +31758,10 @@ impl Client {
     * Initiates the generation of a migration archive.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#start-an-organization-migration>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn migrations_start_for_org(&self, org: &str, body: &types::MigrationsStartOrgRequest) -> Result<types::Migration> {
         let url = format!("/orgs/{}/migrations", progenitor_support::encode_path(&org.to_string()),);
@@ -38758,6 +31784,12 @@ impl Client {
     * *   `failed`, which means the migration failed.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#get-an-organization-migration-status>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * migration_id: i64
+    * * exclude: &[String]
     */
     pub async fn migrations_get_status_for_org(&self, org: &str, migration_id: i64, exclude: &[String]) -> Result<types::Migration> {
         let url = format!(
@@ -38778,6 +31810,11 @@ impl Client {
     * Fetches the URL to a migration archive.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#download-an-organization-migration-archive>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * migration_id: i64
     */
     pub async fn migrations_download_archive_for_org(&self, org: &str, migration_id: i64) -> Result<()> {
         let url = format!(
@@ -38797,6 +31834,11 @@ impl Client {
     * Deletes a previous migration archive. Migration archives are automatically deleted after seven days.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#delete-an-organization-migration-archive>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * migration_id: i64
     */
     pub async fn migrations_delete_archive_for_org(&self, org: &str, migration_id: i64) -> Result<()> {
         let url = format!(
@@ -38816,6 +31858,12 @@ impl Client {
     * Unlocks a repository that was locked for migration. You should unlock each migrated repository and [delete them](https://docs.github.com/rest/reference/repos#delete-a-repository) when the migration is complete and you no longer need the source data.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#unlock-an-organization-repository>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * migration_id: i64
+    * * repo_name: &str
     */
     pub async fn migrations_unlock_repo_for_org(&self, org: &str, migration_id: i64, repo_name: &str) -> Result<()> {
         let url = format!(
@@ -38836,6 +31884,13 @@ impl Client {
     * List all the repositories for this organization migration.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-in-an-organization-migration>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * migration_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn migrations_list_repos_for_org(
         &self,
@@ -38863,6 +31918,13 @@ impl Client {
     * List all users who are outside collaborators of an organization.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-outside-collaborators-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * filter: crate::types::OrgsListMembersFilter
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_outside_collaborators(
         &self,
@@ -38890,12 +31952,13 @@ impl Client {
     * When an organization member is converted to an outside collaborator, they'll only have access to the repositories that their current team membership allows. The user will no longer be a member of the organization. For more information, see "[Converting an organization member to an outside collaborator](https://help.github.com/articles/converting-an-organization-member-to-an-outside-collaborator/)".
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#convert-an-organization-member-to-outside-collaborator>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
-    pub async fn orgs_convert_member_to_outside_collaborator(
-        &self,
-        org: &str,
-        username: &str,
-    ) -> Result<types::PutOrgsConvertMemberOutsideCollaboratorAcceptedResponse> {
+    pub async fn orgs_convert_member_to_outside_collaborator(&self, org: &str, username: &str) -> Result<types::AuthenticationTokenPermissions> {
         let url = format!(
             "/orgs/{}/outside_collaborators/{}",
             progenitor_support::encode_path(&org.to_string()),
@@ -38913,6 +31976,11 @@ impl Client {
     * Removing a user from this list will remove them from all the organization's repositories.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#remove-outside-collaborator-from-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_remove_outside_collaborator(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -38935,6 +32003,12 @@ impl Client {
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * org: &str
     */
     pub async fn packages_get_package_for_organization(
         &self,
@@ -38964,6 +32038,12 @@ impl Client {
     * - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * org: &str
     */
     pub async fn packages_delete_package_for_org(&self, package_type: crate::types::PackageType, package_name: &str, org: &str) -> Result<()> {
         let url = format!(
@@ -38992,6 +32072,13 @@ impl Client {
     * - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * org: &str
+    * * token: &str
     */
     pub async fn packages_restore_package_for_org(
         &self,
@@ -39022,6 +32109,15 @@ impl Client {
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * org: &str
+    * * page: i64
+    * * per_page: i64
+    * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState -- The state of the milestone.
     */
     pub async fn packages_get_all_package_versions_for_package_owned_by_org(
         &self,
@@ -39056,6 +32152,13 @@ impl Client {
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-version-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * org: &str
+    * * package_version_id: i64
     */
     pub async fn packages_get_package_version_for_organization(
         &self,
@@ -39087,6 +32190,13 @@ impl Client {
     * - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-version-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * org: &str
+    * * package_version_id: i64
     */
     pub async fn packages_delete_package_version_for_org(
         &self,
@@ -39122,6 +32232,13 @@ impl Client {
     * - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-version-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * org: &str
+    * * package_version_id: i64
     */
     pub async fn packages_restore_package_version_for_org(
         &self,
@@ -39149,6 +32266,13 @@ impl Client {
     * Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-organization-projects>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn projects_list_for_org(
         &self,
@@ -39176,6 +32300,10 @@ impl Client {
     * Creates an organization project board. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#create-an-organization-project>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn projects_create_for_org(&self, org: &str, body: &types::ProjectsCreateOrgRequest) -> Result<types::Project> {
         let url = format!("/orgs/{}/projects", progenitor_support::encode_path(&org.to_string()),);
@@ -39191,6 +32319,12 @@ impl Client {
     * Members of an organization can choose to have their membership publicized or not.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-public-organization-members>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_public_members(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
@@ -39211,6 +32345,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#check-public-organization-membership-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_check_public_membership_for_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -39232,6 +32371,11 @@ impl Client {
     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#set-public-organization-membership-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_set_public_membership_for_authenticated_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -39251,6 +32395,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#remove-public-organization-membership-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * username: &str
     */
     pub async fn orgs_remove_public_membership_for_authenticated_user(&self, org: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -39270,6 +32419,15 @@ impl Client {
     * Lists repositories for the specified organization.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-organization-repositories>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    *  * type_: crate::types::ReposListOrgType -- The type of label. Read-only labels are applied automatically when the runner is configured.
+    * * sort: crate::types::ReposListOrgSort
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_for_org(
         &self,
@@ -39308,6 +32466,10 @@ impl Client {
     * *   `repo` scope to create a private repository
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-an-organization-repository>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn repos_create_in_org(&self, org: &str, body: &types::ReposCreateInOrgRequest) -> Result<types::Repository> {
         let url = format!("/orgs/{}/repos", progenitor_support::encode_path(&org.to_string()),);
@@ -39327,6 +32489,10 @@ impl Client {
     * Access tokens must have the `repo` or `admin:org` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn billing_get_github_actions_billing_org(&self, org: &str) -> Result<types::ActionsBillingUsage> {
         let url = format!("/orgs/{}/settings/billing/actions", progenitor_support::encode_path(&org.to_string()),);
@@ -39346,6 +32512,10 @@ impl Client {
     * Access tokens must have the `repo` or `admin:org` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn billing_get_github_packages_billing_org(&self, org: &str) -> Result<types::PackagesBillingUsage> {
         let url = format!("/orgs/{}/settings/billing/packages", progenitor_support::encode_path(&org.to_string()),);
@@ -39365,6 +32535,10 @@ impl Client {
     * Access tokens must have the `repo` or `admin:org` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn billing_get_shared_storage_billing_org(&self, org: &str) -> Result<types::CombinedBillingUsage> {
         let url = format!(
@@ -39387,6 +32561,12 @@ impl Client {
     * The `per_page` parameter provides pagination for a list of IdP groups the authenticated user can access in an organization. For example, if the user `octocat` wants to see two groups per page in `octo-org` via cURL, it would look like this:
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-idp-groups-for-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: &str -- The configuration for GitHub Pages for a repository.
     */
     pub async fn teams_list_idp_groups_for_org(&self, org: &str, per_page: i64, page: &str) -> Result<types::GroupMapping> {
         let url = format!(
@@ -39407,6 +32587,12 @@ impl Client {
     * Lists all teams in an organization that are visible to the authenticated user.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-teams>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list(&self, org: &str, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
         let url = format!(
@@ -39429,6 +32615,10 @@ impl Client {
     * When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of `maintainers`. For more information, see "[About teams](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-teams)".
     *
     * FROM: <https://docs.github.com/rest/reference/teams#create-a-team>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn teams_create(&self, org: &str, body: &types::TeamsCreateRequest) -> Result<types::TeamFull> {
         let url = format!("/orgs/{}/teams", progenitor_support::encode_path(&org.to_string()),);
@@ -39446,6 +32636,11 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#get-a-team-by-name>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
     */
     pub async fn teams_get_by_name(&self, org: &str, team_slug: &str) -> Result<types::TeamFull> {
         let url = format!(
@@ -39469,6 +32664,11 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#delete-a-team>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
     */
     pub async fn teams_delete_in_org(&self, org: &str, team_slug: &str) -> Result<()> {
         let url = format!(
@@ -39490,6 +32690,11 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#update-a-team>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
     */
     pub async fn teams_update_in_org(&self, org: &str, team_slug: &str, body: &types::TeamsUpdateInOrgRequest) -> Result<types::TeamFull> {
         let url = format!(
@@ -39511,6 +32716,15 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-discussions>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
+    * * pinned: &str
     */
     pub async fn teams_list_discussions_in_org(
         &self,
@@ -39546,6 +32760,11 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#create-a-discussion>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
     */
     pub async fn teams_create_discussion_in_org(
         &self,
@@ -39572,6 +32791,12 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#get-a-discussion>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
     */
     pub async fn teams_get_discussion_in_org(&self, org: &str, team_slug: &str, discussion_number: i64) -> Result<types::TeamDiscussion> {
         let url = format!(
@@ -39594,6 +32819,12 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#delete-a-discussion>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
     */
     pub async fn teams_delete_discussion_in_org(&self, org: &str, team_slug: &str, discussion_number: i64) -> Result<()> {
         let url = format!(
@@ -39616,6 +32847,12 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#update-a-discussion>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
     */
     pub async fn teams_update_discussion_in_org(
         &self,
@@ -39644,6 +32881,15 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-discussion-comments>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_discussion_comments_in_org(
         &self,
@@ -39679,6 +32925,12 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#create-a-discussion-comment>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
     */
     pub async fn teams_create_discussion_comment_in_org(
         &self,
@@ -39707,6 +32959,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#get-a-discussion-comment>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
+    * * comment_number: i64
     */
     pub async fn teams_get_discussion_comment_in_org(
         &self,
@@ -39736,6 +32995,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#delete-a-discussion-comment>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
+    * * comment_number: i64
     */
     pub async fn teams_delete_discussion_comment_in_org(
         &self,
@@ -39765,6 +33031,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#update-a-discussion-comment>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
+    * * comment_number: i64
     */
     pub async fn teams_update_discussion_comment_in_org(
         &self,
@@ -39772,7 +33045,7 @@ impl Client {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::TeamsUpdateDiscussionCommentInOrgRequest,
+        body: &types::TeamsCreateDiscussionCommentInOrgRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}",
@@ -39795,6 +33068,16 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions`.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
+    * * comment_number: i64
+    * * content: crate::types::Content -- The reaction to use
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn reactions_list_for_team_discussion_comment_in_org(
         &self,
@@ -39830,6 +33113,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions`.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion-comment>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
+    * * comment_number: i64
     */
     pub async fn reactions_create_for_team_discussion_comment_in_org(
         &self,
@@ -39837,7 +33127,7 @@ impl Client {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::ReactionsCreateTeamDiscussionCommentInOrgRequest,
+        body: &types::ReactionsCreateTeamDiscussionCommentLegacyRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
@@ -39860,6 +33150,14 @@ impl Client {
     * Delete a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#delete-team-discussion-comment-reaction>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
+    * * comment_number: i64
+    * * reaction_id: i64
     */
     pub async fn reactions_delete_for_team_discussion_comment(
         &self,
@@ -39891,6 +33189,15 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions`.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
+    * * content: crate::types::Content -- The reaction to use
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn reactions_list_for_team_discussion_in_org(
         &self,
@@ -39924,13 +33231,19 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions`.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
     */
     pub async fn reactions_create_for_team_discussion_in_org(
         &self,
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        body: &types::ReactionsCreateTeamDiscussionInOrgRequest,
+        body: &types::ReactionsCreateTeamDiscussionLegacyRequest,
     ) -> Result<types::Reaction> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions",
@@ -39952,6 +33265,13 @@ impl Client {
     * Delete a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#delete-team-discussion-reaction>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * discussion_number: i64
+    * * reaction_id: i64
     */
     pub async fn reactions_delete_for_team_discussion(&self, org: &str, team_slug: &str, discussion_number: i64, reaction_id: i64) -> Result<()> {
         let url = format!(
@@ -39975,6 +33295,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/invitations`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-pending-team-invitations>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_pending_invitations_in_org(
         &self,
@@ -40004,6 +33331,14 @@ impl Client {
     * To list members in a team, the team must be visible to the authenticated user.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-team-members>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * role: crate::types::TeamsListMembersInOrgRole -- The user's membership type in the organization.
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_members_in_org(
         &self,
@@ -40042,6 +33377,12 @@ impl Client {
     * The `role` for organization owners is set to `maintainer`. For more information about `maintainer` roles, see see [Create a team](https://docs.github.com/rest/reference/teams#create-a-team).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * username: &str
     */
     pub async fn teams_get_membership_for_user_in_org(&self, org: &str, team_slug: &str, username: &str) -> Result<types::TeamMembership> {
         let url = format!(
@@ -40072,13 +33413,19 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/memberships/{username}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * username: &str
     */
     pub async fn teams_add_or_update_membership_for_user_in_org(
         &self,
         org: &str,
         team_slug: &str,
         username: &str,
-        body: &types::TeamsAddUpdateMembershipUserInOrgRequest,
+        body: &types::TeamsAddUpdateMembershipUserLegacyRequest,
     ) -> Result<types::TeamMembership> {
         let url = format!(
             "/orgs/{}/teams/{}/memberships/{}",
@@ -40104,6 +33451,12 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/memberships/{username}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * username: &str
     */
     pub async fn teams_remove_membership_for_user_in_org(&self, org: &str, team_slug: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -40126,6 +33479,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-team-projects>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_projects_in_org(&self, org: &str, team_slug: &str, per_page: i64, page: i64) -> Result<Vec<types::TeamProject>> {
         let url = format!(
@@ -40149,6 +33509,12 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#check-team-permissions-for-a-project>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * project_id: i64
     */
     pub async fn teams_check_permissions_for_project_in_org(&self, org: &str, team_slug: &str, project_id: i64) -> Result<types::TeamProject> {
         let url = format!(
@@ -40171,6 +33537,12 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#add-or-update-team-project-permissions>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * project_id: i64
     */
     pub async fn teams_add_or_update_project_permissions_in_org(
         &self,
@@ -40199,6 +33571,12 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#remove-a-project-from-a-team>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * project_id: i64
     */
     pub async fn teams_remove_project_in_org(&self, org: &str, team_slug: &str, project_id: i64) -> Result<()> {
         let url = format!(
@@ -40221,6 +33599,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-team-repositories>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_repos_in_org(&self, org: &str, team_slug: &str, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
@@ -40248,6 +33633,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn teams_check_permissions_for_repo_in_org(
         &self,
@@ -40279,6 +33671,13 @@ impl Client {
     * For more information about the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#add-or-update-team-repository-permissions>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn teams_add_or_update_repo_permissions_in_org(
         &self,
@@ -40309,6 +33708,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#remove-a-repository-from-a-team>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn teams_remove_repo_in_org(&self, org: &str, team_slug: &str, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -40334,6 +33740,11 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/team-sync/group-mappings`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
     */
     pub async fn teams_list_idp_groups_in_org(&self, org: &str, team_slug: &str) -> Result<types::GroupMapping> {
         let url = format!(
@@ -40357,6 +33768,11 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/team-sync/group-mappings`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
     */
     pub async fn teams_create_or_update_idp_group_connections_in_org(
         &self,
@@ -40383,6 +33799,13 @@ impl Client {
     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/teams`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-child-teams>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * team_slug: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_child_in_org(&self, org: &str, team_slug: &str, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
         let url = format!(
@@ -40404,6 +33827,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#get-a-project-card>
+    *
+    * **Parameters:**
+    *
+    * * card_id: i64
     */
     pub async fn projects_get_card(&self, card_id: i64) -> Result<types::ProjectCard> {
         let url = format!("/projects/columns/cards/{}", progenitor_support::encode_path(&card_id.to_string()),);
@@ -40419,6 +33846,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#delete-a-project-card>
+    *
+    * **Parameters:**
+    *
+    * * card_id: i64
     */
     pub async fn projects_delete_card(&self, card_id: i64) -> Result<()> {
         let url = format!("/projects/columns/cards/{}", progenitor_support::encode_path(&card_id.to_string()),);
@@ -40434,6 +33865,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#update-a-project-card>
+    *
+    * **Parameters:**
+    *
+    * * card_id: i64
     */
     pub async fn projects_update_card(&self, card_id: i64, body: &types::ProjectsUpdateCardRequest) -> Result<types::ProjectCard> {
         let url = format!("/projects/columns/cards/{}", progenitor_support::encode_path(&card_id.to_string()),);
@@ -40449,12 +33884,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#move-a-project-card>
+    *
+    * **Parameters:**
+    *
+    * * card_id: i64
     */
-    pub async fn projects_move_card(
-        &self,
-        card_id: i64,
-        body: &types::ProjectsMoveCardRequest,
-    ) -> Result<types::PostProjectsMoveCardCreatedResponse> {
+    pub async fn projects_move_card(&self, card_id: i64, body: &types::ProjectsMoveCardRequest) -> Result<types::AuthenticationTokenPermissions> {
         let url = format!("/projects/columns/cards/{}/moves", progenitor_support::encode_path(&card_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -40468,6 +33903,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#get-a-project-column>
+    *
+    * **Parameters:**
+    *
+    * * column_id: i64
     */
     pub async fn projects_get_column(&self, column_id: i64) -> Result<types::ProjectColumn> {
         let url = format!("/projects/columns/{}", progenitor_support::encode_path(&column_id.to_string()),);
@@ -40483,6 +33922,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#delete-a-project-column>
+    *
+    * **Parameters:**
+    *
+    * * column_id: i64
     */
     pub async fn projects_delete_column(&self, column_id: i64) -> Result<()> {
         let url = format!("/projects/columns/{}", progenitor_support::encode_path(&column_id.to_string()),);
@@ -40498,6 +33941,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#update-a-project-column>
+    *
+    * **Parameters:**
+    *
+    * * column_id: i64
     */
     pub async fn projects_update_column(&self, column_id: i64, body: &types::ProjectsUpdateColumnRequest) -> Result<types::ProjectColumn> {
         let url = format!("/projects/columns/{}", progenitor_support::encode_path(&column_id.to_string()),);
@@ -40513,6 +33960,13 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-project-cards>
+    *
+    * **Parameters:**
+    *
+    * * column_id: i64
+    * * archived_state: crate::types::ProjectsListCardsArchivedState
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn projects_list_cards(
         &self,
@@ -40540,6 +33994,10 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#create-a-project-card>
+    *
+    * **Parameters:**
+    *
+    * * column_id: i64
     */
     pub async fn projects_create_card(&self, column_id: i64, body: &types::ProjectsCreateCardRequest) -> Result<types::ProjectCard> {
         let url = format!("/projects/columns/{}/cards", progenitor_support::encode_path(&column_id.to_string()),);
@@ -40555,12 +34013,16 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#move-a-project-column>
+    *
+    * **Parameters:**
+    *
+    * * column_id: i64
     */
     pub async fn projects_move_column(
         &self,
         column_id: i64,
         body: &types::ProjectsMoveColumnRequest,
-    ) -> Result<types::PostProjectsMoveColumnCreatedResponse> {
+    ) -> Result<types::AuthenticationTokenPermissions> {
         let url = format!("/projects/columns/{}/moves", progenitor_support::encode_path(&column_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -40574,6 +34036,10 @@ impl Client {
     * Gets a project by its `id`. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#get-a-project>
+    *
+    * **Parameters:**
+    *
+    * * project_id: i64
     */
     pub async fn projects_get(&self, project_id: i64) -> Result<types::Project> {
         let url = format!("/projects/{}", progenitor_support::encode_path(&project_id.to_string()),);
@@ -40589,6 +34055,10 @@ impl Client {
     * Deletes a project board. Returns a `404 Not Found` status if projects are disabled.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#delete-a-project>
+    *
+    * **Parameters:**
+    *
+    * * project_id: i64
     */
     pub async fn projects_delete(&self, project_id: i64) -> Result<()> {
         let url = format!("/projects/{}", progenitor_support::encode_path(&project_id.to_string()),);
@@ -40604,6 +34074,10 @@ impl Client {
     * Updates a project board's information. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#update-a-project>
+    *
+    * **Parameters:**
+    *
+    * * project_id: i64
     */
     pub async fn projects_update(&self, project_id: i64, body: &types::ProjectsUpdateRequest) -> Result<types::Project> {
         let url = format!("/projects/{}", progenitor_support::encode_path(&project_id.to_string()),);
@@ -40619,6 +34093,13 @@ impl Client {
     * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-project-collaborators>
+    *
+    * **Parameters:**
+    *
+    * * project_id: i64
+    * * affiliation: crate::types::ProjectsListCollaboratorsAffiliation
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn projects_list_collaborators(
         &self,
@@ -40646,6 +34127,11 @@ impl Client {
     * Adds a collaborator to an organization project and sets their permission level. You must be an organization owner or a project `admin` to add a collaborator.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#add-project-collaborator>
+    *
+    * **Parameters:**
+    *
+    * * project_id: i64
+    * * username: &str
     */
     pub async fn projects_add_collaborator(&self, project_id: i64, username: &str, body: &types::ProjectsAddCollaboratorRequest) -> Result<()> {
         let url = format!(
@@ -40665,6 +34151,11 @@ impl Client {
     * Removes a collaborator from an organization project. You must be an organization owner or a project `admin` to remove a collaborator.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#remove-project-collaborator>
+    *
+    * **Parameters:**
+    *
+    * * project_id: i64
+    * * username: &str
     */
     pub async fn projects_remove_collaborator(&self, project_id: i64, username: &str) -> Result<()> {
         let url = format!(
@@ -40684,6 +34175,11 @@ impl Client {
     * Returns the collaborator's permission level for an organization project. Possible values for the `permission` key: `admin`, `write`, `read`, `none`. You must be an organization owner or a project `admin` to review a user's permission level.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#get-project-permission-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * project_id: i64
+    * * username: &str
     */
     pub async fn projects_get_permission_for_user(&self, project_id: i64, username: &str) -> Result<types::RepositoryCollaboratorPermission> {
         let url = format!(
@@ -40703,6 +34199,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-project-columns>
+    *
+    * **Parameters:**
+    *
+    * * project_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn projects_list_columns(&self, project_id: i64, per_page: i64, page: i64) -> Result<Vec<types::ProjectColumn>> {
         let url = format!(
@@ -40723,8 +34225,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#create-a-project-column>
+    *
+    * **Parameters:**
+    *
+    * * project_id: i64
     */
-    pub async fn projects_create_column(&self, project_id: i64, body: &types::ProjectsCreateColumnRequest) -> Result<types::ProjectColumn> {
+    pub async fn projects_create_column(&self, project_id: i64, body: &types::ProjectsUpdateColumnRequest) -> Result<types::ProjectColumn> {
         let url = format!("/projects/{}/columns", progenitor_support::encode_path(&project_id.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -40756,6 +34262,10 @@ impl Client {
     * OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/), when deleting a [team discussion](https://docs.github.com/rest/reference/teams#discussions) or [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions/#delete-a-reaction-legacy>
+    *
+    * **Parameters:**
+    *
+    * * reaction_id: i64
     */
     pub async fn reactions_delete_legacy(&self, reaction_id: i64) -> Result<()> {
         let url = format!("/reactions/{}", progenitor_support::encode_path(&reaction_id.to_string()),);
@@ -40773,6 +34283,11 @@ impl Client {
     * The `parent` and `source` objects are present when the repository is a fork. `parent` is the repository this repository was forked from, `source` is the ultimate source for the network.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get(&self, owner: &str, repo: &str) -> Result<types::FullRepository> {
         let url = format!(
@@ -40795,6 +34310,11 @@ impl Client {
     * repositories, you will get a `403 Forbidden` response.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_delete(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -40814,6 +34334,11 @@ impl Client {
     * **Note**: To edit a repository's topics, use the [Replace all repository topics](https://docs.github.com/rest/reference/repos#replace-all-repository-topics) endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/repos/#update-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_update(&self, owner: &str, repo: &str, body: &types::ReposUpdateRequest) -> Result<types::FullRepository> {
         let url = format!(
@@ -40833,6 +34358,13 @@ impl Client {
     * Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-artifacts-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_artifacts_for_repo(
         &self,
@@ -40860,6 +34392,12 @@ impl Client {
     * Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-an-artifact>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * artifact_id: i64
     */
     pub async fn actions_get_artifact(&self, owner: &str, repo: &str, artifact_id: i64) -> Result<types::Artifact> {
         let url = format!(
@@ -40880,6 +34418,12 @@ impl Client {
     * Deletes an artifact for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#delete-an-artifact>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * artifact_id: i64
     */
     pub async fn actions_delete_artifact(&self, owner: &str, repo: &str, artifact_id: i64) -> Result<()> {
         let url = format!(
@@ -40903,6 +34447,13 @@ impl Client {
     * GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#download-an-artifact>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * artifact_id: i64
+    * * archive_format: &str
     */
     pub async fn actions_download_artifact(&self, owner: &str, repo: &str, artifact_id: i64, archive_format: &str) -> Result<()> {
         let url = format!(
@@ -40924,6 +34475,12 @@ impl Client {
     * Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-a-job-for-a-workflow-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * job_id: i64
     */
     pub async fn actions_get_job_for_workflow_run(&self, owner: &str, repo: &str, job_id: i64) -> Result<types::Job> {
         let url = format!(
@@ -40947,6 +34504,12 @@ impl Client {
     * have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#download-job-logs-for-a-workflow-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * job_id: i64
     */
     pub async fn actions_download_job_logs_for_workflow_run(&self, owner: &str, repo: &str, job_id: i64) -> Result<()> {
         let url = format!(
@@ -40970,6 +34533,11 @@ impl Client {
     * endpoint. GitHub Apps must have the `administration` repository permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-github-actions-permissions-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn actions_get_github_actions_permissions_repository(&self, owner: &str, repo: &str) -> Result<types::ActionsRepositoryPermissions> {
         let url = format!(
@@ -40993,6 +34561,11 @@ impl Client {
     * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `administration` repository permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#set-github-actions-permissions-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn actions_set_github_actions_permissions_repository(
         &self,
@@ -41019,6 +34592,11 @@ impl Client {
     * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `administration` repository permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-allowed-actions-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn actions_get_allowed_actions_repository(&self, owner: &str, repo: &str) -> Result<types::SelectedActions> {
         let url = format!(
@@ -41044,6 +34622,11 @@ impl Client {
     * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `administration` repository permission to use this API.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#set-allowed-actions-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn actions_set_allowed_actions_repository(&self, owner: &str, repo: &str, body: &types::SelectedActions) -> Result<()> {
         let url = format!(
@@ -41063,6 +34646,13 @@ impl Client {
     * Lists all self-hosted runners configured in a repository. You must authenticate using an access token with the `repo` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-self-hosted-runners-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_self_hosted_runners_for_repo(
         &self,
@@ -41070,7 +34660,7 @@ impl Client {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetActionsListSelfHostedRunnersRepoOkResponse> {
+    ) -> Result<types::GetActionsListSelfHostedRunnersOrgOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runners?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41092,6 +34682,11 @@ impl Client {
     * You must authenticate using an access token with the `repo` scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-runner-applications-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn actions_list_runner_applications_for_repo(&self, owner: &str, repo: &str) -> Result<Vec<types::RunnerApplication>> {
         let url = format!(
@@ -41120,6 +34715,11 @@ impl Client {
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/actions#create-a-registration-token-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn actions_create_registration_token_for_repo(&self, owner: &str, repo: &str) -> Result<types::AuthenticationToken> {
         let url = format!(
@@ -41148,6 +34748,11 @@ impl Client {
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/actions#create-a-remove-token-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn actions_create_remove_token_for_repo(&self, owner: &str, repo: &str) -> Result<types::AuthenticationToken> {
         let url = format!(
@@ -41170,6 +34775,12 @@ impl Client {
     * endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-a-self-hosted-runner-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * runner_id: i64
     */
     pub async fn actions_get_self_hosted_runner_for_repo(&self, owner: &str, repo: &str, runner_id: i64) -> Result<types::Runner> {
         let url = format!(
@@ -41193,6 +34804,12 @@ impl Client {
     * scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#delete-a-self-hosted-runner-from-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * runner_id: i64
     */
     pub async fn actions_delete_self_hosted_runner_from_repo(&self, owner: &str, repo: &str, runner_id: i64) -> Result<()> {
         let url = format!(
@@ -41215,6 +34832,17 @@ impl Client {
     * Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-workflow-runs-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * actor: &str
+    * * branch: &str
+    * * event: &str
+    * * status: crate::types::WorkflowRunStatus
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_workflow_runs_for_repo(
         &self,
@@ -41250,6 +34878,12 @@ impl Client {
     * Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-a-workflow-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
     pub async fn actions_get_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::WorkflowRun> {
         let url = format!(
@@ -41272,6 +34906,12 @@ impl Client {
     * this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#delete-a-workflow-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
     pub async fn actions_delete_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
@@ -41292,6 +34932,12 @@ impl Client {
     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-the-review-history-for-a-workflow-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
     pub async fn actions_get_reviews_for_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<Vec<types::EnvironmentApprovals>> {
         let url = format!(
@@ -41316,6 +34962,12 @@ impl Client {
     * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#approve-a-workflow-run-for-a-fork-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
     pub async fn actions_approve_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::EmptyObject> {
         let url = format!(
@@ -41336,6 +34988,14 @@ impl Client {
     * Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-workflow-run-artifacts>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_workflow_run_artifacts(
         &self,
@@ -41344,7 +35004,7 @@ impl Client {
         run_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetActionsListWorkflowRunArtifactsOkResponse> {
+    ) -> Result<types::GetActionsListArtifactsRepoOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/artifacts?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41365,13 +35025,14 @@ impl Client {
     * Cancels a workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#cancel-a-workflow-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
-    pub async fn actions_cancel_workflow_run(
-        &self,
-        owner: &str,
-        repo: &str,
-        run_id: i64,
-    ) -> Result<types::PostActionsCancelWorkflowRunAcceptedResponse> {
+    pub async fn actions_cancel_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::AuthenticationTokenPermissions> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/cancel",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41390,6 +35051,15 @@ impl Client {
     * Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-jobs-for-a-workflow-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
+    * * filter: crate::types::ActionsListJobsWorkflowRunFilter
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_jobs_for_workflow_run(
         &self,
@@ -41424,6 +35094,12 @@ impl Client {
     * the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#download-workflow-run-logs>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
     pub async fn actions_download_workflow_run_logs(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
@@ -41444,6 +35120,12 @@ impl Client {
     * Deletes all logs for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#delete-workflow-run-logs>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
     pub async fn actions_delete_workflow_run_logs(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
@@ -41466,6 +35148,12 @@ impl Client {
     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-pending-deployments-for-a-workflow-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
     pub async fn actions_get_pending_deployments_for_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<Vec<types::PendingDeployment>> {
         let url = format!(
@@ -41488,6 +35176,12 @@ impl Client {
     * Anyone with read access to the repository contents and deployments can use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#review-pending-deployments-for-a-workflow-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
     pub async fn actions_review_pending_deployments_for_run(
         &self,
@@ -41514,8 +35208,14 @@ impl Client {
     * Re-runs your workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#re-run-a-workflow>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
-    pub async fn actions_re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::PostActionsReRunWorkflowCreatedResponse> {
+    pub async fn actions_re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::AuthenticationTokenPermissions> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/rerun",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41536,6 +35236,12 @@ impl Client {
     * Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-workflow-run-usage>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * run_id: i64
     */
     pub async fn actions_get_workflow_run_usage(&self, owner: &str, repo: &str, run_id: i64) -> Result<types::WorkflowRunUsage> {
         let url = format!(
@@ -41556,6 +35262,13 @@ impl Client {
     * Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-repository-secrets>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_repo_secrets(
         &self,
@@ -41583,6 +35296,11 @@ impl Client {
     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-a-repository-public-key>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn actions_get_repo_public_key(&self, owner: &str, repo: &str) -> Result<types::ActionsPublicKey> {
         let url = format!(
@@ -41602,6 +35320,12 @@ impl Client {
     * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-a-repository-secret>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * secret_name: &str
     */
     pub async fn actions_get_repo_secret(&self, owner: &str, repo: &str, secret_name: &str) -> Result<types::ActionsSecret> {
         let url = format!(
@@ -41696,6 +35420,12 @@ impl Client {
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/actions#create-or-update-a-repository-secret>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * secret_name: &str
     */
     pub async fn actions_create_or_update_repo_secret(
         &self,
@@ -41703,7 +35433,7 @@ impl Client {
         repo: &str,
         secret_name: &str,
         body: &types::ActionsCreateUpdateRepoSecretRequest,
-    ) -> Result<types::PutActionsCreateUpdateRepoSecretCreatedResponse> {
+    ) -> Result<types::AuthenticationTokenPermissions> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/{}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41722,6 +35452,12 @@ impl Client {
     * Deletes a secret in a repository using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#delete-a-repository-secret>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * secret_name: &str
     */
     pub async fn actions_delete_repo_secret(&self, owner: &str, repo: &str, secret_name: &str) -> Result<()> {
         let url = format!(
@@ -41742,6 +35478,13 @@ impl Client {
     * Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-repository-workflows>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_repo_workflows(
         &self,
@@ -41769,6 +35512,12 @@ impl Client {
     * Gets a specific workflow. You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-a-workflow>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * workflow_id: &str
     */
     pub async fn actions_get_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<types::Workflow> {
         let url = format!(
@@ -41791,6 +35540,12 @@ impl Client {
     * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#disable-a-workflow>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * workflow_id: &str
     */
     pub async fn actions_disable_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<()> {
         let url = format!(
@@ -41815,6 +35570,12 @@ impl Client {
     * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint. For more information, see "[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line)."
     *
     * FROM: <https://docs.github.com/rest/reference/actions#create-a-workflow-dispatch-event>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * workflow_id: &str
     */
     pub async fn actions_create_workflow_dispatch(
         &self,
@@ -41843,6 +35604,12 @@ impl Client {
     * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#enable-a-workflow>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * workflow_id: &str
     */
     pub async fn actions_enable_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<()> {
         let url = format!(
@@ -41865,6 +35632,18 @@ impl Client {
     * Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-workflow-runs>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * workflow_id: &str
+    * * actor: &str
+    * * branch: &str
+    * * event: &str
+    * * status: crate::types::WorkflowRunStatus
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_workflow_runs(
         &self,
@@ -41877,7 +35656,7 @@ impl Client {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetActionsListWorkflowRunsOkResponse> {
+    ) -> Result<types::GetActionsListWorkflowRunsRepoOkResponse> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/runs?actor={}&branch={}&event={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -41904,6 +35683,12 @@ impl Client {
     * You can replace `workflow_id` with the workflow file name. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-workflow-usage>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * workflow_id: &str
     */
     pub async fn actions_get_workflow_usage(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<types::WorkflowUsage> {
         let url = format!(
@@ -41924,6 +35709,13 @@ impl Client {
     * Lists the [available assignees](https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-assignees>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_assignees(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
@@ -41949,6 +35741,12 @@ impl Client {
     * Otherwise a `404` status code is returned.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#check-if-a-user-can-be-assigned>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * assignee: &str
     */
     pub async fn issues_check_user_can_be_assigned(&self, owner: &str, repo: &str, assignee: &str) -> Result<()> {
         let url = format!(
@@ -41969,6 +35767,11 @@ impl Client {
     * Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
     *
     * FROM: <https://docs.github.com/rest/reference/repos#enable-automated-security-fixes>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_enable_automated_security_fixes(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -41988,6 +35791,11 @@ impl Client {
     * Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
     *
     * FROM: <https://docs.github.com/rest/reference/repos#disable-automated-security-fixes>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_disable_automated_security_fixes(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -42007,6 +35815,14 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-branches>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * protected: bool
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_branches(&self, owner: &str, repo: &str, protected: bool, per_page: i64, page: i64) -> Result<Vec<types::ShortBranch>> {
         let url = format!(
@@ -42029,6 +35845,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-branch>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<types::BranchWithProtection> {
         let url = format!(
@@ -42049,6 +35871,12 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-branch-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::BranchProtection> {
         let url = format!(
@@ -42075,6 +35903,12 @@ impl Client {
     * **Note**: The list of users, apps, and teams in total is limited to 100 items.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-branch-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_update_branch_protection(
         &self,
@@ -42101,6 +35935,12 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-branch-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_delete_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
         let url = format!(
@@ -42121,6 +35961,12 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-admin-branch-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_admin_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
@@ -42143,6 +35989,12 @@ impl Client {
     * Adding admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#set-admin-branch-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_set_admin_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
@@ -42165,6 +36017,12 @@ impl Client {
     * Removing admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-admin-branch-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_delete_admin_branch_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
         let url = format!(
@@ -42185,6 +36043,12 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-pull-request-review-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_pull_request_review_protection(
         &self,
@@ -42210,6 +36074,12 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-pull-request-review-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_delete_pull_request_review_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
         let url = format!(
@@ -42234,6 +36104,12 @@ impl Client {
     * **Note**: Passing new arrays of `users` and `teams` replaces their previous values.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-pull-request-review-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_update_pull_request_review_protection(
         &self,
@@ -42264,6 +36140,12 @@ impl Client {
     * **Note**: You must enable branch protection to require signed commits.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-commit-signature-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_commit_signature_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::ProtectedBranchAdminEnforced> {
         let url = format!(
@@ -42286,6 +36168,12 @@ impl Client {
     * When authenticated with admin or owner permissions to the repository, you can use this endpoint to require signed commits on a branch. You must enable branch protection to require signed commits.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-commit-signature-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_create_commit_signature_protection(
         &self,
@@ -42313,6 +36201,12 @@ impl Client {
     * When authenticated with admin or owner permissions to the repository, you can use this endpoint to disable required signed commits on a branch. You must enable branch protection to require signed commits.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-commit-signature-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_delete_commit_signature_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
         let url = format!(
@@ -42333,6 +36227,12 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-status-checks-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_status_checks_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<types::StatusCheckPolicy> {
         let url = format!(
@@ -42353,6 +36253,12 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#remove-status-check-protection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_remove_status_check_protection(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
         let url = format!(
@@ -42375,6 +36281,12 @@ impl Client {
     * Updating required status checks requires admin or owner permissions to the repository and branch protection to be enabled.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-status-check-potection>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_update_status_check_protection(
         &self,
@@ -42401,6 +36313,12 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-all-status-check-contexts>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_all_status_check_contexts(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<String>> {
         let url = format!(
@@ -42421,13 +36339,19 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#set-status-check-contexts>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_set_status_check_contexts(
         &self,
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::ReposSetStatusCheckContextsRequest,
+        body: &types::ReposAddStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -42447,6 +36371,12 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#add-status-check-contexts>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_add_status_check_contexts(
         &self,
@@ -42473,13 +36403,19 @@ impl Client {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#remove-status-check-contexts>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_remove_status_check_contexts(
         &self,
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::ReposRemoveStatusCheckContextsRequest,
+        body: &types::ReposAddStatusCheckContextsRequest,
     ) -> Result<Vec<String>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -42503,6 +36439,12 @@ impl Client {
     * **Note**: Users, apps, and teams `restrictions` are only available for organization-owned repositories.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_access_restrictions(&self, owner: &str, repo: &str, branch: &str) -> Result<types::BranchRestrictionPolicy> {
         let url = format!(
@@ -42525,6 +36467,12 @@ impl Client {
     * Disables the ability to restrict who can push to this branch.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_delete_access_restrictions(&self, owner: &str, repo: &str, branch: &str) -> Result<()> {
         let url = format!(
@@ -42547,6 +36495,12 @@ impl Client {
     * Lists the GitHub Apps that have push access to this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-apps-with-access-to-the-protected-branch>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_apps_with_access_to_protected_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<types::Integration>> {
         let url = format!(
@@ -42573,13 +36527,19 @@ impl Client {
     * | `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#set-app-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_set_app_access_restrictions(
         &self,
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::ReposSetAppAccessRestrictionsRequest,
+        body: &types::ReposAddAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -42605,6 +36565,12 @@ impl Client {
     * | `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#add-app-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_add_app_access_restrictions(
         &self,
@@ -42637,13 +36603,19 @@ impl Client {
     * | `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#remove-app-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_remove_app_access_restrictions(
         &self,
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::ReposRemoveAppAccessRestrictionsRequest,
+        body: &types::ReposAddAppAccessRestrictionsRequest,
     ) -> Result<Vec<types::Integration>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -42665,6 +36637,12 @@ impl Client {
     * Lists the teams who have push access to this branch. The list includes child teams.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-teams-with-access-to-the-protected-branch>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_teams_with_access_to_protected_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<types::Team>> {
         let url = format!(
@@ -42691,13 +36669,19 @@ impl Client {
     * | `array` | The teams that can have push access. Use the team's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#set-team-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_set_team_access_restrictions(
         &self,
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::ReposSetTeamAccessRestrictionsRequest,
+        body: &types::ReposAddTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -42723,6 +36707,12 @@ impl Client {
     * | `array` | The teams that can have push access. Use the team's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#add-team-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_add_team_access_restrictions(
         &self,
@@ -42755,13 +36745,19 @@ impl Client {
     * | `array` | Teams that should no longer have push access. Use the team's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#remove-team-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_remove_team_access_restrictions(
         &self,
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::ReposRemoveTeamAccessRestrictionsRequest,
+        body: &types::ReposAddTeamAccessRestrictionsRequest,
     ) -> Result<Vec<types::Team>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -42783,6 +36779,12 @@ impl Client {
     * Lists the people who have push access to this branch.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-users-with-access-to-the-protected-branch>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_get_users_with_access_to_protected_branch(&self, owner: &str, repo: &str, branch: &str) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
@@ -42809,13 +36811,19 @@ impl Client {
     * | `array` | Usernames for people who can have push access. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#set-user-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_set_user_access_restrictions(
         &self,
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::ReposSetUserAccessRestrictionsRequest,
+        body: &types::ReposAddUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -42841,6 +36849,12 @@ impl Client {
     * | `array` | Usernames for people who can have push access. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#add-user-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_add_user_access_restrictions(
         &self,
@@ -42873,13 +36887,19 @@ impl Client {
     * | `array` | Usernames of the people who should no longer have push access. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#remove-user-access-restrictions>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_remove_user_access_restrictions(
         &self,
         owner: &str,
         repo: &str,
         branch: &str,
-        body: &types::ReposRemoveUserAccessRestrictionsRequest,
+        body: &types::ReposAddUserAccessRestrictionsRequest,
     ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -42913,6 +36933,12 @@ impl Client {
     * * GitHub Apps must have the `administration:write` repository permission.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#rename-a-branch>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * branch: &str
     */
     pub async fn repos_rename_branch(
         &self,
@@ -42943,6 +36969,11 @@ impl Client {
     * In a check suite, GitHub limits the number of check runs with the same name to 1000. Once these check runs exceed 1000, GitHub will start to automatically delete older check runs.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#create-a-check-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn checks_create(&self, owner: &str, repo: &str, body: &types::ChecksCreateRequest) -> Result<types::CheckRun> {
         let url = format!(
@@ -42964,6 +36995,12 @@ impl Client {
     * Gets a single check run using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#get-a-check-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * check_run_id: i64
     */
     pub async fn checks_get(&self, owner: &str, repo: &str, check_run_id: i64) -> Result<types::CheckRun> {
         let url = format!(
@@ -42986,6 +37023,12 @@ impl Client {
     * Updates a check run for a specific commit in a repository. Your GitHub App must have the `checks:write` permission to edit check runs.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#update-a-check-run>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * check_run_id: i64
     */
     pub async fn checks_update(&self, owner: &str, repo: &str, check_run_id: i64, body: &types::ChecksUpdateRequest) -> Result<types::CheckRun> {
         let url = format!(
@@ -43006,6 +37049,14 @@ impl Client {
     * Lists annotations for a check run using the annotation `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get annotations for a check run. OAuth Apps and authenticated users must have the `repo` scope to get annotations for a check run in a private repository.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#list-check-run-annotations>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * check_run_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn checks_list_annotations(
         &self,
@@ -43037,6 +37088,11 @@ impl Client {
     * By default, check suites are automatically created when you create a [check run](https://docs.github.com/rest/reference/checks#check-runs). You only need to use this endpoint for manually creating check suites when you've disabled automatic creation using "[Update repository preferences for check suites](https://docs.github.com/rest/reference/checks#update-repository-preferences-for-check-suites)". Your GitHub App must have the `checks:write` permission to create check suites.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#create-a-check-suite>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn checks_create_suite(&self, owner: &str, repo: &str, body: &types::ChecksCreateSuiteRequest) -> Result<types::CheckSuite> {
         let url = format!(
@@ -43056,6 +37112,11 @@ impl Client {
     * Changes the default automatic flow when creating check suites. By default, a check suite is automatically created each time code is pushed to a repository. When you disable the automatic creation of check suites, you can manually [Create a check suite](https://docs.github.com/rest/reference/checks#create-a-check-suite). You must have admin permissions in the repository to set preferences for check suites.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#update-repository-preferences-for-check-suites>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn checks_set_suites_preferences(
         &self,
@@ -43082,6 +37143,12 @@ impl Client {
     * Gets a single check suite using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check suites. OAuth Apps and authenticated users must have the `repo` scope to get check suites in a private repository.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#get-a-check-suite>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * check_suite_id: i64
     */
     pub async fn checks_get_suite(&self, owner: &str, repo: &str, check_suite_id: i64) -> Result<types::CheckSuite> {
         let url = format!(
@@ -43104,6 +37171,17 @@ impl Client {
     * Lists check runs for a check suite using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#list-check-runs-in-a-check-suite>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * check_suite_id: i64
+    * * check_name: &str
+    * * status: crate::types::JobStatus
+    * * filter: crate::types::ActionsListJobsWorkflowRunFilter
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn checks_list_for_suite(
         &self,
@@ -43111,7 +37189,7 @@ impl Client {
         repo: &str,
         check_suite_id: i64,
         check_name: &str,
-        status: crate::types::StatusData,
+        status: crate::types::JobStatus,
         filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
@@ -43141,13 +37219,14 @@ impl Client {
     * To rerequest a check suite, your GitHub App must have the `checks:read` permission on a private repository or pull access to a public repository.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#rerequest-a-check-suite>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * check_suite_id: i64
     */
-    pub async fn checks_rerequest_suite(
-        &self,
-        owner: &str,
-        repo: &str,
-        check_suite_id: i64,
-    ) -> Result<types::PostChecksRerequestSuiteCreatedResponse> {
+    pub async fn checks_rerequest_suite(&self, owner: &str, repo: &str, check_suite_id: i64) -> Result<types::AuthenticationTokenPermissions> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/rerequest",
             progenitor_support::encode_path(&owner.to_string()),
@@ -43174,6 +37253,17 @@ impl Client {
     * (if you used `ref` in the request).
     *
     * FROM: <https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * tool_name: &str
+    * * tool_guid: &str
+    * * page: i64
+    * * per_page: i64
+    *  * ref_: &str
+    * * state: &str -- State of a code scanning alert.
     */
     pub async fn code_scanning_list_alerts_for_repo(
         &self,
@@ -43212,6 +37302,12 @@ impl Client {
     * The instances field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The same information can now be retrieved via a GET request to the URL specified by `instances_url`.
     *
     * FROM: <https://docs.github.com/rest/reference/code-scanning#get-a-code-scanning-alert>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * alert_number: &str
     */
     pub async fn code_scanning_get_alert(&self, owner: &str, repo: &str, alert_number: &str) -> Result<types::CodeScanningAlert> {
         let url = format!(
@@ -43232,6 +37328,12 @@ impl Client {
     * Updates the status of a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/code-scanning#update-a-code-scanning-alert>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * alert_number: &str
     */
     pub async fn code_scanning_update_alert(
         &self,
@@ -43258,6 +37360,15 @@ impl Client {
     * Lists all instances of the specified code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/code-scanning#list-instances-of-a-code-scanning-alert>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * alert_number: &str
+    * * page: i64
+    * * per_page: i64
+    *  * ref_: &str
     */
     pub async fn code_scanning_list_alert_instances(
         &self,
@@ -43304,6 +37415,18 @@ impl Client {
     * The `tool_name` field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The tool name can now be found inside the `tool` field.
     *
     * FROM: <https://docs.github.com/rest/reference/code-scanning#list-code-scanning-analyses-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * tool_name: &str
+    * * tool_guid: &str
+    * * page: i64
+    * * per_page: i64
+    *  * ref_: &str -- The full Git reference, formatted as `refs/heads/<branch name>`,
+    `refs/pull/<number>/merge`, or `refs/pull/<number>/head`.
+    * * sarif_id: &str -- An identifier for the upload.
     */
     pub async fn code_scanning_list_recent_analyses(
         &self,
@@ -43359,6 +37482,12 @@ impl Client {
     * The `tool_name` field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The tool name can now be found inside the `tool` field.
     *
     * FROM: <https://docs.github.com/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * analysis_id: i64
     */
     pub async fn code_scanning_get_analysis(&self, owner: &str, repo: &str, analysis_id: i64) -> Result<types::CodeScanningAnalysis> {
         let url = format!(
@@ -43442,6 +37571,13 @@ impl Client {
     * The above process assumes that you want to remove all trace of the tool's analyses from the GitHub user interface, for the specified repository, and it therefore uses the `confirm_delete_url` value. Alternatively, you could use the `next_analysis_url` value, which would leave the last analysis in each set undeleted to avoid removing a tool's analysis entirely.
     *
     * FROM: <https://docs.github.com/rest/reference/code-scanning#delete-a-code-scanning-analysis-from-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * analysis_id: i64
+    * * confirm_delete: &str
     */
     pub async fn code_scanning_delete_analysis(
         &self,
@@ -43485,6 +37621,11 @@ impl Client {
     * For more information, see "[Get information about a SARIF upload](/rest/reference/code-scanning#get-information-about-a-sarif-upload)."
     *
     * FROM: <https://docs.github.com/rest/reference/code-scanning#upload-a-sarif-file>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn code_scanning_upload_sarif(
         &self,
@@ -43509,6 +37650,12 @@ impl Client {
     * Gets information about a SARIF upload, including the status and the URL of the analysis that was uploaded so that you can retrieve details of the analysis. For more information, see "[Get a code scanning analysis for a repository](/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository)." You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/code-scanning#list-recent-code-scanning-analyses-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * sarif_id: &str
     */
     pub async fn code_scanning_get_sarif(&self, owner: &str, repo: &str, sarif_id: &str) -> Result<types::CodeScanningSarifsStatus> {
         let url = format!(
@@ -43531,6 +37678,14 @@ impl Client {
     * Team members will include the members of child teams.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-collaborators>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * affiliation: crate::types::ProjectsListCollaboratorsAffiliation
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_collaborators(
         &self,
@@ -43562,6 +37717,12 @@ impl Client {
     * Team members will include the members of child teams.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#check-if-a-user-is-a-repository-collaborator>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * username: &str
     */
     pub async fn repos_check_collaborator(&self, owner: &str, repo: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -43592,6 +37753,12 @@ impl Client {
     * To prevent abuse, you are limited to sending 50 invitations to a repository per 24 hour period. Note there is no limit if you are inviting organization members to an organization repository.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#add-a-repository-collaborator>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * username: &str
     */
     pub async fn repos_add_collaborator(
         &self,
@@ -43618,6 +37785,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#remove-a-repository-collaborator>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * username: &str
     */
     pub async fn repos_remove_collaborator(&self, owner: &str, repo: &str, username: &str) -> Result<()> {
         let url = format!(
@@ -43638,6 +37811,12 @@ impl Client {
     * Checks the repository permission of a collaborator. The possible repository permissions are `admin`, `write`, `read`, and `none`.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-repository-permissions-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * username: &str
     */
     pub async fn repos_get_collaborator_permission_level(
         &self,
@@ -43665,6 +37844,13 @@ impl Client {
     * Comments are ordered by ascending ID.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-commit-comments-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_commit_comments_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::CommitComment>> {
         let url = format!(
@@ -43686,6 +37872,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-commit-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn repos_get_commit_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<types::CommitComment> {
         let url = format!(
@@ -43706,6 +37898,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-commit-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn repos_delete_commit_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<()> {
         let url = format!(
@@ -43726,6 +37924,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-a-commit-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn repos_update_commit_comment(
         &self,
@@ -43752,6 +37956,15 @@ impl Client {
     * List the reactions to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-a-commit-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
+    * * content: crate::types::Content -- The reaction to use
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn reactions_list_for_commit_comment(
         &self,
@@ -43783,6 +37996,12 @@ impl Client {
     * Create a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments). A response with an HTTP `200` status means that you already added the reaction type to this commit comment.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#create-reaction-for-a-commit-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn reactions_create_for_commit_comment(
         &self,
@@ -43811,6 +38030,13 @@ impl Client {
     * Delete a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#delete-a-commit-comment-reaction>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
+    * * reaction_id: i64
     */
     pub async fn reactions_delete_for_commit_comment(&self, owner: &str, repo: &str, comment_id: i64, reaction_id: i64) -> Result<()> {
         let url = format!(
@@ -43859,6 +38085,18 @@ impl Client {
     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-commits>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * sha: &str
+    * * path: &str -- The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
+    * * author: &str
+    * * since: DateTime<Utc>
+    * * until: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_commits(
         &self,
@@ -43898,6 +38136,12 @@ impl Client {
     * Returns all branches where the given commit SHA is the HEAD, or latest commit for the branch.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-branches-for-head-commit>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * commit_sha: &str
     */
     pub async fn repos_list_branches_for_head_commit(&self, owner: &str, repo: &str, commit_sha: &str) -> Result<Vec<types::BranchShort>> {
         let url = format!(
@@ -43918,6 +38162,14 @@ impl Client {
     * Use the `:commit_sha` to specify the commit that will have its comments listed.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-commit-comments>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * commit_sha: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_comments_for_commit(
         &self,
@@ -43949,6 +38201,12 @@ impl Client {
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-commit-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * commit_sha: &str
     */
     pub async fn repos_create_commit_comment(
         &self,
@@ -43975,6 +38233,14 @@ impl Client {
     * Lists the merged pull request that introduced the commit to the repository. If the commit is not present in the default branch, additionally returns open pull requests associated with the commit. The results may include open and closed pull requests. Additional preview headers may be required to see certain details for associated pull requests, such as whether a pull request is in a draft state. For more information about previews that might affect this endpoint, see the [List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests) endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-pull-requests-associated-with-a-commit>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * commit_sha: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_pull_requests_associated_with_commit(
         &self,
@@ -44039,6 +38305,14 @@ impl Client {
     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-commit>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * page: i64
+    * * per_page: i64
+    *  * ref_: &str
     */
     pub async fn repos_get_commit(&self, owner: &str, repo: &str, page: i64, per_page: i64, ref_: &str) -> Result<types::Commit> {
         let url = format!(
@@ -44063,6 +38337,18 @@ impl Client {
     * Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag name. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#list-check-runs-for-a-git-reference>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
+    * * check_name: &str
+    * * status: crate::types::JobStatus
+    * * filter: crate::types::ActionsListJobsWorkflowRunFilter
+    * * per_page: i64
+    * * page: i64
+    * * app_id: i64
     */
     pub async fn checks_list_for_ref(
         &self,
@@ -44070,12 +38356,12 @@ impl Client {
         repo: &str,
         ref_: &str,
         check_name: &str,
-        status: crate::types::StatusData,
+        status: crate::types::JobStatus,
         filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
         app_id: i64,
-    ) -> Result<types::GetChecksListRefOkResponse> {
+    ) -> Result<types::GetChecksListSuiteOkResponse> {
         let url = format!(
             "/repos/{}/{}/commits/{}/check-runs?app_id={}&check_name={}&filter={}&page={}&per_page={}&status={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44102,6 +38388,16 @@ impl Client {
     * Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a tag name. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to list check suites. OAuth Apps and authenticated users must have the `repo` scope to get check suites in a private repository.
     *
     * FROM: <https://docs.github.com/rest/reference/checks#list-check-suites-for-a-git-reference>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
+    * * app_id: i64
+    * * check_name: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn checks_list_suites_for_ref(
         &self,
@@ -44143,6 +38439,14 @@ impl Client {
     * *   **success** if the latest status for all contexts is `success`
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-the-combined-status-for-a-specific-reference>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_get_combined_status_for_ref(
         &self,
@@ -44174,6 +38478,14 @@ impl Client {
     * This resource is also available via a legacy route: `GET /repos/:owner/:repo/statuses/:ref`.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-commit-statuses-for-a-reference>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_commit_statuses_for_ref(
         &self,
@@ -44205,6 +38517,11 @@ impl Client {
     * A code of conduct is detected if there is a file named `CODE_OF_CONDUCT` in the root directory of the repository. GitHub detects which code of conduct it is using fuzzy matching.
     *
     * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-the-code-of-conduct-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn codes_of_conduct_get_for_repo(&self, owner: &str, repo: &str) -> Result<types::CodeOfConduct> {
         let url = format!(
@@ -44235,6 +38552,11 @@ impl Client {
     * `content_reports_enabled` is only returned for organization-owned repositories.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-community-profile-metrics>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_community_profile_metrics(&self, owner: &str, repo: &str) -> Result<types::CommunityProfile> {
         let url = format!(
@@ -44293,6 +38615,14 @@ impl Client {
     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
     *
     * FROM: <https://docs.github.com/rest/reference/repos#compare-two-commits>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * page: i64
+    * * per_page: i64
+    * * basehead: &str
     */
     pub async fn repos_compare_commits(&self, owner: &str, repo: &str, page: i64, per_page: i64, basehead: &str) -> Result<types::CommitComparison> {
         let url = format!(
@@ -44319,6 +38649,12 @@ impl Client {
     * You must use an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#create-a-content-attachment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * content_reference_id: i64
     */
     pub async fn apps_create_content_attachment(
         &self,
@@ -44376,8 +38712,15 @@ impl Client {
     * github.com URLs (`html_url` and `_links["html"]`) will have null values.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-repository-content>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * path: &str -- The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
+    *  * ref_: &str
     */
-    pub async fn repos_get_content(&self, owner: &str, repo: &str, path: &str, ref_: &str) -> Result<types::GetReposContentOkResponse> {
+    pub async fn repos_get_content(&self, owner: &str, repo: &str, path: &str, ref_: &str) -> Result<types::ContentDirectory> {
         let url = format!(
             "/repos/{}/{}/contents/{}?ref={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -44397,6 +38740,12 @@ impl Client {
     * Creates a new file or replaces an existing file in a repository.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-or-update-file-contents>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * path: &str -- The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
     */
     pub async fn repos_create_or_update_file_contents(
         &self,
@@ -44429,6 +38778,12 @@ impl Client {
     * You must provide values for both `name` and `email`, whether you choose to use `author` or `committer`. Otherwise, you'll receive a `422` status code.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-file>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * path: &str -- The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
     */
     pub async fn repos_delete_file(&self, owner: &str, repo: &str, path: &str, body: &types::ReposDeleteFileRequest) -> Result<types::FileCommit> {
         let url = format!(
@@ -44451,6 +38806,14 @@ impl Client {
     * GitHub identifies contributors by author email address. This endpoint groups contribution counts by GitHub user, which includes all associated email addresses. To improve performance, only the first 500 author email addresses in the repository link to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-contributors>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * anon: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_contributors(&self, owner: &str, repo: &str, anon: &str, per_page: i64, page: i64) -> Result<Vec<types::Contributor>> {
         let url = format!(
@@ -44473,6 +38836,17 @@ impl Client {
     * Simple filtering of deployments is available via query parameters:
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-deployments>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * sha: &str
+    *  * ref_: &str
+    * * task: &str
+    * * environment: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_deployments(
         &self,
@@ -44552,6 +38926,11 @@ impl Client {
     * status for the commit to be deployed, but one or more of the required contexts do not have a state of `success`.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-deployment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_create_deployment(&self, owner: &str, repo: &str, body: &types::ReposCreateDeploymentRequest) -> Result<types::Deployment> {
         let url = format!(
@@ -44571,6 +38950,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-deployment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * deployment_id: i64
     */
     pub async fn repos_get_deployment(&self, owner: &str, repo: &str, deployment_id: i64) -> Result<types::Deployment> {
         let url = format!(
@@ -44598,6 +38983,12 @@ impl Client {
     * For more information, see "[Create a deployment](https://docs.github.com/rest/reference/repos/#create-a-deployment)" and "[Create a deployment status](https://docs.github.com/rest/reference/repos#create-a-deployment-status)."
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-deployment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * deployment_id: i64
     */
     pub async fn repos_delete_deployment(&self, owner: &str, repo: &str, deployment_id: i64) -> Result<()> {
         let url = format!(
@@ -44618,6 +39009,14 @@ impl Client {
     * Users with pull access can view deployment statuses for a deployment:
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-deployment-statuses>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * deployment_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_deployment_statuses(
         &self,
@@ -44649,6 +39048,12 @@ impl Client {
     * GitHub Apps require `read & write` access to "Deployments" and `read-only` access to "Repo contents" (for private repos). OAuth Apps require the `repo_deployment` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-deployment-status>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * deployment_id: i64
     */
     pub async fn repos_create_deployment_status(
         &self,
@@ -44675,6 +39080,13 @@ impl Client {
     * Users with pull access can view a deployment status for a deployment:
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-deployment-status>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * deployment_id: i64
+    * * status_id: i64
     */
     pub async fn repos_get_deployment_status(&self, owner: &str, repo: &str, deployment_id: i64, status_id: i64) -> Result<types::DeploymentStatus> {
         let url = format!(
@@ -44705,6 +39117,11 @@ impl Client {
     * This input example shows how you can use the `client_payload` as a test to debug your workflow.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-repository-dispatch-event>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_create_dispatch_event(&self, owner: &str, repo: &str, body: &types::ReposCreateDispatchEventRequest) -> Result<()> {
         let url = format!(
@@ -44726,6 +39143,11 @@ impl Client {
     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-all-environments>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_all_environments(&self, owner: &str, repo: &str) -> Result<types::GetReposAllEnvironmentsOkResponse> {
         let url = format!(
@@ -44745,6 +39167,12 @@ impl Client {
     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-an-environment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * environment_name: &str
     */
     pub async fn repos_get_environment(&self, owner: &str, repo: &str, environment_name: &str) -> Result<types::Environment> {
         let url = format!(
@@ -44771,6 +39199,12 @@ impl Client {
     * You must authenticate using an access token with the repo scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-or-update-an-environment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * environment_name: &str
     */
     pub async fn repos_create_or_update_environment(
         &self,
@@ -44797,6 +39231,12 @@ impl Client {
     * You must authenticate using an access token with the repo scope to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-an-environment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * environment_name: &str
     */
     pub async fn repos_delete_an_environment(&self, owner: &str, repo: &str, environment_name: &str) -> Result<()> {
         let url = format!(
@@ -44817,6 +39257,13 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-repository-events>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_repo_events(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
         let url = format!(
@@ -44838,6 +39285,14 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-forks>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * sort: crate::types::ReposListForksSort
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_forks(
         &self,
@@ -44869,6 +39324,11 @@ impl Client {
     * **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://support.github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com).
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-fork>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_create_fork(&self, owner: &str, repo: &str, body: &types::ReposCreateForkRequest) -> Result<types::FullRepository> {
         let url = format!(
@@ -44888,6 +39348,11 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-blob>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn git_create_blob(&self, owner: &str, repo: &str, body: &types::GitCreateBlobRequest) -> Result<types::ShortBlob> {
         let url = format!(
@@ -44909,6 +39374,12 @@ impl Client {
     * _Note_: This API supports blobs up to 100 megabytes in size.
     *
     * FROM: <https://docs.github.com/rest/reference/git#get-a-blob>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * file_sha: &str
     */
     pub async fn git_get_blob(&self, owner: &str, repo: &str, file_sha: &str) -> Result<types::Blob> {
         let url = format!(
@@ -44958,6 +39429,11 @@ impl Client {
     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-commit>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn git_create_commit(&self, owner: &str, repo: &str, body: &types::GitCreateCommitRequest) -> Result<types::GitCommit> {
         let url = format!(
@@ -45006,6 +39482,12 @@ impl Client {
     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
     *
     * FROM: <https://docs.github.com/rest/reference/git#get-a-commit>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * commit_sha: &str
     */
     pub async fn git_get_commit(&self, owner: &str, repo: &str, commit_sha: &str) -> Result<types::GitCommit> {
         let url = format!(
@@ -45032,6 +39514,14 @@ impl Client {
     * If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the response can still include other matching head refs that start with the word `feature`, such as `featureA` and `featureB`.
     *
     * FROM: <https://docs.github.com/rest/reference/git#list-matching-references>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn git_list_matching_refs(&self, owner: &str, repo: &str, ref_: &str, per_page: i64, page: i64) -> Result<Vec<types::GitRef>> {
         let url = format!(
@@ -45056,6 +39546,12 @@ impl Client {
     * **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
     *
     * FROM: <https://docs.github.com/rest/reference/git#get-a-reference>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
     */
     pub async fn git_get_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<types::GitRef> {
         let url = format!(
@@ -45076,6 +39572,11 @@ impl Client {
     * Creates a reference for your repository. You are unable to create new references for empty repositories, even if the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-reference>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn git_create_ref(&self, owner: &str, repo: &str, body: &types::GitCreateRefRequest) -> Result<types::GitRef> {
         let url = format!(
@@ -45095,6 +39596,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/git#delete-a-reference>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
     */
     pub async fn git_delete_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
         let url = format!(
@@ -45115,6 +39622,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/git#update-a-reference>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
     */
     pub async fn git_update_ref(&self, owner: &str, repo: &str, ref_: &str, body: &types::GitUpdateRefRequest) -> Result<types::GitRef> {
         let url = format!(
@@ -45164,6 +39677,11 @@ impl Client {
     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-tag-object>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn git_create_tag(&self, owner: &str, repo: &str, body: &types::GitCreateTagRequest) -> Result<types::GitTag> {
         let url = format!(
@@ -45210,6 +39728,12 @@ impl Client {
     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
     *
     * FROM: <https://docs.github.com/rest/reference/git#get-a-tag>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * tag_sha: &str
     */
     pub async fn git_get_tag(&self, owner: &str, repo: &str, tag_sha: &str) -> Result<types::GitTag> {
         let url = format!(
@@ -45232,8 +39756,13 @@ impl Client {
     * If you use this endpoint to add, delete, or modify the file contents in a tree, you will need to commit the tree and then update a branch to point to the commit. For more information see "[Create a commit](https://docs.github.com/rest/reference/git#create-a-commit)" and "[Update a reference](https://docs.github.com/rest/reference/git#update-a-reference)."
     *
     * FROM: <https://docs.github.com/rest/reference/git#create-a-tree>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
-    pub async fn git_create_tree(&self, owner: &str, repo: &str, body: &types::GitCreateTreeRequest) -> Result<types::GitTree> {
+    pub async fn git_create_tree(&self, owner: &str, repo: &str, body: &types::GitCreateTreeRequestData) -> Result<types::GitTree> {
         let url = format!(
             "/repos/{}/{}/git/trees",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45253,6 +39782,13 @@ impl Client {
     * If `truncated` is `true` in the response then the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.
     *
     * FROM: <https://docs.github.com/rest/reference/git#get-a-tree>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * tree_sha: &str
+    * * recursive: &str
     */
     pub async fn git_get_tree(&self, owner: &str, repo: &str, tree_sha: &str, recursive: &str) -> Result<types::GitTree> {
         let url = format!(
@@ -45274,6 +39810,13 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-webhooks>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_webhooks(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Hook>> {
         let url = format!(
@@ -45296,6 +39839,11 @@ impl Client {
     * share the same `config` as long as those webhooks do not have any `events` that overlap.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-repository-webhook>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_create_webhook(&self, owner: &str, repo: &str, body: &types::ReposCreateWebhookRequest) -> Result<types::Hook> {
         let url = format!(
@@ -45315,6 +39863,12 @@ impl Client {
     * Returns a webhook configured in a repository. To get only the webhook `config` properties, see "[Get a webhook configuration for a repository](/rest/reference/repos#get-a-webhook-configuration-for-a-repository)."
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-repository-webhook>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * hook_id: i64
     */
     pub async fn repos_get_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<types::Hook> {
         let url = format!(
@@ -45335,6 +39889,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-repository-webhook>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * hook_id: i64
     */
     pub async fn repos_delete_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
         let url = format!(
@@ -45355,6 +39915,12 @@ impl Client {
     * Updates a webhook configured in a repository. If you previously had a `secret` set, you must provide the same `secret` or set a new `secret` or the secret will be removed. If you are only updating individual webhook `config` properties, use "[Update a webhook configuration for a repository](/rest/reference/repos#update-a-webhook-configuration-for-a-repository)."
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-a-repository-webhook>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * hook_id: i64
     */
     pub async fn repos_update_webhook(&self, owner: &str, repo: &str, hook_id: i64, body: &types::ReposUpdateWebhookRequest) -> Result<types::Hook> {
         let url = format!(
@@ -45377,6 +39943,12 @@ impl Client {
     * Access tokens must have the `read:repo_hook` or `repo` scope, and GitHub Apps must have the `repository_hooks:read` permission.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-webhook-configuration-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * hook_id: i64
     */
     pub async fn repos_get_webhook_config_for_repo(&self, owner: &str, repo: &str, hook_id: i64) -> Result<types::WebhookConfig> {
         let url = format!(
@@ -45399,13 +39971,19 @@ impl Client {
     * Access tokens must have the `write:repo_hook` or `repo` scope, and GitHub Apps must have the `repository_hooks:write` permission.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-a-webhook-configuration-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * hook_id: i64
     */
     pub async fn repos_update_webhook_config_for_repo(
         &self,
         owner: &str,
         repo: &str,
         hook_id: i64,
-        body: &types::ReposUpdateWebhookConfigRepoRequest,
+        body: &types::AppsUpdateWebhookConfigAppRequest,
     ) -> Result<types::WebhookConfig> {
         let url = format!(
             "/repos/{}/{}/hooks/{}/config",
@@ -45425,6 +40003,12 @@ impl Client {
     * This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#ping-a-repository-webhook>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * hook_id: i64
     */
     pub async fn repos_ping_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
         let url = format!(
@@ -45447,6 +40031,12 @@ impl Client {
     * **Note**: Previously `/repos/:owner/:repo/hooks/:hook_id/test`
     *
     * FROM: <https://docs.github.com/rest/reference/repos#test-the-push-repository-webhook>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * hook_id: i64
     */
     pub async fn repos_test_push_webhook(&self, owner: &str, repo: &str, hook_id: i64) -> Result<()> {
         let url = format!(
@@ -45500,6 +40090,11 @@ impl Client {
     * *   `large_files_count` - the total number of files larger than 100MB found in the originating repository. To see a list of these files, make a "Get Large Files" request.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#get-an-import-status>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn migrations_get_import_status(&self, owner: &str, repo: &str) -> Result<types::Import> {
         let url = format!(
@@ -45519,6 +40114,11 @@ impl Client {
     * Start a source import to a GitHub repository using GitHub Importer.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#start-an-import>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn migrations_start_import(&self, owner: &str, repo: &str, body: &types::MigrationsStartImportRequest) -> Result<types::Import> {
         let url = format!(
@@ -45538,6 +40138,11 @@ impl Client {
     * Stop an import for a repository.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#cancel-an-import>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn migrations_cancel_import(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -45558,6 +40163,11 @@ impl Client {
     * request. If no parameters are provided, the import will be restarted.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#update-an-import>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn migrations_update_import(&self, owner: &str, repo: &str, body: &types::MigrationsUpdateImportRequest) -> Result<types::Import> {
         let url = format!(
@@ -45579,6 +40189,12 @@ impl Client {
     * This endpoint and the [Map a commit author](https://docs.github.com/rest/reference/migrations#map-a-commit-author) endpoint allow you to provide correct Git author information.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#get-commit-authors>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * since: i64
     */
     pub async fn migrations_get_commit_authors(&self, owner: &str, repo: &str, since: i64) -> Result<Vec<types::PorterAuthor>> {
         let url = format!(
@@ -45599,6 +40215,12 @@ impl Client {
     * Update an author's identity for the import. Your application can continue updating authors any time before you push new commits to the repository.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#map-a-commit-author>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * author_id: i64
     */
     pub async fn migrations_map_commit_author(
         &self,
@@ -45625,6 +40247,11 @@ impl Client {
     * List files larger than 100MB found during the import
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#get-large-files>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn migrations_get_large_files(&self, owner: &str, repo: &str) -> Result<Vec<types::PorterLargeFile>> {
         let url = format!(
@@ -45644,6 +40271,11 @@ impl Client {
     * You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://help.github.com/articles/versioning-large-files/).
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#update-git-lfs-preference>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn migrations_set_lfs_preference(
         &self,
@@ -45670,6 +40302,11 @@ impl Client {
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#get-a-repository-installation-for-the-authenticated-app>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn apps_get_repo_installation(&self, owner: &str, repo: &str) -> Result<types::Installation> {
         let url = format!(
@@ -45689,8 +40326,13 @@ impl Client {
     * Shows which type of GitHub user can interact with this repository and when the restriction expires. If there are no restrictions, you will see an empty response.
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
-    pub async fn interactions_get_restrictions_for_repo(&self, owner: &str, repo: &str) -> Result<types::GetInteractionsRestrictionsRepoOkResponse> {
+    pub async fn interactions_get_restrictions_for_repo(&self, owner: &str, repo: &str) -> Result<types::InteractionLimitResponse> {
         let url = format!(
             "/repos/{}/{}/interaction-limits",
             progenitor_support::encode_path(&owner.to_string()),
@@ -45708,6 +40350,11 @@ impl Client {
     * Temporarily restricts interactions to a certain type of GitHub user within the given repository. You must have owner or admin access to set these restrictions. If an interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn interactions_set_restrictions_for_repo(
         &self,
@@ -45732,6 +40379,11 @@ impl Client {
     * Removes all interaction restrictions from the given repository. You must have owner or admin access to remove restrictions. If the interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn interactions_remove_restrictions_for_repo(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -45751,6 +40403,13 @@ impl Client {
     * When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-invitations>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_invitations(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::RepositoryInvitation>> {
         let url = format!(
@@ -45772,6 +40431,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-repository-invitation>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * invitation_id: i64
     */
     pub async fn repos_delete_invitation(&self, owner: &str, repo: &str, invitation_id: i64) -> Result<()> {
         let url = format!(
@@ -45792,6 +40457,12 @@ impl Client {
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-a-repository-invitation>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * invitation_id: i64
     */
     pub async fn repos_update_invitation(
         &self,
@@ -45823,6 +40494,22 @@ impl Client {
     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-repository-issues>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * milestone: &str -- A collection of related issues and pull requests.
+    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * assignee: &str
+    * * creator: &str
+    * * mentioned: &str
+    * * labels: &str
+    * * sort: crate::types::IssuesListSort
+    * * direction: crate::types::Direction
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_for_repo(
         &self,
@@ -45858,6 +40545,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#create-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn issues_create(&self, owner: &str, repo: &str, body: &types::IssuesCreateRequest) -> Result<types::Issue> {
         let url = format!(
@@ -45877,6 +40569,16 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * By default, Issue Comments are ordered by ascending ID.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-issue-comments-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * sort: crate::types::Sort
+    * * direction: crate::types::Direction
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_comments_for_repo(
         &self,
@@ -45910,6 +40612,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#get-an-issue-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn issues_get_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<types::IssueComment> {
         let url = format!(
@@ -45930,6 +40638,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#delete-an-issue-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn issues_delete_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<()> {
         let url = format!(
@@ -45950,6 +40664,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#update-an-issue-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn issues_update_comment(
         &self,
@@ -45976,6 +40696,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List the reactions to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
+    * * content: crate::types::Content -- The reaction to use
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn reactions_list_for_issue_comment(
         &self,
@@ -46007,6 +40736,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Create a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments). A response with an HTTP `200` status means that you already added the reaction type to this issue comment.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#create-reaction-for-an-issue-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn reactions_create_for_issue_comment(
         &self,
@@ -46035,6 +40770,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Delete a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#delete-an-issue-comment-reaction>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
+    * * reaction_id: i64
     */
     pub async fn reactions_delete_for_issue_comment(&self, owner: &str, repo: &str, comment_id: i64, reaction_id: i64) -> Result<()> {
         let url = format!(
@@ -46056,6 +40798,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_events_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::IssueEvent>> {
         let url = format!(
@@ -46077,6 +40826,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#get-an-issue-event>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * event_id: i64
     */
     pub async fn issues_get_event(&self, owner: &str, repo: &str, event_id: i64) -> Result<types::IssueEvent> {
         let url = format!(
@@ -46107,6 +40862,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#get-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_get(&self, owner: &str, repo: &str, issue_number: i64) -> Result<types::Issue> {
         let url = format!(
@@ -46127,6 +40888,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Issue owners and users with push access can edit an issue.
     *
     * FROM: <https://docs.github.com/rest/reference/issues/#update-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_update(&self, owner: &str, repo: &str, issue_number: i64, body: &types::IssuesUpdateRequest) -> Result<types::Issue> {
         let url = format!(
@@ -46147,6 +40914,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#add-assignees-to-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_add_assignees(
         &self,
@@ -46173,6 +40946,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Removes one or more assignees from an issue.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#remove-assignees-from-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_remove_assignees(
         &self,
@@ -46199,6 +40978,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Issue Comments are ordered by ascending ID.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-issue-comments>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_comments(
         &self,
@@ -46230,13 +41018,19 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#create-an-issue-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_create_comment(
         &self,
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::IssuesCreateCommentRequest,
+        body: &types::IssuesUpdateCommentRequest,
     ) -> Result<types::IssueComment> {
         let url = format!(
             "/repos/{}/{}/issues/{}/comments",
@@ -46256,6 +41050,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_events(
         &self,
@@ -46285,6 +41087,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_labels_on_issue(
         &self,
@@ -46314,13 +41124,19 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Removes any previous labels and sets the new labels for an issue.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#set-labels-for-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_set_labels(
         &self,
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &types::IssuesSetLabelsRequest,
+        body: &types::IssuesAddLabelsRequest,
     ) -> Result<Vec<types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
@@ -46340,6 +41156,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#add-labels-to-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_add_labels(
         &self,
@@ -46366,6 +41188,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#remove-all-labels-from-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_remove_all_labels(&self, owner: &str, repo: &str, issue_number: i64) -> Result<()> {
         let url = format!(
@@ -46386,6 +41214,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Removes the specified label from the issue, and returns the remaining labels on the issue. This endpoint returns a `404 Not Found` status if the label does not exist.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#remove-a-label-from-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
+    * * name: &str
     */
     pub async fn issues_remove_label(&self, owner: &str, repo: &str, issue_number: i64, name: &str) -> Result<Vec<types::Label>> {
         let url = format!(
@@ -46409,6 +41244,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
     * FROM: <https://docs.github.com/rest/reference/issues#lock-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_lock(&self, owner: &str, repo: &str, issue_number: i64, body: &types::IssuesLockRequest) -> Result<()> {
         let url = format!(
@@ -46429,6 +41270,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Users with push access can unlock an issue's conversation.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#unlock-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn issues_unlock(&self, owner: &str, repo: &str, issue_number: i64) -> Result<()> {
         let url = format!(
@@ -46449,6 +41296,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List the reactions to an [issue](https://docs.github.com/rest/reference/issues).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
+    * * content: crate::types::Content -- The reaction to use
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn reactions_list_for_issue(
         &self,
@@ -46480,6 +41336,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Create a reaction to an [issue](https://docs.github.com/rest/reference/issues/). A response with an HTTP `200` status means that you already added the reaction type to this issue.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#create-reaction-for-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
     */
     pub async fn reactions_create_for_issue(
         &self,
@@ -46508,6 +41370,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Delete a reaction to an [issue](https://docs.github.com/rest/reference/issues/).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#delete-an-issue-reaction>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
+    * * reaction_id: i64
     */
     pub async fn reactions_delete_for_issue(&self, owner: &str, repo: &str, issue_number: i64, reaction_id: i64) -> Result<()> {
         let url = format!(
@@ -46529,6 +41398,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-timeline-events-for-an-issue>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * issue_number: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_events_for_timeline(
         &self,
@@ -46558,6 +41435,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-deploy-keys>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_deploy_keys(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::DeployKey>> {
         let url = format!(
@@ -46579,6 +41463,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You can create a read-only deploy key.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-deploy-key>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_create_deploy_key(&self, owner: &str, repo: &str, body: &types::ReposCreateDeployKeyRequest) -> Result<types::DeployKey> {
         let url = format!(
@@ -46598,6 +41487,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-deploy-key>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * key_id: i64
     */
     pub async fn repos_get_deploy_key(&self, owner: &str, repo: &str, key_id: i64) -> Result<types::DeployKey> {
         let url = format!(
@@ -46618,6 +41513,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Deploy keys are immutable. If you need to update a key, remove the key and create a new one instead.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-deploy-key>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * key_id: i64
     */
     pub async fn repos_delete_deploy_key(&self, owner: &str, repo: &str, key_id: i64) -> Result<()> {
         let url = format!(
@@ -46638,6 +41539,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_labels_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Label>> {
         let url = format!(
@@ -46659,6 +41567,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#create-a-label>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn issues_create_label(&self, owner: &str, repo: &str, body: &types::IssuesCreateLabelRequest) -> Result<types::Label> {
         let url = format!(
@@ -46678,6 +41591,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#get-a-label>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * name: &str
     */
     pub async fn issues_get_label(&self, owner: &str, repo: &str, name: &str) -> Result<types::Label> {
         let url = format!(
@@ -46698,6 +41617,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#delete-a-label>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * name: &str
     */
     pub async fn issues_delete_label(&self, owner: &str, repo: &str, name: &str) -> Result<()> {
         let url = format!(
@@ -46718,6 +41643,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#update-a-label>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * name: &str
     */
     pub async fn issues_update_label(&self, owner: &str, repo: &str, name: &str, body: &types::IssuesUpdateLabelRequest) -> Result<types::Label> {
         let url = format!(
@@ -46738,6 +41669,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists languages for the specified repository. The value shown for each language is the number of bytes of code written in that language.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-languages>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_list_languages(&self, owner: &str, repo: &str) -> Result<types::Language> {
         let url = format!(
@@ -46759,6 +41695,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Similar to [Get repository content](https://docs.github.com/rest/reference/repos#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
     *
     * FROM: <https://docs.github.com/rest/reference/licenses/#get-the-license-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn licenses_get_for_repo(&self, owner: &str, repo: &str) -> Result<types::LicenseContent> {
         let url = format!(
@@ -46778,6 +41719,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#merge-a-branch>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_merge(&self, owner: &str, repo: &str, body: &types::ReposMergeRequest) -> Result<types::Commit> {
         let url = format!(
@@ -46797,6 +41743,16 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-milestones>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * sort: crate::types::IssuesListMilestonesSort
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_milestones(
         &self,
@@ -46830,6 +41786,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#create-a-milestone>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn issues_create_milestone(&self, owner: &str, repo: &str, body: &types::IssuesCreateMilestoneRequest) -> Result<types::Milestone> {
         let url = format!(
@@ -46849,6 +41810,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#get-a-milestone>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * milestone_number: i64
     */
     pub async fn issues_get_milestone(&self, owner: &str, repo: &str, milestone_number: i64) -> Result<types::Milestone> {
         let url = format!(
@@ -46869,6 +41836,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#delete-a-milestone>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * milestone_number: i64
     */
     pub async fn issues_delete_milestone(&self, owner: &str, repo: &str, milestone_number: i64) -> Result<()> {
         let url = format!(
@@ -46889,6 +41862,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#update-a-milestone>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * milestone_number: i64
     */
     pub async fn issues_update_milestone(
         &self,
@@ -46915,6 +41894,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-issues-in-a-milestone>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * milestone_number: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_labels_for_milestone(
         &self,
@@ -46944,6 +41931,17 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List all notifications for the current user.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * all: bool
+    * * participating: bool
+    * * since: DateTime<Utc>
+    * * before: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_repo_notifications_for_authenticated_user(
         &self,
@@ -46979,6 +41977,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Marks all notifications in a repository as "read" removes them from the [default view on GitHub](https://github.com/notifications). If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List repository notifications for the authenticated user](https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#mark-repository-notifications-as-read>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn activity_mark_repo_notifications_as_read(
         &self,
@@ -47003,6 +42006,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-github-pages-site>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_pages(&self, owner: &str, repo: &str) -> Result<types::Page> {
         let url = format!(
@@ -47022,6 +42030,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Updates information for a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages).
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-information-about-a-github-pages-site>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_update_information_about_pages_site(
         &self,
@@ -47046,6 +42059,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Configures a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages)."
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-github-pages-site>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_create_pages_site(&self, owner: &str, repo: &str, body: &types::ReposCreatePagesSiteRequest) -> Result<types::Page> {
         let url = format!(
@@ -47065,6 +42083,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-github-pages-site>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_delete_pages_site(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -47084,6 +42107,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-github-pages-builds>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_pages_builds(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::PageBuild>> {
         let url = format!(
@@ -47107,6 +42137,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Build requests are limited to one concurrent build per repository and one concurrent build per requester. If you request a build while another is still in progress, the second request will be queued until the first completes.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#request-a-github-pages-build>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_request_pages_build(&self, owner: &str, repo: &str) -> Result<types::PageBuildStatus> {
         let url = format!(
@@ -47126,6 +42161,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-latest-pages-build>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_latest_pages_build(&self, owner: &str, repo: &str) -> Result<types::PageBuild> {
         let url = format!(
@@ -47145,6 +42185,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-github-pages-build>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * build_id: i64
     */
     pub async fn repos_get_pages_build(&self, owner: &str, repo: &str, build_id: i64) -> Result<types::PageBuild> {
         let url = format!(
@@ -47169,6 +42215,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Users must have admin or owner permissions. GitHub Apps must have the `pages:write` and `administration:write` permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-dns-health-check-for-github-pages>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_pages_health_check(&self, owner: &str, repo: &str) -> Result<types::PagesHealthCheck> {
         let url = format!(
@@ -47188,6 +42239,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-repository-projects>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn projects_list_for_repo(
         &self,
@@ -47217,8 +42276,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Creates a repository project board. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
     *
     * FROM: <https://docs.github.com/rest/reference/projects#create-a-repository-project>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
-    pub async fn projects_create_for_repo(&self, owner: &str, repo: &str, body: &types::ProjectsCreateRepoRequest) -> Result<types::Project> {
+    pub async fn projects_create_for_repo(&self, owner: &str, repo: &str, body: &types::ProjectsCreateOrgRequest) -> Result<types::Project> {
         let url = format!(
             "/repos/{}/{}/projects",
             progenitor_support::encode_path(&owner.to_string()),
@@ -47236,6 +42300,18 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#list-pull-requests>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * head: &str
+    * * base: &str
+    * * sort: crate::types::PullsListSort
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn pulls_list(
         &self,
@@ -47279,6 +42355,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#create-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn pulls_create(&self, owner: &str, repo: &str, body: &types::PullsCreateRequest) -> Result<types::PullRequest> {
         let url = format!(
@@ -47298,6 +42379,16 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#list-review-comments-in-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * sort: crate::types::PullsListReviewCommentsRepoSort
+    * * direction: crate::types::Direction
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn pulls_list_review_comments_for_repo(
         &self,
@@ -47331,6 +42422,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Provides details for a review comment.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#get-a-review-comment-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn pulls_get_review_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<types::PullRequestReviewComment> {
         let url = format!(
@@ -47351,6 +42448,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Deletes a review comment.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#delete-a-review-comment-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn pulls_delete_review_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<()> {
         let url = format!(
@@ -47371,6 +42474,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Enables you to edit a review comment.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#update-a-review-comment-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn pulls_update_review_comment(
         &self,
@@ -47397,6 +42506,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List the reactions to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-a-pull-request-review-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
+    * * content: crate::types::Content -- The reaction to use
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn reactions_list_for_pull_request_review_comment(
         &self,
@@ -47428,6 +42546,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Create a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#comments). A response with an HTTP `200` status means that you already added the reaction type to this pull request review comment.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#create-reaction-for-a-pull-request-review-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
     */
     pub async fn reactions_create_for_pull_request_review_comment(
         &self,
@@ -47456,6 +42580,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Delete a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions#delete-a-pull-request-comment-reaction>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * comment_id: i64
+    * * reaction_id: i64
     */
     pub async fn reactions_delete_for_pull_request_comment(&self, owner: &str, repo: &str, comment_id: i64, reaction_id: i64) -> Result<()> {
         let url = format!(
@@ -47491,6 +42622,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#get-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
     */
     pub async fn pulls_get(&self, owner: &str, repo: &str, pull_number: i64) -> Result<types::PullRequest> {
         let url = format!(
@@ -47513,6 +42650,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * To open or update a pull request in a public repository, you must have write access to the head or the source branch. For organization-owned repositories, you must be a member of the organization that owns the repository to open or update a pull request.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls/#update-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
     */
     pub async fn pulls_update(&self, owner: &str, repo: &str, pull_number: i64, body: &types::PullsUpdateRequest) -> Result<types::PullRequest> {
         let url = format!(
@@ -47533,6 +42676,17 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists all review comments for a pull request. By default, review comments are in ascending order by ID.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#list-review-comments-on-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * sort: crate::types::Sort
+    * * direction: crate::types::Direction
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn pulls_list_review_comments(
         &self,
@@ -47575,6 +42729,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#create-a-review-comment-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
     */
     pub async fn pulls_create_review_comment(
         &self,
@@ -47603,6 +42763,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#create-a-reply-for-a-review-comment>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * comment_id: i64
     */
     pub async fn pulls_create_reply_for_review_comment(
         &self,
@@ -47631,6 +42798,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://docs.github.com/rest/reference/repos#list-commits) endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#list-commits-on-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn pulls_list_commits(&self, owner: &str, repo: &str, pull_number: i64, per_page: i64, page: i64) -> Result<Vec<types::Commit>> {
         let url = format!(
@@ -47653,6 +42828,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#list-pull-requests-files>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn pulls_list_files(&self, owner: &str, repo: &str, pull_number: i64, per_page: i64, page: i64) -> Result<Vec<types::DiffEntry>> {
         let url = format!(
@@ -47675,6 +42858,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#check-if-a-pull-request-has-been-merged>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
     */
     pub async fn pulls_check_if_merged(&self, owner: &str, repo: &str, pull_number: i64) -> Result<()> {
         let url = format!(
@@ -47695,6 +42884,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#merge-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
     */
     pub async fn pulls_merge(
         &self,
@@ -47721,6 +42916,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#list-requested-reviewers-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn pulls_list_requested_reviewers(
         &self,
@@ -47750,6 +42953,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#request-reviewers-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
     */
     pub async fn pulls_request_reviewers(
         &self,
@@ -47776,6 +42985,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#remove-requested-reviewers-from-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
     */
     pub async fn pulls_remove_requested_reviewers(
         &self,
@@ -47802,6 +43017,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The list of reviews returns in chronological order.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#list-reviews-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn pulls_list_reviews(
         &self,
@@ -47837,6 +43060,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The `position` value equals the number of lines down from the first "@@" hunk header in the file you want to add a comment. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the diff continues to increase through lines of whitespace and additional hunks until the beginning of a new file.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#create-a-review-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
     */
     pub async fn pulls_create_review(
         &self,
@@ -47863,6 +43092,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#get-a-review-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * review_id: i64
     */
     pub async fn pulls_get_review(&self, owner: &str, repo: &str, pull_number: i64, review_id: i64) -> Result<types::PullRequestReview> {
         let url = format!(
@@ -47884,6 +43120,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Update the review summary comment with new text.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#update-a-review-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * review_id: i64
     */
     pub async fn pulls_update_review(
         &self,
@@ -47912,6 +43155,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#delete-a-pending-review-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * review_id: i64
     */
     pub async fn pulls_delete_pending_review(&self, owner: &str, repo: &str, pull_number: i64, review_id: i64) -> Result<types::PullRequestReview> {
         let url = format!(
@@ -47933,6 +43183,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List comments for a specific pull request review.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#list-comments-for-a-pull-request-review>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * review_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn pulls_list_comments_for_review(
         &self,
@@ -47964,6 +43223,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** To dismiss a pull request review on a [protected branch](https://docs.github.com/rest/reference/repos#branches), you must be a repository administrator or be included in the list of people or teams who can dismiss pull request reviews.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#dismiss-a-review-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * review_id: i64
     */
     pub async fn pulls_dismiss_review(
         &self,
@@ -47992,6 +43258,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
+    * * review_id: i64
     */
     pub async fn pulls_submit_review(
         &self,
@@ -48020,6 +43293,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Updates the pull request branch with the latest upstream changes by merging HEAD from the base branch into the pull request branch.
     *
     * FROM: <https://docs.github.com/rest/reference/pulls#update-a-pull-request-branch>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * pull_number: i64
     */
     pub async fn pulls_update_branch(
         &self,
@@ -48027,7 +43306,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         repo: &str,
         pull_number: i64,
         body: &types::PullsUpdateBranchRequest,
-    ) -> Result<types::PutPullsUpdateBranchAcceptedResponse> {
+    ) -> Result<types::PutActivityMarkRepoNotificationsAsReadAcceptedResponse> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/update-branch",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48048,6 +43327,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-repository-readme>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
     */
     pub async fn repos_get_readme(&self, owner: &str, repo: &str, ref_: &str) -> Result<types::ContentFile> {
         let url = format!(
@@ -48070,6 +43355,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-repository-directory-readme>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * dir: &str
+    *  * ref_: &str
     */
     pub async fn repos_get_readme_in_directory(&self, owner: &str, repo: &str, dir: &str, ref_: &str) -> Result<types::ContentFile> {
         let url = format!(
@@ -48093,6 +43385,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Information about published releases are available to everyone. Only users with push access will receive listings for draft releases.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-releases>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_releases(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Release>> {
         let url = format!(
@@ -48116,6 +43415,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-release>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_create_release(&self, owner: &str, repo: &str, body: &types::ReposCreateReleaseRequest) -> Result<types::Release> {
         let url = format!(
@@ -48135,6 +43439,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-release-asset>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * asset_id: i64
     */
     pub async fn repos_get_release_asset(&self, owner: &str, repo: &str, asset_id: i64) -> Result<types::ReleaseAsset> {
         let url = format!(
@@ -48155,6 +43465,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-release-asset>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * asset_id: i64
     */
     pub async fn repos_delete_release_asset(&self, owner: &str, repo: &str, asset_id: i64) -> Result<()> {
         let url = format!(
@@ -48175,6 +43491,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Users with push access to the repository can edit a release asset.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-a-release-asset>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * asset_id: i64
     */
     pub async fn repos_update_release_asset(
         &self,
@@ -48203,6 +43525,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The latest release is the most recent non-prerelease, non-draft release, sorted by the `created_at` attribute. The `created_at` attribute is the date of the commit used for the release, and not the date when the release was drafted or published.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-the-latest-release>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_latest_release(&self, owner: &str, repo: &str) -> Result<types::Release> {
         let url = format!(
@@ -48222,6 +43549,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Get a published release with the specified tag.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-release-by-tag-name>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * tag: &str -- Tag
     */
     pub async fn repos_get_release_by_tag(&self, owner: &str, repo: &str, tag: &str) -> Result<types::Release> {
         let url = format!(
@@ -48242,6 +43575,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-a-release>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * release_id: i64
     */
     pub async fn repos_get_release(&self, owner: &str, repo: &str, release_id: i64) -> Result<types::Release> {
         let url = format!(
@@ -48262,6 +43601,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Users with push access to the repository can delete a release.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-release>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * release_id: i64
     */
     pub async fn repos_delete_release(&self, owner: &str, repo: &str, release_id: i64) -> Result<()> {
         let url = format!(
@@ -48282,6 +43627,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Users with push access to the repository can edit a release.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#update-a-release>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * release_id: i64
     */
     pub async fn repos_update_release(
         &self,
@@ -48308,6 +43659,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-release-assets>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * release_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_release_assets(
         &self,
@@ -48354,6 +43713,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * *   If you upload an asset with the same filename as another uploaded asset, you'll receive an error and must delete the old file before you can re-upload the new asset.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#upload-a-release-asset>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * release_id: i64
+    * * name: &str
+    * * label: &str -- Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
     */
     pub async fn repos_upload_release_asset<T: Into<reqwest::Body>>(
         &self,
@@ -48384,6 +43751,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Create a reaction to a [release](https://docs.github.com/rest/reference/repos#releases). A response with a `Status: 200 OK` means that you already added the reaction type to this release.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-release>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * release_id: i64
     */
     pub async fn reactions_create_for_release(
         &self,
@@ -48412,6 +43785,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * state: crate::types::SecretScanningAlertState -- The state of the milestone.
+    * * secret_type: &str
+    * * page: i64
+    * * per_page: i64
     */
     pub async fn secret_scanning_list_alerts_for_repo(
         &self,
@@ -48445,6 +43827,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/secret-scanning#get-a-secret-scanning-alert>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * alert_number: &str
     */
     pub async fn secret_scanning_get_alert(&self, owner: &str, repo: &str, alert_number: &str) -> Result<types::SecretScanningAlert> {
         let url = format!(
@@ -48467,6 +43855,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * GitHub Apps must have the `secret_scanning_alerts` write permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/secret-scanning#update-a-secret-scanning-alert>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * alert_number: &str
     */
     pub async fn secret_scanning_update_alert(
         &self,
@@ -48495,6 +43889,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-stargazers>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_stargazers_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
@@ -48516,6 +43917,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-the-weekly-commit-activity>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_code_frequency_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
         let url = format!(
@@ -48535,6 +43941,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-the-last-year-of-commit-activity>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_commit_activity_stats(&self, owner: &str, repo: &str) -> Result<Vec<types::CommitActivity>> {
         let url = format!(
@@ -48560,6 +43971,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * *   `c` - Number of commits
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-all-contributor-commit-activity>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_contributors_stats(&self, owner: &str, repo: &str) -> Result<Vec<types::ContributorActivity>> {
         let url = format!(
@@ -48581,6 +43997,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The array order is oldest week (index 0) to most recent week.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-the-weekly-commit-count>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_participation_stats(&self, owner: &str, repo: &str) -> Result<types::ParticipationStats> {
         let url = format!(
@@ -48606,6 +44027,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays. All times are based on the time zone of individual commits.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-the-hourly-commit-count-for-each-day>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_punch_card_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
         let url = format!(
@@ -48627,6 +44053,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Note: there is a limit of 1000 statuses per `sha` and `context` within a repository. Attempts to create more than 1000 statuses will result in a validation error.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-commit-status>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * sha: &str
     */
     pub async fn repos_create_commit_status(
         &self,
@@ -48653,6 +44085,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the people watching the specified repository.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-watchers>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_watchers_for_repo(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
@@ -48674,6 +44113,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#get-a-repository-subscription>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn activity_get_repo_subscription(&self, owner: &str, repo: &str) -> Result<types::RepositorySubscription> {
         let url = format!(
@@ -48693,6 +44137,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If you would like to watch a repository, set `subscribed` to `true`. If you would like to ignore notifications made within a repository, set `ignored` to `true`. If you would like to stop watching a repository, [delete the repository's subscription](https://docs.github.com/rest/reference/activity#delete-a-repository-subscription) completely.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#set-a-repository-subscription>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn activity_set_repo_subscription(
         &self,
@@ -48717,6 +44166,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint should only be used to stop watching a repository. To control whether or not you wish to receive notifications from a repository, [set the repository's subscription manually](https://docs.github.com/rest/reference/activity#set-a-repository-subscription).
     *
     * FROM: <https://docs.github.com/rest/reference/activity#delete-a-repository-subscription>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn activity_delete_repo_subscription(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -48736,8 +44190,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-tags>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
-    pub async fn repos_list_tags(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<serde_json::Value>> {
+    pub async fn repos_list_tags(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Tag>> {
         let url = format!(
             "/repos/{}/{}/tags?page={}&per_page={}",
             progenitor_support::encode_path(&owner.to_string()),
@@ -48760,6 +44221,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note**: For private repositories, these links are temporary and expire after five minutes.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#download-a-repository-archive>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
     */
     pub async fn repos_download_tarball_archive(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
         let url = format!(
@@ -48780,6 +44247,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-teams>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_teams(&self, owner: &str, repo: &str, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
         let url = format!(
@@ -48801,6 +44275,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-all-repository-topics>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * page: i64
+    * * per_page: i64
     */
     pub async fn repos_get_all_topics(&self, owner: &str, repo: &str, page: i64, per_page: i64) -> Result<types::Topic> {
         let url = format!(
@@ -48822,6 +44303,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#replace-all-repository-topics>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_replace_all_topics(&self, owner: &str, repo: &str, body: &types::ReposReplaceAllTopicsRequest) -> Result<types::Topic> {
         let url = format!(
@@ -48841,6 +44327,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-repository-clones>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per: crate::types::Per
     */
     pub async fn repos_get_clones(&self, owner: &str, repo: &str, per: crate::types::Per) -> Result<types::CloneTraffic> {
         let url = format!(
@@ -48861,6 +44353,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Get the top 10 popular contents over the last 14 days.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-top-referral-paths>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_top_paths(&self, owner: &str, repo: &str) -> Result<Vec<types::ContentTraffic>> {
         let url = format!(
@@ -48880,6 +44377,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Get the top 10 referrers over the last 14 days.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-top-referral-sources>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_get_top_referrers(&self, owner: &str, repo: &str) -> Result<Vec<types::ReferrerTraffic>> {
         let url = format!(
@@ -48899,6 +44401,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#get-page-views>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    * * per: crate::types::Per
     */
     pub async fn repos_get_views(&self, owner: &str, repo: &str, per: crate::types::Per) -> Result<types::ViewTraffic> {
         let url = format!(
@@ -48919,6 +44427,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://help.github.com/articles/about-repository-transfers/).
     *
     * FROM: <https://docs.github.com/rest/reference/repos#transfer-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_transfer(&self, owner: &str, repo: &str, body: &types::ReposTransferRequest) -> Result<types::MinimalRepository> {
         let url = format!(
@@ -48938,6 +44451,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
     *
     * FROM: <https://docs.github.com/rest/reference/repos#check-if-vulnerability-alerts-are-enabled-for-a-repository>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_check_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -48957,6 +44475,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Enables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
     *
     * FROM: <https://docs.github.com/rest/reference/repos#enable-vulnerability-alerts>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_enable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -48976,6 +44499,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Disables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
     *
     * FROM: <https://docs.github.com/rest/reference/repos#disable-vulnerability-alerts>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn repos_disable_vulnerability_alerts(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -48998,6 +44526,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note**: For private repositories, these links are temporary and expire after five minutes.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#download-a-repository-archive>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
+    *  * ref_: &str
     */
     pub async fn repos_download_zipball_archive(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
         let url = format!(
@@ -49025,6 +44559,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * *   `repo` scope to create a private repository
     *
     * FROM: <https://docs.github.com/rest/reference/repos#create-a-repository-using-a-template>
+    *
+    * **Parameters:**
+    *
+    * * template_owner: &str
+    * * template_repo: &str
     */
     pub async fn repos_create_using_template(
         &self,
@@ -49053,6 +44592,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * - Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of repositories.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-public-repositories>
+    *
+    * **Parameters:**
+    *
+    * * since: i64
     */
     pub async fn repos_list_public(&self, since: i64) -> Result<Vec<types::MinimalRepository>> {
         let url = format!("/repositories?since={}", format!("{}", since),);
@@ -49068,6 +44611,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists all secrets available in an environment without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#list-environment-secrets>
+    *
+    * **Parameters:**
+    *
+    * * repository_id: i64
+    * * environment_name: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn actions_list_environment_secrets(
         &self,
@@ -49075,7 +44625,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         environment_name: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetActionsListEnvironmentSecretsOkResponse> {
+    ) -> Result<types::GetActionsListRepoSecretsOkResponse> {
         let url = format!(
             "/repositories/{}/environments/{}/secrets?page={}&per_page={}",
             progenitor_support::encode_path(&repository_id.to_string()),
@@ -49095,6 +44645,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Get the public key for an environment, which you need to encrypt environment secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-an-environment-public-key>
+    *
+    * **Parameters:**
+    *
+    * * repository_id: i64
+    * * environment_name: &str
     */
     pub async fn actions_get_environment_public_key(&self, repository_id: i64, environment_name: &str) -> Result<types::ActionsPublicKey> {
         let url = format!(
@@ -49114,6 +44669,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Gets a single environment secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#get-an-environment-secret>
+    *
+    * **Parameters:**
+    *
+    * * repository_id: i64
+    * * environment_name: &str
+    * * secret_name: &str
     */
     pub async fn actions_get_environment_secret(
         &self,
@@ -49213,6 +44774,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/actions#create-or-update-an-environment-secret>
+    *
+    * **Parameters:**
+    *
+    * * repository_id: i64
+    * * environment_name: &str
+    * * secret_name: &str
     */
     pub async fn actions_create_or_update_environment_secret(
         &self,
@@ -49239,6 +44806,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Deletes a secret in an environment using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/actions#delete-an-environment-secret>
+    *
+    * **Parameters:**
+    *
+    * * repository_id: i64
+    * * environment_name: &str
+    * * secret_name: &str
     */
     pub async fn actions_delete_environment_secret(&self, repository_id: i64, environment_name: &str, secret_name: &str) -> Result<()> {
         let url = format!(
@@ -49259,6 +44832,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-provisioned-scim-groups-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * start_index: i64
+    * * count: i64
+    * * filter: &str
+    * * excluded_attributes: &str
     */
     pub async fn enterprise_admin_list_provisioned_groups_enterprise(
         &self,
@@ -49290,11 +44871,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Provision an enterprise group, and invite users to the group. This sends invitation emails to the email address of the invited users to join the GitHub organization that the SCIM group corresponds to.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#provision-a-scim-enterprise-group-and-invite-users>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_provision_and_invite_enterprise_group(
         &self,
         enterprise: &str,
-        body: &types::EnterpriseAdminProvisionInviteGroupRequest,
+        body: &types::EnterpriseAdminSetInformationProvisionedGroupRequest,
     ) -> Result<types::ScimEnterpriseGroup> {
         let url = format!("/scim/v2/enterprises/{}/Groups", progenitor_support::encode_path(&enterprise.to_string()),);
 
@@ -49309,6 +44894,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-scim-provisioning-information-for-an-enterprise-group>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * scim_group_id: &str
+    * * excluded_attributes: &str
     */
     pub async fn enterprise_admin_get_provisioning_information_for_enterprise_group(
         &self,
@@ -49336,6 +44927,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Replaces an existing provisioned group’s information. You must provide all the information required for the group as if you were provisioning it for the first time. Any existing group information that you don't provide will be removed, including group membership. If you want to only update a specific attribute, use the [Update an attribute for a SCIM enterprise group](#update-an-attribute-for-a-scim-enterprise-group) endpoint instead.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#set-scim-information-for-a-provisioned-enterprise-group>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * scim_group_id: &str
     */
     pub async fn enterprise_admin_set_information_for_provisioned_enterprise_group(
         &self,
@@ -49360,6 +44956,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#delete-a-scim-group-from-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * scim_group_id: &str
     */
     pub async fn enterprise_admin_delete_scim_group_from_enterprise(&self, enterprise: &str, scim_group_id: &str) -> Result<()> {
         let url = format!(
@@ -49381,6 +44982,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Allows you to change a provisioned group’s individual attributes. To change a group’s values, you must provide a specific Operations JSON format that contains at least one of the add, remove, or replace operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#update-an-attribute-for-a-scim-enterprise-group>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * scim_group_id: &str
     */
     pub async fn enterprise_admin_update_attribute_for_enterprise_group(
         &self,
@@ -49422,6 +45028,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *    - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub enterprise, and the external identity `null` entry remains in place.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-scim-provisioned-identities-for-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * start_index: i64
+    * * count: i64
+    * * filter: &str
     */
     pub async fn enterprise_admin_list_provisioned_identities_enterprise(
         &self,
@@ -49453,11 +45066,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You can optionally include the groups a user will be invited to join. If you do not provide a list of `groups`, the user is provisioned for the enterprise, but no organization invitation emails will be sent.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#provision-and-invite-a-scim-enterprise-user>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
     */
     pub async fn enterprise_admin_provision_and_invite_enterprise_user(
         &self,
         enterprise: &str,
-        body: &types::EnterpriseAdminProvisionInviteUserRequest,
+        body: &types::EnterpriseAdminSetInformationProvisionedUserRequest,
     ) -> Result<types::ScimEnterpriseUser> {
         let url = format!("/scim/v2/enterprises/{}/Users", progenitor_support::encode_path(&enterprise.to_string()),);
 
@@ -49472,6 +45089,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-scim-provisioning-information-for-an-enterprise-user>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * scim_user_id: &str
     */
     pub async fn enterprise_admin_get_provisioning_information_for_enterprise_user(
         &self,
@@ -49501,6 +45123,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Warning:** Setting `active: false` removes the user from the enterprise, deletes the external identity, and deletes the associated `{scim_user_id}`.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#set-scim-information-for-a-provisioned-enterprise-user>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * scim_user_id: &str
     */
     pub async fn enterprise_admin_set_information_for_provisioned_enterprise_user(
         &self,
@@ -49525,6 +45152,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#delete-a-scim-user-from-an-enterprise>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * scim_user_id: &str
     */
     pub async fn enterprise_admin_delete_user_from_enterprise(&self, enterprise: &str, scim_user_id: &str) -> Result<()> {
         let url = format!(
@@ -49561,6 +45193,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#update-an-attribute-for-a-scim-enterprise-user>
+    *
+    * **Parameters:**
+    *
+    * * enterprise: &str
+    * * scim_user_id: &str
     */
     pub async fn enterprise_admin_update_attribute_for_enterprise_user(
         &self,
@@ -49600,6 +45237,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *    - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub organization, and the external identity `null` entry remains in place.
     *
     * FROM: <https://docs.github.com/rest/reference/scim#list-scim-provisioned-identities>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * start_index: i64
+    * * count: i64
+    * * filter: &str
     */
     pub async fn scim_list_provisioned_identities(&self, org: &str, start_index: i64, count: i64, filter: &str) -> Result<types::ScimUserList> {
         let url = format!(
@@ -49621,8 +45265,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Provision organization membership for a user, and send an activation email to the email address.
     *
     * FROM: <https://docs.github.com/rest/reference/scim#provision-and-invite-a-scim-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
-    pub async fn scim_provision_and_invite_user(&self, org: &str, body: &types::ScimProvisionInviteUserRequest) -> Result<types::ScimUser> {
+    pub async fn scim_provision_and_invite_user(&self, org: &str, body: &types::ScimSetInformationProvisionedUserRequest) -> Result<types::ScimUser> {
         let url = format!("/scim/v2/organizations/{}/Users", progenitor_support::encode_path(&org.to_string()),);
 
         self.post(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
@@ -49636,6 +45284,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/scim#get-scim-provisioning-information-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * scim_user_id: &str
     */
     pub async fn scim_get_provisioning_information_for_user(&self, org: &str, scim_user_id: &str) -> Result<types::ScimUser> {
         let url = format!(
@@ -49659,6 +45312,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Warning:** Setting `active: false` removes the user from the organization, deletes the external identity, and deletes the associated `{scim_user_id}`.
     *
     * FROM: <https://docs.github.com/rest/reference/scim#set-scim-information-for-a-provisioned-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * scim_user_id: &str
     */
     pub async fn scim_set_information_for_provisioned_user(
         &self,
@@ -49683,6 +45341,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/scim#delete-a-scim-user-from-an-organization>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * scim_user_id: &str
     */
     pub async fn scim_delete_user_from_org(&self, org: &str, scim_user_id: &str) -> Result<()> {
         let url = format!(
@@ -49717,6 +45380,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/scim#update-an-attribute-for-a-scim-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
+    * * scim_user_id: &str
     */
     pub async fn scim_update_attribute_for_user(
         &self,
@@ -49758,12 +45426,20 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
     *
     * FROM: <https://docs.github.com/rest/reference/search#search-code>
+    *
+    * **Parameters:**
+    *
+    * * q: &str
+    * * sort: crate::types::SearchCodeSort
+    * * order: crate::types::AuditLogOrder
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn search_code(
         &self,
         q: &str,
         sort: crate::types::SearchCodeSort,
-        order: crate::types::Order,
+        order: crate::types::AuditLogOrder,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCodeOkResponse> {
@@ -49794,12 +45470,20 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * `q=repo:octocat/Spoon-Knife+css`
     *
     * FROM: <https://docs.github.com/rest/reference/search#search-commits>
+    *
+    * **Parameters:**
+    *
+    * * q: &str
+    * * sort: crate::types::SearchCommitsSort
+    * * order: crate::types::AuditLogOrder
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn search_commits(
         &self,
         q: &str,
         sort: crate::types::SearchCommitsSort,
-        order: crate::types::Order,
+        order: crate::types::AuditLogOrder,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchCommitsOkResponse> {
@@ -49834,12 +45518,20 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** For [user-to-server](https://docs.github.com/developers/apps/identifying-and-authorizing-users-for-github-apps#user-to-server-requests) GitHub App requests, you can't retrieve a combination of issues and pull requests in a single query. Requests that don't include the `is:issue` or `is:pull-request` qualifier will receive an HTTP `422 Unprocessable Entity` response. To get results for both issues and pull requests, you must send separate queries for issues and pull requests. For more information about the `is` qualifier, see "[Searching only issues or pull requests](https://docs.github.com/github/searching-for-information-on-github/searching-issues-and-pull-requests#search-only-issues-or-pull-requests)."
     *
     * FROM: <https://docs.github.com/rest/reference/search#search-issues-and-pull-requests>
+    *
+    * **Parameters:**
+    *
+    * * q: &str
+    * * sort: crate::types::SearchIssuesPullRequestsSort
+    * * order: crate::types::AuditLogOrder
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn search_issues_and_pull_requests(
         &self,
         q: &str,
         sort: crate::types::SearchIssuesPullRequestsSort,
-        order: crate::types::Order,
+        order: crate::types::AuditLogOrder,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchIssuesPullRequestsOkResponse> {
@@ -49871,13 +45563,22 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The labels that best match the query appear first in the search results.
     *
     * FROM: <https://docs.github.com/rest/reference/search#search-labels>
+    *
+    * **Parameters:**
+    *
+    * * repository_id: i64
+    * * q: &str
+    * * sort: crate::types::Sort
+    * * order: crate::types::AuditLogOrder
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn search_labels(
         &self,
         repository_id: i64,
         q: &str,
         sort: crate::types::Sort,
-        order: crate::types::Order,
+        order: crate::types::AuditLogOrder,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchLabelsOkResponse> {
@@ -49914,12 +45615,20 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * `q=topic:ruby+topic:rails`
     *
     * FROM: <https://docs.github.com/rest/reference/search#search-repositories>
+    *
+    * **Parameters:**
+    *
+    * * q: &str
+    * * sort: crate::types::SearchReposSort
+    * * order: crate::types::AuditLogOrder
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn search_repos(
         &self,
         q: &str,
         sort: crate::types::SearchReposSort,
-        order: crate::types::Order,
+        order: crate::types::AuditLogOrder,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchReposOkResponse> {
@@ -49951,6 +45660,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This query searches for topics with the keyword `ruby` and limits the results to find only topics that are featured. The topics that are the best match for the query appear first in the search results.
     *
     * FROM: <https://docs.github.com/rest/reference/search#search-topics>
+    *
+    * **Parameters:**
+    *
+    * * q: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn search_topics(&self, q: &str, per_page: i64, page: i64) -> Result<types::GetSearchTopicsOkResponse> {
         let url = format!(
@@ -49979,12 +45694,20 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This query searches for users with the name `tom`. The results are restricted to users with more than 42 repositories and over 1,000 followers.
     *
     * FROM: <https://docs.github.com/rest/reference/search#search-users>
+    *
+    * **Parameters:**
+    *
+    * * q: &str
+    * * sort: crate::types::SearchUsersSort
+    * * order: crate::types::AuditLogOrder
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn search_users(
         &self,
         q: &str,
         sort: crate::types::SearchUsersSort,
-        order: crate::types::Order,
+        order: crate::types::AuditLogOrder,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetSearchUsersOkResponse> {
@@ -50008,6 +45731,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the [Get a team by name](https://docs.github.com/rest/reference/teams#get-a-team-by-name) endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#get-a-team-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
     */
     pub async fn teams_get_legacy(&self, team_id: i64) -> Result<types::TeamFull> {
         let url = format!("/teams/{}", progenitor_support::encode_path(&team_id.to_string()),);
@@ -50027,6 +45754,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If you are an organization owner, deleting a parent team will delete all of its child teams as well.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#delete-a-team-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
     */
     pub async fn teams_delete_legacy(&self, team_id: i64) -> Result<()> {
         let url = format!("/teams/{}", progenitor_support::encode_path(&team_id.to_string()),);
@@ -50046,6 +45777,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** With nested teams, the `privacy` for parent teams cannot be `secret`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#update-a-team-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
     */
     pub async fn teams_update_legacy(&self, team_id: i64, body: &types::TeamsUpdateLegacyRequest) -> Result<types::TeamFull> {
         let url = format!("/teams/{}", progenitor_support::encode_path(&team_id.to_string()),);
@@ -50063,6 +45798,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-discussions-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_discussions_legacy(
         &self,
@@ -50094,11 +45836,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#create-a-discussion-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
     */
     pub async fn teams_create_discussion_legacy(
         &self,
         team_id: i64,
-        body: &types::TeamsCreateDiscussionLegacyRequest,
+        body: &types::TeamsCreateDiscussionInOrgRequest,
     ) -> Result<types::TeamDiscussion> {
         let url = format!("/teams/{}/discussions", progenitor_support::encode_path(&team_id.to_string()),);
 
@@ -50115,6 +45861,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Get a specific discussion on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#get-a-discussion-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
     */
     pub async fn teams_get_discussion_legacy(&self, team_id: i64, discussion_number: i64) -> Result<types::TeamDiscussion> {
         let url = format!(
@@ -50136,6 +45887,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Delete a discussion from a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#delete-a-discussion-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
     */
     pub async fn teams_delete_discussion_legacy(&self, team_id: i64, discussion_number: i64) -> Result<()> {
         let url = format!(
@@ -50157,12 +45913,17 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#update-a-discussion-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
     */
     pub async fn teams_update_discussion_legacy(
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &types::TeamsUpdateDiscussionLegacyRequest,
+        body: &types::TeamsUpdateDiscussionInOrgRequest,
     ) -> Result<types::TeamDiscussion> {
         let url = format!(
             "/teams/{}/discussions/{}",
@@ -50183,6 +45944,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-discussion-comments-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_discussion_comments_legacy(
         &self,
@@ -50216,12 +45985,17 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#create-a-discussion-comment-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
     */
     pub async fn teams_create_discussion_comment_legacy(
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &types::TeamsCreateDiscussionCommentLegacyRequest,
+        body: &types::TeamsCreateDiscussionCommentInOrgRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "/teams/{}/discussions/{}/comments",
@@ -50242,6 +46016,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#get-a-discussion-comment-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
+    * * comment_number: i64
     */
     pub async fn teams_get_discussion_comment_legacy(
         &self,
@@ -50269,6 +46049,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Deletes a comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#delete-a-discussion-comment-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
+    * * comment_number: i64
     */
     pub async fn teams_delete_discussion_comment_legacy(&self, team_id: i64, discussion_number: i64, comment_number: i64) -> Result<()> {
         let url = format!(
@@ -50291,13 +46077,19 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Edits the body text of a discussion comment. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#update-a-discussion-comment-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
+    * * comment_number: i64
     */
     pub async fn teams_update_discussion_comment_legacy(
         &self,
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-        body: &types::TeamsUpdateDiscussionCommentLegacyRequest,
+        body: &types::TeamsCreateDiscussionCommentInOrgRequest,
     ) -> Result<types::TeamDiscussionComment> {
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}",
@@ -50319,6 +46111,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List the reactions to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-comment-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
+    * * comment_number: i64
+    * * content: crate::types::Content -- The reaction to use
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn reactions_list_for_team_discussion_comment_legacy(
         &self,
@@ -50352,6 +46153,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Create a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion comment.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion-comment-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
+    * * comment_number: i64
     */
     pub async fn reactions_create_for_team_discussion_comment_legacy(
         &self,
@@ -50380,6 +46187,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List the reactions to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
+    * * content: crate::types::Content -- The reaction to use
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn reactions_list_for_team_discussion_legacy(
         &self,
@@ -50411,6 +46226,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Create a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion.
     *
     * FROM: <https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * discussion_number: i64
     */
     pub async fn reactions_create_for_team_discussion_legacy(
         &self,
@@ -50437,6 +46257,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-pending-team-invitations-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_pending_invitations_legacy(&self, team_id: i64, per_page: i64, page: i64) -> Result<Vec<types::OrganizationInvitation>> {
         let url = format!(
@@ -50459,6 +46285,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Team members will include the members of child teams.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-team-members-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * role: crate::types::TeamsListMembersInOrgRole -- The user's membership type in the organization.
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_members_legacy(
         &self,
@@ -50490,6 +46323,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * To list members in a team, the team must be visible to the authenticated user.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#get-team-member-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * username: &str
     */
     pub async fn teams_get_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
@@ -50519,6 +46357,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
     * FROM: <https://docs.github.com/rest/reference/teams#add-team-member-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * username: &str
     */
     pub async fn teams_add_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
@@ -50546,6 +46389,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
     *
     * FROM: <https://docs.github.com/rest/reference/teams#remove-team-member-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * username: &str
     */
     pub async fn teams_remove_member_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
@@ -50574,6 +46422,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The `role` for organization owners is set to `maintainer`. For more information about `maintainer` roles, see [Create a team](https://docs.github.com/rest/reference/teams#create-a-team).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * username: &str
     */
     pub async fn teams_get_membership_for_user_legacy(&self, team_id: i64, username: &str) -> Result<types::TeamMembership> {
         let url = format!(
@@ -50603,6 +46456,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If the user is already a member of the team, this endpoint will update the role of the team member's role. To update the membership of a team member, the authenticated user must be an organization owner or a team maintainer.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * username: &str
     */
     pub async fn teams_add_or_update_membership_for_user_legacy(
         &self,
@@ -50633,6 +46491,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
     *
     * FROM: <https://docs.github.com/rest/reference/teams#remove-team-membership-for-a-user-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * username: &str
     */
     pub async fn teams_remove_membership_for_user_legacy(&self, team_id: i64, username: &str) -> Result<()> {
         let url = format!(
@@ -50654,6 +46517,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the organization projects for a team.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#list-team-projects-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_projects_legacy(&self, team_id: i64, per_page: i64, page: i64) -> Result<Vec<types::TeamProject>> {
         let url = format!(
@@ -50676,6 +46545,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-project-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * project_id: i64
     */
     pub async fn teams_check_permissions_for_project_legacy(&self, team_id: i64, project_id: i64) -> Result<types::TeamProject> {
         let url = format!(
@@ -50697,6 +46571,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Adds an organization project to a team. To add a project to a team or update the team's permission on a project, the authenticated user must have `admin` permissions for the project. The project and team must be part of the same organization.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#add-or-update-team-project-permissions-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * project_id: i64
     */
     pub async fn teams_add_or_update_project_permissions_legacy(
         &self,
@@ -50723,6 +46602,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Removes an organization project from a team. An organization owner or a team maintainer can remove any project from the team. To remove a project from a team as an organization member, the authenticated user must have `read` access to both the team and project, or `admin` access to the team or project. **Note:** This endpoint removes the project from the team, but does not delete it.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#remove-a-project-from-a-team-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * project_id: i64
     */
     pub async fn teams_remove_project_legacy(&self, team_id: i64, project_id: i64) -> Result<()> {
         let url = format!(
@@ -50742,6 +46626,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://docs.github.com/rest/reference/teams#list-team-repositories) endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#list-team-repositories-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_repos_legacy(&self, team_id: i64, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
@@ -50766,6 +46656,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-repository-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn teams_check_permissions_for_repo_legacy(&self, team_id: i64, owner: &str, repo: &str) -> Result<types::TeamRepository> {
         let url = format!(
@@ -50790,6 +46686,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#add-or-update-team-repository-permissions-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn teams_add_or_update_repo_permissions_legacy(
         &self,
@@ -50818,6 +46720,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. NOTE: This does not delete the repository, it just removes it from the team.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#remove-a-repository-from-a-team-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn teams_remove_repo_legacy(&self, team_id: i64, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -50842,6 +46750,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List IdP groups connected to a team on GitHub.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
     */
     pub async fn teams_list_idp_groups_for_legacy(&self, team_id: i64) -> Result<types::GroupMapping> {
         let url = format!(
@@ -50864,6 +46776,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty `groups` array will remove all connections for a team.
     *
     * FROM: <https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
     */
     pub async fn teams_create_or_update_idp_group_connections_legacy(
         &self,
@@ -50886,6 +46802,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List child teams`](https://docs.github.com/rest/reference/teams#list-child-teams) endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/teams/#list-child-teams-legacy>
+    *
+    * **Parameters:**
+    *
+    * * team_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_child_legacy(&self, team_id: i64, per_page: i64, page: i64) -> Result<Vec<types::Team>> {
         let url = format!(
@@ -50909,7 +46831,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
     */
-    pub async fn users_get_authenticated(&self) -> Result<types::GetUsersAuthenticatedOkResponse> {
+    pub async fn users_get_authenticated(&self) -> Result<types::PrivateUser> {
         let url = "/user".to_string();
         self.get(&url).await
     }
@@ -50950,6 +46872,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/users#check-if-a-user-is-blocked-by-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn users_check_blocked(&self, username: &str) -> Result<()> {
         let url = format!("/user/blocks/{}", progenitor_support::encode_path(&username.to_string()),);
@@ -50965,6 +46891,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/users#block-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn users_block(&self, username: &str) -> Result<()> {
         let url = format!("/user/blocks/{}", progenitor_support::encode_path(&username.to_string()),);
@@ -50980,6 +46910,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/users#unblock-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn users_unblock(&self, username: &str) -> Result<()> {
         let url = format!("/user/blocks/{}", progenitor_support::encode_path(&username.to_string()),);
@@ -51012,6 +46946,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists all of your email addresses, and specifies which one is visible to the public. This endpoint is accessible with the `user:email` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-email-addresses-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_emails_for_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::Email>> {
         let url = format!("/user/emails?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -51055,6 +46994,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the people following the authenticated user.
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-followers-of-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_followers_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!("/user/followers?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -51070,6 +47014,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the people who the authenticated user follows.
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-the-people-the-authenticated-user-follows>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_followed_by_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!("/user/following?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -51085,6 +47034,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/users#check-if-a-person-is-followed-by-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn users_check_person_is_followed_by_authenticated(&self, username: &str) -> Result<()> {
         let url = format!("/user/following/{}", progenitor_support::encode_path(&username.to_string()),);
@@ -51102,6 +47055,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Following a user requires the user to be logged in and authenticated with basic auth or OAuth with the `user:follow` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/users#follow-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn users_follow(&self, username: &str) -> Result<()> {
         let url = format!("/user/following/{}", progenitor_support::encode_path(&username.to_string()),);
@@ -51117,6 +47074,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Unfollowing a user requires the user to be logged in and authenticated with basic auth or OAuth with the `user:follow` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/users#unfollow-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn users_unfollow(&self, username: &str) -> Result<()> {
         let url = format!("/user/following/{}", progenitor_support::encode_path(&username.to_string()),);
@@ -51132,6 +47093,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the current user's GPG keys. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-gpg-keys-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_gpg_keys_for_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::GpgKey>> {
         let url = format!("/user/gpg_keys?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -51161,6 +47127,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * View extended details for a single GPG key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/users#get-a-gpg-key-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * gpg_key_id: i64
     */
     pub async fn users_get_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> Result<types::GpgKey> {
         let url = format!("/user/gpg_keys/{}", progenitor_support::encode_path(&gpg_key_id.to_string()),);
@@ -51176,6 +47146,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Removes a GPG key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/users#delete-a-gpg-key-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * gpg_key_id: i64
     */
     pub async fn users_delete_gpg_key_for_authenticated(&self, gpg_key_id: i64) -> Result<()> {
         let url = format!("/user/gpg_keys/{}", progenitor_support::encode_path(&gpg_key_id.to_string()),);
@@ -51197,12 +47171,17 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You can find the permissions for the installation under the `permissions` key.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-app-installations-accessible-to-the-user-access-token>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn apps_list_installations_for_authenticated_user(
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetAppsListInstallationsOkResponse> {
+    ) -> Result<types::GetOrgsListAppInstallationsOkResponse> {
         let url = format!("/user/installations?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
 
         self.get(&url).await
@@ -51222,13 +47201,19 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The access the user has to each repository is included in the hash under the `permissions` key.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-repositories-accessible-to-the-user-access-token>
+    *
+    * **Parameters:**
+    *
+    * * installation_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn apps_list_installation_repos_for_authenticated_user(
         &self,
         installation_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<types::GetAppsListInstallationReposOkResponse> {
+    ) -> Result<types::GetAppsListReposAccessibleInstallationOkResponse> {
         let url = format!(
             "/user/installations/{}/repositories?page={}&per_page={}",
             progenitor_support::encode_path(&installation_id.to_string()),
@@ -51249,6 +47234,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You must use a personal access token (which you can create via the [command line](https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication)) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#add-a-repository-to-an-app-installation>
+    *
+    * **Parameters:**
+    *
+    * * installation_id: i64
+    * * repository_id: i64
     */
     pub async fn apps_add_repo_to_installation(&self, installation_id: i64, repository_id: i64) -> Result<()> {
         let url = format!(
@@ -51270,6 +47260,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You must use a personal access token (which you can create via the [command line](https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication)) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#remove-a-repository-from-an-app-installation>
+    *
+    * **Parameters:**
+    *
+    * * installation_id: i64
+    * * repository_id: i64
     */
     pub async fn apps_remove_repo_from_installation(&self, installation_id: i64, repository_id: i64) -> Result<()> {
         let url = format!(
@@ -51290,7 +47285,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-your-public-repositories>
     */
-    pub async fn interactions_get_restrictions_for_authenticated_user(&self) -> Result<types::GetInteractionsRestrictionsOkResponse> {
+    pub async fn interactions_get_restrictions_for_authenticated_user(&self) -> Result<types::InteractionLimitResponse> {
         let url = "/user/interaction-limits".to_string();
         self.get(&url).await
     }
@@ -51339,6 +47334,17 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * filter: crate::types::IssuesListFilter
+    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * labels: &str
+    * * sort: crate::types::IssuesListSort
+    * * direction: crate::types::Direction
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn issues_list_for_authenticated_user(
         &self,
@@ -51374,6 +47380,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the public SSH keys for the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-public-ssh-keys-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_public_ssh_keys_for_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::Key>> {
         let url = format!("/user/keys?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -51406,6 +47417,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * View extended details for a single public SSH key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/users#get-a-public-ssh-key-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * key_id: i64
     */
     pub async fn users_get_public_ssh_key_for_authenticated(&self, key_id: i64) -> Result<types::Key> {
         let url = format!("/user/keys/{}", progenitor_support::encode_path(&key_id.to_string()),);
@@ -51421,6 +47436,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Removes a public SSH key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/users#delete-a-public-ssh-key-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * key_id: i64
     */
     pub async fn users_delete_public_ssh_key_for_authenticated(&self, key_id: i64) -> Result<()> {
         let url = format!("/user/keys/{}", progenitor_support::encode_path(&key_id.to_string()),);
@@ -51436,6 +47455,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn apps_list_subscriptions_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::UserMarketplacePurchase>> {
         let url = format!(
@@ -51455,6 +47479,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user-stubbed>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn apps_list_subscriptions_for_authenticated_user_stubbed(
         &self,
@@ -51478,6 +47507,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-memberships-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * state: crate::types::OrgMembershipState -- The state of the milestone.
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_memberships_for_authenticated_user(
         &self,
@@ -51503,6 +47538,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#get-an-organization-membership-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn orgs_get_membership_for_authenticated_user(&self, org: &str) -> Result<types::OrgMembership> {
         let url = format!("/user/memberships/orgs/{}", progenitor_support::encode_path(&org.to_string()),);
@@ -51518,6 +47557,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#update-an-organization-membership-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * org: &str
     */
     pub async fn orgs_update_membership_for_authenticated_user(
         &self,
@@ -51537,6 +47580,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists all migrations a user has started.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#list-user-migrations>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn migrations_list_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::Migration>> {
         let url = format!("/user/migrations?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -51573,6 +47621,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Once the migration has been `exported` you can [download the migration archive](https://docs.github.com/rest/reference/migrations#download-a-user-migration-archive).
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#get-a-user-migration-status>
+    *
+    * **Parameters:**
+    *
+    * * migration_id: i64
+    * * exclude: &[String]
     */
     pub async fn migrations_get_status_for_authenticated_user(&self, migration_id: i64, exclude: &[String]) -> Result<types::Migration> {
         let url = format!(
@@ -51612,6 +47665,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The archive will also contain an `attachments` directory that includes all attachment files uploaded to GitHub.com and a `repositories` directory that contains the repository's Git data.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#download-a-user-migration-archive>
+    *
+    * **Parameters:**
+    *
+    * * migration_id: i64
     */
     pub async fn migrations_get_archive_for_authenticated_user(&self, migration_id: i64) -> Result<()> {
         let url = format!("/user/migrations/{}/archive", progenitor_support::encode_path(&migration_id.to_string()),);
@@ -51627,6 +47684,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://docs.github.com/rest/reference/migrations#list-user-migrations) and [Get a user migration status](https://docs.github.com/rest/reference/migrations#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#delete-a-user-migration-archive>
+    *
+    * **Parameters:**
+    *
+    * * migration_id: i64
     */
     pub async fn migrations_delete_archive_for_authenticated_user(&self, migration_id: i64) -> Result<()> {
         let url = format!("/user/migrations/{}/archive", progenitor_support::encode_path(&migration_id.to_string()),);
@@ -51642,6 +47703,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Unlocks a repository. You can lock repositories when you [start a user migration](https://docs.github.com/rest/reference/migrations#start-a-user-migration). Once the migration is complete you can unlock each repository to begin using it again or [delete the repository](https://docs.github.com/rest/reference/repos#delete-a-repository) if you no longer need the source data. Returns a status of `404 Not Found` if the repository is not locked.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#unlock-a-user-repository>
+    *
+    * **Parameters:**
+    *
+    * * migration_id: i64
+    * * repo_name: &str
     */
     pub async fn migrations_unlock_repo_for_authenticated_user(&self, migration_id: i64, repo_name: &str) -> Result<()> {
         let url = format!(
@@ -51661,6 +47727,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists all the repositories for this user migration.
     *
     * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-for-a-user-migration>
+    *
+    * **Parameters:**
+    *
+    * * migration_id: i64
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn migrations_list_repos_for_user(&self, migration_id: i64, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
@@ -51685,6 +47757,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This only lists organizations that your authorization allows you to operate on in some way (e.g., you can list teams with `read:org` scope, you can publicize your organization membership with `user` scope, etc.). Therefore, this API requires at least `user` or `read:org` scope. OAuth requests with insufficient scope receive a `403 Forbidden` response.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!("/user/orgs?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -51703,6 +47780,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
     */
     pub async fn packages_get_package_for_authenticated_user(
         &self,
@@ -51729,6 +47811,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
     */
     pub async fn packages_delete_package_for_authenticated_user(&self, package_type: crate::types::PackageType, package_name: &str) -> Result<()> {
         let url = format!(
@@ -51754,6 +47841,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scope. If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * token: &str
     */
     pub async fn packages_restore_package_for_authenticated_user(
         &self,
@@ -51782,6 +47875,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * page: i64
+    * * per_page: i64
+    * * state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState -- The state of the milestone.
     */
     pub async fn packages_get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
@@ -51814,6 +47915,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-version-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * package_version_id: i64
     */
     pub async fn packages_get_package_version_for_authenticated_user(
         &self,
@@ -51842,6 +47949,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-version-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * package_version_id: i64
     */
     pub async fn packages_delete_package_version_for_authenticated_user(
         &self,
@@ -51873,6 +47986,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scope. If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-version-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * package_version_id: i64
     */
     pub async fn packages_restore_package_version_for_authenticated_user(
         &self,
@@ -51912,6 +48031,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists your publicly visible email address, which you can set with the [Set primary email visibility for the authenticated user](https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user) endpoint. This endpoint is accessible with the `user:email` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-public-email-addresses-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_public_emails_for_authenticated(&self, per_page: i64, page: i64) -> Result<Vec<types::Email>> {
         let url = format!("/user/public_emails?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -51929,6 +48053,18 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repositories-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * visibility: crate::types::ReposListVisibility -- Visibility of a secret
+    * * affiliation: &str
+    *  * type_: crate::types::ReposListType -- The type of label. Read-only labels are applied automatically when the runner is configured.
+    * * sort: crate::types::ReposListOrgSort
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
+    * * since: DateTime<Utc>
+    * * before: DateTime<Utc>
     */
     pub async fn repos_list_for_authenticated_user(
         &self,
@@ -51987,6 +48123,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-invitations-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_invitations_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::RepositoryInvitation>> {
         let url = format!(
@@ -52006,6 +48147,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#decline-a-repository-invitation>
+    *
+    * **Parameters:**
+    *
+    * * invitation_id: i64
     */
     pub async fn repos_decline_invitation(&self, invitation_id: i64) -> Result<()> {
         let url = format!(
@@ -52024,6 +48169,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/repos#accept-a-repository-invitation>
+    *
+    * **Parameters:**
+    *
+    * * invitation_id: i64
     */
     pub async fn repos_accept_invitation(&self, invitation_id: i64) -> Result<()> {
         let url = format!(
@@ -52044,6 +48193,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-starred-by-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * sort: crate::types::Sort
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_repos_starred_by_authenticated_user(
         &self,
@@ -52071,6 +48227,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#check-if-a-repository-is-starred-by-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn activity_check_repo_is_starred_by_authenticated_user(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -52090,6 +48251,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
     *
     * FROM: <https://docs.github.com/rest/reference/activity#star-a-repository-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn activity_star_repo_for_authenticated_user(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -52109,6 +48275,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#unstar-a-repository-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * owner: &str
+    * * repo: &str
     */
     pub async fn activity_unstar_repo_for_authenticated_user(&self, owner: &str, repo: &str) -> Result<()> {
         let url = format!(
@@ -52128,6 +48299,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists repositories the authenticated user is watching.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-watched-by-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_watched_repos_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
         let url = format!("/user/subscriptions?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -52143,6 +48319,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires `user`, `repo`, or `read:org` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://docs.github.com/apps/building-oauth-apps/).
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn teams_list_for_authenticated_user(&self, per_page: i64, page: i64) -> Result<Vec<types::TeamFull>> {
         let url = format!("/user/teams?page={}&per_page={}", format!("{}", page), format!("{}", per_page),);
@@ -52160,6 +48341,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Note: Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of users.
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-users>
+    *
+    * **Parameters:**
+    *
+    * * since: i64
+    * * per_page: i64
     */
     pub async fn users_list(&self, since: i64, per_page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!("/users?per_page={}&since={}", format!("{}", per_page), format!("{}", since),);
@@ -52181,8 +48367,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * The Emails API enables you to list all of your email addresses, and toggle a primary email to be visible publicly. For more information, see "[Emails API](https://docs.github.com/rest/reference/users#emails)".
     *
     * FROM: <https://docs.github.com/rest/reference/users#get-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
-    pub async fn users_get_by_username(&self, username: &str) -> Result<types::GetUsersByUsernameOkResponse> {
+    pub async fn users_get_by_username(&self, username: &str) -> Result<types::PrivateUser> {
         let url = format!("/users/{}", progenitor_support::encode_path(&username.to_string()),);
 
         self.get(&url).await
@@ -52196,6 +48386,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-events-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_events_for_authenticated_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
         let url = format!(
@@ -52216,6 +48412,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This is the user's organization dashboard. You must be authenticated as the user to view this.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-organization-events-for-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * org: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_org_events_for_authenticated_user(
         &self,
@@ -52243,6 +48446,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_public_events_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
         let url = format!(
@@ -52263,6 +48472,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the people following the specified user.
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-followers-of-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_followers_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
@@ -52283,6 +48498,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the people who the specified user follows.
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-the-people-a-user-follows>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_following_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
@@ -52303,6 +48524,11 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/users#check-if-a-user-follows-another-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * target_user: &str
     */
     pub async fn users_check_following_for_user(&self, username: &str, target_user: &str) -> Result<()> {
         let url = format!(
@@ -52322,6 +48548,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists public gists for the specified user:
     *
     * FROM: <https://docs.github.com/rest/reference/gists#list-gists-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * since: DateTime<Utc>
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn gists_list_for_user(&self, username: &str, since: DateTime<Utc>, per_page: i64, page: i64) -> Result<Vec<types::BaseGist>> {
         let url = format!(
@@ -52343,6 +48576,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the GPG keys for a user. This information is accessible by anyone.
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-gpg-keys-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_gpg_keys_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::GpgKey>> {
         let url = format!(
@@ -52370,6 +48609,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * ```
     *
     * FROM: <https://docs.github.com/rest/reference/users#get-contextual-information-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * subject_type: crate::types::UsersGetContextUserSubjectType
+    * * subject_id: &str
     */
     pub async fn users_get_context_for_user(
         &self,
@@ -52397,6 +48642,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * FROM: <https://docs.github.com/rest/reference/apps#get-a-user-installation-for-the-authenticated-app>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn apps_get_user_installation(&self, username: &str) -> Result<types::Installation> {
         let url = format!("/users/{}/installation", progenitor_support::encode_path(&username.to_string()),);
@@ -52412,6 +48661,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists the _verified_ public SSH keys for a user. This is accessible by anyone.
     *
     * FROM: <https://docs.github.com/rest/reference/users#list-public-keys-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn users_list_public_keys_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::KeySimple>> {
         let url = format!(
@@ -52434,6 +48689,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * This method only lists _public_ memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the [List organizations for the authenticated user](https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user) API instead.
     *
     * FROM: <https://docs.github.com/rest/reference/orgs#list-organizations-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn orgs_list_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::OrganizationSimple>> {
         let url = format!(
@@ -52457,6 +48718,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * username: &str
     */
     pub async fn packages_get_package_for_user(
         &self,
@@ -52485,6 +48752,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * username: &str
     */
     pub async fn packages_get_all_package_versions_for_package_owned_by_user(
         &self,
@@ -52513,6 +48786,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * If `package_type` is not `container`, your token must also include the `repo` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-version-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * package_type: crate::types::PackageType
+    * * package_name: &str
+    * * package_version_id: i64
+    * * username: &str
     */
     pub async fn packages_get_package_version_for_user(
         &self,
@@ -52540,6 +48820,13 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-user-projects>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * state: crate::types::IssuesListState -- The state of the milestone.
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn projects_list_for_user(
         &self,
@@ -52567,6 +48854,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-events-received-by-the-authenticated-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_received_events_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
         let url = format!(
@@ -52587,6 +48880,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-received-by-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_received_public_events_for_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::Event>> {
         let url = format!(
@@ -52607,6 +48906,15 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists public repositories for the specified user. Note: For GitHub AE, this endpoint will list internal repositories for the specified user.
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-repositories-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    *  * type_: crate::types::ReposListUserType -- The type of label. Read-only labels are applied automatically when the runner is configured.
+    * * sort: crate::types::ReposListOrgSort
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn repos_list_for_user(
         &self,
@@ -52642,6 +48950,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Access tokens must have the `user` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/billing#get-github-actions-billing-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn billing_get_github_actions_billing_user(&self, username: &str) -> Result<types::ActionsBillingUsage> {
         let url = format!(
@@ -52664,6 +48976,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Access tokens must have the `user` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/billing#get-github-packages-billing-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn billing_get_github_packages_billing_user(&self, username: &str) -> Result<types::PackagesBillingUsage> {
         let url = format!(
@@ -52686,6 +49002,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Access tokens must have the `user` scope.
     *
     * FROM: <https://docs.github.com/rest/reference/billing#get-shared-storage-billing-for-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
     */
     pub async fn billing_get_shared_storage_billing_user(&self, username: &str) -> Result<types::CombinedBillingUsage> {
         let url = format!(
@@ -52706,6 +49026,14 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-starred-by-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * sort: crate::types::Sort
+    * * direction: crate::types::Direction
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_repos_starred_by_user(
         &self,
@@ -52735,6 +49063,12 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     * Lists repositories a user is watching.
     *
     * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-watched-by-a-user>
+    *
+    * **Parameters:**
+    *
+    * * username: &str
+    * * per_page: i64
+    * * page: i64
     */
     pub async fn activity_list_repos_watched_by_user(&self, username: &str, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
