@@ -3,7 +3,7 @@ use std::env;
 use github_api_client::{
     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
     http_cache::FileBasedCache,
-    types::{Direction, ReposListOrgType, ReposListSort},
+    types::{Direction, ReposListOrgSort, ReposListOrgType},
     Client,
 };
 
@@ -41,7 +41,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // List the repos for an org.
     let repos = github
-        .repos_list_for_org("oxidecomputer", ReposListOrgType::All, ReposListSort::Created, Direction::Desc, 100, 1)
+        .repos_list_for_org("oxidecomputer", ReposListOrgType::All, ReposListOrgSort::Created, Direction::Desc, 100, 1)
         .await
         .unwrap();
     for repo in &repos {
