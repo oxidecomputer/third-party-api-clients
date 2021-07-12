@@ -213,7 +213,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     // TODO: have a more automated way of making sure there aren't
                                     // duplicates of enums.
                                     if sn == "Status" {
-                                        sn = format!("{}Param", sn);
+                                        sn = format!("{}Data", sn);
                                     }
 
                                     return Ok(format!("crate::types::{}", sn));
@@ -1127,20 +1127,6 @@ fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::Parame
     None
 }
 
-fn get_enums_for_param(param: &openapiv3::Parameter) -> Vec<String> {
-    if let Some(parameter_data) = get_parameter_data(param) {
-        if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
-            if let Ok(s) = s.item() {
-                if let openapiv3::SchemaKind::Type(openapiv3::Type::String(st)) = &s.schema_kind {
-                    return st.enumeration.to_vec();
-                }
-            }
-        }
-    }
-
-    vec![]
-}
-
 fn render_param(n: &str, en: &[String], required: bool, description: &str, default: Option<&serde_json::Value>) -> String {
     let mut out = String::new();
 
@@ -1170,12 +1156,7 @@ fn render_param(n: &str, en: &[String], required: bool, description: &str, defau
         a(&format!("/// {}", description.replace('\n', "\n/// ")));
     }
 
-    let mut sn = struct_name(n);
-    // TODO: have a more automated way of making sure there aren't
-    // duplicates of enums.
-    if sn == "Status" {
-        sn = format!("{}Param", sn);
-    }
+    let sn = struct_name(n);
 
     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
     a(r#"#[serde(rename_all = "snake_case")]"#);
