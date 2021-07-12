@@ -25639,7 +25639,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum Filter {
+    pub enum IssuesListFilter {
         All,
         Assigned,
         Created,
@@ -25648,73 +25648,73 @@ pub mod types {
         Subscribed,
     }
 
-    impl std::fmt::Display for Filter {
+    impl std::fmt::Display for IssuesListFilter {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                Filter::All => "all",
-                Filter::Assigned => "assigned",
-                Filter::Created => "created",
-                Filter::Mentioned => "mentioned",
-                Filter::Repos => "repos",
-                Filter::Subscribed => "subscribed",
+                IssuesListFilter::All => "all",
+                IssuesListFilter::Assigned => "assigned",
+                IssuesListFilter::Created => "created",
+                IssuesListFilter::Mentioned => "mentioned",
+                IssuesListFilter::Repos => "repos",
+                IssuesListFilter::Subscribed => "subscribed",
             }
             .fmt(f)
         }
     }
 
-    impl Default for Filter {
-        fn default() -> Filter {
-            Filter::Assigned
+    impl Default for IssuesListFilter {
+        fn default() -> IssuesListFilter {
+            IssuesListFilter::Assigned
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum StateData {
+    pub enum IssuesListState {
         All,
         Closed,
         Open,
     }
 
-    impl std::fmt::Display for StateData {
+    impl std::fmt::Display for IssuesListState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                StateData::All => "all",
-                StateData::Closed => "closed",
-                StateData::Open => "open",
+                IssuesListState::All => "all",
+                IssuesListState::Closed => "closed",
+                IssuesListState::Open => "open",
             }
             .fmt(f)
         }
     }
 
-    impl Default for StateData {
-        fn default() -> StateData {
-            StateData::Open
+    impl Default for IssuesListState {
+        fn default() -> IssuesListState {
+            IssuesListState::Open
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum SortData {
+    pub enum IssuesListSort {
         Comments,
         Created,
         Updated,
     }
 
-    impl std::fmt::Display for SortData {
+    impl std::fmt::Display for IssuesListSort {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                SortData::Comments => "comments",
-                SortData::Created => "created",
-                SortData::Updated => "updated",
+                IssuesListSort::Comments => "comments",
+                IssuesListSort::Created => "created",
+                IssuesListSort::Updated => "updated",
             }
             .fmt(f)
         }
     }
 
-    impl Default for SortData {
-        fn default() -> SortData {
-            SortData::Created
+    impl Default for IssuesListSort {
+        fn default() -> IssuesListSort {
+            IssuesListSort::Created
         }
     }
 
@@ -25759,6 +25759,56 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub text: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AppsListAccountsPlanDirection {
+        Asc,
+        Desc,
+        Noop,
+    }
+
+    impl std::fmt::Display for AppsListAccountsPlanDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AppsListAccountsPlanDirection::Asc => "asc",
+                AppsListAccountsPlanDirection::Desc => "desc",
+                AppsListAccountsPlanDirection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AppsListAccountsPlanDirection {
+        fn default() -> AppsListAccountsPlanDirection {
+            AppsListAccountsPlanDirection::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum AppsListAccountsPlanStubbedDirection {
+        Asc,
+        Desc,
+        Noop,
+    }
+
+    impl std::fmt::Display for AppsListAccountsPlanStubbedDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                AppsListAccountsPlanStubbedDirection::Asc => "asc",
+                AppsListAccountsPlanStubbedDirection::Desc => "desc",
+                AppsListAccountsPlanStubbedDirection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for AppsListAccountsPlanStubbedDirection {
+        fn default() -> AppsListAccountsPlanStubbedDirection {
+            AppsListAccountsPlanStubbedDirection::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26373,49 +26423,130 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum FilterData {
-        TwoFaDisabled,
+    pub enum IssuesListOrgFilter {
         All,
+        Assigned,
+        Created,
+        Mentioned,
+        Repos,
+        Subscribed,
     }
 
-    impl std::fmt::Display for FilterData {
+    impl std::fmt::Display for IssuesListOrgFilter {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                FilterData::TwoFaDisabled => "2fa_disabled",
-                FilterData::All => "all",
+                IssuesListOrgFilter::All => "all",
+                IssuesListOrgFilter::Assigned => "assigned",
+                IssuesListOrgFilter::Created => "created",
+                IssuesListOrgFilter::Mentioned => "mentioned",
+                IssuesListOrgFilter::Repos => "repos",
+                IssuesListOrgFilter::Subscribed => "subscribed",
             }
             .fmt(f)
         }
     }
 
-    impl Default for FilterData {
-        fn default() -> FilterData {
-            FilterData::All
+    impl Default for IssuesListOrgFilter {
+        fn default() -> IssuesListOrgFilter {
+            IssuesListOrgFilter::Assigned
         }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum RoleData {
-        Admin,
+    pub enum IssuesListOrgState {
         All,
-        Member,
+        Closed,
+        Open,
     }
 
-    impl std::fmt::Display for RoleData {
+    impl std::fmt::Display for IssuesListOrgState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                RoleData::Admin => "admin",
-                RoleData::All => "all",
-                RoleData::Member => "member",
+                IssuesListOrgState::All => "all",
+                IssuesListOrgState::Closed => "closed",
+                IssuesListOrgState::Open => "open",
             }
             .fmt(f)
         }
     }
 
-    impl Default for RoleData {
-        fn default() -> RoleData {
-            RoleData::All
+    impl Default for IssuesListOrgState {
+        fn default() -> IssuesListOrgState {
+            IssuesListOrgState::Open
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesListOrgSort {
+        Comments,
+        Created,
+        Updated,
+    }
+
+    impl std::fmt::Display for IssuesListOrgSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesListOrgSort::Comments => "comments",
+                IssuesListOrgSort::Created => "created",
+                IssuesListOrgSort::Updated => "updated",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesListOrgSort {
+        fn default() -> IssuesListOrgSort {
+            IssuesListOrgSort::Created
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrgsListMembersFilter {
+        TwoFaDisabled,
+        All,
+    }
+
+    impl std::fmt::Display for OrgsListMembersFilter {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrgsListMembersFilter::TwoFaDisabled => "2fa_disabled",
+                OrgsListMembersFilter::All => "all",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrgsListMembersFilter {
+        fn default() -> OrgsListMembersFilter {
+            OrgsListMembersFilter::All
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrgsListMembersRole {
+        Admin,
+        All,
+        Member,
+    }
+
+    impl std::fmt::Display for OrgsListMembersRole {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrgsListMembersRole::Admin => "admin",
+                OrgsListMembersRole::All => "all",
+                OrgsListMembersRole::Member => "member",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrgsListMembersRole {
+        fn default() -> OrgsListMembersRole {
+            OrgsListMembersRole::All
         }
     }
 
@@ -26454,24 +26585,24 @@ pub mod types {
     /// Allowed values that can be passed to the exclude param.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ExcludeData {
+    pub enum MigrationsListOrgExclude {
         Repositories,
         Noop,
     }
 
-    impl std::fmt::Display for ExcludeData {
+    impl std::fmt::Display for MigrationsListOrgExclude {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ExcludeData::Repositories => "repositories",
-                ExcludeData::Noop => "",
+                MigrationsListOrgExclude::Repositories => "repositories",
+                MigrationsListOrgExclude::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ExcludeData {
-        fn default() -> ExcludeData {
-            ExcludeData::Noop
+    impl Default for MigrationsListOrgExclude {
+        fn default() -> MigrationsListOrgExclude {
+            MigrationsListOrgExclude::Noop
         }
     }
 
@@ -26511,6 +26642,53 @@ pub mod types {
         pub repositories: Vec<String>,
     }
 
+    /// Allowed values that can be passed to the exclude param.
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum MigrationsGetStatusOrgExclude {
+        Repositories,
+        Noop,
+    }
+
+    impl std::fmt::Display for MigrationsGetStatusOrgExclude {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                MigrationsGetStatusOrgExclude::Repositories => "repositories",
+                MigrationsGetStatusOrgExclude::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for MigrationsGetStatusOrgExclude {
+        fn default() -> MigrationsGetStatusOrgExclude {
+            MigrationsGetStatusOrgExclude::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrgsListOutsideCollaboratorsFilter {
+        TwoFaDisabled,
+        All,
+    }
+
+    impl std::fmt::Display for OrgsListOutsideCollaboratorsFilter {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrgsListOutsideCollaboratorsFilter::TwoFaDisabled => "2fa_disabled",
+                OrgsListOutsideCollaboratorsFilter::All => "all",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrgsListOutsideCollaboratorsFilter {
+        fn default() -> OrgsListOutsideCollaboratorsFilter {
+            OrgsListOutsideCollaboratorsFilter::All
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PutOrgsConvertMemberOutsideCollaboratorAcceptedResponse {}
 
@@ -26528,6 +26706,54 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub message: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
+        Active,
+        Deleted,
+    }
+
+    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByOrgState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PackagesGetAllPackageVersionsOwnedByOrgState::Active => "active",
+                PackagesGetAllPackageVersionsOwnedByOrgState::Deleted => "deleted",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
+        fn default() -> PackagesGetAllPackageVersionsOwnedByOrgState {
+            PackagesGetAllPackageVersionsOwnedByOrgState::Active
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ProjectsListOrgState {
+        All,
+        Closed,
+        Open,
+    }
+
+    impl std::fmt::Display for ProjectsListOrgState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ProjectsListOrgState::All => "all",
+                ProjectsListOrgState::Closed => "closed",
+                ProjectsListOrgState::Open => "open",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ProjectsListOrgState {
+        fn default() -> ProjectsListOrgState {
+            ProjectsListOrgState::Open
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26549,7 +26775,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum TypeData {
+    pub enum ReposListOrgType {
         All,
         Forks,
         Internal,
@@ -26560,25 +26786,77 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for TypeData {
+    impl std::fmt::Display for ReposListOrgType {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                TypeData::All => "all",
-                TypeData::Forks => "forks",
-                TypeData::Internal => "internal",
-                TypeData::Member => "member",
-                TypeData::Private => "private",
-                TypeData::Public => "public",
-                TypeData::Sources => "sources",
-                TypeData::Noop => "",
+                ReposListOrgType::All => "all",
+                ReposListOrgType::Forks => "forks",
+                ReposListOrgType::Internal => "internal",
+                ReposListOrgType::Member => "member",
+                ReposListOrgType::Private => "private",
+                ReposListOrgType::Public => "public",
+                ReposListOrgType::Sources => "sources",
+                ReposListOrgType::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for TypeData {
-        fn default() -> TypeData {
-            TypeData::Noop
+    impl Default for ReposListOrgType {
+        fn default() -> ReposListOrgType {
+            ReposListOrgType::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListOrgSort {
+        Created,
+        FullName,
+        Pushed,
+        Updated,
+    }
+
+    impl std::fmt::Display for ReposListOrgSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListOrgSort::Created => "created",
+                ReposListOrgSort::FullName => "full_name",
+                ReposListOrgSort::Pushed => "pushed",
+                ReposListOrgSort::Updated => "updated",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListOrgSort {
+        fn default() -> ReposListOrgSort {
+            ReposListOrgSort::Created
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListOrgDirection {
+        Asc,
+        Desc,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReposListOrgDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListOrgDirection::Asc => "asc",
+                ReposListOrgDirection::Desc => "desc",
+                ReposListOrgDirection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListOrgDirection {
+        fn default() -> ReposListOrgDirection {
+            ReposListOrgDirection::Noop
         }
     }
 
@@ -26874,7 +27152,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ContentData {
+    pub enum ReactionsListTeamDiscussionCommentInOrgContent {
         PlusOne,
         MinusOne,
         Confused,
@@ -26886,26 +27164,26 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for ContentData {
+    impl std::fmt::Display for ReactionsListTeamDiscussionCommentInOrgContent {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ContentData::PlusOne => "+1",
-                ContentData::MinusOne => "-1",
-                ContentData::Confused => "confused",
-                ContentData::Eyes => "eyes",
-                ContentData::Heart => "heart",
-                ContentData::Hooray => "hooray",
-                ContentData::Laugh => "laugh",
-                ContentData::Rocket => "rocket",
-                ContentData::Noop => "",
+                ReactionsListTeamDiscussionCommentInOrgContent::PlusOne => "+1",
+                ReactionsListTeamDiscussionCommentInOrgContent::MinusOne => "-1",
+                ReactionsListTeamDiscussionCommentInOrgContent::Confused => "confused",
+                ReactionsListTeamDiscussionCommentInOrgContent::Eyes => "eyes",
+                ReactionsListTeamDiscussionCommentInOrgContent::Heart => "heart",
+                ReactionsListTeamDiscussionCommentInOrgContent::Hooray => "hooray",
+                ReactionsListTeamDiscussionCommentInOrgContent::Laugh => "laugh",
+                ReactionsListTeamDiscussionCommentInOrgContent::Rocket => "rocket",
+                ReactionsListTeamDiscussionCommentInOrgContent::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ContentData {
-        fn default() -> ContentData {
-            ContentData::Noop
+    impl Default for ReactionsListTeamDiscussionCommentInOrgContent {
+        fn default() -> ReactionsListTeamDiscussionCommentInOrgContent {
+            ReactionsListTeamDiscussionCommentInOrgContent::Noop
         }
     }
 
@@ -26954,6 +27232,43 @@ pub mod types {
         pub content: Content,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsListTeamDiscussionInOrgContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsListTeamDiscussionInOrgContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsListTeamDiscussionInOrgContent::PlusOne => "+1",
+                ReactionsListTeamDiscussionInOrgContent::MinusOne => "-1",
+                ReactionsListTeamDiscussionInOrgContent::Confused => "confused",
+                ReactionsListTeamDiscussionInOrgContent::Eyes => "eyes",
+                ReactionsListTeamDiscussionInOrgContent::Heart => "heart",
+                ReactionsListTeamDiscussionInOrgContent::Hooray => "hooray",
+                ReactionsListTeamDiscussionInOrgContent::Laugh => "laugh",
+                ReactionsListTeamDiscussionInOrgContent::Rocket => "rocket",
+                ReactionsListTeamDiscussionInOrgContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsListTeamDiscussionInOrgContent {
+        fn default() -> ReactionsListTeamDiscussionInOrgContent {
+            ReactionsListTeamDiscussionInOrgContent::Noop
+        }
+    }
+
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -26997,6 +27312,31 @@ pub mod types {
         /// The reaction to use
         #[serde()]
         pub content: Content,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamsListMembersInOrgRole {
+        All,
+        Maintainer,
+        Member,
+    }
+
+    impl std::fmt::Display for TeamsListMembersInOrgRole {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamsListMembersInOrgRole::All => "all",
+                TeamsListMembersInOrgRole::Maintainer => "maintainer",
+                TeamsListMembersInOrgRole::Member => "member",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamsListMembersInOrgRole {
+        fn default() -> TeamsListMembersInOrgRole {
+            TeamsListMembersInOrgRole::All
+        }
     }
 
     /// The role that this user should have in the team. Can be one of:  
@@ -27306,26 +27646,26 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum ArchivedState {
+    pub enum ProjectsListCardsArchivedState {
         All,
         Archived,
         NotArchived,
     }
 
-    impl std::fmt::Display for ArchivedState {
+    impl std::fmt::Display for ProjectsListCardsArchivedState {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                ArchivedState::All => "all",
-                ArchivedState::Archived => "archived",
-                ArchivedState::NotArchived => "not_archived",
+                ProjectsListCardsArchivedState::All => "all",
+                ProjectsListCardsArchivedState::Archived => "archived",
+                ProjectsListCardsArchivedState::NotArchived => "not_archived",
             }
             .fmt(f)
         }
     }
 
-    impl Default for ArchivedState {
-        fn default() -> ArchivedState {
-            ArchivedState::NotArchived
+    impl Default for ProjectsListCardsArchivedState {
+        fn default() -> ProjectsListCardsArchivedState {
+            ProjectsListCardsArchivedState::NotArchived
         }
     }
 
@@ -27507,26 +27847,26 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum Affiliation {
+    pub enum ProjectsListCollaboratorsAffiliation {
         All,
         Direct,
         Outside,
     }
 
-    impl std::fmt::Display for Affiliation {
+    impl std::fmt::Display for ProjectsListCollaboratorsAffiliation {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                Affiliation::All => "all",
-                Affiliation::Direct => "direct",
-                Affiliation::Outside => "outside",
+                ProjectsListCollaboratorsAffiliation::All => "all",
+                ProjectsListCollaboratorsAffiliation::Direct => "direct",
+                ProjectsListCollaboratorsAffiliation::Outside => "outside",
             }
             .fmt(f)
         }
     }
 
-    impl Default for Affiliation {
-        fn default() -> Affiliation {
-            Affiliation::All
+    impl Default for ProjectsListCollaboratorsAffiliation {
+        fn default() -> ProjectsListCollaboratorsAffiliation {
+            ProjectsListCollaboratorsAffiliation::All
         }
     }
 
@@ -27745,6 +28085,29 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PostActionsCancelWorkflowRunAcceptedResponse {}
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ActionsListJobsWorkflowRunFilter {
+        All,
+        Latest,
+    }
+
+    impl std::fmt::Display for ActionsListJobsWorkflowRunFilter {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ActionsListJobsWorkflowRunFilter::All => "all",
+                ActionsListJobsWorkflowRunFilter::Latest => "latest",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ActionsListJobsWorkflowRunFilter {
+        fn default() -> ActionsListJobsWorkflowRunFilter {
+            ActionsListJobsWorkflowRunFilter::Latest
+        }
+    }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetActionsListJobsWorkflowRunOkResponse {
@@ -28558,6 +28921,29 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ChecksListSuiteFilter {
+        All,
+        Latest,
+    }
+
+    impl std::fmt::Display for ChecksListSuiteFilter {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ChecksListSuiteFilter::All => "all",
+                ChecksListSuiteFilter::Latest => "latest",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ChecksListSuiteFilter {
+        fn default() -> ChecksListSuiteFilter {
+            ChecksListSuiteFilter::Latest
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetChecksListSuiteOkResponse {
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         pub check_runs: Vec<CheckRun>,
@@ -28618,6 +29004,31 @@ pub mod types {
         pub tool_name: String,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListCollaboratorsAffiliation {
+        All,
+        Direct,
+        Outside,
+    }
+
+    impl std::fmt::Display for ReposListCollaboratorsAffiliation {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListCollaboratorsAffiliation::All => "all",
+                ReposListCollaboratorsAffiliation::Direct => "direct",
+                ReposListCollaboratorsAffiliation::Outside => "outside",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListCollaboratorsAffiliation {
+        fn default() -> ReposListCollaboratorsAffiliation {
+            ReposListCollaboratorsAffiliation::All
+        }
+    }
+
     /// The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  
     /// \* `pull` - can pull, but not push to or administer this repository.  
     /// \* `push` - can pull and push, but not administer this repository.  
@@ -28674,6 +29085,43 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsListCommitCommentContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsListCommitCommentContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsListCommitCommentContent::PlusOne => "+1",
+                ReactionsListCommitCommentContent::MinusOne => "-1",
+                ReactionsListCommitCommentContent::Confused => "confused",
+                ReactionsListCommitCommentContent::Eyes => "eyes",
+                ReactionsListCommitCommentContent::Heart => "heart",
+                ReactionsListCommitCommentContent::Hooray => "hooray",
+                ReactionsListCommitCommentContent::Laugh => "laugh",
+                ReactionsListCommitCommentContent::Rocket => "rocket",
+                ReactionsListCommitCommentContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsListCommitCommentContent {
+        fn default() -> ReactionsListCommitCommentContent {
+            ReactionsListCommitCommentContent::Noop
+        }
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
@@ -28740,6 +29188,29 @@ pub mod types {
         pub path: String,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub position: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ChecksListRefFilter {
+        All,
+        Latest,
+    }
+
+    impl std::fmt::Display for ChecksListRefFilter {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ChecksListRefFilter::All => "all",
+                ChecksListRefFilter::Latest => "latest",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ChecksListRefFilter {
+        fn default() -> ChecksListRefFilter {
+            ChecksListRefFilter::Latest
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29175,6 +29646,33 @@ pub mod types {
         pub reviewers: Vec<Reviewers>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         pub wait_timer: Option<i64>,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListForksSort {
+        Newest,
+        Oldest,
+        Stargazers,
+        Watchers,
+    }
+
+    impl std::fmt::Display for ReposListForksSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListForksSort::Newest => "newest",
+                ReposListForksSort::Oldest => "oldest",
+                ReposListForksSort::Stargazers => "stargazers",
+                ReposListForksSort::Watchers => "watchers",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListForksSort {
+        fn default() -> ReposListForksSort {
+            ReposListForksSort::Newest
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29824,6 +30322,56 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesListRepoState {
+        All,
+        Closed,
+        Open,
+    }
+
+    impl std::fmt::Display for IssuesListRepoState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesListRepoState::All => "all",
+                IssuesListRepoState::Closed => "closed",
+                IssuesListRepoState::Open => "open",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesListRepoState {
+        fn default() -> IssuesListRepoState {
+            IssuesListRepoState::Open
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesListRepoSort {
+        Comments,
+        Created,
+        Updated,
+    }
+
+    impl std::fmt::Display for IssuesListRepoSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesListRepoSort::Comments => "comments",
+                IssuesListRepoSort::Created => "created",
+                IssuesListRepoSort::Updated => "updated",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesListRepoSort {
+        fn default() -> IssuesListRepoSort {
+            IssuesListRepoSort::Created
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssuesCreateRequest {
         #[serde(
             default,
@@ -29852,6 +30400,31 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesListCommentsRepoDirection {
+        Asc,
+        Desc,
+        Noop,
+    }
+
+    impl std::fmt::Display for IssuesListCommentsRepoDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesListCommentsRepoDirection::Asc => "asc",
+                IssuesListCommentsRepoDirection::Desc => "desc",
+                IssuesListCommentsRepoDirection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesListCommentsRepoDirection {
+        fn default() -> IssuesListCommentsRepoDirection {
+            IssuesListCommentsRepoDirection::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct IssuesUpdateCommentRequest {
         /// The contents of the comment.
         #[serde(
@@ -29860,6 +30433,43 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsListIssueCommentContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsListIssueCommentContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsListIssueCommentContent::PlusOne => "+1",
+                ReactionsListIssueCommentContent::MinusOne => "-1",
+                ReactionsListIssueCommentContent::Confused => "confused",
+                ReactionsListIssueCommentContent::Eyes => "eyes",
+                ReactionsListIssueCommentContent::Heart => "heart",
+                ReactionsListIssueCommentContent::Hooray => "hooray",
+                ReactionsListIssueCommentContent::Laugh => "laugh",
+                ReactionsListIssueCommentContent::Rocket => "rocket",
+                ReactionsListIssueCommentContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsListIssueCommentContent {
+        fn default() -> ReactionsListIssueCommentContent {
+            ReactionsListIssueCommentContent::Noop
+        }
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
@@ -30038,6 +30648,43 @@ pub mod types {
         pub lock_reason: Option<LockReason>,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsListIssueContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsListIssueContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsListIssueContent::PlusOne => "+1",
+                ReactionsListIssueContent::MinusOne => "-1",
+                ReactionsListIssueContent::Confused => "confused",
+                ReactionsListIssueContent::Eyes => "eyes",
+                ReactionsListIssueContent::Heart => "heart",
+                ReactionsListIssueContent::Hooray => "hooray",
+                ReactionsListIssueContent::Laugh => "laugh",
+                ReactionsListIssueContent::Rocket => "rocket",
+                ReactionsListIssueContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsListIssueContent {
+        fn default() -> ReactionsListIssueContent {
+            ReactionsListIssueContent::Noop
+        }
+    }
+
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -30169,6 +30816,77 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub head: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesListMilestonesState {
+        All,
+        Closed,
+        Open,
+    }
+
+    impl std::fmt::Display for IssuesListMilestonesState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesListMilestonesState::All => "all",
+                IssuesListMilestonesState::Closed => "closed",
+                IssuesListMilestonesState::Open => "open",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesListMilestonesState {
+        fn default() -> IssuesListMilestonesState {
+            IssuesListMilestonesState::Open
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesListMilestonesSort {
+        Completeness,
+        DueOn,
+    }
+
+    impl std::fmt::Display for IssuesListMilestonesSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesListMilestonesSort::Completeness => "completeness",
+                IssuesListMilestonesSort::DueOn => "due_on",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesListMilestonesSort {
+        fn default() -> IssuesListMilestonesSort {
+            IssuesListMilestonesSort::DueOn
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum IssuesListMilestonesDirection {
+        Asc,
+        Desc,
+    }
+
+    impl std::fmt::Display for IssuesListMilestonesDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                IssuesListMilestonesDirection::Asc => "asc",
+                IssuesListMilestonesDirection::Desc => "desc",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for IssuesListMilestonesDirection {
+        fn default() -> IssuesListMilestonesDirection {
+            IssuesListMilestonesDirection::Asc
+        }
     }
 
     /// The state of the milestone. Either `open` or `closed`.
@@ -30372,6 +31090,31 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ProjectsListRepoState {
+        All,
+        Closed,
+        Open,
+    }
+
+    impl std::fmt::Display for ProjectsListRepoState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ProjectsListRepoState::All => "all",
+                ProjectsListRepoState::Closed => "closed",
+                ProjectsListRepoState::Open => "open",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ProjectsListRepoState {
+        fn default() -> ProjectsListRepoState {
+            ProjectsListRepoState::Open
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProjectsCreateRepoRequest {
         #[serde(
             default,
@@ -30386,6 +31129,83 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub name: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullsListState {
+        All,
+        Closed,
+        Open,
+    }
+
+    impl std::fmt::Display for PullsListState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullsListState::All => "all",
+                PullsListState::Closed => "closed",
+                PullsListState::Open => "open",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullsListState {
+        fn default() -> PullsListState {
+            PullsListState::Open
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullsListSort {
+        Created,
+        LongRunning,
+        Popularity,
+        Updated,
+    }
+
+    impl std::fmt::Display for PullsListSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullsListSort::Created => "created",
+                PullsListSort::LongRunning => "long-running",
+                PullsListSort::Popularity => "popularity",
+                PullsListSort::Updated => "updated",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullsListSort {
+        fn default() -> PullsListSort {
+            PullsListSort::Created
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullsListDirection {
+        Asc,
+        Desc,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullsListDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullsListDirection::Asc => "asc",
+                PullsListDirection::Desc => "desc",
+                PullsListDirection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullsListDirection {
+        fn default() -> PullsListDirection {
+            PullsListDirection::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -30425,6 +31245,58 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullsListReviewCommentsRepoSort {
+        Created,
+        CreatedAt,
+        Updated,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullsListReviewCommentsRepoSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullsListReviewCommentsRepoSort::Created => "created",
+                PullsListReviewCommentsRepoSort::CreatedAt => "created_at",
+                PullsListReviewCommentsRepoSort::Updated => "updated",
+                PullsListReviewCommentsRepoSort::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullsListReviewCommentsRepoSort {
+        fn default() -> PullsListReviewCommentsRepoSort {
+            PullsListReviewCommentsRepoSort::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullsListReviewCommentsRepoDirection {
+        Asc,
+        Desc,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullsListReviewCommentsRepoDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullsListReviewCommentsRepoDirection::Asc => "asc",
+                PullsListReviewCommentsRepoDirection::Desc => "desc",
+                PullsListReviewCommentsRepoDirection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullsListReviewCommentsRepoDirection {
+        fn default() -> PullsListReviewCommentsRepoDirection {
+            PullsListReviewCommentsRepoDirection::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct PullsUpdateReviewCommentRequest {
         /// The text of the reply to the review comment.
         #[serde(
@@ -30433,6 +31305,43 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub body: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsListPullRequestReviewCommentContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsListPullRequestReviewCommentContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsListPullRequestReviewCommentContent::PlusOne => "+1",
+                ReactionsListPullRequestReviewCommentContent::MinusOne => "-1",
+                ReactionsListPullRequestReviewCommentContent::Confused => "confused",
+                ReactionsListPullRequestReviewCommentContent::Eyes => "eyes",
+                ReactionsListPullRequestReviewCommentContent::Heart => "heart",
+                ReactionsListPullRequestReviewCommentContent::Hooray => "hooray",
+                ReactionsListPullRequestReviewCommentContent::Laugh => "laugh",
+                ReactionsListPullRequestReviewCommentContent::Rocket => "rocket",
+                ReactionsListPullRequestReviewCommentContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsListPullRequestReviewCommentContent {
+        fn default() -> ReactionsListPullRequestReviewCommentContent {
+            ReactionsListPullRequestReviewCommentContent::Noop
+        }
     }
 
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
@@ -30530,6 +31439,31 @@ pub mod types {
             deserialize_with = "crate::utils::deserialize_null_string::deserialize"
         )]
         pub title: String,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PullsListReviewCommentsDirection {
+        Asc,
+        Desc,
+        Noop,
+    }
+
+    impl std::fmt::Display for PullsListReviewCommentsDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PullsListReviewCommentsDirection::Asc => "asc",
+                PullsListReviewCommentsDirection::Desc => "desc",
+                PullsListReviewCommentsDirection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PullsListReviewCommentsDirection {
+        fn default() -> PullsListReviewCommentsDirection {
+            PullsListReviewCommentsDirection::Noop
+        }
     }
 
     /// **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
@@ -31050,6 +31984,31 @@ pub mod types {
         /// The reaction to use
         #[serde()]
         pub content: Content,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SecretScanningListAlertsRepoState {
+        Open,
+        Resolved,
+        Noop,
+    }
+
+    impl std::fmt::Display for SecretScanningListAlertsRepoState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SecretScanningListAlertsRepoState::Open => "open",
+                SecretScanningListAlertsRepoState::Resolved => "resolved",
+                SecretScanningListAlertsRepoState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SecretScanningListAlertsRepoState {
+        fn default() -> SecretScanningListAlertsRepoState {
+            SecretScanningListAlertsRepoState::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31637,6 +32596,29 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SearchCodeSort {
+        Indexed,
+        Noop,
+    }
+
+    impl std::fmt::Display for SearchCodeSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SearchCodeSort::Indexed => "indexed",
+                SearchCodeSort::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SearchCodeSort {
+        fn default() -> SearchCodeSort {
+            SearchCodeSort::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchCodeOkResponse {
         #[serde(default)]
         pub incomplete_results: bool,
@@ -31644,6 +32626,31 @@ pub mod types {
         pub items: Vec<CodeSearchResultItem>,
         #[serde(default)]
         pub total_count: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SearchCommitsSort {
+        AuthorDate,
+        CommitterDate,
+        Noop,
+    }
+
+    impl std::fmt::Display for SearchCommitsSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SearchCommitsSort::AuthorDate => "author-date",
+                SearchCommitsSort::CommitterDate => "committer-date",
+                SearchCommitsSort::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SearchCommitsSort {
+        fn default() -> SearchCommitsSort {
+            SearchCommitsSort::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31657,6 +32664,49 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SearchIssuesPullRequestsSort {
+        Comments,
+        Created,
+        Interactions,
+        Reactions,
+        ReactionsPlusOne,
+        ReactionsMinusOne,
+        ReactionsHeart,
+        ReactionsSmile,
+        ReactionsTada,
+        ReactionsThinkingFace,
+        Updated,
+        Noop,
+    }
+
+    impl std::fmt::Display for SearchIssuesPullRequestsSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SearchIssuesPullRequestsSort::Comments => "comments",
+                SearchIssuesPullRequestsSort::Created => "created",
+                SearchIssuesPullRequestsSort::Interactions => "interactions",
+                SearchIssuesPullRequestsSort::Reactions => "reactions",
+                SearchIssuesPullRequestsSort::ReactionsPlusOne => "reactions-+1",
+                SearchIssuesPullRequestsSort::ReactionsMinusOne => "reactions--1",
+                SearchIssuesPullRequestsSort::ReactionsHeart => "reactions-heart",
+                SearchIssuesPullRequestsSort::ReactionsSmile => "reactions-smile",
+                SearchIssuesPullRequestsSort::ReactionsTada => "reactions-tada",
+                SearchIssuesPullRequestsSort::ReactionsThinkingFace => "reactions-thinking_face",
+                SearchIssuesPullRequestsSort::Updated => "updated",
+                SearchIssuesPullRequestsSort::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SearchIssuesPullRequestsSort {
+        fn default() -> SearchIssuesPullRequestsSort {
+            SearchIssuesPullRequestsSort::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchIssuesPullRequestsOkResponse {
         #[serde(default)]
         pub incomplete_results: bool,
@@ -31667,6 +32717,31 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SearchLabelsSort {
+        Created,
+        Updated,
+        Noop,
+    }
+
+    impl std::fmt::Display for SearchLabelsSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SearchLabelsSort::Created => "created",
+                SearchLabelsSort::Updated => "updated",
+                SearchLabelsSort::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SearchLabelsSort {
+        fn default() -> SearchLabelsSort {
+            SearchLabelsSort::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct GetSearchLabelsOkResponse {
         #[serde(default)]
         pub incomplete_results: bool,
@@ -31674,6 +32749,35 @@ pub mod types {
         pub items: Vec<LabelSearchResultItem>,
         #[serde(default)]
         pub total_count: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SearchReposSort {
+        Forks,
+        HelpWantedIssues,
+        Stars,
+        Updated,
+        Noop,
+    }
+
+    impl std::fmt::Display for SearchReposSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SearchReposSort::Forks => "forks",
+                SearchReposSort::HelpWantedIssues => "help-wanted-issues",
+                SearchReposSort::Stars => "stars",
+                SearchReposSort::Updated => "updated",
+                SearchReposSort::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SearchReposSort {
+        fn default() -> SearchReposSort {
+            SearchReposSort::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31694,6 +32798,33 @@ pub mod types {
         pub items: Vec<TopicSearchResultItem>,
         #[serde(default)]
         pub total_count: i64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum SearchUsersSort {
+        Followers,
+        Joined,
+        Repositories,
+        Noop,
+    }
+
+    impl std::fmt::Display for SearchUsersSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                SearchUsersSort::Followers => "followers",
+                SearchUsersSort::Joined => "joined",
+                SearchUsersSort::Repositories => "repositories",
+                SearchUsersSort::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for SearchUsersSort {
+        fn default() -> SearchUsersSort {
+            SearchUsersSort::Noop
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31818,6 +32949,43 @@ pub mod types {
         pub body: String,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsListTeamDiscussionCommentLegacyContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsListTeamDiscussionCommentLegacyContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsListTeamDiscussionCommentLegacyContent::PlusOne => "+1",
+                ReactionsListTeamDiscussionCommentLegacyContent::MinusOne => "-1",
+                ReactionsListTeamDiscussionCommentLegacyContent::Confused => "confused",
+                ReactionsListTeamDiscussionCommentLegacyContent::Eyes => "eyes",
+                ReactionsListTeamDiscussionCommentLegacyContent::Heart => "heart",
+                ReactionsListTeamDiscussionCommentLegacyContent::Hooray => "hooray",
+                ReactionsListTeamDiscussionCommentLegacyContent::Laugh => "laugh",
+                ReactionsListTeamDiscussionCommentLegacyContent::Rocket => "rocket",
+                ReactionsListTeamDiscussionCommentLegacyContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsListTeamDiscussionCommentLegacyContent {
+        fn default() -> ReactionsListTeamDiscussionCommentLegacyContent {
+            ReactionsListTeamDiscussionCommentLegacyContent::Noop
+        }
+    }
+
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -31863,6 +33031,43 @@ pub mod types {
         pub content: Content,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReactionsListTeamDiscussionLegacyContent {
+        PlusOne,
+        MinusOne,
+        Confused,
+        Eyes,
+        Heart,
+        Hooray,
+        Laugh,
+        Rocket,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReactionsListTeamDiscussionLegacyContent {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReactionsListTeamDiscussionLegacyContent::PlusOne => "+1",
+                ReactionsListTeamDiscussionLegacyContent::MinusOne => "-1",
+                ReactionsListTeamDiscussionLegacyContent::Confused => "confused",
+                ReactionsListTeamDiscussionLegacyContent::Eyes => "eyes",
+                ReactionsListTeamDiscussionLegacyContent::Heart => "heart",
+                ReactionsListTeamDiscussionLegacyContent::Hooray => "hooray",
+                ReactionsListTeamDiscussionLegacyContent::Laugh => "laugh",
+                ReactionsListTeamDiscussionLegacyContent::Rocket => "rocket",
+                ReactionsListTeamDiscussionLegacyContent::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReactionsListTeamDiscussionLegacyContent {
+        fn default() -> ReactionsListTeamDiscussionLegacyContent {
+            ReactionsListTeamDiscussionLegacyContent::Noop
+        }
+    }
+
     /// The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -31906,6 +33111,31 @@ pub mod types {
         /// The reaction to use
         #[serde()]
         pub content: Content,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum TeamsListMembersLegacyRole {
+        All,
+        Maintainer,
+        Member,
+    }
+
+    impl std::fmt::Display for TeamsListMembersLegacyRole {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                TeamsListMembersLegacyRole::All => "all",
+                TeamsListMembersLegacyRole::Maintainer => "maintainer",
+                TeamsListMembersLegacyRole::Member => "member",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for TeamsListMembersLegacyRole {
+        fn default() -> TeamsListMembersLegacyRole {
+            TeamsListMembersLegacyRole::All
+        }
     }
 
     /// The role that this user should have in the team. Can be one of:  
@@ -32437,6 +33667,31 @@ pub mod types {
         pub title: String,
     }
 
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum OrgsListMembershipsState {
+        Active,
+        Pending,
+        Noop,
+    }
+
+    impl std::fmt::Display for OrgsListMembershipsState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                OrgsListMembershipsState::Active => "active",
+                OrgsListMembershipsState::Pending => "pending",
+                OrgsListMembershipsState::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for OrgsListMembershipsState {
+        fn default() -> OrgsListMembershipsState {
+            OrgsListMembershipsState::Noop
+        }
+    }
+
     /// The state that the membership should be in. Only `"active"` will be accepted.
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
@@ -32505,6 +33760,29 @@ pub mod types {
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum PackagesGetAllPackageVersionsOwnedByState {
+        Active,
+        Deleted,
+    }
+
+    impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                PackagesGetAllPackageVersionsOwnedByState::Active => "active",
+                PackagesGetAllPackageVersionsOwnedByState::Deleted => "deleted",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for PackagesGetAllPackageVersionsOwnedByState {
+        fn default() -> PackagesGetAllPackageVersionsOwnedByState {
+            PackagesGetAllPackageVersionsOwnedByState::Active
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     pub struct ProjectsCreateRequest {
         #[serde(
             default,
@@ -32523,26 +33801,107 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum VisibilityData {
+    pub enum ReposListVisibility {
         All,
         Private,
         Public,
     }
 
-    impl std::fmt::Display for VisibilityData {
+    impl std::fmt::Display for ReposListVisibility {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                VisibilityData::All => "all",
-                VisibilityData::Private => "private",
-                VisibilityData::Public => "public",
+                ReposListVisibility::All => "all",
+                ReposListVisibility::Private => "private",
+                ReposListVisibility::Public => "public",
             }
             .fmt(f)
         }
     }
 
-    impl Default for VisibilityData {
-        fn default() -> VisibilityData {
-            VisibilityData::All
+    impl Default for ReposListVisibility {
+        fn default() -> ReposListVisibility {
+            ReposListVisibility::All
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListType {
+        All,
+        Member,
+        Owner,
+        Private,
+        Public,
+    }
+
+    impl std::fmt::Display for ReposListType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListType::All => "all",
+                ReposListType::Member => "member",
+                ReposListType::Owner => "owner",
+                ReposListType::Private => "private",
+                ReposListType::Public => "public",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListType {
+        fn default() -> ReposListType {
+            ReposListType::All
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListSort {
+        Created,
+        FullName,
+        Pushed,
+        Updated,
+    }
+
+    impl std::fmt::Display for ReposListSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListSort::Created => "created",
+                ReposListSort::FullName => "full_name",
+                ReposListSort::Pushed => "pushed",
+                ReposListSort::Updated => "updated",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListSort {
+        fn default() -> ReposListSort {
+            ReposListSort::FullName
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListDirection {
+        Asc,
+        Desc,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReposListDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListDirection::Asc => "asc",
+                ReposListDirection::Desc => "desc",
+                ReposListDirection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListDirection {
+        fn default() -> ReposListDirection {
+            ReposListDirection::Noop
         }
     }
 
@@ -32793,7 +34152,7 @@ pub mod types {
 
     #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
     #[serde(rename_all = "snake_case")]
-    pub enum SubjectType {
+    pub enum UsersGetContextUserSubjectType {
         Issue,
         Organization,
         PullRequest,
@@ -32801,22 +34160,124 @@ pub mod types {
         Noop,
     }
 
-    impl std::fmt::Display for SubjectType {
+    impl std::fmt::Display for UsersGetContextUserSubjectType {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             match *self {
-                SubjectType::Issue => "issue",
-                SubjectType::Organization => "organization",
-                SubjectType::PullRequest => "pull_request",
-                SubjectType::Repository => "repository",
-                SubjectType::Noop => "",
+                UsersGetContextUserSubjectType::Issue => "issue",
+                UsersGetContextUserSubjectType::Organization => "organization",
+                UsersGetContextUserSubjectType::PullRequest => "pull_request",
+                UsersGetContextUserSubjectType::Repository => "repository",
+                UsersGetContextUserSubjectType::Noop => "",
             }
             .fmt(f)
         }
     }
 
-    impl Default for SubjectType {
-        fn default() -> SubjectType {
-            SubjectType::Noop
+    impl Default for UsersGetContextUserSubjectType {
+        fn default() -> UsersGetContextUserSubjectType {
+            UsersGetContextUserSubjectType::Noop
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ProjectsListUserState {
+        All,
+        Closed,
+        Open,
+    }
+
+    impl std::fmt::Display for ProjectsListUserState {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ProjectsListUserState::All => "all",
+                ProjectsListUserState::Closed => "closed",
+                ProjectsListUserState::Open => "open",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ProjectsListUserState {
+        fn default() -> ProjectsListUserState {
+            ProjectsListUserState::Open
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListUserType {
+        All,
+        Member,
+        Owner,
+    }
+
+    impl std::fmt::Display for ReposListUserType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListUserType::All => "all",
+                ReposListUserType::Member => "member",
+                ReposListUserType::Owner => "owner",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListUserType {
+        fn default() -> ReposListUserType {
+            ReposListUserType::Owner
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListUserSort {
+        Created,
+        FullName,
+        Pushed,
+        Updated,
+    }
+
+    impl std::fmt::Display for ReposListUserSort {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListUserSort::Created => "created",
+                ReposListUserSort::FullName => "full_name",
+                ReposListUserSort::Pushed => "pushed",
+                ReposListUserSort::Updated => "updated",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListUserSort {
+        fn default() -> ReposListUserSort {
+            ReposListUserSort::FullName
+        }
+    }
+
+    #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+    #[serde(rename_all = "snake_case")]
+    pub enum ReposListUserDirection {
+        Asc,
+        Desc,
+        Noop,
+    }
+
+    impl std::fmt::Display for ReposListUserDirection {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match *self {
+                ReposListUserDirection::Asc => "asc",
+                ReposListUserDirection::Desc => "desc",
+                ReposListUserDirection::Noop => "",
+            }
+            .fmt(f)
+        }
+    }
+
+    impl Default for ReposListUserDirection {
+        fn default() -> ReposListUserDirection {
+            ReposListUserDirection::Noop
         }
     }
 }
@@ -35140,10 +36601,10 @@ impl Client {
     */
     pub async fn issues_list(
         &self,
-        filter: crate::types::Filter,
-        state: crate::types::StateData,
+        filter: crate::types::IssuesListFilter,
+        state: crate::types::IssuesListState,
         labels: &str,
-        sort: crate::types::SortData,
+        sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
         since: DateTime<Utc>,
         collab: bool,
@@ -37082,10 +38543,10 @@ impl Client {
     pub async fn issues_list_for_org(
         &self,
         org: &str,
-        filter: crate::types::Filter,
-        state: crate::types::StateData,
+        filter: crate::types::IssuesListFilter,
+        state: crate::types::IssuesListState,
         labels: &str,
-        sort: crate::types::SortData,
+        sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
@@ -37119,8 +38580,8 @@ impl Client {
     pub async fn orgs_list_members(
         &self,
         org: &str,
-        filter: crate::types::FilterData,
-        role: crate::types::RoleData,
+        filter: crate::types::OrgsListMembersFilter,
+        role: crate::types::OrgsListMembersRole,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
@@ -37406,7 +38867,7 @@ impl Client {
     pub async fn orgs_list_outside_collaborators(
         &self,
         org: &str,
-        filter: crate::types::FilterData,
+        filter: crate::types::OrgsListMembersFilter,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
@@ -37569,7 +39030,7 @@ impl Client {
         org: &str,
         page: i64,
         per_page: i64,
-        state: &str,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -37578,7 +39039,7 @@ impl Client {
             progenitor_support::encode_path(&package_name.to_string()),
             format!("{}", page),
             format!("{}", per_page),
-            state.to_string(),
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -37689,7 +39150,13 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/projects#list-organization-projects>
     */
-    pub async fn projects_list_for_org(&self, org: &str, state: crate::types::StateData, per_page: i64, page: i64) -> Result<Vec<types::Project>> {
+    pub async fn projects_list_for_org(
+        &self,
+        org: &str,
+        state: crate::types::IssuesListState,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::Project>> {
         let url = format!(
             "/orgs/{}/projects?page={}&per_page={}&state={}",
             progenitor_support::encode_path(&org.to_string()),
@@ -37807,8 +39274,8 @@ impl Client {
     pub async fn repos_list_for_org(
         &self,
         org: &str,
-        type_: crate::types::TypeData,
-        sort: &str,
+        type_: crate::types::ReposListOrgType,
+        sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -37819,7 +39286,7 @@ impl Client {
             direction,
             format!("{}", page),
             format!("{}", per_page),
-            sort.to_string(),
+            sort,
             type_,
         );
 
@@ -38542,7 +40009,7 @@ impl Client {
         &self,
         org: &str,
         team_slug: &str,
-        role: &str,
+        role: crate::types::TeamsListMembersInOrgRole,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
@@ -38552,7 +40019,7 @@ impl Client {
             progenitor_support::encode_path(&team_slug.to_string()),
             format!("{}", page),
             format!("{}", per_page),
-            role.to_string(),
+            role,
         );
 
         self.get_all_pages(&url).await
@@ -39050,7 +40517,7 @@ impl Client {
     pub async fn projects_list_cards(
         &self,
         column_id: i64,
-        archived_state: crate::types::ArchivedState,
+        archived_state: crate::types::ProjectsListCardsArchivedState,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::ProjectCard>> {
@@ -39156,7 +40623,7 @@ impl Client {
     pub async fn projects_list_collaborators(
         &self,
         project_id: i64,
-        affiliation: crate::types::Affiliation,
+        affiliation: crate::types::ProjectsListCollaboratorsAffiliation,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::SimpleUser>> {
@@ -39929,7 +41396,7 @@ impl Client {
         owner: &str,
         repo: &str,
         run_id: i64,
-        filter: &str,
+        filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetActionsListJobsWorkflowRunOkResponse> {
@@ -39938,7 +41405,7 @@ impl Client {
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&run_id.to_string()),
-            filter.to_string(),
+            filter,
             format!("{}", page),
             format!("{}", per_page),
         );
@@ -41645,7 +43112,7 @@ impl Client {
         check_suite_id: i64,
         check_name: &str,
         status: crate::types::StatusData,
-        filter: &str,
+        filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
     ) -> Result<types::GetChecksListSuiteOkResponse> {
@@ -41655,7 +43122,7 @@ impl Client {
             progenitor_support::encode_path(&repo.to_string()),
             progenitor_support::encode_path(&check_suite_id.to_string()),
             check_name.to_string(),
-            filter.to_string(),
+            filter,
             format!("{}", page),
             format!("{}", per_page),
             status,
@@ -42069,7 +43536,7 @@ impl Client {
         &self,
         owner: &str,
         repo: &str,
-        affiliation: crate::types::Affiliation,
+        affiliation: crate::types::ProjectsListCollaboratorsAffiliation,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Collaborator>> {
@@ -42604,7 +44071,7 @@ impl Client {
         ref_: &str,
         check_name: &str,
         status: crate::types::StatusData,
-        filter: &str,
+        filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
         app_id: i64,
@@ -42616,7 +44083,7 @@ impl Client {
             progenitor_support::encode_path(&ref_.to_string()),
             format!("{}", app_id),
             check_name.to_string(),
-            filter.to_string(),
+            filter,
             format!("{}", page),
             format!("{}", per_page),
             status,
@@ -43372,14 +44839,21 @@ impl Client {
     *
     * FROM: <https://docs.github.com/rest/reference/repos#list-forks>
     */
-    pub async fn repos_list_forks(&self, owner: &str, repo: &str, sort: &str, per_page: i64, page: i64) -> Result<Vec<types::MinimalRepository>> {
+    pub async fn repos_list_forks(
+        &self,
+        owner: &str,
+        repo: &str,
+        sort: crate::types::ReposListForksSort,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::MinimalRepository>> {
         let url = format!(
             "/repos/{}/{}/forks?page={}&per_page={}&sort={}",
             progenitor_support::encode_path(&owner.to_string()),
             progenitor_support::encode_path(&repo.to_string()),
             format!("{}", page),
             format!("{}", per_page),
-            sort.to_string(),
+            sort,
         );
 
         self.get_all_pages(&url).await
@@ -44355,12 +45829,12 @@ impl Client {
         owner: &str,
         repo: &str,
         milestone: &str,
-        state: crate::types::StateData,
+        state: crate::types::IssuesListState,
         assignee: &str,
         creator: &str,
         mentioned: &str,
         labels: &str,
-        sort: crate::types::SortData,
+        sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
@@ -45328,8 +46802,8 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        state: crate::types::StateData,
-        sort: &str,
+        state: crate::types::IssuesListState,
+        sort: crate::types::IssuesListMilestonesSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -45341,7 +46815,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             direction,
             format!("{}", page),
             format!("{}", per_page),
-            sort.to_string(),
+            sort,
             state,
         );
 
@@ -45719,7 +47193,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        state: crate::types::StateData,
+        state: crate::types::IssuesListState,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Project>> {
@@ -45767,10 +47241,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        state: crate::types::StateData,
+        state: crate::types::IssuesListState,
         head: &str,
         base: &str,
-        sort: &str,
+        sort: crate::types::PullsListSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -45784,7 +47258,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             head.to_string(),
             format!("{}", page),
             format!("{}", per_page),
-            sort.to_string(),
+            sort,
             state,
         );
 
@@ -45829,7 +47303,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         &self,
         owner: &str,
         repo: &str,
-        sort: &str,
+        sort: crate::types::PullsListReviewCommentsRepoSort,
         direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
@@ -45843,7 +47317,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             since.to_rfc3339(),
-            sort.to_string(),
+            sort,
         );
 
         self.get_all_pages(&url).await
@@ -48288,7 +49762,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn search_code(
         &self,
         q: &str,
-        sort: &str,
+        sort: crate::types::SearchCodeSort,
         order: crate::types::Order,
         per_page: i64,
         page: i64,
@@ -48299,7 +49773,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
-            sort.to_string(),
+            sort,
         );
 
         self.get(&url).await
@@ -48324,7 +49798,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn search_commits(
         &self,
         q: &str,
-        sort: &str,
+        sort: crate::types::SearchCommitsSort,
         order: crate::types::Order,
         per_page: i64,
         page: i64,
@@ -48335,7 +49809,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
-            sort.to_string(),
+            sort,
         );
 
         self.get(&url).await
@@ -48364,7 +49838,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn search_issues_and_pull_requests(
         &self,
         q: &str,
-        sort: &str,
+        sort: crate::types::SearchIssuesPullRequestsSort,
         order: crate::types::Order,
         per_page: i64,
         page: i64,
@@ -48375,7 +49849,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
-            sort.to_string(),
+            sort,
         );
 
         self.get(&url).await
@@ -48444,7 +49918,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn search_repos(
         &self,
         q: &str,
-        sort: &str,
+        sort: crate::types::SearchReposSort,
         order: crate::types::Order,
         per_page: i64,
         page: i64,
@@ -48455,7 +49929,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
-            sort.to_string(),
+            sort,
         );
 
         self.get(&url).await
@@ -48509,7 +49983,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn search_users(
         &self,
         q: &str,
-        sort: &str,
+        sort: crate::types::SearchUsersSort,
         order: crate::types::Order,
         per_page: i64,
         page: i64,
@@ -48520,7 +49994,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             q.to_string(),
-            sort.to_string(),
+            sort,
         );
 
         self.get(&url).await
@@ -48986,13 +50460,19 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     *
     * FROM: <https://docs.github.com/rest/reference/teams#list-team-members-legacy>
     */
-    pub async fn teams_list_members_legacy(&self, team_id: i64, role: &str, per_page: i64, page: i64) -> Result<Vec<types::SimpleUser>> {
+    pub async fn teams_list_members_legacy(
+        &self,
+        team_id: i64,
+        role: crate::types::TeamsListMembersInOrgRole,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<types::SimpleUser>> {
         let url = format!(
             "/teams/{}/members?page={}&per_page={}&role={}",
             progenitor_support::encode_path(&team_id.to_string()),
             format!("{}", page),
             format!("{}", per_page),
-            role.to_string(),
+            role,
         );
 
         self.get_all_pages(&url).await
@@ -49862,10 +51342,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     */
     pub async fn issues_list_for_authenticated_user(
         &self,
-        filter: crate::types::Filter,
-        state: crate::types::StateData,
+        filter: crate::types::IssuesListFilter,
+        state: crate::types::IssuesListState,
         labels: &str,
-        sort: crate::types::SortData,
+        sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
         since: DateTime<Utc>,
         per_page: i64,
@@ -50309,7 +51789,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
         package_name: &str,
         page: i64,
         per_page: i64,
-        state: &str,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<types::PackageVersion>> {
         let url = format!(
             "/user/packages/{}/{}/versions?page={}&per_page={}&state={}",
@@ -50317,7 +51797,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             progenitor_support::encode_path(&package_name.to_string()),
             format!("{}", page),
             format!("{}", per_page),
-            state.to_string(),
+            state,
         );
 
         self.get_all_pages(&url).await
@@ -50452,10 +51932,10 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     */
     pub async fn repos_list_for_authenticated_user(
         &self,
-        visibility: crate::types::VisibilityData,
+        visibility: crate::types::ReposListVisibility,
         affiliation: &str,
-        type_: &str,
-        sort: &str,
+        type_: crate::types::ReposListType,
+        sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -50470,7 +51950,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             format!("{}", page),
             format!("{}", per_page),
             since.to_rfc3339(),
-            sort.to_string(),
+            sort,
             type_,
             visibility,
         );
@@ -50894,7 +52374,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn users_get_context_for_user(
         &self,
         username: &str,
-        subject_type: crate::types::SubjectType,
+        subject_type: crate::types::UsersGetContextUserSubjectType,
         subject_id: &str,
     ) -> Result<types::Hovercard> {
         let url = format!(
@@ -51064,7 +52544,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn projects_list_for_user(
         &self,
         username: &str,
-        state: crate::types::StateData,
+        state: crate::types::IssuesListState,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<types::Project>> {
@@ -51131,8 +52611,8 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
     pub async fn repos_list_for_user(
         &self,
         username: &str,
-        type_: &str,
-        sort: &str,
+        type_: crate::types::ReposListUserType,
+        sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
@@ -51143,7 +52623,7 @@ assignee.to_string(), creator.to_string(), direction, labels.to_string(), mentio
             direction,
             format!("{}", page),
             format!("{}", per_page),
-            sort.to_string(),
+            sort,
             type_,
         );
 

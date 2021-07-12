@@ -204,8 +204,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         }
                                     }
 
-                                    // TODO: fix this.
-                                    println!("parameter {} that enumerates should have a pre-defined type: {:?}", name, s);
+                                    bail!("parameter {} that enumerates should have a pre-defined type: {:?}", name, s);
                                 } else {
                                     // We have an enum.
                                     // Let's return the correct enum struct name.
@@ -1101,6 +1100,8 @@ impl TypeSpace {
         if let Some(parameter_data) = get_parameter_data(p) {
             if nam.is_empty() && !parameter_data.name.is_empty() {
                 nam = clean_name(&parameter_data.name);
+            } else {
+                nam = clean_name(&format!("{} {}", nam, parameter_data.name));
             }
             if let openapiv3::ParameterSchemaOrContent::Schema(st) = &parameter_data.format {
                 self.select(Some(&nam), st, is_schema)
@@ -2090,7 +2091,7 @@ fn main() -> Result<()> {
                  */
                 for par in o.parameters.iter() {
                     // The name will be filled in by the parameter data.
-                    ts.select_param(None, par, false)?;
+                    ts.select_param(Some(&oid_to_object_name("", &oid)), par, false)?;
                 }
 
                 /*
