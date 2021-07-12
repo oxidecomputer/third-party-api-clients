@@ -198,10 +198,8 @@ impl ParameterDataExt for openapiv3::ParameterData {
 
                                 // Make sure we actually have a type, we might have
                                 // not added the type since it is a duplicate of another type.
-                                if !name.is_empty() {
-                                    if ts.name_to_id.get(&sn).is_some() {
-                                        return Ok(format!("crate::types::{}", sn));
-                                    }
+                                if !name.is_empty() && ts.name_to_id.get(&sn).is_some() {
+                                    return Ok(format!("crate::types::{}", sn));
                                 }
 
                                 // Try to find the parameter among our types.
