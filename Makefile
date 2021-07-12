@@ -10,3 +10,6 @@ generate: target/debug/generator $(GITHUB_SPEC)
 
 target/debug/generator: generator/src/*.rs generator/Cargo.toml
 	cargo build --bin generator
+
+examples: github/examples/*.rs
+	cargo build --examples
