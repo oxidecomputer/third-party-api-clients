@@ -199,7 +199,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 // Make sure we actually have a type, we might have
                                 // not added the type since it is a duplicate of another type.
                                 if !name.is_empty() {
-                                    if let Some(_) = ts.name_to_id.get(&sn) {
+                                    if ts.name_to_id.get(&sn).is_some() {
                                         return Ok(format!("crate::types::{}", sn));
                                     }
                                 }
