@@ -849,7 +849,7 @@ impl TypeSpace {
     fn select_param(&mut self, name: Option<&str>, p: &openapiv3::ReferenceOr<openapiv3::Parameter>, is_schema: bool) -> Result<TypeId> {
         match p {
             openapiv3::ReferenceOr::Reference { reference } => self.select_ref(name, reference.as_str()),
-            openapiv3::ReferenceOr::Item(p) => self.select_parameter(name, p, "", is_schema),
+            openapiv3::ReferenceOr::Item(p) => self.select_parameter(name, p, is_schema),
         }
     }
 
@@ -1049,11 +1049,17 @@ impl TypeSpace {
         }
     }
 
-    fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter, parent_name: &str, is_schema: bool) -> Result<TypeId> {
-        /*let (n, details) = self.get_type_name_and_details_param(name, p, parent_name, is_schema)?;
-
-        self.add_if_not_exists(n, details, &parent_name)*/
-        bail!("we need to implement this");
+    fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter, is_schema: bool) -> Result<TypeId> {
+        if let Some(parameter_data) = get_parameter_data(p) {
+            println!("param data {:?} is ok: {:?}", name, p);
+            if let openapiv3::ParameterSchemaOrContent::Schema(st) = &parameter_data.format {
+                self.select(name, st, is_schema)
+            } else {
+                bail!("could not get parameter_schema for {:?}: {:?}", name, p);
+            }
+        } else {
+            bail!("could not get parameter_data for {:?}: {:?}", name, p);
+        }
     }
 }
 
@@ -1075,24 +1081,6 @@ fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::Parame
     }
 
     None
-}
-
-fn render_raw_param(n: &str, param: &openapiv3::Parameter) -> String {
-    if let Some(parameter_data) = get_parameter_data(param) {
-        if let openapiv3::ParameterSchemaOrContent::Schema(s) = &parameter_data.format {
-            if let Ok(s) = s.item() {
-                if let openapiv3::SchemaKind::Type(openapiv3::Type::String(st)) = &s.schema_kind {
-                    let mut desc = "".to_string();
-                    if let Some(d) = &parameter_data.description {
-                        desc = d.to_string();
-                    }
-                    return render_param(n, &st.enumeration.clone(), parameter_data.required, &desc, s.schema_data.default.as_ref());
-                }
-            }
-        }
-    }
-
-    "".to_string()
 }
 
 fn get_enums_for_param(param: &openapiv3::Parameter) -> Vec<String> {
@@ -1423,12 +1411,6 @@ fn gen(api: &OpenAPI, ts: &mut TypeSpace, parameters: BTreeMap<String, &openapiv
     a("    use schemars::JsonSchema;");
     a("    use serde::{Serialize, Deserialize};");
     a("");
-
-    // Let's iterate over the parameters and create all the enums.
-    for (name, param) in &parameters {
-        let p = render_raw_param(name.as_str(), &(*param).clone());
-        a(&p);
-    }
 
     for te in ts.id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
