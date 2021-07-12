@@ -1047,13 +1047,13 @@ impl TypeSpace {
                 Ok((Some(nam), TypeDetails::Basic("serde_json::Value".to_string(), s.schema_data.clone())))
             }
         }
+    }
 
-        fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter, parent_name: &str, is_schema: bool) -> Result<TypeId> {
-            /*let (n, details) = self.get_type_name_and_details_param(name, p, parent_name, is_schema)?;
+    fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter, parent_name: &str, is_schema: bool) -> Result<TypeId> {
+        /*let (n, details) = self.get_type_name_and_details_param(name, p, parent_name, is_schema)?;
 
-            self.add_if_not_exists(n, details, &parent_name)*/
-            bail!("we need to implement this");
-        }
+        self.add_if_not_exists(n, details, &parent_name)*/
+        bail!("we need to implement this");
     }
 }
 
