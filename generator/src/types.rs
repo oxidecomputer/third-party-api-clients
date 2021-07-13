@@ -95,14 +95,27 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                                 } else if rt.starts_with("Option<") {
                                     a(r#"skip_serializing_if = "Option::is_none","#);
                                 }
-                            } else if rt == "bool"
-                                || rt == "i32"
-                                || rt == "i64"
-                                || rt == "f32"
-                                || rt == "f64"
-                                || rt == "u32"
-                                || rt == "u64"
-                            {
+                            } else if rt == "bool" {
+                                a(
+                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_boolean::deserialize","#,
+                                );
+                            } else if rt == "i32" {
+                                a(
+                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_i32::deserialize","#,
+                                );
+                            } else if rt == "i64" {
+                                a(
+                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_i64::deserialize","#,
+                                );
+                            } else if rt == "f32" {
+                                a(
+                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_f32::deserialize","#,
+                                );
+                            } else if rt == "f64" {
+                                a(
+                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_f64::deserialize","#,
+                                );
+                            } else if rt == "u32" || rt == "u64" {
                                 a(r#"#[serde(default,"#);
                             } else {
                                 a(r#"#[serde("#);

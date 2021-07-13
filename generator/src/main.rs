@@ -777,7 +777,14 @@ impl TypeSpace {
                 }
                 TypeDetails::Optional(itid, _) => {
                     let rt = self.render_type(itid, in_mod)?;
-                    if rt == "String" || rt.starts_with("Vec<") {
+                    if rt == "String"
+                        || rt.starts_with("Vec<")
+                        || rt == "bool"
+                        || rt == "i32"
+                        || rt == "i64"
+                        || rt == "f32"
+                        || rt == "f64"
+                    {
                         Ok(rt)
                     } else {
                         Ok(format!("Option<{}>", rt))

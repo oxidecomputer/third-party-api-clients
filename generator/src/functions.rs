@@ -163,7 +163,7 @@ pub fn generate_files(
                     o,
                     m,
                     p,
-                    &oid.trim_start_matches(&tag).trim_start_matches('_'),
+                    oid.trim_start_matches(&tag).trim_start_matches('_'),
                 )?;
 
                 let (fn_params_str, query_params) = get_fn_params(ts, o, parameters, true)?;
