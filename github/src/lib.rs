@@ -144,71 +144,71 @@
 #![allow(missing_docs)]
 
 /// Endpoints to manage GitHub Actions using the REST API.
-mod actions;
+pub mod actions;
 /// Activity APIs provide access to notifications, subscriptions, and timelines.
-mod activity;
+pub mod activity;
 /// Information for integrations and installations.
-mod apps;
+pub mod apps;
 pub mod auth;
 /// Monitor charges and usage from Actions and Packages.
-mod billing;
+pub mod billing;
 /// Rich interactions with checks run by your integrations.
-mod checks;
+pub mod checks;
 /// Retrieve code scanning alerts from a repository.
-mod code_scanning;
+pub mod code_scanning;
 /// Insight into codes of conduct for your communities.
-mod codes_of_conduct;
+pub mod codes_of_conduct;
 /// List emojis available to use on GitHub.
-mod emojis;
+pub mod emojis;
 /// Administer a GitHub enterprise.
-mod enterprise_admin;
+pub mod enterprise_admin;
 /// View, modify your gists.
-mod gists;
+pub mod gists;
 /// Raw Git functionality.
-mod git;
+pub mod git;
 /// View gitignore templates.
-mod gitignore;
+pub mod gitignore;
 #[cfg(feature = "httpcache")]
 pub mod http_cache;
 /// Owner or admin management of users interactions.
-mod interactions;
+pub mod interactions;
 /// Interact with GitHub Issues.
-mod issues;
+pub mod issues;
 /// View various OSS licenses.
-mod licenses;
+pub mod licenses;
 /// Render Github flavored markdown.
-mod markdown;
+pub mod markdown;
 /// Endpoints that give information about the API.
-mod meta;
+pub mod meta;
 /// Move projects to or from GitHub.
-mod migrations;
+pub mod migrations;
 /// Manage access of OAuth applications.
-mod oauth_authorizations;
+pub mod oauth_authorizations;
 /// Interact with GitHub Orgs.
-mod orgs;
+pub mod orgs;
 /// Manage packages for authenticated users and organizations.
-mod packages;
+pub mod packages;
 /// Interact with GitHub Projects.
-mod projects;
+pub mod projects;
 /// Interact with GitHub Pull Requests.
-mod pulls;
+pub mod pulls;
 /// Check your current rate limit status.
-mod rate_limit;
+pub mod rate_limit;
 /// Interact with reactions to various GitHub entities.
-mod reactions;
+pub mod reactions;
 /// Interact with GitHub Repos.
-mod repos;
+pub mod repos;
 /// Provisioning of GitHub organization membership for SCIM-enabled providers.
-mod scim;
+pub mod scim;
 /// Look for stuff on GitHub.
-mod search;
+pub mod search;
 /// Retrieve secret scanning alerts from a repository.
-mod secret_scanning;
+pub mod secret_scanning;
 /// Interact with GitHub Teams.
-mod teams;
+pub mod teams;
 pub mod types;
 /// Interact with and view information about users and also current user.
-mod users;
+pub mod users;
 #[doc(hidden)]
 pub mod utils;
 

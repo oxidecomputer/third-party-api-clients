@@ -1573,7 +1573,7 @@ fn gen(api: &OpenAPI) -> Result<String> {
         if !docs.is_empty() {
             a(&format!("/// {}", docs.replace("\n", "\n///"),));
         }
-        a(&format!("mod {};", to_snake_case(&tag.name),));
+        a(&format!("pub mod {};", to_snake_case(&tag.name),));
     }
 
     a("");
@@ -2010,7 +2010,7 @@ httpcache = ["dirs"]
             let docs = template::generate_docs(&to_snake_case(&name), &version);
             let mut readme = root.clone();
             readme.push("README.md");
-            save(readme, docs.as_str())?;
+            save(readme, docs.replace("//! ", "").as_str())?;
 
             /*
              * Create the src/ directory:
