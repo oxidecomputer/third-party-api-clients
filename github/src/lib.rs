@@ -31070,6 +31070,161 @@ impl Client {
         Ok(global_items)
     }
 
+    /// Endpoints to manage GitHub Actions using the REST API.
+    pub fn actions(&self) -> actions::Actions {
+        actions::Actions::new(self.clone())
+    }
+
+    /// Activity APIs provide access to notifications, subscriptions, and timelines.
+    pub fn activity(&self) -> activity::Activity {
+        activity::Activity::new(self.clone())
+    }
+
+    /// Information for integrations and installations.
+    pub fn apps(&self) -> apps::Apps {
+        apps::Apps::new(self.clone())
+    }
+
+    /// Monitor charges and usage from Actions and Packages.
+    pub fn billing(&self) -> billing::Billing {
+        billing::Billing::new(self.clone())
+    }
+
+    /// Rich interactions with checks run by your integrations.
+    pub fn checks(&self) -> checks::Checks {
+        checks::Checks::new(self.clone())
+    }
+
+    /// Retrieve code scanning alerts from a repository.
+    pub fn code_scanning(&self) -> code_scanning::CodeScanning {
+        code_scanning::CodeScanning::new(self.clone())
+    }
+
+    /// Insight into codes of conduct for your communities.
+    pub fn codes_of_conduct(&self) -> codes_of_conduct::CodesOfConduct {
+        codes_of_conduct::CodesOfConduct::new(self.clone())
+    }
+
+    /// List emojis available to use on GitHub.
+    pub fn emojis(&self) -> emojis::Emojis {
+        emojis::Emojis::new(self.clone())
+    }
+
+    /// Administer a GitHub enterprise.
+    pub fn enterprise_admin(&self) -> enterprise_admin::EnterpriseAdmin {
+        enterprise_admin::EnterpriseAdmin::new(self.clone())
+    }
+
+    /// View, modify your gists.
+    pub fn gists(&self) -> gists::Gists {
+        gists::Gists::new(self.clone())
+    }
+
+    /// Raw Git functionality.
+    pub fn git(&self) -> git::Git {
+        git::Git::new(self.clone())
+    }
+
+    /// View gitignore templates.
+    pub fn gitignore(&self) -> gitignore::Gitignore {
+        gitignore::Gitignore::new(self.clone())
+    }
+
+    /// Owner or admin management of users interactions.
+    pub fn interactions(&self) -> interactions::Interactions {
+        interactions::Interactions::new(self.clone())
+    }
+
+    /// Interact with GitHub Issues.
+    pub fn issues(&self) -> issues::Issues {
+        issues::Issues::new(self.clone())
+    }
+
+    /// View various OSS licenses.
+    pub fn licenses(&self) -> licenses::Licenses {
+        licenses::Licenses::new(self.clone())
+    }
+
+    /// Render Github flavored markdown.
+    pub fn markdown(&self) -> markdown::Markdown {
+        markdown::Markdown::new(self.clone())
+    }
+
+    /// Endpoints that give information about the API.
+    pub fn meta(&self) -> meta::Meta {
+        meta::Meta::new(self.clone())
+    }
+
+    /// Move projects to or from GitHub.
+    pub fn migrations(&self) -> migrations::Migrations {
+        migrations::Migrations::new(self.clone())
+    }
+
+    /// Manage access of OAuth applications.
+    pub fn oauth_authorizations(&self) -> oauth_authorizations::OauthAuthorizations {
+        oauth_authorizations::OauthAuthorizations::new(self.clone())
+    }
+
+    /// Interact with GitHub Orgs.
+    pub fn orgs(&self) -> orgs::Orgs {
+        orgs::Orgs::new(self.clone())
+    }
+
+    /// Manage packages for authenticated users and organizations.
+    pub fn packages(&self) -> packages::Packages {
+        packages::Packages::new(self.clone())
+    }
+
+    /// Interact with GitHub Projects.
+    pub fn projects(&self) -> projects::Projects {
+        projects::Projects::new(self.clone())
+    }
+
+    /// Interact with GitHub Pull Requests.
+    pub fn pulls(&self) -> pulls::Pulls {
+        pulls::Pulls::new(self.clone())
+    }
+
+    /// Check your current rate limit status.
+    pub fn rate_limit(&self) -> rate_limit::RateLimit {
+        rate_limit::RateLimit::new(self.clone())
+    }
+
+    /// Interact with reactions to various GitHub entities.
+    pub fn reactions(&self) -> reactions::Reactions {
+        reactions::Reactions::new(self.clone())
+    }
+
+    /// Interact with GitHub Repos.
+    pub fn repos(&self) -> repos::Repos {
+        repos::Repos::new(self.clone())
+    }
+
+    /// Provisioning of GitHub organization membership for SCIM-enabled providers.
+    pub fn scim(&self) -> scim::Scim {
+        scim::Scim::new(self.clone())
+    }
+
+    /// Look for stuff on GitHub.
+    pub fn search(&self) -> search::Search {
+        search::Search::new(self.clone())
+    }
+
+    /// Retrieve secret scanning alerts from a repository.
+    pub fn secret_scanning(&self) -> secret_scanning::SecretScanning {
+        secret_scanning::SecretScanning::new(self.clone())
+    }
+
+    /// Interact with GitHub Teams.
+    pub fn teams(&self) -> teams::Teams {
+        teams::Teams::new(self.clone())
+    }
+
+    /// Interact with and view information about users and also current user.
+    pub fn users(&self) -> users::Users {
+        users::Users::new(self.clone())
+    }
+
     /**
      * GitHub API Root.
      *

@@ -1887,6 +1887,39 @@ fn gen(
     a("");
 
     /*
+     * Generate a function for each tag.
+     * Tags are how functions are grouped.
+     */
+    for tag in api.tags.iter() {
+        let mut docs = format!(
+            "Return a reference to an interface that provides access to {} operations.",
+            tag.name
+        );
+        if let Some(d) = &tag.description {
+            docs = format!("{}.", d.trim_end_matches('.'));
+        }
+        if let Some(e) = &tag.external_docs {
+            if !e.url.is_empty() {
+                docs = format!("{}\n\nFROM: {}", docs, e.url);
+            }
+        }
+
+        a(&format!(
+            r#"/// {}
+               pub fn {}(&self) -> {}::{} {{
+                    {}::{}::new(self.clone())
+               }}"#,
+            docs.replace("\n", "\n///"),
+            to_snake_case(&tag.name),
+            to_snake_case(&tag.name),
+            struct_name(&tag.name),
+            to_snake_case(&tag.name),
+            struct_name(&tag.name),
+        ));
+        a("");
+    }
+
+    /*
      * Generate a function for each Operation.
      *
      * XXX We should probably be producing an intermediate object for each of
