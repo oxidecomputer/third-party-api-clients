@@ -82,7 +82,7 @@ impl Template {
                 }"#);
         }
 
-        a("let url = ");
+        a("let url =");
         if self.components.is_empty() && query_params.is_empty() {
             a(r#""".to_string();"#);
 
@@ -282,7 +282,8 @@ mod test {
     fn compile() -> Result<()> {
         let t = parse("/measure/{number}")?;
         let out = t.compile(Default::default());
-        let want = "let url = format!(\"/measure/{}\",
+        let want = "let url =
+format!(\"/measure/{}\",
 crate::progenitor_support::encode_path(&number.to_string()),);\n";
         assert_eq!(want, &out);
         Ok(())
