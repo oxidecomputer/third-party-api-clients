@@ -54,7 +54,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // List the repos for an org.
     let repos = github
-        .repos_list_for_org(
+        .repos()
+        .list_for_org(
             "oxidecomputer",
             ReposListOrgType::All,
             ReposListOrgSort::Created,
