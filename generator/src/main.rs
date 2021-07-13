@@ -1696,6 +1696,8 @@ fn gen(api: &OpenAPI, n: &str, version: &str) -> Result<String> {
     a("pub mod auth;");
     a(r#"#[cfg(feature = "httpcache")]"#);
     a("pub mod http_cache;");
+    // Hopefully there is never a "tag" named after these reserved libs.
+    a("pub mod types;");
     a("#[doc(hidden)]");
     a("pub mod utils;");
 
