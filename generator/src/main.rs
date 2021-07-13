@@ -1974,6 +1974,7 @@ documentation = "https://docs.rs/{}/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/github"
 readme = "README.md"
 edition = "2018"
+license = "MIT"
 
 [dependencies]
 anyhow = "1"
