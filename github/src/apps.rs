@@ -212,13 +212,14 @@ impl Apps {
             crate::progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        self.post_media(
-            &url,
-            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::JWT,
-        )
-        .await
+        self.client
+            .post_media(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+                crate::utils::MediaType::Json,
+                crate::auth::AuthenticationConstraint::JWT,
+            )
+            .await
     }
 
     /**
