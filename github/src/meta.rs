@@ -21,7 +21,7 @@ impl Meta {
      *
      * FROM: <https://docs.github.com/rest/overview/resources-in-the-rest-api#root-endpoint>
      */
-    pub async fn root(&self) -> Result<crate::types::GetMetaRootResponse> {
+    pub async fn root(&self) -> Result<crate::types::MetaRootResponse> {
         let url = "".to_string();
         self.client.get(&url).await
     }

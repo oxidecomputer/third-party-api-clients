@@ -96,7 +96,7 @@ impl Actions {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListSelectedRepositoriesEnabledGithubOrganizationResponse>
+    ) -> Result<crate::types::ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse>
     {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories?page={}&per_page={}",
@@ -289,7 +289,7 @@ impl Actions {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListSelfHostedRunnerGroupsOrgResponse> {
+    ) -> Result<crate::types::ActionsListSelfHostedRunnerGroupsOrgResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups?page={}&per_page={}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -463,7 +463,7 @@ impl Actions {
         runner_group_id: i64,
         page: i64,
         per_page: i64,
-    ) -> Result<crate::types::GetActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse> {
+    ) -> Result<crate::types::ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories?page={}&per_page={}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -612,7 +612,7 @@ impl Actions {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListSelfHostedRunnersInGroupOrgResponse> {
+    ) -> Result<crate::types::ActionsListSelfHostedRunnersInGroupOrgResponse> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -757,7 +757,7 @@ impl Actions {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListSelfHostedRunnersOrgResponse> {
+    ) -> Result<crate::types::ActionsListSelfHostedRunnersOrgResponse> {
         let url = format!(
             "/orgs/{}/actions/runners?page={}&per_page={}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -946,7 +946,7 @@ impl Actions {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListOrgSecretsResponse> {
+    ) -> Result<crate::types::ActionsListOrgSecretsResponse> {
         let url = format!(
             "/orgs/{}/actions/secrets?page={}&per_page={}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -1161,7 +1161,7 @@ impl Actions {
         secret_name: &str,
         page: i64,
         per_page: i64,
-    ) -> Result<crate::types::GetActionsListSelectedReposOrgSecretResponse> {
+    ) -> Result<crate::types::ActionsListSelectedReposOrgSecretResponse> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories?page={}&per_page={}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -1291,7 +1291,7 @@ impl Actions {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListArtifactsRepoResponse> {
+    ) -> Result<crate::types::ActionsListArtifactsRepoResponse> {
         let url = format!(
             "/repos/{}/{}/actions/artifacts?page={}&per_page={}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1623,7 +1623,7 @@ impl Actions {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListSelfHostedRunnersOrgResponse> {
+    ) -> Result<crate::types::ActionsListSelfHostedRunnersOrgResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runners?page={}&per_page={}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1839,7 +1839,7 @@ impl Actions {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListWorkflowRunsResponse> {
+    ) -> Result<crate::types::ActionsListWorkflowRunsResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs?actor={}&branch={}&event={}&page={}&per_page={}&status={}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2004,7 +2004,7 @@ impl Actions {
         run_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListArtifactsRepoResponse> {
+    ) -> Result<crate::types::ActionsListArtifactsRepoResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/artifacts?page={}&per_page={}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2076,7 +2076,7 @@ impl Actions {
         filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListJobsWorkflowRunResponse> {
+    ) -> Result<crate::types::ActionsListJobsWorkflowRunResponse> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/jobs?filter={}&page={}&per_page={}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2313,7 +2313,7 @@ impl Actions {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListRepoSecretsResponse> {
+    ) -> Result<crate::types::ActionsListRepoSecretsResponse> {
         let url = format!(
             "/repos/{}/{}/actions/secrets?page={}&per_page={}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2548,7 +2548,7 @@ impl Actions {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListRepoWorkflowsResponse> {
+    ) -> Result<crate::types::ActionsListRepoWorkflowsResponse> {
         let url = format!(
             "/repos/{}/{}/actions/workflows?page={}&per_page={}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2722,7 +2722,7 @@ impl Actions {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListWorkflowRunsResponse> {
+    ) -> Result<crate::types::ActionsListWorkflowRunsResponse> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/runs?actor={}&branch={}&event={}&page={}&\
              per_page={}&status={}",
@@ -2795,7 +2795,7 @@ impl Actions {
         environment_name: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListRepoSecretsResponse> {
+    ) -> Result<crate::types::ActionsListRepoSecretsResponse> {
         let url = format!(
             "/repositories/{}/environments/{}/secrets?page={}&per_page={}",
             crate::progenitor_support::encode_path(&repository_id.to_string()),

@@ -128,7 +128,7 @@ pub fn generate_files(
                     let (ct, mt) = b.content.first().unwrap();
                     if ct == "application/json" {
                         if let Some(s) = &mt.schema {
-                            let object_name = format!("{} request", oid_to_object_name("", &oid));
+                            let object_name = format!("{} request", oid_to_object_name(&oid));
                             let id = ts.select(Some(&object_name), s, false, "")?;
                             let rt = ts.render_type(&id, false)?;
                             (Some(format!("&{}", rt)), Some("json".to_string()))
@@ -266,7 +266,7 @@ pub fn generate_files(
                 a(&format!("body: {},", bp));
             }
 
-            let response_type = get_response_type(&oid, ts, m, o)?;
+            let response_type = get_response_type(&oid, ts, o)?;
             a(&format!(") -> Result<{}> {{", response_type));
 
             /*
@@ -334,12 +334,7 @@ pub fn generate_files(
     Ok(tag_files)
 }
 
-fn get_response_type(
-    oid: &str,
-    ts: &mut TypeSpace,
-    m: &str,
-    o: &openapiv3::Operation,
-) -> Result<String> {
+fn get_response_type(oid: &str, ts: &mut TypeSpace, o: &openapiv3::Operation) -> Result<String> {
     // Get the first response.
     let first = o.responses.responses.first().unwrap();
     let i = first.1.item()?;
@@ -356,7 +351,7 @@ fn get_response_type(
         }
 
         if let Some(s) = &mt.schema {
-            let object_name = format!("{} response", oid_to_object_name(m, &oid),);
+            let object_name = format!("{} response", oid_to_object_name(oid));
             let tid = ts.select(Some(&clean_name(&object_name)), s, false, "")?;
             let rt = ts.render_type(&tid, false)?;
             return Ok(rt);
@@ -378,7 +373,7 @@ fn get_response_type(
         }
 
         if let Some(s) = &mt.schema {
-            let object_name = format!("{} response", oid_to_object_name(m, &oid),);
+            let object_name = format!("{} response", oid_to_object_name(oid));
             let tid = ts.select(Some(&clean_name(&object_name)), s, false, "")?;
             let rt = ts.render_type(&tid, false)?;
             return Ok(rt);

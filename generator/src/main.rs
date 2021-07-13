@@ -1714,7 +1714,7 @@ fn clean_name(t: &str) -> String {
     words.join(" ")
 }
 
-fn oid_to_object_name(m: &str, s: &str) -> String {
+fn oid_to_object_name(s: &str) -> String {
     let cleaned = s
         .to_lowercase()
         .replace('.', "")
@@ -1738,11 +1738,7 @@ fn oid_to_object_name(m: &str, s: &str) -> String {
         .trim()
         .to_string();
 
-    if m.is_empty() || cleaned.starts_with(&m.to_lowercase()) {
-        cleaned
-    } else {
-        format!("{} {}", m.to_lowercase(), cleaned)
-    }
+    cleaned
 }
 
 fn main() -> Result<()> {
@@ -1853,8 +1849,7 @@ fn main() -> Result<()> {
                     for (ct, mt) in &body.content {
                         if ct == "application/json" {
                             if let Some(s) = &mt.schema {
-                                let object_name =
-                                    format!("{} request", oid_to_object_name("", &oid));
+                                let object_name = format!("{} request", oid_to_object_name(&oid));
                                 let id = ts.select(Some(&object_name), s, false, "")?;
                                 let rt = ts.render_type(&id, true)?;
                                 req.push(format!("{} {:?}", rt, id));
@@ -1883,7 +1878,7 @@ fn main() -> Result<()> {
                  */
                 for par in o.parameters.iter() {
                     // The name will be filled in by the parameter data.
-                    ts.select_param(Some(&oid_to_object_name("", &oid)), par, false)?;
+                    ts.select_param(Some(&oid_to_object_name(&oid)), par, false)?;
                 }
 
                 /*
@@ -1897,7 +1892,7 @@ fn main() -> Result<()> {
                                 if ct == "application/json" {
                                     if let Some(s) = &mt.schema {
                                         let object_name =
-                                            format!("{} response", oid_to_object_name(m, &oid),);
+                                            format!("{} response", oid_to_object_name(&oid));
                                         let id = ts.select(
                                             Some(&clean_name(&object_name)),
                                             s,

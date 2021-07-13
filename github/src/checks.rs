@@ -294,7 +294,7 @@ impl Checks {
         filter: crate::types::ActionsListJobsWorkflowRunFilter,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetChecksListRefResponse> {
+    ) -> Result<crate::types::ChecksListRefResponse> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/check-runs?check_name={}&filter={}&page={}&per_page={}&\
              status={}",
@@ -378,7 +378,7 @@ impl Checks {
         per_page: i64,
         page: i64,
         app_id: i64,
-    ) -> Result<crate::types::GetChecksListRefResponse> {
+    ) -> Result<crate::types::ChecksListRefResponse> {
         let url = format!(
             "/repos/{}/{}/commits/{}/check-runs?app_id={}&check_name={}&filter={}&page={}&\
              per_page={}&status={}",
@@ -426,7 +426,7 @@ impl Checks {
         check_name: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetChecksListSuitesRefResponse> {
+    ) -> Result<crate::types::ChecksListSuitesRefResponse> {
         let url = format!(
             "/repos/{}/{}/commits/{}/check-suites?app_id={}&check_name={}&page={}&per_page={}",
             crate::progenitor_support::encode_path(&owner.to_string()),
