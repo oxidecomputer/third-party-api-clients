@@ -1,5 +1,5 @@
-const X_GITHUB_REQUEST_ID: &str = "x-github-request-id";
-const X_RATELIMIT_LIMIT: &str = "x-ratelimit-limit";
+//const X_GITHUB_REQUEST_ID: &str = "x-github-request-id";
+//const X_RATELIMIT_LIMIT: &str = "x-ratelimit-limit";
 const X_RATELIMIT_REMAINING: &str = "x-ratelimit-remaining";
 const X_RATELIMIT_RESET: &str = "x-ratelimit-reset";
 
@@ -26,12 +26,12 @@ type HeaderValues = (Option<u32>, Option<u32>, Option<Vec<u8>>);
 pub fn get_header_values(
     headers: &http::header::HeaderMap<http::header::HeaderValue>,
 ) -> HeaderValues {
-    if let Some(value) = headers.get(X_GITHUB_REQUEST_ID) {
+    /*if let Some(value) = headers.get(X_GITHUB_REQUEST_ID) {
         println!("x-github-request-id: {:?}", value)
     }
     if let Some(value) = headers.get(X_RATELIMIT_LIMIT) {
         println!("x-rate-limit-limit: {:?}", value)
-    }
+    }*/
     let remaining = headers
         .get(X_RATELIMIT_REMAINING)
         .and_then(|val| val.to_str().ok())
@@ -40,16 +40,17 @@ pub fn get_header_values(
         .get(X_RATELIMIT_RESET)
         .and_then(|val| val.to_str().ok())
         .and_then(|val| val.parse::<u32>().ok());
-    if let Some(value) = remaining {
+    /*if let Some(value) = remaining {
         println!("x-rate-limit-remaining: {}", value)
     }
     if let Some(value) = reset {
         println!("x-rate-limit-reset: {}", value)
-    }
+    }*/
+    #[cfg(feature = "httpcache")]
     let etag = headers.get(http::header::ETAG);
-    if let Some(value) = etag {
+    /*if let Some(value) = etag {
         println!("etag: {:?}", value)
-    }
+    }*/
 
     #[cfg(feature = "httpcache")]
     {

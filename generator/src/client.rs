@@ -199,7 +199,7 @@ impl Client {
             //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
             req = req.body(body);
         }
-        println!("Request: {:?}", &req);
+        //println!("Request: {:?}", &req);
         let response = req.send().await?;
 
         #[cfg(feature = "httpcache")]
@@ -224,9 +224,7 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            println!("response payload {}",
-                String::from_utf8_lossy(&response_body)
-            );
+            //println!("response payload {}", String::from_utf8_lossy(&response_body));
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {
@@ -453,17 +451,14 @@ impl Client {
         let mut global_items = Vec::new();
         let (new_link, mut items) = self.get_pages(uri).await.unwrap();
         let mut link = new_link;
-        items.reverse();
         while !items.is_empty() {
-            match items.pop() {
-                Some(item) => global_items.push(item),
-                // We need to get the next link.
-                None => if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
-                    let url = reqwest::Url::parse(&url).unwrap();
-                    let (new_link, new_items) = self.get_pages_url(&url).await?;
-                    link = new_link;
-                    items = new_items;
-                },
+            global_items.append(&mut items);
+            // We need to get the next link.
+            if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
+                let url = reqwest::Url::parse(&url).unwrap();
+                let (new_link, new_items) = self.get_pages_url(&url).await?;
+                link = new_link;
+                items = new_items;
             }
         }
 

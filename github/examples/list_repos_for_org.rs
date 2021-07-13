@@ -55,19 +55,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // List the repos for an org.
     let repos = github
         .repos()
-        .list_for_org(
+        .list_all_for_org(
             "oxidecomputer",
             ReposListOrgType::All,
             ReposListOrgSort::Created,
             Direction::Desc,
-            100,
-            1,
         )
         .await
         .unwrap();
-    for repo in &repos {
+    /*for repo in &repos {
         println!("repo: {:?}", repo);
-    }
+    }*/
     println!("length: {}", repos.len());
 
     Ok(())

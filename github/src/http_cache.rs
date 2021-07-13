@@ -88,7 +88,7 @@ impl HttpCache for FileBasedCache {
         next_link: &Option<String>,
     ) -> Result<()> {
         let mut path = cache_path(&self.root, uri, "json");
-        println!("caching body at path: {}", path.display());
+        //println!("caching body at path: {}", path.display());
         if let Some(parent) = path.parent() {
             fs::create_dir_all(parent)?;
         }
@@ -178,7 +178,7 @@ pub fn cache_path<S: AsRef<OsStr>>(dir: &Path, uri: &str, extension: S) -> PathB
 }
 
 fn read_to_string<P: AsRef<Path>>(path: P) -> Result<String> {
-    println!("reading path: {}", path.as_ref().display());
+    //println!("reading path: {}", path.as_ref().display());
     fs::read_to_string(path).map_err(Error::from)
 }
 
