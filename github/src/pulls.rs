@@ -58,7 +58,7 @@ impl Pulls {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -141,7 +141,7 @@ impl Pulls {
             sort,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -370,7 +370,7 @@ impl Pulls {
             sort,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -493,7 +493,7 @@ impl Pulls {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -530,7 +530,7 @@ impl Pulls {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -741,7 +741,7 @@ impl Pulls {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -932,7 +932,7 @@ impl Pulls {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**

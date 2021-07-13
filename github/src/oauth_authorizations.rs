@@ -42,7 +42,7 @@ impl OauthAuthorizations {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -119,7 +119,7 @@ impl OauthAuthorizations {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**

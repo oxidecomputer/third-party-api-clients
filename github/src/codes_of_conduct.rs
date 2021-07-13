@@ -23,7 +23,7 @@ impl CodesOfConduct {
      */
     pub async fn get_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
         let url = "/codes_of_conduct".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**

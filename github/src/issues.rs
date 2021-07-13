@@ -81,7 +81,7 @@ impl Issues {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -141,7 +141,7 @@ impl Issues {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -175,7 +175,7 @@ impl Issues {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -277,7 +277,7 @@ impl Issues {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -356,7 +356,7 @@ impl Issues {
             sort,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -484,7 +484,7 @@ impl Issues {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -707,7 +707,7 @@ impl Issues {
             since,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -781,7 +781,7 @@ impl Issues {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -818,7 +818,7 @@ impl Issues {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1059,7 +1059,7 @@ impl Issues {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1093,7 +1093,7 @@ impl Issues {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1264,7 +1264,7 @@ impl Issues {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1434,7 +1434,7 @@ impl Issues {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1491,6 +1491,6 @@ impl Issues {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 }

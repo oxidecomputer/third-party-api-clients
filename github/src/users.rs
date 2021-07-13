@@ -61,7 +61,7 @@ impl Users {
      */
     pub async fn list_blocked_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
         let url = "/user/blocks".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -177,7 +177,7 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -249,7 +249,7 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -277,7 +277,7 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -373,7 +373,7 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -470,7 +470,7 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -567,7 +567,7 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -593,7 +593,7 @@ impl Users {
             format!("{}", since),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -652,7 +652,7 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -683,7 +683,7 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -738,7 +738,7 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -807,6 +807,6 @@ impl Users {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 }

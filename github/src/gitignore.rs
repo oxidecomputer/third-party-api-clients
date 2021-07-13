@@ -23,7 +23,7 @@ impl Gitignore {
      */
     pub async fn get_all_templates(&self) -> Result<Vec<String>> {
         let url = "/gitignore/templates".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**

@@ -40,7 +40,7 @@ impl Gists {
             since,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -97,7 +97,7 @@ impl Gists {
             since,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -128,7 +128,7 @@ impl Gists {
             since,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -234,7 +234,7 @@ impl Gists {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -382,7 +382,7 @@ impl Gists {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -413,7 +413,7 @@ impl Gists {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -559,6 +559,6 @@ impl Gists {
             since,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 }

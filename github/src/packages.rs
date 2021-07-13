@@ -163,7 +163,7 @@ impl Packages {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -419,7 +419,7 @@ impl Packages {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -592,7 +592,7 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**

@@ -792,7 +792,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1662,7 +1662,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1942,7 +1942,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -2185,7 +2185,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**

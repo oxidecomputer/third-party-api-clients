@@ -39,7 +39,7 @@ impl Orgs {
             format!("{}", since),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -153,7 +153,7 @@ impl Orgs {
             phrase.to_string(),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -175,7 +175,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -274,7 +274,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -331,7 +331,7 @@ impl Orgs {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -362,7 +362,7 @@ impl Orgs {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -627,7 +627,7 @@ impl Orgs {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -720,7 +720,7 @@ impl Orgs {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -762,7 +762,7 @@ impl Orgs {
             role,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -942,7 +942,7 @@ impl Orgs {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1025,7 +1025,7 @@ impl Orgs {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1138,7 +1138,7 @@ impl Orgs {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1226,7 +1226,7 @@ impl Orgs {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1259,6 +1259,6 @@ impl Orgs {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 }

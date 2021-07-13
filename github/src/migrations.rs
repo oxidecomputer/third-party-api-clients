@@ -43,7 +43,7 @@ impl Migrations {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -225,7 +225,7 @@ impl Migrations {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -408,7 +408,7 @@ impl Migrations {
             format!("{}", since),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -473,7 +473,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -535,7 +535,7 @@ impl Migrations {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -715,6 +715,6 @@ impl Migrations {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 }

@@ -43,7 +43,7 @@ impl Projects {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -289,7 +289,7 @@ impl Projects {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -463,7 +463,7 @@ impl Projects {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -580,7 +580,7 @@ impl Projects {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -648,7 +648,7 @@ impl Projects {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -738,6 +738,6 @@ impl Projects {
             state,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 }

@@ -49,7 +49,7 @@ impl Repos {
             type_,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -259,7 +259,7 @@ impl Repos {
             format!("{}", protected),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -828,7 +828,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1040,7 +1040,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1202,7 +1202,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1364,7 +1364,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1586,7 +1586,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1754,7 +1754,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1929,7 +1929,7 @@ impl Repos {
             until,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1962,7 +1962,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -1999,7 +1999,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -2075,7 +2075,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -2231,7 +2231,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -2411,7 +2411,7 @@ impl Repos {
             ref_,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -2530,7 +2530,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -2576,7 +2576,7 @@ impl Repos {
             task.to_string(),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -2760,7 +2760,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -3048,7 +3048,7 @@ impl Repos {
             sort,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -3118,7 +3118,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -3407,7 +3407,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -3509,7 +3509,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -3808,7 +3808,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4034,7 +4034,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4356,7 +4356,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4435,7 +4435,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4463,7 +4463,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4497,7 +4497,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4557,7 +4557,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4630,7 +4630,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4698,7 +4698,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4825,7 +4825,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -4853,7 +4853,7 @@ impl Repos {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -5088,7 +5088,7 @@ impl Repos {
     pub async fn list_public(&self, since: i64) -> Result<Vec<crate::types::MinimalRepository>> {
         let url = format!("/repositories?since={}", format!("{}", since),);
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -5145,7 +5145,7 @@ impl Repos {
             visibility,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -5202,7 +5202,7 @@ impl Repos {
             format!("{}", per_page),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -5286,6 +5286,6 @@ impl Repos {
             type_,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 }

@@ -756,7 +756,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -942,7 +942,7 @@ impl EnterpriseAdmin {
             phrase.to_string(),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**

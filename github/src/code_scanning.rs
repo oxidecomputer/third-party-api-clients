@@ -64,7 +64,7 @@ impl CodeScanning {
             tool_name.to_string(),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -175,7 +175,7 @@ impl CodeScanning {
             ref_,
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
@@ -237,7 +237,7 @@ impl CodeScanning {
             tool_name.to_string(),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get(&url).await
     }
 
     /**
