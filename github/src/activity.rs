@@ -275,7 +275,7 @@ impl Activity {
     pub async fn mark_notifications_as_read(
         &self,
         body: &crate::types::ActivityMarkNotificationsAsReadRequest,
-    ) -> Result<crate::types::ReposCreateDeploymentResponse> {
+    ) -> Result<crate::types::Error> {
         let url = "/notifications".to_string();
         self.client
             .put(

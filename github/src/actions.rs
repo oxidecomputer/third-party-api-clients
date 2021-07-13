@@ -2291,8 +2291,8 @@ impl Actions {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters jobs by their `completed_at` timestamp. Can be one of:  
-     *  \* `latest`: Returns jobs from the most recent execution of the workflow run.  
-     *  \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
+     *  \\* `latest`: Returns jobs from the most recent execution of the workflow run.  
+     *  \\* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */

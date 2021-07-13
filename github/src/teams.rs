@@ -831,9 +831,9 @@ impl Teams {
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
      * * `role: crate::types::TeamsListMembersInOrgRole` -- Filters members returned by their role in the team. Can be one of:  
-     *  \* `member` - normal members of the team.  
-     *  \* `maintainer` - team maintainers.  
-     *  \* `all` - all members of the team.
+     *  \\* `member` - normal members of the team.  
+     *  \\* `maintainer` - team maintainers.  
+     *  \\* `all` - all members of the team.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -2173,9 +2173,9 @@ impl Teams {
      *
      * * `team_id: i64`
      * * `role: crate::types::TeamsListMembersInOrgRole` -- Filters members returned by their role in the team. Can be one of:  
-     *  \* `member` - normal members of the team.  
-     *  \* `maintainer` - team maintainers.  
-     *  \* `all` - all members of the team.
+     *  \\* `member` - normal members of the team.  
+     *  \\* `maintainer` - team maintainers.  
+     *  \\* `all` - all members of the team.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */

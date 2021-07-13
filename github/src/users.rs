@@ -1088,8 +1088,8 @@ impl Users {
      * **Parameters:**
      *
      * * `username: &str`
-     * * `subject_type: crate::types::SubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
-     * * `subject_id: &str` -- Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.
+     * * `subject_type: crate::types::SubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. \*\*Required\*\* when using `subject_id`.
+     * * `subject_id: &str` -- Uses the ID for the `subject_type` you specified. \*\*Required\*\* when using `subject_type`.
      */
     pub async fn get_context_for_user(
         &self,

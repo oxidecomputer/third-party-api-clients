@@ -32,11 +32,11 @@ impl Issues {
      * **Parameters:**
      *
      * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
-     *  \* `assigned`: Issues assigned to you  
-     *  \* `created`: Issues created by you  
-     *  \* `mentioned`: Issues mentioning you  
-     *  \* `subscribed`: Issues you're subscribed to updates for  
-     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     *  \\* `assigned`: Issues assigned to you  
+     *  \\* `created`: Issues created by you  
+     *  \\* `mentioned`: Issues mentioning you  
+     *  \\* `subscribed`: Issues you're subscribed to updates for  
+     *  \\* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
@@ -190,11 +190,11 @@ impl Issues {
      *
      * * `org: &str`
      * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
-     *  \* `assigned`: Issues assigned to you  
-     *  \* `created`: Issues created by you  
-     *  \* `mentioned`: Issues mentioning you  
-     *  \* `subscribed`: Issues you're subscribed to updates for  
-     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     *  \\* `assigned`: Issues assigned to you  
+     *  \\* `created`: Issues created by you  
+     *  \\* `mentioned`: Issues mentioning you  
+     *  \\* `subscribed`: Issues you're subscribed to updates for  
+     *  \\* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
@@ -426,9 +426,9 @@ impl Issues {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `milestone: &str` -- If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
+     * * `milestone: &str` -- If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `\*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `assignee: &str` -- Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user.
+     * * `assignee: &str` -- Can be the name of a user. Pass in `none` for issues with no assigned user, and `\*` for issues assigned to any user.
      * * `creator: &str` -- The user that created the issue.
      * * `mentioned: &str` -- A user that's mentioned in the issue.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
@@ -2143,11 +2143,11 @@ impl Issues {
      * **Parameters:**
      *
      * * `filter: crate::types::Filter` -- Indicates which sorts of issues to return. Can be one of:  
-     *  \* `assigned`: Issues assigned to you  
-     *  \* `created`: Issues created by you  
-     *  \* `mentioned`: Issues mentioning you  
-     *  \* `subscribed`: Issues you're subscribed to updates for  
-     *  \* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     *  \\* `assigned`: Issues assigned to you  
+     *  \\* `created`: Issues created by you  
+     *  \\* `mentioned`: Issues mentioning you  
+     *  \\* `subscribed`: Issues you're subscribed to updates for  
+     *  \\* `all`: All issues the authenticated user can see, regardless of participation or creation.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.

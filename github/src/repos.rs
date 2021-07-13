@@ -1781,9 +1781,9 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      * * `affiliation: crate::types::Affiliation` -- Filter collaborators returned by their affiliation. Can be one of:  
-     *  \* `outside`: All outside collaborators of an organization-owned repository.  
-     *  \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  
-     *  \* `all`: All collaborators the authenticated user can see.
+     *  \\* `outside`: All outside collaborators of an organization-owned repository.  
+     *  \\* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  
+     *  \\* `all`: All collaborators the authenticated user can see.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -6576,12 +6576,12 @@ impl Repos {
      *
      * * `visibility: crate::types::ReposListVisibility` -- Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
      * * `affiliation: &str` -- Comma-separated list of values. Can include:  
-     *  \* `owner`: Repositories that are owned by the authenticated user.  
-     *  \* `collaborator`: Repositories that the user has been added to as a collaborator.  
-     *  \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
+     *  \\* `owner`: Repositories that are owned by the authenticated user.  
+     *  \\* `collaborator`: Repositories that the user has been added to as a collaborator.  
+     *  \\* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
      * * `type_: crate::types::ReposListType` -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
      *    
-     *  Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
+     *  Will cause a `422` error if used in the same request as \*\*visibility\*\* or \*\*affiliation\*\*. Will cause a `422` error if used in the same request as \*\*visibility\*\* or \*\*affiliation\*\*.
      * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
      * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).

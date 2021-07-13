@@ -729,7 +729,14 @@ impl TypeSpace {
                 }
                 TypeDetails::Enum(_, schema_data) => Some(schema_data),
                 TypeDetails::Array(_, schema_data) => Some(schema_data),
-                TypeDetails::Optional(_, schema_data) => Some(schema_data),
+                TypeDetails::Optional(id, schema_data) => {
+                    let def: openapiv3::SchemaData = Default::default();
+                    if def == *schema_data {
+                        self.get_schema_data_for_id(id)
+                    } else {
+                        Some(schema_data)
+                    }
+                }
                 TypeDetails::Object(_, schema_data) => Some(schema_data),
                 TypeDetails::Unknown => None,
             }
@@ -750,7 +757,10 @@ impl TypeSpace {
 
         if let Some(s) = schema {
             if let Some(description) = &s.description {
-                a(&format!("* {}", description.replace("\n", "\n*  ")));
+                a(&format!(
+                    "* {}",
+                    description.replace('*', "\\*").replace("\n", "\n*  ")
+                ));
             }
             if let Some(external_docs) = &s.external_docs {
                 a("*");
@@ -1249,6 +1259,17 @@ impl TypeSpace {
                             rb,
                             &clean_name(&format!("{} {}", &parent_name, name)),
                         )?;
+                        if let Some(schema_data) = self.get_schema_data_for_id(&itid) {
+                            if schema_data.nullable {
+                                // This is an optional member.
+                                omap.insert(
+                                    n.to_string(),
+                                    self.id_for_optional(&itid, s.schema_data.clone()),
+                                );
+                                continue;
+                            }
+                        }
+
                         if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
                         } else {

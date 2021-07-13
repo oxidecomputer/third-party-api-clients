@@ -536,9 +536,9 @@ impl Projects {
      *
      * * `project_id: i64`
      * * `affiliation: crate::types::Affiliation` -- Filters the collaborators by their affiliation. Can be one of:  
-     *  \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
-     *  \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
-     *  \* `all`: All collaborators the authenticated user can see.
+     *  \\* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
+     *  \\* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
+     *  \\* `all`: All collaborators the authenticated user can see.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
