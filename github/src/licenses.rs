@@ -13,6 +13,59 @@ impl Licenses {
     }
 
     /**
+     * Get all commonly used licenses.
+     *
+     * This function performs a `GET` to the `/licenses` endpoint.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
+     *
+     * **Parameters:**
+     *
+     * * `featured: bool`
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `page: i64` -- Page number of the results to fetch.
+     */
+    pub async fn get_all_commonly_used(
+        &self,
+        featured: bool,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<crate::types::License>> {
+        let url = format!(
+            "/licenses?featured={}&page={}&per_page={}",
+            format!("{}", featured),
+            format!("{}", page),
+            format!("{}", per_page),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
+     * Get a license.
+     *
+     * This function performs a `GET` to the `/licenses/{license}` endpoint.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/licenses#get-a-license>
+     *
+     * **Parameters:**
+     *
+     * * `license: &str`
+     */
+    pub async fn get(&self, license: &str) -> Result<crate::types::License> {
+        let url = format!(
+            "/licenses/{}",
+            crate::progenitor_support::encode_path(&license.to_string()),
+        );
+
+        self.client.get(&url).await
+    }
+
+    /**
      * Get the license for a repository.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/license` endpoint.

@@ -13,6 +13,25 @@ impl Markdown {
     }
 
     /**
+     * Render a Markdown document.
+     *
+     * This function performs a `POST` to the `/markdown` endpoint.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/markdown#render-a-markdown-document>
+     */
+    pub async fn render(&self, body: &crate::types::MarkdownRenderRequest) -> Result<String> {
+        let url = "/markdown".to_string();
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
      * Render a Markdown document in raw mode.
      *
      * This function performs a `POST` to the `/markdown/raw` endpoint.

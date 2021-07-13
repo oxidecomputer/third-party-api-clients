@@ -13,6 +13,526 @@ impl Git {
     }
 
     /**
+     * Create a blob.
+     *
+     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/blobs` endpoint.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#create-a-blob>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     */
+    pub async fn create_blob(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &crate::types::GitCreateBlobRequest,
+    ) -> Result<crate::types::ShortBlob> {
+        let url = format!(
+            "/repos/{}/{}/git/blobs",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
+     * Get a blob.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/blobs/{file_sha}` endpoint.
+     *
+     * The `content` in the response will always be Base64 encoded.
+     *
+     * _Note_: This API supports blobs up to 100 megabytes in size.
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#get-a-blob>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `file_sha: &str`
+     */
+    pub async fn get_blob(
+        &self,
+        owner: &str,
+        repo: &str,
+        file_sha: &str,
+    ) -> Result<crate::types::Blob> {
+        let url = format!(
+            "/repos/{}/{}/git/blobs/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&file_sha.to_string()),
+        );
+
+        self.client.get(&url).await
+    }
+
+    /**
+     * Create a commit.
+     *
+     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/commits` endpoint.
+     *
+     * Creates a new Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
+     *
+     * **Signature verification object**
+     *
+     * The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
+     *
+     * | Name | Type | Description |
+     * | ---- | ---- | ----------- |
+     * | `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+     * | `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+     * | `signature` | `string` | The signature that was extracted from the commit. |
+     * | `payload` | `string` | The value that was signed. |
+     *
+     * These are the possible values for `reason` in the `verification` object:
+     *
+     * | Value | Description |
+     * | ----- | ----------- |
+     * | `expired_key` | The key that made the signature is expired. |
+     * | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+     * | `gpgverify_error` | There was an error communicating with the signature verification service. |
+     * | `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+     * | `unsigned` | The object does not include a signature. |
+     * | `unknown_signature_type` | A non-PGP signature was found in the commit. |
+     * | `no_user` | No user was associated with the `committer` email address in the commit. |
+     * | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+     * | `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+     * | `unknown_key` | The key that made the signature has not been registered with any user's account. |
+     * | `malformed_signature` | There was an error parsing the signature. |
+     * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#create-a-commit>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     */
+    pub async fn create_commit(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &crate::types::GitCreateCommitRequest,
+    ) -> Result<crate::types::GitCommit> {
+        let url = format!(
+            "/repos/{}/{}/git/commits",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
+     * Get a commit.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/commits/{commit_sha}` endpoint.
+     *
+     * Gets a Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
+     *
+     * **Signature verification object**
+     *
+     * The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
+     *
+     * | Name | Type | Description |
+     * | ---- | ---- | ----------- |
+     * | `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+     * | `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+     * | `signature` | `string` | The signature that was extracted from the commit. |
+     * | `payload` | `string` | The value that was signed. |
+     *
+     * These are the possible values for `reason` in the `verification` object:
+     *
+     * | Value | Description |
+     * | ----- | ----------- |
+     * | `expired_key` | The key that made the signature is expired. |
+     * | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+     * | `gpgverify_error` | There was an error communicating with the signature verification service. |
+     * | `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+     * | `unsigned` | The object does not include a signature. |
+     * | `unknown_signature_type` | A non-PGP signature was found in the commit. |
+     * | `no_user` | No user was associated with the `committer` email address in the commit. |
+     * | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+     * | `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+     * | `unknown_key` | The key that made the signature has not been registered with any user's account. |
+     * | `malformed_signature` | There was an error parsing the signature. |
+     * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#get-a-commit>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `commit_sha: &str` -- commit_sha parameter.
+     */
+    pub async fn get_commit(
+        &self,
+        owner: &str,
+        repo: &str,
+        commit_sha: &str,
+    ) -> Result<crate::types::GitCommit> {
+        let url = format!(
+            "/repos/{}/{}/git/commits/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&commit_sha.to_string()),
+        );
+
+        self.client.get(&url).await
+    }
+
+    /**
+     * List matching references.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/matching-refs/{ref}` endpoint.
+     *
+     * Returns an array of references from your Git database that match the supplied name. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't exist in the repository, but existing refs start with `:ref`, they will be returned as an array.
+     *
+     * When you use this endpoint without providing a `:ref`, it will return an array of all the references from your Git database, including notes and stashes if they exist on the server. Anything in the namespace is returned, not just `heads` and `tags`.
+     *
+     * **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
+     *
+     * If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the response can still include other matching head refs that start with the word `feature`, such as `featureA` and `featureB`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#list-matching-references>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `ref_: &str` -- ref parameter.
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `page: i64` -- Page number of the results to fetch.
+     */
+    pub async fn list_matching_refs(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<crate::types::GitRef>> {
+        let url = format!(
+            "/repos/{}/{}/git/matching-refs/{}?page={}&per_page={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
+            format!("{}", page),
+            format!("{}", per_page),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
+     * Get a reference.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/ref/{ref}` endpoint.
+     *
+     * Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is returned.
+     *
+     * **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#get-a-reference>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `ref_: &str` -- ref parameter.
+     */
+    pub async fn get_ref(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+    ) -> Result<crate::types::GitRef> {
+        let url = format!(
+            "/repos/{}/{}/git/ref/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
+        );
+
+        self.client.get(&url).await
+    }
+
+    /**
+     * Create a reference.
+     *
+     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/refs` endpoint.
+     *
+     * Creates a reference for your repository. You are unable to create new references for empty repositories, even if the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#create-a-reference>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     */
+    pub async fn create_ref(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &crate::types::GitCreateRefRequest,
+    ) -> Result<crate::types::GitRef> {
+        let url = format!(
+            "/repos/{}/{}/git/refs",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
+     * Delete a reference.
+     *
+     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/git/refs/{ref}` endpoint.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#delete-a-reference>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `ref_: &str` -- ref parameter.
+     */
+    pub async fn delete_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
+        let url = format!(
+            "/repos/{}/{}/git/refs/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
+        );
+
+        self.client.delete(&url, None).await
+    }
+
+    /**
+     * Update a reference.
+     *
+     * This function performs a `PATCH` to the `/repos/{owner}/{repo}/git/refs/{ref}` endpoint.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#update-a-reference>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `ref_: &str` -- ref parameter.
+     */
+    pub async fn update_ref(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+        body: &crate::types::GitUpdateRefRequest,
+    ) -> Result<crate::types::GitRef> {
+        let url = format!(
+            "/repos/{}/{}/git/refs/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
+        );
+
+        self.client
+            .patch(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
+     * Create a tag object.
+     *
+     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/tags` endpoint.
+     *
+     * Note that creating a tag object does not create the reference that makes a tag in Git. If you want to create an annotated tag in Git, you have to do this call to create the tag object, and then [create](https://docs.github.com/rest/reference/git#create-a-reference) the `refs/tags/[tag]` reference. If you want to create a lightweight tag, you only have to [create](https://docs.github.com/rest/reference/git#create-a-reference) the tag reference - this call would be unnecessary.
+     *
+     * **Signature verification object**
+     *
+     * The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
+     *
+     * | Name | Type | Description |
+     * | ---- | ---- | ----------- |
+     * | `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+     * | `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+     * | `signature` | `string` | The signature that was extracted from the commit. |
+     * | `payload` | `string` | The value that was signed. |
+     *
+     * These are the possible values for `reason` in the `verification` object:
+     *
+     * | Value | Description |
+     * | ----- | ----------- |
+     * | `expired_key` | The key that made the signature is expired. |
+     * | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+     * | `gpgverify_error` | There was an error communicating with the signature verification service. |
+     * | `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+     * | `unsigned` | The object does not include a signature. |
+     * | `unknown_signature_type` | A non-PGP signature was found in the commit. |
+     * | `no_user` | No user was associated with the `committer` email address in the commit. |
+     * | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+     * | `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+     * | `unknown_key` | The key that made the signature has not been registered with any user's account. |
+     * | `malformed_signature` | There was an error parsing the signature. |
+     * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#create-a-tag-object>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     */
+    pub async fn create_tag(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &crate::types::GitCreateTagRequest,
+    ) -> Result<crate::types::GitTag> {
+        let url = format!(
+            "/repos/{}/{}/git/tags",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
+     * Get a tag.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/tags/{tag_sha}` endpoint.
+     *
+     * **Signature verification object**
+     *
+     * The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
+     *
+     * | Name | Type | Description |
+     * | ---- | ---- | ----------- |
+     * | `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+     * | `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+     * | `signature` | `string` | The signature that was extracted from the commit. |
+     * | `payload` | `string` | The value that was signed. |
+     *
+     * These are the possible values for `reason` in the `verification` object:
+     *
+     * | Value | Description |
+     * | ----- | ----------- |
+     * | `expired_key` | The key that made the signature is expired. |
+     * | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+     * | `gpgverify_error` | There was an error communicating with the signature verification service. |
+     * | `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+     * | `unsigned` | The object does not include a signature. |
+     * | `unknown_signature_type` | A non-PGP signature was found in the commit. |
+     * | `no_user` | No user was associated with the `committer` email address in the commit. |
+     * | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+     * | `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+     * | `unknown_key` | The key that made the signature has not been registered with any user's account. |
+     * | `malformed_signature` | There was an error parsing the signature. |
+     * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#get-a-tag>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `tag_sha: &str`
+     */
+    pub async fn get_tag(
+        &self,
+        owner: &str,
+        repo: &str,
+        tag_sha: &str,
+    ) -> Result<crate::types::GitTag> {
+        let url = format!(
+            "/repos/{}/{}/git/tags/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&tag_sha.to_string()),
+        );
+
+        self.client.get(&url).await
+    }
+
+    /**
+     * Create a tree.
+     *
+     * This function performs a `POST` to the `/repos/{owner}/{repo}/git/trees` endpoint.
+     *
+     * The tree creation API accepts nested entries. If you specify both a tree and a nested path modifying that tree, this endpoint will overwrite the contents of the tree with the new path contents, and create a new tree structure.
+     *
+     * If you use this endpoint to add, delete, or modify the file contents in a tree, you will need to commit the tree and then update a branch to point to the commit. For more information see "[Create a commit](https://docs.github.com/rest/reference/git#create-a-commit)" and "[Update a reference](https://docs.github.com/rest/reference/git#update-a-reference)."
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#create-a-tree>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     */
+    pub async fn create_tree(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &crate::types::GitCreateTreeRequestData,
+    ) -> Result<crate::types::GitTree> {
+        let url = format!(
+            "/repos/{}/{}/git/trees",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
      * Get a tree.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/git/trees/{tree_sha}` endpoint.

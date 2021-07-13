@@ -29,13 +29,6 @@ pub fn generate_files(
                 return Ok(());
             };
 
-            let mut out = String::new();
-
-            let mut a = |s: &str| {
-                out.push_str(s);
-                out.push('\n');
-            };
-
             let oid = to_snake_case(o.operation_id.as_deref().unwrap());
 
             // Make sure we have exactly 1 tag. This likely needs to change in the
@@ -44,6 +37,16 @@ pub fn generate_files(
                 bail!("invalid number of tags for op {}: {}", oid, o.tags.len());
             }
             let tag = to_snake_case(o.tags.first().unwrap());
+
+            let mut out = String::new();
+            if let Some(o) = tag_files.get(&tag) {
+                out = o.to_string();
+            }
+
+            let mut a = |s: &str| {
+                out.push_str(s);
+                out.push('\n');
+            };
 
             a("/**");
             if let Some(summary) = &o.summary {
