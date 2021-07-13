@@ -35,12 +35,27 @@ impl Migrations {
         page: i64,
         exclude: &[String],
     ) -> Result<Vec<crate::types::Migration>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !exclude.is_empty() {
+            query_args.push(format!("exclude={}", exclude.join(" ")));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/migrations?exclude={}&page={}&per_page={}",
+            "/orgs/{}/migrations?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            exclude.join(" "),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -62,10 +77,21 @@ impl Migrations {
         org: &str,
         exclude: &[String],
     ) -> Result<Vec<crate::types::Migration>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !exclude.is_empty() {
+            query_args.push(format!("exclude={}", exclude.join(" ")));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/migrations?exclude={}",
+            "/orgs/{}/migrations?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            exclude.join(" "),
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -130,11 +156,22 @@ impl Migrations {
         migration_id: i64,
         exclude: &[String],
     ) -> Result<crate::types::Migration> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !exclude.is_empty() {
+            query_args.push(format!("exclude={}", exclude.join(" ")));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/migrations/{}?exclude={}",
+            "/orgs/{}/migrations/{}?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&migration_id.to_string()),
-            exclude.join(" "),
+            query
         );
 
         self.client.get(&url).await
@@ -242,12 +279,25 @@ impl Migrations {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/migrations/{}/repositories?page={}&per_page={}",
+            "/orgs/{}/migrations/{}/repositories?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&migration_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -451,11 +501,22 @@ impl Migrations {
         repo: &str,
         since: i64,
     ) -> Result<Vec<crate::types::PorterAuthor>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if since > 0 {
+            query_args.push(format!("since={}", since));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/import/authors?since={}",
+            "/repos/{}/{}/import/authors?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", since),
+            query
         );
 
         self.client.get(&url).await
@@ -480,11 +541,22 @@ impl Migrations {
         repo: &str,
         since: i64,
     ) -> Result<Vec<crate::types::PorterAuthor>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if since > 0 {
+            query_args.push(format!("since={}", since));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/import/authors?since={}",
+            "/repos/{}/{}/import/authors?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", since),
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -633,11 +705,21 @@ impl Migrations {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Migration>> {
-        let url = format!(
-            "/user/migrations?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/migrations?{}", query);
 
         self.client.get(&url).await
     }
@@ -706,10 +788,21 @@ impl Migrations {
         migration_id: i64,
         exclude: &[String],
     ) -> Result<crate::types::Migration> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !exclude.is_empty() {
+            query_args.push(format!("exclude={}", exclude.join(" ")));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/user/migrations/{}?exclude={}",
+            "/user/migrations/{}?{}",
             crate::progenitor_support::encode_path(&migration_id.to_string()),
-            exclude.join(" "),
+            query
         );
 
         self.client.get(&url).await
@@ -828,11 +921,24 @@ impl Migrations {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/user/migrations/{}/repositories?page={}&per_page={}",
+            "/user/migrations/{}/repositories?{}",
             crate::progenitor_support::encode_path(&migration_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await

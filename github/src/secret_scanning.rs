@@ -41,14 +41,29 @@ impl SecretScanning {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<crate::types::SecretScanningAlert>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !secret_type.is_empty() {
+            query_args.push(format!("secret_type={}", secret_type));
+        }
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts?page={}&per_page={}&secret_type={}&state={}",
+            "/repos/{}/{}/secret-scanning/alerts?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            secret_type.to_string(),
-            state,
+            query
         );
 
         self.client.get(&url).await
@@ -74,12 +89,23 @@ impl SecretScanning {
         state: crate::types::SecretScanningAlertState,
         secret_type: &str,
     ) -> Result<Vec<crate::types::SecretScanningAlert>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !secret_type.is_empty() {
+            query_args.push(format!("secret_type={}", secret_type));
+        }
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/secret-scanning/alerts?secret_type={}&state={}",
+            "/repos/{}/{}/secret-scanning/alerts?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            secret_type.to_string(),
-            state,
+            query
         );
 
         self.client.get_all_pages(&url).await

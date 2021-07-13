@@ -301,7 +301,11 @@ fn get_fn_params(
         if nam == "ref" || nam == "type" {
             fn_params_str.push(format!("{}_: {},", nam, typ));
         } else if !all_pages || (nam != ("page") && nam != "per_page") {
-            fn_params_str.push(format!("{}: {},", nam, typ));
+            if typ == "chrono::DateTime<chrono::Utc>>" {
+                fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
+            } else {
+                fn_params_str.push(format!("{}: {},", nam, typ));
+            }
         }
 
         // Check if we have a query.
@@ -320,25 +324,12 @@ fn get_fn_params(
             }
 
             if nam == "ref" || nam == "type" {
-                query_params.insert(nam.to_string(), format!("{}_", nam));
-                continue;
-            }
-
-            if !all_pages || (nam != ("page") && nam != "per_page") {
+                query_params.insert(format!("{}_", nam), typ.to_string());
+            } else if !all_pages || (nam != ("page") && nam != "per_page") {
                 if typ == "DateTime<Utc>" {
-                    query_params.insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
-                } else if typ == "i64" || typ == "bool" {
-                    query_params.insert(nam.to_string(), format!(r#"format!("{{}}", {})"#, nam));
-                } else if typ == "&str" {
-                    query_params.insert(nam.to_string(), format!("{}.to_string()", nam));
-                } else if typ == "&[String]" {
-                    // TODO: I have no idea how these should be seperated and the docs
-                    // don't give any answers either, for an array sent through query
-                    // params.
-                    // https://docs.github.com/en/rest/reference/migrations
-                    query_params.insert(nam.to_string(), format!("{}.join(\" \")", nam));
+                    query_params.insert(nam.to_string(), format!("Option<{}>", typ));
                 } else {
-                    query_params.insert(nam.to_string(), nam.to_string());
+                    query_params.insert(nam.to_string(), typ.to_string());
                 }
             }
         }

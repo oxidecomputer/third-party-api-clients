@@ -54,14 +54,26 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchCodeResponse> {
-        let url = format!(
-            "/search/code?order={}&page={}&per_page={}&q={}&sort={}",
-            order,
-            format!("{}", page),
-            format!("{}", per_page),
-            q.to_string(),
-            sort,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("order={}", order));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !q.is_empty() {
+            query_args.push(format!("q={}", q));
+        }
+        query_args.push(format!("sort={}", sort));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/search/code?{}", query);
 
         self.client.get(&url).await
     }
@@ -98,14 +110,26 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchCommitsResponse> {
-        let url = format!(
-            "/search/commits?order={}&page={}&per_page={}&q={}&sort={}",
-            order,
-            format!("{}", page),
-            format!("{}", per_page),
-            q.to_string(),
-            sort,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("order={}", order));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !q.is_empty() {
+            query_args.push(format!("q={}", q));
+        }
+        query_args.push(format!("sort={}", sort));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/search/commits?{}", query);
 
         self.client.get(&url).await
     }
@@ -146,14 +170,26 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchIssuesPullRequestsResponse> {
-        let url = format!(
-            "/search/issues?order={}&page={}&per_page={}&q={}&sort={}",
-            order,
-            format!("{}", page),
-            format!("{}", per_page),
-            q.to_string(),
-            sort,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("order={}", order));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !q.is_empty() {
+            query_args.push(format!("q={}", q));
+        }
+        query_args.push(format!("sort={}", sort));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/search/issues?{}", query);
 
         self.client.get(&url).await
     }
@@ -193,15 +229,29 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchLabelsResponse> {
-        let url = format!(
-            "/search/labels?order={}&page={}&per_page={}&q={}&repository_id={}&sort={}",
-            order,
-            format!("{}", page),
-            format!("{}", per_page),
-            q.to_string(),
-            format!("{}", repository_id),
-            sort,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("order={}", order));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !q.is_empty() {
+            query_args.push(format!("q={}", q));
+        }
+        if repository_id > 0 {
+            query_args.push(format!("repository_id={}", repository_id));
+        }
+        query_args.push(format!("sort={}", sort));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/search/labels?{}", query);
 
         self.client.get(&url).await
     }
@@ -243,14 +293,26 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchReposResponse> {
-        let url = format!(
-            "/search/repositories?order={}&page={}&per_page={}&q={}&sort={}",
-            order,
-            format!("{}", page),
-            format!("{}", per_page),
-            q.to_string(),
-            sort,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("order={}", order));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !q.is_empty() {
+            query_args.push(format!("q={}", q));
+        }
+        query_args.push(format!("sort={}", sort));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/search/repositories?{}", query);
 
         self.client.get(&url).await
     }
@@ -284,12 +346,24 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchTopicsResponse> {
-        let url = format!(
-            "/search/topics?page={}&per_page={}&q={}",
-            format!("{}", page),
-            format!("{}", per_page),
-            q.to_string(),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !q.is_empty() {
+            query_args.push(format!("q={}", q));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/search/topics?{}", query);
 
         self.client.get(&url).await
     }
@@ -327,14 +401,26 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchUsersResponse> {
-        let url = format!(
-            "/search/users?order={}&page={}&per_page={}&q={}&sort={}",
-            order,
-            format!("{}", page),
-            format!("{}", per_page),
-            q.to_string(),
-            sort,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("order={}", order));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !q.is_empty() {
+            query_args.push(format!("q={}", q));
+        }
+        query_args.push(format!("sort={}", sort));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/search/users?{}", query);
 
         self.client.get(&url).await
     }

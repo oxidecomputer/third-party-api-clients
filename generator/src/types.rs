@@ -87,34 +87,32 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                             {
                                 a(r#"#[serde(default,"#);
                                 if rt == "String" {
-                                    a(
-                                        r#"skip_serializing_if = "String::is_empty", deserialize_with = "crate::utils::deserialize_null_string::deserialize","#,
-                                    );
+                                    a(r#"skip_serializing_if = "String::is_empty",
+                                        deserialize_with = "crate::utils::deserialize_null_string::deserialize","#);
                                 } else if rt.starts_with("Vec<") {
                                     a(r#"skip_serializing_if = "Vec::is_empty","#);
                                 } else if rt.starts_with("Option<") {
                                     a(r#"skip_serializing_if = "Option::is_none","#);
                                 }
                             } else if rt == "bool" {
-                                a(
-                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_boolean::deserialize","#,
-                                );
+                                a(r#"#[serde(default,
+                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize","#);
                             } else if rt == "i32" {
-                                a(
-                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_i32::deserialize","#,
-                                );
+                                a(r#"#[serde(default,
+                                    skip_serializing_if = "crate::utils::zero_i32",
+                                    deserialize_with = "crate::utils::deserialize_null_i32::deserialize","#);
                             } else if rt == "i64" {
-                                a(
-                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_i64::deserialize","#,
-                                );
+                                a(r#"#[serde(default,
+                                    skip_serializing_if = "crate::utils::zero_i64",
+                                    deserialize_with = "crate::utils::deserialize_null_i64::deserialize","#);
                             } else if rt == "f32" {
-                                a(
-                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_f32::deserialize","#,
-                                );
+                                a(r#"#[serde(default,
+                                    skip_serializing_if = "crate::utils::zero_f32",
+                                    deserialize_with = "crate::utils::deserialize_null_f32::deserialize","#);
                             } else if rt == "f64" {
-                                a(
-                                    r#"#[serde(default, deserialize_with= "crate::utils::deserialize_null_f64::deserialize","#,
-                                );
+                                a(r#"#[serde(default,
+                                    skip_serializing_if = "crate::utils::zero_f64",
+                                    deserialize_with = "crate::utils::deserialize_null_f64::deserialize","#);
                             } else if rt == "u32" || rt == "u64" {
                                 a(r#"#[serde(default,"#);
                             } else {

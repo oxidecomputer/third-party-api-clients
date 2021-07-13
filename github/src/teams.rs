@@ -37,11 +37,24 @@ impl Teams {
         per_page: i64,
         page: &str,
     ) -> Result<crate::types::GroupMapping> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !page.is_empty() {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/team-sync/groups?page={}&per_page={}",
+            "/orgs/{}/team-sync/groups?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            page.to_string(),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -68,11 +81,24 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Team>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams?page={}&per_page={}",
+            "/orgs/{}/teams?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -250,14 +276,29 @@ impl Teams {
         page: i64,
         pinned: &str,
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !pinned.is_empty() {
+            query_args.push(format!("pinned={}", pinned));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/discussions?direction={}&page={}&per_page={}&pinned={}",
+            "/orgs/{}/teams/{}/discussions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
-            direction,
-            format!("{}", page),
-            format!("{}", per_page),
-            pinned.to_string(),
+            query
         );
 
         self.client.get(&url).await
@@ -283,12 +324,23 @@ impl Teams {
         direction: crate::types::Direction,
         pinned: &str,
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        if !pinned.is_empty() {
+            query_args.push(format!("pinned={}", pinned));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/discussions?direction={}&pinned={}",
+            "/orgs/{}/teams/{}/discussions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
-            direction,
-            pinned.to_string(),
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -466,14 +518,27 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments?direction={}&page={}&per_page={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            direction,
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -499,12 +564,21 @@ impl Teams {
         discussion_number: i64,
         direction: crate::types::Direction,
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/discussions/{}/comments?direction={}",
+            "/orgs/{}/teams/{}/discussions/{}/comments?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            direction,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -690,12 +764,25 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/invitations?page={}&per_page={}",
+            "/orgs/{}/teams/{}/invitations?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -758,13 +845,26 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("role={}", role));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/members?page={}&per_page={}&role={}",
+            "/orgs/{}/teams/{}/members?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            role,
+            query
         );
 
         self.client.get(&url).await
@@ -789,11 +889,20 @@ impl Teams {
         team_slug: &str,
         role: crate::types::TeamsListMembersInOrgRole,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("role={}", role));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/members?role={}",
+            "/orgs/{}/teams/{}/members?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
-            role,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -948,12 +1057,25 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::TeamProject>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/projects?page={}&per_page={}",
+            "/orgs/{}/teams/{}/projects?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -1116,12 +1238,25 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/repos?page={}&per_page={}",
+            "/orgs/{}/teams/{}/repos?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -1369,12 +1504,25 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Team>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/teams/{}/teams?page={}&per_page={}",
+            "/orgs/{}/teams/{}/teams?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -1515,12 +1663,25 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/discussions?direction={}&page={}&per_page={}",
+            "/teams/{}/discussions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
-            direction,
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -1544,10 +1705,19 @@ impl Teams {
         team_id: i64,
         direction: crate::types::Direction,
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/discussions?direction={}",
+            "/teams/{}/discussions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
-            direction,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -1711,13 +1881,26 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/discussions/{}/comments?direction={}&page={}&per_page={}",
+            "/teams/{}/discussions/{}/comments?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            direction,
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -1742,11 +1925,20 @@ impl Teams {
         discussion_number: i64,
         direction: crate::types::Direction,
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/discussions/{}/comments?direction={}",
+            "/teams/{}/discussions/{}/comments?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            direction,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -1918,11 +2110,24 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/invitations?page={}&per_page={}",
+            "/teams/{}/invitations?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -1981,12 +2186,25 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("role={}", role));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/members?page={}&per_page={}&role={}",
+            "/teams/{}/members?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            role,
+            query
         );
 
         self.client.get(&url).await
@@ -2010,10 +2228,19 @@ impl Teams {
         team_id: i64,
         role: crate::types::TeamsListMembersInOrgRole,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("role={}", role));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/members?role={}",
+            "/teams/{}/members?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
-            role,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -2251,11 +2478,24 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::TeamProject>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/projects?page={}&per_page={}",
+            "/teams/{}/projects?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2399,11 +2639,24 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/repos?page={}&per_page={}",
+            "/teams/{}/repos?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2621,11 +2874,24 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Team>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/teams/{}/teams?page={}&per_page={}",
+            "/teams/{}/teams?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2670,11 +2936,21 @@ impl Teams {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::TeamFull>> {
-        let url = format!(
-            "/user/teams?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/teams?{}", query);
 
         self.client.get(&url).await
     }

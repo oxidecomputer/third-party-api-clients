@@ -33,11 +33,21 @@ impl Orgs {
         since: i64,
         per_page: i64,
     ) -> Result<Vec<crate::types::OrganizationSimple>> {
-        let url = format!(
-            "/organizations?per_page={}&since={}",
-            format!("{}", per_page),
-            format!("{}", since),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if since > 0 {
+            query_args.push(format!("since={}", since));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/organizations?{}", query);
 
         self.client.get(&url).await
     }
@@ -56,7 +66,18 @@ impl Orgs {
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organizations>
      */
     pub async fn list_all(&self, since: i64) -> Result<Vec<crate::types::OrganizationSimple>> {
-        let url = format!("/organizations?since={}", format!("{}", since),);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if since > 0 {
+            query_args.push(format!("since={}", since));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/organizations?{}", query);
 
         self.client.get_all_pages(&url).await
     }
@@ -159,17 +180,35 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::AuditLogEvent>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !after.is_empty() {
+            query_args.push(format!("after={}", after));
+        }
+        if !before.is_empty() {
+            query_args.push(format!("before={}", before));
+        }
+        query_args.push(format!("include={}", include));
+        query_args.push(format!("order={}", order));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !phrase.is_empty() {
+            query_args.push(format!("phrase={}", phrase));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/audit-log?after={}&before={}&include={}&order={}&page={}&per_page={}&\
-             phrase={}",
+            "/orgs/{}/audit-log?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            after.to_string(),
-            before.to_string(),
-            include,
-            order,
-            format!("{}", page),
-            format!("{}", per_page),
-            phrase.to_string(),
+            query
         );
 
         self.client.get(&url).await
@@ -197,14 +236,29 @@ impl Orgs {
         before: &str,
         order: crate::types::Order,
     ) -> Result<Vec<crate::types::AuditLogEvent>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !after.is_empty() {
+            query_args.push(format!("after={}", after));
+        }
+        if !before.is_empty() {
+            query_args.push(format!("before={}", before));
+        }
+        query_args.push(format!("include={}", include));
+        query_args.push(format!("order={}", order));
+        if !phrase.is_empty() {
+            query_args.push(format!("phrase={}", phrase));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/audit-log?after={}&before={}&include={}&order={}&phrase={}",
+            "/orgs/{}/audit-log?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            after.to_string(),
-            before.to_string(),
-            include,
-            order,
-            phrase.to_string(),
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -423,11 +477,24 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/failed_invitations?page={}&per_page={}",
+            "/orgs/{}/failed_invitations?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -477,11 +544,24 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::OrgHook>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/hooks?page={}&per_page={}",
+            "/orgs/{}/hooks?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -731,11 +811,24 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::AppsListInstallationsResponse> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/installations?page={}&per_page={}",
+            "/orgs/{}/installations?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -762,11 +855,24 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/invitations?page={}&per_page={}",
+            "/orgs/{}/invitations?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -877,12 +983,25 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Team>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/invitations/{}/teams?page={}&per_page={}",
+            "/orgs/{}/invitations/{}/teams?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&invitation_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -943,13 +1062,26 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("filter={}", filter));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("role={}", role));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/members?filter={}&page={}&per_page={}&role={}",
+            "/orgs/{}/members?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            filter,
-            format!("{}", page),
-            format!("{}", per_page),
-            role,
+            query
         );
 
         self.client.get(&url).await
@@ -972,11 +1104,20 @@ impl Orgs {
         filter: crate::types::OrgsListMembersFilter,
         role: crate::types::OrgsListMembersRole,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("filter={}", filter));
+        query_args.push(format!("role={}", role));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/members?filter={}&role={}",
+            "/orgs/{}/members?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            filter,
-            role,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -1151,12 +1292,25 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("filter={}", filter));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/outside_collaborators?filter={}&page={}&per_page={}",
+            "/orgs/{}/outside_collaborators?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            filter,
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -1178,10 +1332,19 @@ impl Orgs {
         org: &str,
         filter: crate::types::OrgsListMembersFilter,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("filter={}", filter));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/outside_collaborators?filter={}",
+            "/orgs/{}/outside_collaborators?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            filter,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -1260,11 +1423,24 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/public_members?page={}&per_page={}",
+            "/orgs/{}/public_members?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -1393,12 +1569,22 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::OrgMembership>> {
-        let url = format!(
-            "/user/memberships/orgs?page={}&per_page={}&state={}",
-            format!("{}", page),
-            format!("{}", per_page),
-            state,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/memberships/orgs?{}", query);
 
         self.client.get(&url).await
     }
@@ -1418,7 +1604,16 @@ impl Orgs {
         &self,
         state: crate::types::OrgMembershipState,
     ) -> Result<Vec<crate::types::OrgMembership>> {
-        let url = format!("/user/memberships/orgs?state={}", state,);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/memberships/orgs?{}", query);
 
         self.client.get_all_pages(&url).await
     }
@@ -1502,11 +1697,21 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::OrganizationSimple>> {
-        let url = format!(
-            "/user/orgs?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/orgs?{}", query);
 
         self.client.get(&url).await
     }
@@ -1556,11 +1761,24 @@ impl Orgs {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::OrganizationSimple>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/orgs?page={}&per_page={}",
+            "/users/{}/orgs?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await

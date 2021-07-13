@@ -15,75 +15,143 @@ pub struct Template {
 
 impl Template {
     pub fn compile(&self, query_params: BTreeMap<String, String>) -> String {
-        let mut out = "let url = ".to_string();
-        if self.components.is_empty() && query_params.is_empty() {
-            out.push_str(r#""".to_string();"#);
-        } else {
-            let mut has_params = false;
-            for c in self.components.iter() {
-                match c {
-                    Component::Constant(_) => (),
-                    Component::Parameter(_) => {
-                        has_params = true;
-                        break;
-                    }
+        let mut out = String::new();
+
+        let mut a = |s: &str| {
+            out.push_str(s);
+            out.push('\n');
+        };
+
+        if !query_params.is_empty() {
+            // Format the query params if they exist.
+            a("let mut query = String::new();");
+            a("let mut query_args: Vec<String> = Default::default();");
+
+            for (nam, value) in &query_params {
+                if value == "Option<chrono::DateTime<chrono::Utc>>" {
+                    a(&format!(
+                        r#"if let Some(date) = {} {{ query_args.push(format!("{}={{}}", &date.to_rfc3339())); }}"#,
+                        nam, nam
+                    ));
+                } else if value == "i64" || value == "i32" {
+                    a(&format!(
+                        r#"if {} > 0 {{ query_args.push(format!("{}={{}}", {})); }}"#,
+                        nam,
+                        nam.trim_end_matches('_'),
+                        nam
+                    ));
+                } else if value == "bool" {
+                    a(&format!(
+                        r#"if {} {{ query_args.push(format!("{}={{}}", {})); }}"#,
+                        nam,
+                        nam.trim_end_matches('_'),
+                        nam
+                    ));
+                } else if value == "&str" {
+                    a(&format!(
+                        r#"if !{}.is_empty() {{ query_args.push(format!("{}={{}}", {})); }}"#,
+                        nam,
+                        nam.trim_end_matches('_'),
+                        nam
+                    ));
+                } else if value == "&[String]" {
+                    // TODO: I have no idea how these should be seperated and the docs
+                    // don't give any answers either, for an array sent through query
+                    // params.
+                    // https://docs.github.com/en/rest/reference/migrations
+                    a(&format!(
+                        r#"if !{}.is_empty() {{ query_args.push(format!("{}={{}}", {}.join(" "))); }}"#,
+                        nam,
+                        nam.trim_end_matches('_'),
+                        nam
+                    ));
+                } else {
+                    a(&format!(
+                        r#"query_args.push(format!("{}={{}}", {}));"#,
+                        nam.trim_end_matches('_'),
+                        nam
+                    ));
                 }
             }
 
-            if !has_params && query_params.is_empty() {
-                out.push('"');
-                for c in self.components.iter() {
-                    out.push('/');
-                    match c {
-                        Component::Constant(n) => out.push_str(n),
-                        Component::Parameter(_) => (),
+            a(r#"for (i, n) in query_args.iter().enumerate() {
+                    if i > 0 {
+                        query.push('&');
                     }
+                    query.push_str(n);
+                }"#);
+        }
+
+        a("let url = ");
+        if self.components.is_empty() && query_params.is_empty() {
+            a(r#""".to_string();"#);
+
+            return out.to_string();
+        }
+
+        let mut has_params = false;
+        for c in self.components.iter() {
+            match c {
+                Component::Constant(_) => (),
+                Component::Parameter(_) => {
+                    has_params = true;
+                    break;
                 }
-                out.push_str("\".to_string();");
-            } else {
-                out.push_str("format!(\"");
-                for c in self.components.iter() {
-                    out.push('/');
-                    match c {
-                        Component::Constant(n) => out.push_str(n),
-                        Component::Parameter(_) => {
-                            out.push_str("{}");
-                        }
-                    }
-                }
-                if !query_params.is_empty() {
-                    out.push('?');
-                    for (i, key) in query_params.keys().enumerate() {
-                        if i > 0 {
-                            out.push('&');
-                        }
-                        out.push_str(&format!("{}={{}}", key));
-                    }
-                }
-                out.push_str("\",\n");
-                for c in self.components.iter() {
-                    if let Component::Parameter(n) = &c {
-                        if n == "type" || n == "ref" {
-                            out.push_str(&format!(
-                                "crate::progenitor_support::encode_path(&{}_.to_string()),",
-                                n
-                            ));
-                        } else {
-                            out.push_str(&format!(
-                                "crate::progenitor_support::encode_path(&{}.to_string()),",
-                                n
-                            ));
-                        }
-                    }
-                }
-                if !query_params.is_empty() {
-                    for key in query_params.values() {
-                        out.push_str(&format!("{}, ", key));
-                    }
-                }
-                out.push_str(");\n");
             }
         }
+
+        if !has_params && query_params.is_empty() {
+            out.push('"');
+            for c in self.components.iter() {
+                out.push('/');
+                match c {
+                    Component::Constant(n) => out.push_str(n),
+                    Component::Parameter(_) => (),
+                }
+            }
+            out.push_str("\".to_string();");
+
+            return out.to_string();
+        }
+
+        out.push_str("format!(\"");
+        for c in self.components.iter() {
+            out.push('/');
+            match c {
+                Component::Constant(n) => out.push_str(n),
+                Component::Parameter(_) => {
+                    out.push_str("{}");
+                }
+            }
+        }
+
+        if !query_params.is_empty() {
+            out.push_str("?{}");
+        }
+
+        out.push_str("\",\n");
+        for c in self.components.iter() {
+            if let Component::Parameter(n) = &c {
+                if n == "type" || n == "ref" {
+                    out.push_str(&format!(
+                        "crate::progenitor_support::encode_path(&{}_.to_string()),",
+                        n
+                    ));
+                } else {
+                    out.push_str(&format!(
+                        "crate::progenitor_support::encode_path(&{}.to_string()),",
+                        n
+                    ));
+                }
+            }
+        }
+
+        if !query_params.is_empty() {
+            out.push_str("query");
+        }
+
+        out.push_str(");\n");
+
         out
     }
 }

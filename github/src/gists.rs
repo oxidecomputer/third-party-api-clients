@@ -29,16 +29,26 @@ impl Gists {
      */
     pub async fn list(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let url = format!(
-            "/gists?page={}&per_page={}&since={}",
-            format!("{}", page),
-            format!("{}", per_page),
-            since,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("since={}", since));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/gists?{}", query);
 
         self.client.get(&url).await
     }
@@ -56,9 +66,18 @@ impl Gists {
      */
     pub async fn list_all(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let url = format!("/gists?since={}", since,);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("since={}", since));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/gists?{}", query);
 
         self.client.get_all_pages(&url).await
     }
@@ -106,16 +125,26 @@ impl Gists {
      */
     pub async fn list_public(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let url = format!(
-            "/gists/public?page={}&per_page={}&since={}",
-            format!("{}", page),
-            format!("{}", per_page),
-            since,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("since={}", since));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/gists/public?{}", query);
 
         self.client.get(&url).await
     }
@@ -135,9 +164,18 @@ impl Gists {
      */
     pub async fn list_all_public(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let url = format!("/gists/public?since={}", since,);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("since={}", since));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/gists/public?{}", query);
 
         self.client.get_all_pages(&url).await
     }
@@ -159,16 +197,26 @@ impl Gists {
      */
     pub async fn list_starred(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let url = format!(
-            "/gists/starred?page={}&per_page={}&since={}",
-            format!("{}", page),
-            format!("{}", per_page),
-            since,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("since={}", since));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/gists/starred?{}", query);
 
         self.client.get(&url).await
     }
@@ -186,9 +234,18 @@ impl Gists {
      */
     pub async fn list_all_starred(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let url = format!("/gists/starred?since={}", since,);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("since={}", since));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/gists/starred?{}", query);
 
         self.client.get_all_pages(&url).await
     }
@@ -289,11 +346,24 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::GistComment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/gists/{}/comments?page={}&per_page={}",
+            "/gists/{}/comments?{}",
             crate::progenitor_support::encode_path(&gist_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -457,11 +527,24 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::GistCommit>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/gists/{}/commits?page={}&per_page={}",
+            "/gists/{}/commits?{}",
             crate::progenitor_support::encode_path(&gist_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -508,11 +591,24 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::GistSimple>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/gists/{}/forks?page={}&per_page={}",
+            "/gists/{}/forks?{}",
             crate::progenitor_support::encode_path(&gist_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -669,16 +765,29 @@ impl Gists {
     pub async fn list_for_user(
         &self,
         username: &str,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("since={}", since));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/gists?page={}&per_page={}&since={}",
+            "/users/{}/gists?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            since,
+            query
         );
 
         self.client.get(&url).await
@@ -698,12 +807,21 @@ impl Gists {
     pub async fn list_all_for_user(
         &self,
         username: &str,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("since={}", since));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/gists?since={}",
+            "/users/{}/gists?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            since,
+            query
         );
 
         self.client.get_all_pages(&url).await

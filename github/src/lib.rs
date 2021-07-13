@@ -9,7 +9,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.1.3"
+//! octorust = "0.1.4"
 //! ```
 //!
 //! ## Basic example
@@ -21,13 +21,15 @@
 //! use octorust::{auth::Credentials, Client};
 //!
 //! let github = Client::new(
-//!     String::from("user-agent-name"),
-//!     Credentials::Token(String::from("personal-access-token")),
+//!   String::from("user-agent-name"),
+//!   Credentials::Token(
+//!     String::from("personal-access-token")
+//!   ),
 //! );
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.1.3/octorust/struct.Client.html#method.host) method.
+//! [Client#host](https://docs.rs/octorust/0.1.4/octorust/struct.Client.html#method.host) method.
 //!
 //! ## Feature flags
 //!
@@ -41,7 +43,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.1.3", features = ["httpcache"] }
+//! octorust = { version = "0.1.4", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -49,9 +51,9 @@
 //! Here is an example:
 //!
 //! ```
+//! use octorust::{auth::Credentials, Client};
 //! #[cfg(feature = "httpcache")]
 //! use octorust::http_cache::HttpCache;
-//! use octorust::{auth::Credentials, Client};
 //!
 //! #[cfg(feature = "httpcache")]
 //! let http_cache = HttpCache::in_home_dir();
@@ -60,7 +62,9 @@
 //! let github = Client::custom(
 //!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-//!     Credentials::Token(String::from("personal-access-token")),
+//!     Credentials::Token(
+//!       String::from("personal-access-token")
+//!     ),
 //!     reqwest::Client::builder().build().unwrap(),
 //! );
 //!
@@ -68,9 +72,11 @@
 //! let github = Client::custom(
 //!     "https://api.github.com",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-//!     Credentials::Token(String::from("personal-access-token")),
+//!     Credentials::Token(
+//!       String::from("personal-access-token")
+//!     ),
 //!     reqwest::Client::builder().build().unwrap(),
-//!     http_cache,
+//!     http_cache
 //! );
 //! ```
 //! ## Authenticating GitHub apps
@@ -82,12 +88,9 @@
 //! ```rust
 //! use std::env;
 //!
+//! use octorust::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
 //! #[cfg(feature = "httpcache")]
 //! use octorust::http_cache::FileBasedCache;
-//! use octorust::{
-//!     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
-//!     Client,
-//! };
 //!
 //! let app_id_str = env::var("GH_APP_ID").unwrap();
 //! let app_id = app_id_str.parse::<u64>().unwrap();
@@ -138,18 +141,25 @@
 //! way here. This extends that effort in a generated way so the library is
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
+//!
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(missing_docs)]
 
+pub mod auth;
+#[cfg(feature = "httpcache")]
+#[cfg_attr(doc_cfg, doc(cfg(feature = "httpcache")))]
+pub mod http_cache;
+pub mod types;
+#[doc(hidden)]
+pub mod utils;
 /// Endpoints to manage GitHub Actions using the REST API.
 pub mod actions;
 /// Activity APIs provide access to notifications, subscriptions, and timelines.
 pub mod activity;
 /// Information for integrations and installations.
 pub mod apps;
-pub mod auth;
 /// Monitor charges and usage from Actions and Packages.
 pub mod billing;
 /// Rich interactions with checks run by your integrations.
@@ -168,8 +178,6 @@ pub mod gists;
 pub mod git;
 /// View gitignore templates.
 pub mod gitignore;
-#[cfg(feature = "httpcache")]
-pub mod http_cache;
 /// Owner or admin management of users interactions.
 pub mod interactions;
 /// Interact with GitHub Issues.
@@ -206,18 +214,15 @@ pub mod search;
 pub mod secret_scanning;
 /// Interact with GitHub Teams.
 pub mod teams;
-pub mod types;
 /// Interact with and view information about users and also current user.
 pub mod users;
-#[doc(hidden)]
-pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
 const DEFAULT_HOST: &str = "https://api.github.com";
 
 mod progenitor_support {
-    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
+    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')
@@ -234,6 +239,7 @@ mod progenitor_support {
         utf8_percent_encode(pc, PATH_SET).to_string()
     }
 }
+
 
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
@@ -322,16 +328,10 @@ impl Client {
         self.credentials = credentials.into();
     }
 
-    fn credentials(
-        &self,
-        authentication: crate::auth::AuthenticationConstraint,
-    ) -> Option<&crate::auth::Credentials> {
+    fn credentials(&self, authentication: crate::auth::AuthenticationConstraint) -> Option<&crate::auth::Credentials> {
         match (authentication, self.credentials.as_ref()) {
             (crate::auth::AuthenticationConstraint::Unconstrained, creds) => creds,
-            (
-                crate::auth::AuthenticationConstraint::JWT,
-                creds @ Some(&crate::auth::Credentials::JWT(_)),
-            ) => creds,
+            (crate::auth::AuthenticationConstraint::JWT, creds @ Some(&crate::auth::Credentials::JWT(_))) => creds,
             (
                 crate::auth::AuthenticationConstraint::JWT,
                 Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
@@ -378,18 +378,12 @@ impl Client {
                     println!("App token is stale, refreshing");
                     let token_ref = apptoken.access_key.clone();
 
-                    let token = self
-                        .apps()
-                        .create_installation_access_token(
-                            apptoken.installation_id as i64,
-                            &types::AppsCreateInstallationAccessTokenRequest {
-                                permissions: Default::default(),
-                                repositories: Default::default(),
-                                repository_ids: Default::default(),
-                            },
-                        )
-                        .await
-                        .unwrap();
+                    let token = self.apps().create_installation_access_token(apptoken.installation_id as i64,
+                    &types::AppsCreateInstallationAccessTokenRequest{
+                        permissions: Default::default(),
+                        repositories: Default::default(),
+                        repository_ids: Default::default(),
+                    }).await.unwrap();
                     let auth = format!("token {}", &token.token);
                     *token_ref.lock().unwrap() = Some(token.token);
                     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
@@ -434,10 +428,7 @@ impl Client {
         req = req.header(http::header::USER_AGENT, &*instance.agent);
         req = req.header(
             http::header::ACCEPT,
-            &*format!(
-                "{}",
-                hyperx::header::qitem::<mime::Mime>(From::from(media_type))
-            ),
+            &*format!("{}", hyperx::header::qitem::<mime::Mime>(From::from(media_type))),
         );
 
         if let Some(auth_str) = auth {
@@ -489,41 +480,31 @@ impl Client {
                     }
                 }
             }
-            let parsed_response = if status == http::StatusCode::NO_CONTENT {
-                serde_json::from_str("null")
-            } else {
-                serde_json::from_slice::<Out>(&response_body)
-            };
+            let parsed_response = if status == http::StatusCode::NO_CONTENT { serde_json::from_str("null") } else { serde_json::from_slice::<Out>(&response_body) };
             parsed_response.map(|out| (link, out)).map_err(Error::from)
         } else if status == http::StatusCode::NOT_MODIFIED {
-            // only supported case is when client provides if-none-match
-            // header when cargo builds with --cfg feature="httpcache"
-            #[cfg(feature = "httpcache")]
-            {
-                let body = instance2.http_cache.lookup_body(&uri3).unwrap();
-                let out = serde_json::from_str::<Out>(&body).unwrap();
-                let link = match link {
-                    Some(link) => Ok(Some(link)),
-                    None => instance2
-                        .http_cache
-                        .lookup_next_link(&uri3)
-                        .map(|next_link| {
-                            next_link.map(|next| {
-                                let next = hyperx::header::LinkValue::new(next)
-                                    .push_rel(hyperx::header::RelationType::Next);
-                                hyperx::header::Link::new(vec![next])
-                            })
-                        }),
-                };
-                link.map(|link| (link, out))
-            }
-            #[cfg(not(feature = "httpcache"))]
-            {
-                unreachable!("this should not be reachable without the httpcache feature enabled")
-            }
+                // only supported case is when client provides if-none-match
+                // header when cargo builds with --cfg feature="httpcache"
+                #[cfg(feature = "httpcache")]
+                {
+                    let body = instance2.http_cache.lookup_body(&uri3).unwrap();
+                    let out = serde_json::from_str::<Out>(&body).unwrap();
+                    let link = match link {
+                        Some(link) => Ok(Some(link)),
+                        None => instance2.http_cache.lookup_next_link(&uri3)
+                                    .map(|next_link| next_link.map(|next| {
+                                        let next = hyperx::header::LinkValue::new(next).push_rel(hyperx::header::RelationType::Next);
+                                        hyperx::header::Link::new(vec![next])
+                                    }))
+                    };
+                    link.map(|link| (link, out))
+                }
+                #[cfg(not(feature = "httpcache"))]
+                {
+                    unreachable!("this should not be reachable without the httpcache feature enabled")
+                }
         } else {
-            println!(
-                "error status: {:?}, response payload: {}",
+            println!("error status: {:?}, response payload: {}",
                 status,
                 String::from_utf8_lossy(&response_body),
             );
@@ -533,20 +514,13 @@ impl Client {
                         .duration_since(std::time::UNIX_EPOCH)
                         .unwrap()
                         .as_secs();
-                    anyhow!(
-                        "rate limit exceeded, will reset in {} seconds",
-                        u64::from(reset) - now
-                    )
-                }
+                    anyhow!("rate limit exceeded, will reset in {} seconds", u64::from(reset) - now)
+                },
                 _ => {
                     if response_body.is_empty() {
                         anyhow!("code: {}, empty response", status)
                     } else {
-                        anyhow!(
-                            "code: {}, error: {:?}",
-                            status,
-                            serde_json::from_slice(&response_body)?
-                        )
+                        anyhow!("code: {}, error: {:?}", status, serde_json::from_slice(&response_body)?)
                     }
                 }
             };
@@ -565,9 +539,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let (_, r) = self
-            .request(method, uri, body, media_type, authentication)
-            .await?;
+        let (_ , r) = self.request(method, uri, body, media_type, authentication).await?;
         Ok(r)
     }
 
@@ -588,8 +560,7 @@ impl Client {
             None,
             media,
             self::auth::AuthenticationConstraint::Unconstrained,
-        )
-        .await
+        ).await
     }
 
     async fn get_all_pages<D>(&self, uri: &str) -> Result<Vec<D>>
@@ -609,14 +580,10 @@ impl Client {
             None,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
-        )
-        .await
+        ).await
     }
 
-    async fn get_pages_url<D>(
-        &self,
-        url: &reqwest::Url,
-    ) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -626,8 +593,7 @@ impl Client {
             None,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
-        )
-        .await
+        ).await
     }
 
     async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
@@ -639,8 +605,7 @@ impl Client {
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
-        )
-        .await
+        ).await
     }
 
     async fn post_media<D>(
@@ -659,16 +624,10 @@ impl Client {
             message,
             media,
             authentication,
-        )
-        .await
+        ).await
     }
 
-    async fn patch_media<D>(
-        &self,
-        uri: &str,
-        message: Option<reqwest::Body>,
-        media: crate::utils::MediaType,
-    ) -> Result<D>
+    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -678,32 +637,24 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
-        )
-        .await
+        ).await
     }
 
     async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.patch_media(uri, message, crate::utils::MediaType::Json)
-            .await
+        self.patch_media(uri, message, crate::utils::MediaType::Json).await
     }
 
     async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.put_media(uri, message, crate::utils::MediaType::Json)
-            .await
+        self.put_media(uri, message, crate::utils::MediaType::Json).await
     }
 
-    async fn put_media<D>(
-        &self,
-        uri: &str,
-        message: Option<reqwest::Body>,
-        media: crate::utils::MediaType,
-    ) -> Result<D>
+    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -713,8 +664,7 @@ impl Client {
             message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
-        )
-        .await
+        ).await
     }
 
     async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
@@ -727,12 +677,14 @@ impl Client {
             message,
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::Unconstrained,
-        )
-        .await
+        ).await
     }
 
     /// "unfold" paginated results of a vector of items
-    async fn unfold<D>(&self, uri: &str) -> Result<Vec<D>>
+    async fn unfold<D>(
+        &self,
+        uri: &str,
+    ) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -753,158 +705,159 @@ impl Client {
         Ok(global_items)
     }
 
-    /// Endpoints to manage GitHub Actions using the REST API.
-    pub fn actions(&self) -> actions::Actions {
-        actions::Actions::new(self.clone())
-    }
+/// Endpoints to manage GitHub Actions using the REST API.
+               pub fn actions(&self) -> actions::Actions {
+                    actions::Actions::new(self.clone())
+               }
 
-    /// Activity APIs provide access to notifications, subscriptions, and timelines.
-    pub fn activity(&self) -> activity::Activity {
-        activity::Activity::new(self.clone())
-    }
+/// Activity APIs provide access to notifications, subscriptions, and timelines.
+               pub fn activity(&self) -> activity::Activity {
+                    activity::Activity::new(self.clone())
+               }
 
-    /// Information for integrations and installations.
-    pub fn apps(&self) -> apps::Apps {
-        apps::Apps::new(self.clone())
-    }
+/// Information for integrations and installations.
+               pub fn apps(&self) -> apps::Apps {
+                    apps::Apps::new(self.clone())
+               }
 
-    /// Monitor charges and usage from Actions and Packages.
-    pub fn billing(&self) -> billing::Billing {
-        billing::Billing::new(self.clone())
-    }
+/// Monitor charges and usage from Actions and Packages.
+               pub fn billing(&self) -> billing::Billing {
+                    billing::Billing::new(self.clone())
+               }
 
-    /// Rich interactions with checks run by your integrations.
-    pub fn checks(&self) -> checks::Checks {
-        checks::Checks::new(self.clone())
-    }
+/// Rich interactions with checks run by your integrations.
+               pub fn checks(&self) -> checks::Checks {
+                    checks::Checks::new(self.clone())
+               }
 
-    /// Retrieve code scanning alerts from a repository.
-    pub fn code_scanning(&self) -> code_scanning::CodeScanning {
-        code_scanning::CodeScanning::new(self.clone())
-    }
+/// Retrieve code scanning alerts from a repository.
+               pub fn code_scanning(&self) -> code_scanning::CodeScanning {
+                    code_scanning::CodeScanning::new(self.clone())
+               }
 
-    /// Insight into codes of conduct for your communities.
-    pub fn codes_of_conduct(&self) -> codes_of_conduct::CodesOfConduct {
-        codes_of_conduct::CodesOfConduct::new(self.clone())
-    }
+/// Insight into codes of conduct for your communities.
+               pub fn codes_of_conduct(&self) -> codes_of_conduct::CodesOfConduct {
+                    codes_of_conduct::CodesOfConduct::new(self.clone())
+               }
 
-    /// List emojis available to use on GitHub.
-    pub fn emojis(&self) -> emojis::Emojis {
-        emojis::Emojis::new(self.clone())
-    }
+/// List emojis available to use on GitHub.
+               pub fn emojis(&self) -> emojis::Emojis {
+                    emojis::Emojis::new(self.clone())
+               }
 
-    /// Administer a GitHub enterprise.
-    pub fn enterprise_admin(&self) -> enterprise_admin::EnterpriseAdmin {
-        enterprise_admin::EnterpriseAdmin::new(self.clone())
-    }
+/// Administer a GitHub enterprise.
+               pub fn enterprise_admin(&self) -> enterprise_admin::EnterpriseAdmin {
+                    enterprise_admin::EnterpriseAdmin::new(self.clone())
+               }
 
-    /// View, modify your gists.
-    pub fn gists(&self) -> gists::Gists {
-        gists::Gists::new(self.clone())
-    }
+/// View, modify your gists.
+               pub fn gists(&self) -> gists::Gists {
+                    gists::Gists::new(self.clone())
+               }
 
-    /// Raw Git functionality.
-    pub fn git(&self) -> git::Git {
-        git::Git::new(self.clone())
-    }
+/// Raw Git functionality.
+               pub fn git(&self) -> git::Git {
+                    git::Git::new(self.clone())
+               }
 
-    /// View gitignore templates.
-    pub fn gitignore(&self) -> gitignore::Gitignore {
-        gitignore::Gitignore::new(self.clone())
-    }
+/// View gitignore templates.
+               pub fn gitignore(&self) -> gitignore::Gitignore {
+                    gitignore::Gitignore::new(self.clone())
+               }
 
-    /// Owner or admin management of users interactions.
-    pub fn interactions(&self) -> interactions::Interactions {
-        interactions::Interactions::new(self.clone())
-    }
+/// Owner or admin management of users interactions.
+               pub fn interactions(&self) -> interactions::Interactions {
+                    interactions::Interactions::new(self.clone())
+               }
 
-    /// Interact with GitHub Issues.
-    pub fn issues(&self) -> issues::Issues {
-        issues::Issues::new(self.clone())
-    }
+/// Interact with GitHub Issues.
+               pub fn issues(&self) -> issues::Issues {
+                    issues::Issues::new(self.clone())
+               }
 
-    /// View various OSS licenses.
-    pub fn licenses(&self) -> licenses::Licenses {
-        licenses::Licenses::new(self.clone())
-    }
+/// View various OSS licenses.
+               pub fn licenses(&self) -> licenses::Licenses {
+                    licenses::Licenses::new(self.clone())
+               }
 
-    /// Render Github flavored markdown.
-    pub fn markdown(&self) -> markdown::Markdown {
-        markdown::Markdown::new(self.clone())
-    }
+/// Render Github flavored markdown.
+               pub fn markdown(&self) -> markdown::Markdown {
+                    markdown::Markdown::new(self.clone())
+               }
 
-    /// Endpoints that give information about the API.
-    pub fn meta(&self) -> meta::Meta {
-        meta::Meta::new(self.clone())
-    }
+/// Endpoints that give information about the API.
+               pub fn meta(&self) -> meta::Meta {
+                    meta::Meta::new(self.clone())
+               }
 
-    /// Move projects to or from GitHub.
-    pub fn migrations(&self) -> migrations::Migrations {
-        migrations::Migrations::new(self.clone())
-    }
+/// Move projects to or from GitHub.
+               pub fn migrations(&self) -> migrations::Migrations {
+                    migrations::Migrations::new(self.clone())
+               }
 
-    /// Manage access of OAuth applications.
-    pub fn oauth_authorizations(&self) -> oauth_authorizations::OauthAuthorizations {
-        oauth_authorizations::OauthAuthorizations::new(self.clone())
-    }
+/// Manage access of OAuth applications.
+               pub fn oauth_authorizations(&self) -> oauth_authorizations::OauthAuthorizations {
+                    oauth_authorizations::OauthAuthorizations::new(self.clone())
+               }
 
-    /// Interact with GitHub Orgs.
-    pub fn orgs(&self) -> orgs::Orgs {
-        orgs::Orgs::new(self.clone())
-    }
+/// Interact with GitHub Orgs.
+               pub fn orgs(&self) -> orgs::Orgs {
+                    orgs::Orgs::new(self.clone())
+               }
 
-    /// Manage packages for authenticated users and organizations.
-    pub fn packages(&self) -> packages::Packages {
-        packages::Packages::new(self.clone())
-    }
+/// Manage packages for authenticated users and organizations.
+               pub fn packages(&self) -> packages::Packages {
+                    packages::Packages::new(self.clone())
+               }
 
-    /// Interact with GitHub Projects.
-    pub fn projects(&self) -> projects::Projects {
-        projects::Projects::new(self.clone())
-    }
+/// Interact with GitHub Projects.
+               pub fn projects(&self) -> projects::Projects {
+                    projects::Projects::new(self.clone())
+               }
 
-    /// Interact with GitHub Pull Requests.
-    pub fn pulls(&self) -> pulls::Pulls {
-        pulls::Pulls::new(self.clone())
-    }
+/// Interact with GitHub Pull Requests.
+               pub fn pulls(&self) -> pulls::Pulls {
+                    pulls::Pulls::new(self.clone())
+               }
 
-    /// Check your current rate limit status.
-    pub fn rate_limit(&self) -> rate_limit::RateLimit {
-        rate_limit::RateLimit::new(self.clone())
-    }
+/// Check your current rate limit status.
+               pub fn rate_limit(&self) -> rate_limit::RateLimit {
+                    rate_limit::RateLimit::new(self.clone())
+               }
 
-    /// Interact with reactions to various GitHub entities.
-    pub fn reactions(&self) -> reactions::Reactions {
-        reactions::Reactions::new(self.clone())
-    }
+/// Interact with reactions to various GitHub entities.
+               pub fn reactions(&self) -> reactions::Reactions {
+                    reactions::Reactions::new(self.clone())
+               }
 
-    /// Interact with GitHub Repos.
-    pub fn repos(&self) -> repos::Repos {
-        repos::Repos::new(self.clone())
-    }
+/// Interact with GitHub Repos.
+               pub fn repos(&self) -> repos::Repos {
+                    repos::Repos::new(self.clone())
+               }
 
-    /// Provisioning of GitHub organization membership for SCIM-enabled providers.
-    pub fn scim(&self) -> scim::Scim {
-        scim::Scim::new(self.clone())
-    }
+/// Provisioning of GitHub organization membership for SCIM-enabled providers.
+               pub fn scim(&self) -> scim::Scim {
+                    scim::Scim::new(self.clone())
+               }
 
-    /// Look for stuff on GitHub.
-    pub fn search(&self) -> search::Search {
-        search::Search::new(self.clone())
-    }
+/// Look for stuff on GitHub.
+               pub fn search(&self) -> search::Search {
+                    search::Search::new(self.clone())
+               }
 
-    /// Retrieve secret scanning alerts from a repository.
-    pub fn secret_scanning(&self) -> secret_scanning::SecretScanning {
-        secret_scanning::SecretScanning::new(self.clone())
-    }
+/// Retrieve secret scanning alerts from a repository.
+               pub fn secret_scanning(&self) -> secret_scanning::SecretScanning {
+                    secret_scanning::SecretScanning::new(self.clone())
+               }
 
-    /// Interact with GitHub Teams.
-    pub fn teams(&self) -> teams::Teams {
-        teams::Teams::new(self.clone())
-    }
+/// Interact with GitHub Teams.
+               pub fn teams(&self) -> teams::Teams {
+                    teams::Teams::new(self.clone())
+               }
 
-    /// Interact with and view information about users and also current user.
-    pub fn users(&self) -> users::Users {
-        users::Users::new(self.clone())
-    }
+/// Interact with and view information about users and also current user.
+               pub fn users(&self) -> users::Users {
+                    users::Users::new(self.clone())
+               }
+
 }

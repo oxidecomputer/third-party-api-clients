@@ -233,13 +233,26 @@ impl Git {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::GitRef>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/git/matching-refs/{}?page={}&per_page={}",
+            "/repos/{}/{}/git/matching-refs/{}?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -590,12 +603,23 @@ impl Git {
         tree_sha: &str,
         recursive: &str,
     ) -> Result<crate::types::GitTree> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !recursive.is_empty() {
+            query_args.push(format!("recursive={}", recursive));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/git/trees/{}?recursive={}",
+            "/repos/{}/{}/git/trees/{}?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&tree_sha.to_string()),
-            recursive.to_string(),
+            query
         );
 
         self.client.get(&url).await

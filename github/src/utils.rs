@@ -361,3 +361,19 @@ pub mod deserialize_null_f64 {
         Ok(s)
     }
 }
+
+pub fn zero_i32(num: &i32) -> bool {
+    *num == 0
+}
+
+pub fn zero_i64(num: &i64) -> bool {
+    *num == 0
+}
+
+pub fn zero_f32(num: &f32) -> bool {
+    *num == 0.0
+}
+
+pub fn zero_f64(num: &f64) -> bool {
+    *num == 0.0
+}

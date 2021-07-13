@@ -33,12 +33,24 @@ impl Licenses {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::License>> {
-        let url = format!(
-            "/licenses?featured={}&page={}&per_page={}",
-            format!("{}", featured),
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if featured {
+            query_args.push(format!("featured={}", featured));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/licenses?{}", query);
 
         self.client.get(&url).await
     }
@@ -58,7 +70,18 @@ impl Licenses {
         &self,
         featured: bool,
     ) -> Result<Vec<crate::types::License>> {
-        let url = format!("/licenses?featured={}", format!("{}", featured),);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if featured {
+            query_args.push(format!("featured={}", featured));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/licenses?{}", query);
 
         self.client.get_all_pages(&url).await
     }

@@ -56,12 +56,27 @@ impl Scim {
         count: i64,
         filter: &str,
     ) -> Result<crate::types::ScimUserList> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if count > 0 {
+            query_args.push(format!("count={}", count));
+        }
+        if !filter.is_empty() {
+            query_args.push(format!("filter={}", filter));
+        }
+        if start_index > 0 {
+            query_args.push(format!("start_index={}", start_index));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/scim/v2/organizations/{}/Users?count={}&filter={}&start_index={}",
+            "/scim/v2/organizations/{}/Users?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            format!("{}", count),
-            filter.to_string(),
-            format!("{}", start_index),
+            query
         );
 
         self.client.get(&url).await

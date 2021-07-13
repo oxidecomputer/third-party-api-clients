@@ -147,13 +147,26 @@ impl Checks {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::CheckAnnotation>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/check-runs/{}/annotations?page={}&per_page={}",
+            "/repos/{}/{}/check-runs/{}/annotations?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -322,17 +335,31 @@ impl Checks {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ChecksListRefResponse> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !check_name.is_empty() {
+            query_args.push(format!("check_name={}", check_name));
+        }
+        query_args.push(format!("filter={}", filter));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("status={}", status));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/check-suites/{}/check-runs?check_name={}&filter={}&page={}&per_page={}&\
-             status={}",
+            "/repos/{}/{}/check-suites/{}/check-runs?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_suite_id.to_string()),
-            check_name.to_string(),
-            filter,
-            format!("{}", page),
-            format!("{}", per_page),
-            status,
+            query
         );
 
         self.client.get(&url).await
@@ -406,18 +433,34 @@ impl Checks {
         page: i64,
         app_id: i64,
     ) -> Result<crate::types::ChecksListRefResponse> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if app_id > 0 {
+            query_args.push(format!("app_id={}", app_id));
+        }
+        if !check_name.is_empty() {
+            query_args.push(format!("check_name={}", check_name));
+        }
+        query_args.push(format!("filter={}", filter));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("status={}", status));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/commits/{}/check-runs?app_id={}&check_name={}&filter={}&page={}&\
-             per_page={}&status={}",
+            "/repos/{}/{}/commits/{}/check-runs?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", app_id),
-            check_name.to_string(),
-            filter,
-            format!("{}", page),
-            format!("{}", per_page),
-            status,
+            query
         );
 
         self.client.get(&url).await
@@ -454,15 +497,32 @@ impl Checks {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ChecksListSuitesRefResponse> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if app_id > 0 {
+            query_args.push(format!("app_id={}", app_id));
+        }
+        if !check_name.is_empty() {
+            query_args.push(format!("check_name={}", check_name));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/commits/{}/check-suites?app_id={}&check_name={}&page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/check-suites?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", app_id),
-            check_name.to_string(),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await

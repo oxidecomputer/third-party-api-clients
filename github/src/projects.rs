@@ -35,12 +35,25 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Project>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/projects?page={}&per_page={}&state={}",
+            "/orgs/{}/projects?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            state,
+            query
         );
 
         self.client.get(&url).await
@@ -62,10 +75,19 @@ impl Projects {
         org: &str,
         state: crate::types::IssuesListState,
     ) -> Result<Vec<crate::types::Project>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/projects?state={}",
+            "/orgs/{}/projects?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            state,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -306,12 +328,25 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::ProjectCard>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("archived_state={}", archived_state));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/projects/columns/{}/cards?archived_state={}&page={}&per_page={}",
+            "/projects/columns/{}/cards?{}",
             crate::progenitor_support::encode_path(&column_id.to_string()),
-            archived_state,
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -333,10 +368,19 @@ impl Projects {
         column_id: i64,
         archived_state: crate::types::ArchivedState,
     ) -> Result<Vec<crate::types::ProjectCard>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("archived_state={}", archived_state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/projects/columns/{}/cards?archived_state={}",
+            "/projects/columns/{}/cards?{}",
             crate::progenitor_support::encode_path(&column_id.to_string()),
-            archived_state,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -505,12 +549,25 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("affiliation={}", affiliation));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/projects/{}/collaborators?affiliation={}&page={}&per_page={}",
+            "/projects/{}/collaborators?{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
-            affiliation,
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -532,10 +589,19 @@ impl Projects {
         project_id: i64,
         affiliation: crate::types::Affiliation,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("affiliation={}", affiliation));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/projects/{}/collaborators?affiliation={}",
+            "/projects/{}/collaborators?{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
-            affiliation,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -648,11 +714,24 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::ProjectColumn>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/projects/{}/columns?page={}&per_page={}",
+            "/projects/{}/columns?{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -737,13 +816,26 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Project>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/projects?page={}&per_page={}&state={}",
+            "/repos/{}/{}/projects?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            state,
+            query
         );
 
         self.client.get(&url).await
@@ -766,11 +858,20 @@ impl Projects {
         repo: &str,
         state: crate::types::IssuesListState,
     ) -> Result<Vec<crate::types::Project>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/projects?state={}",
+            "/repos/{}/{}/projects?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            state,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -855,12 +956,25 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Project>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/projects?page={}&per_page={}&state={}",
+            "/users/{}/projects?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            state,
+            query
         );
 
         self.client.get(&url).await
@@ -882,10 +996,19 @@ impl Projects {
         username: &str,
         state: crate::types::IssuesListState,
     ) -> Result<Vec<crate::types::Project>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("state={}", state));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/projects?state={}",
+            "/users/{}/projects?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            state,
+            query
         );
 
         self.client.get_all_pages(&url).await

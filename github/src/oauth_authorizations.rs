@@ -35,12 +35,24 @@ impl OauthAuthorizations {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<crate::types::ApplicationGrant>> {
-        let url = format!(
-            "/applications/grants?client_id={}&page={}&per_page={}",
-            client_id.to_string(),
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !client_id.is_empty() {
+            query_args.push(format!("client_id={}", client_id));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/applications/grants?{}", query);
 
         self.client.get(&url).await
     }
@@ -62,7 +74,18 @@ impl OauthAuthorizations {
         &self,
         client_id: &str,
     ) -> Result<Vec<crate::types::ApplicationGrant>> {
-        let url = format!("/applications/grants?client_id={}", client_id.to_string(),);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !client_id.is_empty() {
+            query_args.push(format!("client_id={}", client_id));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/applications/grants?{}", query);
 
         self.client.get_all_pages(&url).await
     }
@@ -134,12 +157,24 @@ impl OauthAuthorizations {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<crate::types::Authorization>> {
-        let url = format!(
-            "/authorizations?client_id={}&page={}&per_page={}",
-            client_id.to_string(),
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !client_id.is_empty() {
+            query_args.push(format!("client_id={}", client_id));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/authorizations?{}", query);
 
         self.client.get(&url).await
     }
@@ -159,7 +194,18 @@ impl OauthAuthorizations {
         &self,
         client_id: &str,
     ) -> Result<Vec<crate::types::Authorization>> {
-        let url = format!("/authorizations?client_id={}", client_id.to_string(),);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !client_id.is_empty() {
+            query_args.push(format!("client_id={}", client_id));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/authorizations?{}", query);
 
         self.client.get_all_pages(&url).await
     }

@@ -39,14 +39,27 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("sort={}", sort));
+        query_args.push(format!("type={}", type_));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/repos?direction={}&page={}&per_page={}&sort={}&type={}",
+            "/orgs/{}/repos?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            direction,
-            format!("{}", page),
-            format!("{}", per_page),
-            sort,
-            type_,
+            query
         );
 
         self.client.get(&url).await
@@ -70,12 +83,21 @@ impl Repos {
         sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        query_args.push(format!("sort={}", sort));
+        query_args.push(format!("type={}", type_));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/orgs/{}/repos?direction={}&sort={}&type={}",
+            "/orgs/{}/repos?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            direction,
-            sort,
-            type_,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -279,13 +301,28 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::ShortBranch>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if protected {
+            query_args.push(format!("protected={}", protected));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/branches?page={}&per_page={}&protected={}",
+            "/repos/{}/{}/branches?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            format!("{}", protected),
+            query
         );
 
         self.client.get(&url).await
@@ -308,11 +345,22 @@ impl Repos {
         repo: &str,
         protected: bool,
     ) -> Result<Vec<crate::types::ShortBranch>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if protected {
+            query_args.push(format!("protected={}", protected));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/branches?protected={}",
+            "/repos/{}/{}/branches?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", protected),
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -1747,13 +1795,26 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Collaborator>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("affiliation={}", affiliation));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/collaborators?affiliation={}&page={}&per_page={}",
+            "/repos/{}/{}/collaborators?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            affiliation,
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -1778,11 +1839,20 @@ impl Repos {
         repo: &str,
         affiliation: crate::types::Affiliation,
     ) -> Result<Vec<crate::types::Collaborator>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("affiliation={}", affiliation));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/collaborators?affiliation={}",
+            "/repos/{}/{}/collaborators?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            affiliation,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -1945,12 +2015,25 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::CommitComment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/comments?page={}&per_page={}",
+            "/repos/{}/{}/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2137,22 +2220,41 @@ impl Repos {
         sha: &str,
         path: &str,
         author: &str,
-        since: chrono::DateTime<chrono::Utc>,
-        until: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        until: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Tree>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !author.is_empty() {
+            query_args.push(format!("author={}", author));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if !path.is_empty() {
+            query_args.push(format!("path={}", path));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !sha.is_empty() {
+            query_args.push(format!("sha={}", sha));
+        }
+        query_args.push(format!("since={}", since));
+        query_args.push(format!("until={}", until));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/commits?author={}&page={}&path={}&per_page={}&sha={}&since={}&until={}",
+            "/repos/{}/{}/commits?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            author.to_string(),
-            format!("{}", page),
-            path.to_string(),
-            format!("{}", per_page),
-            sha.to_string(),
-            since,
-            until,
+            query
         );
 
         self.client.get(&url).await
@@ -2203,18 +2305,33 @@ impl Repos {
         sha: &str,
         path: &str,
         author: &str,
-        since: chrono::DateTime<chrono::Utc>,
-        until: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        until: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Tree>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !author.is_empty() {
+            query_args.push(format!("author={}", author));
+        }
+        if !path.is_empty() {
+            query_args.push(format!("path={}", path));
+        }
+        if !sha.is_empty() {
+            query_args.push(format!("sha={}", sha));
+        }
+        query_args.push(format!("since={}", since));
+        query_args.push(format!("until={}", until));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/commits?author={}&path={}&sha={}&since={}&until={}",
+            "/repos/{}/{}/commits?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            author.to_string(),
-            path.to_string(),
-            sha.to_string(),
-            since,
-            until,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -2307,13 +2424,26 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::CommitComment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/commits/{}/comments?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&commit_sha.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2410,13 +2540,26 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestSimple>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/commits/{}/pulls?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/pulls?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&commit_sha.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2509,13 +2652,26 @@ impl Repos {
         per_page: i64,
         ref_: &str,
     ) -> Result<crate::types::Tree> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/commits/{}?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2554,13 +2710,26 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::CombinedCommitStatus> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/commits/{}/status?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/status?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2593,13 +2762,26 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Status>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/commits/{}/statuses?page={}&per_page={}",
+            "/repos/{}/{}/commits/{}/statuses?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&ref_.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2737,13 +2919,26 @@ impl Repos {
         per_page: i64,
         basehead: &str,
     ) -> Result<crate::types::CommitComparison> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/compare/{}?page={}&per_page={}",
+            "/repos/{}/{}/compare/{}?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&basehead.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -2803,12 +2998,23 @@ impl Repos {
         path: &str,
         ref_: &str,
     ) -> Result<Vec<crate::types::Entries>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !ref_.is_empty() {
+            query_args.push(format!("ref={}", ref_));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/contents/{}?ref={}",
+            "/repos/{}/{}/contents/{}?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&path.to_string()),
-            ref_,
+            query
         );
 
         self.client.get(&url).await
@@ -2863,12 +3069,23 @@ impl Repos {
         path: &str,
         ref_: &str,
     ) -> Result<Vec<crate::types::Entries>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !ref_.is_empty() {
+            query_args.push(format!("ref={}", ref_));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/contents/{}?ref={}",
+            "/repos/{}/{}/contents/{}?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&path.to_string()),
-            ref_,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -2981,13 +3198,28 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Contributor>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !anon.is_empty() {
+            query_args.push(format!("anon={}", anon));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/contributors?anon={}&page={}&per_page={}",
+            "/repos/{}/{}/contributors?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            anon.to_string(),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -3012,11 +3244,22 @@ impl Repos {
         repo: &str,
         anon: &str,
     ) -> Result<Vec<crate::types::Contributor>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !anon.is_empty() {
+            query_args.push(format!("anon={}", anon));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/contributors?anon={}",
+            "/repos/{}/{}/contributors?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            anon.to_string(),
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -3053,16 +3296,37 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Deployment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !environment.is_empty() {
+            query_args.push(format!("environment={}", environment));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !ref_.is_empty() {
+            query_args.push(format!("ref={}", ref_));
+        }
+        if !sha.is_empty() {
+            query_args.push(format!("sha={}", sha));
+        }
+        if !task.is_empty() {
+            query_args.push(format!("task={}", task));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/deployments?environment={}&page={}&per_page={}&ref={}&sha={}&task={}",
+            "/repos/{}/{}/deployments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            environment.to_string(),
-            format!("{}", page),
-            format!("{}", per_page),
-            ref_,
-            sha.to_string(),
-            task.to_string(),
+            query
         );
 
         self.client.get(&url).await
@@ -3088,14 +3352,31 @@ impl Repos {
         task: &str,
         environment: &str,
     ) -> Result<Vec<crate::types::Deployment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !environment.is_empty() {
+            query_args.push(format!("environment={}", environment));
+        }
+        if !ref_.is_empty() {
+            query_args.push(format!("ref={}", ref_));
+        }
+        if !sha.is_empty() {
+            query_args.push(format!("sha={}", sha));
+        }
+        if !task.is_empty() {
+            query_args.push(format!("task={}", task));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/deployments?environment={}&ref={}&sha={}&task={}",
+            "/repos/{}/{}/deployments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            environment.to_string(),
-            ref_,
-            sha.to_string(),
-            task.to_string(),
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -3273,13 +3554,26 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::DeploymentStatus>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/deployments/{}/statuses?page={}&per_page={}",
+            "/repos/{}/{}/deployments/{}/statuses?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&deployment_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -3588,13 +3882,26 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("sort={}", sort));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/forks?page={}&per_page={}&sort={}",
+            "/repos/{}/{}/forks?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
-            sort,
+            query
         );
 
         self.client.get(&url).await
@@ -3617,11 +3924,20 @@ impl Repos {
         repo: &str,
         sort: crate::types::ReposListForksSort,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("sort={}", sort));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/forks?sort={}",
+            "/repos/{}/{}/forks?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            sort,
+            query
         );
 
         self.client.get_all_pages(&url).await
@@ -3686,12 +4002,25 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Hook>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/hooks?page={}&per_page={}",
+            "/repos/{}/{}/hooks?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -4000,12 +4329,25 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::RepositoryInvitation>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/invitations?page={}&per_page={}",
+            "/repos/{}/{}/invitations?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -4127,12 +4469,25 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::DeployKey>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/keys?page={}&per_page={}",
+            "/repos/{}/{}/keys?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -4451,12 +4806,25 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PageBuild>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/pages/builds?page={}&per_page={}",
+            "/repos/{}/{}/pages/builds?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -4631,11 +4999,22 @@ impl Repos {
         repo: &str,
         ref_: &str,
     ) -> Result<crate::types::ContentFile> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !ref_.is_empty() {
+            query_args.push(format!("ref={}", ref_));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/readme?ref={}",
+            "/repos/{}/{}/readme?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            ref_,
+            query
         );
 
         self.client.get(&url).await
@@ -4666,12 +5045,23 @@ impl Repos {
         dir: &str,
         ref_: &str,
     ) -> Result<crate::types::ContentFile> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !ref_.is_empty() {
+            query_args.push(format!("ref={}", ref_));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/readme/{}?ref={}",
+            "/repos/{}/{}/readme/{}?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&dir.to_string()),
-            ref_,
+            query
         );
 
         self.client.get(&url).await
@@ -4702,12 +5092,25 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Release>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/releases?page={}&per_page={}",
+            "/repos/{}/{}/releases?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -5050,13 +5453,26 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::ReleaseAsset>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/releases/{}/assets?page={}&per_page={}",
+            "/repos/{}/{}/releases/{}/assets?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&release_id.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -5132,13 +5548,26 @@ impl Repos {
         label: &str,
         body: T,
     ) -> Result<crate::types::ReleaseAsset> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !label.is_empty() {
+            query_args.push(format!("label={}", label));
+        }
+        if !name.is_empty() {
+            query_args.push(format!("name={}", name));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/releases/{}/assets?label={}&name={}",
+            "/repos/{}/{}/releases/{}/assets?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&release_id.to_string()),
-            label.to_string(),
-            name.to_string(),
+            query
         );
 
         self.client.post(&url, Some(body.into())).await
@@ -5460,12 +5889,25 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Tag>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/tags?page={}&per_page={}",
+            "/repos/{}/{}/tags?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -5549,12 +5991,25 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Team>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/teams?page={}&per_page={}",
+            "/repos/{}/{}/teams?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -5604,12 +6059,25 @@ impl Repos {
         page: i64,
         per_page: i64,
     ) -> Result<crate::types::Topic> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/topics?page={}&per_page={}",
+            "/repos/{}/{}/topics?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -5670,11 +6138,20 @@ impl Repos {
         repo: &str,
         per: crate::types::Per,
     ) -> Result<crate::types::CloneTraffic> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("per={}", per));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/traffic/clones?per={}",
+            "/repos/{}/{}/traffic/clones?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            per,
+            query
         );
 
         self.client.get(&url).await
@@ -5807,11 +6284,20 @@ impl Repos {
         repo: &str,
         per: crate::types::Per,
     ) -> Result<crate::types::ViewTraffic> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("per={}", per));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/repos/{}/{}/traffic/views?per={}",
+            "/repos/{}/{}/traffic/views?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            per,
+            query
         );
 
         self.client.get(&url).await
@@ -6016,7 +6502,18 @@ impl Repos {
      * * `since: i64` -- A repository ID. Only return repositories with an ID greater than this ID.
      */
     pub async fn list_public(&self, since: i64) -> Result<Vec<crate::types::MinimalRepository>> {
-        let url = format!("/repositories?since={}", format!("{}", since),);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if since > 0 {
+            query_args.push(format!("since={}", since));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/repositories?{}", query);
 
         self.client.get(&url).await
     }
@@ -6040,7 +6537,18 @@ impl Repos {
         &self,
         since: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
-        let url = format!("/repositories?since={}", format!("{}", since),);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if since > 0 {
+            query_args.push(format!("since={}", since));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/repositories?{}", query);
 
         self.client.get_all_pages(&url).await
     }
@@ -6082,22 +6590,33 @@ impl Repos {
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
-        since: chrono::DateTime<chrono::Utc>,
-        before: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        before: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Repository>> {
-        let url = format!(
-            "/user/repos?affiliation={}&before={}&direction={}&page={}&per_page={}&since={}&\
-             sort={}&type={}&visibility={}",
-            affiliation.to_string(),
-            before,
-            direction,
-            format!("{}", page),
-            format!("{}", per_page),
-            since,
-            sort,
-            type_,
-            visibility,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !affiliation.is_empty() {
+            query_args.push(format!("affiliation={}", affiliation));
+        }
+        query_args.push(format!("before={}", before));
+        query_args.push(format!("direction={}", direction));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("since={}", since));
+        query_args.push(format!("sort={}", sort));
+        query_args.push(format!("type={}", type_));
+        query_args.push(format!("visibility={}", visibility));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/repos?{}", query);
 
         self.client.get(&url).await
     }
@@ -6122,20 +6641,27 @@ impl Repos {
         type_: crate::types::ReposListType,
         sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
-        before: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        before: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Repository>> {
-        let url = format!(
-            "/user/repos?affiliation={}&before={}&direction={}&since={}&sort={}&type={}&\
-             visibility={}",
-            affiliation.to_string(),
-            before,
-            direction,
-            since,
-            sort,
-            type_,
-            visibility,
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !affiliation.is_empty() {
+            query_args.push(format!("affiliation={}", affiliation));
+        }
+        query_args.push(format!("before={}", before));
+        query_args.push(format!("direction={}", direction));
+        query_args.push(format!("since={}", since));
+        query_args.push(format!("sort={}", sort));
+        query_args.push(format!("type={}", type_));
+        query_args.push(format!("visibility={}", visibility));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/repos?{}", query);
 
         self.client.get_all_pages(&url).await
     }
@@ -6188,11 +6714,21 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::RepositoryInvitation>> {
-        let url = format!(
-            "/user/repository_invitations?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/repository_invitations?{}", query);
 
         self.client.get(&url).await
     }
@@ -6286,14 +6822,27 @@ impl Repos {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        query_args.push(format!("sort={}", sort));
+        query_args.push(format!("type={}", type_));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/repos?direction={}&page={}&per_page={}&sort={}&type={}",
+            "/users/{}/repos?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            direction,
-            format!("{}", page),
-            format!("{}", per_page),
-            sort,
-            type_,
+            query
         );
 
         self.client.get(&url).await
@@ -6317,12 +6866,21 @@ impl Repos {
         sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("direction={}", direction));
+        query_args.push(format!("sort={}", sort));
+        query_args.push(format!("type={}", type_));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/repos?direction={}&sort={}&type={}",
+            "/users/{}/repos?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            direction,
-            sort,
-            type_,
+            query
         );
 
         self.client.get_all_pages(&url).await

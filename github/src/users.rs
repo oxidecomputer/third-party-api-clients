@@ -187,11 +187,21 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Email>> {
-        let url = format!(
-            "/user/emails?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/emails?{}", query);
 
         self.client.get(&url).await
     }
@@ -275,11 +285,21 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
-        let url = format!(
-            "/user/followers?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/followers?{}", query);
 
         self.client.get(&url).await
     }
@@ -321,11 +341,21 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
-        let url = format!(
-            "/user/following?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/following?{}", query);
 
         self.client.get(&url).await
     }
@@ -433,11 +463,21 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::GpgKey>> {
-        let url = format!(
-            "/user/gpg_keys?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/gpg_keys?{}", query);
 
         self.client.get(&url).await
     }
@@ -546,11 +586,21 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Key>> {
-        let url = format!(
-            "/user/keys?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/keys?{}", query);
 
         self.client.get(&url).await
     }
@@ -661,11 +711,21 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Email>> {
-        let url = format!(
-            "/user/public_emails?page={}&per_page={}",
-            format!("{}", page),
-            format!("{}", per_page),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/user/public_emails?{}", query);
 
         self.client.get(&url).await
     }
@@ -705,11 +765,21 @@ impl Users {
      * * `per_page: i64` -- Results per page (max 100).
      */
     pub async fn list(&self, since: i64, per_page: i64) -> Result<Vec<crate::types::User>> {
-        let url = format!(
-            "/users?per_page={}&since={}",
-            format!("{}", per_page),
-            format!("{}", since),
-        );
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if since > 0 {
+            query_args.push(format!("since={}", since));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/users?{}", query);
 
         self.client.get(&url).await
     }
@@ -728,7 +798,18 @@ impl Users {
      * FROM: <https://docs.github.com/rest/reference/users#list-users>
      */
     pub async fn list_all(&self, since: i64) -> Result<Vec<crate::types::User>> {
-        let url = format!("/users?since={}", format!("{}", since),);
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if since > 0 {
+            query_args.push(format!("since={}", since));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/users?{}", query);
 
         self.client.get_all_pages(&url).await
     }
@@ -782,11 +863,24 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/followers?page={}&per_page={}",
+            "/users/{}/followers?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -836,11 +930,24 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/following?page={}&per_page={}",
+            "/users/{}/following?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -914,11 +1021,24 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::GpgKey>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/gpg_keys?page={}&per_page={}",
+            "/users/{}/gpg_keys?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
@@ -975,11 +1095,22 @@ impl Users {
         subject_type: crate::types::SubjectType,
         subject_id: &str,
     ) -> Result<crate::types::Hovercard> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !subject_id.is_empty() {
+            query_args.push(format!("subject_id={}", subject_id));
+        }
+        query_args.push(format!("subject_type={}", subject_type));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/hovercard?subject_id={}&subject_type={}",
+            "/users/{}/hovercard?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            subject_id.to_string(),
-            subject_type,
+            query
         );
 
         self.client.get(&url).await
@@ -1006,11 +1137,24 @@ impl Users {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::KeySimple>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
         let url = format!(
-            "/users/{}/keys?page={}&per_page={}",
+            "/users/{}/keys?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            format!("{}", page),
-            format!("{}", per_page),
+            query
         );
 
         self.client.get(&url).await
