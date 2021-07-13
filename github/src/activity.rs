@@ -41,6 +41,21 @@ impl Activity {
     }
 
     /**
+     * List public events.
+     *
+     * This function performs a `GET` to the `/events` endpoint.
+     * As opposed to `activity_list_public_events`, this function returns all the pages of the request at once.
+     *
+     * We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago.
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-public-events>
+     */
+    pub async fn list_public_events(&self) -> Result<Vec<crate::types::Event>> {
+        let url = "/events".to_string();
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get feeds.
      *
      * This function performs a `GET` to the `/feeds` endpoint.
@@ -99,6 +114,30 @@ impl Activity {
     }
 
     /**
+     * List public events for a network of repositories.
+     *
+     * This function performs a `GET` to the `/networks/{owner}/{repo}/events` endpoint.
+     * As opposed to `activity_list_public_events_for_repo_network`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-network-of-repositories>
+     */
+    pub async fn list_public_events_for_repo_network(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::Event>> {
+        let url = format!(
+            "/networks/{}/{}/events",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List notifications for the authenticated user.
      *
      * This function performs a `GET` to the `/notifications` endpoint.
@@ -136,6 +175,34 @@ impl Activity {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List notifications for the authenticated user.
+     *
+     * This function performs a `GET` to the `/notifications` endpoint.
+     * As opposed to `activity_list_notifications_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * List all notifications for the current user, sorted by most recently updated.
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-notifications-for-the-authenticated-user>
+     */
+    pub async fn list_notifications_for_authenticated_user(
+        &self,
+        all: bool,
+        participating: bool,
+        since: chrono::DateTime<chrono::Utc>,
+        before: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::Thread>> {
+        let url = format!(
+            "/notifications?all={}&before={}&participating={}&since={}",
+            format!("{}", all),
+            before,
+            format!("{}", participating),
+            since,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -320,6 +387,25 @@ impl Activity {
     }
 
     /**
+     * List public organization events.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/events` endpoint.
+     * As opposed to `activity_list_public_org_events`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-public-organization-events>
+     */
+    pub async fn list_public_org_events(&self, org: &str) -> Result<Vec<crate::types::Event>> {
+        let url = format!(
+            "/orgs/{}/events",
+            crate::progenitor_support::encode_path(&org.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List repository events.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/events` endpoint.
@@ -351,6 +437,30 @@ impl Activity {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repository events.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/events` endpoint.
+     * As opposed to `activity_list_repo_events`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-repository-events>
+     */
+    pub async fn list_repo_events(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::Event>> {
+        let url = format!(
+            "/repos/{}/{}/events",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -398,6 +508,38 @@ impl Activity {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repository notifications for the authenticated user.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/notifications` endpoint.
+     * As opposed to `activity_list_repo_notifications_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * List all notifications for the current user.
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user>
+     */
+    pub async fn list_repo_notifications_for_authenticated_user(
+        &self,
+        owner: &str,
+        repo: &str,
+        all: bool,
+        participating: bool,
+        since: chrono::DateTime<chrono::Utc>,
+        before: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::Thread>> {
+        let url = format!(
+            "/repos/{}/{}/notifications?all={}&before={}&participating={}&since={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            format!("{}", all),
+            before,
+            format!("{}", participating),
+            since,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -471,6 +613,32 @@ impl Activity {
     }
 
     /**
+     * List stargazers.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/stargazers` endpoint.
+     * As opposed to `activity_list_stargazers_for_repo`, this function returns all the pages of the request at once.
+     *
+     * Lists the people that have starred the repository.
+     *
+     * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-stargazers>
+     */
+    pub async fn list_stargazers_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::User>> {
+        let url = format!(
+            "/repos/{}/{}/stargazers",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List watchers.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/subscribers` endpoint.
@@ -502,6 +670,30 @@ impl Activity {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List watchers.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/subscribers` endpoint.
+     * As opposed to `activity_list_watchers_for_repo`, this function returns all the pages of the request at once.
+     *
+     * Lists the people watching the specified repository.
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-watchers>
+     */
+    pub async fn list_watchers_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::User>> {
+        let url = format!(
+            "/repos/{}/{}/subscribers",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -627,6 +819,28 @@ impl Activity {
     }
 
     /**
+     * List repositories starred by the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/starred` endpoint.
+     * As opposed to `activity_list_repos_starred_by_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * Lists repositories the authenticated user has starred.
+     *
+     * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-starred-by-the-authenticated-user>
+     */
+    pub async fn list_repos_starred_by_authenticated_user(
+        &self,
+        sort: crate::types::Sort,
+        direction: crate::types::Direction,
+    ) -> Result<Vec<crate::types::Repository>> {
+        let url = format!("/user/starred?direction={}&sort={}", direction, sort,);
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Check if a repository is starred by the authenticated user.
      *
      * This function performs a `GET` to the `/user/starred/{owner}/{repo}` endpoint.
@@ -731,6 +945,23 @@ impl Activity {
     }
 
     /**
+     * List repositories watched by the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/subscriptions` endpoint.
+     * As opposed to `activity_list_watched_repos_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * Lists repositories the authenticated user is watching.
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-watched-by-the-authenticated-user>
+     */
+    pub async fn list_watched_repos_for_authenticated_user(
+        &self,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = "/user/subscriptions".to_string();
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List events for the authenticated user.
      *
      * This function performs a `GET` to the `/users/{username}/events` endpoint.
@@ -759,6 +990,28 @@ impl Activity {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List events for the authenticated user.
+     *
+     * This function performs a `GET` to the `/users/{username}/events` endpoint.
+     * As opposed to `activity_list_events_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-events-for-the-authenticated-user>
+     */
+    pub async fn list_events_for_authenticated_user(
+        &self,
+        username: &str,
+    ) -> Result<Vec<crate::types::Event>> {
+        let url = format!(
+            "/users/{}/events",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -796,6 +1049,30 @@ impl Activity {
     }
 
     /**
+     * List organization events for the authenticated user.
+     *
+     * This function performs a `GET` to the `/users/{username}/events/orgs/{org}` endpoint.
+     * As opposed to `activity_list_org_events_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * This is the user's organization dashboard. You must be authenticated as the user to view this.
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-organization-events-for-the-authenticated-user>
+     */
+    pub async fn list_org_events_for_authenticated_user(
+        &self,
+        username: &str,
+        org: &str,
+    ) -> Result<Vec<crate::types::Event>> {
+        let url = format!(
+            "/users/{}/events/orgs/{}",
+            crate::progenitor_support::encode_path(&username.to_string()),
+            crate::progenitor_support::encode_path(&org.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List public events for a user.
      *
      * This function performs a `GET` to the `/users/{username}/events/public` endpoint.
@@ -824,6 +1101,28 @@ impl Activity {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List public events for a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/events/public` endpoint.
+     * As opposed to `activity_list_public_events_for_user`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-user>
+     */
+    pub async fn list_public_events_for_user(
+        &self,
+        username: &str,
+    ) -> Result<Vec<crate::types::Event>> {
+        let url = format!(
+            "/users/{}/events/public",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -858,6 +1157,28 @@ impl Activity {
     }
 
     /**
+     * List events received by the authenticated user.
+     *
+     * This function performs a `GET` to the `/users/{username}/received_events` endpoint.
+     * As opposed to `activity_list_received_events_for_user`, this function returns all the pages of the request at once.
+     *
+     * These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events.
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-events-received-by-the-authenticated-user>
+     */
+    pub async fn list_received_events_for_user(
+        &self,
+        username: &str,
+    ) -> Result<Vec<crate::types::Event>> {
+        let url = format!(
+            "/users/{}/received_events",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List public events received by a user.
      *
      * This function performs a `GET` to the `/users/{username}/received_events/public` endpoint.
@@ -886,6 +1207,28 @@ impl Activity {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List public events received by a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/received_events/public` endpoint.
+     * As opposed to `activity_list_received_public_events_for_user`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-received-by-a-user>
+     */
+    pub async fn list_received_public_events_for_user(
+        &self,
+        username: &str,
+    ) -> Result<Vec<crate::types::Event>> {
+        let url = format!(
+            "/users/{}/received_events/public",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -928,6 +1271,34 @@ impl Activity {
     }
 
     /**
+     * List repositories starred by a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/starred` endpoint.
+     * As opposed to `activity_list_repos_starred_by_user`, this function returns all the pages of the request at once.
+     *
+     * Lists repositories a user has starred.
+     *
+     * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-starred-by-a-user>
+     */
+    pub async fn list_repos_starred_by_user(
+        &self,
+        username: &str,
+        sort: crate::types::Sort,
+        direction: crate::types::Direction,
+    ) -> Result<Vec<crate::types::StarredRepository>> {
+        let url = format!(
+            "/users/{}/starred?direction={}&sort={}",
+            crate::progenitor_support::encode_path(&username.to_string()),
+            direction,
+            sort,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List repositories watched by a user.
      *
      * This function performs a `GET` to the `/users/{username}/subscriptions` endpoint.
@@ -956,5 +1327,27 @@ impl Activity {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repositories watched by a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/subscriptions` endpoint.
+     * As opposed to `activity_list_repos_watched_by_user`, this function returns all the pages of the request at once.
+     *
+     * Lists repositories a user is watching.
+     *
+     * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-watched-by-a-user>
+     */
+    pub async fn list_repos_watched_by_user(
+        &self,
+        username: &str,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = format!(
+            "/users/{}/subscriptions",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 }

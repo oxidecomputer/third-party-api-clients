@@ -27,6 +27,21 @@ impl Gitignore {
     }
 
     /**
+     * Get all gitignore templates.
+     *
+     * This function performs a `GET` to the `/gitignore/templates` endpoint.
+     * As opposed to `gitignore_get_all_templates`, this function returns all the pages of the request at once.
+     *
+     * List all templates available to pass as an option when [creating a repository](https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user).
+     *
+     * FROM: <https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates>
+     */
+    pub async fn get_all_templates(&self) -> Result<Vec<String>> {
+        let url = "/gitignore/templates".to_string();
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a gitignore template.
      *
      * This function performs a `GET` to the `/gitignore/templates/{name}` endpoint.

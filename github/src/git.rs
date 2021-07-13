@@ -246,6 +246,38 @@ impl Git {
     }
 
     /**
+     * List matching references.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/git/matching-refs/{ref}` endpoint.
+     * As opposed to `git_list_matching_refs`, this function returns all the pages of the request at once.
+     *
+     * Returns an array of references from your Git database that match the supplied name. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't exist in the repository, but existing refs start with `:ref`, they will be returned as an array.
+     *
+     * When you use this endpoint without providing a `:ref`, it will return an array of all the references from your Git database, including notes and stashes if they exist on the server. Anything in the namespace is returned, not just `heads` and `tags`.
+     *
+     * **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
+     *
+     * If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the response can still include other matching head refs that start with the word `feature`, such as `featureA` and `featureB`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/git#list-matching-references>
+     */
+    pub async fn list_matching_refs(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+    ) -> Result<Vec<crate::types::GitRef>> {
+        let url = format!(
+            "/repos/{}/{}/git/matching-refs/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a reference.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/git/ref/{ref}` endpoint.

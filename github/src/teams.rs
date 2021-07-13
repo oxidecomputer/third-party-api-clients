@@ -79,6 +79,25 @@ impl Teams {
     }
 
     /**
+     * List teams.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/teams` endpoint.
+     * As opposed to `teams_list`, this function returns all the pages of the request at once.
+     *
+     * Lists all teams in an organization that are visible to the authenticated user.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-teams>
+     */
+    pub async fn list_all(&self, org: &str) -> Result<Vec<crate::types::Team>> {
+        let url = format!(
+            "/orgs/{}/teams",
+            crate::progenitor_support::encode_path(&org.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a team.
      *
      * This function performs a `POST` to the `/orgs/{org}/teams` endpoint.
@@ -241,6 +260,36 @@ impl Teams {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List discussions.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions` endpoint.
+     * As opposed to `teams_list_discussions_in_org`, this function returns all the pages of the request at once.
+     *
+     * List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+     *
+     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-discussions>
+     */
+    pub async fn list_discussions_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        direction: crate::types::Direction,
+        pinned: &str,
+    ) -> Result<Vec<crate::types::TeamDiscussion>> {
+        let url = format!(
+            "/orgs/{}/teams/{}/discussions?direction={}&pinned={}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
+            direction,
+            pinned.to_string(),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -426,6 +475,36 @@ impl Teams {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List discussion comments.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments` endpoint.
+     * As opposed to `teams_list_discussion_comments_in_org`, this function returns all the pages of the request at once.
+     *
+     * List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+     *
+     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-discussion-comments>
+     */
+    pub async fn list_discussion_comments_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        discussion_number: i64,
+        direction: crate::types::Direction,
+    ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+        let url = format!(
+            "/orgs/{}/teams/{}/discussions/{}/comments?direction={}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
+            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            direction,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -620,6 +699,32 @@ impl Teams {
     }
 
     /**
+     * List pending team invitations.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/invitations` endpoint.
+     * As opposed to `teams_list_pending_invitations_in_org`, this function returns all the pages of the request at once.
+     *
+     * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
+     *
+     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/invitations`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-pending-team-invitations>
+     */
+    pub async fn list_pending_invitations_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+        let url = format!(
+            "/orgs/{}/teams/{}/invitations",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List team members.
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/members` endpoint.
@@ -659,6 +764,34 @@ impl Teams {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List team members.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/members` endpoint.
+     * As opposed to `teams_list_members_in_org`, this function returns all the pages of the request at once.
+     *
+     * Team members will include the members of child teams.
+     *
+     * To list members in a team, the team must be visible to the authenticated user.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-team-members>
+     */
+    pub async fn list_members_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+        role: crate::types::TeamsListMembersInOrgRole,
+    ) -> Result<Vec<crate::types::User>> {
+        let url = format!(
+            "/orgs/{}/teams/{}/members?role={}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
+            role,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -822,6 +955,32 @@ impl Teams {
     }
 
     /**
+     * List team projects.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/projects` endpoint.
+     * As opposed to `teams_list_projects_in_org`, this function returns all the pages of the request at once.
+     *
+     * Lists the organization projects for a team.
+     *
+     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-team-projects>
+     */
+    pub async fn list_projects_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+    ) -> Result<Vec<crate::types::TeamProject>> {
+        let url = format!(
+            "/orgs/{}/teams/{}/projects",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Check team permissions for a project.
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/projects/{project_id}` endpoint.
@@ -960,6 +1119,32 @@ impl Teams {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List team repositories.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/repos` endpoint.
+     * As opposed to `teams_list_repos_in_org`, this function returns all the pages of the request at once.
+     *
+     * Lists a team's repositories visible to the authenticated user.
+     *
+     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-team-repositories>
+     */
+    pub async fn list_repos_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = format!(
+            "/orgs/{}/teams/{}/repos",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -1189,6 +1374,32 @@ impl Teams {
     }
 
     /**
+     * List child teams.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/teams` endpoint.
+     * As opposed to `teams_list_child_in_org`, this function returns all the pages of the request at once.
+     *
+     * Lists the child teams of the team specified by `{team_slug}`.
+     *
+     * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/teams`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-child-teams>
+     */
+    pub async fn list_child_in_org(
+        &self,
+        org: &str,
+        team_slug: &str,
+    ) -> Result<Vec<crate::types::Team>> {
+        let url = format!(
+            "/orgs/{}/teams/{}/teams",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a team (Legacy).
      *
      * This function performs a `GET` to the `/teams/{team_id}` endpoint.
@@ -1305,6 +1516,32 @@ impl Teams {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List discussions (Legacy).
+     *
+     * This function performs a `GET` to the `/teams/{team_id}/discussions` endpoint.
+     * As opposed to `teams_list_discussions_legacy`, this function returns all the pages of the request at once.
+     *
+     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List discussions`](https://docs.github.com/rest/reference/teams#list-discussions) endpoint.
+     *
+     * List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-discussions-legacy>
+     */
+    pub async fn list_discussions_legacy(
+        &self,
+        team_id: i64,
+        direction: crate::types::Direction,
+    ) -> Result<Vec<crate::types::TeamDiscussion>> {
+        let url = format!(
+            "/teams/{}/discussions?direction={}",
+            crate::progenitor_support::encode_path(&team_id.to_string()),
+            direction,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -1475,6 +1712,34 @@ impl Teams {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List discussion comments (Legacy).
+     *
+     * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments` endpoint.
+     * As opposed to `teams_list_discussion_comments_legacy`, this function returns all the pages of the request at once.
+     *
+     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List discussion comments](https://docs.github.com/rest/reference/teams#list-discussion-comments) endpoint.
+     *
+     * List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-discussion-comments-legacy>
+     */
+    pub async fn list_discussion_comments_legacy(
+        &self,
+        team_id: i64,
+        discussion_number: i64,
+        direction: crate::types::Direction,
+    ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
+        let url = format!(
+            "/teams/{}/discussions/{}/comments?direction={}",
+            crate::progenitor_support::encode_path(&team_id.to_string()),
+            crate::progenitor_support::encode_path(&discussion_number.to_string()),
+            direction,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -1654,6 +1919,30 @@ impl Teams {
     }
 
     /**
+     * List pending team invitations (Legacy).
+     *
+     * This function performs a `GET` to the `/teams/{team_id}/invitations` endpoint.
+     * As opposed to `teams_list_pending_invitations_legacy`, this function returns all the pages of the request at once.
+     *
+     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List pending team invitations`](https://docs.github.com/rest/reference/teams#list-pending-team-invitations) endpoint.
+     *
+     * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-pending-team-invitations-legacy>
+     */
+    pub async fn list_pending_invitations_legacy(
+        &self,
+        team_id: i64,
+    ) -> Result<Vec<crate::types::OrganizationInvitation>> {
+        let url = format!(
+            "/teams/{}/invitations",
+            crate::progenitor_support::encode_path(&team_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List team members (Legacy).
      *
      * This function performs a `GET` to the `/teams/{team_id}/members` endpoint.
@@ -1690,6 +1979,32 @@ impl Teams {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List team members (Legacy).
+     *
+     * This function performs a `GET` to the `/teams/{team_id}/members` endpoint.
+     * As opposed to `teams_list_members_legacy`, this function returns all the pages of the request at once.
+     *
+     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team members`](https://docs.github.com/rest/reference/teams#list-team-members) endpoint.
+     *
+     * Team members will include the members of child teams.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-team-members-legacy>
+     */
+    pub async fn list_members_legacy(
+        &self,
+        team_id: i64,
+        role: crate::types::TeamsListMembersInOrgRole,
+    ) -> Result<Vec<crate::types::User>> {
+        let url = format!(
+            "/teams/{}/members?role={}",
+            crate::progenitor_support::encode_path(&team_id.to_string()),
+            role,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -1935,6 +2250,30 @@ impl Teams {
     }
 
     /**
+     * List team projects (Legacy).
+     *
+     * This function performs a `GET` to the `/teams/{team_id}/projects` endpoint.
+     * As opposed to `teams_list_projects_legacy`, this function returns all the pages of the request at once.
+     *
+     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team projects`](https://docs.github.com/rest/reference/teams#list-team-projects) endpoint.
+     *
+     * Lists the organization projects for a team.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams/#list-team-projects-legacy>
+     */
+    pub async fn list_projects_legacy(
+        &self,
+        team_id: i64,
+    ) -> Result<Vec<crate::types::TeamProject>> {
+        let url = format!(
+            "/teams/{}/projects",
+            crate::progenitor_support::encode_path(&team_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Check team permissions for a project (Legacy).
      *
      * This function performs a `GET` to the `/teams/{team_id}/projects/{project_id}` endpoint.
@@ -2055,6 +2394,28 @@ impl Teams {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List team repositories (Legacy).
+     *
+     * This function performs a `GET` to the `/teams/{team_id}/repos` endpoint.
+     * As opposed to `teams_list_repos_legacy`, this function returns all the pages of the request at once.
+     *
+     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://docs.github.com/rest/reference/teams#list-team-repositories) endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams/#list-team-repositories-legacy>
+     */
+    pub async fn list_repos_legacy(
+        &self,
+        team_id: i64,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = format!(
+            "/teams/{}/repos",
+            crate::progenitor_support::encode_path(&team_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -2257,6 +2618,25 @@ impl Teams {
     }
 
     /**
+     * List child teams (Legacy).
+     *
+     * This function performs a `GET` to the `/teams/{team_id}/teams` endpoint.
+     * As opposed to `teams_list_child_legacy`, this function returns all the pages of the request at once.
+     *
+     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List child teams`](https://docs.github.com/rest/reference/teams#list-child-teams) endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams/#list-child-teams-legacy>
+     */
+    pub async fn list_child_legacy(&self, team_id: i64) -> Result<Vec<crate::types::Team>> {
+        let url = format!(
+            "/teams/{}/teams",
+            crate::progenitor_support::encode_path(&team_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List teams for the authenticated user.
      *
      * This function performs a `GET` to the `/user/teams` endpoint.
@@ -2282,5 +2662,20 @@ impl Teams {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List teams for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/teams` endpoint.
+     * As opposed to `teams_list_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires `user`, `repo`, or `read:org` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://docs.github.com/apps/building-oauth-apps/).
+     *
+     * FROM: <https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user>
+     */
+    pub async fn list_for_authenticated_user(&self) -> Result<Vec<crate::types::TeamFull>> {
+        let url = "/user/teams".to_string();
+        self.client.get_all_pages(&url).await
     }
 }

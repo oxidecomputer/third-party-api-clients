@@ -46,6 +46,27 @@ impl OauthAuthorizations {
     }
 
     /**
+     * List your grants.
+     *
+     * This function performs a `GET` to the `/applications/grants` endpoint.
+     * As opposed to `oauth_authorizations_list_grants`, this function returns all the pages of the request at once.
+     *
+     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+     *
+     * You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `["repo", "user"]`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#list-your-grants>
+     */
+    pub async fn list_grants(
+        &self,
+        client_id: &str,
+    ) -> Result<Vec<crate::types::ApplicationGrant>> {
+        let url = format!("/applications/grants?client_id={}", client_id.to_string(),);
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a single grant.
      *
      * This function performs a `GET` to the `/applications/grants/{grant_id}` endpoint.
@@ -120,6 +141,25 @@ impl OauthAuthorizations {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List your authorizations.
+     *
+     * This function performs a `GET` to the `/authorizations` endpoint.
+     * As opposed to `oauth_authorizations_list_authorizations`, this function returns all the pages of the request at once.
+     *
+     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
+     *
+     * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations>
+     */
+    pub async fn list_authorizations(
+        &self,
+        client_id: &str,
+    ) -> Result<Vec<crate::types::Authorization>> {
+        let url = format!("/authorizations?client_id={}", client_id.to_string(),);
+
+        self.client.get_all_pages(&url).await
     }
 
     /**

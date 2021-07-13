@@ -47,6 +47,30 @@ impl Migrations {
     }
 
     /**
+     * List organization migrations.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/migrations` endpoint.
+     * As opposed to `migrations_list_for_org`, this function returns all the pages of the request at once.
+     *
+     * Lists the most recent migrations.
+     *
+     * FROM: <https://docs.github.com/rest/reference/migrations#list-organization-migrations>
+     */
+    pub async fn list_for_org(
+        &self,
+        org: &str,
+        exclude: &[String],
+    ) -> Result<Vec<crate::types::Migration>> {
+        let url = format!(
+            "/orgs/{}/migrations?exclude={}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            exclude.join(" "),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Start an organization migration.
      *
      * This function performs a `POST` to the `/orgs/{org}/migrations` endpoint.
@@ -226,6 +250,30 @@ impl Migrations {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repositories in an organization migration.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/migrations/{migration_id}/repositories` endpoint.
+     * As opposed to `migrations_list_repos_for_org`, this function returns all the pages of the request at once.
+     *
+     * List all the repositories for this organization migration.
+     *
+     * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-in-an-organization-migration>
+     */
+    pub async fn list_repos_for_org(
+        &self,
+        org: &str,
+        migration_id: i64,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = format!(
+            "/orgs/{}/migrations/{}/repositories",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&migration_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -412,6 +460,34 @@ impl Migrations {
     }
 
     /**
+     * Get commit authors.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/import/authors` endpoint.
+     * As opposed to `migrations_get_commit_authors`, this function returns all the pages of the request at once.
+     *
+     * Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`.
+     *
+     * This endpoint and the [Map a commit author](https://docs.github.com/rest/reference/migrations#map-a-commit-author) endpoint allow you to provide correct Git author information.
+     *
+     * FROM: <https://docs.github.com/rest/reference/migrations#get-commit-authors>
+     */
+    pub async fn get_commit_authors(
+        &self,
+        owner: &str,
+        repo: &str,
+        since: i64,
+    ) -> Result<Vec<crate::types::PorterAuthor>> {
+        let url = format!(
+            "/repos/{}/{}/import/authors?since={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            format!("{}", since),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Map a commit author.
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import/authors/{author_id}` endpoint.
@@ -477,6 +553,30 @@ impl Migrations {
     }
 
     /**
+     * Get large files.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/import/large_files` endpoint.
+     * As opposed to `migrations_get_large_files`, this function returns all the pages of the request at once.
+     *
+     * List files larger than 100MB found during the import
+     *
+     * FROM: <https://docs.github.com/rest/reference/migrations#get-large-files>
+     */
+    pub async fn get_large_files(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::PorterLargeFile>> {
+        let url = format!(
+            "/repos/{}/{}/import/large_files",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Update Git LFS preference.
      *
      * This function performs a `PATCH` to the `/repos/{owner}/{repo}/import/lfs` endpoint.
@@ -536,6 +636,21 @@ impl Migrations {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List user migrations.
+     *
+     * This function performs a `GET` to the `/user/migrations` endpoint.
+     * As opposed to `migrations_list_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * Lists all migrations a user has started.
+     *
+     * FROM: <https://docs.github.com/rest/reference/migrations#list-user-migrations>
+     */
+    pub async fn list_for_authenticated_user(&self) -> Result<Vec<crate::types::Migration>> {
+        let url = "/user/migrations".to_string();
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -716,5 +831,27 @@ impl Migrations {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repositories for a user migration.
+     *
+     * This function performs a `GET` to the `/user/migrations/{migration_id}/repositories` endpoint.
+     * As opposed to `migrations_list_repos_for_user`, this function returns all the pages of the request at once.
+     *
+     * Lists all the repositories for this user migration.
+     *
+     * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-for-a-user-migration>
+     */
+    pub async fn list_repos_for_user(
+        &self,
+        migration_id: i64,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = format!(
+            "/user/migrations/{}/repositories",
+            crate::progenitor_support::encode_path(&migration_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 }

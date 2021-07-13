@@ -48,12 +48,13 @@ pub fn generate_files(
             };
 
             let mut print_fn = |docs: &str,
-                                bounds: Vec<String>,
-                                fn_params_str: Vec<String>,
-                                body_param: Option<String>,
+                                bounds: &Vec<String>,
+                                fn_params_str: &Vec<String>,
+                                body_param: &Option<String>,
                                 response_type: &str,
                                 template: &str,
-                                fn_inner: &str| {
+                                fn_inner: &str,
+                                fn_name: &str| {
                 // Print the function docs.
                 a(docs);
 
@@ -64,16 +65,9 @@ pub fn generate_files(
                 }
 
                 if bounds.is_empty() {
-                    a(&format!(
-                        "pub async fn {}(",
-                        oid.trim_start_matches(&tag).trim_start_matches('_')
-                    ));
+                    a(&format!("pub async fn {}(", fn_name,));
                 } else {
-                    a(&format!(
-                        "pub async fn {}<{}>(",
-                        oid.trim_start_matches(&tag).trim_start_matches('_'),
-                        bounds.join(", ")
-                    ));
+                    a(&format!("pub async fn {}<{}>(", fn_name, bounds.join(", ")));
                 }
                 a("&self,");
 
@@ -135,7 +129,7 @@ pub fn generate_files(
             /*
              * Get the function parameters.
              */
-            let (fn_params_str, query_params) = get_fn_params(ts, o, parameters)?;
+            let (fn_params_str, query_params) = get_fn_params(ts, o, parameters, false)?;
 
             /*
              * Get the response type.
@@ -153,16 +147,51 @@ pub fn generate_files(
             // Print our standard function.
             print_fn(
                 &docs,
-                bounds,
-                fn_params_str,
-                body_param,
+                &bounds,
+                &fn_params_str,
+                &body_param,
                 &response_type,
                 &template,
                 &fn_inner,
+                oid.trim_start_matches(&tag).trim_start_matches('_'),
             );
 
             // If we are returning a list of things and we have page, etc as
             // params, let's get all the pages.
+            if response_type.starts_with("Vec<") && http::Method::GET == m {
+                let docs = get_fn_docs_all(o, m, p, &oid)?;
+
+                let (fn_params_str, query_params) = get_fn_params(ts, o, parameters, true)?;
+
+                let tmp = parse(p)?;
+                let template = tmp.compile(query_params);
+
+                let fn_inner = "self.client.get_all_pages(&url).await";
+
+                let mut fn_name = oid
+                    .trim_start_matches(&tag)
+                    .trim_start_matches('_')
+                    .replace("_get_", "_get_all_")
+                    .replace("_list_", "_list_all_");
+                if fn_name == "list" {
+                    fn_name = "list_all".to_string();
+                }
+                if fn_name == "get" {
+                    fn_name = "get_all".to_string();
+                }
+
+                // Now let's print the new function.
+                print_fn(
+                    &docs,
+                    &bounds,
+                    &fn_params_str,
+                    &body_param,
+                    &response_type,
+                    &template,
+                    fn_inner,
+                    &fn_name,
+                );
+            }
 
             // Add this to our map of functions based on the tag name.
             tag_files.insert(tag, out.to_string());
@@ -236,6 +265,7 @@ fn get_fn_params(
     ts: &mut TypeSpace,
     o: &openapiv3::Operation,
     parameters: &BTreeMap<String, &openapiv3::Parameter>,
+    all_pages: bool,
 ) -> Result<(Vec<String>, BTreeMap<String, String>)> {
     /*
      * Query parameters are sorted lexicographically to ensure a stable
@@ -263,7 +293,7 @@ fn get_fn_params(
         let typ = parameter_data.render_type(&param_name, ts)?;
         if nam == "ref" || nam == "type" {
             fn_params_str.push(format!("{}_: {},", nam, typ));
-        } else {
+        } else if !all_pages || (nam != ("page") && nam != "per_page") {
             fn_params_str.push(format!("{}: {},", nam, typ));
         }
 
@@ -287,20 +317,22 @@ fn get_fn_params(
                 continue;
             }
 
-            if typ == "DateTime<Utc>" {
-                query_params.insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
-            } else if typ == "i64" || typ == "bool" {
-                query_params.insert(nam.to_string(), format!(r#"format!("{{}}", {})"#, nam));
-            } else if typ == "&str" {
-                query_params.insert(nam.to_string(), format!("{}.to_string()", nam));
-            } else if typ == "&[String]" {
-                // TODO: I have no idea how these should be seperated and the docs
-                // don't give any answers either, for an array sent through query
-                // params.
-                // https://docs.github.com/en/rest/reference/migrations
-                query_params.insert(nam.to_string(), format!("{}.join(\" \")", nam));
-            } else {
-                query_params.insert(nam.to_string(), nam.to_string());
+            if !all_pages || (nam != ("page") && nam != "per_page") {
+                if typ == "DateTime<Utc>" {
+                    query_params.insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
+                } else if typ == "i64" || typ == "bool" {
+                    query_params.insert(nam.to_string(), format!(r#"format!("{{}}", {})"#, nam));
+                } else if typ == "&str" {
+                    query_params.insert(nam.to_string(), format!("{}.to_string()", nam));
+                } else if typ == "&[String]" {
+                    // TODO: I have no idea how these should be seperated and the docs
+                    // don't give any answers either, for an array sent through query
+                    // params.
+                    // https://docs.github.com/en/rest/reference/migrations
+                    query_params.insert(nam.to_string(), format!("{}.join(\" \")", nam));
+                } else {
+                    query_params.insert(nam.to_string(), nam.to_string());
+                }
             }
         }
     }
@@ -432,6 +464,40 @@ fn get_fn_docs(
         } else {
             a(&format!("* * `{}: {}`{}", nam, typ, docs));
         }
+    }
+    a("*/");
+
+    Ok(out.trim().to_string())
+}
+
+fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, oid: &str) -> Result<String> {
+    let mut out = String::new();
+
+    let mut a = |s: &str| {
+        out.push_str(s);
+        out.push('\n');
+    };
+
+    a("/**");
+    if let Some(summary) = &o.summary {
+        a(&format!("* {}.", summary.trim_end_matches('.')));
+        a("*");
+    }
+    a(&format!(
+        "* This function performs a `{}` to the `{}` endpoint.",
+        m, p
+    ));
+    a(&format!(
+        "* As opposed to `{}`, this function returns all the pages of the request at once.",
+        oid
+    ));
+    if let Some(description) = &o.description {
+        a("*");
+        a(&format!("* {}", description.replace('\n', "\n* ")));
+    }
+    if let Some(external_docs) = &o.external_docs {
+        a("*");
+        a(&format!("* FROM: <{}>", external_docs.url));
     }
     a("*/");
 

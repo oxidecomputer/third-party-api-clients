@@ -44,6 +44,25 @@ impl Gists {
     }
 
     /**
+     * List gists for the authenticated user.
+     *
+     * This function performs a `GET` to the `/gists` endpoint.
+     * As opposed to `gists_list`, this function returns all the pages of the request at once.
+     *
+     * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
+     *
+     * FROM: <https://docs.github.com/rest/reference/gists#list-gists-for-the-authenticated-user>
+     */
+    pub async fn list_all(
+        &self,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::BaseGist>> {
+        let url = format!("/gists?since={}", since,);
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a gist.
      *
      * This function performs a `POST` to the `/gists` endpoint.
@@ -101,6 +120,27 @@ impl Gists {
     }
 
     /**
+     * List public gists.
+     *
+     * This function performs a `GET` to the `/gists/public` endpoint.
+     * As opposed to `gists_list_public`, this function returns all the pages of the request at once.
+     *
+     * List public gists sorted by most recently updated to least recently updated.
+     *
+     * Note: With [pagination](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
+     *
+     * FROM: <https://docs.github.com/rest/reference/gists#list-public-gists>
+     */
+    pub async fn list_public(
+        &self,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::BaseGist>> {
+        let url = format!("/gists/public?since={}", since,);
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List starred gists.
      *
      * This function performs a `GET` to the `/gists/starred` endpoint.
@@ -129,6 +169,25 @@ impl Gists {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List starred gists.
+     *
+     * This function performs a `GET` to the `/gists/starred` endpoint.
+     * As opposed to `gists_list_starred`, this function returns all the pages of the request at once.
+     *
+     * List the authenticated user's starred gists:
+     *
+     * FROM: <https://docs.github.com/rest/reference/gists#list-starred-gists>
+     */
+    pub async fn list_starred(
+        &self,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::BaseGist>> {
+        let url = format!("/gists/starred?since={}", since,);
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -235,6 +294,25 @@ impl Gists {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List gist comments.
+     *
+     * This function performs a `GET` to the `/gists/{gist_id}/comments` endpoint.
+     * As opposed to `gists_list_comments`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-comments>
+     */
+    pub async fn list_comments(&self, gist_id: &str) -> Result<Vec<crate::types::GistComment>> {
+        let url = format!(
+            "/gists/{}/comments",
+            crate::progenitor_support::encode_path(&gist_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -386,6 +464,25 @@ impl Gists {
     }
 
     /**
+     * List gist commits.
+     *
+     * This function performs a `GET` to the `/gists/{gist_id}/commits` endpoint.
+     * As opposed to `gists_list_commits`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-commits>
+     */
+    pub async fn list_commits(&self, gist_id: &str) -> Result<Vec<crate::types::GistCommit>> {
+        let url = format!(
+            "/gists/{}/commits",
+            crate::progenitor_support::encode_path(&gist_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List gist forks.
      *
      * This function performs a `GET` to the `/gists/{gist_id}/forks` endpoint.
@@ -414,6 +511,25 @@ impl Gists {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List gist forks.
+     *
+     * This function performs a `GET` to the `/gists/{gist_id}/forks` endpoint.
+     * As opposed to `gists_list_forks`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/gists#list-gist-forks>
+     */
+    pub async fn list_forks(&self, gist_id: &str) -> Result<Vec<crate::types::GistSimple>> {
+        let url = format!(
+            "/gists/{}/forks",
+            crate::progenitor_support::encode_path(&gist_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -560,5 +676,29 @@ impl Gists {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List gists for a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/gists` endpoint.
+     * As opposed to `gists_list_for_user`, this function returns all the pages of the request at once.
+     *
+     * Lists public gists for the specified user:
+     *
+     * FROM: <https://docs.github.com/rest/reference/gists#list-gists-for-a-user>
+     */
+    pub async fn list_for_user(
+        &self,
+        username: &str,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::BaseGist>> {
+        let url = format!(
+            "/users/{}/gists?since={}",
+            crate::progenitor_support::encode_path(&username.to_string()),
+            since,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 }

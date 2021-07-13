@@ -62,6 +62,40 @@ impl Pulls {
     }
 
     /**
+     * List pull requests.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls` endpoint.
+     * As opposed to `pulls_list`, this function returns all the pages of the request at once.
+     *
+     * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+     *
+     * FROM: <https://docs.github.com/rest/reference/pulls#list-pull-requests>
+     */
+    pub async fn list_all(
+        &self,
+        owner: &str,
+        repo: &str,
+        state: crate::types::IssuesListState,
+        head: &str,
+        base: &str,
+        sort: crate::types::PullsListSort,
+        direction: crate::types::Direction,
+    ) -> Result<Vec<crate::types::PullRequestSimple>> {
+        let url = format!(
+            "/repos/{}/{}/pulls?base={}&direction={}&head={}&sort={}&state={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            base.to_string(),
+            direction,
+            head.to_string(),
+            sort,
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a pull request.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls` endpoint.
@@ -142,6 +176,36 @@ impl Pulls {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List review comments in a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments` endpoint.
+     * As opposed to `pulls_list_review_comments_for_repo`, this function returns all the pages of the request at once.
+     *
+     * Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID.
+     *
+     * FROM: <https://docs.github.com/rest/reference/pulls#list-review-comments-in-a-repository>
+     */
+    pub async fn list_review_comments_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        sort: crate::types::PullsListReviewCommentsRepoSort,
+        direction: crate::types::Direction,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
+        let url = format!(
+            "/repos/{}/{}/pulls/comments?direction={}&since={}&sort={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            direction,
+            since,
+            sort,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -374,6 +438,38 @@ impl Pulls {
     }
 
     /**
+     * List review comments on a pull request.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments` endpoint.
+     * As opposed to `pulls_list_review_comments`, this function returns all the pages of the request at once.
+     *
+     * Lists all review comments for a pull request. By default, review comments are in ascending order by ID.
+     *
+     * FROM: <https://docs.github.com/rest/reference/pulls#list-review-comments-on-a-pull-request>
+     */
+    pub async fn list_review_comments(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+        sort: crate::types::Sort,
+        direction: crate::types::Direction,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
+        let url = format!(
+            "/repos/{}/{}/pulls/{}/comments?direction={}&since={}&sort={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&pull_number.to_string()),
+            direction,
+            since,
+            sort,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a review comment for a pull request.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments` endpoint.
@@ -497,6 +593,32 @@ impl Pulls {
     }
 
     /**
+     * List commits on a pull request.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/commits` endpoint.
+     * As opposed to `pulls_list_commits`, this function returns all the pages of the request at once.
+     *
+     * Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://docs.github.com/rest/reference/repos#list-commits) endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/pulls#list-commits-on-a-pull-request>
+     */
+    pub async fn list_commits(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+    ) -> Result<Vec<crate::types::Tree>> {
+        let url = format!(
+            "/repos/{}/{}/pulls/{}/commits",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List pull requests files.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/files` endpoint.
@@ -531,6 +653,32 @@ impl Pulls {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List pull requests files.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/files` endpoint.
+     * As opposed to `pulls_list_files`, this function returns all the pages of the request at once.
+     *
+     * **Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
+     *
+     * FROM: <https://docs.github.com/rest/reference/pulls#list-pull-requests-files>
+     */
+    pub async fn list_files(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+    ) -> Result<Vec<crate::types::DiffEntry>> {
+        let url = format!(
+            "/repos/{}/{}/pulls/{}/files",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -745,6 +893,32 @@ impl Pulls {
     }
 
     /**
+     * List reviews for a pull request.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews` endpoint.
+     * As opposed to `pulls_list_reviews`, this function returns all the pages of the request at once.
+     *
+     * The list of reviews returns in chronological order.
+     *
+     * FROM: <https://docs.github.com/rest/reference/pulls#list-reviews-for-a-pull-request>
+     */
+    pub async fn list_reviews(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+    ) -> Result<Vec<crate::types::PullRequestReview>> {
+        let url = format!(
+            "/repos/{}/{}/pulls/{}/reviews",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&pull_number.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a review for a pull request.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews` endpoint.
@@ -933,6 +1107,34 @@ impl Pulls {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List comments for a pull request review.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments` endpoint.
+     * As opposed to `pulls_list_comments_for_review`, this function returns all the pages of the request at once.
+     *
+     * List comments for a specific pull request review.
+     *
+     * FROM: <https://docs.github.com/rest/reference/pulls#list-comments-for-a-pull-request-review>
+     */
+    pub async fn list_comments_for_review(
+        &self,
+        owner: &str,
+        repo: &str,
+        pull_number: i64,
+        review_id: i64,
+    ) -> Result<Vec<crate::types::ReviewComment>> {
+        let url = format!(
+            "/repos/{}/{}/pulls/{}/reviews/{}/comments",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&pull_number.to_string()),
+            crate::progenitor_support::encode_path(&review_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**

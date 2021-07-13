@@ -65,6 +65,21 @@ impl Users {
     }
 
     /**
+     * List users blocked by the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/blocks` endpoint.
+     * As opposed to `users_list_blocked_by_authenticated`, this function returns all the pages of the request at once.
+     *
+     * List the users you've blocked on your personal account.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user>
+     */
+    pub async fn list_blocked_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
+        let url = "/user/blocks".to_string();
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Check if a user is blocked by the authenticated user.
      *
      * This function performs a `GET` to the `/user/blocks/{username}` endpoint.
@@ -181,6 +196,21 @@ impl Users {
     }
 
     /**
+     * List email addresses for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/emails` endpoint.
+     * As opposed to `users_list_emails_for_authenticated`, this function returns all the pages of the request at once.
+     *
+     * Lists all of your email addresses, and specifies which one is visible to the public. This endpoint is accessible with the `user:email` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-email-addresses-for-the-authenticated-user>
+     */
+    pub async fn list_emails_for_authenticated(&self) -> Result<Vec<crate::types::Email>> {
+        let url = "/user/emails".to_string();
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Add an email address for the authenticated user.
      *
      * This function performs a `POST` to the `/user/emails` endpoint.
@@ -253,6 +283,21 @@ impl Users {
     }
 
     /**
+     * List followers of the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/followers` endpoint.
+     * As opposed to `users_list_followers_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * Lists the people following the authenticated user.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-followers-of-the-authenticated-user>
+     */
+    pub async fn list_followers_for_authenticated_user(&self) -> Result<Vec<crate::types::User>> {
+        let url = "/user/followers".to_string();
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List the people the authenticated user follows.
      *
      * This function performs a `GET` to the `/user/following` endpoint.
@@ -278,6 +323,21 @@ impl Users {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List the people the authenticated user follows.
+     *
+     * This function performs a `GET` to the `/user/following` endpoint.
+     * As opposed to `users_list_followed_by_authenticated`, this function returns all the pages of the request at once.
+     *
+     * Lists the people who the authenticated user follows.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-the-people-the-authenticated-user-follows>
+     */
+    pub async fn list_followed_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
+        let url = "/user/following".to_string();
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -374,6 +434,21 @@ impl Users {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List GPG keys for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/gpg_keys` endpoint.
+     * As opposed to `users_list_gpg_keys_for_authenticated`, this function returns all the pages of the request at once.
+     *
+     * Lists the current user's GPG keys. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-gpg-keys-for-the-authenticated-user>
+     */
+    pub async fn list_gpg_keys_for_authenticated(&self) -> Result<Vec<crate::types::GpgKey>> {
+        let url = "/user/gpg_keys".to_string();
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -474,6 +549,21 @@ impl Users {
     }
 
     /**
+     * List public SSH keys for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/keys` endpoint.
+     * As opposed to `users_list_public_ssh_keys_for_authenticated`, this function returns all the pages of the request at once.
+     *
+     * Lists the public SSH keys for the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-public-ssh-keys-for-the-authenticated-user>
+     */
+    pub async fn list_public_ssh_keys_for_authenticated(&self) -> Result<Vec<crate::types::Key>> {
+        let url = "/user/keys".to_string();
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a public SSH key for the authenticated user.
      *
      * This function performs a `POST` to the `/user/keys` endpoint.
@@ -571,6 +661,21 @@ impl Users {
     }
 
     /**
+     * List public email addresses for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/public_emails` endpoint.
+     * As opposed to `users_list_public_emails_for_authenticated`, this function returns all the pages of the request at once.
+     *
+     * Lists your publicly visible email address, which you can set with the [Set primary email visibility for the authenticated user](https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user) endpoint. This endpoint is accessible with the `user:email` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-public-email-addresses-for-the-authenticated-user>
+     */
+    pub async fn list_public_emails_for_authenticated(&self) -> Result<Vec<crate::types::Email>> {
+        let url = "/user/public_emails".to_string();
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List users.
      *
      * This function performs a `GET` to the `/users` endpoint.
@@ -594,6 +699,24 @@ impl Users {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List users.
+     *
+     * This function performs a `GET` to the `/users` endpoint.
+     * As opposed to `users_list`, this function returns all the pages of the request at once.
+     *
+     * Lists all users, in the order that they signed up on GitHub. This list includes personal user accounts and organization accounts.
+     *
+     * Note: Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of users.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-users>
+     */
+    pub async fn list_all(&self, since: i64) -> Result<Vec<crate::types::User>> {
+        let url = format!("/users?since={}", format!("{}", since),);
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -656,6 +779,25 @@ impl Users {
     }
 
     /**
+     * List followers of a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/followers` endpoint.
+     * As opposed to `users_list_followers_for_user`, this function returns all the pages of the request at once.
+     *
+     * Lists the people following the specified user.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-followers-of-a-user>
+     */
+    pub async fn list_followers_for_user(&self, username: &str) -> Result<Vec<crate::types::User>> {
+        let url = format!(
+            "/users/{}/followers",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List the people a user follows.
      *
      * This function performs a `GET` to the `/users/{username}/following` endpoint.
@@ -684,6 +826,25 @@ impl Users {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List the people a user follows.
+     *
+     * This function performs a `GET` to the `/users/{username}/following` endpoint.
+     * As opposed to `users_list_following_for_user`, this function returns all the pages of the request at once.
+     *
+     * Lists the people who the specified user follows.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-the-people-a-user-follows>
+     */
+    pub async fn list_following_for_user(&self, username: &str) -> Result<Vec<crate::types::User>> {
+        let url = format!(
+            "/users/{}/following",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -739,6 +900,28 @@ impl Users {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List GPG keys for a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/gpg_keys` endpoint.
+     * As opposed to `users_list_gpg_keys_for_user`, this function returns all the pages of the request at once.
+     *
+     * Lists the GPG keys for a user. This information is accessible by anyone.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-gpg-keys-for-a-user>
+     */
+    pub async fn list_gpg_keys_for_user(
+        &self,
+        username: &str,
+    ) -> Result<Vec<crate::types::GpgKey>> {
+        let url = format!(
+            "/users/{}/gpg_keys",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -808,5 +991,27 @@ impl Users {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List public keys for a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/keys` endpoint.
+     * As opposed to `users_list_public_keys_for_user`, this function returns all the pages of the request at once.
+     *
+     * Lists the _verified_ public SSH keys for a user. This is accessible by anyone.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#list-public-keys-for-a-user>
+     */
+    pub async fn list_public_keys_for_user(
+        &self,
+        username: &str,
+    ) -> Result<Vec<crate::types::KeySimple>> {
+        let url = format!(
+            "/users/{}/keys",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 }

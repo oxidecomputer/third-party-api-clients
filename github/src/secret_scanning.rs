@@ -55,6 +55,36 @@ impl SecretScanning {
     }
 
     /**
+     * List secret scanning alerts for a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/secret-scanning/alerts` endpoint.
+     * As opposed to `secret_scanning_list_alerts_for_repo`, this function returns all the pages of the request at once.
+     *
+     * Lists all secret scanning alerts for a private repository, from newest to oldest. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.
+     *
+     * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-a-repository>
+     */
+    pub async fn list_alerts_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        state: crate::types::SecretScanningAlertState,
+        secret_type: &str,
+    ) -> Result<Vec<crate::types::SecretScanningAlert>> {
+        let url = format!(
+            "/repos/{}/{}/secret-scanning/alerts?secret_type={}&state={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            secret_type.to_string(),
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a secret scanning alert.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}` endpoint.

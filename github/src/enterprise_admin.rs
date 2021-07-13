@@ -758,6 +758,30 @@ impl EnterpriseAdmin {
     }
 
     /**
+     * List runner applications for an enterprise.
+     *
+     * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runners/downloads` endpoint.
+     * As opposed to `enterprise_admin_list_runner_applications_for_enterprise`, this function returns all the pages of the request at once.
+     *
+     * Lists binaries for the runner application that you can download and run.
+     *
+     * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-runner-applications-for-an-enterprise>
+     */
+    pub async fn list_runner_applications_for_enterprise(
+        &self,
+        enterprise: &str,
+    ) -> Result<Vec<crate::types::RunnerApplication>> {
+        let url = format!(
+            "/enterprises/{}/actions/runners/downloads",
+            crate::progenitor_support::encode_path(&enterprise.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a registration token for an enterprise.
      *
      * This function performs a `POST` to the `/enterprises/{enterprise}/actions/runners/registration-token` endpoint.
@@ -941,6 +965,38 @@ impl EnterpriseAdmin {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * Get the audit log for an enterprise.
+     *
+     * This function performs a `GET` to the `/enterprises/{enterprise}/audit-log` endpoint.
+     * As opposed to `enterprise_admin_get_audit_log`, this function returns all the pages of the request at once.
+     *
+     * Gets the audit log for an enterprise. To use this endpoint, you must be an enterprise admin, and you must use an access token with the `admin:enterprise` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-the-audit-log-for-an-enterprise>
+     */
+    pub async fn get_audit_log(
+        &self,
+        enterprise: &str,
+        phrase: &str,
+        include: crate::types::Include,
+        after: &str,
+        before: &str,
+        order: crate::types::Order,
+    ) -> Result<Vec<crate::types::AuditLogEvent>> {
+        let url = format!(
+            "/enterprises/{}/audit-log?after={}&before={}&include={}&order={}&phrase={}",
+            crate::progenitor_support::encode_path(&enterprise.to_string()),
+            after.to_string(),
+            before.to_string(),
+            include,
+            order,
+            phrase.to_string(),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**

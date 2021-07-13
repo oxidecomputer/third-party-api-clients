@@ -47,6 +47,30 @@ impl Projects {
     }
 
     /**
+     * List organization projects.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/projects` endpoint.
+     * As opposed to `projects_list_for_org`, this function returns all the pages of the request at once.
+     *
+     * Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+     *
+     * FROM: <https://docs.github.com/rest/reference/projects#list-organization-projects>
+     */
+    pub async fn list_for_org(
+        &self,
+        org: &str,
+        state: crate::types::IssuesListState,
+    ) -> Result<Vec<crate::types::Project>> {
+        let url = format!(
+            "/orgs/{}/projects?state={}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create an organization project.
      *
      * This function performs a `POST` to the `/orgs/{org}/projects` endpoint.
@@ -293,6 +317,30 @@ impl Projects {
     }
 
     /**
+     * List project cards.
+     *
+     * This function performs a `GET` to the `/projects/columns/{column_id}/cards` endpoint.
+     * As opposed to `projects_list_cards`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/projects#list-project-cards>
+     */
+    pub async fn list_cards(
+        &self,
+        column_id: i64,
+        archived_state: crate::types::ArchivedState,
+    ) -> Result<Vec<crate::types::ProjectCard>> {
+        let url = format!(
+            "/projects/columns/{}/cards?archived_state={}",
+            crate::progenitor_support::encode_path(&column_id.to_string()),
+            archived_state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a project card.
      *
      * This function performs a `POST` to the `/projects/columns/{column_id}/cards` endpoint.
@@ -467,6 +515,30 @@ impl Projects {
     }
 
     /**
+     * List project collaborators.
+     *
+     * This function performs a `GET` to the `/projects/{project_id}/collaborators` endpoint.
+     * As opposed to `projects_list_collaborators`, this function returns all the pages of the request at once.
+     *
+     * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
+     *
+     * FROM: <https://docs.github.com/rest/reference/projects#list-project-collaborators>
+     */
+    pub async fn list_collaborators(
+        &self,
+        project_id: i64,
+        affiliation: crate::types::Affiliation,
+    ) -> Result<Vec<crate::types::User>> {
+        let url = format!(
+            "/projects/{}/collaborators?affiliation={}",
+            crate::progenitor_support::encode_path(&project_id.to_string()),
+            affiliation,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Add project collaborator.
      *
      * This function performs a `PUT` to the `/projects/{project_id}/collaborators/{username}` endpoint.
@@ -584,6 +656,25 @@ impl Projects {
     }
 
     /**
+     * List project columns.
+     *
+     * This function performs a `GET` to the `/projects/{project_id}/columns` endpoint.
+     * As opposed to `projects_list_columns`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/projects#list-project-columns>
+     */
+    pub async fn list_columns(&self, project_id: i64) -> Result<Vec<crate::types::ProjectColumn>> {
+        let url = format!(
+            "/projects/{}/columns",
+            crate::progenitor_support::encode_path(&project_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a project column.
      *
      * This function performs a `POST` to the `/projects/{project_id}/columns` endpoint.
@@ -649,6 +740,32 @@ impl Projects {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repository projects.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/projects` endpoint.
+     * As opposed to `projects_list_for_repo`, this function returns all the pages of the request at once.
+     *
+     * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
+     *
+     * FROM: <https://docs.github.com/rest/reference/projects#list-repository-projects>
+     */
+    pub async fn list_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        state: crate::types::IssuesListState,
+    ) -> Result<Vec<crate::types::Project>> {
+        let url = format!(
+            "/repos/{}/{}/projects?state={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -739,5 +856,29 @@ impl Projects {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List user projects.
+     *
+     * This function performs a `GET` to the `/users/{username}/projects` endpoint.
+     * As opposed to `projects_list_for_user`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/projects#list-user-projects>
+     */
+    pub async fn list_for_user(
+        &self,
+        username: &str,
+        state: crate::types::IssuesListState,
+    ) -> Result<Vec<crate::types::Project>> {
+        let url = format!(
+            "/users/{}/projects?state={}",
+            crate::progenitor_support::encode_path(&username.to_string()),
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 }

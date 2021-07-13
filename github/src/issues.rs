@@ -85,6 +85,55 @@ impl Issues {
     }
 
     /**
+     * List issues assigned to the authenticated user.
+     *
+     * This function performs a `GET` to the `/issues` endpoint.
+     * As opposed to `issues_list`, this function returns all the pages of the request at once.
+     *
+     * List issues assigned to the authenticated user across all visible repositories including owned repositories, member
+     * repositories, and organization repositories. You can use the `filter` query parameter to fetch issues that are not
+     * necessarily assigned to you.
+     *
+     *
+     * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
+     * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
+     * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
+     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-issues-assigned-to-the-authenticated-user>
+     */
+    pub async fn list_all(
+        &self,
+        filter: crate::types::Filter,
+        state: crate::types::IssuesListState,
+        labels: &str,
+        sort: crate::types::IssuesListSort,
+        direction: crate::types::Direction,
+        since: chrono::DateTime<chrono::Utc>,
+        collab: bool,
+        orgs: bool,
+        owned: bool,
+        pulls: bool,
+    ) -> Result<Vec<crate::types::Issue>> {
+        let url = format!(
+            "/issues?collab={}&direction={}&filter={}&labels={}&orgs={}&owned={}&pulls={}&\
+             since={}&sort={}&state={}",
+            format!("{}", collab),
+            direction,
+            filter,
+            labels.to_string(),
+            format!("{}", orgs),
+            format!("{}", owned),
+            format!("{}", pulls),
+            since,
+            sort,
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List organization issues assigned to the authenticated user.
      *
      * This function performs a `GET` to the `/orgs/{org}/issues` endpoint.
@@ -145,6 +194,45 @@ impl Issues {
     }
 
     /**
+     * List organization issues assigned to the authenticated user.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/issues` endpoint.
+     * As opposed to `issues_list_for_org`, this function returns all the pages of the request at once.
+     *
+     * List issues in an organization assigned to the authenticated user.
+     *
+     * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
+     * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
+     * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
+     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user>
+     */
+    pub async fn list_for_org(
+        &self,
+        org: &str,
+        filter: crate::types::Filter,
+        state: crate::types::IssuesListState,
+        labels: &str,
+        sort: crate::types::IssuesListSort,
+        direction: crate::types::Direction,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::Issue>> {
+        let url = format!(
+            "/orgs/{}/issues?direction={}&filter={}&labels={}&since={}&sort={}&state={}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            direction,
+            filter,
+            labels.to_string(),
+            since,
+            sort,
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List assignees.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/assignees` endpoint.
@@ -176,6 +264,26 @@ impl Issues {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List assignees.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/assignees` endpoint.
+     * As opposed to `issues_list_assignees`, this function returns all the pages of the request at once.
+     *
+     * Lists the [available assignees](https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-assignees>
+     */
+    pub async fn list_assignees(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::User>> {
+        let url = format!(
+            "/repos/{}/{}/assignees",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -281,6 +389,54 @@ impl Issues {
     }
 
     /**
+     * List repository issues.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues` endpoint.
+     * As opposed to `issues_list_for_repo`, this function returns all the pages of the request at once.
+     *
+     * List issues in a repository.
+     *
+     * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
+     * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
+     * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
+     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-repository-issues>
+     */
+    pub async fn list_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        milestone: &str,
+        state: crate::types::IssuesListState,
+        assignee: &str,
+        creator: &str,
+        mentioned: &str,
+        labels: &str,
+        sort: crate::types::IssuesListSort,
+        direction: crate::types::Direction,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::IssueSimple>> {
+        let url = format!(
+            "/repos/{}/{}/issues?assignee={}&creator={}&direction={}&labels={}&mentioned={}&\
+             milestone={}&since={}&sort={}&state={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            assignee.to_string(),
+            creator.to_string(),
+            direction,
+            labels.to_string(),
+            mentioned.to_string(),
+            milestone.to_string(),
+            since,
+            sort,
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create an issue.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/issues` endpoint.
@@ -357,6 +513,36 @@ impl Issues {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List issue comments for a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments` endpoint.
+     * As opposed to `issues_list_comments_for_repo`, this function returns all the pages of the request at once.
+     *
+     * By default, Issue Comments are ordered by ascending ID.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-issue-comments-for-a-repository>
+     */
+    pub async fn list_comments_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        sort: crate::types::Sort,
+        direction: crate::types::Direction,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::IssueComment>> {
+        let url = format!(
+            "/repos/{}/{}/issues/comments?direction={}&since={}&sort={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            direction,
+            since,
+            sort,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -485,6 +671,30 @@ impl Issues {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List issue events for a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/events` endpoint.
+     * As opposed to `issues_list_events_for_repo`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events-for-a-repository>
+     */
+    pub async fn list_events_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::IssueEvent>> {
+        let url = format!(
+            "/repos/{}/{}/issues/events",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -711,6 +921,34 @@ impl Issues {
     }
 
     /**
+     * List issue comments.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/comments` endpoint.
+     * As opposed to `issues_list_comments`, this function returns all the pages of the request at once.
+     *
+     * Issue Comments are ordered by ascending ID.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-issue-comments>
+     */
+    pub async fn list_comments(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::IssueComment>> {
+        let url = format!(
+            "/repos/{}/{}/issues/{}/comments?since={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&issue_number.to_string()),
+            since,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create an issue comment.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/comments` endpoint.
@@ -785,6 +1023,32 @@ impl Issues {
     }
 
     /**
+     * List issue events.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/events` endpoint.
+     * As opposed to `issues_list_events`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events>
+     */
+    pub async fn list_events(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+    ) -> Result<Vec<crate::types::IssueEventFor>> {
+        let url = format!(
+            "/repos/{}/{}/issues/{}/events",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&issue_number.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List labels for an issue.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
@@ -819,6 +1083,32 @@ impl Issues {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List labels for an issue.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
+     * As opposed to `issues_list_labels_on_issue`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-an-issue>
+     */
+    pub async fn list_labels_on_issue(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+    ) -> Result<Vec<crate::types::Label>> {
+        let url = format!(
+            "/repos/{}/{}/issues/{}/labels",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&issue_number.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -1063,6 +1353,32 @@ impl Issues {
     }
 
     /**
+     * List timeline events for an issue.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/timeline` endpoint.
+     * As opposed to `issues_list_events_for_timeline`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-timeline-events-for-an-issue>
+     */
+    pub async fn list_events_for_timeline(
+        &self,
+        owner: &str,
+        repo: &str,
+        issue_number: i64,
+    ) -> Result<Vec<crate::types::TimelineIssueEvents>> {
+        let url = format!(
+            "/repos/{}/{}/issues/{}/timeline",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&issue_number.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List labels for a repository.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/labels` endpoint.
@@ -1094,6 +1410,30 @@ impl Issues {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List labels for a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/labels` endpoint.
+     * As opposed to `issues_list_labels_for_repo`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-a-repository>
+     */
+    pub async fn list_labels_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::Label>> {
+        let url = format!(
+            "/repos/{}/{}/labels",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -1268,6 +1608,36 @@ impl Issues {
     }
 
     /**
+     * List milestones.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones` endpoint.
+     * As opposed to `issues_list_milestones`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-milestones>
+     */
+    pub async fn list_milestones(
+        &self,
+        owner: &str,
+        repo: &str,
+        state: crate::types::IssuesListState,
+        sort: crate::types::IssuesListMilestonesSort,
+        direction: crate::types::Direction,
+    ) -> Result<Vec<crate::types::Milestone>> {
+        let url = format!(
+            "/repos/{}/{}/milestones?direction={}&sort={}&state={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            direction,
+            sort,
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a milestone.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/milestones` endpoint.
@@ -1438,6 +1808,32 @@ impl Issues {
     }
 
     /**
+     * List labels for issues in a milestone.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones/{milestone_number}/labels` endpoint.
+     * As opposed to `issues_list_labels_for_milestone`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-issues-in-a-milestone>
+     */
+    pub async fn list_labels_for_milestone(
+        &self,
+        owner: &str,
+        repo: &str,
+        milestone_number: i64,
+    ) -> Result<Vec<crate::types::Label>> {
+        let url = format!(
+            "/repos/{}/{}/milestones/{}/labels",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&milestone_number.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List user account issues assigned to the authenticated user.
      *
      * This function performs a `GET` to the `/user/issues` endpoint.
@@ -1492,5 +1888,42 @@ impl Issues {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List user account issues assigned to the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/issues` endpoint.
+     * As opposed to `issues_list_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * List issues across owned and member repositories assigned to the authenticated user.
+     *
+     * **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this
+     * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
+     * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
+     * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user>
+     */
+    pub async fn list_for_authenticated_user(
+        &self,
+        filter: crate::types::Filter,
+        state: crate::types::IssuesListState,
+        labels: &str,
+        sort: crate::types::IssuesListSort,
+        direction: crate::types::Direction,
+        since: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::Issue>> {
+        let url = format!(
+            "/user/issues?direction={}&filter={}&labels={}&since={}&sort={}&state={}",
+            direction,
+            filter,
+            labels.to_string(),
+            since,
+            sort,
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 }

@@ -160,6 +160,32 @@ impl Checks {
     }
 
     /**
+     * List check run annotations.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations` endpoint.
+     * As opposed to `checks_list_annotations`, this function returns all the pages of the request at once.
+     *
+     * Lists annotations for a check run using the annotation `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get annotations for a check run. OAuth Apps and authenticated users must have the `repo` scope to get annotations for a check run in a private repository.
+     *
+     * FROM: <https://docs.github.com/rest/reference/checks#list-check-run-annotations>
+     */
+    pub async fn list_annotations(
+        &self,
+        owner: &str,
+        repo: &str,
+        check_run_id: i64,
+    ) -> Result<Vec<crate::types::CheckAnnotation>> {
+        let url = format!(
+            "/repos/{}/{}/check-runs/{}/annotations",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&check_run_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a check suite.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/check-suites` endpoint.

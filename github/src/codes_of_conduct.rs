@@ -27,6 +27,21 @@ impl CodesOfConduct {
     }
 
     /**
+     * Get all codes of conduct.
+     *
+     * This function performs a `GET` to the `/codes_of_conduct` endpoint.
+     * As opposed to `codes_of_conduct_get_all_codes_of_conduct`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
+     */
+    pub async fn get_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
+        let url = "/codes_of_conduct".to_string();
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a code of conduct.
      *
      * This function performs a `GET` to the `/codes_of_conduct/{key}` endpoint.

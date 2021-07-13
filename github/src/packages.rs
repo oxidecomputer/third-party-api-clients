@@ -167,6 +167,37 @@ impl Packages {
     }
 
     /**
+     * Get all package versions for a package owned by an organization.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions` endpoint.
+     * As opposed to `packages_get_all_package_versions_for_package_owned_by_org`, this function returns all the pages of the request at once.
+     *
+     * Returns all package versions for a package owned by an organization.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization>
+     */
+    pub async fn get_all_package_versions_for_package_owned_by_org(
+        &self,
+        package_type: crate::types::PackageType,
+        package_name: &str,
+        org: &str,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
+    ) -> Result<Vec<crate::types::PackageVersion>> {
+        let url = format!(
+            "/orgs/{}/packages/{}/{}/versions?state={}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&package_type.to_string()),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a package version for an organization.
      *
      * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
@@ -423,6 +454,35 @@ impl Packages {
     }
 
     /**
+     * Get all package versions for a package owned by the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions` endpoint.
+     * As opposed to `packages_get_all_package_versions_for_package_owned_by_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * Returns all package versions for a package owned by the authenticated user.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user>
+     */
+    pub async fn get_all_package_versions_for_package_owned_by_authenticated_user(
+        &self,
+        package_type: crate::types::PackageType,
+        package_name: &str,
+        state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
+    ) -> Result<Vec<crate::types::PackageVersion>> {
+        let url = format!(
+            "/user/packages/{}/{}/versions?state={}",
+            crate::progenitor_support::encode_path(&package_type.to_string()),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
+            state,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a package version for the authenticated user.
      *
      * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
@@ -593,6 +653,35 @@ impl Packages {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * Get all package versions for a package owned by a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions` endpoint.
+     * As opposed to `packages_get_all_package_versions_for_package_owned_by_user`, this function returns all the pages of the request at once.
+     *
+     * Returns all package versions for a public package owned by a specified user.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user>
+     */
+    pub async fn get_all_package_versions_for_package_owned_by_user(
+        &self,
+        package_type: crate::types::PackageType,
+        package_name: &str,
+        username: &str,
+    ) -> Result<Vec<crate::types::PackageVersion>> {
+        let url = format!(
+            "/users/{}/packages/{}/{}/versions",
+            crate::progenitor_support::encode_path(&username.to_string()),
+            crate::progenitor_support::encode_path(&package_type.to_string()),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**

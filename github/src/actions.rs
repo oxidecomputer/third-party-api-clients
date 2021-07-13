@@ -796,6 +796,30 @@ impl Actions {
     }
 
     /**
+     * List runner applications for an organization.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/actions/runners/downloads` endpoint.
+     * As opposed to `actions_list_runner_applications_for_org`, this function returns all the pages of the request at once.
+     *
+     * Lists binaries for the runner application that you can download and run.
+     *
+     * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/actions#list-runner-applications-for-an-organization>
+     */
+    pub async fn list_runner_applications_for_org(
+        &self,
+        org: &str,
+    ) -> Result<Vec<crate::types::RunnerApplication>> {
+        let url = format!(
+            "/orgs/{}/actions/runners/downloads",
+            crate::progenitor_support::encode_path(&org.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a registration token for an organization.
      *
      * This function performs a `POST` to the `/orgs/{org}/actions/runners/registration-token` endpoint.
@@ -1666,6 +1690,32 @@ impl Actions {
     }
 
     /**
+     * List runner applications for a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runners/downloads` endpoint.
+     * As opposed to `actions_list_runner_applications_for_repo`, this function returns all the pages of the request at once.
+     *
+     * Lists binaries for the runner application that you can download and run.
+     *
+     * You must authenticate using an access token with the `repo` scope to use this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/actions#list-runner-applications-for-a-repository>
+     */
+    pub async fn list_runner_applications_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::RunnerApplication>> {
+        let url = format!(
+            "/repos/{}/{}/actions/runners/downloads",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a registration token for a repository.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runners/registration-token` endpoint.
@@ -1946,6 +1996,32 @@ impl Actions {
     }
 
     /**
+     * Get the review history for a workflow run.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/approvals` endpoint.
+     * As opposed to `actions_get_reviews_for_run`, this function returns all the pages of the request at once.
+     *
+     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/actions#get-the-review-history-for-a-workflow-run>
+     */
+    pub async fn get_reviews_for_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<Vec<crate::types::EnvironmentApprovals>> {
+        let url = format!(
+            "/repos/{}/{}/actions/runs/{}/approvals",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&run_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Approve a workflow run for a fork pull request.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/approve` endpoint.
@@ -2186,6 +2262,34 @@ impl Actions {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * Get pending deployments for a workflow run.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments` endpoint.
+     * As opposed to `actions_get_pending_deployments_for_run`, this function returns all the pages of the request at once.
+     *
+     * Get all deployment environments for a workflow run that are waiting for protection rules to pass.
+     *
+     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/actions#get-pending-deployments-for-a-workflow-run>
+     */
+    pub async fn get_pending_deployments_for_run(
+        &self,
+        owner: &str,
+        repo: &str,
+        run_id: i64,
+    ) -> Result<Vec<crate::types::PendingDeployment>> {
+        let url = format!(
+            "/repos/{}/{}/actions/runs/{}/pending_deployments",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&run_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**

@@ -44,6 +44,25 @@ impl Licenses {
     }
 
     /**
+     * Get all commonly used licenses.
+     *
+     * This function performs a `GET` to the `/licenses` endpoint.
+     * As opposed to `licenses_get_all_commonly_used`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
+     */
+    pub async fn get_all_commonly_used(
+        &self,
+        featured: bool,
+    ) -> Result<Vec<crate::types::License>> {
+        let url = format!("/licenses?featured={}", format!("{}", featured),);
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a license.
      *
      * This function performs a `GET` to the `/licenses/{license}` endpoint.

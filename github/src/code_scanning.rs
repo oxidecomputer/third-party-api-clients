@@ -68,6 +68,46 @@ impl CodeScanning {
     }
 
     /**
+     * List code scanning alerts for a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts` endpoint.
+     * As opposed to `code_scanning_list_alerts_for_repo`, this function returns all the pages of the request at once.
+     *
+     * Lists all open code scanning alerts for the default branch (usually `main`
+     * or `master`). You must use an access token with the `security_events` scope to use
+     * this endpoint. GitHub Apps must have the `security_events` read permission to use
+     * this endpoint.
+     *
+     * The response includes a `most_recent_instance` object.
+     * This provides details of the most recent instance of this alert
+     * for the default branch or for the specified Git reference
+     * (if you used `ref` in the request).
+     *
+     * FROM: <https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-a-repository>
+     */
+    pub async fn list_alerts_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+        tool_name: &str,
+        tool_guid: &str,
+        ref_: &str,
+        state: crate::types::CodeScanningAlertState,
+    ) -> Result<Vec<crate::types::CodeScanningAlertItems>> {
+        let url = format!(
+            "/repos/{}/{}/code-scanning/alerts?ref={}&state={}&tool_guid={}&tool_name={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            ref_,
+            state,
+            tool_guid.to_string(),
+            tool_name.to_string(),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get a code scanning alert.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}` endpoint.
@@ -179,6 +219,34 @@ impl CodeScanning {
     }
 
     /**
+     * List instances of a code scanning alert.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances` endpoint.
+     * As opposed to `code_scanning_list_alert_instances`, this function returns all the pages of the request at once.
+     *
+     * Lists all instances of the specified code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/code-scanning#list-instances-of-a-code-scanning-alert>
+     */
+    pub async fn list_alert_instances(
+        &self,
+        owner: &str,
+        repo: &str,
+        alert_number: i64,
+        ref_: &str,
+    ) -> Result<Vec<crate::types::CodeScanningAlertInstance>> {
+        let url = format!(
+            "/repos/{}/{}/code-scanning/alerts/{}/instances?ref={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&alert_number.to_string()),
+            ref_,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List code scanning analyses for a repository.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/analyses` endpoint.
@@ -238,6 +306,53 @@ impl CodeScanning {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List code scanning analyses for a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/analyses` endpoint.
+     * As opposed to `code_scanning_list_recent_analyses`, this function returns all the pages of the request at once.
+     *
+     * Lists the details of all code scanning analyses for a repository,
+     * starting with the most recent.
+     * The response is paginated and you can use the `page` and `per_page` parameters
+     * to list the analyses you're interested in.
+     * By default 30 analyses are listed per page.
+     *
+     * The `rules_count` field in the response give the number of rules
+     * that were run in the analysis.
+     * For very old analyses this data is not available,
+     * and `0` is returned in this field.
+     *
+     * You must use an access token with the `security_events` scope to use this endpoint.
+     * GitHub Apps must have the `security_events` read permission to use this endpoint.
+     *
+     * **Deprecation notice**:
+     * The `tool_name` field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The tool name can now be found inside the `tool` field.
+     *
+     * FROM: <https://docs.github.com/rest/reference/code-scanning#list-code-scanning-analyses-for-a-repository>
+     */
+    pub async fn list_recent_analyses(
+        &self,
+        owner: &str,
+        repo: &str,
+        tool_name: &str,
+        tool_guid: &str,
+        ref_: &str,
+        sarif_id: &str,
+    ) -> Result<Vec<crate::types::CodeScanningAnalysis>> {
+        let url = format!(
+            "/repos/{}/{}/code-scanning/analyses?ref={}&sarif_id={}&tool_guid={}&tool_name={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            ref_,
+            sarif_id.to_string(),
+            tool_guid.to_string(),
+            tool_name.to_string(),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**

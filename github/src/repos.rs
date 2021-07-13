@@ -53,6 +53,34 @@ impl Repos {
     }
 
     /**
+     * List organization repositories.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/repos` endpoint.
+     * As opposed to `repos_list_for_org`, this function returns all the pages of the request at once.
+     *
+     * Lists repositories for the specified organization.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-organization-repositories>
+     */
+    pub async fn list_for_org(
+        &self,
+        org: &str,
+        type_: crate::types::ReposListOrgType,
+        sort: crate::types::ReposListOrgSort,
+        direction: crate::types::Direction,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = format!(
+            "/orgs/{}/repos?direction={}&sort={}&type={}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            direction,
+            sort,
+            type_,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create an organization repository.
      *
      * This function performs a `POST` to the `/orgs/{org}/repos` endpoint.
@@ -260,6 +288,32 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List branches.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches` endpoint.
+     * As opposed to `repos_list_branches`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-branches>
+     */
+    pub async fn list_branches(
+        &self,
+        owner: &str,
+        repo: &str,
+        protected: bool,
+    ) -> Result<Vec<crate::types::ShortBranch>> {
+        let url = format!(
+            "/repos/{}/{}/branches?protected={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            format!("{}", protected),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -832,6 +886,32 @@ impl Repos {
     }
 
     /**
+     * Get all status check contexts.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
+     * As opposed to `repos_get_all_status_check_contexts`, this function returns all the pages of the request at once.
+     *
+     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-all-status-check-contexts>
+     */
+    pub async fn get_all_status_check_contexts(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<Vec<String>> {
+        let url = format!(
+            "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&branch.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Set status check contexts.
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
@@ -1044,6 +1124,34 @@ impl Repos {
     }
 
     /**
+     * Get apps with access to the protected branch.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
+     * As opposed to `repos_get_apps_with_access_to_protected_branch`, this function returns all the pages of the request at once.
+     *
+     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+     *
+     * Lists the GitHub Apps that have push access to this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-apps-with-access-to-the-protected-branch>
+     */
+    pub async fn get_apps_with_access_to_protected_branch(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<Vec<crate::types::Integration>> {
+        let url = format!(
+            "/repos/{}/{}/branches/{}/protection/restrictions/apps",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&branch.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Set app access restrictions.
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
@@ -1206,6 +1314,34 @@ impl Repos {
     }
 
     /**
+     * Get teams with access to the protected branch.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
+     * As opposed to `repos_get_teams_with_access_to_protected_branch`, this function returns all the pages of the request at once.
+     *
+     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+     *
+     * Lists the teams who have push access to this branch. The list includes child teams.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-teams-with-access-to-the-protected-branch>
+     */
+    pub async fn get_teams_with_access_to_protected_branch(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<Vec<crate::types::Team>> {
+        let url = format!(
+            "/repos/{}/{}/branches/{}/protection/restrictions/teams",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&branch.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Set team access restrictions.
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
@@ -1365,6 +1501,34 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * Get users with access to the protected branch.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
+     * As opposed to `repos_get_users_with_access_to_protected_branch`, this function returns all the pages of the request at once.
+     *
+     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+     *
+     * Lists the people who have push access to this branch.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-users-with-access-to-the-protected-branch>
+     */
+    pub async fn get_users_with_access_to_protected_branch(
+        &self,
+        owner: &str,
+        repo: &str,
+        branch: &str,
+    ) -> Result<Vec<crate::types::User>> {
+        let url = format!(
+            "/repos/{}/{}/branches/{}/protection/restrictions/users",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&branch.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -1590,6 +1754,34 @@ impl Repos {
     }
 
     /**
+     * List repository collaborators.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators` endpoint.
+     * As opposed to `repos_list_collaborators`, this function returns all the pages of the request at once.
+     *
+     * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
+     *
+     * Team members will include the members of child teams.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-collaborators>
+     */
+    pub async fn list_collaborators(
+        &self,
+        owner: &str,
+        repo: &str,
+        affiliation: crate::types::Affiliation,
+    ) -> Result<Vec<crate::types::Collaborator>> {
+        let url = format!(
+            "/repos/{}/{}/collaborators?affiliation={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            affiliation,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Check if a user is a repository collaborator.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators/{username}` endpoint.
@@ -1755,6 +1947,32 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List commit comments for a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/comments` endpoint.
+     * As opposed to `repos_list_commit_comments_for_repo`, this function returns all the pages of the request at once.
+     *
+     * Commit Comments use [these custom media types](https://docs.github.com/rest/reference/repos#custom-media-types). You can read more about the use of media types in the API [here](https://docs.github.com/rest/overview/media-types/).
+     *
+     * Comments are ordered by ascending ID.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-commit-comments-for-a-repository>
+     */
+    pub async fn list_commit_comments_for_repo(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::CommitComment>> {
+        let url = format!(
+            "/repos/{}/{}/comments",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -1933,6 +2151,67 @@ impl Repos {
     }
 
     /**
+     * List commits.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits` endpoint.
+     * As opposed to `repos_list_commits`, this function returns all the pages of the request at once.
+     *
+     * **Signature verification object**
+     *
+     * The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
+     *
+     * | Name | Type | Description |
+     * | ---- | ---- | ----------- |
+     * | `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+     * | `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+     * | `signature` | `string` | The signature that was extracted from the commit. |
+     * | `payload` | `string` | The value that was signed. |
+     *
+     * These are the possible values for `reason` in the `verification` object:
+     *
+     * | Value | Description |
+     * | ----- | ----------- |
+     * | `expired_key` | The key that made the signature is expired. |
+     * | `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+     * | `gpgverify_error` | There was an error communicating with the signature verification service. |
+     * | `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+     * | `unsigned` | The object does not include a signature. |
+     * | `unknown_signature_type` | A non-PGP signature was found in the commit. |
+     * | `no_user` | No user was associated with the `committer` email address in the commit. |
+     * | `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+     * | `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+     * | `unknown_key` | The key that made the signature has not been registered with any user's account. |
+     * | `malformed_signature` | There was an error parsing the signature. |
+     * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+     * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-commits>
+     */
+    pub async fn list_commits(
+        &self,
+        owner: &str,
+        repo: &str,
+        sha: &str,
+        path: &str,
+        author: &str,
+        since: chrono::DateTime<chrono::Utc>,
+        until: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::Tree>> {
+        let url = format!(
+            "/repos/{}/{}/commits?author={}&path={}&sha={}&since={}&until={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            author.to_string(),
+            path.to_string(),
+            sha.to_string(),
+            since,
+            until,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List branches for HEAD commit.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head` endpoint.
@@ -1963,6 +2242,34 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List branches for HEAD commit.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head` endpoint.
+     * As opposed to `repos_list_branches_for_head_commit`, this function returns all the pages of the request at once.
+     *
+     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+     *
+     * Returns all branches where the given commit SHA is the HEAD, or latest commit for the branch.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-branches-for-head-commit>
+     */
+    pub async fn list_branches_for_head_commit(
+        &self,
+        owner: &str,
+        repo: &str,
+        commit_sha: &str,
+    ) -> Result<Vec<crate::types::BranchShort>> {
+        let url = format!(
+            "/repos/{}/{}/commits/{}/branches-where-head",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&commit_sha.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -2000,6 +2307,32 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List commit comments.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/comments` endpoint.
+     * As opposed to `repos_list_comments_for_commit`, this function returns all the pages of the request at once.
+     *
+     * Use the `:commit_sha` to specify the commit that will have its comments listed.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-commit-comments>
+     */
+    pub async fn list_comments_for_commit(
+        &self,
+        owner: &str,
+        repo: &str,
+        commit_sha: &str,
+    ) -> Result<Vec<crate::types::CommitComment>> {
+        let url = format!(
+            "/repos/{}/{}/commits/{}/comments",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&commit_sha.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -2076,6 +2409,32 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List pull requests associated with a commit.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/pulls` endpoint.
+     * As opposed to `repos_list_pull_requests_associated_with_commit`, this function returns all the pages of the request at once.
+     *
+     * Lists the merged pull request that introduced the commit to the repository. If the commit is not present in the default branch, additionally returns open pull requests associated with the commit. The results may include open and closed pull requests. Additional preview headers may be required to see certain details for associated pull requests, such as whether a pull request is in a draft state. For more information about previews that might affect this endpoint, see the [List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests) endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-pull-requests-associated-with-a-commit>
+     */
+    pub async fn list_pull_requests_associated_with_commit(
+        &self,
+        owner: &str,
+        repo: &str,
+        commit_sha: &str,
+    ) -> Result<Vec<crate::types::PullRequestSimple>> {
+        let url = format!(
+            "/repos/{}/{}/commits/{}/pulls",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&commit_sha.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -2232,6 +2591,34 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List commit statuses for a reference.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/statuses` endpoint.
+     * As opposed to `repos_list_commit_statuses_for_ref`, this function returns all the pages of the request at once.
+     *
+     * Users with pull access in a repository can view commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name. Statuses are returned in reverse chronological order. The first status in the list will be the latest one.
+     *
+     * This resource is also available via a legacy route: `GET /repos/:owner/:repo/statuses/:ref`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-commit-statuses-for-a-reference>
+     */
+    pub async fn list_commit_statuses_for_ref(
+        &self,
+        owner: &str,
+        repo: &str,
+        ref_: &str,
+    ) -> Result<Vec<crate::types::Status>> {
+        let url = format!(
+            "/repos/{}/{}/commits/{}/statuses",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -2415,6 +2802,65 @@ impl Repos {
     }
 
     /**
+     * Get repository content.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
+     * As opposed to `repos_get_content`, this function returns all the pages of the request at once.
+     *
+     * Gets the contents of a file or directory in a repository. Specify the file path or directory in `:path`. If you omit
+     * `:path`, you will receive the contents of the repository's root directory. See the description below regarding what the API response includes for directories.
+     *
+     * Files and symlinks support [a custom media type](https://docs.github.com/rest/reference/repos#custom-media-types) for
+     * retrieving the raw content or rendered HTML (when supported). All content types support [a custom media
+     * type](https://docs.github.com/rest/reference/repos#custom-media-types) to ensure the content is returned in a consistent
+     * object format.
+     *
+     * **Note**:
+     * *   To get a repository's contents recursively, you can [recursively get the tree](https://docs.github.com/rest/reference/git#trees).
+     * *   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees
+     * API](https://docs.github.com/rest/reference/git#get-a-tree).
+     * *   This API supports files up to 1 megabyte in size.
+     *
+     * #### If the content is a directory
+     * The response will be an array of objects, one object for each item in the directory.
+     * When listing the contents of a directory, submodules have their "type" specified as "file". Logically, the value
+     * _should_ be "submodule". This behavior exists in API v3 [for backwards compatibility purposes](https://git.io/v1YCW).
+     * In the next major version of the API, the type will be returned as "submodule".
+     *
+     * #### If the content is a symlink
+     * If the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the
+     * API responds with the content of the file (in the format shown in the example. Otherwise, the API responds with an object
+     * describing the symlink itself.
+     *
+     * #### If the content is a submodule
+     * The `submodule_git_url` identifies the location of the submodule repository, and the `sha` identifies a specific
+     * commit within the submodule repository. Git uses the given URL when cloning the submodule repository, and checks out
+     * the submodule at that specific commit.
+     *
+     * If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the
+     * github.com URLs (`html_url` and `_links["html"]`) will have null values.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-repository-content>
+     */
+    pub async fn get_content(
+        &self,
+        owner: &str,
+        repo: &str,
+        path: &str,
+        ref_: &str,
+    ) -> Result<Vec<crate::types::Entries>> {
+        let url = format!(
+            "/repos/{}/{}/contents/{}?ref={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&path.to_string()),
+            ref_,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create or update file contents.
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
@@ -2534,6 +2980,34 @@ impl Repos {
     }
 
     /**
+     * List repository contributors.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/contributors` endpoint.
+     * As opposed to `repos_list_contributors`, this function returns all the pages of the request at once.
+     *
+     * Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.
+     *
+     * GitHub identifies contributors by author email address. This endpoint groups contribution counts by GitHub user, which includes all associated email addresses. To improve performance, only the first 500 author email addresses in the repository link to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-contributors>
+     */
+    pub async fn list_contributors(
+        &self,
+        owner: &str,
+        repo: &str,
+        anon: &str,
+    ) -> Result<Vec<crate::types::Contributor>> {
+        let url = format!(
+            "/repos/{}/{}/contributors?anon={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            anon.to_string(),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List deployments.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments` endpoint.
@@ -2577,6 +3051,38 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List deployments.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments` endpoint.
+     * As opposed to `repos_list_deployments`, this function returns all the pages of the request at once.
+     *
+     * Simple filtering of deployments is available via query parameters:
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-deployments>
+     */
+    pub async fn list_deployments(
+        &self,
+        owner: &str,
+        repo: &str,
+        sha: &str,
+        ref_: &str,
+        task: &str,
+        environment: &str,
+    ) -> Result<Vec<crate::types::Deployment>> {
+        let url = format!(
+            "/repos/{}/{}/deployments?environment={}&ref={}&sha={}&task={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            environment.to_string(),
+            ref_,
+            sha.to_string(),
+            task.to_string(),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -2761,6 +3267,32 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List deployment statuses.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses` endpoint.
+     * As opposed to `repos_list_deployment_statuses`, this function returns all the pages of the request at once.
+     *
+     * Users with pull access can view deployment statuses for a deployment:
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-deployment-statuses>
+     */
+    pub async fn list_deployment_statuses(
+        &self,
+        owner: &str,
+        repo: &str,
+        deployment_id: i64,
+    ) -> Result<Vec<crate::types::DeploymentStatus>> {
+        let url = format!(
+            "/repos/{}/{}/deployments/{}/statuses",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&deployment_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -3052,6 +3584,32 @@ impl Repos {
     }
 
     /**
+     * List forks.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/forks` endpoint.
+     * As opposed to `repos_list_forks`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-forks>
+     */
+    pub async fn list_forks(
+        &self,
+        owner: &str,
+        repo: &str,
+        sort: crate::types::ReposListForksSort,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = format!(
+            "/repos/{}/{}/forks?sort={}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            sort,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a fork.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/forks` endpoint.
@@ -3119,6 +3677,26 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repository webhooks.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks` endpoint.
+     * As opposed to `repos_list_webhooks`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-webhooks>
+     */
+    pub async fn list_webhooks(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Hook>> {
+        let url = format!(
+            "/repos/{}/{}/hooks",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -3411,6 +3989,30 @@ impl Repos {
     }
 
     /**
+     * List repository invitations.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/invitations` endpoint.
+     * As opposed to `repos_list_invitations`, this function returns all the pages of the request at once.
+     *
+     * When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-invitations>
+     */
+    pub async fn list_invitations(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::RepositoryInvitation>> {
+        let url = format!(
+            "/repos/{}/{}/invitations",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Delete a repository invitation.
      *
      * This function performs a `DELETE` to the `/repos/{owner}/{repo}/invitations/{invitation_id}` endpoint.
@@ -3510,6 +4112,30 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List deploy keys.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/keys` endpoint.
+     * As opposed to `repos_list_deploy_keys`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-deploy-keys>
+     */
+    pub async fn list_deploy_keys(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::DeployKey>> {
+        let url = format!(
+            "/repos/{}/{}/keys",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -3812,6 +4438,30 @@ impl Repos {
     }
 
     /**
+     * List GitHub Pages builds.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/builds` endpoint.
+     * As opposed to `repos_list_pages_builds`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-github-pages-builds>
+     */
+    pub async fn list_pages_builds(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::PageBuild>> {
+        let url = format!(
+            "/repos/{}/{}/pages/builds",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Request a GitHub Pages build.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/pages/builds` endpoint.
@@ -4035,6 +4685,32 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List releases.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/releases` endpoint.
+     * As opposed to `repos_list_releases`, this function returns all the pages of the request at once.
+     *
+     * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the [Repository Tags API](https://docs.github.com/rest/reference/repos#list-repository-tags).
+     *
+     * Information about published releases are available to everyone. Only users with push access will receive listings for draft releases.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-releases>
+     */
+    pub async fn list_releases(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::Release>> {
+        let url = format!(
+            "/repos/{}/{}/releases",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -4360,6 +5036,32 @@ impl Repos {
     }
 
     /**
+     * List release assets.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/{release_id}/assets` endpoint.
+     * As opposed to `repos_list_release_assets`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-release-assets>
+     */
+    pub async fn list_release_assets(
+        &self,
+        owner: &str,
+        repo: &str,
+        release_id: i64,
+    ) -> Result<Vec<crate::types::ReleaseAsset>> {
+        let url = format!(
+            "/repos/{}/{}/releases/{}/assets",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&release_id.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Upload a release asset.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/releases/{release_id}/assets` endpoint.
@@ -4439,6 +5141,26 @@ impl Repos {
     }
 
     /**
+     * Get the weekly commit activity.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/code_frequency` endpoint.
+     * As opposed to `repos_get_code_frequency_stats`, this function returns all the pages of the request at once.
+     *
+     * Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-the-weekly-commit-activity>
+     */
+    pub async fn get_code_frequency_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
+        let url = format!(
+            "/repos/{}/{}/stats/code_frequency",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get the last year of commit activity.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/commit_activity` endpoint.
@@ -4464,6 +5186,30 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * Get the last year of commit activity.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/commit_activity` endpoint.
+     * As opposed to `repos_get_commit_activity_stats`, this function returns all the pages of the request at once.
+     *
+     * Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-the-last-year-of-commit-activity>
+     */
+    pub async fn get_commit_activity_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::CommitActivity>> {
+        let url = format!(
+            "/repos/{}/{}/stats/commit_activity",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -4498,6 +5244,36 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * Get all contributor commit activity.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/contributors` endpoint.
+     * As opposed to `repos_get_contributors_stats`, this function returns all the pages of the request at once.
+     *
+     *
+     * Returns the `total` number of commits authored by the contributor. In addition, the response includes a Weekly Hash (`weeks` array) with the following information:
+     *
+     * *   `w` - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).
+     * *   `a` - Number of additions
+     * *   `d` - Number of deletions
+     * *   `c` - Number of commits
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-all-contributor-commit-activity>
+     */
+    pub async fn get_contributors_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::ContributorActivity>> {
+        let url = format!(
+            "/repos/{}/{}/stats/contributors",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -4558,6 +5334,32 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * Get the hourly commit count for each day.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/punch_card` endpoint.
+     * As opposed to `repos_get_punch_card_stats`, this function returns all the pages of the request at once.
+     *
+     * Each array contains the day number, hour number, and number of commits:
+     *
+     * *   `0-6`: Sunday - Saturday
+     * *   `0-23`: Hour of day
+     * *   Number of commits
+     *
+     * For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays. All times are based on the time zone of individual commits.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-the-hourly-commit-count-for-each-day>
+     */
+    pub async fn get_punch_card_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
+        let url = format!(
+            "/repos/{}/{}/stats/punch_card",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -4634,6 +5436,26 @@ impl Repos {
     }
 
     /**
+     * List repository tags.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/tags` endpoint.
+     * As opposed to `repos_list_tags`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-tags>
+     */
+    pub async fn list_tags(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Tag>> {
+        let url = format!(
+            "/repos/{}/{}/tags",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Download a repository archive (tar).
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/tarball/{ref}` endpoint.
@@ -4699,6 +5521,26 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repository teams.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/teams` endpoint.
+     * As opposed to `repos_list_teams`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-teams>
+     */
+    pub async fn list_teams(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Team>> {
+        let url = format!(
+            "/repos/{}/{}/teams",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -4829,6 +5671,30 @@ impl Repos {
     }
 
     /**
+     * Get top referral paths.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/paths` endpoint.
+     * As opposed to `repos_get_top_paths`, this function returns all the pages of the request at once.
+     *
+     * Get the top 10 popular contents over the last 14 days.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-top-referral-paths>
+     */
+    pub async fn get_top_paths(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::ContentTraffic>> {
+        let url = format!(
+            "/repos/{}/{}/traffic/popular/paths",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Get top referral sources.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/referrers` endpoint.
@@ -4854,6 +5720,30 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * Get top referral sources.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/referrers` endpoint.
+     * As opposed to `repos_get_top_referrers`, this function returns all the pages of the request at once.
+     *
+     * Get the top 10 referrers over the last 14 days.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-top-referral-sources>
+     */
+    pub async fn get_top_referrers(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::ReferrerTraffic>> {
+        let url = format!(
+            "/repos/{}/{}/traffic/popular/referrers",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -5092,6 +5982,26 @@ impl Repos {
     }
 
     /**
+     * List public repositories.
+     *
+     * This function performs a `GET` to the `/repositories` endpoint.
+     * As opposed to `repos_list_public`, this function returns all the pages of the request at once.
+     *
+     * Lists all public repositories in the order that they were created.
+     *
+     * Note:
+     * - For GitHub Enterprise Server, this endpoint will only list repositories available to all users on the enterprise.
+     * - Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of repositories.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-public-repositories>
+     */
+    pub async fn list_public(&self, since: i64) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = format!("/repositories?since={}", format!("{}", since),);
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * List repositories for the authenticated user.
      *
      * This function performs a `GET` to the `/user/repos` endpoint.
@@ -5149,6 +6059,43 @@ impl Repos {
     }
 
     /**
+     * List repositories for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/repos` endpoint.
+     * As opposed to `repos_list_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * Lists repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
+     *
+     * The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repositories-for-the-authenticated-user>
+     */
+    pub async fn list_for_authenticated_user(
+        &self,
+        visibility: crate::types::ReposListVisibility,
+        affiliation: &str,
+        type_: crate::types::ReposListType,
+        sort: crate::types::ReposListOrgSort,
+        direction: crate::types::Direction,
+        since: chrono::DateTime<chrono::Utc>,
+        before: chrono::DateTime<chrono::Utc>,
+    ) -> Result<Vec<crate::types::Repository>> {
+        let url = format!(
+            "/user/repos?affiliation={}&before={}&direction={}&since={}&sort={}&type={}&\
+             visibility={}",
+            affiliation.to_string(),
+            before,
+            direction,
+            since,
+            sort,
+            type_,
+            visibility,
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
      * Create a repository for the authenticated user.
      *
      * This function performs a `POST` to the `/user/repos` endpoint.
@@ -5203,6 +6150,23 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repository invitations for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/repository_invitations` endpoint.
+     * As opposed to `repos_list_invitations_for_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-invitations-for-the-authenticated-user>
+     */
+    pub async fn list_invitations_for_authenticated_user(
+        &self,
+    ) -> Result<Vec<crate::types::RepositoryInvitation>> {
+        let url = "/user/repository_invitations".to_string();
+        self.client.get_all_pages(&url).await
     }
 
     /**
@@ -5287,5 +6251,33 @@ impl Repos {
         );
 
         self.client.get(&url).await
+    }
+
+    /**
+     * List repositories for a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/repos` endpoint.
+     * As opposed to `repos_list_for_user`, this function returns all the pages of the request at once.
+     *
+     * Lists public repositories for the specified user. Note: For GitHub AE, this endpoint will list internal repositories for the specified user.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repositories-for-a-user>
+     */
+    pub async fn list_for_user(
+        &self,
+        username: &str,
+        type_: crate::types::ReposListUserType,
+        sort: crate::types::ReposListOrgSort,
+        direction: crate::types::Direction,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
+        let url = format!(
+            "/users/{}/repos?direction={}&sort={}&type={}",
+            crate::progenitor_support::encode_path(&username.to_string()),
+            direction,
+            sort,
+            type_,
+        );
+
+        self.client.get_all_pages(&url).await
     }
 }
