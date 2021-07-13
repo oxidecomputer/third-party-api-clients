@@ -1573,12 +1573,6 @@ fn gen(api: &OpenAPI) -> Result<String> {
         if !docs.is_empty() {
             a(&format!("/// {}", docs.replace("\n", "\n///"),));
         }
-        a("#[doc(inline)]");
-        a(&format!(
-            "pub use {}::{};",
-            to_snake_case(&tag.name),
-            struct_name(&tag.name)
-        ));
         a(&format!("mod {};", to_snake_case(&tag.name),));
     }
 

@@ -143,136 +143,74 @@
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(missing_docs)]
 
-pub mod auth;
-#[cfg(feature = "httpcache")]
-pub mod http_cache;
-pub mod types;
-#[doc(hidden)]
-pub mod utils;
 /// Endpoints to manage GitHub Actions using the REST API.
-#[doc(inline)]
-pub use actions::Actions;
 mod actions;
 /// Activity APIs provide access to notifications, subscriptions, and timelines.
-#[doc(inline)]
-pub use activity::Activity;
 mod activity;
 /// Information for integrations and installations.
-#[doc(inline)]
-pub use apps::Apps;
 mod apps;
+pub mod auth;
 /// Monitor charges and usage from Actions and Packages.
-#[doc(inline)]
-pub use billing::Billing;
 mod billing;
 /// Rich interactions with checks run by your integrations.
-#[doc(inline)]
-pub use checks::Checks;
 mod checks;
 /// Retrieve code scanning alerts from a repository.
-#[doc(inline)]
-pub use code_scanning::CodeScanning;
 mod code_scanning;
 /// Insight into codes of conduct for your communities.
-#[doc(inline)]
-pub use codes_of_conduct::CodesOfConduct;
 mod codes_of_conduct;
 /// List emojis available to use on GitHub.
-#[doc(inline)]
-pub use emojis::Emojis;
 mod emojis;
 /// Administer a GitHub enterprise.
-#[doc(inline)]
-pub use enterprise_admin::EnterpriseAdmin;
 mod enterprise_admin;
 /// View, modify your gists.
-#[doc(inline)]
-pub use gists::Gists;
 mod gists;
 /// Raw Git functionality.
-#[doc(inline)]
-pub use git::Git;
 mod git;
 /// View gitignore templates.
-#[doc(inline)]
-pub use gitignore::Gitignore;
 mod gitignore;
+#[cfg(feature = "httpcache")]
+pub mod http_cache;
 /// Owner or admin management of users interactions.
-#[doc(inline)]
-pub use interactions::Interactions;
 mod interactions;
 /// Interact with GitHub Issues.
-#[doc(inline)]
-pub use issues::Issues;
 mod issues;
 /// View various OSS licenses.
-#[doc(inline)]
-pub use licenses::Licenses;
 mod licenses;
 /// Render Github flavored markdown.
-#[doc(inline)]
-pub use markdown::Markdown;
 mod markdown;
 /// Endpoints that give information about the API.
-#[doc(inline)]
-pub use meta::Meta;
 mod meta;
 /// Move projects to or from GitHub.
-#[doc(inline)]
-pub use migrations::Migrations;
 mod migrations;
 /// Manage access of OAuth applications.
-#[doc(inline)]
-pub use oauth_authorizations::OauthAuthorizations;
 mod oauth_authorizations;
 /// Interact with GitHub Orgs.
-#[doc(inline)]
-pub use orgs::Orgs;
 mod orgs;
 /// Manage packages for authenticated users and organizations.
-#[doc(inline)]
-pub use packages::Packages;
 mod packages;
 /// Interact with GitHub Projects.
-#[doc(inline)]
-pub use projects::Projects;
 mod projects;
 /// Interact with GitHub Pull Requests.
-#[doc(inline)]
-pub use pulls::Pulls;
 mod pulls;
 /// Check your current rate limit status.
-#[doc(inline)]
-pub use rate_limit::RateLimit;
 mod rate_limit;
 /// Interact with reactions to various GitHub entities.
-#[doc(inline)]
-pub use reactions::Reactions;
 mod reactions;
 /// Interact with GitHub Repos.
-#[doc(inline)]
-pub use repos::Repos;
 mod repos;
 /// Provisioning of GitHub organization membership for SCIM-enabled providers.
-#[doc(inline)]
-pub use scim::Scim;
 mod scim;
 /// Look for stuff on GitHub.
-#[doc(inline)]
-pub use search::Search;
 mod search;
 /// Retrieve secret scanning alerts from a repository.
-#[doc(inline)]
-pub use secret_scanning::SecretScanning;
 mod secret_scanning;
 /// Interact with GitHub Teams.
-#[doc(inline)]
-pub use teams::Teams;
 mod teams;
+pub mod types;
 /// Interact with and view information about users and also current user.
-#[doc(inline)]
-pub use users::Users;
 mod users;
+#[doc(hidden)]
+pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
