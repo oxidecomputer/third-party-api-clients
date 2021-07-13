@@ -9,7 +9,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.1.0"
+//! octorust = "0.1.1"
 //! ```
 //!
 //! ## Basic example
@@ -41,7 +41,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.1.0", features = ["httpcache"] }
+//! octorust = { version = "0.1.1", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.

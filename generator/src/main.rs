@@ -2011,7 +2011,7 @@ httpcache = ["dirs"]
             let docs = template::generate_docs(&to_snake_case(&name), &version);
             let mut readme = root.clone();
             readme.push("README.md");
-            save(readme, docs.replace("//! ", "").as_str())?;
+            save(readme, docs.replace("//! ", "").replace("//!", "").as_str())?;
 
             /*
              * Create the src/ directory:
