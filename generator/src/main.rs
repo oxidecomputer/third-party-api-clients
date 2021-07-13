@@ -1693,7 +1693,6 @@ fn clean_name(t: &str) -> String {
             .replace("040000", "subdirectory_tree")
             .replace("160000", "submodule_commit")
             .replace("120000", "symlink_path_blob")
-            .replace("commit commit ", "commit ")
             .replace(" an ", " ")
             .replace(" or ", " ")
             .replace(" for ", " ")
