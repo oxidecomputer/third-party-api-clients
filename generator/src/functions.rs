@@ -172,100 +172,21 @@ pub fn generate_files(
             }
             a("&self,");
 
-            let mut query_params_str: Vec<String> = Default::default();
             /*
-             * Query parameters are sorted lexicographically to ensure a stable
-             * order in the generated code.
+             * Get the function parameters.
              */
-            let mut query_params: BTreeMap<String, String> = Default::default();
-            for par in o.parameters.iter() {
-                let mut param_name = "".to_string();
-                let item = match par {
-                    openapiv3::ReferenceOr::Reference { reference } => {
-                        param_name =
-                            struct_name(&reference.replace("#/components/parameters/", ""));
-                        // Get the parameter from our BTreeMap.
-                        if let Some(param) = parameters.get(&param_name) {
-                            param
-                        } else {
-                            bail!("could not find parameter with reference: {}", reference);
-                        }
-                    }
-                    openapiv3::ReferenceOr::Item(item) => item,
-                };
-
-                match item {
-                    openapiv3::Parameter::Path {
-                        parameter_data,
-                        style: openapiv3::PathStyle::Simple,
-                    } => {
-                        let nam = &to_snake_case(&parameter_data.name);
-                        let typ = parameter_data.render_type(&param_name, ts)?;
-                        if nam == "ref" || nam == "type" {
-                            a(&format!("{}_: {},", nam, typ));
-                        } else {
-                            a(&format!("{}: {},", nam, typ));
-                        }
-                    }
-                    openapiv3::Parameter::Query {
-                        parameter_data,
-                        allow_reserved: _,
-                        style: openapiv3::QueryStyle::Form,
-                        allow_empty_value,
-                    } => {
-                        if let Some(aev) = allow_empty_value {
-                            if *aev {
-                                bail!("allow empty value is a no go");
-                            }
-                        }
-
-                        let nam = &to_snake_case(&parameter_data.name);
-                        let typ = parameter_data.render_type(&param_name, ts)?;
-                        if nam == "ref" || nam == "type" {
-                            a(&format!("        {}_: {},", nam, typ));
-                            query_params_str.push(format!(r#"("{}", {}_.to_string())"#, nam, nam));
-                            query_params.insert(nam.to_string(), format!("{}_", nam));
-                        } else {
-                            a(&format!("        {}: {},", nam, typ));
-                            if typ == "DateTime<Utc>" {
-                                query_params_str
-                                    .push(format!(r#"("{}", {}.to_rfc3339())"#, nam, nam));
-                                query_params
-                                    .insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
-                            } else if typ == "i64" || typ == "bool" {
-                                query_params_str
-                                    .push(format!(r#"("{}", format!("{{}}", {}))"#, nam, nam));
-                                query_params.insert(
-                                    nam.to_string(),
-                                    format!(r#"format!("{{}}", {})"#, nam),
-                                );
-                            } else if typ == "&str" {
-                                query_params_str
-                                    .push(format!(r#"("{}", {}.to_string())"#, nam, nam));
-                                query_params
-                                    .insert(nam.to_string(), format!("{}.to_string()", nam));
-                            } else if typ == "&[String]" {
-                                // TODO: I have no idea how these should be seperated and the docs
-                                // don't give any answers either, for an array sent through query
-                                // params.
-                                // https://docs.github.com/en/rest/reference/migrations
-                                query_params_str.push(format!(r#"("{}", {}.join(" "))"#, nam, nam));
-                                query_params
-                                    .insert(nam.to_string(), format!("{}.join(\" \")", nam));
-                            } else {
-                                query_params_str.push(format!(r#"("{}", {})"#, nam, nam));
-                                query_params.insert(nam.to_string(), nam.to_string());
-                            }
-                        }
-                    }
-                    x => bail!("unhandled parameter type: {:#?}", x),
-                }
+            let (fn_params_str, query_params) = get_fn_params(ts, o, parameters)?;
+            if !fn_params_str.is_empty() {
+                a(&fn_params_str.join(" "));
             }
 
             if let Some(bp) = &body_param {
-                a(&format!("body: {},", bp));
+                a(&format!("body: {}", bp));
             }
 
+            /*
+             * Get the response type.
+             */
             let response_type = get_response_type(&oid, ts, o)?;
             a(&format!(") -> Result<{}> {{", response_type));
 
@@ -381,4 +302,80 @@ fn get_response_type(oid: &str, ts: &mut TypeSpace, o: &openapiv3::Operation) ->
     }
 
     bail!("parsing response got to end with no type");
+}
+
+fn get_fn_params(
+    ts: &mut TypeSpace,
+    o: &openapiv3::Operation,
+    parameters: &BTreeMap<String, &openapiv3::Parameter>,
+) -> Result<(Vec<String>, BTreeMap<String, String>)> {
+    /*
+     * Query parameters are sorted lexicographically to ensure a stable
+     * order in the generated code.
+     */
+    let mut fn_params_str: Vec<String> = Default::default();
+    let mut query_params: BTreeMap<String, String> = Default::default();
+    for par in o.parameters.iter() {
+        let mut param_name = "".to_string();
+        let item = match par {
+            openapiv3::ReferenceOr::Reference { reference } => {
+                param_name = struct_name(&reference.replace("#/components/parameters/", ""));
+                // Get the parameter from our BTreeMap.
+                if let Some(param) = parameters.get(&param_name) {
+                    param
+                } else {
+                    bail!("could not find parameter with reference: {}", reference);
+                }
+            }
+            openapiv3::ReferenceOr::Item(item) => item,
+        };
+
+        let parameter_data = get_parameter_data(item).unwrap();
+        let nam = &to_snake_case(&parameter_data.name);
+        let typ = parameter_data.render_type(&param_name, ts)?;
+        if nam == "ref" || nam == "type" {
+            fn_params_str.push(format!("{}_: {},", nam, typ));
+        } else {
+            fn_params_str.push(format!("{}: {},", nam, typ));
+        }
+
+        // Check if we have a query.
+        // TODO: make this a bool ext.
+        if let openapiv3::Parameter::Query {
+            parameter_data: _,
+            allow_reserved: _,
+            style: openapiv3::QueryStyle::Form,
+            allow_empty_value,
+        } = item
+        {
+            if let Some(aev) = allow_empty_value {
+                if *aev {
+                    bail!("allow empty value is a no go");
+                }
+            }
+
+            if nam == "ref" || nam == "type" {
+                query_params.insert(nam.to_string(), format!("{}_", nam));
+                continue;
+            }
+
+            if typ == "DateTime<Utc>" {
+                query_params.insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
+            } else if typ == "i64" || typ == "bool" {
+                query_params.insert(nam.to_string(), format!(r#"format!("{{}}", {})"#, nam));
+            } else if typ == "&str" {
+                query_params.insert(nam.to_string(), format!("{}.to_string()", nam));
+            } else if typ == "&[String]" {
+                // TODO: I have no idea how these should be seperated and the docs
+                // don't give any answers either, for an array sent through query
+                // params.
+                // https://docs.github.com/en/rest/reference/migrations
+                query_params.insert(nam.to_string(), format!("{}.join(\" \")", nam));
+            } else {
+                query_params.insert(nam.to_string(), nam.to_string());
+            }
+        }
+    }
+
+    Ok((fn_params_str, query_params))
 }
