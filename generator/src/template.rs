@@ -254,7 +254,7 @@ pub fn generate_docs(name: &str, version: &str) -> String {
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](struct.Client.html#method.host) method.
+//! [Client#host](https://docs.rs/{}/struct.Client.html#method.host) method.
 //!
 //! ## Feature flags
 //!
@@ -367,6 +367,6 @@ pub fn generate_docs(name: &str, version: &str) -> String {
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
 //!"#,
-        name, version, name, name, version, name, name, name, name,
+        name, version, name, name, name, version, name, name, name, name,
     )
 }

@@ -29,7 +29,7 @@ let github = Client::new(
 ```
 //!
 If you are a GitHub enterprise customer, you will want to create a client with the
-[Client#host](struct.Client.html#method.host) method.
+[Client#host](https://docs.rs/octorust/struct.Client.html#method.host) method.
 //!
 ## Feature flags
 //!
