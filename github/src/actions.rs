@@ -807,7 +807,7 @@ impl Actions {
      *
      * FROM: <https://docs.github.com/rest/reference/actions#list-runner-applications-for-an-organization>
      */
-    pub async fn list_runner_applications_for_org(
+    pub async fn list_all_runner_applications_for_org(
         &self,
         org: &str,
     ) -> Result<Vec<crate::types::RunnerApplication>> {
@@ -1701,7 +1701,7 @@ impl Actions {
      *
      * FROM: <https://docs.github.com/rest/reference/actions#list-runner-applications-for-a-repository>
      */
-    pub async fn list_runner_applications_for_repo(
+    pub async fn list_all_runner_applications_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -2005,7 +2005,7 @@ impl Actions {
      *
      * FROM: <https://docs.github.com/rest/reference/actions#get-the-review-history-for-a-workflow-run>
      */
-    pub async fn get_reviews_for_run(
+    pub async fn get_all_reviews_for_run(
         &self,
         owner: &str,
         repo: &str,
@@ -2276,7 +2276,7 @@ impl Actions {
      *
      * FROM: <https://docs.github.com/rest/reference/actions#get-pending-deployments-for-a-workflow-run>
      */
-    pub async fn get_pending_deployments_for_run(
+    pub async fn get_all_pending_deployments_for_run(
         &self,
         owner: &str,
         repo: &str,

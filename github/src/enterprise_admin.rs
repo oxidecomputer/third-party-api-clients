@@ -769,7 +769,7 @@ impl EnterpriseAdmin {
      *
      * FROM: <https://docs.github.com/rest/reference/enterprise-admin#list-runner-applications-for-an-enterprise>
      */
-    pub async fn list_runner_applications_for_enterprise(
+    pub async fn list_all_runner_applications_for_enterprise(
         &self,
         enterprise: &str,
     ) -> Result<Vec<crate::types::RunnerApplication>> {
@@ -977,7 +977,7 @@ impl EnterpriseAdmin {
      *
      * FROM: <https://docs.github.com/rest/reference/enterprise-admin#get-the-audit-log-for-an-enterprise>
      */
-    pub async fn get_audit_log(
+    pub async fn get_all_audit_log(
         &self,
         enterprise: &str,
         phrase: &str,

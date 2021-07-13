@@ -36,7 +36,7 @@ impl CodesOfConduct {
      *
      * FROM: <https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct>
      */
-    pub async fn get_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
+    pub async fn get_all_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
         let url = "/codes_of_conduct".to_string();
         self.client.get_all_pages(&url).await
     }

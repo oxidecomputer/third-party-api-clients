@@ -74,7 +74,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user>
      */
-    pub async fn list_blocked_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_blocked_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
         let url = "/user/blocks".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -205,7 +205,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-email-addresses-for-the-authenticated-user>
      */
-    pub async fn list_emails_for_authenticated(&self) -> Result<Vec<crate::types::Email>> {
+    pub async fn list_all_emails_for_authenticated(&self) -> Result<Vec<crate::types::Email>> {
         let url = "/user/emails".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -292,7 +292,9 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-followers-of-the-authenticated-user>
      */
-    pub async fn list_followers_for_authenticated_user(&self) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_followers_for_authenticated_user(
+        &self,
+    ) -> Result<Vec<crate::types::User>> {
         let url = "/user/followers".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -335,7 +337,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-the-people-the-authenticated-user-follows>
      */
-    pub async fn list_followed_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_followed_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
         let url = "/user/following".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -446,7 +448,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-gpg-keys-for-the-authenticated-user>
      */
-    pub async fn list_gpg_keys_for_authenticated(&self) -> Result<Vec<crate::types::GpgKey>> {
+    pub async fn list_all_gpg_keys_for_authenticated(&self) -> Result<Vec<crate::types::GpgKey>> {
         let url = "/user/gpg_keys".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -558,7 +560,9 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-public-ssh-keys-for-the-authenticated-user>
      */
-    pub async fn list_public_ssh_keys_for_authenticated(&self) -> Result<Vec<crate::types::Key>> {
+    pub async fn list_all_public_ssh_keys_for_authenticated(
+        &self,
+    ) -> Result<Vec<crate::types::Key>> {
         let url = "/user/keys".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -670,7 +674,9 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-public-email-addresses-for-the-authenticated-user>
      */
-    pub async fn list_public_emails_for_authenticated(&self) -> Result<Vec<crate::types::Email>> {
+    pub async fn list_all_public_emails_for_authenticated(
+        &self,
+    ) -> Result<Vec<crate::types::Email>> {
         let url = "/user/public_emails".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -788,7 +794,10 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-followers-of-a-user>
      */
-    pub async fn list_followers_for_user(&self, username: &str) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_followers_for_user(
+        &self,
+        username: &str,
+    ) -> Result<Vec<crate::types::User>> {
         let url = format!(
             "/users/{}/followers",
             crate::progenitor_support::encode_path(&username.to_string()),
@@ -838,7 +847,10 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-the-people-a-user-follows>
      */
-    pub async fn list_following_for_user(&self, username: &str) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_following_for_user(
+        &self,
+        username: &str,
+    ) -> Result<Vec<crate::types::User>> {
         let url = format!(
             "/users/{}/following",
             crate::progenitor_support::encode_path(&username.to_string()),
@@ -912,7 +924,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-gpg-keys-for-a-user>
      */
-    pub async fn list_gpg_keys_for_user(
+    pub async fn list_all_gpg_keys_for_user(
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::GpgKey>> {
@@ -1003,7 +1015,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-public-keys-for-a-user>
      */
-    pub async fn list_public_keys_for_user(
+    pub async fn list_all_public_keys_for_user(
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::KeySimple>> {

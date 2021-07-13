@@ -274,7 +274,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-discussions>
      */
-    pub async fn list_discussions_in_org(
+    pub async fn list_all_discussions_in_org(
         &self,
         org: &str,
         team_slug: &str,
@@ -489,7 +489,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-discussion-comments>
      */
-    pub async fn list_discussion_comments_in_org(
+    pub async fn list_all_discussion_comments_in_org(
         &self,
         org: &str,
         team_slug: &str,
@@ -710,7 +710,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-pending-team-invitations>
      */
-    pub async fn list_pending_invitations_in_org(
+    pub async fn list_all_pending_invitations_in_org(
         &self,
         org: &str,
         team_slug: &str,
@@ -778,7 +778,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-team-members>
      */
-    pub async fn list_members_in_org(
+    pub async fn list_all_members_in_org(
         &self,
         org: &str,
         team_slug: &str,
@@ -966,7 +966,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-team-projects>
      */
-    pub async fn list_projects_in_org(
+    pub async fn list_all_projects_in_org(
         &self,
         org: &str,
         team_slug: &str,
@@ -1133,7 +1133,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-team-repositories>
      */
-    pub async fn list_repos_in_org(
+    pub async fn list_all_repos_in_org(
         &self,
         org: &str,
         team_slug: &str,
@@ -1385,7 +1385,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-child-teams>
      */
-    pub async fn list_child_in_org(
+    pub async fn list_all_child_in_org(
         &self,
         org: &str,
         team_slug: &str,
@@ -1530,7 +1530,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-discussions-legacy>
      */
-    pub async fn list_discussions_legacy(
+    pub async fn list_all_discussions_legacy(
         &self,
         team_id: i64,
         direction: crate::types::Direction,
@@ -1726,7 +1726,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-discussion-comments-legacy>
      */
-    pub async fn list_discussion_comments_legacy(
+    pub async fn list_all_discussion_comments_legacy(
         &self,
         team_id: i64,
         discussion_number: i64,
@@ -1930,7 +1930,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-pending-team-invitations-legacy>
      */
-    pub async fn list_pending_invitations_legacy(
+    pub async fn list_all_pending_invitations_legacy(
         &self,
         team_id: i64,
     ) -> Result<Vec<crate::types::OrganizationInvitation>> {
@@ -1993,7 +1993,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-team-members-legacy>
      */
-    pub async fn list_members_legacy(
+    pub async fn list_all_members_legacy(
         &self,
         team_id: i64,
         role: crate::types::TeamsListMembersInOrgRole,
@@ -2261,7 +2261,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams/#list-team-projects-legacy>
      */
-    pub async fn list_projects_legacy(
+    pub async fn list_all_projects_legacy(
         &self,
         team_id: i64,
     ) -> Result<Vec<crate::types::TeamProject>> {
@@ -2406,7 +2406,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams/#list-team-repositories-legacy>
      */
-    pub async fn list_repos_legacy(
+    pub async fn list_all_repos_legacy(
         &self,
         team_id: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
@@ -2627,7 +2627,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams/#list-child-teams-legacy>
      */
-    pub async fn list_child_legacy(&self, team_id: i64) -> Result<Vec<crate::types::Team>> {
+    pub async fn list_all_child_legacy(&self, team_id: i64) -> Result<Vec<crate::types::Team>> {
         let url = format!(
             "/teams/{}/teams",
             crate::progenitor_support::encode_path(&team_id.to_string()),
@@ -2674,7 +2674,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user>
      */
-    pub async fn list_for_authenticated_user(&self) -> Result<Vec<crate::types::TeamFull>> {
+    pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::TeamFull>> {
         let url = "/user/teams".to_string();
         self.client.get_all_pages(&url).await
     }

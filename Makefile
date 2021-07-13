@@ -15,3 +15,7 @@ examples: generate github/examples/*.rs
 	cargo build --examples
 	cargo clippy --examples --features="httpcache"
 	cargo clippy --examples
+
+run:
+	cargo run --example list_repos_for_org --features="httpcache"
+

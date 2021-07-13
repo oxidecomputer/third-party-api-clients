@@ -147,7 +147,7 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app>
      */
-    pub async fn list_installations(
+    pub async fn list_all_installations(
         &self,
         since: chrono::DateTime<chrono::Utc>,
         outdated: &str,
@@ -715,7 +715,7 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#list-plans>
      */
-    pub async fn list_plans(&self) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
+    pub async fn list_all_plans(&self) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
         let url = "/marketplace_listing/plans".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -771,7 +771,7 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan>
      */
-    pub async fn list_accounts_for_plan(
+    pub async fn list_all_accounts_for_plan(
         &self,
         plan_id: i64,
         sort: crate::types::Sort,
@@ -856,7 +856,9 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#list-plans-stubbed>
      */
-    pub async fn list_plans_stubbed(&self) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
+    pub async fn list_all_plans_stubbed(
+        &self,
+    ) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
         let url = "/marketplace_listing/stubbed/plans".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -913,7 +915,7 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan-stubbed>
      */
-    pub async fn list_accounts_for_plan_stubbed(
+    pub async fn list_all_accounts_for_plan_stubbed(
         &self,
         plan_id: i64,
         sort: crate::types::Sort,
@@ -1193,7 +1195,7 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user>
      */
-    pub async fn list_subscriptions_for_authenticated_user(
+    pub async fn list_all_subscriptions_for_authenticated_user(
         &self,
     ) -> Result<Vec<crate::types::UserMarketplacePurchase>> {
         let url = "/user/marketplace_purchases".to_string();
@@ -1238,7 +1240,7 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user-stubbed>
      */
-    pub async fn list_subscriptions_for_authenticated_user_stubbed(
+    pub async fn list_all_subscriptions_for_authenticated_user_stubbed(
         &self,
     ) -> Result<Vec<crate::types::UserMarketplacePurchase>> {
         let url = "/user/marketplace_purchases/stubbed".to_string();

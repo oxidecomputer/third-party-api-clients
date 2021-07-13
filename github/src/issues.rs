@@ -208,7 +208,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user>
      */
-    pub async fn list_for_org(
+    pub async fn list_all_for_org(
         &self,
         org: &str,
         filter: crate::types::Filter,
@@ -276,7 +276,11 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-assignees>
      */
-    pub async fn list_assignees(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_assignees(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::User>> {
         let url = format!(
             "/repos/{}/{}/assignees",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -403,7 +407,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-repository-issues>
      */
-    pub async fn list_for_repo(
+    pub async fn list_all_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -525,7 +529,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-issue-comments-for-a-repository>
      */
-    pub async fn list_comments_for_repo(
+    pub async fn list_all_comments_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -683,7 +687,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events-for-a-repository>
      */
-    pub async fn list_events_for_repo(
+    pub async fn list_all_events_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -930,7 +934,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-issue-comments>
      */
-    pub async fn list_comments(
+    pub async fn list_all_comments(
         &self,
         owner: &str,
         repo: &str,
@@ -1032,7 +1036,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-issue-events>
      */
-    pub async fn list_events(
+    pub async fn list_all_events(
         &self,
         owner: &str,
         repo: &str,
@@ -1095,7 +1099,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-an-issue>
      */
-    pub async fn list_labels_on_issue(
+    pub async fn list_all_labels_on_issue(
         &self,
         owner: &str,
         repo: &str,
@@ -1362,7 +1366,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-timeline-events-for-an-issue>
      */
-    pub async fn list_events_for_timeline(
+    pub async fn list_all_events_for_timeline(
         &self,
         owner: &str,
         repo: &str,
@@ -1422,7 +1426,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-a-repository>
      */
-    pub async fn list_labels_for_repo(
+    pub async fn list_all_labels_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -1617,7 +1621,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-milestones>
      */
-    pub async fn list_milestones(
+    pub async fn list_all_milestones(
         &self,
         owner: &str,
         repo: &str,
@@ -1817,7 +1821,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-labels-for-issues-in-a-milestone>
      */
-    pub async fn list_labels_for_milestone(
+    pub async fn list_all_labels_for_milestone(
         &self,
         owner: &str,
         repo: &str,
@@ -1905,7 +1909,7 @@ impl Issues {
      *
      * FROM: <https://docs.github.com/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user>
      */
-    pub async fn list_for_authenticated_user(
+    pub async fn list_all_for_authenticated_user(
         &self,
         filter: crate::types::Filter,
         state: crate::types::IssuesListState,

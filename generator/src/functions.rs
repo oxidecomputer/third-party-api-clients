@@ -169,10 +169,12 @@ pub fn generate_files(
                 let fn_inner = "self.client.get_all_pages(&url).await";
 
                 let mut fn_name = oid
+                    .replace("_get_", "_get_all_")
+                    .replace("_list_", "_list_all_")
                     .trim_start_matches(&tag)
                     .trim_start_matches('_')
-                    .replace("_get_", "_get_all_")
-                    .replace("_list_", "_list_all_");
+                    .to_string();
+
                 if fn_name == "list" {
                     fn_name = "list_all".to_string();
                 }

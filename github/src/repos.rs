@@ -62,7 +62,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-organization-repositories>
      */
-    pub async fn list_for_org(
+    pub async fn list_all_for_org(
         &self,
         org: &str,
         type_: crate::types::ReposListOrgType,
@@ -300,7 +300,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-branches>
      */
-    pub async fn list_branches(
+    pub async fn list_all_branches(
         &self,
         owner: &str,
         repo: &str,
@@ -895,7 +895,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-all-status-check-contexts>
      */
-    pub async fn get_all_status_check_contexts(
+    pub async fn get_all_all_status_check_contexts(
         &self,
         owner: &str,
         repo: &str,
@@ -1135,7 +1135,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-apps-with-access-to-the-protected-branch>
      */
-    pub async fn get_apps_with_access_to_protected_branch(
+    pub async fn get_all_apps_with_access_to_protected_branch(
         &self,
         owner: &str,
         repo: &str,
@@ -1325,7 +1325,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-teams-with-access-to-the-protected-branch>
      */
-    pub async fn get_teams_with_access_to_protected_branch(
+    pub async fn get_all_teams_with_access_to_protected_branch(
         &self,
         owner: &str,
         repo: &str,
@@ -1515,7 +1515,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-users-with-access-to-the-protected-branch>
      */
-    pub async fn get_users_with_access_to_protected_branch(
+    pub async fn get_all_users_with_access_to_protected_branch(
         &self,
         owner: &str,
         repo: &str,
@@ -1765,7 +1765,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-collaborators>
      */
-    pub async fn list_collaborators(
+    pub async fn list_all_collaborators(
         &self,
         owner: &str,
         repo: &str,
@@ -1961,7 +1961,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-commit-comments-for-a-repository>
      */
-    pub async fn list_commit_comments_for_repo(
+    pub async fn list_all_commit_comments_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -2187,7 +2187,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-commits>
      */
-    pub async fn list_commits(
+    pub async fn list_all_commits(
         &self,
         owner: &str,
         repo: &str,
@@ -2256,7 +2256,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-branches-for-head-commit>
      */
-    pub async fn list_branches_for_head_commit(
+    pub async fn list_all_branches_for_head_commit(
         &self,
         owner: &str,
         repo: &str,
@@ -2319,7 +2319,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-commit-comments>
      */
-    pub async fn list_comments_for_commit(
+    pub async fn list_all_comments_for_commit(
         &self,
         owner: &str,
         repo: &str,
@@ -2421,7 +2421,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-pull-requests-associated-with-a-commit>
      */
-    pub async fn list_pull_requests_associated_with_commit(
+    pub async fn list_all_pull_requests_associated_with_commit(
         &self,
         owner: &str,
         repo: &str,
@@ -2605,7 +2605,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-commit-statuses-for-a-reference>
      */
-    pub async fn list_commit_statuses_for_ref(
+    pub async fn list_all_commit_statuses_for_ref(
         &self,
         owner: &str,
         repo: &str,
@@ -2842,7 +2842,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-repository-content>
      */
-    pub async fn get_content(
+    pub async fn get_all_content(
         &self,
         owner: &str,
         repo: &str,
@@ -2991,7 +2991,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-contributors>
      */
-    pub async fn list_contributors(
+    pub async fn list_all_contributors(
         &self,
         owner: &str,
         repo: &str,
@@ -3063,7 +3063,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-deployments>
      */
-    pub async fn list_deployments(
+    pub async fn list_all_deployments(
         &self,
         owner: &str,
         repo: &str,
@@ -3279,7 +3279,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-deployment-statuses>
      */
-    pub async fn list_deployment_statuses(
+    pub async fn list_all_deployment_statuses(
         &self,
         owner: &str,
         repo: &str,
@@ -3593,7 +3593,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-forks>
      */
-    pub async fn list_forks(
+    pub async fn list_all_forks(
         &self,
         owner: &str,
         repo: &str,
@@ -3689,7 +3689,11 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-webhooks>
      */
-    pub async fn list_webhooks(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Hook>> {
+    pub async fn list_all_webhooks(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::Hook>> {
         let url = format!(
             "/repos/{}/{}/hooks",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -3998,7 +4002,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-invitations>
      */
-    pub async fn list_invitations(
+    pub async fn list_all_invitations(
         &self,
         owner: &str,
         repo: &str,
@@ -4124,7 +4128,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-deploy-keys>
      */
-    pub async fn list_deploy_keys(
+    pub async fn list_all_deploy_keys(
         &self,
         owner: &str,
         repo: &str,
@@ -4447,7 +4451,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-github-pages-builds>
      */
-    pub async fn list_pages_builds(
+    pub async fn list_all_pages_builds(
         &self,
         owner: &str,
         repo: &str,
@@ -4699,7 +4703,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-releases>
      */
-    pub async fn list_releases(
+    pub async fn list_all_releases(
         &self,
         owner: &str,
         repo: &str,
@@ -5045,7 +5049,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-release-assets>
      */
-    pub async fn list_release_assets(
+    pub async fn list_all_release_assets(
         &self,
         owner: &str,
         repo: &str,
@@ -5150,7 +5154,11 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-the-weekly-commit-activity>
      */
-    pub async fn get_code_frequency_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
+    pub async fn get_all_code_frequency_stats(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<Vec<i64>>> {
         let url = format!(
             "/repos/{}/{}/stats/code_frequency",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -5198,7 +5206,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-the-last-year-of-commit-activity>
      */
-    pub async fn get_commit_activity_stats(
+    pub async fn get_all_commit_activity_stats(
         &self,
         owner: &str,
         repo: &str,
@@ -5262,7 +5270,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-all-contributor-commit-activity>
      */
-    pub async fn get_contributors_stats(
+    pub async fn get_all_contributors_stats(
         &self,
         owner: &str,
         repo: &str,
@@ -5352,7 +5360,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-the-hourly-commit-count-for-each-day>
      */
-    pub async fn get_punch_card_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
+    pub async fn get_all_punch_card_stats(&self, owner: &str, repo: &str) -> Result<Vec<Vec<i64>>> {
         let url = format!(
             "/repos/{}/{}/stats/punch_card",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -5445,7 +5453,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-tags>
      */
-    pub async fn list_tags(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Tag>> {
+    pub async fn list_all_tags(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Tag>> {
         let url = format!(
             "/repos/{}/{}/tags",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -5533,7 +5541,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-teams>
      */
-    pub async fn list_teams(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Team>> {
+    pub async fn list_all_teams(&self, owner: &str, repo: &str) -> Result<Vec<crate::types::Team>> {
         let url = format!(
             "/repos/{}/{}/teams",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -5680,7 +5688,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-top-referral-paths>
      */
-    pub async fn get_top_paths(
+    pub async fn get_all_top_paths(
         &self,
         owner: &str,
         repo: &str,
@@ -5732,7 +5740,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#get-top-referral-sources>
      */
-    pub async fn get_top_referrers(
+    pub async fn get_all_top_referrers(
         &self,
         owner: &str,
         repo: &str,
@@ -5995,7 +6003,10 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-public-repositories>
      */
-    pub async fn list_public(&self, since: i64) -> Result<Vec<crate::types::MinimalRepository>> {
+    pub async fn list_all_public(
+        &self,
+        since: i64,
+    ) -> Result<Vec<crate::types::MinimalRepository>> {
         let url = format!("/repositories?since={}", format!("{}", since),);
 
         self.client.get_all_pages(&url).await
@@ -6070,7 +6081,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repositories-for-the-authenticated-user>
      */
-    pub async fn list_for_authenticated_user(
+    pub async fn list_all_for_authenticated_user(
         &self,
         visibility: crate::types::ReposListVisibility,
         affiliation: &str,
@@ -6162,7 +6173,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repository-invitations-for-the-authenticated-user>
      */
-    pub async fn list_invitations_for_authenticated_user(
+    pub async fn list_all_invitations_for_authenticated_user(
         &self,
     ) -> Result<Vec<crate::types::RepositoryInvitation>> {
         let url = "/user/repository_invitations".to_string();
@@ -6263,7 +6274,7 @@ impl Repos {
      *
      * FROM: <https://docs.github.com/rest/reference/repos#list-repositories-for-a-user>
      */
-    pub async fn list_for_user(
+    pub async fn list_all_for_user(
         &self,
         username: &str,
         type_: crate::types::ReposListUserType,

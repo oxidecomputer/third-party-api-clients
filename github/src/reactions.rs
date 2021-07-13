@@ -69,7 +69,7 @@ impl Reactions {
      *
      * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment>
      */
-    pub async fn list_for_team_discussion_comment_in_org(
+    pub async fn list_all_for_team_discussion_comment_in_org(
         &self,
         org: &str,
         team_slug: &str,
@@ -224,7 +224,7 @@ impl Reactions {
      *
      * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion>
      */
-    pub async fn list_for_team_discussion_in_org(
+    pub async fn list_all_for_team_discussion_in_org(
         &self,
         org: &str,
         team_slug: &str,
@@ -391,7 +391,7 @@ impl Reactions {
      *
      * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-a-commit-comment>
      */
-    pub async fn list_for_commit_comment(
+    pub async fn list_all_for_commit_comment(
         &self,
         owner: &str,
         repo: &str,
@@ -532,7 +532,7 @@ impl Reactions {
      *
      * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue-comment>
      */
-    pub async fn list_for_issue_comment(
+    pub async fn list_all_for_issue_comment(
         &self,
         owner: &str,
         repo: &str,
@@ -673,7 +673,7 @@ impl Reactions {
      *
      * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue>
      */
-    pub async fn list_for_issue(
+    pub async fn list_all_for_issue(
         &self,
         owner: &str,
         repo: &str,
@@ -814,7 +814,7 @@ impl Reactions {
      *
      * FROM: <https://docs.github.com/rest/reference/reactions#list-reactions-for-a-pull-request-review-comment>
      */
-    pub async fn list_for_pull_request_review_comment(
+    pub async fn list_all_for_pull_request_review_comment(
         &self,
         owner: &str,
         repo: &str,
@@ -996,7 +996,7 @@ impl Reactions {
      *
      * FROM: <https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-comment-legacy>
      */
-    pub async fn list_for_team_discussion_comment_legacy(
+    pub async fn list_all_for_team_discussion_comment_legacy(
         &self,
         team_id: i64,
         discussion_number: i64,
@@ -1104,7 +1104,7 @@ impl Reactions {
      *
      * FROM: <https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-legacy>
      */
-    pub async fn list_for_team_discussion_legacy(
+    pub async fn list_all_for_team_discussion_legacy(
         &self,
         team_id: i64,
         discussion_number: i64,

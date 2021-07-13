@@ -57,7 +57,7 @@ impl OauthAuthorizations {
      *
      * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#list-your-grants>
      */
-    pub async fn list_grants(
+    pub async fn list_all_grants(
         &self,
         client_id: &str,
     ) -> Result<Vec<crate::types::ApplicationGrant>> {
@@ -153,7 +153,7 @@ impl OauthAuthorizations {
      *
      * FROM: <https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations>
      */
-    pub async fn list_authorizations(
+    pub async fn list_all_authorizations(
         &self,
         client_id: &str,
     ) -> Result<Vec<crate::types::Authorization>> {

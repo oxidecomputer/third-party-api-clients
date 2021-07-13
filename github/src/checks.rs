@@ -169,7 +169,7 @@ impl Checks {
      *
      * FROM: <https://docs.github.com/rest/reference/checks#list-check-run-annotations>
      */
-    pub async fn list_annotations(
+    pub async fn list_all_annotations(
         &self,
         owner: &str,
         repo: &str,

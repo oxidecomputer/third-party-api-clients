@@ -131,7 +131,7 @@ impl Gists {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-public-gists>
      */
-    pub async fn list_public(
+    pub async fn list_all_public(
         &self,
         since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -181,7 +181,7 @@ impl Gists {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-starred-gists>
      */
-    pub async fn list_starred(
+    pub async fn list_all_starred(
         &self,
         since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -306,7 +306,7 @@ impl Gists {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-comments>
      */
-    pub async fn list_comments(&self, gist_id: &str) -> Result<Vec<crate::types::GistComment>> {
+    pub async fn list_all_comments(&self, gist_id: &str) -> Result<Vec<crate::types::GistComment>> {
         let url = format!(
             "/gists/{}/comments",
             crate::progenitor_support::encode_path(&gist_id.to_string()),
@@ -473,7 +473,7 @@ impl Gists {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-commits>
      */
-    pub async fn list_commits(&self, gist_id: &str) -> Result<Vec<crate::types::GistCommit>> {
+    pub async fn list_all_commits(&self, gist_id: &str) -> Result<Vec<crate::types::GistCommit>> {
         let url = format!(
             "/gists/{}/commits",
             crate::progenitor_support::encode_path(&gist_id.to_string()),
@@ -523,7 +523,7 @@ impl Gists {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gist-forks>
      */
-    pub async fn list_forks(&self, gist_id: &str) -> Result<Vec<crate::types::GistSimple>> {
+    pub async fn list_all_forks(&self, gist_id: &str) -> Result<Vec<crate::types::GistSimple>> {
         let url = format!(
             "/gists/{}/forks",
             crate::progenitor_support::encode_path(&gist_id.to_string()),
@@ -688,7 +688,7 @@ impl Gists {
      *
      * FROM: <https://docs.github.com/rest/reference/gists#list-gists-for-a-user>
      */
-    pub async fn list_for_user(
+    pub async fn list_all_for_user(
         &self,
         username: &str,
         since: chrono::DateTime<chrono::Utc>,

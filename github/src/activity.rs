@@ -50,7 +50,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events>
      */
-    pub async fn list_public_events(&self) -> Result<Vec<crate::types::Event>> {
+    pub async fn list_all_public_events(&self) -> Result<Vec<crate::types::Event>> {
         let url = "/events".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -123,7 +123,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-network-of-repositories>
      */
-    pub async fn list_public_events_for_repo_network(
+    pub async fn list_all_public_events_for_repo_network(
         &self,
         owner: &str,
         repo: &str,
@@ -187,7 +187,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-notifications-for-the-authenticated-user>
      */
-    pub async fn list_notifications_for_authenticated_user(
+    pub async fn list_all_notifications_for_authenticated_user(
         &self,
         all: bool,
         participating: bool,
@@ -396,7 +396,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-organization-events>
      */
-    pub async fn list_public_org_events(&self, org: &str) -> Result<Vec<crate::types::Event>> {
+    pub async fn list_all_public_org_events(&self, org: &str) -> Result<Vec<crate::types::Event>> {
         let url = format!(
             "/orgs/{}/events",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -449,7 +449,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-repository-events>
      */
-    pub async fn list_repo_events(
+    pub async fn list_all_repo_events(
         &self,
         owner: &str,
         repo: &str,
@@ -520,7 +520,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user>
      */
-    pub async fn list_repo_notifications_for_authenticated_user(
+    pub async fn list_all_repo_notifications_for_authenticated_user(
         &self,
         owner: &str,
         repo: &str,
@@ -624,7 +624,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-stargazers>
      */
-    pub async fn list_stargazers_for_repo(
+    pub async fn list_all_stargazers_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -682,7 +682,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-watchers>
      */
-    pub async fn list_watchers_for_repo(
+    pub async fn list_all_watchers_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -830,7 +830,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-starred-by-the-authenticated-user>
      */
-    pub async fn list_repos_starred_by_authenticated_user(
+    pub async fn list_all_repos_starred_by_authenticated_user(
         &self,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
@@ -954,7 +954,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-watched-by-the-authenticated-user>
      */
-    pub async fn list_watched_repos_for_authenticated_user(
+    pub async fn list_all_watched_repos_for_authenticated_user(
         &self,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
         let url = "/user/subscriptions".to_string();
@@ -1002,7 +1002,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-events-for-the-authenticated-user>
      */
-    pub async fn list_events_for_authenticated_user(
+    pub async fn list_all_events_for_authenticated_user(
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::Event>> {
@@ -1058,7 +1058,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-organization-events-for-the-authenticated-user>
      */
-    pub async fn list_org_events_for_authenticated_user(
+    pub async fn list_all_org_events_for_authenticated_user(
         &self,
         username: &str,
         org: &str,
@@ -1113,7 +1113,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-for-a-user>
      */
-    pub async fn list_public_events_for_user(
+    pub async fn list_all_public_events_for_user(
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::Event>> {
@@ -1166,7 +1166,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-events-received-by-the-authenticated-user>
      */
-    pub async fn list_received_events_for_user(
+    pub async fn list_all_received_events_for_user(
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::Event>> {
@@ -1219,7 +1219,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-public-events-received-by-a-user>
      */
-    pub async fn list_received_public_events_for_user(
+    pub async fn list_all_received_public_events_for_user(
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::Event>> {
@@ -1282,7 +1282,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-starred-by-a-user>
      */
-    pub async fn list_repos_starred_by_user(
+    pub async fn list_all_repos_starred_by_user(
         &self,
         username: &str,
         sort: crate::types::Sort,
@@ -1339,7 +1339,7 @@ impl Activity {
      *
      * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-watched-by-a-user>
      */
-    pub async fn list_repos_watched_by_user(
+    pub async fn list_all_repos_watched_by_user(
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::MinimalRepository>> {

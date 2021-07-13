@@ -85,7 +85,7 @@ impl CodeScanning {
      *
      * FROM: <https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-a-repository>
      */
-    pub async fn list_alerts_for_repo(
+    pub async fn list_all_alerts_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -228,7 +228,7 @@ impl CodeScanning {
      *
      * FROM: <https://docs.github.com/rest/reference/code-scanning#list-instances-of-a-code-scanning-alert>
      */
-    pub async fn list_alert_instances(
+    pub async fn list_all_alert_instances(
         &self,
         owner: &str,
         repo: &str,
@@ -333,7 +333,7 @@ impl CodeScanning {
      *
      * FROM: <https://docs.github.com/rest/reference/code-scanning#list-code-scanning-analyses-for-a-repository>
      */
-    pub async fn list_recent_analyses(
+    pub async fn list_all_recent_analyses(
         &self,
         owner: &str,
         repo: &str,

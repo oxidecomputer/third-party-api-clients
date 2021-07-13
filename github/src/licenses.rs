@@ -53,7 +53,7 @@ impl Licenses {
      *
      * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
      */
-    pub async fn get_all_commonly_used(
+    pub async fn get_all_all_commonly_used(
         &self,
         featured: bool,
     ) -> Result<Vec<crate::types::License>> {

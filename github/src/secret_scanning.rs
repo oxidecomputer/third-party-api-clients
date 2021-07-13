@@ -66,7 +66,7 @@ impl SecretScanning {
      *
      * FROM: <https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-a-repository>
      */
-    pub async fn list_alerts_for_repo(
+    pub async fn list_all_alerts_for_repo(
         &self,
         owner: &str,
         repo: &str,

@@ -36,7 +36,7 @@ impl Gitignore {
      *
      * FROM: <https://docs.github.com/rest/reference/gitignore#get-all-gitignore-templates>
      */
-    pub async fn get_all_templates(&self) -> Result<Vec<String>> {
+    pub async fn get_all_all_templates(&self) -> Result<Vec<String>> {
         let url = "/gitignore/templates".to_string();
         self.client.get_all_pages(&url).await
     }

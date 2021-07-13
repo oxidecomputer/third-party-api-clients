@@ -188,7 +188,7 @@ impl Pulls {
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#list-review-comments-in-a-repository>
      */
-    pub async fn list_review_comments_for_repo(
+    pub async fn list_all_review_comments_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -447,7 +447,7 @@ impl Pulls {
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#list-review-comments-on-a-pull-request>
      */
-    pub async fn list_review_comments(
+    pub async fn list_all_review_comments(
         &self,
         owner: &str,
         repo: &str,
@@ -602,7 +602,7 @@ impl Pulls {
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#list-commits-on-a-pull-request>
      */
-    pub async fn list_commits(
+    pub async fn list_all_commits(
         &self,
         owner: &str,
         repo: &str,
@@ -665,7 +665,7 @@ impl Pulls {
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#list-pull-requests-files>
      */
-    pub async fn list_files(
+    pub async fn list_all_files(
         &self,
         owner: &str,
         repo: &str,
@@ -902,7 +902,7 @@ impl Pulls {
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#list-reviews-for-a-pull-request>
      */
-    pub async fn list_reviews(
+    pub async fn list_all_reviews(
         &self,
         owner: &str,
         repo: &str,
@@ -1119,7 +1119,7 @@ impl Pulls {
      *
      * FROM: <https://docs.github.com/rest/reference/pulls#list-comments-for-a-pull-request-review>
      */
-    pub async fn list_comments_for_review(
+    pub async fn list_all_comments_for_review(
         &self,
         owner: &str,
         repo: &str,

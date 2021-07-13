@@ -56,7 +56,7 @@ impl Migrations {
      *
      * FROM: <https://docs.github.com/rest/reference/migrations#list-organization-migrations>
      */
-    pub async fn list_for_org(
+    pub async fn list_all_for_org(
         &self,
         org: &str,
         exclude: &[String],
@@ -262,7 +262,7 @@ impl Migrations {
      *
      * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-in-an-organization-migration>
      */
-    pub async fn list_repos_for_org(
+    pub async fn list_all_repos_for_org(
         &self,
         org: &str,
         migration_id: i64,
@@ -471,7 +471,7 @@ impl Migrations {
      *
      * FROM: <https://docs.github.com/rest/reference/migrations#get-commit-authors>
      */
-    pub async fn get_commit_authors(
+    pub async fn get_all_commit_authors(
         &self,
         owner: &str,
         repo: &str,
@@ -562,7 +562,7 @@ impl Migrations {
      *
      * FROM: <https://docs.github.com/rest/reference/migrations#get-large-files>
      */
-    pub async fn get_large_files(
+    pub async fn get_all_large_files(
         &self,
         owner: &str,
         repo: &str,
@@ -648,7 +648,7 @@ impl Migrations {
      *
      * FROM: <https://docs.github.com/rest/reference/migrations#list-user-migrations>
      */
-    pub async fn list_for_authenticated_user(&self) -> Result<Vec<crate::types::Migration>> {
+    pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::Migration>> {
         let url = "/user/migrations".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -843,7 +843,7 @@ impl Migrations {
      *
      * FROM: <https://docs.github.com/rest/reference/migrations#list-repositories-for-a-user-migration>
      */
-    pub async fn list_repos_for_user(
+    pub async fn list_all_repos_for_user(
         &self,
         migration_id: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {

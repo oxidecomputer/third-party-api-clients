@@ -261,7 +261,7 @@ impl Git {
      *
      * FROM: <https://docs.github.com/rest/reference/git#list-matching-references>
      */
-    pub async fn list_matching_refs(
+    pub async fn list_all_matching_refs(
         &self,
         owner: &str,
         repo: &str,

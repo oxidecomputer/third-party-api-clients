@@ -186,7 +186,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#get-audit-log>
      */
-    pub async fn get_audit_log(
+    pub async fn get_all_audit_log(
         &self,
         org: &str,
         phrase: &str,
@@ -240,7 +240,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-users-blocked-by-an-organization>
      */
-    pub async fn list_blocked_users(&self, org: &str) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_blocked_users(&self, org: &str) -> Result<Vec<crate::types::User>> {
         let url = format!(
             "/orgs/{}/blocks",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -360,7 +360,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-saml-sso-authorizations-for-an-organization>
      */
-    pub async fn list_saml_sso_authorizations(
+    pub async fn list_all_saml_sso_authorizations(
         &self,
         org: &str,
     ) -> Result<Vec<crate::types::CredentialAuthorization>> {
@@ -439,7 +439,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-failed-organization-invitations>
      */
-    pub async fn list_failed_invitations(
+    pub async fn list_all_failed_invitations(
         &self,
         org: &str,
     ) -> Result<Vec<crate::types::OrganizationInvitation>> {
@@ -492,7 +492,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-webhooks>
      */
-    pub async fn list_webhooks(&self, org: &str) -> Result<Vec<crate::types::OrgHook>> {
+    pub async fn list_all_webhooks(&self, org: &str) -> Result<Vec<crate::types::OrgHook>> {
         let url = format!(
             "/orgs/{}/hooks",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -776,7 +776,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-pending-organization-invitations>
      */
-    pub async fn list_pending_invitations(
+    pub async fn list_all_pending_invitations(
         &self,
         org: &str,
     ) -> Result<Vec<crate::types::OrganizationInvitation>> {
@@ -891,7 +891,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-invitation-teams>
      */
-    pub async fn list_invitation_teams(
+    pub async fn list_all_invitation_teams(
         &self,
         org: &str,
         invitation_id: i64,
@@ -957,7 +957,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-members>
      */
-    pub async fn list_members(
+    pub async fn list_all_members(
         &self,
         org: &str,
         filter: crate::types::OrgsListMembersFilter,
@@ -1163,7 +1163,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-outside-collaborators-for-an-organization>
      */
-    pub async fn list_outside_collaborators(
+    pub async fn list_all_outside_collaborators(
         &self,
         org: &str,
         filter: crate::types::OrgsListMembersFilter,
@@ -1270,7 +1270,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-public-organization-members>
      */
-    pub async fn list_public_members(&self, org: &str) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_public_members(&self, org: &str) -> Result<Vec<crate::types::User>> {
         let url = format!(
             "/orgs/{}/public_members",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -1402,7 +1402,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organization-memberships-for-the-authenticated-user>
      */
-    pub async fn list_memberships_for_authenticated_user(
+    pub async fn list_all_memberships_for_authenticated_user(
         &self,
         state: crate::types::OrgMembershipState,
     ) -> Result<Vec<crate::types::OrgMembership>> {
@@ -1513,7 +1513,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user>
      */
-    pub async fn list_for_authenticated_user(
+    pub async fn list_all_for_authenticated_user(
         &self,
     ) -> Result<Vec<crate::types::OrganizationSimple>> {
         let url = "/user/orgs".to_string();
@@ -1565,7 +1565,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-organizations-for-a-user>
      */
-    pub async fn list_for_user(
+    pub async fn list_all_for_user(
         &self,
         username: &str,
     ) -> Result<Vec<crate::types::OrganizationSimple>> {

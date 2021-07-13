@@ -179,7 +179,7 @@ impl Packages {
      *
      * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization>
      */
-    pub async fn get_all_package_versions_for_package_owned_by_org(
+    pub async fn get_all_all_package_versions_for_package_owned_by_org(
         &self,
         package_type: crate::types::PackageType,
         package_name: &str,
@@ -466,7 +466,7 @@ impl Packages {
      *
      * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user>
      */
-    pub async fn get_all_package_versions_for_package_owned_by_authenticated_user(
+    pub async fn get_all_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
         package_type: crate::types::PackageType,
         package_name: &str,
@@ -668,7 +668,7 @@ impl Packages {
      *
      * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user>
      */
-    pub async fn get_all_package_versions_for_package_owned_by_user(
+    pub async fn get_all_all_package_versions_for_package_owned_by_user(
         &self,
         package_type: crate::types::PackageType,
         package_name: &str,

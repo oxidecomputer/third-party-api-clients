@@ -56,7 +56,7 @@ impl Projects {
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-organization-projects>
      */
-    pub async fn list_for_org(
+    pub async fn list_all_for_org(
         &self,
         org: &str,
         state: crate::types::IssuesListState,
@@ -326,7 +326,7 @@ impl Projects {
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-project-cards>
      */
-    pub async fn list_cards(
+    pub async fn list_all_cards(
         &self,
         column_id: i64,
         archived_state: crate::types::ArchivedState,
@@ -524,7 +524,7 @@ impl Projects {
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-project-collaborators>
      */
-    pub async fn list_collaborators(
+    pub async fn list_all_collaborators(
         &self,
         project_id: i64,
         affiliation: crate::types::Affiliation,
@@ -665,7 +665,10 @@ impl Projects {
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-project-columns>
      */
-    pub async fn list_columns(&self, project_id: i64) -> Result<Vec<crate::types::ProjectColumn>> {
+    pub async fn list_all_columns(
+        &self,
+        project_id: i64,
+    ) -> Result<Vec<crate::types::ProjectColumn>> {
         let url = format!(
             "/projects/{}/columns",
             crate::progenitor_support::encode_path(&project_id.to_string()),
@@ -752,7 +755,7 @@ impl Projects {
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-repository-projects>
      */
-    pub async fn list_for_repo(
+    pub async fn list_all_for_repo(
         &self,
         owner: &str,
         repo: &str,
@@ -868,7 +871,7 @@ impl Projects {
      *
      * FROM: <https://docs.github.com/rest/reference/projects#list-user-projects>
      */
-    pub async fn list_for_user(
+    pub async fn list_all_for_user(
         &self,
         username: &str,
         state: crate::types::IssuesListState,
