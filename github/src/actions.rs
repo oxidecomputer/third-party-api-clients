@@ -800,7 +800,7 @@ impl Actions {
      *
      * This function performs a `GET` to the `/orgs/{org}/actions/runners/downloads` endpoint.
      *
-     * As opposed to `actions_list_runner_applications_for_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_runner_applications_for_org`, this function returns all the pages of the request at once.
      *
      * Lists binaries for the runner application that you can download and run.
      *
@@ -1695,7 +1695,7 @@ impl Actions {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runners/downloads` endpoint.
      *
-     * As opposed to `actions_list_runner_applications_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_runner_applications_for_repo`, this function returns all the pages of the request at once.
      *
      * Lists binaries for the runner application that you can download and run.
      *
@@ -2002,7 +2002,7 @@ impl Actions {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/approvals` endpoint.
      *
-     * As opposed to `actions_get_reviews_for_run`, this function returns all the pages of the request at once.
+     * As opposed to `get_reviews_for_run`, this function returns all the pages of the request at once.
      *
      * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
      *
@@ -2272,7 +2272,7 @@ impl Actions {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments` endpoint.
      *
-     * As opposed to `actions_get_pending_deployments_for_run`, this function returns all the pages of the request at once.
+     * As opposed to `get_pending_deployments_for_run`, this function returns all the pages of the request at once.
      *
      * Get all deployment environments for a workflow run that are waiting for protection rules to pass.
      *

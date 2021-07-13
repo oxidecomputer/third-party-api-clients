@@ -83,7 +83,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams` endpoint.
      *
-     * As opposed to `teams_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists all teams in an organization that are visible to the authenticated user.
      *
@@ -268,7 +268,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions` endpoint.
      *
-     * As opposed to `teams_list_discussions_in_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_discussions_in_org`, this function returns all the pages of the request at once.
      *
      * List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
      *
@@ -484,7 +484,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments` endpoint.
      *
-     * As opposed to `teams_list_discussion_comments_in_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_discussion_comments_in_org`, this function returns all the pages of the request at once.
      *
      * List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
      *
@@ -706,7 +706,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/invitations` endpoint.
      *
-     * As opposed to `teams_list_pending_invitations_in_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_pending_invitations_in_org`, this function returns all the pages of the request at once.
      *
      * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
      *
@@ -775,7 +775,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/members` endpoint.
      *
-     * As opposed to `teams_list_members_in_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_members_in_org`, this function returns all the pages of the request at once.
      *
      * Team members will include the members of child teams.
      *
@@ -964,7 +964,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/projects` endpoint.
      *
-     * As opposed to `teams_list_projects_in_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_projects_in_org`, this function returns all the pages of the request at once.
      *
      * Lists the organization projects for a team.
      *
@@ -1132,7 +1132,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/repos` endpoint.
      *
-     * As opposed to `teams_list_repos_in_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_repos_in_org`, this function returns all the pages of the request at once.
      *
      * Lists a team's repositories visible to the authenticated user.
      *
@@ -1385,7 +1385,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/teams` endpoint.
      *
-     * As opposed to `teams_list_child_in_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_child_in_org`, this function returns all the pages of the request at once.
      *
      * Lists the child teams of the team specified by `{team_slug}`.
      *
@@ -1531,7 +1531,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions` endpoint.
      *
-     * As opposed to `teams_list_discussions_legacy`, this function returns all the pages of the request at once.
+     * As opposed to `list_discussions_legacy`, this function returns all the pages of the request at once.
      *
      * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List discussions`](https://docs.github.com/rest/reference/teams#list-discussions) endpoint.
      *
@@ -1728,7 +1728,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments` endpoint.
      *
-     * As opposed to `teams_list_discussion_comments_legacy`, this function returns all the pages of the request at once.
+     * As opposed to `list_discussion_comments_legacy`, this function returns all the pages of the request at once.
      *
      * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List discussion comments](https://docs.github.com/rest/reference/teams#list-discussion-comments) endpoint.
      *
@@ -1933,7 +1933,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/teams/{team_id}/invitations` endpoint.
      *
-     * As opposed to `teams_list_pending_invitations_legacy`, this function returns all the pages of the request at once.
+     * As opposed to `list_pending_invitations_legacy`, this function returns all the pages of the request at once.
      *
      * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List pending team invitations`](https://docs.github.com/rest/reference/teams#list-pending-team-invitations) endpoint.
      *
@@ -1997,7 +1997,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/teams/{team_id}/members` endpoint.
      *
-     * As opposed to `teams_list_members_legacy`, this function returns all the pages of the request at once.
+     * As opposed to `list_members_legacy`, this function returns all the pages of the request at once.
      *
      * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team members`](https://docs.github.com/rest/reference/teams#list-team-members) endpoint.
      *
@@ -2266,7 +2266,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/teams/{team_id}/projects` endpoint.
      *
-     * As opposed to `teams_list_projects_legacy`, this function returns all the pages of the request at once.
+     * As opposed to `list_projects_legacy`, this function returns all the pages of the request at once.
      *
      * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team projects`](https://docs.github.com/rest/reference/teams#list-team-projects) endpoint.
      *
@@ -2414,7 +2414,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/teams/{team_id}/repos` endpoint.
      *
-     * As opposed to `teams_list_repos_legacy`, this function returns all the pages of the request at once.
+     * As opposed to `list_repos_legacy`, this function returns all the pages of the request at once.
      *
      * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://docs.github.com/rest/reference/teams#list-team-repositories) endpoint.
      *
@@ -2636,7 +2636,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/teams/{team_id}/teams` endpoint.
      *
-     * As opposed to `teams_list_child_legacy`, this function returns all the pages of the request at once.
+     * As opposed to `list_child_legacy`, this function returns all the pages of the request at once.
      *
      * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List child teams`](https://docs.github.com/rest/reference/teams#list-child-teams) endpoint.
      *
@@ -2684,7 +2684,7 @@ impl Teams {
      *
      * This function performs a `GET` to the `/user/teams` endpoint.
      *
-     * As opposed to `teams_list_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires `user`, `repo`, or `read:org` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://docs.github.com/apps/building-oauth-apps/).
      *

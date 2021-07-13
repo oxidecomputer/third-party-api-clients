@@ -159,7 +159,12 @@ pub fn generate_files(
             // If we are returning a list of things and we have page, etc as
             // params, let's get all the pages.
             if response_type.starts_with("Vec<") && http::Method::GET == m {
-                let docs = get_fn_docs_all(o, m, p, &oid)?;
+                let docs = get_fn_docs_all(
+                    o,
+                    m,
+                    p,
+                    &oid.trim_start_matches(&tag).trim_start_matches('_'),
+                )?;
 
                 let (fn_params_str, query_params) = get_fn_params(ts, o, parameters, true)?;
 
@@ -472,7 +477,7 @@ fn get_fn_docs(
     Ok(out.trim().to_string())
 }
 
-fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, oid: &str) -> Result<String> {
+fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) -> Result<String> {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -492,7 +497,7 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, oid: &str) -> Res
     a("*");
     a(&format!(
         "* As opposed to `{}`, this function returns all the pages of the request at once.",
-        oid
+        fn_name
     ));
     if let Some(description) = &o.description {
         a("*");

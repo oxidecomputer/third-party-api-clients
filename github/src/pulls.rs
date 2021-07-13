@@ -66,7 +66,7 @@ impl Pulls {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls` endpoint.
      *
-     * As opposed to `pulls_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
      *
@@ -184,7 +184,7 @@ impl Pulls {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments` endpoint.
      *
-     * As opposed to `pulls_list_review_comments_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_review_comments_for_repo`, this function returns all the pages of the request at once.
      *
      * Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID.
      *
@@ -444,7 +444,7 @@ impl Pulls {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/comments` endpoint.
      *
-     * As opposed to `pulls_list_review_comments`, this function returns all the pages of the request at once.
+     * As opposed to `list_review_comments`, this function returns all the pages of the request at once.
      *
      * Lists all review comments for a pull request. By default, review comments are in ascending order by ID.
      *
@@ -600,7 +600,7 @@ impl Pulls {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/commits` endpoint.
      *
-     * As opposed to `pulls_list_commits`, this function returns all the pages of the request at once.
+     * As opposed to `list_commits`, this function returns all the pages of the request at once.
      *
      * Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://docs.github.com/rest/reference/repos#list-commits) endpoint.
      *
@@ -664,7 +664,7 @@ impl Pulls {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/files` endpoint.
      *
-     * As opposed to `pulls_list_files`, this function returns all the pages of the request at once.
+     * As opposed to `list_files`, this function returns all the pages of the request at once.
      *
      * **Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
      *
@@ -902,7 +902,7 @@ impl Pulls {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews` endpoint.
      *
-     * As opposed to `pulls_list_reviews`, this function returns all the pages of the request at once.
+     * As opposed to `list_reviews`, this function returns all the pages of the request at once.
      *
      * The list of reviews returns in chronological order.
      *
@@ -1120,7 +1120,7 @@ impl Pulls {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments` endpoint.
      *
-     * As opposed to `pulls_list_comments_for_review`, this function returns all the pages of the request at once.
+     * As opposed to `list_comments_for_review`, this function returns all the pages of the request at once.
      *
      * List comments for a specific pull request review.
      *

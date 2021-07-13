@@ -45,7 +45,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/events` endpoint.
      *
-     * As opposed to `activity_list_public_events`, this function returns all the pages of the request at once.
+     * As opposed to `list_public_events`, this function returns all the pages of the request at once.
      *
      * We delay the public events feed by five minutes, which means the most recent event returned by the public events API actually occurred at least five minutes ago.
      *
@@ -119,7 +119,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/networks/{owner}/{repo}/events` endpoint.
      *
-     * As opposed to `activity_list_public_events_for_repo_network`, this function returns all the pages of the request at once.
+     * As opposed to `list_public_events_for_repo_network`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -184,7 +184,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/notifications` endpoint.
      *
-     * As opposed to `activity_list_notifications_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_notifications_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * List all notifications for the current user, sorted by most recently updated.
      *
@@ -394,7 +394,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/orgs/{org}/events` endpoint.
      *
-     * As opposed to `activity_list_public_org_events`, this function returns all the pages of the request at once.
+     * As opposed to `list_public_org_events`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -448,7 +448,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/events` endpoint.
      *
-     * As opposed to `activity_list_repo_events`, this function returns all the pages of the request at once.
+     * As opposed to `list_repo_events`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -520,7 +520,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/notifications` endpoint.
      *
-     * As opposed to `activity_list_repo_notifications_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_repo_notifications_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * List all notifications for the current user.
      *
@@ -623,7 +623,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stargazers` endpoint.
      *
-     * As opposed to `activity_list_stargazers_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_stargazers_for_repo`, this function returns all the pages of the request at once.
      *
      * Lists the people that have starred the repository.
      *
@@ -684,7 +684,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/subscribers` endpoint.
      *
-     * As opposed to `activity_list_watchers_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_watchers_for_repo`, this function returns all the pages of the request at once.
      *
      * Lists the people watching the specified repository.
      *
@@ -831,7 +831,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/user/starred` endpoint.
      *
-     * As opposed to `activity_list_repos_starred_by_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_repos_starred_by_authenticated_user`, this function returns all the pages of the request at once.
      *
      * Lists repositories the authenticated user has starred.
      *
@@ -958,7 +958,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/user/subscriptions` endpoint.
      *
-     * As opposed to `activity_list_watched_repos_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_watched_repos_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * Lists repositories the authenticated user is watching.
      *
@@ -1007,7 +1007,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/users/{username}/events` endpoint.
      *
-     * As opposed to `activity_list_events_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_events_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events.
      *
@@ -1064,7 +1064,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/users/{username}/events/orgs/{org}` endpoint.
      *
-     * As opposed to `activity_list_org_events_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_org_events_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * This is the user's organization dashboard. You must be authenticated as the user to view this.
      *
@@ -1120,7 +1120,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/users/{username}/events/public` endpoint.
      *
-     * As opposed to `activity_list_public_events_for_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_public_events_for_user`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -1174,7 +1174,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/users/{username}/received_events` endpoint.
      *
-     * As opposed to `activity_list_received_events_for_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_received_events_for_user`, this function returns all the pages of the request at once.
      *
      * These are events that you've received by watching repos and following users. If you are authenticated as the given user, you will see private events. Otherwise, you'll only see public events.
      *
@@ -1228,7 +1228,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/users/{username}/received_events/public` endpoint.
      *
-     * As opposed to `activity_list_received_public_events_for_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_received_public_events_for_user`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -1290,7 +1290,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/users/{username}/starred` endpoint.
      *
-     * As opposed to `activity_list_repos_starred_by_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_repos_starred_by_user`, this function returns all the pages of the request at once.
      *
      * Lists repositories a user has starred.
      *
@@ -1350,7 +1350,7 @@ impl Activity {
      *
      * This function performs a `GET` to the `/users/{username}/subscriptions` endpoint.
      *
-     * As opposed to `activity_list_repos_watched_by_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_repos_watched_by_user`, this function returns all the pages of the request at once.
      *
      * Lists repositories a user is watching.
      *

@@ -62,7 +62,7 @@ impl Reactions {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
      *
-     * As opposed to `reactions_list_for_team_discussion_comment_in_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_team_discussion_comment_in_org`, this function returns all the pages of the request at once.
      *
      * List the reactions to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments/). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
      *
@@ -218,7 +218,7 @@ impl Reactions {
      *
      * This function performs a `GET` to the `/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions` endpoint.
      *
-     * As opposed to `reactions_list_for_team_discussion_in_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_team_discussion_in_org`, this function returns all the pages of the request at once.
      *
      * List the reactions to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
      *
@@ -388,7 +388,7 @@ impl Reactions {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/comments/{comment_id}/reactions` endpoint.
      *
-     * As opposed to `reactions_list_for_commit_comment`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_commit_comment`, this function returns all the pages of the request at once.
      *
      * List the reactions to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
      *
@@ -530,7 +530,7 @@ impl Reactions {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions` endpoint.
      *
-     * As opposed to `reactions_list_for_issue_comment`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_issue_comment`, this function returns all the pages of the request at once.
      *
      * List the reactions to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
      *
@@ -672,7 +672,7 @@ impl Reactions {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/reactions` endpoint.
      *
-     * As opposed to `reactions_list_for_issue`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_issue`, this function returns all the pages of the request at once.
      *
      * List the reactions to an [issue](https://docs.github.com/rest/reference/issues).
      *
@@ -814,7 +814,7 @@ impl Reactions {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions` endpoint.
      *
-     * As opposed to `reactions_list_for_pull_request_review_comment`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_pull_request_review_comment`, this function returns all the pages of the request at once.
      *
      * List the reactions to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
      *
@@ -995,7 +995,7 @@ impl Reactions {
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions` endpoint.
      *
-     * As opposed to `reactions_list_for_team_discussion_comment_legacy`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_team_discussion_comment_legacy`, this function returns all the pages of the request at once.
      *
      * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List reactions for a team discussion comment`](https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment) endpoint.
      *
@@ -1104,7 +1104,7 @@ impl Reactions {
      *
      * This function performs a `GET` to the `/teams/{team_id}/discussions/{discussion_number}/reactions` endpoint.
      *
-     * As opposed to `reactions_list_for_team_discussion_legacy`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_team_discussion_legacy`, this function returns all the pages of the request at once.
      *
      * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List reactions for a team discussion`](https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion) endpoint.
      *

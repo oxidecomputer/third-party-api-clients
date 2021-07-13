@@ -47,7 +47,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/organizations` endpoint.
      *
-     * As opposed to `orgs_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists all organizations, in the order that they were created on GitHub.
      *
@@ -180,7 +180,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/audit-log` endpoint.
      *
-     * As opposed to `orgs_get_audit_log`, this function returns all the pages of the request at once.
+     * As opposed to `get_audit_log`, this function returns all the pages of the request at once.
      *
      * Gets the audit log for an organization. For more information, see "[Reviewing the audit log for your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization)."
      *
@@ -237,7 +237,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/blocks` endpoint.
      *
-     * As opposed to `orgs_list_blocked_users`, this function returns all the pages of the request at once.
+     * As opposed to `list_blocked_users`, this function returns all the pages of the request at once.
      *
      * List the users blocked by an organization.
      *
@@ -356,7 +356,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/credential-authorizations` endpoint.
      *
-     * As opposed to `orgs_list_saml_sso_authorizations`, this function returns all the pages of the request at once.
+     * As opposed to `list_saml_sso_authorizations`, this function returns all the pages of the request at once.
      *
      * Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
      *
@@ -438,7 +438,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/failed_invitations` endpoint.
      *
-     * As opposed to `orgs_list_failed_invitations`, this function returns all the pages of the request at once.
+     * As opposed to `list_failed_invitations`, this function returns all the pages of the request at once.
      *
      * The return hash contains `failed_at` and `failed_reason` fields which represent the time at which the invitation failed and the reason for the failure.
      *
@@ -492,7 +492,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/hooks` endpoint.
      *
-     * As opposed to `orgs_list_webhooks`, this function returns all the pages of the request at once.
+     * As opposed to `list_webhooks`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -777,7 +777,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/invitations` endpoint.
      *
-     * As opposed to `orgs_list_pending_invitations`, this function returns all the pages of the request at once.
+     * As opposed to `list_pending_invitations`, this function returns all the pages of the request at once.
      *
      * The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
      *
@@ -893,7 +893,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/invitations/{invitation_id}/teams` endpoint.
      *
-     * As opposed to `orgs_list_invitation_teams`, this function returns all the pages of the request at once.
+     * As opposed to `list_invitation_teams`, this function returns all the pages of the request at once.
      *
      * List all teams associated with an invitation. In order to see invitations in an organization, the authenticated user must be an organization owner.
      *
@@ -960,7 +960,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/members` endpoint.
      *
-     * As opposed to `orgs_list_members`, this function returns all the pages of the request at once.
+     * As opposed to `list_members`, this function returns all the pages of the request at once.
      *
      * List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
      *
@@ -1167,7 +1167,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/outside_collaborators` endpoint.
      *
-     * As opposed to `orgs_list_outside_collaborators`, this function returns all the pages of the request at once.
+     * As opposed to `list_outside_collaborators`, this function returns all the pages of the request at once.
      *
      * List all users who are outside collaborators of an organization.
      *
@@ -1275,7 +1275,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/orgs/{org}/public_members` endpoint.
      *
-     * As opposed to `orgs_list_public_members`, this function returns all the pages of the request at once.
+     * As opposed to `list_public_members`, this function returns all the pages of the request at once.
      *
      * Members of an organization can choose to have their membership publicized or not.
      *
@@ -1408,7 +1408,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/user/memberships/orgs` endpoint.
      *
-     * As opposed to `orgs_list_memberships_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_memberships_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -1516,7 +1516,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/user/orgs` endpoint.
      *
-     * As opposed to `orgs_list_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * List organizations for the authenticated user.
      *
@@ -1571,7 +1571,7 @@ impl Orgs {
      *
      * This function performs a `GET` to the `/users/{username}/orgs` endpoint.
      *
-     * As opposed to `orgs_list_for_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_user`, this function returns all the pages of the request at once.
      *
      * List [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.
      *

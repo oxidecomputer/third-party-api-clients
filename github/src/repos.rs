@@ -57,7 +57,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/orgs/{org}/repos` endpoint.
      *
-     * As opposed to `repos_list_for_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_org`, this function returns all the pages of the request at once.
      *
      * Lists repositories for the specified organization.
      *
@@ -296,7 +296,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches` endpoint.
      *
-     * As opposed to `repos_list_branches`, this function returns all the pages of the request at once.
+     * As opposed to `list_branches`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -892,7 +892,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts` endpoint.
      *
-     * As opposed to `repos_get_all_status_check_contexts`, this function returns all the pages of the request at once.
+     * As opposed to `get_all_status_check_contexts`, this function returns all the pages of the request at once.
      *
      * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
      *
@@ -1131,7 +1131,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps` endpoint.
      *
-     * As opposed to `repos_get_apps_with_access_to_protected_branch`, this function returns all the pages of the request at once.
+     * As opposed to `get_apps_with_access_to_protected_branch`, this function returns all the pages of the request at once.
      *
      * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
      *
@@ -1322,7 +1322,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams` endpoint.
      *
-     * As opposed to `repos_get_teams_with_access_to_protected_branch`, this function returns all the pages of the request at once.
+     * As opposed to `get_teams_with_access_to_protected_branch`, this function returns all the pages of the request at once.
      *
      * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
      *
@@ -1513,7 +1513,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users` endpoint.
      *
-     * As opposed to `repos_get_users_with_access_to_protected_branch`, this function returns all the pages of the request at once.
+     * As opposed to `get_users_with_access_to_protected_branch`, this function returns all the pages of the request at once.
      *
      * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
      *
@@ -1764,7 +1764,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/collaborators` endpoint.
      *
-     * As opposed to `repos_list_collaborators`, this function returns all the pages of the request at once.
+     * As opposed to `list_collaborators`, this function returns all the pages of the request at once.
      *
      * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
      *
@@ -1961,7 +1961,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/comments` endpoint.
      *
-     * As opposed to `repos_list_commit_comments_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_commit_comments_for_repo`, this function returns all the pages of the request at once.
      *
      * Commit Comments use [these custom media types](https://docs.github.com/rest/reference/repos#custom-media-types). You can read more about the use of media types in the API [here](https://docs.github.com/rest/overview/media-types/).
      *
@@ -2163,7 +2163,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits` endpoint.
      *
-     * As opposed to `repos_list_commits`, this function returns all the pages of the request at once.
+     * As opposed to `list_commits`, this function returns all the pages of the request at once.
      *
      * **Signature verification object**
      *
@@ -2258,7 +2258,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head` endpoint.
      *
-     * As opposed to `repos_list_branches_for_head_commit`, this function returns all the pages of the request at once.
+     * As opposed to `list_branches_for_head_commit`, this function returns all the pages of the request at once.
      *
      * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
      *
@@ -2324,7 +2324,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/comments` endpoint.
      *
-     * As opposed to `repos_list_comments_for_commit`, this function returns all the pages of the request at once.
+     * As opposed to `list_comments_for_commit`, this function returns all the pages of the request at once.
      *
      * Use the `:commit_sha` to specify the commit that will have its comments listed.
      *
@@ -2427,7 +2427,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{commit_sha}/pulls` endpoint.
      *
-     * As opposed to `repos_list_pull_requests_associated_with_commit`, this function returns all the pages of the request at once.
+     * As opposed to `list_pull_requests_associated_with_commit`, this function returns all the pages of the request at once.
      *
      * Lists the merged pull request that introduced the commit to the repository. If the commit is not present in the default branch, additionally returns open pull requests associated with the commit. The results may include open and closed pull requests. Additional preview headers may be required to see certain details for associated pull requests, such as whether a pull request is in a draft state. For more information about previews that might affect this endpoint, see the [List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests) endpoint.
      *
@@ -2610,7 +2610,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/commits/{ref}/statuses` endpoint.
      *
-     * As opposed to `repos_list_commit_statuses_for_ref`, this function returns all the pages of the request at once.
+     * As opposed to `list_commit_statuses_for_ref`, this function returns all the pages of the request at once.
      *
      * Users with pull access in a repository can view commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name. Statuses are returned in reverse chronological order. The first status in the list will be the latest one.
      *
@@ -2819,7 +2819,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
      *
-     * As opposed to `repos_get_content`, this function returns all the pages of the request at once.
+     * As opposed to `get_content`, this function returns all the pages of the request at once.
      *
      * Gets the contents of a file or directory in a repository. Specify the file path or directory in `:path`. If you omit
      * `:path`, you will receive the contents of the repository's root directory. See the description below regarding what the API response includes for directories.
@@ -2998,7 +2998,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/contributors` endpoint.
      *
-     * As opposed to `repos_list_contributors`, this function returns all the pages of the request at once.
+     * As opposed to `list_contributors`, this function returns all the pages of the request at once.
      *
      * Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.
      *
@@ -3073,7 +3073,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments` endpoint.
      *
-     * As opposed to `repos_list_deployments`, this function returns all the pages of the request at once.
+     * As opposed to `list_deployments`, this function returns all the pages of the request at once.
      *
      * Simple filtering of deployments is available via query parameters:
      *
@@ -3290,7 +3290,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments/{deployment_id}/statuses` endpoint.
      *
-     * As opposed to `repos_list_deployment_statuses`, this function returns all the pages of the request at once.
+     * As opposed to `list_deployment_statuses`, this function returns all the pages of the request at once.
      *
      * Users with pull access can view deployment statuses for a deployment:
      *
@@ -3605,7 +3605,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/forks` endpoint.
      *
-     * As opposed to `repos_list_forks`, this function returns all the pages of the request at once.
+     * As opposed to `list_forks`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -3702,7 +3702,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks` endpoint.
      *
-     * As opposed to `repos_list_webhooks`, this function returns all the pages of the request at once.
+     * As opposed to `list_webhooks`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -4016,7 +4016,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/invitations` endpoint.
      *
-     * As opposed to `repos_list_invitations`, this function returns all the pages of the request at once.
+     * As opposed to `list_invitations`, this function returns all the pages of the request at once.
      *
      * When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
      *
@@ -4143,7 +4143,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/keys` endpoint.
      *
-     * As opposed to `repos_list_deploy_keys`, this function returns all the pages of the request at once.
+     * As opposed to `list_deploy_keys`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -4467,7 +4467,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/pages/builds` endpoint.
      *
-     * As opposed to `repos_list_pages_builds`, this function returns all the pages of the request at once.
+     * As opposed to `list_pages_builds`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -4718,7 +4718,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases` endpoint.
      *
-     * As opposed to `repos_list_releases`, this function returns all the pages of the request at once.
+     * As opposed to `list_releases`, this function returns all the pages of the request at once.
      *
      * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the [Repository Tags API](https://docs.github.com/rest/reference/repos#list-repository-tags).
      *
@@ -5067,7 +5067,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/releases/{release_id}/assets` endpoint.
      *
-     * As opposed to `repos_list_release_assets`, this function returns all the pages of the request at once.
+     * As opposed to `list_release_assets`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -5173,7 +5173,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/code_frequency` endpoint.
      *
-     * As opposed to `repos_get_code_frequency_stats`, this function returns all the pages of the request at once.
+     * As opposed to `get_code_frequency_stats`, this function returns all the pages of the request at once.
      *
      * Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
      *
@@ -5226,7 +5226,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/commit_activity` endpoint.
      *
-     * As opposed to `repos_get_commit_activity_stats`, this function returns all the pages of the request at once.
+     * As opposed to `get_commit_activity_stats`, this function returns all the pages of the request at once.
      *
      * Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
      *
@@ -5285,7 +5285,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/contributors` endpoint.
      *
-     * As opposed to `repos_get_contributors_stats`, this function returns all the pages of the request at once.
+     * As opposed to `get_contributors_stats`, this function returns all the pages of the request at once.
      *
      *
      * Returns the `total` number of commits authored by the contributor. In addition, the response includes a Weekly Hash (`weeks` array) with the following information:
@@ -5376,7 +5376,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/stats/punch_card` endpoint.
      *
-     * As opposed to `repos_get_punch_card_stats`, this function returns all the pages of the request at once.
+     * As opposed to `get_punch_card_stats`, this function returns all the pages of the request at once.
      *
      * Each array contains the day number, hour number, and number of commits:
      *
@@ -5476,7 +5476,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/tags` endpoint.
      *
-     * As opposed to `repos_list_tags`, this function returns all the pages of the request at once.
+     * As opposed to `list_tags`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -5565,7 +5565,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/teams` endpoint.
      *
-     * As opposed to `repos_list_teams`, this function returns all the pages of the request at once.
+     * As opposed to `list_teams`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -5713,7 +5713,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/paths` endpoint.
      *
-     * As opposed to `repos_get_top_paths`, this function returns all the pages of the request at once.
+     * As opposed to `get_top_paths`, this function returns all the pages of the request at once.
      *
      * Get the top 10 popular contents over the last 14 days.
      *
@@ -5766,7 +5766,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/traffic/popular/referrers` endpoint.
      *
-     * As opposed to `repos_get_top_referrers`, this function returns all the pages of the request at once.
+     * As opposed to `get_top_referrers`, this function returns all the pages of the request at once.
      *
      * Get the top 10 referrers over the last 14 days.
      *
@@ -6026,7 +6026,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/repositories` endpoint.
      *
-     * As opposed to `repos_list_public`, this function returns all the pages of the request at once.
+     * As opposed to `list_public`, this function returns all the pages of the request at once.
      *
      * Lists all public repositories in the order that they were created.
      *
@@ -6107,7 +6107,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/user/repos` endpoint.
      *
-     * As opposed to `repos_list_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * Lists repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
      *
@@ -6202,7 +6202,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/user/repository_invitations` endpoint.
      *
-     * As opposed to `repos_list_invitations_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_invitations_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
      *
@@ -6304,7 +6304,7 @@ impl Repos {
      *
      * This function performs a `GET` to the `/users/{username}/repos` endpoint.
      *
-     * As opposed to `repos_list_for_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_user`, this function returns all the pages of the request at once.
      *
      * Lists public repositories for the specified user. Note: For GitHub AE, this endpoint will list internal repositories for the specified user.
      *

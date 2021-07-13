@@ -72,7 +72,7 @@ impl CodeScanning {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts` endpoint.
      *
-     * As opposed to `code_scanning_list_alerts_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_alerts_for_repo`, this function returns all the pages of the request at once.
      *
      * Lists all open code scanning alerts for the default branch (usually `main`
      * or `master`). You must use an access token with the `security_events` scope to use
@@ -224,7 +224,7 @@ impl CodeScanning {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances` endpoint.
      *
-     * As opposed to `code_scanning_list_alert_instances`, this function returns all the pages of the request at once.
+     * As opposed to `list_alert_instances`, this function returns all the pages of the request at once.
      *
      * Lists all instances of the specified code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
      *
@@ -315,7 +315,7 @@ impl CodeScanning {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/code-scanning/analyses` endpoint.
      *
-     * As opposed to `code_scanning_list_recent_analyses`, this function returns all the pages of the request at once.
+     * As opposed to `list_recent_analyses`, this function returns all the pages of the request at once.
      *
      * Lists the details of all code scanning analyses for a repository,
      * starting with the most recent.

@@ -31,7 +31,7 @@ impl CodesOfConduct {
      *
      * This function performs a `GET` to the `/codes_of_conduct` endpoint.
      *
-     * As opposed to `codes_of_conduct_get_all_codes_of_conduct`, this function returns all the pages of the request at once.
+     * As opposed to `get_all_codes_of_conduct`, this function returns all the pages of the request at once.
      *
      *
      *

@@ -89,7 +89,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/issues` endpoint.
      *
-     * As opposed to `issues_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * List issues assigned to the authenticated user across all visible repositories including owned repositories, member
      * repositories, and organization repositories. You can use the `filter` query parameter to fetch issues that are not
@@ -199,7 +199,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/orgs/{org}/issues` endpoint.
      *
-     * As opposed to `issues_list_for_org`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_org`, this function returns all the pages of the request at once.
      *
      * List issues in an organization assigned to the authenticated user.
      *
@@ -273,7 +273,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/assignees` endpoint.
      *
-     * As opposed to `issues_list_assignees`, this function returns all the pages of the request at once.
+     * As opposed to `list_assignees`, this function returns all the pages of the request at once.
      *
      * Lists the [available assignees](https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
      *
@@ -400,7 +400,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues` endpoint.
      *
-     * As opposed to `issues_list_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_repo`, this function returns all the pages of the request at once.
      *
      * List issues in a repository.
      *
@@ -528,7 +528,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/comments` endpoint.
      *
-     * As opposed to `issues_list_comments_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_comments_for_repo`, this function returns all the pages of the request at once.
      *
      * By default, Issue Comments are ordered by ascending ID.
      *
@@ -687,7 +687,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/events` endpoint.
      *
-     * As opposed to `issues_list_events_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_events_for_repo`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -935,7 +935,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/comments` endpoint.
      *
-     * As opposed to `issues_list_comments`, this function returns all the pages of the request at once.
+     * As opposed to `list_comments`, this function returns all the pages of the request at once.
      *
      * Issue Comments are ordered by ascending ID.
      *
@@ -1038,7 +1038,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/events` endpoint.
      *
-     * As opposed to `issues_list_events`, this function returns all the pages of the request at once.
+     * As opposed to `list_events`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -1102,7 +1102,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/labels` endpoint.
      *
-     * As opposed to `issues_list_labels_on_issue`, this function returns all the pages of the request at once.
+     * As opposed to `list_labels_on_issue`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -1370,7 +1370,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/issues/{issue_number}/timeline` endpoint.
      *
-     * As opposed to `issues_list_events_for_timeline`, this function returns all the pages of the request at once.
+     * As opposed to `list_events_for_timeline`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -1431,7 +1431,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/labels` endpoint.
      *
-     * As opposed to `issues_list_labels_for_repo`, this function returns all the pages of the request at once.
+     * As opposed to `list_labels_for_repo`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -1627,7 +1627,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones` endpoint.
      *
-     * As opposed to `issues_list_milestones`, this function returns all the pages of the request at once.
+     * As opposed to `list_milestones`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -1828,7 +1828,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/milestones/{milestone_number}/labels` endpoint.
      *
-     * As opposed to `issues_list_labels_for_milestone`, this function returns all the pages of the request at once.
+     * As opposed to `list_labels_for_milestone`, this function returns all the pages of the request at once.
      *
      *
      *
@@ -1912,7 +1912,7 @@ impl Issues {
      *
      * This function performs a `GET` to the `/user/issues` endpoint.
      *
-     * As opposed to `issues_list_for_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `list_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * List issues across owned and member repositories assigned to the authenticated user.
      *

@@ -171,7 +171,7 @@ impl Packages {
      *
      * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions` endpoint.
      *
-     * As opposed to `packages_get_all_package_versions_for_package_owned_by_org`, this function returns all the pages of the request at once.
+     * As opposed to `get_all_package_versions_for_package_owned_by_org`, this function returns all the pages of the request at once.
      *
      * Returns all package versions for a package owned by an organization.
      *
@@ -459,7 +459,7 @@ impl Packages {
      *
      * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions` endpoint.
      *
-     * As opposed to `packages_get_all_package_versions_for_package_owned_by_authenticated_user`, this function returns all the pages of the request at once.
+     * As opposed to `get_all_package_versions_for_package_owned_by_authenticated_user`, this function returns all the pages of the request at once.
      *
      * Returns all package versions for a package owned by the authenticated user.
      *
@@ -662,7 +662,7 @@ impl Packages {
      *
      * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions` endpoint.
      *
-     * As opposed to `packages_get_all_package_versions_for_package_owned_by_user`, this function returns all the pages of the request at once.
+     * As opposed to `get_all_package_versions_for_package_owned_by_user`, this function returns all the pages of the request at once.
      *
      * Returns all package versions for a public package owned by a specified user.
      *

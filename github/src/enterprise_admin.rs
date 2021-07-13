@@ -762,7 +762,7 @@ impl EnterpriseAdmin {
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/actions/runners/downloads` endpoint.
      *
-     * As opposed to `enterprise_admin_list_runner_applications_for_enterprise`, this function returns all the pages of the request at once.
+     * As opposed to `list_runner_applications_for_enterprise`, this function returns all the pages of the request at once.
      *
      * Lists binaries for the runner application that you can download and run.
      *
@@ -973,7 +973,7 @@ impl EnterpriseAdmin {
      *
      * This function performs a `GET` to the `/enterprises/{enterprise}/audit-log` endpoint.
      *
-     * As opposed to `enterprise_admin_get_audit_log`, this function returns all the pages of the request at once.
+     * As opposed to `get_audit_log`, this function returns all the pages of the request at once.
      *
      * Gets the audit log for an enterprise. To use this endpoint, you must be an enterprise admin, and you must use an access token with the `admin:enterprise` scope.
      *
