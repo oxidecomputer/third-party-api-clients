@@ -456,7 +456,7 @@ pub fn generate_files(
                     panic!("function {} should be authenticated", oid);
                 }
 
-                a(r#"self.post_media(
+                a(r#"self.client.post_media(
                         &url,
                         Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
                         crate::utils::MediaType::Json,
