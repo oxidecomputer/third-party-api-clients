@@ -2220,8 +2220,8 @@ impl Repos {
         sha: &str,
         path: &str,
         author: &str,
-        since: Option<chrono::DateTime<chrono::Utc>>,
-        until: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
+        until: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Tree>> {
@@ -2305,8 +2305,8 @@ impl Repos {
         sha: &str,
         path: &str,
         author: &str,
-        since: Option<chrono::DateTime<chrono::Utc>>,
-        until: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
+        until: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::Tree>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -6590,8 +6590,8 @@ impl Repos {
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
-        since: Option<chrono::DateTime<chrono::Utc>>,
-        before: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
+        before: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::Repository>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -6641,8 +6641,8 @@ impl Repos {
         type_: crate::types::ReposListType,
         sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
-        before: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
+        before: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::Repository>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();

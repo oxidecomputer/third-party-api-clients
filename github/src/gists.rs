@@ -29,7 +29,7 @@ impl Gists {
      */
     pub async fn list(
         &self,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -66,7 +66,7 @@ impl Gists {
      */
     pub async fn list_all(
         &self,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::BaseGist>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -125,7 +125,7 @@ impl Gists {
      */
     pub async fn list_public(
         &self,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -164,7 +164,7 @@ impl Gists {
      */
     pub async fn list_all_public(
         &self,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::BaseGist>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -197,7 +197,7 @@ impl Gists {
      */
     pub async fn list_starred(
         &self,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -234,7 +234,7 @@ impl Gists {
      */
     pub async fn list_all_starred(
         &self,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::BaseGist>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -765,7 +765,7 @@ impl Gists {
     pub async fn list_for_user(
         &self,
         username: &str,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -807,7 +807,7 @@ impl Gists {
     pub async fn list_all_for_user(
         &self,
         username: &str,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::BaseGist>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();

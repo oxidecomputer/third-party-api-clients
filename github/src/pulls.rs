@@ -191,7 +191,7 @@ impl Pulls {
         repo: &str,
         sort: crate::types::PullsListReviewCommentsRepoSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
@@ -239,7 +239,7 @@ impl Pulls {
         repo: &str,
         sort: crate::types::PullsListReviewCommentsRepoSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -472,7 +472,7 @@ impl Pulls {
         pull_number: i64,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
@@ -522,7 +522,7 @@ impl Pulls {
         pull_number: i64,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();

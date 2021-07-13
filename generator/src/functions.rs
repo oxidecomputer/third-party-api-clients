@@ -301,7 +301,7 @@ fn get_fn_params(
         if nam == "ref" || nam == "type" {
             fn_params_str.push(format!("{}_: {},", nam, typ));
         } else if !all_pages || (nam != ("page") && nam != "per_page") {
-            if typ == "chrono::DateTime<chrono::Utc>>" {
+            if typ == "chrono::DateTime<chrono::Utc>" {
                 fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
             } else {
                 fn_params_str.push(format!("{}: {},", nam, typ));
@@ -326,7 +326,7 @@ fn get_fn_params(
             if nam == "ref" || nam == "type" {
                 query_params.insert(format!("{}_", nam), typ.to_string());
             } else if !all_pages || (nam != ("page") && nam != "per_page") {
-                if typ == "DateTime<Utc>" {
+                if typ == "chrono::DateTime<chrono::Utc>" {
                     query_params.insert(nam.to_string(), format!("Option<{}>", typ));
                 } else {
                     query_params.insert(nam.to_string(), typ.to_string());

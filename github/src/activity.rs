@@ -184,8 +184,8 @@ impl Activity {
         &self,
         all: bool,
         participating: bool,
-        since: Option<chrono::DateTime<chrono::Utc>>,
-        before: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
+        before: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Thread>> {
@@ -231,8 +231,8 @@ impl Activity {
         &self,
         all: bool,
         participating: bool,
-        since: Option<chrono::DateTime<chrono::Utc>>,
-        before: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
+        before: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::Thread>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -567,8 +567,8 @@ impl Activity {
         repo: &str,
         all: bool,
         participating: bool,
-        since: Option<chrono::DateTime<chrono::Utc>>,
-        before: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
+        before: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Thread>> {
@@ -621,8 +621,8 @@ impl Activity {
         repo: &str,
         all: bool,
         participating: bool,
-        since: Option<chrono::DateTime<chrono::Utc>>,
-        before: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
+        before: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::Thread>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();

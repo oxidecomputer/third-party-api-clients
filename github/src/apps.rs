@@ -121,7 +121,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         outdated: &str,
     ) -> Result<Vec<crate::types::Installation>> {
         let mut query = String::new();
@@ -162,7 +162,7 @@ impl Apps {
      */
     pub async fn list_all_installations(
         &self,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         outdated: &str,
     ) -> Result<Vec<crate::types::Installation>> {
         let mut query = String::new();

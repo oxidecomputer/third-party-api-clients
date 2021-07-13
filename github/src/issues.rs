@@ -56,7 +56,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         collab: bool,
         orgs: bool,
         owned: bool,
@@ -129,7 +129,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         collab: bool,
         orgs: bool,
         owned: bool,
@@ -207,7 +207,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Issue>> {
@@ -266,7 +266,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -442,7 +442,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueSimple>> {
@@ -517,7 +517,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::IssueSimple>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -617,7 +617,7 @@ impl Issues {
         repo: &str,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueComment>> {
@@ -665,7 +665,7 @@ impl Issues {
         repo: &str,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::IssueComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -1060,7 +1060,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueComment>> {
@@ -1106,7 +1106,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::IssueComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -2143,7 +2143,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Issue>> {
@@ -2197,7 +2197,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: Option<chrono::DateTime<chrono::Utc>>,
+        since: chrono::DateTime<chrono::Utc>,
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
