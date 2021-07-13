@@ -59,7 +59,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user>
      */
-    pub async fn list_blocked_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
+    pub async fn list_blocked_by_authenticated(&self) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/blocks".to_string();
         self.client.get(&url).await
     }
@@ -75,7 +75,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user>
      */
-    pub async fn list_all_blocked_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_blocked_by_authenticated(&self) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/blocks".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -284,7 +284,7 @@ impl Users {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -317,7 +317,7 @@ impl Users {
      */
     pub async fn list_all_followers_for_authenticated_user(
         &self,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/followers".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -340,7 +340,7 @@ impl Users {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -371,7 +371,9 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-the-people-the-authenticated-user-follows>
      */
-    pub async fn list_all_followed_by_authenticated(&self) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_followed_by_authenticated(
+        &self,
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/following".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -764,7 +766,7 @@ impl Users {
      * * `since: i64` -- A user ID. Only return users with an ID greater than this ID.
      * * `per_page: i64` -- Results per page (max 100).
      */
-    pub async fn list(&self, since: i64, per_page: i64) -> Result<Vec<crate::types::User>> {
+    pub async fn list(&self, since: i64, per_page: i64) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if per_page > 0 {
@@ -797,7 +799,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#list-users>
      */
-    pub async fn list_all(&self, since: i64) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all(&self, since: i64) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if since > 0 {
@@ -862,7 +864,7 @@ impl Users {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -900,7 +902,7 @@ impl Users {
     pub async fn list_all_followers_for_user(
         &self,
         username: &str,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/users/{}/followers",
             crate::progenitor_support::encode_path(&username.to_string()),
@@ -929,7 +931,7 @@ impl Users {
         username: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -967,7 +969,7 @@ impl Users {
     pub async fn list_all_following_for_user(
         &self,
         username: &str,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/users/{}/following",
             crate::progenitor_support::encode_path(&username.to_string()),

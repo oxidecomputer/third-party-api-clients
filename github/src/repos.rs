@@ -1545,7 +1545,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1574,7 +1574,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1612,7 +1612,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddUserAccessRestrictionsRequest,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1655,7 +1655,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddUserAccessRestrictionsRequest,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1698,7 +1698,7 @@ impl Repos {
         repo: &str,
         branch: &str,
         body: &crate::types::ReposAddUserAccessRestrictionsRequest,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2224,7 +2224,7 @@ impl Repos {
         until: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Tree>> {
+    ) -> Result<Vec<crate::types::CommitDataType>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !author.is_empty() {
@@ -2311,7 +2311,7 @@ impl Repos {
         author: &str,
         since: Option<chrono::DateTime<chrono::Utc>>,
         until: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::Tree>> {
+    ) -> Result<Vec<crate::types::CommitDataType>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !author.is_empty() {
@@ -2659,7 +2659,7 @@ impl Repos {
         page: i64,
         per_page: i64,
         ref_: &str,
-    ) -> Result<crate::types::Tree> {
+    ) -> Result<crate::types::CommitDataType> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -3120,7 +3120,7 @@ impl Repos {
         repo: &str,
         path: &str,
         body: &crate::types::ReposCreateUpdateFileContentsRequest,
-    ) -> Result<crate::types::FileCommit> {
+    ) -> Result<crate::types::FileCommitData> {
         let url = format!(
             "/repos/{}/{}/contents/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -3163,7 +3163,7 @@ impl Repos {
         repo: &str,
         path: &str,
         body: &crate::types::ReposDeleteFileRequest,
-    ) -> Result<crate::types::FileCommit> {
+    ) -> Result<crate::types::FileCommitData> {
         let url = format!(
             "/repos/{}/{}/contents/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -3780,7 +3780,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         environment_name: &str,
-    ) -> Result<crate::types::Environment> {
+    ) -> Result<crate::types::EnvironmentData> {
         let url = format!(
             "/repos/{}/{}/environments/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -3818,7 +3818,7 @@ impl Repos {
         repo: &str,
         environment_name: &str,
         body: &crate::types::ReposCreateUpdateEnvironmentRequest,
-    ) -> Result<crate::types::Environment> {
+    ) -> Result<crate::types::EnvironmentData> {
         let url = format!(
             "/repos/{}/{}/environments/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -4660,7 +4660,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         body: &crate::types::ReposMergeRequest,
-    ) -> Result<crate::types::Tree> {
+    ) -> Result<crate::types::CommitDataType> {
         let url = format!(
             "/repos/{}/{}/merges",
             crate::progenitor_support::encode_path(&owner.to_string()),

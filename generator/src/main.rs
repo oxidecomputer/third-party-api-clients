@@ -715,18 +715,18 @@ impl TypeSpace {
         }
     }
 
-    fn render_docs(&self, tid: &TypeId) -> String {
-        let mut out = String::new();
-
-        let mut a = |s: &str| {
-            out.push_str(s);
-            out.push('\n');
-        };
-
-        let schema = if let Some(te) = self.id_to_entry.get(tid) {
+    fn get_schema_data_for_id(&self, tid: &TypeId) -> Option<&openapiv3::SchemaData> {
+        if let Some(te) = self.id_to_entry.get(tid) {
             match &te.details {
                 TypeDetails::Basic(_, schema_data) => Some(schema_data),
-                TypeDetails::NamedType(_, schema_data) => Some(schema_data),
+                TypeDetails::NamedType(id, schema_data) => {
+                    let def: openapiv3::SchemaData = Default::default();
+                    if def == *schema_data {
+                        self.get_schema_data_for_id(id)
+                    } else {
+                        Some(schema_data)
+                    }
+                }
                 TypeDetails::Enum(_, schema_data) => Some(schema_data),
                 TypeDetails::Array(_, schema_data) => Some(schema_data),
                 TypeDetails::Optional(_, schema_data) => Some(schema_data),
@@ -735,7 +735,18 @@ impl TypeSpace {
             }
         } else {
             None
+        }
+    }
+
+    fn render_docs(&self, tid: &TypeId) -> String {
+        let mut out = String::new();
+
+        let mut a = |s: &str| {
+            out.push_str(s);
+            out.push('\n');
         };
+
+        let schema = self.get_schema_data_for_id(tid);
 
         if let Some(s) = schema {
             if let Some(description) = &s.description {
@@ -856,13 +867,15 @@ impl TypeSpace {
     }
 
     fn select_ref(&mut self, _name: Option<&str>, reference: &str) -> Result<TypeId> {
-        let r = clean_name(&reference.replace("#/components/schemas/", ""));
-
         /*
          * As this is a reference, all we can do for now is determine
          * the type ID.
          */
-        Ok(self.id_for_name(&r))
+        if let Some(id) = self.name_to_id.get(reference) {
+            return Ok(id.clone());
+        }
+
+        bail!("reference {} not found", reference);
     }
 
     fn add_if_not_exists(
@@ -1067,6 +1080,28 @@ impl TypeSpace {
             }
             openapiv3::ReferenceOr::Item(p) => self.select_parameter(name, p, is_schema),
         }
+    }
+
+    fn populate_ref(
+        &mut self,
+        name: Option<&str>,
+        id: Option<TypeId>,
+        type_: &str,
+    ) -> Result<TypeId> {
+        let nam = if let Some(n) = name {
+            n.to_string()
+        } else {
+            "".to_string()
+        };
+
+        let details = if let Some(id) = id {
+            TypeDetails::NamedType(id, Default::default())
+        } else {
+            TypeDetails::NamedType(self.id_for_name("String"), Default::default())
+        };
+
+        let ref_ = format!("#/components/{}s/{}", type_.trim_end_matches('s'), nam);
+        self.add_if_not_exists(Some(ref_), details, "", true)
     }
 
     fn select(
@@ -1805,6 +1840,10 @@ fn main() -> Result<()> {
             let id = ts.select(Some(name.as_str()), s, true, "")?;
             debug(&format!("    -> {:?}", id));
             debug("");
+
+            // Insert the named type for our reference.
+            // DO NOT CLEAN THE NAME HERE.
+            ts.populate_ref(Some(sn.as_str()), Some(id), "schema")?;
         }
 
         // Populate a type to describe each entry in the parameters section.
@@ -1819,6 +1858,10 @@ fn main() -> Result<()> {
 
             let id = ts.select_param(Some(name.as_str()), p, true)?;
 
+            // Insert the named type for our reference.
+            // DO NOT CLEAN THE NAME HERE.
+            ts.populate_ref(Some(pn.as_str()), Some(id.clone()), "parameter")?;
+
             debug(&format!("    -> {:?}", id));
             debug("");
             if let openapiv3::ReferenceOr::Item(item) = p {
@@ -1827,6 +1870,40 @@ fn main() -> Result<()> {
                 bail!("parameter {} uses reference, unsupported: {:?}", pn, p);
             }
             debug("");
+        }
+
+        // Populate a type to describe each entry in the responses section.
+        for (i, (rn, r)) in components.responses.iter().enumerate() {
+            let name = clean_name(rn);
+            debug(&format!(
+                "RESPONSE {}/{}: {}",
+                i + 1,
+                components.responses.len(),
+                name
+            ));
+
+            let content = &r.item().unwrap().content;
+
+            for (ct, mt) in content {
+                if ct == "application/json" {
+                    if let Some(s) = &mt.schema {
+                        let object_name = format!("{} response", name);
+                        let id = ts.select(Some(&clean_name(&object_name)), s, true, "")?;
+
+                        // Insert the named type for our reference.
+                        // DO NOT CLEAN THE NAME HERE.
+                        ts.populate_ref(Some(rn.as_str()), Some(id.clone()), "response")?;
+
+                        debug(&format!("    -> {:?}", id));
+                        debug("");
+                    }
+                }
+            }
+
+            if content.is_empty() {
+                // Populate an empty reference.
+                ts.populate_ref(Some(rn.as_str()), None, "response")?;
+            }
         }
     }
 

@@ -220,7 +220,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         body: &crate::types::ChecksCreateSuiteRequest,
-    ) -> Result<crate::types::CheckSuite> {
+    ) -> Result<crate::types::CheckSuiteData> {
         let url = format!(
             "/repos/{}/{}/check-suites",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -291,7 +291,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         check_suite_id: i64,
-    ) -> Result<crate::types::CheckSuite> {
+    ) -> Result<crate::types::CheckSuiteData> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),

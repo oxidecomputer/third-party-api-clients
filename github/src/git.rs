@@ -563,7 +563,7 @@ impl Git {
         owner: &str,
         repo: &str,
         body: &crate::types::GitCreateTreeRequestData,
-    ) -> Result<crate::types::GitTree> {
+    ) -> Result<crate::types::GitTreeData> {
         let url = format!(
             "/repos/{}/{}/git/trees",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -602,7 +602,7 @@ impl Git {
         repo: &str,
         tree_sha: &str,
         recursive: &str,
-    ) -> Result<crate::types::GitTree> {
+    ) -> Result<crate::types::GitTreeData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !recursive.is_empty() {

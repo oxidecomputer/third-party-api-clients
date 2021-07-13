@@ -32,7 +32,7 @@ impl Licenses {
         featured: bool,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::License>> {
+    ) -> Result<Vec<crate::types::LicenseSimple>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if featured {
@@ -69,7 +69,7 @@ impl Licenses {
     pub async fn get_all_all_commonly_used(
         &self,
         featured: bool,
-    ) -> Result<Vec<crate::types::License>> {
+    ) -> Result<Vec<crate::types::LicenseSimple>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if featured {

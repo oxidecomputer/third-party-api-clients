@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 /// Simple User
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct User {
+pub struct SimpleUser {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -275,7 +275,7 @@ pub struct Integration {
      * Simple User
      */
     #[serde()]
-    pub owner: User,
+    pub owner: SimpleUser,
     /**
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
@@ -1555,7 +1555,7 @@ pub struct Installation {
      * Simple User
      */
     #[serde()]
-    pub account: User,
+    pub account: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -1637,7 +1637,7 @@ pub struct Installation {
      * Simple User
      */
     #[serde()]
-    pub suspended_by: User,
+    pub suspended_by: SimpleUser,
     /**
      * The ID of the user or organization this token is being scoped to.
      */
@@ -1659,7 +1659,7 @@ pub struct Installation {
 
 /// License Simple
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct License {
+pub struct LicenseSimple {
     /**
      * License Simple
      */
@@ -1731,7 +1731,7 @@ pub struct RepositoryPermissions {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct Users {
+pub struct Owner {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2187,7 +2187,7 @@ pub struct TemplateRepository {
     )]
     pub open_issues_count: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<Users>,
+    pub owner: Option<Owner>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<RepositoryTemplatePermissions>,
     #[serde(
@@ -2642,7 +2642,7 @@ pub struct Repository {
      * License Simple
      */
     #[serde()]
-    pub license: License,
+    pub license: LicenseSimple,
     /**
      * A git repository
      */
@@ -2716,12 +2716,12 @@ pub struct Repository {
      * A git repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub organization: Option<User>,
+    pub organization: Option<SimpleUser>,
     /**
      * Simple User
      */
     #[serde()]
-    pub owner: User,
+    pub owner: SimpleUser,
     /**
      * A git repository
      */
@@ -3073,7 +3073,7 @@ pub struct ApplicationGrant {
      * The authorization associated with an OAuth Access.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<User>,
+    pub user: Option<SimpleUser>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3082,7 +3082,7 @@ pub struct ScopedInstallation {
      * Simple User
      */
     #[serde()]
-    pub account: User,
+    pub account: SimpleUser,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -3185,7 +3185,7 @@ pub struct Authorization {
      * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<User>,
+    pub user: Option<SimpleUser>,
 }
 
 /// Code Of Conduct
@@ -4121,7 +4121,7 @@ pub struct Milestone {
      * Simple User
      */
     #[serde()]
-    pub creator: User,
+    pub creator: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4279,12 +4279,12 @@ pub struct IssueSimple {
      * Simple User
      */
     #[serde()]
-    pub assignee: User,
+    pub assignee: SimpleUser,
     /**
      * Issue Simple
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub assignees: Vec<User>,
+    pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
      */
@@ -4435,7 +4435,7 @@ pub struct IssueSimple {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -4593,7 +4593,7 @@ pub struct IssueComment {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -4907,7 +4907,7 @@ pub struct BaseGist {
      * Base Gist
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<User>,
+    pub owner: Option<SimpleUser>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -4933,7 +4933,7 @@ pub struct BaseGist {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5258,7 +5258,7 @@ pub struct GistHistory {
      * Gist History
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<User>,
+    pub user: Option<SimpleUser>,
     /**
      * Gist History
      */
@@ -5373,7 +5373,7 @@ pub struct ForkOf {
      * Gist
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<User>,
+    pub owner: Option<SimpleUser>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -5399,7 +5399,7 @@ pub struct ForkOf {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /// Gist Simple
@@ -5528,7 +5528,7 @@ pub struct GistSimple {
      * Gist Simple
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<User>,
+    pub owner: Option<SimpleUser>,
     /**
      * Gist Simple
      */
@@ -5617,7 +5617,7 @@ pub struct GistComment {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /// Gist Commit
@@ -5637,7 +5637,7 @@ pub struct GistCommit {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5679,12 +5679,12 @@ pub struct Issue {
      * Simple User
      */
     #[serde()]
-    pub assignee: User,
+    pub assignee: SimpleUser,
     /**
      * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub assignees: Vec<User>,
+    pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
      */
@@ -5723,7 +5723,7 @@ pub struct Issue {
      * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub closed_by: Option<User>,
+    pub closed_by: Option<SimpleUser>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5860,12 +5860,12 @@ pub struct Issue {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /// License
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct LicenseData {
+pub struct License {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7714,7 +7714,7 @@ pub struct OrganizationInvitation {
      * Simple User
      */
     #[serde()]
-    pub inviter: User,
+    pub inviter: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7917,7 +7917,7 @@ pub struct InteractionLimit {
 
 /// Groups of organization members that gives permissions on specified repositories.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct Parent {
+pub struct TeamSimple {
     /**
      * Description of the team
      */
@@ -8085,7 +8085,7 @@ pub struct Team {
      * Groups of organization members that gives permissions on specified repositories.
      */
     #[serde()]
-    pub parent: Parent,
+    pub parent: TeamSimple,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8232,7 +8232,7 @@ pub struct OrgMembership {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /// A migration.
@@ -8286,7 +8286,7 @@ pub struct Migration {
      * Simple User
      */
     #[serde()]
-    pub owner: User,
+    pub owner: SimpleUser,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<Repository>,
     #[serde(
@@ -8396,7 +8396,7 @@ pub struct Package {
      * A software package
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<User>,
+    pub owner: Option<SimpleUser>,
     #[serde()]
     pub package_type: PackageType,
     /**
@@ -8579,7 +8579,7 @@ pub struct Project {
      * Simple User
      */
     #[serde()]
-    pub creator: User,
+    pub creator: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8803,7 +8803,7 @@ pub struct TeamFull {
      * Groups of organization members that gives permissions on specified repositories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub parent: Option<Parent>,
+    pub parent: Option<TeamSimple>,
     /**
      * Permission that the team will have for its repositories
      */
@@ -8856,7 +8856,7 @@ pub struct TeamDiscussion {
      * Simple User
      */
     #[serde()]
-    pub author: User,
+    pub author: SimpleUser,
     /**
      * The main text of the discussion.
      */
@@ -8971,7 +8971,7 @@ pub struct TeamDiscussionComment {
      * Simple User
      */
     #[serde()]
-    pub author: User,
+    pub author: SimpleUser,
     /**
      * The main text of the comment.
      */
@@ -9108,7 +9108,7 @@ pub struct Reaction {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /**
@@ -9230,7 +9230,7 @@ pub struct TeamProject {
      * Simple User
      */
     #[serde()]
-    pub creator: User,
+    pub creator: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9629,7 +9629,7 @@ pub struct TeamRepository {
      * License Simple
      */
     #[serde()]
-    pub license: License,
+    pub license: LicenseSimple,
     /**
      * A team's access to a repository.
      */
@@ -9703,7 +9703,7 @@ pub struct TeamRepository {
      * Simple User
      */
     #[serde()]
-    pub owner: User,
+    pub owner: SimpleUser,
     /**
      * A team's access to a repository.
      */
@@ -9897,7 +9897,7 @@ pub struct ProjectCard {
      * Simple User
      */
     #[serde()]
-    pub creator: User,
+    pub creator: SimpleUser,
     /**
      * The project card's ID
      */
@@ -10008,7 +10008,7 @@ pub struct RepositoryCollaboratorPermission {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -10466,7 +10466,7 @@ pub struct FullRepository {
      * License Simple
      */
     #[serde()]
-    pub license: License,
+    pub license: LicenseSimple,
     /**
      * Full Repository
      */
@@ -10534,12 +10534,12 @@ pub struct FullRepository {
      * Full Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub organization: Option<User>,
+    pub organization: Option<SimpleUser>,
     /**
      * Simple User
      */
     #[serde()]
-    pub owner: User,
+    pub owner: SimpleUser,
     /**
      * Full Repository
      */
@@ -11015,7 +11015,7 @@ pub struct Author {
 
 /// Simple Commit
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct HeadCommit {
+pub struct SimpleCommit {
     #[serde()]
     pub author: Author,
     #[serde()]
@@ -11114,7 +11114,7 @@ pub struct WorkflowRun {
      * Simple Commit
      */
     #[serde()]
-    pub head_commit: HeadCommit,
+    pub head_commit: SimpleCommit,
     /**
      * Minimal Repository
      */
@@ -11340,7 +11340,7 @@ pub struct EnvironmentApprovals {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /**
@@ -11408,7 +11408,7 @@ pub struct Environment {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Reviewers {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub reviewer: Option<User>,
+    pub reviewer: Option<SimpleUser>,
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<DeploymentReviewerType>,
 }
@@ -11456,7 +11456,7 @@ pub struct Deployment {
      * Simple User
      */
     #[serde()]
-    pub creator: User,
+    pub creator: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -11775,7 +11775,7 @@ pub struct DismissalRestrictions {
     )]
     pub url: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub users: Vec<User>,
+    pub users: Vec<SimpleUser>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12158,7 +12158,7 @@ pub struct BranchRestrictionPolicy {
     )]
     pub url: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub users: Vec<Users>,
+    pub users: Vec<Owner>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12547,7 +12547,7 @@ pub struct CommitDataType {
      * Simple User
      */
     #[serde()]
-    pub author: User,
+    pub author: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12560,7 +12560,7 @@ pub struct CommitDataType {
      * Simple User
      */
     #[serde()]
-    pub committer: User,
+    pub committer: SimpleUser,
     /**
      * Commit
      */
@@ -12621,8 +12621,11 @@ pub struct BranchWithProtectionLinks {
 pub struct BranchWithProtection {
     #[serde()]
     pub links: BranchWithProtectionLinks,
+    /**
+     * Commit
+     */
     #[serde()]
-    pub commit: Tree,
+    pub commit: CommitDataType,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12706,7 +12709,7 @@ pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
     )]
     pub url: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub users: Vec<User>,
+    pub users: Vec<SimpleUser>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13235,7 +13238,7 @@ pub struct CheckSuiteData {
      * Simple Commit
      */
     #[serde()]
-    pub head_commit: HeadCommit,
+    pub head_commit: SimpleCommit,
     /**
      * The SHA of the head commit that is being checked.
      */
@@ -13576,7 +13579,7 @@ pub struct CodeScanningAlertItems {
      * Simple User
      */
     #[serde()]
-    pub dismissed_by: User,
+    pub dismissed_by: SimpleUser,
     /**
      * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
@@ -13719,7 +13722,7 @@ pub struct CodeScanningAlert {
      * Simple User
      */
     #[serde()]
-    pub dismissed_by: User,
+    pub dismissed_by: SimpleUser,
     /**
      * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
@@ -14266,12 +14269,12 @@ pub struct RepositoryInvitation {
      * Simple User
      */
     #[serde()]
-    pub invitee: User,
+    pub invitee: SimpleUser,
     /**
      * Simple User
      */
     #[serde()]
-    pub inviter: User,
+    pub inviter: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14374,7 +14377,7 @@ pub struct CommitComment {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /// Branch Short
@@ -14461,7 +14464,7 @@ pub struct AutoMerge {
      * Simple User
      */
     #[serde()]
-    pub enabled_by: User,
+    pub enabled_by: SimpleUser,
     /**
      * The merge method to use.
      */
@@ -14544,7 +14547,7 @@ pub struct Base {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14609,12 +14612,12 @@ pub struct PullRequestSimple {
      * Simple User
      */
     #[serde()]
-    pub assignee: User,
+    pub assignee: SimpleUser,
     /**
      * Pull Request Simple
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub assignees: Vec<User>,
+    pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
      */
@@ -14725,7 +14728,7 @@ pub struct PullRequestSimple {
      * Pull Request Simple
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub requested_reviewers: Vec<User>,
+    pub requested_reviewers: Vec<SimpleUser>,
     /**
      * Pull Request Simple
      */
@@ -14773,7 +14776,7 @@ pub struct PullRequestSimple {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14904,7 +14907,7 @@ pub struct Status {
      * Simple User
      */
     #[serde()]
-    pub creator: User,
+    pub creator: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14950,7 +14953,7 @@ pub struct Status {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct Readme {
+pub struct CommunityHealthFile {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14973,20 +14976,20 @@ pub struct CommunityProfileFiles {
     #[serde()]
     pub code_of_conduct: CodeOfConductSimple,
     #[serde()]
-    pub code_of_conduct_file: Readme,
+    pub code_of_conduct_file: CommunityHealthFile,
     #[serde()]
-    pub contributing: Readme,
+    pub contributing: CommunityHealthFile,
     #[serde()]
-    pub issue_template: Readme,
+    pub issue_template: CommunityHealthFile,
     /**
      * License Simple
      */
     #[serde()]
-    pub license: License,
+    pub license: LicenseSimple,
     #[serde()]
-    pub pull_request_template: Readme,
+    pub pull_request_template: CommunityHealthFile,
     #[serde()]
-    pub readme: Readme,
+    pub readme: CommunityHealthFile,
 }
 
 /// Community Profile
@@ -15139,8 +15142,11 @@ pub struct CommitComparison {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub ahead_by: i64,
+    /**
+     * Commit
+     */
     #[serde()]
-    pub base_commit: Tree,
+    pub base_commit: CommitDataType,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -15148,7 +15154,7 @@ pub struct CommitComparison {
     )]
     pub behind_by: i64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub commits: Vec<Tree>,
+    pub commits: Vec<CommitDataType>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -15166,8 +15172,11 @@ pub struct CommitComparison {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
+    /**
+     * Commit
+     */
     #[serde()]
-    pub merge_base_commit: Tree,
+    pub merge_base_commit: CommitDataType,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -16081,7 +16090,7 @@ pub struct DeploymentStatus {
      * Simple User
      */
     #[serde()]
-    pub creator: User,
+    pub creator: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17310,17 +17319,17 @@ pub struct IssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     /**
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assignee: Option<User>,
+    pub assignee: Option<SimpleUser>,
     /**
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assigner: Option<User>,
+    pub assigner: Option<SimpleUser>,
     /**
      * Issue Event
      */
@@ -17406,7 +17415,7 @@ pub struct IssueEvent {
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub requested_reviewer: Option<User>,
+    pub requested_reviewer: Option<SimpleUser>,
     /**
      * Issue Event
      */
@@ -17416,7 +17425,7 @@ pub struct IssueEvent {
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub review_requester: Option<User>,
+    pub review_requester: Option<SimpleUser>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17448,7 +17457,7 @@ pub struct LabeledIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17507,7 +17516,7 @@ pub struct UnlabeledIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17566,17 +17575,17 @@ pub struct AssignedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     /**
      * Simple User
      */
     #[serde()]
-    pub assignee: User,
+    pub assignee: SimpleUser,
     /**
      * Simple User
      */
     #[serde()]
-    pub assigner: User,
+    pub assigner: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17633,17 +17642,17 @@ pub struct UnassignedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     /**
      * Simple User
      */
     #[serde()]
-    pub assignee: User,
+    pub assignee: SimpleUser,
     /**
      * Simple User
      */
     #[serde()]
-    pub assigner: User,
+    pub assigner: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17710,7 +17719,7 @@ pub struct MilestonedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17769,7 +17778,7 @@ pub struct DemilestonedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17844,7 +17853,7 @@ pub struct RenamedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17903,7 +17912,7 @@ pub struct ReviewRequestedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17949,7 +17958,7 @@ pub struct ReviewRequestedIssueEvent {
      * Review Requested Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub requested_reviewer: Option<User>,
+    pub requested_reviewer: Option<SimpleUser>,
     /**
      * Review Requested Issue Event
      */
@@ -17959,7 +17968,7 @@ pub struct ReviewRequestedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub review_requester: User,
+    pub review_requester: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17975,7 +17984,7 @@ pub struct ReviewRequestRemovedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18021,7 +18030,7 @@ pub struct ReviewRequestRemovedIssueEvent {
      * Review Request Removed Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub requested_reviewer: Option<User>,
+    pub requested_reviewer: Option<SimpleUser>,
     /**
      * Review Request Removed Issue Event
      */
@@ -18031,7 +18040,7 @@ pub struct ReviewRequestRemovedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub review_requester: User,
+    pub review_requester: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18075,7 +18084,7 @@ pub struct ReviewDismissedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18134,7 +18143,7 @@ pub struct LockedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18237,7 +18246,7 @@ pub struct AddedProjectIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18299,7 +18308,7 @@ pub struct MovedColumnInProjectIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18361,7 +18370,7 @@ pub struct RemovedFromProjectIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18423,7 +18432,7 @@ pub struct ConvertedNoteIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18478,65 +18487,6 @@ pub struct ConvertedNoteIssueEvent {
     pub url: String,
 }
 
-/// Labeled Issue Event
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct IssueEventFor {
-    /**
-     * Simple User
-     */
-    #[serde()]
-    pub actor: User,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub commit_id: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub commit_url: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub created_at: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub event: String,
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub id: i64,
-    #[serde()]
-    pub label: LabeledIssueEventLabel,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub node_id: String,
-    /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-     */
-    #[serde()]
-    pub performed_via_github_app: Integration,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub url: String,
-}
-
 /// Timeline Comment Event
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineCommentEvent {
@@ -18544,7 +18494,7 @@ pub struct TimelineCommentEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     /**
      * How the author is associated with the repository.
      */
@@ -18637,7 +18587,7 @@ pub struct TimelineCommentEvent {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -18660,7 +18610,7 @@ pub struct TimelineCrossReferencedEvent {
      * Timeline Cross Referenced Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub actor: Option<User>,
+    pub actor: Option<SimpleUser>,
     #[serde()]
     pub created_at: chrono::DateTime<chrono::Utc>,
     #[serde(
@@ -18853,7 +18803,7 @@ pub struct TimelineReviewedEvent {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -19131,7 +19081,7 @@ pub struct PullRequestReviewComment {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /// Timeline Line Commented Event
@@ -19206,12 +19156,12 @@ pub struct TimelineAssignedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     /**
      * Simple User
      */
     #[serde()]
-    pub assignee: User,
+    pub assignee: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19268,12 +19218,12 @@ pub struct TimelineUnassignedIssueEvent {
      * Simple User
      */
     #[serde()]
-    pub actor: User,
+    pub actor: SimpleUser,
     /**
      * Simple User
      */
     #[serde()]
-    pub assignee: User,
+    pub assignee: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19415,7 +19365,7 @@ pub struct LicenseContent {
      * License Simple
      */
     #[serde()]
-    pub license: License,
+    pub license: LicenseSimple,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19669,7 +19619,7 @@ pub struct PageBuild {
      * Simple User
      */
     #[serde()]
-    pub pusher: User,
+    pub pusher: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20047,7 +19997,7 @@ impl Default for PullRequestState {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PullRequestHeadRepoOwner {
+pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20518,7 +20468,7 @@ pub struct PullRequestHeadRepo {
     )]
     pub open_issues_count: i64,
     #[serde()]
-    pub owner: PullRequestHeadRepoOwner,
+    pub owner: User,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
     #[serde(
@@ -20660,7 +20610,7 @@ pub struct PullRequestHead {
     )]
     pub sha: String,
     #[serde()]
-    pub user: PullRequestHeadRepoOwner,
+    pub user: User,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20936,7 +20886,7 @@ pub struct PullRequestBaseRepo {
      * License Simple
      */
     #[serde()]
-    pub license: License,
+    pub license: LicenseSimple,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20992,7 +20942,7 @@ pub struct PullRequestBaseRepo {
     )]
     pub open_issues_count: i64,
     #[serde()]
-    pub owner: PullRequestHeadRepoOwner,
+    pub owner: User,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<FullRepositoryPermissions>,
     #[serde(
@@ -21134,7 +21084,7 @@ pub struct PullRequestBase {
     )]
     pub sha: String,
     #[serde()]
-    pub user: PullRequestHeadRepoOwner,
+    pub user: User,
 }
 
 /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
@@ -21161,12 +21111,12 @@ pub struct PullRequestData {
      * Simple User
      */
     #[serde()]
-    pub assignee: User,
+    pub assignee: SimpleUser,
     /**
      * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub assignees: Vec<User>,
+    pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
      */
@@ -21302,7 +21252,7 @@ pub struct PullRequestData {
      * Simple User
      */
     #[serde()]
-    pub merged_by: User,
+    pub merged_by: SimpleUser,
     /**
      * A collection of related issues and pull requests.
      */
@@ -21341,12 +21291,12 @@ pub struct PullRequestData {
      * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub requested_reviewers: Vec<User>,
+    pub requested_reviewers: Vec<SimpleUser>,
     /**
      * Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub requested_teams: Vec<Parent>,
+    pub requested_teams: Vec<TeamSimple>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -21397,7 +21347,7 @@ pub struct PullRequestData {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /// Pull Request Merge Result
@@ -21428,7 +21378,7 @@ pub struct PullRequestReview {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub teams: Vec<Team>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub users: Vec<User>,
+    pub users: Vec<SimpleUser>,
 }
 
 /// Pull Request Reviews are reviews on pull requests.
@@ -21519,7 +21469,7 @@ pub struct PullRequestReviewData {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -21715,7 +21665,7 @@ pub struct ReviewComment {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /**
@@ -21813,7 +21763,7 @@ pub struct ReleaseAsset {
      * Simple User
      */
     #[serde()]
-    pub uploader: User,
+    pub uploader: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -21837,7 +21787,7 @@ pub struct Release {
      * Simple User
      */
     #[serde()]
-    pub author: User,
+    pub author: SimpleUser,
     /**
      * A release.
      */
@@ -22016,7 +21966,7 @@ pub struct SecretScanningAlert {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resolved_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub resolved_by: Option<User>,
+    pub resolved_by: Option<SimpleUser>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22048,7 +21998,7 @@ pub struct Stargazer {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /// Commit Activity
@@ -22105,7 +22055,7 @@ pub struct ContributorActivity {
      * Simple User
      */
     #[serde()]
-    pub author: User,
+    pub author: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -22923,8 +22873,8 @@ pub struct CodeSearchResultItem {
     /**
      * Code Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub text_matches: Option<SearchResultTextMatches>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22991,7 +22941,7 @@ pub struct CommitSearchResultItemData {
      * Simple User
      */
     #[serde()]
-    pub author: User,
+    pub author: SimpleUser,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23039,8 +22989,8 @@ pub struct CommitSearchResultItemData {
     /**
      * Commit Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub text_matches: Option<SearchResultTextMatches>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23065,12 +23015,12 @@ pub struct IssueSearchResultItem {
      * Simple User
      */
     #[serde()]
-    pub assignee: User,
+    pub assignee: SimpleUser,
     /**
      * Issue Search Result Item
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub assignees: Vec<User>,
+    pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
      */
@@ -23211,8 +23161,8 @@ pub struct IssueSearchResultItem {
     /**
      * Issue Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub text_matches: Option<SearchResultTextMatches>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub text_matches: Vec<SearchResultTextMatches>,
     /**
      * Issue Search Result Item
      */
@@ -23240,7 +23190,7 @@ pub struct IssueSearchResultItem {
      * Simple User
      */
     #[serde()]
-    pub user: User,
+    pub user: SimpleUser,
 }
 
 /// Label Search Result Item
@@ -23290,8 +23240,8 @@ pub struct LabelSearchResultItem {
     /**
      * Label Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub text_matches: Option<SearchResultTextMatches>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23594,7 +23544,7 @@ pub struct RepoSearchResultItem {
      * License Simple
      */
     #[serde()]
-    pub license: License,
+    pub license: LicenseSimple,
     /**
      * Repo Search Result Item
      */
@@ -23656,7 +23606,7 @@ pub struct RepoSearchResultItem {
      * Simple User
      */
     #[serde()]
-    pub owner: User,
+    pub owner: SimpleUser,
     /**
      * Repo Search Result Item
      */
@@ -23759,8 +23709,8 @@ pub struct RepoSearchResultItem {
     /**
      * Repo Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub text_matches: Option<SearchResultTextMatches>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub text_matches: Vec<SearchResultTextMatches>,
     /**
      * Repo Search Result Item
      */
@@ -23916,8 +23866,8 @@ pub struct TopicSearchResultItem {
     /**
      * Topic Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub text_matches: Option<SearchResultTextMatches>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub text_matches: Vec<SearchResultTextMatches>,
     #[serde()]
     pub updated_at: chrono::DateTime<chrono::Utc>,
 }
@@ -24137,8 +24087,8 @@ pub struct UserSearchResultItem {
     /**
      * User Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub text_matches: Option<SearchResultTextMatches>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -25047,6 +24997,87 @@ impl Default for OrderData {
         OrderData::Desc
     }
 }
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct PreviewHeaderMissingResponse {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub documentation_url: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub message: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ServiceUnavailableResponse {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub code: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub documentation_url: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub message: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct Block {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub created_at: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub html_url: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub reason: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ForbiddenGistResponse {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub block: Option<Block>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub documentation_url: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub message: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct AcceptedResponse {}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MetaRootResponse {
@@ -29317,7 +29348,7 @@ pub struct ReposCreateCommitCommentRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksListSuitesRefResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub check_suites: Vec<CheckSuite>,
+    pub check_suites: Vec<CheckSuiteData>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -29709,7 +29740,7 @@ pub struct ReposCreateDispatchEventRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposGetAllEnvironmentsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub environments: Vec<Environment>,
+    pub environments: Vec<EnvironmentData>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -32670,7 +32701,7 @@ pub struct SearchCommitsResponse {
     )]
     pub incomplete_results: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub items: Vec<CommitSearchResultItem>,
+    pub items: Vec<CommitSearchResultItemData>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",

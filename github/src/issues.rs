@@ -323,7 +323,7 @@ impl Issues {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -363,7 +363,7 @@ impl Issues {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/assignees",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1209,7 +1209,7 @@ impl Issues {
         issue_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::IssueEventFor>> {
+    ) -> Result<Vec<crate::types::LabeledIssueEvent>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -1251,7 +1251,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-    ) -> Result<Vec<crate::types::IssueEventFor>> {
+    ) -> Result<Vec<crate::types::LabeledIssueEvent>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/events",
             crate::progenitor_support::encode_path(&owner.to_string()),

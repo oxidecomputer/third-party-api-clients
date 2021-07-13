@@ -724,7 +724,7 @@ impl Activity {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -766,7 +766,7 @@ impl Activity {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/stargazers",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -798,7 +798,7 @@ impl Activity {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -838,7 +838,7 @@ impl Activity {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/subscribers",
             crate::progenitor_support::encode_path(&owner.to_string()),

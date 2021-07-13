@@ -548,7 +548,7 @@ impl Projects {
         affiliation: crate::types::Affiliation,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("affiliation={}", affiliation));
@@ -588,7 +588,7 @@ impl Projects {
         &self,
         project_id: i64,
         affiliation: crate::types::Affiliation,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("affiliation={}", affiliation));

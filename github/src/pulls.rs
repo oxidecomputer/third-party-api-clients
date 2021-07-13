@@ -151,7 +151,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         body: &crate::types::PullsCreateRequest,
-    ) -> Result<crate::types::PullRequest> {
+    ) -> Result<crate::types::PullRequestData> {
         let url = format!(
             "/repos/{}/{}/pulls",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -399,7 +399,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         pull_number: i64,
-    ) -> Result<crate::types::PullRequest> {
+    ) -> Result<crate::types::PullRequestData> {
         let url = format!(
             "/repos/{}/{}/pulls/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -433,7 +433,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsUpdateRequest,
-    ) -> Result<crate::types::PullRequest> {
+    ) -> Result<crate::types::PullRequestData> {
         let url = format!(
             "/repos/{}/{}/pulls/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -664,7 +664,7 @@ impl Pulls {
         pull_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Tree>> {
+    ) -> Result<Vec<crate::types::CommitDataType>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -706,7 +706,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         pull_number: i64,
-    ) -> Result<Vec<crate::types::Tree>> {
+    ) -> Result<Vec<crate::types::CommitDataType>> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/commits",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1005,7 +1005,7 @@ impl Pulls {
         pull_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::PullRequestReview>> {
+    ) -> Result<Vec<crate::types::PullRequestReviewData>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -1047,7 +1047,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         pull_number: i64,
-    ) -> Result<Vec<crate::types::PullRequestReview>> {
+    ) -> Result<Vec<crate::types::PullRequestReviewData>> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1085,7 +1085,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsCreateReviewRequest,
-    ) -> Result<crate::types::PullRequestReview> {
+    ) -> Result<crate::types::PullRequestReviewData> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1123,7 +1123,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         review_id: i64,
-    ) -> Result<crate::types::PullRequestReview> {
+    ) -> Result<crate::types::PullRequestReviewData> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1158,7 +1158,7 @@ impl Pulls {
         pull_number: i64,
         review_id: i64,
         body: &crate::types::PullsUpdateReviewRequest,
-    ) -> Result<crate::types::PullRequestReview> {
+    ) -> Result<crate::types::PullRequestReviewData> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1197,7 +1197,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         review_id: i64,
-    ) -> Result<crate::types::PullRequestReview> {
+    ) -> Result<crate::types::PullRequestReviewData> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1314,7 +1314,7 @@ impl Pulls {
         pull_number: i64,
         review_id: i64,
         body: &crate::types::PullsDismissReviewRequest,
-    ) -> Result<crate::types::PullRequestReview> {
+    ) -> Result<crate::types::PullRequestReviewData> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}/dismissals",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1354,7 +1354,7 @@ impl Pulls {
         pull_number: i64,
         review_id: i64,
         body: &crate::types::PullsSubmitReviewRequest,
-    ) -> Result<crate::types::PullRequestReview> {
+    ) -> Result<crate::types::PullRequestReviewData> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}/events",
             crate::progenitor_support::encode_path(&owner.to_string()),

@@ -699,7 +699,7 @@ impl Apps {
     pub async fn get_subscription_plan_for_account(
         &self,
         account_id: i64,
-    ) -> Result<crate::types::MarketplacePurchase> {
+    ) -> Result<crate::types::MarketplacePurchaseData> {
         let url = format!(
             "/marketplace_listing/accounts/{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -792,7 +792,7 @@ impl Apps {
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::MarketplacePurchase>> {
+    ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
@@ -836,7 +836,7 @@ impl Apps {
         plan_id: i64,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-    ) -> Result<Vec<crate::types::MarketplacePurchase>> {
+    ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
@@ -874,7 +874,7 @@ impl Apps {
     pub async fn get_subscription_plan_for_account_stubbed(
         &self,
         account_id: i64,
-    ) -> Result<crate::types::MarketplacePurchase> {
+    ) -> Result<crate::types::MarketplacePurchaseData> {
         let url = format!(
             "/marketplace_listing/stubbed/accounts/{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -969,7 +969,7 @@ impl Apps {
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::MarketplacePurchase>> {
+    ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
@@ -1013,7 +1013,7 @@ impl Apps {
         plan_id: i64,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-    ) -> Result<Vec<crate::types::MarketplacePurchase>> {
+    ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));

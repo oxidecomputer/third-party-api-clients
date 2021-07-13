@@ -155,17 +155,17 @@ impl Orgs {
      * * `org: &str`
      * * `phrase: &str` -- A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
      * * `include: crate::types::Include` -- The event types to include:
-     *   
-     *   - `web` - returns web (non-Git) events
-     *   - `git` - returns Git events
-     *   - `all` - returns both web and Git events
-     *   
-     *   The default is `web`.
+     *  
+     *  - `web` - returns web (non-Git) events
+     *  - `git` - returns Git events
+     *  - `all` - returns both web and Git events
+     *  
+     *  The default is `web`.
      * * `after: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
      * * `before: &str` -- A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
      * * `order: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
-     *   
-     *   The default is `desc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -277,7 +277,7 @@ impl Orgs {
      *
      * * `org: &str`
      */
-    pub async fn list_blocked_users(&self, org: &str) -> Result<Vec<crate::types::User>> {
+    pub async fn list_blocked_users(&self, org: &str) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/orgs/{}/blocks",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -297,7 +297,7 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-users-blocked-by-an-organization>
      */
-    pub async fn list_all_blocked_users(&self, org: &str) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_blocked_users(&self, org: &str) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/orgs/{}/blocks",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -1061,7 +1061,7 @@ impl Orgs {
         role: crate::types::OrgsListMembersRole,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("filter={}", filter));
@@ -1103,7 +1103,7 @@ impl Orgs {
         org: &str,
         filter: crate::types::OrgsListMembersFilter,
         role: crate::types::OrgsListMembersRole,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("filter={}", filter));
@@ -1291,7 +1291,7 @@ impl Orgs {
         filter: crate::types::OrgsListMembersFilter,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("filter={}", filter));
@@ -1331,7 +1331,7 @@ impl Orgs {
         &self,
         org: &str,
         filter: crate::types::OrgsListMembersFilter,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("filter={}", filter));
@@ -1422,7 +1422,7 @@ impl Orgs {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -1457,7 +1457,10 @@ impl Orgs {
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#list-public-organization-members>
      */
-    pub async fn list_all_public_members(&self, org: &str) -> Result<Vec<crate::types::User>> {
+    pub async fn list_all_public_members(
+        &self,
+        org: &str,
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/orgs/{}/public_members",
             crate::progenitor_support::encode_path(&org.to_string()),

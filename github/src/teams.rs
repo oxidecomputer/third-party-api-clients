@@ -844,7 +844,7 @@ impl Teams {
         role: crate::types::TeamsListMembersInOrgRole,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -888,7 +888,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         role: crate::types::TeamsListMembersInOrgRole,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("role={}", role));
@@ -2185,7 +2185,7 @@ impl Teams {
         role: crate::types::TeamsListMembersInOrgRole,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -2227,7 +2227,7 @@ impl Teams {
         &self,
         team_id: i64,
         role: crate::types::TeamsListMembersInOrgRole,
-    ) -> Result<Vec<crate::types::User>> {
+    ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("role={}", role));
