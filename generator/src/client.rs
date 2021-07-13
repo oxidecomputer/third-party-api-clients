@@ -2,6 +2,7 @@
  * Declare the client object:
  */
 pub const TEMPLATE: &str = r#"/// Entrypoint for interacting with the API client.
+#[derive(Clone)]
 pub struct Client {
     host: String,
     agent: String,
@@ -137,7 +138,7 @@ impl Client {
                     println!("App token is stale, refreshing");
                     let token_ref = apptoken.access_key.clone();
 
-                    let token = self.apps_create_installation_access_token(apptoken.installation_id as i64,
+                    let token = self.apps().create_installation_access_token(apptoken.installation_id as i64,
                     &types::AppsCreateInstallationAccessTokenRequest{
                         permissions: Default::default(),
                         repositories: Default::default(),

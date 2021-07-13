@@ -15,7 +15,7 @@ pub struct Template {
 
 impl Template {
     pub fn compile(&self, query_params: BTreeMap<String, String>) -> String {
-        let mut out = "        let url = ".to_string();
+        let mut out = "let url = ".to_string();
         if self.components.is_empty() && query_params.is_empty() {
             out.push_str(r#""".to_string();"#);
         } else {
@@ -65,12 +65,12 @@ impl Template {
                     if let Component::Parameter(n) = &c {
                         if n == "type" || n == "ref" {
                             out.push_str(&format!(
-                                "            progenitor_support::encode_path(&{}_.to_string()),\n",
+                                "crate::progenitor_support::encode_path(&{}_.to_string()),",
                                 n
                             ));
                         } else {
                             out.push_str(&format!(
-                                "            progenitor_support::encode_path(&{}.to_string()),\n",
+                                "crate::progenitor_support::encode_path(&{}.to_string()),",
                                 n
                             ));
                         }
@@ -81,7 +81,7 @@ impl Template {
                         out.push_str(&format!("{}, ", key));
                     }
                 }
-                out.push_str("        );\n");
+                out.push_str(");\n");
             }
         }
         out
@@ -214,8 +214,8 @@ mod test {
     fn compile() -> Result<()> {
         let t = parse("/measure/{number}")?;
         let out = t.compile(Default::default());
-        let want = "        let url = format!(\"/measure/{}\",\n            \
-                    progenitor_support::encode_path(&number.to_string()),\n        );\n";
+        let want = "let url = format!(\"/measure/{}\",\n
+crate::progenitor_support::encode_path(&number.to_string()),\n);\n";
         assert_eq!(want, &out);
         Ok(())
     }

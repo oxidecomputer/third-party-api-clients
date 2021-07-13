@@ -1,4 +1,5 @@
 mod client;
+mod functions;
 mod template;
 
 use std::{
@@ -250,8 +251,8 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 }
 
                                 match &st.format {
-                                    Item(DateTime) => "DateTime<Utc>".to_string(),
-                                    Item(Date) => "NaiveDate".to_string(),
+                                    Item(DateTime) => "chrono::DateTime<chrono::Utc>".to_string(),
+                                    Item(Date) => "chrono::NaiveDate".to_string(),
                                     Empty => "&str".to_string(),
                                     Unknown(f) => match f.as_str() {
                                         "float" => "f64".to_string(),
@@ -624,7 +625,7 @@ impl PartialEq for TypeId {
 }
 
 #[derive(Debug)]
-struct TypeSpace {
+pub struct TypeSpace {
     next_id: u64,
     /*
      * Object types generally have a useful name, which we would like to match
@@ -634,8 +635,6 @@ struct TypeSpace {
      */
     name_to_id: BTreeMap<String, TypeId>,
     id_to_entry: BTreeMap<TypeId, TypeEntry>,
-
-    import_chrono: bool,
 }
 
 impl TypeSpace {
@@ -644,7 +643,6 @@ impl TypeSpace {
             next_id: 1,
             name_to_id: BTreeMap::new(),
             id_to_entry: BTreeMap::new(),
-            import_chrono: false,
         }
     }
 
@@ -768,7 +766,7 @@ impl TypeSpace {
                              * and must be referenced with that prefix when not
                              * in the module itself.
                              */
-                            Ok(format!("types::{}", struct_name))
+                            Ok(format!("crate::types::{}", struct_name))
                         }
                     } else {
                         bail!("enum type {:?} does not have a name?", tid);
@@ -796,7 +794,7 @@ impl TypeSpace {
                              * and must be referenced with that prefix when not
                              * in the module itself.
                              */
-                            Ok(format!("types::{}", struct_name))
+                            Ok(format!("crate::types::{}", struct_name))
                         }
                     } else {
                         bail!("object type {:?} does not have a name?", tid);
@@ -1256,23 +1254,20 @@ impl TypeSpace {
                     }
 
                     match &st.format {
-                        Item(DateTime) => {
-                            self.import_chrono = true;
-                            Ok((
-                                Some(uid.to_string()),
-                                TypeDetails::Basic(
-                                    "DateTime<Utc>".to_string(),
-                                    s.schema_data.clone(),
-                                ),
-                            ))
-                        }
-                        Item(Date) => {
-                            self.import_chrono = true;
-                            Ok((
-                                Some(uid.to_string()),
-                                TypeDetails::Basic("NaiveDate".to_string(), s.schema_data.clone()),
-                            ))
-                        }
+                        Item(DateTime) => Ok((
+                            Some(uid.to_string()),
+                            TypeDetails::Basic(
+                                "chrono::DateTime<chrono::Utc>".to_string(),
+                                s.schema_data.clone(),
+                            ),
+                        )),
+                        Item(Date) => Ok((
+                            Some(uid.to_string()),
+                            TypeDetails::Basic(
+                                "chrono::NaiveDate".to_string(),
+                                s.schema_data.clone(),
+                            ),
+                        )),
                         Empty => Ok((
                             Some(uid.to_string()),
                             TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
@@ -1534,13 +1529,7 @@ fn render_param(
     out.to_string()
 }
 
-fn gen(
-    api: &OpenAPI,
-    ts: &mut TypeSpace,
-    parameters: BTreeMap<String, &openapiv3::Parameter>,
-    n: &str,
-    version: &str,
-) -> Result<String> {
+fn gen(api: &OpenAPI, ts: &mut TypeSpace, n: &str, version: &str) -> Result<String> {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1708,11 +1697,33 @@ fn gen(
     a("pub mod http_cache;");
     a("#[doc(hidden)]");
     a("pub mod utils;");
+
+    /*
+     * Import the module for each tag.
+     * Tags are how functions are grouped.
+     */
+    for tag in api.tags.iter() {
+        let mut docs = "".to_string();
+        if let Some(d) = &tag.description {
+            docs = format!("{}.", d.trim_end_matches('.'));
+        }
+        if let Some(e) = &tag.external_docs {
+            if !e.url.is_empty() {
+                docs = format!("{}\n\nFROM: {}", docs, e.url);
+            }
+        }
+        docs = docs.trim().to_string();
+
+        if !docs.is_empty() {
+            a(&format!("/// {}", docs.replace("\n", "\n///"),));
+        }
+        a("");
+        a(&format!("pub mod {};", to_snake_case(&tag.name)));
+    }
+
     a("");
 
     a("use anyhow::{anyhow, Error, Result};");
-    a("use async_recursion::async_recursion;");
-    a("use chrono::{DateTime, Utc};");
     a("");
 
     a(r#"const DEFAULT_HOST: &str = "https://api.github.com";"#);
@@ -1756,7 +1767,6 @@ fn gen(
      */
     a("/// The data types sent to and returned from the API client.");
     a("pub mod types {");
-    a("    use chrono::{DateTime, Utc, NaiveDate};");
     a("    use schemars::JsonSchema;");
     a("    use serde::{Serialize, Deserialize};");
     a("");
@@ -1917,445 +1927,6 @@ fn gen(
             struct_name(&tag.name),
         ));
         a("");
-    }
-
-    /*
-     * Generate a function for each Operation.
-     *
-     * XXX We should probably be producing an intermediate object for each of
-     * these, which can link in to the type space, instead of doing this inline
-     * here.
-     */
-    for (pn, p) in api.paths.iter() {
-        let op = p.item()?;
-
-        let mut gen = |p: &str, m: &str, o: Option<&openapiv3::Operation>| -> Result<()> {
-            let o = if let Some(o) = o {
-                o
-            } else {
-                return Ok(());
-            };
-
-            let mut oid = o.operation_id.as_deref().unwrap().to_string();
-            oid = oid.replace("-", "_").replace("/", "_");
-            a("/**");
-            if let Some(summary) = &o.summary {
-                a(&format!("* {}.", summary.trim_end_matches('.')));
-                a("*");
-            }
-            a(&format!(
-                "* This function performs a `{}` to the `{}` endpoint.",
-                m, p
-            ));
-            if let Some(description) = &o.description {
-                a("*");
-                a(&format!("* {}", description.replace('\n', "\n* ")));
-            }
-            if let Some(external_docs) = &o.external_docs {
-                a("*");
-                a(&format!("* FROM: <{}>", external_docs.url));
-            }
-            if !o.parameters.is_empty() {
-                a("*");
-                a("* **Parameters:**");
-                a("*");
-            }
-            // Iterate over the function parameters and add any data those had as well.
-            for par in o.parameters.iter() {
-                let mut param_name = "".to_string();
-                let item = match par {
-                    openapiv3::ReferenceOr::Reference { reference } => {
-                        param_name =
-                            struct_name(&reference.replace("#/components/parameters/", ""));
-                        // Get the parameter from our BTreeMap.
-                        if let Some(param) = parameters.get(&param_name) {
-                            param
-                        } else {
-                            bail!("could not find parameter with reference: {}", reference);
-                        }
-                    }
-                    openapiv3::ReferenceOr::Item(item) => item,
-                };
-
-                let parameter_data = get_parameter_data(item).unwrap();
-
-                let pid = ts.select_param(None, par, false)?;
-                let mut docs = ts.render_docs(&pid);
-                if let Some(d) = &parameter_data.description {
-                    if !d.is_empty() && d.len() > docs.len() {
-                        docs = format!(" -- {}.", d.trim_end_matches('.').replace("\n", "\n*   "));
-                    } else if !docs.is_empty() {
-                        docs = format!(
-                            " -- {}.",
-                            docs.trim_start_matches('*').trim_end_matches('.').trim()
-                        );
-                    }
-                } else if !docs.is_empty() {
-                    docs = format!(
-                        " -- {}.",
-                        docs.trim_start_matches('*').trim_end_matches('.').trim()
-                    );
-                }
-
-                let nam = &to_snake_case(&clean_name(&parameter_data.name));
-                let typ = parameter_data.render_type(&param_name, ts)?;
-
-                if nam == "ref" || nam == "type" {
-                    a(&format!("* * `{}_: {}`{}", nam, typ, docs));
-                } else {
-                    a(&format!("* * `{}: {}`{}", nam, typ, docs));
-                }
-            }
-            a("*/");
-
-            let mut bounds: Vec<String> = Vec::new();
-
-            let (body_param, body_func) = if let Some(b) = &o.request_body {
-                let b = b.item()?;
-                if b.is_binary()? {
-                    bounds.push("B: Into<reqwest::Body>".to_string());
-                    (Some("B".to_string()), Some("body".to_string()))
-                } else {
-                    let (ct, mt) = b.content.first().unwrap();
-                    if ct == "application/json" {
-                        if let Some(s) = &mt.schema {
-                            let object_name = format!("{} request", oid_to_object_name("", &oid));
-                            let id = ts.select(Some(&object_name), s, false, "")?;
-                            let rt = ts.render_type(&id, false)?;
-                            (Some(format!("&{}", rt)), Some("json".to_string()))
-                        } else {
-                            (None, None)
-                        }
-                    } else if let Some(s) = &mt.schema {
-                        let tid = ts.select(None, s, false, "")?;
-                        let rt = ts.render_type(&tid, false)?;
-                        bounds.push("T: Into<reqwest::Body>".to_string());
-                        if rt == "String" {
-                            (Some("T".to_string()), Some("body".to_string()))
-                        } else {
-                            (Some(rt), Some("body".to_string()))
-                        }
-                    } else {
-                        (None, None)
-                    }
-                }
-            } else {
-                (None, None)
-            };
-
-            // For this one function, we need it to be recursive since this is how you get
-            // an access token when authenicating on behalf of an app with a JWT.
-            if oid == "apps_create_installation_access_token" {
-                a("#[async_recursion]");
-            }
-
-            if bounds.is_empty() {
-                a(&format!("pub async fn {}(", oid));
-            } else {
-                a(&format!("pub async fn {}<{}>(", oid, bounds.join(", ")));
-            }
-            a("&self,");
-
-            let mut query_params_str: Vec<String> = Default::default();
-            /*
-             * Query parameters are sorted lexicographically to ensure a stable
-             * order in the generated code.
-             */
-            let mut query_params: BTreeMap<String, String> = Default::default();
-            for par in o.parameters.iter() {
-                let mut param_name = "".to_string();
-                let item = match par {
-                    openapiv3::ReferenceOr::Reference { reference } => {
-                        param_name =
-                            struct_name(&reference.replace("#/components/parameters/", ""));
-                        // Get the parameter from our BTreeMap.
-                        if let Some(param) = parameters.get(&param_name) {
-                            param
-                        } else {
-                            bail!("could not find parameter with reference: {}", reference);
-                        }
-                    }
-                    openapiv3::ReferenceOr::Item(item) => item,
-                };
-
-                match item {
-                    openapiv3::Parameter::Path {
-                        parameter_data,
-                        style: openapiv3::PathStyle::Simple,
-                    } => {
-                        let nam = &to_snake_case(&parameter_data.name);
-                        let typ = parameter_data.render_type(&param_name, ts)?;
-                        if nam == "ref" || nam == "type" {
-                            a(&format!("{}_: {},", nam, typ));
-                        } else {
-                            a(&format!("{}: {},", nam, typ));
-                        }
-                    }
-                    openapiv3::Parameter::Query {
-                        parameter_data,
-                        allow_reserved: _,
-                        style: openapiv3::QueryStyle::Form,
-                        allow_empty_value,
-                    } => {
-                        if let Some(aev) = allow_empty_value {
-                            if *aev {
-                                bail!("allow empty value is a no go");
-                            }
-                        }
-
-                        let nam = &to_snake_case(&parameter_data.name);
-                        let typ = parameter_data.render_type(&param_name, ts)?;
-                        if nam == "ref" || nam == "type" {
-                            a(&format!("        {}_: {},", nam, typ));
-                            query_params_str.push(format!(r#"("{}", {}_.to_string())"#, nam, nam));
-                            query_params.insert(nam.to_string(), format!("{}_", nam));
-                        } else {
-                            a(&format!("        {}: {},", nam, typ));
-                            if typ == "DateTime<Utc>" {
-                                query_params_str
-                                    .push(format!(r#"("{}", {}.to_rfc3339())"#, nam, nam));
-                                query_params
-                                    .insert(nam.to_string(), format!("{}.to_rfc3339()", nam));
-                            } else if typ == "i64" || typ == "bool" {
-                                query_params_str
-                                    .push(format!(r#"("{}", format!("{{}}", {}))"#, nam, nam));
-                                query_params.insert(
-                                    nam.to_string(),
-                                    format!(r#"format!("{{}}", {})"#, nam),
-                                );
-                            } else if typ == "&str" {
-                                query_params_str
-                                    .push(format!(r#"("{}", {}.to_string())"#, nam, nam));
-                                query_params
-                                    .insert(nam.to_string(), format!("{}.to_string()", nam));
-                            } else if typ == "&[String]" {
-                                // TODO: I have no idea how these should be seperated and the docs
-                                // don't give any answers either, for an array sent through query
-                                // params.
-                                // https://docs.github.com/en/rest/reference/migrations
-                                query_params_str.push(format!(r#"("{}", {}.join(" "))"#, nam, nam));
-                                query_params
-                                    .insert(nam.to_string(), format!("{}.join(\" \")", nam));
-                            } else {
-                                query_params_str.push(format!(r#"("{}", {})"#, nam, nam));
-                                query_params.insert(nam.to_string(), nam.to_string());
-                            }
-                        }
-                    }
-                    x => bail!("unhandled parameter type: {:#?}", x),
-                }
-            }
-
-            if let Some(bp) = &body_param {
-                a(&format!("body: {},", bp));
-            }
-
-            // Only do the first.
-            let is_vector = if let Some(only) = o.responses.responses.first() {
-                match only.0 {
-                    openapiv3::StatusCode::Code(n) => {
-                        // 302 is the code returned from /orgs/{org}/migrations/{migration_id}/archive GET
-                        if *n < 200 || *n > 303 {
-                            bail!("code? {:#?}", only);
-                        }
-                    }
-                    _ => bail!("code? {:#?}", only),
-                }
-
-                let i = only.1.item()?;
-                if !i.headers.is_empty() {
-                    // TODO: do response headers.
-                }
-
-                if !i.links.is_empty() {
-                    // TODO: do response links
-                }
-                /*
-                 * XXX ignoring extensions.
-                 */
-
-                /*
-                 * Look at the response content.  For now, support a single
-                 * JSON-formatted response.
-                 */
-                if i.content.is_empty() {
-                    a(") -> Result<()> {");
-                    false
-                } else {
-                    match i.content.get("application/json") {
-                        Some(mt) => {
-                            if !mt.encoding.is_empty() {
-                                bail!("media type encoding not empty: {:#?}", mt);
-                            }
-
-                            if let Some(s) = &mt.schema {
-                                let tid = match s {
-                                    openapiv3::ReferenceOr::Reference { reference } => {
-                                        ts.select_ref(None, reference.as_str())?
-                                    }
-                                    openapiv3::ReferenceOr::Item(item) => {
-                                        if let openapiv3::StatusCode::Code(c) = only.0 {
-                                            let status_code = StatusCode::from_u16(*c).unwrap();
-                                            let object_name = format!(
-                                                "{} {} Response",
-                                                oid_to_object_name(m, &oid),
-                                                status_code
-                                                    .canonical_reason()
-                                                    .unwrap()
-                                                    .to_lowercase()
-                                            );
-                                            ts.select_schema(
-                                                Some(&object_name),
-                                                item,
-                                                "",
-                                                false,
-                                                "",
-                                            )?
-                                        } else {
-                                            bail!("got a range and not a code for {:?}", only.0);
-                                        }
-                                    }
-                                };
-                                if let Ok(rt) = ts.render_type(&tid, false) {
-                                    a(&format!(") -> Result<{}> {{", rt));
-
-                                    rt.starts_with("Vec<")
-                                } else {
-                                    bail!("rendering type {:?}: {:?} failed", tid, s);
-                                }
-                            } else {
-                                bail!("media type encoding, no schema: {:#?}", mt);
-                            }
-                        }
-                        None => {
-                            let (ct, mt) = i.content.first().unwrap();
-                            if ct == "text/plain"
-                                || ct == "text/html"
-                                || ct == "application/octocat-stream"
-                                || ct == "*/*"
-                            {
-                                if let Some(s) = &mt.schema {
-                                    let tid = ts.select(None, s, false, "")?;
-                                    let rt = ts.render_type(&tid, false)?;
-
-                                    a(&format!("    ) -> Result<{}> {{", rt));
-                                    rt.starts_with("Vec<")
-                                } else {
-                                    bail!("media type encoding, no schema: {:#?}", mt);
-                                }
-                            } else if ct == "application/scim+json" {
-                                if !mt.encoding.is_empty() {
-                                    bail!("media type encoding not empty: {:#?}", mt);
-                                }
-
-                                if let Some(s) = &mt.schema {
-                                    let tid = match s {
-                                        openapiv3::ReferenceOr::Reference { reference } => {
-                                            ts.select_ref(None, reference.as_str())?
-                                        }
-                                        openapiv3::ReferenceOr::Item(item) => {
-                                            if let openapiv3::StatusCode::Code(c) = only.0 {
-                                                let status_code = StatusCode::from_u16(*c).unwrap();
-                                                let object_name = format!(
-                                                    "{} {} response",
-                                                    oid_to_object_name(m, &oid),
-                                                    status_code
-                                                        .canonical_reason()
-                                                        .unwrap()
-                                                        .to_lowercase()
-                                                );
-                                                ts.select_schema(
-                                                    Some(&object_name),
-                                                    item,
-                                                    "",
-                                                    false,
-                                                    "",
-                                                )?
-                                            } else {
-                                                bail!(
-                                                    "got a range and not a code for {:?}",
-                                                    only.0
-                                                );
-                                            }
-                                        }
-                                    };
-                                    if let Ok(rt) = ts.render_type(&tid, false) {
-                                        a(&format!("    ) -> Result<{}> {{", rt));
-
-                                        rt.starts_with("Vec<")
-                                    } else {
-                                        bail!("rendering type {:?} failed", tid);
-                                    }
-                                } else {
-                                    bail!("media type encoding, no schema: {:#?}", mt);
-                                }
-                            } else {
-                                bail!("unhandled response content type: {}", ct);
-                            }
-                        }
-                    }
-                }
-            } else {
-                bail!("responses? {:#?}", o.responses);
-            };
-
-            /*
-             * Generate the URL for the request.
-             */
-            let tmp = template::parse(p)?;
-            a(&tmp.compile(query_params));
-
-            /*
-             * Perform the request.
-             */
-            if m == http::Method::GET {
-                if is_vector {
-                    a("self.get_all_pages(&url).await");
-                } else {
-                    a(&format!("self.{}(&url).await", m.to_lowercase()));
-                }
-            } else if (m == http::Method::POST
-                || m == http::Method::PATCH
-                || m == http::Method::PUT
-                || m == http::Method::DELETE)
-                && oid != "apps_create_installation_access_token"
-            {
-                let body = if let Some(f) = &body_func {
-                    if f == "json" {
-                        "Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))"
-                    } else {
-                        "Some(body.into())"
-                    }
-                } else {
-                    "None"
-                };
-                a(&format!("self.{}(&url, {}).await", m.to_lowercase(), body));
-            } else {
-                if oid != "apps_create_installation_access_token" {
-                    panic!("function {} should be authenticated", oid);
-                }
-
-                a(r#"self.post_media(
-                        &url,
-                        Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-                        crate::utils::MediaType::Json,
-                        crate::auth::AuthenticationConstraint::JWT,
-                    ).await"#);
-            }
-            a("}");
-            a("");
-
-            Ok(())
-        };
-
-        gen(pn.as_str(), "GET", op.get.as_ref())?;
-        gen(pn.as_str(), "PUT", op.put.as_ref())?;
-        gen(pn.as_str(), "POST", op.post.as_ref())?;
-        gen(pn.as_str(), "DELETE", op.delete.as_ref())?;
-        gen(pn.as_str(), "OPTIONS", op.options.as_ref())?;
-        gen(pn.as_str(), "HEAD", op.head.as_ref())?;
-        gen(pn.as_str(), "PATCH", op.patch.as_ref())?;
-        gen(pn.as_str(), "TRACE", op.trace.as_ref())?;
     }
 
     a("}");
@@ -2542,8 +2113,7 @@ fn main() -> Result<()> {
                     ts: &mut TypeSpace|
          -> Result<()> {
             if let Some(o) = o {
-                let mut oid = o.operation_id.as_deref().unwrap().to_string();
-                oid = oid.replace("-", "_").replace("/", "_");
+                let oid = to_snake_case(o.operation_id.as_deref().unwrap());
 
                 debug("");
                 debug(&oid);
@@ -2651,7 +2221,7 @@ fn main() -> Result<()> {
 
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();
-    let fail = match gen(&api, &mut ts, parameters, &name.replace("-", "_"), &version) {
+    let fail = match gen(&api, &mut ts, &name.replace("-", "_"), &version) {
         Ok(out) => {
             let description = args.opt_str("d").unwrap();
 
@@ -2715,10 +2285,57 @@ httpcache = ["dirs"]
             /*
              * Create the Rust source file containing the generated client:
              */
-            let mut librs = src;
+            let mut librs = src.clone();
             librs.push("lib.rs");
             save(librs, out.as_str())?;
-            false
+
+            /*
+             * Create the Rust source files for each of the tags functions:
+             */
+            let fail = match functions::generate_files(&api, &mut ts, &parameters) {
+                Ok(files) => {
+                    // We have a map of our files, let's write to them.
+                    for (f, content) in files {
+                        let mut tagrs = src.clone();
+                        tagrs.push(format!("{}.rs", f));
+
+                        let output = format!(
+                            r#"use anyhow::Result;
+
+use crate::Client;
+
+pub struct {} {{
+    client: Client,
+}}
+
+impl {} {{
+    #[doc(hidden)]
+    pub fn new(client: Client) -> Self
+    {{
+        {} {{
+            client,
+        }}
+    }}
+
+    {}
+}}"#,
+                            struct_name(&f),
+                            struct_name(&f),
+                            struct_name(&f),
+                            content,
+                        );
+                        save(tagrs, output.as_str())?;
+                    }
+
+                    false
+                }
+                Err(e) => {
+                    println!("generate_files fail: {:?}", e);
+                    true
+                }
+            };
+
+            fail
         }
         Err(e) => {
             println!("gen fail: {:?}", e);
