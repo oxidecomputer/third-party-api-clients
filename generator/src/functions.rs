@@ -489,6 +489,7 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, oid: &str) -> Res
         "* This function performs a `{}` to the `{}` endpoint.",
         m, p
     ));
+    a("*");
     a(&format!(
         "* As opposed to `{}`, this function returns all the pages of the request at once.",
         oid
