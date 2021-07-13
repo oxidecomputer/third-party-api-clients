@@ -47,75 +47,9 @@ pub fn generate_files(
                 out.push('\n');
             };
 
-            a("/**");
-            if let Some(summary) = &o.summary {
-                a(&format!("* {}.", summary.trim_end_matches('.')));
-                a("*");
-            }
-            a(&format!(
-                "* This function performs a `{}` to the `{}` endpoint.",
-                m, p
-            ));
-            if let Some(description) = &o.description {
-                a("*");
-                a(&format!("* {}", description.replace('\n', "\n* ")));
-            }
-            if let Some(external_docs) = &o.external_docs {
-                a("*");
-                a(&format!("* FROM: <{}>", external_docs.url));
-            }
-            if !o.parameters.is_empty() {
-                a("*");
-                a("* **Parameters:**");
-                a("*");
-            }
-            // Iterate over the function parameters and add any data those had as well.
-            for par in o.parameters.iter() {
-                let mut param_name = "".to_string();
-                let item = match par {
-                    openapiv3::ReferenceOr::Reference { reference } => {
-                        param_name =
-                            struct_name(&reference.replace("#/components/parameters/", ""));
-                        // Get the parameter from our BTreeMap.
-                        if let Some(param) = parameters.get(&param_name) {
-                            param
-                        } else {
-                            bail!("could not find parameter with reference: {}", reference);
-                        }
-                    }
-                    openapiv3::ReferenceOr::Item(item) => item,
-                };
-
-                let parameter_data = get_parameter_data(item).unwrap();
-
-                let pid = ts.select_param(None, par, false)?;
-                let mut docs = ts.render_docs(&pid);
-                if let Some(d) = &parameter_data.description {
-                    if !d.is_empty() && d.len() > docs.len() {
-                        docs = format!(" -- {}.", d.trim_end_matches('.').replace("\n", "\n*   "));
-                    } else if !docs.is_empty() {
-                        docs = format!(
-                            " -- {}.",
-                            docs.trim_start_matches('*').trim_end_matches('.').trim()
-                        );
-                    }
-                } else if !docs.is_empty() {
-                    docs = format!(
-                        " -- {}.",
-                        docs.trim_start_matches('*').trim_end_matches('.').trim()
-                    );
-                }
-
-                let nam = &to_snake_case(&clean_name(&parameter_data.name));
-                let typ = parameter_data.render_type(&param_name, ts)?;
-
-                if nam == "ref" || nam == "type" {
-                    a(&format!("* * `{}_: {}`{}", nam, typ, docs));
-                } else {
-                    a(&format!("* * `{}: {}`{}", nam, typ, docs));
-                }
-            }
-            a("*/");
+            // Print the function docs.
+            let docs = get_fn_docs(o, m, p, parameters, ts)?;
+            a(&docs);
 
             let mut bounds: Vec<String> = Vec::new();
 
@@ -196,43 +130,9 @@ pub fn generate_files(
             let tmp = parse(p)?;
             a(&tmp.compile(query_params));
 
-            /*
-             * Perform the request.
-             */
-            if m == http::Method::GET {
-                a(&format!("self.client.{}(&url).await", m.to_lowercase(),));
-            } else if (m == http::Method::POST
-                || m == http::Method::PATCH
-                || m == http::Method::PUT
-                || m == http::Method::DELETE)
-                && oid != "apps_create_installation_access_token"
-            {
-                let body = if let Some(f) = &body_func {
-                    if f == "json" {
-                        "Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))"
-                    } else {
-                        "Some(body.into())"
-                    }
-                } else {
-                    "None"
-                };
-                a(&format!(
-                    "self.client.{}(&url, {}).await",
-                    m.to_lowercase(),
-                    body
-                ));
-            } else {
-                if oid != "apps_create_installation_access_token" {
-                    panic!("function {} should be authenticated", oid);
-                }
+            let fn_inner = get_fn_inner(&oid, m, &body_func)?;
+            a(&fn_inner);
 
-                a(r#"self.client.post_media(
-                        &url,
-                        Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-                        crate::utils::MediaType::Json,
-                        crate::auth::AuthenticationConstraint::JWT,
-                    ).await"#);
-            }
             a("}");
             a("");
 
@@ -378,4 +278,134 @@ fn get_fn_params(
     }
 
     Ok((fn_params_str, query_params))
+}
+
+/*
+ * Perform the function.
+ */
+fn get_fn_inner(oid: &str, m: &str, body_func: &Option<String>) -> Result<String> {
+    if m == http::Method::GET {
+        return Ok(format!("self.client.{}(&url).await", m.to_lowercase()));
+    }
+
+    if (m == http::Method::POST
+        || m == http::Method::PATCH
+        || m == http::Method::PUT
+        || m == http::Method::DELETE)
+        && oid != "apps_create_installation_access_token"
+    {
+        let body = if let Some(f) = &body_func {
+            if f == "json" {
+                "Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))"
+            } else {
+                "Some(body.into())"
+            }
+        } else {
+            "None"
+        };
+
+        return Ok(format!(
+            "self.client.{}(&url, {}).await",
+            m.to_lowercase(),
+            body
+        ));
+    }
+
+    if oid != "apps_create_installation_access_token" {
+        bail!("function {} should be authenticated", oid);
+    }
+
+    Ok(r#"self.client.post_media(
+            &url,
+            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::JWT,
+        ).await"#
+        .to_string())
+}
+
+fn get_fn_docs(
+    o: &openapiv3::Operation,
+    m: &str,
+    p: &str,
+    parameters: &BTreeMap<String, &openapiv3::Parameter>,
+    ts: &mut TypeSpace,
+) -> Result<String> {
+    let mut out = String::new();
+
+    let mut a = |s: &str| {
+        out.push_str(s);
+        out.push('\n');
+    };
+
+    a("/**");
+    if let Some(summary) = &o.summary {
+        a(&format!("* {}.", summary.trim_end_matches('.')));
+        a("*");
+    }
+    a(&format!(
+        "* This function performs a `{}` to the `{}` endpoint.",
+        m, p
+    ));
+    if let Some(description) = &o.description {
+        a("*");
+        a(&format!("* {}", description.replace('\n', "\n* ")));
+    }
+    if let Some(external_docs) = &o.external_docs {
+        a("*");
+        a(&format!("* FROM: <{}>", external_docs.url));
+    }
+    if !o.parameters.is_empty() {
+        a("*");
+        a("* **Parameters:**");
+        a("*");
+    }
+    // Iterate over the function parameters and add any data those had as well.
+    for par in o.parameters.iter() {
+        let mut param_name = "".to_string();
+        let item = match par {
+            openapiv3::ReferenceOr::Reference { reference } => {
+                param_name = struct_name(&reference.replace("#/components/parameters/", ""));
+                // Get the parameter from our BTreeMap.
+                if let Some(param) = parameters.get(&param_name) {
+                    param
+                } else {
+                    bail!("could not find parameter with reference: {}", reference);
+                }
+            }
+            openapiv3::ReferenceOr::Item(item) => item,
+        };
+
+        let parameter_data = get_parameter_data(item).unwrap();
+
+        let pid = ts.select_param(None, par, false)?;
+        let mut docs = ts.render_docs(&pid);
+        if let Some(d) = &parameter_data.description {
+            if !d.is_empty() && d.len() > docs.len() {
+                docs = format!(" -- {}.", d.trim_end_matches('.').replace("\n", "\n*   "));
+            } else if !docs.is_empty() {
+                docs = format!(
+                    " -- {}.",
+                    docs.trim_start_matches('*').trim_end_matches('.').trim()
+                );
+            }
+        } else if !docs.is_empty() {
+            docs = format!(
+                " -- {}.",
+                docs.trim_start_matches('*').trim_end_matches('.').trim()
+            );
+        }
+
+        let nam = &to_snake_case(&clean_name(&parameter_data.name));
+        let typ = parameter_data.render_type(&param_name, ts)?;
+
+        if nam == "ref" || nam == "type" {
+            a(&format!("* * `{}_: {}`{}", nam, typ, docs));
+        } else {
+            a(&format!("* * `{}: {}`{}", nam, typ, docs));
+        }
+    }
+    a("*/");
+
+    Ok(out.trim().to_string())
 }
