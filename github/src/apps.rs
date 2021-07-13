@@ -139,6 +139,7 @@ impl Apps {
      * List installations for the authenticated app.
      *
      * This function performs a `GET` to the `/app/installations` endpoint.
+     *
      * As opposed to `apps_list_installations`, this function returns all the pages of the request at once.
      *
      * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
@@ -707,6 +708,7 @@ impl Apps {
      * List plans.
      *
      * This function performs a `GET` to the `/marketplace_listing/plans` endpoint.
+     *
      * As opposed to `apps_list_plans`, this function returns all the pages of the request at once.
      *
      * Lists all plans that are part of your GitHub Marketplace listing.
@@ -763,6 +765,7 @@ impl Apps {
      * List accounts for a plan.
      *
      * This function performs a `GET` to the `/marketplace_listing/plans/{plan_id}/accounts` endpoint.
+     *
      * As opposed to `apps_list_accounts_for_plan`, this function returns all the pages of the request at once.
      *
      * Returns user and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
@@ -848,6 +851,7 @@ impl Apps {
      * List plans (stubbed).
      *
      * This function performs a `GET` to the `/marketplace_listing/stubbed/plans` endpoint.
+     *
      * As opposed to `apps_list_plans_stubbed`, this function returns all the pages of the request at once.
      *
      * Lists all plans that are part of your GitHub Marketplace listing.
@@ -907,6 +911,7 @@ impl Apps {
      * List accounts for a plan (stubbed).
      *
      * This function performs a `GET` to the `/marketplace_listing/stubbed/plans/{plan_id}/accounts` endpoint.
+     *
      * As opposed to `apps_list_accounts_for_plan_stubbed`, this function returns all the pages of the request at once.
      *
      * Returns repository and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won't be processed until the end of their billing cycle, you will also see the upcoming pending change.
@@ -1189,6 +1194,7 @@ impl Apps {
      * List subscriptions for the authenticated user.
      *
      * This function performs a `GET` to the `/user/marketplace_purchases` endpoint.
+     *
      * As opposed to `apps_list_subscriptions_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
@@ -1234,6 +1240,7 @@ impl Apps {
      * List subscriptions for the authenticated user (stubbed).
      *
      * This function performs a `GET` to the `/user/marketplace_purchases/stubbed` endpoint.
+     *
      * As opposed to `apps_list_subscriptions_for_authenticated_user_stubbed`, this function returns all the pages of the request at once.
      *
      * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).

@@ -58,6 +58,7 @@ impl SecretScanning {
      * List secret scanning alerts for a repository.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/secret-scanning/alerts` endpoint.
+     *
      * As opposed to `secret_scanning_list_alerts_for_repo`, this function returns all the pages of the request at once.
      *
      * Lists all secret scanning alerts for a private repository, from newest to oldest. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the `repo` scope or `security_events` scope.

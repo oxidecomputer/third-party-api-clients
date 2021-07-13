@@ -50,6 +50,7 @@ impl Migrations {
      * List organization migrations.
      *
      * This function performs a `GET` to the `/orgs/{org}/migrations` endpoint.
+     *
      * As opposed to `migrations_list_for_org`, this function returns all the pages of the request at once.
      *
      * Lists the most recent migrations.
@@ -256,6 +257,7 @@ impl Migrations {
      * List repositories in an organization migration.
      *
      * This function performs a `GET` to the `/orgs/{org}/migrations/{migration_id}/repositories` endpoint.
+     *
      * As opposed to `migrations_list_repos_for_org`, this function returns all the pages of the request at once.
      *
      * List all the repositories for this organization migration.
@@ -463,6 +465,7 @@ impl Migrations {
      * Get commit authors.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/import/authors` endpoint.
+     *
      * As opposed to `migrations_get_commit_authors`, this function returns all the pages of the request at once.
      *
      * Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`.
@@ -556,6 +559,7 @@ impl Migrations {
      * Get large files.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/import/large_files` endpoint.
+     *
      * As opposed to `migrations_get_large_files`, this function returns all the pages of the request at once.
      *
      * List files larger than 100MB found during the import
@@ -642,6 +646,7 @@ impl Migrations {
      * List user migrations.
      *
      * This function performs a `GET` to the `/user/migrations` endpoint.
+     *
      * As opposed to `migrations_list_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * Lists all migrations a user has started.
@@ -837,6 +842,7 @@ impl Migrations {
      * List repositories for a user migration.
      *
      * This function performs a `GET` to the `/user/migrations/{migration_id}/repositories` endpoint.
+     *
      * As opposed to `migrations_list_repos_for_user`, this function returns all the pages of the request at once.
      *
      * Lists all the repositories for this user migration.

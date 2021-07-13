@@ -47,6 +47,7 @@ impl Licenses {
      * Get all commonly used licenses.
      *
      * This function performs a `GET` to the `/licenses` endpoint.
+     *
      * As opposed to `licenses_get_all_commonly_used`, this function returns all the pages of the request at once.
      *
      *

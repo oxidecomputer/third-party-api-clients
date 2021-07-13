@@ -47,6 +47,7 @@ impl Gists {
      * List gists for the authenticated user.
      *
      * This function performs a `GET` to the `/gists` endpoint.
+     *
      * As opposed to `gists_list`, this function returns all the pages of the request at once.
      *
      * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
@@ -123,6 +124,7 @@ impl Gists {
      * List public gists.
      *
      * This function performs a `GET` to the `/gists/public` endpoint.
+     *
      * As opposed to `gists_list_public`, this function returns all the pages of the request at once.
      *
      * List public gists sorted by most recently updated to least recently updated.
@@ -175,6 +177,7 @@ impl Gists {
      * List starred gists.
      *
      * This function performs a `GET` to the `/gists/starred` endpoint.
+     *
      * As opposed to `gists_list_starred`, this function returns all the pages of the request at once.
      *
      * List the authenticated user's starred gists:
@@ -300,6 +303,7 @@ impl Gists {
      * List gist comments.
      *
      * This function performs a `GET` to the `/gists/{gist_id}/comments` endpoint.
+     *
      * As opposed to `gists_list_comments`, this function returns all the pages of the request at once.
      *
      *
@@ -467,6 +471,7 @@ impl Gists {
      * List gist commits.
      *
      * This function performs a `GET` to the `/gists/{gist_id}/commits` endpoint.
+     *
      * As opposed to `gists_list_commits`, this function returns all the pages of the request at once.
      *
      *
@@ -517,6 +522,7 @@ impl Gists {
      * List gist forks.
      *
      * This function performs a `GET` to the `/gists/{gist_id}/forks` endpoint.
+     *
      * As opposed to `gists_list_forks`, this function returns all the pages of the request at once.
      *
      *
@@ -682,6 +688,7 @@ impl Gists {
      * List gists for a user.
      *
      * This function performs a `GET` to the `/users/{username}/gists` endpoint.
+     *
      * As opposed to `gists_list_for_user`, this function returns all the pages of the request at once.
      *
      * Lists public gists for the specified user:

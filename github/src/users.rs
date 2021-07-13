@@ -68,6 +68,7 @@ impl Users {
      * List users blocked by the authenticated user.
      *
      * This function performs a `GET` to the `/user/blocks` endpoint.
+     *
      * As opposed to `users_list_blocked_by_authenticated`, this function returns all the pages of the request at once.
      *
      * List the users you've blocked on your personal account.
@@ -199,6 +200,7 @@ impl Users {
      * List email addresses for the authenticated user.
      *
      * This function performs a `GET` to the `/user/emails` endpoint.
+     *
      * As opposed to `users_list_emails_for_authenticated`, this function returns all the pages of the request at once.
      *
      * Lists all of your email addresses, and specifies which one is visible to the public. This endpoint is accessible with the `user:email` scope.
@@ -286,6 +288,7 @@ impl Users {
      * List followers of the authenticated user.
      *
      * This function performs a `GET` to the `/user/followers` endpoint.
+     *
      * As opposed to `users_list_followers_for_authenticated_user`, this function returns all the pages of the request at once.
      *
      * Lists the people following the authenticated user.
@@ -331,6 +334,7 @@ impl Users {
      * List the people the authenticated user follows.
      *
      * This function performs a `GET` to the `/user/following` endpoint.
+     *
      * As opposed to `users_list_followed_by_authenticated`, this function returns all the pages of the request at once.
      *
      * Lists the people who the authenticated user follows.
@@ -442,6 +446,7 @@ impl Users {
      * List GPG keys for the authenticated user.
      *
      * This function performs a `GET` to the `/user/gpg_keys` endpoint.
+     *
      * As opposed to `users_list_gpg_keys_for_authenticated`, this function returns all the pages of the request at once.
      *
      * Lists the current user's GPG keys. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
@@ -554,6 +559,7 @@ impl Users {
      * List public SSH keys for the authenticated user.
      *
      * This function performs a `GET` to the `/user/keys` endpoint.
+     *
      * As opposed to `users_list_public_ssh_keys_for_authenticated`, this function returns all the pages of the request at once.
      *
      * Lists the public SSH keys for the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
@@ -668,6 +674,7 @@ impl Users {
      * List public email addresses for the authenticated user.
      *
      * This function performs a `GET` to the `/user/public_emails` endpoint.
+     *
      * As opposed to `users_list_public_emails_for_authenticated`, this function returns all the pages of the request at once.
      *
      * Lists your publicly visible email address, which you can set with the [Set primary email visibility for the authenticated user](https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user) endpoint. This endpoint is accessible with the `user:email` scope.
@@ -711,6 +718,7 @@ impl Users {
      * List users.
      *
      * This function performs a `GET` to the `/users` endpoint.
+     *
      * As opposed to `users_list`, this function returns all the pages of the request at once.
      *
      * Lists all users, in the order that they signed up on GitHub. This list includes personal user accounts and organization accounts.
@@ -788,6 +796,7 @@ impl Users {
      * List followers of a user.
      *
      * This function performs a `GET` to the `/users/{username}/followers` endpoint.
+     *
      * As opposed to `users_list_followers_for_user`, this function returns all the pages of the request at once.
      *
      * Lists the people following the specified user.
@@ -841,6 +850,7 @@ impl Users {
      * List the people a user follows.
      *
      * This function performs a `GET` to the `/users/{username}/following` endpoint.
+     *
      * As opposed to `users_list_following_for_user`, this function returns all the pages of the request at once.
      *
      * Lists the people who the specified user follows.
@@ -918,6 +928,7 @@ impl Users {
      * List GPG keys for a user.
      *
      * This function performs a `GET` to the `/users/{username}/gpg_keys` endpoint.
+     *
      * As opposed to `users_list_gpg_keys_for_user`, this function returns all the pages of the request at once.
      *
      * Lists the GPG keys for a user. This information is accessible by anyone.
@@ -1009,6 +1020,7 @@ impl Users {
      * List public keys for a user.
      *
      * This function performs a `GET` to the `/users/{username}/keys` endpoint.
+     *
      * As opposed to `users_list_public_keys_for_user`, this function returns all the pages of the request at once.
      *
      * Lists the _verified_ public SSH keys for a user. This is accessible by anyone.

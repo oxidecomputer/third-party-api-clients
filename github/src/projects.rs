@@ -50,6 +50,7 @@ impl Projects {
      * List organization projects.
      *
      * This function performs a `GET` to the `/orgs/{org}/projects` endpoint.
+     *
      * As opposed to `projects_list_for_org`, this function returns all the pages of the request at once.
      *
      * Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
@@ -320,6 +321,7 @@ impl Projects {
      * List project cards.
      *
      * This function performs a `GET` to the `/projects/columns/{column_id}/cards` endpoint.
+     *
      * As opposed to `projects_list_cards`, this function returns all the pages of the request at once.
      *
      *
@@ -518,6 +520,7 @@ impl Projects {
      * List project collaborators.
      *
      * This function performs a `GET` to the `/projects/{project_id}/collaborators` endpoint.
+     *
      * As opposed to `projects_list_collaborators`, this function returns all the pages of the request at once.
      *
      * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
@@ -659,6 +662,7 @@ impl Projects {
      * List project columns.
      *
      * This function performs a `GET` to the `/projects/{project_id}/columns` endpoint.
+     *
      * As opposed to `projects_list_columns`, this function returns all the pages of the request at once.
      *
      *
@@ -749,6 +753,7 @@ impl Projects {
      * List repository projects.
      *
      * This function performs a `GET` to the `/repos/{owner}/{repo}/projects` endpoint.
+     *
      * As opposed to `projects_list_for_repo`, this function returns all the pages of the request at once.
      *
      * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
@@ -865,6 +870,7 @@ impl Projects {
      * List user projects.
      *
      * This function performs a `GET` to the `/users/{username}/projects` endpoint.
+     *
      * As opposed to `projects_list_for_user`, this function returns all the pages of the request at once.
      *
      *
