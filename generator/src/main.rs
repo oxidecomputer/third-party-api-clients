@@ -12,7 +12,6 @@ use std::{
 };
 
 use anyhow::{bail, Result};
-use http::status::StatusCode;
 use inflector::cases::{snakecase::to_snake_case, titlecase::to_title_case};
 use openapiv3::OpenAPI;
 use serde::Deserialize;
@@ -1891,28 +1890,22 @@ fn main() -> Result<()> {
                  * Get the response body type for each status code:
                  */
                 let mut res: Vec<String> = Default::default();
-                for (code, r) in o.responses.responses.iter() {
+                for (_, r) in o.responses.responses.iter() {
                     match r {
                         openapiv3::ReferenceOr::Item(ri) => {
                             for (ct, mt) in &ri.content {
                                 if ct == "application/json" {
                                     if let Some(s) = &mt.schema {
-                                        if let openapiv3::StatusCode::Code(c) = code {
-                                            let status_code = StatusCode::from_u16(*c).unwrap();
-                                            let object_name = format!(
-                                                "{} {} response",
-                                                oid_to_object_name(m, &oid),
-                                                status_code
-                                                    .canonical_reason()
-                                                    .unwrap()
-                                                    .to_lowercase()
-                                            );
-                                            let id = ts.select(Some(&object_name), s, false, "")?;
-                                            let rt = ts.render_type(&id, true)?;
-                                            res.push(format!("{} {:?}", rt, id));
-                                        } else {
-                                            bail!("got a range and not a code for {:?}", code);
-                                        }
+                                        let object_name =
+                                            format!("{} response", oid_to_object_name(m, &oid),);
+                                        let id = ts.select(
+                                            Some(&clean_name(&object_name)),
+                                            s,
+                                            false,
+                                            "",
+                                        )?;
+                                        let rt = ts.render_type(&id, false)?;
+                                        res.push(format!("{} {:?}", rt, id));
                                     }
                                 } else {
                                     res.push(ct.to_string());

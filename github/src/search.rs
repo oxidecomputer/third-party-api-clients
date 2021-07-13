@@ -53,7 +53,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetSearchCodeOkResponse> {
+    ) -> Result<crate::types::GetSearchCodeResponse> {
         let url = format!(
             "/search/code?order={}&page={}&per_page={}&q={}&sort={}",
             order,
@@ -97,7 +97,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetSearchCommitsOkResponse> {
+    ) -> Result<crate::types::GetSearchCommitsResponse> {
         let url = format!(
             "/search/commits?order={}&page={}&per_page={}&q={}&sort={}",
             order,
@@ -145,7 +145,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetSearchIssuesPullRequestsOkResponse> {
+    ) -> Result<crate::types::GetSearchIssuesPullRequestsResponse> {
         let url = format!(
             "/search/issues?order={}&page={}&per_page={}&q={}&sort={}",
             order,
@@ -192,7 +192,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetSearchLabelsOkResponse> {
+    ) -> Result<crate::types::GetSearchLabelsResponse> {
         let url = format!(
             "/search/labels?order={}&page={}&per_page={}&q={}&repository_id={}&sort={}",
             order,
@@ -242,7 +242,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetSearchReposOkResponse> {
+    ) -> Result<crate::types::GetSearchReposResponse> {
         let url = format!(
             "/search/repositories?order={}&page={}&per_page={}&q={}&sort={}",
             order,
@@ -283,7 +283,7 @@ impl Search {
         q: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetSearchTopicsOkResponse> {
+    ) -> Result<crate::types::GetSearchTopicsResponse> {
         let url = format!(
             "/search/topics?page={}&per_page={}&q={}",
             format!("{}", page),
@@ -326,7 +326,7 @@ impl Search {
         order: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetSearchUsersOkResponse> {
+    ) -> Result<crate::types::GetSearchUsersResponse> {
         let url = format!(
             "/search/users?order={}&page={}&per_page={}&q={}&sort={}",
             order,

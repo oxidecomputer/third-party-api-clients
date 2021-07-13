@@ -588,7 +588,7 @@ impl Orgs {
         org: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetAppsListInstallationsOkResponse> {
+    ) -> Result<crate::types::GetAppsListInstallationsResponse> {
         let url = format!(
             "/orgs/{}/installations?page={}&per_page={}",
             crate::progenitor_support::encode_path(&org.to_string()),

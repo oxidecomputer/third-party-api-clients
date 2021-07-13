@@ -2899,7 +2899,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::GetReposAllEnvironmentsOkResponse> {
+    ) -> Result<crate::types::GetReposAllEnvironmentsResponse> {
         let url = format!(
             "/repos/{}/{}/environments",
             crate::progenitor_support::encode_path(&owner.to_string()),

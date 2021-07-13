@@ -150,7 +150,7 @@ impl Activity {
     pub async fn mark_notifications_as_read(
         &self,
         body: &crate::types::ActivityMarkNotificationsAsReadRequest,
-    ) -> Result<crate::types::PostReposCreateDeploymentAcceptedResponse> {
+    ) -> Result<crate::types::PostReposCreateDeploymentResponse> {
         let url = "/notifications".to_string();
         self.client
             .put(
@@ -419,7 +419,7 @@ impl Activity {
         owner: &str,
         repo: &str,
         body: &crate::types::ActivityMarkRepoNotificationsAsReadRequest,
-    ) -> Result<crate::types::PutPullsUpdateBranchAcceptedResponse> {
+    ) -> Result<crate::types::PutPullsUpdateBranchResponse> {
         let url = format!(
             "/repos/{}/{}/notifications",
             crate::progenitor_support::encode_path(&owner.to_string()),

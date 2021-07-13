@@ -1,7 +1,6 @@
 use std::collections::BTreeMap;
 
 use anyhow::{bail, Result};
-use http::status::StatusCode;
 use inflector::cases::snakecase::to_snake_case;
 
 use crate::{
@@ -267,154 +266,8 @@ pub fn generate_files(
                 a(&format!("body: {},", bp));
             }
 
-            // Only do the first.
-            let is_vector = if let Some(only) = o.responses.responses.first() {
-                match only.0 {
-                    openapiv3::StatusCode::Code(n) => {
-                        // 302 is the code returned from /orgs/{org}/migrations/{migration_id}/archive GET
-                        if *n < 200 || *n > 303 {
-                            bail!("code? {:#?}", only);
-                        }
-                    }
-                    _ => bail!("code? {:#?}", only),
-                }
-
-                let i = only.1.item()?;
-                if !i.headers.is_empty() {
-                    // TODO: do response headers.
-                }
-
-                if !i.links.is_empty() {
-                    // TODO: do response links
-                }
-                /*
-                 * XXX ignoring extensions.
-                 */
-
-                /*
-                 * Look at the response content.  For now, support a single
-                 * JSON-formatted response.
-                 */
-                if i.content.is_empty() {
-                    a(") -> Result<()> {");
-                    false
-                } else {
-                    match i.content.get("application/json") {
-                        Some(mt) => {
-                            if !mt.encoding.is_empty() {
-                                bail!("media type encoding not empty: {:#?}", mt);
-                            }
-
-                            if let Some(s) = &mt.schema {
-                                let tid = match s {
-                                    openapiv3::ReferenceOr::Reference { reference } => {
-                                        ts.select_ref(None, reference.as_str())?
-                                    }
-                                    openapiv3::ReferenceOr::Item(item) => {
-                                        if let openapiv3::StatusCode::Code(c) = only.0 {
-                                            let status_code = StatusCode::from_u16(*c).unwrap();
-                                            let object_name = format!(
-                                                "{} {} Response",
-                                                oid_to_object_name(m, &oid),
-                                                status_code
-                                                    .canonical_reason()
-                                                    .unwrap()
-                                                    .to_lowercase()
-                                            );
-                                            ts.select_schema(
-                                                Some(&object_name),
-                                                item,
-                                                "",
-                                                false,
-                                                "",
-                                            )?
-                                        } else {
-                                            bail!("got a range and not a code for {:?}", only.0);
-                                        }
-                                    }
-                                };
-                                if let Ok(rt) = ts.render_type(&tid, false) {
-                                    a(&format!(") -> Result<{}> {{", rt));
-
-                                    rt.starts_with("Vec<")
-                                } else {
-                                    bail!("rendering type {:?}: {:?} failed", tid, s);
-                                }
-                            } else {
-                                bail!("media type encoding, no schema: {:#?}", mt);
-                            }
-                        }
-                        None => {
-                            let (ct, mt) = i.content.first().unwrap();
-                            if ct == "text/plain"
-                                || ct == "text/html"
-                                || ct == "application/octocat-stream"
-                                || ct == "*/*"
-                            {
-                                if let Some(s) = &mt.schema {
-                                    let tid = ts.select(None, s, false, "")?;
-                                    let rt = ts.render_type(&tid, false)?;
-
-                                    a(&format!("    ) -> Result<{}> {{", rt));
-                                    rt.starts_with("Vec<")
-                                } else {
-                                    bail!("media type encoding, no schema: {:#?}", mt);
-                                }
-                            } else if ct == "application/scim+json" {
-                                if !mt.encoding.is_empty() {
-                                    bail!("media type encoding not empty: {:#?}", mt);
-                                }
-
-                                if let Some(s) = &mt.schema {
-                                    let tid = match s {
-                                        openapiv3::ReferenceOr::Reference { reference } => {
-                                            ts.select_ref(None, reference.as_str())?
-                                        }
-                                        openapiv3::ReferenceOr::Item(item) => {
-                                            if let openapiv3::StatusCode::Code(c) = only.0 {
-                                                let status_code = StatusCode::from_u16(*c).unwrap();
-                                                let object_name = format!(
-                                                    "{} {} response",
-                                                    oid_to_object_name(m, &oid),
-                                                    status_code
-                                                        .canonical_reason()
-                                                        .unwrap()
-                                                        .to_lowercase()
-                                                );
-                                                ts.select_schema(
-                                                    Some(&object_name),
-                                                    item,
-                                                    "",
-                                                    false,
-                                                    "",
-                                                )?
-                                            } else {
-                                                bail!(
-                                                    "got a range and not a code for {:?}",
-                                                    only.0
-                                                );
-                                            }
-                                        }
-                                    };
-                                    if let Ok(rt) = ts.render_type(&tid, false) {
-                                        a(&format!("    ) -> Result<{}> {{", rt));
-
-                                        rt.starts_with("Vec<")
-                                    } else {
-                                        bail!("rendering type {:?} failed", tid);
-                                    }
-                                } else {
-                                    bail!("media type encoding, no schema: {:#?}", mt);
-                                }
-                            } else {
-                                bail!("unhandled response content type: {}", ct);
-                            }
-                        }
-                    }
-                }
-            } else {
-                bail!("responses? {:#?}", o.responses);
-            };
+            let response_type = get_response_type(&oid, ts, m, o)?;
+            a(&format!(") -> Result<{}> {{", response_type));
 
             /*
              * Generate the URL for the request.
@@ -426,11 +279,7 @@ pub fn generate_files(
              * Perform the request.
              */
             if m == http::Method::GET {
-                if is_vector {
-                    a("self.client.get_all_pages(&url).await");
-                } else {
-                    a(&format!("self.client.{}(&url).await", m.to_lowercase()));
-                }
+                a(&format!("self.client.{}(&url).await", m.to_lowercase(),));
             } else if (m == http::Method::POST
                 || m == http::Method::PATCH
                 || m == http::Method::PUT
@@ -483,4 +332,58 @@ pub fn generate_files(
     }
 
     Ok(tag_files)
+}
+
+fn get_response_type(
+    oid: &str,
+    ts: &mut TypeSpace,
+    m: &str,
+    o: &openapiv3::Operation,
+) -> Result<String> {
+    // Get the first response.
+    let first = o.responses.responses.first().unwrap();
+    let i = first.1.item()?;
+
+    if i.content.is_empty() {
+        // Return empty.
+        return Ok("()".to_string());
+    }
+
+    // Get the json response, if it exists.
+    if let Some(mt) = i.content.get("application/json") {
+        if !mt.encoding.is_empty() {
+            bail!("media type encoding not empty: {:#?}", mt);
+        }
+
+        if let Some(s) = &mt.schema {
+            let object_name = format!("{} response", oid_to_object_name(m, &oid),);
+            let tid = ts.select(Some(&clean_name(&object_name)), s, false, "")?;
+            let rt = ts.render_type(&tid, false)?;
+            return Ok(rt);
+        }
+    }
+
+    // Get the first response.
+    let (ct, mt) = i.content.first().unwrap();
+    if ct == "text/plain" || ct == "text/html" || ct == "application/octocat-stream" || ct == "*/*"
+    {
+        if let Some(s) = &mt.schema {
+            let tid = ts.select(None, s, false, "")?;
+            let rt = ts.render_type(&tid, false)?;
+            return Ok(rt);
+        }
+    } else if ct == "application/scim+json" {
+        if !mt.encoding.is_empty() {
+            bail!("media type encoding not empty: {:#?}", mt);
+        }
+
+        if let Some(s) = &mt.schema {
+            let object_name = format!("{} response", oid_to_object_name(m, &oid),);
+            let tid = ts.select(Some(&clean_name(&object_name)), s, false, "")?;
+            let rt = ts.render_type(&tid, false)?;
+            return Ok(rt);
+        }
+    }
+
+    bail!("parsing response got to end with no type");
 }

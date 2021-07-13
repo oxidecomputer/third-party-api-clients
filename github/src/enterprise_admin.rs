@@ -94,8 +94,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse>
-    {
+    ) -> Result<crate::types::GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse> {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations?page={}&per_page={}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -281,7 +280,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetEnterpriseAdminListSelfHostedRunnerGroupsOkResponse> {
+    ) -> Result<crate::types::GetEnterpriseAdminListSelfHostedRunnerGroupsResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups?page={}&per_page={}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -445,8 +444,7 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse>
-    {
+    ) -> Result<crate::types::GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations?page={}&per_page={}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -584,7 +582,7 @@ impl EnterpriseAdmin {
         runner_group_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetActionsListSelfHostedRunnersInGroupOrgOkResponse> {
+    ) -> Result<crate::types::GetActionsListSelfHostedRunnersInGroupOrgResponse> {
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners?page={}&per_page={}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -721,7 +719,7 @@ impl EnterpriseAdmin {
         enterprise: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetEnterpriseAdminListSelfHostedRunnersOkResponse> {
+    ) -> Result<crate::types::GetEnterpriseAdminListSelfHostedRunnersResponse> {
         let url = format!(
             "/enterprises/{}/actions/runners?page={}&per_page={}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),

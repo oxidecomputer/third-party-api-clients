@@ -592,7 +592,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetAppsListInstallationReposOkResponse> {
+    ) -> Result<crate::types::GetAppsListInstallationReposResponse> {
         let url = format!(
             "/installation/repositories?page={}&per_page={}",
             format!("{}", page),
@@ -932,7 +932,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetAppsListInstallationsOkResponse> {
+    ) -> Result<crate::types::GetAppsListInstallationsResponse> {
         let url = format!(
             "/user/installations?page={}&per_page={}",
             format!("{}", page),
@@ -968,7 +968,7 @@ impl Apps {
         installation_id: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<crate::types::GetAppsListInstallationReposOkResponse> {
+    ) -> Result<crate::types::GetAppsListInstallationReposResponse> {
         let url = format!(
             "/user/installations/{}/repositories?page={}&per_page={}",
             crate::progenitor_support::encode_path(&installation_id.to_string()),

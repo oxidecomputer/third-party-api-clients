@@ -22366,7 +22366,7 @@ impl Default for OrderData {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetMetaRootOkResponse {
+pub struct GetMetaRootResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22804,7 +22804,7 @@ pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInOkResponse {
+pub struct GetEnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub organizations: Vec<OrganizationSimple>,
     #[serde(default)]
@@ -22821,7 +22821,7 @@ pub struct EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetEnterpriseAdminListSelfHostedRunnerGroupsOkResponse {
+pub struct GetEnterpriseAdminListSelfHostedRunnerGroupsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runner_groups: Vec<RunnerGroupsEnterprise>,
     #[serde(default)]
@@ -22923,7 +22923,7 @@ pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListSelfHostedRunnersInGroupOrgOkResponse {
+pub struct GetActionsListSelfHostedRunnersInGroupOrgResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runners: Vec<Runner>,
     #[serde(default)]
@@ -22940,7 +22940,7 @@ pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetEnterpriseAdminListSelfHostedRunnersOkResponse {
+pub struct GetEnterpriseAdminListSelfHostedRunnersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runners: Vec<Runner>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -22998,7 +22998,7 @@ pub struct GistsCreateCommentRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetAppsListInstallationReposOkResponse {
+pub struct GetAppsListInstallationReposResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<Repository>,
     #[serde(
@@ -23190,7 +23190,7 @@ pub struct ActivityMarkNotificationsAsReadRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostReposCreateDeploymentAcceptedResponse {
+pub struct PostReposCreateDeploymentResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23359,7 +23359,7 @@ pub struct ActionsSetGithubPermissionsOrganizationRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListSelectedRepositoriesEnabledGithubOrganizationOkResponse {
+pub struct GetActionsListSelectedRepositoriesEnabledGithubOrganizationResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<Repository>,
     #[serde(default)]
@@ -23376,7 +23376,7 @@ pub struct ActionsSetSelectedRepositoriesEnabledGithubOrganizationRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListSelfHostedRunnerGroupsOrgOkResponse {
+pub struct GetActionsListSelfHostedRunnerGroupsOrgResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runner_groups: Vec<RunnerGroupsOrg>,
     #[serde(default)]
@@ -23473,7 +23473,7 @@ pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListRepoAccessSelfHostedRunnerGroupInOrgOkResponse {
+pub struct GetActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<MinimalRepository>,
     #[serde(default)]
@@ -23490,7 +23490,7 @@ pub struct ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListSelfHostedRunnersOrgOkResponse {
+pub struct GetActionsListSelfHostedRunnersOrgResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runners: Vec<Runner>,
     #[serde(default)]
@@ -23498,7 +23498,7 @@ pub struct GetActionsListSelfHostedRunnersOrgOkResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListOrgSecretsOkResponse {
+pub struct GetActionsListOrgSecretsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub secrets: Vec<OrganizationActionsSecret>,
     #[serde(default)]
@@ -23565,7 +23565,7 @@ pub struct ActionsCreateUpdateOrgSecretRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListSelectedReposOrgSecretOkResponse {
+pub struct GetActionsListSelectedReposOrgSecretResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<MinimalRepository>,
     #[serde(default)]
@@ -23717,7 +23717,7 @@ pub struct OrgsUpdateWebhookRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetAppsListInstallationsOkResponse {
+pub struct GetAppsListInstallationsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub installations: Vec<Installation>,
     #[serde(default)]
@@ -23957,7 +23957,7 @@ impl Default for OrgsListOutsideCollaboratorsFilter {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct DeleteReposForbiddenResponse {
+pub struct DeleteReposResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24806,7 +24806,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct DeleteProjectsForbiddenResponse {
+pub struct DeleteProjectsResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24851,7 +24851,7 @@ pub struct ProjectsMoveCardRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostProjectsMoveCardForbiddenResponseErrors {
+pub struct PostProjectsMoveCardResponseErrors {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24879,7 +24879,7 @@ pub struct PostProjectsMoveCardForbiddenResponseErrors {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostProjectsMoveCardForbiddenResponse {
+pub struct PostProjectsMoveCardResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24887,7 +24887,7 @@ pub struct PostProjectsMoveCardForbiddenResponse {
     )]
     pub documentation_url: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub errors: Vec<PostProjectsMoveCardForbiddenResponseErrors>,
+    pub errors: Vec<PostProjectsMoveCardResponseErrors>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24897,7 +24897,7 @@ pub struct PostProjectsMoveCardForbiddenResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostProjectsMoveCardServiceUnavailableResponseErrors {
+pub struct PostProjectsMoveCardResponseErrorsData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24913,7 +24913,7 @@ pub struct PostProjectsMoveCardServiceUnavailableResponseErrors {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostProjectsMoveCardServiceUnavailableResponse {
+pub struct PostProjectsCreateCardResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24927,7 +24927,7 @@ pub struct PostProjectsMoveCardServiceUnavailableResponse {
     )]
     pub documentation_url: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub errors: Vec<PostProjectsMoveCardServiceUnavailableResponseErrors>,
+    pub errors: Vec<PostProjectsMoveCardResponseErrorsData>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -25254,7 +25254,7 @@ pub struct ReposUpdateRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListArtifactsRepoOkResponse {
+pub struct GetActionsListArtifactsRepoResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub artifacts: Vec<Artifact>,
     #[serde(default)]
@@ -25273,7 +25273,7 @@ pub struct ActionsSetGithubPermissionsRepositoryRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListWorkflowRunsOkResponse {
+pub struct GetActionsListWorkflowRunsResponse {
     #[serde(default)]
     pub total_count: i64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -25309,7 +25309,7 @@ impl Default for ActionsListJobsWorkflowRunFilter {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListJobsWorkflowRunOkResponse {
+pub struct GetActionsListJobsWorkflowRunResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub jobs: Vec<Job>,
     #[serde(default)]
@@ -25368,7 +25368,7 @@ pub struct ActionsReviewPendingDeploymentsRunRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListRepoSecretsOkResponse {
+pub struct GetActionsListRepoSecretsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub secrets: Vec<ActionsSecret>,
     #[serde(default)]
@@ -25392,7 +25392,7 @@ pub struct ActionsCreateUpdateRepoSecretRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetActionsListRepoWorkflowsOkResponse {
+pub struct GetActionsListRepoWorkflowsResponse {
     #[serde(default)]
     pub total_count: i64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -26073,7 +26073,7 @@ impl Default for ChecksListSuiteFilter {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetChecksListRefOkResponse {
+pub struct GetChecksListRefResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub check_runs: Vec<CheckRun>,
     #[serde(default)]
@@ -26344,7 +26344,7 @@ pub struct ReposCreateCommitCommentRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetChecksListSuitesRefOkResponse {
+pub struct GetChecksListSuitesRefResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub check_suites: Vec<CheckSuite>,
     #[serde(default)]
@@ -26720,7 +26720,7 @@ pub struct ReposCreateDispatchEventRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetReposAllEnvironmentsOkResponse {
+pub struct GetReposAllEnvironmentsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub environments: Vec<Environment>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -28098,7 +28098,7 @@ pub struct ActivityMarkRepoNotificationsAsReadRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PutPullsUpdateBranchAcceptedResponse {
+pub struct PutPullsUpdateBranchResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -29524,7 +29524,7 @@ impl Default for SearchCodeSort {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetSearchCodeOkResponse {
+pub struct GetSearchCodeResponse {
     #[serde(default)]
     pub incomplete_results: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -29562,7 +29562,7 @@ impl Default for SearchCommitsSort {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetSearchCommitsOkResponse {
+pub struct GetSearchCommitsResponse {
     #[serde(default)]
     pub incomplete_results: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -29618,7 +29618,7 @@ impl Default for SearchIssuesPullRequestsSort {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetSearchIssuesPullRequestsOkResponse {
+pub struct GetSearchIssuesPullRequestsResponse {
     #[serde(default)]
     pub incomplete_results: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -29656,7 +29656,7 @@ impl Default for SearchLabelsSort {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetSearchLabelsOkResponse {
+pub struct GetSearchLabelsResponse {
     #[serde(default)]
     pub incomplete_results: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -29698,7 +29698,7 @@ impl Default for SearchReposSort {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetSearchReposOkResponse {
+pub struct GetSearchReposResponse {
     #[serde(default)]
     pub incomplete_results: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -29708,7 +29708,7 @@ pub struct GetSearchReposOkResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetSearchTopicsOkResponse {
+pub struct GetSearchTopicsResponse {
     #[serde(default)]
     pub incomplete_results: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -29748,7 +29748,7 @@ impl Default for SearchUsersSort {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetSearchUsersOkResponse {
+pub struct GetSearchUsersResponse {
     #[serde(default)]
     pub incomplete_results: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]

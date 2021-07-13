@@ -1036,7 +1036,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         body: &crate::types::PullsUpdateBranchRequest,
-    ) -> Result<crate::types::PutPullsUpdateBranchAcceptedResponse> {
+    ) -> Result<crate::types::PutPullsUpdateBranchResponse> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/update-branch",
             crate::progenitor_support::encode_path(&owner.to_string()),
