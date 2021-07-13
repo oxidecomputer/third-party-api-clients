@@ -121,7 +121,7 @@ impl Apps {
         &self,
         per_page: i64,
         page: i64,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         outdated: &str,
     ) -> Result<Vec<crate::types::Installation>> {
         let mut query = String::new();
@@ -135,7 +135,9 @@ impl Apps {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -162,7 +164,7 @@ impl Apps {
      */
     pub async fn list_all_installations(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         outdated: &str,
     ) -> Result<Vec<crate::types::Installation>> {
         let mut query = String::new();
@@ -170,7 +172,9 @@ impl Apps {
         if !outdated.is_empty() {
             query_args.push(format!("outdated={}", outdated));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');

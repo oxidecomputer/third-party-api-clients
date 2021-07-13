@@ -184,8 +184,8 @@ impl Activity {
         &self,
         all: bool,
         participating: bool,
-        since: chrono::DateTime<chrono::Utc>,
-        before: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        before: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Thread>> {
@@ -194,7 +194,9 @@ impl Activity {
         if all {
             query_args.push(format!("all={}", all));
         }
-        query_args.push(format!("before={}", before));
+        if let Some(date) = before {
+            query_args.push(format!("before={}", &date.to_rfc3339()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -204,7 +206,9 @@ impl Activity {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -231,19 +235,23 @@ impl Activity {
         &self,
         all: bool,
         participating: bool,
-        since: chrono::DateTime<chrono::Utc>,
-        before: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        before: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Thread>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if all {
             query_args.push(format!("all={}", all));
         }
-        query_args.push(format!("before={}", before));
+        if let Some(date) = before {
+            query_args.push(format!("before={}", &date.to_rfc3339()));
+        }
         if participating {
             query_args.push(format!("participating={}", participating));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -567,8 +575,8 @@ impl Activity {
         repo: &str,
         all: bool,
         participating: bool,
-        since: chrono::DateTime<chrono::Utc>,
-        before: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        before: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Thread>> {
@@ -577,7 +585,9 @@ impl Activity {
         if all {
             query_args.push(format!("all={}", all));
         }
-        query_args.push(format!("before={}", before));
+        if let Some(date) = before {
+            query_args.push(format!("before={}", &date.to_rfc3339()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -587,7 +597,9 @@ impl Activity {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -621,19 +633,23 @@ impl Activity {
         repo: &str,
         all: bool,
         participating: bool,
-        since: chrono::DateTime<chrono::Utc>,
-        before: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        before: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Thread>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if all {
             query_args.push(format!("all={}", all));
         }
-        query_args.push(format!("before={}", before));
+        if let Some(date) = before {
+            query_args.push(format!("before={}", &date.to_rfc3339()));
+        }
         if participating {
             query_args.push(format!("participating={}", participating));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');

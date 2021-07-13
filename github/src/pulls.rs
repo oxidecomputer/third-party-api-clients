@@ -191,7 +191,7 @@ impl Pulls {
         repo: &str,
         sort: crate::types::PullsListReviewCommentsRepoSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
@@ -204,7 +204,9 @@ impl Pulls {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -239,12 +241,14 @@ impl Pulls {
         repo: &str,
         sort: crate::types::PullsListReviewCommentsRepoSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -472,7 +476,7 @@ impl Pulls {
         pull_number: i64,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
@@ -485,7 +489,9 @@ impl Pulls {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -522,12 +528,14 @@ impl Pulls {
         pull_number: i64,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {

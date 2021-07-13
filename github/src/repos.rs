@@ -2220,8 +2220,8 @@ impl Repos {
         sha: &str,
         path: &str,
         author: &str,
-        since: chrono::DateTime<chrono::Utc>,
-        until: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        until: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Tree>> {
@@ -2242,8 +2242,12 @@ impl Repos {
         if !sha.is_empty() {
             query_args.push(format!("sha={}", sha));
         }
-        query_args.push(format!("since={}", since));
-        query_args.push(format!("until={}", until));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
+        if let Some(date) = until {
+            query_args.push(format!("until={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -2305,8 +2309,8 @@ impl Repos {
         sha: &str,
         path: &str,
         author: &str,
-        since: chrono::DateTime<chrono::Utc>,
-        until: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        until: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Tree>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -2319,8 +2323,12 @@ impl Repos {
         if !sha.is_empty() {
             query_args.push(format!("sha={}", sha));
         }
-        query_args.push(format!("since={}", since));
-        query_args.push(format!("until={}", until));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
+        if let Some(date) = until {
+            query_args.push(format!("until={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -6590,15 +6598,17 @@ impl Repos {
         direction: crate::types::Direction,
         per_page: i64,
         page: i64,
-        since: chrono::DateTime<chrono::Utc>,
-        before: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        before: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Repository>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !affiliation.is_empty() {
             query_args.push(format!("affiliation={}", affiliation));
         }
-        query_args.push(format!("before={}", before));
+        if let Some(date) = before {
+            query_args.push(format!("before={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("direction={}", direction));
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -6606,7 +6616,9 @@ impl Repos {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("type={}", type_));
         query_args.push(format!("visibility={}", visibility));
@@ -6641,17 +6653,21 @@ impl Repos {
         type_: crate::types::ReposListType,
         sort: crate::types::ReposListOrgSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
-        before: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
+        before: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Repository>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !affiliation.is_empty() {
             query_args.push(format!("affiliation={}", affiliation));
         }
-        query_args.push(format!("before={}", before));
+        if let Some(date) = before {
+            query_args.push(format!("before={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("direction={}", direction));
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("type={}", type_));
         query_args.push(format!("visibility={}", visibility));

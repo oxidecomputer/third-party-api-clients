@@ -29,7 +29,7 @@ impl Gists {
      */
     pub async fn list(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -41,7 +41,9 @@ impl Gists {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -66,11 +68,13 @@ impl Gists {
      */
     pub async fn list_all(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -125,7 +129,7 @@ impl Gists {
      */
     pub async fn list_public(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -137,7 +141,9 @@ impl Gists {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -164,11 +170,13 @@ impl Gists {
      */
     pub async fn list_all_public(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -197,7 +205,7 @@ impl Gists {
      */
     pub async fn list_starred(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -209,7 +217,9 @@ impl Gists {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -234,11 +244,13 @@ impl Gists {
      */
     pub async fn list_all_starred(
         &self,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -765,7 +777,7 @@ impl Gists {
     pub async fn list_for_user(
         &self,
         username: &str,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
@@ -777,7 +789,9 @@ impl Gists {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -807,11 +821,13 @@ impl Gists {
     pub async fn list_all_for_user(
         &self,
         username: &str,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');

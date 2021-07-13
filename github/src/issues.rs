@@ -56,7 +56,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         collab: bool,
         orgs: bool,
         owned: bool,
@@ -89,7 +89,9 @@ impl Issues {
         if pulls {
             query_args.push(format!("pulls={}", pulls));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
@@ -129,7 +131,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         collab: bool,
         orgs: bool,
         owned: bool,
@@ -154,7 +156,9 @@ impl Issues {
         if pulls {
             query_args.push(format!("pulls={}", pulls));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
@@ -207,7 +211,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Issue>> {
@@ -224,7 +228,9 @@ impl Issues {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
@@ -266,7 +272,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -275,7 +281,9 @@ impl Issues {
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
@@ -442,7 +450,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueSimple>> {
@@ -470,7 +478,9 @@ impl Issues {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
@@ -517,7 +527,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::IssueSimple>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -537,7 +547,9 @@ impl Issues {
         if !milestone.is_empty() {
             query_args.push(format!("milestone={}", milestone));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
@@ -617,7 +629,7 @@ impl Issues {
         repo: &str,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueComment>> {
@@ -630,7 +642,9 @@ impl Issues {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -665,12 +679,14 @@ impl Issues {
         repo: &str,
         sort: crate::types::Sort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::IssueComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -1060,7 +1076,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueComment>> {
@@ -1072,7 +1088,9 @@ impl Issues {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -1106,11 +1124,13 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::IssueComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query.push('&');
@@ -2143,7 +2163,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Issue>> {
@@ -2160,7 +2180,9 @@ impl Issues {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
@@ -2197,7 +2219,7 @@ impl Issues {
         labels: &str,
         sort: crate::types::IssuesListSort,
         direction: crate::types::Direction,
-        since: chrono::DateTime<chrono::Utc>,
+        since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -2206,7 +2228,9 @@ impl Issues {
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
-        query_args.push(format!("since={}", since));
+        if let Some(date) = since {
+            query_args.push(format!("since={}", &date.to_rfc3339()));
+        }
         query_args.push(format!("sort={}", sort));
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
