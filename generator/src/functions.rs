@@ -47,9 +47,55 @@ pub fn generate_files(
                 out.push('\n');
             };
 
-            // Print the function docs.
+            let mut print_fn = |docs: &str,
+                                bounds: Vec<String>,
+                                fn_params_str: Vec<String>,
+                                body_param: Option<String>,
+                                response_type: &str,
+                                template: &str,
+                                fn_inner: &str| {
+                // Print the function docs.
+                a(docs);
+
+                // For this one function, we need it to be recursive since this is how you get
+                // an access token when authenicating on behalf of an app with a JWT.
+                if oid == "apps_create_installation_access_token" {
+                    a("#[async_recursion::async_recursion]");
+                }
+
+                if bounds.is_empty() {
+                    a(&format!(
+                        "pub async fn {}(",
+                        oid.trim_start_matches(&tag).trim_start_matches('_')
+                    ));
+                } else {
+                    a(&format!(
+                        "pub async fn {}<{}>(",
+                        oid.trim_start_matches(&tag).trim_start_matches('_'),
+                        bounds.join(", ")
+                    ));
+                }
+                a("&self,");
+
+                if !fn_params_str.is_empty() {
+                    a(&fn_params_str.join(" "));
+                }
+
+                if let Some(bp) = &body_param {
+                    a(&format!("body: {}", bp));
+                }
+
+                a(&format!(") -> Result<{}> {{", response_type));
+
+                a(template);
+
+                a(fn_inner);
+
+                a("}");
+                a("");
+            };
+
             let docs = get_fn_docs(o, m, p, parameters, ts)?;
-            a(&docs);
 
             let mut bounds: Vec<String> = Vec::new();
 
@@ -86,55 +132,37 @@ pub fn generate_files(
                 (None, None)
             };
 
-            // For this one function, we need it to be recursive since this is how you get
-            // an access token when authenicating on behalf of an app with a JWT.
-            if oid == "apps_create_installation_access_token" {
-                a("#[async_recursion::async_recursion]");
-            }
-
-            if bounds.is_empty() {
-                a(&format!(
-                    "pub async fn {}(",
-                    oid.trim_start_matches(&tag).trim_start_matches('_')
-                ));
-            } else {
-                a(&format!(
-                    "pub async fn {}<{}>(",
-                    oid.trim_start_matches(&tag).trim_start_matches('_'),
-                    bounds.join(", ")
-                ));
-            }
-            a("&self,");
-
             /*
              * Get the function parameters.
              */
             let (fn_params_str, query_params) = get_fn_params(ts, o, parameters)?;
-            if !fn_params_str.is_empty() {
-                a(&fn_params_str.join(" "));
-            }
-
-            if let Some(bp) = &body_param {
-                a(&format!("body: {}", bp));
-            }
 
             /*
              * Get the response type.
              */
             let response_type = get_response_type(&oid, ts, o)?;
-            a(&format!(") -> Result<{}> {{", response_type));
 
             /*
              * Generate the URL for the request.
              */
             let tmp = parse(p)?;
-            a(&tmp.compile(query_params));
+            let template = tmp.compile(query_params);
 
             let fn_inner = get_fn_inner(&oid, m, &body_func)?;
-            a(&fn_inner);
 
-            a("}");
-            a("");
+            // Print our standard function.
+            print_fn(
+                &docs,
+                bounds,
+                fn_params_str,
+                body_param,
+                &response_type,
+                &template,
+                &fn_inner,
+            );
+
+            // If we are returning a list of things and we have page, etc as
+            // params, let's get all the pages.
 
             // Add this to our map of functions based on the tag name.
             tag_files.insert(tag, out.to_string());
