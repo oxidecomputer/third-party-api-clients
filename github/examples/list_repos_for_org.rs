@@ -1,8 +1,8 @@
 use std::env;
 
 #[cfg(feature = "httpcache")]
-use github_api_client::http_cache::FileBasedCache;
-use github_api_client::{
+use octorust::http_cache::FileBasedCache;
+use octorust::{
     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
     types::{Direction, ReposListOrgSort, ReposListOrgType},
     Client,

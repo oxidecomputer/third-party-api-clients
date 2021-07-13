@@ -36,7 +36,7 @@ impl dyn HttpCache {
 
     pub fn in_home_dir() -> BoxedHttpCache {
         let mut dir = dirs::home_dir().expect("Expected a home dir");
-        dir.push(".github_api_client/cache");
+        dir.push(".github/cache");
         Box::new(FileBasedCache::new(dir))
     }
 }
@@ -126,37 +126,35 @@ impl HttpCache for FileBasedCache {
 ///
 /// ```
 /// # use std::path::PathBuf;
-/// # use github_api_client::http_cache::cache_path;
+/// # use octorust::http_cache::cache_path;
 /// assert_eq!(
 ///     cache_path(
-///         &PathBuf::from("/home/.github_api_client/cache"),
+///         &PathBuf::from("/home/.github/cache"),
 ///         "https://api.github.com/users/dwijnand/repos",
 ///         "json"
 ///     ),
-///     PathBuf::from(
-///         "/home/.github_api_client/cache/v1/https/api.github.com/users/dwijnand/repos.json"
-///     ),
+///     PathBuf::from("/home/.github/cache/v1/https/api.github.com/users/dwijnand/repos.json"),
 /// );
 /// assert_eq!(
 ///     cache_path(
-///         &PathBuf::from("/home/.github_api_client/cache"),
+///         &PathBuf::from("/home/.github/cache"),
 ///         "https://api.github.com/users/dwijnand/repos?page=2",
 ///         "json"
 ///     ),
 ///     PathBuf::from(
-///         "/home/.github_api_client/cache/v1/https/api.github.com/users/dwijnand/repos/\
-///              6dd58bde8abb0869.json"
+///         "/home/.github/cache/v1/https/api.github.com/users/dwijnand/repos/6dd58bde8abb0869.\
+///              json"
 ///     ),
 /// );
 /// assert_eq!(
 ///     cache_path(
-///         &PathBuf::from("/home/.github_api_client/cache"),
+///         &PathBuf::from("/home/.github/cache"),
 ///         "https://api.github.com/users/dwijnand/repos?page=2&per_page=5",
 ///         "json"
 ///     ),
 ///     PathBuf::from(
-///         "/home/.github_api_client/cache/v1/https/api.github.com/users/dwijnand/repos/\
-///              d862dcd2d85cebca.json"
+///         "/home/.github/cache/v1/https/api.github.com/users/dwijnand/repos/d862dcd2d85cebca.\
+///              json"
 ///     ),
 /// );
 /// ```
@@ -215,7 +213,7 @@ fn hash1<A: Hash, H: Hasher>(x: A, mut hasher: H) -> String {
 /// # Examples
 ///
 /// ```
-/// # use github_api_client::http_cache::u64_to_padded_hex;
+/// # use octorust::http_cache::u64_to_padded_hex;
 /// assert_eq!(u64_to_padded_hex(0), "0000000000000000");
 /// assert_eq!(u64_to_padded_hex(u64::max_value()), "ffffffffffffffff");
 /// ```

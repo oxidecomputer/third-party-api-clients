@@ -1,9 +1,9 @@
 [package]
-name = "github-api-client"
+name = "octorust"
 description = "A fully generated & opinionated API client for the GitHub API."
 version = "0.1.0"
-documentation = "https://docs.rs/github-api-client/"
-repository = "https://github.com/oxidecomputer/github-api-client"
+documentation = "https://docs.rs/octorust/"
+repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/github"
 readme = "README.md"
 edition = "2018"
 
