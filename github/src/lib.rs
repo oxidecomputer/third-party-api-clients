@@ -9,7 +9,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.1.4"
+//! octorust = "0.1.5"
 //! ```
 //!
 //! ## Basic example
@@ -27,7 +27,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.1.4/octorust/struct.Client.html#method.host) method.
+//! [Client#host](https://docs.rs/octorust/0.1.5/octorust/struct.Client.html#method.host) method.
 //!
 //! ## Feature flags
 //!
@@ -41,7 +41,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.1.4", features = ["httpcache"] }
+//! octorust = { version = "0.1.5", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
