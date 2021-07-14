@@ -327,6 +327,35 @@ pub struct ValidationErrorSimple {
     pub message: String,
 }
 
+/// One of the following types:
+///
+/// - String
+/// - f64
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WebhookConfigInsecureSslOneOf {
+    /**
+     * Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. \*\*We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.\*\*
+     */
+    String(String),
+    F64(f64),
+}
+
+impl WebhookConfigInsecureSslOneOf {
+    pub fn f64(&self) -> Option<&f64> {
+        if let WebhookConfigInsecureSslOneOf::F64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let WebhookConfigInsecureSslOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Configuration object of the webhook
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebhookConfig {
@@ -342,12 +371,8 @@ pub struct WebhookConfig {
     /**
      * Configuration object of the webhook
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub insecure_ssl: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     /**
      * Configuration object of the webhook
      */
@@ -2893,6 +2918,40 @@ pub struct InstallationToken {
     pub token: String,
 }
 
+/// One of the following types:
+///
+/// - String
+/// - i64
+/// - Vec<String>
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ValueOneOf {
+    String(String),
+    StringVector(Vec<String>),
+    I64(i64),
+}
+
+impl ValueOneOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let ValueOneOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let ValueOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ValueOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Errors {
     #[serde(
@@ -2925,12 +2984,16 @@ pub struct Errors {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub resource: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub value: String,
+    /**
+     * One of the following types:
+     *  
+     *  - String
+     *  - i64
+     *  - Vec<String>
+     *
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<ValueOneOf>,
 }
 
 /// Validation Error
@@ -5583,6 +5646,77 @@ pub struct GitignoreTemplate {
     pub source: String,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct LabelsData {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub color: String,
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub default: bool,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub description: String,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub id: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub node_id: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub url: String,
+}
+
+/// One of the following types:
+///
+/// - String
+/// - LabelsData
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum LabelsOneOf {
+    LabelsData(LabelsData),
+    String(String),
+}
+
+impl LabelsOneOf {
+    pub fn labels_data(&self) -> Option<&LabelsData> {
+        if let LabelsOneOf::LabelsData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let LabelsOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Issue {
@@ -5668,7 +5802,7 @@ pub struct Issue {
      * Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub labels: Vec<String>,
+    pub labels: Vec<LabelsOneOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -11274,6 +11408,32 @@ pub struct PendingDeployment {
     pub wait_timer_started_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
+/// One of the following types:
+///
+/// - Data
+/// - String
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum PayloadOneOf {
+    Data(Data),
+    String(String),
+}
+
+impl PayloadOneOf {
+    pub fn data(&self) -> Option<&Data> {
+        if let PayloadOneOf::Data(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let PayloadOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// A request for a specific ref(branch,sha,tag) to be deployed
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Deployment {
@@ -11320,8 +11480,15 @@ pub struct Deployment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub original_environment: String,
+    /**
+     * One of the following types:
+     *  
+     *  - Data
+     *  - String
+     *
+     */
     #[serde()]
-    pub payload: Data,
+    pub payload: PayloadOneOf,
     /**
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
@@ -14332,51 +14499,6 @@ pub struct AutoMerge {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PullRequestSimpleLabels {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub color: String,
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub default: bool,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub description: String,
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub id: i64,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub name: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub node_id: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub url: String,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Base {
     #[serde(
         default,
@@ -14540,7 +14662,7 @@ pub struct PullRequestSimple {
     )]
     pub issue_url: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub labels: Vec<PullRequestSimpleLabels>,
+    pub labels: Vec<LabelsData>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -16455,14 +16577,14 @@ pub struct HookConfig {
     )]
     pub email: String,
     /**
-     * Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. \*\*We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.\*\*
+     * One of the following types:
+     *  
+     *  - String
+     *  - f64
+     *
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub insecure_ssl: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20795,7 +20917,7 @@ pub struct PullRequestData {
     )]
     pub issue_url: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub labels: Vec<PullRequestSimpleLabels>,
+    pub labels: Vec<LabelsData>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -21901,7 +22023,7 @@ pub struct Meta {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct ScimGroupListEnterpriseResources {
+pub struct ScimEnterpriseGroup {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -21931,7 +22053,7 @@ pub struct ScimGroupListEnterpriseResources {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimGroupListEnterprise {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub resources: Vec<ScimGroupListEnterpriseResources>,
+    pub resources: Vec<ScimEnterpriseGroup>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -21952,34 +22074,6 @@ pub struct ScimGroupListEnterprise {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub total_results: f64,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct ScimEnterpriseGroup {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub display_name: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub external_id: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub members: Vec<ScimGroupListEnterpriseResourcesMembers>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub meta: Option<Meta>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub schemas: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22031,7 +22125,7 @@ pub struct ScimUserListEnterpriseResourcesGroups {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct ScimUserListEnterpriseResources {
+pub struct ScimEnterpriseUser {
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -22070,7 +22164,7 @@ pub struct ScimUserListEnterpriseResources {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUserListEnterprise {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub resources: Vec<ScimUserListEnterpriseResources>,
+    pub resources: Vec<ScimEnterpriseUser>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -22091,43 +22185,6 @@ pub struct ScimUserListEnterprise {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub total_results: f64,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct ScimEnterpriseUser {
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub active: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub emails: Vec<Emails>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub external_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub groups: Vec<ScimUserListEnterpriseResourcesGroups>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub meta: Option<Meta>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub name: Option<Name>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub schemas: Vec<String>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub user_name: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22214,6 +22271,40 @@ impl Default for Op {
     }
 }
 
+/// One of the following types:
+///
+/// - String
+/// - Data
+/// - Vec<serde_json::Value>
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ScimUserOperationsValueOneOf {
+    Data(Data),
+    String(String),
+    ValueVector(Vec<serde_json::Value>),
+}
+
+impl ScimUserOperationsValueOneOf {
+    pub fn data(&self) -> Option<&Data> {
+        if let ScimUserOperationsValueOneOf::Data(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let ScimUserOperationsValueOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_serde_json_value(&self) -> Option<&Vec<serde_json::Value>> {
+        if let ScimUserOperationsValueOneOf::ValueVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Operations {
     #[serde()]
@@ -22224,12 +22315,16 @@ pub struct Operations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub path: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub value: String,
+    /**
+     * One of the following types:
+     *  
+     *  - String
+     *  - Data
+     *  - Vec<serde_json::Value>
+     *
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<ScimUserOperationsValueOneOf>,
 }
 
 /// SCIM /Users provisioning endpoints
@@ -22666,7 +22761,7 @@ pub struct IssueSearchResultItem {
     )]
     pub id: i64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub labels: Vec<PullRequestSimpleLabels>,
+    pub labels: Vec<LabelsData>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24444,6 +24539,38 @@ impl Default for WorkflowRunStatus {
     }
 }
 
+/// One of the following types:
+///
+/// - i64
+/// - String
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WorkflowIdOneOf {
+    /**
+     * The ID of the workflow. You can also pass the workflow file name as a string.
+     */
+    String(String),
+    /**
+     * The ID of the workflow. You can also pass the workflow file name as a string.
+     */
+    I64(i64),
+}
+
+impl WorkflowIdOneOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let WorkflowIdOneOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let WorkflowIdOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /**
  * Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
  */
@@ -24603,9 +24730,6 @@ pub struct ForbiddenGistResponse {
     )]
     pub message: String,
 }
-
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct AcceptedResponse {}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MetaRootResponse {
@@ -24817,12 +24941,8 @@ pub struct AppsUpdateWebhookConfigAppRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_type: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub insecure_ssl: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -25316,6 +25436,58 @@ pub struct EnterpriseAdminListSelfHostedRunnersResponse {
 pub struct GistsCreateRequestFiles {}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum Public {
+    False,
+    True,
+}
+
+impl std::fmt::Display for Public {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            Public::False => "false",
+            Public::True => "true",
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for Public {
+    fn default() -> Public {
+        Public::False
+    }
+}
+
+/// One of the following types:
+///
+/// - bool
+/// - Public
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum PublicOneOf {
+    Public(Public),
+    /**
+     * Flag indicating whether the gist is public
+     */
+    Bool(bool),
+}
+
+impl PublicOneOf {
+    pub fn bool(&self) -> Option<&bool> {
+        if let PublicOneOf::Bool(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn public(&self) -> Option<&Public> {
+        if let PublicOneOf::Public(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistsCreateRequest {
     /**
      * Description of the gist
@@ -25332,13 +25504,14 @@ pub struct GistsCreateRequest {
     #[serde()]
     pub files: GistsCreateRequestFiles,
     /**
-     * Flag indicating whether the gist is public
+     * One of the following types:
+     *  
+     *  - bool
+     *  - Public
+     *
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub public: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub public: Option<PublicOneOf>,
 }
 
 /// Names of files to be updated
@@ -25843,6 +26016,38 @@ pub struct OrgsUpdateRequest {
     pub twitter_username: String,
 }
 
+/// One of the following types:
+///
+/// - ValidationError
+/// - ValidationErrorSimple
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum OrgsUpdateResponseOneOf {
+    /**
+     * Validation Error
+     */
+    ValidationError(ValidationError),
+    /**
+     * Validation Error Simple
+     */
+    ValidationErrorSimple(ValidationErrorSimple),
+}
+
+impl OrgsUpdateResponseOneOf {
+    pub fn validation_error(&self) -> Option<&ValidationError> {
+        if let OrgsUpdateResponseOneOf::ValidationError(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn validation_error_simple(&self) -> Option<&ValidationErrorSimple> {
+        if let OrgsUpdateResponseOneOf::ValidationErrorSimple(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsSetGithubPermissionsOrganizationRequest {
     /**
@@ -26143,12 +26348,8 @@ pub struct OrgsCreateWebhookRequestConfig {
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub insecure_ssl: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -26227,12 +26428,8 @@ pub struct OrgsUpdateWebhookRequestConfig {
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub insecure_ssl: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
      */
@@ -27771,6 +27968,54 @@ pub struct ProjectsCreateCardRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ProjectsCreateCardRequestData {
+    /**
+     * The unique identifier of the content associated with the card
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub content_id: i64,
+    /**
+     * The piece of content associated with the card
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub content_type: String,
+}
+
+/// One of the following types:
+///
+/// - ProjectsCreateCardRequest
+/// - ProjectsCreateCardRequestData
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ProjectsCreateCardRequestOneOf {
+    ProjectsCreateCardRequest(ProjectsCreateCardRequest),
+    ProjectsCreateCardRequestData(ProjectsCreateCardRequestData),
+}
+
+impl ProjectsCreateCardRequestOneOf {
+    pub fn projects_create_card_request(&self) -> Option<&ProjectsCreateCardRequest> {
+        if let ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn projects_create_card_request_data(&self) -> Option<&ProjectsCreateCardRequestData> {
+        if let ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequestData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsMoveColumnRequest {
     /**
      * The position of the column in a project. Can be one of: `first`, `last`, or `after:<column_id>` to place after the specified column.
@@ -28541,6 +28786,39 @@ pub struct ReposAddStatusCheckContextsRequest {
     pub contexts: Vec<String>,
 }
 
+/// One of the following types:
+///
+/// - ReposAddStatusCheckContextsRequest
+/// - Vec<String>
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReposAddStatusCheckContextsRequestOneOf {
+    ReposAddStatusCheckContextsRequest(ReposAddStatusCheckContextsRequest),
+    /**
+     * contexts parameter
+     */
+    StringVector(Vec<String>),
+}
+
+impl ReposAddStatusCheckContextsRequestOneOf {
+    pub fn repos_add_status_check_contexts_request(
+        &self,
+    ) -> Option<&ReposAddStatusCheckContextsRequest> {
+        if let ReposAddStatusCheckContextsRequestOneOf::ReposAddStatusCheckContextsRequest(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ReposAddStatusCheckContextsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddAppAccessRestrictionsRequest {
     /**
@@ -28548,6 +28826,37 @@ pub struct ReposAddAppAccessRestrictionsRequest {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub apps: Vec<String>,
+}
+
+/// One of the following types:
+///
+/// - ReposAddAppAccessRestrictionsRequest
+/// - Vec<String>
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReposAddAppAccessRestrictionsRequestOneOf {
+    ReposAddAppAccessRestrictionsRequest(ReposAddAppAccessRestrictionsRequest),
+    StringVector(Vec<String>),
+}
+
+impl ReposAddAppAccessRestrictionsRequestOneOf {
+    pub fn repos_add_app_access_restrictions_request(
+        &self,
+    ) -> Option<&ReposAddAppAccessRestrictionsRequest> {
+        if let ReposAddAppAccessRestrictionsRequestOneOf::ReposAddAppAccessRestrictionsRequest(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ReposAddAppAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -28559,6 +28868,40 @@ pub struct ReposAddTeamAccessRestrictionsRequest {
     pub teams: Vec<String>,
 }
 
+/// One of the following types:
+///
+/// - ReposAddTeamAccessRestrictionsRequest
+/// - Vec<String>
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReposAddTeamAccessRestrictionsRequestOneOf {
+    ReposAddTeamAccessRestrictionsRequest(ReposAddTeamAccessRestrictionsRequest),
+    /**
+     * teams parameter
+     */
+    StringVector(Vec<String>),
+}
+
+impl ReposAddTeamAccessRestrictionsRequestOneOf {
+    pub fn repos_add_team_access_restrictions_request(
+        &self,
+    ) -> Option<&ReposAddTeamAccessRestrictionsRequest> {
+        if let ReposAddTeamAccessRestrictionsRequestOneOf::ReposAddTeamAccessRestrictionsRequest(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ReposAddTeamAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddUserAccessRestrictionsRequest {
     /**
@@ -28566,6 +28909,37 @@ pub struct ReposAddUserAccessRestrictionsRequest {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub users: Vec<String>,
+}
+
+/// One of the following types:
+///
+/// - ReposAddUserAccessRestrictionsRequest
+/// - Vec<String>
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReposAddUserAccessRestrictionsRequestOneOf {
+    ReposAddUserAccessRestrictionsRequest(ReposAddUserAccessRestrictionsRequest),
+    StringVector(Vec<String>),
+}
+
+impl ReposAddUserAccessRestrictionsRequestOneOf {
+    pub fn repos_add_user_access_restrictions_request(
+        &self,
+    ) -> Option<&ReposAddUserAccessRestrictionsRequest> {
+        if let ReposAddUserAccessRestrictionsRequestOneOf::ReposAddUserAccessRestrictionsRequest(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ReposAddUserAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29497,6 +29871,60 @@ pub struct AppsCreateContentAttachmentRequest {
     pub title: String,
 }
 
+/// One of the following types:
+///
+/// - Vec<Entries>
+/// - ContentFile
+/// - ContentSymlink
+/// - ContentSubmodule
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReposGetContentResponseOneOf {
+    /**
+     * Content File
+     */
+    ContentFile(ContentFile),
+    /**
+     * An object describing a symlink
+     */
+    ContentSubmodule(ContentSubmodule),
+    /**
+     * An object describing a symlink
+     */
+    ContentSymlink(ContentSymlink),
+    /**
+     * A list of directory items
+     */
+    EntriesVector(Vec<Entries>),
+}
+
+impl ReposGetContentResponseOneOf {
+    pub fn content_file(&self) -> Option<&ContentFile> {
+        if let ReposGetContentResponseOneOf::ContentFile(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn content_submodule(&self) -> Option<&ContentSubmodule> {
+        if let ReposGetContentResponseOneOf::ContentSubmodule(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn content_symlink(&self) -> Option<&ContentSymlink> {
+        if let ReposGetContentResponseOneOf::ContentSymlink(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_entries(&self) -> Option<&Vec<Entries>> {
+        if let ReposGetContentResponseOneOf::EntriesVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// The person that committed the file. Default: the authenticated user.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUpdateFileContentsRequestCommitter {
@@ -29692,6 +30120,35 @@ pub struct ReposDeleteFileRequest {
     pub sha: String,
 }
 
+/// One of the following types:
+///
+/// - Data
+/// - String
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReposCreateDeploymentRequestPayloadOneOf {
+    Data(Data),
+    /**
+     * JSON payload with extra information about the deployment.
+     */
+    String(String),
+}
+
+impl ReposCreateDeploymentRequestPayloadOneOf {
+    pub fn data(&self) -> Option<&Data> {
+        if let ReposCreateDeploymentRequestPayloadOneOf::Data(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let ReposCreateDeploymentRequestPayloadOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateDeploymentRequest {
     /**
@@ -29720,8 +30177,15 @@ pub struct ReposCreateDeploymentRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub environment: String,
+    /**
+     * One of the following types:
+     *  
+     *  - Data
+     *  - String
+     *
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payload: Option<Data>,
+    pub payload: Option<ReposCreateDeploymentRequestPayloadOneOf>,
     /**
      * Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.  
      *  \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
@@ -30434,12 +30898,8 @@ pub struct ReposCreateWebhookRequestConfig {
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub insecure_ssl: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
      */
@@ -30506,12 +30966,8 @@ pub struct ReposUpdateWebhookRequestConfig {
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub insecure_ssl: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -30777,6 +31233,115 @@ pub struct ReposUpdateInvitationRequest {
     pub permissions: Option<ReposUpdateInvitationRequestPermissions>,
 }
 
+/// One of the following types:
+///
+/// - String
+/// - i64
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum TitleOneOf {
+    String(String),
+    I64(i64),
+}
+
+impl TitleOneOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let TitleOneOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let TitleOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// One of the following types:
+///
+/// - String
+/// - i64
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MilestoneOneOf {
+    String(String),
+    /**
+     * The `number` of the milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
+     */
+    I64(i64),
+}
+
+impl MilestoneOneOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let MilestoneOneOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let MilestoneOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct LabelsDataType {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub color: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub description: String,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub id: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+}
+
+/// One of the following types:
+///
+/// - String
+/// - LabelsDataType
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum IssuesCreateRequestLabelsOneOf {
+    LabelsDataType(LabelsDataType),
+    String(String),
+}
+
+impl IssuesCreateRequestLabelsOneOf {
+    pub fn labels_data_type(&self) -> Option<&LabelsDataType> {
+        if let IssuesCreateRequestLabelsOneOf::LabelsDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let IssuesCreateRequestLabelsOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesCreateRequest {
     /**
@@ -30806,19 +31371,25 @@ pub struct IssuesCreateRequest {
      * Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub labels: Vec<String>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub milestone: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub title: String,
+    pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
+    /**
+     * One of the following types:
+     *  
+     *  - String
+     *  - i64
+     *
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub milestone: Option<MilestoneOneOf>,
+    /**
+     * One of the following types:
+     *  
+     *  - String
+     *  - i64
+     *
+     */
+    #[serde()]
+    pub title: TitleOneOf,
 }
 
 /**
@@ -30979,6 +31550,35 @@ impl Default for IssuesUpdateRequestState {
     }
 }
 
+/// One of the following types:
+///
+/// - String
+/// - i64
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum IssuesUpdateRequestMilestoneOneOf {
+    String(String),
+    /**
+     * The `number` of the milestone to associate this issue with or `null` to remove current. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._
+     */
+    I64(i64),
+}
+
+impl IssuesUpdateRequestMilestoneOneOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let IssuesUpdateRequestMilestoneOneOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let IssuesUpdateRequestMilestoneOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesUpdateRequest {
     /**
@@ -31008,24 +31608,30 @@ pub struct IssuesUpdateRequest {
      * Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for issues. Labels are silently dropped otherwise._
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub labels: Vec<String>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub milestone: String,
+    pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
+    /**
+     * One of the following types:
+     *  
+     *  - String
+     *  - i64
+     *
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub milestone: Option<IssuesUpdateRequestMilestoneOneOf>,
     /**
      * State of the issue. Either `open` or `closed`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<IssuesUpdateRequestState>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub title: String,
+    /**
+     * One of the following types:
+     *  
+     *  - String
+     *  - i64
+     *
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub title: Option<TitleOneOf>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31053,6 +31659,72 @@ pub struct IssuesAddLabelsRequest {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub labels: Vec<String>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct IssuesAddLabelsRequestData {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct IssuesAddLabelsRequestDataType {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub labels: Vec<IssuesAddLabelsRequestData>,
+}
+
+/// One of the following types:
+///
+/// - IssuesAddLabelsRequest
+/// - Vec<String>
+/// - IssuesAddLabelsRequestDataType
+/// - Vec<IssuesAddLabelsRequestData>
+/// - String
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum IssuesAddLabelsRequestOneOf {
+    IssuesAddLabelsRequest(IssuesAddLabelsRequest),
+    IssuesAddLabelsRequestDataType(IssuesAddLabelsRequestDataType),
+    String(String),
+    IssuesAddLabelsRequestDataVector(Vec<IssuesAddLabelsRequestData>),
+    StringVector(Vec<String>),
+}
+
+impl IssuesAddLabelsRequestOneOf {
+    pub fn issues_add_labels_request(&self) -> Option<&IssuesAddLabelsRequest> {
+        if let IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn issues_add_labels_request_data_type(&self) -> Option<&IssuesAddLabelsRequestDataType> {
+        if let IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_issues_add_labels_request_data(&self) -> Option<&Vec<IssuesAddLabelsRequestData>> {
+        if let IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let IssuesAddLabelsRequestOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let IssuesAddLabelsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -32899,6 +33571,40 @@ impl Default for EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     }
 }
 
+/// One of the following types:
+///
+/// - String
+/// - Data
+/// - serde_json::Value
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
+    Data(Data),
+    String(String),
+    Value(serde_json::Value),
+}
+
+impl EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
+    pub fn data(&self) -> Option<&Data> {
+        if let EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::Data(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn serde_json_value(&self) -> Option<&serde_json::Value> {
+        if let EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::Value(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
     #[serde()]
@@ -32909,12 +33615,16 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub path: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub value: String,
+    /**
+     * One of the following types:
+     *  
+     *  - String
+     *  - Data
+     *  - serde_json::Value
+     *
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -33105,6 +33815,41 @@ pub struct Value {
     pub user_name: String,
 }
 
+/// One of the following types:
+///
+/// - Value
+/// - Vec<ScimUserEmails>
+/// - String
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ScimUpdateAttributeUserRequestOperationsValueOneOf {
+    String(String),
+    Value(Value),
+    ScimUserEmailsVector(Vec<ScimUserEmails>),
+}
+
+impl ScimUpdateAttributeUserRequestOperationsValueOneOf {
+    pub fn vec_scim_user_emails(&self) -> Option<&Vec<ScimUserEmails>> {
+        if let ScimUpdateAttributeUserRequestOperationsValueOneOf::ScimUserEmailsVector(ref_) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn string(&self) -> Option<&String> {
+        if let ScimUpdateAttributeUserRequestOperationsValueOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn value(&self) -> Option<&Value> {
+        if let ScimUpdateAttributeUserRequestOperationsValueOneOf::Value(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUpdateAttributeUserRequestOperations {
     #[serde()]
@@ -33115,8 +33860,16 @@ pub struct ScimUpdateAttributeUserRequestOperations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub path: String,
+    /**
+     * One of the following types:
+     *  
+     *  - Value
+     *  - Vec<ScimUserEmails>
+     *  - String
+     *
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub value: Option<Value>,
+    pub value: Option<ScimUpdateAttributeUserRequestOperationsValueOneOf>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -33647,6 +34400,38 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
     pub synced_at: String,
 }
 
+/// One of the following types:
+///
+/// - PrivateUser
+/// - PublicUser
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum UsersGetByUsernameResponseOneOf {
+    /**
+     * Private User
+     */
+    PrivateUser(PrivateUser),
+    /**
+     * Public User
+     */
+    PublicUser(PublicUser),
+}
+
+impl UsersGetByUsernameResponseOneOf {
+    pub fn private_user(&self) -> Option<&PrivateUser> {
+        if let UsersGetByUsernameResponseOneOf::PrivateUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn public_user(&self) -> Option<&PublicUser> {
+        if let UsersGetByUsernameResponseOneOf::PublicUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersUpdateAuthenticatedRequest {
     /**
@@ -33768,6 +34553,44 @@ pub struct UsersAddEmailAuthenticatedRequest {
     pub emails: Vec<String>,
 }
 
+/// One of the following types:
+///
+/// - UsersAddEmailAuthenticatedRequest
+/// - Vec<String>
+/// - String
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum UsersAddEmailAuthenticatedRequestOneOf {
+    String(String),
+    UsersAddEmailAuthenticatedRequest(UsersAddEmailAuthenticatedRequest),
+    StringVector(Vec<String>),
+}
+
+impl UsersAddEmailAuthenticatedRequestOneOf {
+    pub fn string(&self) -> Option<&String> {
+        if let UsersAddEmailAuthenticatedRequestOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let UsersAddEmailAuthenticatedRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn users_add_email_authenticated_request(
+        &self,
+    ) -> Option<&UsersAddEmailAuthenticatedRequest> {
+        if let UsersAddEmailAuthenticatedRequestOneOf::UsersAddEmailAuthenticatedRequest(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Deletes one or more email addresses from your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersDeleteEmailAuthenticatedRequest {
@@ -33776,6 +34599,48 @@ pub struct UsersDeleteEmailAuthenticatedRequest {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub emails: Vec<String>,
+}
+
+/// One of the following types:
+///
+/// - UsersDeleteEmailAuthenticatedRequest
+/// - Vec<String>
+/// - String
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum UsersDeleteEmailAuthenticatedRequestOneOf {
+    String(String),
+    /**
+     * Deletes one or more email addresses from your GitHub account. Must contain at least one email address. \*\*Note:\*\* Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
+     */
+    UsersDeleteEmailAuthenticatedRequest(UsersDeleteEmailAuthenticatedRequest),
+    StringVector(Vec<String>),
+}
+
+impl UsersDeleteEmailAuthenticatedRequestOneOf {
+    pub fn string(&self) -> Option<&String> {
+        if let UsersDeleteEmailAuthenticatedRequestOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let UsersDeleteEmailAuthenticatedRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+    pub fn users_delete_email_authenticated_request(
+        &self,
+    ) -> Option<&UsersDeleteEmailAuthenticatedRequest> {
+        if let UsersDeleteEmailAuthenticatedRequestOneOf::UsersDeleteEmailAuthenticatedRequest(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]

@@ -506,12 +506,20 @@ enum TypeDetails {
      * order in the generated code.
      */
     Object(BTreeMap<String, TypeId>, openapiv3::SchemaData),
+    OneOf(BTreeMap<String, TypeId>, openapiv3::SchemaData),
 }
 
 #[allow(dead_code)]
 impl TypeDetails {
     pub fn is_enum(&self) -> bool {
         if let TypeDetails::Enum(..) = self {
+            return true;
+        }
+        false
+    }
+
+    pub fn is_one_of(&self) -> bool {
+        if let TypeDetails::OneOf(..) = self {
             return true;
         }
         false
@@ -539,6 +547,7 @@ impl TypeDetails {
             TypeDetails::Array(_, d) => d.description.as_ref(),
             TypeDetails::Optional(_, d) => d.description.as_ref(),
             TypeDetails::Object(_, d) => d.description.as_ref(),
+            TypeDetails::OneOf(_, d) => d.description.as_ref(),
             TypeDetails::Unknown => None,
         };
 
@@ -584,6 +593,11 @@ impl PartialEq for TypeDetails {
             }
             TypeDetails::Object(s, _d) => {
                 if let TypeDetails::Object(os, _od) = other {
+                    return s == os;
+                }
+            }
+            TypeDetails::OneOf(s, _d) => {
+                if let TypeDetails::OneOf(os, _od) = other {
                     return s == os;
                 }
             }
@@ -706,6 +720,13 @@ impl TypeSpace {
                         format!("[OBJECT {} !NONAME?]", tid.0)
                     }
                 }
+                TypeDetails::OneOf(..) => {
+                    if let Some(n) = &te.name {
+                        format!("one_of {}", n)
+                    } else {
+                        format!("[ONE_OF {} !NONAME?]", tid.0)
+                    }
+                }
                 TypeDetails::Unknown => {
                     format!("[UNKNOWN {}]", tid.0)
                 }
@@ -731,6 +752,7 @@ impl TypeSpace {
                     }
                 }
                 TypeDetails::Enum(_, schema_data) => Some(schema_data),
+                TypeDetails::OneOf(_, schema_data) => Some(schema_data),
                 TypeDetails::Array(_, schema_data) => Some(schema_data),
                 TypeDetails::Optional(id, schema_data) => {
                     let def: openapiv3::SchemaData = Default::default();
@@ -794,6 +816,23 @@ impl TypeSpace {
                         }
                     } else {
                         bail!("enum type {:?} does not have a name?", tid);
+                    }
+                }
+                TypeDetails::OneOf(..) => {
+                    if let Some(n) = &te.name {
+                        let struct_name = struct_name(n);
+                        if in_mod {
+                            Ok(struct_name)
+                        } else {
+                            /*
+                             * Model types are declared in the "types" module,
+                             * and must be referenced with that prefix when not
+                             * in the module itself.
+                             */
+                            Ok(format!("crate::types::{}", struct_name))
+                        }
+                    } else {
+                        bail!("one_of type {:?} does not have a name?", tid);
                     }
                 }
                 TypeDetails::Array(itid, _) => {
@@ -896,14 +935,14 @@ impl TypeSpace {
         name: Option<String>,
         details: TypeDetails,
         parent_name: &str,
-        is_schema: bool,
+        is_reference: bool,
     ) -> Result<TypeId> {
         /*
          * We can have types that are references that are never explicitly called
          * but are duplicated all over. Let's ensure that we don't have a type with a different
          * name that is this exact same type.
          */
-        if !is_schema {
+        if !is_reference {
             for (tid, te) in self.id_to_entry.iter() {
                 if te.details == details {
                     let id = tid.clone();
@@ -922,7 +961,7 @@ impl TypeSpace {
                     } else {
                         "".to_string()
                     };
-                    if details.is_object() || details.is_enum() {
+                    if details.is_object() || details.is_enum() || details.is_one_of() {
                         if existing_name == new_name {
                             // Return early.
                             return Ok(tid.clone());
@@ -942,6 +981,7 @@ impl TypeSpace {
                                 if nt.details.is_enum()
                                     || nt.details.is_object()
                                     || nt.details.is_named_type()
+                                    || nt.details.is_one_of()
                                 {
                                     // Return early we definitely don't want to do any funny business.
                                     return Ok(tid.clone());
@@ -1008,7 +1048,7 @@ impl TypeSpace {
                             Some(clean_name(&pname)),
                             details,
                             "",
-                            is_schema,
+                            is_reference,
                         );
                     }
 
@@ -1019,7 +1059,7 @@ impl TypeSpace {
                             Some(clean_name(&new_name)),
                             details,
                             "",
-                            is_schema,
+                            is_reference,
                         );
                     } else if !name.contains("type") {
                         // Let's try to append "type" onto the end and see if that helps.
@@ -1028,7 +1068,7 @@ impl TypeSpace {
                             Some(clean_name(&new_name)),
                             details,
                             "",
-                            is_schema,
+                            is_reference,
                         );
                     }
 
@@ -1085,13 +1125,12 @@ impl TypeSpace {
         &mut self,
         name: Option<&str>,
         p: &openapiv3::ReferenceOr<openapiv3::Parameter>,
-        is_schema: bool,
     ) -> Result<TypeId> {
         match p {
             openapiv3::ReferenceOr::Reference { reference } => {
                 self.select_ref(name, reference.as_str())
             }
-            openapiv3::ReferenceOr::Item(p) => self.select_parameter(name, p, is_schema),
+            openapiv3::ReferenceOr::Item(p) => self.select_parameter(name, p),
         }
     }
 
@@ -1121,7 +1160,6 @@ impl TypeSpace {
         &mut self,
         name: Option<&str>,
         s: &openapiv3::ReferenceOr<openapiv3::Schema>,
-        is_schema: bool,
         additional_description: &str,
     ) -> Result<TypeId> {
         match s {
@@ -1129,7 +1167,7 @@ impl TypeSpace {
                 self.select_ref(name, reference.as_str())
             }
             openapiv3::ReferenceOr::Item(s) => {
-                self.select_schema(name, s, "", is_schema, additional_description)
+                self.select_schema(name, s, "", additional_description)
             }
         }
     }
@@ -1145,7 +1183,7 @@ impl TypeSpace {
                 self.select_ref(name, reference.as_str())
             }
             openapiv3::ReferenceOr::Item(s) => {
-                self.select_schema(name, s.as_ref(), parent_name, false, "")
+                self.select_schema(name, s.as_ref(), parent_name, "")
             }
         }
     }
@@ -1155,18 +1193,12 @@ impl TypeSpace {
         name: Option<&str>,
         s: &openapiv3::Schema,
         parent_name: &str,
-        is_schema: bool,
         additional_description: &str,
     ) -> Result<TypeId> {
-        let (n, details) = self.get_type_name_and_details(
-            name,
-            s,
-            parent_name,
-            is_schema,
-            additional_description,
-        )?;
+        let (n, details) =
+            self.get_type_name_and_details(name, s, parent_name, additional_description)?;
 
-        self.add_if_not_exists(n, details, parent_name, is_schema)
+        self.add_if_not_exists(n, details, parent_name, false)
     }
 
     fn get_type_name_and_details(
@@ -1174,7 +1206,6 @@ impl TypeSpace {
         name: Option<&str>,
         sc: &openapiv3::Schema,
         parent_name: &str,
-        is_schema: bool,
         additional_description: &str,
     ) -> Result<(Option<String>, TypeDetails)> {
         let nam = if let Some(n) = name {
@@ -1198,40 +1229,6 @@ impl TypeSpace {
             }
         }
 
-        if is_schema {
-            // If we are on a parent schema that as been defined in the spec, we want to ensure,
-            // that type gets a named type. This is so that we can find all these types later on, even
-            // arrays and basic types like numbers and strings.
-            if let openapiv3::SchemaKind::Type(t) = &s.schema_kind {
-                if let openapiv3::Type::Object(_) = t {
-                    // If it's an object we will always have a named type so it's fine.
-                } else if let openapiv3::Type::String(st) = t {
-                    // If it's an enum we will always have a named type so it's fine.
-                    if st.enumeration.is_empty() {
-                        // Handle the non-enums.
-                        let id = self.select_schema(
-                            Some(&nam),
-                            &s,
-                            parent_name,
-                            false,
-                            additional_description,
-                        )?;
-                        return Ok((Some(nam), TypeDetails::NamedType(id, s.schema_data.clone())));
-                    }
-                } else {
-                    // For everything else ensure we have a named type.
-                    let id = self.select_schema(
-                        Some(&nam),
-                        &s,
-                        parent_name,
-                        false,
-                        additional_description,
-                    )?;
-                    return Ok((Some(nam), TypeDetails::NamedType(id, s.schema_data.clone())));
-                }
-            }
-        }
-
         // Generate a UUID for this type.
         let uid = uuid::Uuid::new_v4();
 
@@ -1251,7 +1248,11 @@ impl TypeSpace {
                         (Some(""), Some(t)) => t,
                         (Some(n), Some(_)) => n,
                         (None, None) => {
-                            bail!("types need a name? {:?} {:?}", name, s)
+                            if !parent_name.is_empty() {
+                                parent_name
+                            } else {
+                                bail!("types need a name? {:?} {:?}", name, s)
+                            }
                         }
                     });
 
@@ -1388,7 +1389,7 @@ impl TypeSpace {
             },
             openapiv3::SchemaKind::AllOf { all_of } => {
                 // TODO: Actually combine all the types.
-                let id = self.select(name, all_of.get(0).unwrap(), is_schema, "")?;
+                let id = self.select(name, all_of.get(0).unwrap(), "")?;
                 if let Some(et) = self.id_to_entry.get(&id) {
                     let mut sd = self.get_schema_data_for_id(&id).unwrap().clone();
                     if s.schema_data.nullable {
@@ -1416,29 +1417,42 @@ impl TypeSpace {
                 }
             }
             openapiv3::SchemaKind::OneOf { one_of } => {
-                // Iterate over each one of and select the first one that is not
-                // an empty object.
-                let mut id = TypeId(0);
-                for o in one_of {
-                    if let Ok(i) = self.select(name, o, is_schema, "") {
-                        id = i;
-                        break;
-                    }
+                // Iterate over each one of and add each of them to our typeset.
+                // OneOf types must have a consistent name.
+                let mut one_of_name = nam;
+                if one_of_name.is_empty() && !parent_name.is_empty() {
+                    one_of_name = parent_name.to_string();
+                }
+                if one_of_name.is_empty() {
+                    bail!("one_of name cannot be empty!");
+                }
+                one_of_name.push_str(" one of");
+
+                let mut one_of_description = "One of the following types:\n\n".to_string();
+
+                let mut omap = BTreeMap::new();
+                for one in one_of {
+                    let itid = self.select(
+                        Some(one_of_name.trim_end_matches("one of").trim()),
+                        one,
+                        additional_description,
+                    )?;
+
+                    let rt = self.render_type(&itid, true)?;
+                    one_of_description.push_str(&format!("- {}\n", rt));
+
+                    omap.insert(rt, itid);
                 }
 
-                if let Some(et) = self.id_to_entry.get(&id) {
-                    if let Some(n) = name {
-                        Ok((Some(n.to_string()), et.details.clone()))
-                    } else {
-                        bail!("one_of types need a name? {:?} {:?}", name, one_of)
-                    }
-                } else {
-                    bail!("oneof schema kind: {:?} {:?}\n{:?}", name, s, one_of);
-                }
+                let sd = openapiv3::SchemaData {
+                    description: Some(one_of_description),
+                    ..Default::default()
+                };
+                Ok((Some(one_of_name), TypeDetails::OneOf(omap, sd)))
             }
             openapiv3::SchemaKind::AnyOf { any_of } => {
                 // TODO: Actually combine all the types.
-                let id = self.select(name, any_of.get(0).unwrap(), is_schema, "")?;
+                let id = self.select(name, any_of.get(0).unwrap(), "")?;
                 if let Some(et) = self.id_to_entry.get(&id) {
                     if let Some(n) = name {
                         Ok((Some(n.to_string()), et.details.clone()))
@@ -1449,7 +1463,8 @@ impl TypeSpace {
                     bail!("anyof schema kind: {:?} {:?}\n{:?}", name, s, any_of);
                 }
             }
-            openapiv3::SchemaKind::Any(_a) => {
+            openapiv3::SchemaKind::Any(a) => {
+                println!("got ANY kind: {:?} {:?}", name, a);
                 // Then we use the serde_json type.
                 Ok((
                     Some(nam),
@@ -1459,12 +1474,7 @@ impl TypeSpace {
         }
     }
 
-    fn select_parameter(
-        &mut self,
-        name: Option<&str>,
-        p: &openapiv3::Parameter,
-        is_schema: bool,
-    ) -> Result<TypeId> {
+    fn select_parameter(&mut self, name: Option<&str>, p: &openapiv3::Parameter) -> Result<TypeId> {
         let nam = if let Some(n) = name {
             n.to_string()
         } else {
@@ -1484,7 +1494,7 @@ impl TypeSpace {
                         self.select_ref(name, reference.as_str())
                     }
                     openapiv3::ReferenceOr::Item(s) => {
-                        self.select_schema(Some(&parameter_data.name), s, &nam, is_schema, &desc)
+                        self.select_schema(Some(&parameter_data.name), s, &nam, &desc)
                     }
                 }
             } else {
@@ -1885,7 +1895,7 @@ fn main() -> Result<()> {
                 name
             ));
 
-            let id = ts.select(Some(name.as_str()), s, true, "")?;
+            let id = ts.select(Some(name.as_str()), s, "")?;
             debug(&format!("    -> {:?}", id));
             debug("");
 
@@ -1904,7 +1914,7 @@ fn main() -> Result<()> {
                 name
             ));
 
-            let id = ts.select_param(Some(name.as_str()), p, true)?;
+            let id = ts.select_param(Some(name.as_str()), p)?;
 
             // Insert the named type for our reference.
             // DO NOT CLEAN THE NAME HERE.
@@ -1936,7 +1946,7 @@ fn main() -> Result<()> {
                 if ct == "application/json" {
                     if let Some(s) = &mt.schema {
                         let object_name = format!("{} response", name);
-                        let id = ts.select(Some(&clean_name(&object_name)), s, true, "")?;
+                        let id = ts.select(Some(&clean_name(&object_name)), s, "")?;
 
                         // Insert the named type for our reference.
                         // DO NOT CLEAN THE NAME HERE.
@@ -1982,7 +1992,7 @@ fn main() -> Result<()> {
                         if ct == "application/json" {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!("{} request", oid_to_object_name(&oid));
-                                let id = ts.select(Some(&object_name), s, false, "")?;
+                                let id = ts.select(Some(&object_name), s, "")?;
                                 let rt = ts.render_type(&id, true)?;
                                 req.push(format!("{} {:?}", rt, id));
                             }
@@ -2010,7 +2020,7 @@ fn main() -> Result<()> {
                  */
                 for par in o.parameters.iter() {
                     // The name will be filled in by the parameter data.
-                    ts.select_param(Some(&oid_to_object_name(&oid)), par, false)?;
+                    ts.select_param(Some(&oid_to_object_name(&oid)), par)?;
                 }
 
                 /*
@@ -2025,12 +2035,8 @@ fn main() -> Result<()> {
                                     if let Some(s) = &mt.schema {
                                         let object_name =
                                             format!("{} response", oid_to_object_name(&oid));
-                                        let id = ts.select(
-                                            Some(&clean_name(&object_name)),
-                                            s,
-                                            false,
-                                            "",
-                                        )?;
+                                        let id =
+                                            ts.select(Some(&clean_name(&object_name)), s, "")?;
                                         let rt = ts.render_type(&id, false)?;
                                         res.push(format!("{} {:?}", rt, id));
                                     }

@@ -23,7 +23,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
      */
-    pub async fn get_authenticated(&self) -> Result<crate::types::PrivateUser> {
+    pub async fn get_authenticated(&self) -> Result<crate::types::UsersGetByUsernameResponseOneOf> {
         let url = "/user".to_string();
         self.client.get(&url).await
     }
@@ -233,7 +233,7 @@ impl Users {
      */
     pub async fn add_email_for_authenticated(
         &self,
-        body: &crate::types::UsersAddEmailAuthenticatedRequest,
+        body: &crate::types::UsersAddEmailAuthenticatedRequestOneOf,
     ) -> Result<Vec<crate::types::Email>> {
         let url = "/user/emails".to_string();
         self.client
@@ -255,7 +255,7 @@ impl Users {
      */
     pub async fn delete_email_for_authenticated(
         &self,
-        body: &crate::types::UsersDeleteEmailAuthenticatedRequest,
+        body: &crate::types::UsersDeleteEmailAuthenticatedRequestOneOf,
     ) -> Result<()> {
         let url = "/user/emails".to_string();
         self.client
@@ -835,7 +835,10 @@ impl Users {
      *
      * * `username: &str`
      */
-    pub async fn get_by_username(&self, username: &str) -> Result<crate::types::PrivateUser> {
+    pub async fn get_by_username(
+        &self,
+        username: &str,
+    ) -> Result<crate::types::UsersGetByUsernameResponseOneOf> {
         let url = format!(
             "/users/{}",
             crate::progenitor_support::encode_path(&username.to_string()),

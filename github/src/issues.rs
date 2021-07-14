@@ -1396,7 +1396,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &crate::types::IssuesAddLabelsRequest,
+        body: &crate::types::IssuesAddLabelsRequestOneOf,
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",

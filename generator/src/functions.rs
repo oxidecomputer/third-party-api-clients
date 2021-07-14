@@ -103,14 +103,14 @@ pub fn generate_files(
                     if ct == "application/json" {
                         if let Some(s) = &mt.schema {
                             let object_name = format!("{} request", oid_to_object_name(&oid));
-                            let id = ts.select(Some(&object_name), s, false, "")?;
+                            let id = ts.select(Some(&object_name), s, "")?;
                             let rt = ts.render_type(&id, false)?;
                             (Some(format!("&{}", rt)), Some("json".to_string()))
                         } else {
                             (None, None)
                         }
                     } else if let Some(s) = &mt.schema {
-                        let tid = ts.select(None, s, false, "")?;
+                        let tid = ts.select(None, s, "")?;
                         let rt = ts.render_type(&tid, false)?;
                         bounds.push("T: Into<reqwest::Body>".to_string());
                         if rt == "String" {
@@ -237,7 +237,7 @@ fn get_response_type(oid: &str, ts: &mut TypeSpace, o: &openapiv3::Operation) ->
 
         if let Some(s) = &mt.schema {
             let object_name = format!("{} response", oid_to_object_name(oid));
-            let tid = ts.select(Some(&clean_name(&object_name)), s, false, "")?;
+            let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
             let rt = ts.render_type(&tid, false)?;
             return Ok(rt);
         }
@@ -248,7 +248,7 @@ fn get_response_type(oid: &str, ts: &mut TypeSpace, o: &openapiv3::Operation) ->
     if ct == "text/plain" || ct == "text/html" || ct == "application/octocat-stream" || ct == "*/*"
     {
         if let Some(s) = &mt.schema {
-            let tid = ts.select(None, s, false, "")?;
+            let tid = ts.select(None, s, "")?;
             let rt = ts.render_type(&tid, false)?;
             return Ok(rt);
         }
@@ -259,7 +259,7 @@ fn get_response_type(oid: &str, ts: &mut TypeSpace, o: &openapiv3::Operation) ->
 
         if let Some(s) = &mt.schema {
             let object_name = format!("{} response", oid_to_object_name(oid));
-            let tid = ts.select(Some(&clean_name(&object_name)), s, false, "")?;
+            let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
             let rt = ts.render_type(&tid, false)?;
             return Ok(rt);
         }
@@ -436,7 +436,7 @@ fn get_fn_docs(
 
         let parameter_data = get_parameter_data(item).unwrap();
 
-        let pid = ts.select_param(None, par, false)?;
+        let pid = ts.select_param(None, par)?;
         let mut docs = ts.render_docs(&pid);
         if let Some(d) = &parameter_data.description {
             if !d.is_empty() && d.len() > docs.len() {

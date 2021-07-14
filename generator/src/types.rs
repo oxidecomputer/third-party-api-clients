@@ -1,3 +1,5 @@
+use std::collections::BTreeMap;
+
 use anyhow::{bail, Result};
 use inflector::cases::snakecase::to_snake_case;
 
@@ -19,16 +21,9 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
     a("    use serde::{Serialize, Deserialize};");
     a("");
 
-    let mut rendered: Vec<String> = Default::default();
     for te in ts.id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
             let sn = struct_name(sn);
-
-            if rendered.contains(&sn) {
-                // Skip duplicates, this is stupid but since I chose to pick the smaller of the
-                // names of the structs, we get duplicates.
-                continue;
-            }
 
             match &te.details {
                 TypeDetails::Enum(vals, schema_data) => {
@@ -44,7 +39,72 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                         schema_data.default.as_ref(),
                     );
                     a(&p);
-                    rendered.push(sn.to_string());
+                }
+                TypeDetails::OneOf(omap, schema_data) => {
+                    let desc = if let Some(description) = &schema_data.description {
+                        format!("/// {}", description.replace('\n', "\n/// "))
+                    } else {
+                        "".to_string()
+                    };
+
+                    if !desc.is_empty() {
+                        a(&desc);
+                    }
+
+                    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+                    a("#[serde(untagged)]");
+                    a(&format!("pub enum {} {{", sn));
+                    let mut name_map: BTreeMap<String, String> = Default::default();
+                    for (name, tid) in omap.iter() {
+                        // Try to render the docs.
+                        let p = ts.render_docs(tid);
+                        if !p.is_empty() && p != desc {
+                            a("/**");
+                            a(&p);
+                            a("*/");
+                        }
+
+                        let fn_name = if name.starts_with("Vec<") {
+                            format!(
+                                "{}Vector",
+                                name.trim_start_matches("Vec<")
+                                    .trim_end_matches('>')
+                                    .replace("serde_json::", "")
+                            )
+                        } else if name.starts_with("serde_json") {
+                            "Value".to_string()
+                        } else {
+                            struct_name(name)
+                        };
+
+                        a(&format!("{}({}),", fn_name, name));
+                        name_map.insert(fn_name, name.to_string());
+                    }
+                    a("}");
+                    a("");
+
+                    // Render the implementation to easily unpack these things for the end user.
+                    a(&format!("impl {} {{", sn));
+                    for (fn_name, name) in name_map {
+                        a(&format!(
+                            r#"pub fn {}(&self) -> Option<&{}> {{
+                            if let {}::{}(ref_) = self {{
+                                return Some(ref_);
+                            }}
+                            None
+                        }}"#,
+                            to_snake_case(&name)
+                                .replace("f_64", "f64")
+                                .replace("f_32", "f32")
+                                .replace("i_64", "i64")
+                                .replace("i_32", "i32"),
+                            name,
+                            sn,
+                            fn_name,
+                        ));
+                    }
+                    a("}");
+                    a("");
                 }
                 TypeDetails::Object(omap, schema_data) => {
                     let desc = if let Some(description) = &schema_data.description {
@@ -138,7 +198,6 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                     }
                     a("}");
                     a("");
-                    rendered.push(sn.to_string());
                 }
                 TypeDetails::Basic(..) => {}
                 TypeDetails::Unknown => {}

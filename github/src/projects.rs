@@ -402,7 +402,7 @@ impl Projects {
     pub async fn create_card(
         &self,
         column_id: i64,
-        body: &crate::types::ProjectsCreateCardRequest,
+        body: &crate::types::ProjectsCreateCardRequestOneOf,
     ) -> Result<crate::types::ProjectCard> {
         let url = format!(
             "/projects/columns/{}/cards",
