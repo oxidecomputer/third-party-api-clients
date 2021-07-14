@@ -1443,6 +1443,10 @@ impl TypeSpace {
 
                     omap.insert(rt, itid);
                 }
+                one_of_description.push_str(
+                    "\nYou can easily convert this enum to the inner value with `From` and \
+                     `Into`, as both are implemented for each type.\n",
+                );
 
                 let sd = openapiv3::SchemaData {
                     description: Some(one_of_description),
