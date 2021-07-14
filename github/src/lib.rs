@@ -9,7 +9,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.1.6"
+//! octorust = "0.1.7"
 //! ```
 //!
 //! ## Basic example
@@ -27,7 +27,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.1.6/octorust/struct.Client.html#method.host) method.
+//! [Client#host](https://docs.rs/octorust/0.1.7/octorust/struct.Client.html#method.host) method.
 //!
 //! ## Feature flags
 //!
@@ -41,7 +41,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.1.6", features = ["httpcache"] }
+//! octorust = { version = "0.1.7", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -138,6 +138,8 @@
 //! way here. This extends that effort in a generated way so the library is
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
+#![cfg_attr(backtrace, feature(httpcache))]
+#![cfg_attr(doc_cfg, feature(doc_cfg))]
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
