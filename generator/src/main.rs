@@ -1629,7 +1629,7 @@ fn gen(api: &OpenAPI) -> Result<String> {
     /*
      * Deal with any dependencies we require to produce this client.
      */
-    a("#![cfg_attr(backtrace, feature(httpcache))]");
+    a("#![cfg_attr(httpcache, feature(httpcache))]");
     a("#![cfg_attr(doc_cfg, feature(doc_cfg))]");
     a("#![feature(async_stream)]");
     a("#![allow(clippy::too_many_arguments)]");

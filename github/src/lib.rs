@@ -138,7 +138,7 @@
 //! way here. This extends that effort in a generated way so the library is
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
-#![cfg_attr(backtrace, feature(httpcache))]
+#![cfg_attr(httpcache, feature(httpcache))]
 #![cfg_attr(doc_cfg, feature(doc_cfg))]
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
