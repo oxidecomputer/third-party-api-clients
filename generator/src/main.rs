@@ -721,7 +721,10 @@ impl TypeSpace {
                 TypeDetails::Basic(_, schema_data) => Some(schema_data),
                 TypeDetails::NamedType(id, schema_data) => {
                     let def: openapiv3::SchemaData = Default::default();
-                    if def == *schema_data {
+                    if def == *schema_data
+                        && schema_data.description.is_none()
+                        && !schema_data.nullable
+                    {
                         self.get_schema_data_for_id(id)
                     } else {
                         Some(schema_data)
@@ -1259,14 +1262,25 @@ impl TypeSpace {
                             rb,
                             &clean_name(&format!("{} {}", &parent_name, name)),
                         )?;
-                        if let Some(schema_data) = self.get_schema_data_for_id(&itid) {
+                        if let Some(sd) = &self.get_schema_data_for_id(&itid) {
+                            let schema_data = &(*sd).clone();
                             if schema_data.nullable {
                                 // This is an optional member.
                                 omap.insert(
                                     n.to_string(),
-                                    self.id_for_optional(&itid, s.schema_data.clone()),
+                                    self.id_for_optional(&itid, schema_data.clone()),
                                 );
                                 continue;
+                            }
+
+                            if o.required.contains(n) {
+                                omap.insert(n.to_string(), itid.clone());
+                            } else {
+                                // This is an optional member.
+                                omap.insert(
+                                    n.to_string(),
+                                    self.id_for_optional(&itid, schema_data.clone()),
+                                );
                             }
                         }
 
@@ -1376,6 +1390,18 @@ impl TypeSpace {
                 // TODO: Actually combine all the types.
                 let id = self.select(name, all_of.get(0).unwrap(), is_schema, "")?;
                 if let Some(et) = self.id_to_entry.get(&id) {
+                    let mut sd = self.get_schema_data_for_id(&id).unwrap().clone();
+                    if s.schema_data.nullable {
+                        sd.nullable = true;
+                        if let Some(d) = &s.schema_data.description {
+                            if !d.is_empty() {
+                                sd.description = Some(d.to_string());
+                            }
+                        }
+                        // This type is nullable.
+                        // We need to pass that information along!
+                        return Ok((Some(nam), TypeDetails::NamedType(id, sd)));
+                    }
                     if let Some(n) = name {
                         if let TypeDetails::Object(..) = et.details {
                             Ok((Some(clean_name(n)), et.details.clone()))
