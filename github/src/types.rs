@@ -3607,7 +3607,8 @@ pub struct AuditLogEvent {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "_document_id"
     )]
     pub document_id: String,
     /**
@@ -4745,7 +4746,7 @@ pub struct Links {
 /// Feed
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Feed {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: Links,
     #[serde(
         default,
@@ -12424,7 +12425,7 @@ pub struct BranchWithProtectionLinks {
 /// Branch With Protection
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BranchWithProtection {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: BranchWithProtectionLinks,
     /**
      * Commit
@@ -14455,7 +14456,7 @@ pub struct PullRequestSimpleLinks {
 /// Pull Request Simple
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestSimple {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: PullRequestSimpleLinks,
     #[serde(
         default,
@@ -15114,7 +15115,7 @@ pub struct ContentTreeEntriesLinks {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Entries {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
     #[serde(
         default,
@@ -15182,7 +15183,7 @@ pub struct Entries {
 /// Content Tree
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentTree {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
     #[serde(
         default,
@@ -15249,7 +15250,7 @@ pub struct ContentTree {
 /// Content File
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentFile {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
     #[serde(
         default,
@@ -15335,7 +15336,7 @@ pub struct ContentFile {
 /// An object describing a symlink
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentSymlink {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
     #[serde(
         default,
@@ -15403,7 +15404,7 @@ pub struct ContentSymlink {
 /// An object describing a symlink
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentSubmodule {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
     #[serde(
         default,
@@ -15470,7 +15471,7 @@ pub struct ContentSubmodule {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FileCommitContent {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "_links")]
     pub links: Option<ContentTreeEntriesLinks>,
     #[serde(
         default,
@@ -18366,7 +18367,7 @@ pub struct TimelineReviewedEventLinks {
 /// Timeline Reviewed Event
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineReviewedEvent {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
     /**
      * How the author is associated with the repository.
@@ -18519,7 +18520,7 @@ impl Default for Side {
 /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestReviewComment {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: PullRequestReviewCommentLinks,
     /**
      * How the author is associated with the repository.
@@ -18956,7 +18957,7 @@ pub struct Language {}
 /// License Content
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LicenseContent {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
     #[serde(
         default,
@@ -20680,7 +20681,7 @@ pub struct PullRequestBase {
 /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestData {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: PullRequestSimpleLinks,
     #[serde(
         default,
@@ -20962,7 +20963,7 @@ pub struct PullRequestReview {
 /// Pull Request Reviews are reviews on pull requests.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestReviewData {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
     /**
      * How the author is associated with the repository.
@@ -21066,7 +21067,7 @@ pub struct ReviewCommentLinks {
 /// Legacy Review Comment
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReviewComment {
-    #[serde()]
+    #[serde(rename = "_links")]
     pub links: ReviewCommentLinks,
     /**
      * How the author is associated with the repository.

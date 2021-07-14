@@ -71,7 +71,9 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                             } else if name == "-1" {
                                 prop = "minus_one".to_string()
                             } else if name.starts_with('@') {
-                                prop = name.replace('@', "");
+                                prop = name.trim_start_matches('@').to_string();
+                            } else if name.starts_with('_') {
+                                prop = name.trim_start_matches('_').to_string();
                             }
 
                             // Try to render the docs.

@@ -1630,7 +1630,6 @@ fn gen(api: &OpenAPI) -> Result<String> {
      * Deal with any dependencies we require to produce this client.
      */
     a("#![cfg_attr(httpcache, feature(httpcache))]");
-    a("#![cfg_attr(doc_cfg, feature(doc_cfg))]");
     a("#![feature(async_stream)]");
     a("#![allow(clippy::too_many_arguments)]");
     a("#![allow(clippy::nonstandard_macro_braces)]");
@@ -1638,7 +1637,6 @@ fn gen(api: &OpenAPI) -> Result<String> {
     a("");
     a("pub mod auth;");
     a(r#"#[cfg(feature = "httpcache")]"#);
-    a(r#"#[cfg_attr(doc_cfg, doc(cfg(feature = "httpcache")))]"#);
     a("pub mod http_cache;");
     // Hopefully there is never a "tag" named after these reserved libs.
     a("pub mod types;");
@@ -2123,7 +2121,8 @@ tokio = {{ version = "1.8.0", features = ["full"] }}
 httpcache = ["dirs"]
 
 [package.metadata.docs.rs]
-rustdoc-args = ["--cfg", "doc_cfg"]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
 "#,
                 name, description, version, name,
             );
