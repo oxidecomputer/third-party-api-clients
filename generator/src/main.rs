@@ -1629,14 +1629,15 @@ fn gen(api: &OpenAPI) -> Result<String> {
     /*
      * Deal with any dependencies we require to produce this client.
      */
-    a("#![cfg_attr(httpcache, feature(httpcache))]");
     a("#![feature(async_stream)]");
     a("#![allow(clippy::too_many_arguments)]");
     a("#![allow(clippy::nonstandard_macro_braces)]");
     a("#![allow(missing_docs)]"); // TODO: Make this a deny.
+    a("#![cfg_attr(docsrs, feature(doc_cfg))]");
     a("");
     a("pub mod auth;");
     a(r#"#[cfg(feature = "httpcache")]"#);
+    a(r#"#[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]"#);
     a("pub mod http_cache;");
     // Hopefully there is never a "tag" named after these reserved libs.
     a("pub mod types;");
