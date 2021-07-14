@@ -348,11 +348,36 @@ impl WebhookConfigInsecureSslOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let WebhookConfigInsecureSslOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<f64> for WebhookConfigInsecureSslOneOf {
+    fn from(f: f64) -> Self {
+        WebhookConfigInsecureSslOneOf::F64(f)
+    }
+}
+
+impl From<String> for WebhookConfigInsecureSslOneOf {
+    fn from(f: String) -> Self {
+        WebhookConfigInsecureSslOneOf::String(f)
+    }
+}
+
+impl From<WebhookConfigInsecureSslOneOf> for f64 {
+    fn from(f: WebhookConfigInsecureSslOneOf) -> Self {
+        *f.f64().unwrap()
+    }
+}
+
+impl From<WebhookConfigInsecureSslOneOf> for String {
+    fn from(f: WebhookConfigInsecureSslOneOf) -> Self {
+        f.string().unwrap().clone()
     }
 }
 
@@ -2938,17 +2963,55 @@ impl ValueOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let ValueOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn vec_string(&self) -> Option<&Vec<String>> {
         if let ValueOneOf::StringVector(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<i64> for ValueOneOf {
+    fn from(f: i64) -> Self {
+        ValueOneOf::I64(f)
+    }
+}
+
+impl From<String> for ValueOneOf {
+    fn from(f: String) -> Self {
+        ValueOneOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for ValueOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ValueOneOf::StringVector(f)
+    }
+}
+
+impl From<ValueOneOf> for i64 {
+    fn from(f: ValueOneOf) -> Self {
+        *f.i64().unwrap()
+    }
+}
+
+impl From<ValueOneOf> for String {
+    fn from(f: ValueOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<ValueOneOf> for Vec<String> {
+    fn from(f: ValueOneOf) -> Self {
+        f.vec_string().unwrap().clone()
     }
 }
 
@@ -5709,11 +5772,36 @@ impl LabelsOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let LabelsOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<LabelsData> for LabelsOneOf {
+    fn from(f: LabelsData) -> Self {
+        LabelsOneOf::LabelsData(f)
+    }
+}
+
+impl From<String> for LabelsOneOf {
+    fn from(f: String) -> Self {
+        LabelsOneOf::String(f)
+    }
+}
+
+impl From<LabelsOneOf> for LabelsData {
+    fn from(f: LabelsOneOf) -> Self {
+        f.labels_data().unwrap().clone()
+    }
+}
+
+impl From<LabelsOneOf> for String {
+    fn from(f: LabelsOneOf) -> Self {
+        f.string().unwrap().clone()
     }
 }
 
@@ -11426,11 +11514,36 @@ impl PayloadOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let PayloadOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<Data> for PayloadOneOf {
+    fn from(f: Data) -> Self {
+        PayloadOneOf::Data(f)
+    }
+}
+
+impl From<String> for PayloadOneOf {
+    fn from(f: String) -> Self {
+        PayloadOneOf::String(f)
+    }
+}
+
+impl From<PayloadOneOf> for Data {
+    fn from(f: PayloadOneOf) -> Self {
+        f.data().unwrap().clone()
+    }
+}
+
+impl From<PayloadOneOf> for String {
+    fn from(f: PayloadOneOf) -> Self {
+        f.string().unwrap().clone()
     }
 }
 
@@ -22291,17 +22404,55 @@ impl ScimUserOperationsValueOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let ScimUserOperationsValueOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn vec_serde_json_value(&self) -> Option<&Vec<serde_json::Value>> {
         if let ScimUserOperationsValueOneOf::ValueVector(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<Data> for ScimUserOperationsValueOneOf {
+    fn from(f: Data) -> Self {
+        ScimUserOperationsValueOneOf::Data(f)
+    }
+}
+
+impl From<String> for ScimUserOperationsValueOneOf {
+    fn from(f: String) -> Self {
+        ScimUserOperationsValueOneOf::String(f)
+    }
+}
+
+impl From<Vec<serde_json::Value>> for ScimUserOperationsValueOneOf {
+    fn from(f: Vec<serde_json::Value>) -> Self {
+        ScimUserOperationsValueOneOf::ValueVector(f)
+    }
+}
+
+impl From<ScimUserOperationsValueOneOf> for Data {
+    fn from(f: ScimUserOperationsValueOneOf) -> Self {
+        f.data().unwrap().clone()
+    }
+}
+
+impl From<ScimUserOperationsValueOneOf> for String {
+    fn from(f: ScimUserOperationsValueOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<ScimUserOperationsValueOneOf> for Vec<serde_json::Value> {
+    fn from(f: ScimUserOperationsValueOneOf) -> Self {
+        f.vec_serde_json_value().unwrap().clone()
     }
 }
 
@@ -24563,11 +24714,36 @@ impl WorkflowIdOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let WorkflowIdOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<i64> for WorkflowIdOneOf {
+    fn from(f: i64) -> Self {
+        WorkflowIdOneOf::I64(f)
+    }
+}
+
+impl From<String> for WorkflowIdOneOf {
+    fn from(f: String) -> Self {
+        WorkflowIdOneOf::String(f)
+    }
+}
+
+impl From<WorkflowIdOneOf> for i64 {
+    fn from(f: WorkflowIdOneOf) -> Self {
+        *f.i64().unwrap()
+    }
+}
+
+impl From<WorkflowIdOneOf> for String {
+    fn from(f: WorkflowIdOneOf) -> Self {
+        f.string().unwrap().clone()
     }
 }
 
@@ -25479,11 +25655,36 @@ impl PublicOneOf {
         }
         None
     }
+
     pub fn public(&self) -> Option<&Public> {
         if let PublicOneOf::Public(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<bool> for PublicOneOf {
+    fn from(f: bool) -> Self {
+        PublicOneOf::Bool(f)
+    }
+}
+
+impl From<Public> for PublicOneOf {
+    fn from(f: Public) -> Self {
+        PublicOneOf::Public(f)
+    }
+}
+
+impl From<PublicOneOf> for bool {
+    fn from(f: PublicOneOf) -> Self {
+        *f.bool().unwrap()
+    }
+}
+
+impl From<PublicOneOf> for Public {
+    fn from(f: PublicOneOf) -> Self {
+        f.public().unwrap().clone()
     }
 }
 
@@ -26040,11 +26241,36 @@ impl OrgsUpdateResponseOneOf {
         }
         None
     }
+
     pub fn validation_error_simple(&self) -> Option<&ValidationErrorSimple> {
         if let OrgsUpdateResponseOneOf::ValidationErrorSimple(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<ValidationError> for OrgsUpdateResponseOneOf {
+    fn from(f: ValidationError) -> Self {
+        OrgsUpdateResponseOneOf::ValidationError(f)
+    }
+}
+
+impl From<ValidationErrorSimple> for OrgsUpdateResponseOneOf {
+    fn from(f: ValidationErrorSimple) -> Self {
+        OrgsUpdateResponseOneOf::ValidationErrorSimple(f)
+    }
+}
+
+impl From<OrgsUpdateResponseOneOf> for ValidationError {
+    fn from(f: OrgsUpdateResponseOneOf) -> Self {
+        f.validation_error().unwrap().clone()
+    }
+}
+
+impl From<OrgsUpdateResponseOneOf> for ValidationErrorSimple {
+    fn from(f: OrgsUpdateResponseOneOf) -> Self {
+        f.validation_error_simple().unwrap().clone()
     }
 }
 
@@ -28007,11 +28233,36 @@ impl ProjectsCreateCardRequestOneOf {
         }
         None
     }
+
     pub fn projects_create_card_request_data(&self) -> Option<&ProjectsCreateCardRequestData> {
         if let ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequestData(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<ProjectsCreateCardRequest> for ProjectsCreateCardRequestOneOf {
+    fn from(f: ProjectsCreateCardRequest) -> Self {
+        ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequest(f)
+    }
+}
+
+impl From<ProjectsCreateCardRequestData> for ProjectsCreateCardRequestOneOf {
+    fn from(f: ProjectsCreateCardRequestData) -> Self {
+        ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequestData(f)
+    }
+}
+
+impl From<ProjectsCreateCardRequestOneOf> for ProjectsCreateCardRequest {
+    fn from(f: ProjectsCreateCardRequestOneOf) -> Self {
+        f.projects_create_card_request().unwrap().clone()
+    }
+}
+
+impl From<ProjectsCreateCardRequestOneOf> for ProjectsCreateCardRequestData {
+    fn from(f: ProjectsCreateCardRequestOneOf) -> Self {
+        f.projects_create_card_request_data().unwrap().clone()
     }
 }
 
@@ -28811,11 +29062,36 @@ impl ReposAddStatusCheckContextsRequestOneOf {
         }
         None
     }
+
     pub fn vec_string(&self) -> Option<&Vec<String>> {
         if let ReposAddStatusCheckContextsRequestOneOf::StringVector(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<ReposAddStatusCheckContextsRequest> for ReposAddStatusCheckContextsRequestOneOf {
+    fn from(f: ReposAddStatusCheckContextsRequest) -> Self {
+        ReposAddStatusCheckContextsRequestOneOf::ReposAddStatusCheckContextsRequest(f)
+    }
+}
+
+impl From<Vec<String>> for ReposAddStatusCheckContextsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ReposAddStatusCheckContextsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<ReposAddStatusCheckContextsRequestOneOf> for ReposAddStatusCheckContextsRequest {
+    fn from(f: ReposAddStatusCheckContextsRequestOneOf) -> Self {
+        f.repos_add_status_check_contexts_request().unwrap().clone()
+    }
+}
+
+impl From<ReposAddStatusCheckContextsRequestOneOf> for Vec<String> {
+    fn from(f: ReposAddStatusCheckContextsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
     }
 }
 
@@ -28851,11 +29127,38 @@ impl ReposAddAppAccessRestrictionsRequestOneOf {
         }
         None
     }
+
     pub fn vec_string(&self) -> Option<&Vec<String>> {
         if let ReposAddAppAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<ReposAddAppAccessRestrictionsRequest> for ReposAddAppAccessRestrictionsRequestOneOf {
+    fn from(f: ReposAddAppAccessRestrictionsRequest) -> Self {
+        ReposAddAppAccessRestrictionsRequestOneOf::ReposAddAppAccessRestrictionsRequest(f)
+    }
+}
+
+impl From<Vec<String>> for ReposAddAppAccessRestrictionsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ReposAddAppAccessRestrictionsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<ReposAddAppAccessRestrictionsRequestOneOf> for ReposAddAppAccessRestrictionsRequest {
+    fn from(f: ReposAddAppAccessRestrictionsRequestOneOf) -> Self {
+        f.repos_add_app_access_restrictions_request()
+            .unwrap()
+            .clone()
+    }
+}
+
+impl From<ReposAddAppAccessRestrictionsRequestOneOf> for Vec<String> {
+    fn from(f: ReposAddAppAccessRestrictionsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
     }
 }
 
@@ -28894,11 +29197,38 @@ impl ReposAddTeamAccessRestrictionsRequestOneOf {
         }
         None
     }
+
     pub fn vec_string(&self) -> Option<&Vec<String>> {
         if let ReposAddTeamAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<ReposAddTeamAccessRestrictionsRequest> for ReposAddTeamAccessRestrictionsRequestOneOf {
+    fn from(f: ReposAddTeamAccessRestrictionsRequest) -> Self {
+        ReposAddTeamAccessRestrictionsRequestOneOf::ReposAddTeamAccessRestrictionsRequest(f)
+    }
+}
+
+impl From<Vec<String>> for ReposAddTeamAccessRestrictionsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ReposAddTeamAccessRestrictionsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<ReposAddTeamAccessRestrictionsRequestOneOf> for ReposAddTeamAccessRestrictionsRequest {
+    fn from(f: ReposAddTeamAccessRestrictionsRequestOneOf) -> Self {
+        f.repos_add_team_access_restrictions_request()
+            .unwrap()
+            .clone()
+    }
+}
+
+impl From<ReposAddTeamAccessRestrictionsRequestOneOf> for Vec<String> {
+    fn from(f: ReposAddTeamAccessRestrictionsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
     }
 }
 
@@ -28934,11 +29264,38 @@ impl ReposAddUserAccessRestrictionsRequestOneOf {
         }
         None
     }
+
     pub fn vec_string(&self) -> Option<&Vec<String>> {
         if let ReposAddUserAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<ReposAddUserAccessRestrictionsRequest> for ReposAddUserAccessRestrictionsRequestOneOf {
+    fn from(f: ReposAddUserAccessRestrictionsRequest) -> Self {
+        ReposAddUserAccessRestrictionsRequestOneOf::ReposAddUserAccessRestrictionsRequest(f)
+    }
+}
+
+impl From<Vec<String>> for ReposAddUserAccessRestrictionsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ReposAddUserAccessRestrictionsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<ReposAddUserAccessRestrictionsRequestOneOf> for ReposAddUserAccessRestrictionsRequest {
+    fn from(f: ReposAddUserAccessRestrictionsRequestOneOf) -> Self {
+        f.repos_add_user_access_restrictions_request()
+            .unwrap()
+            .clone()
+    }
+}
+
+impl From<ReposAddUserAccessRestrictionsRequestOneOf> for Vec<String> {
+    fn from(f: ReposAddUserAccessRestrictionsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
     }
 }
 
@@ -29905,23 +30262,74 @@ impl ReposGetContentResponseOneOf {
         }
         None
     }
+
     pub fn content_submodule(&self) -> Option<&ContentSubmodule> {
         if let ReposGetContentResponseOneOf::ContentSubmodule(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn content_symlink(&self) -> Option<&ContentSymlink> {
         if let ReposGetContentResponseOneOf::ContentSymlink(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn vec_entries(&self) -> Option<&Vec<Entries>> {
         if let ReposGetContentResponseOneOf::EntriesVector(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<ContentFile> for ReposGetContentResponseOneOf {
+    fn from(f: ContentFile) -> Self {
+        ReposGetContentResponseOneOf::ContentFile(f)
+    }
+}
+
+impl From<ContentSubmodule> for ReposGetContentResponseOneOf {
+    fn from(f: ContentSubmodule) -> Self {
+        ReposGetContentResponseOneOf::ContentSubmodule(f)
+    }
+}
+
+impl From<ContentSymlink> for ReposGetContentResponseOneOf {
+    fn from(f: ContentSymlink) -> Self {
+        ReposGetContentResponseOneOf::ContentSymlink(f)
+    }
+}
+
+impl From<Vec<Entries>> for ReposGetContentResponseOneOf {
+    fn from(f: Vec<Entries>) -> Self {
+        ReposGetContentResponseOneOf::EntriesVector(f)
+    }
+}
+
+impl From<ReposGetContentResponseOneOf> for ContentFile {
+    fn from(f: ReposGetContentResponseOneOf) -> Self {
+        f.content_file().unwrap().clone()
+    }
+}
+
+impl From<ReposGetContentResponseOneOf> for ContentSubmodule {
+    fn from(f: ReposGetContentResponseOneOf) -> Self {
+        f.content_submodule().unwrap().clone()
+    }
+}
+
+impl From<ReposGetContentResponseOneOf> for ContentSymlink {
+    fn from(f: ReposGetContentResponseOneOf) -> Self {
+        f.content_symlink().unwrap().clone()
+    }
+}
+
+impl From<ReposGetContentResponseOneOf> for Vec<Entries> {
+    fn from(f: ReposGetContentResponseOneOf) -> Self {
+        f.vec_entries().unwrap().clone()
     }
 }
 
@@ -30141,11 +30549,36 @@ impl ReposCreateDeploymentRequestPayloadOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let ReposCreateDeploymentRequestPayloadOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<Data> for ReposCreateDeploymentRequestPayloadOneOf {
+    fn from(f: Data) -> Self {
+        ReposCreateDeploymentRequestPayloadOneOf::Data(f)
+    }
+}
+
+impl From<String> for ReposCreateDeploymentRequestPayloadOneOf {
+    fn from(f: String) -> Self {
+        ReposCreateDeploymentRequestPayloadOneOf::String(f)
+    }
+}
+
+impl From<ReposCreateDeploymentRequestPayloadOneOf> for Data {
+    fn from(f: ReposCreateDeploymentRequestPayloadOneOf) -> Self {
+        f.data().unwrap().clone()
+    }
+}
+
+impl From<ReposCreateDeploymentRequestPayloadOneOf> for String {
+    fn from(f: ReposCreateDeploymentRequestPayloadOneOf) -> Self {
+        f.string().unwrap().clone()
     }
 }
 
@@ -31251,11 +31684,36 @@ impl TitleOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let TitleOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<i64> for TitleOneOf {
+    fn from(f: i64) -> Self {
+        TitleOneOf::I64(f)
+    }
+}
+
+impl From<String> for TitleOneOf {
+    fn from(f: String) -> Self {
+        TitleOneOf::String(f)
+    }
+}
+
+impl From<TitleOneOf> for i64 {
+    fn from(f: TitleOneOf) -> Self {
+        *f.i64().unwrap()
+    }
+}
+
+impl From<TitleOneOf> for String {
+    fn from(f: TitleOneOf) -> Self {
+        f.string().unwrap().clone()
     }
 }
 
@@ -31280,11 +31738,36 @@ impl MilestoneOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let MilestoneOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<i64> for MilestoneOneOf {
+    fn from(f: i64) -> Self {
+        MilestoneOneOf::I64(f)
+    }
+}
+
+impl From<String> for MilestoneOneOf {
+    fn from(f: String) -> Self {
+        MilestoneOneOf::String(f)
+    }
+}
+
+impl From<MilestoneOneOf> for i64 {
+    fn from(f: MilestoneOneOf) -> Self {
+        *f.i64().unwrap()
+    }
+}
+
+impl From<MilestoneOneOf> for String {
+    fn from(f: MilestoneOneOf) -> Self {
+        f.string().unwrap().clone()
     }
 }
 
@@ -31334,11 +31817,36 @@ impl IssuesCreateRequestLabelsOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let IssuesCreateRequestLabelsOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<LabelsDataType> for IssuesCreateRequestLabelsOneOf {
+    fn from(f: LabelsDataType) -> Self {
+        IssuesCreateRequestLabelsOneOf::LabelsDataType(f)
+    }
+}
+
+impl From<String> for IssuesCreateRequestLabelsOneOf {
+    fn from(f: String) -> Self {
+        IssuesCreateRequestLabelsOneOf::String(f)
+    }
+}
+
+impl From<IssuesCreateRequestLabelsOneOf> for LabelsDataType {
+    fn from(f: IssuesCreateRequestLabelsOneOf) -> Self {
+        f.labels_data_type().unwrap().clone()
+    }
+}
+
+impl From<IssuesCreateRequestLabelsOneOf> for String {
+    fn from(f: IssuesCreateRequestLabelsOneOf) -> Self {
+        f.string().unwrap().clone()
     }
 }
 
@@ -31571,11 +32079,36 @@ impl IssuesUpdateRequestMilestoneOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let IssuesUpdateRequestMilestoneOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<i64> for IssuesUpdateRequestMilestoneOneOf {
+    fn from(f: i64) -> Self {
+        IssuesUpdateRequestMilestoneOneOf::I64(f)
+    }
+}
+
+impl From<String> for IssuesUpdateRequestMilestoneOneOf {
+    fn from(f: String) -> Self {
+        IssuesUpdateRequestMilestoneOneOf::String(f)
+    }
+}
+
+impl From<IssuesUpdateRequestMilestoneOneOf> for i64 {
+    fn from(f: IssuesUpdateRequestMilestoneOneOf) -> Self {
+        *f.i64().unwrap()
+    }
+}
+
+impl From<IssuesUpdateRequestMilestoneOneOf> for String {
+    fn from(f: IssuesUpdateRequestMilestoneOneOf) -> Self {
+        f.string().unwrap().clone()
     }
 }
 
@@ -31701,29 +32234,93 @@ impl IssuesAddLabelsRequestOneOf {
         }
         None
     }
+
     pub fn issues_add_labels_request_data_type(&self) -> Option<&IssuesAddLabelsRequestDataType> {
         if let IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataType(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn vec_issues_add_labels_request_data(&self) -> Option<&Vec<IssuesAddLabelsRequestData>> {
         if let IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataVector(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let IssuesAddLabelsRequestOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn vec_string(&self) -> Option<&Vec<String>> {
         if let IssuesAddLabelsRequestOneOf::StringVector(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<IssuesAddLabelsRequest> for IssuesAddLabelsRequestOneOf {
+    fn from(f: IssuesAddLabelsRequest) -> Self {
+        IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequest(f)
+    }
+}
+
+impl From<IssuesAddLabelsRequestDataType> for IssuesAddLabelsRequestOneOf {
+    fn from(f: IssuesAddLabelsRequestDataType) -> Self {
+        IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataType(f)
+    }
+}
+
+impl From<Vec<IssuesAddLabelsRequestData>> for IssuesAddLabelsRequestOneOf {
+    fn from(f: Vec<IssuesAddLabelsRequestData>) -> Self {
+        IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataVector(f)
+    }
+}
+
+impl From<String> for IssuesAddLabelsRequestOneOf {
+    fn from(f: String) -> Self {
+        IssuesAddLabelsRequestOneOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for IssuesAddLabelsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        IssuesAddLabelsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<IssuesAddLabelsRequestOneOf> for IssuesAddLabelsRequest {
+    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
+        f.issues_add_labels_request().unwrap().clone()
+    }
+}
+
+impl From<IssuesAddLabelsRequestOneOf> for IssuesAddLabelsRequestDataType {
+    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
+        f.issues_add_labels_request_data_type().unwrap().clone()
+    }
+}
+
+impl From<IssuesAddLabelsRequestOneOf> for Vec<IssuesAddLabelsRequestData> {
+    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
+        f.vec_issues_add_labels_request_data().unwrap().clone()
+    }
+}
+
+impl From<IssuesAddLabelsRequestOneOf> for String {
+    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<IssuesAddLabelsRequestOneOf> for Vec<String> {
+    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
     }
 }
 
@@ -33591,17 +34188,55 @@ impl EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn serde_json_value(&self) -> Option<&serde_json::Value> {
         if let EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::Value(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<Data> for EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
+    fn from(f: Data) -> Self {
+        EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::Data(f)
+    }
+}
+
+impl From<String> for EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
+    fn from(f: String) -> Self {
+        EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::String(f)
+    }
+}
+
+impl From<serde_json::Value> for EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
+    fn from(f: serde_json::Value) -> Self {
+        EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::Value(f)
+    }
+}
+
+impl From<EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf> for Data {
+    fn from(f: EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf) -> Self {
+        f.data().unwrap().clone()
+    }
+}
+
+impl From<EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf> for String {
+    fn from(f: EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf> for serde_json::Value {
+    fn from(f: EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf) -> Self {
+        f.serde_json_value().unwrap().clone()
     }
 }
 
@@ -33836,17 +34471,55 @@ impl ScimUpdateAttributeUserRequestOperationsValueOneOf {
         }
         None
     }
+
     pub fn string(&self) -> Option<&String> {
         if let ScimUpdateAttributeUserRequestOperationsValueOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn value(&self) -> Option<&Value> {
         if let ScimUpdateAttributeUserRequestOperationsValueOneOf::Value(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<Vec<ScimUserEmails>> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
+    fn from(f: Vec<ScimUserEmails>) -> Self {
+        ScimUpdateAttributeUserRequestOperationsValueOneOf::ScimUserEmailsVector(f)
+    }
+}
+
+impl From<String> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
+    fn from(f: String) -> Self {
+        ScimUpdateAttributeUserRequestOperationsValueOneOf::String(f)
+    }
+}
+
+impl From<Value> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
+    fn from(f: Value) -> Self {
+        ScimUpdateAttributeUserRequestOperationsValueOneOf::Value(f)
+    }
+}
+
+impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for Vec<ScimUserEmails> {
+    fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
+        f.vec_scim_user_emails().unwrap().clone()
+    }
+}
+
+impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for String {
+    fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for Value {
+    fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
+        f.value().unwrap().clone()
     }
 }
 
@@ -34424,11 +35097,36 @@ impl UsersGetByUsernameResponseOneOf {
         }
         None
     }
+
     pub fn public_user(&self) -> Option<&PublicUser> {
         if let UsersGetByUsernameResponseOneOf::PublicUser(ref_) = self {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<PrivateUser> for UsersGetByUsernameResponseOneOf {
+    fn from(f: PrivateUser) -> Self {
+        UsersGetByUsernameResponseOneOf::PrivateUser(f)
+    }
+}
+
+impl From<PublicUser> for UsersGetByUsernameResponseOneOf {
+    fn from(f: PublicUser) -> Self {
+        UsersGetByUsernameResponseOneOf::PublicUser(f)
+    }
+}
+
+impl From<UsersGetByUsernameResponseOneOf> for PrivateUser {
+    fn from(f: UsersGetByUsernameResponseOneOf) -> Self {
+        f.private_user().unwrap().clone()
+    }
+}
+
+impl From<UsersGetByUsernameResponseOneOf> for PublicUser {
+    fn from(f: UsersGetByUsernameResponseOneOf) -> Self {
+        f.public_user().unwrap().clone()
     }
 }
 
@@ -34573,12 +35271,14 @@ impl UsersAddEmailAuthenticatedRequestOneOf {
         }
         None
     }
+
     pub fn vec_string(&self) -> Option<&Vec<String>> {
         if let UsersAddEmailAuthenticatedRequestOneOf::StringVector(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn users_add_email_authenticated_request(
         &self,
     ) -> Option<&UsersAddEmailAuthenticatedRequest> {
@@ -34588,6 +35288,42 @@ impl UsersAddEmailAuthenticatedRequestOneOf {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<String> for UsersAddEmailAuthenticatedRequestOneOf {
+    fn from(f: String) -> Self {
+        UsersAddEmailAuthenticatedRequestOneOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for UsersAddEmailAuthenticatedRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        UsersAddEmailAuthenticatedRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<UsersAddEmailAuthenticatedRequest> for UsersAddEmailAuthenticatedRequestOneOf {
+    fn from(f: UsersAddEmailAuthenticatedRequest) -> Self {
+        UsersAddEmailAuthenticatedRequestOneOf::UsersAddEmailAuthenticatedRequest(f)
+    }
+}
+
+impl From<UsersAddEmailAuthenticatedRequestOneOf> for String {
+    fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<UsersAddEmailAuthenticatedRequestOneOf> for Vec<String> {
+    fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
+}
+
+impl From<UsersAddEmailAuthenticatedRequestOneOf> for UsersAddEmailAuthenticatedRequest {
+    fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
+        f.users_add_email_authenticated_request().unwrap().clone()
     }
 }
 
@@ -34624,12 +35360,14 @@ impl UsersDeleteEmailAuthenticatedRequestOneOf {
         }
         None
     }
+
     pub fn vec_string(&self) -> Option<&Vec<String>> {
         if let UsersDeleteEmailAuthenticatedRequestOneOf::StringVector(ref_) = self {
             return Some(ref_);
         }
         None
     }
+
     pub fn users_delete_email_authenticated_request(
         &self,
     ) -> Option<&UsersDeleteEmailAuthenticatedRequest> {
@@ -34640,6 +35378,44 @@ impl UsersDeleteEmailAuthenticatedRequestOneOf {
             return Some(ref_);
         }
         None
+    }
+}
+
+impl From<String> for UsersDeleteEmailAuthenticatedRequestOneOf {
+    fn from(f: String) -> Self {
+        UsersDeleteEmailAuthenticatedRequestOneOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for UsersDeleteEmailAuthenticatedRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        UsersDeleteEmailAuthenticatedRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<UsersDeleteEmailAuthenticatedRequest> for UsersDeleteEmailAuthenticatedRequestOneOf {
+    fn from(f: UsersDeleteEmailAuthenticatedRequest) -> Self {
+        UsersDeleteEmailAuthenticatedRequestOneOf::UsersDeleteEmailAuthenticatedRequest(f)
+    }
+}
+
+impl From<UsersDeleteEmailAuthenticatedRequestOneOf> for String {
+    fn from(f: UsersDeleteEmailAuthenticatedRequestOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<UsersDeleteEmailAuthenticatedRequestOneOf> for Vec<String> {
+    fn from(f: UsersDeleteEmailAuthenticatedRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
+}
+
+impl From<UsersDeleteEmailAuthenticatedRequestOneOf> for UsersDeleteEmailAuthenticatedRequest {
+    fn from(f: UsersDeleteEmailAuthenticatedRequestOneOf) -> Self {
+        f.users_delete_email_authenticated_request()
+            .unwrap()
+            .clone()
     }
 }
 

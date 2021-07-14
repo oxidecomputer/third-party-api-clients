@@ -85,7 +85,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
 
                     // Render the implementation to easily unpack these things for the end user.
                     a(&format!("impl {} {{", sn));
-                    for (fn_name, name) in name_map {
+                    for (fn_name, name) in &name_map {
                         a(&format!(
                             r#"pub fn {}(&self) -> Option<&{}> {{
                             if let {}::{}(ref_) = self {{
@@ -93,7 +93,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                             }}
                             None
                         }}"#,
-                            to_snake_case(&name)
+                            to_snake_case(name)
                                 .replace("f_64", "f64")
                                 .replace("f_32", "f32")
                                 .replace("i_64", "i64")
@@ -102,9 +102,65 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                             sn,
                             fn_name,
                         ));
+                        a("");
                     }
                     a("}");
                     a("");
+
+                    // Render the implementation to easily unpack these things for the end user.
+                    for (fn_name, name) in &name_map {
+                        a(&format!(
+                            r#"impl From<{}> for {} {{
+                                    fn from(f: {}) -> Self {{
+                                        {}::{}(f)
+                                    }}
+                            }}"#,
+                            name, sn, name, sn, fn_name,
+                        ));
+                        a("");
+                    }
+
+                    for name in name_map.values() {
+                        if name == "i64"
+                            || name == "i32"
+                            || name == "f64"
+                            || name == "f32"
+                            || name == "bool"
+                        {
+                            a(&format!(
+                                r#"impl From<{}> for {} {{
+                                    fn from(f: {}) -> Self {{
+                                        *f.{}().unwrap()
+                                    }}
+                            }}"#,
+                                sn,
+                                name,
+                                sn,
+                                to_snake_case(name)
+                                    .replace("f_64", "f64")
+                                    .replace("f_32", "f32")
+                                    .replace("i_64", "i64")
+                                    .replace("i_32", "i32"),
+                            ));
+                        } else {
+                            a(&format!(
+                                r#"impl From<{}> for {} {{
+                                    fn from(f: {}) -> Self {{
+                                        f.{}().unwrap().clone()
+                                    }}
+                            }}"#,
+                                sn,
+                                name,
+                                sn,
+                                to_snake_case(name)
+                                    .replace("f_64", "f64")
+                                    .replace("f_32", "f32")
+                                    .replace("i_64", "i64")
+                                    .replace("i_32", "i32"),
+                            ));
+                        }
+                        a("");
+                    }
                 }
                 TypeDetails::Object(omap, schema_data) => {
                     let desc = if let Some(description) = &schema_data.description {
