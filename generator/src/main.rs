@@ -847,6 +847,7 @@ impl TypeSpace {
                         || rt == "i64"
                         || rt == "f32"
                         || rt == "f64"
+                        || rt.starts_with("Option<")
                     {
                         Ok(rt)
                     } else {
@@ -1341,17 +1342,20 @@ impl TypeSpace {
                     }
 
                     match &st.format {
+                        // It is far too risky to not make all the DateTime/Dates optional
+                        // otherwise you are just risking a panic when the vendor passes back
+                        // a null.
                         Item(DateTime) => Ok((
                             Some(uid.to_string()),
                             TypeDetails::Basic(
-                                "chrono::DateTime<chrono::Utc>".to_string(),
+                                "Option<chrono::DateTime<chrono::Utc>>".to_string(),
                                 s.schema_data.clone(),
                             ),
                         )),
                         Item(Date) => Ok((
                             Some(uid.to_string()),
                             TypeDetails::Basic(
-                                "chrono::NaiveDate".to_string(),
+                                "Option<chrono::NaiveDate>".to_string(),
                                 s.schema_data.clone(),
                             ),
                         )),

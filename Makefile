@@ -1,7 +1,7 @@
 GITHUB_SPEC = $(CURDIR)/specs/github/api.github.com.json
 
 generate: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.11 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.12 \
 		-o github \
 		-n octorust \
 		-d "A fully generated & opinionated API client for the GitHub API."
