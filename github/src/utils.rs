@@ -223,6 +223,13 @@ impl<'de> Visitor<'de> for I32Visitor {
             Err(E::custom(format!("i32 out of range: {}", value)))
         }
     }
+
+    fn visit_u64<E>(self, value: u64) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(value as i32)
+    }
 }
 
 pub mod deserialize_null_i32 {
@@ -282,6 +289,13 @@ impl<'de> Visitor<'de> for I64Visitor {
         E: de::Error,
     {
         Ok(value)
+    }
+
+    fn visit_u64<E>(self, value: u64) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(value as i64)
     }
 }
 

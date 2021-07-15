@@ -26542,103 +26542,103 @@
       "get": {
         "summary": "Get repository content",
         "description": "Gets the contents of a file or directory in a repository. Specify the file path or directory in `:path`. If you omit\n`:path`, you will receive the contents of the repository's root directory. See the description below regarding what the API response includes for directories. \n\nFiles and symlinks support [a custom media type](https://docs.github.com/rest/reference/repos#custom-media-types) for\nretrieving the raw content or rendered HTML (when supported). All content types support [a custom media\ntype](https://docs.github.com/rest/reference/repos#custom-media-types) to ensure the content is returned in a consistent\nobject format.\n\n**Note**:\n*   To get a repository's contents recursively, you can [recursively get the tree](https://docs.github.com/rest/reference/git#trees).\n*   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees\nAPI](https://docs.github.com/rest/reference/git#get-a-tree).\n*   This API supports files up to 1 megabyte in size.\n\n#### If the content is a directory\nThe response will be an array of objects, one object for each item in the directory.\nWhen listing the contents of a directory, submodules have their \"type\" specified as \"file\". Logically, the value\n_should_ be \"submodule\". This behavior exists in API v3 [for backwards compatibility purposes](https://git.io/v1YCW).\nIn the next major version of the API, the type will be returned as \"submodule\".\n\n#### If the content is a symlink \nIf the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the\nAPI responds with the content of the file (in the format shown in the example. Otherwise, the API responds with an object \ndescribing the symlink itself.\n\n#### If the content is a submodule\nThe `submodule_git_url` identifies the location of the submodule repository, and the `sha` identifies a specific\ncommit within the submodule repository. Git uses the given URL when cloning the submodule repository, and checks out\nthe submodule at that specific commit.\n\nIf the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links[\"git\"]`) and the\ngithub.com URLs (`html_url` and `_links[\"html\"]`) will have null values.",
-        "tags": [
-          "repos"
-        ],
-        "operationId": "repos/get-content",
-        "externalDocs": {
-          "description": "API method documentation",
-          "url": "https://docs.github.com/rest/reference/repos#get-repository-content"
-        },
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/owner"
+          "tags": [
+            "repos"
+          ],
+          "operationId": "repos/get-content",
+          "externalDocs": {
+            "description": "API method documentation",
+            "url": "https://docs.github.com/rest/reference/repos#get-repository-content"
           },
-          {
-            "$ref": "#/components/parameters/repo"
-          },
-          {
-            "name": "path",
-            "description": "path parameter",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/owner"
             },
-            "x-multi-segment": true
-          },
-          {
-            "name": "ref",
-            "description": "The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/vnd.github.v3.object": {
-                "schema": {
-                  "$ref": "#/components/schemas/content-tree"
-                }
+            {
+              "$ref": "#/components/parameters/repo"
+            },
+            {
+              "name": "path",
+              "description": "path parameter",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
               },
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/content-directory"
-                    },
-                    {
-                      "$ref": "#/components/schemas/content-file"
-                    },
-                    {
-                      "$ref": "#/components/schemas/content-symlink"
-                    },
-                    {
-                      "$ref": "#/components/schemas/content-submodule"
-                    }
-                  ]
+              "x-multi-segment": true
+            },
+            {
+              "name": "ref",
+              "description": "The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Response",
+              "content": {
+                "application/vnd.github.v3.object": {
+                  "schema": {
+                    "$ref": "#/components/schemas/content-tree"
+                  }
                 },
-                "examples": {
-                  "response-if-content-is-a-file": {
-                    "$ref": "#/components/examples/content-file-response-if-content-is-a-file"
+                "application/json": {
+                  "schema": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/content-directory"
+                      },
+                      {
+                        "$ref": "#/components/schemas/content-file"
+                      },
+                      {
+                        "$ref": "#/components/schemas/content-symlink"
+                      },
+                      {
+                        "$ref": "#/components/schemas/content-submodule"
+                      }
+                    ]
                   },
-                  "response-if-content-is-a-directory": {
-                    "$ref": "#/components/examples/content-file-response-if-content-is-a-directory"
-                  },
-                  "response-if-content-is-a-symlink": {
-                    "$ref": "#/components/examples/content-file-response-if-content-is-a-symlink"
-                  },
-                  "response-if-content-is-a-submodule": {
-                    "$ref": "#/components/examples/content-file-response-if-content-is-a-submodule"
+                  "examples": {
+                    "response-if-content-is-a-file": {
+                      "$ref": "#/components/examples/content-file-response-if-content-is-a-file"
+                    },
+                    "response-if-content-is-a-directory": {
+                      "$ref": "#/components/examples/content-file-response-if-content-is-a-directory"
+                    },
+                    "response-if-content-is-a-symlink": {
+                      "$ref": "#/components/examples/content-file-response-if-content-is-a-symlink"
+                    },
+                    "response-if-content-is-a-submodule": {
+                      "$ref": "#/components/examples/content-file-response-if-content-is-a-submodule"
+                    }
                   }
                 }
               }
+            },
+            "404": {
+              "$ref": "#/components/responses/not_found"
+            },
+            "403": {
+              "$ref": "#/components/responses/forbidden"
+            },
+            "302": {
+              "$ref": "#/components/responses/found"
             }
           },
-          "404": {
-            "$ref": "#/components/responses/not_found"
-          },
-          "403": {
-            "$ref": "#/components/responses/forbidden"
-          },
-          "302": {
-            "$ref": "#/components/responses/found"
-          }
-        },
-        "x-github": {
-          "githubCloudOnly": false,
-          "enabledForGitHubApps": true,
-          "previews": [
+          "x-github": {
+            "githubCloudOnly": false,
+            "enabledForGitHubApps": true,
+            "previews": [
 
-          ],
-          "category": "repos",
-          "subcategory": "contents"
-        }
+            ],
+            "category": "repos",
+            "subcategory": "contents"
+          }
       },
       "put": {
         "summary": "Create or update file contents",
@@ -55219,24 +55219,21 @@
           },
           "files": {
             "type": "object",
-            "additionalProperties": {
-              "type": "object",
-              "properties": {
-                "filename": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "language": {
-                  "type": "string"
-                },
-                "raw_url": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "integer"
-                }
+            "properties": {
+              "filename": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "language": {
+                "type": "string"
+              },
+              "raw_url": {
+                "type": "string"
+              },
+              "size": {
+                "type": "integer"
               }
             }
           },
@@ -55630,24 +55627,21 @@
               },
               "files": {
                 "type": "object",
-                "additionalProperties": {
-                  "type": "object",
-                  "properties": {
-                    "filename": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "type": "string"
-                    },
-                    "language": {
-                      "type": "string"
-                    },
-                    "raw_url": {
-                      "type": "string"
-                    },
-                    "size": {
-                      "type": "integer"
-                    }
+                "properties": {
+                  "filename": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "raw_url": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "integer"
                   }
                 }
               },
@@ -55747,32 +55741,29 @@
             "type": "string"
           },
           "files": {
+            "nullable": true,
             "type": "object",
-            "additionalProperties": {
-              "nullable": true,
-              "type": "object",
-              "properties": {
-                "filename": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "language": {
-                  "type": "string"
-                },
-                "raw_url": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "integer"
-                },
-                "truncated": {
-                  "type": "boolean"
-                },
-                "content": {
-                  "type": "string"
-                }
+            "properties": {
+              "filename": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "language": {
+                "type": "string"
+              },
+              "raw_url": {
+                "type": "string"
+              },
+              "size": {
+                "type": "integer"
+              },
+              "truncated": {
+                "type": "boolean"
+              },
+              "content": {
+                "type": "string"
               }
             }
           },
@@ -56585,13 +56576,7 @@
             "example": "octocat/Hello-World"
           },
           "owner": {
-            "type": "object",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/simple-user"
-              }
-            ]
+            "$ref": "#/components/schemas/simple-user"
           },
           "private": {
             "type": "boolean"

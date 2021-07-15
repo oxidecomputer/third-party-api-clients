@@ -921,7 +921,7 @@ impl TypeSpace {
             TypeEntry {
                 id: oid.clone(),
                 name: None,
-                details: TypeDetails::Optional(want.clone(), sd),
+                details: TypeDetails::Optional(want, sd),
             },
         );
         oid
@@ -1402,6 +1402,7 @@ impl TypeSpace {
                 let id = self.select(name, all_of.get(0).unwrap(), "")?;
                 if let Some(et) = self.id_to_entry.get(&id) {
                     let sd = self.get_schema_data_for_id(&id).unwrap().clone();
+
                     if s.schema_data.nullable {
                         if let TypeDetails::Optional(..) = &et.details {
                             // Do nothing we already have an optional.
@@ -1413,7 +1414,7 @@ impl TypeSpace {
 
                     Ok((et.name.clone(), et.details.clone()))
                 } else {
-                    bail!("allof schema kind: {:?} {:?} {:?}", id, name, s,);
+                    bail!("allof schema kind not found: {:?} {:?} {:?}", id, name, s,);
                 }
             }
             openapiv3::SchemaKind::OneOf { one_of } => {
@@ -1468,7 +1469,8 @@ impl TypeSpace {
                 }
             }
             openapiv3::SchemaKind::Any(a) => {
-                println!("got ANY kind: {:?} {:?}", name, a);
+                println!("got ANY kind: {:?} {:?}\n", name, a);
+
                 // Then we use the serde_json type.
                 Ok((
                     Some(nam),
