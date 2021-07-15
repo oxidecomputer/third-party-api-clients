@@ -1511,9 +1511,19 @@ impl TypeSpace {
                 }
             }
             openapiv3::SchemaKind::Any(a) => {
-                println!("got ANY kind: {:?} {} {:?}\n", name, parent_name, a);
+                // There is at least one occurance where the github api spec gives "items"
+                // but not a type array. Let's parse for that.
+                // https://github.com/github/rest-api-description/issues/455
+                if let Some(items) = &a.items {
+                    // Determine the type of item that will be in this array.
+                    let itid = self.select_box(Some(&clean_name(&nam)), items, parent_name)?;
+                    return Ok((None, TypeDetails::Array(itid, s.schema_data.clone())));
+                }
 
+                // We have no idea what this is.
                 // Then we use the serde_json type.
+                println!("[warn] got ANY kind: {:?} {} {:?}\n", name, parent_name, a);
+
                 Ok((
                     Some(nam),
                     TypeDetails::Basic("serde_json::Value".to_string(), s.schema_data.clone()),

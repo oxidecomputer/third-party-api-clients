@@ -13265,8 +13265,8 @@ pub struct CheckRun {
     pub node_id: String,
     #[serde()]
     pub output: Output,
-    #[serde()]
-    pub pull_requests: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub pull_requests: Vec<PullRequestMinimal>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
