@@ -844,6 +844,14 @@ impl TypeSpace {
                     Ok(format!("Vec<{}>", self.render_type(itid, in_mod)?))
                 }
                 TypeDetails::Optional(itid, _) => {
+                    // If it is an enum we should not make it optional.
+                    // We have default functions and we should use them.
+                    if let Some(te) = self.id_to_entry.get(tid) {
+                        if te.is_enum() {
+                            return Ok(rt);
+                        }
+                    }
+
                     let rt = self.render_type(itid, in_mod)?;
                     if rt == "String"
                         || rt.starts_with("Vec<")
@@ -1688,6 +1696,19 @@ fn render_param(
             a("}");
             a("}");
         }
+    }
+
+    // Add a method to check if it is empty if it has this Noop state.
+    if !required && default.is_none() {
+        a(&format!(
+            r#"impl {} {{
+            pub fn is_empty(&self) -> bool {{
+                matches!(self, {}::Noop)
+            }}
+    }}"#,
+            sn, sn
+        ));
+        a("");
     }
 
     out.to_string()

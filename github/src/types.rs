@@ -519,6 +519,11 @@ impl Default for Actions {
         Actions::Noop
     }
 }
+impl Actions {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Actions::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
@@ -545,6 +550,11 @@ impl std::fmt::Display for Administration {
 impl Default for Administration {
     fn default() -> Administration {
         Administration::Noop
+    }
+}
+impl Administration {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Administration::Noop)
     }
 }
 
@@ -575,6 +585,11 @@ impl Default for Checks {
         Checks::Noop
     }
 }
+impl Checks {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Checks::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
@@ -601,6 +616,11 @@ impl std::fmt::Display for ContentReferences {
 impl Default for ContentReferences {
     fn default() -> ContentReferences {
         ContentReferences::Noop
+    }
+}
+impl ContentReferences {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ContentReferences::Noop)
     }
 }
 
@@ -631,6 +651,11 @@ impl Default for Contents {
         Contents::Noop
     }
 }
+impl Contents {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Contents::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
@@ -657,6 +682,11 @@ impl std::fmt::Display for Deployments {
 impl Default for Deployments {
     fn default() -> Deployments {
         Deployments::Noop
+    }
+}
+impl Deployments {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Deployments::Noop)
     }
 }
 
@@ -687,6 +717,11 @@ impl Default for Environments {
         Environments::Noop
     }
 }
+impl Environments {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Environments::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
@@ -713,6 +748,11 @@ impl std::fmt::Display for Issues {
 impl Default for Issues {
     fn default() -> Issues {
         Issues::Noop
+    }
+}
+impl Issues {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Issues::Noop)
     }
 }
 
@@ -743,6 +783,11 @@ impl Default for Metadata {
         Metadata::Noop
     }
 }
+impl Metadata {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Metadata::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
@@ -769,6 +814,11 @@ impl std::fmt::Display for Packages {
 impl Default for Packages {
     fn default() -> Packages {
         Packages::Noop
+    }
+}
+impl Packages {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Packages::Noop)
     }
 }
 
@@ -799,6 +849,11 @@ impl Default for Pages {
         Pages::Noop
     }
 }
+impl Pages {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Pages::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
@@ -827,6 +882,11 @@ impl Default for PullRequests {
         PullRequests::Noop
     }
 }
+impl PullRequests {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullRequests::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
@@ -853,6 +913,11 @@ impl std::fmt::Display for RepositoryHooks {
 impl Default for RepositoryHooks {
     fn default() -> RepositoryHooks {
         RepositoryHooks::Noop
+    }
+}
+impl RepositoryHooks {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, RepositoryHooks::Noop)
     }
 }
 
@@ -885,6 +950,11 @@ impl Default for RepositoryProjects {
         RepositoryProjects::Noop
     }
 }
+impl RepositoryProjects {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, RepositoryProjects::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
@@ -911,6 +981,11 @@ impl std::fmt::Display for SecretScanningAlerts {
 impl Default for SecretScanningAlerts {
     fn default() -> SecretScanningAlerts {
         SecretScanningAlerts::Noop
+    }
+}
+impl SecretScanningAlerts {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SecretScanningAlerts::Noop)
     }
 }
 
@@ -941,6 +1016,11 @@ impl Default for Secrets {
         Secrets::Noop
     }
 }
+impl Secrets {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Secrets::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
@@ -967,6 +1047,11 @@ impl std::fmt::Display for SecurityEvents {
 impl Default for SecurityEvents {
     fn default() -> SecurityEvents {
         SecurityEvents::Noop
+    }
+}
+impl SecurityEvents {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SecurityEvents::Noop)
     }
 }
 
@@ -997,6 +1082,11 @@ impl Default for SingleFile {
         SingleFile::Noop
     }
 }
+impl SingleFile {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SingleFile::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
@@ -1025,6 +1115,11 @@ impl Default for Statuses {
         Statuses::Noop
     }
 }
+impl Statuses {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Statuses::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
@@ -1051,6 +1146,11 @@ impl Default for VulnerabilityAlerts {
         VulnerabilityAlerts::Noop
     }
 }
+impl VulnerabilityAlerts {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, VulnerabilityAlerts::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
@@ -1075,6 +1175,11 @@ impl std::fmt::Display for Workflows {
 impl Default for Workflows {
     fn default() -> Workflows {
         Workflows::Noop
+    }
+}
+impl Workflows {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Workflows::Noop)
     }
 }
 
@@ -1105,6 +1210,11 @@ impl Default for Members {
         Members::Noop
     }
 }
+impl Members {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Members::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
@@ -1131,6 +1241,11 @@ impl std::fmt::Display for OrganizationAdministration {
 impl Default for OrganizationAdministration {
     fn default() -> OrganizationAdministration {
         OrganizationAdministration::Noop
+    }
+}
+impl OrganizationAdministration {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrganizationAdministration::Noop)
     }
 }
 
@@ -1161,6 +1276,11 @@ impl Default for OrganizationHooks {
         OrganizationHooks::Noop
     }
 }
+impl OrganizationHooks {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrganizationHooks::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
@@ -1185,6 +1305,11 @@ impl std::fmt::Display for OrganizationPlan {
 impl Default for OrganizationPlan {
     fn default() -> OrganizationPlan {
         OrganizationPlan::Noop
+    }
+}
+impl OrganizationPlan {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrganizationPlan::Noop)
     }
 }
 
@@ -1217,6 +1342,11 @@ impl Default for OrganizationProjects {
         OrganizationProjects::Noop
     }
 }
+impl OrganizationProjects {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrganizationProjects::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token for organization packages published to GitHub Packages. Can be one of: `read` or `write`.
@@ -1243,6 +1373,11 @@ impl std::fmt::Display for OrganizationPackages {
 impl Default for OrganizationPackages {
     fn default() -> OrganizationPackages {
         OrganizationPackages::Noop
+    }
+}
+impl OrganizationPackages {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrganizationPackages::Noop)
     }
 }
 
@@ -1273,6 +1408,11 @@ impl Default for OrganizationSecrets {
         OrganizationSecrets::Noop
     }
 }
+impl OrganizationSecrets {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrganizationSecrets::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
@@ -1299,6 +1439,11 @@ impl std::fmt::Display for OrganizationSelfHostedRunners {
 impl Default for OrganizationSelfHostedRunners {
     fn default() -> OrganizationSelfHostedRunners {
         OrganizationSelfHostedRunners::Noop
+    }
+}
+impl OrganizationSelfHostedRunners {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrganizationSelfHostedRunners::Noop)
     }
 }
 
@@ -1329,6 +1474,11 @@ impl Default for OrganizationUserBlocking {
         OrganizationUserBlocking::Noop
     }
 }
+impl OrganizationUserBlocking {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrganizationUserBlocking::Noop)
+    }
+}
 
 /**
  * The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
@@ -1355,6 +1505,11 @@ impl std::fmt::Display for TeamDiscussions {
 impl Default for TeamDiscussions {
     fn default() -> TeamDiscussions {
         TeamDiscussions::Noop
+    }
+}
+impl TeamDiscussions {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, TeamDiscussions::Noop)
     }
 }
 
@@ -1543,6 +1698,11 @@ impl std::fmt::Display for RepositorySelection {
 impl Default for RepositorySelection {
     fn default() -> RepositorySelection {
         RepositorySelection::Noop
+    }
+}
+impl RepositorySelection {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, RepositorySelection::Noop)
     }
 }
 
@@ -2893,6 +3053,11 @@ impl Default for InstallationTokenRepositorySelection {
         InstallationTokenRepositorySelection::Noop
     }
 }
+impl InstallationTokenRepositorySelection {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, InstallationTokenRepositorySelection::Noop)
+    }
+}
 
 /// Authentication token for a GitHub App installed on a user or org.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3315,6 +3480,11 @@ impl Default for EnabledOrganizations {
         EnabledOrganizations::Noop
     }
 }
+impl EnabledOrganizations {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, EnabledOrganizations::Noop)
+    }
+}
 
 /**
  * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -3343,6 +3513,11 @@ impl std::fmt::Display for AllowedActions {
 impl Default for AllowedActions {
     fn default() -> AllowedActions {
         AllowedActions::Noop
+    }
+}
+impl AllowedActions {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, AllowedActions::Noop)
     }
 }
 
@@ -3549,6 +3724,11 @@ impl std::fmt::Display for Type {
 impl Default for Type {
     fn default() -> Type {
         Type::Noop
+    }
+}
+impl Type {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Type::Noop)
     }
 }
 
@@ -4354,6 +4534,11 @@ impl std::fmt::Display for AuthorAssociation {
 impl Default for AuthorAssociation {
     fn default() -> AuthorAssociation {
         AuthorAssociation::Noop
+    }
+}
+impl AuthorAssociation {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, AuthorAssociation::Noop)
     }
 }
 
@@ -7517,6 +7702,11 @@ impl Default for EnabledRepositories {
         EnabledRepositories::Noop
     }
 }
+impl EnabledRepositories {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, EnabledRepositories::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsOrganizationPermissions {
@@ -7634,6 +7824,11 @@ impl std::fmt::Display for Visibility {
 impl Default for Visibility {
     fn default() -> Visibility {
         Visibility::Noop
+    }
+}
+impl Visibility {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Visibility::Noop)
     }
 }
 
@@ -7988,6 +8183,11 @@ impl Default for InteractionGroup {
         InteractionGroup::Noop
     }
 }
+impl InteractionGroup {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, InteractionGroup::Noop)
+    }
+}
 
 /// Interaction limit settings.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8038,6 +8238,11 @@ impl std::fmt::Display for InteractionExpiry {
 impl Default for InteractionExpiry {
     fn default() -> InteractionExpiry {
         InteractionExpiry::Noop
+    }
+}
+impl InteractionExpiry {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, InteractionExpiry::Noop)
     }
 }
 
@@ -8291,6 +8496,11 @@ impl Default for OrgMembershipState {
         OrgMembershipState::Noop
     }
 }
+impl OrgMembershipState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrgMembershipState::Noop)
+    }
+}
 
 /**
  * The user's membership type in the organization.
@@ -8319,6 +8529,11 @@ impl std::fmt::Display for Role {
 impl Default for Role {
     fn default() -> Role {
         Role::Noop
+    }
+}
+impl Role {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Role::Noop)
     }
 }
 
@@ -8472,6 +8687,11 @@ impl Default for PackageType {
         PackageType::Noop
     }
 }
+impl PackageType {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PackageType::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(rename_all = "snake_case")]
@@ -8495,6 +8715,11 @@ impl std::fmt::Display for PackageVisibility {
 impl Default for PackageVisibility {
     fn default() -> PackageVisibility {
         PackageVisibility::Noop
+    }
+}
+impl PackageVisibility {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PackageVisibility::Noop)
     }
 }
 
@@ -8680,6 +8905,11 @@ impl Default for OrganizationPermission {
         OrganizationPermission::Noop
     }
 }
+impl OrganizationPermission {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrganizationPermission::Noop)
+    }
+}
 
 /// Projects are a way to organize columns and cards of work.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -8861,6 +9091,11 @@ impl std::fmt::Display for Privacy {
 impl Default for Privacy {
     fn default() -> Privacy {
         Privacy::Noop
+    }
+}
+impl Privacy {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Privacy::Noop)
     }
 }
 
@@ -9213,6 +9448,11 @@ impl Default for Content {
         Content::Noop
     }
 }
+impl Content {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Content::Noop)
+    }
+}
 
 /// Reactions to conversations provide a way to help people express their feelings more simply and effectively.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -9294,6 +9534,11 @@ impl std::fmt::Display for TeamMembershipState {
 impl Default for TeamMembershipState {
     fn default() -> TeamMembershipState {
         TeamMembershipState::Noop
+    }
+}
+impl TeamMembershipState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, TeamMembershipState::Noop)
     }
 }
 
@@ -10253,6 +10498,11 @@ impl Default for FullRepositorySecurityAnalysisAdvancedStatus {
         FullRepositorySecurityAnalysisAdvancedStatus::Noop
     }
 }
+impl FullRepositorySecurityAnalysisAdvancedStatus {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, FullRepositorySecurityAnalysisAdvancedStatus::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SecretScanning {
@@ -10899,6 +11149,11 @@ impl Default for JobStatus {
         JobStatus::Noop
     }
 }
+impl JobStatus {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, JobStatus::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Steps {
@@ -11442,6 +11697,11 @@ impl Default for EnvironmentApprovalsState {
         EnvironmentApprovalsState::Noop
     }
 }
+impl EnvironmentApprovalsState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, EnvironmentApprovalsState::Noop)
+    }
+}
 
 /// An entry in the reviews log for environment deployments
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -11497,6 +11757,11 @@ impl std::fmt::Display for DeploymentReviewerType {
 impl Default for DeploymentReviewerType {
     fn default() -> DeploymentReviewerType {
         DeploymentReviewerType::Noop
+    }
+}
+impl DeploymentReviewerType {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, DeploymentReviewerType::Noop)
     }
 }
 
@@ -11854,6 +12119,11 @@ impl std::fmt::Display for WorkflowState {
 impl Default for WorkflowState {
     fn default() -> WorkflowState {
         WorkflowState::Noop
+    }
+}
+impl WorkflowState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, WorkflowState::Noop)
     }
 }
 
@@ -13113,6 +13383,11 @@ impl Default for CheckRunStatus {
         CheckRunStatus::Noop
     }
 }
+impl CheckRunStatus {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, CheckRunStatus::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(rename_all = "snake_case")]
@@ -13146,6 +13421,11 @@ impl std::fmt::Display for Conclusion {
 impl Default for Conclusion {
     fn default() -> Conclusion {
         Conclusion::Noop
+    }
+}
+impl Conclusion {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Conclusion::Noop)
     }
 }
 
@@ -13373,6 +13653,11 @@ impl Default for CheckSuiteStatus {
         CheckSuiteStatus::Noop
     }
 }
+impl CheckSuiteStatus {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, CheckSuiteStatus::Noop)
+    }
+}
 
 /// A suite of checks performed on the code of a given code change
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -13525,6 +13810,11 @@ impl Default for CodeScanningAlertState {
         CodeScanningAlertState::Noop
     }
 }
+impl CodeScanningAlertState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, CodeScanningAlertState::Noop)
+    }
+}
 
 /**
  * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
@@ -13553,6 +13843,11 @@ impl std::fmt::Display for CodeScanningAlertDismissedReason {
 impl Default for CodeScanningAlertDismissedReason {
     fn default() -> CodeScanningAlertDismissedReason {
         CodeScanningAlertDismissedReason::Noop
+    }
+}
+impl CodeScanningAlertDismissedReason {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, CodeScanningAlertDismissedReason::Noop)
     }
 }
 
@@ -13585,6 +13880,11 @@ impl std::fmt::Display for Severity {
 impl Default for Severity {
     fn default() -> Severity {
         Severity::Noop
+    }
+}
+impl Severity {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Severity::Noop)
     }
 }
 
@@ -13731,6 +14031,11 @@ impl std::fmt::Display for CodeScanningAlertClassification {
 impl Default for CodeScanningAlertClassification {
     fn default() -> CodeScanningAlertClassification {
         CodeScanningAlertClassification::Noop
+    }
+}
+impl CodeScanningAlertClassification {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, CodeScanningAlertClassification::Noop)
     }
 }
 
@@ -13909,6 +14214,11 @@ impl Default for SecuritySeverityLevel {
         SecuritySeverityLevel::Noop
     }
 }
+impl SecuritySeverityLevel {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SecuritySeverityLevel::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAlertRule {
@@ -14072,6 +14382,11 @@ impl std::fmt::Display for CodeScanningAlertSetState {
 impl Default for CodeScanningAlertSetState {
     fn default() -> CodeScanningAlertSetState {
         CodeScanningAlertSetState::Noop
+    }
+}
+impl CodeScanningAlertSetState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, CodeScanningAlertSetState::Noop)
     }
 }
 
@@ -14319,6 +14634,11 @@ impl Default for ProcessingStatus {
         ProcessingStatus::Noop
     }
 }
+impl ProcessingStatus {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ProcessingStatus::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningSarifsStatus {
@@ -14499,6 +14819,11 @@ impl std::fmt::Display for RepositoryInvitationPermissions {
 impl Default for RepositoryInvitationPermissions {
     fn default() -> RepositoryInvitationPermissions {
         RepositoryInvitationPermissions::Noop
+    }
+}
+impl RepositoryInvitationPermissions {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, RepositoryInvitationPermissions::Noop)
     }
 }
 
@@ -14701,6 +15026,11 @@ impl std::fmt::Display for MergeMethod {
 impl Default for MergeMethod {
     fn default() -> MergeMethod {
         MergeMethod::Noop
+    }
+}
+impl MergeMethod {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, MergeMethod::Noop)
     }
 }
 
@@ -15368,6 +15698,11 @@ impl std::fmt::Display for CommitComparisonStatus {
 impl Default for CommitComparisonStatus {
     fn default() -> CommitComparisonStatus {
         CommitComparisonStatus::Noop
+    }
+}
+impl CommitComparisonStatus {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, CommitComparisonStatus::Noop)
     }
 }
 
@@ -16200,6 +16535,11 @@ impl Default for DeploymentStatusState {
         DeploymentStatusState::Noop
     }
 }
+impl DeploymentStatusState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, DeploymentStatusState::Noop)
+    }
+}
 
 /// The status of a deployment.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17022,6 +17362,11 @@ impl std::fmt::Display for ImportStatus {
 impl Default for ImportStatus {
     fn default() -> ImportStatus {
         ImportStatus::Noop
+    }
+}
+impl ImportStatus {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ImportStatus::Noop)
     }
 }
 
@@ -19489,6 +19834,11 @@ impl Default for PagesHttpsCertificateState {
         PagesHttpsCertificateState::Noop
     }
 }
+impl PagesHttpsCertificateState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PagesHttpsCertificateState::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PagesHttpsCertificate {
@@ -19536,6 +19886,11 @@ impl std::fmt::Display for PageStatus {
 impl Default for PageStatus {
     fn default() -> PageStatus {
         PageStatus::Noop
+    }
+}
+impl PageStatus {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PageStatus::Noop)
     }
 }
 
@@ -20014,6 +20369,11 @@ impl std::fmt::Display for PullRequestState {
 impl Default for PullRequestState {
     fn default() -> PullRequestState {
         PullRequestState::Noop
+    }
+}
+impl PullRequestState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullRequestState::Noop)
     }
 }
 
@@ -21658,6 +22018,11 @@ impl Default for ReleaseAssetState {
         ReleaseAssetState::Noop
     }
 }
+impl ReleaseAssetState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReleaseAssetState::Noop)
+    }
+}
 
 /// Data related to a release.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -21898,6 +22263,11 @@ impl Default for SecretScanningAlertState {
         SecretScanningAlertState::Noop
     }
 }
+impl SecretScanningAlertState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SecretScanningAlertState::Noop)
+    }
+}
 
 /**
  * **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
@@ -21928,6 +22298,11 @@ impl std::fmt::Display for SecretScanningAlertResolution {
 impl Default for SecretScanningAlertResolution {
     fn default() -> SecretScanningAlertResolution {
         SecretScanningAlertResolution::Noop
+    }
+}
+impl SecretScanningAlertResolution {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SecretScanningAlertResolution::Noop)
     }
 }
 
@@ -22574,6 +22949,11 @@ impl std::fmt::Display for Op {
 impl Default for Op {
     fn default() -> Op {
         Op::Noop
+    }
+}
+impl Op {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Op::Noop)
     }
 }
 
@@ -24718,6 +25098,11 @@ impl Default for Include {
         Include::Noop
     }
 }
+impl Include {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Include::Noop)
+    }
+}
 
 /**
  * The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
@@ -24746,6 +25131,11 @@ impl std::fmt::Display for Order {
 impl Default for Order {
     fn default() -> Order {
         Order::Noop
+    }
+}
+impl Order {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Order::Noop)
     }
 }
 
@@ -24836,6 +25226,11 @@ impl Default for PackageTypeData {
         PackageTypeData::Noop
     }
 }
+impl PackageTypeData {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PackageTypeData::Noop)
+    }
+}
 
 /**
  * Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
@@ -24884,6 +25279,11 @@ impl std::fmt::Display for WorkflowRunStatus {
 impl Default for WorkflowRunStatus {
     fn default() -> WorkflowRunStatus {
         WorkflowRunStatus::Noop
+    }
+}
+impl WorkflowRunStatus {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, WorkflowRunStatus::Noop)
     }
 }
 
@@ -24973,6 +25373,11 @@ impl std::fmt::Display for StatusData {
 impl Default for StatusData {
     fn default() -> StatusData {
         StatusData::Noop
+    }
+}
+impl StatusData {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, StatusData::Noop)
     }
 }
 
@@ -25691,6 +26096,14 @@ impl Default for EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
         EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::Noop
     }
 }
+impl EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
+    pub fn is_empty(&self) -> bool {
+        matches!(
+            self,
+            EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::Noop
+        )
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
@@ -26140,6 +26553,11 @@ impl Default for AppsListAccountsPlanDirection {
         AppsListAccountsPlanDirection::Noop
     }
 }
+impl AppsListAccountsPlanDirection {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, AppsListAccountsPlanDirection::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActivityMarkNotificationsAsReadRequest {
@@ -26235,6 +26653,11 @@ impl std::fmt::Display for MembersAllowedRepositoryCreationType {
 impl Default for MembersAllowedRepositoryCreationType {
     fn default() -> MembersAllowedRepositoryCreationType {
         MembersAllowedRepositoryCreationType::Noop
+    }
+}
+impl MembersAllowedRepositoryCreationType {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, MembersAllowedRepositoryCreationType::Noop)
     }
 }
 
@@ -26611,6 +27034,14 @@ impl Default for ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
         ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::Noop
     }
 }
+impl ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
+    pub fn is_empty(&self) -> bool {
+        matches!(
+            self,
+            ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::Noop
+        )
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
@@ -26705,6 +27136,11 @@ impl std::fmt::Display for ActionsCreateUpdateOrgSecretRequestVisibility {
 impl Default for ActionsCreateUpdateOrgSecretRequestVisibility {
     fn default() -> ActionsCreateUpdateOrgSecretRequestVisibility {
         ActionsCreateUpdateOrgSecretRequestVisibility::Noop
+    }
+}
+impl ActionsCreateUpdateOrgSecretRequestVisibility {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ActionsCreateUpdateOrgSecretRequestVisibility::Noop)
     }
 }
 
@@ -27110,6 +27546,11 @@ impl Default for Exclude {
         Exclude::Noop
     }
 }
+impl Exclude {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Exclude::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(rename_all = "snake_case")]
@@ -27131,6 +27572,11 @@ impl std::fmt::Display for MigrationsStartOrgRequestExclude {
 impl Default for MigrationsStartOrgRequestExclude {
     fn default() -> MigrationsStartOrgRequestExclude {
         MigrationsStartOrgRequestExclude::Noop
+    }
+}
+impl MigrationsStartOrgRequestExclude {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, MigrationsStartOrgRequestExclude::Noop)
     }
 }
 
@@ -27302,6 +27748,11 @@ impl Default for ReposListOrgType {
         ReposListOrgType::Noop
     }
 }
+impl ReposListOrgType {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReposListOrgType::Noop)
+    }
+}
 
 /**
  * Can be one of `created`, `updated`, `pushed`, `full_name`.
@@ -27360,6 +27811,11 @@ impl Default for ReposListOrgDirection {
         ReposListOrgDirection::Noop
     }
 }
+impl ReposListOrgDirection {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReposListOrgDirection::Noop)
+    }
+}
 
 /**
  * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
@@ -27391,6 +27847,11 @@ impl std::fmt::Display for ReposCreateInOrgRequestVisibility {
 impl Default for ReposCreateInOrgRequestVisibility {
     fn default() -> ReposCreateInOrgRequestVisibility {
         ReposCreateInOrgRequestVisibility::Noop
+    }
+}
+impl ReposCreateInOrgRequestVisibility {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReposCreateInOrgRequestVisibility::Noop)
     }
 }
 
@@ -27572,6 +28033,11 @@ impl Default for TeamsCreateRequestPrivacy {
         TeamsCreateRequestPrivacy::Noop
     }
 }
+impl TeamsCreateRequestPrivacy {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, TeamsCreateRequestPrivacy::Noop)
+    }
+}
 
 /**
  * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
@@ -27695,6 +28161,11 @@ impl std::fmt::Display for TeamsUpdateInOrgRequestPrivacy {
 impl Default for TeamsUpdateInOrgRequestPrivacy {
     fn default() -> TeamsUpdateInOrgRequestPrivacy {
         TeamsUpdateInOrgRequestPrivacy::Noop
+    }
+}
+impl TeamsUpdateInOrgRequestPrivacy {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, TeamsUpdateInOrgRequestPrivacy::Noop)
     }
 }
 
@@ -27851,6 +28322,11 @@ impl Default for ReactionsListTeamDiscussionCommentInOrgContent {
         ReactionsListTeamDiscussionCommentInOrgContent::Noop
     }
 }
+impl ReactionsListTeamDiscussionCommentInOrgContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsListTeamDiscussionCommentInOrgContent::Noop)
+    }
+}
 
 /**
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
@@ -27889,6 +28365,14 @@ impl std::fmt::Display for ReactionsCreateTeamDiscussionCommentInOrgRequestConte
 impl Default for ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
     fn default() -> ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
         ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Noop
+    }
+}
+impl ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(
+            self,
+            ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Noop
+        )
     }
 }
 
@@ -27940,6 +28424,11 @@ impl Default for ReactionsListTeamDiscussionInOrgContent {
         ReactionsListTeamDiscussionInOrgContent::Noop
     }
 }
+impl ReactionsListTeamDiscussionInOrgContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsListTeamDiscussionInOrgContent::Noop)
+    }
+}
 
 /**
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
@@ -27978,6 +28467,11 @@ impl std::fmt::Display for ReactionsCreateTeamDiscussionInOrgRequestContent {
 impl Default for ReactionsCreateTeamDiscussionInOrgRequestContent {
     fn default() -> ReactionsCreateTeamDiscussionInOrgRequestContent {
         ReactionsCreateTeamDiscussionInOrgRequestContent::Noop
+    }
+}
+impl ReactionsCreateTeamDiscussionInOrgRequestContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsCreateTeamDiscussionInOrgRequestContent::Noop)
     }
 }
 
@@ -28093,6 +28587,14 @@ impl Default for TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
         TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Noop
     }
 }
+impl TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
+    pub fn is_empty(&self) -> bool {
+        matches!(
+            self,
+            TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Noop
+        )
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateProjectPermissionsInOrgRequest {
@@ -28138,6 +28640,14 @@ impl std::fmt::Display for TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
 impl Default for TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     fn default() -> TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
         TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Noop
+    }
+}
+impl TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
+    pub fn is_empty(&self) -> bool {
+        matches!(
+            self,
+            TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Noop
+        )
     }
 }
 
@@ -28517,6 +29027,11 @@ impl Default for ProjectsUpdateRequestOrganizationPermission {
         ProjectsUpdateRequestOrganizationPermission::Noop
     }
 }
+impl ProjectsUpdateRequestOrganizationPermission {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ProjectsUpdateRequestOrganizationPermission::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsUpdateRequest {
@@ -28656,6 +29171,11 @@ impl std::fmt::Display for ReposUpdateRequestVisibility {
 impl Default for ReposUpdateRequestVisibility {
     fn default() -> ReposUpdateRequestVisibility {
         ReposUpdateRequestVisibility::Noop
+    }
+}
+impl ReposUpdateRequestVisibility {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReposUpdateRequestVisibility::Noop)
     }
 }
 
@@ -28939,6 +29459,11 @@ impl std::fmt::Display for ActionsReviewPendingDeploymentsRunRequestState {
 impl Default for ActionsReviewPendingDeploymentsRunRequestState {
     fn default() -> ActionsReviewPendingDeploymentsRunRequestState {
         ActionsReviewPendingDeploymentsRunRequestState::Noop
+    }
+}
+impl ActionsReviewPendingDeploymentsRunRequestState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ActionsReviewPendingDeploymentsRunRequestState::Noop)
     }
 }
 
@@ -29595,6 +30120,11 @@ impl Default for ChecksCreateRequestConclusion {
         ChecksCreateRequestConclusion::Noop
     }
 }
+impl ChecksCreateRequestConclusion {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ChecksCreateRequestConclusion::Noop)
+    }
+}
 
 /**
  * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
@@ -29623,6 +30153,11 @@ impl std::fmt::Display for AnnotationLevel {
 impl Default for AnnotationLevel {
     fn default() -> AnnotationLevel {
         AnnotationLevel::Noop
+    }
+}
+impl AnnotationLevel {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, AnnotationLevel::Noop)
     }
 }
 
@@ -29920,6 +30455,11 @@ impl std::fmt::Display for ChecksUpdateRequestConclusion {
 impl Default for ChecksUpdateRequestConclusion {
     fn default() -> ChecksUpdateRequestConclusion {
         ChecksUpdateRequestConclusion::Noop
+    }
+}
+impl ChecksUpdateRequestConclusion {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ChecksUpdateRequestConclusion::Noop)
     }
 }
 
@@ -30319,6 +30859,11 @@ impl Default for ReactionsListCommitCommentContent {
         ReactionsListCommitCommentContent::Noop
     }
 }
+impl ReactionsListCommitCommentContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsListCommitCommentContent::Noop)
+    }
+}
 
 /**
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
@@ -30357,6 +30902,11 @@ impl std::fmt::Display for ReactionsCreateCommitCommentRequestContent {
 impl Default for ReactionsCreateCommitCommentRequestContent {
     fn default() -> ReactionsCreateCommitCommentRequestContent {
         ReactionsCreateCommitCommentRequestContent::Noop
+    }
+}
+impl ReactionsCreateCommitCommentRequestContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsCreateCommitCommentRequestContent::Noop)
     }
 }
 
@@ -30921,6 +31471,11 @@ impl Default for ReposCreateDeploymentStatusRequestState {
         ReposCreateDeploymentStatusRequestState::Noop
     }
 }
+impl ReposCreateDeploymentStatusRequestState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReposCreateDeploymentStatusRequestState::Noop)
+    }
+}
 
 /**
  * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
@@ -30949,6 +31504,11 @@ impl std::fmt::Display for ReposCreateDeploymentStatusRequestEnvironment {
 impl Default for ReposCreateDeploymentStatusRequestEnvironment {
     fn default() -> ReposCreateDeploymentStatusRequestEnvironment {
         ReposCreateDeploymentStatusRequestEnvironment::Noop
+    }
+}
+impl ReposCreateDeploymentStatusRequestEnvironment {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReposCreateDeploymentStatusRequestEnvironment::Noop)
     }
 }
 
@@ -31332,6 +31892,11 @@ impl Default for GitCreateTagRequestType {
         GitCreateTagRequestType::Noop
     }
 }
+impl GitCreateTagRequestType {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, GitCreateTagRequestType::Noop)
+    }
+}
 
 /// An object with information about the individual creating the tag.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31435,6 +32000,11 @@ impl Default for GitCreateTreeRequestMode {
         GitCreateTreeRequestMode::Noop
     }
 }
+impl GitCreateTreeRequestMode {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, GitCreateTreeRequestMode::Noop)
+    }
+}
 
 /**
  * Either `blob`, `tree`, or `commit`.
@@ -31463,6 +32033,11 @@ impl std::fmt::Display for GitCreateTreeRequestType {
 impl Default for GitCreateTreeRequestType {
     fn default() -> GitCreateTreeRequestType {
         GitCreateTreeRequestType::Noop
+    }
+}
+impl GitCreateTreeRequestType {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, GitCreateTreeRequestType::Noop)
     }
 }
 
@@ -31711,6 +32286,11 @@ impl Default for Vcs {
         Vcs::Noop
     }
 }
+impl Vcs {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, Vcs::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MigrationsStartImportRequest {
@@ -31834,6 +32414,11 @@ impl Default for UseLfs {
         UseLfs::Noop
     }
 }
+impl UseLfs {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, UseLfs::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MigrationsSetLfsPreferenceRequest {
@@ -31875,6 +32460,11 @@ impl std::fmt::Display for ReposUpdateInvitationRequestPermissions {
 impl Default for ReposUpdateInvitationRequestPermissions {
     fn default() -> ReposUpdateInvitationRequestPermissions {
         ReposUpdateInvitationRequestPermissions::Noop
+    }
+}
+impl ReposUpdateInvitationRequestPermissions {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReposUpdateInvitationRequestPermissions::Noop)
     }
 }
 
@@ -32158,6 +32748,11 @@ impl Default for IssuesListCommentsRepoDirection {
         IssuesListCommentsRepoDirection::Noop
     }
 }
+impl IssuesListCommentsRepoDirection {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, IssuesListCommentsRepoDirection::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesUpdateCommentRequest {
@@ -32211,6 +32806,11 @@ impl Default for ReactionsListIssueCommentContent {
         ReactionsListIssueCommentContent::Noop
     }
 }
+impl ReactionsListIssueCommentContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsListIssueCommentContent::Noop)
+    }
+}
 
 /**
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
@@ -32251,6 +32851,11 @@ impl Default for ReactionsCreateIssueCommentRequestContent {
         ReactionsCreateIssueCommentRequestContent::Noop
     }
 }
+impl ReactionsCreateIssueCommentRequestContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsCreateIssueCommentRequestContent::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateIssueCommentRequest {
@@ -32286,6 +32891,11 @@ impl std::fmt::Display for IssuesUpdateRequestState {
 impl Default for IssuesUpdateRequestState {
     fn default() -> IssuesUpdateRequestState {
         IssuesUpdateRequestState::Noop
+    }
+}
+impl IssuesUpdateRequestState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, IssuesUpdateRequestState::Noop)
     }
 }
 
@@ -32598,6 +33208,11 @@ impl Default for LockReason {
         LockReason::Noop
     }
 }
+impl LockReason {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, LockReason::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesLockRequest {
@@ -32644,6 +33259,11 @@ impl Default for ReactionsListIssueContent {
         ReactionsListIssueContent::Noop
     }
 }
+impl ReactionsListIssueContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsListIssueContent::Noop)
+    }
+}
 
 /**
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
@@ -32682,6 +33302,11 @@ impl std::fmt::Display for ReactionsCreateIssueRequestContent {
 impl Default for ReactionsCreateIssueRequestContent {
     fn default() -> ReactionsCreateIssueRequestContent {
         ReactionsCreateIssueRequestContent::Noop
+    }
+}
+impl ReactionsCreateIssueRequestContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsCreateIssueRequestContent::Noop)
     }
 }
 
@@ -33098,6 +33723,11 @@ impl Default for SourceData {
         SourceData::Noop
     }
 }
+impl SourceData {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SourceData::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateInformationAboutPagesSiteRequest {
@@ -33218,6 +33848,11 @@ impl Default for PullsListDirection {
         PullsListDirection::Noop
     }
 }
+impl PullsListDirection {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullsListDirection::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsCreateRequest {
@@ -33307,6 +33942,11 @@ impl Default for PullsListReviewCommentsRepoSort {
         PullsListReviewCommentsRepoSort::Noop
     }
 }
+impl PullsListReviewCommentsRepoSort {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullsListReviewCommentsRepoSort::Noop)
+    }
+}
 
 /**
  * Can be either `asc` or `desc`. Ignored without `sort` parameter.
@@ -33333,6 +33973,11 @@ impl std::fmt::Display for PullsListReviewCommentsRepoDirection {
 impl Default for PullsListReviewCommentsRepoDirection {
     fn default() -> PullsListReviewCommentsRepoDirection {
         PullsListReviewCommentsRepoDirection::Noop
+    }
+}
+impl PullsListReviewCommentsRepoDirection {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullsListReviewCommentsRepoDirection::Noop)
     }
 }
 
@@ -33388,6 +34033,11 @@ impl Default for ReactionsListPullRequestReviewCommentContent {
         ReactionsListPullRequestReviewCommentContent::Noop
     }
 }
+impl ReactionsListPullRequestReviewCommentContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsListPullRequestReviewCommentContent::Noop)
+    }
+}
 
 /**
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
@@ -33426,6 +34076,11 @@ impl std::fmt::Display for ReactionsCreatePullRequestReviewCommentContent {
 impl Default for ReactionsCreatePullRequestReviewCommentContent {
     fn default() -> ReactionsCreatePullRequestReviewCommentContent {
         ReactionsCreatePullRequestReviewCommentContent::Noop
+    }
+}
+impl ReactionsCreatePullRequestReviewCommentContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsCreatePullRequestReviewCommentContent::Noop)
     }
 }
 
@@ -33509,6 +34164,11 @@ impl Default for PullsCreateReviewCommentRequestSide {
         PullsCreateReviewCommentRequestSide::Noop
     }
 }
+impl PullsCreateReviewCommentRequestSide {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullsCreateReviewCommentRequestSide::Noop)
+    }
+}
 
 /**
  * **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
@@ -33537,6 +34197,11 @@ impl std::fmt::Display for PullsCreateReviewCommentRequestStartSide {
 impl Default for PullsCreateReviewCommentRequestStartSide {
     fn default() -> PullsCreateReviewCommentRequestStartSide {
         PullsCreateReviewCommentRequestStartSide::Noop
+    }
+}
+impl PullsCreateReviewCommentRequestStartSide {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullsCreateReviewCommentRequestStartSide::Noop)
     }
 }
 
@@ -33656,6 +34321,11 @@ impl Default for PullsMergeRequestMethod {
         PullsMergeRequestMethod::Noop
     }
 }
+impl PullsMergeRequestMethod {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullsMergeRequestMethod::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsMergeRequest {
@@ -33736,6 +34406,11 @@ impl std::fmt::Display for PullsCreateReviewRequestEvent {
 impl Default for PullsCreateReviewRequestEvent {
     fn default() -> PullsCreateReviewRequestEvent {
         PullsCreateReviewRequestEvent::Noop
+    }
+}
+impl PullsCreateReviewRequestEvent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullsCreateReviewRequestEvent::Noop)
     }
 }
 
@@ -33885,6 +34560,11 @@ impl std::fmt::Display for PullsSubmitReviewRequestEvent {
 impl Default for PullsSubmitReviewRequestEvent {
     fn default() -> PullsSubmitReviewRequestEvent {
         PullsSubmitReviewRequestEvent::Noop
+    }
+}
+impl PullsSubmitReviewRequestEvent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, PullsSubmitReviewRequestEvent::Noop)
     }
 }
 
@@ -34109,6 +34789,11 @@ impl Default for ReactionsCreateReleaseRequestContent {
         ReactionsCreateReleaseRequestContent::Noop
     }
 }
+impl ReactionsCreateReleaseRequestContent {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReactionsCreateReleaseRequestContent::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateReleaseRequest {
@@ -34144,6 +34829,11 @@ impl std::fmt::Display for SecretScanningListAlertsRepoState {
 impl Default for SecretScanningListAlertsRepoState {
     fn default() -> SecretScanningListAlertsRepoState {
         SecretScanningListAlertsRepoState::Noop
+    }
+}
+impl SecretScanningListAlertsRepoState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SecretScanningListAlertsRepoState::Noop)
     }
 }
 
@@ -34190,6 +34880,11 @@ impl std::fmt::Display for ReposCreateCommitStatusRequestState {
 impl Default for ReposCreateCommitStatusRequestState {
     fn default() -> ReposCreateCommitStatusRequestState {
         ReposCreateCommitStatusRequestState::Noop
+    }
+}
+impl ReposCreateCommitStatusRequestState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReposCreateCommitStatusRequestState::Noop)
     }
 }
 
@@ -34404,6 +35099,14 @@ impl std::fmt::Display for EnterpriseAdminUpdateAttributeGroupRequestOperationsO
 impl Default for EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     fn default() -> EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
         EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Noop
+    }
+}
+impl EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
+    pub fn is_empty(&self) -> bool {
+        matches!(
+            self,
+            EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Noop
+        )
     }
 }
 
@@ -34754,6 +35457,11 @@ impl Default for SearchCodeSort {
         SearchCodeSort::Noop
     }
 }
+impl SearchCodeSort {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SearchCodeSort::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchCodeResponse {
@@ -34797,6 +35505,11 @@ impl std::fmt::Display for SearchCommitsSort {
 impl Default for SearchCommitsSort {
     fn default() -> SearchCommitsSort {
         SearchCommitsSort::Noop
+    }
+}
+impl SearchCommitsSort {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SearchCommitsSort::Noop)
     }
 }
 
@@ -34862,6 +35575,11 @@ impl Default for SearchIssuesPullRequestsSort {
         SearchIssuesPullRequestsSort::Noop
     }
 }
+impl SearchIssuesPullRequestsSort {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SearchIssuesPullRequestsSort::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchIssuesPullRequestsResponse {
@@ -34905,6 +35623,11 @@ impl std::fmt::Display for SearchLabelsSort {
 impl Default for SearchLabelsSort {
     fn default() -> SearchLabelsSort {
         SearchLabelsSort::Noop
+    }
+}
+impl SearchLabelsSort {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SearchLabelsSort::Noop)
     }
 }
 
@@ -34954,6 +35677,11 @@ impl std::fmt::Display for SearchReposSort {
 impl Default for SearchReposSort {
     fn default() -> SearchReposSort {
         SearchReposSort::Noop
+    }
+}
+impl SearchReposSort {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SearchReposSort::Noop)
     }
 }
 
@@ -35020,6 +35748,11 @@ impl Default for SearchUsersSort {
         SearchUsersSort::Noop
     }
 }
+impl SearchUsersSort {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SearchUsersSort::Noop)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchUsersResponse {
@@ -35068,6 +35801,11 @@ impl std::fmt::Display for TeamsUpdateLegacyRequestPrivacy {
 impl Default for TeamsUpdateLegacyRequestPrivacy {
     fn default() -> TeamsUpdateLegacyRequestPrivacy {
         TeamsUpdateLegacyRequestPrivacy::Noop
+    }
+}
+impl TeamsUpdateLegacyRequestPrivacy {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, TeamsUpdateLegacyRequestPrivacy::Noop)
     }
 }
 
@@ -35165,6 +35903,14 @@ impl std::fmt::Display for TeamsAddUpdateRepoPermissionsLegacyRequestPermission 
 impl Default for TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
     fn default() -> TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
         TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Noop
+    }
+}
+impl TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+    pub fn is_empty(&self) -> bool {
+        matches!(
+            self,
+            TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Noop
+        )
     }
 }
 
@@ -35405,6 +36151,14 @@ impl std::fmt::Display for UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
 impl Default for UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
     fn default() -> UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
         UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Noop
+    }
+}
+impl UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
+    pub fn is_empty(&self) -> bool {
+        matches!(
+            self,
+            UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Noop
+        )
     }
 }
 
@@ -35660,6 +36414,11 @@ impl Default for OrgsListMembershipsState {
         OrgsListMembershipsState::Noop
     }
 }
+impl OrgsListMembershipsState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrgsListMembershipsState::Noop)
+    }
+}
 
 /**
  * The state that the membership should be in. Only `"active"` will be accepted.
@@ -35684,6 +36443,11 @@ impl std::fmt::Display for OrgsUpdateMembershipRequestState {
 impl Default for OrgsUpdateMembershipRequestState {
     fn default() -> OrgsUpdateMembershipRequestState {
         OrgsUpdateMembershipRequestState::Noop
+    }
+}
+impl OrgsUpdateMembershipRequestState {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, OrgsUpdateMembershipRequestState::Noop)
     }
 }
 
@@ -35832,6 +36596,11 @@ impl std::fmt::Display for ReposListDirection {
 impl Default for ReposListDirection {
     fn default() -> ReposListDirection {
         ReposListDirection::Noop
+    }
+}
+impl ReposListDirection {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, ReposListDirection::Noop)
     }
 }
 
@@ -36010,6 +36779,11 @@ impl std::fmt::Display for SubjectType {
 impl Default for SubjectType {
     fn default() -> SubjectType {
         SubjectType::Noop
+    }
+}
+impl SubjectType {
+    pub fn is_empty(&self) -> bool {
+        matches!(self, SubjectType::Noop)
     }
 }
 
