@@ -3800,10 +3800,10 @@ pub struct AuditLogEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub business: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub config: Option<serde_json::Value>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub config_was: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub config: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub config_was: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3833,10 +3833,10 @@ pub struct AuditLogEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub emoji: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub events: Option<serde_json::Value>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub events_were: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub events: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub events_were: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5002,7 +5002,7 @@ pub struct BaseGist {
      * Base Gist
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub forks: Vec<serde_json::Value>,
+    pub forks: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5025,7 +5025,7 @@ pub struct BaseGist {
      * Base Gist
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub history: Vec<serde_json::Value>,
+    pub history: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5462,7 +5462,7 @@ pub struct ForkOf {
      * Gist
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub forks: Vec<serde_json::Value>,
+    pub forks: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5485,7 +5485,7 @@ pub struct ForkOf {
      * Gist
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub history: Vec<serde_json::Value>,
+    pub history: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7883,7 +7883,7 @@ pub struct OrganizationInvitation {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct OrgHookConfig {
+pub struct Config {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7919,7 +7919,7 @@ pub struct OrgHook {
     )]
     pub active: bool,
     #[serde()]
-    pub config: OrgHookConfig,
+    pub config: Config,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -8388,7 +8388,7 @@ pub struct Migration {
      * A migration.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub exclude: Vec<serde_json::Value>,
+    pub exclude: Vec<String>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -8562,14 +8562,14 @@ pub struct Package {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Container {
-    #[serde()]
-    pub tags: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub tags: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Docker {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub tag: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub tag: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -13527,6 +13527,36 @@ impl Default for CodeScanningAlertState {
 }
 
 /**
+ * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum CodeScanningAlertDismissedReason {
+    FalsePositive,
+    UsedInTests,
+    WonTFix,
+    Noop,
+}
+
+impl std::fmt::Display for CodeScanningAlertDismissedReason {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            CodeScanningAlertDismissedReason::FalsePositive => "false positive",
+            CodeScanningAlertDismissedReason::UsedInTests => "used in tests",
+            CodeScanningAlertDismissedReason::WonTFix => "won't fix",
+            CodeScanningAlertDismissedReason::Noop => "",
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for CodeScanningAlertDismissedReason {
+    fn default() -> CodeScanningAlertDismissedReason {
+        CodeScanningAlertDismissedReason::Noop
+    }
+}
+
+/**
  * The severity of the alert.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -13798,7 +13828,7 @@ pub struct CodeScanningAlertItems {
      * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub dismissed_reason: Option<serde_json::Value>,
+    pub dismissed_reason: Option<CodeScanningAlertDismissedReason>,
     /**
      * The GitHub URL of the alert resource.
      */
@@ -13965,7 +13995,7 @@ pub struct CodeScanningAlert {
      * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub dismissed_reason: Option<serde_json::Value>,
+    pub dismissed_reason: Option<CodeScanningAlertDismissedReason>,
     /**
      * The GitHub URL of the alert resource.
      */
@@ -19471,8 +19501,8 @@ pub struct PagesHttpsCertificate {
     /**
      * Array of the domain set and its alternate name (if it is configured)
      */
-    #[serde()]
-    pub domains: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub domains: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<chrono::NaiveDate>,
     #[serde()]
@@ -21869,6 +21899,38 @@ impl Default for SecretScanningAlertState {
     }
 }
 
+/**
+ * **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum SecretScanningAlertResolution {
+    FalsePositive,
+    Revoked,
+    UsedInTests,
+    WontFix,
+    Noop,
+}
+
+impl std::fmt::Display for SecretScanningAlertResolution {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            SecretScanningAlertResolution::FalsePositive => "false_positive",
+            SecretScanningAlertResolution::Revoked => "revoked",
+            SecretScanningAlertResolution::UsedInTests => "used_in_tests",
+            SecretScanningAlertResolution::WontFix => "wont_fix",
+            SecretScanningAlertResolution::Noop => "",
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for SecretScanningAlertResolution {
+    fn default() -> SecretScanningAlertResolution {
+        SecretScanningAlertResolution::Noop
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SecretScanningAlert {
     /**
@@ -21898,7 +21960,7 @@ pub struct SecretScanningAlert {
      * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub resolution: Option<serde_json::Value>,
+    pub resolution: Option<SecretScanningAlertResolution>,
     /**
      * The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
@@ -22519,7 +22581,7 @@ impl Default for Op {
 ///
 /// - `String`
 /// - `Data`
-/// - `Vec<serde_json::Value>`
+/// - `Vec<String>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22527,7 +22589,7 @@ impl Default for Op {
 pub enum ScimUserOperationsValueOneOf {
     Data(Data),
     String(String),
-    ValueVector(Vec<serde_json::Value>),
+    StringVector(Vec<String>),
 }
 
 impl ScimUserOperationsValueOneOf {
@@ -22545,8 +22607,8 @@ impl ScimUserOperationsValueOneOf {
         None
     }
 
-    pub fn vec_serde_json_value(&self) -> Option<&Vec<serde_json::Value>> {
-        if let ScimUserOperationsValueOneOf::ValueVector(ref_) = self {
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ScimUserOperationsValueOneOf::StringVector(ref_) = self {
             return Some(ref_);
         }
         None
@@ -22565,9 +22627,9 @@ impl From<String> for ScimUserOperationsValueOneOf {
     }
 }
 
-impl From<Vec<serde_json::Value>> for ScimUserOperationsValueOneOf {
-    fn from(f: Vec<serde_json::Value>) -> Self {
-        ScimUserOperationsValueOneOf::ValueVector(f)
+impl From<Vec<String>> for ScimUserOperationsValueOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ScimUserOperationsValueOneOf::StringVector(f)
     }
 }
 
@@ -22583,9 +22645,9 @@ impl From<ScimUserOperationsValueOneOf> for String {
     }
 }
 
-impl From<ScimUserOperationsValueOneOf> for Vec<serde_json::Value> {
+impl From<ScimUserOperationsValueOneOf> for Vec<String> {
     fn from(f: ScimUserOperationsValueOneOf) -> Self {
-        f.vec_serde_json_value().unwrap().clone()
+        f.vec_string().unwrap().clone()
     }
 }
 
@@ -22604,7 +22666,7 @@ pub struct Operations {
      *  
      *  - `String`
      *  - `Data`
-     *  - `Vec<serde_json::Value>`
+     *  - `Vec<String>`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -22651,7 +22713,7 @@ pub struct ScimUser {
      * SCIM /Users provisioning endpoints
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub groups: Vec<serde_json::Value>,
+    pub groups: Vec<String>,
     /**
      * Unique identifier of an external identity
      */
@@ -24342,7 +24404,7 @@ pub struct Subkeys {
     )]
     pub created_at: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub emails: Vec<serde_json::Value>,
+    pub emails: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24380,7 +24442,7 @@ pub struct Subkeys {
     )]
     pub raw_key: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub subkeys: Vec<serde_json::Value>,
+    pub subkeys: Vec<String>,
 }
 
 /// A unique encryption key
@@ -30052,7 +30114,7 @@ pub struct CodeScanningUpdateAlertRequest {
      * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub dismissed_reason: Option<serde_json::Value>,
+    pub dismissed_reason: Option<CodeScanningAlertDismissedReason>,
     /**
      * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
      */
@@ -34091,7 +34153,7 @@ pub struct SecretScanningUpdateAlertRequest {
      * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub resolution: Option<serde_json::Value>,
+    pub resolution: Option<SecretScanningAlertResolution>,
     /**
      * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
      */
@@ -34345,80 +34407,6 @@ impl Default for EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     }
 }
 
-/// One of the following types:
-///
-/// - `String`
-/// - `Data`
-/// - `serde_json::Value`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
-    Data(Data),
-    String(String),
-    Value(serde_json::Value),
-}
-
-impl EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
-    pub fn data(&self) -> Option<&Data> {
-        if let EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::Data(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn serde_json_value(&self) -> Option<&serde_json::Value> {
-        if let EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::Value(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Data> for EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
-    fn from(f: Data) -> Self {
-        EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::Data(f)
-    }
-}
-
-impl From<String> for EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
-    fn from(f: String) -> Self {
-        EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::String(f)
-    }
-}
-
-impl From<serde_json::Value> for EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
-    fn from(f: serde_json::Value) -> Self {
-        EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf::Value(f)
-    }
-}
-
-impl From<EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf> for Data {
-    fn from(f: EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf) -> Self {
-        f.data().unwrap().clone()
-    }
-}
-
-impl From<EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf> for String {
-    fn from(f: EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
-impl From<EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf> for serde_json::Value {
-    fn from(f: EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf) -> Self {
-        f.serde_json_value().unwrap().clone()
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
     #[serde()]
@@ -34434,13 +34422,13 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
      *  
      *  - `String`
      *  - `Data`
-     *  - `serde_json::Value`
+     *  - `Vec<String>`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub value: Option<EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf>,
+    pub value: Option<ScimUserOperationsValueOneOf>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]

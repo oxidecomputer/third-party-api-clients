@@ -231,7 +231,12 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                             if let TypeDetails::Enum(vals, _schema_data) =
                                                 &te.details
                                             {
-                                                if st.enumeration == *vals {
+                                                let mut enums: Vec<String> = Default::default();
+                                                for v in st.enumeration.iter().flatten() {
+                                                    enums.push(v.to_string());
+                                                }
+
+                                                if enums == *vals {
                                                     return Ok(format!("crate::types::{}", sn));
                                                 }
                                             }
@@ -1245,9 +1250,37 @@ impl TypeSpace {
         match &s.schema_kind {
             openapiv3::SchemaKind::Type(t) => match t {
                 openapiv3::Type::Array(at) => {
-                    // Determine the type of item that will be in this array.
-                    let itid = self.select_box(Some(&clean_name(&nam)), &at.items, parent_name)?;
-                    Ok((None, TypeDetails::Array(itid, s.schema_data.clone())))
+                    if let Some(items) = &at.items {
+                        // Make sure the items type is not empty. If it is empty the
+                        // schema kind for the item will be "ANY".
+                        if let Ok(item) = items.item() {
+                            if let openapiv3::SchemaKind::Any(_) = &item.schema_kind {
+                                // The type of array is not defined. Most likey it is a string as has been
+                                // observed by the GitHub API spec.
+                                let itid = self.add_if_not_exists(
+                                    Some(clean_name(&nam)),
+                                    TypeDetails::Basic("String".to_string(), Default::default()),
+                                    parent_name,
+                                    false,
+                                )?;
+                                return Ok((None, TypeDetails::Array(itid, s.schema_data.clone())));
+                            }
+                        }
+
+                        // Determine the type of item that will be in this array.
+                        let itid = self.select_box(Some(&clean_name(&nam)), items, parent_name)?;
+                        Ok((None, TypeDetails::Array(itid, s.schema_data.clone())))
+                    } else {
+                        // The type of array is not defined. Most likey it is a string as has been
+                        // observed by the GitHub API spec.
+                        let itid = self.add_if_not_exists(
+                            Some(clean_name(&nam)),
+                            TypeDetails::Basic("String".to_string(), Default::default()),
+                            parent_name,
+                            false,
+                        )?;
+                        Ok((None, TypeDetails::Array(itid, s.schema_data.clone())))
+                    }
                 }
                 openapiv3::Type::Object(o) => {
                     // Object types must have a consistent name.
@@ -1335,9 +1368,14 @@ impl TypeSpace {
                             name = format!("{} {}", parent_name, name);
                         }
 
+                        let mut enums: Vec<String> = Default::default();
+                        for v in st.enumeration.iter().flatten() {
+                            enums.push(v.to_string());
+                        }
+
                         return Ok((
                             Some(clean_name(&name)),
-                            TypeDetails::Enum(st.enumeration.clone(), s.schema_data.clone()),
+                            TypeDetails::Enum(enums, s.schema_data.clone()),
                         ));
                     }
 
@@ -1473,7 +1511,7 @@ impl TypeSpace {
                 }
             }
             openapiv3::SchemaKind::Any(a) => {
-                println!("got ANY kind: {:?} {:?}\n", name, a);
+                println!("got ANY kind: {:?} {} {:?}\n", name, parent_name, a);
 
                 // Then we use the serde_json type.
                 Ok((
