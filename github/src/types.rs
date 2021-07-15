@@ -329,18 +329,18 @@ pub struct ValidationErrorSimple {
 
 /// One of the following types:
 ///
-/// - String
-/// - f64
+/// - `String`
+/// - `f64`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum WebhookConfigInsecureSslOneOf {
+    F64(f64),
     /**
      * Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. \*\*We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.\*\*
      */
     String(String),
-    F64(f64),
 }
 
 impl WebhookConfigInsecureSslOneOf {
@@ -2947,17 +2947,17 @@ pub struct InstallationToken {
 
 /// One of the following types:
 ///
-/// - String
-/// - i64
-/// - Vec<String>
+/// - `String`
+/// - `i64`
+/// - `Vec<String>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ValueOneOf {
-    String(String),
-    StringVector(Vec<String>),
     I64(i64),
+    StringVector(Vec<String>),
+    String(String),
 }
 
 impl ValueOneOf {
@@ -3054,9 +3054,9 @@ pub struct Errors {
     /**
      * One of the following types:
      *  
-     *  - String
-     *  - i64
-     *  - Vec<String>
+     *  - `String`
+     *  - `i64`
+     *  - `Vec<String>`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -5762,15 +5762,15 @@ pub struct LabelsData {
 
 /// One of the following types:
 ///
-/// - String
-/// - LabelsData
+/// - `String`
+/// - `LabelsData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum LabelsOneOf {
-    LabelsData(LabelsData),
     String(String),
+    LabelsData(LabelsData),
 }
 
 impl LabelsOneOf {
@@ -11506,15 +11506,15 @@ pub struct PendingDeployment {
 
 /// One of the following types:
 ///
-/// - Data
-/// - String
+/// - `Data`
+/// - `String`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PayloadOneOf {
-    Data(Data),
     String(String),
+    Data(Data),
 }
 
 impl PayloadOneOf {
@@ -11606,8 +11606,8 @@ pub struct Deployment {
     /**
      * One of the following types:
      *  
-     *  - Data
-     *  - String
+     *  - `Data`
+     *  - `String`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -16704,8 +16704,8 @@ pub struct HookConfig {
     /**
      * One of the following types:
      *  
-     *  - String
-     *  - f64
+     *  - `String`
+     *  - `f64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -22400,17 +22400,17 @@ impl Default for Op {
 
 /// One of the following types:
 ///
-/// - String
-/// - Data
-/// - Vec<serde_json::Value>
+/// - `String`
+/// - `Data`
+/// - `Vec<serde_json::Value>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ScimUserOperationsValueOneOf {
-    Data(Data),
-    String(String),
     ValueVector(Vec<serde_json::Value>),
+    String(String),
+    Data(Data),
 }
 
 impl ScimUserOperationsValueOneOf {
@@ -22485,9 +22485,9 @@ pub struct Operations {
     /**
      * One of the following types:
      *  
-     *  - String
-     *  - Data
-     *  - Vec<serde_json::Value>
+     *  - `String`
+     *  - `Data`
+     *  - `Vec<serde_json::Value>`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -24710,8 +24710,8 @@ impl Default for WorkflowRunStatus {
 
 /// One of the following types:
 ///
-/// - i64
-/// - String
+/// - `i64`
+/// - `String`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24720,11 +24720,11 @@ pub enum WorkflowIdOneOf {
     /**
      * The ID of the workflow. You can also pass the workflow file name as a string.
      */
-    String(String),
+    I64(i64),
     /**
      * The ID of the workflow. You can also pass the workflow file name as a string.
      */
-    I64(i64),
+    String(String),
 }
 
 impl WorkflowIdOneOf {
@@ -25656,18 +25656,18 @@ impl Default for Public {
 
 /// One of the following types:
 ///
-/// - bool
-/// - Public
+/// - `bool`
+/// - `Public`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PublicOneOf {
-    Public(Public),
     /**
      * Flag indicating whether the gist is public
      */
     Bool(bool),
+    Public(Public),
 }
 
 impl PublicOneOf {
@@ -25729,8 +25729,8 @@ pub struct GistsCreateRequest {
     /**
      * One of the following types:
      *  
-     *  - bool
-     *  - Public
+     *  - `bool`
+     *  - `Public`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -26243,21 +26243,21 @@ pub struct OrgsUpdateRequest {
 
 /// One of the following types:
 ///
-/// - ValidationError
-/// - ValidationErrorSimple
+/// - `ValidationError`
+/// - `ValidationErrorSimple`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum OrgsUpdateResponseOneOf {
     /**
-     * Validation Error
-     */
-    ValidationError(ValidationError),
-    /**
      * Validation Error Simple
      */
     ValidationErrorSimple(ValidationErrorSimple),
+    /**
+     * Validation Error
+     */
+    ValidationError(ValidationError),
 }
 
 impl OrgsUpdateResponseOneOf {
@@ -28243,15 +28243,15 @@ pub struct ProjectsCreateCardRequestData {
 
 /// One of the following types:
 ///
-/// - ProjectsCreateCardRequest
-/// - ProjectsCreateCardRequestData
+/// - `ProjectsCreateCardRequest`
+/// - `ProjectsCreateCardRequestData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ProjectsCreateCardRequestOneOf {
-    ProjectsCreateCardRequest(ProjectsCreateCardRequest),
     ProjectsCreateCardRequestData(ProjectsCreateCardRequestData),
+    ProjectsCreateCardRequest(ProjectsCreateCardRequest),
 }
 
 impl ProjectsCreateCardRequestOneOf {
@@ -29067,18 +29067,18 @@ pub struct ReposAddStatusCheckContextsRequest {
 
 /// One of the following types:
 ///
-/// - ReposAddStatusCheckContextsRequest
-/// - Vec<String>
+/// - `ReposAddStatusCheckContextsRequest`
+/// - `Vec<String>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddStatusCheckContextsRequestOneOf {
-    ReposAddStatusCheckContextsRequest(ReposAddStatusCheckContextsRequest),
     /**
      * contexts parameter
      */
     StringVector(Vec<String>),
+    ReposAddStatusCheckContextsRequest(ReposAddStatusCheckContextsRequest),
 }
 
 impl ReposAddStatusCheckContextsRequestOneOf {
@@ -29136,15 +29136,15 @@ pub struct ReposAddAppAccessRestrictionsRequest {
 
 /// One of the following types:
 ///
-/// - ReposAddAppAccessRestrictionsRequest
-/// - Vec<String>
+/// - `ReposAddAppAccessRestrictionsRequest`
+/// - `Vec<String>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddAppAccessRestrictionsRequestOneOf {
-    ReposAddAppAccessRestrictionsRequest(ReposAddAppAccessRestrictionsRequest),
     StringVector(Vec<String>),
+    ReposAddAppAccessRestrictionsRequest(ReposAddAppAccessRestrictionsRequest),
 }
 
 impl ReposAddAppAccessRestrictionsRequestOneOf {
@@ -29205,18 +29205,18 @@ pub struct ReposAddTeamAccessRestrictionsRequest {
 
 /// One of the following types:
 ///
-/// - ReposAddTeamAccessRestrictionsRequest
-/// - Vec<String>
+/// - `ReposAddTeamAccessRestrictionsRequest`
+/// - `Vec<String>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddTeamAccessRestrictionsRequestOneOf {
-    ReposAddTeamAccessRestrictionsRequest(ReposAddTeamAccessRestrictionsRequest),
     /**
      * teams parameter
      */
     StringVector(Vec<String>),
+    ReposAddTeamAccessRestrictionsRequest(ReposAddTeamAccessRestrictionsRequest),
 }
 
 impl ReposAddTeamAccessRestrictionsRequestOneOf {
@@ -29277,15 +29277,15 @@ pub struct ReposAddUserAccessRestrictionsRequest {
 
 /// One of the following types:
 ///
-/// - ReposAddUserAccessRestrictionsRequest
-/// - Vec<String>
+/// - `ReposAddUserAccessRestrictionsRequest`
+/// - `Vec<String>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddUserAccessRestrictionsRequestOneOf {
-    ReposAddUserAccessRestrictionsRequest(ReposAddUserAccessRestrictionsRequest),
     StringVector(Vec<String>),
+    ReposAddUserAccessRestrictionsRequest(ReposAddUserAccessRestrictionsRequest),
 }
 
 impl ReposAddUserAccessRestrictionsRequestOneOf {
@@ -30266,31 +30266,31 @@ pub struct AppsCreateContentAttachmentRequest {
 
 /// One of the following types:
 ///
-/// - Vec<Entries>
-/// - ContentFile
-/// - ContentSymlink
-/// - ContentSubmodule
+/// - `Vec<Entries>`
+/// - `ContentFile`
+/// - `ContentSymlink`
+/// - `ContentSubmodule`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposGetContentResponseOneOf {
     /**
-     * Content File
+     * A list of directory items
      */
-    ContentFile(ContentFile),
-    /**
-     * An object describing a symlink
-     */
-    ContentSubmodule(ContentSubmodule),
+    EntriesVector(Vec<Entries>),
     /**
      * An object describing a symlink
      */
     ContentSymlink(ContentSymlink),
     /**
-     * A list of directory items
+     * An object describing a symlink
      */
-    EntriesVector(Vec<Entries>),
+    ContentSubmodule(ContentSubmodule),
+    /**
+     * Content File
+     */
+    ContentFile(ContentFile),
 }
 
 impl ReposGetContentResponseOneOf {
@@ -30568,18 +30568,18 @@ pub struct ReposDeleteFileRequest {
 
 /// One of the following types:
 ///
-/// - Data
-/// - String
+/// - `Data`
+/// - `String`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposCreateDeploymentRequestPayloadOneOf {
-    Data(Data),
     /**
      * JSON payload with extra information about the deployment.
      */
     String(String),
+    Data(Data),
 }
 
 impl ReposCreateDeploymentRequestPayloadOneOf {
@@ -30653,8 +30653,8 @@ pub struct ReposCreateDeploymentRequest {
     /**
      * One of the following types:
      *  
-     *  - Data
-     *  - String
+     *  - `Data`
+     *  - `String`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -31710,15 +31710,15 @@ pub struct ReposUpdateInvitationRequest {
 
 /// One of the following types:
 ///
-/// - String
-/// - i64
+/// - `String`
+/// - `i64`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TitleOneOf {
-    String(String),
     I64(i64),
+    String(String),
 }
 
 impl TitleOneOf {
@@ -31763,18 +31763,18 @@ impl From<TitleOneOf> for String {
 
 /// One of the following types:
 ///
-/// - String
-/// - i64
+/// - `String`
+/// - `i64`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum MilestoneOneOf {
-    String(String),
     /**
      * The `number` of the milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
      */
     I64(i64),
+    String(String),
 }
 
 impl MilestoneOneOf {
@@ -31847,15 +31847,15 @@ pub struct LabelsDataType {
 
 /// One of the following types:
 ///
-/// - String
-/// - LabelsDataType
+/// - `String`
+/// - `LabelsDataType`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesCreateRequestLabelsOneOf {
-    LabelsDataType(LabelsDataType),
     String(String),
+    LabelsDataType(LabelsDataType),
 }
 
 impl IssuesCreateRequestLabelsOneOf {
@@ -31931,8 +31931,8 @@ pub struct IssuesCreateRequest {
     /**
      * One of the following types:
      *  
-     *  - String
-     *  - i64
+     *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -31942,8 +31942,8 @@ pub struct IssuesCreateRequest {
     /**
      * One of the following types:
      *  
-     *  - String
-     *  - i64
+     *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -32112,18 +32112,18 @@ impl Default for IssuesUpdateRequestState {
 
 /// One of the following types:
 ///
-/// - String
-/// - i64
+/// - `String`
+/// - `i64`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesUpdateRequestMilestoneOneOf {
-    String(String),
     /**
      * The `number` of the milestone to associate this issue with or `null` to remove current. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._
      */
     I64(i64),
+    String(String),
 }
 
 impl IssuesUpdateRequestMilestoneOneOf {
@@ -32199,8 +32199,8 @@ pub struct IssuesUpdateRequest {
     /**
      * One of the following types:
      *  
-     *  - String
-     *  - i64
+     *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -32215,8 +32215,8 @@ pub struct IssuesUpdateRequest {
     /**
      * One of the following types:
      *  
-     *  - String
-     *  - i64
+     *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -32270,21 +32270,21 @@ pub struct IssuesAddLabelsRequestDataType {
 
 /// One of the following types:
 ///
-/// - IssuesAddLabelsRequest
-/// - Vec<String>
-/// - IssuesAddLabelsRequestDataType
-/// - Vec<IssuesAddLabelsRequestData>
-/// - String
+/// - `IssuesAddLabelsRequest`
+/// - `Vec<String>`
+/// - `IssuesAddLabelsRequestDataType`
+/// - `Vec<IssuesAddLabelsRequestData>`
+/// - `String`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesAddLabelsRequestOneOf {
-    IssuesAddLabelsRequest(IssuesAddLabelsRequest),
-    IssuesAddLabelsRequestDataType(IssuesAddLabelsRequestDataType),
-    String(String),
-    IssuesAddLabelsRequestDataVector(Vec<IssuesAddLabelsRequestData>),
     StringVector(Vec<String>),
+    IssuesAddLabelsRequestDataVector(Vec<IssuesAddLabelsRequestData>),
+    String(String),
+    IssuesAddLabelsRequestDataType(IssuesAddLabelsRequestDataType),
+    IssuesAddLabelsRequest(IssuesAddLabelsRequest),
 }
 
 impl IssuesAddLabelsRequestOneOf {
@@ -34230,17 +34230,17 @@ impl Default for EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
 
 /// One of the following types:
 ///
-/// - String
-/// - Data
-/// - serde_json::Value
+/// - `String`
+/// - `Data`
+/// - `serde_json::Value`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
-    Data(Data),
-    String(String),
     Value(serde_json::Value),
+    String(String),
+    Data(Data),
 }
 
 impl EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
@@ -34315,9 +34315,9 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
     /**
      * One of the following types:
      *  
-     *  - String
-     *  - Data
-     *  - serde_json::Value
+     *  - `String`
+     *  - `Data`
+     *  - `serde_json::Value`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -34516,17 +34516,17 @@ pub struct Value {
 
 /// One of the following types:
 ///
-/// - Value
-/// - Vec<ScimUserEmails>
-/// - String
+/// - `Value`
+/// - `Vec<ScimUserEmails>`
+/// - `String`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ScimUpdateAttributeUserRequestOperationsValueOneOf {
-    String(String),
-    Value(Value),
     ScimUserEmailsVector(Vec<ScimUserEmails>),
+    Value(Value),
+    String(String),
 }
 
 impl ScimUpdateAttributeUserRequestOperationsValueOneOf {
@@ -34602,9 +34602,9 @@ pub struct ScimUpdateAttributeUserRequestOperations {
     /**
      * One of the following types:
      *  
-     *  - Value
-     *  - Vec<ScimUserEmails>
-     *  - String
+     *  - `Value`
+     *  - `Vec<ScimUserEmails>`
+     *  - `String`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
@@ -35143,21 +35143,21 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
 
 /// One of the following types:
 ///
-/// - PrivateUser
-/// - PublicUser
+/// - `PrivateUser`
+/// - `PublicUser`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsersGetByUsernameResponseOneOf {
     /**
-     * Private User
-     */
-    PrivateUser(PrivateUser),
-    /**
      * Public User
      */
     PublicUser(PublicUser),
+    /**
+     * Private User
+     */
+    PrivateUser(PrivateUser),
 }
 
 impl UsersGetByUsernameResponseOneOf {
@@ -35323,17 +35323,17 @@ pub struct UsersAddEmailAuthenticatedRequest {
 
 /// One of the following types:
 ///
-/// - UsersAddEmailAuthenticatedRequest
-/// - Vec<String>
-/// - String
+/// - `UsersAddEmailAuthenticatedRequest`
+/// - `Vec<String>`
+/// - `String`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsersAddEmailAuthenticatedRequestOneOf {
-    String(String),
-    UsersAddEmailAuthenticatedRequest(UsersAddEmailAuthenticatedRequest),
     StringVector(Vec<String>),
+    UsersAddEmailAuthenticatedRequest(UsersAddEmailAuthenticatedRequest),
+    String(String),
 }
 
 impl UsersAddEmailAuthenticatedRequestOneOf {
@@ -35411,20 +35411,20 @@ pub struct UsersDeleteEmailAuthenticatedRequest {
 
 /// One of the following types:
 ///
-/// - UsersDeleteEmailAuthenticatedRequest
-/// - Vec<String>
-/// - String
+/// - `UsersDeleteEmailAuthenticatedRequest`
+/// - `Vec<String>`
+/// - `String`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsersDeleteEmailAuthenticatedRequestOneOf {
-    String(String),
+    StringVector(Vec<String>),
     /**
      * Deletes one or more email addresses from your GitHub account. Must contain at least one email address. \*\*Note:\*\* Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
      */
     UsersDeleteEmailAuthenticatedRequest(UsersDeleteEmailAuthenticatedRequest),
-    StringVector(Vec<String>),
+    String(String),
 }
 
 impl UsersDeleteEmailAuthenticatedRequestOneOf {

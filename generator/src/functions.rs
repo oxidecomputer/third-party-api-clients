@@ -132,17 +132,39 @@ pub fn generate_files(
             let (fn_params_str, query_params) = get_fn_params(ts, o, parameters, false)?;
 
             /*
-             * Get the response type.
-             */
-            let response_type = get_response_type(&oid, ts, o)?;
-
-            /*
              * Generate the URL for the request.
              */
             let tmp = parse(p)?;
             let template = tmp.compile(query_params);
 
             let fn_inner = get_fn_inner(&oid, m, &body_func)?;
+
+            /*
+             * Get the response type.
+             */
+            let (response_type, tid) = get_response_type(&oid, ts, o)?;
+            if let Some(te) = ts.id_to_entry.get(&tid) {
+                // If we have a one of, we can generate a few different subfunctions to
+                // help as well.
+                if let crate::TypeDetails::OneOf(one_of, _) = &te.details {
+                    for (rt, itid) in one_of {
+                        print_fn(
+                            &docs,
+                            &bounds,
+                            &fn_params_str,
+                            &body_param,
+                            &ts.render_type(itid, false)?,
+                            &template,
+                            &fn_inner,
+                            &to_snake_case(&struct_name(&format!(
+                                "{}_{}",
+                                oid.trim_start_matches(&tag).trim_start_matches('_'),
+                                to_snake_case(rt)
+                            ))),
+                        );
+                    }
+                }
+            }
 
             // Print our standard function.
             print_fn(
@@ -219,14 +241,18 @@ pub fn generate_files(
     Ok(tag_files)
 }
 
-fn get_response_type(oid: &str, ts: &mut TypeSpace, o: &openapiv3::Operation) -> Result<String> {
+fn get_response_type(
+    oid: &str,
+    ts: &mut TypeSpace,
+    o: &openapiv3::Operation,
+) -> Result<(String, crate::TypeId)> {
     // Get the first response.
     let first = o.responses.responses.first().unwrap();
     let i = first.1.item()?;
 
     if i.content.is_empty() {
         // Return empty.
-        return Ok("()".to_string());
+        return Ok(("()".to_string(), crate::TypeId(0)));
     }
 
     // Get the json response, if it exists.
@@ -239,7 +265,7 @@ fn get_response_type(oid: &str, ts: &mut TypeSpace, o: &openapiv3::Operation) ->
             let object_name = format!("{} response", oid_to_object_name(oid));
             let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
             let rt = ts.render_type(&tid, false)?;
-            return Ok(rt);
+            return Ok((rt, tid));
         }
     }
 
@@ -250,7 +276,7 @@ fn get_response_type(oid: &str, ts: &mut TypeSpace, o: &openapiv3::Operation) ->
         if let Some(s) = &mt.schema {
             let tid = ts.select(None, s, "")?;
             let rt = ts.render_type(&tid, false)?;
-            return Ok(rt);
+            return Ok((rt, tid));
         }
     } else if ct == "application/scim+json" {
         if !mt.encoding.is_empty() {
@@ -261,7 +287,7 @@ fn get_response_type(oid: &str, ts: &mut TypeSpace, o: &openapiv3::Operation) ->
             let object_name = format!("{} response", oid_to_object_name(oid));
             let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
             let rt = ts.render_type(&tid, false)?;
-            return Ok(rt);
+            return Ok((rt, tid));
         }
     }
 

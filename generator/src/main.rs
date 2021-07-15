@@ -494,7 +494,7 @@ impl<T> ReferenceOrExt<T> for openapiv3::ReferenceOr<T> {
 
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
-enum TypeDetails {
+pub enum TypeDetails {
     Unknown,
     Basic(String, openapiv3::SchemaData),
     NamedType(TypeId, openapiv3::SchemaData),
@@ -618,7 +618,7 @@ struct TypeEntry {
 }
 
 #[derive(Debug, Eq, Clone)]
-struct TypeId(u64);
+pub struct TypeId(u64);
 
 impl PartialOrd for TypeId {
     fn partial_cmp(&self, other: &TypeId) -> Option<std::cmp::Ordering> {
@@ -1439,7 +1439,7 @@ impl TypeSpace {
                     )?;
 
                     let rt = self.render_type(&itid, true)?;
-                    one_of_description.push_str(&format!("- {}\n", rt));
+                    one_of_description.push_str(&format!("- `{}`\n", rt));
 
                     omap.insert(rt, itid);
                 }

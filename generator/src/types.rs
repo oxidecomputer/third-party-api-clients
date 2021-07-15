@@ -55,6 +55,9 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                     a("#[serde(untagged)]");
                     a(&format!("pub enum {} {{", sn));
                     let mut name_map: BTreeMap<String, String> = Default::default();
+                    // Becasue we have so many defaults set on our serde types these enums
+                    // sometimes parse the wrong value. It's better to instead use the functions we
+                    // inject that force the value to a specific type.
                     for (name, tid) in omap.iter() {
                         // Try to render the docs.
                         let p = ts.render_docs(tid);

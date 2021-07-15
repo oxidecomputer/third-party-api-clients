@@ -2871,8 +2871,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - i64
-     *  - String
+     *  - `i64`
+     *  - `String`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -2910,8 +2910,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - i64
-     *  - String
+     *  - `i64`
+     *  - `String`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -2946,8 +2946,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - i64
-     *  - String
+     *  - `i64`
+     *  - `String`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -2991,8 +2991,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - i64
-     *  - String
+     *  - `i64`
+     *  - `String`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -3025,8 +3025,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - i64
-     *  - String
+     *  - `i64`
+     *  - `String`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -3101,8 +3101,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - i64
-     *  - String
+     *  - `i64`
+     *  - `String`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.

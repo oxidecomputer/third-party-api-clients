@@ -23,6 +23,38 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
      */
+    pub async fn get_authenticated_private_user(&self) -> Result<crate::types::PrivateUser> {
+        let url = "/user".to_string();
+        self.client.get(&url).await
+    }
+
+    /**
+     * Get the authenticated user.
+     *
+     * This function performs a `GET` to the `/user` endpoint.
+     *
+     * If the authenticated user is authenticated through basic authentication or OAuth with the `user` scope, then the response lists public and private profile information.
+     *
+     * If the authenticated user is authenticated through OAuth without the `user` scope, then the response lists only public profile information.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
+     */
+    pub async fn get_authenticated_public_user(&self) -> Result<crate::types::PublicUser> {
+        let url = "/user".to_string();
+        self.client.get(&url).await
+    }
+
+    /**
+     * Get the authenticated user.
+     *
+     * This function performs a `GET` to the `/user` endpoint.
+     *
+     * If the authenticated user is authenticated through basic authentication or OAuth with the `user` scope, then the response lists public and private profile information.
+     *
+     * If the authenticated user is authenticated through OAuth without the `user` scope, then the response lists only public profile information.
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
+     */
     pub async fn get_authenticated(&self) -> Result<crate::types::UsersGetByUsernameResponseOneOf> {
         let url = "/user".to_string();
         self.client.get(&url).await
@@ -814,6 +846,68 @@ impl Users {
         let url = format!("/users?{}", query);
 
         self.client.get_all_pages(&url).await
+    }
+
+    /**
+     * Get a user.
+     *
+     * This function performs a `GET` to the `/users/{username}` endpoint.
+     *
+     * Provides publicly available information about someone with a GitHub account.
+     *
+     * GitHub Apps with the `Plan` user permission can use this endpoint to retrieve information about a user's GitHub plan. The GitHub App must be authenticated as a user. See "[Identifying and authorizing users for GitHub Apps](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/)" for details about authentication. For an example response, see 'Response with GitHub plan information' below"
+     *
+     * The `email` key in the following response is the publicly visible email address from your GitHub [profile page](https://github.com/settings/profile). When setting up your profile, you can select a primary email address to be “public” which provides an email entry for this endpoint. If you do not set a public email address for `email`, then it will have a value of `null`. You only see publicly visible email addresses when authenticated with GitHub. For more information, see [Authentication](https://docs.github.com/rest/overview/resources-in-the-rest-api#authentication).
+     *
+     * The Emails API enables you to list all of your email addresses, and toggle a primary email to be visible publicly. For more information, see "[Emails API](https://docs.github.com/rest/reference/users#emails)".
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#get-a-user>
+     *
+     * **Parameters:**
+     *
+     * * `username: &str`
+     */
+    pub async fn get_by_username_private_user(
+        &self,
+        username: &str,
+    ) -> Result<crate::types::PrivateUser> {
+        let url = format!(
+            "/users/{}",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get(&url).await
+    }
+
+    /**
+     * Get a user.
+     *
+     * This function performs a `GET` to the `/users/{username}` endpoint.
+     *
+     * Provides publicly available information about someone with a GitHub account.
+     *
+     * GitHub Apps with the `Plan` user permission can use this endpoint to retrieve information about a user's GitHub plan. The GitHub App must be authenticated as a user. See "[Identifying and authorizing users for GitHub Apps](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/)" for details about authentication. For an example response, see 'Response with GitHub plan information' below"
+     *
+     * The `email` key in the following response is the publicly visible email address from your GitHub [profile page](https://github.com/settings/profile). When setting up your profile, you can select a primary email address to be “public” which provides an email entry for this endpoint. If you do not set a public email address for `email`, then it will have a value of `null`. You only see publicly visible email addresses when authenticated with GitHub. For more information, see [Authentication](https://docs.github.com/rest/overview/resources-in-the-rest-api#authentication).
+     *
+     * The Emails API enables you to list all of your email addresses, and toggle a primary email to be visible publicly. For more information, see "[Emails API](https://docs.github.com/rest/reference/users#emails)".
+     *
+     * FROM: <https://docs.github.com/rest/reference/users#get-a-user>
+     *
+     * **Parameters:**
+     *
+     * * `username: &str`
+     */
+    pub async fn get_by_username_public_user(
+        &self,
+        username: &str,
+    ) -> Result<crate::types::PublicUser> {
+        let url = format!(
+            "/users/{}",
+            crate::progenitor_support::encode_path(&username.to_string()),
+        );
+
+        self.client.get(&url).await
     }
 
     /**
