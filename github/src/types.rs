@@ -3053,11 +3053,11 @@ pub struct Errors {
     pub resource: String,
     /**
      * One of the following types:
-     *
+     *  
      *  - `String`
      *  - `i64`
      *  - `Vec<String>`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -11689,10 +11689,10 @@ pub struct Deployment {
     pub original_environment: String,
     /**
      * One of the following types:
-     *
+     *  
      *  - `Data`
      *  - `String`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -16820,10 +16820,10 @@ pub struct HookConfig {
     pub email: String,
     /**
      * One of the following types:
-     *
+     *  
      *  - `String`
      *  - `f64`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -22601,11 +22601,11 @@ pub struct Operations {
     pub path: String,
     /**
      * One of the following types:
-     *
+     *  
      *  - `String`
      *  - `Data`
      *  - `Vec<serde_json::Value>`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -24623,11 +24623,11 @@ pub struct KeySimple {
 
 /**
  * The event types to include:
- *
+ *   
  *   - `web` - returns web (non-Git) events
  *   - `git` - returns Git events
  *   - `all` - returns both web and Git events
- *
+ *   
  *   The default is `web`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24659,7 +24659,7 @@ impl Default for Include {
 
 /**
  * The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
- *
+ *   
  *   The default is `desc`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25845,10 +25845,10 @@ pub struct GistsCreateRequest {
     pub files: GistsCreateRequestFiles,
     /**
      * One of the following types:
-     *
+     *  
      *  - `bool`
      *  - `Public`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -25904,11 +25904,11 @@ pub struct AppsListInstallationReposResponse {
 }
 
 /**
- * Indicates which sorts of issues to return. Can be one of:
- *   \* `assigned`: Issues assigned to you
- *   \* `created`: Issues created by you
- *   \* `mentioned`: Issues mentioning you
- *   \* `subscribed`: Issues you're subscribed to updates for
+ * Indicates which sorts of issues to return. Can be one of:  
+ *   \* `assigned`: Issues assigned to you  
+ *   \* `created`: Issues created by you  
+ *   \* `mentioned`: Issues mentioning you  
+ *   \* `subscribed`: Issues you're subscribed to updates for  
  *   \* `all`: All issues the authenticated user can see, regardless of participation or creation
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26109,10 +26109,10 @@ pub struct ActivitySetThreadSubscriptionRequest {
 }
 
 /**
- * Default permission level members have for organization repositories:
- *   \* `read` - can pull, but not push to or administer this repository.
- *   \* `write` - can pull and push, but not administer this repository.
- *   \* `admin` - can pull, push, and administer this repository.
+ * Default permission level members have for organization repositories:  
+ *   \* `read` - can pull, but not push to or administer this repository.  
+ *   \* `write` - can pull and push, but not administer this repository.  
+ *   \* `admin` - can pull, push, and administer this repository.  
  *   \* `none` - no permissions granted by default.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26143,10 +26143,10 @@ impl Default for DefaultRepositoryPermission {
 }
 
 /**
- * Specifies which types of repositories non-admin organization members can create. Can be one of:
- *   \* `all` - all organization members can create public and private repositories.
- *   \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.
- *   \* `none` - only admin members can create repositories.
+ * Specifies which types of repositories non-admin organization members can create. Can be one of:  
+ *   \* `all` - all organization members can create public and private repositories.  
+ *   \* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  
+ *   \* `none` - only admin members can create repositories.  
  *   **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26203,10 +26203,10 @@ pub struct OrgsUpdateRequest {
     )]
     pub company: String,
     /**
-     * Default permission level members have for organization repositories:
-     *  \\* `read` - can pull, but not push to or administer this repository.
-     *  \\* `write` - can pull and push, but not administer this repository.
-     *  \\* `admin` - can pull, push, and administer this repository.
+     * Default permission level members have for organization repositories:  
+     *  \\* `read` - can pull, but not push to or administer this repository.  
+     *  \\* `write` - can pull and push, but not administer this repository.  
+     *  \\* `admin` - can pull, push, and administer this repository.  
      *  \\* `none` - no permissions granted by default.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26255,18 +26255,18 @@ pub struct OrgsUpdateRequest {
     )]
     pub location: String,
     /**
-     * Specifies which types of repositories non-admin organization members can create. Can be one of:
-     *  \\* `all` - all organization members can create public and private repositories.
-     *  \\* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.
-     *  \\* `none` - only admin members can create repositories.
+     * Specifies which types of repositories non-admin organization members can create. Can be one of:  
+     *  \\* `all` - all organization members can create public and private repositories.  
+     *  \\* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  
+     *  \\* `none` - only admin members can create repositories.  
      *  \*\*Note:\*\* This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members_allowed_repository_creation_type: Option<MembersAllowedRepositoryCreationType>,
     /**
-     * Toggles whether organization members can create internal repositories, which are visible to all enterprise members. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. Can be one of:
-     *  \\* `true` - all organization members can create internal repositories.
-     *  \\* `false` - only organization owners can create internal repositories.
+     * Toggles whether organization members can create internal repositories, which are visible to all enterprise members. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. Can be one of:  
+     *  \\* `true` - all organization members can create internal repositories.  
+     *  \\* `false` - only organization owners can create internal repositories.  
      *  Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
      */
     #[serde(
@@ -26275,8 +26275,8 @@ pub struct OrgsUpdateRequest {
     )]
     pub members_can_create_internal_repositories: bool,
     /**
-     * Toggles whether organization members can create GitHub Pages sites. Can be one of:
-     *  \\* `true` - all organization members can create GitHub Pages sites.
+     * Toggles whether organization members can create GitHub Pages sites. Can be one of:  
+     *  \\* `true` - all organization members can create GitHub Pages sites.  
      *  \\* `false` - no organization members can create GitHub Pages sites. Existing published sites will not be impacted.
      */
     #[serde(
@@ -26285,8 +26285,8 @@ pub struct OrgsUpdateRequest {
     )]
     pub members_can_create_pages: bool,
     /**
-     * Toggles whether organization members can create private GitHub Pages sites. Can be one of:
-     *  \\* `true` - all organization members can create private GitHub Pages sites.
+     * Toggles whether organization members can create private GitHub Pages sites. Can be one of:  
+     *  \\* `true` - all organization members can create private GitHub Pages sites.  
      *  \\* `false` - no organization members can create private GitHub Pages sites. Existing published sites will not be impacted.
      */
     #[serde(
@@ -26295,9 +26295,9 @@ pub struct OrgsUpdateRequest {
     )]
     pub members_can_create_private_pages: bool,
     /**
-     * Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:
-     *  \\* `true` - all organization members can create private repositories.
-     *  \\* `false` - only organization owners can create private repositories.
+     * Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:  
+     *  \\* `true` - all organization members can create private repositories.  
+     *  \\* `false` - only organization owners can create private repositories.  
      *  Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
      */
     #[serde(
@@ -26306,8 +26306,8 @@ pub struct OrgsUpdateRequest {
     )]
     pub members_can_create_private_repositories: bool,
     /**
-     * Toggles whether organization members can create public GitHub Pages sites. Can be one of:
-     *  \\* `true` - all organization members can create public GitHub Pages sites.
+     * Toggles whether organization members can create public GitHub Pages sites. Can be one of:  
+     *  \\* `true` - all organization members can create public GitHub Pages sites.  
      *  \\* `false` - no organization members can create public GitHub Pages sites. Existing published sites will not be impacted.
      */
     #[serde(
@@ -26316,9 +26316,9 @@ pub struct OrgsUpdateRequest {
     )]
     pub members_can_create_public_pages: bool,
     /**
-     * Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:
-     *  \\* `true` - all organization members can create public repositories.
-     *  \\* `false` - only organization owners can create public repositories.
+     * Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:  
+     *  \\* `true` - all organization members can create public repositories.  
+     *  \\* `false` - only organization owners can create public repositories.  
      *  Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
      */
     #[serde(
@@ -26327,10 +26327,10 @@ pub struct OrgsUpdateRequest {
     )]
     pub members_can_create_public_repositories: bool,
     /**
-     * Toggles the ability of non-admin organization members to create repositories. Can be one of:
-     *  \\* `true` - all organization members can create repositories.
-     *  \\* `false` - only organization owners can create repositories.
-     *  Default: `true`
+     * Toggles the ability of non-admin organization members to create repositories. Can be one of:  
+     *  \\* `true` - all organization members can create repositories.  
+     *  \\* `false` - only organization owners can create repositories.  
+     *  Default: `true`  
      *  \*\*Note:\*\* A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. \*\*Note:\*\* A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details.
      */
     #[serde(
@@ -26614,9 +26614,9 @@ pub struct ActionsListOrgSecretsResponse {
 }
 
 /**
- * Configures the access that repositories have to the organization secret. Can be one of:
- *   \- `all` - All repositories in an organization can access the secret.
- *   \- `private` - Private repositories in an organization can access the secret.
+ * Configures the access that repositories have to the organization secret. Can be one of:  
+ *   \- `all` - All repositories in an organization can access the secret.  
+ *   \- `private` - Private repositories in an organization can access the secret.  
  *   \- `selected` - Only specific repositories can access the secret.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26672,9 +26672,9 @@ pub struct ActionsCreateUpdateOrgSecretRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub selected_repository_ids: Vec<String>,
     /**
-     * Configures the access that repositories have to the organization secret. Can be one of:
-     *  \- `all` - All repositories in an organization can access the secret.
-     *  \- `private` - Private repositories in an organization can access the secret.
+     * Configures the access that repositories have to the organization secret. Can be one of:  
+     *  \- `all` - All repositories in an organization can access the secret.  
+     *  \- `private` - Private repositories in an organization can access the secret.  
      *  \- `selected` - Only specific repositories can access the secret.
      */
     #[serde()]
@@ -26860,9 +26860,9 @@ pub struct AppsListInstallationsResponse {
 }
 
 /**
- * Specify role for new member. Can be one of:
- *   \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.
- *   \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.
+ * Specify role for new member. Can be one of:  
+ *   \* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  
+ *   \* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
  *   \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26911,9 +26911,9 @@ pub struct OrgsCreateInvitationRequest {
     )]
     pub invitee_id: i64,
     /**
-     * Specify role for new member. Can be one of:
-     *  \\* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.
-     *  \\* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.
+     * Specify role for new member. Can be one of:  
+     *  \\* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  
+     *  \\* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  
      *  \\* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -26926,8 +26926,8 @@ pub struct OrgsCreateInvitationRequest {
 }
 
 /**
- * Filter members returned in the list. Can be one of:
- *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.
+ * Filter members returned in the list. Can be one of:  
+ *   \* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  
  *   \* `all` - All members the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26954,9 +26954,9 @@ impl Default for OrgsListMembersFilter {
 }
 
 /**
- * Filter members returned by their role. Can be one of:
- *   \* `all` - All members of the organization, regardless of role.
- *   \* `admin` - Organization owners.
+ * Filter members returned by their role. Can be one of:  
+ *   \* `all` - All members of the organization, regardless of role.  
+ *   \* `admin` - Organization owners.  
  *   \* `member` - Non-owner organization members.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26985,8 +26985,8 @@ impl Default for OrgsListMembersRole {
 }
 
 /**
- * The role to give the user in the organization. Can be one of:
- *   \* `admin` - The user will become an owner of the organization.
+ * The role to give the user in the organization. Can be one of:  
+ *   \* `admin` - The user will become an owner of the organization.  
  *   \* `member` - The user will become a non-owner member of the organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27015,8 +27015,8 @@ impl Default for OrgsSetMembershipUserRequestRole {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgsSetMembershipUserRequest {
     /**
-     * The role to give the user in the organization. Can be one of:
-     *  \\* `admin` - The user will become an owner of the organization.
+     * The role to give the user in the organization. Can be one of:  
+     *  \\* `admin` - The user will become an owner of the organization.  
      *  \\* `member` - The user will become a non-owner member of the organization.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27100,8 +27100,8 @@ pub struct MigrationsStartOrgRequest {
 }
 
 /**
- * Filter the list of outside collaborators. Can be one of:
- *   \* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.
+ * Filter the list of outside collaborators. Can be one of:  
+ *   \* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.  
  *   \* `all`: All outside collaborators.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27300,7 +27300,7 @@ impl Default for ReposListOrgDirection {
 }
 
 /**
- * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.
+ * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
  *   The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27469,7 +27469,7 @@ pub struct ReposCreateInOrgRequest {
     )]
     pub team_id: i64,
     /**
-     * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.
+     * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. Note: For GitHub Enterprise Server and GitHub AE, this endpoint will only list repositories available to all users on the enterprise. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  
      *  The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27477,13 +27477,13 @@ pub struct ReposCreateInOrgRequest {
 }
 
 /**
- * The level of privacy this team should have. The options are:
- *   **For a non-nested team:**
- *   \* `secret` - only visible to organization owners and members of this team.
- *   \* `closed` - visible to all members of this organization.
- *   Default: `secret`
- *   **For a parent or child team:**
- *   \* `closed` - visible to all members of this organization.
+ * The level of privacy this team should have. The options are:  
+ *   **For a non-nested team:**  
+ *   \* `secret` - only visible to organization owners and members of this team.  
+ *   \* `closed` - visible to all members of this organization.  
+ *   Default: `secret`  
+ *   **For a parent or child team:**  
+ *   \* `closed` - visible to all members of this organization.  
  *   Default for child team: `closed`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27512,9 +27512,9 @@ impl Default for TeamsCreateRequestPrivacy {
 }
 
 /**
- * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:
- *   \* `pull` - team members can pull, but not push to or administer newly-added repositories.
- *   \* `push` - team members can pull and push, but not administer newly-added repositories.
+ * **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
+ *   \* `pull` - team members can pull, but not push to or administer newly-added repositories.  
+ *   \* `push` - team members can pull and push, but not administer newly-added repositories.  
  *   \* `admin` - team members can pull, push and administer newly-added repositories.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27577,21 +27577,21 @@ pub struct TeamsCreateRequest {
     )]
     pub parent_team_id: i64,
     /**
-     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:
-     *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.
-     *  \\* `push` - team members can pull and push, but not administer newly-added repositories.
+     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
+     *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.  
+     *  \\* `push` - team members can pull and push, but not administer newly-added repositories.  
      *  \\* `admin` - team members can pull, push and administer newly-added repositories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<Permission>,
     /**
-     * The level of privacy this team should have. The options are:
-     *  \*\*For a non-nested team:\*\*
-     *  \\* `secret` - only visible to organization owners and members of this team.
-     *  \\* `closed` - visible to all members of this organization.
-     *  Default: `secret`
-     *  \*\*For a parent or child team:\*\*
-     *  \\* `closed` - visible to all members of this organization.
+     * The level of privacy this team should have. The options are:  
+     *  \*\*For a non-nested team:\*\*  
+     *  \\* `secret` - only visible to organization owners and members of this team.  
+     *  \\* `closed` - visible to all members of this organization.  
+     *  Default: `secret`  
+     *  \*\*For a parent or child team:\*\*  
+     *  \\* `closed` - visible to all members of this organization.  
      *  Default for child team: `closed`
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27604,11 +27604,11 @@ pub struct TeamsCreateRequest {
 }
 
 /**
- * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. When a team is nested, the `privacy` for parent teams cannot be `secret`. The options are:
- *   **For a non-nested team:**
- *   \* `secret` - only visible to organization owners and members of this team.
- *   \* `closed` - visible to all members of this organization.
- *   **For a parent or child team:**
+ * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. When a team is nested, the `privacy` for parent teams cannot be `secret`. The options are:  
+ *   **For a non-nested team:**  
+ *   \* `secret` - only visible to organization owners and members of this team.  
+ *   \* `closed` - visible to all members of this organization.  
+ *   **For a parent or child team:**  
  *   \* `closed` - visible to all members of this organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27666,19 +27666,19 @@ pub struct TeamsUpdateInOrgRequest {
     )]
     pub parent_team_id: i64,
     /**
-     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:
-     *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.
-     *  \\* `push` - team members can pull and push, but not administer newly-added repositories.
+     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
+     *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.  
+     *  \\* `push` - team members can pull and push, but not administer newly-added repositories.  
      *  \\* `admin` - team members can pull, push and administer newly-added repositories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<Permission>,
     /**
-     * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. When a team is nested, the `privacy` for parent teams cannot be `secret`. The options are:
-     *  \*\*For a non-nested team:\*\*
-     *  \\* `secret` - only visible to organization owners and members of this team.
-     *  \\* `closed` - visible to all members of this organization.
-     *  \*\*For a parent or child team:\*\*
+     * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. When a team is nested, the `privacy` for parent teams cannot be `secret`. The options are:  
+     *  \*\*For a non-nested team:\*\*  
+     *  \\* `secret` - only visible to organization owners and members of this team.  
+     *  \\* `closed` - visible to all members of this organization.  
+     *  \*\*For a parent or child team:\*\*  
      *  \\* `closed` - visible to all members of this organization.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27929,9 +27929,9 @@ pub struct ReactionsCreateTeamDiscussionInOrgRequest {
 }
 
 /**
- * Filters members returned by their role in the team. Can be one of:
- *   \* `member` - normal members of the team.
- *   \* `maintainer` - team maintainers.
+ * Filters members returned by their role in the team. Can be one of:  
+ *   \* `member` - normal members of the team.  
+ *   \* `maintainer` - team maintainers.  
  *   \* `all` - all members of the team.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27960,8 +27960,8 @@ impl Default for TeamsListMembersInOrgRole {
 }
 
 /**
- * The role that this user should have in the team. Can be one of:
- *   \* `member` - a normal member of the team.
+ * The role that this user should have in the team. Can be one of:  
+ *   \* `member` - a normal member of the team.  
  *   \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27990,8 +27990,8 @@ impl Default for TeamsAddUpdateMembershipUserInOrgRequestRole {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateMembershipUserInOrgRequest {
     /**
-     * The role that this user should have in the team. Can be one of:
-     *  \\* `member` - a normal member of the team.
+     * The role that this user should have in the team. Can be one of:  
+     *  \\* `member` - a normal member of the team.  
      *  \\* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -27999,10 +27999,10 @@ pub struct TeamsAddUpdateMembershipUserInOrgRequest {
 }
 
 /**
- * The permission to grant to the team for this project. Can be one of:
- *   \* `read` - team members can read, but not write to or administer this project.
- *   \* `write` - team members can read and write, but not administer this project.
- *   \* `admin` - team members can read, write and administer this project.
+ * The permission to grant to the team for this project. Can be one of:  
+ *   \* `read` - team members can read, but not write to or administer this project.  
+ *   \* `write` - team members can read and write, but not administer this project.  
+ *   \* `admin` - team members can read, write and administer this project.  
  *   Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -28039,13 +28039,13 @@ pub struct TeamsAddUpdateProjectPermissionsInOrgRequest {
 }
 
 /**
- * The permission to grant the team on this repository. Can be one of:
- *   \* `pull` - team members can pull, but not push to or administer this repository.
- *   \* `push` - team members can pull and push, but not administer this repository.
- *   \* `admin` - team members can pull, push and administer this repository.
- *   \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.
- *   \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.
- *
+ * The permission to grant the team on this repository. Can be one of:  
+ *   \* `pull` - team members can pull, but not push to or administer this repository.  
+ *   \* `push` - team members can pull and push, but not administer this repository.  
+ *   \* `admin` - team members can pull, push and administer this repository.  
+ *   \* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  
+ *   \* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  
+ *     
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -28082,13 +28082,13 @@ impl Default for TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateRepoPermissionsInOrgRequest {
     /**
-     * The permission to grant the team on this repository. Can be one of:
-     *  \\* `pull` - team members can pull, but not push to or administer this repository.
-     *  \\* `push` - team members can pull and push, but not administer this repository.
-     *  \\* `admin` - team members can pull, push and administer this repository.
-     *  \\* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.
-     *  \\* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.
-     *
+     * The permission to grant the team on this repository. Can be one of:  
+     *  \\* `pull` - team members can pull, but not push to or administer this repository.  
+     *  \\* `push` - team members can pull and push, but not administer this repository.  
+     *  \\* `admin` - team members can pull, push and administer this repository.  
+     *  \\* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  
+     *  \\* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  
+     *    
      *  If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -28501,9 +28501,9 @@ pub struct ProjectsUpdateRequest {
 }
 
 /**
- * Filters the collaborators by their affiliation. Can be one of:
- *   \* `outside`: Outside collaborators of a project that are not a member of the project's organization.
- *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.
+ * Filters the collaborators by their affiliation. Can be one of:  
+ *   \* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
+ *   \* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
  *   \* `all`: All collaborators the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -28751,7 +28751,7 @@ pub struct ReposUpdateRequest {
     )]
     pub name: String,
     /**
-     * Either `true` to make the repository private or `false` to make it public. Default: `false`.
+     * Either `true` to make the repository private or `false` to make it public. Default: `false`.  
      *  \*\*Note\*\*: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. \*\*Note\*\*: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private.
      */
     #[serde(
@@ -28813,8 +28813,8 @@ pub struct ActionsListWorkflowRunsResponse {
 }
 
 /**
- * Filters jobs by their `completed_at` timestamp. Can be one of:
- *   \* `latest`: Returns jobs from the most recent execution of the workflow run.
+ * Filters jobs by their `completed_at` timestamp. Can be one of:  
+ *   \* `latest`: Returns jobs from the most recent execution of the workflow run.  
  *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29494,7 +29494,7 @@ impl Default for ChecksCreateRequestStatus {
 }
 
 /**
- * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.
+ * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29762,7 +29762,7 @@ pub struct ChecksCreateRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.
+     * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
      *  \*\*Note:\*\* Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -29821,7 +29821,7 @@ pub struct ChecksCreateRequest {
 }
 
 /**
- * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.
+ * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.  
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29916,7 +29916,7 @@ pub struct ChecksUpdateRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.
+     * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.  
      *  \*\*Note:\*\* Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -30118,9 +30118,9 @@ pub struct CodeScanningUploadSarifRequest {
 }
 
 /**
- * Filter collaborators returned by their affiliation. Can be one of:
- *   \* `outside`: All outside collaborators of an organization-owned repository.
- *   \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.
+ * Filter collaborators returned by their affiliation. Can be one of:  
+ *   \* `outside`: All outside collaborators of an organization-owned repository.  
+ *   \* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  
  *   \* `all`: All collaborators the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -30149,11 +30149,11 @@ impl Default for ReposListCollaboratorsAffiliation {
 }
 
 /**
- * The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:
- *   \* `pull` - can pull, but not push to or administer this repository.
- *   \* `push` - can pull and push, but not administer this repository.
- *   \* `admin` - can pull, push and administer this repository.
- *   \* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.
+ * The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  
+ *   \* `pull` - can pull, but not push to or administer this repository.  
+ *   \* `push` - can pull and push, but not administer this repository.  
+ *   \* `admin` - can pull, push and administer this repository.  
+ *   \* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.  
  *   \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -30188,11 +30188,11 @@ impl Default for ReposAddCollaboratorRequestPermission {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddCollaboratorRequest {
     /**
-     * The permission to grant the collaborator. \*\*Only valid on organization-owned repositories.\*\* Can be one of:
-     *  \\* `pull` - can pull, but not push to or administer this repository.
-     *  \\* `push` - can pull and push, but not administer this repository.
-     *  \\* `admin` - can pull, push and administer this repository.
-     *  \\* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.
+     * The permission to grant the collaborator. \*\*Only valid on organization-owned repositories.\*\* Can be one of:  
+     *  \\* `pull` - can pull, but not push to or administer this repository.  
+     *  \\* `push` - can pull and push, but not administer this repository.  
+     *  \\* `admin` - can pull, push and administer this repository.  
+     *  \\* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.  
      *  \\* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -30769,17 +30769,17 @@ pub struct ReposCreateDeploymentRequest {
     pub environment: String,
     /**
      * One of the following types:
-     *
+     *  
      *  - `Data`
      *  - `String`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub payload: Option<ReposCreateDeploymentRequestPayloadOneOf>,
     /**
-     * Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.
+     * Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.  
      *  \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
      */
     #[serde(
@@ -30812,7 +30812,7 @@ pub struct ReposCreateDeploymentRequest {
     )]
     pub task: String,
     /**
-     * Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`
+     * Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`  
      *  \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
      */
     #[serde(
@@ -30893,8 +30893,8 @@ impl Default for ReposCreateDeploymentStatusRequestEnvironment {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateDeploymentStatusRequest {
     /**
-     * Adds a new `inactive` status to all prior non-transient, non-production environment deployments with the same repository and `environment` name as the created status's deployment. An `inactive` status is only added to deployments that had a `success` state. Default: `true`
-     *  \*\*Note:\*\* To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
+     * Adds a new `inactive` status to all prior non-transient, non-production environment deployments with the same repository and `environment` name as the created status's deployment. An `inactive` status is only added to deployments that had a `success` state. Default: `true`  
+     *  \*\*Note:\*\* To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.  
      *  \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
      */
     #[serde(
@@ -30917,7 +30917,7 @@ pub struct ReposCreateDeploymentStatusRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub environment: Option<ReposCreateDeploymentStatusRequestEnvironment>,
     /**
-     * Sets the URL for accessing your environment. Default: `""`
+     * Sets the URL for accessing your environment. Default: `""`  
      *  \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
      */
     #[serde(
@@ -30927,7 +30927,7 @@ pub struct ReposCreateDeploymentStatusRequest {
     )]
     pub environment_url: String,
     /**
-     * The full URL of the deployment's output. This parameter replaces `target_url`. We will continue to accept `target_url` to support legacy uses, but we recommend replacing `target_url` with `log_url`. Setting `log_url` will automatically set `target_url` to the same value. Default: `""`
+     * The full URL of the deployment's output. This parameter replaces `target_url`. We will continue to accept `target_url` to support legacy uses, but we recommend replacing `target_url` with `log_url`. Setting `log_url` will automatically set `target_url` to the same value. Default: `""`  
      *  \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
      */
     #[serde(
@@ -31407,8 +31407,8 @@ impl Default for GitCreateTreeRequestType {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateTreeRequest {
     /**
-     * The content you want this file to have. GitHub will write this blob out and use that SHA for this entry. Use either this, or `tree.sha`.
-     *
+     * The content you want this file to have. GitHub will write this blob out and use that SHA for this entry. Use either this, or `tree.sha`.  
+     *    
      *  \*\*Note:\*\* Use either `tree.sha` or `content` to specify the contents of the entry. Using both `tree.sha` and `content` will return an error.
      */
     #[serde(
@@ -31432,8 +31432,8 @@ pub struct GitCreateTreeRequest {
     )]
     pub path: String,
     /**
-     * The SHA1 checksum ID of the object in the tree. Also called `tree.sha`. If the value is `null` then the file will be deleted.
-     *
+     * The SHA1 checksum ID of the object in the tree. Also called `tree.sha`. If the value is `null` then the file will be deleted.  
+     *    
      *  \*\*Note:\*\* Use either `tree.sha` or `content` to specify the contents of the entry. Using both `tree.sha` and `content` will return an error.
      */
     #[serde(
@@ -32047,10 +32047,10 @@ pub struct IssuesCreateRequest {
     pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
     /**
      * One of the following types:
-     *
+     *  
      *  - `String`
      *  - `i64`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -32058,10 +32058,10 @@ pub struct IssuesCreateRequest {
     pub milestone: Option<MilestoneOneOf>,
     /**
      * One of the following types:
-     *
+     *  
      *  - `String`
      *  - `i64`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -32315,10 +32315,10 @@ pub struct IssuesUpdateRequest {
     pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
     /**
      * One of the following types:
-     *
+     *  
      *  - `String`
      *  - `i64`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -32331,10 +32331,10 @@ pub struct IssuesUpdateRequest {
     pub state: Option<IssuesUpdateRequestState>,
     /**
      * One of the following types:
-     *
+     *  
      *  - `String`
      *  - `i64`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -32502,10 +32502,10 @@ impl From<IssuesAddLabelsRequestOneOf> for Vec<String> {
 }
 
 /**
- * The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:
- *   \* `off-topic`
- *   \* `too heated`
- *   \* `resolved`
+ * The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:  
+ *   \* `off-topic`  
+ *   \* `too heated`  
+ *   \* `resolved`  
  *   \* `spam`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -32644,8 +32644,8 @@ pub struct ReposCreateDeployKeyRequest {
     )]
     pub key: String,
     /**
-     * If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.
-     *
+     * If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.  
+     *    
      *  Deploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see "[Repository permission levels for an organization](https://help.github.com/articles/repository-permission-levels-for-an-organization/)" and "[Permission levels for a user account repository](https://help.github.com/articles/permission-levels-for-a-user-account-repository/)."
      */
     #[serde(
@@ -34157,8 +34157,8 @@ pub struct ReposCreateCommitStatusRequest {
     #[serde()]
     pub state: ReposCreateCommitStatusRequestState,
     /**
-     * The target URL to associate with this status. This URL will be linked from the GitHub UI to allow users to easily see the source of the status.
-     *  For example, if your continuous integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:
+     * The target URL to associate with this status. This URL will be linked from the GitHub UI to allow users to easily see the source of the status.  
+     *  For example, if your continuous integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:  
      *  `http://ci.example.com/user/repo/build/sha`
      */
     #[serde(
@@ -34431,11 +34431,11 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
     pub path: String,
     /**
      * One of the following types:
-     *
+     *  
      *  - `String`
      *  - `Data`
      *  - `serde_json::Value`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -34718,11 +34718,11 @@ pub struct ScimUpdateAttributeUserRequestOperations {
     pub path: String,
     /**
      * One of the following types:
-     *
+     *  
      *  - `Value`
      *  - `Vec<ScimUserEmails>`
      *  - `String`
-     *
+     *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *
      */
@@ -35051,11 +35051,11 @@ pub struct SearchUsersResponse {
 }
 
 /**
- * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. The options are:
- *   **For a non-nested team:**
- *   \* `secret` - only visible to organization owners and members of this team.
- *   \* `closed` - visible to all members of this organization.
- *   **For a parent or child team:**
+ * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. The options are:  
+ *   **For a non-nested team:**  
+ *   \* `secret` - only visible to organization owners and members of this team.  
+ *   \* `closed` - visible to all members of this organization.  
+ *   **For a parent or child team:**  
  *   \* `closed` - visible to all members of this organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -35113,19 +35113,19 @@ pub struct TeamsUpdateLegacyRequest {
     )]
     pub parent_team_id: i64,
     /**
-     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:
-     *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.
-     *  \\* `push` - team members can pull and push, but not administer newly-added repositories.
+     * \*\*Deprecated\*\*. The permission that new repositories will be added to the team with when none is specified. Can be one of:  
+     *  \\* `pull` - team members can pull, but not push to or administer newly-added repositories.  
+     *  \\* `push` - team members can pull and push, but not administer newly-added repositories.  
      *  \\* `admin` - team members can pull, push and administer newly-added repositories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<Permission>,
     /**
-     * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. The options are:
-     *  \*\*For a non-nested team:\*\*
-     *  \\* `secret` - only visible to organization owners and members of this team.
-     *  \\* `closed` - visible to all members of this organization.
-     *  \*\*For a parent or child team:\*\*
+     * The level of privacy this team should have. Editing teams without specifying this parameter leaves `privacy` intact. The options are:  
+     *  \*\*For a non-nested team:\*\*  
+     *  \\* `secret` - only visible to organization owners and members of this team.  
+     *  \\* `closed` - visible to all members of this organization.  
+     *  \*\*For a parent or child team:\*\*  
      *  \\* `closed` - visible to all members of this organization.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -35135,10 +35135,10 @@ pub struct TeamsUpdateLegacyRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
     /**
-     * The permission to grant to the team for this project. Can be one of:
-     *  \\* `read` - team members can read, but not write to or administer this project.
-     *  \\* `write` - team members can read and write, but not administer this project.
-     *  \\* `admin` - team members can read, write and administer this project.
+     * The permission to grant to the team for this project. Can be one of:  
+     *  \\* `read` - team members can read, but not write to or administer this project.  
+     *  \\* `write` - team members can read and write, but not administer this project.  
+     *  \\* `admin` - team members can read, write and administer this project.  
      *  Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -35146,11 +35146,11 @@ pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
 }
 
 /**
- * The permission to grant the team on this repository. Can be one of:
- *   \* `pull` - team members can pull, but not push to or administer this repository.
- *   \* `push` - team members can pull and push, but not administer this repository.
- *   \* `admin` - team members can pull, push and administer this repository.
- *
+ * The permission to grant the team on this repository. Can be one of:  
+ *   \* `pull` - team members can pull, but not push to or administer this repository.  
+ *   \* `push` - team members can pull and push, but not administer this repository.  
+ *   \* `admin` - team members can pull, push and administer this repository.  
+ *     
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -35183,11 +35183,11 @@ impl Default for TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateRepoPermissionsLegacyRequest {
     /**
-     * The permission to grant the team on this repository. Can be one of:
-     *  \\* `pull` - team members can pull, but not push to or administer this repository.
-     *  \\* `push` - team members can pull and push, but not administer this repository.
-     *  \\* `admin` - team members can pull, push and administer this repository.
-     *
+     * The permission to grant the team on this repository. Can be one of:  
+     *  \\* `pull` - team members can pull, but not push to or administer this repository.  
+     *  \\* `push` - team members can pull and push, but not administer this repository.  
+     *  \\* `admin` - team members can pull, push and administer this repository.  
+     *    
      *  If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -35786,8 +35786,8 @@ impl Default for ReposListVisibility {
 }
 
 /**
- * Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`
- *
+ * Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
+ *     
  *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
