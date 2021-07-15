@@ -3202,6 +3202,9 @@ pub struct Authorization {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
+    /**
+     * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub installation: Option<ScopedInstallation>,
     #[serde(
@@ -6376,7 +6379,7 @@ pub struct MinimalRepositoryPermissions {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct MinimalRepositoryLicense {
+pub struct License {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6716,7 +6719,7 @@ pub struct MinimalRepository {
     )]
     pub languages_url: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<MinimalRepositoryLicense>,
+    pub license: Option<License>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -8451,7 +8454,7 @@ pub struct Package {
     #[serde()]
     pub package_type: PackageType,
     /**
-     * Minimal Repository
+     * A software package
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository: Option<MinimalRepository>,
@@ -14624,6 +14627,39 @@ pub struct AutoMerge {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct PullRequestSimpleHead {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub label: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "ref"
+    )]
+    pub ref_: String,
+    /**
+     * A git repository
+     */
+    #[serde()]
+    pub repo: Repository,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub sha: String,
+    /**
+     * Simple User
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub user: Option<SimpleUser>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Base {
     #[serde(
         default,
@@ -14767,7 +14803,7 @@ pub struct PullRequestSimple {
     )]
     pub draft: bool,
     #[serde()]
-    pub head: Base,
+    pub head: PullRequestSimpleHead,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20252,7 +20288,7 @@ pub struct PullRequestHeadRepo {
     )]
     pub languages_url: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<MinimalRepositoryLicense>,
+    pub license: Option<License>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",

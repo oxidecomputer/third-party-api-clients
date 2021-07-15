@@ -9,7 +9,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.1.10"
+//! octorust = "0.1.11"
 //! ```
 //!
 //! ## Basic example
@@ -27,7 +27,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.1.10/octorust/struct.Client.html#method.host) method.
+//! [Client#host](https://docs.rs/octorust/0.1.11/octorust/struct.Client.html#method.host) method.
 //!
 //! ## Feature flags
 //!
@@ -41,7 +41,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.1.10", features = ["httpcache"] }
+//! octorust = { version = "0.1.11", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -524,11 +524,10 @@ impl Client {
                 unreachable!("this should not be reachable without the httpcache feature enabled")
             }
         } else {
-            println!(
-                "error status: {:?}, response payload: {}",
+            /*println!("error status: {:?}, response payload: {}",
                 status,
                 String::from_utf8_lossy(&response_body),
-            );
+            );*/
             let error = match (remaining, reset) {
                 (Some(remaining), Some(reset)) if remaining == 0 => {
                     let now = std::time::SystemTime::now()

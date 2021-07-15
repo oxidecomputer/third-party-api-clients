@@ -191,6 +191,20 @@ impl<'de> Visitor<'de> for I32Visitor {
         formatter.write_str("an integer between -2^31 and 2^31")
     }
 
+    fn visit_i8<E>(self, value: i8) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(value as i32)
+    }
+
+    fn visit_i16<E>(self, value: i16) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(value as i32)
+    }
+
     fn visit_i32<E>(self, value: i32) -> Result<Self::Value, E>
     where
         E: de::Error,
@@ -240,6 +254,27 @@ impl<'de> Visitor<'de> for I64Visitor {
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         formatter.write_str("an integer")
+    }
+
+    fn visit_i8<E>(self, value: i8) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(value as i64)
+    }
+
+    fn visit_i16<E>(self, value: i16) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(value as i64)
+    }
+
+    fn visit_i32<E>(self, value: i32) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(value as i64)
     }
 
     fn visit_i64<E>(self, value: i64) -> Result<Self::Value, E>

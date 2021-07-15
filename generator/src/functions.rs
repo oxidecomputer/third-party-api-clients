@@ -142,7 +142,15 @@ pub fn generate_files(
             /*
              * Get the response type.
              */
-            let (response_type, tid) = get_response_type(&oid, ts, o)?;
+            let (mut response_type, tid) = get_response_type(&oid, ts, o)?;
+            // We shouldn't ever have an optional response type, thats just annoying.
+            if response_type.starts_with("Option<") {
+                response_type = response_type
+                    .trim_start_matches("Option<")
+                    .trim_end_matches('>')
+                    .to_string();
+            }
+
             if let Some(te) = ts.id_to_entry.get(&tid) {
                 // If we have a one of, we can generate a few different subfunctions to
                 // help as well.

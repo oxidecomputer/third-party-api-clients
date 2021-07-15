@@ -896,13 +896,22 @@ impl TypeSpace {
         id
     }
 
-    fn id_for_optional(&mut self, want: &TypeId, sd: openapiv3::SchemaData) -> TypeId {
+    fn id_for_optional(&mut self, tid: &TypeId, sd: openapiv3::SchemaData) -> TypeId {
+        let mut want = tid.clone();
         for (oid, oent) in self.id_to_entry.iter() {
             match &oent.details {
-                TypeDetails::Optional(id, schema_data) if id == want && *schema_data == sd => {
-                    return oid.clone()
+                TypeDetails::Optional(id, schema_data) => {
+                    if *id == want && *schema_data == sd {
+                        return oid.clone();
+                    }
                 }
                 _ => continue,
+            }
+        }
+
+        if let Some(te) = self.id_to_entry.get(tid) {
+            if let TypeDetails::Optional(nid, _) = &te.details {
+                want = nid.clone();
             }
         }
 
@@ -1388,30 +1397,21 @@ impl TypeSpace {
                 )),
             },
             openapiv3::SchemaKind::AllOf { all_of } => {
-                // TODO: Actually combine all the types.
+                // So for the github api specifically they only ever pass one
+                // thing into this. So let's just get the first thing and embed it.
                 let id = self.select(name, all_of.get(0).unwrap(), "")?;
                 if let Some(et) = self.id_to_entry.get(&id) {
-                    let mut sd = self.get_schema_data_for_id(&id).unwrap().clone();
+                    let sd = self.get_schema_data_for_id(&id).unwrap().clone();
                     if s.schema_data.nullable {
-                        sd.nullable = true;
-                        if let Some(d) = &s.schema_data.description {
-                            if !d.is_empty() {
-                                sd.description = Some(d.to_string());
-                            }
-                        }
-                        // This type is nullable.
-                        // We need to pass that information along!
-                        return Ok((Some(nam), TypeDetails::NamedType(id, sd)));
-                    }
-                    if let Some(n) = name {
-                        if let TypeDetails::Object(..) = et.details {
-                            Ok((Some(clean_name(n)), et.details.clone()))
+                        if let TypeDetails::Optional(..) = &et.details {
+                            // Do nothing we already have an optional.
                         } else {
-                            Ok((Some(n.to_string()), et.details.clone()))
+                            // Set it as optional.
+                            return Ok((Some(nam), TypeDetails::Optional(id, sd)));
                         }
-                    } else {
-                        bail!("all_of types need a name? {:?} {:?}", name, all_of)
                     }
+
+                    Ok((et.name.clone(), et.details.clone()))
                 } else {
                     bail!("allof schema kind: {:?} {:?} {:?}", id, name, s,);
                 }

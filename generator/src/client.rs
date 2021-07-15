@@ -264,10 +264,10 @@ impl Client {
                     unreachable!("this should not be reachable without the httpcache feature enabled")
                 }
         } else {
-            println!("error status: {:?}, response payload: {}",
+            /*println!("error status: {:?}, response payload: {}",
                 status,
                 String::from_utf8_lossy(&response_body),
-            );
+            );*/
             let error = match (remaining, reset) {
                 (Some(remaining), Some(reset)) if remaining == 0 => {
                     let now = std::time::SystemTime::now()
