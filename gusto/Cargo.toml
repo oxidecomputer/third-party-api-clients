@@ -1,0 +1,38 @@
+[package]
+name = "gusto-api"
+description = "A fully generated & opinionated API client for the Gusto API."
+version = "0.2.0"
+documentation = "https://docs.rs/gusto-api/"
+repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/github"
+readme = "README.md"
+edition = "2018"
+license = "MIT"
+
+[dependencies]
+anyhow = "1"
+async-recursion = "^0.3.2"
+chrono = { version = "0.4", features = ["serde"] }
+dirs = { version = "^3.0.2", optional = true }
+http = "^0.2.4"
+hyperx = "1"
+jsonwebtoken = "7"
+mime = "0.3"
+percent-encoding = "2.1"
+reqwest = { version = "0.11", features = ["json"] }
+schemars = { version = "0.8", features = ["chrono", "uuid"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+base64 = "^0.12"
+dirs = "^3.0.2"
+nom_pem = "4"
+tokio = { version = "1.8.0", features = ["full"] }
+
+[features]
+# enable etag-based http_cache functionality
+httpcache = ["dirs"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

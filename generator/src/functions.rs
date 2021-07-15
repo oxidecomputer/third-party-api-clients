@@ -32,10 +32,18 @@ pub fn generate_files(
 
             // Make sure we have exactly 1 tag. This likely needs to change in the
             // future but for now it seems fairly consistent.
-            if o.tags.len() != 1 {
+            let mut tags = o.tags.clone();
+            if tags.is_empty() {
+                // This "x-tags" bullshit is for Gusto.
+                if let Some(x) = o.extensions.get("x-tags") {
+                    let xtags: Vec<String> = serde_json::from_value(x.clone()).unwrap();
+                    tags = xtags;
+                }
+            }
+            if tags.len() != 1 {
                 bail!("invalid number of tags for op {}: {}", oid, o.tags.len());
             }
-            let tag = to_snake_case(o.tags.first().unwrap());
+            let tag = to_snake_case(tags.first().unwrap());
 
             let mut out = String::new();
             if let Some(o) = tag_files.get(&tag) {
@@ -94,33 +102,42 @@ pub fn generate_files(
             let mut bounds: Vec<String> = Vec::new();
 
             let (body_param, body_func) = if let Some(b) = &o.request_body {
-                let b = b.item()?;
-                if b.is_binary()? {
-                    bounds.push("B: Into<reqwest::Body>".to_string());
-                    (Some("B".to_string()), Some("body".to_string()))
-                } else {
-                    let (ct, mt) = b.content.first().unwrap();
-                    if ct == "application/json" {
-                        if let Some(s) = &mt.schema {
-                            let object_name = format!("{} request", oid_to_object_name(&oid));
-                            let id = ts.select(Some(&object_name), s, "")?;
-                            let rt = ts.render_type(&id, false)?;
-                            (Some(format!("&{}", rt)), Some("json".to_string()))
+                if let Ok(b) = b.item() {
+                    if b.is_binary()? {
+                        bounds.push("B: Into<reqwest::Body>".to_string());
+                        (Some("B".to_string()), Some("body".to_string()))
+                    } else {
+                        let (ct, mt) = b.content.first().unwrap();
+                        if ct == "application/json" {
+                            if let Some(s) = &mt.schema {
+                                let object_name = format!("{} request", oid_to_object_name(&oid));
+                                let id = ts.select(Some(&object_name), s, "")?;
+                                let rt = ts.render_type(&id, false)?;
+                                (Some(format!("&{}", rt)), Some("json".to_string()))
+                            } else {
+                                (None, None)
+                            }
+                        } else if let Some(s) = &mt.schema {
+                            let tid = ts.select(None, s, "")?;
+                            let rt = ts.render_type(&tid, false)?;
+                            bounds.push("T: Into<reqwest::Body>".to_string());
+                            if rt == "String" {
+                                (Some("T".to_string()), Some("body".to_string()))
+                            } else {
+                                (Some(rt), Some("body".to_string()))
+                            }
                         } else {
                             (None, None)
                         }
-                    } else if let Some(s) = &mt.schema {
-                        let tid = ts.select(None, s, "")?;
-                        let rt = ts.render_type(&tid, false)?;
-                        bounds.push("T: Into<reqwest::Body>".to_string());
-                        if rt == "String" {
-                            (Some("T".to_string()), Some("body".to_string()))
-                        } else {
-                            (Some(rt), Some("body".to_string()))
-                        }
-                    } else {
-                        (None, None)
                     }
+                } else if let openapiv3::ReferenceOr::Reference { reference } = b {
+                    // We must have had a reference.
+                    let object_name = format!("{} request", oid_to_object_name(&oid));
+                    let id = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
+                    let rt = ts.render_type(&id, false)?;
+                    (Some(format!("&{}", rt)), Some("json".to_string()))
+                } else {
+                    (None, None)
                 }
             } else {
                 (None, None)
@@ -256,47 +273,56 @@ fn get_response_type(
 ) -> Result<(String, crate::TypeId)> {
     // Get the first response.
     let first = o.responses.responses.first().unwrap();
-    let i = first.1.item()?;
-
-    if i.content.is_empty() {
-        // Return empty.
-        return Ok(("()".to_string(), crate::TypeId(0)));
-    }
-
-    // Get the json response, if it exists.
-    if let Some(mt) = i.content.get("application/json") {
-        if !mt.encoding.is_empty() {
-            bail!("media type encoding not empty: {:#?}", mt);
+    if let Ok(i) = first.1.item() {
+        if i.content.is_empty() {
+            // Return empty.
+            return Ok(("()".to_string(), crate::TypeId(0)));
         }
 
-        if let Some(s) = &mt.schema {
-            let object_name = format!("{} response", oid_to_object_name(oid));
-            let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
-            let rt = ts.render_type(&tid, false)?;
-            return Ok((rt, tid));
-        }
-    }
+        // Get the json response, if it exists.
+        if let Some(mt) = i.content.get("application/json") {
+            if !mt.encoding.is_empty() {
+                bail!("media type encoding not empty: {:#?}", mt);
+            }
 
-    // Get the first response.
-    let (ct, mt) = i.content.first().unwrap();
-    if ct == "text/plain" || ct == "text/html" || ct == "application/octocat-stream" || ct == "*/*"
-    {
-        if let Some(s) = &mt.schema {
-            let tid = ts.select(None, s, "")?;
-            let rt = ts.render_type(&tid, false)?;
-            return Ok((rt, tid));
-        }
-    } else if ct == "application/scim+json" {
-        if !mt.encoding.is_empty() {
-            bail!("media type encoding not empty: {:#?}", mt);
+            if let Some(s) = &mt.schema {
+                let object_name = format!("{} response", oid_to_object_name(oid));
+                let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
+                let rt = ts.render_type(&tid, false)?;
+                return Ok((rt, tid));
+            }
         }
 
-        if let Some(s) = &mt.schema {
-            let object_name = format!("{} response", oid_to_object_name(oid));
-            let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
-            let rt = ts.render_type(&tid, false)?;
-            return Ok((rt, tid));
+        // Get the first response.
+        let (ct, mt) = i.content.first().unwrap();
+        if ct == "text/plain"
+            || ct == "text/html"
+            || ct == "application/octocat-stream"
+            || ct == "*/*"
+        {
+            if let Some(s) = &mt.schema {
+                let tid = ts.select(None, s, "")?;
+                let rt = ts.render_type(&tid, false)?;
+                return Ok((rt, tid));
+            }
+        } else if ct == "application/scim+json" {
+            if !mt.encoding.is_empty() {
+                bail!("media type encoding not empty: {:#?}", mt);
+            }
+
+            if let Some(s) = &mt.schema {
+                let object_name = format!("{} response", oid_to_object_name(oid));
+                let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
+                let rt = ts.render_type(&tid, false)?;
+                return Ok((rt, tid));
+            }
         }
+    } else if let openapiv3::ReferenceOr::Reference { reference } = first.1 {
+        // We must have had a reference.
+        let object_name = format!("{} response", oid_to_object_name(oid));
+        let id = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
+        let rt = ts.render_type(&id, false)?;
+        return Ok((rt, id));
     }
 
     bail!("parsing response got to end with no type");

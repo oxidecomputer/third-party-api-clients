@@ -273,6 +273,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     }
                                 }
                             }
+                            SchemaKind::Type(openapiv3::Type::Number(_)) => "f64".to_string(), /* TODO: make this more exhaustive. */
                             SchemaKind::Type(Type::Integer(it)) => {
                                 let mut uint;
                                 let width;
@@ -894,7 +895,7 @@ impl TypeSpace {
                 }
             }
         } else {
-            bail!("could not resolve type ID {:?}", tid);
+            panic!("could not resolve type ID {:?}", tid);
         }
     }
 
@@ -947,15 +948,22 @@ impl TypeSpace {
     }
 
     fn select_ref(&mut self, _name: Option<&str>, reference: &str) -> Result<TypeId> {
+        let ref_ = reference.to_string();
         /*
          * As this is a reference, all we can do for now is determine
          * the type ID.
          */
-        if let Some(id) = self.name_to_id.get(reference) {
+        if let Some(id) = self.name_to_id.get(&ref_) {
             return Ok(id.clone());
         }
 
-        bail!("reference {} not found", reference);
+        // This reference has not yet been parsed, so likely what is happening is
+        // we are in the middle of populating all the schemas and a schema references
+        // a schema that is not yet populated.
+        // Let's make some generic details, assign an id and then later in
+        // populate ref we can replace this ID with the real one.
+        let details = TypeDetails::NamedType(self.assign(), Default::default());
+        self.add_if_not_exists(Some(ref_), details, "", true)
     }
 
     fn add_if_not_exists(
@@ -1174,13 +1182,32 @@ impl TypeSpace {
             "".to_string()
         };
 
+        let ref_ = format!("#/components/{}s/{}", type_.trim_end_matches('s'), nam);
+
         let details = if let Some(id) = id {
             TypeDetails::NamedType(id, Default::default())
         } else {
             TypeDetails::NamedType(self.id_for_name("String"), Default::default())
         };
 
-        let ref_ = format!("#/components/{}s/{}", type_.trim_end_matches('s'), nam);
+        // Lets check if we already have this reference added.
+        // This would have happened if we were parsing all the schemas and something
+        // was referenced that had not yet been parsed.
+        if let Some(rid) = self.name_to_id.get(&ref_) {
+            // Okay we have the id for the reference.
+            // Let's update it's named type.
+            self.id_to_entry.insert(
+                rid.clone(),
+                TypeEntry {
+                    id: rid.clone(),
+                    name: Some(ref_.to_string()),
+                    details,
+                },
+            );
+
+            return Ok(rid.clone());
+        }
+
         self.add_if_not_exists(Some(ref_), details, "", true)
     }
 
@@ -2019,6 +2046,40 @@ fn main() -> Result<()> {
                 bail!("parameter {} uses reference, unsupported: {:?}", pn, p);
             }
             debug("");
+        }
+
+        // Populate a type to describe each entry in the requestBodies section.
+        for (i, (rn, r)) in components.request_bodies.iter().enumerate() {
+            let name = clean_name(rn);
+            debug(&format!(
+                "REQUEST BODY {}/{}: {}",
+                i + 1,
+                components.request_bodies.len(),
+                name
+            ));
+
+            let content = &r.item().unwrap().content;
+
+            for (ct, mt) in content {
+                if ct == "application/json" {
+                    if let Some(s) = &mt.schema {
+                        let object_name = format!("{} request", name);
+                        let id = ts.select(Some(&clean_name(&object_name)), s, "")?;
+
+                        // Insert the named type for our reference.
+                        // DO NOT CLEAN THE NAME HERE.
+                        ts.populate_ref(Some(rn.as_str()), Some(id.clone()), "requestBodies")?;
+
+                        debug(&format!("    -> {:?}", id));
+                        debug("");
+                    }
+                }
+            }
+
+            if content.is_empty() {
+                // Populate an empty reference.
+                ts.populate_ref(Some(rn.as_str()), None, "requestBodies")?;
+            }
         }
 
         // Populate a type to describe each entry in the responses section.
