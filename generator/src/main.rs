@@ -1577,7 +1577,14 @@ fn render_param(
     }
 
     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
-    a(r#"#[serde(rename_all = "snake_case")]"#);
+
+    let first = enums.first().unwrap();
+    if *first == first.to_uppercase() {
+        a(r#"#[serde(rename_all = "SCREAMING_SNAKE_CASE")]"#);
+    } else {
+        a(r#"#[serde(rename_all = "snake_case")]"#);
+    }
+
     a(&format!("pub enum {} {{", sn));
     for e in &enums {
         if struct_name(e).is_empty() {

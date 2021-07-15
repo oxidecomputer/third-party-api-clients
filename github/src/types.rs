@@ -4321,7 +4321,7 @@ pub struct Milestone {
  * How the author is associated with the repository.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum AuthorAssociation {
     Collaborator,
     Contributor,
@@ -9178,7 +9178,7 @@ pub struct TeamDiscussionComment {
  * The reaction to use
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Content {
     PlusOne,
     MinusOne,
@@ -18835,7 +18835,7 @@ pub struct PullRequestReviewCommentLinks {
  * The side of the first line of the range for a multi-line comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum StartSide {
     Left,
     Right,
@@ -18861,7 +18861,7 @@ impl Default for StartSide {
  * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Side {
     Left,
     Right,
@@ -24918,7 +24918,7 @@ impl Default for StatusData {
  * Must be one of: `day`, `week`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Per {
     Day,
     Week,
@@ -27754,7 +27754,7 @@ pub struct TeamsCreateDiscussionCommentInOrgRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsListTeamDiscussionCommentInOrgContent {
     PlusOne,
     MinusOne,
@@ -27794,7 +27794,7 @@ impl Default for ReactionsListTeamDiscussionCommentInOrgContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
     PlusOne,
     MinusOne,
@@ -27843,7 +27843,7 @@ pub struct ReactionsCreateTeamDiscussionCommentInOrgRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsListTeamDiscussionInOrgContent {
     PlusOne,
     MinusOne,
@@ -27883,7 +27883,7 @@ impl Default for ReactionsListTeamDiscussionInOrgContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsCreateTeamDiscussionInOrgRequestContent {
     PlusOne,
     MinusOne,
@@ -30222,7 +30222,7 @@ pub struct ReposUpdateCommitCommentRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsListCommitCommentContent {
     PlusOne,
     MinusOne,
@@ -30262,7 +30262,7 @@ impl Default for ReactionsListCommitCommentContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsCreateCommitCommentRequestContent {
     PlusOne,
     MinusOne,
@@ -31344,7 +31344,7 @@ pub struct GitCreateTagRequest {
  * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum GitCreateTreeRequestMode {
     SubdirectoryTree,
     FileBlob,
@@ -32114,7 +32114,7 @@ pub struct IssuesUpdateCommentRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsListIssueCommentContent {
     PlusOne,
     MinusOne,
@@ -32154,7 +32154,7 @@ impl Default for ReactionsListIssueCommentContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsCreateIssueCommentRequestContent {
     PlusOne,
     MinusOne,
@@ -32547,7 +32547,7 @@ pub struct IssuesLockRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsListIssueContent {
     PlusOne,
     MinusOne,
@@ -32587,7 +32587,7 @@ impl Default for ReactionsListIssueContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsCreateIssueRequestContent {
     PlusOne,
     MinusOne,
@@ -32956,7 +32956,7 @@ pub struct PullsUpdateBranchResponse {
  * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Path {
     Root,
     Docs,
@@ -33291,7 +33291,7 @@ pub struct PullsUpdateReviewCommentRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsListPullRequestReviewCommentContent {
     PlusOne,
     MinusOne,
@@ -33331,7 +33331,7 @@ impl Default for ReactionsListPullRequestReviewCommentContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsCreatePullRequestReviewCommentContent {
     PlusOne,
     MinusOne,
@@ -33424,7 +33424,7 @@ pub struct PullsUpdateRequest {
  * **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PullsCreateReviewCommentRequestSide {
     Left,
     Right,
@@ -33452,7 +33452,7 @@ impl Default for PullsCreateReviewCommentRequestSide {
  * **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PullsCreateReviewCommentRequestStartSide {
     Left,
     Right,
@@ -33651,7 +33651,7 @@ pub struct PullsRemoveRequestedReviewersRequest {
  * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PullsCreateReviewRequestEvent {
     Approve,
     Comment,
@@ -33800,7 +33800,7 @@ pub struct PullsDismissReviewRequest {
  * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PullsSubmitReviewRequestEvent {
     Approve,
     Comment,
@@ -34016,7 +34016,7 @@ pub struct ReposUpdateReleaseRequest {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ReactionsCreateReleaseRequestContent {
     PlusOne,
     Eyes,
