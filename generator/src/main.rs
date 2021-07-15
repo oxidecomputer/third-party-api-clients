@@ -844,15 +844,20 @@ impl TypeSpace {
                     Ok(format!("Vec<{}>", self.render_type(itid, in_mod)?))
                 }
                 TypeDetails::Optional(itid, _) => {
+                    let rt = self.render_type(itid, in_mod)?;
+
                     // If it is an enum we should not make it optional.
                     // We have default functions and we should use them.
                     if let Some(te) = self.id_to_entry.get(tid) {
-                        if te.is_enum() {
-                            return Ok(rt);
+                        if let TypeDetails::Enum(_, sd) = &te.details {
+                            if !sd.nullable {
+                                return Ok(rt);
+                            }
                         }
                     }
 
-                    let rt = self.render_type(itid, in_mod)?;
+                    // We have functions for all these types to have defaults and
+                    // custom deserializers.
                     if rt == "String"
                         || rt.starts_with("Vec<")
                         || rt == "bool"
@@ -1702,7 +1707,7 @@ fn render_param(
     if !required && default.is_none() {
         a(&format!(
             r#"impl {} {{
-            pub fn is_empty(&self) -> bool {{
+            pub fn is_noop(&self) -> bool {{
                 matches!(self, {}::Noop)
             }}
     }}"#,

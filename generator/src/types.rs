@@ -203,6 +203,8 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                                 a("*/");
                             }
 
+                            let te = ts.id_to_entry.get(tid).unwrap();
+
                             // Render the serde string.
                             if rt == "String" || rt.starts_with("Vec<") || rt.starts_with("Option<")
                             {
@@ -236,6 +238,14 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                                     deserialize_with = "crate::utils::deserialize_null_f64::deserialize","#);
                             } else if rt == "u32" || rt == "u64" {
                                 a(r#"#[serde(default,"#);
+                            } else if let TypeDetails::Enum(_, sd) = &te.details {
+                                // We for sure have a default for every single enum, even
+                                // if the default is a noop.
+                                a(r#"#[serde(default,"#);
+                                // Figure out if its a no op and skip serializing if it is.
+                                if sd.default.is_none() {
+                                    a(&format!(r#"skip_serializing_if = "{}::is_noop","#, rt));
+                                }
                             } else {
                                 a(r#"#[serde("#);
                             }
