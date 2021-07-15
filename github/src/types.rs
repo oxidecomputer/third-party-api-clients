@@ -336,11 +336,11 @@ pub struct ValidationErrorSimple {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum WebhookConfigInsecureSslOneOf {
-    F64(f64),
     /**
      * Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. \*\*We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.\*\*
      */
     String(String),
+    F64(f64),
 }
 
 impl WebhookConfigInsecureSslOneOf {
@@ -2955,9 +2955,9 @@ pub struct InstallationToken {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ValueOneOf {
-    I64(i64),
-    StringVector(Vec<String>),
     String(String),
+    StringVector(Vec<String>),
+    I64(i64),
 }
 
 impl ValueOneOf {
@@ -5769,8 +5769,8 @@ pub struct LabelsData {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum LabelsOneOf {
-    String(String),
     LabelsData(LabelsData),
+    String(String),
 }
 
 impl LabelsOneOf {
@@ -11513,8 +11513,8 @@ pub struct PendingDeployment {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PayloadOneOf {
-    String(String),
     Data(Data),
+    String(String),
 }
 
 impl PayloadOneOf {
@@ -22408,9 +22408,9 @@ impl Default for Op {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ScimUserOperationsValueOneOf {
-    ValueVector(Vec<serde_json::Value>),
-    String(String),
     Data(Data),
+    String(String),
+    ValueVector(Vec<serde_json::Value>),
 }
 
 impl ScimUserOperationsValueOneOf {
@@ -24720,11 +24720,11 @@ pub enum WorkflowIdOneOf {
     /**
      * The ID of the workflow. You can also pass the workflow file name as a string.
      */
-    I64(i64),
+    String(String),
     /**
      * The ID of the workflow. You can also pass the workflow file name as a string.
      */
-    String(String),
+    I64(i64),
 }
 
 impl WorkflowIdOneOf {
@@ -25663,11 +25663,11 @@ impl Default for Public {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PublicOneOf {
+    Public(Public),
     /**
      * Flag indicating whether the gist is public
      */
     Bool(bool),
-    Public(Public),
 }
 
 impl PublicOneOf {
@@ -26251,13 +26251,13 @@ pub struct OrgsUpdateRequest {
 #[serde(untagged)]
 pub enum OrgsUpdateResponseOneOf {
     /**
-     * Validation Error Simple
-     */
-    ValidationErrorSimple(ValidationErrorSimple),
-    /**
      * Validation Error
      */
     ValidationError(ValidationError),
+    /**
+     * Validation Error Simple
+     */
+    ValidationErrorSimple(ValidationErrorSimple),
 }
 
 impl OrgsUpdateResponseOneOf {
@@ -28250,8 +28250,8 @@ pub struct ProjectsCreateCardRequestData {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ProjectsCreateCardRequestOneOf {
-    ProjectsCreateCardRequestData(ProjectsCreateCardRequestData),
     ProjectsCreateCardRequest(ProjectsCreateCardRequest),
+    ProjectsCreateCardRequestData(ProjectsCreateCardRequestData),
 }
 
 impl ProjectsCreateCardRequestOneOf {
@@ -29074,11 +29074,11 @@ pub struct ReposAddStatusCheckContextsRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddStatusCheckContextsRequestOneOf {
+    ReposAddStatusCheckContextsRequest(ReposAddStatusCheckContextsRequest),
     /**
      * contexts parameter
      */
     StringVector(Vec<String>),
-    ReposAddStatusCheckContextsRequest(ReposAddStatusCheckContextsRequest),
 }
 
 impl ReposAddStatusCheckContextsRequestOneOf {
@@ -29143,8 +29143,8 @@ pub struct ReposAddAppAccessRestrictionsRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddAppAccessRestrictionsRequestOneOf {
-    StringVector(Vec<String>),
     ReposAddAppAccessRestrictionsRequest(ReposAddAppAccessRestrictionsRequest),
+    StringVector(Vec<String>),
 }
 
 impl ReposAddAppAccessRestrictionsRequestOneOf {
@@ -29212,11 +29212,11 @@ pub struct ReposAddTeamAccessRestrictionsRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddTeamAccessRestrictionsRequestOneOf {
+    ReposAddTeamAccessRestrictionsRequest(ReposAddTeamAccessRestrictionsRequest),
     /**
      * teams parameter
      */
     StringVector(Vec<String>),
-    ReposAddTeamAccessRestrictionsRequest(ReposAddTeamAccessRestrictionsRequest),
 }
 
 impl ReposAddTeamAccessRestrictionsRequestOneOf {
@@ -29284,8 +29284,8 @@ pub struct ReposAddUserAccessRestrictionsRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddUserAccessRestrictionsRequestOneOf {
-    StringVector(Vec<String>),
     ReposAddUserAccessRestrictionsRequest(ReposAddUserAccessRestrictionsRequest),
+    StringVector(Vec<String>),
 }
 
 impl ReposAddUserAccessRestrictionsRequestOneOf {
@@ -30276,21 +30276,21 @@ pub struct AppsCreateContentAttachmentRequest {
 #[serde(untagged)]
 pub enum ReposGetContentResponseOneOf {
     /**
-     * A list of directory items
+     * Content File
      */
-    EntriesVector(Vec<Entries>),
-    /**
-     * An object describing a symlink
-     */
-    ContentSymlink(ContentSymlink),
+    ContentFile(ContentFile),
     /**
      * An object describing a symlink
      */
     ContentSubmodule(ContentSubmodule),
     /**
-     * Content File
+     * An object describing a symlink
      */
-    ContentFile(ContentFile),
+    ContentSymlink(ContentSymlink),
+    /**
+     * A list of directory items
+     */
+    EntriesVector(Vec<Entries>),
 }
 
 impl ReposGetContentResponseOneOf {
@@ -30575,11 +30575,11 @@ pub struct ReposDeleteFileRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposCreateDeploymentRequestPayloadOneOf {
+    Data(Data),
     /**
      * JSON payload with extra information about the deployment.
      */
     String(String),
-    Data(Data),
 }
 
 impl ReposCreateDeploymentRequestPayloadOneOf {
@@ -31717,8 +31717,8 @@ pub struct ReposUpdateInvitationRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum TitleOneOf {
-    I64(i64),
     String(String),
+    I64(i64),
 }
 
 impl TitleOneOf {
@@ -31770,11 +31770,11 @@ impl From<TitleOneOf> for String {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum MilestoneOneOf {
+    String(String),
     /**
      * The `number` of the milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
      */
     I64(i64),
-    String(String),
 }
 
 impl MilestoneOneOf {
@@ -31854,8 +31854,8 @@ pub struct LabelsDataType {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesCreateRequestLabelsOneOf {
-    String(String),
     LabelsDataType(LabelsDataType),
+    String(String),
 }
 
 impl IssuesCreateRequestLabelsOneOf {
@@ -32119,11 +32119,11 @@ impl Default for IssuesUpdateRequestState {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesUpdateRequestMilestoneOneOf {
+    String(String),
     /**
      * The `number` of the milestone to associate this issue with or `null` to remove current. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._
      */
     I64(i64),
-    String(String),
 }
 
 impl IssuesUpdateRequestMilestoneOneOf {
@@ -32280,11 +32280,11 @@ pub struct IssuesAddLabelsRequestDataType {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesAddLabelsRequestOneOf {
-    StringVector(Vec<String>),
-    IssuesAddLabelsRequestDataVector(Vec<IssuesAddLabelsRequestData>),
-    String(String),
-    IssuesAddLabelsRequestDataType(IssuesAddLabelsRequestDataType),
     IssuesAddLabelsRequest(IssuesAddLabelsRequest),
+    IssuesAddLabelsRequestDataType(IssuesAddLabelsRequestDataType),
+    String(String),
+    IssuesAddLabelsRequestDataVector(Vec<IssuesAddLabelsRequestData>),
+    StringVector(Vec<String>),
 }
 
 impl IssuesAddLabelsRequestOneOf {
@@ -34238,9 +34238,9 @@ impl Default for EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
-    Value(serde_json::Value),
-    String(String),
     Data(Data),
+    String(String),
+    Value(serde_json::Value),
 }
 
 impl EnterpriseAdminUpdateAttributeGroupRequestOperationsValueOneOf {
@@ -34524,9 +34524,9 @@ pub struct Value {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ScimUpdateAttributeUserRequestOperationsValueOneOf {
-    ScimUserEmailsVector(Vec<ScimUserEmails>),
-    Value(Value),
     String(String),
+    Value(Value),
+    ScimUserEmailsVector(Vec<ScimUserEmails>),
 }
 
 impl ScimUpdateAttributeUserRequestOperationsValueOneOf {
@@ -35151,13 +35151,13 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
 #[serde(untagged)]
 pub enum UsersGetByUsernameResponseOneOf {
     /**
-     * Public User
-     */
-    PublicUser(PublicUser),
-    /**
      * Private User
      */
     PrivateUser(PrivateUser),
+    /**
+     * Public User
+     */
+    PublicUser(PublicUser),
 }
 
 impl UsersGetByUsernameResponseOneOf {
@@ -35331,9 +35331,9 @@ pub struct UsersAddEmailAuthenticatedRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsersAddEmailAuthenticatedRequestOneOf {
-    StringVector(Vec<String>),
-    UsersAddEmailAuthenticatedRequest(UsersAddEmailAuthenticatedRequest),
     String(String),
+    UsersAddEmailAuthenticatedRequest(UsersAddEmailAuthenticatedRequest),
+    StringVector(Vec<String>),
 }
 
 impl UsersAddEmailAuthenticatedRequestOneOf {
@@ -35419,12 +35419,12 @@ pub struct UsersDeleteEmailAuthenticatedRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsersDeleteEmailAuthenticatedRequestOneOf {
-    StringVector(Vec<String>),
+    String(String),
     /**
      * Deletes one or more email addresses from your GitHub account. Must contain at least one email address. \*\*Note:\*\* Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
      */
     UsersDeleteEmailAuthenticatedRequest(UsersDeleteEmailAuthenticatedRequest),
-    String(String),
+    StringVector(Vec<String>),
 }
 
 impl UsersDeleteEmailAuthenticatedRequestOneOf {
