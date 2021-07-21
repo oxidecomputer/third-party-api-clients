@@ -280,7 +280,7 @@ impl Client {
                     if response_body.is_empty() {
                         anyhow!("code: {}, empty response", status)
                     } else {
-                        anyhow!("code: {}, error: {:?}", status, serde_json::from_slice(&response_body)?)
+                        anyhow!("code: {}, error: {:?}", status, String::from_utf8_lossy(&response_body),)
                     }
                 }
             };

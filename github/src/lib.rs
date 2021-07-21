@@ -546,7 +546,7 @@ impl Client {
                         anyhow!(
                             "code: {}, error: {:?}",
                             status,
-                            serde_json::from_slice(&response_body)?
+                            String::from_utf8_lossy(&response_body),
                         )
                     }
                 }
