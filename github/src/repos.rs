@@ -3270,7 +3270,397 @@ impl Repos {
      * object format.
      *
      * **Note**:
-     * *   To get a repository's c                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                le
+     * *   To get a repository's contents recursively, you can [recursively get the tree](https://docs.github.com/rest/reference/git#trees).
+     * *   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees
+     * API](https://docs.github.com/rest/reference/git#get-a-tree).
+     * *   This API supports files up to 1 megabyte in size.
+     *
+     * #### If the content is a directory
+     * The response will be an array of objects, one object for each item in the directory.
+     * When listing the contents of a directory, submodules have their "type" specified as "file". Logically, the value
+     * _should_ be "submodule". This behavior exists in API v3 [for backwards compatibility purposes](https://git.io/v1YCW).
+     * In the next major version of the API, the type will be returned as "submodule".
+     *
+     * #### If the content is a symlink
+     * If the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the
+     * API responds with the content of the file (in the format shown in the example. Otherwise, the API responds with an object
+     * describing the symlink itself.
+     *
+     * #### If the content is a submodule
+     * The `submodule_git_url` identifies the location of the submodule repository, and the `sha` identifies a specific
+     * commit within the submodule repository. Git uses the given URL when cloning the submodule repository, and checks out
+     * the submodule at that specific commit.
+     *
+     * If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the
+     * github.com URLs (`html_url` and `_links["html"]`) will have null values.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-repository-content>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `path: &str` -- path parameter.
+     * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
+     */
+    pub async fn get_content(
+        &self,
+        owner: &str,
+        repo: &str,
+        path: &str,
+        ref_: &str,
+    ) -> Result<crate::types::ReposGetContentResponseOneOf> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !ref_.is_empty() {
+            query_args.push(format!("ref={}", ref_));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/repos/{}/{}/contents/{}?{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&path.to_string()),
+            query
+        );
+
+        self.client.get(&url).await
+    }
+
+    /**
+     * Create or update file contents.
+     *
+     * This function performs a `PUT` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
+     *
+     * Creates a new file or replaces an existing file in a repository.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#create-or-update-file-contents>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `path: &str` -- path parameter.
+     */
+    pub async fn create_or_update_file_contents(
+        &self,
+        owner: &str,
+        repo: &str,
+        path: &str,
+        body: &crate::types::ReposCreateUpdateFileContentsRequest,
+    ) -> Result<crate::types::FileCommitData> {
+        let url = format!(
+            "/repos/{}/{}/contents/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&path.to_string()),
+        );
+
+        self.client
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
+     * Delete a file.
+     *
+     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/contents/{path}` endpoint.
+     *
+     * Deletes a file in a repository.
+     *
+     * You can provide an additional `committer` parameter, which is an object containing information about the committer. Or, you can provide an `author` parameter, which is an object containing information about the author.
+     *
+     * The `author` section is optional and is filled in with the `committer` information if omitted. If the `committer` information is omitted, the authenticated user's information is used.
+     *
+     * You must provide values for both `name` and `email`, whether you choose to use `author` or `committer`. Otherwise, you'll receive a `422` status code.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#delete-a-file>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `path: &str` -- path parameter.
+     */
+    pub async fn delete_file(
+        &self,
+        owner: &str,
+        repo: &str,
+        path: &str,
+        body: &crate::types::ReposDeleteFileRequest,
+    ) -> Result<crate::types::FileCommitData> {
+        let url = format!(
+            "/repos/{}/{}/contents/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&path.to_string()),
+        );
+
+        self.client
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
+     * List repository contributors.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/contributors` endpoint.
+     *
+     * Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.
+     *
+     * GitHub identifies contributors by author email address. This endpoint groups contribution counts by GitHub user, which includes all associated email addresses. To improve performance, only the first 500 author email addresses in the repository link to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-contributors>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `anon: &str` -- Set to `1` or `true` to include anonymous contributors in results.
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `page: i64` -- Page number of the results to fetch.
+     */
+    pub async fn list_contributors(
+        &self,
+        owner: &str,
+        repo: &str,
+        anon: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<crate::types::Contributor>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !anon.is_empty() {
+            query_args.push(format!("anon={}", anon));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/repos/{}/{}/contributors?{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            query
+        );
+
+        self.client.get(&url).await
+    }
+
+    /**
+     * List repository contributors.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/contributors` endpoint.
+     *
+     * As opposed to `list_contributors`, this function returns all the pages of the request at once.
+     *
+     * Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.
+     *
+     * GitHub identifies contributors by author email address. This endpoint groups contribution counts by GitHub user, which includes all associated email addresses. To improve performance, only the first 500 author email addresses in the repository link to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-repository-contributors>
+     */
+    pub async fn list_all_contributors(
+        &self,
+        owner: &str,
+        repo: &str,
+        anon: &str,
+    ) -> Result<Vec<crate::types::Contributor>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !anon.is_empty() {
+            query_args.push(format!("anon={}", anon));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/repos/{}/{}/contributors?{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
+     * List deployments.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments` endpoint.
+     *
+     * Simple filtering of deployments is available via query parameters:
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-deployments>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `sha: &str` -- The SHA recorded at creation time.
+     * * `ref_: &str` -- The name of the ref. This can be a branch, tag, or SHA.
+     * * `task: &str` -- The name of the task for the deployment (e.g., `deploy` or `deploy:migrations`).
+     * * `environment: &str` -- The name of the environment that was deployed to (e.g., `staging` or `production`).
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `page: i64` -- Page number of the results to fetch.
+     */
+    pub async fn list_deployments(
+        &self,
+        owner: &str,
+        repo: &str,
+        sha: &str,
+        ref_: &str,
+        task: &str,
+        environment: &str,
+        per_page: i64,
+        page: i64,
+    ) -> Result<Vec<crate::types::Deployment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !environment.is_empty() {
+            query_args.push(format!("environment={}", environment));
+        }
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        if !ref_.is_empty() {
+            query_args.push(format!("ref={}", ref_));
+        }
+        if !sha.is_empty() {
+            query_args.push(format!("sha={}", sha));
+        }
+        if !task.is_empty() {
+            query_args.push(format!("task={}", task));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/repos/{}/{}/deployments?{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            query
+        );
+
+        self.client.get(&url).await
+    }
+
+    /**
+     * List deployments.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/deployments` endpoint.
+     *
+     * As opposed to `list_deployments`, this function returns all the pages of the request at once.
+     *
+     * Simple filtering of deployments is available via query parameters:
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-deployments>
+     */
+    pub async fn list_all_deployments(
+        &self,
+        owner: &str,
+        repo: &str,
+        sha: &str,
+        ref_: &str,
+        task: &str,
+        environment: &str,
+    ) -> Result<Vec<crate::types::Deployment>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !environment.is_empty() {
+            query_args.push(format!("environment={}", environment));
+        }
+        if !ref_.is_empty() {
+            query_args.push(format!("ref={}", ref_));
+        }
+        if !sha.is_empty() {
+            query_args.push(format!("sha={}", sha));
+        }
+        if !task.is_empty() {
+            query_args.push(format!("task={}", task));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/repos/{}/{}/deployments?{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url).await
+    }
+
+    /**
+     * Create a deployment.
+     *
+     * This function performs a `POST` to the `/repos/{owner}/{repo}/deployments` endpoint.
+     *
+     * Deployments offer a few configurable parameters with certain defaults.
+     *
+     * The `ref` parameter can be any named branch, tag, or SHA. At GitHub we often deploy branches and verify them
+     * before we merge a pull request.
+     *
+     * The `environment` parameter allows deployments to be issued to different runtime environments. Teams often have
+     * multiple environments for verifying their applications, such as `production`, `staging`, and `qa`. This parameter
+     * makes it easier to track which environments have requested deployments. The default environment is `production`.
+     *
+     * The `auto_merge` parameter is used to ensure that the requested ref is not behind the repository's default branch. If
+     * the ref _is_ behind the default branch for the repository, we will attempt to merge it for you. If the merge succeeds,
+     * the API will return a successful merge commit. If merge conflicts prevent the merge from succeeding, the API will
+     * return a failure response.
+     *
+     * By default, [commit statuses](https://docs.github.com/rest/reference/repos#statuses) for every submitted context must be in a `success`
+     * state. The `required_contexts` parameter allows you to specify a subset of contexts that must be `success`, or to
+     * specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do
+     * not require any contexts or create any commit statuses, the deployment will always succeed.
+     *
+     * The `payload` parameter is available for any extra information that a deployment system might need. It is a JSON text
+     * field that will be passed on when a deployment event is dispatched.
+     *
+     * The `task` parameter is used by the deployment system to allow different execution paths. In the web world this might
+     * be `deploy:migrations` to run schema changes on the system. In the compiled world this could be a flag to compile an
+     * application with debugging enabled.
+     *
+     * Users with `repo` or `repo_deployment` scopes can create a deployment for a given ref.
+     *
+     * #### Merged branch response
+     * You will see this response when GitHub automatically merges the base branch into the topic branch instead of creating
+     * a deployment. This auto-merge happens when:
+     * *   Auto-merge option is enabled in the repository
+     * *   Topic branch does not include the latest changes on the base branch, which is `master` in the response example
      * *   There are no merge conflicts
      *
      * If there are no new commits in the base branch, a new request to create a deployment should give a successful
