@@ -5,7 +5,7 @@ RAMP_SPEC = $(CURDIR)/specs/ramp/reference/*.yaml
 generate: github
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.15 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.16 \
 		-o github \
 		-n octorust \
 		-d "A fully generated & opinionated API client for the GitHub API."

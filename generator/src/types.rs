@@ -179,7 +179,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
                     a(&format!("pub struct {} {{", sn));
                     for (name, tid) in omap.iter() {
-                        if let Ok(rt) = ts.render_type(tid, true) {
+                        if let Ok(mut rt) = ts.render_type(tid, true) {
                             let mut prop = name.to_string();
                             if name == "ref" || name == "type" || name == "self" {
                                 prop = format!("{}_", name);
@@ -218,8 +218,17 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                                     a(r#"skip_serializing_if = "Option::is_none","#);
                                 }
                             } else if rt == "bool" {
-                                a(r#"#[serde(default,
+                                if sn.ends_with("Request") {
+                                    // We have a request, we want to make sure our bools are
+                                    // options so we don't have to always provide them.
+                                    a(
+                                        r#"#[serde(default, skip_serializing_if = "Option::is_none","#,
+                                    );
+                                    rt = "Option<bool>".to_string();
+                                } else {
+                                    a(r#"#[serde(default,
                                     deserialize_with = "crate::utils::deserialize_null_boolean::deserialize","#);
+                                }
                             } else if rt == "i32" {
                                 a(r#"#[serde(default,
                                     skip_serializing_if = "crate::utils::zero_i32",

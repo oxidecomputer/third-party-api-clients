@@ -26572,11 +26572,8 @@ pub struct ActivityMarkNotificationsAsReadRequest {
     /**
      * Whether the notification has been read.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub read: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub read: Option<bool>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26584,11 +26581,8 @@ pub struct ActivitySetThreadSubscriptionRequest {
     /**
      * Whether to block all notifications from a thread.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub ignored: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ignored: Option<bool>,
 }
 
 /**
@@ -26720,19 +26714,13 @@ pub struct OrgsUpdateRequest {
     /**
      * Toggles whether an organization can use organization projects.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_organization_projects: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_organization_projects: Option<bool>,
     /**
      * Toggles whether repositories that belong to the organization can use repository projects.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_repository_projects: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_repository_projects: Option<bool>,
     /**
      * The location.
      */
@@ -26757,63 +26745,45 @@ pub struct OrgsUpdateRequest {
      *  \\* `false` - only organization owners can create internal repositories.  
      *  Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub members_can_create_internal_repositories: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub members_can_create_internal_repositories: Option<bool>,
     /**
      * Toggles whether organization members can create GitHub Pages sites. Can be one of:  
      *  \\* `true` - all organization members can create GitHub Pages sites.  
      *  \\* `false` - no organization members can create GitHub Pages sites. Existing published sites will not be impacted.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub members_can_create_pages: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub members_can_create_pages: Option<bool>,
     /**
      * Toggles whether organization members can create private GitHub Pages sites. Can be one of:  
      *  \\* `true` - all organization members can create private GitHub Pages sites.  
      *  \\* `false` - no organization members can create private GitHub Pages sites. Existing published sites will not be impacted.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub members_can_create_private_pages: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub members_can_create_private_pages: Option<bool>,
     /**
      * Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:  
      *  \\* `true` - all organization members can create private repositories.  
      *  \\* `false` - only organization owners can create private repositories.  
      *  Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub members_can_create_private_repositories: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub members_can_create_private_repositories: Option<bool>,
     /**
      * Toggles whether organization members can create public GitHub Pages sites. Can be one of:  
      *  \\* `true` - all organization members can create public GitHub Pages sites.  
      *  \\* `false` - no organization members can create public GitHub Pages sites. Existing published sites will not be impacted.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub members_can_create_public_pages: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub members_can_create_public_pages: Option<bool>,
     /**
      * Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:  
      *  \\* `true` - all organization members can create public repositories.  
      *  \\* `false` - only organization owners can create public repositories.  
      *  Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub members_can_create_public_repositories: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub members_can_create_public_repositories: Option<bool>,
     /**
      * Toggles the ability of non-admin organization members to create repositories. Can be one of:  
      *  \\* `true` - all organization members can create repositories.  
@@ -26821,11 +26791,8 @@ pub struct OrgsUpdateRequest {
      *  Default: `true`  
      *  \*\*Note:\*\* A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. \*\*Note:\*\* A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub members_can_create_repositories: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub members_can_create_repositories: Option<bool>,
     /**
      * The shorthand name of the company.
      */
@@ -27260,11 +27227,8 @@ pub struct OrgsCreateWebhookRequest {
     /**
      * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
      */
@@ -27328,11 +27292,8 @@ pub struct OrgsUpdateWebhookRequest {
     /**
      * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
      */
@@ -27593,19 +27554,13 @@ pub struct MigrationsStartOrgRequest {
     /**
      * Indicates whether attachments should be excluded from the migration (to reduce migration archive file size).
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub exclude_attachments: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub exclude_attachments: Option<bool>,
     /**
      * Indicates whether repositories should be locked (to prevent manipulation) while migrating data.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub lock_repositories: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub lock_repositories: Option<bool>,
     /**
      * A list of arrays indicating which repositories should be migrated.
      */
@@ -27866,43 +27821,28 @@ pub struct ReposCreateInOrgRequest {
     /**
      * Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_merge_commit: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_merge_commit: Option<bool>,
     /**
      * Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_rebase_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_rebase_merge: Option<bool>,
     /**
      * Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_squash_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_squash_merge: Option<bool>,
     /**
      * Pass `true` to create an initial commit with empty README.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub auto_init: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub auto_init: Option<bool>,
     /**
      * Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub delete_branch_on_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub delete_branch_on_merge: Option<bool>,
     /**
      * A short description of the repository.
      */
@@ -27924,27 +27864,18 @@ pub struct ReposCreateInOrgRequest {
     /**
      * Either `true` to enable issues for this repository or `false` to disable them.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_issues: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_issues: Option<bool>,
     /**
      * Either `true` to enable projects for this repository or `false` to disable them. \*\*Note:\*\* If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_projects: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_projects: Option<bool>,
     /**
      * Either `true` to enable the wiki for this repository or `false` to disable it.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_wiki: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_wiki: Option<bool>,
     /**
      * A URL with more information about the repository.
      */
@@ -27957,11 +27888,8 @@ pub struct ReposCreateInOrgRequest {
     /**
      * Either `true` to make this repo available as a template repository or `false` to prevent it.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub is_template: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub is_template: Option<bool>,
     /**
      * Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://help.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, "mit" or "mpl-2.0".
      */
@@ -27983,11 +27911,8 @@ pub struct ReposCreateInOrgRequest {
     /**
      * Whether the repository is private.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub private: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub private: Option<bool>,
     /**
      * The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
      */
@@ -28238,11 +28163,8 @@ pub struct TeamsCreateDiscussionInOrgRequest {
     /**
      * Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub private: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub private: Option<bool>,
     /**
      * The discussion post's title.
      */
@@ -28742,11 +28664,8 @@ pub struct ProjectsUpdateCardRequest {
     /**
      * Whether or not the card is archived
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub archived: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub archived: Option<bool>,
     /**
      * The project card's note
      */
@@ -29073,11 +28992,8 @@ pub struct ProjectsUpdateRequest {
     /**
      * Whether or not this project can be seen by everyone.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub private: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub private: Option<bool>,
     /**
      * State of the project; either 'open' or 'closed'
      */
@@ -29239,35 +29155,23 @@ pub struct ReposUpdateRequest {
     /**
      * Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_merge_commit: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_merge_commit: Option<bool>,
     /**
      * Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_rebase_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_rebase_merge: Option<bool>,
     /**
      * Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_squash_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_squash_merge: Option<bool>,
     /**
      * `true` to archive this repository. \*\*Note\*\*: You cannot unarchive repositories through the API.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub archived: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub archived: Option<bool>,
     /**
      * Updates the default branch for this repository.
      */
@@ -29280,11 +29184,8 @@ pub struct ReposUpdateRequest {
     /**
      * Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub delete_branch_on_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub delete_branch_on_merge: Option<bool>,
     /**
      * A short description of the repository.
      */
@@ -29297,27 +29198,18 @@ pub struct ReposUpdateRequest {
     /**
      * Either `true` to enable issues for this repository or `false` to disable them.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_issues: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_issues: Option<bool>,
     /**
      * Either `true` to enable projects for this repository or `false` to disable them. \*\*Note:\*\* If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_projects: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_projects: Option<bool>,
     /**
      * Either `true` to enable the wiki for this repository or `false` to disable it.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_wiki: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_wiki: Option<bool>,
     /**
      * A URL with more information about the repository.
      */
@@ -29330,11 +29222,8 @@ pub struct ReposUpdateRequest {
     /**
      * Either `true` to make this repo available as a template repository or `false` to prevent it.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub is_template: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub is_template: Option<bool>,
     /**
      * The name of the repository.
      */
@@ -29348,11 +29237,8 @@ pub struct ReposUpdateRequest {
      * Either `true` to make the repository private or `false` to make it public. Default: `false`.  
      *  \*\*Note\*\*: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. \*\*Note\*\*: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub private: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub private: Option<bool>,
     /**
      * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
      */
@@ -29387,11 +29273,8 @@ pub struct ActionsSetGithubPermissionsRepositoryRequest {
     /**
      * Whether GitHub Actions is enabled on the repository.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub enabled: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<bool>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29668,43 +29551,28 @@ pub struct ReposUpdateBranchProtectionRequest {
     /**
      * Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_deletions: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_deletions: Option<bool>,
     /**
      * Permits force pushes to the protected branch by anyone with write access to the repository. Set to `true` to allow force pushes. Set to `false` or `null` to block force pushes. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation."
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_force_pushes: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_force_pushes: Option<bool>,
     /**
      * Enforce all configured restrictions for administrators. Set to `true` to enforce required status checks for repository administrators. Set to `null` to disable.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub enforce_admins: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub enforce_admins: Option<bool>,
     /**
      * Requires all conversations on code to be resolved before a pull request can be merged into a branch that matches this rule. Set to `false` to disable. Default: `false`.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub required_conversation_resolution: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub required_conversation_resolution: Option<bool>,
     /**
      * Enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch. Set to `true` to enforce a linear commit history. Set to `false` to disable a linear commit Git history. Your repository must allow squash merging or rebase merging before you can enable a linear commit history. Default: `false`. For more information, see "[Requiring a linear commit history](https://help.github.com/github/administering-a-repository/requiring-a-linear-commit-history)" in the GitHub Help documentation.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub required_linear_history: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub required_linear_history: Option<bool>,
     /**
      * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
      */
@@ -29768,11 +29636,8 @@ pub struct ReposUpdateStatusCheckProtectionRequest {
     /**
      * Require branches to be up to date before merging.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub strict: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub strict: Option<bool>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31374,11 +31239,8 @@ pub struct ReposCreateDeploymentRequest {
     /**
      * Attempts to automatically merge the default branch into the requested ref, if it's behind the default branch.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub auto_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub auto_merge: Option<bool>,
     /**
      * Short description of the deployment.
      */
@@ -31412,11 +31274,8 @@ pub struct ReposCreateDeploymentRequest {
      * Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.  
      *  \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub production_environment: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub production_environment: Option<bool>,
     /**
      * The ref to deploy. This can be a branch, tag, or SHA.
      */
@@ -31445,11 +31304,8 @@ pub struct ReposCreateDeploymentRequest {
      * Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`  
      *  \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub transient_environment: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub transient_environment: Option<bool>,
 }
 
 /**
@@ -31537,11 +31393,8 @@ pub struct ReposCreateDeploymentStatusRequest {
      *  \*\*Note:\*\* To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.  
      *  \*\*Note:\*\* This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub auto_inactive: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub auto_inactive: Option<bool>,
     /**
      * A short description of the status. The maximum description length is 140 characters.
      */
@@ -31868,11 +31721,8 @@ pub struct GitUpdateRefRequest {
     /**
      * Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub force: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub force: Option<bool>,
     /**
      * The SHA1 value to set this reference to
      */
@@ -32182,11 +32032,8 @@ pub struct ReposCreateWebhookRequestConfig {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateWebhookRequest {
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub config: Option<ReposCreateWebhookRequestConfig>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -32253,11 +32100,8 @@ pub struct ReposUpdateWebhookRequest {
     /**
      * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
     /**
      * Determines a list of events to be added to the list of events that the Hook triggers for.
      */
@@ -33366,11 +33210,8 @@ pub struct ReposCreateDeployKeyRequest {
      *    
      *  Deploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see "[Repository permission levels for an organization](https://help.github.com/articles/repository-permission-levels-for-an-organization/)" and "[Permission levels for a user account repository](https://help.github.com/articles/permission-levels-for-a-user-account-repository/)."
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub read_only: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub read_only: Option<bool>,
     /**
      * A name for the key.
      */
@@ -33774,19 +33615,13 @@ pub struct ReposUpdateInformationAboutPagesSiteRequest {
     /**
      * Specify whether HTTPS should be enforced for the repository.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub https_enforced: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub https_enforced: Option<bool>,
     /**
      * Configures access controls for the GitHub Pages site. If public is set to `true`, the site is accessible to anyone on the internet. If set to `false`, the site will only be accessible to users who have at least `read` access to the repository that published the site. This includes anyone in your Enterprise if the repository is set to `internal` visibility. This feature is only available to repositories in an organization on an Enterprise plan.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub public: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub public: Option<bool>,
     /**
      * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
      */
@@ -33908,11 +33743,8 @@ pub struct PullsCreateRequest {
     /**
      * Indicates whether the pull request is a draft. See "[Draft Pull Requests](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests)" in the GitHub Help documentation to learn more.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub draft: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub draft: Option<bool>,
     /**
      * The name of the branch where your changes are implemented. For cross-repository pull requests in the same network, namespace `head` with a user like this: `username:branch`.
      */
@@ -33931,11 +33763,8 @@ pub struct PullsCreateRequest {
     /**
      * Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub maintainer_can_modify: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub maintainer_can_modify: Option<bool>,
     /**
      * The title of the new pull request.
      */
@@ -34150,11 +33979,8 @@ pub struct PullsUpdateRequest {
     /**
      * Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub maintainer_can_modify: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub maintainer_can_modify: Option<bool>,
     /**
      * State of this Pull Request. Either `open` or `closed`.
      */
@@ -34656,11 +34482,8 @@ pub struct ReposCreateReleaseRequest {
     /**
      * `true` to create a draft (unpublished) release, `false` to create a published one.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub draft: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub draft: Option<bool>,
     /**
      * The name of the release.
      */
@@ -34673,11 +34496,8 @@ pub struct ReposCreateReleaseRequest {
     /**
      * `true` to identify the release as a prerelease. `false` to identify the release as a full release.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub prerelease: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub prerelease: Option<bool>,
     /**
      * The name of the tag.
      */
@@ -34749,11 +34569,8 @@ pub struct ReposUpdateReleaseRequest {
     /**
      * `true` makes the release a draft, and `false` publishes the release.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub draft: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub draft: Option<bool>,
     /**
      * The name of the release.
      */
@@ -34766,11 +34583,8 @@ pub struct ReposUpdateReleaseRequest {
     /**
      * `true` to identify the release as a prerelease, `false` to identify the release as a full release.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub prerelease: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub prerelease: Option<bool>,
     /**
      * The name of the tag.
      */
@@ -34974,19 +34788,13 @@ pub struct ActivitySetRepoSubscriptionRequest {
     /**
      * Determines if all notifications should be blocked from this repository.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub ignored: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ignored: Option<bool>,
     /**
      * Determines if notifications should be received from this repository.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub subscribed: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub subscribed: Option<bool>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -35030,11 +34838,8 @@ pub struct ReposCreateUsingTemplateRequest {
     /**
      * Set to `true` to include the directory structure and files from all branches in the template repository, and not just the default branch. Default: `false`.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub include_all_branches: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub include_all_branches: Option<bool>,
     /**
      * The name of the new repository.
      */
@@ -35056,11 +34861,8 @@ pub struct ReposCreateUsingTemplateRequest {
     /**
      * Either `true` to create a new private repository or `false` to create a new public one.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub private: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub private: Option<bool>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -35293,11 +35095,8 @@ pub struct EnterpriseAdminUpdateAttributeUserRequest {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimProvisionInviteUserRequest {
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
     /**
      * The name of the user, suitable for display to end-users
      */
@@ -36138,11 +35937,8 @@ pub struct UsersUpdateAuthenticatedRequest {
     /**
      * The new hiring availability of the user.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub hireable: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub hireable: Option<bool>,
     /**
      * The new location of the user.
      */
@@ -36522,19 +36318,13 @@ pub struct MigrationsStartRequest {
     /**
      * Do not include attachments in the migration
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub exclude_attachments: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub exclude_attachments: Option<bool>,
     /**
      * Lock the repositories being migrated at the start of the migration
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub lock_repositories: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub lock_repositories: Option<bool>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<String>,
 }
@@ -36661,43 +36451,28 @@ pub struct ReposCreateRequest {
     /**
      * Whether to allow merge commits for pull requests.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_merge_commit: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_merge_commit: Option<bool>,
     /**
      * Whether to allow rebase merges for pull requests.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_rebase_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_rebase_merge: Option<bool>,
     /**
      * Whether to allow squash merges for pull requests.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub allow_squash_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_squash_merge: Option<bool>,
     /**
      * Whether the repository is initialized with a minimal README.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub auto_init: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub auto_init: Option<bool>,
     /**
      * Whether to delete head branches when pull requests are merged
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub delete_branch_on_merge: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub delete_branch_on_merge: Option<bool>,
     /**
      * A short description of the repository.
      */
@@ -36719,35 +36494,23 @@ pub struct ReposCreateRequest {
     /**
      * Whether downloads are enabled.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_downloads: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_downloads: Option<bool>,
     /**
      * Whether issues are enabled.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_issues: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_issues: Option<bool>,
     /**
      * Whether projects are enabled.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_projects: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_projects: Option<bool>,
     /**
      * Whether the wiki is enabled.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub has_wiki: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub has_wiki: Option<bool>,
     /**
      * A URL with more information about the repository.
      */
@@ -36760,11 +36523,8 @@ pub struct ReposCreateRequest {
     /**
      * Whether this repository acts as a template that can be used to generate new repositories.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub is_template: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub is_template: Option<bool>,
     /**
      * The license keyword of the open source license for this repository.
      */
@@ -36786,11 +36546,8 @@ pub struct ReposCreateRequest {
     /**
      * Whether the repository is private.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub private: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub private: Option<bool>,
     /**
      * The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
      */
