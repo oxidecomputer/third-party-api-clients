@@ -290,11 +290,11 @@ crate::progenitor_support::encode_path(&number.to_string()),);\n";
     }
 }
 
-pub fn generate_docs(name: &str, version: &str) -> String {
+pub fn generate_docs_github(name: &str, version: &str, proper_name: &str, host: &str) -> String {
     format!(
-        r#"//! A fully generated, opinionated API client library for GitHub.
+        r#"//! A fully generated, opinionated API client library for {}.
 //!
-//! This library is generated from the [GitHub OpenAPI
+//! This library is generated from the [{} OpenAPI
 //! specs](https://github.com/github/rest-api-description). This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
@@ -314,7 +314,7 @@ pub fn generate_docs(name: &str, version: &str) -> String {
 //! ```
 //! use {}::{{auth::Credentials, Client}};
 //!
-//! let github = Client::new(
+//! let {} = Client::new(
 //!   String::from("user-agent-name"),
 //!   Credentials::Token(
 //!     String::from("personal-access-token")
@@ -353,8 +353,8 @@ pub fn generate_docs(name: &str, version: &str) -> String {
 //! let http_cache = HttpCache::in_home_dir();
 //!
 //! #[cfg(not(feature = "httpcache"))]
-//! let github = Client::custom(
-//!     "https://api.github.com",
+//! let {} = Client::custom(
+//!     "https://{}",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::Token(
 //!       String::from("personal-access-token")
@@ -363,8 +363,8 @@ pub fn generate_docs(name: &str, version: &str) -> String {
 //! );
 //!
 //! #[cfg(feature = "httpcache")]
-//! let github = Client::custom(
-//!     "https://api.github.com",
+//! let {} = Client::custom(
+//!     "https://{}",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::Token(
 //!       String::from("personal-access-token")
@@ -412,16 +412,16 @@ pub fn generate_docs(name: &str, version: &str) -> String {
 //! let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
 //!
 //! #[cfg(not(feature = "httpcache"))]
-//! let github = Client::custom(
-//!     "https://api.github.com",
+//! let {} = Client::custom(
+//!     "https://{}",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::InstallationToken(token_generator),
 //!     reqwest::Client::builder().build().unwrap(),
 //! );
 //!
 //! #[cfg(feature = "httpcache")]
-//! let github = Client::custom(
-//!     "https://api.github.com",
+//! let {} = Client::custom(
+//!     "https://{}",
 //!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
 //!     Credentials::InstallationToken(token_generator),
 //!     reqwest::Client::builder().build().unwrap(),
@@ -436,6 +436,123 @@ pub fn generate_docs(name: &str, version: &str) -> String {
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
 //!"#,
-        name, version, name, name, version, name, name, version, name, name, name, name
+        proper_name,
+        proper_name,
+        name,
+        version,
+        name,
+        proper_name.to_lowercase(),
+        name,
+        version,
+        name,
+        name,
+        version,
+        name,
+        name,
+        proper_name.to_lowercase(),
+        host,
+        proper_name.to_lowercase(),
+        host,
+        name,
+        name,
+        proper_name.to_lowercase(),
+        host,
+        proper_name.to_lowercase(),
+        host,
+    )
+}
+
+pub fn generate_docs_generic_token(name: &str, version: &str, proper_name: &str) -> String {
+    format!(
+        r#"//! A fully generated, opinionated API client library for {}.
+//!
+//! This library is generated from the {} OpenAPI
+//! specs. This way it will remain
+//! up to date as features are added. The documentation for the crate is generated
+//! along with the code to make this library easy to use.
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
+//!
+//! ```toml
+//! [dependencies]
+//! {} = "{}"
+//! ```
+//!
+//! ## Basic example
+//!
+//! Typical use will require intializing a `Client`. This requires
+//! a user agent string and set of credentials.
+//!
+//! ```
+//! use {}::Client;
+//!
+//! let {} = Client::new(
+//!     String::from("client-id")
+//!     String::from("client-secret")
+//!     String::from("redirect-uri")
+//!     String::from("token")
+//!     String::from("refresh-token")
+//!     String::from("company-id")
+//! );
+//! ```
+//!
+//! Alternatively, the library can search for most of the variables required for
+//! the client in the environment:
+//!
+//! - `{}_CLIENT_ID`
+//! - `{}_CLIENT_SECRET`
+//! - `{}_REDIRECT_URI`
+//!
+//! And then you can create a client from the environment.
+//!
+//! ```
+//! use {}::Client;
+//!
+//! let {} = Client::new_from_env(
+//!     String::from("token")
+//!     String::from("refresh-token")
+//!     String::from("company-id")
+//! );
+//! ```
+//!
+//! It is okay to pass empty values for token, refresh_token, and company_id. In
+//! the initial state of the client, you will not know these values.
+//!
+//! To start off a fresh client and get a token and refresh_token, use the following.
+//!
+//! ```
+//! use {}::Client;
+//!
+//! let {} = Client::new_from_env("", "", "");
+//!
+//! // Get the URL to request consent from the user.
+//! let user_consent_url = {}.user_consent_url();
+//!
+//! // In your redirect URL capture the code sent.
+//! // Send it along to the request for the token.
+//! let code = "thing-from-redirect-url";
+//! let mut access_token = {}.get_access_token(code).unwrap();
+//!
+//! // You can additionally refresh the access token with the following.
+//! // You must have a refresh token to be able to call this function.
+//! access_token = {}.refresh_access_token().unwrap();
+//! ```
+//!"#,
+        proper_name,
+        proper_name,
+        name,
+        version,
+        name,
+        proper_name.to_lowercase(),
+        proper_name.to_uppercase(),
+        proper_name.to_uppercase(),
+        proper_name.to_uppercase(),
+        name,
+        proper_name.to_lowercase(),
+        name,
+        proper_name.to_lowercase(),
+        proper_name.to_lowercase(),
+        proper_name.to_lowercase(),
+        proper_name.to_lowercase(),
     )
 }

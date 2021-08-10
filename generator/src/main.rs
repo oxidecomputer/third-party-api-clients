@@ -1746,7 +1746,7 @@ fn render_param(
     out.to_string()
 }
 
-fn gen(api: &OpenAPI) -> Result<String> {
+fn gen(api: &OpenAPI, proper_name: &str, host: &str) -> Result<String> {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1799,7 +1799,10 @@ fn gen(api: &OpenAPI) -> Result<String> {
     a("use anyhow::{anyhow, Error, Result};");
     a("");
 
-    a(r#"const DEFAULT_HOST: &str = "https://api.github.com";"#);
+    a(&format!(
+        r#"const DEFAULT_HOST: &str = "https://{}";"#,
+        host.trim_start_matches("https://")
+    ));
     a("");
 
     a("mod progenitor_support {");
@@ -1838,7 +1841,11 @@ fn gen(api: &OpenAPI) -> Result<String> {
     a("");
 
     // Print the client template.
-    a(crate::client::TEMPLATE);
+    if proper_name == "GitHub" {
+        a(crate::client::GITHUB_TEMPLATE);
+    } else if proper_name == "Gusto" || proper_name == "Ramp" {
+        a(crate::client::GENERIC_TOKEN_TEMPLATE);
+    }
 
     a("");
 
@@ -1972,6 +1979,8 @@ fn main() -> Result<()> {
     opts.reqopt("n", "", "Target Rust crate name", "CRATE");
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
     opts.reqopt("d", "", "Target Rust crate description", "DESCRIPTION");
+    opts.reqopt("", "host", "Target default host", "DEFAULT_HOST");
+    opts.reqopt("", "pn", "Target client proper name", "PROPER_NAME");
     opts.optflag("", "debug", "Print debug output");
 
     let args = match opts.parse(std::env::args().skip(1)) {
@@ -2227,15 +2236,18 @@ fn main() -> Result<()> {
 
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();
+    let host = args.opt_str("host").unwrap();
+    let proper_name = args.opt_str("pn").unwrap();
+    let output_dir = args.opt_str("o").unwrap();
 
-    let fail = match gen(&api) {
+    let fail = match gen(&api, &proper_name, &host) {
         Ok(out) => {
             let description = args.opt_str("d").unwrap();
 
             /*
              * Create the top-level crate directory:
              */
-            let root = PathBuf::from(args.opt_str("o").unwrap());
+            let root = PathBuf::from(&output_dir);
             std::fs::create_dir_all(&root)?;
 
             /*
@@ -2249,7 +2261,7 @@ name = "{}"
 description = "{}"
 version = "{}"
 documentation = "https://docs.rs/{}/"
-repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/github"
+repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/{}"
 readme = "README.md"
 edition = "2018"
 license = "MIT"
@@ -2283,14 +2295,28 @@ httpcache = ["dirs"]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 "#,
-                name, description, version, name,
+                name, description, version, name, output_dir
             );
             save(&toml, tomlout.as_str())?;
 
             /*
              * Generate our documentation for the library.
              */
-            let docs = template::generate_docs(&to_snake_case(&name), &version);
+            let mut docs = String::new();
+            if proper_name == "GitHub" {
+                docs = template::generate_docs_github(
+                    &to_snake_case(&name),
+                    &version,
+                    &proper_name,
+                    host.trim_start_matches("https://"),
+                );
+            } else if proper_name == "Gusto" || proper_name == "Ramp" {
+                docs = template::generate_docs_generic_token(
+                    &to_snake_case(&name),
+                    &version,
+                    &proper_name,
+                );
+            }
             let mut readme = root.clone();
             readme.push("README.md");
             save(readme, docs.replace("//! ", "").replace("//!", "").as_str())?;

@@ -3546,10 +3546,9 @@ pub ssn: String,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub two_percent_shareholder: bool,
+pub two_percent_shareholder: Option<bool>,
 /**
 * The current version of the object. See the versioning guide for information on how to use this field.
 */
@@ -3702,17 +3701,15 @@ pub country: String,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub filing_address: bool,
+pub filing_address: Option<bool>,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub mailing_address: bool,
+pub mailing_address: Option<bool>,
 #[serde(default,
 skip_serializing_if = "String::is_empty",
                                         deserialize_with = "crate::utils::deserialize_null_string::deserialize",
@@ -3765,17 +3762,15 @@ pub country: String,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub filing_address: bool,
+pub filing_address: Option<bool>,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub mailing_address: bool,
+pub mailing_address: Option<bool>,
 /**
 *
 */
@@ -4053,10 +4048,9 @@ pub middle_initial: String,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub self_onboarding: bool,
+pub self_onboarding: Option<bool>,
 /**
 * The day when the contractor will start working for the company.
 */
@@ -4159,10 +4153,9 @@ pub struct PostV1EmployeesEmployeeIdGarnishmentsRequest {
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub active: bool,
+pub active: Option<bool>,
 /**
 * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float, e.g. "8.00".
 */
@@ -4182,17 +4175,15 @@ pub annual_maximum: f64,
 /**
 * Whether the garnishment is court ordered.
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub court_ordered: bool,
+pub court_ordered: Option<bool>,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub deduct_as_percentage: bool,
+pub deduct_as_percentage: Option<bool>,
 /**
 * The description of the garnishment.
 */
@@ -4212,10 +4203,9 @@ pub pay_period_maximum: f64,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub recurring: bool,
+pub recurring: Option<bool>,
 /**
 * The number of times to apply the garnisment. Ignored if recurring is true.
 */
@@ -4231,10 +4221,9 @@ pub struct PutV1GarnishmentsGarnishmentIdRequest {
 /**
 * Whether or not this garnishment is currently active.
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub active: bool,
+pub active: Option<bool>,
 /**
 * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float, e.g. "8.00".
 */
@@ -4254,17 +4243,15 @@ pub annual_maximum: f64,
 /**
 * Whether the garnishment is court ordered.
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub court_ordered: bool,
+pub court_ordered: Option<bool>,
 /**
 * Whether the amount should be treated as a percentage to be deducted per pay period.
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub deduct_as_percentage: bool,
+pub deduct_as_percentage: Option<bool>,
 /**
 * The description of the garnishment.
 */
@@ -4284,10 +4271,9 @@ pub pay_period_maximum: f64,
 /**
 * Whether the garnishment should recur indefinitely.
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub recurring: bool,
+pub recurring: Option<bool>,
 /**
 * The number of times to apply the garnisment. Ignored if recurring is true.
 */
@@ -4320,10 +4306,9 @@ pub effective_date: String,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub run_termination_payroll: bool,
+pub run_termination_payroll: Option<bool>,
 }
 
 /// 
@@ -4385,10 +4370,9 @@ pub struct PutV1CompaniesCompanyIdPaySchedulesScheduleRequest {
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub auto_pilot: bool,
+pub auto_pilot: Option<bool>,
 /**
 * The current version of the object. See the versioning guide for information on how to use this field.
 */
@@ -4488,10 +4472,9 @@ pub struct PostV1CompaniesCompanyIdBenefitsRequest {
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub active: bool,
+pub active: Option<bool>,
 /**
 * The ID of the benefit to which the company benefit belongs.
 */
@@ -4511,17 +4494,15 @@ pub description: String,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub responsible_for_employee_w_2: bool,
+pub responsible_for_employee_w_2: Option<bool>,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub responsible_for_employer_taxes: bool,
+pub responsible_for_employer_taxes: Option<bool>,
 }
 
 /// 
@@ -4530,10 +4511,9 @@ pub struct PutV1CompanyBenefitsBenefitIdRequest {
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub active: bool,
+pub active: Option<bool>,
 /**
 *
 */
@@ -4582,17 +4562,15 @@ pub struct PostV1EmployeesEmployeeIdBenefitsRequest {
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub active: bool,
+pub active: Option<bool>,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub catch_up: bool,
+pub catch_up: Option<bool>,
 /**
 * The ID of the company to which the benefit belongs.
 */
@@ -4620,10 +4598,9 @@ pub company_contribution_annual_maximum: String,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub contribute_as_percentage: bool,
+pub contribute_as_percentage: Option<bool>,
 /**
 * The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.
 */
@@ -4643,10 +4620,9 @@ pub coverage_salary_multiplier: String,
 /**
 *
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub deduct_as_percentage: bool,
+pub deduct_as_percentage: Option<bool>,
 /**
 * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
 */
@@ -4685,17 +4661,15 @@ pub struct PutV1EmployeeBenefitsBenefitIdRequest {
 /**
 * Whether the employee benefit is active.
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub active: bool,
+pub active: Option<bool>,
 /**
 * Whether the employee should use a benefit’s "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub catch_up: bool,
+pub catch_up: Option<bool>,
 /**
 * The amount to be paid, per pay period, by the company.
 */
@@ -4715,10 +4689,9 @@ pub company_contribution_annual_maximum: String,
 /**
 * Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub contribute_as_percentage: bool,
+pub contribute_as_percentage: Option<bool>,
 /**
 * The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.
 */
@@ -4738,10 +4711,9 @@ pub coverage_salary_multiplier: String,
 /**
 * Whether the employee deduction amount should be treated as a percentage to be deducted from each payroll.
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub deduct_as_percentage: bool,
+pub deduct_as_percentage: Option<bool>,
 /**
 * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
 */
@@ -5310,10 +5282,9 @@ pub phone: String,
 /**
 * Required if onboarding_person_type is set to "Employee".
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub send_offer: bool,
+pub send_offer: Option<bool>,
 /**
 *
 */
@@ -5385,10 +5356,9 @@ pub phone: String,
 /**
 * Required if onboarding_person_type is set to "Employee".
 */
-#[serde(default,
-                                    deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+#[serde(default, skip_serializing_if = "Option::is_none",
 )]
-pub send_offer: bool,
+pub send_offer: Option<bool>,
 /**
 *
 */

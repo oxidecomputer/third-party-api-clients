@@ -1,7 +1,7 @@
-//! A fully generated, opinionated API client library for GitHub.
+//! A fully generated, opinionated API client library for Gusto.
 //!
-//! This library is generated from the [GitHub OpenAPI
-//! specs](https://github.com/github/rest-api-description). This way it will remain
+//! This library is generated from the Gusto OpenAPI
+//! specs. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //!
@@ -15,132 +15,62 @@
 //! ## Basic example
 //!
 //! Typical use will require intializing a `Client`. This requires
-//! a user agent string and set of `auth::Credentials`.
+//! a user agent string and set of credentials.
 //!
 //! ```
-//! use gusto_api::{auth::Credentials, Client};
+//! use gusto_api::Client;
 //!
-//! let github = Client::new(
-//!   String::from("user-agent-name"),
-//!   Credentials::Token(
-//!     String::from("personal-access-token")
-//!   ),
+//! let gusto = Client::new(
+//!     String::from("client-id")
+//!     String::from("client-secret")
+//!     String::from("redirect-uri")
+//!     String::from("token")
+//!     String::from("refresh-token")
+//!     String::from("company-id")
 //! );
 //! ```
 //!
-//! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/gusto_api/0.2.0/gusto_api/struct.Client.html#method.host) method.
+//! Alternatively, the library can search for most of the variables required for
+//! the client in the environment:
 //!
-//! ## Feature flags
+//! - `GUSTO_CLIENT_ID`
+//! - `GUSTO_CLIENT_SECRET`
+//! - `GUSTO_REDIRECT_URI`
 //!
-//! ### httpcache
-//!
-//! Github supports conditional HTTP requests using etags to checksum responses
-//! Experimental support for utilizing this to cache responses locally with the
-//! `httpcache` feature flag.
-//!
-//! To enable this, add the following to your `Cargo.toml` file:
-//!
-//! ```toml
-//! [dependencies]
-//! gusto_api = { version = "0.2.0", features = ["httpcache"] }
-//! ```
-//!
-//! Then use the `Client::custom` constructor to provide a cache implementation.
-//!
-//! Here is an example:
+//! And then you can create a client from the environment.
 //!
 //! ```
-//! use gusto_api::{auth::Credentials, Client};
-//! #[cfg(feature = "httpcache")]
-//! use gusto_api::http_cache::HttpCache;
+//! use gusto_api::Client;
 //!
-//! #[cfg(feature = "httpcache")]
-//! let http_cache = HttpCache::in_home_dir();
-//!
-//! #[cfg(not(feature = "httpcache"))]
-//! let github = Client::custom(
-//!     "https://api.github.com",
-//!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-//!     Credentials::Token(
-//!       String::from("personal-access-token")
-//!     ),
-//!     reqwest::Client::builder().build().unwrap(),
-//! );
-//!
-//! #[cfg(feature = "httpcache")]
-//! let github = Client::custom(
-//!     "https://api.github.com",
-//!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-//!     Credentials::Token(
-//!       String::from("personal-access-token")
-//!     ),
-//!     reqwest::Client::builder().build().unwrap(),
-//!     http_cache
-//! );
-//! ```
-//! ## Authenticating GitHub apps
-//!
-//! You can also authenticate via a GitHub app.
-//!
-//! Here is an example:
-//!
-//! ```rust
-//! use std::env;
-//!
-//! use gusto_api::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
-//! #[cfg(feature = "httpcache")]
-//! use gusto_api::http_cache::FileBasedCache;
-//!
-//! let app_id_str = env::var("GH_APP_ID").unwrap();
-//! let app_id = app_id_str.parse::<u64>().unwrap();
-//!
-//! let app_installation_id_str = env::var("GH_INSTALLATION_ID").unwrap();
-//! let app_installation_id = app_installation_id_str.parse::<u64>().unwrap();
-//!
-//! let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
-//! let private_key = base64::decode(encoded_private_key).unwrap();
-//!
-//! // Decode the key.
-//! let key = nom_pem::decode_block(&private_key).unwrap();
-//!
-//! // Get the JWT credentials.
-//! let jwt = JWTCredentials::new(app_id, key.data).unwrap();
-//!
-//! // Create the HTTP cache.
-//! #[cfg(feature = "httpcache")]
-//! let mut dir = dirs::home_dir().expect("Expected a home dir");
-//! #[cfg(feature = "httpcache")]
-//! dir.push(".cache/github");
-//! #[cfg(feature = "httpcache")]
-//! let http_cache = Box::new(FileBasedCache::new(dir));
-//!
-//! let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
-//!
-//! #[cfg(not(feature = "httpcache"))]
-//! let github = Client::custom(
-//!     "https://api.github.com",
-//!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-//!     Credentials::InstallationToken(token_generator),
-//!     reqwest::Client::builder().build().unwrap(),
-//! );
-//!
-//! #[cfg(feature = "httpcache")]
-//! let github = Client::custom(
-//!     "https://api.github.com",
-//!     concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-//!     Credentials::InstallationToken(token_generator),
-//!     reqwest::Client::builder().build().unwrap(),
-//!     http_cache,
+//! let gusto = Client::new_from_env(
+//!     String::from("token")
+//!     String::from("refresh-token")
+//!     String::from("company-id")
 //! );
 //! ```
 //!
-//! ## Acknowledgements
+//! It is okay to pass empty values for token, refresh_token, and company_id. In
+//! the initial state of the client, you will not know these values.
 //!
-//! Shout out to [hubcaps](https://github.com/softprops/hubcaps) for paving the
-//! way here. This extends that effort in a generated way so the library is
-//! always up to the date with the OpenAPI spec and no longer requires manual
-//! contributions to add new endpoints.
+//! To start off a fresh client and get a token and refresh_token, use the following.
+//!
+//! ```
+//! use gusto_api::Client;
+//!
+//! let gusto = Client::new_from_env("", "", "");
+//!
+//! // Get the URL to request consent from the user.
+//! let user_consent_url = gusto.user_consent_url();
+//!
+//! // In your redirect URL capture the code sent.
+//! // Send it along to the request for the token.
+//! let code = "thing-from-redirect-url";
+//! let mut access_token = gusto.get_access_token(code).unwrap();
+//!
+//! // You can additionally refresh the access token with the following.
+//! // You must have a refresh token to be able to call this function.
+//! access_token = gusto.refresh_access_token().unwrap();
+//! ```
 //!
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
@@ -177,7 +107,7 @@ pub mod admins_beta;
 
 use anyhow::{anyhow, Error, Result};
 
-const DEFAULT_HOST: &str = "https://api.github.com";
+const DEFAULT_HOST: &str = "https://api.gusto.com";
 
 mod progenitor_support {
     use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
@@ -202,303 +132,206 @@ mod progenitor_support {
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
-    host: String,
-    agent: String,
+    token: String,
+    // This will expire within a certain amount of time as determined by the
+    // expiration date passed back in the initial request.
+    refresh_token: String,
+    client_id: String,
+    client_secret: String,
+    redirect_uri: String,
+    company_id: String,
+
     client: reqwest::Client,
-    credentials: Option<crate::auth::Credentials>,
-    #[cfg(feature = "httpcache")]
-    http_cache: crate::http_cache::BoxedHttpCache,
 }
 
 impl Client {
-    pub fn new<A, C>(agent: A, credentials: C) -> Result<Self>
-    where
-        A: Into<String>,
-        C: Into<Option<crate::auth::Credentials>>,
-    {
-        Self::host(DEFAULT_HOST, agent, credentials)
-    }
-
-    pub fn host<H, A, C>(host: H, agent: A, credentials: C) -> Result<Self>
-    where
-        H: Into<String>,
-        A: Into<String>,
-        C: Into<Option<crate::auth::Credentials>>,
-    {
-        let http = reqwest::Client::builder().build()?;
-        #[cfg(feature = "httpcache")]
-        {
-            Ok(Self::custom(
-                host,
-                agent,
-                credentials,
-                http,
-                <dyn crate::http_cache::HttpCache>::noop(),
-            ))
-        }
-        #[cfg(not(feature = "httpcache"))]
-        {
-            Ok(Self::custom(host, agent, credentials, http))
-        }
-    }
-
-    #[cfg(feature = "httpcache")]
-    pub fn custom<H, A, CR>(
-        host: H,
-        agent: A,
-        credentials: CR,
-        http: reqwest::Client,
-        http_cache: crate::http_cache::BoxedHttpCache,
+    /// Create a new Client struct. It takes a type that can convert into
+    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
+    /// given a valid API key your requests will work.
+    pub fn new<I, K, R, T, Q, C>(
+        client_id: I,
+        client_secret: K,
+        redirect_uri: R,
+        token: T,
+        refresh_token: Q,
+        company_id: C,
     ) -> Self
     where
-        H: Into<String>,
-        A: Into<String>,
-        CR: Into<Option<crate::auth::Credentials>>,
+        I: ToString,
+        K: ToString,
+        R: ToString,
+        T: ToString,
+        Q: ToString,
+        C: ToString,
     {
-        Self {
-            host: host.into(),
-            agent: agent.into(),
-            client: http,
-            credentials: credentials.into(),
-            http_cache,
-        }
-    }
+        let client = Client::builder().build();
+        match client {
+            Ok(c) => {
+                let c = Client {
+                    client_id: client_id.to_string(),
+                    client_secret: client_secret.to_string(),
+                    redirect_uri: redirect_uri.to_string(),
+                    token: token.to_string(),
+                    refresh_token: refresh_token.to_string(),
+                    company_id: company_id.to_string(),
 
-    #[cfg(not(feature = "httpcache"))]
-    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: reqwest::Client) -> Self
-    where
-        H: Into<String>,
-        A: Into<String>,
-        CR: Into<Option<crate::auth::Credentials>>,
-    {
-        Self {
-            host: host.into(),
-            agent: agent.into(),
-            client: http,
-            credentials: credentials.into(),
-        }
-    }
+                    client: c,
+                };
 
-    pub fn set_credentials<CR>(&mut self, credentials: CR)
-    where
-        CR: Into<Option<crate::auth::Credentials>>,
-    {
-        self.credentials = credentials.into();
-    }
-
-    fn credentials(&self, authentication: crate::auth::AuthenticationConstraint) -> Option<&crate::auth::Credentials> {
-        match (authentication, self.credentials.as_ref()) {
-            (crate::auth::AuthenticationConstraint::Unconstrained, creds) => creds,
-            (crate::auth::AuthenticationConstraint::JWT, creds @ Some(&crate::auth::Credentials::JWT(_))) => creds,
-            (
-                crate::auth::AuthenticationConstraint::JWT,
-                Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
-            ) => Some(apptoken.jwt()),
-            (crate::auth::AuthenticationConstraint::JWT, creds) => {
-                println!(
-                    "Request needs JWT authentication but only {:?} available",
-                    creds
-                );
-                None
-            }
-        }
-    }
-
-    async fn url_and_auth(
-        &self,
-        uri: &str,
-        authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<(reqwest::Url, Option<String>)> {
-        let parsed_url = uri.parse::<reqwest::Url>();
-
-        match self.credentials(authentication) {
-            Some(&crate::auth::Credentials::Client(ref id, ref secret)) => parsed_url
-                .map(|mut u| {
-                    u.query_pairs_mut()
-                        .append_pair("client_id", id)
-                        .append_pair("client_secret", secret);
-                    (u, None)
-                })
-                .map_err(Error::from),
-            Some(&crate::auth::Credentials::Token(ref token)) => {
-                let auth = format!("token {}", token);
-                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
-            }
-            Some(&crate::auth::Credentials::JWT(ref jwt)) => {
-                let auth = format!("Bearer {}", jwt.token());
-                parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
-            }
-            Some(&crate::auth::Credentials::InstallationToken(ref apptoken)) => {
-                if let Some(token) = apptoken.token() {
-                    let auth = format!("token {}", token);
-                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
-                } else {
-                    println!("App token is stale, refreshing");
-                    let token_ref = apptoken.access_key.clone();
-
-                    let token = self.apps().create_installation_access_token(apptoken.installation_id as i64,
-                    &types::AppsCreateInstallationAccessTokenRequest{
-                        permissions: Default::default(),
-                        repositories: Default::default(),
-                        repository_ids: Default::default(),
-                    }).await.unwrap();
-                    let auth = format!("token {}", &token.token);
-                    *token_ref.lock().unwrap() = Some(token.token);
-                    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+                if c.token.is_empty() || c.refresh_token.is_empty() {
+                    // This is super hacky and a work around since there is no way to
+                    // auth without using the browser.
+                    println!("API consent URL: {}", c.user_consent_url());
                 }
+                // We do not refresh the access token since we leave that up to the
+                // user to do so they can re-save it to their database.
+
+                c
             }
-            None => parsed_url.map(|u| (u, None)).map_err(Error::from),
+            Err(e) => panic!("creating client failed: {:?}", e),
         }
     }
 
-    async fn request<Out>(
-        &self,
-        method: http::Method,
-        uri: &str,
-        body: Option<reqwest::Body>,
-        media_type: crate::utils::MediaType,
-        authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<(Option<hyperx::header::Link>, Out)>
+    /// Create a new Client struct from environment variables. It
+    /// takes a type that can convert into
+    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
+    /// given a valid API key and your requests will work.
+    /// We pass in the token and refresh token to the client so if you are storing
+    /// it in a database, you can get it first.
+    pub fn new_from_env<T, R, C>(token: T, refresh_token: R, company_id: C) -> Self
     where
-        Out: serde::de::DeserializeOwned + 'static + Send,
+        T: ToString,
+        R: ToString,
+        C: ToString,
     {
-        #[cfg(feature = "httpcache")]
-        let uri2 = uri.to_string();
+        let client_id = env::var("{}_CLIENT_ID").unwrap();
+        let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
+        let redirect_uri = env::var("{}_REDIRECT_URI").unwrap();
 
-        let (url, auth) = self.url_and_auth(uri, authentication).await?;
+        Client::new(
+            client_id,
+            client_secret,
+            redirect_uri,
+            token,
+            refresh_token,
+            company_id,
+        )
+    }
 
-        let instance = <&Client>::clone(&self);
+    fn request<B>(
+        &self,
+        method: Method,
+        path: &str,
+        body: B,
+        query: Option<&[(&str, &str)]>,
+    ) -> Request
+    where
+        B: Serialize,
+    {
+        // Build the url.
+        let base = Url::parse(DEFAULT_HOST).unwrap();
+        let mut p = path.to_string();
+        // Make sure we have the leading "/".
+        if !p.starts_with('/') {
+            p = format!("/{{}}", p);
+        }
+        let url = base.join(&p).unwrap();
 
-        #[cfg(not(feature = "httpcache"))]
-        let mut req = instance.client.request(method, url);
+        let bt = format!("Bearer {{}}", self.token);
+        let bearer = header::HeaderValue::from_str(&bt).unwrap();
 
-        #[cfg(feature = "httpcache")]
-        let mut req = {
-            let mut req = instance.client.request(method.clone(), url);
-            if method == http::Method::GET {
-                if let Ok(etag) = instance.http_cache.lookup_etag(&uri2) {
-                    req = req.header(http::header::IF_NONE_MATCH, etag);
-                }
-            }
-            req
-        };
-
-        req = req.header(http::header::USER_AGENT, &*instance.agent);
-        req = req.header(
-            http::header::ACCEPT,
-            &*format!("{}", hyperx::header::qitem::<mime::Mime>(From::from(media_type))),
+        // Set the default headers.
+        let mut headers = header::HeaderMap::new();
+        headers.append(header::AUTHORIZATION, bearer);
+        headers.append(
+            header::CONTENT_TYPE,
+            header::HeaderValue::from_static("application/json"),
         );
 
-        if let Some(auth_str) = auth {
-            req = req.header(http::header::AUTHORIZATION, &*auth_str);
+        let mut rb = self.client.request(method.clone(), url).headers(headers);
+
+        if let Some(val) = query {
+            rb = rb.query(&val);
         }
 
-        if let Some(body) = body {
-            //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
-            req = req.body(body);
+        // Add the body, this is to ensure our GET and DELETE calls succeed.
+        if method != Method::GET && method != Method::DELETE {
+            rb = rb.json(&body);
         }
-        //println!("Request: {:?}", &req);
-        let response = req.send().await?;
 
-        #[cfg(feature = "httpcache")]
-        let instance2 = <&Client>::clone(&self);
-
-        #[cfg(feature = "httpcache")]
-        let uri3 = uri.to_string();
-
-        #[cfg(not(feature = "httpcache"))]
-        let (remaining, reset) = crate::utils::get_header_values(response.headers());
-
-        #[cfg(feature = "httpcache")]
-        let (remaining, reset, etag) = crate::utils::get_header_values(response.headers());
-
-        let status = response.status();
-        let link = response
-            .headers()
-            .get(http::header::LINK)
-            .and_then(|l| l.to_str().ok())
-            .and_then(|l| l.parse().ok());
-
-        let response_body = response.bytes().await?;
-
-        if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
-            #[cfg(feature = "httpcache")]
-            {
-                if let Some(etag) = etag {
-                    let next_link = link.as_ref().and_then(|l| crate::utils::next_link(l));
-                    if let Err(e) = instance2.http_cache.cache_response(
-                        &uri3,
-                        &response_body,
-                        &etag,
-                        &next_link,
-                    ) {
-                        // failing to cache isn't fatal, so just log & swallow the error
-                        println!("Failed to cache body & etag: {}", e);
-                    }
-                }
-            }
-            let parsed_response = if status == http::StatusCode::NO_CONTENT { serde_json::from_str("null") } else { serde_json::from_slice::<Out>(&response_body) };
-            parsed_response.map(|out| (link, out)).map_err(Error::from)
-        } else if status == http::StatusCode::NOT_MODIFIED {
-                // only supported case is when client provides if-none-match
-                // header when cargo builds with --cfg feature="httpcache"
-                #[cfg(feature = "httpcache")]
-                {
-                    let body = instance2.http_cache.lookup_body(&uri3).unwrap();
-                    let out = serde_json::from_str::<Out>(&body).unwrap();
-                    let link = match link {
-                        Some(link) => Ok(Some(link)),
-                        None => instance2.http_cache.lookup_next_link(&uri3)
-                                    .map(|next_link| next_link.map(|next| {
-                                        let next = hyperx::header::LinkValue::new(next).push_rel(hyperx::header::RelationType::Next);
-                                        hyperx::header::Link::new(vec![next])
-                                    }))
-                    };
-                    link.map(|link| (link, out))
-                }
-                #[cfg(not(feature = "httpcache"))]
-                {
-                    unreachable!("this should not be reachable without the httpcache feature enabled")
-                }
-        } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
-            let error = match (remaining, reset) {
-                (Some(remaining), Some(reset)) if remaining == 0 => {
-                    let now = std::time::SystemTime::now()
-                        .duration_since(std::time::UNIX_EPOCH)
-                        .unwrap()
-                        .as_secs();
-                    anyhow!("rate limit exceeded, will reset in {} seconds", u64::from(reset) - now)
-                },
-                _ => {
-                    if response_body.is_empty() {
-                        anyhow!("code: {}, empty response", status)
-                    } else {
-                        anyhow!("code: {}, error: {:?}", status, serde_json::from_slice(&response_body)?)
-                    }
-                }
-            };
-            Err(error)
-        }
+        // Build the request.
+        rb.build().unwrap()
     }
 
-    async fn request_entity<D>(
-        &self,
-        method: http::Method,
-        uri: &str,
-        body: Option<reqwest::Body>,
-        media_type: crate::utils::MediaType,
-        authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        let (_ , r) = self.request(method, uri, body, media_type, authentication).await?;
-        Ok(r)
+    pub fn user_consent_url(&self) -> String {
+        format!(
+            "{{}}/oauth/authorize?client_id={{}}&response_type=code&redirect_uri={{}}",
+            DEFAULT_HOST, self.client_id, self.redirect_uri
+        )
+    }
+
+    pub async fn refresh_access_token(&mut self) -> Result<AccessToken, APIError> {
+        let mut headers = header::HeaderMap::new();
+        headers.append(
+            header::ACCEPT,
+            header::HeaderValue::from_static("application/json"),
+        );
+
+        let params = [
+            ("grant_type", "refresh_token"),
+            ("refresh_token", &self.refresh_token),
+            ("client_id", &self.client_id),
+            ("client_secret", &self.client_secret),
+            ("redirect_uri", &self.redirect_uri),
+        ];
+        let client = reqwest::Client::new();
+        let resp = client
+            .post(&format!("{{}}/oauth/token", DEFAULT_HOST))
+            .headers(headers)
+            .form(&params)
+            .send()
+            .await
+            .unwrap();
+
+        // Unwrap the response.
+        let t: AccessToken = resp.json().await.unwrap();
+
+        self.token = t.access_token.to_string();
+        self.refresh_token = t.refresh_token.to_string();
+
+        Ok(t)
+    }
+
+    pub async fn get_access_token(&mut self, code: &str) -> Result<AccessToken, APIError> {
+        let mut headers = header::HeaderMap::new();
+        headers.append(
+            header::ACCEPT,
+            header::HeaderValue::from_static("application/json"),
+        );
+
+        let params = [
+            ("grant_type", "authorization_code"),
+            ("code", code),
+            ("client_id", &self.client_id),
+            ("client_secret", &self.client_secret),
+            ("redirect_uri", &self.redirect_uri),
+        ];
+        let client = reqwest::Client::new();
+        let resp = client
+            .post(&format!("{{}}/oauth/token", DEFAULT_HOST))
+            .headers(headers)
+            .form(&params)
+            .send()
+            .await
+            .unwrap();
+
+        // Unwrap the response.
+        let t: AccessToken = resp.json().await.unwrap();
+
+        self.token = t.access_token.to_string();
+        self.refresh_token = t.refresh_token.to_string();
+
+        Ok(t)
     }
 
     async fn get<D>(&self, uri: &str) -> Result<D>

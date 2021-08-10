@@ -1,7 +1,7 @@
-A fully generated, opinionated API client library for GitHub.
+A fully generated, opinionated API client library for Gusto.
 
-This library is generated from the [GitHub OpenAPI
-specs](https://github.com/github/rest-api-description). This way it will remain
+This library is generated from the Gusto OpenAPI
+specs. This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.
 
@@ -15,129 +15,59 @@ gusto_api = "0.2.0"
 ## Basic example
 
 Typical use will require intializing a `Client`. This requires
-a user agent string and set of `auth::Credentials`.
+a user agent string and set of credentials.
 
 ```
-use gusto_api::{auth::Credentials, Client};
+use gusto_api::Client;
 
-let github = Client::new(
-  String::from("user-agent-name"),
-  Credentials::Token(
-    String::from("personal-access-token")
-  ),
+let gusto = Client::new(
+    String::from("client-id")
+    String::from("client-secret")
+    String::from("redirect-uri")
+    String::from("token")
+    String::from("refresh-token")
+    String::from("company-id")
 );
 ```
 
-If you are a GitHub enterprise customer, you will want to create a client with the
-[Client#host](https://docs.rs/gusto_api/0.2.0/gusto_api/struct.Client.html#method.host) method.
+Alternatively, the library can search for most of the variables required for
+the client in the environment:
 
-## Feature flags
+- `GUSTO_CLIENT_ID`
+- `GUSTO_CLIENT_SECRET`
+- `GUSTO_REDIRECT_URI`
 
-### httpcache
-
-Github supports conditional HTTP requests using etags to checksum responses
-Experimental support for utilizing this to cache responses locally with the
-`httpcache` feature flag.
-
-To enable this, add the following to your `Cargo.toml` file:
-
-```toml
-[dependencies]
-gusto_api = { version = "0.2.0", features = ["httpcache"] }
-```
-
-Then use the `Client::custom` constructor to provide a cache implementation.
-
-Here is an example:
+And then you can create a client from the environment.
 
 ```
-use gusto_api::{auth::Credentials, Client};
-#[cfg(feature = "httpcache")]
-use gusto_api::http_cache::HttpCache;
+use gusto_api::Client;
 
-#[cfg(feature = "httpcache")]
-let http_cache = HttpCache::in_home_dir();
-
-#[cfg(not(feature = "httpcache"))]
-let github = Client::custom(
-    "https://api.github.com",
-    concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-    Credentials::Token(
-      String::from("personal-access-token")
-    ),
-    reqwest::Client::builder().build().unwrap(),
-);
-
-#[cfg(feature = "httpcache")]
-let github = Client::custom(
-    "https://api.github.com",
-    concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-    Credentials::Token(
-      String::from("personal-access-token")
-    ),
-    reqwest::Client::builder().build().unwrap(),
-    http_cache
-);
-```
-## Authenticating GitHub apps
-
-You can also authenticate via a GitHub app.
-
-Here is an example:
-
-```rust
-use std::env;
-
-use gusto_api::{Client, auth::{Credentials, InstallationTokenGenerator, JWTCredentials}};
-#[cfg(feature = "httpcache")]
-use gusto_api::http_cache::FileBasedCache;
-
-let app_id_str = env::var("GH_APP_ID").unwrap();
-let app_id = app_id_str.parse::<u64>().unwrap();
-
-let app_installation_id_str = env::var("GH_INSTALLATION_ID").unwrap();
-let app_installation_id = app_installation_id_str.parse::<u64>().unwrap();
-
-let encoded_private_key = env::var("GH_PRIVATE_KEY").unwrap();
-let private_key = base64::decode(encoded_private_key).unwrap();
-
-// Decode the key.
-let key = nom_pem::decode_block(&private_key).unwrap();
-
-// Get the JWT credentials.
-let jwt = JWTCredentials::new(app_id, key.data).unwrap();
-
-// Create the HTTP cache.
-#[cfg(feature = "httpcache")]
-let mut dir = dirs::home_dir().expect("Expected a home dir");
-#[cfg(feature = "httpcache")]
-dir.push(".cache/github");
-#[cfg(feature = "httpcache")]
-let http_cache = Box::new(FileBasedCache::new(dir));
-
-let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
-
-#[cfg(not(feature = "httpcache"))]
-let github = Client::custom(
-    "https://api.github.com",
-    concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-    Credentials::InstallationToken(token_generator),
-    reqwest::Client::builder().build().unwrap(),
-);
-
-#[cfg(feature = "httpcache")]
-let github = Client::custom(
-    "https://api.github.com",
-    concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
-    Credentials::InstallationToken(token_generator),
-    reqwest::Client::builder().build().unwrap(),
-    http_cache,
+let gusto = Client::new_from_env(
+    String::from("token")
+    String::from("refresh-token")
+    String::from("company-id")
 );
 ```
 
-## Acknowledgements
+It is okay to pass empty values for token, refresh_token, and company_id. In
+the initial state of the client, you will not know these values.
 
-Shout out to [hubcaps](https://github.com/softprops/hubcaps) for paving the
-way here. This extends that effort in a generated way so the library is
-always up to the date with the OpenAPI spec and no longer requires manual
-contributions to add new endpoints.
+To start off a fresh client and get a token and refresh_token, use the following.
+
+```
+use gusto_api::Client;
+
+let gusto = Client::new_from_env("", "", "");
+
+// Get the URL to request consent from the user.
+let user_consent_url = gusto.user_consent_url();
+
+// In your redirect URL capture the code sent.
+// Send it along to the request for the token.
+let code = "thing-from-redirect-url";
+let mut access_token = gusto.get_access_token(code).unwrap();
+
+// You can additionally refresh the access token with the following.
+// You must have a refresh token to be able to call this function.
+access_token = gusto.refresh_access_token().unwrap();
+```
