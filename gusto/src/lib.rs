@@ -138,6 +138,32 @@ pub struct Client {
     client: reqwest::Client,
 }
 
+#[derive(Debug, JsonSchema, Clone, Default, Serialize, Deserialize)]
+pub struct AccessToken {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub access_token: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub token_type: String,
+    #[serde(default)]
+    pub expires_in: i64,
+    #[serde(default, alias = "x_refresh_token_expires_in")]
+    pub refresh_token_expires_in: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    refresh_token: String,
+}
+
 impl Client {
     /// Create a new Client struct. It takes a type that can convert into
     /// an &str (`String` or `Vec<u8>` for example). As long as the function is

@@ -319,6 +319,7 @@ impl Client {
             &(self.host.clone() + uri),
             None,
             media,
+            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -362,6 +363,7 @@ impl Client {
             uri,
             message,
             crate::utils::MediaType::Json,
+             crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -370,6 +372,7 @@ impl Client {
         uri: &str,
         message: Option<reqwest::Body>,
         media: crate::utils::MediaType,
+        authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -379,6 +382,7 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             media,
+            authentication,
         ).await
     }
 
@@ -391,6 +395,7 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             media,
+            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -417,6 +422,7 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             media,
+            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -429,6 +435,7 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -472,6 +479,32 @@ pub struct Client {{
     company_id: String,
 
     client: reqwest::Client,
+}}
+
+#[derive(Debug, JsonSchema, Clone, Default, Serialize, Deserialize)]
+pub struct AccessToken {{
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub access_token: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub token_type: String,
+    #[serde(default)]
+    pub expires_in: i64,
+    #[serde(default, alias = "x_refresh_token_expires_in")]
+    pub refresh_token_expires_in: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+        refresh_token: String,
 }}
 
 impl Client {{
