@@ -1763,10 +1763,12 @@ fn gen(api: &OpenAPI, proper_name: &str, host: &str) -> Result<String> {
     a("#![allow(missing_docs)]"); // TODO: Make this a deny.
     a("#![cfg_attr(docsrs, feature(doc_cfg))]");
     a("");
-    a("pub mod auth;");
-    a(r#"#[cfg(feature = "httpcache")]"#);
-    a(r#"#[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]"#);
-    a("pub mod http_cache;");
+    if proper_name == "GitHub" {
+        a("pub mod auth;");
+        a(r#"#[cfg(feature = "httpcache")]"#);
+        a(r#"#[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]"#);
+        a("pub mod http_cache;");
+    }
     // Hopefully there is never a "tag" named after these reserved libs.
     a("pub mod types;");
     a("#[doc(hidden)]");

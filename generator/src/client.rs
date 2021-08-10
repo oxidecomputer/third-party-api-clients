@@ -142,7 +142,7 @@ impl Client {
         )
     }
 
-    pub async fn refresh_access_token(&mut self) -> Result<AccessToken, APIError> {
+    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
         let mut headers = header::HeaderMap::new();
         headers.append(
             header::ACCEPT,
@@ -174,7 +174,7 @@ impl Client {
         Ok(t)
     }
 
-    pub async fn get_access_token(&mut self, code: &str) -> Result<AccessToken, APIError> {
+    pub async fn get_access_token(&mut self, code: &str) -> Result<AccessToken> {
         let mut headers = header::HeaderMap::new();
         headers.append(
             header::ACCEPT,
