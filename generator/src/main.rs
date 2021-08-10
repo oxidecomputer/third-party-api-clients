@@ -1846,7 +1846,7 @@ fn gen(api: &OpenAPI, proper_name: &str, host: &str) -> Result<String> {
     if proper_name == "GitHub" {
         a(crate::client::GITHUB_TEMPLATE);
     } else if proper_name == "Gusto" || proper_name == "Ramp" {
-        a(crate::client::GENERIC_TOKEN_TEMPLATE);
+        a(&crate::client::generate_client_generic_token(&proper_name));
     }
 
     a("");

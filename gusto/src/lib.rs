@@ -71,46 +71,41 @@
 //! // You must have a refresh token to be able to call this function.
 //! access_token = gusto.refresh_access_token().unwrap();
 //! ```
-//!
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-pub mod auth;
-#[cfg(feature = "httpcache")]
-#[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]
-pub mod http_cache;
+pub mod admins_beta;
+pub mod benefits;
+pub mod companies;
+pub mod company_bank_accounts_beta;
+pub mod compensations;
+pub mod contractor_payments;
+pub mod contractors;
+pub mod current_user;
+pub mod custom_fields;
+pub mod earning_type;
+pub mod employees;
+pub mod garnishments;
+pub mod job_applicants_beta;
+pub mod jobs;
+pub mod locations;
+pub mod pay_schedules;
+pub mod payroll;
+pub mod terminations;
+pub mod time_off_requests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;
-pub mod current_user;
-pub mod companies;
-pub mod employees;
-pub mod contractors;
-pub mod payroll;
-pub mod contractor_payments;
-pub mod company_bank_accounts_beta;
-pub mod benefits;
-pub mod locations;
-pub mod jobs;
-pub mod job_applicants_beta;
-pub mod compensations;
-pub mod pay_schedules;
-pub mod garnishments;
-pub mod time_off_requests;
-pub mod earning_type;
-pub mod terminations;
-pub mod custom_fields;
-pub mod admins_beta;
 
 use anyhow::{anyhow, Error, Result};
 
 const DEFAULT_HOST: &str = "https://api.gusto.com";
 
 mod progenitor_support {
-    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
+    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')
@@ -127,7 +122,6 @@ mod progenitor_support {
         utf8_percent_encode(pc, PATH_SET).to_string()
     }
 }
-
 
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
@@ -204,9 +198,9 @@ impl Client {
         R: ToString,
         C: ToString,
     {
-        let client_id = env::var("{}_CLIENT_ID").unwrap();
-        let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
-        let redirect_uri = env::var("{}_REDIRECT_URI").unwrap();
+        let client_id = env::var("GUSTO_CLIENT_ID").unwrap();
+        let client_secret = env::var("GUSTO_CLIENT_SECRET").unwrap();
+        let redirect_uri = env::var("GUSTO_REDIRECT_URI").unwrap();
 
         Client::new(
             client_id,
@@ -233,11 +227,11 @@ impl Client {
         let mut p = path.to_string();
         // Make sure we have the leading "/".
         if !p.starts_with('/') {
-            p = format!("/{{}}", p);
+            p = format!("/{}", p);
         }
         let url = base.join(&p).unwrap();
 
-        let bt = format!("Bearer {{}}", self.token);
+        let bt = format!("Bearer {}", self.token);
         let bearer = header::HeaderValue::from_str(&bt).unwrap();
 
         // Set the default headers.
@@ -265,12 +259,12 @@ impl Client {
 
     pub fn user_consent_url(&self) -> String {
         format!(
-            "{{}}/oauth/authorize?client_id={{}}&response_type=code&redirect_uri={{}}",
+            "{}/oauth/authorize?client_id={}&response_type=code&redirect_uri={}",
             DEFAULT_HOST, self.client_id, self.redirect_uri
         )
     }
 
-    pub async fn refresh_access_token(&mut self) -> Result<AccessToken, APIError> {
+    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
         let mut headers = header::HeaderMap::new();
         headers.append(
             header::ACCEPT,
@@ -286,7 +280,7 @@ impl Client {
         ];
         let client = reqwest::Client::new();
         let resp = client
-            .post(&format!("{{}}/oauth/token", DEFAULT_HOST))
+            .post(&format!("{}/oauth/token", DEFAULT_HOST))
             .headers(headers)
             .form(&params)
             .send()
@@ -302,7 +296,7 @@ impl Client {
         Ok(t)
     }
 
-    pub async fn get_access_token(&mut self, code: &str) -> Result<AccessToken, APIError> {
+    pub async fn get_access_token(&mut self, code: &str) -> Result<AccessToken> {
         let mut headers = header::HeaderMap::new();
         headers.append(
             header::ACCEPT,
@@ -318,7 +312,7 @@ impl Client {
         ];
         let client = reqwest::Client::new();
         let resp = client
-            .post(&format!("{{}}/oauth/token", DEFAULT_HOST))
+            .post(&format!("{}/oauth/token", DEFAULT_HOST))
             .headers(headers)
             .form(&params)
             .send()
@@ -345,13 +339,8 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(
-            http::Method::GET,
-            &(self.host.clone() + uri),
-            None,
-            media,
-            self::auth::AuthenticationConstraint::Unconstrained,
-        ).await
+        self.request_entity(http::Method::GET, &(self.host.clone() + uri), None, media)
+            .await
     }
 
     async fn get_all_pages<D>(&self, uri: &str) -> Result<Vec<D>>
@@ -370,11 +359,14 @@ impl Client {
             &(self.host.clone() + uri),
             None,
             crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
+        )
+        .await
     }
 
-    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    async fn get_pages_url<D>(
+        &self,
+        url: &reqwest::Url,
+    ) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -383,20 +375,16 @@ impl Client {
             url.as_str(),
             None,
             crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
+        )
+        .await
     }
 
     async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.post_media(
-            uri,
-            message,
-            crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
+        self.post_media(uri, message, crate::utils::MediaType::Json)
+            .await
     }
 
     async fn post_media<D>(
@@ -404,7 +392,6 @@ impl Client {
         uri: &str,
         message: Option<reqwest::Body>,
         media: crate::utils::MediaType,
-        authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -414,11 +401,16 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             media,
-            authentication,
-        ).await
+        )
+        .await
     }
 
-    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    async fn patch_media<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        media: crate::utils::MediaType,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -427,25 +419,32 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             media,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
+        )
+        .await
     }
 
     async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.patch_media(uri, message, crate::utils::MediaType::Json).await
+        self.patch_media(uri, message, crate::utils::MediaType::Json)
+            .await
     }
 
     async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.put_media(uri, message, crate::utils::MediaType::Json).await
+        self.put_media(uri, message, crate::utils::MediaType::Json)
+            .await
     }
 
-    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    async fn put_media<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        media: crate::utils::MediaType,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -454,8 +453,8 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             media,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
+        )
+        .await
     }
 
     async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
@@ -467,15 +466,12 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
+        )
+        .await
     }
 
     /// "unfold" paginated results of a vector of items
-    async fn unfold<D>(
-        &self,
-        uri: &str,
-    ) -> Result<Vec<D>>
+    async fn unfold<D>(&self, uri: &str) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -496,99 +492,100 @@ impl Client {
         Ok(global_items)
     }
 
-/// Return a reference to an interface that provides access to Current User operations.
-               pub fn current_user(&self) -> current_user::CurrentUser {
-                    current_user::CurrentUser::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Current User operations.
+    pub fn current_user(&self) -> current_user::CurrentUser {
+        current_user::CurrentUser::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Companies operations.
-               pub fn companies(&self) -> companies::Companies {
-                    companies::Companies::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Companies operations.
+    pub fn companies(&self) -> companies::Companies {
+        companies::Companies::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Employees operations.
-               pub fn employees(&self) -> employees::Employees {
-                    employees::Employees::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Employees operations.
+    pub fn employees(&self) -> employees::Employees {
+        employees::Employees::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Contractors operations.
-               pub fn contractors(&self) -> contractors::Contractors {
-                    contractors::Contractors::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Contractors operations.
+    pub fn contractors(&self) -> contractors::Contractors {
+        contractors::Contractors::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Payroll operations.
-               pub fn payroll(&self) -> payroll::Payroll {
-                    payroll::Payroll::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Payroll operations.
+    pub fn payroll(&self) -> payroll::Payroll {
+        payroll::Payroll::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Contractor Payments operations.
-               pub fn contractor_payments(&self) -> contractor_payments::ContractorPayments {
-                    contractor_payments::ContractorPayments::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Contractor Payments operations.
+    pub fn contractor_payments(&self) -> contractor_payments::ContractorPayments {
+        contractor_payments::ContractorPayments::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Company Bank Accounts (Beta) operations.
-               pub fn company_bank_accounts_beta(&self) -> company_bank_accounts_beta::CompanyBankAccountsBeta {
-                    company_bank_accounts_beta::CompanyBankAccountsBeta::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Company Bank Accounts (Beta) operations.
+    pub fn company_bank_accounts_beta(
+        &self,
+    ) -> company_bank_accounts_beta::CompanyBankAccountsBeta {
+        company_bank_accounts_beta::CompanyBankAccountsBeta::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Benefits operations.
-               pub fn benefits(&self) -> benefits::Benefits {
-                    benefits::Benefits::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Benefits operations.
+    pub fn benefits(&self) -> benefits::Benefits {
+        benefits::Benefits::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Locations operations.
-               pub fn locations(&self) -> locations::Locations {
-                    locations::Locations::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Locations operations.
+    pub fn locations(&self) -> locations::Locations {
+        locations::Locations::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Jobs operations.
-               pub fn jobs(&self) -> jobs::Jobs {
-                    jobs::Jobs::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Jobs operations.
+    pub fn jobs(&self) -> jobs::Jobs {
+        jobs::Jobs::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Job Applicants (Beta) operations.
-               pub fn job_applicants_beta(&self) -> job_applicants_beta::JobApplicantsBeta {
-                    job_applicants_beta::JobApplicantsBeta::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Job Applicants (Beta) operations.
+    pub fn job_applicants_beta(&self) -> job_applicants_beta::JobApplicantsBeta {
+        job_applicants_beta::JobApplicantsBeta::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Compensations operations.
-               pub fn compensations(&self) -> compensations::Compensations {
-                    compensations::Compensations::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Compensations operations.
+    pub fn compensations(&self) -> compensations::Compensations {
+        compensations::Compensations::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Pay Schedules operations.
-               pub fn pay_schedules(&self) -> pay_schedules::PaySchedules {
-                    pay_schedules::PaySchedules::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Pay Schedules operations.
+    pub fn pay_schedules(&self) -> pay_schedules::PaySchedules {
+        pay_schedules::PaySchedules::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Garnishments operations.
-               pub fn garnishments(&self) -> garnishments::Garnishments {
-                    garnishments::Garnishments::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Garnishments operations.
+    pub fn garnishments(&self) -> garnishments::Garnishments {
+        garnishments::Garnishments::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Time Off Requests operations.
-               pub fn time_off_requests(&self) -> time_off_requests::TimeOffRequests {
-                    time_off_requests::TimeOffRequests::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Time Off Requests operations.
+    pub fn time_off_requests(&self) -> time_off_requests::TimeOffRequests {
+        time_off_requests::TimeOffRequests::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Earning Type operations.
-               pub fn earning_type(&self) -> earning_type::EarningType {
-                    earning_type::EarningType::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Earning Type operations.
+    pub fn earning_type(&self) -> earning_type::EarningType {
+        earning_type::EarningType::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Terminations operations.
-               pub fn terminations(&self) -> terminations::Terminations {
-                    terminations::Terminations::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Terminations operations.
+    pub fn terminations(&self) -> terminations::Terminations {
+        terminations::Terminations::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Custom Fields operations.
-               pub fn custom_fields(&self) -> custom_fields::CustomFields {
-                    custom_fields::CustomFields::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to Custom Fields operations.
+    pub fn custom_fields(&self) -> custom_fields::CustomFields {
+        custom_fields::CustomFields::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to Admins (Beta) operations.
-               pub fn admins_beta(&self) -> admins_beta::AdminsBeta {
-                    admins_beta::AdminsBeta::new(self.clone())
-               }
-
+    /// Return a reference to an interface that provides access to Admins (Beta) operations.
+    pub fn admins_beta(&self) -> admins_beta::AdminsBeta {
+        admins_beta::AdminsBeta::new(self.clone())
+    }
 }

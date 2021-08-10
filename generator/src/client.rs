@@ -1,373 +1,6 @@
 /*
  * Declare the client object:
  */
-pub const GENERIC_TOKEN_TEMPLATE: &str = r#"/// Entrypoint for interacting with the API client.
-#[derive(Clone)]
-pub struct Client {
-    token: String,
-    // This will expire within a certain amount of time as determined by the
-    // expiration date passed back in the initial request.
-    refresh_token: String,
-    client_id: String,
-    client_secret: String,
-    redirect_uri: String,
-    company_id: String,
-
-    client: reqwest::Client,
-}
-
-impl Client {
-    /// Create a new Client struct. It takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key your requests will work.
-    pub fn new<I, K, R, T, Q, C>(
-        client_id: I,
-        client_secret: K,
-        redirect_uri: R,
-        token: T,
-        refresh_token: Q,
-        company_id: C,
-    ) -> Self
-    where
-        I: ToString,
-        K: ToString,
-        R: ToString,
-        T: ToString,
-        Q: ToString,
-        C: ToString,
-    {
-        let client = Client::builder().build();
-        match client {
-            Ok(c) => {
-                let c = Client {
-                    client_id: client_id.to_string(),
-                    client_secret: client_secret.to_string(),
-                    redirect_uri: redirect_uri.to_string(),
-                    token: token.to_string(),
-                    refresh_token: refresh_token.to_string(),
-                    company_id: company_id.to_string(),
-
-                    client: c,
-                };
-
-                if c.token.is_empty() || c.refresh_token.is_empty() {
-                    // This is super hacky and a work around since there is no way to
-                    // auth without using the browser.
-                    println!("API consent URL: {}", c.user_consent_url());
-                }
-                // We do not refresh the access token since we leave that up to the
-                // user to do so they can re-save it to their database.
-
-                c
-            }
-            Err(e) => panic!("creating client failed: {:?}", e),
-        }
-    }
-
-    /// Create a new Client struct from environment variables. It
-    /// takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key and your requests will work.
-    /// We pass in the token and refresh token to the client so if you are storing
-    /// it in a database, you can get it first.
-    pub fn new_from_env<T, R, C>(token: T, refresh_token: R, company_id: C) -> Self
-    where
-        T: ToString,
-        R: ToString,
-        C: ToString,
-    {
-        let client_id = env::var("{}_CLIENT_ID").unwrap();
-        let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
-        let redirect_uri = env::var("{}_REDIRECT_URI").unwrap();
-
-        Client::new(
-            client_id,
-            client_secret,
-            redirect_uri,
-            token,
-            refresh_token,
-            company_id,
-        )
-    }
-
-    fn request<B>(
-        &self,
-        method: Method,
-        path: &str,
-        body: B,
-        query: Option<&[(&str, &str)]>,
-    ) -> Request
-    where
-        B: Serialize,
-    {
-        // Build the url.
-        let base = Url::parse(DEFAULT_HOST).unwrap();
-        let mut p = path.to_string();
-        // Make sure we have the leading "/".
-        if !p.starts_with('/') {
-            p = format!("/{{}}", p);
-        }
-        let url = base.join(&p).unwrap();
-
-        let bt = format!("Bearer {{}}", self.token);
-        let bearer = header::HeaderValue::from_str(&bt).unwrap();
-
-        // Set the default headers.
-        let mut headers = header::HeaderMap::new();
-        headers.append(header::AUTHORIZATION, bearer);
-        headers.append(
-            header::CONTENT_TYPE,
-            header::HeaderValue::from_static("application/json"),
-        );
-
-        let mut rb = self.client.request(method.clone(), url).headers(headers);
-
-        if let Some(val) = query {
-            rb = rb.query(&val);
-        }
-
-        // Add the body, this is to ensure our GET and DELETE calls succeed.
-        if method != Method::GET && method != Method::DELETE {
-            rb = rb.json(&body);
-        }
-
-        // Build the request.
-        rb.build().unwrap()
-    }
-
-    pub fn user_consent_url(&self) -> String {
-        format!(
-            "{{}}/oauth/authorize?client_id={{}}&response_type=code&redirect_uri={{}}",
-            DEFAULT_HOST, self.client_id, self.redirect_uri
-        )
-    }
-
-    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
-        let mut headers = header::HeaderMap::new();
-        headers.append(
-            header::ACCEPT,
-            header::HeaderValue::from_static("application/json"),
-        );
-
-        let params = [
-            ("grant_type", "refresh_token"),
-            ("refresh_token", &self.refresh_token),
-            ("client_id", &self.client_id),
-            ("client_secret", &self.client_secret),
-            ("redirect_uri", &self.redirect_uri),
-        ];
-        let client = reqwest::Client::new();
-        let resp = client
-            .post(&format!("{{}}/oauth/token", DEFAULT_HOST))
-            .headers(headers)
-            .form(&params)
-            .send()
-            .await
-            .unwrap();
-
-        // Unwrap the response.
-        let t: AccessToken = resp.json().await.unwrap();
-
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
-
-        Ok(t)
-    }
-
-    pub async fn get_access_token(&mut self, code: &str) -> Result<AccessToken> {
-        let mut headers = header::HeaderMap::new();
-        headers.append(
-            header::ACCEPT,
-            header::HeaderValue::from_static("application/json"),
-        );
-
-        let params = [
-            ("grant_type", "authorization_code"),
-            ("code", code),
-            ("client_id", &self.client_id),
-            ("client_secret", &self.client_secret),
-            ("redirect_uri", &self.redirect_uri),
-        ];
-        let client = reqwest::Client::new();
-        let resp = client
-            .post(&format!("{{}}/oauth/token", DEFAULT_HOST))
-            .headers(headers)
-            .form(&params)
-            .send()
-            .await
-            .unwrap();
-
-        // Unwrap the response.
-        let t: AccessToken = resp.json().await.unwrap();
-
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
-
-        Ok(t)
-    }
-
-    async fn get<D>(&self, uri: &str) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.get_media(uri, crate::utils::MediaType::Json).await
-    }
-
-    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.request_entity(
-            http::Method::GET,
-            &(self.host.clone() + uri),
-            None,
-            media,
-            self::auth::AuthenticationConstraint::Unconstrained,
-        ).await
-    }
-
-    async fn get_all_pages<D>(&self, uri: &str) -> Result<Vec<D>>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.unfold(uri).await
-    }
-
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.request(
-            http::Method::GET,
-            &(self.host.clone() + uri),
-            None,
-            crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
-    }
-
-    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.request(
-            http::Method::GET,
-            url.as_str(),
-            None,
-            crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
-    }
-
-    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.post_media(
-            uri,
-            message,
-            crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
-    }
-
-    async fn post_media<D>(
-        &self,
-        uri: &str,
-        message: Option<reqwest::Body>,
-        media: crate::utils::MediaType,
-        authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.request_entity(
-            http::Method::POST,
-            &(self.host.clone() + uri),
-            message,
-            media,
-            authentication,
-        ).await
-    }
-
-    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.request_entity(
-            http::Method::PATCH,
-            &(self.host.clone() + uri),
-            message,
-            media,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
-    }
-
-    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.patch_media(uri, message, crate::utils::MediaType::Json).await
-    }
-
-    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.put_media(uri, message, crate::utils::MediaType::Json).await
-    }
-
-    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.request_entity(
-            http::Method::PUT,
-            &(self.host.clone() + uri),
-            message,
-            media,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
-    }
-
-    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        self.request_entity(
-            http::Method::DELETE,
-            &(self.host.clone() + uri),
-            message,
-            crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
-        ).await
-    }
-
-    /// "unfold" paginated results of a vector of items
-    async fn unfold<D>(
-        &self,
-        uri: &str,
-    ) -> Result<Vec<D>>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        let mut global_items = Vec::new();
-        let (new_link, mut items) = self.get_pages(uri).await.unwrap();
-        let mut link = new_link;
-        while !items.is_empty() {
-            global_items.append(&mut items);
-            // We need to get the next link.
-            if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
-                let url = reqwest::Url::parse(&url).unwrap();
-                let (new_link, new_items) = self.get_pages_url(&url).await?;
-                link = new_link;
-                items = new_items;
-            }
-        }
-
-        Ok(global_items)
-    }"#;
-
 pub const GITHUB_TEMPLATE: &str = r#"/// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
@@ -686,7 +319,6 @@ impl Client {
             &(self.host.clone() + uri),
             None,
             media,
-            self::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -719,7 +351,6 @@ impl Client {
             url.as_str(),
             None,
             crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -731,7 +362,6 @@ impl Client {
             uri,
             message,
             crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -740,7 +370,6 @@ impl Client {
         uri: &str,
         message: Option<reqwest::Body>,
         media: crate::utils::MediaType,
-        authentication: crate::auth::AuthenticationConstraint,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -750,7 +379,6 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             media,
-            authentication,
         ).await
     }
 
@@ -763,7 +391,6 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             media,
-            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -790,7 +417,6 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             media,
-            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -803,7 +429,6 @@ impl Client {
             &(self.host.clone() + uri),
             message,
             crate::utils::MediaType::Json,
-            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -831,3 +456,368 @@ impl Client {
 
         Ok(global_items)
     }"#;
+
+pub fn generate_client_generic_token(proper_name: &str) -> String {
+    format!(
+        r#"/// Entrypoint for interacting with the API client.
+#[derive(Clone)]
+pub struct Client {{
+    token: String,
+    // This will expire within a certain amount of time as determined by the
+    // expiration date passed back in the initial request.
+    refresh_token: String,
+    client_id: String,
+    client_secret: String,
+    redirect_uri: String,
+    company_id: String,
+
+    client: reqwest::Client,
+}}
+
+impl Client {{
+    /// Create a new Client struct. It takes a type that can convert into
+    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
+    /// given a valid API key your requests will work.
+    pub fn new<I, K, R, T, Q, C>(
+        client_id: I,
+        client_secret: K,
+        redirect_uri: R,
+        token: T,
+        refresh_token: Q,
+        company_id: C,
+    ) -> Self
+    where
+        I: ToString,
+        K: ToString,
+        R: ToString,
+        T: ToString,
+        Q: ToString,
+        C: ToString,
+    {{
+        let client = Client::builder().build();
+        match client {{
+            Ok(c) => {{
+                let c = Client {{
+                    client_id: client_id.to_string(),
+                    client_secret: client_secret.to_string(),
+                    redirect_uri: redirect_uri.to_string(),
+                    token: token.to_string(),
+                    refresh_token: refresh_token.to_string(),
+                    company_id: company_id.to_string(),
+
+                    client: c,
+                }};
+
+                if c.token.is_empty() || c.refresh_token.is_empty() {{
+                    // This is super hacky and a work around since there is no way to
+                    // auth without using the browser.
+                    println!("API consent URL: {{}}", c.user_consent_url());
+                }}
+                // We do not refresh the access token since we leave that up to the
+                // user to do so they can re-save it to their database.
+
+                c
+            }}
+            Err(e) => panic!("creating client failed: {{:?}}", e),
+        }}
+    }}
+
+    /// Create a new Client struct from environment variables. It
+    /// takes a type that can convert into
+    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
+    /// given a valid API key and your requests will work.
+    /// We pass in the token and refresh token to the client so if you are storing
+    /// it in a database, you can get it first.
+    pub fn new_from_env<T, R, C>(token: T, refresh_token: R, company_id: C) -> Self
+    where
+        T: ToString,
+        R: ToString,
+        C: ToString,
+        {{
+        let client_id = env::var("{}_CLIENT_ID").unwrap();
+        let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
+        let redirect_uri = env::var("{}_REDIRECT_URI").unwrap();
+
+        Client::new(
+            client_id,
+            client_secret,
+            redirect_uri,
+            token,
+            refresh_token,
+            company_id,
+        )
+    }}
+
+    fn request<B>(
+        &self,
+        method: Method,
+        path: &str,
+        body: B,
+        query: Option<&[(&str, &str)]>,
+    ) -> Request
+    where
+        B: Serialize,
+    {{
+        // Build the url.
+        let base = Url::parse(DEFAULT_HOST).unwrap();
+        let mut p = path.to_string();
+        // Make sure we have the leading "/".
+        if !p.starts_with('/') {{
+            p = format!("/{{}}", p);
+        }}
+        let url = base.join(&p).unwrap();
+
+        let bt = format!("Bearer {{}}", self.token);
+        let bearer = header::HeaderValue::from_str(&bt).unwrap();
+
+        // Set the default headers.
+        let mut headers = header::HeaderMap::new();
+        headers.append(header::AUTHORIZATION, bearer);
+        headers.append(
+            header::CONTENT_TYPE,
+            header::HeaderValue::from_static("application/json"),
+        );
+
+        let mut rb = self.client.request(method.clone(), url).headers(headers);
+
+        if let Some(val) = query {{
+            rb = rb.query(&val);
+        }}
+
+        // Add the body, this is to ensure our GET and DELETE calls succeed.
+        if method != Method::GET && method != Method::DELETE {{
+            rb = rb.json(&body);
+        }}
+
+        // Build the request.
+        rb.build().unwrap()
+    }}
+
+    pub fn user_consent_url(&self) -> String {{
+        format!(
+            "{{}}/oauth/authorize?client_id={{}}&response_type=code&redirect_uri={{}}",
+            DEFAULT_HOST, self.client_id, self.redirect_uri
+        )
+    }}
+
+    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {{
+        let mut headers = header::HeaderMap::new();
+        headers.append(
+            header::ACCEPT,
+            header::HeaderValue::from_static("application/json"),
+        );
+
+        let params = [
+            ("grant_type", "refresh_token"),
+            ("refresh_token", &self.refresh_token),
+            ("client_id", &self.client_id),
+            ("client_secret", &self.client_secret),
+            ("redirect_uri", &self.redirect_uri),
+        ];
+        let client = reqwest::Client::new();
+        let resp = client
+            .post(&format!("{{}}/oauth/token", DEFAULT_HOST))
+            .headers(headers)
+            .form(&params)
+            .send()
+            .await
+            .unwrap();
+
+        // Unwrap the response.
+        let t: AccessToken = resp.json().await.unwrap();
+
+        self.token = t.access_token.to_string();
+        self.refresh_token = t.refresh_token.to_string();
+
+        Ok(t)
+    }}
+
+    pub async fn get_access_token(&mut self, code: &str) -> Result<AccessToken> {{
+        let mut headers = header::HeaderMap::new();
+        headers.append(
+            header::ACCEPT,
+            header::HeaderValue::from_static("application/json"),
+        );
+
+        let params = [
+            ("grant_type", "authorization_code"),
+            ("code", code),
+            ("client_id", &self.client_id),
+            ("client_secret", &self.client_secret),
+            ("redirect_uri", &self.redirect_uri),
+        ];
+        let client = reqwest::Client::new();
+        let resp = client
+            .post(&format!("{{}}/oauth/token", DEFAULT_HOST))
+            .headers(headers)
+            .form(&params)
+            .send()
+            .await
+            .unwrap();
+
+        // Unwrap the response.
+        let t: AccessToken = resp.json().await.unwrap();
+
+        self.token = t.access_token.to_string();
+        self.refresh_token = t.refresh_token.to_string();
+
+        Ok(t)
+    }}
+
+    async fn get<D>(&self, uri: &str) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.get_media(uri, crate::utils::MediaType::Json).await
+    }}
+
+    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.request_entity(
+            http::Method::GET,
+            &(self.host.clone() + uri),
+            None,
+            media,
+        ).await
+    }}
+
+    async fn get_all_pages<D>(&self, uri: &str) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.unfold(uri).await
+    }}
+
+    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.request(
+            http::Method::GET,
+            &(self.host.clone() + uri),
+            None,
+            crate::utils::MediaType::Json,
+        ).await
+    }}
+
+    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.request(
+            http::Method::GET,
+            url.as_str(),
+            None,
+            crate::utils::MediaType::Json,
+        ).await
+    }}
+
+    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.post_media(
+            uri,
+            message,
+            crate::utils::MediaType::Json,
+        ).await
+    }}
+
+    async fn post_media<D>(
+        &self,
+        uri: &str,
+        message: Option<reqwest::Body>,
+        media: crate::utils::MediaType,
+    ) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.request_entity(
+            http::Method::POST,
+            &(self.host.clone() + uri),
+            message,
+            media,
+        ).await
+    }}
+
+    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.request_entity(
+            http::Method::PATCH,
+            &(self.host.clone() + uri),
+            message,
+            media,
+        ).await
+    }}
+
+    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.patch_media(uri, message, crate::utils::MediaType::Json).await
+    }}
+
+    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.put_media(uri, message, crate::utils::MediaType::Json).await
+    }}
+
+    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.request_entity(
+            http::Method::PUT,
+            &(self.host.clone() + uri),
+            message,
+            media,
+        ).await
+    }}
+
+    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        self.request_entity(
+            http::Method::DELETE,
+            &(self.host.clone() + uri),
+            message,
+            crate::utils::MediaType::Json,
+        ).await
+    }}
+
+    /// "unfold" paginated results of a vector of items
+    async fn unfold<D>(
+        &self,
+        uri: &str,
+    ) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        let mut global_items = Vec::new();
+        let (new_link, mut items) = self.get_pages(uri).await.unwrap();
+        let mut link = new_link;
+        while !items.is_empty() {{
+            global_items.append(&mut items);
+            // We need to get the next link.
+            if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {{
+                let url = reqwest::Url::parse(&url).unwrap();
+                let (new_link, new_items) = self.get_pages_url(&url).await?;
+                link = new_link;
+                items = new_items;
+            }}
+        }}
+
+        Ok(global_items)
+    }}"#,
+        proper_name.to_uppercase(),
+        proper_name.to_uppercase(),
+        proper_name.to_uppercase(),
+    )
+}
