@@ -2,6 +2,7 @@ mod client;
 mod functions;
 mod template;
 mod types;
+mod utils;
 
 use std::{
     collections::{BTreeMap, HashSet},
@@ -1829,7 +1830,14 @@ fn render_param(
     out.to_string()
 }
 
-fn gen(api: &OpenAPI, proper_name: &str, host: &str, tags: Vec<String>) -> Result<String> {
+fn gen(
+    api: &OpenAPI,
+    proper_name: &str,
+    host: &str,
+    tags: Vec<String>,
+    token_endpoint: &str,
+    user_consent_endpoint: &str,
+) -> Result<String> {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1940,7 +1948,11 @@ fn gen(api: &OpenAPI, proper_name: &str, host: &str, tags: Vec<String>) -> Resul
     if proper_name == "GitHub" {
         a(crate::client::GITHUB_TEMPLATE);
     } else if proper_name == "Gusto" || proper_name == "Ramp" {
-        a(&crate::client::generate_client_generic_token(proper_name));
+        a(&crate::client::generate_client_generic_token(
+            proper_name,
+            token_endpoint,
+            user_consent_endpoint,
+        ));
     }
 
     a("");
@@ -2155,8 +2167,25 @@ fn main() -> Result<()> {
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
     opts.reqopt("d", "", "Target Rust crate description", "DESCRIPTION");
     opts.reqopt("", "host", "Target default host", "DEFAULT_HOST");
-    opts.reqopt("", "pn", "Target client proper name", "PROPER_NAME");
-    opts.reqopt("", "speclink", "Link to the spec", "SPEC_LINK");
+    opts.reqopt(
+        "",
+        "proper-name",
+        "Target client proper name",
+        "PROPER_NAME",
+    );
+    opts.reqopt("", "spec-link", "Link to the spec", "SPEC_LINK");
+    opts.optopt(
+        "",
+        "token-endpoint",
+        "Target token endpoint",
+        "TOKEN_ENDPOINT",
+    );
+    opts.optopt(
+        "",
+        "user-consent-endpoint",
+        "Target user consent endpoint",
+        "USER_CONSENT_ENDPOINT",
+    );
     opts.optflag("", "debug", "Print debug output");
 
     let args = match opts.parse(std::env::args().skip(1)) {
@@ -2306,7 +2335,7 @@ fn main() -> Result<()> {
      * In addition to types defined in schemas, types may be defined inline in
      * request and response bodies.
      */
-    let proper_name = args.opt_str("pn").unwrap();
+    let proper_name = args.opt_str("proper-name").unwrap();
     let mut tags: Vec<String> = Default::default();
     for (pn, p) in api.paths.iter() {
         let op = p.item()?;
@@ -2436,13 +2465,30 @@ fn main() -> Result<()> {
     let version = args.opt_str("v").unwrap();
     let host = args.opt_str("host").unwrap();
     let output_dir = args.opt_str("o").unwrap();
-    let spec_link = args.opt_str("speclink").unwrap();
+    let spec_link = args.opt_str("spec-link").unwrap();
+    let token_endpoint = if let Some(te) = args.opt_str("token-endpoint") {
+        te
+    } else {
+        String::new()
+    };
+    let user_consent_endpoint = if let Some(uce) = args.opt_str("user-consent-endpoint") {
+        uce
+    } else {
+        String::new()
+    };
 
     // Sort our tags and de-duplicate them.
     tags.sort_unstable();
     tags.dedup();
 
-    let fail = match gen(&api, &proper_name, &host, tags) {
+    let fail = match gen(
+        &api,
+        &proper_name,
+        &host,
+        tags,
+        &token_endpoint,
+        &user_consent_endpoint,
+    ) {
         Ok(out) => {
             let description = args.opt_str("d").unwrap();
 
@@ -2455,6 +2501,12 @@ fn main() -> Result<()> {
             /*
              * Write the Cargo.toml file:
              */
+            let mut uuid_lib = "".to_string();
+            if proper_name != "GitHub" {
+                uuid_lib = r#"
+uuid = { version = "0.8", features = ["serde", "v4"] }"#
+                    .to_string();
+            }
             let mut toml = root.clone();
             toml.push("Cargo.toml");
             let tomlout = format!(
@@ -2481,7 +2533,7 @@ percent-encoding = "2.1"
 reqwest = {{ version = "0.11", features = ["json"] }}
 schemars = {{ version = "0.8", features = ["chrono", "uuid"] }}
 serde = {{ version = "1", features = ["derive"] }}
-serde_json = "1"
+serde_json = "1"{}
 
 [dev-dependencies]
 base64 = "^0.12"
@@ -2497,7 +2549,7 @@ httpcache = ["dirs"]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 "#,
-                name, description, version, name, output_dir
+                name, description, version, name, output_dir, uuid_lib
             );
             save(&toml, tomlout.as_str())?;
 
@@ -2539,6 +2591,14 @@ rustdoc-args = ["--cfg", "docsrs"]
             let mut librs = src.clone();
             librs.push("lib.rs");
             save(librs, lib.as_str())?;
+
+            /*
+             * Create the Rust utils module:
+             */
+            let utils = utils::generate_utils(&proper_name);
+            let mut utilsrs = src.clone();
+            utilsrs.push("utils.rs");
+            save(utilsrs, utils.as_str())?;
 
             /*
              * Create the Rust source types file containing the generated types:

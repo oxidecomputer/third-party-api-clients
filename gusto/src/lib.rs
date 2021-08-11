@@ -9,7 +9,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gusto_api = "0.2.4"
+//! gusto_api = "0.2.5"
 //! ```
 //!
 //! ## Basic example
@@ -56,12 +56,15 @@
 //!     let mut gusto = Client::new_from_env("", "");
 //!
 //!     // Get the URL to request consent from the user.
-//!     let user_consent_url = gusto.user_consent_url();
+//!     // You can optionally pass in scopes. If none are provided, then the
+//!     // resulting URL will not have any scopes.
+//!     let user_consent_url = gusto.user_consent_url(&["some-scope".to_string()]);
 //!
-//!     // In your redirect URL capture the code sent.
+//!     // In your redirect URL capture the code sent and our state.
 //!     // Send it along to the request for the token.
 //!     let code = "thing-from-redirect-url";
-//!     let mut access_token = gusto.get_access_token(code).await.unwrap();
+//!     let state = "state-from-redirect-url";
+//!     let mut access_token = gusto.get_access_token(code, state).await.unwrap();
 //!
 //!     // You can additionally refresh the access token with the following.
 //!     // You must have a refresh token to be able to call this function.
@@ -126,6 +129,9 @@ use std::env;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
+const TOKEN_ENDPOINT: &str = "https://api.gusto.com/oauth/token";
+const USER_CONSENT_ENDPOINT: &str = "https://api.gusto.com/oauth/authorize";
+
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
@@ -187,7 +193,12 @@ impl Client {
         let client = reqwest::Client::builder().build();
         match client {
             Ok(c) => {
-                let c = Client {
+                // We do not refresh the access token here since we leave that up to the
+                // user to do so they can re-save it to their database.
+                // TODO: But in the future we should save the expires in date and refresh it
+                // if it needs to be refreshed.
+                //
+                Client {
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     redirect_uri: redirect_uri.to_string(),
@@ -195,19 +206,9 @@ impl Client {
                     refresh_token: refresh_token.to_string(),
 
                     client: c,
-                };
-
-                if c.token.is_empty() || c.refresh_token.is_empty() {
-                    // This is super hacky and a work around since there is no way to
-                    // auth without using the browser.
-                    println!("API consent URL: {}", c.user_consent_url());
                 }
-                // We do not refresh the access token since we leave that up to the
-                // user to do so they can re-save it to their database.
-
-                c
             }
-            Err(e) => panic!("creating client failed: {:?}", e),
+            Err(e) => panic!("creating reqwest client failed: {:?}", e),
         }
     }
 
@@ -317,11 +318,22 @@ impl Client {
         Ok(r)
     }
 
-    pub fn user_consent_url(&self) -> String {
-        format!(
-            "{}/oauth/authorize?client_id={}&response_type=code&redirect_uri={}",
-            DEFAULT_HOST, self.client_id, self.redirect_uri
-        )
+    /// Return a user consent url with an optional set of scopes.
+    /// If no scopes are provided, they will not be passed in the url.
+    pub fn user_consent_url(&self, scopes: &[String]) -> String {
+        let state = uuid::Uuid::new_v4();
+
+        let url = format!(
+            "{}?client_id={}&response_type=code&redirect_uri={}&state={}",
+            USER_CONSENT_ENDPOINT, self.client_id, self.redirect_uri, state
+        );
+
+        if scopes.is_empty() {
+            return url;
+        }
+
+        // Add the scopes.
+        format!("{}&scope={}", url, scopes.join(" "))
     }
 
     /// Refresh an access token from a refresh token. Client must have a refresh token
@@ -346,9 +358,10 @@ impl Client {
         ];
         let client = reqwest::Client::new();
         let resp = client
-            .post(&format!("{}/oauth/token", DEFAULT_HOST))
+            .post(TOKEN_ENDPOINT)
             .headers(headers)
             .form(&params)
+            .basic_auth(&self.client_id, Some(&self.client_secret))
             .send()
             .await
             .unwrap();
@@ -364,7 +377,7 @@ impl Client {
 
     /// Get an access token from the code returned by the URL paramter sent to the
     /// redirect URL.
-    pub async fn get_access_token(&mut self, code: &str) -> Result<AccessToken> {
+    pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<AccessToken> {
         let mut headers = reqwest::header::HeaderMap::new();
         headers.append(
             reqwest::header::ACCEPT,
@@ -377,12 +390,14 @@ impl Client {
             ("client_id", &self.client_id),
             ("client_secret", &self.client_secret),
             ("redirect_uri", &self.redirect_uri),
+            ("state", state),
         ];
         let client = reqwest::Client::new();
         let resp = client
-            .post(&format!("{}/oauth/token", DEFAULT_HOST))
+            .post(TOKEN_ENDPOINT)
             .headers(headers)
             .form(&params)
+            .basic_auth(&self.client_id, Some(&self.client_secret))
             .send()
             .await
             .unwrap();

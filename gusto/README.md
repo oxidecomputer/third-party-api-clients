@@ -9,7 +9,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-gusto_api = "0.2.4"
+gusto_api = "0.2.5"
 ```
 
 ## Basic example
@@ -59,12 +59,15 @@ async fn do_call() {
     let mut gusto = Client::new_from_env("", "");
 
     // Get the URL to request consent from the user.
-    let user_consent_url = gusto.user_consent_url();
+    // You can optionally pass in scopes. If none are provided, then the
+    // resulting URL will not have any scopes.
+    let user_consent_url = gusto.user_consent_url(&["some-scope".to_string()]);
 
-    // In your redirect URL capture the code sent.
+    // In your redirect URL capture the code sent and our state.
     // Send it along to the request for the token.
     let code = "thing-from-redirect-url";
-    let mut access_token = gusto.get_access_token(code).await.unwrap();
+    let state = "state-from-redirect-url";
+    let mut access_token = gusto.get_access_token(code, state).await.unwrap();
 
     // You can additionally refresh the access token with the following.
     // You must have a refresh token to be able to call this function.
