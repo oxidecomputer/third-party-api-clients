@@ -74,7 +74,17 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+pub mod business;
+pub mod card;
+pub mod card_program;
+pub mod custom_id;
+pub mod department;
+pub mod location;
+pub mod receipt;
+pub mod reimbursement;
+pub mod transaction;
 pub mod types;
+pub mod user;
 #[doc(hidden)]
 pub mod utils;
 
@@ -454,5 +464,45 @@ impl Client {
             message,
         )
         .await
+    }
+
+    pub fn business(&self) -> business::Business {
+        business::Business::new(self.clone())
+    }
+
+    pub fn card(&self) -> card::Card {
+        card::Card::new(self.clone())
+    }
+
+    pub fn card_program(&self) -> card_program::CardProgram {
+        card_program::CardProgram::new(self.clone())
+    }
+
+    pub fn custom_id(&self) -> custom_id::CustomId {
+        custom_id::CustomId::new(self.clone())
+    }
+
+    pub fn department(&self) -> department::Department {
+        department::Department::new(self.clone())
+    }
+
+    pub fn location(&self) -> location::Location {
+        location::Location::new(self.clone())
+    }
+
+    pub fn receipt(&self) -> receipt::Receipt {
+        receipt::Receipt::new(self.clone())
+    }
+
+    pub fn reimbursement(&self) -> reimbursement::Reimbursement {
+        reimbursement::Reimbursement::new(self.clone())
+    }
+
+    pub fn transaction(&self) -> transaction::Transaction {
+        transaction::Transaction::new(self.clone())
+    }
+
+    pub fn user(&self) -> user::User {
+        user::User::new(self.clone())
     }
 }

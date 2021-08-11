@@ -109,8 +109,6 @@ where
      * to immediately affect our code generation.
      */
 
-    // TODO: tags
-
     let mut opids = HashSet::new();
     for p in api.paths.iter() {
         match p.1 {
@@ -1792,7 +1790,7 @@ fn render_param(
     out.to_string()
 }
 
-fn gen(api: &OpenAPI, proper_name: &str, host: &str) -> Result<String> {
+fn gen(api: &OpenAPI, proper_name: &str, host: &str, tags: Vec<String>) -> Result<String> {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -1839,7 +1837,17 @@ fn gen(api: &OpenAPI, proper_name: &str, host: &str) -> Result<String> {
         if !docs.is_empty() {
             a(&format!("/// {}", docs.replace("\n", "\n///"),));
         }
-        a(&format!("pub mod {};", to_snake_case(&tag.name),));
+        a(&format!("pub mod {};", to_snake_case(&tag.name)));
+    }
+    if api.tags.is_empty() {
+        // If the spec didn't call out tags explicitly, we need to use the
+        // ones we found ourselves.
+        for tag in tags.iter() {
+            // TODO: eventually fix hardcoding auth here for ramp
+            if !tag.is_empty() && tag != "auth" {
+                a(&format!("pub mod {};", to_snake_case(tag)));
+            }
+        }
     }
 
     a("");
@@ -1930,6 +1938,26 @@ fn gen(api: &OpenAPI, proper_name: &str, host: &str) -> Result<String> {
         ));
         a("");
     }
+    if api.tags.is_empty() {
+        // If the spec didn't call out tags explicitly, we need to use the
+        // ones we found ourselves.
+        for tag in tags.iter() {
+            // TODO: eventually fix hardcoding auth here for ramp
+            if !tag.is_empty() && tag != "auth" {
+                a(&format!(
+                    r#"pub fn {}(&self) -> {}::{} {{
+                    {}::{}::new(self.clone())
+               }}"#,
+                    to_snake_case(tag),
+                    to_snake_case(tag),
+                    struct_name(tag),
+                    to_snake_case(tag),
+                    struct_name(tag),
+                ));
+                a("");
+            }
+        }
+    }
 
     a("}");
 
@@ -1989,7 +2017,7 @@ fn clean_name(t: &str) -> String {
 }
 
 pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
-    if proper_name == "GitHub" {
+    if proper_name == "GitHub" || proper_name == "Ramp" {
         return to_snake_case(oid).trim_start_matches('_').to_string();
     }
 
@@ -2221,6 +2249,7 @@ fn main() -> Result<()> {
      * request and response bodies.
      */
     let proper_name = args.opt_str("pn").unwrap();
+    let mut tags: Vec<String> = Default::default();
     for (pn, p) in api.paths.iter() {
         let op = p.item()?;
 
@@ -2228,7 +2257,7 @@ fn main() -> Result<()> {
                     m: &str,
                     o: Option<&openapiv3::Operation>,
                     ts: &mut TypeSpace|
-         -> Result<()> {
+         -> Result<String> {
             if let Some(o) = o {
                 let od = o.operation_id.as_deref().unwrap();
 
@@ -2326,19 +2355,21 @@ fn main() -> Result<()> {
                     m,
                     res.join(" | ")
                 ));
+
+                return Ok(tag);
             }
 
-            Ok(())
+            Ok("".to_string())
         };
 
-        grab(pn, "GET", op.get.as_ref(), &mut ts)?;
-        grab(pn, "POST", op.post.as_ref(), &mut ts)?;
-        grab(pn, "PUT", op.put.as_ref(), &mut ts)?;
-        grab(pn, "DELETE", op.delete.as_ref(), &mut ts)?;
-        grab(pn, "OPTIONS", op.options.as_ref(), &mut ts)?;
-        grab(pn, "HEAD", op.head.as_ref(), &mut ts)?;
-        grab(pn, "PATCH", op.patch.as_ref(), &mut ts)?;
-        grab(pn, "TRACE", op.trace.as_ref(), &mut ts)?;
+        tags.push(grab(pn, "GET", op.get.as_ref(), &mut ts)?);
+        tags.push(grab(pn, "POST", op.post.as_ref(), &mut ts)?);
+        tags.push(grab(pn, "PUT", op.put.as_ref(), &mut ts)?);
+        tags.push(grab(pn, "DELETE", op.delete.as_ref(), &mut ts)?);
+        tags.push(grab(pn, "OPTIONS", op.options.as_ref(), &mut ts)?);
+        tags.push(grab(pn, "HEAD", op.head.as_ref(), &mut ts)?);
+        tags.push(grab(pn, "PATCH", op.patch.as_ref(), &mut ts)?);
+        tags.push(grab(pn, "TRACE", op.trace.as_ref(), &mut ts)?);
     }
     debug("");
 
@@ -2347,7 +2378,11 @@ fn main() -> Result<()> {
     let host = args.opt_str("host").unwrap();
     let output_dir = args.opt_str("o").unwrap();
 
-    let fail = match gen(&api, &proper_name, &host) {
+    // Sort our tags and de-duplicate them.
+    tags.sort_unstable();
+    tags.dedup();
+
+    let fail = match gen(&api, &proper_name, &host, tags) {
         Ok(out) => {
             let description = args.opt_str("d").unwrap();
 

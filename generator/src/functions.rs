@@ -404,7 +404,10 @@ fn get_fn_params(
         let typ = parameter_data.render_type(&param_name, ts)?;
         if nam == "ref" || nam == "type" {
             fn_params_str.push(format!("{}_: {},", nam, typ));
-        } else if !all_pages || (nam != "page" && nam != "per_page" && nam != "per") {
+        } else if (!all_pages || (nam != "page" && nam != "per_page" && nam != "per"))
+            && nam != "authorization"
+            && !nam.starts_with("authorization_bearer")
+        {
             if typ == "chrono::DateTime<chrono::Utc>" {
                 fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
             } else {
@@ -429,7 +432,10 @@ fn get_fn_params(
 
             if nam == "ref" || nam == "type" {
                 query_params.insert(format!("{}_", nam), typ.to_string());
-            } else if !all_pages || (nam != "page" && nam != "per_page" && nam != "per") {
+            } else if (!all_pages || (nam != "page" && nam != "per_page" && nam != "per"))
+                && nam != "authorization"
+                && !nam.starts_with("authorization_bearer")
+            {
                 if typ == "chrono::DateTime<chrono::Utc>" {
                     query_params.insert(nam.to_string(), format!("Option<{}>", typ));
                 } else {
