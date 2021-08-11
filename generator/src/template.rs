@@ -488,10 +488,10 @@ pub fn generate_docs_generic_token(name: &str, version: &str, proper_name: &str)
 //! use {}::Client;
 //!
 //! let {} = Client::new(
-//!     String::from("client-id")
-//!     String::from("client-secret")
-//!     String::from("redirect-uri")
-//!     String::from("token")
+//!     String::from("client-id"),
+//!     String::from("client-secret"),
+//!     String::from("redirect-uri"),
+//!     String::from("token"),
 //!     String::from("refresh-token")
 //! );
 //! ```
@@ -509,7 +509,7 @@ pub fn generate_docs_generic_token(name: &str, version: &str, proper_name: &str)
 //! use {}::Client;
 //!
 //! let {} = Client::new_from_env(
-//!     String::from("token")
+//!     String::from("token"),
 //!     String::from("refresh-token")
 //! );
 //! ```

@@ -21,10 +21,10 @@ a user agent string and set of credentials.
 use gusto_api::Client;
 
 let gusto = Client::new(
-    String::from("client-id")
-    String::from("client-secret")
-    String::from("redirect-uri")
-    String::from("token")
+    String::from("client-id"),
+    String::from("client-secret"),
+    String::from("redirect-uri"),
+    String::from("token"),
     String::from("refresh-token")
 );
 ```
@@ -42,7 +42,7 @@ And then you can create a client from the environment.
 use gusto_api::Client;
 
 let gusto = Client::new_from_env(
-    String::from("token")
+    String::from("token"),
     String::from("refresh-token")
 );
 ```

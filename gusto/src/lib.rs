@@ -21,11 +21,11 @@
 //! use gusto_api::Client;
 //!
 //! let gusto = Client::new(
-//!     String::from("client-id")
-//!     String::from("client-secret")
-//!     String::from("redirect-uri")
-//!     String::from("token")
-//!     String::from("refresh-token")
+//!     String::from("client-id"),
+//!     String::from("client-secret"),
+//!     String::from("redirect-uri"),
+//!     String::from("token"),
+//!     String::from("refresh-token"),
 //! );
 //! ```
 //!
@@ -41,10 +41,7 @@
 //! ```
 //! use gusto_api::Client;
 //!
-//! let gusto = Client::new_from_env(
-//!     String::from("token")
-//!     String::from("refresh-token")
-//! );
+//! let gusto = Client::new_from_env(String::from("token"), String::from("refresh-token"));
 //! ```
 //!
 //! It is okay to pass empty values for token and `refresh_token`. In
