@@ -1256,6 +1256,7 @@ impl TypeSpace {
         self.add_if_not_exists(n, details, parent_name, false)
     }
 
+    #[allow(clippy::if_same_then_else)]
     fn get_type_name_and_details(
         &mut self,
         name: Option<&str>,
@@ -1331,7 +1332,9 @@ impl TypeSpace {
                         (Some(""), Some(t)) => t,
                         (Some(n), Some(t)) => {
                             // Check if we already have a type with this name.
-                            if self.name_to_id.get(&clean_name(n)).is_some() {
+                            if n == t {
+                                t
+                            } else if self.name_to_id.get(&clean_name(n)).is_some() {
                                 t
                             } else if self.name_to_id.get(&clean_name(t)).is_some() {
                                 n
@@ -1409,7 +1412,21 @@ impl TypeSpace {
                             (Some(n), Some("")) => n,
                             (None, Some(t)) => t,
                             (Some(""), Some(t)) => t,
-                            (Some(n), Some(_)) => n,
+                            (Some(n), Some(t)) => {
+                                // Check if we already have a type with this name.
+                                if n == t {
+                                    t
+                                } else if self.name_to_id.get(&clean_name(n)).is_some() {
+                                    t
+                                } else if self.name_to_id.get(&clean_name(t)).is_some() {
+                                    n
+                                } else if n.len() < t.len() {
+                                    // Pick the shorter of the names.
+                                    n
+                                } else {
+                                    t
+                                }
+                            }
                             (None, None) => {
                                 bail!("enumeration types need a name? {:?} {:?}", name, s)
                             }
