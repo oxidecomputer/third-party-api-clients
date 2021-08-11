@@ -1093,7 +1093,6 @@ pub struct PostResourcesCardVirtualRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
 pub enum TokenType {
     Bearer,
     Noop,
@@ -1321,7 +1320,6 @@ pub struct GetResourcesCardsDeferredIdResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "snake_case")]
 pub enum Icon {
     AdvertisingIcon,
     CardIcon,

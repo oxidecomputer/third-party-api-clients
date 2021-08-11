@@ -74,17 +74,17 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-pub mod business;
-pub mod card;
-pub mod card_program;
-pub mod custom_id;
-pub mod department;
-pub mod location;
-pub mod receipt;
-pub mod reimbursement;
-pub mod transaction;
+pub mod businesses;
+pub mod card_programs;
+pub mod cards;
+pub mod custom_ids;
+pub mod departments;
+pub mod locations;
+pub mod receipts;
+pub mod reimbursements;
+pub mod transactions;
 pub mod types;
-pub mod user;
+pub mod users;
 #[doc(hidden)]
 pub mod utils;
 
@@ -466,43 +466,43 @@ impl Client {
         .await
     }
 
-    pub fn business(&self) -> business::Business {
-        business::Business::new(self.clone())
+    pub fn businesses(&self) -> businesses::Businesses {
+        businesses::Businesses::new(self.clone())
     }
 
-    pub fn card(&self) -> card::Card {
-        card::Card::new(self.clone())
+    pub fn card_programs(&self) -> card_programs::CardPrograms {
+        card_programs::CardPrograms::new(self.clone())
     }
 
-    pub fn card_program(&self) -> card_program::CardProgram {
-        card_program::CardProgram::new(self.clone())
+    pub fn cards(&self) -> cards::Cards {
+        cards::Cards::new(self.clone())
     }
 
-    pub fn custom_id(&self) -> custom_id::CustomId {
-        custom_id::CustomId::new(self.clone())
+    pub fn custom_ids(&self) -> custom_ids::CustomIds {
+        custom_ids::CustomIds::new(self.clone())
     }
 
-    pub fn department(&self) -> department::Department {
-        department::Department::new(self.clone())
+    pub fn departments(&self) -> departments::Departments {
+        departments::Departments::new(self.clone())
     }
 
-    pub fn location(&self) -> location::Location {
-        location::Location::new(self.clone())
+    pub fn locations(&self) -> locations::Locations {
+        locations::Locations::new(self.clone())
     }
 
-    pub fn receipt(&self) -> receipt::Receipt {
-        receipt::Receipt::new(self.clone())
+    pub fn receipts(&self) -> receipts::Receipts {
+        receipts::Receipts::new(self.clone())
     }
 
-    pub fn reimbursement(&self) -> reimbursement::Reimbursement {
-        reimbursement::Reimbursement::new(self.clone())
+    pub fn reimbursements(&self) -> reimbursements::Reimbursements {
+        reimbursements::Reimbursements::new(self.clone())
     }
 
-    pub fn transaction(&self) -> transaction::Transaction {
-        transaction::Transaction::new(self.clone())
+    pub fn transactions(&self) -> transactions::Transactions {
+        transactions::Transactions::new(self.clone())
     }
 
-    pub fn user(&self) -> user::User {
-        user::User::new(self.clone())
+    pub fn users(&self) -> users::Users {
+        users::Users::new(self.clone())
     }
 }

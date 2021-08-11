@@ -4,7 +4,7 @@ use anyhow::{bail, Result};
 use inflector::cases::snakecase::to_snake_case;
 
 use crate::{
-    clean_fn_name, clean_name, get_parameter_data, oid_to_object_name, struct_name,
+    clean_fn_name, clean_name, get_parameter_data, make_plural, oid_to_object_name, struct_name,
     template::parse, ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeSpace,
 };
 
@@ -50,7 +50,8 @@ pub fn generate_files(
             if tags.len() != 1 {
                 bail!("invalid number of tags for op {}: {}", od, o.tags.len());
             }
-            let tag = to_snake_case(tags.first().unwrap());
+            let tag = to_snake_case(&make_plural(proper_name, tags.first().unwrap()))
+                .replace("_i_ds", "_ids");
 
             let oid = clean_fn_name(proper_name, od, &tag);
 

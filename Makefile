@@ -13,16 +13,16 @@ github: target/debug/generator $(GITHUB_SPEC)
 		--pn GitHub \
 		-d "A fully generated & opinionated API client for the GitHub API." \
 		--host "api.github.com"
-	cargo fmt
+	cargo fmt -p octorust
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.2 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.3 \
 		-o gusto \
 		-n gusto-api \
 		--pn Gusto \
 		-d "A fully generated & opinionated API client for the Gusto API." \
 		--host "api.gusto.com"
-	cargo fmt
+	cargo fmt -p gusto-api
 
 $(RAMP_SPEC_REFERENCE):
 	git clone git@github.com:sumatokado/ramp-developer.git $(RAMP_SPEC_DIR)
@@ -40,7 +40,7 @@ ramp: target/debug/generator $(RAMP_SPEC)
 		--pn Ramp \
 		-d "A fully generated & opinionated API client for the Ramp API." \
 		--host "api.ramp.com"
-	cargo fmt
+	cargo fmt -p ramp-api
 
 target/debug/generator: generator/src/*.rs generator/Cargo.toml
 	cargo build --bin generator

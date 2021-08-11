@@ -12,7 +12,10 @@ use std::{
 };
 
 use anyhow::{bail, Result};
-use inflector::cases::{snakecase::to_snake_case, titlecase::to_title_case};
+use inflector::cases::{
+    kebabcase::to_kebab_case, screamingsnakecase::to_screaming_snake_case,
+    sentencecase::to_sentence_case, snakecase::to_snake_case, titlecase::to_title_case,
+};
 use openapiv3::OpenAPI;
 use serde::Deserialize;
 
@@ -1742,10 +1745,27 @@ fn render_param(
     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
 
     let first = enums.first().unwrap();
-    if *first == first.to_uppercase() {
+    if *first == struct_name(first) {
+    } else if *first == to_screaming_snake_case(first) {
         a(r#"#[serde(rename_all = "SCREAMING_SNAKE_CASE")]"#);
-    } else {
+    } else if *first == first.to_uppercase() {
+        a(r#"#[serde(rename_all = "UPPERCASE")]"#);
+    } else if *first == first.to_lowercase() {
+        a(r#"#[serde(rename_all = "lowercase")]"#);
+    } else if *first == to_snake_case(first) {
         a(r#"#[serde(rename_all = "snake_case")]"#);
+    } else if *first == to_kebab_case(first) {
+        a(r#"#[serde(rename_all = "kebab-case")]"#);
+    } else if *first == to_sentence_case(first) {
+        //a(r#"#[serde(rename_all = "kebab-case")]"#);
+        println!(
+            "sentence case: sn: {}, first: {} {}",
+            sn,
+            struct_name(first),
+            first
+        );
+    } else {
+        println!("sn: {}, first: {} {}", sn, struct_name(first), first);
     }
 
     a(&format!("pub enum {} {{", sn));
@@ -1875,7 +1895,7 @@ fn gen(api: &OpenAPI, proper_name: &str, host: &str, tags: Vec<String>) -> Resul
         // ones we found ourselves.
         for tag in tags.iter() {
             // TODO: eventually fix hardcoding auth here for ramp
-            if !tag.is_empty() && tag != "auth" {
+            if !tag.is_empty() && tag != "auths" {
                 a(&format!("pub mod {};", to_snake_case(tag)));
             }
         }
@@ -1974,7 +1994,7 @@ fn gen(api: &OpenAPI, proper_name: &str, host: &str, tags: Vec<String>) -> Resul
         // ones we found ourselves.
         for tag in tags.iter() {
             // TODO: eventually fix hardcoding auth here for ramp
-            if !tag.is_empty() && tag != "auth" {
+            if !tag.is_empty() && tag != "auths" {
                 a(&format!(
                     r#"pub fn {}(&self) -> {}::{} {{
                     {}::{}::new(self.clone())
@@ -1993,6 +2013,23 @@ fn gen(api: &OpenAPI, proper_name: &str, host: &str, tags: Vec<String>) -> Resul
     a("}");
 
     Ok(out)
+}
+
+pub fn make_plural(proper_name: &str, s: &str) -> String {
+    // Only fix the ramp names.
+    if proper_name != "Ramp" {
+        return s.to_string();
+    }
+
+    if s.ends_with("ss") {
+        return format!("{}es", s);
+    } else if s.ends_with('s') {
+        return s.to_string();
+    } else if s.ends_with('y') {
+        return format!("{}ies", s.trim_end_matches('y'));
+    }
+
+    format!("{}s", s)
 }
 
 fn struct_name(s: &str) -> String {
@@ -2306,7 +2343,8 @@ fn main() -> Result<()> {
                 if tags.len() != 1 {
                     bail!("invalid number of tags for op {}: {}", od, o.tags.len());
                 }
-                let tag = to_snake_case(tags.first().unwrap());
+                let tag = to_snake_case(&make_plural(&proper_name, tags.first().unwrap()))
+                    .replace("_i_ds", "_ids");
 
                 let oid = clean_fn_name(&proper_name, od, &tag);
 

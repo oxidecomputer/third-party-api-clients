@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct Reimbursement {
+pub struct Reimbursements {
     client: Client,
 }
 
-impl Reimbursement {
+impl Reimbursements {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        Reimbursement { client }
+        Reimbursements { client }
     }
 
     /**
