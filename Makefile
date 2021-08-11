@@ -31,6 +31,8 @@ examples: generate github/examples/*.rs
 run:
 	cargo run --example list_repos_for_org --features="httpcache"
 
+update: update-specs
+
 update-specs:
 	$(RM) -r $(GITHUB_SPEC_DIR) $(GUSTO_SPEC_DIR) $(RAMP_SPEC_DIR) $(ZOOM_SPEC_DIR)
 	make $(GITHUB_SPEC) $(GUSTO_SPEC) $(RAMP_SPEC) $(ZOOM_SPEC)
@@ -42,7 +44,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.19 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.20 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \
@@ -94,7 +96,9 @@ $(ZOOM_SPEC_DIR):
 	mkdir -p $@
 
 $(ZOOM_SPEC): $(ZOOM_SPEC_DIR)
-	curl -sSL $(ZOOM_SPEC_REMOTE) -o $@
+	npx swagger2openapi \
+		--outfile $@ \
+		$(ZOOM_SPEC_REMOTE)
 
 zoom: target/debug/generator $(ZOOM_SPEC)
 	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.0 \
