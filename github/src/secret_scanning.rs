@@ -28,7 +28,7 @@ impl SecretScanning {
      * * `owner: &str`
      * * `repo: &str`
      * * `state: crate::types::SecretScanningAlertState` -- Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
-     * * `secret_type: &str` -- A comma separated list of secret types to return. By default all secret types are returned.
+     * * `secret_type: &str` -- A comma separated list of secret types to return. By default all secret types are returned. See "[About secret scanning for private repositories](https://docs.github.com/code-security/secret-security/about-secret-scanning#about-secret-scanning-for-private-repositories)" for a complete list of secret types (API slug).
      * * `page: i64` -- Page number of the results to fetch.
      * * `per_page: i64` -- Results per page (max 100).
      */

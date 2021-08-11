@@ -1,7 +1,7 @@
 A fully generated, opinionated API client library for Ramp.
 
-This library is generated from the Ramp OpenAPI
-specs. This way it will remain
+This library is generated from the [Ramp OpenAPI
+specs](https://github.com/sumatokado/ramp-developer). This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.
 

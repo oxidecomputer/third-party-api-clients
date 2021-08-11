@@ -36,7 +36,7 @@ impl Issues {
      *  \\* `created`: Issues created by you  
      *  \\* `mentioned`: Issues mentioning you  
      *  \\* `subscribed`: Issues you're subscribed to updates for  
-     *  \\* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     *  \\* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
@@ -194,7 +194,7 @@ impl Issues {
      *  \\* `created`: Issues created by you  
      *  \\* `mentioned`: Issues mentioning you  
      *  \\* `subscribed`: Issues you're subscribed to updates for  
-     *  \\* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     *  \\* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
@@ -575,7 +575,7 @@ impl Issues {
      *
      * Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://help.github.com/articles/disabling-issues/), the API returns a `410 Gone` status.
      *
-     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
+     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
      *
      * FROM: <https://docs.github.com/rest/reference/issues#create-an-issue>
      *
@@ -1153,7 +1153,7 @@ impl Issues {
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/issues/{issue_number}/comments` endpoint.
      *
-     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
+     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
      *
      * FROM: <https://docs.github.com/rest/reference/issues#create-an-issue-comment>
      *
@@ -2141,7 +2141,7 @@ impl Issues {
      *  \\* `created`: Issues created by you  
      *  \\* `mentioned`: Issues mentioning you  
      *  \\* `subscribed`: Issues you're subscribed to updates for  
-     *  \\* `all`: All issues the authenticated user can see, regardless of participation or creation.
+     *  \\* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.

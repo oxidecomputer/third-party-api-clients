@@ -291,12 +291,18 @@ crate::progenitor_support::encode_path(&number.to_string()),);\n";
     }
 }
 
-pub fn generate_docs_github(name: &str, version: &str, proper_name: &str, host: &str) -> String {
+pub fn generate_docs_github(
+    name: &str,
+    version: &str,
+    proper_name: &str,
+    host: &str,
+    spec_link: &str,
+) -> String {
     format!(
         r#"//! A fully generated, opinionated API client library for {}.
 //!
 //! This library is generated from the [{} OpenAPI
-//! specs](https://github.com/github/rest-api-description). This way it will remain
+//! specs]({}). This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //!
@@ -439,6 +445,7 @@ pub fn generate_docs_github(name: &str, version: &str, proper_name: &str, host: 
 //!"#,
         proper_name,
         proper_name,
+        spec_link,
         name,
         version,
         name,
@@ -463,12 +470,17 @@ pub fn generate_docs_github(name: &str, version: &str, proper_name: &str, host: 
     )
 }
 
-pub fn generate_docs_generic_token(name: &str, version: &str, proper_name: &str) -> String {
+pub fn generate_docs_generic_token(
+    name: &str,
+    version: &str,
+    proper_name: &str,
+    spec_link: &str,
+) -> String {
     format!(
         r#"//! A fully generated, opinionated API client library for {}.
 //!
-//! This library is generated from the {} OpenAPI
-//! specs. This way it will remain
+//! This library is generated from the [{} OpenAPI
+//! specs]({}). This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //!
@@ -541,6 +553,7 @@ pub fn generate_docs_generic_token(name: &str, version: &str, proper_name: &str)
 //!"#,
         proper_name,
         proper_name,
+        spec_link,
         name,
         version,
         name,

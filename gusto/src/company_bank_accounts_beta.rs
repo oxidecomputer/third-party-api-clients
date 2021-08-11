@@ -17,7 +17,7 @@ impl CompanyBankAccountsBeta {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/bank_accounts` endpoint.
      *
-     * *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+     * This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
      *
      * Returns all company bank accounts
      */
@@ -40,7 +40,7 @@ impl CompanyBankAccountsBeta {
      *
      * As opposed to `get_company_bank_accounts`, this function returns all the pages of the request at once.
      *
-     * *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+     * This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
      *
      * Returns all company bank accounts
      */
@@ -61,7 +61,7 @@ impl CompanyBankAccountsBeta {
      *
      * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/bank_accounts` endpoint.
      *
-     * *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+     * This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
      *
      * Create a company bank account. The new bank account will replace an existing bank account as the default company funding method.
      */
@@ -88,7 +88,7 @@ impl CompanyBankAccountsBeta {
      *
      * This function performs a `PUT` to the `/v1/companies/{company_id_or_uuid}/bank_accounts/{bank_account_uuid}/verify` endpoint.
      *
-     * This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+     * This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
      *
      * Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter.
      */

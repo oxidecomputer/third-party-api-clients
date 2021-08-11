@@ -1,7 +1,7 @@
 //! A fully generated, opinionated API client library for Gusto.
 //!
-//! This library is generated from the Gusto OpenAPI
-//! specs. This way it will remain
+//! This library is generated from the [Gusto OpenAPI
+//! specs](https://github.com/Gusto-API/api.gusto.dev). This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //!

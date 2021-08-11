@@ -60,7 +60,7 @@ impl ContractorPayments {
      *
      * Returns an object containing individual contractor payments, within a given time period, including totals.
      *
-     * This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+     * This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
      *
      * **Parameters:**
      *
@@ -134,7 +134,7 @@ impl ContractorPayments {
      *
      * Cancels and deletes a contractor payment. If the contractor payment has already started processing, the payment cannot be cancelled.
      *
-     * This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
+     * This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
      */
     pub async fn delete_company_contractor_payment(
         &self,

@@ -229,6 +229,172 @@ impl Repos {
     }
 
     /**
+     * List all autolinks of a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/autolinks` endpoint.
+     *
+     * This returns a list of autolinks configured for the given repository.
+     *
+     * Information about autolinks are only available to repository administrators.
+     *
+     * FROM: <https://docs.github.com/v3/repos#list-autolinks>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `page: i64` -- Page number of the results to fetch.
+     */
+    pub async fn list_autolinks(
+        &self,
+        owner: &str,
+        repo: &str,
+        page: i64,
+    ) -> Result<Vec<crate::types::Autolink>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if page > 0 {
+            query_args.push(format!("page={}", page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/repos/{}/{}/autolinks?{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            query
+        );
+
+        self.client.get(&url, None).await
+    }
+
+    /**
+     * List all autolinks of a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/autolinks` endpoint.
+     *
+     * As opposed to `list_autolinks`, this function returns all the pages of the request at once.
+     *
+     * This returns a list of autolinks configured for the given repository.
+     *
+     * Information about autolinks are only available to repository administrators.
+     *
+     * FROM: <https://docs.github.com/v3/repos#list-autolinks>
+     */
+    pub async fn list_all_autolinks(
+        &self,
+        owner: &str,
+        repo: &str,
+    ) -> Result<Vec<crate::types::Autolink>> {
+        let url = format!(
+            "/repos/{}/{}/autolinks",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client.get_all_pages(&url, None).await
+    }
+
+    /**
+     * Create an autolink reference for a repository.
+     *
+     * This function performs a `POST` to the `/repos/{owner}/{repo}/autolinks` endpoint.
+     *
+     * Users with admin access to the repository can create an autolink.
+     *
+     * FROM: <https://docs.github.com/v3/repos#create-an-autolink>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     */
+    pub async fn create_autolink(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &crate::types::ReposCreateAutolinkRequest,
+    ) -> Result<crate::types::Autolink> {
+        let url = format!(
+            "/repos/{}/{}/autolinks",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+        );
+
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
+    }
+
+    /**
+     * Get an autolink reference of a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/autolinks/{autolink_id}` endpoint.
+     *
+     * This returns a single autolink reference by ID that was configured for the given repository.
+     *
+     * Information about autolinks are only available to repository administrators.
+     *
+     * FROM: <https://docs.github.com/v3/repos#get-autolink>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `autolink_id: i64` -- autolink_id parameter.
+     */
+    pub async fn get_autolink(
+        &self,
+        owner: &str,
+        repo: &str,
+        autolink_id: i64,
+    ) -> Result<crate::types::Autolink> {
+        let url = format!(
+            "/repos/{}/{}/autolinks/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&autolink_id.to_string()),
+        );
+
+        self.client.get(&url, None).await
+    }
+
+    /**
+     * Delete an autolink reference from a repository.
+     *
+     * This function performs a `DELETE` to the `/repos/{owner}/{repo}/autolinks/{autolink_id}` endpoint.
+     *
+     * This deletes a single autolink reference by ID that was configured for the given repository.
+     *
+     * Information about autolinks are only available to repository administrators.
+     *
+     * FROM: <https://docs.github.com/v3/repos#delete-autolink>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `autolink_id: i64` -- autolink_id parameter.
+     */
+    pub async fn delete_autolink(&self, owner: &str, repo: &str, autolink_id: i64) -> Result<()> {
+        let url = format!(
+            "/repos/{}/{}/autolinks/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&autolink_id.to_string()),
+        );
+
+        self.client.delete(&url, None).await
+    }
+
+    /**
      * Enable automated security fixes.
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/automated-security-fixes` endpoint.
@@ -1819,7 +1985,7 @@ impl Repos {
      *
      * This function performs a `PUT` to the `/repos/{owner}/{repo}/collaborators/{username}` endpoint.
      *
-     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
      *
      * For more information the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
      *
@@ -1829,7 +1995,7 @@ impl Repos {
      *
      * **Rate limits**
      *
-     * To prevent abuse, you are limited to sending 50 invitations to a repository per 24 hour period. Note there is no limit if you are inviting organization members to an organization repository.
+     * You are limited to sending 50 invitations to a repository per 24 hour period. Note there is no limit if you are inviting organization members to an organization repository.
      *
      * FROM: <https://docs.github.com/rest/reference/repos#add-a-repository-collaborator>
      *
@@ -2419,7 +2585,7 @@ impl Repos {
      *
      * Create a comment for a commit using its `:commit_sha`.
      *
-     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
      *
      * FROM: <https://docs.github.com/rest/reference/repos#create-a-commit-comment>
      *
@@ -4119,7 +4285,7 @@ impl Repos {
      *
      * Create a fork for the authenticated user.
      *
-     * **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://support.github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com).
+     * **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://support.github.com/contact?tags=rest-api).
      *
      * FROM: <https://docs.github.com/rest/reference/repos#create-a-fork>
      *
@@ -4419,6 +4585,164 @@ impl Repos {
                 Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
             )
             .await
+    }
+
+    /**
+     * List deliveries for a repository webhook.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}/deliveries` endpoint.
+     *
+     * Returns a list of webhook deliveries for a webhook configured in a repository.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-deliveries-for-a-repository-webhook>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `hook_id: i64`
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `cursor: &str` -- Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
+     */
+    pub async fn list_webhook_deliveries(
+        &self,
+        owner: &str,
+        repo: &str,
+        hook_id: i64,
+        per_page: i64,
+        cursor: &str,
+    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !cursor.is_empty() {
+            query_args.push(format!("cursor={}", cursor));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/repos/{}/{}/hooks/{}/deliveries?{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            query
+        );
+
+        self.client.get(&url, None).await
+    }
+
+    /**
+     * List deliveries for a repository webhook.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}/deliveries` endpoint.
+     *
+     * As opposed to `list_webhook_deliveries`, this function returns all the pages of the request at once.
+     *
+     * Returns a list of webhook deliveries for a webhook configured in a repository.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#list-deliveries-for-a-repository-webhook>
+     */
+    pub async fn list_all_webhook_deliveries(
+        &self,
+        owner: &str,
+        repo: &str,
+        hook_id: i64,
+        cursor: &str,
+    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !cursor.is_empty() {
+            query_args.push(format!("cursor={}", cursor));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/repos/{}/{}/hooks/{}/deliveries?{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
+    }
+
+    /**
+     * Get a delivery for a repository webhook.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/hooks/{hook_id}/deliveries/{delivery_id}` endpoint.
+     *
+     * Returns a delivery for a webhook configured in a repository.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#get-a-delivery-for-a-repository-webhook>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `hook_id: i64`
+     * * `delivery_id: i64`
+     */
+    pub async fn get_webhook_delivery(
+        &self,
+        owner: &str,
+        repo: &str,
+        hook_id: i64,
+        delivery_id: i64,
+    ) -> Result<crate::types::HookDelivery> {
+        let url = format!(
+            "/repos/{}/{}/hooks/{}/deliveries/{}",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+        );
+
+        self.client.get(&url, None).await
+    }
+
+    /**
+     * Redeliver a delivery for a repository webhook.
+     *
+     * This function performs a `POST` to the `/repos/{owner}/{repo}/hooks/{hook_id}/deliveries/{delivery_id}/attempts` endpoint.
+     *
+     * Redeliver a webhook delivery for a webhook configured in a repository.
+     *
+     * FROM: <https://docs.github.com/rest/reference/repos#redeliver-a-delivery-for-a-repository-webhook>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     * * `hook_id: i64`
+     * * `delivery_id: i64`
+     */
+    pub async fn redeliver_webhook_delivery(
+        &self,
+        owner: &str,
+        repo: &str,
+        hook_id: i64,
+        delivery_id: i64,
+    ) -> Result<crate::types::Data> {
+        let url = format!(
+            "/repos/{}/{}/hooks/{}/deliveries/{}/attempts",
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+        );
+
+        self.client.post(&url, None).await
     }
 
     /**
@@ -5319,7 +5643,7 @@ impl Repos {
      *
      * Users with push access to the repository can create a release.
      *
-     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
      *
      * FROM: <https://docs.github.com/rest/reference/repos#create-a-release>
      *
@@ -5695,7 +6019,7 @@ impl Repos {
      *
      * **Notes:**
      * *   GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The "[List assets for a release](https://docs.github.com/rest/reference/repos#list-assets-for-a-release)"
-     * endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact).
+     * endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact?tags=rest-api).
      * *   If you upload an asset with the same filename as another uploaded asset, you'll receive an error and must delete the old file before you can re-upload the new asset.
      *
      * FROM: <https://docs.github.com/rest/reference/repos#upload-a-release-asset>

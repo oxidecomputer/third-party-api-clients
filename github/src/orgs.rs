@@ -767,6 +767,153 @@ impl Orgs {
     }
 
     /**
+     * List deliveries for an organization webhook.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}/deliveries` endpoint.
+     *
+     * Returns a list of webhook deliveries for a webhook configured in an organization.
+     *
+     * FROM: <https://docs.github.com/rest/reference/orgs#list-deliveries-for-an-organization-webhook>
+     *
+     * **Parameters:**
+     *
+     * * `org: &str`
+     * * `hook_id: i64`
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `cursor: &str` -- Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
+     */
+    pub async fn list_webhook_deliveries(
+        &self,
+        org: &str,
+        hook_id: i64,
+        per_page: i64,
+        cursor: &str,
+    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !cursor.is_empty() {
+            query_args.push(format!("cursor={}", cursor));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/orgs/{}/hooks/{}/deliveries?{}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            query
+        );
+
+        self.client.get(&url, None).await
+    }
+
+    /**
+     * List deliveries for an organization webhook.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}/deliveries` endpoint.
+     *
+     * As opposed to `list_webhook_deliveries`, this function returns all the pages of the request at once.
+     *
+     * Returns a list of webhook deliveries for a webhook configured in an organization.
+     *
+     * FROM: <https://docs.github.com/rest/reference/orgs#list-deliveries-for-an-organization-webhook>
+     */
+    pub async fn list_all_webhook_deliveries(
+        &self,
+        org: &str,
+        hook_id: i64,
+        cursor: &str,
+    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !cursor.is_empty() {
+            query_args.push(format!("cursor={}", cursor));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/orgs/{}/hooks/{}/deliveries?{}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
+    }
+
+    /**
+     * Get a webhook delivery for an organization webhook.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/hooks/{hook_id}/deliveries/{delivery_id}` endpoint.
+     *
+     * Returns a delivery for a webhook configured in an organization.
+     *
+     * FROM: <https://docs.github.com/rest/reference/orgs#get-a-webhook-delivery-for-an-organization-webhook>
+     *
+     * **Parameters:**
+     *
+     * * `org: &str`
+     * * `hook_id: i64`
+     * * `delivery_id: i64`
+     */
+    pub async fn get_webhook_delivery(
+        &self,
+        org: &str,
+        hook_id: i64,
+        delivery_id: i64,
+    ) -> Result<crate::types::HookDelivery> {
+        let url = format!(
+            "/orgs/{}/hooks/{}/deliveries/{}",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+        );
+
+        self.client.get(&url, None).await
+    }
+
+    /**
+     * Redeliver a delivery for an organization webhook.
+     *
+     * This function performs a `POST` to the `/orgs/{org}/hooks/{hook_id}/deliveries/{delivery_id}/attempts` endpoint.
+     *
+     * Redeliver a delivery for a webhook configured in an organization.
+     *
+     * FROM: <https://docs.github.com/rest/reference/orgs#redeliver-a-delivery-for-an-organization-webhook>
+     *
+     * **Parameters:**
+     *
+     * * `org: &str`
+     * * `hook_id: i64`
+     * * `delivery_id: i64`
+     */
+    pub async fn redeliver_webhook_delivery(
+        &self,
+        org: &str,
+        hook_id: i64,
+        delivery_id: i64,
+    ) -> Result<crate::types::Data> {
+        let url = format!(
+            "/orgs/{}/hooks/{}/deliveries/{}/attempts",
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&hook_id.to_string()),
+            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+        );
+
+        self.client.post(&url, None).await
+    }
+
+    /**
      * Ping an organization webhook.
      *
      * This function performs a `POST` to the `/orgs/{org}/hooks/{hook_id}/pings` endpoint.
@@ -908,7 +1055,7 @@ impl Orgs {
      *
      * Invite people to an organization by using their GitHub user ID or their email address. In order to create invitations in an organization, the authenticated user must be an organization owner.
      *
-     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
      *
      * FROM: <https://docs.github.com/rest/reference/orgs#create-an-organization-invitation>
      *

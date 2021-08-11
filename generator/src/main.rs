@@ -2156,6 +2156,7 @@ fn main() -> Result<()> {
     opts.reqopt("d", "", "Target Rust crate description", "DESCRIPTION");
     opts.reqopt("", "host", "Target default host", "DEFAULT_HOST");
     opts.reqopt("", "pn", "Target client proper name", "PROPER_NAME");
+    opts.reqopt("", "speclink", "Link to the spec", "SPEC_LINK");
     opts.optflag("", "debug", "Print debug output");
 
     let args = match opts.parse(std::env::args().skip(1)) {
@@ -2435,6 +2436,7 @@ fn main() -> Result<()> {
     let version = args.opt_str("v").unwrap();
     let host = args.opt_str("host").unwrap();
     let output_dir = args.opt_str("o").unwrap();
+    let spec_link = args.opt_str("speclink").unwrap();
 
     // Sort our tags and de-duplicate them.
     tags.sort_unstable();
@@ -2509,12 +2511,14 @@ rustdoc-args = ["--cfg", "docsrs"]
                     &version,
                     &proper_name,
                     host.trim_start_matches("https://"),
+                    &spec_link,
                 );
             } else if proper_name == "Gusto" || proper_name == "Ramp" {
                 docs = template::generate_docs_generic_token(
                     &to_snake_case(&name),
                     &version,
                     &proper_name,
+                    &spec_link,
                 );
             }
             let mut readme = root.clone();

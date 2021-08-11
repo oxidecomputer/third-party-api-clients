@@ -33,7 +33,7 @@ impl Companies {
      *
      * This function performs a `POST` to the `/v1/partner_managed_companies` endpoint.
      *
-     * This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
+     * This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
      *
      * ### Overview
      *
@@ -61,7 +61,7 @@ impl Companies {
      */
     pub async fn post_partner_managed_companie(
         &self,
-        body: &crate::types::PostProvisionRequest,
+        body: &crate::types::PostPartnerManagedCompanieRequest,
     ) -> Result<crate::types::PostPartnerManagedCompanieResponse> {
         let url = "/v1/partner_managed_companies".to_string();
         self.client

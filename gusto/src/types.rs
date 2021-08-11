@@ -2,134 +2,6 @@
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-/// The representation of an address in Gusto.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Location {
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub active: bool,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub city: String,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub company_id: i64,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub country: String,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub employee_id: i64,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub filing_address: bool,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub id: i64,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub mailing_address: bool,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub phone_number: String,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub state: String,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub street_1: String,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub street_2: String,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub version: String,
-    /**
-     * The representation of an address in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub zip: String,
-}
-
 /// The representation of an employee in Gusto.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Employee {
@@ -195,6 +67,14 @@ pub struct Employee {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub garnishments: Vec<Garnishment>,
+    /**
+     * The representation of an employee in Gusto.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub has_ssn: bool,
     /**
      * The representation of an employee in Gusto.
      */
@@ -324,6 +204,134 @@ pub struct Employee {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub work_email: String,
+}
+
+/// The representation of an address in Gusto.
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct Location {
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub active: bool,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub city: String,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub company_id: i64,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub country: String,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub employee_id: i64,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub filing_address: bool,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub id: i64,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub mailing_address: bool,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub phone_number: String,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub state: String,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub street_1: String,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub street_2: String,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub version: String,
+    /**
+     * The representation of an address in Gusto.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub zip: String,
 }
 
 /// The representation of paid time off in Gusto.
@@ -3254,6 +3262,15 @@ pub struct PayrollData {
     /**
      *
      */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub calculated_at: String,
+    /**
+     *
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub check_date: Option<chrono::NaiveDate>,
     /**
@@ -3319,6 +3336,11 @@ pub struct PayrollData {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub processed: bool,
+    /**
+     *
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub processed_date: Option<chrono::NaiveDate>,
     /**
      *
      */
@@ -3595,6 +3617,51 @@ pub struct JobApplicant {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub uuid: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct FederalTaxDetails {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub ein: String,
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub ein_verified: bool,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub filing_form: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub legal_name: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub tax_payer_type: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub taxable_as_scorp: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub version: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -5250,6 +5317,81 @@ pub struct User {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct PostPartnerManagedCompanieRequestCompany {
+    /**
+     * The employer identification number (EIN) of the company.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub ein: String,
+    /**
+     * The legal name of the company.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+     * The name of the company.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub trade_name: String,
+}
+
+///
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct PostPartnerManagedCompanieRequest {
+    #[serde()]
+    pub company: PostPartnerManagedCompanieRequestCompany,
+    /**
+     * Information for the user who will be the primary payroll administrator for the new company.
+     */
+    #[serde()]
+    pub user: User,
+}
+
+///
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct PostPartnerManagedCompanieResponse {
+    /**
+     *
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub access_token: String,
+    /**
+     *
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub company_uuid: String,
+    /**
+     *
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub refresh_token: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Addresses {
     #[serde(
         default,
@@ -5299,7 +5441,7 @@ pub struct Addresses {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostPartnerManagedCompanieRequestCompany {
+pub struct PostProvisionRequestCompany {
     /**
      * The locations for the company. This includes mailing, work, and filing addresses.
      */
@@ -5352,44 +5494,12 @@ pub struct PostPartnerManagedCompanieRequestCompany {
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostProvisionRequest {
     #[serde()]
-    pub company: PostPartnerManagedCompanieRequestCompany,
+    pub company: PostProvisionRequestCompany,
     /**
      * Information for the user who will be the primary payroll administrator for the new company.
      */
     #[serde()]
     pub user: User,
-}
-
-///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostPartnerManagedCompanieResponse {
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub access_token: String,
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub company_uuid: String,
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub refresh_token: String,
 }
 
 ///
@@ -5658,4 +5768,142 @@ pub struct PostCompanyAdminRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct GetCompanyFederalTaxDetailsResponse {
+    /**
+     * The company's EIN
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub ein: String,
+    /**
+     * Whether the EIN was able to be verified as a valid EIN with the IRS.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub ein_verified: bool,
+    /**
+     * The form used by the company for federal tax filing. One of:
+     *  - 941 (Quarterly federal tax return form)
+     *  - 944 (Annual federal tax return form)
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub filing_form: String,
+    /**
+     * The legal name of the company
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub legal_name: String,
+    /**
+     * What type of tax entity the company is. One of:
+     *  - C-Corporation
+     *  - S-Corporation
+     *  - Sole proprietor
+     *  - LLC
+     *  - LLP
+     *  - Limited partnership
+     *  - Co-ownership
+     *  - Association
+     *  - Trusteeship
+     *  - General partnership
+     *  - Joint venture
+     *  - Non-Profit
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub tax_payer_type: String,
+    /**
+     * Whether the company is taxed as an S-Corporation. Tax payer types that may be taxed as an S-Corporation include:
+     *  - S-Corporation
+     *  - C-Corporation
+     *  - LLC
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub taxable_as_scorp: bool,
+    /**
+     * The current version of the object. See the versioning guide for details using this field.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub version: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct PutCompanyFederalTaxDetailsRequest {
+    /**
+     * The EIN of of the company
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub ein: String,
+    /**
+     * The form used by the company for federal tax filing. One of:
+     *  - 941 (Quarterly federal tax return)
+     *  - 944 (Annual federal tax return)
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub filing_form: String,
+    /**
+     * The legal name of the company
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub legal_name: String,
+    /**
+     * What type of tax entity the company is
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub tax_payer_type: String,
+    /**
+     * Whether this company should be taxed as an S-Corporation
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub taxable_as_scorp: Option<bool>,
+    /**
+     * The current version of the object. See the versioning guide for details using this field.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub version: String,
 }

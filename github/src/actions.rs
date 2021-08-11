@@ -1978,6 +1978,7 @@ impl Actions {
      * * `status: crate::types::WorkflowRunStatus` -- Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run).".
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
+     * * `created: chrono::DateTime<chrono::Utc>`
      */
     pub async fn list_workflow_runs_for_repo(
         &self,
@@ -1989,6 +1990,7 @@ impl Actions {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
+        created: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<crate::types::ActionsListWorkflowRunsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -1997,6 +1999,9 @@ impl Actions {
         }
         if !branch.is_empty() {
             query_args.push(format!("branch={}", branch));
+        }
+        if let Some(date) = created {
+            query_args.push(format!("created={}", &date.to_rfc3339()));
         }
         if !event.is_empty() {
             query_args.push(format!("event={}", event));
@@ -2145,8 +2150,6 @@ impl Actions {
      * Approve a workflow run for a fork pull request.
      *
      * This function performs a `POST` to the `/repos/{owner}/{repo}/actions/runs/{run_id}/approve` endpoint.
-     *
-     * **Note:** This endpoint is currently in beta and is subject to change.
      *
      * Approves a workflow run for a pull request from a public fork of a first time contributor. For more information, see ["Approving workflow runs from public forks](https://docs.github.com/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks)."
      *
@@ -3017,6 +3020,7 @@ impl Actions {
      * * `status: crate::types::WorkflowRunStatus` -- Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run).".
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
+     * * `created: chrono::DateTime<chrono::Utc>`
      */
     pub async fn list_workflow_runs(
         &self,
@@ -3029,6 +3033,7 @@ impl Actions {
         status: crate::types::WorkflowRunStatus,
         per_page: i64,
         page: i64,
+        created: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<crate::types::ActionsListWorkflowRunsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -3037,6 +3042,9 @@ impl Actions {
         }
         if !branch.is_empty() {
             query_args.push(format!("branch={}", branch));
+        }
+        if let Some(date) = created {
+            query_args.push(format!("created={}", &date.to_rfc3339()));
         }
         if !event.is_empty() {
             query_args.push(format!("event={}", event));

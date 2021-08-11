@@ -420,6 +420,437 @@ pub struct WebhookConfig {
     pub url: String,
 }
 
+/// Delivery made by a webhook, without request and response information.
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct HookDeliveryItem {
+    /**
+     * The type of activity for the event that triggered the delivery.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub action: String,
+    /**
+     * Time when the webhook delivery occurred.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub delivered_at: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Time spent delivering.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_f64",
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+    )]
+    pub duration: f64,
+    /**
+     * The event that triggered the delivery.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub event: String,
+    /**
+     * Unique identifier for the event (shared with all deliveries for all webhooks that subscribe to this event).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub guid: String,
+    /**
+     * Unique identifier of the webhook delivery.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub id: i64,
+    /**
+     * The id of the GitHub App installation associated with this event.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub installation_id: i64,
+    /**
+     * Whether the webhook delivery is a redelivery.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub redelivery: bool,
+    /**
+     * The id of the repository associated with this event.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub repository_id: i64,
+    /**
+     * Describes the response returned after attempting the delivery.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub status: String,
+    /**
+     * Status code received when delivery was made.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub status_code: i64,
+}
+
+/// Scim Error
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct ScimError {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub detail: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub documentation_url: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub message: String,
+    /**
+     * Scim Error
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub schemas: Vec<String>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub scim_type: String,
+    /**
+     * Scim Error
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub status: i64,
+}
+
+/// One of the following types:
+///
+/// - `String`
+/// - `i64`
+/// - `Vec<String>`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ValueOneOf {
+    String(String),
+    StringVector(Vec<String>),
+    I64(i64),
+}
+
+impl ValueOneOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let ValueOneOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ValueOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ValueOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<i64> for ValueOneOf {
+    fn from(f: i64) -> Self {
+        ValueOneOf::I64(f)
+    }
+}
+
+impl From<String> for ValueOneOf {
+    fn from(f: String) -> Self {
+        ValueOneOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for ValueOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ValueOneOf::StringVector(f)
+    }
+}
+
+impl From<ValueOneOf> for i64 {
+    fn from(f: ValueOneOf) -> Self {
+        *f.i64().unwrap()
+    }
+}
+
+impl From<ValueOneOf> for String {
+    fn from(f: ValueOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<ValueOneOf> for Vec<String> {
+    fn from(f: ValueOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct Errors {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub code: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub field: String,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub index: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub message: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub resource: String,
+    /**
+     * One of the following types:
+     *  
+     *  - `String`
+     *  - `i64`
+     *  - `Vec<String>`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<ValueOneOf>,
+}
+
+/// Validation Error
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct ValidationError {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub documentation_url: String,
+    /**
+     * Validation Error
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub errors: Vec<Errors>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub message: String,
+}
+
+/// The request headers sent with the webhook delivery.
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct Headers {}
+
+/// The webhook payload.
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct Payload {}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct Request {
+    /**
+     * The request headers sent with the webhook delivery.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub headers: Option<Headers>,
+    /**
+     * The webhook payload.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub payload: Option<Payload>,
+}
+
+/// The response headers received when the delivery was made.
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct HookDeliveryResponseHeaders {}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct Response {
+    /**
+     * The response headers received when the delivery was made.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub headers: Option<HookDeliveryResponseHeaders>,
+    /**
+     * The response payload received.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub payload: String,
+}
+
+/// Delivery made by a webhook.
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct HookDelivery {
+    /**
+     * The type of activity for the event that triggered the delivery.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub action: String,
+    /**
+     * Time when the delivery was delivered.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub delivered_at: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Time spent delivering.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_f64",
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+    )]
+    pub duration: f64,
+    /**
+     * The event that triggered the delivery.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub event: String,
+    /**
+     * Unique identifier for the event (shared with all deliveries for all webhooks that subscribe to this event).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub guid: String,
+    /**
+     * Unique identifier of the delivery.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub id: i64,
+    /**
+     * The id of the GitHub App installation associated with this event.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub installation_id: i64,
+    /**
+     * Whether the delivery is a redelivery.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub redelivery: bool,
+    /**
+     * The id of the repository associated with this event.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub repository_id: i64,
+    #[serde()]
+    pub request: Request,
+    #[serde()]
+    pub response: Response,
+    /**
+     * Description of the status of the attempted delivery
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub status: String,
+    /**
+     * Status code received when delivery was made.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub status_code: i64,
+}
+
 /// An enterprise account
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Enterprise {
@@ -2152,6 +2583,11 @@ pub struct TemplateRepository {
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
+    pub allow_auto_merge: bool,
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
     pub allow_merge_commit: bool,
     #[serde(
         default,
@@ -2607,6 +3043,14 @@ pub struct TemplateRepository {
 /// A git repository
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Repository {
+    /**
+     * A git repository
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub allow_auto_merge: bool,
     /**
      * A git repository
      */
@@ -3241,148 +3685,6 @@ pub struct InstallationToken {
     pub token: String,
 }
 
-/// One of the following types:
-///
-/// - `String`
-/// - `i64`
-/// - `Vec<String>`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ValueOneOf {
-    String(String),
-    StringVector(Vec<String>),
-    I64(i64),
-}
-
-impl ValueOneOf {
-    pub fn i64(&self) -> Option<&i64> {
-        if let ValueOneOf::I64(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let ValueOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let ValueOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<i64> for ValueOneOf {
-    fn from(f: i64) -> Self {
-        ValueOneOf::I64(f)
-    }
-}
-
-impl From<String> for ValueOneOf {
-    fn from(f: String) -> Self {
-        ValueOneOf::String(f)
-    }
-}
-
-impl From<Vec<String>> for ValueOneOf {
-    fn from(f: Vec<String>) -> Self {
-        ValueOneOf::StringVector(f)
-    }
-}
-
-impl From<ValueOneOf> for i64 {
-    fn from(f: ValueOneOf) -> Self {
-        *f.i64().unwrap()
-    }
-}
-
-impl From<ValueOneOf> for String {
-    fn from(f: ValueOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
-impl From<ValueOneOf> for Vec<String> {
-    fn from(f: ValueOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Errors {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub code: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub field: String,
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub index: i64,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub message: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub resource: String,
-    /**
-     * One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  - `Vec<String>`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub value: Option<ValueOneOf>,
-}
-
-/// Validation Error
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ValidationError {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub documentation_url: String,
-    /**
-     * Validation Error
-     */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub errors: Vec<Errors>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub message: String,
-}
-
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct App {
     #[serde(
@@ -3667,8 +3969,8 @@ pub struct ActionsEnterprisePermissions {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
      */
-    #[serde()]
-    pub allowed_actions: AllowedActions,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allowed_actions: Option<AllowedActions>,
     /**
      * The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
      */
@@ -5102,7 +5404,7 @@ pub struct EventPayloadPages {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Payload {
+pub struct EventPayload {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5145,7 +5447,7 @@ pub struct Event {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub org: Option<Actor>,
     #[serde()]
-    pub payload: Payload,
+    pub payload: EventPayload,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -5275,41 +5577,6 @@ pub struct Feed {
     pub user_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Files {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub filename: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub language: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub raw_url: String,
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub size: i64,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-        rename = "type"
-    )]
-    pub type_: String,
-}
-
 /// Base Gist
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct BaseGist {
@@ -5340,7 +5607,7 @@ pub struct BaseGist {
     )]
     pub description: String,
     #[serde()]
-    pub files: Files,
+    pub files: Data,
     /**
      * Base Gist
      */
@@ -5800,7 +6067,7 @@ pub struct Gist {
     )]
     pub description: String,
     #[serde()]
-    pub files: Files,
+    pub files: Data,
     /**
      * Gist
      */
@@ -5880,52 +6147,6 @@ pub struct Gist {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GistSimpleFiles {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub content: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub filename: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub language: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub raw_url: String,
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub size: i64,
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub truncated: bool,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-        rename = "type"
-    )]
-    pub type_: String,
-}
-
 /// Gist Simple
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct GistSimple {
@@ -5962,8 +6183,11 @@ pub struct GistSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
+    /**
+     * Gist Simple
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub files: Option<GistSimpleFiles>,
+    pub files: Option<Data>,
     /**
      * Gist
      */
@@ -8277,6 +8501,12 @@ pub struct OrgHook {
     pub config: Config,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub deliveries_url: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub events: Vec<String>,
     #[serde(
@@ -9913,6 +10143,14 @@ pub struct TeamRepository {
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
+    pub allow_auto_merge: bool,
+    /**
+     * A team's access to a repository.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
     pub allow_merge_commit: bool,
     /**
      * A team's access to a repository.
@@ -10752,6 +10990,14 @@ pub struct FullRepository {
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
+    pub allow_auto_merge: bool,
+    /**
+     * Full Repository
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
     pub allow_merge_commit: bool,
     /**
      * Full Repository
@@ -11532,8 +11778,8 @@ pub struct ActionsRepositoryPermissions {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
      */
-    #[serde()]
-    pub allowed_actions: AllowedActions,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allowed_actions: Option<AllowedActions>,
     /**
      * Whether GitHub Actions is enabled on the repository.
      */
@@ -12456,6 +12702,35 @@ pub struct WorkflowUsage {
     pub billable: WorkflowUsageBillable,
 }
 
+/// An autolink reference.
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct Autolink {
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub id: i64,
+    /**
+     * The prefix of a key that is linkified.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub key_prefix: String,
+    /**
+     * A template for the target URL that is generated if a key was found.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub url_template: String,
+}
+
 /// Protected Branch Admin Enforced
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ProtectedBranchAdminEnforced {
@@ -13167,7 +13442,7 @@ pub struct Parents {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct CommitFiles {
+pub struct Files {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -13261,7 +13536,7 @@ pub struct CommitDataType {
      * Commit
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub files: Vec<CommitFiles>,
+    pub files: Vec<Files>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14836,49 +15111,6 @@ pub struct AnalysisDeletion {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub next_analysis_url: String,
-}
-
-/// Scim Error
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ScimError {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub detail: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub documentation_url: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub message: String,
-    /**
-     * Scim Error
-     */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub schemas: Vec<String>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub scim_type: String,
-    /**
-     * Scim Error
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub status: i64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -17588,6 +17820,12 @@ pub struct Hook {
     pub config: HookConfig,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub deliveries_url: String,
     /**
      * Determines what events the hook is triggered for. Default: ['push'].
      */
@@ -21319,8 +21557,8 @@ pub struct PullRequestHead {
         rename = "ref"
     )]
     pub ref_: String,
-    #[serde()]
-    pub repo: PullRequestHeadRepo,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub repo: Option<PullRequestHeadRepo>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22540,6 +22778,15 @@ pub struct Release {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
+    /**
+     * A release.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub mentions_count: i64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24033,6 +24280,14 @@ pub struct LabelSearchResultItem {
 /// Repo Search Result Item
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct RepoSearchResultItem {
+    /**
+     * Repo Search Result Item
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub allow_auto_merge: bool,
     /**
      * Repo Search Result Item
      */
@@ -26833,7 +27088,7 @@ pub struct AppsListInstallationReposResponse {
  *   \* `created`: Issues created by you  
  *   \* `mentioned`: Issues mentioning you  
  *   \* `subscribed`: Issues you're subscribed to updates for  
- *   \* `all`: All issues the authenticated user can see, regardless of participation or creation
+ *   \* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum Filter {
@@ -28365,6 +28620,11 @@ impl ReposCreateInOrgRequestVisibility {
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ReposCreateInOrgRequest {
     /**
+     * Either `true` to allow auto-merge on pull requests, or `false` to disallow auto-merge.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_auto_merge: Option<bool>,
+    /**
      * Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -29794,6 +30054,11 @@ pub struct ReposUpdateRequestSecurityAnalysis {
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ReposUpdateRequest {
     /**
+     * Either `true` to allow auto-merge on pull requests, or `false` to disallow auto-merge.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_auto_merge: Option<bool>,
+    /**
      * Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -30103,6 +30368,28 @@ pub struct ActionsCreateWorkflowDispatchRequest {
         rename = "ref"
     )]
     pub ref_: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct ReposCreateAutolinkRequest {
+    /**
+     * The prefix appended by a number will generate a link any time it is found in an issue, pull request, or commit.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub key_prefix: String,
+    /**
+     * The URL must contain <num> for the reference number.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub url_template: String,
 }
 
 /// Require status checks to pass before merging. Set to `null` to disable.
@@ -37444,6 +37731,11 @@ impl ReposListDirection {
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ReposCreateRequest {
+    /**
+     * Whether to allow Auto-merge to be used on pull requests.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_auto_merge: Option<bool>,
     /**
      * Whether to allow merge commits for pull requests.
      */

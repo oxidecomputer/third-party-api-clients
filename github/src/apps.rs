@@ -91,6 +91,130 @@ impl Apps {
     }
 
     /**
+     * List deliveries for an app webhook.
+     *
+     * This function performs a `GET` to the `/app/hook/deliveries` endpoint.
+     *
+     * Returns a list of webhook deliveries for the webhook configured for a GitHub App.
+     *
+     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/apps#list-deliveries-for-an-app-webhook>
+     *
+     * **Parameters:**
+     *
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `cursor: &str` -- Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
+     */
+    pub async fn list_webhook_deliveries(
+        &self,
+        per_page: i64,
+        cursor: &str,
+    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !cursor.is_empty() {
+            query_args.push(format!("cursor={}", cursor));
+        }
+        if per_page > 0 {
+            query_args.push(format!("per_page={}", per_page));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/app/hook/deliveries?{}", query);
+
+        self.client.get(&url, None).await
+    }
+
+    /**
+     * List deliveries for an app webhook.
+     *
+     * This function performs a `GET` to the `/app/hook/deliveries` endpoint.
+     *
+     * As opposed to `list_webhook_deliveries`, this function returns all the pages of the request at once.
+     *
+     * Returns a list of webhook deliveries for the webhook configured for a GitHub App.
+     *
+     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/apps#list-deliveries-for-an-app-webhook>
+     */
+    pub async fn list_all_webhook_deliveries(
+        &self,
+        cursor: &str,
+    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !cursor.is_empty() {
+            query_args.push(format!("cursor={}", cursor));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/app/hook/deliveries?{}", query);
+
+        self.client.get_all_pages(&url, None).await
+    }
+
+    /**
+     * Get a delivery for an app webhook.
+     *
+     * This function performs a `GET` to the `/app/hook/deliveries/{delivery_id}` endpoint.
+     *
+     * Returns a delivery for the webhook configured for a GitHub App.
+     *
+     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/apps#get-a-delivery-for-an-app-webhook>
+     *
+     * **Parameters:**
+     *
+     * * `delivery_id: i64`
+     */
+    pub async fn get_webhook_delivery(
+        &self,
+        delivery_id: i64,
+    ) -> Result<crate::types::HookDelivery> {
+        let url = format!(
+            "/app/hook/deliveries/{}",
+            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+        );
+
+        self.client.get(&url, None).await
+    }
+
+    /**
+     * Redeliver a delivery for an app webhook.
+     *
+     * This function performs a `POST` to the `/app/hook/deliveries/{delivery_id}/attempts` endpoint.
+     *
+     * Redeliver a delivery for the webhook configured for a GitHub App.
+     *
+     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+     *
+     * FROM: <https://docs.github.com/rest/reference/apps#redeliver-a-delivery-for-an-app-webhook>
+     *
+     * **Parameters:**
+     *
+     * * `delivery_id: i64`
+     */
+    pub async fn redeliver_webhook_delivery(&self, delivery_id: i64) -> Result<crate::types::Data> {
+        let url = format!(
+            "/app/hook/deliveries/{}/attempts",
+            crate::progenitor_support::encode_path(&delivery_id.to_string()),
+        );
+
+        self.client.post(&url, None).await
+    }
+
+    /**
      * List installations for the authenticated app.
      *
      * This function performs a `GET` to the `/app/installations` endpoint.
