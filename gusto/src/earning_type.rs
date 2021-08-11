@@ -46,10 +46,10 @@ impl EarningType {
      *
      * If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
      */
-    pub async fn post_company_earning_types(
+    pub async fn post_company_earning_type(
         &self,
         company_id: &str,
-        body: &crate::types::PostCompanyEarningTypesRequest,
+        body: &crate::types::PostCompanyEarningTypeRequest,
     ) -> Result<crate::types::EarningType> {
         let url = format!(
             "/v1/companies/{}/earning_types",
@@ -71,11 +71,11 @@ impl EarningType {
      *
      * Update an earning type.
      */
-    pub async fn put_company_earning_types_earning_type_uuid(
+    pub async fn put_company_earning_type(
         &self,
         company_id: &str,
         earning_type_uuid: &str,
-        body: &crate::types::PutCompanyEarningTypesTypeUuidRequest,
+        body: &crate::types::PutCompanyEarningTypeRequest,
     ) -> Result<crate::types::EarningType> {
         let url = format!(
             "/v1/companies/{}/earning_types/{}",
@@ -98,7 +98,7 @@ impl EarningType {
      *
      * Deactivate an earning type.
      */
-    pub async fn delete_company_earning_types_earning_type_uuid(
+    pub async fn delete_company_earning_type(
         &self,
         company_id: &str,
         earning_type_uuid: &str,

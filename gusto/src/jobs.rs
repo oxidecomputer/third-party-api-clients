@@ -19,7 +19,7 @@ impl Jobs {
      *
      * Get a job.
      */
-    pub async fn get_jobs_job_id(&self, job_id: &str) -> Result<crate::types::Job> {
+    pub async fn get_job(&self, job_id: &str) -> Result<crate::types::Job> {
         let url = format!(
             "/v1/jobs/{}",
             crate::progenitor_support::encode_path(&job_id.to_string()),
@@ -35,10 +35,10 @@ impl Jobs {
      *
      * Update a job.
      */
-    pub async fn put_jobs_job_id(
+    pub async fn put_job(
         &self,
         job_id: &str,
-        body: &crate::types::PutJobsJobIdRequest,
+        body: &crate::types::PutJobRequest,
     ) -> Result<crate::types::Job> {
         let url = format!(
             "/v1/jobs/{}",
@@ -60,7 +60,7 @@ impl Jobs {
      *
      * Deletes a specific job that an employee holds.
      */
-    pub async fn delete_jobs_job_id(&self, job_id: &str) -> Result<()> {
+    pub async fn delete_job(&self, job_id: &str) -> Result<()> {
         let url = format!(
             "/v1/jobs/{}",
             crate::progenitor_support::encode_path(&job_id.to_string()),
@@ -110,10 +110,10 @@ impl Jobs {
      *
      * Create a job.
      */
-    pub async fn post_jobs_job_id(
+    pub async fn post_job(
         &self,
         employee_id: &str,
-        body: &crate::types::PostJobsJobIdRequest,
+        body: &crate::types::PostJobRequest,
     ) -> Result<crate::types::Job> {
         let url = format!(
             "/v1/employees/{}/jobs",
@@ -137,10 +137,10 @@ impl Jobs {
      *
      * Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
      */
-    pub async fn post_jobs_job_id_compensations(
+    pub async fn post_job_compensation(
         &self,
         job_id: &str,
-        body: &crate::types::PostJobsJobIdCompensationsRequest,
+        body: &crate::types::PostJobCompensationRequest,
     ) -> Result<crate::types::Compensation> {
         let url = format!(
             "/v1/jobs/{}/compensations",

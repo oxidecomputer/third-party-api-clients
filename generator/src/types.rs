@@ -166,6 +166,15 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                     }
                 }
                 TypeDetails::Object(omap, schema_data) => {
+                    /*
+                     * TODO: This breaks things so ignore for now.
+                     * Eventually this should work, we should ignore empty structs.
+                    if omap.is_empty() {
+                        // Continue early.
+                        // We don't care about empty structs.
+                        continue;
+                    }*/
+
                     let desc = if let Some(description) = &schema_data.description {
                         format!("/// {}", description.replace('\n', "\n/// "))
                     } else {

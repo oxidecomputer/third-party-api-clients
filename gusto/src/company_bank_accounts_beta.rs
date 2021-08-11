@@ -65,10 +65,10 @@ impl CompanyBankAccountsBeta {
      *
      * Create a company bank account. The new bank account will replace an existing bank account as the default company funding method.
      */
-    pub async fn post_company_bank_accounts(
+    pub async fn post_company_bank_account(
         &self,
         company_id_or_uuid: &str,
-        body: &crate::types::PostCompanyBankAccountsRequest,
+        body: &crate::types::PostCompanyBankAccountRequest,
     ) -> Result<crate::types::CompanyBankAccount> {
         let url = format!(
             "/v1/companies/{}/bank_accounts",

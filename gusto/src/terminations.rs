@@ -65,10 +65,10 @@ impl Terminations {
      *
      * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
      */
-    pub async fn post_employee_terminations(
+    pub async fn post_employee_termination(
         &self,
         employee_id: &str,
-        body: &crate::types::PostEmployeeTerminationsRequest,
+        body: &crate::types::PostEmployeeTerminationRequest,
     ) -> Result<crate::types::Termination> {
         let url = format!(
             "/v1/employees/{}/terminations",

@@ -222,10 +222,10 @@ impl Payroll {
      *
      * Creates a new, unprocessed, off-cycle payroll.
      */
-    pub async fn post_company_payrolls(
+    pub async fn post_company_payroll(
         &self,
         company_id_or_uuid: &str,
-        body: &crate::types::PostCompanyPayrollsRequest,
+        body: &crate::types::PostCompanyPayrollRequest,
     ) -> Result<crate::types::PayrollData> {
         let url = format!(
             "/v1/companies/{}/payrolls",
@@ -257,7 +257,7 @@ impl Payroll {
      * * `include: crate::types::GetCompanyPayrollsInclude` -- Include the requested attribute in the employee_compensations attribute in the response.
      * * `show_calculation: &str` -- with `include`, shows the tax, and/or benefit, and/or deduction details for a calculated, unprocessed payroll.
      */
-    pub async fn get_company_payrolls_payroll_id(
+    pub async fn get_company_payrolls(
         &self,
         company_id_or_uuid: &str,
         payroll_id_or_uuid: &str,
@@ -322,7 +322,7 @@ impl Payroll {
      *
      * The payrolls are identified by their pay periods’ start_date and end_date. Both are required and must correspond with an existing, unprocessed payroll. *If the dates do not match, the entire request will be rejected.* This was an explicit design decision to remove any assumptions around the timespan for data sent.
      */
-    pub async fn put_company_payrolls_pay_period_start_date_pay_period_end_date(
+    pub async fn put_company_payrolls_pay_period_start_date_end(
         &self,
         company_id_or_uuid: &str,
         pay_period_start_date: &str,
@@ -355,7 +355,7 @@ impl Payroll {
      *
      * This endpoint is asynchronous and responds with only a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with the *show_calculation* and *includes* params
      */
-    pub async fn put_company_payrolls_payroll_id_calculate(
+    pub async fn put_company_payrolls_calculate(
         &self,
         company_id: &str,
         payroll_id: &str,
@@ -378,7 +378,7 @@ impl Payroll {
      *
      * Submits an unprocessed payroll to be calculated and run. Upon success, transitions the payroll to the `processed` state.
      */
-    pub async fn put_company_payrolls_payroll_id_submit(
+    pub async fn put_company_payrolls_submit(
         &self,
         company_id: &str,
         payroll_id: &str,
@@ -402,7 +402,7 @@ impl Payroll {
      * Transitions a `processed` payroll back to the `unprocessed` state. A payroll cannot be canceled once it has entered the `funded` state.
      *
      */
-    pub async fn put_api_company_payrolls_payroll_id_cancel(
+    pub async fn put_api_company_payrolls_cancel(
         &self,
         company_id: &str,
         payroll_id: &str,
@@ -423,10 +423,10 @@ impl Payroll {
      *
      * Returns all approved Payroll Reversals for a Company.
      */
-    pub async fn get_company_or_uuid_payroll_reversals(
+    pub async fn get_company_reversals(
         &self,
         company_id_or_uuid: &str,
-    ) -> Result<crate::types::GetCompanyUuidPayrollReversalsResponse> {
+    ) -> Result<crate::types::GetCompanyReversalsResponse> {
         let url = format!(
             "/v1/companies/{}/payroll_reversals",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),

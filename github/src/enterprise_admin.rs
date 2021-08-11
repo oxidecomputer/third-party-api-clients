@@ -253,22 +253,13 @@ impl EnterpriseAdmin {
      *
      * * `enterprise: &str` -- The slug version of the enterprise name. You can also substitute this value with the enterprise id.
      */
-    pub async fn set_allowed_actions_enterprise(
-        &self,
-        enterprise: &str,
-        body: &crate::types::SelectedActions,
-    ) -> Result<()> {
+    pub async fn set_allowed_actions_enterprise(&self, enterprise: &str) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/permissions/selected-actions",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
-            .await
+        self.client.put(&url, None).await
     }
 
     /**

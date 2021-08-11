@@ -59,10 +59,10 @@ impl Garnishments {
      *
      * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
-    pub async fn post_employee_garnishments(
+    pub async fn post_employee_garnishment(
         &self,
         employee_id: &str,
-        body: &crate::types::PostEmployeeGarnishmentsRequest,
+        body: &crate::types::PostEmployeeGarnishmentRequest,
     ) -> Result<crate::types::Garnishment> {
         let url = format!(
             "/v1/employees/{}/garnishments",
@@ -84,10 +84,7 @@ impl Garnishments {
      *
      * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
-    pub async fn get_garnishments_garnishment_id(
-        &self,
-        garnishment_id: &str,
-    ) -> Result<crate::types::Garnishment> {
+    pub async fn get_garnishment(&self, garnishment_id: &str) -> Result<crate::types::Garnishment> {
         let url = format!(
             "/v1/garnishments/{}",
             crate::progenitor_support::encode_path(&garnishment_id.to_string()),
@@ -103,10 +100,10 @@ impl Garnishments {
      *
      * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
-    pub async fn put_garnishments_garnishment_id(
+    pub async fn put_garnishment(
         &self,
         garnishment_id: &str,
-        body: &crate::types::PutGarnishmentsGarnishmentIdRequest,
+        body: &crate::types::PutGarnishmentRequest,
     ) -> Result<crate::types::Garnishment> {
         let url = format!(
             "/v1/garnishments/{}",

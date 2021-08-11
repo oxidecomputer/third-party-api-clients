@@ -19,7 +19,7 @@ impl Contractors {
      *
      * Get a contractor.
      */
-    pub async fn get_contractors_contractor_id(
+    pub async fn get_contractor(
         &self,
         contractor_id_or_uuid: &str,
     ) -> Result<crate::types::Contractor> {
@@ -38,10 +38,10 @@ impl Contractors {
      *
      * Update a contractor.
      */
-    pub async fn put_contractors_contractor_id(
+    pub async fn put_contractor(
         &self,
         contractor_id_or_uuid: &str,
-        body: &crate::types::PutContractorsContractorIdRequest,
+        body: &crate::types::PutContractorRequest,
     ) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/contractors/{}",
@@ -103,10 +103,10 @@ impl Contractors {
      *
      * Create an individual or business contractor.
      */
-    pub async fn post_company_contractors(
+    pub async fn post_company_contractor(
         &self,
         company_id_or_uuid: &str,
-        body: &crate::types::PostCompanyContractorsRequest,
+        body: &crate::types::PostCompanyContractorRequest,
     ) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/companies/{}/contractors",

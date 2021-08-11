@@ -1964,14 +1964,45 @@ fn clean_name(t: &str) -> String {
     words.join(" ")
 }
 
-pub fn clean_fn_name(oid: &str) -> String {
-    to_snake_case(oid)
+pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
+    if proper_name == "GitHub" {
+        return to_snake_case(oid).trim_start_matches('_').to_string();
+    }
+
+    let t = tag.to_string() + "_";
+
+    let mut st = to_snake_case(oid)
         .replace("v_1_", "")
-        .replace("companies_", "company_")
-        .replace("company_id_", "")
-        .replace("employees_employee_id_", "employee_")
-        .replace("employee_id_", "")
+        .replace(&t, "")
+        .replace("s_uuid", "")
+        .replace("_id_or_uuid", "")
+        .replace("_uuid", "")
+        .replace("_id_", "_")
+        .replace("companies_company_", "company_")
         .replace("employees_employee_", "employee_")
+        .replace("jobs_job_", "job_")
+        .replace("applicants_applicant_", "applicant_")
+        .trim_start_matches('_')
+        .trim_end_matches('_')
+        .trim_end_matches("_id")
+        .to_string();
+
+    if st.starts_with("post_") {
+        // This should be singular.
+        st = st.trim_end_matches('s').to_string();
+    }
+
+    let mut words: Vec<String> = Default::default();
+    // Only get a string with unique words.
+    let split = st.split('_');
+    for s in split {
+        if words.contains(&s.to_string()) {
+            continue;
+        }
+        words.push(s.to_string());
+    }
+
+    words.join("_")
 }
 
 fn oid_to_object_name(s: &str) -> String {
@@ -2165,6 +2196,7 @@ fn main() -> Result<()> {
      * In addition to types defined in schemas, types may be defined inline in
      * request and response bodies.
      */
+    let proper_name = args.opt_str("pn").unwrap();
     for (pn, p) in api.paths.iter() {
         let op = p.item()?;
 
@@ -2174,7 +2206,24 @@ fn main() -> Result<()> {
                     ts: &mut TypeSpace|
          -> Result<()> {
             if let Some(o) = o {
-                let oid = clean_fn_name(o.operation_id.as_deref().unwrap());
+                let od = o.operation_id.as_deref().unwrap();
+
+                // Make sure we have exactly 1 tag. This likely needs to change in the
+                // future but for now it seems fairly consistent.
+                let mut tags = o.tags.clone();
+                if tags.is_empty() {
+                    // This "x-tags" bullshit is for Gusto.
+                    if let Some(x) = o.extensions.get("x-tags") {
+                        let xtags: Vec<String> = serde_json::from_value(x.clone()).unwrap();
+                        tags = xtags;
+                    }
+                }
+                if tags.len() != 1 {
+                    bail!("invalid number of tags for op {}: {}", od, o.tags.len());
+                }
+                let tag = to_snake_case(tags.first().unwrap());
+
+                let oid = clean_fn_name(&proper_name, od, &tag);
 
                 debug("");
                 debug(&oid);
@@ -2272,7 +2321,6 @@ fn main() -> Result<()> {
     let name = args.opt_str("n").unwrap();
     let version = args.opt_str("v").unwrap();
     let host = args.opt_str("host").unwrap();
-    let proper_name = args.opt_str("pn").unwrap();
     let output_dir = args.opt_str("o").unwrap();
 
     let fail = match gen(&api, &proper_name, &host) {
@@ -2382,7 +2430,7 @@ rustdoc-args = ["--cfg", "docsrs"]
             /*
              * Create the Rust source files for each of the tags functions:
              */
-            let fail = match functions::generate_files(&api, &mut ts, &parameters) {
+            let fail = match functions::generate_files(&api, &proper_name, &mut ts, &parameters) {
                 Ok(files) => {
                     // We have a map of our files, let's write to them.
                     for (f, content) in files {

@@ -65,10 +65,10 @@ impl JobApplicantsBeta {
      *
      * Create a job applicant.
      */
-    pub async fn post_company_job_applicants(
+    pub async fn post_company_job_applicant(
         &self,
         company_id: &str,
-        body: &crate::types::PostCompanyJobApplicantsRequest,
+        body: &crate::types::PostCompanyJobApplicantRequest,
     ) -> Result<crate::types::JobApplicant> {
         let url = format!(
             "/v1/companies/{}/job_applicants",
@@ -92,7 +92,7 @@ impl JobApplicantsBeta {
      *
      * Returns a single job applicant.
      */
-    pub async fn get_company_job_applicants_job_applicant_uuid(
+    pub async fn get_company_job_applicants_applicant(
         &self,
         company_id: &str,
         job_applicant_uuid: &str,
@@ -115,11 +115,11 @@ impl JobApplicantsBeta {
      *
      * Update an existing job applicant (only allowed when the job applicant has not been imported).
      */
-    pub async fn put_company_job_applicants_job_applicant_uuid(
+    pub async fn put_company_job_applicants_applicant(
         &self,
         company_id: &str,
         job_applicant_uuid: &str,
-        body: &crate::types::PutCompanyJobApplicantsApplicantUuidRequest,
+        body: &crate::types::PutCompanyJobApplicantsApplicantRequest,
     ) -> Result<crate::types::JobApplicant> {
         let url = format!(
             "/v1/companies/{}/job_applicants/{}",
@@ -144,7 +144,7 @@ impl JobApplicantsBeta {
      *
      * Permanently remove a job applicant by uuid (only allowed when the job applicant has not been imported).
      */
-    pub async fn delete_company_job_applicants_job_applicant_uuid(
+    pub async fn delete_company_job_applicants_applicant(
         &self,
         company_id: &str,
         job_applicant_uuid: &str,

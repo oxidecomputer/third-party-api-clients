@@ -13,6 +13,7 @@ use crate::{
  */
 pub fn generate_files(
     api: &openapiv3::OpenAPI,
+    proper_name: &str,
     ts: &mut TypeSpace,
     parameters: &BTreeMap<String, &openapiv3::Parameter>,
 ) -> Result<BTreeMap<String, String>> {
@@ -28,7 +29,7 @@ pub fn generate_files(
                 return Ok(());
             };
 
-            let oid = clean_fn_name(o.operation_id.as_deref().unwrap());
+            let od = o.operation_id.as_deref().unwrap();
 
             // Make sure we have exactly 1 tag. This likely needs to change in the
             // future but for now it seems fairly consistent.
@@ -41,9 +42,11 @@ pub fn generate_files(
                 }
             }
             if tags.len() != 1 {
-                bail!("invalid number of tags for op {}: {}", oid, o.tags.len());
+                bail!("invalid number of tags for op {}: {}", od, o.tags.len());
             }
             let tag = to_snake_case(tags.first().unwrap());
+
+            let oid = clean_fn_name(proper_name, od, &tag);
 
             let mut out = String::new();
             if let Some(o) = tag_files.get(&tag) {
@@ -112,8 +115,19 @@ pub fn generate_files(
                             if let Some(s) = &mt.schema {
                                 let object_name = format!("{} request", oid_to_object_name(&oid));
                                 let id = ts.select(Some(&object_name), s, "")?;
-                                let rt = ts.render_type(&id, false)?;
-                                (Some(format!("&{}", rt)), Some("json".to_string()))
+                                let et = ts.id_to_entry.get(&id).unwrap();
+                                if let crate::TypeDetails::Object(p, _) = &et.details {
+                                    // We want to make sure we actally have properties
+                                    // in our object.
+                                    if p.is_empty() {
+                                        (None, None)
+                                    } else {
+                                        let rt = ts.render_type(&id, false)?;
+                                        (Some(format!("&{}", rt)), Some("json".to_string()))
+                                    }
+                                } else {
+                                    (None, None)
+                                }
                             } else {
                                 (None, None)
                             }

@@ -94,7 +94,6 @@ impl Employees {
         page: f64,
         per: f64,
         include: &[String],
-        body: &crate::types::GetCompanyEmployeesRequest,
     ) -> Result<Vec<crate::types::Employee>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -118,12 +117,7 @@ impl Employees {
             query
         );
 
-        self.client
-            .get(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
-            .await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -140,7 +134,6 @@ impl Employees {
         company_id_or_uuid: &str,
         terminated: bool,
         include: &[String],
-        body: &crate::types::GetCompanyEmployeesRequest,
     ) -> Result<Vec<crate::types::Employee>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -162,12 +155,7 @@ impl Employees {
             query
         );
 
-        self.client
-            .get_all_pages(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
-            .await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -177,10 +165,10 @@ impl Employees {
      *
      * Create an employee.
      */
-    pub async fn post_employees(
+    pub async fn post_employee(
         &self,
         company_id_or_uuid: &str,
-        body: &crate::types::PostEmployeesRequest,
+        body: &crate::types::PostEmployeeRequest,
     ) -> Result<crate::types::Employee> {
         let url = format!(
             "/v1/companies/{}/employees",

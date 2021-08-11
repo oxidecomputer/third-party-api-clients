@@ -399,22 +399,13 @@ impl Projects {
      *
      * * `column_id: i64` -- column_id parameter.
      */
-    pub async fn create_card(
-        &self,
-        column_id: i64,
-        body: &crate::types::ProjectsCreateCardRequestOneOf,
-    ) -> Result<crate::types::ProjectCard> {
+    pub async fn create_card(&self, column_id: i64) -> Result<crate::types::ProjectCard> {
         let url = format!(
             "/projects/columns/{}/cards",
             crate::progenitor_support::encode_path(&column_id.to_string()),
         );
 
-        self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
-            .await
+        self.client.post(&url, None).await
     }
 
     /**

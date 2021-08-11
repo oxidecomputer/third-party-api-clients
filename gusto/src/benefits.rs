@@ -51,10 +51,7 @@ impl Benefits {
      *
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
-    pub async fn get_benefits_benefit_id(
-        &self,
-        benefit_id: &str,
-    ) -> Result<crate::types::SupportedBenefit> {
+    pub async fn get_benefit(&self, benefit_id: &str) -> Result<crate::types::SupportedBenefit> {
         let url = format!(
             "/v1/benefits/{}",
             crate::progenitor_support::encode_path(&benefit_id.to_string()),
@@ -72,7 +69,7 @@ impl Benefits {
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn get_company_company_benefits(
+    pub async fn get_company_benefits(
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::CompanyBenefit>> {
@@ -89,13 +86,13 @@ impl Benefits {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/company_benefits` endpoint.
      *
-     * As opposed to `get_company_company_benefits`, this function returns all the pages of the request at once.
+     * As opposed to `get_company_benefits`, this function returns all the pages of the request at once.
      *
      * Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn get_all_company_company_benefits(
+    pub async fn get_all_company_benefits(
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::CompanyBenefit>> {
@@ -116,10 +113,10 @@ impl Benefits {
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn post_company_company_benefits(
+    pub async fn post_company_benefit(
         &self,
         company_id: &str,
-        body: &crate::types::PostCompanyBenefitsRequest,
+        body: &crate::types::PostCompanyBenefitRequest,
     ) -> Result<crate::types::CompanyBenefit> {
         let url = format!(
             "/v1/companies/{}/company_benefits",
@@ -143,7 +140,7 @@ impl Benefits {
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn get_company_benefits_company_benefit_id(
+    pub async fn get_company_benefit(
         &self,
         company_benefit_id: &str,
     ) -> Result<crate::types::CompanyBenefit> {
@@ -164,10 +161,10 @@ impl Benefits {
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn put_company_benefits_company_benefit_id(
+    pub async fn put_company_benefit(
         &self,
         company_benefit_id: &str,
-        body: &crate::types::PutCompanyBenefitsBenefitIdRequest,
+        body: &crate::types::PutCompanyBenefitRequest,
     ) -> Result<crate::types::CompanyBenefit> {
         let url = format!(
             "/v1/company_benefits/{}",
@@ -191,7 +188,7 @@ impl Benefits {
      *
      * Returns an array of all employee benefits for this employee
      */
-    pub async fn get_employee_employee_benefits(
+    pub async fn get_employee_benefits(
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::EmployeeBenefit>> {
@@ -208,13 +205,13 @@ impl Benefits {
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/employee_benefits` endpoint.
      *
-     * As opposed to `get_employee_employee_benefits`, this function returns all the pages of the request at once.
+     * As opposed to `get_employee_benefits`, this function returns all the pages of the request at once.
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      *
      * Returns an array of all employee benefits for this employee
      */
-    pub async fn get_all_employee_employee_benefits(
+    pub async fn get_all_employee_benefits(
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::EmployeeBenefit>> {
@@ -233,10 +230,10 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn post_employee_employee_benefits(
+    pub async fn post_employee_benefit(
         &self,
         employee_id: &str,
-        body: &crate::types::PostEmployeeBenefitsRequest,
+        body: &crate::types::PostEmployeeBenefitRequest,
     ) -> Result<crate::types::EmployeeBenefit> {
         let url = format!(
             "/v1/employees/{}/employee_benefits",
@@ -283,7 +280,7 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn get_employee_benefits_employee_benefit_id(
+    pub async fn get_employee_benefit(
         &self,
         employee_benefit_id: &str,
     ) -> Result<crate::types::EmployeeBenefit> {
@@ -302,10 +299,10 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn put_employee_benefits_employee_benefit_id(
+    pub async fn put_employee_benefit(
         &self,
         employee_benefit_id: &str,
-        body: &crate::types::PutEmployeeBenefitsBenefitIdRequest,
+        body: &crate::types::PutEmployeeBenefitRequest,
     ) -> Result<crate::types::EmployeeBenefit> {
         let url = format!(
             "/v1/employee_benefits/{}",
@@ -327,10 +324,7 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn delete_employee_benefits_employee_benefit_id(
-        &self,
-        employee_benefit_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_employee_benefit(&self, employee_benefit_id: &str) -> Result<()> {
         let url = format!(
             "/v1/employee_benefits/{}",
             crate::progenitor_support::encode_path(&employee_benefit_id.to_string()),

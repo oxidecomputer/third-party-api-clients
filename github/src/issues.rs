@@ -1396,7 +1396,6 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &crate::types::IssuesAddLabelsRequestOneOf,
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
@@ -1405,12 +1404,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
-            .await
+        self.client.post(&url, None).await
     }
 
     /**

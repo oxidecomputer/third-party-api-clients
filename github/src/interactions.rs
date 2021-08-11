@@ -53,19 +53,13 @@ impl Interactions {
     pub async fn set_restrictions_for_org(
         &self,
         org: &str,
-        body: &crate::types::InteractionLimit,
     ) -> Result<crate::types::InteractionLimitResponse> {
         let url = format!(
             "/orgs/{}/interaction-limits",
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
-            .await
+        self.client.put(&url, None).await
     }
 
     /**
@@ -136,7 +130,6 @@ impl Interactions {
         &self,
         owner: &str,
         repo: &str,
-        body: &crate::types::InteractionLimit,
     ) -> Result<crate::types::InteractionLimitResponse> {
         let url = format!(
             "/repos/{}/{}/interaction-limits",
@@ -144,12 +137,7 @@ impl Interactions {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
-            .await
+        self.client.put(&url, None).await
     }
 
     /**
@@ -203,15 +191,9 @@ impl Interactions {
      */
     pub async fn set_restrictions_for_authenticated_user(
         &self,
-        body: &crate::types::InteractionLimit,
     ) -> Result<crate::types::InteractionLimitResponse> {
         let url = "/user/interaction-limits".to_string();
-        self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
-            .await
+        self.client.put(&url, None).await
     }
 
     /**

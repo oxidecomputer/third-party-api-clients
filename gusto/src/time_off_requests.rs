@@ -132,7 +132,7 @@ impl TimeOffRequests {
      *
      * Details of a single time off request
      */
-    pub async fn get_company_time_off_requests_time_off_request_id(
+    pub async fn get_company_time_off_request(
         &self,
         company_id: &str,
         time_off_request_id: &str,

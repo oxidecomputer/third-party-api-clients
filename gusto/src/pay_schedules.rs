@@ -59,7 +59,7 @@ impl PaySchedules {
      *
      * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      */
-    pub async fn get_company_pay_schedules_pay_schedule_id(
+    pub async fn get_company_pay_schedule(
         &self,
         company_id_or_uuid: &str,
         pay_schedule_id_or_uuid: &str,
@@ -82,11 +82,11 @@ impl PaySchedules {
      *
      * This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
      */
-    pub async fn put_company_pay_schedules_pay_schedule_id(
+    pub async fn put_company_pay_schedule(
         &self,
         company_id_or_uuid: &str,
         pay_schedule_id_or_uuid: &str,
-        body: &crate::types::PutCompanyPaySchedulesScheduleIdRequest,
+        body: &crate::types::PutCompanyPayScheduleRequest,
     ) -> Result<crate::types::PaySchedule> {
         let url = format!(
             "/v1/companies/{}/pay_schedules/{}",

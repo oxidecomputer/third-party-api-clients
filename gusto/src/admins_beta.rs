@@ -62,10 +62,10 @@ impl AdminsBeta {
      *
      * Creates a new admin for a company. If the email matches an existing user, this will create an admin account for the current user. Otherwise, this will create a new user.
      */
-    pub async fn post_company_admins(
+    pub async fn post_company_admin(
         &self,
         company_id: &str,
-        body: &crate::types::PostCompanyAdminsRequest,
+        body: &crate::types::PostCompanyAdminRequest,
     ) -> Result<crate::types::Admin> {
         let url = format!(
             "/v1/companies/{}/admins",

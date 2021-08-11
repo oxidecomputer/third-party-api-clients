@@ -59,10 +59,10 @@ impl Companies {
      * Authorization: Token bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71
      * ```
      */
-    pub async fn post_partner_managed_companies(
+    pub async fn post_partner_managed_companie(
         &self,
         body: &crate::types::PostProvisionRequest,
-    ) -> Result<crate::types::PostPartnerManagedCompaniesResponse> {
+    ) -> Result<crate::types::PostPartnerManagedCompanieResponse> {
         let url = "/v1/partner_managed_companies".to_string();
         self.client
             .post(

@@ -41,22 +41,13 @@ impl Apps {
      *
      * * `code: &str`
      */
-    pub async fn create_from_manifest(
-        &self,
-        code: &str,
-        body: &crate::types::Data,
-    ) -> Result<crate::types::Integration> {
+    pub async fn create_from_manifest(&self, code: &str) -> Result<crate::types::Integration> {
         let url = format!(
             "/app-manifests/{}/conversions",
             crate::progenitor_support::encode_path(&code.to_string()),
         );
 
-        self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
-            .await
+        self.client.post(&url, None).await
     }
 
     /**
