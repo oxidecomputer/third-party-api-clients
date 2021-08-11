@@ -25,7 +25,7 @@ impl Companies {
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

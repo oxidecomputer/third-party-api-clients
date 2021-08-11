@@ -21,6 +21,6 @@ impl CurrentUser {
      */
     pub async fn get_me(&self) -> Result<crate::types::CurrentUser> {
         let url = "/v1/me".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

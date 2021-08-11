@@ -50,7 +50,7 @@ impl ContractorPayments {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -124,7 +124,7 @@ impl ContractorPayments {
             crate::progenitor_support::encode_path(&contractor_payment_id_or_uuid.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

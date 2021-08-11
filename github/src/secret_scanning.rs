@@ -66,7 +66,7 @@ impl SecretScanning {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -108,7 +108,7 @@ impl SecretScanning {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -141,7 +141,7 @@ impl SecretScanning {
             crate::progenitor_support::encode_path(&alert_number.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

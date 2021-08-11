@@ -52,7 +52,7 @@ impl Licenses {
         }
         let url = format!("/licenses?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -83,7 +83,7 @@ impl Licenses {
         }
         let url = format!("/licenses?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -105,7 +105,7 @@ impl Licenses {
             crate::progenitor_support::encode_path(&license.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -135,6 +135,6 @@ impl Licenses {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

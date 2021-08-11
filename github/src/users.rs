@@ -25,7 +25,7 @@ impl Users {
      */
     pub async fn get_authenticated_private_user(&self) -> Result<crate::types::PrivateUser> {
         let url = "/user".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -41,7 +41,7 @@ impl Users {
      */
     pub async fn get_authenticated_public_user(&self) -> Result<crate::types::PublicUser> {
         let url = "/user".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -57,7 +57,7 @@ impl Users {
      */
     pub async fn get_authenticated(&self) -> Result<crate::types::UsersGetByUsernameResponseOneOf> {
         let url = "/user".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -93,7 +93,7 @@ impl Users {
      */
     pub async fn list_blocked_by_authenticated(&self) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/blocks".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -109,7 +109,7 @@ impl Users {
      */
     pub async fn list_all_blocked_by_authenticated(&self) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/blocks".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -131,7 +131,7 @@ impl Users {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -235,7 +235,7 @@ impl Users {
         }
         let url = format!("/user/emails?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -251,7 +251,7 @@ impl Users {
      */
     pub async fn list_all_emails_for_authenticated(&self) -> Result<Vec<crate::types::Email>> {
         let url = "/user/emails".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -333,7 +333,7 @@ impl Users {
         }
         let url = format!("/user/followers?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -351,7 +351,7 @@ impl Users {
         &self,
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/followers".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -389,7 +389,7 @@ impl Users {
         }
         let url = format!("/user/following?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -407,7 +407,7 @@ impl Users {
         &self,
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = "/user/following".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -429,7 +429,7 @@ impl Users {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -513,7 +513,7 @@ impl Users {
         }
         let url = format!("/user/gpg_keys?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -529,7 +529,7 @@ impl Users {
      */
     pub async fn list_all_gpg_keys_for_authenticated(&self) -> Result<Vec<crate::types::GpgKey>> {
         let url = "/user/gpg_keys".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -576,7 +576,7 @@ impl Users {
             crate::progenitor_support::encode_path(&gpg_key_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -636,7 +636,7 @@ impl Users {
         }
         let url = format!("/user/keys?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -654,7 +654,7 @@ impl Users {
         &self,
     ) -> Result<Vec<crate::types::Key>> {
         let url = "/user/keys".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -701,7 +701,7 @@ impl Users {
             crate::progenitor_support::encode_path(&key_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -761,7 +761,7 @@ impl Users {
         }
         let url = format!("/user/public_emails?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -779,7 +779,7 @@ impl Users {
         &self,
     ) -> Result<Vec<crate::types::Email>> {
         let url = "/user/public_emails".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -815,7 +815,7 @@ impl Users {
         }
         let url = format!("/users?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -845,7 +845,7 @@ impl Users {
         }
         let url = format!("/users?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -876,7 +876,7 @@ impl Users {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -907,7 +907,7 @@ impl Users {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -938,7 +938,7 @@ impl Users {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -982,7 +982,7 @@ impl Users {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1005,7 +1005,7 @@ impl Users {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1049,7 +1049,7 @@ impl Users {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1072,7 +1072,7 @@ impl Users {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1096,7 +1096,7 @@ impl Users {
             crate::progenitor_support::encode_path(&target_user.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1140,7 +1140,7 @@ impl Users {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1163,7 +1163,7 @@ impl Users {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1212,7 +1212,7 @@ impl Users {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1256,7 +1256,7 @@ impl Users {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1279,6 +1279,6 @@ impl Users {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 }

@@ -76,7 +76,7 @@ impl Git {
             crate::progenitor_support::encode_path(&file_sha.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -199,7 +199,7 @@ impl Git {
             crate::progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -255,7 +255,7 @@ impl Git {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -288,7 +288,7 @@ impl Git {
             crate::progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -321,7 +321,7 @@ impl Git {
             crate::progenitor_support::encode_path(&ref_.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -539,7 +539,7 @@ impl Git {
             crate::progenitor_support::encode_path(&tag_sha.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -622,6 +622,6 @@ impl Git {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

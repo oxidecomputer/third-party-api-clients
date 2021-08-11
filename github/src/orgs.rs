@@ -49,7 +49,7 @@ impl Orgs {
         }
         let url = format!("/organizations?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -79,7 +79,7 @@ impl Orgs {
         }
         let url = format!("/organizations?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -103,7 +103,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -211,7 +211,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -261,7 +261,7 @@ impl Orgs {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -283,7 +283,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -303,7 +303,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -327,7 +327,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -402,7 +402,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -427,7 +427,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -497,7 +497,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -520,7 +520,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -564,7 +564,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -584,7 +584,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -639,7 +639,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -727,7 +727,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&hook_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -831,7 +831,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -875,7 +875,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -898,7 +898,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1004,7 +1004,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1029,7 +1029,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&invitation_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1084,7 +1084,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1120,7 +1120,7 @@ impl Orgs {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1144,7 +1144,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1196,7 +1196,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1313,7 +1313,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1347,7 +1347,7 @@ impl Orgs {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1443,7 +1443,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1466,7 +1466,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1490,7 +1490,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1589,7 +1589,7 @@ impl Orgs {
         }
         let url = format!("/user/memberships/orgs?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1618,7 +1618,7 @@ impl Orgs {
         }
         let url = format!("/user/memberships/orgs?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1643,7 +1643,7 @@ impl Orgs {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1716,7 +1716,7 @@ impl Orgs {
         }
         let url = format!("/user/orgs?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1738,7 +1738,7 @@ impl Orgs {
         &self,
     ) -> Result<Vec<crate::types::OrganizationSimple>> {
         let url = "/user/orgs".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1784,7 +1784,7 @@ impl Orgs {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1809,6 +1809,6 @@ impl Orgs {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 }

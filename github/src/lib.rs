@@ -572,28 +572,34 @@ impl Client {
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.get_media(uri, crate::utils::MediaType::Json).await
+        self.get_media(uri, crate::utils::MediaType::Json, message)
+            .await
     }
 
-    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType) -> Result<D>
+    async fn get_media<D>(
+        &self,
+        uri: &str,
+        media: crate::utils::MediaType,
+        message: Option<reqwest::Body>,
+    ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.request_entity(
             http::Method::GET,
             &(self.host.clone() + uri),
-            None,
+            message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
         )
         .await
     }
 
-    async fn get_all_pages<D>(&self, uri: &str) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str, _message: Option<reqwest::Body>) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {

@@ -25,7 +25,7 @@ impl Apps {
      */
     pub async fn get_authenticated(&self) -> Result<crate::types::Integration> {
         let url = "/app".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -72,7 +72,7 @@ impl Apps {
      */
     pub async fn get_webhook_config_for_app(&self) -> Result<crate::types::WebhookConfig> {
         let url = "/app/hook/config".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -146,7 +146,7 @@ impl Apps {
         }
         let url = format!("/app/installations?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -183,7 +183,7 @@ impl Apps {
         }
         let url = format!("/app/installations?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -210,7 +210,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&installation_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -536,7 +536,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&access_token.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -620,7 +620,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&app_slug.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -660,7 +660,7 @@ impl Apps {
         }
         let url = format!("/installation/repositories?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -705,7 +705,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -745,7 +745,7 @@ impl Apps {
         }
         let url = format!("/marketplace_listing/plans?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -763,7 +763,7 @@ impl Apps {
      */
     pub async fn list_all_plans(&self) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
         let url = "/marketplace_listing/plans".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -815,7 +815,7 @@ impl Apps {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -853,7 +853,7 @@ impl Apps {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -880,7 +880,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -920,7 +920,7 @@ impl Apps {
         }
         let url = format!("/marketplace_listing/stubbed/plans?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -940,7 +940,7 @@ impl Apps {
         &self,
     ) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
         let url = "/marketplace_listing/stubbed/plans".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -992,7 +992,7 @@ impl Apps {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1030,7 +1030,7 @@ impl Apps {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1054,7 +1054,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1125,7 +1125,7 @@ impl Apps {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1169,7 +1169,7 @@ impl Apps {
         }
         let url = format!("/user/installations?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1219,7 +1219,7 @@ impl Apps {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1317,7 +1317,7 @@ impl Apps {
         }
         let url = format!("/user/marketplace_purchases?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1335,7 +1335,7 @@ impl Apps {
         &self,
     ) -> Result<Vec<crate::types::UserMarketplacePurchase>> {
         let url = "/user/marketplace_purchases".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1373,7 +1373,7 @@ impl Apps {
         }
         let url = format!("/user/marketplace_purchases/stubbed?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1391,7 +1391,7 @@ impl Apps {
         &self,
     ) -> Result<Vec<crate::types::UserMarketplacePurchase>> {
         let url = "/user/marketplace_purchases/stubbed".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1418,6 +1418,6 @@ impl Apps {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

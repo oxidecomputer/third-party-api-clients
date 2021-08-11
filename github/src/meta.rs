@@ -24,7 +24,7 @@ impl Meta {
     pub async fn root(&self) -> Result<crate::types::MetaRootResponse> {
         let url = "".to_string();
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -40,7 +40,7 @@ impl Meta {
      */
     pub async fn get(&self) -> Result<crate::types::ApiOverview> {
         let url = "/meta".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -70,7 +70,7 @@ impl Meta {
         }
         let url = format!("/octocat?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -82,6 +82,6 @@ impl Meta {
      */
     pub async fn get_zen(&self) -> Result<String> {
         let url = "/zen".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

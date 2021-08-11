@@ -303,27 +303,27 @@ impl Client {
         Ok(r)
     }
 
-    async fn get<D>(&self, uri: &str) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.get_media(uri, crate::utils::MediaType::Json).await
+        self.get_media(uri, crate::utils::MediaType::Json, message).await
     }
 
-    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType) -> Result<D>
+    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         self.request_entity(
             http::Method::GET,
             &(self.host.clone() + uri),
-            None,
+            message,
             media,
             crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
-    async fn get_all_pages<D>(&self, uri: &str) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str,  _message: Option<reqwest::Body>) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -638,7 +638,7 @@ impl Client {{
             }} else {{
                 serde_json::from_slice::<Out>(&response_body)
             }};
-            parsed_response.map(|out| (out)).map_err(Error::from)
+            parsed_response.map_err(Error::from)
         }} else {{
             /*println!("error status: {{:?}}, response payload: {{}}",
                 status,
@@ -753,61 +753,30 @@ impl Client {{
         Ok(t)
     }}
 
-    async fn get<D>(&self, uri: &str) -> Result<D>
+    async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {{
         self.request_entity(
             http::Method::GET,
             &(DEFAULT_HOST.to_string() + uri),
-            None,
-        ).await
-    }}
-
-    async fn get_all_pages<D>(&self, uri: &str) -> Result<Vec<D>>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.unfold(uri).await
-    }}
-
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.request(
-            http::Method::GET,
-            &(DEFAULT_HOST.to_string() + uri),
-            None,
-        ).await
-    }}
-
-    async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.request(
-            http::Method::GET,
-            url.as_str(),
-            None,
-        ).await
-    }}
-
-    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.post_media(
-            uri,
             message,
         ).await
     }}
 
-    async fn post_media<D>(
-        &self,
-        uri: &str,
-        message: Option<reqwest::Body>,
-    ) -> Result<D>
+    async fn get_all_pages<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        // TODO: implement this.
+        self.request_entity(
+            http::Method::GET,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        ).await
+    }}
+
+    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {{
@@ -818,6 +787,7 @@ impl Client {{
         ).await
     }}
 
+    #[allow(dead_code)]
     async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -849,31 +819,6 @@ impl Client {{
             &(DEFAULT_HOST.to_string() + uri),
             message,
         ).await
-    }}
-
-    /// "unfold" paginated results of a vector of items
-    async fn unfold<D>(
-        &self,
-        uri: &str,
-    ) -> Result<Vec<D>>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        let mut global_items = Vec::new();
-        let (new_link, mut items) = self.get_pages(uri).await.unwrap();
-        let mut link = new_link;
-        while !items.is_empty() {{
-            global_items.append(&mut items);
-            // We need to get the next link.
-            if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {{
-                let url = reqwest::Url::parse(&url).unwrap();
-                let (new_link, new_items) = self.get_pages_url(&url).await?;
-                link = new_link;
-                items = new_items;
-            }}
-        }}
-
-        Ok(global_items)
     }}"#,
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),

@@ -79,7 +79,7 @@ impl Scim {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -138,7 +138,7 @@ impl Scim {
             crate::progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

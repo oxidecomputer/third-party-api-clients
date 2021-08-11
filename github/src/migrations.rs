@@ -58,7 +58,7 @@ impl Migrations {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -94,7 +94,7 @@ impl Migrations {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -174,7 +174,7 @@ impl Migrations {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -198,7 +198,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -300,7 +300,7 @@ impl Migrations {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -325,7 +325,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -382,7 +382,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -519,7 +519,7 @@ impl Migrations {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -559,7 +559,7 @@ impl Migrations {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -624,7 +624,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -649,7 +649,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -721,7 +721,7 @@ impl Migrations {
         }
         let url = format!("/user/migrations?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -737,7 +737,7 @@ impl Migrations {
      */
     pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::Migration>> {
         let url = "/user/migrations".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -805,7 +805,7 @@ impl Migrations {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -847,7 +847,7 @@ impl Migrations {
             crate::progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -941,7 +941,7 @@ impl Migrations {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -964,6 +964,6 @@ impl Migrations {
             crate::progenitor_support::encode_path(&migration_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 }

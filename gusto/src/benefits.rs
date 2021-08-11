@@ -23,7 +23,7 @@ impl Benefits {
      */
     pub async fn get_benefits(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
         let url = "/v1/benefits".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -39,7 +39,7 @@ impl Benefits {
      */
     pub async fn get_all_benefits(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
         let url = "/v1/benefits".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -60,7 +60,7 @@ impl Benefits {
             crate::progenitor_support::encode_path(&benefit_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -81,7 +81,7 @@ impl Benefits {
             crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -104,7 +104,7 @@ impl Benefits {
             crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -152,7 +152,7 @@ impl Benefits {
             crate::progenitor_support::encode_path(&company_benefit_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -200,7 +200,7 @@ impl Benefits {
             crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -223,7 +223,7 @@ impl Benefits {
             crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -292,7 +292,7 @@ impl Benefits {
             crate::progenitor_support::encode_path(&employee_benefit_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

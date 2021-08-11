@@ -34,7 +34,7 @@ impl Interactions {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -115,7 +115,7 @@ impl Interactions {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -189,7 +189,7 @@ impl Interactions {
         &self,
     ) -> Result<crate::types::InteractionLimitResponse> {
         let url = "/user/interaction-limits".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

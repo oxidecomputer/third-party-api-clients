@@ -45,7 +45,7 @@ impl Employees {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -118,7 +118,12 @@ impl Employees {
             query
         );
 
-        self.client.get(&url).await
+        self.client
+            .get(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -159,7 +164,12 @@ impl Employees {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client
+            .get_all_pages(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -203,7 +213,7 @@ impl Employees {
             crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

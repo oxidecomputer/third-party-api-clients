@@ -102,7 +102,7 @@ impl Issues {
         }
         let url = format!("/issues?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -169,7 +169,7 @@ impl Issues {
         }
         let url = format!("/issues?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -245,7 +245,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -298,7 +298,7 @@ impl Issues {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -345,7 +345,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -370,7 +370,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -405,7 +405,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&assignee.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -496,7 +496,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -565,7 +565,7 @@ impl Issues {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -659,7 +659,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -701,7 +701,7 @@ impl Issues {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -732,7 +732,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -842,7 +842,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -867,7 +867,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -898,7 +898,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&event_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -939,7 +939,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1105,7 +1105,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1145,7 +1145,7 @@ impl Issues {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1232,7 +1232,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1259,7 +1259,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1309,7 +1309,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1336,7 +1336,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1590,7 +1590,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1617,7 +1617,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1664,7 +1664,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1689,7 +1689,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1754,7 +1754,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&name.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1873,7 +1873,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1913,7 +1913,7 @@ impl Issues {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1978,7 +1978,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2096,7 +2096,7 @@ impl Issues {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2123,7 +2123,7 @@ impl Issues {
             crate::progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -2193,7 +2193,7 @@ impl Issues {
         }
         let url = format!("/user/issues?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2241,6 +2241,6 @@ impl Issues {
         }
         let url = format!("/user/issues?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 }

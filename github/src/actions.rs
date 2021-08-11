@@ -36,7 +36,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -118,7 +118,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -238,7 +238,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -323,7 +323,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -390,7 +390,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -511,7 +511,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -673,7 +673,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -830,7 +830,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -857,7 +857,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -882,7 +882,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -983,7 +983,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1057,7 +1057,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1079,7 +1079,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1107,7 +1107,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1286,7 +1286,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1429,7 +1429,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1460,7 +1460,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&artifact_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1523,7 +1523,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&archive_format.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1554,7 +1554,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1588,7 +1588,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1619,7 +1619,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1687,7 +1687,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1774,7 +1774,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1804,7 +1804,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1831,7 +1831,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1939,7 +1939,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2040,7 +2040,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2071,7 +2071,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2130,7 +2130,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2157,7 +2157,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -2242,7 +2242,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2328,7 +2328,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2362,7 +2362,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2426,7 +2426,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2455,7 +2455,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -2558,7 +2558,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2605,7 +2605,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2633,7 +2633,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2664,7 +2664,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2853,7 +2853,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2890,7 +2890,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -3081,7 +3081,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -3120,7 +3120,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -3167,7 +3167,7 @@ impl Actions {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -3195,7 +3195,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&environment_name.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -3226,7 +3226,7 @@ impl Actions {
             crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

@@ -43,7 +43,7 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -187,7 +187,7 @@ impl Packages {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -228,7 +228,7 @@ impl Packages {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -265,7 +265,7 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -376,7 +376,7 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -508,7 +508,7 @@ impl Packages {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -547,7 +547,7 @@ impl Packages {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -581,7 +581,7 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -686,7 +686,7 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -720,7 +720,7 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -750,7 +750,7 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -787,6 +787,6 @@ impl Packages {
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

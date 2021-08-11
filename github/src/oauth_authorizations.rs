@@ -54,7 +54,7 @@ impl OauthAuthorizations {
         }
         let url = format!("/applications/grants?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -87,7 +87,7 @@ impl OauthAuthorizations {
         }
         let url = format!("/applications/grants?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -109,7 +109,7 @@ impl OauthAuthorizations {
             crate::progenitor_support::encode_path(&grant_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -176,7 +176,7 @@ impl OauthAuthorizations {
         }
         let url = format!("/authorizations?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -207,7 +207,7 @@ impl OauthAuthorizations {
         }
         let url = format!("/authorizations?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -343,7 +343,7 @@ impl OauthAuthorizations {
             crate::progenitor_support::encode_path(&authorization_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

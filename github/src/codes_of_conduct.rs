@@ -23,7 +23,7 @@ impl CodesOfConduct {
      */
     pub async fn get_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
         let url = "/codes_of_conduct".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -39,7 +39,7 @@ impl CodesOfConduct {
      */
     pub async fn get_all_all_codes_of_conduct(&self) -> Result<Vec<crate::types::CodeOfConduct>> {
         let url = "/codes_of_conduct".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -61,7 +61,7 @@ impl CodesOfConduct {
             crate::progenitor_support::encode_path(&key.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -91,6 +91,6 @@ impl CodesOfConduct {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

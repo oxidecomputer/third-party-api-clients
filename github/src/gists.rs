@@ -52,7 +52,7 @@ impl Gists {
         }
         let url = format!("/gists?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -83,7 +83,7 @@ impl Gists {
         }
         let url = format!("/gists?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -152,7 +152,7 @@ impl Gists {
         }
         let url = format!("/gists/public?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -185,7 +185,7 @@ impl Gists {
         }
         let url = format!("/gists/public?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -228,7 +228,7 @@ impl Gists {
         }
         let url = format!("/gists/starred?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -259,7 +259,7 @@ impl Gists {
         }
         let url = format!("/gists/starred?{}", query);
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -281,7 +281,7 @@ impl Gists {
             crate::progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -378,7 +378,7 @@ impl Gists {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -398,7 +398,7 @@ impl Gists {
             crate::progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -457,7 +457,7 @@ impl Gists {
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -559,7 +559,7 @@ impl Gists {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -579,7 +579,7 @@ impl Gists {
             crate::progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -623,7 +623,7 @@ impl Gists {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -643,7 +643,7 @@ impl Gists {
             crate::progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -687,7 +687,7 @@ impl Gists {
             crate::progenitor_support::encode_path(&gist_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -755,7 +755,7 @@ impl Gists {
             crate::progenitor_support::encode_path(&sha.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -804,7 +804,7 @@ impl Gists {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -840,6 +840,6 @@ impl Gists {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 }

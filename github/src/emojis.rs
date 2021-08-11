@@ -23,6 +23,6 @@ impl Emojis {
      */
     pub async fn get(&self) -> Result<crate::types::Data> {
         let url = "/emojis".to_string();
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

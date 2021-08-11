@@ -30,7 +30,7 @@ impl CompanyBankAccountsBeta {
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -53,7 +53,7 @@ impl CompanyBankAccountsBeta {
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

@@ -28,7 +28,7 @@ impl CustomFields {
             crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -47,6 +47,6 @@ impl CustomFields {
             crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

@@ -57,7 +57,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -101,7 +101,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -121,7 +121,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -180,7 +180,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -301,7 +301,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -343,7 +343,7 @@ impl Teams {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -414,7 +414,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -541,7 +541,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -581,7 +581,7 @@ impl Teams {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -658,7 +658,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -785,7 +785,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -812,7 +812,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -867,7 +867,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -905,7 +905,7 @@ impl Teams {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -945,7 +945,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1078,7 +1078,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1105,7 +1105,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1138,7 +1138,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1259,7 +1259,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1286,7 +1286,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1326,7 +1326,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1438,7 +1438,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1525,7 +1525,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1552,7 +1552,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_slug.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1574,7 +1574,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1684,7 +1684,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1720,7 +1720,7 @@ impl Teams {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1785,7 +1785,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1903,7 +1903,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1941,7 +1941,7 @@ impl Teams {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -2012,7 +2012,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2130,7 +2130,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2155,7 +2155,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -2207,7 +2207,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2243,7 +2243,7 @@ impl Teams {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -2271,7 +2271,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2374,7 +2374,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2498,7 +2498,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2523,7 +2523,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -2553,7 +2553,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&project_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2659,7 +2659,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2682,7 +2682,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -2717,7 +2717,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2815,7 +2815,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2894,7 +2894,7 @@ impl Teams {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2914,7 +2914,7 @@ impl Teams {
             crate::progenitor_support::encode_path(&team_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -2952,7 +2952,7 @@ impl Teams {
         }
         let url = format!("/user/teams?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -2968,6 +2968,6 @@ impl Teams {
      */
     pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::TeamFull>> {
         let url = "/user/teams".to_string();
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 }

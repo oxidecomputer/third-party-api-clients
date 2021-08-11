@@ -220,7 +220,7 @@ pub fn generate_files(
                 let tmp = parse(p)?;
                 let template = tmp.compile(query_params);
 
-                let fn_inner = "self.client.get_all_pages(&url).await";
+                let fn_inner = fn_inner.replace("get(", "get_all_pages(");
 
                 let mut fn_name = oid
                     .replace("_get_", "_get_all_")
@@ -247,7 +247,7 @@ pub fn generate_files(
                     &body_param,
                     &response_type,
                     &template,
-                    fn_inner,
+                    &fn_inner,
                     &fn_name,
                 );
             }
@@ -411,11 +411,8 @@ fn get_fn_params(
  * Perform the function.
  */
 fn get_fn_inner(oid: &str, m: &str, body_func: &Option<String>) -> Result<String> {
-    if m == http::Method::GET {
-        return Ok(format!("self.client.{}(&url).await", m.to_lowercase()));
-    }
-
-    if (m == http::Method::POST
+    if (m == http::Method::GET
+        || m == http::Method::POST
         || m == http::Method::PATCH
         || m == http::Method::PUT
         || m == http::Method::DELETE)

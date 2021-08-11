@@ -75,7 +75,7 @@ impl Search {
         }
         let url = format!("/search/code?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -131,7 +131,7 @@ impl Search {
         }
         let url = format!("/search/commits?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -191,7 +191,7 @@ impl Search {
         }
         let url = format!("/search/issues?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -253,7 +253,7 @@ impl Search {
         }
         let url = format!("/search/labels?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -314,7 +314,7 @@ impl Search {
         }
         let url = format!("/search/repositories?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -365,7 +365,7 @@ impl Search {
         }
         let url = format!("/search/topics?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -422,6 +422,6 @@ impl Search {
         }
         let url = format!("/search/users?{}", query);
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

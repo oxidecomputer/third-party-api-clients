@@ -36,7 +36,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -115,7 +115,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -235,7 +235,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -314,7 +314,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -377,7 +377,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -492,7 +492,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -643,7 +643,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -792,7 +792,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -819,7 +819,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -844,7 +844,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -945,7 +945,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1048,7 +1048,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1096,7 +1096,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1150,7 +1150,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1225,7 +1225,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1391,7 +1391,7 @@ impl EnterpriseAdmin {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -1454,7 +1454,7 @@ impl EnterpriseAdmin {
             crate::progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**

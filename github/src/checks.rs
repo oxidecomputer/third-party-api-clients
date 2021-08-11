@@ -80,7 +80,7 @@ impl Checks {
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -169,7 +169,7 @@ impl Checks {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -196,7 +196,7 @@ impl Checks {
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
-        self.client.get_all_pages(&url).await
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -299,7 +299,7 @@ impl Checks {
             crate::progenitor_support::encode_path(&check_suite_id.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -362,7 +362,7 @@ impl Checks {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -463,7 +463,7 @@ impl Checks {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -525,6 +525,6 @@ impl Checks {
             query
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }

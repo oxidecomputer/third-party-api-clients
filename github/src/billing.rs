@@ -38,7 +38,7 @@ impl Billing {
             crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -67,7 +67,7 @@ impl Billing {
             crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -96,7 +96,7 @@ impl Billing {
             crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -125,7 +125,7 @@ impl Billing {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -154,7 +154,7 @@ impl Billing {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -183,7 +183,7 @@ impl Billing {
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -212,7 +212,7 @@ impl Billing {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -241,7 +241,7 @@ impl Billing {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 
     /**
@@ -270,6 +270,6 @@ impl Billing {
             crate::progenitor_support::encode_path(&username.to_string()),
         );
 
-        self.client.get(&url).await
+        self.client.get(&url, None).await
     }
 }
