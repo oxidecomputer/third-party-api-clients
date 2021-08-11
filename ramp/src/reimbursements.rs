@@ -26,7 +26,7 @@ impl Reimbursements {
         &self,
         start: &str,
         page_size: f64,
-    ) -> Result<crate::types::GetReimbursementsResponse> {
+    ) -> Result<Option<crate::types::Reimbursement>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("page_size={}", page_size));
@@ -41,7 +41,11 @@ impl Reimbursements {
         }
         let url = format!("/reimbursements?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetReimbursementsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
     }
 
     /**

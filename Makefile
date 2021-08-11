@@ -16,7 +16,7 @@ github: target/debug/generator $(GITHUB_SPEC)
 	cargo fmt -p octorust
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.3 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.4 \
 		-o gusto \
 		-n gusto-api \
 		--pn Gusto \

@@ -9,7 +9,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gusto_api = "0.2.3"
+//! gusto_api = "0.2.4"
 //! ```
 //!
 //! ## Basic example

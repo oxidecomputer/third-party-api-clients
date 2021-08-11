@@ -871,6 +871,7 @@ impl TypeSpace {
                         || rt.starts_with("Option<")
                         // This is for ramp, let's hope it doesn't break anything in the future.
                         || rt == "Page"
+                        || rt == "crate::types::Page"
                     {
                         Ok(rt)
                     } else {
@@ -1019,10 +1020,11 @@ impl TypeSpace {
 
                                 // Make sure the type we found is not something
                                 // we care about.
-                                if nt.details.is_enum()
+                                if (nt.details.is_enum()
                                     || nt.details.is_object()
                                     || nt.details.is_named_type()
-                                    || nt.details.is_one_of()
+                                    || nt.details.is_one_of())
+                                    && nt.details != details
                                 {
                                     // Return early we definitely don't want to do any funny business.
                                     return Ok(tid.clone());
@@ -1368,7 +1370,8 @@ impl TypeSpace {
                         )?;
                         if let Some(sd) = &self.get_schema_data_for_id(&itid) {
                             let schema_data = &(*sd).clone();
-                            if schema_data.nullable {
+                            // TODO: this is specific to ramp
+                            if schema_data.nullable && name != "page" {
                                 // This is an optional member.
                                 omap.insert(
                                     n.to_string(),
@@ -1377,7 +1380,8 @@ impl TypeSpace {
                                 continue;
                             }
 
-                            if o.required.contains(n) {
+                            // TODO: this is specific to ramp
+                            if o.required.contains(n) || name == "page" {
                                 omap.insert(n.to_string(), itid.clone());
                             } else {
                                 // This is an optional member.
@@ -1388,7 +1392,8 @@ impl TypeSpace {
                             }
                         }
 
-                        if o.required.contains(n) {
+                        // TODO: this is specific to ramp
+                        if o.required.contains(n) || name == "page" {
                             omap.insert(n.to_string(), itid);
                         } else {
                             // This is an optional member.
@@ -1757,6 +1762,7 @@ fn render_param(
     } else if *first == to_kebab_case(first) {
         a(r#"#[serde(rename_all = "kebab-case")]"#);
     } else if *first == to_sentence_case(first) {
+        // TODO: make this work!
         //a(r#"#[serde(rename_all = "kebab-case")]"#);
         println!(
             "sentence case: sn: {}, first: {} {}",

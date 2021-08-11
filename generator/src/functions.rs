@@ -228,6 +228,13 @@ pub fn generate_files(
                 fn_name = fn_name.trim_end_matches('s').to_string();
             }
 
+            // Get the function without the function inners.
+            // This is specifically for Ramp.
+            // We do this directly before we print the other function.
+            if !inner_response_type.is_empty() {
+                response_type = inner_response_type;
+            }
+
             // Print our standard function.
             print_fn(
                 &docs,
@@ -239,12 +246,6 @@ pub fn generate_files(
                 &fn_inner,
                 &fn_name,
             );
-
-            // Get the function without the function inners.
-            // This is specifically for Ramp.
-            if !inner_response_type.is_empty() {
-                response_type = inner_response_type;
-            }
 
             // If we are returning a list of things and we have page, etc as
             // params, let's get all the pages.
@@ -342,12 +343,13 @@ fn get_response_type(
                     // For Ramp, the pagination values are passed _in_ the resulting
                     // struct, so we want to ignore them and just get the data.
                     if let Some(pid) = p.get("page") {
-                        println!("we have a page: {:?}", p);
                         let rt = ts.render_type(pid, false)?;
-                        if rt == "Page" {
-                            if let Some(did) = p.get("did") {
+                        if rt == "crate::types::Page" {
+                            if let Some(did) = p.get("data") {
                                 let rt = ts.render_type(did, false)?;
                                 return Ok((og_rt, did.clone(), rt));
+                            } else {
+                                println!("we have a page: {:?} {}", p, rt);
                             }
                         }
                     }
@@ -392,10 +394,12 @@ fn get_response_type(
             // struct, so we want to ignore them and just get the data.
             if let Some(pid) = p.get("page") {
                 let rt = ts.render_type(pid, false)?;
-                if rt == "Page" {
-                    if let Some(did) = p.get("did") {
+                if rt == "crate::types::Page" {
+                    if let Some(did) = p.get("data") {
                         let rt = ts.render_type(did, false)?;
                         return Ok((og_rt, did.clone(), rt));
+                    } else {
+                        println!("we have a page: {:?} {}", p, rt);
                     }
                 }
             }

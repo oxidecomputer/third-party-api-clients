@@ -29,7 +29,7 @@ impl Departments {
         &self,
         start: &str,
         page_size: f64,
-    ) -> Result<crate::types::GetDepartmentsResponse> {
+    ) -> Result<Vec<crate::types::Department>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("page_size={}", page_size));
@@ -44,7 +44,24 @@ impl Departments {
         }
         let url = format!("/departments?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List departments.
+     *
+     * This function performs a `GET` to the `/departments` endpoint.
+     *
+     * As opposed to `get_departments`, this function returns all the pages of the request at once.
+     *
+     * Retrieve all departments.
+     */
+    pub async fn get_all_departments(&self) -> Result<Vec<crate::types::Department>> {
+        let url = "/departments".to_string();
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

@@ -19909,7 +19909,7 @@ pub struct Page {
     )]
     pub custom_404: bool,
     /**
-     * The configuration for GitHub Pages for a repository.
+     * The web address the Page can be accessed from.
      */
     #[serde(
         default,
@@ -19917,13 +19917,10 @@ pub struct Page {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
+    #[serde()]
+    pub https_certificate: PagesHttpsCertificate,
     /**
-     * The configuration for GitHub Pages for a repository.
-     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub https_certificate: Option<PagesHttpsCertificate>,
-    /**
-     * The configuration for GitHub Pages for a repository.
+     * Whether https is enabled on the domain
      */
     #[serde(
         default,
@@ -19938,16 +19935,13 @@ pub struct Page {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub public: bool,
-    /**
-     * The configuration for GitHub Pages for a repository.
-     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub source: Option<PagesSourceHash>,
+    #[serde()]
+    pub source: PagesSourceHash,
     /**
      * The status of the most recent build of the Page.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<PageStatus>,
+    #[serde(default, skip_serializing_if = "PageStatus::is_noop")]
+    pub status: PageStatus,
     /**
      * The API address for accessing this Page resource.
      */

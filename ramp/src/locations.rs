@@ -29,7 +29,7 @@ impl Locations {
         &self,
         start: &str,
         page_size: f64,
-    ) -> Result<crate::types::GetLocationResponse> {
+    ) -> Result<Vec<crate::types::Location>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("page_size={}", page_size));
@@ -44,7 +44,24 @@ impl Locations {
         }
         let url = format!("/locations?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetLocationResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List locations.
+     *
+     * This function performs a `GET` to the `/locations` endpoint.
+     *
+     * As opposed to `get_location`, this function returns all the pages of the request at once.
+     *
+     * Retrieves all locations for your business.
+     */
+    pub async fn get_all_location(&self) -> Result<Vec<crate::types::Location>> {
+        let url = "/locations".to_string();
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

@@ -523,23 +523,13 @@ pub struct PostLocationRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetUsersResponsePage {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub next: String,
-}
-
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct GetUsersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<User>,
-    #[serde()]
-    pub page: GetUsersResponsePage,
+    #[serde(default)]
+    pub page: Page,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
