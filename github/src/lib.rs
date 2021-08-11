@@ -1,5 +1,7 @@
 //! A fully generated, opinionated API client library for GitHub.
 //!
+//! #### API Details
+//!
 //! GitHub's v3 REST API.
 //!
 //! [API Terms of Service](https://docs.github.com/articles/github-terms-of-service)
@@ -17,8 +19,10 @@
 //! | MIT | https://spdx.org/licenses/MIT |
 //!
 //!
-//! This library is generated from the [GitHub OpenAPI
-//! specs](https://github.com/github/rest-api-description). This API client was generated based on OpenAPI spec version `1.1.4`. This way it will remain
+//! #### Client Details
+//!
+//! This client is generated from the [GitHub OpenAPI
+//! specs](https://github.com/github/rest-api-description) based on OpenAPI spec version `1.1.4`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //! //! To install the library, add the following to your `Cargo.toml` file.

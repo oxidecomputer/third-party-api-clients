@@ -1,5 +1,7 @@
 //! A fully generated, opinionated API client library for Ramp.
 //!
+//! #### API Details
+//!
 //! Ramp's developer API makes it easier for companies to programmatically set up and manage their card program.
 //!
 //! It provides the ability to automate card issuing and the ability to integrate features like reporting with other software platforms.
@@ -9,15 +11,17 @@
 //!
 //!
 //!
-//! This library is generated from the [Ramp OpenAPI
-//! specs](https://github.com/sumatokado/ramp-developer). This API client was generated based on OpenAPI spec version `1.0`. This way it will remain
+//! #### Client Details
+//!
+//! This client is generated from the [Ramp OpenAPI
+//! specs](https://github.com/sumatokado/ramp-developer) based on OpenAPI spec version `1.0`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //! //! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]
-//! ramp_api = "0.2.1"
+//! ramp_api = "0.2.2"
 //! ```
 //!
 //! ## Basic example

@@ -560,23 +560,24 @@ pub fn generate_docs_openapi_info(
         license = format!("API spec license:\n//! \n{}", license);
     }
 
-    let api_version = format!(
-        "This API client was generated based on OpenAPI spec version `{}`.",
-        api.info.version
-    );
+    let api_version = format!("based on OpenAPI spec version `{}`", api.info.version);
 
     format!(
         r#"//! A fully generated, opinionated API client library for {}.
 //!
-//! {}
+//! #### API Details
 //!
 //! {}
 //!
 //! {}
+//!
+//! {}
 //! {}
 //!
-//! This library is generated from the [{} OpenAPI
-//! specs]({}). {} This way it will remain
+//! #### Client Details
+//!
+//! This client is generated from the [{} OpenAPI
+//! specs]({}) {}. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //! "#,
