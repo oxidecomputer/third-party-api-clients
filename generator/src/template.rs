@@ -1,6 +1,7 @@
 use std::collections::BTreeMap;
 
 use anyhow::{anyhow, bail, Context, Result};
+use inflector::cases::snakecase::to_snake_case;
 
 #[derive(Eq, PartialEq, Clone, Debug)]
 enum Component {
@@ -135,12 +136,12 @@ impl Template {
                 if n == "type" || n == "ref" {
                     out.push_str(&format!(
                         "crate::progenitor_support::encode_path(&{}_.to_string()),",
-                        n
+                        to_snake_case(n)
                     ));
                 } else {
                     out.push_str(&format!(
                         "crate::progenitor_support::encode_path(&{}.to_string()),",
-                        n
+                        to_snake_case(n)
                     ));
                 }
             }

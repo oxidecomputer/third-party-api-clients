@@ -386,7 +386,7 @@ impl Payroll {
         let url = format!(
             "/v1/companies/{}/payrolls/{}/submit",
             crate::progenitor_support::encode_path(&company_id.to_string()),
-            crate::progenitor_support::encode_path(&payroll_Id.to_string()),
+            crate::progenitor_support::encode_path(&payroll_id.to_string()),
         );
 
         self.client.put(&url, None).await

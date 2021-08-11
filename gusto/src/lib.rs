@@ -170,7 +170,7 @@ impl Client {
     /// Create a new Client struct. It takes a type that can convert into
     /// an &str (`String` or `Vec<u8>` for example). As long as the function is
     /// given a valid API key your requests will work.
-    pub fn new<I, K, R, T, Q, C>(
+    pub fn new<I, K, R, T, Q>(
         client_id: I,
         client_secret: K,
         redirect_uri: R,
@@ -217,7 +217,7 @@ impl Client {
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
-    pub fn new_from_env<T, R, C>(token: T, refresh_token: R) -> Self
+    pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
     where
         T: ToString,
         R: ToString,
@@ -236,7 +236,7 @@ impl Client {
         parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
     }
 
-    fn request<Out>(
+    async fn request<Out>(
         &self,
         method: reqwest::Method,
         uri: &str,
@@ -283,7 +283,7 @@ impl Client {
             } else {
                 serde_json::from_slice::<Out>(&response_body)
             };
-            parsed_response.map(|out| (link, out)).map_err(Error::from)
+            parsed_response.map(|out| (out)).map_err(Error::from)
         } else {
             /*println!("error status: {:?}, response payload: {}",
                 status,
@@ -313,7 +313,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let (_, r) = self.request(method, uri, body).await?;
+        let r = self.request(method, uri, body).await?;
         Ok(r)
     }
 
@@ -400,7 +400,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::GET, &(self.host.clone() + uri), None)
+        self.request_entity(http::Method::GET, &(DEFAULT_HOST.to_string() + uri), None)
             .await
     }
 
@@ -415,7 +415,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request(http::Method::GET, &(self.host.clone() + uri), None)
+        self.request(http::Method::GET, &(DEFAULT_HOST.to_string() + uri), None)
             .await
     }
 
@@ -440,32 +440,48 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::POST, &(self.host.clone() + uri), message)
-            .await
+        self.request_entity(
+            http::Method::POST,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
     }
 
     async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PATCH, &(DEFAULT_HOST.clone() + uri), message)
-            .await
+        self.request_entity(
+            http::Method::PATCH,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
     }
 
     async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::PUT, &(DEFAULT_HOST.clone() + uri), message)
-            .await
+        self.request_entity(
+            http::Method::PUT,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
     }
 
     async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(http::Method::DELETE, &(DEFAULT_HOST.clone() + uri), message)
-            .await
+        self.request_entity(
+            http::Method::DELETE,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
     }
 
     /// "unfold" paginated results of a vector of items
