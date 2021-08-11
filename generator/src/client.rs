@@ -469,6 +469,7 @@ pub fn generate_client_generic_token(proper_name: &str) -> String {
     format!(
         r#"use std::env;
 
+use schemars::JsonSchema;
 use serde::{{Deserialize, Serialize}};
 
 /// Entrypoint for interacting with the API client.
@@ -532,7 +533,7 @@ impl Client {{
         Q: ToString,
         C: ToString,
     {{
-        let client = Client::builder().build();
+        let client = reqwest::Client::builder().build();
         match client {{
             Ok(c) => {{
                 let c = Client {{
@@ -588,16 +589,16 @@ impl Client {{
 
     fn request<B>(
         &self,
-        method: Method,
+        method: reqwest::Method,
         path: &str,
         body: B,
         query: Option<&[(&str, &str)]>,
-    ) -> Request
+    ) -> reqwest::Request
     where
         B: Serialize,
     {{
         // Build the url.
-        let base = Url::parse(DEFAULT_HOST).unwrap();
+        let base = reqwest::Url::parse(DEFAULT_HOST).unwrap();
         let mut p = path.to_string();
         // Make sure we have the leading "/".
         if !p.starts_with('/') {{
@@ -606,14 +607,14 @@ impl Client {{
         let url = base.join(&p).unwrap();
 
         let bt = format!("Bearer {{}}", self.token);
-        let bearer = header::HeaderValue::from_str(&bt).unwrap();
+        let bearer = reqwest::header::HeaderValue::from_str(&bt).unwrap();
 
         // Set the default headers.
-        let mut headers = header::HeaderMap::new();
-        headers.append(header::AUTHORIZATION, bearer);
+        let mut headers =reqwest::header::HeaderMap::new();
+        headers.append(reqwest::header::AUTHORIZATION, bearer);
         headers.append(
-            header::CONTENT_TYPE,
-            header::HeaderValue::from_static("application/json"),
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_static("application/json"),
         );
 
         let mut rb = self.client.request(method.clone(), url).headers(headers);
@@ -623,7 +624,7 @@ impl Client {{
         }}
 
         // Add the body, this is to ensure our GET and DELETE calls succeed.
-        if method != Method::GET && method != Method::DELETE {{
+        if method != reqwest::Method::GET && method != reqwest::Method::DELETE {{
             rb = rb.json(&body);
         }}
 
@@ -638,11 +639,17 @@ impl Client {{
         )
     }}
 
+    /// Refresh an access token from a refresh token. Client must have a refresh token
+    /// for this to work.
     pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {{
-        let mut headers = header::HeaderMap::new();
+        if self.refresh_token.is_empty() {{
+            anyhow!("refresh token cannot be empty");
+        }}
+
+        let mut headers = reqwest::header::HeaderMap::new();
         headers.append(
-            header::ACCEPT,
-            header::HeaderValue::from_static("application/json"),
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
         );
 
         let params = [
@@ -670,11 +677,13 @@ impl Client {{
         Ok(t)
     }}
 
+    /// Get an access token from the code returned by the URL paramter sent to the
+    /// redirect URL.
     pub async fn get_access_token(&mut self, code: &str) -> Result<AccessToken> {{
-        let mut headers = header::HeaderMap::new();
+        let mut headers = reqwest::header::HeaderMap::new();
         headers.append(
-            header::ACCEPT,
-            header::HeaderValue::from_static("application/json"),
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
         );
 
         let params = [
