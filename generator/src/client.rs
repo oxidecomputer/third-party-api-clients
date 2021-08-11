@@ -352,6 +352,7 @@ impl Client {
             url.as_str(),
             None,
             crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
         ).await
     }
 
@@ -466,7 +467,11 @@ impl Client {
 
 pub fn generate_client_generic_token(proper_name: &str) -> String {
     format!(
-        r#"/// Entrypoint for interacting with the API client.
+        r#"use std::env;
+
+use serde::{{Deserialize, Serialize}};
+
+/// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {{
     token: String,

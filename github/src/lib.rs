@@ -626,6 +626,7 @@ impl Client {
             url.as_str(),
             None,
             crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained,
         )
         .await
     }
