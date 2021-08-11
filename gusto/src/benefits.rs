@@ -191,7 +191,7 @@ impl Benefits {
      *
      * Returns an array of all employee benefits for this employee
      */
-    pub async fn get_employees_employee_id_employee_benefits(
+    pub async fn get_employee_employee_benefits(
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::EmployeeBenefit>> {
@@ -208,13 +208,13 @@ impl Benefits {
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/employee_benefits` endpoint.
      *
-     * As opposed to `get_employees_employee_id_employee_benefits`, this function returns all the pages of the request at once.
+     * As opposed to `get_employee_employee_benefits`, this function returns all the pages of the request at once.
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      *
      * Returns an array of all employee benefits for this employee
      */
-    pub async fn get_all_employees_employee_id_employee_benefits(
+    pub async fn get_all_employee_employee_benefits(
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::EmployeeBenefit>> {
@@ -233,10 +233,10 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn post_employees_employee_id_employee_benefits(
+    pub async fn post_employee_employee_benefits(
         &self,
         employee_id: &str,
-        body: &crate::types::PostEmployeesEmployeeIdBenefitsRequest,
+        body: &crate::types::PostEmployeeBenefitsRequest,
     ) -> Result<crate::types::EmployeeBenefit> {
         let url = format!(
             "/v1/employees/{}/employee_benefits",

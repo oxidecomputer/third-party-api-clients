@@ -19,10 +19,10 @@ impl CustomFields {
      *
      * Returns a list of the employee's custom fields.
      */
-    pub async fn get_employees_employee_id_custom_fields(
+    pub async fn get_employee_custom_fields(
         &self,
         employee_id: &str,
-    ) -> Result<crate::types::GetEmployeesEmployeeIdCustomFieldsResponse> {
+    ) -> Result<crate::types::GetEmployeeCustomFieldsResponse> {
         let url = format!(
             "/v1/employees/{}/custom_fields",
             crate::progenitor_support::encode_path(&employee_id.to_string()),

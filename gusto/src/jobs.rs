@@ -76,10 +76,7 @@ impl Jobs {
      *
      * Get all of the jobs that an employee holds.
      */
-    pub async fn get_employees_employee_id_jobs(
-        &self,
-        employee_id: &str,
-    ) -> Result<Vec<crate::types::Job>> {
+    pub async fn get_employee_jobs(&self, employee_id: &str) -> Result<Vec<crate::types::Job>> {
         let url = format!(
             "/v1/employees/{}/jobs",
             crate::progenitor_support::encode_path(&employee_id.to_string()),
@@ -93,14 +90,11 @@ impl Jobs {
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/jobs` endpoint.
      *
-     * As opposed to `get_employees_employee_id_jobs`, this function returns all the pages of the request at once.
+     * As opposed to `get_employee_jobs`, this function returns all the pages of the request at once.
      *
      * Get all of the jobs that an employee holds.
      */
-    pub async fn get_all_employees_employee_id_jobs(
-        &self,
-        employee_id: &str,
-    ) -> Result<Vec<crate::types::Job>> {
+    pub async fn get_all_employee_jobs(&self, employee_id: &str) -> Result<Vec<crate::types::Job>> {
         let url = format!(
             "/v1/employees/{}/jobs",
             crate::progenitor_support::encode_path(&employee_id.to_string()),

@@ -9,7 +9,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-gusto_api = "0.2.0"
+gusto_api = "0.2.1"
 ```
 
 ## Basic example
@@ -63,9 +63,9 @@ let user_consent_url = gusto.user_consent_url();
 // In your redirect URL capture the code sent.
 // Send it along to the request for the token.
 let code = "thing-from-redirect-url";
-let mut access_token = gusto.get_access_token(code).unwrap();
+let mut access_token = gusto.get_access_token(code).await.unwrap();
 
 // You can additionally refresh the access token with the following.
 // You must have a refresh token to be able to call this function.
-access_token = gusto.refresh_access_token().unwrap();
+access_token = gusto.refresh_access_token().await.unwrap();
 ```

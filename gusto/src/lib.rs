@@ -9,7 +9,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gusto_api = "0.2.0"
+//! gusto_api = "0.2.1"
 //! ```
 //!
 //! ## Basic example
@@ -63,11 +63,11 @@
 //! // In your redirect URL capture the code sent.
 //! // Send it along to the request for the token.
 //! let code = "thing-from-redirect-url";
-//! let mut access_token = gusto.get_access_token(code).unwrap();
+//! let mut access_token = gusto.get_access_token(code).await.unwrap();
 //!
 //! // You can additionally refresh the access token with the following.
 //! // You must have a refresh token to be able to call this function.
-//! access_token = gusto.refresh_access_token().unwrap();
+//! access_token = gusto.refresh_access_token().await.unwrap();
 //! ```
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
@@ -163,7 +163,7 @@ pub struct AccessToken {
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    refresh_token: String,
+    pub refresh_token: String,
 }
 
 impl Client {

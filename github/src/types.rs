@@ -6414,12 +6414,8 @@ pub struct MarketplaceListingPlan {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MarketplacePendingChange {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub effective_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub effective_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6460,12 +6456,8 @@ pub struct MarketplacePurchase {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_installed: bool,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub next_billing_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub next_billing_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"

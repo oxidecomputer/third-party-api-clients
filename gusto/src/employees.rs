@@ -204,7 +204,7 @@ impl Employees {
      *
      * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      */
-    pub async fn get_employees_employee_id_home_address(
+    pub async fn get_employee_home_address(
         &self,
         employee_id: &str,
     ) -> Result<crate::types::Location> {
@@ -223,10 +223,10 @@ impl Employees {
      *
      * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      */
-    pub async fn put_employees_employee_id_home_address(
+    pub async fn put_employee_home_address(
         &self,
         employee_id: &str,
-        body: &crate::types::PutEmployeesEmployeeIdHomeAddressRequest,
+        body: &crate::types::PutEmployeeHomeAddressRequest,
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/employees/{}/home_address",

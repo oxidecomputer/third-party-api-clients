@@ -509,7 +509,7 @@ pub struct AccessToken {{
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-        refresh_token: String,
+    pub refresh_token: String,
 }}
 
 impl Client {{

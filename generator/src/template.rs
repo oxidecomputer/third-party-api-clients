@@ -530,11 +530,11 @@ pub fn generate_docs_generic_token(name: &str, version: &str, proper_name: &str)
 //! // In your redirect URL capture the code sent.
 //! // Send it along to the request for the token.
 //! let code = "thing-from-redirect-url";
-//! let mut access_token = {}.get_access_token(code).unwrap();
+//! let mut access_token = {}.get_access_token(code).await.unwrap();
 //!
 //! // You can additionally refresh the access token with the following.
 //! // You must have a refresh token to be able to call this function.
-//! access_token = {}.refresh_access_token().unwrap();
+//! access_token = {}.refresh_access_token().await.unwrap();
 //! ```
 //!"#,
         proper_name,

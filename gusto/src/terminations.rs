@@ -21,7 +21,7 @@ impl Terminations {
      *
      * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
      */
-    pub async fn get_employees_employee_id_terminations(
+    pub async fn get_employee_terminations(
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::Termination>> {
@@ -38,13 +38,13 @@ impl Terminations {
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/terminations` endpoint.
      *
-     * As opposed to `get_employees_employee_id_terminations`, this function returns all the pages of the request at once.
+     * As opposed to `get_employee_terminations`, this function returns all the pages of the request at once.
      *
      * Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
      *
      * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
      */
-    pub async fn get_all_employees_employee_id_terminations(
+    pub async fn get_all_employee_terminations(
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::Termination>> {
@@ -65,10 +65,10 @@ impl Terminations {
      *
      * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
      */
-    pub async fn post_employees_employee_id_terminations(
+    pub async fn post_employee_terminations(
         &self,
         employee_id: &str,
-        body: &crate::types::PostEmployeesEmployeeIdTerminationsRequest,
+        body: &crate::types::PostEmployeeTerminationsRequest,
     ) -> Result<crate::types::Termination> {
         let url = format!(
             "/v1/employees/{}/terminations",

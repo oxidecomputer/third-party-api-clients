@@ -1437,10 +1437,33 @@ impl TypeSpace {
                                 s.schema_data.clone(),
                             ),
                         )),
-                        Empty => Ok((
-                            Some(uid.to_string()),
-                            TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
-                        )),
+                        Empty => {
+                            // Get the name, we need to find out if its secretly a date.
+                            let name = clean_name(match (name, s.schema_data.title.as_deref()) {
+                                (Some(n), None) => n,
+                                (Some(n), Some("")) => n,
+                                (None, Some(t)) => t,
+                                (Some(""), Some(t)) => t,
+                                (Some(n), Some(_)) => n,
+                                (None, None) => "",
+                            });
+
+                            if name.starts_with("date ") || name.ends_with(" date") {
+                                // Gusto does not set the type as a NaiveDate but it should be so let's fix it.
+                                Ok((
+                                    Some(uid.to_string()),
+                                    TypeDetails::Basic(
+                                        "Option<chrono::NaiveDate>".to_string(),
+                                        s.schema_data.clone(),
+                                    ),
+                                ))
+                            } else {
+                                Ok((
+                                    Some(uid.to_string()),
+                                    TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                                ))
+                            }
+                        }
                         Unknown(f) => match f.as_str() {
                             "float" => Ok((
                                 Some(uid.to_string()),
@@ -1946,6 +1969,9 @@ pub fn clean_fn_name(oid: &str) -> String {
         .replace("v_1_", "")
         .replace("companies_", "company_")
         .replace("company_id_", "")
+        .replace("employees_employee_id_", "employee_")
+        .replace("employee_id_", "")
+        .replace("employees_employee_", "employee_")
 }
 
 fn oid_to_object_name(s: &str) -> String {

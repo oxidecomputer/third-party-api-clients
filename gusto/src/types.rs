@@ -156,15 +156,8 @@ pub struct Employee {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub custom_fields: Vec<EmployeeCustomField>,
-    /**
-     * The representation of an employee in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub date_of_birth: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      * The employee's department in the company.
      */
@@ -523,12 +516,8 @@ pub struct Termination {
     /**
      * The representation of a termination in Gusto.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub effective_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub effective_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a termination in Gusto.
      */
@@ -648,12 +637,8 @@ pub struct Compensation {
     /**
      * The representation of compensation in Gusto.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub effective_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub effective_date: Option<chrono::NaiveDate>,
     /**
      * The representation of compensation in Gusto.
      */
@@ -785,12 +770,8 @@ pub struct Job {
     /**
      * The representation of a job in Gusto.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub hire_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub hire_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a job in Gusto.
      */
@@ -2099,12 +2080,8 @@ pub struct PaySchedule {
     /**
      * The representation of a pay schedule.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub anchor_pay_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub anchor_pay_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a pay schedule.
      */
@@ -2689,12 +2666,8 @@ pub struct PayPeriod {
     /**
      * The representation of a pay period.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub end_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub end_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a pay period.
      */
@@ -2721,22 +2694,14 @@ pub struct PayPeriod {
     /**
      * The representation of a pay period.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub start_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<chrono::NaiveDate>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PayrollPayPeriod {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub end_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub end_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -2749,12 +2714,8 @@ pub struct PayrollPayPeriod {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pay_schedule_uuid: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub start_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<chrono::NaiveDate>,
 }
 
 /// The subtotals for the payroll.
@@ -3204,12 +3165,8 @@ pub struct PayrollData {
     /**
      *
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub check_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub check_date: Option<chrono::NaiveDate>,
     /**
      *
      */
@@ -3459,15 +3416,8 @@ pub struct JobApplicant {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company_uuid: String,
-    /**
-     * The representation of a job applicant in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub date_of_birth: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      * The representation of a job applicant in Gusto.
      */
@@ -3533,15 +3483,8 @@ pub struct JobApplicant {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    /**
-     * The representation of a job applicant in Gusto.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub start_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a job applicant in Gusto.
      */
@@ -3638,15 +3581,8 @@ impl Include {
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PutEmployeesRequest {
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub date_of_birth: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      *
      */
@@ -3714,15 +3650,8 @@ pub struct GetCompanyEmployeesRequest {}
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostEmployeesRequest {
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub date_of_birth: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      *
      */
@@ -3773,15 +3702,8 @@ pub struct PostEmployeesRequest {
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PutJobsJobIdRequest {
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub hire_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub hire_date: Option<chrono::NaiveDate>,
     /**
      *
      */
@@ -3814,15 +3736,8 @@ pub struct PutJobsJobIdRequest {
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostJobsJobIdRequest {
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub hire_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub hire_date: Option<chrono::NaiveDate>,
     /**
      *
      */
@@ -4078,12 +3993,8 @@ pub struct PutContractorsContractorIdRequest {
     /**
      *
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub start_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<chrono::NaiveDate>,
     /**
      *
      */
@@ -4233,12 +4144,8 @@ pub struct PostCompanyContractorsRequest {
     /**
      * The day when the contractor will start working for the company.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub start_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<chrono::NaiveDate>,
     /**
      * The contractor type, either an “Individual” or a “Business”.
      *
@@ -4299,12 +4206,8 @@ pub struct PostJobsJobIdCompensationsRequest {
     /**
      *
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub effective_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub effective_date: Option<chrono::NaiveDate>,
     /**
      * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
      */
@@ -4328,7 +4231,7 @@ pub struct PostJobsJobIdCompensationsRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostEmployeesEmployeeIdGarnishmentsRequest {
+pub struct PostEmployeeGarnishmentsRequest {
     /**
      *
      */
@@ -4476,16 +4379,12 @@ pub struct PutGarnishmentsGarnishmentIdRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostEmployeesEmployeeIdTerminationsRequest {
+pub struct PostEmployeeTerminationsRequest {
     /**
      *
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub effective_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub effective_date: Option<chrono::NaiveDate>,
     /**
      *
      */
@@ -4495,7 +4394,7 @@ pub struct PostEmployeesEmployeeIdTerminationsRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PutEmployeesEmployeeIdHomeAddressRequest {
+pub struct PutEmployeeHomeAddressRequest {
     /**
      *
      */
@@ -4749,7 +4648,7 @@ pub struct PutCompanyEarningTypesTypeUuidRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostEmployeesEmployeeIdBenefitsRequest {
+pub struct PostEmployeeBenefitsRequest {
     /**
      *
      */
@@ -5014,20 +4913,12 @@ impl OffCycleReason {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostCompanyPayrollsRequest {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub check_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub check_date: Option<chrono::NaiveDate>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub employee_ids: Vec<i64>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub end_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub end_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5036,12 +4927,8 @@ pub struct PostCompanyPayrollsRequest {
     pub off_cycle: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub off_cycle_reason: Option<OffCycleReason>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub start_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<chrono::NaiveDate>,
 }
 
 /**
@@ -5386,7 +5273,7 @@ pub struct PostProvisionResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetEmployeesEmployeeIdCustomFieldsResponse {
+pub struct GetEmployeeCustomFieldsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub custom_fields: Vec<EmployeeCustomField>,
 }
@@ -5433,15 +5320,8 @@ impl OnboardingPersonType {
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostCompanyJobApplicantsRequest {
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub date_of_birth: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub date_of_birth: Option<chrono::NaiveDate>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5488,29 +5368,15 @@ pub struct PostCompanyJobApplicantsRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub send_offer: Option<bool>,
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub start_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<chrono::NaiveDate>,
 }
 
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PutCompanyJobApplicantsApplicantUuidRequest {
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub date_of_birth: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      *
      */
@@ -5566,15 +5432,8 @@ pub struct PutCompanyJobApplicantsApplicantUuidRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub send_offer: Option<bool>,
-    /**
-     *
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub start_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<chrono::NaiveDate>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
