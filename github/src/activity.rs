@@ -948,14 +948,14 @@ impl Activity {
      * **Parameters:**
      *
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
     pub async fn list_repos_starred_by_authenticated_user(
         &self,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Repository>> {
@@ -996,7 +996,7 @@ impl Activity {
     pub async fn list_all_repos_starred_by_authenticated_user(
         &self,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::Repository>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -1500,7 +1500,7 @@ impl Activity {
      *
      * * `username: &str`
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -1508,7 +1508,7 @@ impl Activity {
         &self,
         username: &str,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::StarredRepository>> {
@@ -1554,7 +1554,7 @@ impl Activity {
         &self,
         username: &str,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::StarredRepository>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();

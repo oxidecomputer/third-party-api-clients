@@ -292,21 +292,17 @@ crate::progenitor_support::encode_path(&number.to_string()),);\n";
 }
 
 pub fn generate_docs_github(
+    api: &openapiv3::OpenAPI,
     name: &str,
     version: &str,
     proper_name: &str,
     host: &str,
     spec_link: &str,
 ) -> String {
+    let info = generate_docs_openapi_info(api, proper_name, spec_link);
+
     format!(
-        r#"//! A fully generated, opinionated API client library for {}.
-//!
-//! This library is generated from the [{} OpenAPI
-//! specs]({}). This way it will remain
-//! up to date as features are added. The documentation for the crate is generated
-//! along with the code to make this library easy to use.
-//!
-//! To install the library, add the following to your `Cargo.toml` file.
+        r#"{}//! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]
@@ -443,9 +439,7 @@ pub fn generate_docs_github(
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
 //!"#,
-        proper_name,
-        proper_name,
-        spec_link,
+        info,
         name,
         version,
         name,
@@ -470,21 +464,136 @@ pub fn generate_docs_github(
     )
 }
 
+pub fn generate_docs_openapi_info(
+    api: &openapiv3::OpenAPI,
+    proper_name: &str,
+    spec_link: &str,
+) -> String {
+    let mut description = String::new();
+    if let Some(d) = &api.info.description {
+        description = d.replace("\n", "\n//! ");
+    }
+
+    let mut tos = String::new();
+    if let Some(t) = &api.info.terms_of_service {
+        tos = format!("[API Terms of Service]({})", t);
+    }
+
+    let mut contact = String::new();
+    if let Some(c) = &api.info.contact {
+        let mut num = 1;
+        let mut name = String::new();
+        if let Some(n) = &c.name {
+            contact.push_str("| name ");
+            name = n.to_string();
+            num += 1;
+        }
+        let mut url = String::new();
+        if let Some(u) = &c.url {
+            contact.push_str("| url ");
+            url = u.to_string();
+            num += 1;
+        }
+        let mut email = String::new();
+        if let Some(e) = &c.email {
+            contact.push_str("| email ");
+            email = e.to_string();
+            num += 1;
+        }
+        if !contact.is_empty() {
+            contact.push('|');
+            contact = format!(
+                r#"//! {}
+//! "#,
+                contact
+            );
+            for _ in 1..num {
+                contact.push_str("|----");
+            }
+            contact.push_str("|\n//! ");
+        }
+
+        if !name.is_empty() {
+            contact.push_str(&format!("| {} ", name));
+        }
+        if !url.is_empty() {
+            contact.push_str(&format!("| {} ", url));
+        }
+        if !email.is_empty() {
+            contact.push_str(&format!("| {} ", email));
+        }
+        if !contact.is_empty() {
+            contact.push_str("|\n//! ");
+        }
+
+        contact = format!("API spec contact details:\n//! \n{}", contact);
+    }
+
+    let mut license = String::new();
+    if let Some(l) = &api.info.license {
+        license.push_str("| name ");
+
+        let mut url = String::new();
+        if let Some(u) = &l.url {
+            license.push_str("| url ");
+            url = u.to_string();
+        }
+        license.push('|');
+        license = format!(
+            r#"//! {}
+//! "#,
+            license
+        );
+
+        license.push_str("|----");
+        if !url.is_empty() {
+            license.push_str("|----");
+        }
+        license.push_str("|\n//! ");
+
+        license.push_str(&format!("| {} ", l.name));
+        if !url.is_empty() {
+            license.push_str(&format!("| {} ", url));
+        }
+        license.push_str("|\n//! ");
+
+        license = format!("API spec license:\n//! \n{}", license);
+    }
+
+    let api_version = format!(
+        "This API client was generated based on OpenAPI spec version `{}`.",
+        api.info.version
+    );
+
+    format!(
+        r#"//! A fully generated, opinionated API client library for {}.
+//!
+//! {}
+//!
+//! {}
+//!
+//! {}
+//! {}
+//!
+//! This library is generated from the [{} OpenAPI
+//! specs]({}). {} This way it will remain
+//! up to date as features are added. The documentation for the crate is generated
+//! along with the code to make this library easy to use.
+//! "#,
+        proper_name, description, tos, contact, license, proper_name, spec_link, api_version,
+    )
+}
+
 pub fn generate_docs_generic_token(
+    api: &openapiv3::OpenAPI,
     name: &str,
     version: &str,
     proper_name: &str,
     spec_link: &str,
 ) -> String {
+    let info = generate_docs_openapi_info(api, proper_name, spec_link);
     format!(
-        r#"//! A fully generated, opinionated API client library for {}.
-//!
-//! This library is generated from the [{} OpenAPI
-//! specs]({}). This way it will remain
-//! up to date as features are added. The documentation for the crate is generated
-//! along with the code to make this library easy to use.
-//!
-//! To install the library, add the following to your `Cargo.toml` file.
+        r#"{}//! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]
@@ -554,9 +663,7 @@ pub fn generate_docs_generic_token(
 //! }}
 //! ```
 //!"#,
-        proper_name,
-        proper_name,
-        spec_link,
+        info,
         name,
         version,
         name,

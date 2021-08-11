@@ -40,7 +40,7 @@ impl Issues {
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `collab: bool`
      * * `orgs: bool`
@@ -55,7 +55,7 @@ impl Issues {
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         collab: bool,
         orgs: bool,
@@ -130,7 +130,7 @@ impl Issues {
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         collab: bool,
         orgs: bool,
@@ -198,7 +198,7 @@ impl Issues {
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -210,7 +210,7 @@ impl Issues {
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
@@ -271,7 +271,7 @@ impl Issues {
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query = String::new();
@@ -433,7 +433,7 @@ impl Issues {
      * * `mentioned: &str` -- A user that's mentioned in the issue.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -449,7 +449,7 @@ impl Issues {
         mentioned: &str,
         labels: &str,
         sort: crate::types::IssuesListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
@@ -526,7 +526,7 @@ impl Issues {
         mentioned: &str,
         labels: &str,
         sort: crate::types::IssuesListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::IssueSimple>> {
         let mut query = String::new();
@@ -618,7 +618,7 @@ impl Issues {
      * * `owner: &str`
      * * `repo: &str`
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Direction` -- Either `asc` or `desc`. Ignored without the `sort` parameter.
+     * * `direction: crate::types::Order` -- Either `asc` or `desc`. Ignored without the `sort` parameter.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -628,7 +628,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
@@ -678,7 +678,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::IssueComment>> {
         let mut query = String::new();
@@ -1835,7 +1835,7 @@ impl Issues {
      * * `repo: &str`
      * * `state: crate::types::IssuesListState` -- The state of the milestone. Either `open`, `closed`, or `all`.
      * * `sort: crate::types::IssuesListMilestonesSort` -- What to sort results by. Either `due_on` or `completeness`.
-     * * `direction: crate::types::Direction` -- The direction of the sort. Either `asc` or `desc`.
+     * * `direction: crate::types::Order` -- The direction of the sort. Either `asc` or `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -1845,7 +1845,7 @@ impl Issues {
         repo: &str,
         state: crate::types::IssuesListState,
         sort: crate::types::IssuesListMilestonesSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Milestone>> {
@@ -1893,7 +1893,7 @@ impl Issues {
         repo: &str,
         state: crate::types::IssuesListState,
         sort: crate::types::IssuesListMilestonesSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::Milestone>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -2151,7 +2151,7 @@ impl Issues {
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -2162,7 +2162,7 @@ impl Issues {
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
@@ -2218,7 +2218,7 @@ impl Issues {
         state: crate::types::IssuesListState,
         labels: &str,
         sort: crate::types::IssuesListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query = String::new();

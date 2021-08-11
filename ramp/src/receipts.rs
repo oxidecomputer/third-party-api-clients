@@ -137,12 +137,16 @@ impl Receipts {
     /**
      * Get details for one receipt.
      *
-     * This function performs a `GET` to the `/receipts/<id>` endpoint.
+     * This function performs a `GET` to the `/receipts/{id}` endpoint.
      *
      *
      */
-    pub async fn get_receipt(&self) -> Result<crate::types::Receipt> {
-        let url = "/receipts/<id>".to_string();
+    pub async fn get_receipt(&self, id: &str) -> Result<crate::types::Receipt> {
+        let url = format!(
+            "/receipts/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 }

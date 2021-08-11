@@ -15,7 +15,7 @@ impl Users {
     /**
      * Get User Info by User ID.
      *
-     * This function performs a `GET` to the `/users/<id>` endpoint.
+     * This function performs a `GET` to the `/users/{id}` endpoint.
      *
      * Retrieve the information of the user with the matching user ID.
      *
@@ -23,32 +23,44 @@ impl Users {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_user(&self) -> Result<crate::types::User> {
-        let url = "/users/<id>".to_string();
+    pub async fn get_user(&self, id: &str) -> Result<crate::types::User> {
+        let url = format!(
+            "/users/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 
     /**
      * Suspend a user.
      *
-     * This function performs a `DELETE` to the `/users/<id>` endpoint.
+     * This function performs a `DELETE` to the `/users/{id}` endpoint.
      *
      * Suspends a user. Does not delete the user's cards. Currently this action is not reversible.
      */
-    pub async fn delete(&self) -> Result<()> {
-        let url = "/users/<id>".to_string();
+    pub async fn delete(&self, id: &str) -> Result<()> {
+        let url = format!(
+            "/users/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.delete(&url, None).await
     }
 
     /**
      * Modify Existing User.
      *
-     * This function performs a `PATCH` to the `/users/<id>` endpoint.
+     * This function performs a `PATCH` to the `/users/{id}` endpoint.
      *
      * Modify information about a user.
      */
-    pub async fn patch(&self, body: &crate::types::PatchRequest) -> Result<()> {
-        let url = "/users/<id>".to_string();
+    pub async fn patch(&self, id: &str, body: &crate::types::PatchRequest) -> Result<()> {
+        let url = format!(
+            "/users/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client
             .patch(
                 &url,
@@ -184,12 +196,19 @@ impl Users {
     /**
      * Get status of a deferred user task.
      *
-     * This function performs a `GET` to the `/users/deferred/status/<id>` endpoint.
+     * This function performs a `GET` to the `/users/deferred/status/{id}` endpoint.
      *
      * Gets status of a deferred task for users
      */
-    pub async fn get_deferred_status(&self) -> Result<crate::types::GetDeferredStatusResponse> {
-        let url = "/users/deferred/status/<id>".to_string();
+    pub async fn get_deferred_status(
+        &self,
+        id: &str,
+    ) -> Result<crate::types::GetDeferredStatusResponse> {
+        let url = format!(
+            "/users/deferred/status/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 }

@@ -1,10 +1,21 @@
 A fully generated, opinionated API client library for Gusto.
 
+Welcome to Gusto's API documentation.
+
+[API Terms of Service](https://gusto.com/about/terms/developer-terms-of-service)
+
+API spec contact details:
+
+| name | email |
+|----|----|
+| Developer Relations | developer@gusto.com |
+
+
+
 This library is generated from the [Gusto OpenAPI
-specs](https://github.com/Gusto-API/api.gusto.dev). This way it will remain
+specs](https://github.com/Gusto-API/api.gusto.dev). This API client was generated based on OpenAPI spec version `1.0`. This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.
-
 To install the library, add the following to your `Cargo.toml` file.
 
 ```toml

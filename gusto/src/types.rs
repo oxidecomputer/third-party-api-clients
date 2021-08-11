@@ -4245,45 +4245,6 @@ impl PostCompanyContractorRequestType {
     }
 }
 
-/**
- * The contractor’s wage type, either “Fixed” or “Hourly”.
- *   
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum PostCompanyContractorRequestWageType {
-    #[serde(rename = "Fixed")]
-    Fixed,
-    #[serde(rename = "Hourly")]
-    Hourly,
-    #[serde(rename = "")]
-    Noop,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for PostCompanyContractorRequestWageType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            PostCompanyContractorRequestWageType::Fixed => "Fixed",
-            PostCompanyContractorRequestWageType::Hourly => "Hourly",
-            PostCompanyContractorRequestWageType::Noop => "",
-            PostCompanyContractorRequestWageType::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for PostCompanyContractorRequestWageType {
-    fn default() -> PostCompanyContractorRequestWageType {
-        PostCompanyContractorRequestWageType::Noop
-    }
-}
-impl PostCompanyContractorRequestWageType {
-    pub fn is_noop(&self) -> bool {
-        matches!(self, PostCompanyContractorRequestWageType::Noop)
-    }
-}
-
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostCompanyContractorRequest {
@@ -4365,11 +4326,8 @@ pub struct PostCompanyContractorRequest {
      * The contractor’s wage type, either “Fixed” or “Hourly”.
      *
      */
-    #[serde(
-        default,
-        skip_serializing_if = "PostCompanyContractorRequestWageType::is_noop"
-    )]
-    pub wage_type: PostCompanyContractorRequestWageType,
+    #[serde(default, skip_serializing_if = "PutContractorRequestWageType::is_noop")]
+    pub wage_type: PutContractorRequestWageType,
 }
 
 ///

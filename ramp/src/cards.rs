@@ -60,7 +60,7 @@ impl Cards {
     /**
      * GET a card.
      *
-     * This function performs a `GET` to the `/cards/<id>` endpoint.
+     * This function performs a `GET` to the `/cards/{id}` endpoint.
      *
      * Retrieve a single card.
      *
@@ -68,15 +68,19 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_card(&self) -> Result<crate::types::Card> {
-        let url = "/cards/<id>".to_string();
+    pub async fn get_card(&self, id: &str) -> Result<crate::types::Card> {
+        let url = format!(
+            "/cards/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 
     /**
      * Update card.
      *
-     * This function performs a `PATCH` to the `/cards/<id>` endpoint.
+     * This function performs a `PATCH` to the `/cards/{id}` endpoint.
      *
      * Update card details
      *
@@ -86,9 +90,14 @@ impl Cards {
      */
     pub async fn patch_resources_card(
         &self,
+        id: &str,
         body: &crate::types::PatchResourcesCardRequest,
     ) -> Result<()> {
-        let url = "/cards/<id>".to_string();
+        let url = format!(
+            "/cards/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client
             .patch(
                 &url,
@@ -148,15 +157,20 @@ impl Cards {
     /**
      * Delete a card.
      *
-     * This function performs a `POST` to the `/cards/<id>/deferred/termination` endpoint.
+     * This function performs a `POST` to the `/cards/{id}/deferred/termination` endpoint.
      *
      * Terminates a card permanently.
      */
     pub async fn post_resources_card_termination(
         &self,
+        id: &str,
         body: &crate::types::PostResourcesCardSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
-        let url = "/cards/<id>/deferred/termination".to_string();
+        let url = format!(
+            "/cards/{}/deferred/termination",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client
             .post(
                 &url,
@@ -168,15 +182,20 @@ impl Cards {
     /**
      * Suspend a card.
      *
-     * This function performs a `POST` to the `/cards/<id>/deferred/suspension` endpoint.
+     * This function performs a `POST` to the `/cards/{id}/deferred/suspension` endpoint.
      *
      * Suspends a card so that it is locked from use. The suspension is revertable.
      */
     pub async fn post_resources_card_suspension(
         &self,
+        id: &str,
         body: &crate::types::PostResourcesCardSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
-        let url = "/cards/<id>/deferred/suspension".to_string();
+        let url = format!(
+            "/cards/{}/deferred/suspension",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client
             .post(
                 &url,
@@ -188,15 +207,20 @@ impl Cards {
     /**
      * Removes a card's suspension.
      *
-     * This function performs a `POST` to the `/cards/<id>/deferred/unsuspension` endpoint.
+     * This function performs a `POST` to the `/cards/{id}/deferred/unsuspension` endpoint.
      *
      * Removes a card's suspension so that it may be used again.
      */
     pub async fn post_resources_card_unsuspension(
         &self,
+        id: &str,
         body: &crate::types::PostResourcesCardSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
-        let url = "/cards/<id>/deferred/unsuspension".to_string();
+        let url = format!(
+            "/cards/{}/deferred/unsuspension",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client
             .post(
                 &url,
@@ -208,7 +232,7 @@ impl Cards {
     /**
      * Get status of a deferred card task.
      *
-     * This function performs a `GET` to the `/cards/deferred/status/<id>` endpoint.
+     * This function performs a `GET` to the `/cards/deferred/status/{id}` endpoint.
      *
      * Gets status of a deferred task for cards
      *
@@ -218,8 +242,13 @@ impl Cards {
      */
     pub async fn get_resources_deferred(
         &self,
+        id: &str,
     ) -> Result<crate::types::GetResourcesDeferredResponse> {
-        let url = "/cards/deferred/status/<id>".to_string();
+        let url = format!(
+            "/cards/deferred/status/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 }

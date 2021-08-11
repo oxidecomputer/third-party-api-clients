@@ -26,7 +26,7 @@ impl Repos {
      * * `org: &str`
      * * `type_: crate::types::ReposListOrgType` -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
      * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-     * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
+     * * `direction: crate::types::Order` -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -35,7 +35,7 @@ impl Repos {
         org: &str,
         type_: crate::types::ReposListOrgType,
         sort: crate::types::ReposListOrgSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
@@ -81,7 +81,7 @@ impl Repos {
         org: &str,
         type_: crate::types::ReposListOrgType,
         sort: crate::types::ReposListOrgSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -7140,7 +7140,7 @@ impl Repos {
      *    
      *  Will cause a `422` error if used in the same request as \*\*visibility\*\* or \*\*affiliation\*\*. Will cause a `422` error if used in the same request as \*\*visibility\*\* or \*\*affiliation\*\*.
      * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-     * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
+     * * `direction: crate::types::Order` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
@@ -7152,7 +7152,7 @@ impl Repos {
         affiliation: &str,
         type_: crate::types::ReposListType,
         sort: crate::types::ReposListOrgSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
         since: Option<chrono::DateTime<chrono::Utc>>,
@@ -7209,7 +7209,7 @@ impl Repos {
         affiliation: &str,
         type_: crate::types::ReposListType,
         sort: crate::types::ReposListOrgSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         before: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Repository>> {
@@ -7382,7 +7382,7 @@ impl Repos {
      * * `username: &str`
      * * `type_: crate::types::ReposListUserType` -- Can be one of `all`, `owner`, `member`.
      * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-     * * `direction: crate::types::Direction` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
+     * * `direction: crate::types::Order` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -7391,7 +7391,7 @@ impl Repos {
         username: &str,
         type_: crate::types::ReposListUserType,
         sort: crate::types::ReposListOrgSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
@@ -7437,7 +7437,7 @@ impl Repos {
         username: &str,
         type_: crate::types::ReposListUserType,
         sort: crate::types::ReposListOrgSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::MinimalRepository>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();

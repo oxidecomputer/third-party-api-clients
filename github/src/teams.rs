@@ -262,7 +262,7 @@ impl Teams {
      *
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      * * `pinned: &str` -- Pinned discussions only filter.
@@ -271,7 +271,7 @@ impl Teams {
         &self,
         org: &str,
         team_slug: &str,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
         pinned: &str,
@@ -321,7 +321,7 @@ impl Teams {
         &self,
         org: &str,
         team_slug: &str,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         pinned: &str,
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
         let mut query = String::new();
@@ -505,7 +505,7 @@ impl Teams {
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
      * * `discussion_number: i64`
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -514,7 +514,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
@@ -562,7 +562,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -1652,14 +1652,14 @@ impl Teams {
      * **Parameters:**
      *
      * * `team_id: i64`
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
     pub async fn list_discussions_legacy(
         &self,
         team_id: i64,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
@@ -1703,7 +1703,7 @@ impl Teams {
     pub async fn list_all_discussions_legacy(
         &self,
         team_id: i64,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -1869,7 +1869,7 @@ impl Teams {
      *
      * * `team_id: i64`
      * * `discussion_number: i64`
-     * * `direction: crate::types::Direction` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -1877,7 +1877,7 @@ impl Teams {
         &self,
         team_id: i64,
         discussion_number: i64,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
@@ -1923,7 +1923,7 @@ impl Teams {
         &self,
         team_id: i64,
         discussion_number: i64,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();

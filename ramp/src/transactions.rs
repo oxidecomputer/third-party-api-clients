@@ -220,7 +220,7 @@ impl Transactions {
     /**
      * GET a transaction.
      *
-     * This function performs a `GET` to the `/transactions/<id>` endpoint.
+     * This function performs a `GET` to the `/transactions/{id}` endpoint.
      *
      *
      *
@@ -228,8 +228,12 @@ impl Transactions {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_resources_transaction(&self) -> Result<crate::types::Data> {
-        let url = "/transactions/<id>".to_string();
+    pub async fn get_resources_transaction(&self, id: &str) -> Result<crate::types::Data> {
+        let url = format!(
+            "/transactions/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 }

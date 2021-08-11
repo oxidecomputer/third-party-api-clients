@@ -74,7 +74,7 @@ impl CardPrograms {
     /**
      * GET a card program.
      *
-     * This function performs a `GET` to the `/card-programs/<id>` endpoint.
+     * This function performs a `GET` to the `/card-programs/{id}` endpoint.
      *
      * Retrieve a single card program.
      *
@@ -82,8 +82,12 @@ impl CardPrograms {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_card_program(&self) -> Result<crate::types::CardProgram> {
-        let url = "/card-programs/<id>".to_string();
+    pub async fn get_card_program(&self, id: &str) -> Result<crate::types::CardProgram> {
+        let url = format!(
+            "/card-programs/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 }

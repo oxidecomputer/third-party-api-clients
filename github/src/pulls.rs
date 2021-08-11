@@ -29,7 +29,7 @@ impl Pulls {
      * * `head: &str` -- Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`.
      * * `base: &str` -- Filter pulls by base branch name. Example: `gh-pages`.
      * * `sort: crate::types::PullsListSort` -- What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
-     * * `direction: crate::types::Direction` -- The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`.
+     * * `direction: crate::types::Order` -- The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -41,7 +41,7 @@ impl Pulls {
         head: &str,
         base: &str,
         sort: crate::types::PullsListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestSimple>> {
@@ -97,7 +97,7 @@ impl Pulls {
         head: &str,
         base: &str,
         sort: crate::types::PullsListSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::PullRequestSimple>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -180,7 +180,7 @@ impl Pulls {
      * * `owner: &str`
      * * `repo: &str`
      * * `sort: crate::types::PullsListReviewCommentsRepoSort`
-     * * `direction: crate::types::Direction` -- Can be either `asc` or `desc`. Ignored without `sort` parameter.
+     * * `direction: crate::types::Order` -- Can be either `asc` or `desc`. Ignored without `sort` parameter.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -190,7 +190,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         sort: crate::types::PullsListReviewCommentsRepoSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
@@ -240,7 +240,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         sort: crate::types::PullsListReviewCommentsRepoSort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query = String::new();
@@ -464,7 +464,7 @@ impl Pulls {
      * * `repo: &str`
      * * `pull_number: i64`
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Direction` -- Can be either `asc` or `desc`. Ignored without `sort` parameter.
+     * * `direction: crate::types::Order` -- Can be either `asc` or `desc`. Ignored without `sort` parameter.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -475,7 +475,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
         per_page: i64,
         page: i64,
@@ -527,7 +527,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query = String::new();

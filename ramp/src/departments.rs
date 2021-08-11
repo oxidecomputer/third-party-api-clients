@@ -111,7 +111,7 @@ impl Departments {
     /**
      * GET a department.
      *
-     * This function performs a `GET` to the `/departments/<id>` endpoint.
+     * This function performs a `GET` to the `/departments/{id}` endpoint.
      *
      * Retrieve a single department.
      *
@@ -119,23 +119,32 @@ impl Departments {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_department(&self) -> Result<crate::types::Department> {
-        let url = "/departments/<id>".to_string();
+    pub async fn get_department(&self, id: &str) -> Result<crate::types::Department> {
+        let url = format!(
+            "/departments/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 
     /**
      * Update department.
      *
-     * This function performs a `PATCH` to the `/departments/<id>` endpoint.
+     * This function performs a `PATCH` to the `/departments/{id}` endpoint.
      *
      * Modify a department.
      */
     pub async fn patch_department(
         &self,
+        id: &str,
         body: &crate::types::PatchDepartmentRequest,
     ) -> Result<crate::types::Department> {
-        let url = "/departments/<id>".to_string();
+        let url = format!(
+            "/departments/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client
             .patch(
                 &url,

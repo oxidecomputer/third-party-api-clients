@@ -223,6 +223,14 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         return Ok(format!("crate::types::{}", struct_name(&sn)));
                                     }
 
+                                    // Create our vector.
+                                    let mut enums: Vec<String> = Default::default();
+                                    for v in st.enumeration.iter().flatten() {
+                                        enums.push(v.to_string());
+                                    }
+                                    enums.sort_unstable();
+                                    enums.dedup();
+
                                     // Try to find the parameter among our types.
                                     for te in ts.id_to_entry.values() {
                                         if let Some(sn) = te.name.as_deref() {
@@ -230,11 +238,6 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                             if let TypeDetails::Enum(vals, _schema_data) =
                                                 &te.details
                                             {
-                                                let mut enums: Vec<String> = Default::default();
-                                                for v in st.enumeration.iter().flatten() {
-                                                    enums.push(v.to_string());
-                                                }
-
                                                 if enums == *vals {
                                                     return Ok(format!("crate::types::{}", sn));
                                                 }
@@ -1342,6 +1345,10 @@ impl TypeSpace {
                             // Check if we already have a type with this name.
                             if n == t {
                                 t
+                            } else if n.ends_with("response") || n.ends_with("request") {
+                                t
+                            } else if t.ends_with("response") || t.ends_with("request") {
+                                n
                             } else if self.name_to_id.get(&clean_name(n)).is_some() {
                                 t
                             } else if self.name_to_id.get(&clean_name(t)).is_some() {
@@ -1452,11 +1459,15 @@ impl TypeSpace {
                         for v in st.enumeration.iter().flatten() {
                             enums.push(v.to_string());
                         }
+                        enums.sort_unstable();
+                        enums.dedup();
 
-                        return Ok((
-                            Some(clean_name(&name)),
-                            TypeDetails::Enum(enums, s.schema_data.clone()),
-                        ));
+                        if !enums.is_empty() {
+                            return Ok((
+                                Some(clean_name(&name)),
+                                TypeDetails::Enum(enums, s.schema_data.clone()),
+                            ));
+                        }
                     }
 
                     match &st.format {
@@ -2689,6 +2700,7 @@ rustdoc-args = ["--cfg", "docsrs"]
             let mut docs = String::new();
             if proper_name == "GitHub" {
                 docs = template::generate_docs_github(
+                    &api,
                     &to_snake_case(&name),
                     &version,
                     &proper_name,
@@ -2697,6 +2709,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                 );
             } else if proper_name == "Gusto" || proper_name == "Ramp" {
                 docs = template::generate_docs_generic_token(
+                    &api,
                     &to_snake_case(&name),
                     &version,
                     &proper_name,

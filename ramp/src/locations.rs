@@ -115,7 +115,7 @@ impl Locations {
     /**
      * GET a location.
      *
-     * This function performs a `GET` to the `/locations/<id>` endpoint.
+     * This function performs a `GET` to the `/locations/{id}` endpoint.
      *
      * Retrieve a specific location.
      *
@@ -123,23 +123,32 @@ impl Locations {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_location(&self) -> Result<crate::types::Location> {
-        let url = "/locations/<id>".to_string();
+    pub async fn get_location(&self, id: &str) -> Result<crate::types::Location> {
+        let url = format!(
+            "/locations/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 
     /**
      * Update location.
      *
-     * This function performs a `PATCH` to the `/locations/<id>` endpoint.
+     * This function performs a `PATCH` to the `/locations/{id}` endpoint.
      *
      * Modifies a specific location.
      */
     pub async fn patch_location(
         &self,
+        id: &str,
         body: &crate::types::PatchLocationRequest,
     ) -> Result<crate::types::Location> {
-        let url = "/locations/<id>".to_string();
+        let url = format!(
+            "/locations/{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
         self.client
             .patch(
                 &url,

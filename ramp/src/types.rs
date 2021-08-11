@@ -160,47 +160,6 @@ pub struct User {
     pub role: Role,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum PatchRequestRole {
-    #[serde(rename = "BUSINESS_ADMIN")]
-    BusinessAdmin,
-    #[serde(rename = "BUSINESS_BOOKKEEPER")]
-    BusinessBookkeeper,
-    #[serde(rename = "BUSINESS_OWNER")]
-    BusinessOwner,
-    #[serde(rename = "BUSINESS_USER")]
-    BusinessUser,
-    #[serde(rename = "")]
-    Noop,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for PatchRequestRole {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            PatchRequestRole::BusinessAdmin => "BUSINESS_ADMIN",
-            PatchRequestRole::BusinessBookkeeper => "BUSINESS_BOOKKEEPER",
-            PatchRequestRole::BusinessOwner => "BUSINESS_OWNER",
-            PatchRequestRole::BusinessUser => "BUSINESS_USER",
-            PatchRequestRole::Noop => "",
-            PatchRequestRole::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for PatchRequestRole {
-    fn default() -> PatchRequestRole {
-        PatchRequestRole::Noop
-    }
-}
-impl PatchRequestRole {
-    pub fn is_noop(&self) -> bool {
-        matches!(self, PatchRequestRole::Noop)
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PatchRequest {
     #[serde(
@@ -222,7 +181,7 @@ pub struct PatchRequest {
     )]
     pub location_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub role: Option<PatchRequestRole>,
+    pub role: Option<Role>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -1659,7 +1618,7 @@ pub struct GetReceiptsResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetResponse {
+pub struct Reimbursement {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -1700,8 +1659,8 @@ pub struct GetResponse {
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct GetReimbursementsResponse {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub data: Option<GetResponse>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub data: Vec<Reimbursement>,
     #[serde(default)]
     pub page: Page,
 }

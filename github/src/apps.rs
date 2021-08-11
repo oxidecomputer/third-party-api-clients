@@ -896,7 +896,7 @@ impl Apps {
      *
      * * `plan_id: i64` -- plan_id parameter.
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Direction` -- To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
+     * * `direction: crate::types::Order` -- To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -904,7 +904,7 @@ impl Apps {
         &self,
         plan_id: i64,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
@@ -950,7 +950,7 @@ impl Apps {
         &self,
         plan_id: i64,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -1073,7 +1073,7 @@ impl Apps {
      *
      * * `plan_id: i64` -- plan_id parameter.
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Direction` -- To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
+     * * `direction: crate::types::Order` -- To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -1081,7 +1081,7 @@ impl Apps {
         &self,
         plan_id: i64,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
@@ -1127,7 +1127,7 @@ impl Apps {
         &self,
         plan_id: i64,
         sort: crate::types::Sort,
-        direction: crate::types::Direction,
+        direction: crate::types::Order,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
