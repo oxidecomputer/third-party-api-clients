@@ -23,7 +23,7 @@ impl Employees {
      *
      * * `include: &[String]` -- Include the requested attribute(s) in each employee response.
      */
-    pub async fn get_employees(
+    pub async fn get_employee(
         &self,
         employee_id_or_uuid: &str,
         include: &[String],
@@ -190,7 +190,7 @@ impl Employees {
      *
      * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      */
-    pub async fn get_employee_home_address(
+    pub async fn get_employee_home_addre(
         &self,
         employee_id: &str,
     ) -> Result<crate::types::Location> {

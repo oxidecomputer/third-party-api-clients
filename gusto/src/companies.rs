@@ -19,7 +19,7 @@ impl Companies {
      *
      * Get a company.
      */
-    pub async fn get_companies(&self, company_id_or_uuid: &str) -> Result<crate::types::Company> {
+    pub async fn get_companie(&self, company_id_or_uuid: &str) -> Result<crate::types::Company> {
         let url = format!(
             "/v1/companies/{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),

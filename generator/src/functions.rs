@@ -71,7 +71,7 @@ pub fn generate_files(
 
                 // For this one function, we need it to be recursive since this is how you get
                 // an access token when authenicating on behalf of an app with a JWT.
-                if oid == "apps_create_installation_access_token" {
+                if fn_name == "create_installation_access_token" {
                     a("#[async_recursion::async_recursion]");
                 }
 
@@ -206,6 +206,21 @@ pub fn generate_files(
                 }
             }
 
+            let mut fn_name = oid
+                .trim_start_matches(&tag)
+                .trim_start_matches('_')
+                .to_string();
+            if proper_name != "GitHub"
+                && !response_type.starts_with("Vec<")
+                && !response_type.ends_with("Response")
+                && !response_type.ends_with("Summary")
+                && http::Method::GET == m
+            {
+                // Make sure we don't add an s where we don't need one.
+                // Don't make a function plural where it is not needed.
+                fn_name = fn_name.trim_end_matches('s').to_string();
+            }
+
             // Print our standard function.
             print_fn(
                 &docs,
@@ -215,7 +230,7 @@ pub fn generate_files(
                 &response_type,
                 &template,
                 &fn_inner,
-                oid.trim_start_matches(&tag).trim_start_matches('_'),
+                &fn_name,
             );
 
             // If we are returning a list of things and we have page, etc as
