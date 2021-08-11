@@ -65,7 +65,7 @@ impl CustomIds {
     /**
      * Convert custom id to ramp id.
      *
-     * This function performs a `GET` to the `/custom-id-provider/<entity-type>/<custom-id>/ramp-id` endpoint.
+     * This function performs a `GET` to the `/custom-id-provider/{entity_type}/{custom_id}/ramp-id` endpoint.
      *
      *
      *
@@ -75,15 +75,22 @@ impl CustomIds {
      */
     pub async fn get_entity_type_custom_ramp(
         &self,
+        entity_type: &str,
+        custom_id: &str,
     ) -> Result<crate::types::GetEntityTypeCustomRampResponse> {
-        let url = "/custom-id-provider/<entity-type>/<custom-id>/ramp-id".to_string();
+        let url = format!(
+            "/custom-id-provider/{}/{}/ramp-id",
+            crate::progenitor_support::encode_path(&entity_type.to_string()),
+            crate::progenitor_support::encode_path(&custom_id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 
     /**
      * Convert ramp id to custom id.
      *
-     * This function performs a `GET` to the `/custom-id-provider/<entity-type>/<ramp-id>/custom-id` endpoint.
+     * This function performs a `GET` to the `/custom-id-provider/{entity_type}/{ramp_id}/custom-id` endpoint.
      *
      * **Parameters:**
      *
@@ -91,23 +98,35 @@ impl CustomIds {
      */
     pub async fn get_entity_type_ramp_custom(
         &self,
+        entity_type: &str,
+        ramp_id: &str,
     ) -> Result<crate::types::GetEntityTypeRampCustomResponse> {
-        let url = "/custom-id-provider/<entity-type>/<ramp-id>/custom-id".to_string();
+        let url = format!(
+            "/custom-id-provider/{}/{}/custom-id",
+            crate::progenitor_support::encode_path(&entity_type.to_string()),
+            crate::progenitor_support::encode_path(&ramp_id.to_string()),
+        );
+
         self.client.get(&url, None).await
     }
 
     /**
      * Create custom id link.
      *
-     * This function performs a `POST` to the `/custom-id-provider/<entity-type>/custom-id-link` endpoint.
+     * This function performs a `POST` to the `/custom-id-provider/{entity_type}/custom-id-link` endpoint.
      *
      * Create a mapping between custom\_id and ramp\_id under the namespace specified by entity\_type.
      */
     pub async fn post_custom_provider_entity_type_link(
         &self,
+        entity_type: &str,
         body: &crate::types::PostCustomProviderEntityTypeLinkRequest,
     ) -> Result<()> {
-        let url = "/custom-id-provider/<entity-type>/custom-id-link".to_string();
+        let url = format!(
+            "/custom-id-provider/{}/custom-id-link",
+            crate::progenitor_support::encode_path(&entity_type.to_string()),
+        );
+
         self.client
             .post(
                 &url,
