@@ -1860,6 +1860,8 @@ fn gen(
         a(r#"#[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]"#);
         a("pub mod http_cache;");
     }
+    a("#[cfg(test)]");
+    a("mod tests;");
     // Hopefully there is never a "tag" named after these reserved libs.
     a("pub mod types;");
     a("#[doc(hidden)]");

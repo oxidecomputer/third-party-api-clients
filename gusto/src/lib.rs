@@ -95,6 +95,8 @@ pub mod locations;
 pub mod pay_schedules;
 pub mod payroll;
 pub mod terminations;
+#[cfg(test)]
+mod tests;
 pub mod time_off_requests;
 pub mod types;
 #[doc(hidden)]
