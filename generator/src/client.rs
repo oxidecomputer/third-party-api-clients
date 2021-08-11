@@ -581,49 +581,97 @@ impl Client {{
         )
     }}
 
-    fn request<B>(
+    async fn url_and_auth(
+        &self,
+        uri: &str,
+    ) -> Result<(reqwest::Url, Option<String>)> {{
+        let parsed_url = uri.parse::<reqwest::Url>();
+
+        let auth = format!("Bearer {{}}", self.token);
+        parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+    }}
+
+    fn request<Out>(
         &self,
         method: reqwest::Method,
-        path: &str,
-        body: B,
-        query: Option<&[(&str, &str)]>,
-    ) -> reqwest::Request
-    where
-        B: Serialize,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<Out>
+        where
+        Out: serde::de::DeserializeOwned + 'static + Send,
     {{
-        // Build the url.
-        let base = reqwest::Url::parse(DEFAULT_HOST).unwrap();
-        let mut p = path.to_string();
-        // Make sure we have the leading "/".
-        if !p.starts_with('/') {{
-            p = format!("/{{}}", p);
-        }}
-        let url = base.join(&p).unwrap();
+        let (url, auth) = self.url_and_auth(uri).await?;
 
-        let bt = format!("Bearer {{}}", self.token);
-        let bearer = reqwest::header::HeaderValue::from_str(&bt).unwrap();
+        let instance = <&Client>::clone(&self);
+
+        let mut req = instance.client.request(method, url);
 
         // Set the default headers.
-        let mut headers =reqwest::header::HeaderMap::new();
-        headers.append(reqwest::header::AUTHORIZATION, bearer);
-        headers.append(
+        req = req.header(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+        req = req.header(
             reqwest::header::CONTENT_TYPE,
             reqwest::header::HeaderValue::from_static("application/json"),
         );
 
-        let mut rb = self.client.request(method.clone(), url).headers(headers);
-
-        if let Some(val) = query {{
-            rb = rb.query(&val);
+        if let Some(auth_str) = auth {{
+            req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }}
 
-        // Add the body, this is to ensure our GET and DELETE calls succeed.
-        if method != reqwest::Method::GET && method != reqwest::Method::DELETE {{
-            rb = rb.json(&body);
+        if let Some(body) = body {{
+            //println!("Body: {{:?}}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
+            req = req.body(body);
         }}
+        //println!("Request: {{:?}}", &req);
+        let response = req.send().await?;
 
-        // Build the request.
-        rb.build().unwrap()
+        let status = response.status();
+
+        let response_body = response.bytes().await?;
+
+        if status.is_success() {{
+            //println!("response payload {{}}", String::from_utf8_lossy(&response_body));
+            let parsed_response = if status == http::StatusCode::NO_CONTENT {{
+                serde_json::from_str("null")
+            }} else {{
+                serde_json::from_slice::<Out>(&response_body)
+            }};
+            parsed_response.map(|out| (link, out)).map_err(Error::from)
+        }} else {{
+            /*println!("error status: {{:?}}, response payload: {{}}",
+                status,
+                String::from_utf8_lossy(&response_body),
+            );*/
+
+            let error = if response_body.is_empty() {{
+                anyhow!("code: {{}}, empty response", status)
+            }} else {{
+                anyhow!(
+                    "code: {{}}, error: {{:?}}",
+                    status,
+                    String::from_utf8_lossy(&response_body),
+                )
+            }};
+
+            Err(error)
+        }}
+    }}
+
+    async fn request_entity<D>(
+        &self,
+        method: http::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        let (_, r) = self
+            .request(method, uri, body)
+            .await?;
+        Ok(r)
     }}
 
     pub fn user_consent_url(&self) -> String {{
@@ -709,18 +757,10 @@ impl Client {{
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {{
-        self.get_media(uri, crate::utils::MediaType::Json).await
-    }}
-
-    async fn get_media<D>(&self, uri: &str, media: crate::utils::MediaType) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
         self.request_entity(
             http::Method::GET,
-            &(self.host.clone() + uri),
+            &(DEFAULT_HOST.clone() + uri),
             None,
-            media,
         ).await
     }}
 
@@ -737,9 +777,8 @@ impl Client {{
     {{
         self.request(
             http::Method::GET,
-            &(self.host.clone() + uri),
+            &(DEFAULT_HOST.clone() + uri),
             None,
-            crate::utils::MediaType::Json,
         ).await
     }}
 
@@ -751,7 +790,6 @@ impl Client {{
             http::Method::GET,
             url.as_str(),
             None,
-            crate::utils::MediaType::Json,
         ).await
     }}
 
@@ -762,7 +800,6 @@ impl Client {{
         self.post_media(
             uri,
             message,
-            crate::utils::MediaType::Json,
         ).await
     }}
 
@@ -770,28 +807,14 @@ impl Client {{
         &self,
         uri: &str,
         message: Option<reqwest::Body>,
-        media: crate::utils::MediaType,
     ) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {{
         self.request_entity(
             http::Method::POST,
-            &(self.host.clone() + uri),
+            &(DEFAULT_HOST.clone() + uri),
             message,
-            media,
-        ).await
-    }}
-
-    async fn patch_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.request_entity(
-            http::Method::PATCH,
-            &(self.host.clone() + uri),
-            message,
-            media,
         ).await
     }}
 
@@ -799,25 +822,21 @@ impl Client {{
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {{
-        self.patch_media(uri, message, crate::utils::MediaType::Json).await
+        self.request_entity(
+            http::Method::PATCH,
+            &(DEFAULT_HOST.clone() + uri),
+            message,
+        ).await
     }}
 
     async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {{
-        self.put_media(uri, message, crate::utils::MediaType::Json).await
-    }}
-
-    async fn put_media<D>(&self, uri: &str, message: Option<reqwest::Body>, media: crate::utils::MediaType) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
         self.request_entity(
             http::Method::PUT,
-            &(self.host.clone() + uri),
+            &(DEFAULT_HOST.clone() + uri),
             message,
-            media,
         ).await
     }}
 
@@ -827,9 +846,8 @@ impl Client {{
     {{
         self.request_entity(
             http::Method::DELETE,
-            &(self.host.clone() + uri),
+            &(DEFAULT_HOST.clone() + uri),
             message,
-            crate::utils::MediaType::Json,
         ).await
     }}
 

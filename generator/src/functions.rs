@@ -233,9 +233,9 @@ pub fn generate_files(
                     fn_name = "list_all".to_string();
                 } else if fn_name == "get" {
                     fn_name = "get_all".to_string();
-                } else if fn_name.starts_with("get_") {
+                } else if fn_name.starts_with("get_") && !fn_name.starts_with("get_all") {
                     fn_name = fn_name.replace("get_", "get_all_");
-                } else if fn_name.starts_with("list_") {
+                } else if fn_name.starts_with("list_") && !fn_name.starts_with("list_all") {
                     fn_name = fn_name.replace("list_", "list_all_");
                 }
 
