@@ -40,7 +40,7 @@ impl PaySchedules {
      *
      * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      */
-    pub async fn get_company_pay_schedules(
+    pub async fn get_all_company_pay_schedules(
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::PaySchedule>> {

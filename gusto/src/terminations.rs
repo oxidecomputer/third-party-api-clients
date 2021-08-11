@@ -44,7 +44,7 @@ impl Terminations {
      *
      * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
      */
-    pub async fn get_employees_employee_id_terminations(
+    pub async fn get_all_employees_employee_id_terminations(
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::Termination>> {

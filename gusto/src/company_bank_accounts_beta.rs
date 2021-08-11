@@ -44,7 +44,7 @@ impl CompanyBankAccountsBeta {
      *
      * Returns all company bank accounts
      */
-    pub async fn get_company_bank_accounts(
+    pub async fn get_all_company_bank_accounts(
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::CompanyBankAccount>> {

@@ -97,7 +97,7 @@ impl Compensations {
      *
      * Use the `flsa_status` to determine if an employee is elibgle for overtime.
      */
-    pub async fn get_jobs_job_id_compensations(
+    pub async fn get_all_jobs_job_id_compensations(
         &self,
         job_id: &str,
     ) -> Result<Vec<crate::types::Compensation>> {

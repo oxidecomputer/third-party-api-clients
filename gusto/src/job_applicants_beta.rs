@@ -44,7 +44,7 @@ impl JobApplicantsBeta {
      *
      * Returns all job applicants for a company.
      */
-    pub async fn get_company_job_applicants(
+    pub async fn get_all_company_job_applicants(
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::JobApplicant>> {

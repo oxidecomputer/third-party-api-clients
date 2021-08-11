@@ -44,7 +44,7 @@ impl Locations {
      *
      * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
      */
-    pub async fn get_company_locations(
+    pub async fn get_all_company_locations(
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Location>> {

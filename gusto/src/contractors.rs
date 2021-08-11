@@ -84,7 +84,7 @@ impl Contractors {
      *
      * Get all contractors, active and inactive, individual and business, for a company.
      */
-    pub async fn get_company_contractors(
+    pub async fn get_all_company_contractors(
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Contractor>> {

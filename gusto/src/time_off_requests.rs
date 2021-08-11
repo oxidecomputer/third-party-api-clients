@@ -96,7 +96,7 @@ impl TimeOffRequests {
      * Returns all time off requests where the request start date is equal to or after May 1, 2019 and the request end date is equal to or before August 31, 2019.
      *
      */
-    pub async fn get_company_time_off_requests(
+    pub async fn get_all_company_time_off_requests(
         &self,
         company_id: &str,
         start_date: &str,

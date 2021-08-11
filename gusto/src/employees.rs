@@ -130,7 +130,7 @@ impl Employees {
      *
      * Get all of the employees, onboarding, active and terminated, for a given company.
      */
-    pub async fn get_company_employees(
+    pub async fn get_all_company_employees(
         &self,
         company_id_or_uuid: &str,
         terminated: bool,

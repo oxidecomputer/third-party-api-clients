@@ -97,7 +97,7 @@ impl Jobs {
      *
      * Get all of the jobs that an employee holds.
      */
-    pub async fn get_employees_employee_id_jobs(
+    pub async fn get_all_employees_employee_id_jobs(
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::Job>> {

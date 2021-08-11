@@ -37,7 +37,7 @@ impl Benefits {
      *
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
-    pub async fn get_benefits(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
+    pub async fn get_all_benefits(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
         let url = "/v1/benefits".to_string();
         self.client.get_all_pages(&url).await
     }
@@ -95,7 +95,7 @@ impl Benefits {
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn get_company_company_benefits(
+    pub async fn get_all_company_company_benefits(
         &self,
         company_id: &str,
     ) -> Result<Vec<crate::types::CompanyBenefit>> {
@@ -214,7 +214,7 @@ impl Benefits {
      *
      * Returns an array of all employee benefits for this employee
      */
-    pub async fn get_employees_employee_id_employee_benefits(
+    pub async fn get_all_employees_employee_id_employee_benefits(
         &self,
         employee_id: &str,
     ) -> Result<Vec<crate::types::EmployeeBenefit>> {

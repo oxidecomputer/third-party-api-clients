@@ -231,9 +231,12 @@ pub fn generate_files(
 
                 if fn_name == "list" {
                     fn_name = "list_all".to_string();
-                }
-                if fn_name == "get" {
+                } else if fn_name == "get" {
                     fn_name = "get_all".to_string();
+                } else if fn_name.starts_with("get_") {
+                    fn_name = fn_name.replace("get_", "get_all_");
+                } else if fn_name.starts_with("list_") {
+                    fn_name = fn_name.replace("list_", "list_all_");
                 }
 
                 // Now let's print the new function.

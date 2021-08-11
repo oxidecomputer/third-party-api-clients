@@ -41,7 +41,10 @@ impl AdminsBeta {
      *
      * Returns a list of all the admins at a company
      */
-    pub async fn get_company_admins(&self, company_id: &str) -> Result<Vec<crate::types::Admin>> {
+    pub async fn get_all_company_admins(
+        &self,
+        company_id: &str,
+    ) -> Result<Vec<crate::types::Admin>> {
         let url = format!(
             "/v1/companies/{}/admins",
             crate::progenitor_support::encode_path(&company_id.to_string()),

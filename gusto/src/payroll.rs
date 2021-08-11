@@ -68,7 +68,7 @@ impl Payroll {
      *
      * By default, this endpoint returns every current and past pay period for a company. Since companies can process payroll as often as every week, there can be up to 53 pay periods a year. If a company has been running payroll with Gusto for five years, this endpoint could return up to 265 pay periods. Use the `start_date` and `end_date` parameters to reduce the scope of the response.
      */
-    pub async fn get_company_pay_periods(
+    pub async fn get_all_company_pay_periods(
         &self,
         company_id_or_uuid: &str,
         start_date: &str,
@@ -172,7 +172,7 @@ impl Payroll {
      * * Hours are represented to the thousands place; dollar amounts are represented to the cent.
      * * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
      */
-    pub async fn get_company_payrolls(
+    pub async fn get_all_company_payrolls(
         &self,
         company_id_or_uuid: &str,
         processed: bool,
