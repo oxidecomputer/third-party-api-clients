@@ -98,6 +98,7 @@ $(ZOOM_SPEC_DIR):
 $(ZOOM_SPEC): $(ZOOM_SPEC_DIR)
 	npx swagger2openapi \
 		--outfile $@ \
+		--patch \
 		$(ZOOM_SPEC_REMOTE)
 
 zoom: target/debug/generator $(ZOOM_SPEC)
