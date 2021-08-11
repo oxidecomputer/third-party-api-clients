@@ -2718,7 +2718,15 @@ rustdoc-args = ["--cfg", "docsrs"]
             }
             let mut readme = root.clone();
             readme.push("README.md");
-            save(readme, docs.replace("//! ", "").replace("//!", "").as_str())?;
+            save(
+                readme,
+                // Add a title to the README.md so it looks nicer in GitHub.
+                &format!(
+                    "# `{}`\n\n{}",
+                    name,
+                    docs.replace("//! ", "").replace("//!", "").as_str()
+                ),
+            )?;
 
             /*
              * Create the src/ directory:

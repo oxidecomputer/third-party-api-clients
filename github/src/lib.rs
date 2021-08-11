@@ -1,25 +1,27 @@
 //! A fully generated, opinionated API client library for GitHub.
 //!
-//! #### API Details
+//! ## API Details
 //!
 //! GitHub's v3 REST API.
 //!
 //! [API Terms of Service](https://docs.github.com/articles/github-terms-of-service)
 //!
-//! API spec contact details:
+//! ### Contact
+//!
 //!
 //! | name | url |
 //! |----|----|
 //! | Support | https://support.github.com/contact?tags=rest-api |
 //!
-//! API spec license:
+//! ### License
+//!
 //!
 //! | name | url |
 //! |----|----|
 //! | MIT | https://spdx.org/licenses/MIT |
 //!
 //!
-//! #### Client Details
+//! ## Client Details
 //!
 //! This client is generated from the [GitHub OpenAPI
 //! specs](https://github.com/github/rest-api-description) based on OpenAPI spec version `1.1.4`. This way it will remain

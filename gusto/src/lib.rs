@@ -1,12 +1,13 @@
 //! A fully generated, opinionated API client library for Gusto.
 //!
-//! #### API Details
+//! ## API Details
 //!
 //! Welcome to Gusto's API documentation.
 //!
 //! [API Terms of Service](https://gusto.com/about/terms/developer-terms-of-service)
 //!
-//! API spec contact details:
+//! ### Contact
+//!
 //!
 //! | name | email |
 //! |----|----|
@@ -14,7 +15,7 @@
 //!
 //!
 //!
-//! #### Client Details
+//! ## Client Details
 //!
 //! This client is generated from the [Gusto OpenAPI
 //! specs](https://github.com/Gusto-API/api.gusto.dev) based on OpenAPI spec version `1.0`. This way it will remain

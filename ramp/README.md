@@ -1,6 +1,8 @@
+# `ramp-api`
+
 A fully generated, opinionated API client library for Ramp.
 
-#### API Details
+## API Details
 
 Ramp's developer API makes it easier for companies to programmatically set up and manage their card program.
 
@@ -11,7 +13,7 @@ It provides the ability to automate card issuing and the ability to integrate fe
 
 
 
-#### Client Details
+## Client Details
 
 This client is generated from the [Ramp OpenAPI
 specs](https://github.com/sumatokado/ramp-developer) based on OpenAPI spec version `1.0`. This way it will remain

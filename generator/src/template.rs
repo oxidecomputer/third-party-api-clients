@@ -526,7 +526,7 @@ pub fn generate_docs_openapi_info(
             contact.push_str("|\n//! ");
         }
 
-        contact = format!("API spec contact details:\n//! \n{}", contact);
+        contact = format!("### Contact\n//!\n//! \n{}", contact);
     }
 
     let mut license = String::new();
@@ -557,7 +557,7 @@ pub fn generate_docs_openapi_info(
         }
         license.push_str("|\n//! ");
 
-        license = format!("API spec license:\n//! \n{}", license);
+        license = format!("### License\n//!\n//! \n{}", license);
     }
 
     let api_version = format!("based on OpenAPI spec version `{}`", api.info.version);
@@ -565,7 +565,7 @@ pub fn generate_docs_openapi_info(
     format!(
         r#"//! A fully generated, opinionated API client library for {}.
 //!
-//! #### API Details
+//! ## API Details
 //!
 //! {}
 //!
@@ -574,7 +574,7 @@ pub fn generate_docs_openapi_info(
 //! {}
 //! {}
 //!
-//! #### Client Details
+//! ## Client Details
 //!
 //! This client is generated from the [{} OpenAPI
 //! specs]({}) {}. This way it will remain
