@@ -567,6 +567,7 @@ pub struct Termination {
  * The unit accompanying the compensation rate. If the employee is an owner, rate should be 'Paycheck'.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PaymentUnit {
     #[serde(rename = "Hour")]
     Hour,
@@ -613,6 +614,7 @@ impl PaymentUnit {
  * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum FlsaStatus {
     #[serde(rename = "Exempt")]
     Exempt,
@@ -898,6 +900,7 @@ pub struct Admin {
  * The tax payer type of the company.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum EntityType {
     #[serde(rename = "Association")]
     Association,
@@ -965,6 +968,7 @@ impl EntityType {
  * The Gusto product tier of the company.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Tier {
     #[serde(rename = "basic")]
     Basic,
@@ -1011,6 +1015,7 @@ impl Tier {
  * The status of the company in Gusto. "Approved" companies may run payroll with Gusto. "Not Approved" companies may not yet run payroll with Gusto. In order to run payroll, the company may need to complete onboarding or contact support. "Suspended" companies may not run payroll with Gusto. In order to unsuspend their account, the company must contact support.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum CompanyStatus {
     #[serde(rename = "Approved")]
     Approved,
@@ -1336,6 +1341,7 @@ pub struct Company {
  * The contractor's wage type, either "Fixed" or "Hourly".
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum WageType {
     #[serde(rename = "Fixed")]
     Fixed,
@@ -1373,6 +1379,7 @@ impl WageType {
  * The contractor's type, either "Individual" or "Business".
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Type {
     #[serde(rename = "Business")]
     Business,
@@ -1587,6 +1594,7 @@ pub struct Contractor {
  * The payment method.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PaymentMethod {
     #[serde(rename = "Check")]
     Check,
@@ -1630,6 +1638,7 @@ impl PaymentMethod {
  * The wage type for the payment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ContractorPaymentWageType {
     #[serde(rename = "Fixed")]
     Fixed,
@@ -1838,6 +1847,7 @@ pub struct ContractorPaymentSummary {
  * The status of the time off request.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TimeOffRequestStatus {
     #[serde(rename = "approved")]
     Approved,
@@ -1878,6 +1888,7 @@ impl TimeOffRequestStatus {
  * The type of time off request.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum RequestType {
     #[serde(rename = "sick")]
     Sick,
@@ -2115,6 +2126,7 @@ pub struct CurrentUser {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Frequency {
     #[serde(rename = "Every other week")]
     EveryOtherWeek,
@@ -2226,6 +2238,7 @@ pub struct PaySchedule {
  * Bank account type
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum AccountType {
     #[serde(rename = "Checking")]
     Checking,
@@ -2267,6 +2280,7 @@ impl AccountType {
  *   'verified' means the bank account is verified.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum VerificationStatus {
     #[serde(rename = "awaiting_deposits")]
     AwaitingDeposits,
@@ -2543,6 +2557,7 @@ pub struct EarningType {
  * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum DeductionReducesTaxableIncome {
     #[serde(rename = "does_not_reduce_taxable_income")]
     DoesNotReduceTaxableIncome,
@@ -3000,6 +3015,7 @@ pub struct Totals {
  * The employee's compensation payment method. This value is only available for processed payrolls.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PayrollEmployeeCompensationsPaymentMethod {
     #[serde(rename = "Check")]
     Check,
@@ -3358,6 +3374,7 @@ pub struct PayrollData {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum CustomFieldType {
     #[serde(rename = "currency")]
     Currency,
@@ -3482,6 +3499,7 @@ pub struct CompanyCustomField {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum GustoPersonType {
     #[serde(rename = "Candidate")]
     Candidate,
@@ -3719,6 +3737,7 @@ pub struct EarningTypeListResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Include {
     #[serde(rename = "custom_fields")]
     CustomFields,
@@ -4075,6 +4094,7 @@ pub struct PutLocationRequest {
  *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PutContractorRequestWageType {
     #[serde(rename = "Fixed")]
     Fixed,
@@ -4191,6 +4211,7 @@ pub struct PutContractorRequest {
  *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PostCompanyContractorRequestType {
     #[serde(rename = "Business")]
     Business,
@@ -4229,6 +4250,7 @@ impl PostCompanyContractorRequestType {
  *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PostCompanyContractorRequestWageType {
     #[serde(rename = "Fixed")]
     Fixed,
@@ -4657,6 +4679,7 @@ pub struct PutCompanyPayScheduleRequest {
  * The bank account type
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PostCompanyBankAccountRequestType {
     #[serde(rename = "Checking")]
     Checking,
@@ -5037,6 +5060,7 @@ pub struct PutEmployeeBenefitRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum GetCompanyPayrollsInclude {
     #[serde(rename = "benefits")]
     Benefits,
@@ -5074,6 +5098,7 @@ impl GetCompanyPayrollsInclude {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OffCycleReason {
     #[serde(rename = "Bonus")]
     Bonus,
@@ -5131,6 +5156,7 @@ pub struct PostCompanyPayrollRequest {
  * Include the requested attribute in the employee_compensations attribute in the response
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum GetCompanyPayrollsIncludeData {
     #[serde(rename = "benefits")]
     Benefits,
@@ -5532,6 +5558,7 @@ pub struct GetCompanyCustomFieldsResponse {
  * Must be "Employee" if send_offer is set to true.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OnboardingPersonType {
     #[serde(rename = "Contractor")]
     Contractor,

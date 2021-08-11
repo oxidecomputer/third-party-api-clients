@@ -41,6 +41,7 @@ pub struct TaskResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Role {
     #[serde(rename = "BUSINESS_ADMIN")]
     BusinessAdmin,
@@ -160,6 +161,7 @@ pub struct User {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PatchRequestRole {
     #[serde(rename = "BUSINESS_ADMIN")]
     BusinessAdmin,
@@ -290,6 +292,7 @@ pub struct AccountingCategories {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Type {
     #[serde(rename = "POLICY_VIOLATION_FROM_ADMIN")]
     PolicyViolationFromAdmin,
@@ -347,6 +350,7 @@ pub struct PolicyViolations {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum GetTransactionResponseDataDisputesType {
     #[serde(rename = "DISPUTE_CANCELLED")]
     DisputeCancelled,
@@ -677,6 +681,7 @@ pub struct Fulfillment {
  * Time interval to apply limit to.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Interval {
     #[serde(rename = "DAILY")]
     Daily,
@@ -1111,6 +1116,7 @@ pub struct PostResourcesCardVirtualRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TokenType {
     #[serde(rename = "Bearer")]
     Bearer,
@@ -1294,6 +1300,7 @@ pub struct GetResourcesDeferredResponseData {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum GetResourcesDeferredResponseStatus {
     #[serde(rename = "ERROR")]
     Error,
@@ -1348,6 +1355,7 @@ pub struct GetResourcesDeferredResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Icon {
     #[serde(rename = "AdvertisingIcon")]
     AdvertisingIcon,

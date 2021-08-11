@@ -27,7 +27,7 @@ const EMPLOYEE: &str = r#"{
           "id": 7757869444844982,
           "version": "2cd4b18662395eb53bcf80d5b5447f36",
           "payment_unit": "Year",
-          "flsa_status": "Exempt",
+          "flsa_status": "Commission Only Exempt",
           "job_id": 7757869441038001,
           "effective_date": "2021-01-20",
           "rate": "70000.00"
@@ -77,7 +77,7 @@ const EMPLOYEE: &str = r#"{
       "description": "Employee Level",
       "type": "text",
       "value": "2",
-      "selection_options": null
+      "selection_options": []
     },
     {
       "id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59",
@@ -86,7 +86,7 @@ const EMPLOYEE: &str = r#"{
       "description": "What is your t-shirt size?",
       "type": "text",
       "value": "md",
-      "selection_options": null
+      "selection_options": []
     },
     {
       "id": "3796e08d-c2e3-434c-b4de-4ce1893e7b59",

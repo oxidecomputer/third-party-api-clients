@@ -1746,6 +1746,7 @@ fn render_param(
     }
 
     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+    a("#[serde(untagged)]");
 
     a(&format!("pub enum {} {{", sn));
     for e in &enums {

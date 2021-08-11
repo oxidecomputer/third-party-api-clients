@@ -42,7 +42,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.17 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.18 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \
@@ -58,7 +58,7 @@ $(GUSTO_SPEC): $(GUSTO_SPEC_DIR)
 	curl -sSL $(GUSTO_SPEC_REMOTE) -o $@
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.5 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.6 \
 		-o gusto \
 		-n gusto-api \
 		--proper-name Gusto \
@@ -79,7 +79,7 @@ $(RAMP_SPEC): $(RAMP_SPEC_REFERENCE)
 		-o $@ $?
 
 ramp: target/debug/generator $(RAMP_SPEC)
-	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.0 \
+	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.1 \
 		-o ramp \
 		-n ramp-api \
 		--proper-name Ramp \

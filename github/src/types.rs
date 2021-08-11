@@ -927,6 +927,7 @@ pub struct Enterprise {
  * The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Actions {
     #[serde(rename = "read")]
     Read,
@@ -964,6 +965,7 @@ impl Actions {
  * The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Administration {
     #[serde(rename = "read")]
     Read,
@@ -1001,6 +1003,7 @@ impl Administration {
  * The level of permission to grant the access token for checks on code. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Checks {
     #[serde(rename = "read")]
     Read,
@@ -1038,6 +1041,7 @@ impl Checks {
  * The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ContentReferences {
     #[serde(rename = "read")]
     Read,
@@ -1075,6 +1079,7 @@ impl ContentReferences {
  * The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Contents {
     #[serde(rename = "read")]
     Read,
@@ -1112,6 +1117,7 @@ impl Contents {
  * The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Deployments {
     #[serde(rename = "read")]
     Read,
@@ -1149,6 +1155,7 @@ impl Deployments {
  * The level of permission to grant the access token for managing repository environments. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Environments {
     #[serde(rename = "read")]
     Read,
@@ -1186,6 +1193,7 @@ impl Environments {
  * The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Issues {
     #[serde(rename = "read")]
     Read,
@@ -1223,6 +1231,7 @@ impl Issues {
  * The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Metadata {
     #[serde(rename = "read")]
     Read,
@@ -1260,6 +1269,7 @@ impl Metadata {
  * The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Packages {
     #[serde(rename = "read")]
     Read,
@@ -1297,6 +1307,7 @@ impl Packages {
  * The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Pages {
     #[serde(rename = "read")]
     Read,
@@ -1334,6 +1345,7 @@ impl Pages {
  * The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullRequests {
     #[serde(rename = "read")]
     Read,
@@ -1371,6 +1383,7 @@ impl PullRequests {
  * The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum RepositoryHooks {
     #[serde(rename = "read")]
     Read,
@@ -1408,6 +1421,7 @@ impl RepositoryHooks {
  * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum RepositoryProjects {
     #[serde(rename = "admin")]
     Admin,
@@ -1448,6 +1462,7 @@ impl RepositoryProjects {
  * The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SecretScanningAlerts {
     #[serde(rename = "read")]
     Read,
@@ -1485,6 +1500,7 @@ impl SecretScanningAlerts {
  * The level of permission to grant the access token to manage repository secrets. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Secrets {
     #[serde(rename = "read")]
     Read,
@@ -1522,6 +1538,7 @@ impl Secrets {
  * The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SecurityEvents {
     #[serde(rename = "read")]
     Read,
@@ -1559,6 +1576,7 @@ impl SecurityEvents {
  * The level of permission to grant the access token to manage just a single file. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SingleFile {
     #[serde(rename = "read")]
     Read,
@@ -1596,6 +1614,7 @@ impl SingleFile {
  * The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Statuses {
     #[serde(rename = "read")]
     Read,
@@ -1633,6 +1652,7 @@ impl Statuses {
  * The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum VulnerabilityAlerts {
     #[serde(rename = "read")]
     Read,
@@ -1667,6 +1687,7 @@ impl VulnerabilityAlerts {
  * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Workflows {
     #[serde(rename = "write")]
     Write,
@@ -1701,6 +1722,7 @@ impl Workflows {
  * The level of permission to grant the access token for organization teams and members. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Members {
     #[serde(rename = "read")]
     Read,
@@ -1738,6 +1760,7 @@ impl Members {
  * The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrganizationAdministration {
     #[serde(rename = "read")]
     Read,
@@ -1775,6 +1798,7 @@ impl OrganizationAdministration {
  * The level of permission to grant the access token to manage the post-receive hooks for an organization. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrganizationHooks {
     #[serde(rename = "read")]
     Read,
@@ -1812,6 +1836,7 @@ impl OrganizationHooks {
  * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrganizationPlan {
     #[serde(rename = "read")]
     Read,
@@ -1846,6 +1871,7 @@ impl OrganizationPlan {
  * The level of permission to grant the access token to manage organization projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrganizationProjects {
     #[serde(rename = "admin")]
     Admin,
@@ -1886,6 +1912,7 @@ impl OrganizationProjects {
  * The level of permission to grant the access token for organization packages published to GitHub Packages. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrganizationPackages {
     #[serde(rename = "read")]
     Read,
@@ -1923,6 +1950,7 @@ impl OrganizationPackages {
  * The level of permission to grant the access token to manage organization secrets. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrganizationSecrets {
     #[serde(rename = "read")]
     Read,
@@ -1960,6 +1988,7 @@ impl OrganizationSecrets {
  * The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrganizationSelfHostedRunners {
     #[serde(rename = "read")]
     Read,
@@ -1997,6 +2026,7 @@ impl OrganizationSelfHostedRunners {
  * The level of permission to grant the access token to view and manage users blocked by the organization. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrganizationUserBlocking {
     #[serde(rename = "read")]
     Read,
@@ -2034,6 +2064,7 @@ impl OrganizationUserBlocking {
  * The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamDiscussions {
     #[serde(rename = "read")]
     Read,
@@ -2231,6 +2262,7 @@ pub struct AppPermissions {
  * Describe whether all repositories have been selected or there's a selection involved
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum RepositorySelection {
     #[serde(rename = "all")]
     All,
@@ -3601,6 +3633,7 @@ pub struct Repository {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum InstallationTokenRepositorySelection {
     #[serde(rename = "all")]
     All,
@@ -3888,6 +3921,7 @@ pub struct CodeOfConduct {
  * The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum EnabledOrganizations {
     #[serde(rename = "all")]
     All,
@@ -3928,6 +3962,7 @@ impl EnabledOrganizations {
  * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum AllowedActions {
     #[serde(rename = "all")]
     All,
@@ -4146,6 +4181,7 @@ pub struct RunnerGroupsEnterprise {
  * The type of label. Read-only labels are applied automatically when the runner is configured.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Type {
     #[serde(rename = "custom")]
     Custom,
@@ -4833,6 +4869,7 @@ pub struct Label {
  * The state of the milestone.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum State {
     #[serde(rename = "closed")]
     Closed,
@@ -4951,6 +4988,7 @@ pub struct Milestone {
  * How the author is associated with the repository.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum AuthorAssociation {
     #[serde(rename = "COLLABORATOR")]
     Collaborator,
@@ -8051,6 +8089,7 @@ pub struct OrganizationFull {
  * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum EnabledRepositories {
     #[serde(rename = "all")]
     All,
@@ -8180,6 +8219,7 @@ pub struct RunnerGroupsOrg {
  * Visibility of a secret
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Visibility {
     #[serde(rename = "all")]
     All,
@@ -8548,6 +8588,7 @@ pub struct OrgHook {
  * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum InteractionGroup {
     #[serde(rename = "collaborators_only")]
     CollaboratorsOnly,
@@ -8606,6 +8647,7 @@ pub struct InteractionLimits {
  * The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum InteractionExpiry {
     #[serde(rename = "one_day")]
     OneDay,
@@ -8875,6 +8917,7 @@ pub struct Team {
  * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrgMembershipState {
     #[serde(rename = "active")]
     Active,
@@ -8912,6 +8955,7 @@ impl OrgMembershipState {
  * The user's membership type in the organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Role {
     #[serde(rename = "admin")]
     Admin,
@@ -9067,6 +9111,7 @@ pub struct Migration {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PackageType {
     #[serde(rename = "container")]
     Container,
@@ -9113,6 +9158,7 @@ impl PackageType {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PackageVisibility {
     #[serde(rename = "private")]
     Private,
@@ -9301,6 +9347,7 @@ pub struct PackageVersion {
  * The baseline permission that all organization members have on this project. Only present if owner is an organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrganizationPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -9499,6 +9546,7 @@ pub struct GroupMapping {
  * The level of privacy this team should have
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Privacy {
     #[serde(rename = "closed")]
     Closed,
@@ -9846,6 +9894,7 @@ pub struct TeamDiscussionComment {
  * The reaction to use
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Content {
     #[serde(rename = "+1")]
     PlusOne,
@@ -9930,6 +9979,7 @@ pub struct Reaction {
  * The role of the user in the team.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamMembershipRole {
     #[serde(rename = "maintainer")]
     Maintainer,
@@ -9959,6 +10009,7 @@ impl Default for TeamMembershipRole {
  * The state of the user's membership in the team.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamMembershipState {
     #[serde(rename = "active")]
     Active,
@@ -10933,6 +10984,7 @@ pub struct FullRepositoryPermissions {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum FullRepositorySecurityAnalysisAdvancedStatus {
     #[serde(rename = "disabled")]
     Disabled,
@@ -11594,6 +11646,7 @@ pub struct Artifact {
  * The phase of the lifecycle that the job is currently in.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum JobStatus {
     #[serde(rename = "completed")]
     Completed,
@@ -12149,6 +12202,7 @@ pub struct EnvironmentApprovalEnvironments {
  * Whether deployment to the environment(s) was approved or rejected
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum EnvironmentApprovalState {
     #[serde(rename = "approved")]
     Approved,
@@ -12215,6 +12269,7 @@ pub struct EnvironmentApproval {
  * The type of reviewer. Must be one of: `User` or `Team`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum DeploymentReviewerType {
     #[serde(rename = "Team")]
     Team,
@@ -12575,6 +12630,7 @@ pub struct ActionsSecret {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum WorkflowState {
     #[serde(rename = "active")]
     Active,
@@ -13877,6 +13933,7 @@ pub struct DeploymentSimple {
  * The phase of the lifecycle that the check is currently in.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum CheckRunStatus {
     #[serde(rename = "completed")]
     Completed,
@@ -13914,6 +13971,7 @@ impl CheckRunStatus {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Conclusion {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -14161,6 +14219,7 @@ pub struct CheckAnnotation {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum CheckSuiteStatus {
     #[serde(rename = "completed")]
     Completed,
@@ -14321,6 +14380,7 @@ pub struct CheckSuitePreference {
  * State of a code scanning alert.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum CodeScanningAlertState {
     #[serde(rename = "closed")]
     Closed,
@@ -14364,6 +14424,7 @@ impl CodeScanningAlertState {
  * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum CodeScanningAlertDismissedReason {
     #[serde(rename = "false positive")]
     FalsePositive,
@@ -14404,6 +14465,7 @@ impl CodeScanningAlertDismissedReason {
  * The severity of the alert.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Severity {
     #[serde(rename = "error")]
     Error,
@@ -14561,6 +14623,7 @@ pub struct CodeScanningAlertLocation {
  * A classification of the file. For example to identify it as generated.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum CodeScanningAlertClassification {
     #[serde(rename = "generated")]
     Generated,
@@ -14748,6 +14811,7 @@ pub struct CodeScanningAlertItems {
  * The security severity of the alert.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SecuritySeverityLevel {
     #[serde(rename = "critical")]
     Critical,
@@ -14928,6 +14992,7 @@ pub struct CodeScanningAlert {
  * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum CodeScanningAlertSetState {
     #[serde(rename = "dismissed")]
     Dismissed,
@@ -15139,6 +15204,7 @@ pub struct CodeScanningSarifsReceipt {
  * `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ProcessingStatus {
     #[serde(rename = "complete")]
     Complete,
@@ -15324,6 +15390,7 @@ pub struct Collaborator {
  * The permission associated with the invitation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum RepositoryInvitationPermissions {
     #[serde(rename = "admin")]
     Admin,
@@ -15545,6 +15612,7 @@ pub struct Link {
  * The merge method to use.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum MergeMethod {
     #[serde(rename = "merge")]
     Merge,
@@ -16220,6 +16288,7 @@ pub struct DiffEntry {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum CommitComparisonStatus {
     #[serde(rename = "ahead")]
     Ahead,
@@ -17055,6 +17124,7 @@ pub struct Contributor {
  * The state of the status.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum DeploymentStatusState {
     #[serde(rename = "error")]
     Error,
@@ -17881,6 +17951,7 @@ pub struct Hook {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ImportStatus {
     #[serde(rename = "auth")]
     Auth,
@@ -19796,6 +19867,7 @@ pub struct PullRequestReviewCommentLinks {
  * The side of the first line of the range for a multi-line comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum StartSide {
     #[serde(rename = "LEFT")]
     Left,
@@ -19825,6 +19897,7 @@ impl Default for StartSide {
  * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Side {
     #[serde(rename = "LEFT")]
     Left,
@@ -20383,6 +20456,7 @@ pub struct PagesSourceHash {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PagesHttpsCertificateState {
     #[serde(rename = "approved")]
     Approved,
@@ -20469,6 +20543,7 @@ pub struct PagesHttpsCertificate {
  * The status of the most recent build of the Page.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PageStatus {
     #[serde(rename = "building")]
     Building,
@@ -20953,6 +21028,7 @@ pub struct PagesHealthCheck {
  * State of this Pull Request. Either `open` or `closed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullRequestState {
     #[serde(rename = "closed")]
     Closed,
@@ -22604,6 +22680,7 @@ pub struct ReviewComment {
  * State of the release asset.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReleaseAssetState {
     #[serde(rename = "open")]
     Open,
@@ -22862,6 +22939,7 @@ pub struct Release {
  * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SecretScanningAlertState {
     #[serde(rename = "open")]
     Open,
@@ -22899,6 +22977,7 @@ impl SecretScanningAlertState {
  * **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SecretScanningAlertResolution {
     #[serde(rename = "false_positive")]
     FalsePositive,
@@ -23558,6 +23637,7 @@ pub struct ScimUserMeta {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Op {
     #[serde(rename = "add")]
     Add,
@@ -25718,6 +25798,7 @@ pub struct KeySimple {
  *   The default is `web`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Include {
     #[serde(rename = "all")]
     All,
@@ -25760,6 +25841,7 @@ impl Include {
  *   The default is `desc`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Order {
     #[serde(rename = "asc")]
     Asc,
@@ -25797,6 +25879,7 @@ impl Order {
  * One of `asc` (ascending) or `desc` (descending).
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Direction {
     #[serde(rename = "asc")]
     Asc,
@@ -25826,6 +25909,7 @@ impl Default for Direction {
  * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Sort {
     #[serde(rename = "created")]
     Created,
@@ -25855,6 +25939,7 @@ impl Default for Sort {
  * The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PackageTypeData {
     #[serde(rename = "container")]
     Container,
@@ -25904,6 +25989,7 @@ impl PackageTypeData {
  * Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum WorkflowRunStatus {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -26033,6 +26119,7 @@ impl From<WorkflowIdOneOf> for String {
  * Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum StatusData {
     #[serde(rename = "completed")]
     Completed,
@@ -26073,6 +26160,7 @@ impl StatusData {
  * Must be one of: `day`, `week`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Per {
     #[serde(rename = "day")]
     Day,
@@ -26102,6 +26190,7 @@ impl Default for Per {
  * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrderData {
     #[serde(rename = "asc")]
     Asc,
@@ -26767,6 +26856,7 @@ pub struct EnterpriseAdminListSelfHostedRunnerGroupsResponse {
  * Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
     #[serde(rename = "all")]
     All,
@@ -26835,6 +26925,7 @@ pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
  * Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
     #[serde(rename = "all")]
     All,
@@ -26925,6 +27016,7 @@ pub struct EnterpriseAdminListSelfHostedRunnersResponse {
 pub struct GistsCreateRequestFiles {}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Public {
     #[serde(rename = "false")]
     False,
@@ -27091,6 +27183,7 @@ pub struct AppsListInstallationReposResponse {
  *   \* `all` or `repos`: All issues the authenticated user can see, regardless of participation or creation
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Filter {
     #[serde(rename = "all")]
     All,
@@ -27132,6 +27225,7 @@ impl Default for Filter {
  * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum IssuesListState {
     #[serde(rename = "all")]
     All,
@@ -27164,6 +27258,7 @@ impl Default for IssuesListState {
  * What to sort results by. Can be either `created`, `updated`, `comments`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum IssuesListSort {
     #[serde(rename = "comments")]
     Comments,
@@ -27196,6 +27291,7 @@ impl Default for IssuesListSort {
  * The rendering mode.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Mode {
     #[serde(rename = "gfm")]
     Gfm,
@@ -27252,6 +27348,7 @@ pub struct MarkdownRenderRequest {
  * To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum AppsListAccountsPlanDirection {
     #[serde(rename = "asc")]
     Asc,
@@ -27316,6 +27413,7 @@ pub struct ActivitySetThreadSubscriptionRequest {
  *   \* `none` - no permissions granted by default.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum DefaultRepositoryPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -27355,6 +27453,7 @@ impl Default for DefaultRepositoryPermission {
  *   **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum MembersAllowedRepositoryCreationType {
     #[serde(rename = "all")]
     All,
@@ -27656,6 +27755,7 @@ pub struct ActionsListSelfHostedRunnerGroupsOrgResponse {
  * Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
     #[serde(rename = "all")]
     All,
@@ -27716,6 +27816,7 @@ pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
  * Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
     #[serde(rename = "all")]
     All,
@@ -27825,6 +27926,7 @@ pub struct ActionsListOrgSecretsResponse {
  *   \- `selected` - Only specific repositories can access the secret.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ActionsCreateUpdateOrgSecretRequestVisibility {
     #[serde(rename = "all")]
     All,
@@ -28078,6 +28180,7 @@ pub struct AppsListInstallationsResponse {
  *   \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrgsCreateInvitationRequestRole {
     #[serde(rename = "admin")]
     Admin,
@@ -28147,6 +28250,7 @@ pub struct OrgsCreateInvitationRequest {
  *   \* `all` - All members the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrgsListMembersFilter {
     #[serde(rename = "2fa_disabled")]
     TwoFaDisabled,
@@ -28179,6 +28283,7 @@ impl Default for OrgsListMembersFilter {
  *   \* `member` - Non-owner organization members.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrgsListMembersRole {
     #[serde(rename = "admin")]
     Admin,
@@ -28213,6 +28318,7 @@ impl Default for OrgsListMembersRole {
  *   \* `member` - The user will become a non-owner member of the organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrgsSetMembershipUserRequestRole {
     #[serde(rename = "admin")]
     Admin,
@@ -28253,6 +28359,7 @@ pub struct OrgsSetMembershipUserRequest {
  * Allowed values that can be passed to the exclude param.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Exclude {
     #[serde(rename = "repositories")]
     Repositories,
@@ -28284,6 +28391,7 @@ impl Exclude {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum MigrationsStartOrgRequestExclude {
     #[serde(rename = "repositories")]
     Repositories,
@@ -28341,6 +28449,7 @@ pub struct MigrationsStartOrgRequest {
  *   \* `all`: All outside collaborators.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrgsListOutsideCollaboratorsFilter {
     #[serde(rename = "2fa_disabled")]
     TwoFaDisabled,
@@ -28370,6 +28479,7 @@ impl Default for OrgsListOutsideCollaboratorsFilter {
  * The state of the package, either active or deleted.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
     #[serde(rename = "active")]
     Active,
@@ -28399,6 +28509,7 @@ impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
  * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ProjectsListOrgState {
     #[serde(rename = "all")]
     All,
@@ -28453,6 +28564,7 @@ pub struct ProjectsCreateOrgRequest {
  * Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposListOrgType {
     #[serde(rename = "all")]
     All,
@@ -28505,6 +28617,7 @@ impl ReposListOrgType {
  * Can be one of `created`, `updated`, `pushed`, `full_name`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposListOrgSort {
     #[serde(rename = "created")]
     Created,
@@ -28540,6 +28653,7 @@ impl Default for ReposListOrgSort {
  * Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposListOrgDirection {
     #[serde(rename = "asc")]
     Asc,
@@ -28578,6 +28692,7 @@ impl ReposListOrgDirection {
  *   The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposCreateInOrgRequestVisibility {
     #[serde(rename = "internal")]
     Internal,
@@ -28747,6 +28862,7 @@ pub struct ReposCreateInOrgRequest {
  *   Default for child team: `closed`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamsCreateRequestPrivacy {
     #[serde(rename = "closed")]
     Closed,
@@ -28787,6 +28903,7 @@ impl TeamsCreateRequestPrivacy {
  *   \* `admin` - team members can pull, push and administer newly-added repositories.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Permission {
     #[serde(rename = "admin")]
     Admin,
@@ -28885,6 +29002,7 @@ pub struct TeamsCreateRequest {
  *   \* `closed` - visible to all members of this organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamsUpdateInOrgRequestPrivacy {
     #[serde(rename = "closed")]
     Closed,
@@ -29033,6 +29151,7 @@ pub struct TeamsCreateDiscussionCommentInOrgRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsListTeamDiscussionCommentInOrgContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -29088,6 +29207,7 @@ impl ReactionsListTeamDiscussionCommentInOrgContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -29158,6 +29278,7 @@ pub struct ReactionsCreateTeamDiscussionCommentInOrgRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsListTeamDiscussionInOrgContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -29213,6 +29334,7 @@ impl ReactionsListTeamDiscussionInOrgContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsCreateTeamDiscussionInOrgRequestContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -29283,6 +29405,7 @@ pub struct ReactionsCreateTeamDiscussionInOrgRequest {
  *   \* `all` - all members of the team.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamsListMembersInOrgRole {
     #[serde(rename = "all")]
     All,
@@ -29317,6 +29440,7 @@ impl Default for TeamsListMembersInOrgRole {
  *   \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamsAddUpdateMembershipUserInOrgRequestRole {
     #[serde(rename = "maintainer")]
     Maintainer,
@@ -29361,6 +29485,7 @@ pub struct TeamsAddUpdateMembershipUserInOrgRequest {
  *   Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -29417,6 +29542,7 @@ pub struct TeamsAddUpdateProjectPermissionsInOrgRequest {
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -29679,6 +29805,7 @@ pub struct ProjectsUpdateColumnRequest {
  * Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ArchivedState {
     #[serde(rename = "all")]
     All,
@@ -29812,6 +29939,7 @@ pub struct ProjectsMoveColumnRequest {
  * The baseline permission that all organization members have on this project
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ProjectsUpdateRequestOrganizationPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -29899,6 +30027,7 @@ pub struct ProjectsUpdateRequest {
  *   \* `all`: All collaborators the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Affiliation {
     #[serde(rename = "all")]
     All,
@@ -29931,6 +30060,7 @@ impl Default for Affiliation {
  * The permission to grant the collaborator.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ProjectsAddCollaboratorRequestPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -29969,6 +30099,7 @@ pub struct ProjectsAddCollaboratorRequest {
  * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposUpdateRequestVisibility {
     #[serde(rename = "internal")]
     Internal,
@@ -30201,6 +30332,7 @@ pub struct ActionsListWorkflowRunsResponse {
  *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ActionsListJobsWorkflowRunFilter {
     #[serde(rename = "all")]
     All,
@@ -30242,6 +30374,7 @@ pub struct ActionsListJobsWorkflowRunResponse {
  * Whether to approve or reject deployment to the specified environments. Must be one of: `approved` or `rejected`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ActionsReviewPendingDeploymentsRunRequestState {
     #[serde(rename = "approved")]
     Approved,
@@ -30871,6 +31004,7 @@ pub struct ReposRenameBranchRequest {
  * The current status. Can be one of `queued`, `in_progress`, or `completed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ChecksCreateRequestStatus {
     #[serde(rename = "completed")]
     Completed,
@@ -30904,6 +31038,7 @@ impl Default for ChecksCreateRequestStatus {
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ChecksCreateRequestConclusion {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -30959,6 +31094,7 @@ impl ChecksCreateRequestConclusion {
  * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum AnnotationLevel {
     #[serde(rename = "failure")]
     Failure,
@@ -31256,6 +31392,7 @@ pub struct ChecksCreateRequest {
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ChecksUpdateRequestConclusion {
     #[serde(rename = "action_required")]
     ActionRequired,
@@ -31458,6 +31595,7 @@ pub struct ChecksSetSuitesPreferencesRequest {
  * Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ChecksListSuiteFilter {
     #[serde(rename = "all")]
     All,
@@ -31573,6 +31711,7 @@ pub struct CodeScanningUploadSarifRequest {
  *   \* `all`: All collaborators the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposListCollaboratorsAffiliation {
     #[serde(rename = "all")]
     All,
@@ -31610,6 +31749,7 @@ impl Default for ReposListCollaboratorsAffiliation {
  *   \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposAddCollaboratorRequestPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -31681,6 +31821,7 @@ pub struct ReposUpdateCommitCommentRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsListCommitCommentContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -31736,6 +31877,7 @@ impl ReactionsListCommitCommentContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsCreateCommitCommentRequestContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -32309,6 +32451,7 @@ pub struct ReposCreateDeploymentRequest {
  * The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposCreateDeploymentStatusRequestState {
     #[serde(rename = "error")]
     Error,
@@ -32361,6 +32504,7 @@ impl ReposCreateDeploymentStatusRequestState {
  * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposCreateDeploymentStatusRequestEnvironment {
     #[serde(rename = "production")]
     Production,
@@ -32538,6 +32682,7 @@ pub struct ReposCreateUpdateEnvironmentRequest {
  * The sort order. Can be either `newest`, `oldest`, or `stargazers`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposListForksSort {
     #[serde(rename = "newest")]
     Newest,
@@ -32754,6 +32899,7 @@ pub struct GitUpdateRefRequest {
  * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum GitCreateTagRequestType {
     #[serde(rename = "blob")]
     Blob,
@@ -32867,6 +33013,7 @@ pub struct GitCreateTagRequest {
  * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum GitCreateTreeRequestMode {
     #[serde(rename = "040000")]
     SubdirectoryTree,
@@ -32913,6 +33060,7 @@ impl GitCreateTreeRequestMode {
  * Either `blob`, `tree`, or `commit`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum GitCreateTreeRequestType {
     #[serde(rename = "blob")]
     Blob,
@@ -33161,6 +33309,7 @@ pub struct ReposUpdateWebhookRequest {
  * The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Vcs {
     #[serde(rename = "git")]
     Git,
@@ -33299,6 +33448,7 @@ pub struct MigrationsMapCommitAuthorRequest {
  * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum UseLfs {
     #[serde(rename = "opt_in")]
     OptIn,
@@ -33345,6 +33495,7 @@ pub struct MigrationsSetLfsPreferenceRequest {
  * The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposUpdateInvitationRequestPermissions {
     #[serde(rename = "admin")]
     Admin,
@@ -33644,6 +33795,7 @@ pub struct IssuesCreateRequest {
  * Either `asc` or `desc`. Ignored without the `sort` parameter.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum IssuesListCommentsRepoDirection {
     #[serde(rename = "asc")]
     Asc,
@@ -33694,6 +33846,7 @@ pub struct IssuesUpdateCommentRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsListIssueCommentContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -33749,6 +33902,7 @@ impl ReactionsListIssueCommentContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsCreateIssueCommentRequestContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -33816,6 +33970,7 @@ pub struct ReactionsCreateIssueCommentRequest {
  * State of the issue. Either `open` or `closed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum IssuesUpdateRequestState {
     #[serde(rename = "closed")]
     Closed,
@@ -34131,6 +34286,7 @@ impl From<IssuesAddLabelsRequestOneOf> for Vec<String> {
  *   \* `spam`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum LockReason {
     #[serde(rename = "off-topic")]
     OffTopic,
@@ -34180,6 +34336,7 @@ pub struct IssuesLockRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsListIssueContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -34235,6 +34392,7 @@ impl ReactionsListIssueContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsCreateIssueRequestContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -34424,6 +34582,7 @@ pub struct ReposMergeRequest {
  * The state of the milestone. Either `open`, `closed`, or `all`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum IssuesListMilestonesState {
     #[serde(rename = "all")]
     All,
@@ -34456,6 +34615,7 @@ impl Default for IssuesListMilestonesState {
  * What to sort results by. Either `due_on` or `completeness`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum IssuesListMilestonesSort {
     #[serde(rename = "completeness")]
     Completeness,
@@ -34485,6 +34645,7 @@ impl Default for IssuesListMilestonesSort {
  * The direction of the sort. Either `asc` or `desc`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum IssuesListMilestonesDirection {
     #[serde(rename = "asc")]
     Asc,
@@ -34514,6 +34675,7 @@ impl Default for IssuesListMilestonesDirection {
  * The state of the milestone. Either `open` or `closed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum IssuesCreateMilestoneRequestState {
     #[serde(rename = "closed")]
     Closed,
@@ -34632,6 +34794,7 @@ pub struct PullsUpdateBranchResponse {
  * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum Path {
     #[serde(rename = "/")]
     Root,
@@ -34690,6 +34853,7 @@ pub struct ReposCreatePagesSiteRequest {
  * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SourceData {
     #[serde(rename = "gh-pages")]
     GhPages,
@@ -34758,6 +34922,7 @@ pub struct ReposUpdateInformationAboutPagesSiteRequest {
  * Either `open`, `closed`, or `all` to filter by state.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsListState {
     #[serde(rename = "all")]
     All,
@@ -34790,6 +34955,7 @@ impl Default for PullsListState {
  * What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsListSort {
     #[serde(rename = "created")]
     Created,
@@ -34825,6 +34991,7 @@ impl Default for PullsListSort {
  * The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsListDirection {
     #[serde(rename = "asc")]
     Asc,
@@ -34915,6 +35082,7 @@ pub struct PullsCreateRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsListReviewCommentsRepoSort {
     #[serde(rename = "created")]
     Created,
@@ -34955,6 +35123,7 @@ impl PullsListReviewCommentsRepoSort {
  * Can be either `asc` or `desc`. Ignored without `sort` parameter.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsListReviewCommentsRepoDirection {
     #[serde(rename = "asc")]
     Asc,
@@ -35005,6 +35174,7 @@ pub struct PullsUpdateReviewCommentRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsListPullRequestReviewCommentContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -35060,6 +35230,7 @@ impl ReactionsListPullRequestReviewCommentContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsCreatePullRequestReviewCommentContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -35168,6 +35339,7 @@ pub struct PullsUpdateRequest {
  * **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsCreateReviewCommentRequestSide {
     #[serde(rename = "LEFT")]
     Left,
@@ -35205,6 +35377,7 @@ impl PullsCreateReviewCommentRequestSide {
  * **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsCreateReviewCommentRequestStartSide {
     #[serde(rename = "LEFT")]
     Left,
@@ -35332,6 +35505,7 @@ pub struct PullsCreateReplyReviewCommentRequest {
  * Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsMergeRequestMethod {
     #[serde(rename = "merge")]
     Merge,
@@ -35424,6 +35598,7 @@ pub struct PullsRemoveRequestedReviewersRequest {
  * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsCreateReviewRequestEvent {
     #[serde(rename = "APPROVE")]
     Approve,
@@ -35583,6 +35758,7 @@ pub struct PullsDismissReviewRequest {
  * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum PullsSubmitReviewRequestEvent {
     #[serde(rename = "APPROVE")]
     Approve,
@@ -35800,6 +35976,7 @@ pub struct ReposUpdateReleaseRequest {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReactionsCreateReleaseRequestContent {
     #[serde(rename = "+1")]
     PlusOne,
@@ -35861,6 +36038,7 @@ pub struct ReactionsCreateReleaseRequest {
  * Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SecretScanningListAlertsRepoState {
     #[serde(rename = "open")]
     Open,
@@ -35912,6 +36090,7 @@ pub struct SecretScanningUpdateAlertRequest {
  * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposCreateCommitStatusRequestState {
     #[serde(rename = "error")]
     Error,
@@ -36130,6 +36309,7 @@ pub struct EnterpriseAdminProvisionInviteGroupRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     #[serde(rename = "Add")]
     Add,
@@ -36495,6 +36675,7 @@ pub struct ScimUpdateAttributeUserRequest {
  * Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SearchCodeSort {
     #[serde(rename = "indexed")]
     Indexed,
@@ -36546,6 +36727,7 @@ pub struct SearchCodeResponse {
  * Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SearchCommitsSort {
     #[serde(rename = "author-date")]
     AuthorDate,
@@ -36600,6 +36782,7 @@ pub struct SearchCommitsResponse {
  * Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SearchIssuesPullRequestsSort {
     #[serde(rename = "comments")]
     Comments,
@@ -36681,6 +36864,7 @@ pub struct SearchIssuesPullRequestsResponse {
  * Sorts the results of your query by when the label was `created` or `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SearchLabelsSort {
     #[serde(rename = "created")]
     Created,
@@ -36735,6 +36919,7 @@ pub struct SearchLabelsResponse {
  * Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SearchReposSort {
     #[serde(rename = "forks")]
     Forks,
@@ -36812,6 +36997,7 @@ pub struct SearchTopicsResponse {
  * Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SearchUsersSort {
     #[serde(rename = "followers")]
     Followers,
@@ -36874,6 +37060,7 @@ pub struct SearchUsersResponse {
  *   \* `closed` - visible to all members of this organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamsUpdateLegacyRequestPrivacy {
     #[serde(rename = "closed")]
     Closed,
@@ -36978,6 +37165,7 @@ pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
     #[serde(rename = "admin")]
     Admin,
@@ -37230,6 +37418,7 @@ pub struct UsersUpdateAuthenticatedRequest {
  * Denotes whether an email is publicly visible.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
     #[serde(rename = "private")]
     Private,
@@ -37498,6 +37687,7 @@ pub struct UsersCreatePublicSshKeyAuthenticatedRequest {
  * Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrgsListMembershipsState {
     #[serde(rename = "active")]
     Active,
@@ -37535,6 +37725,7 @@ impl OrgsListMembershipsState {
  * The state that the membership should be in. Only `"active"` will be accepted.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum OrgsUpdateMembershipRequestState {
     #[serde(rename = "active")]
     Active,
@@ -37624,6 +37815,7 @@ pub struct ProjectsCreateRequest {
  * Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposListVisibility {
     #[serde(rename = "all")]
     All,
@@ -37658,6 +37850,7 @@ impl Default for ReposListVisibility {
  *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposListType {
     #[serde(rename = "all")]
     All,
@@ -37696,6 +37889,7 @@ impl Default for ReposListType {
  * Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposListDirection {
     #[serde(rename = "asc")]
     Asc,
@@ -37851,6 +38045,7 @@ pub struct ReposCreateRequest {
  * Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum SubjectType {
     #[serde(rename = "issue")]
     Issue,
@@ -37894,6 +38089,7 @@ impl SubjectType {
  * Can be one of `all`, `owner`, `member`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
 pub enum ReposListUserType {
     #[serde(rename = "all")]
     All,
