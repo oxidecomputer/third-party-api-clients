@@ -12,10 +12,7 @@ use std::{
 };
 
 use anyhow::{bail, Result};
-use inflector::cases::{
-    kebabcase::to_kebab_case, screamingsnakecase::to_screaming_snake_case,
-    sentencecase::to_sentence_case, snakecase::to_snake_case, titlecase::to_title_case,
-};
+use inflector::cases::{snakecase::to_snake_case, titlecase::to_title_case};
 use openapiv3::OpenAPI;
 use serde::Deserialize;
 
@@ -1749,48 +1746,29 @@ fn render_param(
 
     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
 
-    let first = enums.first().unwrap();
-    if *first == struct_name(first) {
-    } else if *first == to_screaming_snake_case(first) {
-        a(r#"#[serde(rename_all = "SCREAMING_SNAKE_CASE")]"#);
-    } else if *first == first.to_uppercase() {
-        a(r#"#[serde(rename_all = "UPPERCASE")]"#);
-    } else if *first == first.to_lowercase() {
-        a(r#"#[serde(rename_all = "lowercase")]"#);
-    } else if *first == to_snake_case(first) {
-        a(r#"#[serde(rename_all = "snake_case")]"#);
-    } else if *first == to_kebab_case(first) {
-        a(r#"#[serde(rename_all = "kebab-case")]"#);
-    } else if *first == to_sentence_case(first) {
-        // TODO: make this work!
-        //a(r#"#[serde(rename_all = "kebab-case")]"#);
-        println!(
-            "sentence case: sn: {}, first: {} {}",
-            sn,
-            struct_name(first),
-            first
-        );
-    } else {
-        println!("sn: {}, first: {} {}", sn, struct_name(first), first);
-    }
-
     a(&format!("pub enum {} {{", sn));
     for e in &enums {
         if struct_name(e).is_empty() {
             // TODO: do something for empty(?)
             continue;
         }
+        a(&format!(r#"#[serde(rename = "{}")]"#, e));
         a(&format!("{},", struct_name(e)));
     }
     if !required && default.is_none() {
+        a(r#"#[serde(rename = "")]"#);
         a("Noop,");
     }
+
+    // Let's add the wildcard.
+    a("FallthroughString(String),");
+
     a("}");
     a("");
 
     a(&format!("impl std::fmt::Display for {} {{", sn));
     a(r#"fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {"#);
-    a(r#"match *self {"#);
+    a(r#"match &*self {"#);
     for e in &enums {
         if struct_name(e).is_empty() {
             // TODO: do something for empty(?)
@@ -1799,8 +1777,12 @@ fn render_param(
         a(&format!(r#"{}::{} => "{}","#, sn, struct_name(e), e));
     }
     if !required && default.is_none() {
-        a(&format!(r#"{}::Noop => "","#, sn,));
+        a(&format!(r#"{}::Noop => "","#, sn));
     }
+
+    // Let's add the display format for the wildcard.
+    a(&format!(r#"{}::FallthroughString(s) => s,"#, sn));
+
     a("}");
     a(".fmt(f)");
     a("}");

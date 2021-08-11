@@ -41,23 +41,29 @@ pub struct TaskResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Role {
+    #[serde(rename = "BUSINESS_ADMIN")]
     BusinessAdmin,
+    #[serde(rename = "BUSINESS_BOOKKEEPER")]
     BusinessBookkeeper,
+    #[serde(rename = "BUSINESS_OWNER")]
     BusinessOwner,
+    #[serde(rename = "BUSINESS_USER")]
     BusinessUser,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Role {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Role::BusinessAdmin => "BUSINESS_ADMIN",
             Role::BusinessBookkeeper => "BUSINESS_BOOKKEEPER",
             Role::BusinessOwner => "BUSINESS_OWNER",
             Role::BusinessUser => "BUSINESS_USER",
             Role::Noop => "",
+            Role::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -154,23 +160,29 @@ pub struct User {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PatchRequestRole {
+    #[serde(rename = "BUSINESS_ADMIN")]
     BusinessAdmin,
+    #[serde(rename = "BUSINESS_BOOKKEEPER")]
     BusinessBookkeeper,
+    #[serde(rename = "BUSINESS_OWNER")]
     BusinessOwner,
+    #[serde(rename = "BUSINESS_USER")]
     BusinessUser,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PatchRequestRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PatchRequestRole::BusinessAdmin => "BUSINESS_ADMIN",
             PatchRequestRole::BusinessBookkeeper => "BUSINESS_BOOKKEEPER",
             PatchRequestRole::BusinessOwner => "BUSINESS_OWNER",
             PatchRequestRole::BusinessUser => "BUSINESS_USER",
             PatchRequestRole::Noop => "",
+            PatchRequestRole::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -278,19 +290,23 @@ pub struct AccountingCategories {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Type {
+    #[serde(rename = "POLICY_VIOLATION_FROM_ADMIN")]
     PolicyViolationFromAdmin,
+    #[serde(rename = "POLICY_VIOLATION_FROM_USER")]
     PolicyViolationFromUser,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Type::PolicyViolationFromAdmin => "POLICY_VIOLATION_FROM_ADMIN",
             Type::PolicyViolationFromUser => "POLICY_VIOLATION_FROM_USER",
             Type::Noop => "",
+            Type::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -331,23 +347,29 @@ pub struct PolicyViolations {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum GetTransactionResponseDataDisputesType {
+    #[serde(rename = "DISPUTE_CANCELLED")]
     DisputeCancelled,
+    #[serde(rename = "MERCHANT_ERROR")]
     MerchantError,
+    #[serde(rename = "UNKNOWN")]
     Unknown,
+    #[serde(rename = "UNRECOGNIZED_CHARGE")]
     UnrecognizedCharge,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for GetTransactionResponseDataDisputesType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             GetTransactionResponseDataDisputesType::DisputeCancelled => "DISPUTE_CANCELLED",
             GetTransactionResponseDataDisputesType::MerchantError => "MERCHANT_ERROR",
             GetTransactionResponseDataDisputesType::Unknown => "UNKNOWN",
             GetTransactionResponseDataDisputesType::UnrecognizedCharge => "UNRECOGNIZED_CHARGE",
             GetTransactionResponseDataDisputesType::Noop => "",
+            GetTransactionResponseDataDisputesType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -655,23 +677,29 @@ pub struct Fulfillment {
  * Time interval to apply limit to.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Interval {
+    #[serde(rename = "DAILY")]
     Daily,
+    #[serde(rename = "MONTHLY")]
     Monthly,
+    #[serde(rename = "TOTAL")]
     Total,
+    #[serde(rename = "YEARLY")]
     Yearly,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Interval {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Interval::Daily => "DAILY",
             Interval::Monthly => "MONTHLY",
             Interval::Total => "TOTAL",
             Interval::Yearly => "YEARLY",
             Interval::Noop => "",
+            Interval::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1084,15 +1112,19 @@ pub struct PostResourcesCardVirtualRequest {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum TokenType {
+    #[serde(rename = "Bearer")]
     Bearer,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TokenType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TokenType::Bearer => "Bearer",
             TokenType::Noop => "",
+            TokenType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1262,23 +1294,29 @@ pub struct GetResourcesDeferredResponseData {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum GetResourcesDeferredResponseStatus {
+    #[serde(rename = "ERROR")]
     Error,
+    #[serde(rename = "IN_PROGRESS")]
     InProgress,
+    #[serde(rename = "STARTED")]
     Started,
+    #[serde(rename = "SUCCESS")]
     Success,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for GetResourcesDeferredResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             GetResourcesDeferredResponseStatus::Error => "ERROR",
             GetResourcesDeferredResponseStatus::InProgress => "IN_PROGRESS",
             GetResourcesDeferredResponseStatus::Started => "STARTED",
             GetResourcesDeferredResponseStatus::Success => "SUCCESS",
             GetResourcesDeferredResponseStatus::Noop => "",
+            GetResourcesDeferredResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1311,22 +1349,34 @@ pub struct GetResourcesDeferredResponse {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum Icon {
+    #[serde(rename = "AdvertisingIcon")]
     AdvertisingIcon,
+    #[serde(rename = "CardIcon")]
     CardIcon,
+    #[serde(rename = "EducationStipendIcon")]
     EducationStipendIcon,
+    #[serde(rename = "LunchOrderingIcon")]
     LunchOrderingIcon,
+    #[serde(rename = "OnboardingIcon")]
     OnboardingIcon,
+    #[serde(rename = "PerDiemCardIcon")]
     PerDiemCardIcon,
+    #[serde(rename = "SaasSubscriptionIcon")]
     SaasSubscriptionIcon,
+    #[serde(rename = "SoftwareTrialIcon")]
     SoftwareTrialIcon,
+    #[serde(rename = "TravelExpensesIcon")]
     TravelExpensesIcon,
+    #[serde(rename = "WellnessIcon")]
     WellnessIcon,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Icon {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Icon::AdvertisingIcon => "AdvertisingIcon",
             Icon::CardIcon => "CardIcon",
             Icon::EducationStipendIcon => "EducationStipendIcon",
@@ -1338,6 +1388,7 @@ impl std::fmt::Display for Icon {
             Icon::TravelExpensesIcon => "TravelExpensesIcon",
             Icon::WellnessIcon => "WellnessIcon",
             Icon::Noop => "",
+            Icon::FallthroughString(s) => s,
         }
         .fmt(f)
     }

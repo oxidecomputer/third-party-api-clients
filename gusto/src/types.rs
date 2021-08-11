@@ -560,23 +560,31 @@ pub struct Termination {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum PaymentUnit {
+    #[serde(rename = "Hour")]
     Hour,
+    #[serde(rename = "Month")]
     Month,
+    #[serde(rename = "Paycheck")]
     Paycheck,
+    #[serde(rename = "Week")]
     Week,
+    #[serde(rename = "Year")]
     Year,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PaymentUnit {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PaymentUnit::Hour => "Hour",
             PaymentUnit::Month => "Month",
             PaymentUnit::Paycheck => "Paycheck",
             PaymentUnit::Week => "Week",
             PaymentUnit::Year => "Year",
             PaymentUnit::Noop => "",
+            PaymentUnit::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -598,21 +606,28 @@ impl PaymentUnit {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum FlsaStatus {
+    #[serde(rename = "Exempt")]
     Exempt,
+    #[serde(rename = "Nonexempt")]
     Nonexempt,
+    #[serde(rename = "Owner")]
     Owner,
+    #[serde(rename = "Salaried Nonexempt")]
     SalariedNonexempt,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for FlsaStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             FlsaStatus::Exempt => "Exempt",
             FlsaStatus::Nonexempt => "Nonexempt",
             FlsaStatus::Owner => "Owner",
             FlsaStatus::SalariedNonexempt => "Salaried Nonexempt",
             FlsaStatus::Noop => "",
+            FlsaStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -876,24 +891,38 @@ pub struct Admin {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum EntityType {
+    #[serde(rename = "Association")]
     Association,
+    #[serde(rename = "C-Corporation")]
     CCorporation,
+    #[serde(rename = "Co-ownership")]
     CoOwnership,
+    #[serde(rename = "General partnership")]
     GeneralPartnership,
+    #[serde(rename = "Joint venture")]
     JointVenture,
+    #[serde(rename = "LLC")]
     Llc,
+    #[serde(rename = "LLP")]
     Llp,
+    #[serde(rename = "Limited partnership")]
     LimitedPartnership,
+    #[serde(rename = "Non-Profit")]
     NonProfit,
+    #[serde(rename = "S-Corporation")]
     SCorporation,
+    #[serde(rename = "Sole proprietor")]
     SoleProprietor,
+    #[serde(rename = "Trusteeship")]
     Trusteeship,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for EntityType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             EntityType::Association => "Association",
             EntityType::CCorporation => "C-Corporation",
             EntityType::CoOwnership => "Co-ownership",
@@ -907,6 +936,7 @@ impl std::fmt::Display for EntityType {
             EntityType::SoleProprietor => "Sole proprietor",
             EntityType::Trusteeship => "Trusteeship",
             EntityType::Noop => "",
+            EntityType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -927,25 +957,32 @@ impl EntityType {
  * The Gusto product tier of the company.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Tier {
+    #[serde(rename = "basic")]
     Basic,
+    #[serde(rename = "complete")]
     Complete,
+    #[serde(rename = "concierge")]
     Concierge,
+    #[serde(rename = "contractor_only")]
     ContractorOnly,
+    #[serde(rename = "core")]
     Core,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Tier {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Tier::Basic => "basic",
             Tier::Complete => "complete",
             Tier::Concierge => "concierge",
             Tier::ContractorOnly => "contractor_only",
             Tier::Core => "core",
             Tier::Noop => "",
+            Tier::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -967,19 +1004,25 @@ impl Tier {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum CompanyStatus {
+    #[serde(rename = "Approved")]
     Approved,
+    #[serde(rename = "Not Approved")]
     NotApproved,
+    #[serde(rename = "Suspended")]
     Suspended,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for CompanyStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             CompanyStatus::Approved => "Approved",
             CompanyStatus::NotApproved => "Not Approved",
             CompanyStatus::Suspended => "Suspended",
             CompanyStatus::Noop => "",
+            CompanyStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1286,17 +1329,22 @@ pub struct Company {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum WageType {
+    #[serde(rename = "Fixed")]
     Fixed,
+    #[serde(rename = "Hourly")]
     Hourly,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for WageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             WageType::Fixed => "Fixed",
             WageType::Hourly => "Hourly",
             WageType::Noop => "",
+            WageType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1318,17 +1366,22 @@ impl WageType {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum Type {
+    #[serde(rename = "Business")]
     Business,
+    #[serde(rename = "Individual")]
     Individual,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Type::Business => "Business",
             Type::Individual => "Individual",
             Type::Noop => "",
+            Type::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1527,21 +1580,28 @@ pub struct Contractor {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum PaymentMethod {
+    #[serde(rename = "Check")]
     Check,
+    #[serde(rename = "Correction Payment")]
     CorrectionPayment,
+    #[serde(rename = "Direct Deposit")]
     DirectDeposit,
+    #[serde(rename = "Historical Payment")]
     HistoricalPayment,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PaymentMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PaymentMethod::Check => "Check",
             PaymentMethod::CorrectionPayment => "Correction Payment",
             PaymentMethod::DirectDeposit => "Direct Deposit",
             PaymentMethod::HistoricalPayment => "Historical Payment",
             PaymentMethod::Noop => "",
+            PaymentMethod::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1563,17 +1623,22 @@ impl PaymentMethod {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum ContractorPaymentWageType {
+    #[serde(rename = "Fixed")]
     Fixed,
+    #[serde(rename = "Hourly")]
     Hourly,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ContractorPaymentWageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ContractorPaymentWageType::Fixed => "Fixed",
             ContractorPaymentWageType::Hourly => "Hourly",
             ContractorPaymentWageType::Noop => "",
+            ContractorPaymentWageType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1765,21 +1830,26 @@ pub struct ContractorPaymentSummary {
  * The status of the time off request.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TimeOffRequestStatus {
+    #[serde(rename = "approved")]
     Approved,
+    #[serde(rename = "denied")]
     Denied,
+    #[serde(rename = "pending")]
     Pending,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TimeOffRequestStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TimeOffRequestStatus::Approved => "approved",
             TimeOffRequestStatus::Denied => "denied",
             TimeOffRequestStatus::Pending => "pending",
             TimeOffRequestStatus::Noop => "",
+            TimeOffRequestStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1800,19 +1870,23 @@ impl TimeOffRequestStatus {
  * The type of time off request.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum RequestType {
+    #[serde(rename = "sick")]
     Sick,
+    #[serde(rename = "vacation")]
     Vacation,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for RequestType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             RequestType::Sick => "sick",
             RequestType::Vacation => "vacation",
             RequestType::Noop => "",
+            RequestType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -2034,21 +2108,28 @@ pub struct CurrentUser {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum Frequency {
+    #[serde(rename = "Every other week")]
     EveryOtherWeek,
+    #[serde(rename = "Every week")]
     EveryWeek,
+    #[serde(rename = "Monthly")]
     Monthly,
+    #[serde(rename = "Twice per month")]
     TwicePerMonth,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Frequency {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Frequency::EveryOtherWeek => "Every other week",
             Frequency::EveryWeek => "Every week",
             Frequency::Monthly => "Monthly",
             Frequency::TwicePerMonth => "Twice per month",
             Frequency::Noop => "",
+            Frequency::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -2138,17 +2219,22 @@ pub struct PaySchedule {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum AccountType {
+    #[serde(rename = "Checking")]
     Checking,
+    #[serde(rename = "Savings")]
     Savings,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for AccountType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             AccountType::Checking => "Checking",
             AccountType::Savings => "Savings",
             AccountType::Noop => "",
+            AccountType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -2173,21 +2259,26 @@ impl AccountType {
  *   'verified' means the bank account is verified.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum VerificationStatus {
+    #[serde(rename = "awaiting_deposits")]
     AwaitingDeposits,
+    #[serde(rename = "ready_for_verification")]
     ReadyForVerification,
+    #[serde(rename = "verified")]
     Verified,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for VerificationStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             VerificationStatus::AwaitingDeposits => "awaiting_deposits",
             VerificationStatus::ReadyForVerification => "ready_for_verification",
             VerificationStatus::Verified => "verified",
             VerificationStatus::Noop => "",
+            VerificationStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -2444,21 +2535,25 @@ pub struct EarningType {
  * Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum DeductionReducesTaxableIncome {
+    #[serde(rename = "does_not_reduce_taxable_income")]
     DoesNotReduceTaxableIncome,
+    #[serde(rename = "reduces_taxable_income")]
     ReducesTaxableIncome,
+    #[serde(rename = "unset")]
     Unset,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for DeductionReducesTaxableIncome {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             DeductionReducesTaxableIncome::DoesNotReduceTaxableIncome => {
                 "does_not_reduce_taxable_income"
             }
             DeductionReducesTaxableIncome::ReducesTaxableIncome => "reduces_taxable_income",
             DeductionReducesTaxableIncome::Unset => "unset",
+            DeductionReducesTaxableIncome::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -2898,17 +2993,22 @@ pub struct Totals {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum PayrollEmployeeCompensationsPaymentMethod {
+    #[serde(rename = "Check")]
     Check,
+    #[serde(rename = "Direct Deposit")]
     DirectDeposit,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PayrollEmployeeCompensationsPaymentMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PayrollEmployeeCompensationsPaymentMethod::Check => "Check",
             PayrollEmployeeCompensationsPaymentMethod::DirectDeposit => "Direct Deposit",
             PayrollEmployeeCompensationsPaymentMethod::Noop => "",
+            PayrollEmployeeCompensationsPaymentMethod::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -3236,25 +3336,32 @@ pub struct PayrollData {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum CustomFieldType {
+    #[serde(rename = "currency")]
     Currency,
+    #[serde(rename = "date")]
     Date,
+    #[serde(rename = "number")]
     Number,
+    #[serde(rename = "radio")]
     Radio,
+    #[serde(rename = "text")]
     Text,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for CustomFieldType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             CustomFieldType::Currency => "currency",
             CustomFieldType::Date => "date",
             CustomFieldType::Number => "number",
             CustomFieldType::Radio => "radio",
             CustomFieldType::Text => "text",
             CustomFieldType::Noop => "",
+            CustomFieldType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -3354,19 +3461,25 @@ pub struct CompanyCustomField {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum GustoPersonType {
+    #[serde(rename = "Candidate")]
     Candidate,
+    #[serde(rename = "Contractor")]
     Contractor,
+    #[serde(rename = "Employee")]
     Employee,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for GustoPersonType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             GustoPersonType::Candidate => "Candidate",
             GustoPersonType::Contractor => "Contractor",
             GustoPersonType::Employee => "Employee",
             GustoPersonType::Noop => "",
+            GustoPersonType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -3539,17 +3652,20 @@ pub struct EarningTypeListResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Include {
+    #[serde(rename = "custom_fields")]
     CustomFields,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Include {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Include::CustomFields => "custom_fields",
             Include::Noop => "",
+            Include::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -3893,17 +4009,22 @@ pub struct PutLocationRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum PutContractorRequestWageType {
+    #[serde(rename = "Fixed")]
     Fixed,
+    #[serde(rename = "Hourly")]
     Hourly,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PutContractorRequestWageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PutContractorRequestWageType::Fixed => "Fixed",
             PutContractorRequestWageType::Hourly => "Hourly",
             PutContractorRequestWageType::Noop => "",
+            PutContractorRequestWageType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -4004,17 +4125,22 @@ pub struct PutContractorRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum PostCompanyContractorRequestType {
+    #[serde(rename = "Business")]
     Business,
+    #[serde(rename = "Individual")]
     Individual,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PostCompanyContractorRequestType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PostCompanyContractorRequestType::Business => "Business",
             PostCompanyContractorRequestType::Individual => "Individual",
             PostCompanyContractorRequestType::Noop => "",
+            PostCompanyContractorRequestType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -4037,17 +4163,22 @@ impl PostCompanyContractorRequestType {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum PostCompanyContractorRequestWageType {
+    #[serde(rename = "Fixed")]
     Fixed,
+    #[serde(rename = "Hourly")]
     Hourly,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PostCompanyContractorRequestWageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PostCompanyContractorRequestWageType::Fixed => "Fixed",
             PostCompanyContractorRequestWageType::Hourly => "Hourly",
             PostCompanyContractorRequestWageType::Noop => "",
+            PostCompanyContractorRequestWageType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -4460,17 +4591,22 @@ pub struct PutCompanyPayScheduleRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum PostCompanyBankAccountRequestType {
+    #[serde(rename = "Checking")]
     Checking,
+    #[serde(rename = "Savings")]
     Savings,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PostCompanyBankAccountRequestType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PostCompanyBankAccountRequestType::Checking => "Checking",
             PostCompanyBankAccountRequestType::Savings => "Savings",
             PostCompanyBankAccountRequestType::Noop => "",
+            PostCompanyBankAccountRequestType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -4834,21 +4970,26 @@ pub struct PutEmployeeBenefitRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum GetCompanyPayrollsInclude {
+    #[serde(rename = "benefits")]
     Benefits,
+    #[serde(rename = "deductions")]
     Deductions,
+    #[serde(rename = "taxes")]
     Taxes,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for GetCompanyPayrollsInclude {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             GetCompanyPayrollsInclude::Benefits => "benefits",
             GetCompanyPayrollsInclude::Deductions => "deductions",
             GetCompanyPayrollsInclude::Taxes => "taxes",
             GetCompanyPayrollsInclude::Noop => "",
+            GetCompanyPayrollsInclude::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -4867,17 +5008,22 @@ impl GetCompanyPayrollsInclude {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum OffCycleReason {
+    #[serde(rename = "Bonus")]
     Bonus,
+    #[serde(rename = "Correction")]
     Correction,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OffCycleReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OffCycleReason::Bonus => "Bonus",
             OffCycleReason::Correction => "Correction",
             OffCycleReason::Noop => "",
+            OffCycleReason::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -4918,21 +5064,26 @@ pub struct PostCompanyPayrollRequest {
  * Include the requested attribute in the employee_compensations attribute in the response
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum GetCompanyPayrollsIncludeData {
+    #[serde(rename = "benefits")]
     Benefits,
+    #[serde(rename = "deductions")]
     Deductions,
+    #[serde(rename = "taxes")]
     Taxes,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for GetCompanyPayrollsIncludeData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             GetCompanyPayrollsIncludeData::Benefits => "benefits",
             GetCompanyPayrollsIncludeData::Deductions => "deductions",
             GetCompanyPayrollsIncludeData::Taxes => "taxes",
             GetCompanyPayrollsIncludeData::Noop => "",
+            GetCompanyPayrollsIncludeData::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -5272,17 +5423,22 @@ pub struct GetCompanyCustomFieldsResponse {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum OnboardingPersonType {
+    #[serde(rename = "Contractor")]
     Contractor,
+    #[serde(rename = "Employee")]
     Employee,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OnboardingPersonType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OnboardingPersonType::Contractor => "Contractor",
             OnboardingPersonType::Employee => "Employee",
             OnboardingPersonType::Noop => "",
+            OnboardingPersonType::FallthroughString(s) => s,
         }
         .fmt(f)
     }

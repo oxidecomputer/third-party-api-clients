@@ -496,19 +496,23 @@ pub struct Enterprise {
  * The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Actions {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Actions {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Actions::Read => "read",
             Actions::Write => "write",
             Actions::Noop => "",
+            Actions::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -529,19 +533,23 @@ impl Actions {
  * The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Administration {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Administration {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Administration::Read => "read",
             Administration::Write => "write",
             Administration::Noop => "",
+            Administration::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -562,19 +570,23 @@ impl Administration {
  * The level of permission to grant the access token for checks on code. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Checks {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Checks {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Checks::Read => "read",
             Checks::Write => "write",
             Checks::Noop => "",
+            Checks::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -595,19 +607,23 @@ impl Checks {
  * The level of permission to grant the access token for notification of content references and creation content attachments. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ContentReferences {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ContentReferences {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ContentReferences::Read => "read",
             ContentReferences::Write => "write",
             ContentReferences::Noop => "",
+            ContentReferences::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -628,19 +644,23 @@ impl ContentReferences {
  * The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Contents {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Contents {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Contents::Read => "read",
             Contents::Write => "write",
             Contents::Noop => "",
+            Contents::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -661,19 +681,23 @@ impl Contents {
  * The level of permission to grant the access token for deployments and deployment statuses. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Deployments {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Deployments {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Deployments::Read => "read",
             Deployments::Write => "write",
             Deployments::Noop => "",
+            Deployments::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -694,19 +718,23 @@ impl Deployments {
  * The level of permission to grant the access token for managing repository environments. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Environments {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Environments {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Environments::Read => "read",
             Environments::Write => "write",
             Environments::Noop => "",
+            Environments::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -727,19 +755,23 @@ impl Environments {
  * The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Issues {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Issues {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Issues::Read => "read",
             Issues::Write => "write",
             Issues::Noop => "",
+            Issues::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -760,19 +792,23 @@ impl Issues {
  * The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Metadata {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Metadata {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Metadata::Read => "read",
             Metadata::Write => "write",
             Metadata::Noop => "",
+            Metadata::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -793,19 +829,23 @@ impl Metadata {
  * The level of permission to grant the access token for packages published to GitHub Packages. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Packages {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Packages {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Packages::Read => "read",
             Packages::Write => "write",
             Packages::Noop => "",
+            Packages::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -826,19 +866,23 @@ impl Packages {
  * The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Pages {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Pages {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Pages::Read => "read",
             Pages::Write => "write",
             Pages::Noop => "",
+            Pages::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -859,19 +903,23 @@ impl Pages {
  * The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PullRequests {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullRequests {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullRequests::Read => "read",
             PullRequests::Write => "write",
             PullRequests::Noop => "",
+            PullRequests::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -892,19 +940,23 @@ impl PullRequests {
  * The level of permission to grant the access token to manage the post-receive hooks for a repository. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum RepositoryHooks {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for RepositoryHooks {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             RepositoryHooks::Read => "read",
             RepositoryHooks::Write => "write",
             RepositoryHooks::Noop => "",
+            RepositoryHooks::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -925,21 +977,26 @@ impl RepositoryHooks {
  * The level of permission to grant the access token to manage repository projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum RepositoryProjects {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for RepositoryProjects {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             RepositoryProjects::Admin => "admin",
             RepositoryProjects::Read => "read",
             RepositoryProjects::Write => "write",
             RepositoryProjects::Noop => "",
+            RepositoryProjects::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -960,19 +1017,23 @@ impl RepositoryProjects {
  * The level of permission to grant the access token to view and manage secret scanning alerts. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SecretScanningAlerts {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SecretScanningAlerts {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SecretScanningAlerts::Read => "read",
             SecretScanningAlerts::Write => "write",
             SecretScanningAlerts::Noop => "",
+            SecretScanningAlerts::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -993,19 +1054,23 @@ impl SecretScanningAlerts {
  * The level of permission to grant the access token to manage repository secrets. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Secrets {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Secrets {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Secrets::Read => "read",
             Secrets::Write => "write",
             Secrets::Noop => "",
+            Secrets::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1026,19 +1091,23 @@ impl Secrets {
  * The level of permission to grant the access token to view and manage security events like code scanning alerts. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SecurityEvents {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SecurityEvents {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SecurityEvents::Read => "read",
             SecurityEvents::Write => "write",
             SecurityEvents::Noop => "",
+            SecurityEvents::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1059,19 +1128,23 @@ impl SecurityEvents {
  * The level of permission to grant the access token to manage just a single file. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SingleFile {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SingleFile {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SingleFile::Read => "read",
             SingleFile::Write => "write",
             SingleFile::Noop => "",
+            SingleFile::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1092,19 +1165,23 @@ impl SingleFile {
  * The level of permission to grant the access token for commit statuses. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Statuses {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Statuses {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Statuses::Read => "read",
             Statuses::Write => "write",
             Statuses::Noop => "",
+            Statuses::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1125,17 +1202,20 @@ impl Statuses {
  * The level of permission to grant the access token to retrieve Dependabot alerts. Can be one of: `read`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum VulnerabilityAlerts {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for VulnerabilityAlerts {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             VulnerabilityAlerts::Read => "read",
             VulnerabilityAlerts::Noop => "",
+            VulnerabilityAlerts::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1156,17 +1236,20 @@ impl VulnerabilityAlerts {
  * The level of permission to grant the access token to update GitHub Actions workflow files. Can be one of: `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Workflows {
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Workflows {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Workflows::Write => "write",
             Workflows::Noop => "",
+            Workflows::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1187,19 +1270,23 @@ impl Workflows {
  * The level of permission to grant the access token for organization teams and members. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Members {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Members {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Members::Read => "read",
             Members::Write => "write",
             Members::Noop => "",
+            Members::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1220,19 +1307,23 @@ impl Members {
  * The level of permission to grant the access token to manage access to an organization. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrganizationAdministration {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrganizationAdministration {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrganizationAdministration::Read => "read",
             OrganizationAdministration::Write => "write",
             OrganizationAdministration::Noop => "",
+            OrganizationAdministration::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1253,19 +1344,23 @@ impl OrganizationAdministration {
  * The level of permission to grant the access token to manage the post-receive hooks for an organization. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrganizationHooks {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrganizationHooks {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrganizationHooks::Read => "read",
             OrganizationHooks::Write => "write",
             OrganizationHooks::Noop => "",
+            OrganizationHooks::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1286,17 +1381,20 @@ impl OrganizationHooks {
  * The level of permission to grant the access token for viewing an organization's plan. Can be one of: `read`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrganizationPlan {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrganizationPlan {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrganizationPlan::Read => "read",
             OrganizationPlan::Noop => "",
+            OrganizationPlan::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1317,21 +1415,26 @@ impl OrganizationPlan {
  * The level of permission to grant the access token to manage organization projects, columns, and cards. Can be one of: `read`, `write`, or `admin`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrganizationProjects {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrganizationProjects {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrganizationProjects::Admin => "admin",
             OrganizationProjects::Read => "read",
             OrganizationProjects::Write => "write",
             OrganizationProjects::Noop => "",
+            OrganizationProjects::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1352,19 +1455,23 @@ impl OrganizationProjects {
  * The level of permission to grant the access token for organization packages published to GitHub Packages. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrganizationPackages {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrganizationPackages {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrganizationPackages::Read => "read",
             OrganizationPackages::Write => "write",
             OrganizationPackages::Noop => "",
+            OrganizationPackages::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1385,19 +1492,23 @@ impl OrganizationPackages {
  * The level of permission to grant the access token to manage organization secrets. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrganizationSecrets {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrganizationSecrets {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrganizationSecrets::Read => "read",
             OrganizationSecrets::Write => "write",
             OrganizationSecrets::Noop => "",
+            OrganizationSecrets::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1418,19 +1529,23 @@ impl OrganizationSecrets {
  * The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrganizationSelfHostedRunners {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrganizationSelfHostedRunners {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrganizationSelfHostedRunners::Read => "read",
             OrganizationSelfHostedRunners::Write => "write",
             OrganizationSelfHostedRunners::Noop => "",
+            OrganizationSelfHostedRunners::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1451,19 +1566,23 @@ impl OrganizationSelfHostedRunners {
  * The level of permission to grant the access token to view and manage users blocked by the organization. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrganizationUserBlocking {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrganizationUserBlocking {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrganizationUserBlocking::Read => "read",
             OrganizationUserBlocking::Write => "write",
             OrganizationUserBlocking::Noop => "",
+            OrganizationUserBlocking::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1484,19 +1603,23 @@ impl OrganizationUserBlocking {
  * The level of permission to grant the access token to manage team discussions and related comments. Can be one of: `read` or `write`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamDiscussions {
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamDiscussions {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamDiscussions::Read => "read",
             TeamDiscussions::Write => "write",
             TeamDiscussions::Noop => "",
+            TeamDiscussions::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -1677,19 +1800,23 @@ pub struct AppPermissions {
  * Describe whether all repositories have been selected or there's a selection involved
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum RepositorySelection {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "selected")]
     Selected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for RepositorySelection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             RepositorySelection::All => "all",
             RepositorySelection::Selected => "selected",
             RepositorySelection::Noop => "",
+            RepositorySelection::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -3030,19 +3157,23 @@ pub struct Repository {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum InstallationTokenRepositorySelection {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "selected")]
     Selected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for InstallationTokenRepositorySelection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             InstallationTokenRepositorySelection::All => "all",
             InstallationTokenRepositorySelection::Selected => "selected",
             InstallationTokenRepositorySelection::Noop => "",
+            InstallationTokenRepositorySelection::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -3455,21 +3586,26 @@ pub struct CodeOfConduct {
  * The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum EnabledOrganizations {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "none")]
     None,
+    #[serde(rename = "selected")]
     Selected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for EnabledOrganizations {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             EnabledOrganizations::All => "all",
             EnabledOrganizations::None => "none",
             EnabledOrganizations::Selected => "selected",
             EnabledOrganizations::Noop => "",
+            EnabledOrganizations::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -3490,21 +3626,26 @@ impl EnabledOrganizations {
  * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum AllowedActions {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "local_only")]
     LocalOnly,
+    #[serde(rename = "selected")]
     Selected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for AllowedActions {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             AllowedActions::All => "all",
             AllowedActions::LocalOnly => "local_only",
             AllowedActions::Selected => "selected",
             AllowedActions::Noop => "",
+            AllowedActions::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -3703,19 +3844,23 @@ pub struct RunnerGroupsEnterprise {
  * The type of label. Read-only labels are applied automatically when the runner is configured.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Type {
+    #[serde(rename = "custom")]
     Custom,
+    #[serde(rename = "read-only")]
     ReadOnly,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Type::Custom => "custom",
             Type::ReadOnly => "read-only",
             Type::Noop => "",
+            Type::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -4386,17 +4531,20 @@ pub struct Label {
  * The state of the milestone.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum State {
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "open")]
     Open,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for State {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             State::Closed => "closed",
             State::Open => "open",
+            State::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -4501,22 +4649,31 @@ pub struct Milestone {
  * How the author is associated with the repository.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum AuthorAssociation {
+    #[serde(rename = "COLLABORATOR")]
     Collaborator,
+    #[serde(rename = "CONTRIBUTOR")]
     Contributor,
+    #[serde(rename = "FIRST_TIMER")]
     FirstTimer,
+    #[serde(rename = "FIRST_TIME_CONTRIBUTOR")]
     FirstTimeContributor,
+    #[serde(rename = "MANNEQUIN")]
     Mannequin,
+    #[serde(rename = "MEMBER")]
     Member,
+    #[serde(rename = "NONE")]
     None,
+    #[serde(rename = "OWNER")]
     Owner,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for AuthorAssociation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             AuthorAssociation::Collaborator => "COLLABORATOR",
             AuthorAssociation::Contributor => "CONTRIBUTOR",
             AuthorAssociation::FirstTimer => "FIRST_TIMER",
@@ -4526,6 +4683,7 @@ impl std::fmt::Display for AuthorAssociation {
             AuthorAssociation::None => "NONE",
             AuthorAssociation::Owner => "OWNER",
             AuthorAssociation::Noop => "",
+            AuthorAssociation::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -7669,21 +7827,26 @@ pub struct OrganizationFull {
  * The policy that controls the repositories in the organization that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum EnabledRepositories {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "none")]
     None,
+    #[serde(rename = "selected")]
     Selected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for EnabledRepositories {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             EnabledRepositories::All => "all",
             EnabledRepositories::None => "none",
             EnabledRepositories::Selected => "selected",
             EnabledRepositories::Noop => "",
+            EnabledRepositories::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -7793,21 +7956,26 @@ pub struct RunnerGroupsOrg {
  * Visibility of a secret
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Visibility {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "selected")]
     Selected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Visibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Visibility::All => "all",
             Visibility::Private => "private",
             Visibility::Selected => "selected",
             Visibility::Noop => "",
+            Visibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -8150,21 +8318,26 @@ pub struct OrgHook {
  * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum InteractionGroup {
+    #[serde(rename = "collaborators_only")]
     CollaboratorsOnly,
+    #[serde(rename = "contributors_only")]
     ContributorsOnly,
+    #[serde(rename = "existing_users")]
     ExistingUsers,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for InteractionGroup {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             InteractionGroup::CollaboratorsOnly => "collaborators_only",
             InteractionGroup::ContributorsOnly => "contributors_only",
             InteractionGroup::ExistingUsers => "existing_users",
             InteractionGroup::Noop => "",
+            InteractionGroup::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -8203,25 +8376,32 @@ pub struct InteractionLimits {
  * The duration of the interaction restriction. Can be one of: `one_day`, `three_days`, `one_week`, `one_month`, `six_months`. Default: `one_day`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum InteractionExpiry {
+    #[serde(rename = "one_day")]
     OneDay,
+    #[serde(rename = "one_month")]
     OneMonth,
+    #[serde(rename = "one_week")]
     OneWeek,
+    #[serde(rename = "six_months")]
     SixMonths,
+    #[serde(rename = "three_days")]
     ThreeDays,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for InteractionExpiry {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             InteractionExpiry::OneDay => "one_day",
             InteractionExpiry::OneMonth => "one_month",
             InteractionExpiry::OneWeek => "one_week",
             InteractionExpiry::SixMonths => "six_months",
             InteractionExpiry::ThreeDays => "three_days",
             InteractionExpiry::Noop => "",
+            InteractionExpiry::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -8465,19 +8645,23 @@ pub struct Team {
  * The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrgMembershipState {
+    #[serde(rename = "active")]
     Active,
+    #[serde(rename = "pending")]
     Pending,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrgMembershipState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrgMembershipState::Active => "active",
             OrgMembershipState::Pending => "pending",
             OrgMembershipState::Noop => "",
+            OrgMembershipState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -8498,21 +8682,26 @@ impl OrgMembershipState {
  * The user's membership type in the organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Role {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "billing_manager")]
     BillingManager,
+    #[serde(rename = "member")]
     Member,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Role {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Role::Admin => "admin",
             Role::BillingManager => "billing_manager",
             Role::Member => "member",
             Role::Noop => "",
+            Role::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -8648,20 +8837,27 @@ pub struct Migration {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PackageType {
+    #[serde(rename = "container")]
     Container,
+    #[serde(rename = "docker")]
     Docker,
+    #[serde(rename = "maven")]
     Maven,
+    #[serde(rename = "npm")]
     Npm,
+    #[serde(rename = "nuget")]
     Nuget,
+    #[serde(rename = "rubygems")]
     Rubygems,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PackageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PackageType::Container => "container",
             PackageType::Docker => "docker",
             PackageType::Maven => "maven",
@@ -8669,6 +8865,7 @@ impl std::fmt::Display for PackageType {
             PackageType::Nuget => "nuget",
             PackageType::Rubygems => "rubygems",
             PackageType::Noop => "",
+            PackageType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -8686,19 +8883,23 @@ impl PackageType {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PackageVisibility {
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "public")]
     Public,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PackageVisibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PackageVisibility::Private => "private",
             PackageVisibility::Public => "public",
             PackageVisibility::Noop => "",
+            PackageVisibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -8870,23 +9071,29 @@ pub struct PackageVersion {
  * The baseline permission that all organization members have on this project. Only present if owner is an organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrganizationPermission {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "none")]
     None,
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrganizationPermission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrganizationPermission::Admin => "admin",
             OrganizationPermission::None => "none",
             OrganizationPermission::Read => "read",
             OrganizationPermission::Write => "write",
             OrganizationPermission::Noop => "",
+            OrganizationPermission::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -9062,19 +9269,23 @@ pub struct GroupMapping {
  * The level of privacy this team should have
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Privacy {
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "secret")]
     Secret,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Privacy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Privacy::Closed => "closed",
             Privacy::Secret => "secret",
             Privacy::Noop => "",
+            Privacy::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -9405,22 +9616,31 @@ pub struct TeamDiscussionComment {
  * The reaction to use
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum Content {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Content {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Content::PlusOne => "+1",
             Content::MinusOne => "-1",
             Content::Confused => "confused",
@@ -9430,6 +9650,7 @@ impl std::fmt::Display for Content {
             Content::Laugh => "laugh",
             Content::Rocket => "rocket",
             Content::Noop => "",
+            Content::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -9479,17 +9700,20 @@ pub struct Reaction {
  * The role of the user in the team.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamMembershipRole {
+    #[serde(rename = "maintainer")]
     Maintainer,
+    #[serde(rename = "member")]
     Member,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamMembershipRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamMembershipRole::Maintainer => "maintainer",
             TeamMembershipRole::Member => "member",
+            TeamMembershipRole::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -9505,19 +9729,23 @@ impl Default for TeamMembershipRole {
  * The state of the user's membership in the team.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamMembershipState {
+    #[serde(rename = "active")]
     Active,
+    #[serde(rename = "pending")]
     Pending,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamMembershipState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamMembershipState::Active => "active",
             TeamMembershipState::Pending => "pending",
             TeamMembershipState::Noop => "",
+            TeamMembershipState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -10467,19 +10695,23 @@ pub struct FullRepositoryPermissions {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum FullRepositorySecurityAnalysisAdvancedStatus {
+    #[serde(rename = "disabled")]
     Disabled,
+    #[serde(rename = "enabled")]
     Enabled,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for FullRepositorySecurityAnalysisAdvancedStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             FullRepositorySecurityAnalysisAdvancedStatus::Disabled => "disabled",
             FullRepositorySecurityAnalysisAdvancedStatus::Enabled => "enabled",
             FullRepositorySecurityAnalysisAdvancedStatus::Noop => "",
+            FullRepositorySecurityAnalysisAdvancedStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -11116,21 +11348,26 @@ pub struct Artifact {
  * The phase of the lifecycle that the job is currently in.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum JobStatus {
+    #[serde(rename = "completed")]
     Completed,
+    #[serde(rename = "in_progress")]
     InProgress,
+    #[serde(rename = "queued")]
     Queued,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for JobStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             JobStatus::Completed => "completed",
             JobStatus::InProgress => "in_progress",
             JobStatus::Queued => "queued",
             JobStatus::Noop => "",
+            JobStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -11666,19 +11903,23 @@ pub struct EnvironmentApprovalEnvironments {
  * Whether deployment to the environment(s) was approved or rejected
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum EnvironmentApprovalState {
+    #[serde(rename = "approved")]
     Approved,
+    #[serde(rename = "rejected")]
     Rejected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for EnvironmentApprovalState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             EnvironmentApprovalState::Approved => "approved",
             EnvironmentApprovalState::Rejected => "rejected",
             EnvironmentApprovalState::Noop => "",
+            EnvironmentApprovalState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -11729,17 +11970,22 @@ pub struct EnvironmentApproval {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum DeploymentReviewerType {
+    #[serde(rename = "Team")]
     Team,
+    #[serde(rename = "User")]
     User,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for DeploymentReviewerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             DeploymentReviewerType::Team => "Team",
             DeploymentReviewerType::User => "User",
             DeploymentReviewerType::Noop => "",
+            DeploymentReviewerType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -12083,25 +12329,32 @@ pub struct ActionsSecret {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum WorkflowState {
+    #[serde(rename = "active")]
     Active,
+    #[serde(rename = "deleted")]
     Deleted,
+    #[serde(rename = "disabled_fork")]
     DisabledFork,
+    #[serde(rename = "disabled_inactivity")]
     DisabledInactivity,
+    #[serde(rename = "disabled_manually")]
     DisabledManually,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for WorkflowState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             WorkflowState::Active => "active",
             WorkflowState::Deleted => "deleted",
             WorkflowState::DisabledFork => "disabled_fork",
             WorkflowState::DisabledInactivity => "disabled_inactivity",
             WorkflowState::DisabledManually => "disabled_manually",
             WorkflowState::Noop => "",
+            WorkflowState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -13349,21 +13602,26 @@ pub struct DeploymentSimple {
  * The phase of the lifecycle that the check is currently in.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum CheckRunStatus {
+    #[serde(rename = "completed")]
     Completed,
+    #[serde(rename = "in_progress")]
     InProgress,
+    #[serde(rename = "queued")]
     Queued,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for CheckRunStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             CheckRunStatus::Completed => "completed",
             CheckRunStatus::InProgress => "in_progress",
             CheckRunStatus::Queued => "queued",
             CheckRunStatus::Noop => "",
+            CheckRunStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -13381,21 +13639,29 @@ impl CheckRunStatus {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Conclusion {
+    #[serde(rename = "action_required")]
     ActionRequired,
+    #[serde(rename = "cancelled")]
     Cancelled,
+    #[serde(rename = "failure")]
     Failure,
+    #[serde(rename = "neutral")]
     Neutral,
+    #[serde(rename = "skipped")]
     Skipped,
+    #[serde(rename = "success")]
     Success,
+    #[serde(rename = "timed_out")]
     TimedOut,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Conclusion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Conclusion::ActionRequired => "action_required",
             Conclusion::Cancelled => "cancelled",
             Conclusion::Failure => "failure",
@@ -13404,6 +13670,7 @@ impl std::fmt::Display for Conclusion {
             Conclusion::Success => "success",
             Conclusion::TimedOut => "timed_out",
             Conclusion::Noop => "",
+            Conclusion::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -13619,21 +13886,26 @@ pub struct CheckAnnotation {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum CheckSuiteStatus {
+    #[serde(rename = "completed")]
     Completed,
+    #[serde(rename = "in_progress")]
     InProgress,
+    #[serde(rename = "queued")]
     Queued,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for CheckSuiteStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             CheckSuiteStatus::Completed => "completed",
             CheckSuiteStatus::InProgress => "in_progress",
             CheckSuiteStatus::Queued => "queued",
             CheckSuiteStatus::Noop => "",
+            CheckSuiteStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -13774,23 +14046,29 @@ pub struct CheckSuitePreference {
  * State of a code scanning alert.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum CodeScanningAlertState {
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "dismissed")]
     Dismissed,
+    #[serde(rename = "fixed")]
     Fixed,
+    #[serde(rename = "open")]
     Open,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for CodeScanningAlertState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             CodeScanningAlertState::Closed => "closed",
             CodeScanningAlertState::Dismissed => "dismissed",
             CodeScanningAlertState::Fixed => "fixed",
             CodeScanningAlertState::Open => "open",
             CodeScanningAlertState::Noop => "",
+            CodeScanningAlertState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -13811,21 +14089,26 @@ impl CodeScanningAlertState {
  * **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum CodeScanningAlertDismissedReason {
+    #[serde(rename = "false positive")]
     FalsePositive,
+    #[serde(rename = "used in tests")]
     UsedInTests,
+    #[serde(rename = "won't fix")]
     WonTFix,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for CodeScanningAlertDismissedReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             CodeScanningAlertDismissedReason::FalsePositive => "false positive",
             CodeScanningAlertDismissedReason::UsedInTests => "used in tests",
             CodeScanningAlertDismissedReason::WonTFix => "won't fix",
             CodeScanningAlertDismissedReason::Noop => "",
+            CodeScanningAlertDismissedReason::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -13846,23 +14129,29 @@ impl CodeScanningAlertDismissedReason {
  * The severity of the alert.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Severity {
+    #[serde(rename = "error")]
     Error,
+    #[serde(rename = "none")]
     None,
+    #[serde(rename = "note")]
     Note,
+    #[serde(rename = "warning")]
     Warning,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Severity {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Severity::Error => "error",
             Severity::None => "none",
             Severity::Note => "note",
             Severity::Warning => "warning",
             Severity::Noop => "",
+            Severity::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -13997,23 +14286,29 @@ pub struct CodeScanningAlertLocation {
  * A classification of the file. For example to identify it as generated.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum CodeScanningAlertClassification {
+    #[serde(rename = "generated")]
     Generated,
+    #[serde(rename = "library")]
     Library,
+    #[serde(rename = "source")]
     Source,
+    #[serde(rename = "test")]
     Test,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for CodeScanningAlertClassification {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             CodeScanningAlertClassification::Generated => "generated",
             CodeScanningAlertClassification::Library => "library",
             CodeScanningAlertClassification::Source => "source",
             CodeScanningAlertClassification::Test => "test",
             CodeScanningAlertClassification::Noop => "",
+            CodeScanningAlertClassification::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -14178,23 +14473,29 @@ pub struct CodeScanningAlertItems {
  * The security severity of the alert.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SecuritySeverityLevel {
+    #[serde(rename = "critical")]
     Critical,
+    #[serde(rename = "high")]
     High,
+    #[serde(rename = "low")]
     Low,
+    #[serde(rename = "medium")]
     Medium,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SecuritySeverityLevel {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SecuritySeverityLevel::Critical => "critical",
             SecuritySeverityLevel::High => "high",
             SecuritySeverityLevel::Low => "low",
             SecuritySeverityLevel::Medium => "medium",
             SecuritySeverityLevel::Noop => "",
+            SecuritySeverityLevel::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -14352,19 +14653,23 @@ pub struct CodeScanningAlert {
  * Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum CodeScanningAlertSetState {
+    #[serde(rename = "dismissed")]
     Dismissed,
+    #[serde(rename = "open")]
     Open,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for CodeScanningAlertSetState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             CodeScanningAlertSetState::Dismissed => "dismissed",
             CodeScanningAlertSetState::Open => "open",
             CodeScanningAlertSetState::Noop => "",
+            CodeScanningAlertSetState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -14602,19 +14907,23 @@ pub struct CodeScanningSarifsReceipt {
  * `pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ProcessingStatus {
+    #[serde(rename = "complete")]
     Complete,
+    #[serde(rename = "pending")]
     Pending,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ProcessingStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ProcessingStatus::Complete => "complete",
             ProcessingStatus::Pending => "pending",
             ProcessingStatus::Noop => "",
+            ProcessingStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -14783,25 +15092,32 @@ pub struct Collaborator {
  * The permission associated with the invitation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum RepositoryInvitationPermissions {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "maintain")]
     Maintain,
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "triage")]
     Triage,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for RepositoryInvitationPermissions {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             RepositoryInvitationPermissions::Admin => "admin",
             RepositoryInvitationPermissions::Maintain => "maintain",
             RepositoryInvitationPermissions::Read => "read",
             RepositoryInvitationPermissions::Triage => "triage",
             RepositoryInvitationPermissions::Write => "write",
             RepositoryInvitationPermissions::Noop => "",
+            RepositoryInvitationPermissions::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -14997,21 +15313,26 @@ pub struct Link {
  * The merge method to use.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum MergeMethod {
+    #[serde(rename = "merge")]
     Merge,
+    #[serde(rename = "rebase")]
     Rebase,
+    #[serde(rename = "squash")]
     Squash,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for MergeMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             MergeMethod::Merge => "merge",
             MergeMethod::Rebase => "rebase",
             MergeMethod::Squash => "squash",
             MergeMethod::Noop => "",
+            MergeMethod::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -15667,23 +15988,29 @@ pub struct DiffEntry {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum CommitComparisonStatus {
+    #[serde(rename = "ahead")]
     Ahead,
+    #[serde(rename = "behind")]
     Behind,
+    #[serde(rename = "diverged")]
     Diverged,
+    #[serde(rename = "identical")]
     Identical,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for CommitComparisonStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             CommitComparisonStatus::Ahead => "ahead",
             CommitComparisonStatus::Behind => "behind",
             CommitComparisonStatus::Diverged => "diverged",
             CommitComparisonStatus::Identical => "identical",
             CommitComparisonStatus::Noop => "",
+            CommitComparisonStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -16496,21 +16823,29 @@ pub struct Contributor {
  * The state of the status.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum DeploymentStatusState {
+    #[serde(rename = "error")]
     Error,
+    #[serde(rename = "failure")]
     Failure,
+    #[serde(rename = "in_progress")]
     InProgress,
+    #[serde(rename = "inactive")]
     Inactive,
+    #[serde(rename = "pending")]
     Pending,
+    #[serde(rename = "queued")]
     Queued,
+    #[serde(rename = "success")]
     Success,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for DeploymentStatusState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             DeploymentStatusState::Error => "error",
             DeploymentStatusState::Failure => "failure",
             DeploymentStatusState::InProgress => "in_progress",
@@ -16519,6 +16854,7 @@ impl std::fmt::Display for DeploymentStatusState {
             DeploymentStatusState::Queued => "queued",
             DeploymentStatusState::Success => "success",
             DeploymentStatusState::Noop => "",
+            DeploymentStatusState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -17307,30 +17643,47 @@ pub struct Hook {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ImportStatus {
+    #[serde(rename = "auth")]
     Auth,
+    #[serde(rename = "auth_failed")]
     AuthFailed,
+    #[serde(rename = "choose")]
     Choose,
+    #[serde(rename = "complete")]
     Complete,
+    #[serde(rename = "detecting")]
     Detecting,
+    #[serde(rename = "detection_found_multiple")]
     DetectionFoundMultiple,
+    #[serde(rename = "detection_found_nothing")]
     DetectionFoundNothing,
+    #[serde(rename = "detection_needs_auth")]
     DetectionNeedsAuth,
+    #[serde(rename = "error")]
     Error,
+    #[serde(rename = "importing")]
     Importing,
+    #[serde(rename = "mapping")]
     Mapping,
+    #[serde(rename = "none")]
     None,
+    #[serde(rename = "pushing")]
     Pushing,
+    #[serde(rename = "setup")]
     Setup,
+    #[serde(rename = "unknown")]
     Unknown,
+    #[serde(rename = "waiting_to_push")]
     WaitingToPush,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ImportStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ImportStatus::Auth => "auth",
             ImportStatus::AuthFailed => "auth_failed",
             ImportStatus::Choose => "choose",
@@ -17348,6 +17701,7 @@ impl std::fmt::Display for ImportStatus {
             ImportStatus::Unknown => "unknown",
             ImportStatus::WaitingToPush => "waiting_to_push",
             ImportStatus::Noop => "",
+            ImportStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -19204,17 +19558,20 @@ pub struct PullRequestReviewCommentLinks {
  * The side of the first line of the range for a multi-line comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum StartSide {
+    #[serde(rename = "LEFT")]
     Left,
+    #[serde(rename = "RIGHT")]
     Right,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for StartSide {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             StartSide::Left => "LEFT",
             StartSide::Right => "RIGHT",
+            StartSide::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -19230,17 +19587,20 @@ impl Default for StartSide {
  * The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Side {
+    #[serde(rename = "LEFT")]
     Left,
+    #[serde(rename = "RIGHT")]
     Right,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Side {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Side::Left => "LEFT",
             Side::Right => "RIGHT",
+            Side::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -19785,26 +20145,39 @@ pub struct PagesSourceHash {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PagesHttpsCertificateState {
+    #[serde(rename = "approved")]
     Approved,
+    #[serde(rename = "authorization_created")]
     AuthorizationCreated,
+    #[serde(rename = "authorization_pending")]
     AuthorizationPending,
+    #[serde(rename = "authorization_revoked")]
     AuthorizationRevoked,
+    #[serde(rename = "authorized")]
     Authorized,
+    #[serde(rename = "bad_authz")]
     BadAuthz,
+    #[serde(rename = "destroy_pending")]
     DestroyPending,
+    #[serde(rename = "dns_changed")]
     DnsChanged,
+    #[serde(rename = "errored")]
     Errored,
+    #[serde(rename = "issued")]
     Issued,
+    #[serde(rename = "new")]
     New,
+    #[serde(rename = "uploaded")]
     Uploaded,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PagesHttpsCertificateState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PagesHttpsCertificateState::Approved => "approved",
             PagesHttpsCertificateState::AuthorizationCreated => "authorization_created",
             PagesHttpsCertificateState::AuthorizationPending => "authorization_pending",
@@ -19818,6 +20191,7 @@ impl std::fmt::Display for PagesHttpsCertificateState {
             PagesHttpsCertificateState::New => "new",
             PagesHttpsCertificateState::Uploaded => "uploaded",
             PagesHttpsCertificateState::Noop => "",
+            PagesHttpsCertificateState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -19857,21 +20231,26 @@ pub struct PagesHttpsCertificate {
  * The status of the most recent build of the Page.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PageStatus {
+    #[serde(rename = "building")]
     Building,
+    #[serde(rename = "built")]
     Built,
+    #[serde(rename = "errored")]
     Errored,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PageStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PageStatus::Building => "building",
             PageStatus::Built => "built",
             PageStatus::Errored => "errored",
             PageStatus::Noop => "",
+            PageStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -20336,19 +20715,23 @@ pub struct PagesHealthCheck {
  * State of this Pull Request. Either `open` or `closed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PullRequestState {
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "open")]
     Open,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullRequestState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullRequestState::Closed => "closed",
             PullRequestState::Open => "open",
             PullRequestState::Noop => "",
+            PullRequestState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -21983,19 +22366,23 @@ pub struct ReviewComment {
  * State of the release asset.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReleaseAssetState {
+    #[serde(rename = "open")]
     Open,
+    #[serde(rename = "uploaded")]
     Uploaded,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReleaseAssetState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReleaseAssetState::Open => "open",
             ReleaseAssetState::Uploaded => "uploaded",
             ReleaseAssetState::Noop => "",
+            ReleaseAssetState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -22228,19 +22615,23 @@ pub struct Release {
  * Sets the state of the secret scanning alert. Can be either `open` or `resolved`. You must provide `resolution` when you set the state to `resolved`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SecretScanningAlertState {
+    #[serde(rename = "open")]
     Open,
+    #[serde(rename = "resolved")]
     Resolved,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SecretScanningAlertState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SecretScanningAlertState::Open => "open",
             SecretScanningAlertState::Resolved => "resolved",
             SecretScanningAlertState::Noop => "",
+            SecretScanningAlertState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -22261,23 +22652,29 @@ impl SecretScanningAlertState {
  * **Required when the `state` is `resolved`.** The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SecretScanningAlertResolution {
+    #[serde(rename = "false_positive")]
     FalsePositive,
+    #[serde(rename = "revoked")]
     Revoked,
+    #[serde(rename = "used_in_tests")]
     UsedInTests,
+    #[serde(rename = "wont_fix")]
     WontFix,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SecretScanningAlertResolution {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SecretScanningAlertResolution::FalsePositive => "false_positive",
             SecretScanningAlertResolution::Revoked => "revoked",
             SecretScanningAlertResolution::UsedInTests => "used_in_tests",
             SecretScanningAlertResolution::WontFix => "wont_fix",
             SecretScanningAlertResolution::Noop => "",
+            SecretScanningAlertResolution::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -22914,21 +23311,26 @@ pub struct ScimUserMeta {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Op {
+    #[serde(rename = "add")]
     Add,
+    #[serde(rename = "remove")]
     Remove,
+    #[serde(rename = "replace")]
     Replace,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Op {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Op::Add => "add",
             Op::Remove => "remove",
             Op::Replace => "replace",
             Op::Noop => "",
+            Op::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -25061,21 +25463,26 @@ pub struct KeySimple {
  *   The default is `web`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Include {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "git")]
     Git,
+    #[serde(rename = "web")]
     Web,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Include {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Include::All => "all",
             Include::Git => "git",
             Include::Web => "web",
             Include::Noop => "",
+            Include::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -25098,19 +25505,23 @@ impl Include {
  *   The default is `desc`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Order {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Order {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Order::Asc => "asc",
             Order::Desc => "desc",
             Order::Noop => "",
+            Order::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -25131,17 +25542,20 @@ impl Order {
  * One of `asc` (ascending) or `desc` (descending).
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Direction {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Direction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Direction::Asc => "asc",
             Direction::Desc => "desc",
+            Direction::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -25157,17 +25571,20 @@ impl Default for Direction {
  * One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Sort {
+    #[serde(rename = "created")]
     Created,
+    #[serde(rename = "updated")]
     Updated,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Sort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Sort::Created => "created",
             Sort::Updated => "updated",
+            Sort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -25183,20 +25600,27 @@ impl Default for Sort {
  * The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PackageTypeData {
+    #[serde(rename = "container")]
     Container,
+    #[serde(rename = "docker")]
     Docker,
+    #[serde(rename = "maven")]
     Maven,
+    #[serde(rename = "npm")]
     Npm,
+    #[serde(rename = "nuget")]
     Nuget,
+    #[serde(rename = "rubygems")]
     Rubygems,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PackageTypeData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PackageTypeData::Container => "container",
             PackageTypeData::Docker => "docker",
             PackageTypeData::Maven => "maven",
@@ -25204,6 +25628,7 @@ impl std::fmt::Display for PackageTypeData {
             PackageTypeData::Nuget => "nuget",
             PackageTypeData::Rubygems => "rubygems",
             PackageTypeData::Noop => "",
+            PackageTypeData::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -25224,27 +25649,41 @@ impl PackageTypeData {
  * Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum WorkflowRunStatus {
+    #[serde(rename = "action_required")]
     ActionRequired,
+    #[serde(rename = "cancelled")]
     Cancelled,
+    #[serde(rename = "completed")]
     Completed,
+    #[serde(rename = "failure")]
     Failure,
+    #[serde(rename = "in_progress")]
     InProgress,
+    #[serde(rename = "neutral")]
     Neutral,
+    #[serde(rename = "queued")]
     Queued,
+    #[serde(rename = "requested")]
     Requested,
+    #[serde(rename = "skipped")]
     Skipped,
+    #[serde(rename = "stale")]
     Stale,
+    #[serde(rename = "success")]
     Success,
+    #[serde(rename = "timed_out")]
     TimedOut,
+    #[serde(rename = "waiting")]
     Waiting,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for WorkflowRunStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             WorkflowRunStatus::ActionRequired => "action_required",
             WorkflowRunStatus::Cancelled => "cancelled",
             WorkflowRunStatus::Completed => "completed",
@@ -25259,6 +25698,7 @@ impl std::fmt::Display for WorkflowRunStatus {
             WorkflowRunStatus::TimedOut => "timed_out",
             WorkflowRunStatus::Waiting => "waiting",
             WorkflowRunStatus::Noop => "",
+            WorkflowRunStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -25338,21 +25778,26 @@ impl From<WorkflowIdOneOf> for String {
  * Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum StatusData {
+    #[serde(rename = "completed")]
     Completed,
+    #[serde(rename = "in_progress")]
     InProgress,
+    #[serde(rename = "queued")]
     Queued,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for StatusData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             StatusData::Completed => "completed",
             StatusData::InProgress => "in_progress",
             StatusData::Queued => "queued",
             StatusData::Noop => "",
+            StatusData::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -25374,15 +25819,19 @@ impl StatusData {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum Per {
+    #[serde(rename = "day")]
     Day,
+    #[serde(rename = "week")]
     Week,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Per {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Per::Day => "day",
             Per::Week => "week",
+            Per::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -25398,17 +25847,20 @@ impl Default for Per {
  * Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrderData {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrderData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrderData::Asc => "asc",
             OrderData::Desc => "desc",
+            OrderData::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26060,19 +26512,23 @@ pub struct EnterpriseAdminListSelfHostedRunnerGroupsResponse {
  * Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "selected")]
     Selected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::All => "all",
             EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::Selected => "selected",
             EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::Noop => "",
+            EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26124,17 +26580,20 @@ pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
  * Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "selected")]
     Selected,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::All => "all",
             EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::Selected => "selected",
+            EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26211,17 +26670,20 @@ pub struct EnterpriseAdminListSelfHostedRunnersResponse {
 pub struct GistsCreateRequestFiles {}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Public {
+    #[serde(rename = "false")]
     False,
+    #[serde(rename = "true")]
     True,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Public {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Public::False => "false",
             Public::True => "true",
+            Public::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26374,25 +26836,32 @@ pub struct AppsListInstallationReposResponse {
  *   \* `all`: All issues the authenticated user can see, regardless of participation or creation
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Filter {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "assigned")]
     Assigned,
+    #[serde(rename = "created")]
     Created,
+    #[serde(rename = "mentioned")]
     Mentioned,
+    #[serde(rename = "repos")]
     Repos,
+    #[serde(rename = "subscribed")]
     Subscribed,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Filter {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Filter::All => "all",
             Filter::Assigned => "assigned",
             Filter::Created => "created",
             Filter::Mentioned => "mentioned",
             Filter::Repos => "repos",
             Filter::Subscribed => "subscribed",
+            Filter::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26408,19 +26877,23 @@ impl Default for Filter {
  * Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum IssuesListState {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "open")]
     Open,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for IssuesListState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             IssuesListState::All => "all",
             IssuesListState::Closed => "closed",
             IssuesListState::Open => "open",
+            IssuesListState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26436,19 +26909,23 @@ impl Default for IssuesListState {
  * What to sort results by. Can be either `created`, `updated`, `comments`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum IssuesListSort {
+    #[serde(rename = "comments")]
     Comments,
+    #[serde(rename = "created")]
     Created,
+    #[serde(rename = "updated")]
     Updated,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for IssuesListSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             IssuesListSort::Comments => "comments",
             IssuesListSort::Created => "created",
             IssuesListSort::Updated => "updated",
+            IssuesListSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26464,17 +26941,20 @@ impl Default for IssuesListSort {
  * The rendering mode.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Mode {
+    #[serde(rename = "gfm")]
     Gfm,
+    #[serde(rename = "markdown")]
     Markdown,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Mode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Mode::Gfm => "gfm",
             Mode::Markdown => "markdown",
+            Mode::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26517,19 +26997,23 @@ pub struct MarkdownRenderRequest {
  * To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum AppsListAccountsPlanDirection {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for AppsListAccountsPlanDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             AppsListAccountsPlanDirection::Asc => "asc",
             AppsListAccountsPlanDirection::Desc => "desc",
             AppsListAccountsPlanDirection::Noop => "",
+            AppsListAccountsPlanDirection::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26577,21 +27061,26 @@ pub struct ActivitySetThreadSubscriptionRequest {
  *   \* `none` - no permissions granted by default.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum DefaultRepositoryPermission {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "none")]
     None,
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for DefaultRepositoryPermission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             DefaultRepositoryPermission::Admin => "admin",
             DefaultRepositoryPermission::None => "none",
             DefaultRepositoryPermission::Read => "read",
             DefaultRepositoryPermission::Write => "write",
+            DefaultRepositoryPermission::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26611,21 +27100,26 @@ impl Default for DefaultRepositoryPermission {
  *   **Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See the parameter deprecation notice in the operation description for details.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum MembersAllowedRepositoryCreationType {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "none")]
     None,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for MembersAllowedRepositoryCreationType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             MembersAllowedRepositoryCreationType::All => "all",
             MembersAllowedRepositoryCreationType::None => "none",
             MembersAllowedRepositoryCreationType::Private => "private",
             MembersAllowedRepositoryCreationType::Noop => "",
+            MembersAllowedRepositoryCreationType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26907,19 +27401,23 @@ pub struct ActionsListSelfHostedRunnerGroupsOrgResponse {
  * Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "selected")]
     Selected,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::All => "all",
             ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Private => "private",
             ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::Selected => "selected",
+            ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -26963,21 +27461,26 @@ pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
  * Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "selected")]
     Selected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::All => "all",
             ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::Private => "private",
             ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::Selected => "selected",
             ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::Noop => "",
+            ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27067,21 +27570,26 @@ pub struct ActionsListOrgSecretsResponse {
  *   \- `selected` - Only specific repositories can access the secret.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ActionsCreateUpdateOrgSecretRequestVisibility {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "selected")]
     Selected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ActionsCreateUpdateOrgSecretRequestVisibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ActionsCreateUpdateOrgSecretRequestVisibility::All => "all",
             ActionsCreateUpdateOrgSecretRequestVisibility::Private => "private",
             ActionsCreateUpdateOrgSecretRequestVisibility::Selected => "selected",
             ActionsCreateUpdateOrgSecretRequestVisibility::Noop => "",
+            ActionsCreateUpdateOrgSecretRequestVisibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27315,19 +27823,23 @@ pub struct AppsListInstallationsResponse {
  *   \* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrgsCreateInvitationRequestRole {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "billing_manager")]
     BillingManager,
+    #[serde(rename = "direct_member")]
     DirectMember,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrgsCreateInvitationRequestRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrgsCreateInvitationRequestRole::Admin => "admin",
             OrgsCreateInvitationRequestRole::BillingManager => "billing_manager",
             OrgsCreateInvitationRequestRole::DirectMember => "direct_member",
+            OrgsCreateInvitationRequestRole::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27380,17 +27892,20 @@ pub struct OrgsCreateInvitationRequest {
  *   \* `all` - All members the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrgsListMembersFilter {
+    #[serde(rename = "2fa_disabled")]
     TwoFaDisabled,
+    #[serde(rename = "all")]
     All,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrgsListMembersFilter {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrgsListMembersFilter::TwoFaDisabled => "2fa_disabled",
             OrgsListMembersFilter::All => "all",
+            OrgsListMembersFilter::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27409,19 +27924,23 @@ impl Default for OrgsListMembersFilter {
  *   \* `member` - Non-owner organization members.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrgsListMembersRole {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "member")]
     Member,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrgsListMembersRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrgsListMembersRole::Admin => "admin",
             OrgsListMembersRole::All => "all",
             OrgsListMembersRole::Member => "member",
+            OrgsListMembersRole::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27439,17 +27958,20 @@ impl Default for OrgsListMembersRole {
  *   \* `member` - The user will become a non-owner member of the organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrgsSetMembershipUserRequestRole {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "member")]
     Member,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrgsSetMembershipUserRequestRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrgsSetMembershipUserRequestRole::Admin => "admin",
             OrgsSetMembershipUserRequestRole::Member => "member",
+            OrgsSetMembershipUserRequestRole::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27476,17 +27998,20 @@ pub struct OrgsSetMembershipUserRequest {
  * Allowed values that can be passed to the exclude param.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Exclude {
+    #[serde(rename = "repositories")]
     Repositories,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Exclude {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Exclude::Repositories => "repositories",
             Exclude::Noop => "",
+            Exclude::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27504,17 +28029,20 @@ impl Exclude {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum MigrationsStartOrgRequestExclude {
+    #[serde(rename = "repositories")]
     Repositories,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for MigrationsStartOrgRequestExclude {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             MigrationsStartOrgRequestExclude::Repositories => "repositories",
             MigrationsStartOrgRequestExclude::Noop => "",
+            MigrationsStartOrgRequestExclude::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27558,17 +28086,20 @@ pub struct MigrationsStartOrgRequest {
  *   \* `all`: All outside collaborators.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrgsListOutsideCollaboratorsFilter {
+    #[serde(rename = "2fa_disabled")]
     TwoFaDisabled,
+    #[serde(rename = "all")]
     All,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrgsListOutsideCollaboratorsFilter {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrgsListOutsideCollaboratorsFilter::TwoFaDisabled => "2fa_disabled",
             OrgsListOutsideCollaboratorsFilter::All => "all",
+            OrgsListOutsideCollaboratorsFilter::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27584,17 +28115,20 @@ impl Default for OrgsListOutsideCollaboratorsFilter {
  * The state of the package, either active or deleted.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PackagesGetAllPackageVersionsOwnedByOrgState {
+    #[serde(rename = "active")]
     Active,
+    #[serde(rename = "deleted")]
     Deleted,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PackagesGetAllPackageVersionsOwnedByOrgState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PackagesGetAllPackageVersionsOwnedByOrgState::Active => "active",
             PackagesGetAllPackageVersionsOwnedByOrgState::Deleted => "deleted",
+            PackagesGetAllPackageVersionsOwnedByOrgState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27610,19 +28144,23 @@ impl Default for PackagesGetAllPackageVersionsOwnedByOrgState {
  * Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ProjectsListOrgState {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "open")]
     Open,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ProjectsListOrgState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ProjectsListOrgState::All => "all",
             ProjectsListOrgState::Closed => "closed",
             ProjectsListOrgState::Open => "open",
+            ProjectsListOrgState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27660,21 +28198,29 @@ pub struct ProjectsCreateOrgRequest {
  * Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposListOrgType {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "forks")]
     Forks,
+    #[serde(rename = "internal")]
     Internal,
+    #[serde(rename = "member")]
     Member,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "public")]
     Public,
+    #[serde(rename = "sources")]
     Sources,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposListOrgType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposListOrgType::All => "all",
             ReposListOrgType::Forks => "forks",
             ReposListOrgType::Internal => "internal",
@@ -27683,6 +28229,7 @@ impl std::fmt::Display for ReposListOrgType {
             ReposListOrgType::Public => "public",
             ReposListOrgType::Sources => "sources",
             ReposListOrgType::Noop => "",
+            ReposListOrgType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27703,21 +28250,26 @@ impl ReposListOrgType {
  * Can be one of `created`, `updated`, `pushed`, `full_name`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposListOrgSort {
+    #[serde(rename = "created")]
     Created,
+    #[serde(rename = "full_name")]
     FullName,
+    #[serde(rename = "pushed")]
     Pushed,
+    #[serde(rename = "updated")]
     Updated,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposListOrgSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposListOrgSort::Created => "created",
             ReposListOrgSort::FullName => "full_name",
             ReposListOrgSort::Pushed => "pushed",
             ReposListOrgSort::Updated => "updated",
+            ReposListOrgSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27733,19 +28285,23 @@ impl Default for ReposListOrgSort {
  * Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposListOrgDirection {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposListOrgDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposListOrgDirection::Asc => "asc",
             ReposListOrgDirection::Desc => "desc",
             ReposListOrgDirection::Noop => "",
+            ReposListOrgDirection::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27767,23 +28323,29 @@ impl ReposListOrgDirection {
  *   The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposCreateInOrgRequestVisibility {
+    #[serde(rename = "internal")]
     Internal,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "public")]
     Public,
+    #[serde(rename = "visibility")]
     Visibility,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposCreateInOrgRequestVisibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposCreateInOrgRequestVisibility::Internal => "internal",
             ReposCreateInOrgRequestVisibility::Private => "private",
             ReposCreateInOrgRequestVisibility::Public => "public",
             ReposCreateInOrgRequestVisibility::Visibility => "visibility",
             ReposCreateInOrgRequestVisibility::Noop => "",
+            ReposCreateInOrgRequestVisibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27925,19 +28487,23 @@ pub struct ReposCreateInOrgRequest {
  *   Default for child team: `closed`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamsCreateRequestPrivacy {
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "secret")]
     Secret,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamsCreateRequestPrivacy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamsCreateRequestPrivacy::Closed => "closed",
             TeamsCreateRequestPrivacy::Secret => "secret",
             TeamsCreateRequestPrivacy::Noop => "",
+            TeamsCreateRequestPrivacy::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -27961,19 +28527,23 @@ impl TeamsCreateRequestPrivacy {
  *   \* `admin` - team members can pull, push and administer newly-added repositories.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Permission {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "pull")]
     Pull,
+    #[serde(rename = "push")]
     Push,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Permission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Permission::Admin => "admin",
             Permission::Pull => "pull",
             Permission::Push => "push",
+            Permission::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28055,19 +28625,23 @@ pub struct TeamsCreateRequest {
  *   \* `closed` - visible to all members of this organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamsUpdateInOrgRequestPrivacy {
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "secret")]
     Secret,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamsUpdateInOrgRequestPrivacy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamsUpdateInOrgRequestPrivacy::Closed => "closed",
             TeamsUpdateInOrgRequestPrivacy::Secret => "secret",
             TeamsUpdateInOrgRequestPrivacy::Noop => "",
+            TeamsUpdateInOrgRequestPrivacy::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28199,22 +28773,31 @@ pub struct TeamsCreateDiscussionCommentInOrgRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsListTeamDiscussionCommentInOrgContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsListTeamDiscussionCommentInOrgContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsListTeamDiscussionCommentInOrgContent::PlusOne => "+1",
             ReactionsListTeamDiscussionCommentInOrgContent::MinusOne => "-1",
             ReactionsListTeamDiscussionCommentInOrgContent::Confused => "confused",
@@ -28224,6 +28807,7 @@ impl std::fmt::Display for ReactionsListTeamDiscussionCommentInOrgContent {
             ReactionsListTeamDiscussionCommentInOrgContent::Laugh => "laugh",
             ReactionsListTeamDiscussionCommentInOrgContent::Rocket => "rocket",
             ReactionsListTeamDiscussionCommentInOrgContent::Noop => "",
+            ReactionsListTeamDiscussionCommentInOrgContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28244,22 +28828,31 @@ impl ReactionsListTeamDiscussionCommentInOrgContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsCreateTeamDiscussionCommentInOrgRequestContent::PlusOne => "+1",
             ReactionsCreateTeamDiscussionCommentInOrgRequestContent::MinusOne => "-1",
             ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Confused => "confused",
@@ -28269,6 +28862,7 @@ impl std::fmt::Display for ReactionsCreateTeamDiscussionCommentInOrgRequestConte
             ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Laugh => "laugh",
             ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Rocket => "rocket",
             ReactionsCreateTeamDiscussionCommentInOrgRequestContent::Noop => "",
+            ReactionsCreateTeamDiscussionCommentInOrgRequestContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28304,22 +28898,31 @@ pub struct ReactionsCreateTeamDiscussionCommentInOrgRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsListTeamDiscussionInOrgContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsListTeamDiscussionInOrgContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsListTeamDiscussionInOrgContent::PlusOne => "+1",
             ReactionsListTeamDiscussionInOrgContent::MinusOne => "-1",
             ReactionsListTeamDiscussionInOrgContent::Confused => "confused",
@@ -28329,6 +28932,7 @@ impl std::fmt::Display for ReactionsListTeamDiscussionInOrgContent {
             ReactionsListTeamDiscussionInOrgContent::Laugh => "laugh",
             ReactionsListTeamDiscussionInOrgContent::Rocket => "rocket",
             ReactionsListTeamDiscussionInOrgContent::Noop => "",
+            ReactionsListTeamDiscussionInOrgContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28349,22 +28953,31 @@ impl ReactionsListTeamDiscussionInOrgContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsCreateTeamDiscussionInOrgRequestContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsCreateTeamDiscussionInOrgRequestContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsCreateTeamDiscussionInOrgRequestContent::PlusOne => "+1",
             ReactionsCreateTeamDiscussionInOrgRequestContent::MinusOne => "-1",
             ReactionsCreateTeamDiscussionInOrgRequestContent::Confused => "confused",
@@ -28374,6 +28987,7 @@ impl std::fmt::Display for ReactionsCreateTeamDiscussionInOrgRequestContent {
             ReactionsCreateTeamDiscussionInOrgRequestContent::Laugh => "laugh",
             ReactionsCreateTeamDiscussionInOrgRequestContent::Rocket => "rocket",
             ReactionsCreateTeamDiscussionInOrgRequestContent::Noop => "",
+            ReactionsCreateTeamDiscussionInOrgRequestContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28409,19 +29023,23 @@ pub struct ReactionsCreateTeamDiscussionInOrgRequest {
  *   \* `all` - all members of the team.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamsListMembersInOrgRole {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "maintainer")]
     Maintainer,
+    #[serde(rename = "member")]
     Member,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamsListMembersInOrgRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamsListMembersInOrgRole::All => "all",
             TeamsListMembersInOrgRole::Maintainer => "maintainer",
             TeamsListMembersInOrgRole::Member => "member",
+            TeamsListMembersInOrgRole::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28439,17 +29057,20 @@ impl Default for TeamsListMembersInOrgRole {
  *   \* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamsAddUpdateMembershipUserInOrgRequestRole {
+    #[serde(rename = "maintainer")]
     Maintainer,
+    #[serde(rename = "member")]
     Member,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamsAddUpdateMembershipUserInOrgRequestRole {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamsAddUpdateMembershipUserInOrgRequestRole::Maintainer => "maintainer",
             TeamsAddUpdateMembershipUserInOrgRequestRole::Member => "member",
+            TeamsAddUpdateMembershipUserInOrgRequestRole::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28480,21 +29101,26 @@ pub struct TeamsAddUpdateMembershipUserInOrgRequest {
  *   Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Admin => "admin",
             TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Read => "read",
             TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Write => "write",
             TeamsAddUpdateProjectPermissionsInOrgRequestPermission::Noop => "",
+            TeamsAddUpdateProjectPermissionsInOrgRequestPermission::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28531,25 +29157,32 @@ pub struct TeamsAddUpdateProjectPermissionsInOrgRequest {
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "maintain")]
     Maintain,
+    #[serde(rename = "pull")]
     Pull,
+    #[serde(rename = "push")]
     Push,
+    #[serde(rename = "triage")]
     Triage,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Admin => "admin",
             TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Maintain => "maintain",
             TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Pull => "pull",
             TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Push => "push",
             TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Triage => "triage",
             TeamsAddUpdateRepoPermissionsInOrgRequestPermission::Noop => "",
+            TeamsAddUpdateRepoPermissionsInOrgRequestPermission::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28786,19 +29419,23 @@ pub struct ProjectsUpdateColumnRequest {
  * Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ArchivedState {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "archived")]
     Archived,
+    #[serde(rename = "not_archived")]
     NotArchived,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ArchivedState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ArchivedState::All => "all",
             ArchivedState::Archived => "archived",
             ArchivedState::NotArchived => "not_archived",
+            ArchivedState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28915,23 +29552,29 @@ pub struct ProjectsMoveColumnRequest {
  * The baseline permission that all organization members have on this project
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ProjectsUpdateRequestOrganizationPermission {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "none")]
     None,
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ProjectsUpdateRequestOrganizationPermission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ProjectsUpdateRequestOrganizationPermission::Admin => "admin",
             ProjectsUpdateRequestOrganizationPermission::None => "none",
             ProjectsUpdateRequestOrganizationPermission::Read => "read",
             ProjectsUpdateRequestOrganizationPermission::Write => "write",
             ProjectsUpdateRequestOrganizationPermission::Noop => "",
+            ProjectsUpdateRequestOrganizationPermission::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -28996,19 +29639,23 @@ pub struct ProjectsUpdateRequest {
  *   \* `all`: All collaborators the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Affiliation {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "direct")]
     Direct,
+    #[serde(rename = "outside")]
     Outside,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Affiliation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Affiliation::All => "all",
             Affiliation::Direct => "direct",
             Affiliation::Outside => "outside",
+            Affiliation::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -29024,19 +29671,23 @@ impl Default for Affiliation {
  * The permission to grant the collaborator.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ProjectsAddCollaboratorRequestPermission {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "write")]
     Write,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ProjectsAddCollaboratorRequestPermission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ProjectsAddCollaboratorRequestPermission::Admin => "admin",
             ProjectsAddCollaboratorRequestPermission::Read => "read",
             ProjectsAddCollaboratorRequestPermission::Write => "write",
+            ProjectsAddCollaboratorRequestPermission::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -29058,23 +29709,29 @@ pub struct ProjectsAddCollaboratorRequest {
  * Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposUpdateRequestVisibility {
+    #[serde(rename = "internal")]
     Internal,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "public")]
     Public,
+    #[serde(rename = "visibility")]
     Visibility,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposUpdateRequestVisibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposUpdateRequestVisibility::Internal => "internal",
             ReposUpdateRequestVisibility::Private => "private",
             ReposUpdateRequestVisibility::Public => "public",
             ReposUpdateRequestVisibility::Visibility => "visibility",
             ReposUpdateRequestVisibility::Noop => "",
+            ReposUpdateRequestVisibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -29279,17 +29936,20 @@ pub struct ActionsListWorkflowRunsResponse {
  *   \* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ActionsListJobsWorkflowRunFilter {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "latest")]
     Latest,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ActionsListJobsWorkflowRunFilter {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ActionsListJobsWorkflowRunFilter::All => "all",
             ActionsListJobsWorkflowRunFilter::Latest => "latest",
+            ActionsListJobsWorkflowRunFilter::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -29317,19 +29977,23 @@ pub struct ActionsListJobsWorkflowRunResponse {
  * Whether to approve or reject deployment to the specified environments. Must be one of: `approved` or `rejected`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ActionsReviewPendingDeploymentsRunRequestState {
+    #[serde(rename = "approved")]
     Approved,
+    #[serde(rename = "rejected")]
     Rejected,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ActionsReviewPendingDeploymentsRunRequestState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ActionsReviewPendingDeploymentsRunRequestState::Approved => "approved",
             ActionsReviewPendingDeploymentsRunRequestState::Rejected => "rejected",
             ActionsReviewPendingDeploymentsRunRequestState::Noop => "",
+            ActionsReviewPendingDeploymentsRunRequestState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -29920,19 +30584,23 @@ pub struct ReposRenameBranchRequest {
  * The current status. Can be one of `queued`, `in_progress`, or `completed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ChecksCreateRequestStatus {
+    #[serde(rename = "completed")]
     Completed,
+    #[serde(rename = "in_progress")]
     InProgress,
+    #[serde(rename = "queued")]
     Queued,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ChecksCreateRequestStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ChecksCreateRequestStatus::Completed => "completed",
             ChecksCreateRequestStatus::InProgress => "in_progress",
             ChecksCreateRequestStatus::Queued => "queued",
+            ChecksCreateRequestStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -29949,22 +30617,31 @@ impl Default for ChecksCreateRequestStatus {
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ChecksCreateRequestConclusion {
+    #[serde(rename = "action_required")]
     ActionRequired,
+    #[serde(rename = "cancelled")]
     Cancelled,
+    #[serde(rename = "failure")]
     Failure,
+    #[serde(rename = "neutral")]
     Neutral,
+    #[serde(rename = "skipped")]
     Skipped,
+    #[serde(rename = "stale")]
     Stale,
+    #[serde(rename = "success")]
     Success,
+    #[serde(rename = "timed_out")]
     TimedOut,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ChecksCreateRequestConclusion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ChecksCreateRequestConclusion::ActionRequired => "action_required",
             ChecksCreateRequestConclusion::Cancelled => "cancelled",
             ChecksCreateRequestConclusion::Failure => "failure",
@@ -29974,6 +30651,7 @@ impl std::fmt::Display for ChecksCreateRequestConclusion {
             ChecksCreateRequestConclusion::Success => "success",
             ChecksCreateRequestConclusion::TimedOut => "timed_out",
             ChecksCreateRequestConclusion::Noop => "",
+            ChecksCreateRequestConclusion::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -29994,21 +30672,26 @@ impl ChecksCreateRequestConclusion {
  * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum AnnotationLevel {
+    #[serde(rename = "failure")]
     Failure,
+    #[serde(rename = "notice")]
     Notice,
+    #[serde(rename = "warning")]
     Warning,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for AnnotationLevel {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             AnnotationLevel::Failure => "failure",
             AnnotationLevel::Notice => "notice",
             AnnotationLevel::Warning => "warning",
             AnnotationLevel::Noop => "",
+            AnnotationLevel::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -30286,22 +30969,31 @@ pub struct ChecksCreateRequest {
  *   **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ChecksUpdateRequestConclusion {
+    #[serde(rename = "action_required")]
     ActionRequired,
+    #[serde(rename = "cancelled")]
     Cancelled,
+    #[serde(rename = "failure")]
     Failure,
+    #[serde(rename = "neutral")]
     Neutral,
+    #[serde(rename = "skipped")]
     Skipped,
+    #[serde(rename = "stale")]
     Stale,
+    #[serde(rename = "success")]
     Success,
+    #[serde(rename = "timed_out")]
     TimedOut,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ChecksUpdateRequestConclusion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ChecksUpdateRequestConclusion::ActionRequired => "action_required",
             ChecksUpdateRequestConclusion::Cancelled => "cancelled",
             ChecksUpdateRequestConclusion::Failure => "failure",
@@ -30311,6 +31003,7 @@ impl std::fmt::Display for ChecksUpdateRequestConclusion {
             ChecksUpdateRequestConclusion::Success => "success",
             ChecksUpdateRequestConclusion::TimedOut => "timed_out",
             ChecksUpdateRequestConclusion::Noop => "",
+            ChecksUpdateRequestConclusion::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -30478,17 +31171,20 @@ pub struct ChecksSetSuitesPreferencesRequest {
  * Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ChecksListSuiteFilter {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "latest")]
     Latest,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ChecksListSuiteFilter {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ChecksListSuiteFilter::All => "all",
             ChecksListSuiteFilter::Latest => "latest",
+            ChecksListSuiteFilter::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -30590,19 +31286,23 @@ pub struct CodeScanningUploadSarifRequest {
  *   \* `all`: All collaborators the authenticated user can see.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposListCollaboratorsAffiliation {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "direct")]
     Direct,
+    #[serde(rename = "outside")]
     Outside,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposListCollaboratorsAffiliation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposListCollaboratorsAffiliation::All => "all",
             ReposListCollaboratorsAffiliation::Direct => "direct",
             ReposListCollaboratorsAffiliation::Outside => "outside",
+            ReposListCollaboratorsAffiliation::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -30623,23 +31323,29 @@ impl Default for ReposListCollaboratorsAffiliation {
  *   \* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposAddCollaboratorRequestPermission {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "maintain")]
     Maintain,
+    #[serde(rename = "pull")]
     Pull,
+    #[serde(rename = "push")]
     Push,
+    #[serde(rename = "triage")]
     Triage,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposAddCollaboratorRequestPermission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposAddCollaboratorRequestPermission::Admin => "admin",
             ReposAddCollaboratorRequestPermission::Maintain => "maintain",
             ReposAddCollaboratorRequestPermission::Pull => "pull",
             ReposAddCollaboratorRequestPermission::Push => "push",
             ReposAddCollaboratorRequestPermission::Triage => "triage",
+            ReposAddCollaboratorRequestPermission::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -30688,22 +31394,31 @@ pub struct ReposUpdateCommitCommentRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsListCommitCommentContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsListCommitCommentContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsListCommitCommentContent::PlusOne => "+1",
             ReactionsListCommitCommentContent::MinusOne => "-1",
             ReactionsListCommitCommentContent::Confused => "confused",
@@ -30713,6 +31428,7 @@ impl std::fmt::Display for ReactionsListCommitCommentContent {
             ReactionsListCommitCommentContent::Laugh => "laugh",
             ReactionsListCommitCommentContent::Rocket => "rocket",
             ReactionsListCommitCommentContent::Noop => "",
+            ReactionsListCommitCommentContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -30733,22 +31449,31 @@ impl ReactionsListCommitCommentContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsCreateCommitCommentRequestContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsCreateCommitCommentRequestContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsCreateCommitCommentRequestContent::PlusOne => "+1",
             ReactionsCreateCommitCommentRequestContent::MinusOne => "-1",
             ReactionsCreateCommitCommentRequestContent::Confused => "confused",
@@ -30758,6 +31483,7 @@ impl std::fmt::Display for ReactionsCreateCommitCommentRequestContent {
             ReactionsCreateCommitCommentRequestContent::Laugh => "laugh",
             ReactionsCreateCommitCommentRequestContent::Rocket => "rocket",
             ReactionsCreateCommitCommentRequestContent::Noop => "",
+            ReactionsCreateCommitCommentRequestContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -31296,21 +32022,29 @@ pub struct ReposCreateDeploymentRequest {
  * The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://docs.github.com/rest/overview/api-previews#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposCreateDeploymentStatusRequestState {
+    #[serde(rename = "error")]
     Error,
+    #[serde(rename = "failure")]
     Failure,
+    #[serde(rename = "in_progress")]
     InProgress,
+    #[serde(rename = "inactive")]
     Inactive,
+    #[serde(rename = "pending")]
     Pending,
+    #[serde(rename = "queued")]
     Queued,
+    #[serde(rename = "success")]
     Success,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposCreateDeploymentStatusRequestState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposCreateDeploymentStatusRequestState::Error => "error",
             ReposCreateDeploymentStatusRequestState::Failure => "failure",
             ReposCreateDeploymentStatusRequestState::InProgress => "in_progress",
@@ -31319,6 +32053,7 @@ impl std::fmt::Display for ReposCreateDeploymentStatusRequestState {
             ReposCreateDeploymentStatusRequestState::Queued => "queued",
             ReposCreateDeploymentStatusRequestState::Success => "success",
             ReposCreateDeploymentStatusRequestState::Noop => "",
+            ReposCreateDeploymentStatusRequestState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -31339,21 +32074,26 @@ impl ReposCreateDeploymentStatusRequestState {
  * Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://docs.github.com/rest/overview/api-previews#deployment-statuses) custom media type.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposCreateDeploymentStatusRequestEnvironment {
+    #[serde(rename = "production")]
     Production,
+    #[serde(rename = "qa")]
     Qa,
+    #[serde(rename = "staging")]
     Staging,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposCreateDeploymentStatusRequestEnvironment {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposCreateDeploymentStatusRequestEnvironment::Production => "production",
             ReposCreateDeploymentStatusRequestEnvironment::Qa => "qa",
             ReposCreateDeploymentStatusRequestEnvironment::Staging => "staging",
             ReposCreateDeploymentStatusRequestEnvironment::Noop => "",
+            ReposCreateDeploymentStatusRequestEnvironment::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -31511,21 +32251,26 @@ pub struct ReposCreateUpdateEnvironmentRequest {
  * The sort order. Can be either `newest`, `oldest`, or `stargazers`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposListForksSort {
+    #[serde(rename = "newest")]
     Newest,
+    #[serde(rename = "oldest")]
     Oldest,
+    #[serde(rename = "stargazers")]
     Stargazers,
+    #[serde(rename = "watchers")]
     Watchers,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposListForksSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposListForksSort::Newest => "newest",
             ReposListForksSort::Oldest => "oldest",
             ReposListForksSort::Stargazers => "stargazers",
             ReposListForksSort::Watchers => "watchers",
+            ReposListForksSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -31722,21 +32467,26 @@ pub struct GitUpdateRefRequest {
  * The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum GitCreateTagRequestType {
+    #[serde(rename = "blob")]
     Blob,
+    #[serde(rename = "commit")]
     Commit,
+    #[serde(rename = "tree")]
     Tree,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for GitCreateTagRequestType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             GitCreateTagRequestType::Blob => "blob",
             GitCreateTagRequestType::Commit => "commit",
             GitCreateTagRequestType::Tree => "tree",
             GitCreateTagRequestType::Noop => "",
+            GitCreateTagRequestType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -31830,25 +32580,32 @@ pub struct GitCreateTagRequest {
  * The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum GitCreateTreeRequestMode {
+    #[serde(rename = "040000")]
     SubdirectoryTree,
+    #[serde(rename = "100644")]
     FileBlob,
+    #[serde(rename = "100755")]
     ExecutableBlob,
+    #[serde(rename = "120000")]
     SymlinkPathBlob,
+    #[serde(rename = "160000")]
     SubmoduleCommit,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for GitCreateTreeRequestMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             GitCreateTreeRequestMode::SubdirectoryTree => "040000",
             GitCreateTreeRequestMode::FileBlob => "100644",
             GitCreateTreeRequestMode::ExecutableBlob => "100755",
             GitCreateTreeRequestMode::SymlinkPathBlob => "120000",
             GitCreateTreeRequestMode::SubmoduleCommit => "160000",
             GitCreateTreeRequestMode::Noop => "",
+            GitCreateTreeRequestMode::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -31869,21 +32626,26 @@ impl GitCreateTreeRequestMode {
  * Either `blob`, `tree`, or `commit`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum GitCreateTreeRequestType {
+    #[serde(rename = "blob")]
     Blob,
+    #[serde(rename = "commit")]
     Commit,
+    #[serde(rename = "tree")]
     Tree,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for GitCreateTreeRequestType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             GitCreateTreeRequestType::Blob => "blob",
             GitCreateTreeRequestType::Commit => "commit",
             GitCreateTreeRequestType::Tree => "tree",
             GitCreateTreeRequestType::Noop => "",
+            GitCreateTreeRequestType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -32112,23 +32874,29 @@ pub struct ReposUpdateWebhookRequest {
  * The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum Vcs {
+    #[serde(rename = "git")]
     Git,
+    #[serde(rename = "mercurial")]
     Mercurial,
+    #[serde(rename = "subversion")]
     Subversion,
+    #[serde(rename = "tfvc")]
     Tfvc,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Vcs {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Vcs::Git => "git",
             Vcs::Mercurial => "mercurial",
             Vcs::Subversion => "subversion",
             Vcs::Tfvc => "tfvc",
             Vcs::Noop => "",
+            Vcs::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -32244,19 +33012,23 @@ pub struct MigrationsMapCommitAuthorRequest {
  * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum UseLfs {
+    #[serde(rename = "opt_in")]
     OptIn,
+    #[serde(rename = "opt_out")]
     OptOut,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for UseLfs {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             UseLfs::OptIn => "opt_in",
             UseLfs::OptOut => "opt_out",
             UseLfs::Noop => "",
+            UseLfs::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -32286,25 +33058,32 @@ pub struct MigrationsSetLfsPreferenceRequest {
  * The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposUpdateInvitationRequestPermissions {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "maintain")]
     Maintain,
+    #[serde(rename = "read")]
     Read,
+    #[serde(rename = "triage")]
     Triage,
+    #[serde(rename = "write")]
     Write,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposUpdateInvitationRequestPermissions {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposUpdateInvitationRequestPermissions::Admin => "admin",
             ReposUpdateInvitationRequestPermissions::Maintain => "maintain",
             ReposUpdateInvitationRequestPermissions::Read => "read",
             ReposUpdateInvitationRequestPermissions::Triage => "triage",
             ReposUpdateInvitationRequestPermissions::Write => "write",
             ReposUpdateInvitationRequestPermissions::Noop => "",
+            ReposUpdateInvitationRequestPermissions::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -32578,19 +33357,23 @@ pub struct IssuesCreateRequest {
  * Either `asc` or `desc`. Ignored without the `sort` parameter.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum IssuesListCommentsRepoDirection {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for IssuesListCommentsRepoDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             IssuesListCommentsRepoDirection::Asc => "asc",
             IssuesListCommentsRepoDirection::Desc => "desc",
             IssuesListCommentsRepoDirection::Noop => "",
+            IssuesListCommentsRepoDirection::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -32624,22 +33407,31 @@ pub struct IssuesUpdateCommentRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsListIssueCommentContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsListIssueCommentContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsListIssueCommentContent::PlusOne => "+1",
             ReactionsListIssueCommentContent::MinusOne => "-1",
             ReactionsListIssueCommentContent::Confused => "confused",
@@ -32649,6 +33441,7 @@ impl std::fmt::Display for ReactionsListIssueCommentContent {
             ReactionsListIssueCommentContent::Laugh => "laugh",
             ReactionsListIssueCommentContent::Rocket => "rocket",
             ReactionsListIssueCommentContent::Noop => "",
+            ReactionsListIssueCommentContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -32669,22 +33462,31 @@ impl ReactionsListIssueCommentContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsCreateIssueCommentRequestContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsCreateIssueCommentRequestContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsCreateIssueCommentRequestContent::PlusOne => "+1",
             ReactionsCreateIssueCommentRequestContent::MinusOne => "-1",
             ReactionsCreateIssueCommentRequestContent::Confused => "confused",
@@ -32694,6 +33496,7 @@ impl std::fmt::Display for ReactionsCreateIssueCommentRequestContent {
             ReactionsCreateIssueCommentRequestContent::Laugh => "laugh",
             ReactionsCreateIssueCommentRequestContent::Rocket => "rocket",
             ReactionsCreateIssueCommentRequestContent::Noop => "",
+            ReactionsCreateIssueCommentRequestContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -32726,19 +33529,23 @@ pub struct ReactionsCreateIssueCommentRequest {
  * State of the issue. Either `open` or `closed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum IssuesUpdateRequestState {
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "open")]
     Open,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for IssuesUpdateRequestState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             IssuesUpdateRequestState::Closed => "closed",
             IssuesUpdateRequestState::Open => "open",
             IssuesUpdateRequestState::Noop => "",
+            IssuesUpdateRequestState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33037,23 +33844,29 @@ impl From<IssuesAddLabelsRequestOneOf> for Vec<String> {
  *   \* `spam`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum LockReason {
+    #[serde(rename = "off-topic")]
     OffTopic,
+    #[serde(rename = "resolved")]
     Resolved,
+    #[serde(rename = "spam")]
     Spam,
+    #[serde(rename = "too heated")]
     TooHeated,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for LockReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             LockReason::OffTopic => "off-topic",
             LockReason::Resolved => "resolved",
             LockReason::Spam => "spam",
             LockReason::TooHeated => "too heated",
             LockReason::Noop => "",
+            LockReason::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33080,22 +33893,31 @@ pub struct IssuesLockRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsListIssueContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsListIssueContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsListIssueContent::PlusOne => "+1",
             ReactionsListIssueContent::MinusOne => "-1",
             ReactionsListIssueContent::Confused => "confused",
@@ -33105,6 +33927,7 @@ impl std::fmt::Display for ReactionsListIssueContent {
             ReactionsListIssueContent::Laugh => "laugh",
             ReactionsListIssueContent::Rocket => "rocket",
             ReactionsListIssueContent::Noop => "",
+            ReactionsListIssueContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33125,22 +33948,31 @@ impl ReactionsListIssueContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsCreateIssueRequestContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsCreateIssueRequestContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsCreateIssueRequestContent::PlusOne => "+1",
             ReactionsCreateIssueRequestContent::MinusOne => "-1",
             ReactionsCreateIssueRequestContent::Confused => "confused",
@@ -33150,6 +33982,7 @@ impl std::fmt::Display for ReactionsCreateIssueRequestContent {
             ReactionsCreateIssueRequestContent::Laugh => "laugh",
             ReactionsCreateIssueRequestContent::Rocket => "rocket",
             ReactionsCreateIssueRequestContent::Noop => "",
+            ReactionsCreateIssueRequestContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33304,19 +34137,23 @@ pub struct ReposMergeRequest {
  * The state of the milestone. Either `open`, `closed`, or `all`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum IssuesListMilestonesState {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "open")]
     Open,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for IssuesListMilestonesState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             IssuesListMilestonesState::All => "all",
             IssuesListMilestonesState::Closed => "closed",
             IssuesListMilestonesState::Open => "open",
+            IssuesListMilestonesState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33332,17 +34169,20 @@ impl Default for IssuesListMilestonesState {
  * What to sort results by. Either `due_on` or `completeness`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum IssuesListMilestonesSort {
+    #[serde(rename = "completeness")]
     Completeness,
+    #[serde(rename = "due_on")]
     DueOn,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for IssuesListMilestonesSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             IssuesListMilestonesSort::Completeness => "completeness",
             IssuesListMilestonesSort::DueOn => "due_on",
+            IssuesListMilestonesSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33358,17 +34198,20 @@ impl Default for IssuesListMilestonesSort {
  * The direction of the sort. Either `asc` or `desc`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum IssuesListMilestonesDirection {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for IssuesListMilestonesDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             IssuesListMilestonesDirection::Asc => "asc",
             IssuesListMilestonesDirection::Desc => "desc",
+            IssuesListMilestonesDirection::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33384,17 +34227,20 @@ impl Default for IssuesListMilestonesDirection {
  * The state of the milestone. Either `open` or `closed`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum IssuesCreateMilestoneRequestState {
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "open")]
     Open,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for IssuesCreateMilestoneRequestState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             IssuesCreateMilestoneRequestState::Closed => "closed",
             IssuesCreateMilestoneRequestState::Open => "open",
+            IssuesCreateMilestoneRequestState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33499,17 +34345,20 @@ pub struct PullsUpdateBranchResponse {
  * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum Path {
+    #[serde(rename = "/")]
     Root,
+    #[serde(rename = "/docs")]
     Docs,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for Path {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             Path::Root => "/",
             Path::Docs => "/docs",
+            Path::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33554,21 +34403,26 @@ pub struct ReposCreatePagesSiteRequest {
  * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SourceData {
+    #[serde(rename = "gh-pages")]
     GhPages,
+    #[serde(rename = "master")]
     Master,
+    #[serde(rename = "master /docs")]
     MasterDocs,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SourceData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SourceData::GhPages => "gh-pages",
             SourceData::Master => "master",
             SourceData::MasterDocs => "master /docs",
             SourceData::Noop => "",
+            SourceData::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33617,19 +34471,23 @@ pub struct ReposUpdateInformationAboutPagesSiteRequest {
  * Either `open`, `closed`, or `all` to filter by state.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PullsListState {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "open")]
     Open,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsListState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsListState::All => "all",
             PullsListState::Closed => "closed",
             PullsListState::Open => "open",
+            PullsListState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33645,21 +34503,26 @@ impl Default for PullsListState {
  * What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PullsListSort {
+    #[serde(rename = "created")]
     Created,
+    #[serde(rename = "long-running")]
     LongRunning,
+    #[serde(rename = "popularity")]
     Popularity,
+    #[serde(rename = "updated")]
     Updated,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsListSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsListSort::Created => "created",
             PullsListSort::LongRunning => "long-running",
             PullsListSort::Popularity => "popularity",
             PullsListSort::Updated => "updated",
+            PullsListSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33675,19 +34538,23 @@ impl Default for PullsListSort {
  * The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PullsListDirection {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsListDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsListDirection::Asc => "asc",
             PullsListDirection::Desc => "desc",
             PullsListDirection::Noop => "",
+            PullsListDirection::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33761,21 +34628,26 @@ pub struct PullsCreateRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PullsListReviewCommentsRepoSort {
+    #[serde(rename = "created")]
     Created,
+    #[serde(rename = "created_at")]
     CreatedAt,
+    #[serde(rename = "updated")]
     Updated,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsListReviewCommentsRepoSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsListReviewCommentsRepoSort::Created => "created",
             PullsListReviewCommentsRepoSort::CreatedAt => "created_at",
             PullsListReviewCommentsRepoSort::Updated => "updated",
             PullsListReviewCommentsRepoSort::Noop => "",
+            PullsListReviewCommentsRepoSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33796,19 +34668,23 @@ impl PullsListReviewCommentsRepoSort {
  * Can be either `asc` or `desc`. Ignored without `sort` parameter.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PullsListReviewCommentsRepoDirection {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsListReviewCommentsRepoDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsListReviewCommentsRepoDirection::Asc => "asc",
             PullsListReviewCommentsRepoDirection::Desc => "desc",
             PullsListReviewCommentsRepoDirection::Noop => "",
+            PullsListReviewCommentsRepoDirection::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33842,22 +34718,31 @@ pub struct PullsUpdateReviewCommentRequest {
  * Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsListPullRequestReviewCommentContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsListPullRequestReviewCommentContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsListPullRequestReviewCommentContent::PlusOne => "+1",
             ReactionsListPullRequestReviewCommentContent::MinusOne => "-1",
             ReactionsListPullRequestReviewCommentContent::Confused => "confused",
@@ -33867,6 +34752,7 @@ impl std::fmt::Display for ReactionsListPullRequestReviewCommentContent {
             ReactionsListPullRequestReviewCommentContent::Laugh => "laugh",
             ReactionsListPullRequestReviewCommentContent::Rocket => "rocket",
             ReactionsListPullRequestReviewCommentContent::Noop => "",
+            ReactionsListPullRequestReviewCommentContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33887,22 +34773,31 @@ impl ReactionsListPullRequestReviewCommentContent {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsCreatePullRequestReviewCommentContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "-1")]
     MinusOne,
+    #[serde(rename = "confused")]
     Confused,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsCreatePullRequestReviewCommentContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsCreatePullRequestReviewCommentContent::PlusOne => "+1",
             ReactionsCreatePullRequestReviewCommentContent::MinusOne => "-1",
             ReactionsCreatePullRequestReviewCommentContent::Confused => "confused",
@@ -33912,6 +34807,7 @@ impl std::fmt::Display for ReactionsCreatePullRequestReviewCommentContent {
             ReactionsCreatePullRequestReviewCommentContent::Laugh => "laugh",
             ReactionsCreatePullRequestReviewCommentContent::Rocket => "rocket",
             ReactionsCreatePullRequestReviewCommentContent::Noop => "",
+            ReactionsCreatePullRequestReviewCommentContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -33985,19 +34881,23 @@ pub struct PullsUpdateRequest {
  * **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PullsCreateReviewCommentRequestSide {
+    #[serde(rename = "LEFT")]
     Left,
+    #[serde(rename = "RIGHT")]
     Right,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsCreateReviewCommentRequestSide {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsCreateReviewCommentRequestSide::Left => "LEFT",
             PullsCreateReviewCommentRequestSide::Right => "RIGHT",
             PullsCreateReviewCommentRequestSide::Noop => "",
+            PullsCreateReviewCommentRequestSide::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -34018,21 +34918,26 @@ impl PullsCreateReviewCommentRequestSide {
  * **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PullsCreateReviewCommentRequestStartSide {
+    #[serde(rename = "LEFT")]
     Left,
+    #[serde(rename = "RIGHT")]
     Right,
+    #[serde(rename = "side")]
     Side,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsCreateReviewCommentRequestStartSide {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsCreateReviewCommentRequestStartSide::Left => "LEFT",
             PullsCreateReviewCommentRequestStartSide::Right => "RIGHT",
             PullsCreateReviewCommentRequestStartSide::Side => "side",
             PullsCreateReviewCommentRequestStartSide::Noop => "",
+            PullsCreateReviewCommentRequestStartSide::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -34140,21 +35045,26 @@ pub struct PullsCreateReplyReviewCommentRequest {
  * Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum PullsMergeRequestMethod {
+    #[serde(rename = "merge")]
     Merge,
+    #[serde(rename = "rebase")]
     Rebase,
+    #[serde(rename = "squash")]
     Squash,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsMergeRequestMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsMergeRequestMethod::Merge => "merge",
             PullsMergeRequestMethod::Rebase => "rebase",
             PullsMergeRequestMethod::Squash => "squash",
             PullsMergeRequestMethod::Noop => "",
+            PullsMergeRequestMethod::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -34227,21 +35137,26 @@ pub struct PullsRemoveRequestedReviewersRequest {
  * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://docs.github.com/rest/reference/pulls#submit-a-review-for-a-pull-request) when you are ready.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PullsCreateReviewRequestEvent {
+    #[serde(rename = "APPROVE")]
     Approve,
+    #[serde(rename = "COMMENT")]
     Comment,
+    #[serde(rename = "REQUEST_CHANGES")]
     RequestChanges,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsCreateReviewRequestEvent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsCreateReviewRequestEvent::Approve => "APPROVE",
             PullsCreateReviewRequestEvent::Comment => "COMMENT",
             PullsCreateReviewRequestEvent::RequestChanges => "REQUEST_CHANGES",
             PullsCreateReviewRequestEvent::Noop => "",
+            PullsCreateReviewRequestEvent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -34381,21 +35296,26 @@ pub struct PullsDismissReviewRequest {
  * The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PullsSubmitReviewRequestEvent {
+    #[serde(rename = "APPROVE")]
     Approve,
+    #[serde(rename = "COMMENT")]
     Comment,
+    #[serde(rename = "REQUEST_CHANGES")]
     RequestChanges,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for PullsSubmitReviewRequestEvent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             PullsSubmitReviewRequestEvent::Approve => "APPROVE",
             PullsSubmitReviewRequestEvent::Comment => "COMMENT",
             PullsSubmitReviewRequestEvent::RequestChanges => "REQUEST_CHANGES",
             PullsSubmitReviewRequestEvent::Noop => "",
+            PullsSubmitReviewRequestEvent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -34593,20 +35513,27 @@ pub struct ReposUpdateReleaseRequest {
  * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum ReactionsCreateReleaseRequestContent {
+    #[serde(rename = "+1")]
     PlusOne,
+    #[serde(rename = "eyes")]
     Eyes,
+    #[serde(rename = "heart")]
     Heart,
+    #[serde(rename = "hooray")]
     Hooray,
+    #[serde(rename = "laugh")]
     Laugh,
+    #[serde(rename = "rocket")]
     Rocket,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReactionsCreateReleaseRequestContent {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReactionsCreateReleaseRequestContent::PlusOne => "+1",
             ReactionsCreateReleaseRequestContent::Eyes => "eyes",
             ReactionsCreateReleaseRequestContent::Heart => "heart",
@@ -34614,6 +35541,7 @@ impl std::fmt::Display for ReactionsCreateReleaseRequestContent {
             ReactionsCreateReleaseRequestContent::Laugh => "laugh",
             ReactionsCreateReleaseRequestContent::Rocket => "rocket",
             ReactionsCreateReleaseRequestContent::Noop => "",
+            ReactionsCreateReleaseRequestContent::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -34646,19 +35574,23 @@ pub struct ReactionsCreateReleaseRequest {
  * Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SecretScanningListAlertsRepoState {
+    #[serde(rename = "open")]
     Open,
+    #[serde(rename = "resolved")]
     Resolved,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SecretScanningListAlertsRepoState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SecretScanningListAlertsRepoState::Open => "open",
             SecretScanningListAlertsRepoState::Resolved => "resolved",
             SecretScanningListAlertsRepoState::Noop => "",
+            SecretScanningListAlertsRepoState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -34693,23 +35625,29 @@ pub struct SecretScanningUpdateAlertRequest {
  * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposCreateCommitStatusRequestState {
+    #[serde(rename = "error")]
     Error,
+    #[serde(rename = "failure")]
     Failure,
+    #[serde(rename = "pending")]
     Pending,
+    #[serde(rename = "success")]
     Success,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposCreateCommitStatusRequestState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposCreateCommitStatusRequestState::Error => "error",
             ReposCreateCommitStatusRequestState::Failure => "failure",
             ReposCreateCommitStatusRequestState::Pending => "pending",
             ReposCreateCommitStatusRequestState::Success => "success",
             ReposCreateCommitStatusRequestState::Noop => "",
+            ReposCreateCommitStatusRequestState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -34906,19 +35844,25 @@ pub struct EnterpriseAdminProvisionInviteGroupRequest {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub enum EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
+    #[serde(rename = "Add")]
     Add,
+    #[serde(rename = "Remove")]
     Remove,
+    #[serde(rename = "Replace")]
     Replace,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Add => "Add",
             EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Remove => "Remove",
             EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Replace => "Replace",
             EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::Noop => "",
+            EnterpriseAdminUpdateAttributeGroupRequestOperationsOp::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -35264,17 +36208,20 @@ pub struct ScimUpdateAttributeUserRequest {
  * Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SearchCodeSort {
+    #[serde(rename = "indexed")]
     Indexed,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SearchCodeSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SearchCodeSort::Indexed => "indexed",
             SearchCodeSort::Noop => "",
+            SearchCodeSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -35312,19 +36259,23 @@ pub struct SearchCodeResponse {
  * Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SearchCommitsSort {
+    #[serde(rename = "author-date")]
     AuthorDate,
+    #[serde(rename = "committer-date")]
     CommitterDate,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SearchCommitsSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SearchCommitsSort::AuthorDate => "author-date",
             SearchCommitsSort::CommitterDate => "committer-date",
             SearchCommitsSort::Noop => "",
+            SearchCommitsSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -35362,25 +36313,37 @@ pub struct SearchCommitsResponse {
  * Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SearchIssuesPullRequestsSort {
+    #[serde(rename = "comments")]
     Comments,
+    #[serde(rename = "created")]
     Created,
+    #[serde(rename = "interactions")]
     Interactions,
+    #[serde(rename = "reactions")]
     Reactions,
+    #[serde(rename = "reactions-+1")]
     ReactionsPlusOne,
+    #[serde(rename = "reactions--1")]
     ReactionsMinusOne,
+    #[serde(rename = "reactions-heart")]
     ReactionsHeart,
+    #[serde(rename = "reactions-smile")]
     ReactionsSmile,
+    #[serde(rename = "reactions-tada")]
     ReactionsTada,
+    #[serde(rename = "reactions-thinking_face")]
     ReactionsThinkingFace,
+    #[serde(rename = "updated")]
     Updated,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SearchIssuesPullRequestsSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SearchIssuesPullRequestsSort::Comments => "comments",
             SearchIssuesPullRequestsSort::Created => "created",
             SearchIssuesPullRequestsSort::Interactions => "interactions",
@@ -35393,6 +36356,7 @@ impl std::fmt::Display for SearchIssuesPullRequestsSort {
             SearchIssuesPullRequestsSort::ReactionsThinkingFace => "reactions-thinking_face",
             SearchIssuesPullRequestsSort::Updated => "updated",
             SearchIssuesPullRequestsSort::Noop => "",
+            SearchIssuesPullRequestsSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -35430,19 +36394,23 @@ pub struct SearchIssuesPullRequestsResponse {
  * Sorts the results of your query by when the label was `created` or `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SearchLabelsSort {
+    #[serde(rename = "created")]
     Created,
+    #[serde(rename = "updated")]
     Updated,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SearchLabelsSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SearchLabelsSort::Created => "created",
             SearchLabelsSort::Updated => "updated",
             SearchLabelsSort::Noop => "",
+            SearchLabelsSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -35480,23 +36448,29 @@ pub struct SearchLabelsResponse {
  * Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SearchReposSort {
+    #[serde(rename = "forks")]
     Forks,
+    #[serde(rename = "help-wanted-issues")]
     HelpWantedIssues,
+    #[serde(rename = "stars")]
     Stars,
+    #[serde(rename = "updated")]
     Updated,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SearchReposSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SearchReposSort::Forks => "forks",
             SearchReposSort::HelpWantedIssues => "help-wanted-issues",
             SearchReposSort::Stars => "stars",
             SearchReposSort::Updated => "updated",
             SearchReposSort::Noop => "",
+            SearchReposSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -35551,21 +36525,26 @@ pub struct SearchTopicsResponse {
  * Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SearchUsersSort {
+    #[serde(rename = "followers")]
     Followers,
+    #[serde(rename = "joined")]
     Joined,
+    #[serde(rename = "repositories")]
     Repositories,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SearchUsersSort {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SearchUsersSort::Followers => "followers",
             SearchUsersSort::Joined => "joined",
             SearchUsersSort::Repositories => "repositories",
             SearchUsersSort::Noop => "",
+            SearchUsersSort::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -35608,19 +36587,23 @@ pub struct SearchUsersResponse {
  *   \* `closed` - visible to all members of this organization.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamsUpdateLegacyRequestPrivacy {
+    #[serde(rename = "closed")]
     Closed,
+    #[serde(rename = "secret")]
     Secret,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamsUpdateLegacyRequestPrivacy {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamsUpdateLegacyRequestPrivacy::Closed => "closed",
             TeamsUpdateLegacyRequestPrivacy::Secret => "secret",
             TeamsUpdateLegacyRequestPrivacy::Noop => "",
+            TeamsUpdateLegacyRequestPrivacy::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -35708,21 +36691,26 @@ pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
  *   If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
+    #[serde(rename = "admin")]
     Admin,
+    #[serde(rename = "pull")]
     Pull,
+    #[serde(rename = "push")]
     Push,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Admin => "admin",
             TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Pull => "pull",
             TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Push => "push",
             TeamsAddUpdateRepoPermissionsLegacyRequestPermission::Noop => "",
+            TeamsAddUpdateRepoPermissionsLegacyRequestPermission::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -35955,19 +36943,23 @@ pub struct UsersUpdateAuthenticatedRequest {
  * Denotes whether an email is publicly visible.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "public")]
     Public,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Private => "private",
             UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Public => "public",
             UsersSetPrimaryEmailVisibilityAuthenticatedRequest::Noop => "",
+            UsersSetPrimaryEmailVisibilityAuthenticatedRequest::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -36219,19 +37211,23 @@ pub struct UsersCreatePublicSshKeyAuthenticatedRequest {
  * Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrgsListMembershipsState {
+    #[serde(rename = "active")]
     Active,
+    #[serde(rename = "pending")]
     Pending,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrgsListMembershipsState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrgsListMembershipsState::Active => "active",
             OrgsListMembershipsState::Pending => "pending",
             OrgsListMembershipsState::Noop => "",
+            OrgsListMembershipsState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -36252,17 +37248,20 @@ impl OrgsListMembershipsState {
  * The state that the membership should be in. Only `"active"` will be accepted.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum OrgsUpdateMembershipRequestState {
+    #[serde(rename = "active")]
     Active,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for OrgsUpdateMembershipRequestState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             OrgsUpdateMembershipRequestState::Active => "active",
             OrgsUpdateMembershipRequestState::Noop => "",
+            OrgsUpdateMembershipRequestState::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -36338,19 +37337,23 @@ pub struct ProjectsCreateRequest {
  * Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposListVisibility {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "public")]
     Public,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposListVisibility {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposListVisibility::All => "all",
             ReposListVisibility::Private => "private",
             ReposListVisibility::Public => "public",
+            ReposListVisibility::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -36368,23 +37371,29 @@ impl Default for ReposListVisibility {
  *   Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposListType {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "member")]
     Member,
+    #[serde(rename = "owner")]
     Owner,
+    #[serde(rename = "private")]
     Private,
+    #[serde(rename = "public")]
     Public,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposListType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposListType::All => "all",
             ReposListType::Member => "member",
             ReposListType::Owner => "owner",
             ReposListType::Private => "private",
             ReposListType::Public => "public",
+            ReposListType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -36400,19 +37409,23 @@ impl Default for ReposListType {
  * Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposListDirection {
+    #[serde(rename = "asc")]
     Asc,
+    #[serde(rename = "desc")]
     Desc,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposListDirection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposListDirection::Asc => "asc",
             ReposListDirection::Desc => "desc",
             ReposListDirection::Noop => "",
+            ReposListDirection::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -36546,23 +37559,29 @@ pub struct ReposCreateRequest {
  * Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum SubjectType {
+    #[serde(rename = "issue")]
     Issue,
+    #[serde(rename = "organization")]
     Organization,
+    #[serde(rename = "pull_request")]
     PullRequest,
+    #[serde(rename = "repository")]
     Repository,
+    #[serde(rename = "")]
     Noop,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for SubjectType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             SubjectType::Issue => "issue",
             SubjectType::Organization => "organization",
             SubjectType::PullRequest => "pull_request",
             SubjectType::Repository => "repository",
             SubjectType::Noop => "",
+            SubjectType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
@@ -36583,19 +37602,23 @@ impl SubjectType {
  * Can be one of `all`, `owner`, `member`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(rename_all = "lowercase")]
 pub enum ReposListUserType {
+    #[serde(rename = "all")]
     All,
+    #[serde(rename = "member")]
     Member,
+    #[serde(rename = "owner")]
     Owner,
+    FallthroughString(String),
 }
 
 impl std::fmt::Display for ReposListUserType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
+        match &*self {
             ReposListUserType::All => "all",
             ReposListUserType::Member => "member",
             ReposListUserType::Owner => "owner",
+            ReposListUserType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
