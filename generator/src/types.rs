@@ -185,7 +185,13 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                         a(&desc);
                     }
 
-                    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+                    // TODO: We could likely have default's for a lot of these.
+                    // Don't hard code these in the future as exceptions.
+                    if sn != "IssuesCreateRequest" && sn != "Deployment" {
+                        a("#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]");
+                    } else {
+                        a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+                    }
                     a(&format!("pub struct {} {{", sn));
                     for (name, tid) in omap.iter() {
                         if let Ok(mut rt) = ts.render_type(tid, true) {
@@ -272,9 +278,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                             if *name != prop {
                                 a(&format!(r#"rename = "{}")]"#, name));
                             } else if rt == "Page" && prop == "page" {
-                                // Flatten the struct this is for Ramp's pagination.
-                                // God willing let's hope no other API breaks this in the future.
-                                a(r#"flatten)]"#);
+                                a(r#"default)]"#);
                             } else {
                                 a(r#")]"#);
                             }

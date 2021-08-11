@@ -866,6 +866,8 @@ impl TypeSpace {
                         || rt == "f32"
                         || rt == "f64"
                         || rt.starts_with("Option<")
+                        // This is for ramp, let's hope it doesn't break anything in the future.
+                        || rt == "Page"
                     {
                         Ok(rt)
                     } else {
@@ -1383,10 +1385,7 @@ impl TypeSpace {
                             }
                         }
 
-                        // We will eventually flatten the page struct.
-                        // TODO: This is for ramp, let's hope it doesn't break anything in
-                        // the future.
-                        if o.required.contains(n) && name != "page" {
+                        if o.required.contains(n) {
                             omap.insert(n.to_string(), itid);
                         } else {
                             // This is an optional member.

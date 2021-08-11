@@ -175,12 +175,10 @@ pub fn generate_files(
             let tmp = parse(p)?;
             let template = tmp.compile(query_params);
 
-            let fn_inner = get_fn_inner(&oid, m, &body_func)?;
-
             /*
              * Get the response type.
              */
-            let (mut response_type, tid) = get_response_type(&oid, ts, o)?;
+            let (mut response_type, tid, inner_response_type) = get_response_type(&oid, ts, o)?;
             // We shouldn't ever have an optional response type, thats just annoying.
             if response_type.starts_with("Option<") {
                 response_type = response_type
@@ -188,6 +186,8 @@ pub fn generate_files(
                     .trim_end_matches('>')
                     .to_string();
             }
+
+            let fn_inner = get_fn_inner(&oid, m, &body_func, &response_type, &inner_response_type)?;
 
             if let Some(te) = ts.id_to_entry.get(&tid) {
                 // If we have a one of, we can generate a few different subfunctions to
@@ -239,6 +239,12 @@ pub fn generate_files(
                 &fn_name,
             );
 
+            // Get the function without the function inners.
+            // This is specifically for Ramp.
+            if !inner_response_type.is_empty() {
+                response_type = inner_response_type;
+            }
+
             // If we are returning a list of things and we have page, etc as
             // params, let's get all the pages.
             if response_type.starts_with("Vec<") && http::Method::GET == m {
@@ -255,7 +261,8 @@ pub fn generate_files(
                 let tmp = parse(p)?;
                 let template = tmp.compile(query_params);
 
-                let fn_inner = fn_inner.replace("get(", "get_all_pages(");
+                let fn_inner = get_fn_inner(&oid, m, &body_func, &response_type, "")?
+                    .replace("get(", "get_all_pages(");
 
                 let mut fn_name = oid
                     .replace("_get_", "_get_all_")
@@ -310,13 +317,13 @@ fn get_response_type(
     oid: &str,
     ts: &mut TypeSpace,
     o: &openapiv3::Operation,
-) -> Result<(String, crate::TypeId)> {
+) -> Result<(String, crate::TypeId, String)> {
     // Get the first response.
     let first = o.responses.responses.first().unwrap();
     if let Ok(i) = first.1.item() {
         if i.content.is_empty() {
             // Return empty.
-            return Ok(("()".to_string(), crate::TypeId(0)));
+            return Ok(("()".to_string(), crate::TypeId(0), "".to_string()));
         }
 
         // Get the json response, if it exists.
@@ -328,8 +335,24 @@ fn get_response_type(
             if let Some(s) = &mt.schema {
                 let object_name = format!("{} response", oid_to_object_name(oid));
                 let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
-                let rt = ts.render_type(&tid, false)?;
-                return Ok((rt, tid));
+                let og_rt = ts.render_type(&tid, false)?;
+                let et = ts.id_to_entry.get(&tid).unwrap();
+                if let crate::TypeDetails::Object(p, _) = &et.details {
+                    // For Ramp, the pagination values are passed _in_ the resulting
+                    // struct, so we want to ignore them and just get the data.
+                    if let Some(pid) = p.get("page") {
+                        println!("we have a page: {:?}", p);
+                        let rt = ts.render_type(pid, false)?;
+                        if rt == "Page" {
+                            if let Some(did) = p.get("did") {
+                                let rt = ts.render_type(did, false)?;
+                                return Ok((og_rt, did.clone(), rt));
+                            }
+                        }
+                    }
+                }
+
+                return Ok((og_rt, tid, "".to_string()));
             }
         }
 
@@ -343,7 +366,7 @@ fn get_response_type(
             if let Some(s) = &mt.schema {
                 let tid = ts.select(None, s, "")?;
                 let rt = ts.render_type(&tid, false)?;
-                return Ok((rt, tid));
+                return Ok((rt, tid, "".to_string()));
             }
         } else if ct == "application/scim+json" {
             if !mt.encoding.is_empty() {
@@ -354,15 +377,29 @@ fn get_response_type(
                 let object_name = format!("{} response", oid_to_object_name(oid));
                 let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
                 let rt = ts.render_type(&tid, false)?;
-                return Ok((rt, tid));
+                return Ok((rt, tid, "".to_string()));
             }
         }
     } else if let openapiv3::ReferenceOr::Reference { reference } = first.1 {
         // We must have had a reference.
         let object_name = format!("{} response", oid_to_object_name(oid));
         let id = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
-        let rt = ts.render_type(&id, false)?;
-        return Ok((rt, id));
+        let og_rt = ts.render_type(&id, false)?;
+        let et = ts.id_to_entry.get(&id).unwrap();
+        if let crate::TypeDetails::Object(p, _) = &et.details {
+            // For Ramp, the pagination values are passed _in_ the resulting
+            // struct, so we want to ignore them and just get the data.
+            if let Some(pid) = p.get("page") {
+                let rt = ts.render_type(pid, false)?;
+                if rt == "Page" {
+                    if let Some(did) = p.get("did") {
+                        let rt = ts.render_type(did, false)?;
+                        return Ok((og_rt, did.clone(), rt));
+                    }
+                }
+            }
+        }
+        return Ok((og_rt, id, "".to_string()));
     }
 
     bail!("parsing response got to end with no type");
@@ -461,7 +498,13 @@ fn get_fn_params(
 /*
  * Perform the function.
  */
-fn get_fn_inner(oid: &str, m: &str, body_func: &Option<String>) -> Result<String> {
+fn get_fn_inner(
+    oid: &str,
+    m: &str,
+    body_func: &Option<String>,
+    response_type: &str,
+    inner_response_type: &str,
+) -> Result<String> {
     if (m == http::Method::GET
         || m == http::Method::POST
         || m == http::Method::PATCH
@@ -479,8 +522,21 @@ fn get_fn_inner(oid: &str, m: &str, body_func: &Option<String>) -> Result<String
             "None"
         };
 
+        if inner_response_type.is_empty() {
+            return Ok(format!(
+                "self.client.{}(&url, {}).await",
+                m.to_lowercase(),
+                body
+            ));
+        }
+
+        // Okay we have an inner response type, let's return that instead.
         return Ok(format!(
-            "self.client.{}(&url, {}).await",
+            r#"let resp: {} = self.client.{}(&url, {}).await.unwrap();
+
+                // Return our response data.
+                Ok(resp.data)"#,
+            response_type,
             m.to_lowercase(),
             body
         ));

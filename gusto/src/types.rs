@@ -3,7 +3,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /// The representation of an address in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Location {
     /**
      * The representation of an address in Gusto.
@@ -131,7 +131,7 @@ pub struct Location {
 }
 
 /// The representation of an employee in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Employee {
     /**
      * The representation of an employee in Gusto.
@@ -327,7 +327,7 @@ pub struct Employee {
 }
 
 /// The representation of paid time off in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PaidTimeOff {
     /**
      * The representation of paid time off in Gusto.
@@ -394,7 +394,7 @@ pub struct PaidTimeOff {
 }
 
 /// Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Garnishment {
     /**
      * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
@@ -503,7 +503,7 @@ pub struct Garnishment {
 }
 
 /// The representation of a termination in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Termination {
     /**
      * The representation of a termination in Gusto.
@@ -632,7 +632,7 @@ impl FlsaStatus {
 }
 
 /// The representation of compensation in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Compensation {
     /**
      * The representation of compensation in Gusto.
@@ -687,7 +687,7 @@ pub struct Compensation {
     pub version: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct JobLocation {
     #[serde(
         default,
@@ -742,7 +742,7 @@ pub struct JobLocation {
 }
 
 /// The representation of a job in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Job {
     /**
      * The representation of a job in Gusto.
@@ -842,7 +842,7 @@ pub struct Job {
 }
 
 /// The representation of an admin user in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Admin {
     /**
      * The representation of an admin user in Gusto.
@@ -1000,7 +1000,7 @@ impl CompanyStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Hourly {
     #[serde(
         default,
@@ -1016,7 +1016,7 @@ pub struct Hourly {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Fixed {
     #[serde(
         default,
@@ -1026,7 +1026,7 @@ pub struct Fixed {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct CompanyCompensationsPaidTimeOff {
     #[serde(
         default,
@@ -1037,7 +1037,7 @@ pub struct CompanyCompensationsPaidTimeOff {
 }
 
 /// The available company-wide compensation rates for the company.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Compensations {
     /**
      * The available company-wide compensation rates for the company.
@@ -1056,7 +1056,7 @@ pub struct Compensations {
     pub paid_time_off: Vec<CompanyCompensationsPaidTimeOff>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct HomeAddress {
     #[serde(
         default,
@@ -1097,7 +1097,7 @@ pub struct HomeAddress {
 }
 
 /// The primary signatory of the company.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PrimarySignatory {
     /**
      * The primary signatory of the company.
@@ -1152,7 +1152,7 @@ pub struct PrimarySignatory {
 }
 
 /// The primary payroll admin of the company.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PrimaryPayrollAdmin {
     /**
      * The primary payroll admin of the company.
@@ -1193,7 +1193,7 @@ pub struct PrimaryPayrollAdmin {
 }
 
 /// The representation of a company in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Company {
     /**
      * The representation of a company in Gusto.
@@ -1352,7 +1352,7 @@ impl Type {
 }
 
 /// The contractor’s home address.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Address {
     /**
      * The contractor’s home address.
@@ -1411,7 +1411,7 @@ pub struct Address {
 }
 
 /// The representation of a contractor (individual or business) in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Contractor {
     /**
      * The representation of a contractor (individual or business) in Gusto.
@@ -1599,7 +1599,7 @@ impl ContractorPaymentWageType {
 }
 
 /// The representation of a single contractor payment.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ContractorPayment {
     /**
      * The representation of a single contractor payment.
@@ -1695,7 +1695,7 @@ pub struct ContractorPayment {
 }
 
 /// The wage and reimbursement totals for all contractor payments within a given time period.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Total {
     /**
      * The wage and reimbursement totals for all contractor payments within a given time period.
@@ -1718,7 +1718,7 @@ pub struct Total {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ContractorPayments {
     /**
      *
@@ -1755,7 +1755,7 @@ pub struct ContractorPayments {
 }
 
 /// The representation of the summary of contractor payments for a given company in a given time period.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ContractorPaymentSummary {
     /**
      * The representation of the summary of contractor payments for a given company in a given time period.
@@ -1838,11 +1838,11 @@ impl RequestType {
 }
 
 /// An object that represents the days in the time off request. The keys of the object are the dates, formatted as a YYYY-MM-DD string. The values of the object are the number of hours requested off for each day, formatted as a string representation of a numeric decimal to the thousands place.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Days {}
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct TimeOffRequestEmployee {
     /**
      *
@@ -1865,7 +1865,7 @@ pub struct TimeOffRequestEmployee {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Initiator {
     /**
      *
@@ -1888,7 +1888,7 @@ pub struct Initiator {
 }
 
 /// This value will be null if the request has not been approved.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Approver {
     /**
      * This value will be null if the request has not been approved.
@@ -1911,7 +1911,7 @@ pub struct Approver {
 }
 
 /// The representation of a time off request.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct TimeOffRequest {
     /**
      * This value will be null if the request has not been approved.
@@ -1972,7 +1972,7 @@ pub struct TimeOffRequest {
     pub status: Option<TimeOffRequestStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Companies {
     #[serde(
         default,
@@ -1996,14 +1996,14 @@ pub struct Companies {
     pub trade_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PayrollAdmin {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub companies: Vec<Companies>,
 }
 
 /// An object containing each of the user's permissions.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Roles {
     /**
      * An object containing each of the user's permissions.
@@ -2013,7 +2013,7 @@ pub struct Roles {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct CurrentUser {
     /**
      *
@@ -2075,7 +2075,7 @@ impl Frequency {
 }
 
 /// The representation of a pay schedule.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PaySchedule {
     /**
      * The representation of a pay schedule.
@@ -2215,7 +2215,7 @@ impl VerificationStatus {
 }
 
 /// The company bank account
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct CompanyBankAccount {
     /**
      * The company bank account
@@ -2266,7 +2266,7 @@ pub struct CompanyBankAccount {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct SupportedBenefit {
     /**
      *
@@ -2346,7 +2346,7 @@ pub struct SupportedBenefit {
 }
 
 /// The representation of a company benefit.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct CompanyBenefit {
     /**
      * The representation of a company benefit.
@@ -2428,7 +2428,7 @@ pub struct CompanyBenefit {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct EarningType {
     /**
      *
@@ -2481,7 +2481,7 @@ impl Default for DeductionReducesTaxableIncome {
 }
 
 /// The representation of an employee benefit.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct EmployeeBenefit {
     /**
      * The representation of an employee benefit.
@@ -2621,7 +2621,7 @@ pub struct EmployeeBenefit {
     pub version: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct EligibleEmployees {
     #[serde(
         default,
@@ -2634,7 +2634,7 @@ pub struct EligibleEmployees {
 }
 
 /// Information about the payroll for the pay period.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Payroll {
     /**
      * Information about the payroll for the pay period.
@@ -2656,7 +2656,7 @@ pub struct Payroll {
 }
 
 /// The representation of a pay period.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PayPeriod {
     /**
      * The representation of a pay period.
@@ -2698,7 +2698,7 @@ pub struct PayPeriod {
     pub start_date: Option<chrono::NaiveDate>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PayrollPayPeriod {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub end_date: Option<chrono::NaiveDate>,
@@ -2719,7 +2719,7 @@ pub struct PayrollPayPeriod {
 }
 
 /// The subtotals for the payroll.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Totals {
     /**
      * The subtotals for the payroll.
@@ -2936,7 +2936,7 @@ impl PayrollEmployeeCompensationsPaymentMethod {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct FixedCompensations {
     /**
      * The amount of the compensation for the pay period.
@@ -2967,7 +2967,7 @@ pub struct FixedCompensations {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct HourlyCompensations {
     /**
      * The amount multiplied by the base rate to calculate total compensation per hour worked.
@@ -3007,7 +3007,7 @@ pub struct HourlyCompensations {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PayrollEmployeeCompensationsPaidTimeOff {
     /**
      * The hours of this PTO taken during the pay period.
@@ -3029,7 +3029,7 @@ pub struct PayrollEmployeeCompensationsPaidTimeOff {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Benefits {
     #[serde(
         default,
@@ -3056,7 +3056,7 @@ pub struct Benefits {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Deductions {
     #[serde(
         default,
@@ -3072,7 +3072,7 @@ pub struct Deductions {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Taxes {
     #[serde(
         default,
@@ -3093,7 +3093,7 @@ pub struct Taxes {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct EmployeeCompensations {
     /**
      * An array of employee benefits for the pay period. Benefits are only included for processed payroll when the include parameter is present.
@@ -3160,7 +3160,7 @@ pub struct EmployeeCompensations {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PayrollData {
     /**
      *
@@ -3283,7 +3283,7 @@ impl CustomFieldType {
 }
 
 /// A custom field of an employee
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct EmployeeCustomField {
     /**
      * This is the id of the response object from when you get the company custom fields
@@ -3331,7 +3331,7 @@ pub struct EmployeeCustomField {
 }
 
 /// A custom field on a company
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct CompanyCustomField {
     /**
      * A custom field on a company
@@ -3396,7 +3396,7 @@ impl GustoPersonType {
 }
 
 /// The representation of a job applicant in Gusto.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct JobApplicant {
     /**
      * The representation of a job applicant in Gusto.
@@ -3496,7 +3496,7 @@ pub struct JobApplicant {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest {
     /**
      * The id for the benefit got from the benefits api.
@@ -3536,7 +3536,7 @@ pub struct PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest {
     pub ytd_employee_deduction_amount: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct EarningTypeListResponse {
     /**
      * The custom earning types for the company.
@@ -3579,7 +3579,7 @@ impl Include {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutEmployeesRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
@@ -3644,11 +3644,11 @@ pub struct PutEmployeesRequest {
     pub version: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct GetCompanyEmployeesRequest {}
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostEmployeeRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
@@ -3700,7 +3700,7 @@ pub struct PostEmployeeRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutJobRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hire_date: Option<chrono::NaiveDate>,
@@ -3734,7 +3734,7 @@ pub struct PutJobRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostJobRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hire_date: Option<chrono::NaiveDate>,
@@ -3759,7 +3759,7 @@ pub struct PostJobRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostCompanyLocationRequest {
     #[serde(
         default,
@@ -3822,7 +3822,7 @@ pub struct PostCompanyLocationRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutLocationRequest {
     /**
      *
@@ -3934,7 +3934,7 @@ impl PutContractorRequestWageType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutContractorRequest {
     /**
      * The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
@@ -4080,7 +4080,7 @@ impl PostCompanyContractorRequestWageType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostCompanyContractorRequest {
     /**
      * The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
@@ -4168,7 +4168,7 @@ pub struct PostCompanyContractorRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompensationRequest {
     /**
      *
@@ -4201,7 +4201,7 @@ pub struct PutCompensationRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostJobCompensationRequest {
     /**
      *
@@ -4230,7 +4230,7 @@ pub struct PostJobCompensationRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostEmployeeGarnishmentRequest {
     /**
      *
@@ -4299,7 +4299,7 @@ pub struct PostEmployeeGarnishmentRequest {
     pub times: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutGarnishmentRequest {
     /**
      * Whether or not this garnishment is currently active.
@@ -4378,7 +4378,7 @@ pub struct PutGarnishmentRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostEmployeeTerminationRequest {
     /**
      *
@@ -4393,7 +4393,7 @@ pub struct PostEmployeeTerminationRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutEmployeeHomeAddressRequest {
     /**
      *
@@ -4452,7 +4452,7 @@ pub struct PutEmployeeHomeAddressRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompanyPayScheduleRequest {
     /**
      *
@@ -4504,7 +4504,7 @@ impl PostCompanyBankAccountRequestType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostCompanyBankAccountRequest {
     /**
      *
@@ -4532,7 +4532,7 @@ pub struct PostCompanyBankAccountRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompanyBankAccountsVerifyRequest {
     /**
      *
@@ -4555,7 +4555,7 @@ pub struct PutCompanyBankAccountsVerifyRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostCompanyBenefitRequest {
     /**
      *
@@ -4593,7 +4593,7 @@ pub struct PostCompanyBenefitRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompanyBenefitRequest {
     /**
      *
@@ -4620,7 +4620,7 @@ pub struct PutCompanyBenefitRequest {
     pub version: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostCompanyEarningTypeRequest {
     /**
      * The name of the custom earning type.
@@ -4633,7 +4633,7 @@ pub struct PostCompanyEarningTypeRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompanyEarningTypeRequest {
     /**
      * The name of the custom earning type.
@@ -4647,7 +4647,7 @@ pub struct PutCompanyEarningTypeRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostEmployeeBenefitRequest {
     /**
      *
@@ -4748,7 +4748,7 @@ pub struct PostEmployeeBenefitRequest {
     pub limit_option: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutEmployeeBenefitRequest {
     /**
      * Whether the employee benefit is active.
@@ -4911,7 +4911,7 @@ impl OffCycleReason {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostCompanyPayrollRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub check_date: Option<chrono::NaiveDate>,
@@ -4967,7 +4967,7 @@ impl GetCompanyPayrollsIncludeData {
 }
 
 /// An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompanyPayrollsRequestEmployeeCompensationsFixed {
     /**
      * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
@@ -4999,7 +4999,7 @@ pub struct PutCompanyPayrollsRequestEmployeeCompensationsFixed {
 }
 
 /// An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompanyPayrollsRequestEmployeeCompensationsHourly {
     /**
      * An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.
@@ -5031,7 +5031,7 @@ pub struct PutCompanyPayrollsRequestEmployeeCompensationsHourly {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompanyPayrollsRequestEmployeeCompensations {
     /**
      * The ID of the employee.
@@ -5059,7 +5059,7 @@ pub struct PutCompanyPayrollsRequestEmployeeCompensations {
     pub paid_time_off: Vec<PayrollEmployeeCompensationsPaidTimeOff>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompanyPayrollsRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub employee_compensations: Vec<PutCompanyPayrollsRequestEmployeeCompensations>,
@@ -5075,7 +5075,7 @@ pub struct PutCompanyPayrollsRequest {
 }
 
 /// Information for the user who will be the primary payroll administrator for the new company.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct User {
     /**
      * The email of the user who will be the primary payroll admin.
@@ -5115,7 +5115,7 @@ pub struct User {
     pub phone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Addresses {
     #[serde(
         default,
@@ -5164,7 +5164,7 @@ pub struct Addresses {
     pub zip: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostPartnerManagedCompanieRequestCompany {
     /**
      * The locations for the company. This includes mailing, work, and filing addresses.
@@ -5215,7 +5215,7 @@ pub struct PostPartnerManagedCompanieRequestCompany {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostProvisionRequest {
     #[serde()]
     pub company: PostPartnerManagedCompanieRequestCompany,
@@ -5227,7 +5227,7 @@ pub struct PostProvisionRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostPartnerManagedCompanieResponse {
     /**
      *
@@ -5259,7 +5259,7 @@ pub struct PostPartnerManagedCompanieResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostProvisionResponse {
     /**
      *
@@ -5272,13 +5272,13 @@ pub struct PostProvisionResponse {
     pub account_claim_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct GetEmployeeCustomFieldsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub custom_fields: Vec<EmployeeCustomField>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct GetCompanyCustomFieldsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub custom_fields: Vec<CompanyCustomField>,
@@ -5318,7 +5318,7 @@ impl OnboardingPersonType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostCompanyJobApplicantRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
@@ -5373,7 +5373,7 @@ pub struct PostCompanyJobApplicantRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PutCompanyJobApplicantsApplicantRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
@@ -5436,7 +5436,7 @@ pub struct PutCompanyJobApplicantsApplicantRequest {
     pub start_date: Option<chrono::NaiveDate>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct GetCompanyReversalsResponse {
     /**
      * Timestamp of when the reversal was approved.
@@ -5491,7 +5491,7 @@ pub struct GetCompanyReversalsResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PostCompanyAdminRequest {
     /**
      * The last name of the admin.
