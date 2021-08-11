@@ -404,7 +404,12 @@ fn get_fn_params(
         let typ = parameter_data.render_type(&param_name, ts)?;
         if nam == "ref" || nam == "type" {
             fn_params_str.push(format!("{}_: {},", nam, typ));
-        } else if (!all_pages || (nam != "page" && nam != "per_page" && nam != "per"))
+        } else if (!all_pages
+            || (nam != "page"
+                && nam != "per_page"
+                && nam != "per"
+                && nam != "page_size"
+                && nam != "start"))
             && nam != "authorization"
             && !nam.starts_with("authorization_bearer")
         {
@@ -432,7 +437,12 @@ fn get_fn_params(
 
             if nam == "ref" || nam == "type" {
                 query_params.insert(format!("{}_", nam), typ.to_string());
-            } else if (!all_pages || (nam != "page" && nam != "per_page" && nam != "per"))
+            } else if (!all_pages
+                || (nam != "page"
+                    && nam != "per_page"
+                    && nam != "per"
+                    && nam != "page_size"
+                    && nam != "start"))
                 && nam != "authorization"
                 && !nam.starts_with("authorization_bearer")
             {
