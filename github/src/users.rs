@@ -263,9 +263,17 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#add-an-email-address-for-the-authenticated-user>
      */
-    pub async fn add_email_for_authenticated(&self) -> Result<Vec<crate::types::Email>> {
+    pub async fn add_email_for_authenticated(
+        &self,
+        body: &crate::types::UsersAddEmailAuthenticatedRequestOneOf,
+    ) -> Result<Vec<crate::types::Email>> {
         let url = "/user/emails".to_string();
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -277,9 +285,17 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#delete-an-email-address-for-the-authenticated-user>
      */
-    pub async fn delete_email_for_authenticated(&self) -> Result<()> {
+    pub async fn delete_email_for_authenticated(
+        &self,
+        body: &crate::types::UsersDeleteEmailAuthenticatedRequestOneOf,
+    ) -> Result<()> {
         let url = "/user/emails".to_string();
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**

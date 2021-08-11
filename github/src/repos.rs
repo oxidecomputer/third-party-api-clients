@@ -1148,6 +1148,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddStatusCheckContextsRequestOneOf,
     ) -> Result<Vec<String>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -1156,7 +1157,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1179,6 +1185,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddStatusCheckContextsRequestOneOf,
     ) -> Result<Vec<String>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -1187,7 +1194,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1210,6 +1222,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddStatusCheckContextsRequestOneOf,
     ) -> Result<Vec<String>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_status_checks/contexts",
@@ -1218,7 +1231,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1377,6 +1395,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddAppAccessRestrictionsRequestOneOf,
     ) -> Result<Vec<crate::types::GitHubApp>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -1385,7 +1404,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1414,6 +1438,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddAppAccessRestrictionsRequestOneOf,
     ) -> Result<Vec<crate::types::GitHubApp>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -1422,7 +1447,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1451,6 +1481,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddAppAccessRestrictionsRequestOneOf,
     ) -> Result<Vec<crate::types::GitHubApp>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
@@ -1459,7 +1490,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1550,6 +1586,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddTeamAccessRestrictionsRequestOneOf,
     ) -> Result<Vec<crate::types::Team>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -1558,7 +1595,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1587,6 +1629,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddTeamAccessRestrictionsRequestOneOf,
     ) -> Result<Vec<crate::types::Team>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -1595,7 +1638,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1624,6 +1672,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddTeamAccessRestrictionsRequestOneOf,
     ) -> Result<Vec<crate::types::Team>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/teams",
@@ -1632,7 +1681,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1723,6 +1777,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddUserAccessRestrictionsRequestOneOf,
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -1731,7 +1786,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1760,6 +1820,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddUserAccessRestrictionsRequestOneOf,
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -1768,7 +1829,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.post(&url, None).await
+        self.client
+            .post(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1797,6 +1863,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
+        body: &crate::types::ReposAddUserAccessRestrictionsRequestOneOf,
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/users",
@@ -1805,7 +1872,12 @@ impl Repos {
             crate::progenitor_support::encode_path(&branch.to_string()),
         );
 
-        self.client.delete(&url, None).await
+        self.client
+            .delete(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**

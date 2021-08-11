@@ -133,7 +133,8 @@ pub fn generate_files(
                                         (Some(format!("&{}", rt)), Some("json".to_string()))
                                     }
                                 } else {
-                                    (None, None)
+                                    let rt = ts.render_type(&id, false)?;
+                                    (Some(format!("&{}", rt)), Some("json".to_string()))
                                 }
                             } else {
                                 (None, None)
@@ -188,7 +189,14 @@ pub fn generate_files(
                     .to_string();
             }
 
-            let fn_inner = get_fn_inner(&oid, m, &body_func, &response_type, &inner_response_type)?;
+            let fn_inner = get_fn_inner(
+                &oid,
+                m,
+                &body_func,
+                &response_type,
+                &inner_response_type,
+                false,
+            )?;
 
             if let Some(te) = ts.id_to_entry.get(&tid) {
                 // If we have a one of, we can generate a few different subfunctions to
@@ -217,7 +225,7 @@ pub fn generate_files(
             // This is specifically for Ramp.
             // We do this directly before we print the other function.
             if !inner_response_type.is_empty() {
-                response_type = inner_response_type;
+                response_type = inner_response_type.to_string();
             }
 
             let mut fn_name = oid
@@ -265,8 +273,14 @@ pub fn generate_files(
                 let tmp = parse(p)?;
                 let template = tmp.compile(query_params);
 
-                let fn_inner = get_fn_inner(&oid, m, &body_func, &response_type, "")?
-                    .replace("get(", "get_all_pages(");
+                let fn_inner = get_fn_inner(
+                    &oid,
+                    m,
+                    &body_func,
+                    &response_type,
+                    &inner_response_type,
+                    true,
+                )?;
 
                 let mut fn_name = oid
                     .replace("_get_", "_get_all_")
@@ -515,7 +529,22 @@ fn get_fn_inner(
     body_func: &Option<String>,
     response_type: &str,
     inner_response_type: &str,
+    all_pages: bool,
 ) -> Result<String> {
+    let body = if let Some(f) = &body_func {
+        if f == "json" {
+            "Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))"
+        } else {
+            "Some(body.into())"
+        }
+    } else {
+        "None"
+    };
+
+    if all_pages {
+        return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
+    }
+
     if (m == http::Method::GET
         || m == http::Method::POST
         || m == http::Method::PATCH
@@ -523,16 +552,6 @@ fn get_fn_inner(
         || m == http::Method::DELETE)
         && oid != "apps_create_installation_access_token"
     {
-        let body = if let Some(f) = &body_func {
-            if f == "json" {
-                "Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))"
-            } else {
-                "Some(body.into())"
-            }
-        } else {
-            "None"
-        };
-
         if inner_response_type.is_empty() {
             return Ok(format!(
                 "self.client.{}(&url, {}).await",

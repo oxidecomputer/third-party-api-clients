@@ -42,7 +42,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.18 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.19 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \
@@ -58,7 +58,7 @@ $(GUSTO_SPEC): $(GUSTO_SPEC_DIR)
 	curl -sSL $(GUSTO_SPEC_REMOTE) -o $@
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.6 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.7 \
 		-o gusto \
 		-n gusto-api \
 		--proper-name Gusto \
@@ -95,3 +95,15 @@ $(ZOOM_SPEC_DIR):
 
 $(ZOOM_SPEC): $(ZOOM_SPEC_DIR)
 	curl -sSL $(ZOOM_SPEC_REMOTE) -o $@
+
+zoom: target/debug/generator $(ZOOM_SPEC)
+	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.0 \
+		-o zoom \
+		-n zoom-api \
+		--proper-name Zoom \
+		-d "A fully generated & opinionated API client for the Zoom API." \
+		--spec-link "$(ZOOM_SPEC_REMOTE)" \
+		--host "api.zoom.us/v2" \
+		--token-endpoint "zoom.us/oauth/token" \
+		--user-consent-endpoint "zoom.us/oauth/authorize"
+	cargo fmt -p zoom-api

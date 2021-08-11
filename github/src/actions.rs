@@ -260,13 +260,22 @@ impl Actions {
      *
      * * `org: &str`
      */
-    pub async fn set_allowed_actions_organization(&self, org: &str) -> Result<()> {
+    pub async fn set_allowed_actions_organization(
+        &self,
+        org: &str,
+        body: &crate::types::SelectedActions,
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/selected-actions",
             crate::progenitor_support::encode_path(&org.to_string()),
         );
 
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
@@ -1701,14 +1710,24 @@ impl Actions {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn set_allowed_actions_repository(&self, owner: &str, repo: &str) -> Result<()> {
+    pub async fn set_allowed_actions_repository(
+        &self,
+        owner: &str,
+        repo: &str,
+        body: &crate::types::SelectedActions,
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/permissions/selected-actions",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
-        self.client.put(&url, None).await
+        self.client
+            .put(
+                &url,
+                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            )
+            .await
     }
 
     /**
