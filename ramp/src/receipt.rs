@@ -73,7 +73,7 @@ impl Receipt {
      *
      *
      */
-    pub async fn get_receipts_receipt_id(&self) -> Result<crate::types::GetReceiptsResponseData> {
+    pub async fn get_receipts_receipt_id(&self) -> Result<crate::types::Receipt> {
         let url = "/receipts/<id>".to_string();
         self.client.get(&url, None).await
     }

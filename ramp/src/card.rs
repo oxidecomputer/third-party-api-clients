@@ -68,7 +68,7 @@ impl Card {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_cards_card_id(&self) -> Result<crate::types::Cards> {
+    pub async fn get_cards_card_id(&self) -> Result<crate::types::Card> {
         let url = "/cards/<id>".to_string();
         self.client.get(&url, None).await
     }

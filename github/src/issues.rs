@@ -1561,7 +1561,7 @@ impl Issues {
         issue_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::TimelineIssueEvents>> {
+    ) -> Result<Vec<crate::types::TimelineEvent>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -1603,7 +1603,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-    ) -> Result<Vec<crate::types::TimelineIssueEvents>> {
+    ) -> Result<Vec<crate::types::TimelineEvent>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/timeline",
             crate::progenitor_support::encode_path(&owner.to_string()),

@@ -23,7 +23,7 @@ impl User {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_users_user_id(&self) -> Result<crate::types::GetUsersUserIdResponse> {
+    pub async fn get_users_user_id(&self) -> Result<crate::types::User> {
         let url = "/users/<id>".to_string();
         self.client.get(&url, None).await
     }
@@ -112,7 +112,7 @@ impl User {
     pub async fn post_users_deferred(
         &self,
         body: &crate::types::PostUsersDeferredRequest,
-    ) -> Result<crate::types::GetUsersUserIdResponse> {
+    ) -> Result<crate::types::User> {
         let url = "/users/deferred".to_string();
         self.client
             .post(

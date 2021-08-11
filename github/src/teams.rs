@@ -143,7 +143,7 @@ impl Teams {
         &self,
         org: &str,
         body: &crate::types::TeamsCreateRequest,
-    ) -> Result<crate::types::TeamFull> {
+    ) -> Result<crate::types::FullTeam> {
         let url = format!(
             "/orgs/{}/teams",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -173,7 +173,7 @@ impl Teams {
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
      */
-    pub async fn get_by_name(&self, org: &str, team_slug: &str) -> Result<crate::types::TeamFull> {
+    pub async fn get_by_name(&self, org: &str, team_slug: &str) -> Result<crate::types::FullTeam> {
         let url = format!(
             "/orgs/{}/teams/{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -232,7 +232,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         body: &crate::types::TeamsUpdateInOrgRequest,
-    ) -> Result<crate::types::TeamFull> {
+    ) -> Result<crate::types::FullTeam> {
         let url = format!(
             "/orgs/{}/teams/{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -1568,7 +1568,7 @@ impl Teams {
      *
      * * `team_id: i64`
      */
-    pub async fn get_legacy(&self, team_id: i64) -> Result<crate::types::TeamFull> {
+    pub async fn get_legacy(&self, team_id: i64) -> Result<crate::types::FullTeam> {
         let url = format!(
             "/teams/{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
@@ -1624,7 +1624,7 @@ impl Teams {
         &self,
         team_id: i64,
         body: &crate::types::TeamsUpdateLegacyRequest,
-    ) -> Result<crate::types::TeamFull> {
+    ) -> Result<crate::types::FullTeam> {
         let url = format!(
             "/teams/{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
@@ -2935,7 +2935,7 @@ impl Teams {
         &self,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::TeamFull>> {
+    ) -> Result<Vec<crate::types::FullTeam>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -2966,7 +2966,7 @@ impl Teams {
      *
      * FROM: <https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user>
      */
-    pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::TeamFull>> {
+    pub async fn list_all_for_authenticated_user(&self) -> Result<Vec<crate::types::FullTeam>> {
         let url = "/user/teams".to_string();
         self.client.get_all_pages(&url, None).await
     }

@@ -23,7 +23,7 @@ impl Apps {
      *
      * FROM: <https://docs.github.com/rest/reference/apps#get-the-authenticated-app>
      */
-    pub async fn get_authenticated(&self) -> Result<crate::types::Integration> {
+    pub async fn get_authenticated(&self) -> Result<crate::types::GitHubApp> {
         let url = "/app".to_string();
         self.client.get(&url, None).await
     }
@@ -41,7 +41,7 @@ impl Apps {
      *
      * * `code: &str`
      */
-    pub async fn create_from_manifest(&self, code: &str) -> Result<crate::types::Integration> {
+    pub async fn create_from_manifest(&self, code: &str) -> Result<crate::types::GitHubApp> {
         let url = format!(
             "/app-manifests/{}/conversions",
             crate::progenitor_support::encode_path(&code.to_string()),
@@ -605,7 +605,7 @@ impl Apps {
      *
      * * `app_slug: &str`
      */
-    pub async fn get_by_slug(&self, app_slug: &str) -> Result<crate::types::Integration> {
+    pub async fn get_by_slug(&self, app_slug: &str) -> Result<crate::types::GitHubApp> {
         let url = format!(
             "/apps/{}",
             crate::progenitor_support::encode_path(&app_slug.to_string()),

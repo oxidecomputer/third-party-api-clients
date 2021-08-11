@@ -1145,7 +1145,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::Integration>> {
+    ) -> Result<Vec<crate::types::GitHubApp>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1174,7 +1174,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::Integration>> {
+    ) -> Result<Vec<crate::types::GitHubApp>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1211,7 +1211,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::Integration>> {
+    ) -> Result<Vec<crate::types::GitHubApp>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1248,7 +1248,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::Integration>> {
+    ) -> Result<Vec<crate::types::GitHubApp>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1285,7 +1285,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<Vec<crate::types::Integration>> {
+    ) -> Result<Vec<crate::types::GitHubApp>> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/restrictions/apps",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -3085,7 +3085,7 @@ impl Repos {
         repo: &str,
         path: &str,
         ref_: &str,
-    ) -> Result<crate::types::ContentSymlink> {
+    ) -> Result<crate::types::SymlinkContent> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !ref_.is_empty() {

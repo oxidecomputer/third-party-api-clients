@@ -2103,7 +2103,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> Result<Vec<crate::types::EnvironmentApprovals>> {
+    ) -> Result<Vec<crate::types::EnvironmentApproval>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/approvals",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2130,7 +2130,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> Result<Vec<crate::types::EnvironmentApprovals>> {
+    ) -> Result<Vec<crate::types::EnvironmentApproval>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/approvals",
             crate::progenitor_support::encode_path(&owner.to_string()),

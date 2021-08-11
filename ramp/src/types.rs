@@ -76,7 +76,7 @@ impl Role {
 
 /// Ramp User
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetUsersUserIdResponse {
+pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -483,7 +483,7 @@ pub struct GetTransactionResponse {
 
 /// Ramp location
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostLocationResponse {
+pub struct Location {
     /**
      * Ramp location
      */
@@ -507,7 +507,7 @@ pub struct PostLocationResponse {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub data: Vec<PostLocationResponse>,
+    pub data: Vec<Location>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub page: Option<Page>,
 }
@@ -523,23 +523,13 @@ pub struct PostLocationRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetUsersResponsePage {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub next: String,
-}
-
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetUsersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub data: Vec<GetUsersUserIdResponse>,
-    #[serde()]
-    pub page: GetUsersResponsePage,
+    pub data: Vec<User>,
+    #[serde(flatten)]
+    pub page: Page,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -557,7 +547,7 @@ pub struct PatchLocationsLocationIdRequest {
 
 /// Ramp Department
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostDepartmentsResponse {
+pub struct Department {
     /**
      * Ramp Department
      */
@@ -581,7 +571,7 @@ pub struct PostDepartmentsResponse {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetDepartmentsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub data: Vec<PostDepartmentsResponse>,
+    pub data: Vec<Department>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub page: Option<Page>,
 }
@@ -751,7 +741,7 @@ pub struct SpendingRestrictions {
 
 /// Card data that holds mostly static information about a card.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct Cards {
+pub struct Card {
     /**
      * Card data that holds mostly static information about a card.
      */
@@ -829,7 +819,7 @@ pub struct Cards {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCardsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub cards: Vec<Cards>,
+    pub cards: Vec<Card>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub page: Option<Page>,
 }
@@ -922,7 +912,7 @@ pub struct BillingAddress {
 
 /// Mostly static information about a business that doesn't change often.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetResourcesBusinessResponse {
+pub struct Business {
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -1122,7 +1112,7 @@ impl TokenType {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct PostTokenResponse {
+pub struct OAuth2Token {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1171,7 +1161,7 @@ pub struct PostTokenResponse {
 
 /// Current data about the business.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetResourcesBusinessCurrentResponse {
+pub struct BusinessCurrentStatus {
     /**
      * Current data about the business.
      */
@@ -1368,7 +1358,7 @@ impl Icon {
 
 /// Card Program data that serves as a template for creating new cards.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct CardPrograms {
+pub struct CardProgram {
     /**
      * Card Program data that serves as a template for creating new cards.
      */
@@ -1427,7 +1417,7 @@ pub struct CardPrograms {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCardProgramsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub card_programs: Vec<CardPrograms>,
+    pub card_programs: Vec<CardProgram>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub page: Option<Page>,
 }
@@ -1574,7 +1564,7 @@ pub struct GetUsersDeferredStatusIdResponseDataType {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetReceiptsResponseData {
+pub struct Receipt {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -1606,13 +1596,13 @@ pub struct GetReceiptsResponseData {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetReceiptsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub data: Vec<GetReceiptsResponseData>,
+    pub data: Vec<Receipt>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub page: Option<Page>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetReimbursementsIdResponse {
+pub struct Reimbursement {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -1654,7 +1644,7 @@ pub struct GetReimbursementsIdResponse {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetReimbursementsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub data: Option<GetReimbursementsIdResponse>,
+    pub data: Option<Reimbursement>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub page: Option<Page>,
 }

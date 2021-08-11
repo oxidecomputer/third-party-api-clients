@@ -271,6 +271,10 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                             // Close the serde string.
                             if *name != prop {
                                 a(&format!(r#"rename = "{}")]"#, name));
+                            } else if rt == "Page" && prop == "page" {
+                                // Flatten the struct this is for Ramp's pagination.
+                                // God willing let's hope no other API breaks this in the future.
+                                a(r#"flatten)]"#);
                             } else {
                                 a(r#")]"#);
                             }

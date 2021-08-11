@@ -170,7 +170,7 @@ pub struct Permissions {
 
 /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct Integration {
+pub struct GitHubApp {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4679,7 +4679,7 @@ pub struct IssueSimple {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Issue Simple
      */
@@ -4857,7 +4857,7 @@ pub struct IssueComment {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Comments provide a way for people to collaborate on an issue.
      */
@@ -5614,7 +5614,7 @@ pub struct Forks {
 
 /// Gist
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct ForkOf {
+pub struct Gist {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5810,7 +5810,7 @@ pub struct GistSimple {
      * Gist
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub fork_of: Option<ForkOf>,
+    pub fork_of: Option<Gist>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub forks: Vec<Forks>,
     #[serde(
@@ -6200,7 +6200,7 @@ pub struct Issue {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
@@ -8183,7 +8183,7 @@ impl InteractionGroup {
 
 /// Interaction limit settings.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct InteractionLimitResponse {
+pub struct InteractionLimits {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -9093,7 +9093,7 @@ impl Privacy {
 
 /// Groups of organization members that gives permissions on specified repositories.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct TeamFull {
+pub struct FullTeam {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -11613,7 +11613,7 @@ pub struct WorkflowRun {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct EnvironmentApprovalsEnvironments {
+pub struct EnvironmentApprovalEnvironments {
     /**
      * The time that the environment was created, in ISO 8601 format.
      */
@@ -11667,37 +11667,37 @@ pub struct EnvironmentApprovalsEnvironments {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(rename_all = "snake_case")]
-pub enum EnvironmentApprovalsState {
+pub enum EnvironmentApprovalState {
     Approved,
     Rejected,
     Noop,
 }
 
-impl std::fmt::Display for EnvironmentApprovalsState {
+impl std::fmt::Display for EnvironmentApprovalState {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match *self {
-            EnvironmentApprovalsState::Approved => "approved",
-            EnvironmentApprovalsState::Rejected => "rejected",
-            EnvironmentApprovalsState::Noop => "",
+            EnvironmentApprovalState::Approved => "approved",
+            EnvironmentApprovalState::Rejected => "rejected",
+            EnvironmentApprovalState::Noop => "",
         }
         .fmt(f)
     }
 }
 
-impl Default for EnvironmentApprovalsState {
-    fn default() -> EnvironmentApprovalsState {
-        EnvironmentApprovalsState::Noop
+impl Default for EnvironmentApprovalState {
+    fn default() -> EnvironmentApprovalState {
+        EnvironmentApprovalState::Noop
     }
 }
-impl EnvironmentApprovalsState {
+impl EnvironmentApprovalState {
     pub fn is_noop(&self) -> bool {
-        matches!(self, EnvironmentApprovalsState::Noop)
+        matches!(self, EnvironmentApprovalState::Noop)
     }
 }
 
 /// An entry in the reviews log for environment deployments
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct EnvironmentApprovals {
+pub struct EnvironmentApproval {
     /**
      * The comment submitted with the deployment review
      */
@@ -11711,12 +11711,12 @@ pub struct EnvironmentApprovals {
      * The list of environments that were approved or rejected
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub environments: Vec<EnvironmentApprovalsEnvironments>,
+    pub environments: Vec<EnvironmentApprovalEnvironments>,
     /**
      * Whether deployment to the environment(s) was approved or rejected
      */
-    #[serde(default, skip_serializing_if = "EnvironmentApprovalsState::is_noop")]
-    pub state: EnvironmentApprovalsState,
+    #[serde(default, skip_serializing_if = "EnvironmentApprovalState::is_noop")]
+    pub state: EnvironmentApprovalState,
     /**
      * Simple User
      */
@@ -11959,7 +11959,7 @@ pub struct Deployment {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * A request for a specific ref(branch,sha,tag) to be deployed
      */
@@ -13298,7 +13298,7 @@ pub struct DeploymentSimple {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * A deployment created as the result of an Actions check run from a workflow that references an environment
      */
@@ -13472,7 +13472,7 @@ pub struct CheckRun {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub app: Option<Integration>,
+    pub app: Option<GitHubApp>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub check_suite: Option<CheckSuite>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -13664,7 +13664,7 @@ pub struct CheckSuiteData {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub app: Option<Integration>,
+    pub app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14513,7 +14513,7 @@ pub struct CodeScanningAnalysis {
 
 /// Successful deletion of a code scanning analysis
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct CodeScanningAnalysisDeletion {
+pub struct AnalysisDeletion {
     /**
      * Next deletable analysis in chain, with last analysis deletion confirmation
      */
@@ -16059,7 +16059,7 @@ pub struct ContentFile {
 
 /// An object describing a symlink
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct ContentSymlink {
+pub struct SymlinkContent {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
     #[serde(
@@ -16604,7 +16604,7 @@ pub struct DeploymentStatus {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17825,7 +17825,7 @@ pub struct IssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Issue Event
      */
@@ -17925,7 +17925,7 @@ pub struct LabeledIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17984,7 +17984,7 @@ pub struct UnlabeledIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18051,7 +18051,7 @@ pub struct AssignedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18118,7 +18118,7 @@ pub struct UnassignedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18187,7 +18187,7 @@ pub struct MilestonedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18246,7 +18246,7 @@ pub struct DemilestonedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18319,7 +18319,7 @@ pub struct RenamedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde()]
     pub rename: Rename,
     #[serde(
@@ -18378,7 +18378,7 @@ pub struct ReviewRequestedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Simple User
      */
@@ -18450,7 +18450,7 @@ pub struct ReviewRequestRemovedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Simple User
      */
@@ -18524,7 +18524,7 @@ pub struct ReviewDismissedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18587,7 +18587,7 @@ pub struct LockedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18684,7 +18684,7 @@ pub struct AddedProjectIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Added to Project Issue Event
      */
@@ -18746,7 +18746,7 @@ pub struct MovedColumnInProjectIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Moved Column in Project Issue Event
      */
@@ -18808,7 +18808,7 @@ pub struct RemovedFromProjectIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Removed from Project Issue Event
      */
@@ -18870,7 +18870,7 @@ pub struct ConvertedNoteIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Converted Note to Issue Issue Event
      */
@@ -18957,7 +18957,7 @@ pub struct TimelineCommentEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Timeline Comment Event
      */
@@ -19566,7 +19566,7 @@ pub struct TimelineAssignedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19628,7 +19628,7 @@ pub struct TimelineUnassignedIssueEvent {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19639,7 +19639,7 @@ pub struct TimelineUnassignedIssueEvent {
 
 /// Timeline Event
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct TimelineIssueEvents {}
+pub struct TimelineEvent {}
 
 /// An SSH key granting access to a single repository.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -19902,7 +19902,7 @@ pub struct Page {
     )]
     pub cname: String,
     /**
-     * Whether the Page has a custom 404 page.
+     * The configuration for GitHub Pages for a repository.
      */
     #[serde(
         default,
@@ -19932,7 +19932,7 @@ pub struct Page {
     )]
     pub https_enforced: bool,
     /**
-     * Whether the GitHub Pages site is publicly visible. If set to `true`, the site is accessible to anyone on the internet. If set to `false`, the site will only be accessible to users who have at least `read` access to the repository that published the site.
+     * The configuration for GitHub Pages for a repository.
      */
     #[serde(
         default,
@@ -19950,7 +19950,7 @@ pub struct Page {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<PageStatus>,
     /**
-     * The API address for accessing this Page resource.
+     * The configuration for GitHub Pages for a repository.
      */
     #[serde(
         default,
@@ -23517,7 +23517,7 @@ pub struct IssueSearchResultItem {
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<Integration>,
+    pub performed_via_github_app: Option<GitHubApp>,
     /**
      * Issue Search Result Item
      */
@@ -30872,7 +30872,7 @@ pub struct AppsCreateContentAttachmentRequest {
 ///
 /// - `Vec<Entries>`
 /// - `ContentFile`
-/// - `ContentSymlink`
+/// - `SymlinkContent`
 /// - `ContentSubmodule`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
@@ -30890,7 +30890,7 @@ pub enum ReposGetContentResponseOneOf {
     /**
      * An object describing a symlink
      */
-    ContentSymlink(ContentSymlink),
+    SymlinkContent(SymlinkContent),
     /**
      * A list of directory items
      */
@@ -30912,15 +30912,15 @@ impl ReposGetContentResponseOneOf {
         None
     }
 
-    pub fn content_symlink(&self) -> Option<&ContentSymlink> {
-        if let ReposGetContentResponseOneOf::ContentSymlink(ref_) = self {
+    pub fn vec_entries(&self) -> Option<&Vec<Entries>> {
+        if let ReposGetContentResponseOneOf::EntriesVector(ref_) = self {
             return Some(ref_);
         }
         None
     }
 
-    pub fn vec_entries(&self) -> Option<&Vec<Entries>> {
-        if let ReposGetContentResponseOneOf::EntriesVector(ref_) = self {
+    pub fn symlink_content(&self) -> Option<&SymlinkContent> {
+        if let ReposGetContentResponseOneOf::SymlinkContent(ref_) = self {
             return Some(ref_);
         }
         None
@@ -30939,15 +30939,15 @@ impl From<ContentSubmodule> for ReposGetContentResponseOneOf {
     }
 }
 
-impl From<ContentSymlink> for ReposGetContentResponseOneOf {
-    fn from(f: ContentSymlink) -> Self {
-        ReposGetContentResponseOneOf::ContentSymlink(f)
-    }
-}
-
 impl From<Vec<Entries>> for ReposGetContentResponseOneOf {
     fn from(f: Vec<Entries>) -> Self {
         ReposGetContentResponseOneOf::EntriesVector(f)
+    }
+}
+
+impl From<SymlinkContent> for ReposGetContentResponseOneOf {
+    fn from(f: SymlinkContent) -> Self {
+        ReposGetContentResponseOneOf::SymlinkContent(f)
     }
 }
 
@@ -30963,15 +30963,15 @@ impl From<ReposGetContentResponseOneOf> for ContentSubmodule {
     }
 }
 
-impl From<ReposGetContentResponseOneOf> for ContentSymlink {
-    fn from(f: ReposGetContentResponseOneOf) -> Self {
-        f.content_symlink().unwrap().clone()
-    }
-}
-
 impl From<ReposGetContentResponseOneOf> for Vec<Entries> {
     fn from(f: ReposGetContentResponseOneOf) -> Self {
         f.vec_entries().unwrap().clone()
+    }
+}
+
+impl From<ReposGetContentResponseOneOf> for SymlinkContent {
+    fn from(f: ReposGetContentResponseOneOf) -> Self {
+        f.symlink_content().unwrap().clone()
     }
 }
 

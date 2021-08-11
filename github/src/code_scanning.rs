@@ -590,7 +590,7 @@ impl CodeScanning {
         repo: &str,
         analysis_id: i64,
         confirm_delete: &str,
-    ) -> Result<crate::types::CodeScanningAnalysisDeletion> {
+    ) -> Result<crate::types::AnalysisDeletion> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !confirm_delete.is_empty() {

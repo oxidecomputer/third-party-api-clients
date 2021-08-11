@@ -49,7 +49,7 @@ impl Reimbursement {
      *
      * This function performs a `GET` to the `/reimbursements/<id>` endpoint.
      */
-    pub async fn get_reimbursements_id(&self) -> Result<crate::types::GetReimbursementsIdResponse> {
+    pub async fn get_reimbursements_id(&self) -> Result<crate::types::Reimbursement> {
         let url = "/reimbursements/<id>".to_string();
         self.client.get(&url, None).await
     }

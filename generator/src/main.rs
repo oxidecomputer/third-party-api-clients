@@ -1329,7 +1329,19 @@ impl TypeSpace {
                         (Some(n), Some("")) => n,
                         (None, Some(t)) => t,
                         (Some(""), Some(t)) => t,
-                        (Some(n), Some(_)) => n,
+                        (Some(n), Some(t)) => {
+                            // Check if we already have a type with this name.
+                            if self.name_to_id.get(&clean_name(n)).is_some() {
+                                t
+                            } else if self.name_to_id.get(&clean_name(t)).is_some() {
+                                n
+                            } else if n.len() < t.len() {
+                                // Pick the shorter of the names.
+                                n
+                            } else {
+                                t
+                            }
+                        }
                         (None, None) => {
                             if !parent_name.is_empty() {
                                 parent_name
@@ -1368,7 +1380,10 @@ impl TypeSpace {
                             }
                         }
 
-                        if o.required.contains(n) {
+                        // We will eventually flatten the page struct.
+                        // TODO: This is for ramp, let's hope it doesn't break anything in
+                        // the future.
+                        if o.required.contains(n) && name != "page" {
                             omap.insert(n.to_string(), itid);
                         } else {
                             // This is an optional member.
@@ -1983,6 +1998,7 @@ fn clean_name(t: &str) -> String {
         &s.replace("+1", "plus_one")
             .replace("-1", "minus_one")
             .replace("2fa", "two_fa")
+            .replace(".v1", "")
             .replace("100644", "file_blob")
             .replace("100755", "executable_blob")
             .replace("040000", "subdirectory_tree")

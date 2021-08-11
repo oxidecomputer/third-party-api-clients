@@ -61,7 +61,7 @@ impl Location {
     pub async fn post_location(
         &self,
         body: &crate::types::PostLocationRequest,
-    ) -> Result<crate::types::PostLocationResponse> {
+    ) -> Result<crate::types::Location> {
         let url = "/locations".to_string();
         self.client
             .post(
@@ -82,7 +82,7 @@ impl Location {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_locations_location_id(&self) -> Result<crate::types::PostLocationResponse> {
+    pub async fn get_locations_location_id(&self) -> Result<crate::types::Location> {
         let url = "/locations/<id>".to_string();
         self.client.get(&url, None).await
     }
@@ -97,7 +97,7 @@ impl Location {
     pub async fn patch_locations_location_id(
         &self,
         body: &crate::types::PatchLocationsLocationIdRequest,
-    ) -> Result<crate::types::PostLocationResponse> {
+    ) -> Result<crate::types::Location> {
         let url = "/locations/<id>".to_string();
         self.client
             .patch(

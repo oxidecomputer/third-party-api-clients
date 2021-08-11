@@ -28,7 +28,7 @@ impl Interactions {
     pub async fn get_restrictions_for_org(
         &self,
         org: &str,
-    ) -> Result<crate::types::InteractionLimitResponse> {
+    ) -> Result<crate::types::InteractionLimits> {
         let url = format!(
             "/orgs/{}/interaction-limits",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -53,7 +53,7 @@ impl Interactions {
     pub async fn set_restrictions_for_org(
         &self,
         org: &str,
-    ) -> Result<crate::types::InteractionLimitResponse> {
+    ) -> Result<crate::types::InteractionLimits> {
         let url = format!(
             "/orgs/{}/interaction-limits",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -102,7 +102,7 @@ impl Interactions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::InteractionLimitResponse> {
+    ) -> Result<crate::types::InteractionLimits> {
         let url = format!(
             "/repos/{}/{}/interaction-limits",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -130,7 +130,7 @@ impl Interactions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::InteractionLimitResponse> {
+    ) -> Result<crate::types::InteractionLimits> {
         let url = format!(
             "/repos/{}/{}/interaction-limits",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -175,7 +175,7 @@ impl Interactions {
      */
     pub async fn get_restrictions_for_authenticated_user(
         &self,
-    ) -> Result<crate::types::InteractionLimitResponse> {
+    ) -> Result<crate::types::InteractionLimits> {
         let url = "/user/interaction-limits".to_string();
         self.client.get(&url, None).await
     }
@@ -191,7 +191,7 @@ impl Interactions {
      */
     pub async fn set_restrictions_for_authenticated_user(
         &self,
-    ) -> Result<crate::types::InteractionLimitResponse> {
+    ) -> Result<crate::types::InteractionLimits> {
         let url = "/user/interaction-limits".to_string();
         self.client.put(&url, None).await
     }
