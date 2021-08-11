@@ -106,6 +106,62 @@ impl Users {
     }
 
     /**
+     * List users.
+     *
+     * This function performs a `GET` to the `/users` endpoint.
+     *
+     * As opposed to `get_users`, this function returns all the pages of the request at once.
+     *
+     * Retrieve all users of the business.
+     */
+    pub async fn get_all_users(
+        &self,
+        department_id: &str,
+        location_id: &str,
+    ) -> Result<Vec<crate::types::User>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !department_id.is_empty() {
+            query_args.push(format!("department_id={}", department_id));
+        }
+        if !location_id.is_empty() {
+            query_args.push(format!("location_id={}", location_id));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/users?{}", query);
+
+        let mut resp: crate::types::GetUsersResponse = self.client.get(&url, None).await.unwrap();
+
+        let mut data = resp.data;
+        let mut page = resp.page.next;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            resp = self
+                .client
+                .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
+                .await
+                .unwrap();
+
+            data.append(&mut resp.data);
+
+            if !resp.page.next.is_empty() && resp.page.next != page {
+                page = resp.page.next.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
+    }
+
+    /**
      * Invite a new user.
      *
      * This function performs a `POST` to the `/users/deferred` endpoint.

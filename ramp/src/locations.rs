@@ -51,6 +51,44 @@ impl Locations {
     }
 
     /**
+     * List locations.
+     *
+     * This function performs a `GET` to the `/locations` endpoint.
+     *
+     * As opposed to `get_location`, this function returns all the pages of the request at once.
+     *
+     * Retrieves all locations for your business.
+     */
+    pub async fn get_all_locations(&self) -> Result<Vec<crate::types::Location>> {
+        let url = "/locations".to_string();
+        let mut resp: crate::types::GetLocationResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut data = resp.data;
+        let mut page = resp.page.next;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            resp = self
+                .client
+                .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
+                .await
+                .unwrap();
+
+            data.append(&mut resp.data);
+
+            if !resp.page.next.is_empty() && resp.page.next != page {
+                page = resp.page.next.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
+    }
+
+    /**
      * Create new location.
      *
      * This function performs a `POST` to the `/locations` endpoint.

@@ -95,7 +95,7 @@ pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
-const DEFAULT_HOST: &str = "https://api.ramp.com/developer/v1";
+pub const DEFAULT_HOST: &str = "https://api.ramp.com/developer/v1";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};

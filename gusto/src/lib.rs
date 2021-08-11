@@ -104,7 +104,7 @@ pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
-const DEFAULT_HOST: &str = "https://api.gusto.com";
+pub const DEFAULT_HOST: &str = "https://api.gusto.com";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};

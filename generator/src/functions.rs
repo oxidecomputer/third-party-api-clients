@@ -261,7 +261,7 @@ pub fn generate_files(
 
             // If we are returning a list of things and we have page, etc as
             // params, let's get all the pages.
-            if response_type.starts_with("Vec<") && http::Method::GET == m {
+            if frt.starts_with("Vec<") && http::Method::GET == m {
                 let docs = get_fn_docs_all(
                     o,
                     m,
@@ -568,7 +568,7 @@ fn get_fn_inner(
 
             // Paginate if we should.
             while !page.is_empty() {{
-                resp = self.client.{}(page.trim_start_matches(DEFAULT_HOST), {}).await.unwrap();
+                resp = self.client.{}(page.trim_start_matches(crate::DEFAULT_HOST), {}).await.unwrap();
 
                 data.append(&mut resp.data);
 

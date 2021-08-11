@@ -70,6 +70,71 @@ impl Receipts {
     }
 
     /**
+     * List receipts.
+     *
+     * This function performs a `GET` to the `/receipts` endpoint.
+     *
+     * As opposed to `get_receipts`, this function returns all the pages of the request at once.
+     *
+     * Returns description of all receipts of a business.
+     */
+    pub async fn get_all_receipts(
+        &self,
+        from_date: Option<chrono::DateTime<chrono::Utc>>,
+        to_date: Option<chrono::DateTime<chrono::Utc>>,
+        created_after: Option<chrono::DateTime<chrono::Utc>>,
+        created_before: Option<chrono::DateTime<chrono::Utc>>,
+    ) -> Result<Vec<crate::types::Receipt>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if let Some(date) = created_after {
+            query_args.push(format!("created_after={}", &date.to_rfc3339()));
+        }
+        if let Some(date) = created_before {
+            query_args.push(format!("created_before={}", &date.to_rfc3339()));
+        }
+        if let Some(date) = from_date {
+            query_args.push(format!("from_date={}", &date.to_rfc3339()));
+        }
+        if let Some(date) = to_date {
+            query_args.push(format!("to_date={}", &date.to_rfc3339()));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/receipts?{}", query);
+
+        let mut resp: crate::types::GetReceiptsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut data = resp.data;
+        let mut page = resp.page.next;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            resp = self
+                .client
+                .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
+                .await
+                .unwrap();
+
+            data.append(&mut resp.data);
+
+            if !resp.page.next.is_empty() && resp.page.next != page {
+                page = resp.page.next.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
+    }
+
+    /**
      * Get details for one receipt.
      *
      * This function performs a `GET` to the `/receipts/<id>` endpoint.

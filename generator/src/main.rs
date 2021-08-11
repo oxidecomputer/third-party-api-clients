@@ -2002,7 +2002,7 @@ fn gen(
     a("");
 
     a(&format!(
-        r#"const DEFAULT_HOST: &str = "https://{}";"#,
+        r#"pub const DEFAULT_HOST: &str = "https://{}";"#,
         host.trim_start_matches("https://")
     ));
     a("");

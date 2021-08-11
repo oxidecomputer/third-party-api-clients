@@ -117,6 +117,107 @@ impl Transactions {
     }
 
     /**
+     * List transactions.
+     *
+     * This function performs a `GET` to the `/transactions` endpoint.
+     *
+     * As opposed to `get_transaction`, this function returns all the pages of the request at once.
+     *
+     * Retrieves all transactions for the business. This endpoint supports filtering and ordering. NOTE: only one ordering param is supported.
+     */
+    pub async fn get_all_transactions(
+        &self,
+        department_id: &str,
+        location_id: &str,
+        from_date: Option<chrono::DateTime<chrono::Utc>>,
+        to_date: Option<chrono::DateTime<chrono::Utc>>,
+        merchant_id: &str,
+        sk_category_id: &str,
+        order_by_date_desc: bool,
+        order_by_date_asc: bool,
+        order_by_amount_desc: bool,
+        order_by_amount_asc: bool,
+        state: &str,
+        min_amount: f64,
+        max_amount: f64,
+        requires_memo: bool,
+    ) -> Result<Vec<crate::types::Data>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !department_id.is_empty() {
+            query_args.push(format!("department_id={}", department_id));
+        }
+        if let Some(date) = from_date {
+            query_args.push(format!("from_date={}", &date.to_rfc3339()));
+        }
+        if !location_id.is_empty() {
+            query_args.push(format!("location_id={}", location_id));
+        }
+        query_args.push(format!("max_amount={}", max_amount));
+        if !merchant_id.is_empty() {
+            query_args.push(format!("merchant_id={}", merchant_id));
+        }
+        query_args.push(format!("min_amount={}", min_amount));
+        if order_by_amount_asc {
+            query_args.push(format!("order_by_amount_asc={}", order_by_amount_asc));
+        }
+        if order_by_amount_desc {
+            query_args.push(format!("order_by_amount_desc={}", order_by_amount_desc));
+        }
+        if order_by_date_asc {
+            query_args.push(format!("order_by_date_asc={}", order_by_date_asc));
+        }
+        if order_by_date_desc {
+            query_args.push(format!("order_by_date_desc={}", order_by_date_desc));
+        }
+        if requires_memo {
+            query_args.push(format!("requires_memo={}", requires_memo));
+        }
+        if !sk_category_id.is_empty() {
+            query_args.push(format!("sk_category_id={}", sk_category_id));
+        }
+        if !state.is_empty() {
+            query_args.push(format!("state={}", state));
+        }
+        if let Some(date) = to_date {
+            query_args.push(format!("to_date={}", &date.to_rfc3339()));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/transactions?{}", query);
+
+        let mut resp: crate::types::GetTransactionResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut data = resp.data;
+        let mut page = resp.page.next;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            resp = self
+                .client
+                .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
+                .await
+                .unwrap();
+
+            data.append(&mut resp.data);
+
+            if !resp.page.next.is_empty() && resp.page.next != page {
+                page = resp.page.next.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
+    }
+
+    /**
      * GET a transaction.
      *
      * This function performs a `GET` to the `/transactions/<id>` endpoint.

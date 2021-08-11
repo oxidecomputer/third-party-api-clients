@@ -218,7 +218,7 @@ pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
-const DEFAULT_HOST: &str = "https://api.github.com";
+pub const DEFAULT_HOST: &str = "https://api.github.com";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
