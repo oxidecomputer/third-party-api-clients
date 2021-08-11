@@ -139,7 +139,6 @@ impl Employees {
         &self,
         company_id_or_uuid: &str,
         terminated: bool,
-        per: f64,
         include: &[String],
         body: &crate::types::GetCompanyEmployeesRequest,
     ) -> Result<Vec<crate::types::Employee>> {
@@ -148,7 +147,6 @@ impl Employees {
         if !include.is_empty() {
             query_args.push(format!("include={}", include.join(" ")));
         }
-        query_args.push(format!("per={}", per));
         if terminated {
             query_args.push(format!("terminated={}", terminated));
         }
