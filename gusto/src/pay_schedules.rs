@@ -19,8 +19,9 @@ impl PaySchedules {
      *
      * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      */
-    pub async fn get_v_1_companies_company_id_pay_schedules(
+    pub async fn get_company_pay_schedules(
         &self,
+        company_id: &str,
     ) -> Result<Vec<crate::types::PaySchedule>> {
         let url = format!(
             "/v1/companies/{}/pay_schedules",
@@ -35,12 +36,13 @@ impl PaySchedules {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/pay_schedules` endpoint.
      *
-     * As opposed to `get_v_1_companies_company_id_pay_schedules`, this function returns all the pages of the request at once.
+     * As opposed to `get_company_pay_schedules`, this function returns all the pages of the request at once.
      *
      * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      */
-    pub async fn get_v_1_companies_company_id_pay_schedules(
+    pub async fn get_company_pay_schedules(
         &self,
+        company_id: &str,
     ) -> Result<Vec<crate::types::PaySchedule>> {
         let url = format!(
             "/v1/companies/{}/pay_schedules",
@@ -57,8 +59,10 @@ impl PaySchedules {
      *
      * The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
      */
-    pub async fn get_v_1_companies_company_id_pay_schedules_pay_schedule_id(
+    pub async fn get_company_pay_schedules_pay_schedule_id(
         &self,
+        company_id_or_uuid: &str,
+        pay_schedule_id_or_uuid: &str,
     ) -> Result<crate::types::PaySchedule> {
         let url = format!(
             "/v1/companies/{}/pay_schedules/{}",
@@ -78,9 +82,11 @@ impl PaySchedules {
      *
      * This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
      */
-    pub async fn put_v_1_companies_company_id_pay_schedules_pay_schedule_id(
+    pub async fn put_company_pay_schedules_pay_schedule_id(
         &self,
-        body: &crate::types::PutV1CompaniesCompanyIdPaySchedulesScheduleRequest,
+        company_id_or_uuid: &str,
+        pay_schedule_id_or_uuid: &str,
+        body: &crate::types::PutCompanyPaySchedulesScheduleIdRequest,
     ) -> Result<crate::types::PaySchedule> {
         let url = format!(
             "/v1/companies/{}/pay_schedules/{}",

@@ -1941,6 +1941,13 @@ fn clean_name(t: &str) -> String {
     words.join(" ")
 }
 
+pub fn clean_fn_name(oid: &str) -> String {
+    to_snake_case(oid)
+        .replace("v_1_", "")
+        .replace("companies_", "company_")
+        .replace("company_id_", "")
+}
+
 fn oid_to_object_name(s: &str) -> String {
     let cleaned = s
         .to_lowercase()
@@ -2141,7 +2148,7 @@ fn main() -> Result<()> {
                     ts: &mut TypeSpace|
          -> Result<()> {
             if let Some(o) = o {
-                let oid = to_snake_case(o.operation_id.as_deref().unwrap());
+                let oid = clean_fn_name(o.operation_id.as_deref().unwrap());
 
                 debug("");
                 debug(&oid);

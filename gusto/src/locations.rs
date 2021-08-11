@@ -21,8 +21,9 @@ impl Locations {
      *
      * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
      */
-    pub async fn get_v_1_companies_company_id_locations(
+    pub async fn get_company_locations(
         &self,
+        company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Location>> {
         let url = format!(
             "/v1/companies/{}/locations",
@@ -37,14 +38,15 @@ impl Locations {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
      *
-     * As opposed to `get_v_1_companies_company_id_locations`, this function returns all the pages of the request at once.
+     * As opposed to `get_company_locations`, this function returns all the pages of the request at once.
      *
      * Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
      *
      * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
      */
-    pub async fn get_v_1_companies_company_id_locations(
+    pub async fn get_company_locations(
         &self,
+        company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Location>> {
         let url = format!(
             "/v1/companies/{}/locations",
@@ -63,9 +65,10 @@ impl Locations {
      *
      * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
      */
-    pub async fn post_v_1_companies_company_id_locations(
+    pub async fn post_company_locations(
         &self,
-        body: &crate::types::PostV1CompaniesCompanyIdLocationsRequest,
+        company_id_or_uuid: &str,
+        body: &crate::types::PostCompanyLocationsRequest,
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/companies/{}/locations",
@@ -87,7 +90,10 @@ impl Locations {
      *
      * Get a location.
      */
-    pub async fn get_v_1_locations_location_id(&self) -> Result<crate::types::Location> {
+    pub async fn get_locations_location_id(
+        &self,
+        location_id: &str,
+    ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/locations/{}",
             crate::progenitor_support::encode_path(&location_id.to_string()),
@@ -103,9 +109,10 @@ impl Locations {
      *
      * Update a location.
      */
-    pub async fn put_v_1_locations_location_id(
+    pub async fn put_locations_location_id(
         &self,
-        body: &crate::types::PutV1LocationsLocationIdRequest,
+        location_id: &str,
+        body: &crate::types::PutLocationsLocationIdRequest,
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/locations/{}",

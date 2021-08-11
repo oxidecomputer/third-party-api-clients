@@ -19,7 +19,7 @@ impl Companies {
      *
      * Get a company.
      */
-    pub async fn get_v_1_companies(&self) -> Result<crate::types::Company> {
+    pub async fn get_companies(&self, company_id_or_uuid: &str) -> Result<crate::types::Company> {
         let url = format!(
             "/v1/companies/{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
@@ -59,10 +59,10 @@ impl Companies {
      * Authorization: Token bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71
      * ```
      */
-    pub async fn post_v_1_partner_managed_companies(
+    pub async fn post_partner_managed_companies(
         &self,
-        body: &crate::types::PostV1ProvisionRequest,
-    ) -> Result<crate::types::PostV1PartnerManagedCompaniesResponse> {
+        body: &crate::types::PostProvisionRequest,
+    ) -> Result<crate::types::PostPartnerManagedCompaniesResponse> {
         let url = "/v1/partner_managed_companies".to_string();
         self.client
             .post(
@@ -97,10 +97,10 @@ impl Companies {
      * Authorization: Token bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71
      * ```
      */
-    pub async fn post_v_1_provision(
+    pub async fn post_provision(
         &self,
-        body: &crate::types::PostV1ProvisionRequest,
-    ) -> Result<crate::types::PostV1ProvisionResponse> {
+        body: &crate::types::PostProvisionRequest,
+    ) -> Result<crate::types::PostProvisionResponse> {
         let url = "/v1/provision".to_string();
         self.client
             .post(

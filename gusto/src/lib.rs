@@ -26,7 +26,6 @@
 //!     String::from("redirect-uri")
 //!     String::from("token")
 //!     String::from("refresh-token")
-//!     String::from("company-id")
 //! );
 //! ```
 //!
@@ -45,11 +44,10 @@
 //! let gusto = Client::new_from_env(
 //!     String::from("token")
 //!     String::from("refresh-token")
-//!     String::from("company-id")
 //! );
 //! ```
 //!
-//! It is okay to pass empty values for token, refresh_token, and company_id. In
+//! It is okay to pass empty values for token and refresh_token. In
 //! the initial state of the client, you will not know these values.
 //!
 //! To start off a fresh client and get a token and refresh_token, use the following.
@@ -138,7 +136,6 @@ pub struct Client {
     client_id: String,
     client_secret: String,
     redirect_uri: String,
-    company_id: String,
 
     client: reqwest::Client,
 }
@@ -179,7 +176,6 @@ impl Client {
         redirect_uri: R,
         token: T,
         refresh_token: Q,
-        company_id: C,
     ) -> Self
     where
         I: ToString,
@@ -187,7 +183,6 @@ impl Client {
         R: ToString,
         T: ToString,
         Q: ToString,
-        C: ToString,
     {
         let client = reqwest::Client::builder().build();
         match client {
@@ -198,7 +193,6 @@ impl Client {
                     redirect_uri: redirect_uri.to_string(),
                     token: token.to_string(),
                     refresh_token: refresh_token.to_string(),
-                    company_id: company_id.to_string(),
 
                     client: c,
                 };
@@ -223,24 +217,16 @@ impl Client {
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
-    pub fn new_from_env<T, R, C>(token: T, refresh_token: R, company_id: C) -> Self
+    pub fn new_from_env<T, R, C>(token: T, refresh_token: R) -> Self
     where
         T: ToString,
         R: ToString,
-        C: ToString,
     {
         let client_id = env::var("GUSTO_CLIENT_ID").unwrap();
         let client_secret = env::var("GUSTO_CLIENT_SECRET").unwrap();
         let redirect_uri = env::var("GUSTO_REDIRECT_URI").unwrap();
 
-        Client::new(
-            client_id,
-            client_secret,
-            redirect_uri,
-            token,
-            refresh_token,
-            company_id,
-        )
+        Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
     }
 
     fn request<B>(

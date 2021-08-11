@@ -21,8 +21,9 @@ impl CompanyBankAccountsBeta {
      *
      * Returns all company bank accounts
      */
-    pub async fn get_v_1_companies_company_id_bank_accounts(
+    pub async fn get_company_bank_accounts(
         &self,
+        company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::CompanyBankAccount>> {
         let url = format!(
             "/v1/companies/{}/bank_accounts",
@@ -37,14 +38,15 @@ impl CompanyBankAccountsBeta {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/bank_accounts` endpoint.
      *
-     * As opposed to `get_v_1_companies_company_id_bank_accounts`, this function returns all the pages of the request at once.
+     * As opposed to `get_company_bank_accounts`, this function returns all the pages of the request at once.
      *
      * *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
      *
      * Returns all company bank accounts
      */
-    pub async fn get_v_1_companies_company_id_bank_accounts(
+    pub async fn get_company_bank_accounts(
         &self,
+        company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::CompanyBankAccount>> {
         let url = format!(
             "/v1/companies/{}/bank_accounts",
@@ -63,9 +65,10 @@ impl CompanyBankAccountsBeta {
      *
      * Create a company bank account. The new bank account will replace an existing bank account as the default company funding method.
      */
-    pub async fn post_v_1_companies_company_id_bank_accounts(
+    pub async fn post_company_bank_accounts(
         &self,
-        body: &crate::types::PostV1CompaniesCompanyIdBankAccountsRequest,
+        company_id_or_uuid: &str,
+        body: &crate::types::PostCompanyBankAccountsRequest,
     ) -> Result<crate::types::CompanyBankAccount> {
         let url = format!(
             "/v1/companies/{}/bank_accounts",
@@ -89,9 +92,11 @@ impl CompanyBankAccountsBeta {
      *
      * Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter.
      */
-    pub async fn put_v_1_companies_company_id_bank_accounts_verify(
+    pub async fn put_company_bank_accounts_verify(
         &self,
-        body: &crate::types::PutV1CompaniesCompanyIdBankAccountsVerifyRequest,
+        company_id_or_uuid: &str,
+        bank_account_uuid: &str,
+        body: &crate::types::PutCompanyBankAccountsVerifyRequest,
     ) -> Result<crate::types::CompanyBankAccount> {
         let url = format!(
             "/v1/companies/{}/bank_accounts/{}/verify",

@@ -19,7 +19,7 @@ impl Jobs {
      *
      * Get a job.
      */
-    pub async fn get_v_1_jobs_job_id(&self) -> Result<crate::types::Job> {
+    pub async fn get_jobs_job_id(&self, job_id: &str) -> Result<crate::types::Job> {
         let url = format!(
             "/v1/jobs/{}",
             crate::progenitor_support::encode_path(&job_id.to_string()),
@@ -35,9 +35,10 @@ impl Jobs {
      *
      * Update a job.
      */
-    pub async fn put_v_1_jobs_job_id(
+    pub async fn put_jobs_job_id(
         &self,
-        body: &crate::types::PutV1JobsJobIdRequest,
+        job_id: &str,
+        body: &crate::types::PutJobsJobIdRequest,
     ) -> Result<crate::types::Job> {
         let url = format!(
             "/v1/jobs/{}",
@@ -59,7 +60,7 @@ impl Jobs {
      *
      * Deletes a specific job that an employee holds.
      */
-    pub async fn delete_v_1_jobs_job_id(&self) -> Result<()> {
+    pub async fn delete_jobs_job_id(&self, job_id: &str) -> Result<()> {
         let url = format!(
             "/v1/jobs/{}",
             crate::progenitor_support::encode_path(&job_id.to_string()),
@@ -75,7 +76,10 @@ impl Jobs {
      *
      * Get all of the jobs that an employee holds.
      */
-    pub async fn get_v_1_employees_employee_id_jobs(&self) -> Result<Vec<crate::types::Job>> {
+    pub async fn get_employees_employee_id_jobs(
+        &self,
+        employee_id: &str,
+    ) -> Result<Vec<crate::types::Job>> {
         let url = format!(
             "/v1/employees/{}/jobs",
             crate::progenitor_support::encode_path(&employee_id.to_string()),
@@ -89,11 +93,14 @@ impl Jobs {
      *
      * This function performs a `GET` to the `/v1/employees/{employee_id}/jobs` endpoint.
      *
-     * As opposed to `get_v_1_employees_employee_id_jobs`, this function returns all the pages of the request at once.
+     * As opposed to `get_employees_employee_id_jobs`, this function returns all the pages of the request at once.
      *
      * Get all of the jobs that an employee holds.
      */
-    pub async fn get_v_1_employees_employee_id_jobs(&self) -> Result<Vec<crate::types::Job>> {
+    pub async fn get_employees_employee_id_jobs(
+        &self,
+        employee_id: &str,
+    ) -> Result<Vec<crate::types::Job>> {
         let url = format!(
             "/v1/employees/{}/jobs",
             crate::progenitor_support::encode_path(&employee_id.to_string()),
@@ -109,9 +116,10 @@ impl Jobs {
      *
      * Create a job.
      */
-    pub async fn post_v_1_jobs_job_id(
+    pub async fn post_jobs_job_id(
         &self,
-        body: &crate::types::PostV1JobsJobIdRequest,
+        employee_id: &str,
+        body: &crate::types::PostJobsJobIdRequest,
     ) -> Result<crate::types::Job> {
         let url = format!(
             "/v1/employees/{}/jobs",
@@ -135,9 +143,10 @@ impl Jobs {
      *
      * Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
      */
-    pub async fn post_v_1_jobs_job_id_compensations(
+    pub async fn post_jobs_job_id_compensations(
         &self,
-        body: &crate::types::PostV1JobsJobIdCompensationsRequest,
+        job_id: &str,
+        body: &crate::types::PostJobsJobIdCompensationsRequest,
     ) -> Result<crate::types::Compensation> {
         let url = format!(
             "/v1/jobs/{}/compensations",

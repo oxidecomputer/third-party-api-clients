@@ -492,7 +492,6 @@ pub fn generate_docs_generic_token(name: &str, version: &str, proper_name: &str)
 //!     String::from("redirect-uri")
 //!     String::from("token")
 //!     String::from("refresh-token")
-//!     String::from("company-id")
 //! );
 //! ```
 //!
@@ -511,11 +510,10 @@ pub fn generate_docs_generic_token(name: &str, version: &str, proper_name: &str)
 //! let {} = Client::new_from_env(
 //!     String::from("token")
 //!     String::from("refresh-token")
-//!     String::from("company-id")
 //! );
 //! ```
 //!
-//! It is okay to pass empty values for token, refresh_token, and company_id. In
+//! It is okay to pass empty values for token and refresh_token. In
 //! the initial state of the client, you will not know these values.
 //!
 //! To start off a fresh client and get a token and refresh_token, use the following.

@@ -21,8 +21,9 @@ impl JobApplicantsBeta {
      *
      * Returns all job applicants for a company.
      */
-    pub async fn get_v_1_companies_company_id_job_applicants(
+    pub async fn get_company_job_applicants(
         &self,
+        company_id: &str,
     ) -> Result<Vec<crate::types::JobApplicant>> {
         let url = format!(
             "/v1/companies/{}/job_applicants",
@@ -37,14 +38,15 @@ impl JobApplicantsBeta {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/job_applicants` endpoint.
      *
-     * As opposed to `get_v_1_companies_company_id_job_applicants`, this function returns all the pages of the request at once.
+     * As opposed to `get_company_job_applicants`, this function returns all the pages of the request at once.
      *
      * *This endpoint is in beta - we will be making breaking changes based on developer feedback.
      *
      * Returns all job applicants for a company.
      */
-    pub async fn get_v_1_companies_company_id_job_applicants(
+    pub async fn get_company_job_applicants(
         &self,
+        company_id: &str,
     ) -> Result<Vec<crate::types::JobApplicant>> {
         let url = format!(
             "/v1/companies/{}/job_applicants",
@@ -63,9 +65,10 @@ impl JobApplicantsBeta {
      *
      * Create a job applicant.
      */
-    pub async fn post_v_1_companies_company_id_job_applicants(
+    pub async fn post_company_job_applicants(
         &self,
-        body: &crate::types::PostV1CompaniesCompanyIdJobApplicantsRequest,
+        company_id: &str,
+        body: &crate::types::PostCompanyJobApplicantsRequest,
     ) -> Result<crate::types::JobApplicant> {
         let url = format!(
             "/v1/companies/{}/job_applicants",
@@ -89,8 +92,10 @@ impl JobApplicantsBeta {
      *
      * Returns a single job applicant.
      */
-    pub async fn get_v_1_companies_company_id_job_applicants_job_applicant_uuid(
+    pub async fn get_company_job_applicants_job_applicant_uuid(
         &self,
+        company_id: &str,
+        job_applicant_uuid: &str,
     ) -> Result<crate::types::JobApplicant> {
         let url = format!(
             "/v1/companies/{}/job_applicants/{}",
@@ -110,9 +115,11 @@ impl JobApplicantsBeta {
      *
      * Update an existing job applicant (only allowed when the job applicant has not been imported).
      */
-    pub async fn put_v_1_companies_company_id_job_applicants_job_applicant_uuid(
+    pub async fn put_company_job_applicants_job_applicant_uuid(
         &self,
-        body: &crate::types::PutV1CompaniesCompanyIdJobApplicantsApplicantUuidRequest,
+        company_id: &str,
+        job_applicant_uuid: &str,
+        body: &crate::types::PutCompanyJobApplicantsApplicantUuidRequest,
     ) -> Result<crate::types::JobApplicant> {
         let url = format!(
             "/v1/companies/{}/job_applicants/{}",
@@ -137,8 +144,10 @@ impl JobApplicantsBeta {
      *
      * Permanently remove a job applicant by uuid (only allowed when the job applicant has not been imported).
      */
-    pub async fn delete_v_1_companies_company_id_job_applicants_job_applicant_uuid(
+    pub async fn delete_company_job_applicants_job_applicant_uuid(
         &self,
+        company_id: &str,
+        job_applicant_uuid: &str,
     ) -> Result<()> {
         let url = format!(
             "/v1/companies/{}/job_applicants/{}",

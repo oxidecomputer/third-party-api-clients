@@ -19,7 +19,10 @@ impl Contractors {
      *
      * Get a contractor.
      */
-    pub async fn get_v_1_contractors_contractor_id(&self) -> Result<crate::types::Contractor> {
+    pub async fn get_contractors_contractor_id(
+        &self,
+        contractor_id_or_uuid: &str,
+    ) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/contractors/{}",
             crate::progenitor_support::encode_path(&contractor_id_or_uuid.to_string()),
@@ -35,9 +38,10 @@ impl Contractors {
      *
      * Update a contractor.
      */
-    pub async fn put_v_1_contractors_contractor_id(
+    pub async fn put_contractors_contractor_id(
         &self,
-        body: &crate::types::PutV1ContractorsContractorIdRequest,
+        contractor_id_or_uuid: &str,
+        body: &crate::types::PutContractorsContractorIdRequest,
     ) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/contractors/{}",
@@ -59,8 +63,9 @@ impl Contractors {
      *
      * Get all contractors, active and inactive, individual and business, for a company.
      */
-    pub async fn get_v_1_companies_company_id_contractors(
+    pub async fn get_company_contractors(
         &self,
+        company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Contractor>> {
         let url = format!(
             "/v1/companies/{}/contractors",
@@ -75,12 +80,13 @@ impl Contractors {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
      *
-     * As opposed to `get_v_1_companies_company_id_contractors`, this function returns all the pages of the request at once.
+     * As opposed to `get_company_contractors`, this function returns all the pages of the request at once.
      *
      * Get all contractors, active and inactive, individual and business, for a company.
      */
-    pub async fn get_v_1_companies_company_id_contractors(
+    pub async fn get_company_contractors(
         &self,
+        company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Contractor>> {
         let url = format!(
             "/v1/companies/{}/contractors",
@@ -97,9 +103,10 @@ impl Contractors {
      *
      * Create an individual or business contractor.
      */
-    pub async fn post_v_1_companies_company_id_contractors(
+    pub async fn post_company_contractors(
         &self,
-        body: &crate::types::PostV1CompaniesCompanyIdContractorsRequest,
+        company_id_or_uuid: &str,
+        body: &crate::types::PostCompanyContractorsRequest,
     ) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/companies/{}/contractors",

@@ -19,9 +19,10 @@ impl CustomFields {
      *
      * Returns a list of the employee's custom fields.
      */
-    pub async fn get_v_1_employees_employee_id_custom_fields(
+    pub async fn get_employees_employee_id_custom_fields(
         &self,
-    ) -> Result<crate::types::GetV1EmployeesEmployeeIdCustomFieldsResponse> {
+        employee_id: &str,
+    ) -> Result<crate::types::GetEmployeesEmployeeIdCustomFieldsResponse> {
         let url = format!(
             "/v1/employees/{}/custom_fields",
             crate::progenitor_support::encode_path(&employee_id.to_string()),
@@ -37,9 +38,10 @@ impl CustomFields {
      *
      * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
      */
-    pub async fn get_v_1_companies_company_id_custom_fields(
+    pub async fn get_company_custom_fields(
         &self,
-    ) -> Result<crate::types::GetV1CompaniesCompanyIdCustomFieldsResponse> {
+        company_id: &str,
+    ) -> Result<crate::types::GetCompanyCustomFieldsResponse> {
         let url = format!(
             "/v1/companies/{}/custom_fields",
             crate::progenitor_support::encode_path(&company_id.to_string()),

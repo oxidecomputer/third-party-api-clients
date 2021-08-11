@@ -41,8 +41,9 @@ impl TimeOffRequests {
      * * `start_date: &str` -- Filter time off requests where the request start date is equal to or after this parameter.
      * * `end_date: &str` -- Filter time off requests where the request end date is equal to or after this parameter.
      */
-    pub async fn get_v_1_companies_company_id_time_off_requests(
+    pub async fn get_company_time_off_requests(
         &self,
+        company_id: &str,
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::TimeOffRequest>> {
@@ -74,7 +75,7 @@ impl TimeOffRequests {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/time_off_requests` endpoint.
      *
-     * As opposed to `get_v_1_companies_company_id_time_off_requests`, this function returns all the pages of the request at once.
+     * As opposed to `get_company_time_off_requests`, this function returns all the pages of the request at once.
      *
      * Get all time off requests, past and present, for a company.
      *
@@ -95,8 +96,9 @@ impl TimeOffRequests {
      * Returns all time off requests where the request start date is equal to or after May 1, 2019 and the request end date is equal to or before August 31, 2019.
      *
      */
-    pub async fn get_v_1_companies_company_id_time_off_requests(
+    pub async fn get_company_time_off_requests(
         &self,
+        company_id: &str,
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::TimeOffRequest>> {
@@ -130,8 +132,10 @@ impl TimeOffRequests {
      *
      * Details of a single time off request
      */
-    pub async fn get_v_1_companies_company_id_time_off_requests_time_off_request_id(
+    pub async fn get_company_time_off_requests_time_off_request_id(
         &self,
+        company_id: &str,
+        time_off_request_id: &str,
     ) -> Result<crate::types::TimeOffRequest> {
         let url = format!(
             "/v1/companies/{}/time_off_requests/{}",

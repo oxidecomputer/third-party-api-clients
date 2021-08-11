@@ -482,7 +482,6 @@ pub struct Client {{
     client_id: String,
     client_secret: String,
     redirect_uri: String,
-    company_id: String,
 
     client: reqwest::Client,
 }}
@@ -523,7 +522,6 @@ impl Client {{
         redirect_uri: R,
         token: T,
         refresh_token: Q,
-        company_id: C,
     ) -> Self
     where
         I: ToString,
@@ -531,7 +529,6 @@ impl Client {{
         R: ToString,
         T: ToString,
         Q: ToString,
-        C: ToString,
     {{
         let client = reqwest::Client::builder().build();
         match client {{
@@ -542,7 +539,6 @@ impl Client {{
                     redirect_uri: redirect_uri.to_string(),
                     token: token.to_string(),
                     refresh_token: refresh_token.to_string(),
-                    company_id: company_id.to_string(),
 
                     client: c,
                 }};
@@ -567,11 +563,10 @@ impl Client {{
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
-    pub fn new_from_env<T, R, C>(token: T, refresh_token: R, company_id: C) -> Self
+    pub fn new_from_env<T, R, C>(token: T, refresh_token: R) -> Self
     where
         T: ToString,
         R: ToString,
-        C: ToString,
         {{
         let client_id = env::var("{}_CLIENT_ID").unwrap();
         let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
@@ -583,7 +578,6 @@ impl Client {{
             redirect_uri,
             token,
             refresh_token,
-            company_id,
         )
     }}
 

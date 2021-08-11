@@ -24,8 +24,9 @@ impl ContractorPayments {
      * * `start_date: &str` -- The time period for which to retrieve contractor payments.
      * * `end_date: &str` -- The time period for which to retrieve contractor payments.
      */
-    pub async fn get_v_1_companies_company_id_contractor_payments(
+    pub async fn get_company_contractor_payments(
         &self,
+        company_id: &str,
         start_date: &str,
         end_date: &str,
     ) -> Result<crate::types::ContractorPaymentSummary> {
@@ -70,8 +71,9 @@ impl ContractorPayments {
      * * `bonus: f64` -- If the contractor is on an hourly wage, this is the bonus the contractor earned.
      * * `reimbursement: f64` -- Reimbursed wages for the contractor.
      */
-    pub async fn post_v_1_companies_company_id_contractor_payments(
+    pub async fn post_company_contractor_payments(
         &self,
+        company_id: &str,
         date: &str,
         contractor_id: f64,
         wage: f64,
@@ -111,8 +113,10 @@ impl ContractorPayments {
      *
      * Returns a single contractor payments
      */
-    pub async fn get_v_1_companies_company_id_contractor_payment_contractor_payment(
+    pub async fn get_company_contractor_payment_contractor_payment(
         &self,
+        company_id: &str,
+        contractor_payment_id_or_uuid: &str,
     ) -> Result<crate::types::ContractorPayment> {
         let url = format!(
             "/v1/companies/{}/contractor_payments/{}",
@@ -132,8 +136,10 @@ impl ContractorPayments {
      *
      * This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
      */
-    pub async fn delete_v_1_companies_company_id_contractor_payment_contractor_payment(
+    pub async fn delete_company_contractor_payment_contractor_payment(
         &self,
+        company_id: &str,
+        contractor_payment_id_or_uuid: &str,
     ) -> Result<()> {
         let url = format!(
             "/v1/companies/{}/contractor_payments/{}",

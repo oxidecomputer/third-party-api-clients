@@ -22,8 +22,9 @@ impl Compensations {
      * Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error.
      *
      */
-    pub async fn get_v_1_compensations_compensation_id(
+    pub async fn get_compensations_compensation_id(
         &self,
+        compensation_id: &str,
     ) -> Result<crate::types::Compensation> {
         let url = format!(
             "/v1/compensations/{}",
@@ -42,9 +43,10 @@ impl Compensations {
      *
      * Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
      */
-    pub async fn put_v_1_compensations_compensation_id(
+    pub async fn put_compensations_compensation_id(
         &self,
-        body: &crate::types::PutV1CompensationsCompensationIdRequest,
+        compensation_id: &str,
+        body: &crate::types::PutCompensationsCompensationIdRequest,
     ) -> Result<crate::types::Compensation> {
         let url = format!(
             "/v1/compensations/{}",
@@ -70,8 +72,9 @@ impl Compensations {
      *
      * Use the `flsa_status` to determine if an employee is elibgle for overtime.
      */
-    pub async fn get_v_1_jobs_job_id_compensations(
+    pub async fn get_jobs_job_id_compensations(
         &self,
+        job_id: &str,
     ) -> Result<Vec<crate::types::Compensation>> {
         let url = format!(
             "/v1/jobs/{}/compensations",
@@ -86,7 +89,7 @@ impl Compensations {
      *
      * This function performs a `GET` to the `/v1/jobs/{job_id}/compensations` endpoint.
      *
-     * As opposed to `get_v_1_jobs_job_id_compensations`, this function returns all the pages of the request at once.
+     * As opposed to `get_jobs_job_id_compensations`, this function returns all the pages of the request at once.
      *
      * Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
      *
@@ -94,8 +97,9 @@ impl Compensations {
      *
      * Use the `flsa_status` to determine if an employee is elibgle for overtime.
      */
-    pub async fn get_v_1_jobs_job_id_compensations(
+    pub async fn get_jobs_job_id_compensations(
         &self,
+        job_id: &str,
     ) -> Result<Vec<crate::types::Compensation>> {
         let url = format!(
             "/v1/jobs/{}/compensations",

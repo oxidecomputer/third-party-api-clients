@@ -4,8 +4,8 @@ use anyhow::{bail, Result};
 use inflector::cases::snakecase::to_snake_case;
 
 use crate::{
-    clean_name, get_parameter_data, oid_to_object_name, struct_name, template::parse,
-    ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeSpace,
+    clean_fn_name, clean_name, get_parameter_data, oid_to_object_name, struct_name,
+    template::parse, ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeSpace,
 };
 
 /*
@@ -28,7 +28,7 @@ pub fn generate_files(
                 return Ok(());
             };
 
-            let oid = to_snake_case(o.operation_id.as_deref().unwrap());
+            let oid = clean_fn_name(o.operation_id.as_deref().unwrap());
 
             // Make sure we have exactly 1 tag. This likely needs to change in the
             // future but for now it seems fairly consistent.
@@ -146,7 +146,8 @@ pub fn generate_files(
             /*
              * Get the function parameters.
              */
-            let (fn_params_str, query_params) = get_fn_params(ts, o, parameters, false)?;
+            let (fn_params_str, query_params) =
+                get_fn_params(ts, o, parameters, false, op.parameters.clone())?;
 
             /*
              * Generate the URL for the request.
@@ -213,7 +214,8 @@ pub fn generate_files(
                     oid.trim_start_matches(&tag).trim_start_matches('_'),
                 )?;
 
-                let (fn_params_str, query_params) = get_fn_params(ts, o, parameters, true)?;
+                let (fn_params_str, query_params) =
+                    get_fn_params(ts, o, parameters, true, op.parameters.clone())?;
 
                 let tmp = parse(p)?;
                 let template = tmp.compile(query_params);
@@ -333,6 +335,7 @@ fn get_fn_params(
     o: &openapiv3::Operation,
     parameters: &BTreeMap<String, &openapiv3::Parameter>,
     all_pages: bool,
+    global_params: Vec<openapiv3::ReferenceOr<openapiv3::Parameter>>,
 ) -> Result<(Vec<String>, BTreeMap<String, String>)> {
     /*
      * Query parameters are sorted lexicographically to ensure a stable
@@ -340,7 +343,10 @@ fn get_fn_params(
      */
     let mut fn_params_str: Vec<String> = Default::default();
     let mut query_params: BTreeMap<String, String> = Default::default();
-    for par in o.parameters.iter() {
+    let mut gp = global_params;
+    let mut op = o.parameters.clone();
+    gp.append(&mut op);
+    for par in gp.iter() {
         let mut param_name = "".to_string();
         let item = match par {
             openapiv3::ReferenceOr::Reference { reference } => {

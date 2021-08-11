@@ -21,7 +21,7 @@ impl AdminsBeta {
      *
      * Returns a list of all the admins at a company
      */
-    pub async fn get_v_1_companies_company_id_admins(&self) -> Result<Vec<crate::types::Admin>> {
+    pub async fn get_company_admins(&self, company_id: &str) -> Result<Vec<crate::types::Admin>> {
         let url = format!(
             "/v1/companies/{}/admins",
             crate::progenitor_support::encode_path(&company_id.to_string()),
@@ -35,13 +35,13 @@ impl AdminsBeta {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id}/admins` endpoint.
      *
-     * As opposed to `get_v_1_companies_company_id_admins`, this function returns all the pages of the request at once.
+     * As opposed to `get_company_admins`, this function returns all the pages of the request at once.
      *
      * *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
      *
      * Returns a list of all the admins at a company
      */
-    pub async fn get_v_1_companies_company_id_admins(&self) -> Result<Vec<crate::types::Admin>> {
+    pub async fn get_company_admins(&self, company_id: &str) -> Result<Vec<crate::types::Admin>> {
         let url = format!(
             "/v1/companies/{}/admins",
             crate::progenitor_support::encode_path(&company_id.to_string()),
@@ -59,9 +59,10 @@ impl AdminsBeta {
      *
      * Creates a new admin for a company. If the email matches an existing user, this will create an admin account for the current user. Otherwise, this will create a new user.
      */
-    pub async fn post_v_1_companies_company_id_admins(
+    pub async fn post_company_admins(
         &self,
-        body: &crate::types::PostV1CompaniesCompanyIdAdminsRequest,
+        company_id: &str,
+        body: &crate::types::PostCompanyAdminsRequest,
     ) -> Result<crate::types::Admin> {
         let url = format!(
             "/v1/companies/{}/admins",

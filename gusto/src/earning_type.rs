@@ -25,8 +25,9 @@ impl EarningType {
      * #### Custom Earning Type
      * Custom earning types are all the other earning types added specifically for a company.
      */
-    pub async fn get_v_1_companies_company_id_earning_types(
+    pub async fn get_company_earning_types(
         &self,
+        company_id: &str,
     ) -> Result<crate::types::EarningTypeListResponse> {
         let url = format!(
             "/v1/companies/{}/earning_types",
@@ -45,9 +46,10 @@ impl EarningType {
      *
      * If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
      */
-    pub async fn post_v_1_companies_company_id_earning_types(
+    pub async fn post_company_earning_types(
         &self,
-        body: &crate::types::PostV1CompaniesCompanyIdEarningTypesRequest,
+        company_id: &str,
+        body: &crate::types::PostCompanyEarningTypesRequest,
     ) -> Result<crate::types::EarningType> {
         let url = format!(
             "/v1/companies/{}/earning_types",
@@ -69,9 +71,11 @@ impl EarningType {
      *
      * Update an earning type.
      */
-    pub async fn put_v_1_companies_company_id_earning_types_earning_type_uuid(
+    pub async fn put_company_earning_types_earning_type_uuid(
         &self,
-        body: &crate::types::PutV1CompaniesCompanyIdEarningTypesTypeUuidRequest,
+        company_id: &str,
+        earning_type_uuid: &str,
+        body: &crate::types::PutCompanyEarningTypesTypeUuidRequest,
     ) -> Result<crate::types::EarningType> {
         let url = format!(
             "/v1/companies/{}/earning_types/{}",
@@ -94,8 +98,10 @@ impl EarningType {
      *
      * Deactivate an earning type.
      */
-    pub async fn delete_v_1_companies_company_id_earning_types_earning_type_uuid(
+    pub async fn delete_company_earning_types_earning_type_uuid(
         &self,
+        company_id: &str,
+        earning_type_uuid: &str,
     ) -> Result<()> {
         let url = format!(
             "/v1/companies/{}/earning_types/{}",

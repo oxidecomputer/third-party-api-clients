@@ -23,7 +23,11 @@ impl Employees {
      *
      * * `include: &[String]` -- Include the requested attribute(s) in each employee response.
      */
-    pub async fn get_v_1_employees(&self, include: &[String]) -> Result<crate::types::Employee> {
+    pub async fn get_employees(
+        &self,
+        employee_id_or_uuid: &str,
+        include: &[String],
+    ) -> Result<crate::types::Employee> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include.is_empty() {
@@ -51,9 +55,10 @@ impl Employees {
      *
      * Update an employee.
      */
-    pub async fn put_v_1_employees(
+    pub async fn put_employees(
         &self,
-        body: &crate::types::PutV1EmployeesRequest,
+        employee_id_or_uuid: &str,
+        body: &crate::types::PutEmployeesRequest,
     ) -> Result<crate::types::Employee> {
         let url = format!(
             "/v1/employees/{}",
@@ -82,13 +87,14 @@ impl Employees {
      * * `per: f64` -- Number of employees per page. When unspecified, will default to 25.
      * * `include: &[String]` -- Include the requested attribute(s) in each employee response.
      */
-    pub async fn get_v_1_companies_company_id_employees(
+    pub async fn get_company_employees(
         &self,
+        company_id_or_uuid: &str,
         terminated: bool,
         page: f64,
         per: f64,
         include: &[String],
-        body: &crate::types::GetV1CompaniesCompanyIdEmployeesRequest,
+        body: &crate::types::GetCompanyEmployeesRequest,
     ) -> Result<Vec<crate::types::Employee>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -120,16 +126,17 @@ impl Employees {
      *
      * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
      *
-     * As opposed to `get_v_1_companies_company_id_employees`, this function returns all the pages of the request at once.
+     * As opposed to `get_company_employees`, this function returns all the pages of the request at once.
      *
      * Get all of the employees, onboarding, active and terminated, for a given company.
      */
-    pub async fn get_v_1_companies_company_id_employees(
+    pub async fn get_company_employees(
         &self,
+        company_id_or_uuid: &str,
         terminated: bool,
         per: f64,
         include: &[String],
-        body: &crate::types::GetV1CompaniesCompanyIdEmployeesRequest,
+        body: &crate::types::GetCompanyEmployeesRequest,
     ) -> Result<Vec<crate::types::Employee>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -162,9 +169,10 @@ impl Employees {
      *
      * Create an employee.
      */
-    pub async fn post_v_1_employees(
+    pub async fn post_employees(
         &self,
-        body: &crate::types::PostV1EmployeesRequest,
+        company_id_or_uuid: &str,
+        body: &crate::types::PostEmployeesRequest,
     ) -> Result<crate::types::Employee> {
         let url = format!(
             "/v1/companies/{}/employees",
@@ -186,8 +194,9 @@ impl Employees {
      *
      * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      */
-    pub async fn get_v_1_employees_employee_id_home_address(
+    pub async fn get_employees_employee_id_home_address(
         &self,
+        employee_id: &str,
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/employees/{}/home_address",
@@ -204,9 +213,10 @@ impl Employees {
      *
      * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      */
-    pub async fn put_v_1_employees_employee_id_home_address(
+    pub async fn put_employees_employee_id_home_address(
         &self,
-        body: &crate::types::PutV1EmployeesEmployeeIdHomeAddressRequest,
+        employee_id: &str,
+        body: &crate::types::PutEmployeesEmployeeIdHomeAddressRequest,
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/employees/{}/home_address",
