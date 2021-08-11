@@ -51,20 +51,6 @@ impl Departments {
     }
 
     /**
-     * List departments.
-     *
-     * This function performs a `GET` to the `/departments` endpoint.
-     *
-     * As opposed to `get_departments`, this function returns all the pages of the request at once.
-     *
-     * Retrieve all departments.
-     */
-    pub async fn get_all_departments(&self) -> Result<Vec<crate::types::Department>> {
-        let url = "/departments".to_string();
-        self.client.get_all_pages(&url, None).await
-    }
-
-    /**
      * Create department.
      *
      * This function performs a `POST` to the `/departments` endpoint.

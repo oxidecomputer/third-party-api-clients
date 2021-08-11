@@ -190,6 +190,7 @@ pub fn generate_files(
             }
 
             let fn_inner = get_fn_inner(
+                proper_name,
                 &oid,
                 m,
                 &body_func,
@@ -224,8 +225,9 @@ pub fn generate_files(
             // Get the function without the function inners.
             // This is specifically for Ramp.
             // We do this directly before we print the other function.
+            let mut frt = response_type.to_string();
             if !inner_response_type.is_empty() {
-                response_type = inner_response_type.to_string();
+                frt = inner_response_type.to_string();
             }
 
             let mut fn_name = oid
@@ -233,15 +235,15 @@ pub fn generate_files(
                 .trim_start_matches('_')
                 .to_string();
             if proper_name != "GitHub"
-                && !response_type.starts_with("Vec<")
-                && !response_type.ends_with("Response")
-                && !response_type.ends_with("Summary")
+                && !frt.starts_with("Vec<")
+                && !frt.ends_with("Response")
+                && !frt.ends_with("Summary")
                 && http::Method::GET == m
             {
                 // Make sure we don't add an s where we don't need one.
                 // Don't make a function plural where it is not needed.
                 fn_name = fn_name.trim_end_matches('s').to_string();
-            } else if response_type.starts_with("Vec<") {
+            } else if frt.starts_with("Vec<") {
                 fn_name = make_plural(proper_name, &fn_name);
             }
 
@@ -251,7 +253,7 @@ pub fn generate_files(
                 &bounds,
                 &fn_params_str,
                 &body_param,
-                &response_type,
+                &frt,
                 &template,
                 &fn_inner,
                 &fn_name,
@@ -274,6 +276,7 @@ pub fn generate_files(
                 let template = tmp.compile(query_params);
 
                 let fn_inner = get_fn_inner(
+                    proper_name,
                     &oid,
                     m,
                     &body_func,
@@ -309,7 +312,7 @@ pub fn generate_files(
                     &bounds,
                     &fn_params_str,
                     &body_param,
-                    &response_type,
+                    &frt,
                     &template,
                     &fn_inner,
                     &fn_name,
@@ -535,6 +538,7 @@ fn get_fn_params(
  * Perform the function.
  */
 fn get_fn_inner(
+    proper_name: &str,
     oid: &str,
     m: &str,
     body_func: &Option<String>,
@@ -552,8 +556,39 @@ fn get_fn_inner(
         "None"
     };
 
-    if all_pages {
+    if all_pages && proper_name != "Ramp" {
         return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
+    } else if all_pages && proper_name == "Ramp" {
+        // We will do a custom function here.
+        let inner = format!(
+            r#"let mut resp: {} = self.client.{}(&url, {}).await.unwrap();
+
+            let mut data = resp.data;
+            let mut page = resp.page.next;
+
+            // Paginate if we should.
+            while !page.is_empty() {{
+                resp = self.client.{}(page.trim_start_matches(DEFAULT_HOST), {}).await.unwrap();
+
+                data.append(&mut resp.data);
+
+                if !resp.page.next.is_empty() && resp.page.next != page {{
+                    page = resp.page.next.to_string();
+                }} else {{
+                    page = "".to_string();
+                }}
+            }}
+
+            // Return our response data.
+            Ok(data)"#,
+            response_type,
+            m.to_lowercase(),
+            body,
+            m.to_lowercase(),
+            body
+        );
+
+        return Ok(inner);
     }
 
     if (m == http::Method::GET
