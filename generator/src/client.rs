@@ -753,6 +753,7 @@ impl Client {{
         Ok(t)
     }}
 
+    #[allow(dead_code)]
     async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -764,6 +765,7 @@ impl Client {{
         ).await
     }}
 
+    #[allow(dead_code)]
     async fn get_all_pages<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -776,6 +778,7 @@ impl Client {{
         ).await
     }}
 
+    #[allow(dead_code)]
     async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -799,6 +802,7 @@ impl Client {{
         ).await
     }}
 
+    #[allow(dead_code)]
     async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
@@ -810,6 +814,7 @@ impl Client {{
         ).await
     }}
 
+    #[allow(dead_code)]
     async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,

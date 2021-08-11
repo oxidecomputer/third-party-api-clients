@@ -1,8 +1,10 @@
 GITHUB_SPEC = $(CURDIR)/specs/github/api.github.com.json
 GUSTO_SPEC = $(CURDIR)/specs/gusto/gusto.v1.yaml
-RAMP_SPEC = $(CURDIR)/specs/ramp/reference/*.yaml
+RAMP_SPEC_DIR = $(CURDIR)/specs/ramp
+RAMP_SPEC = $(RAMP_SPEC_DIR)/ramp.v1.json
+RAMP_SPEC_REFERENCE = $(RAMP_SPEC_DIR)/reference/Ramp-developer.v1.yaml
 
-generate: github gusto
+generate: github gusto ramp
 
 github: target/debug/generator $(GITHUB_SPEC)
 	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.16 \
@@ -21,6 +23,15 @@ gusto: target/debug/generator $(GUSTO_SPEC)
 		-d "A fully generated & opinionated API client for the Gusto API." \
 		--host "api.gusto.com"
 	cargo fmt
+
+$(RAMP_SPEC_REFERENCE):
+	git clone git@github.com:sumatokado/ramp-developer.git $(RAMP_SPEC_DIR)
+
+$(RAMP_SPEC): $(RAMP_SPEC_REFERENCE)
+	npx swagger-cli bundle \
+		--dereference \
+		--type json \
+		-o $@ $?
 
 ramp: target/debug/generator $(RAMP_SPEC)
 	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.0 \

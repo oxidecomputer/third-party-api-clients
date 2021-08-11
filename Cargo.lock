@@ -876,6 +876,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "ramp-api"
+version = "0.2.0"
+dependencies = [
+ "anyhow",
+ "async-recursion",
+ "base64 0.12.3",
+ "chrono",
+ "dirs",
+ "http",
+ "hyperx",
+ "jsonwebtoken",
+ "mime",
+ "nom_pem",
+ "percent-encoding",
+ "reqwest",
+ "schemars",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
 name = "rand"
 version = "0.8.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"

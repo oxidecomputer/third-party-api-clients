@@ -264,6 +264,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         "uri" => "&str".to_string(),
                                         "uri-template" => "&str".to_string(),
                                         "email" => "&str".to_string(),
+                                        "uuid" => "&str".to_string(),
                                         f => {
                                             bail!("XXX unknown string format {}", f)
                                         }
@@ -949,6 +950,7 @@ impl TypeSpace {
 
     fn select_ref(&mut self, _name: Option<&str>, reference: &str) -> Result<TypeId> {
         let ref_ = reference.to_string();
+
         /*
          * As this is a reference, all we can do for now is determine
          * the type ID.
@@ -1334,7 +1336,7 @@ impl TypeSpace {
                             if !parent_name.is_empty() {
                                 parent_name
                             } else {
-                                bail!("types need a name? {:?} {:?}", name, s)
+                                bail!("object types need a name? {:?} {:?}", name, s)
                             }
                         }
                     });
@@ -1396,7 +1398,7 @@ impl TypeSpace {
                             (Some(""), Some(t)) => t,
                             (Some(n), Some(_)) => n,
                             (None, None) => {
-                                bail!("types need a name? {:?} {:?}", name, s)
+                                bail!("enumeration types need a name? {:?} {:?}", name, s)
                             }
                         });
 
@@ -1478,6 +1480,10 @@ impl TypeSpace {
                                 TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
                             )),
                             "email" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            )),
+                            "uuid" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
                             )),
@@ -1583,6 +1589,15 @@ impl TypeSpace {
                     return Ok((None, TypeDetails::Array(itid, s.schema_data.clone())));
                 }
 
+                if let Some(format) = &a.format {
+                    // For some reason, ramp has any types with uuids.
+                    if format == "uuid" {
+                        return Ok((
+                            Some(clean_name(&nam)),
+                            TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                        ));
+                    }
+                }
                 // We have no idea what this is.
                 // Then we use the serde_json type.
                 println!("[warn] got ANY kind: {:?} {} {:?}\n", name, parent_name, a);
@@ -1632,6 +1647,14 @@ fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::Parame
         openapiv3::Parameter::Path {
             parameter_data,
             style: openapiv3::PathStyle::Simple,
+        } => return Some(parameter_data),
+        openapiv3::Parameter::Header {
+            parameter_data,
+            style: openapiv3::HeaderStyle::Simple,
+        } => return Some(parameter_data),
+        openapiv3::Parameter::Cookie {
+            parameter_data,
+            style: openapiv3::CookieStyle::Form,
         } => return Some(parameter_data),
         openapiv3::Parameter::Query {
             parameter_data,
@@ -1857,6 +1880,7 @@ fn gen(api: &OpenAPI, proper_name: &str, host: &str) -> Result<String> {
     a("        .add(b'{')");
     a("        .add(b'}');");
     a("");
+    a("    #[allow(dead_code)]");
     a("    pub(crate) fn encode_path(pc: &str) -> String {");
     a("        utf8_percent_encode(pc, PATH_SET).to_string()");
     a("    }");

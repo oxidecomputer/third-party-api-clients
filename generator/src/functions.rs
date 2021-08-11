@@ -31,6 +31,12 @@ pub fn generate_files(
 
             let od = o.operation_id.as_deref().unwrap();
 
+            // For Gusto we don't need to generate the functions for getting a token.
+            // TODO: actually make this work.
+            if od == "post-token" {
+                return Ok(());
+            }
+
             // Make sure we have exactly 1 tag. This likely needs to change in the
             // future but for now it seems fairly consistent.
             let mut tags = o.tags.clone();

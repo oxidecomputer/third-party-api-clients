@@ -232,6 +232,7 @@ mod progenitor_support {
         .add(b'{')
         .add(b'}');
 
+    #[allow(dead_code)]
     pub(crate) fn encode_path(pc: &str) -> String {
         utf8_percent_encode(pc, PATH_SET).to_string()
     }
