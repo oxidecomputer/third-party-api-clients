@@ -2092,7 +2092,7 @@ fn clean_name(t: &str) -> String {
 }
 
 pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
-    if proper_name == "GitHub" || proper_name == "Ramp" {
+    if proper_name == "GitHub" {
         return to_snake_case(oid).trim_start_matches('_').to_string();
     }
 

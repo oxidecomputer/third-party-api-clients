@@ -23,7 +23,7 @@ impl Users {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_users_user_id(&self) -> Result<crate::types::User> {
+    pub async fn get_user(&self) -> Result<crate::types::User> {
         let url = "/users/<id>".to_string();
         self.client.get(&url, None).await
     }
@@ -35,7 +35,7 @@ impl Users {
      *
      * Suspends a user. Does not delete the user's cards. Currently this action is not reversible.
      */
-    pub async fn delete_users_id(&self) -> Result<()> {
+    pub async fn delete(&self) -> Result<()> {
         let url = "/users/<id>".to_string();
         self.client.delete(&url, None).await
     }
@@ -47,7 +47,7 @@ impl Users {
      *
      * Modify information about a user.
      */
-    pub async fn patch_users_id(&self, body: &crate::types::PatchUsersIdRequest) -> Result<()> {
+    pub async fn patch(&self, body: &crate::types::PatchRequest) -> Result<()> {
         let url = "/users/<id>".to_string();
         self.client
             .patch(
@@ -145,9 +145,9 @@ impl Users {
      *
      * Creates an invite for the user to accept. Also optionally sets department, location, and manager.
      */
-    pub async fn post_users_deferred(
+    pub async fn post_deferred(
         &self,
-        body: &crate::types::PostUsersDeferredRequest,
+        body: &crate::types::PostDeferredRequest,
     ) -> Result<crate::types::User> {
         let url = "/users/deferred".to_string();
         self.client
@@ -165,9 +165,7 @@ impl Users {
      *
      * Gets status of a deferred task for users
      */
-    pub async fn get_users_deferred_status_id(
-        &self,
-    ) -> Result<crate::types::GetUsersDeferredStatusIdResponse> {
+    pub async fn get_deferred_status(&self) -> Result<crate::types::GetDeferredStatusResponse> {
         let url = "/users/deferred/status/<id>".to_string();
         self.client.get(&url, None).await
     }

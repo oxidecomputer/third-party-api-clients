@@ -82,7 +82,7 @@ impl CardPrograms {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_card_programs_card_program_id(&self) -> Result<crate::types::CardProgram> {
+    pub async fn get_card_program(&self) -> Result<crate::types::CardProgram> {
         let url = "/card-programs/<id>".to_string();
         self.client.get(&url, None).await
     }

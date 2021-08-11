@@ -68,7 +68,7 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_cards_card_id(&self) -> Result<crate::types::Card> {
+    pub async fn get_card(&self) -> Result<crate::types::Card> {
         let url = "/cards/<id>".to_string();
         self.client.get(&url, None).await
     }
@@ -84,9 +84,9 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn patch_resources_cards_card_id(
+    pub async fn patch_resources_card(
         &self,
-        body: &crate::types::PatchResourcesCardsCardIdRequest,
+        body: &crate::types::PatchResourcesCardRequest,
     ) -> Result<()> {
         let url = "/cards/<id>".to_string();
         self.client
@@ -152,9 +152,9 @@ impl Cards {
      *
      * Terminates a card permanently.
      */
-    pub async fn post_resources_cards_card_id_termination(
+    pub async fn post_resources_card_termination(
         &self,
-        body: &crate::types::PostResourcesCardsCardIdSuspensionRequest,
+        body: &crate::types::PostResourcesCardSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
         let url = "/cards/<id>/deferred/termination".to_string();
         self.client
@@ -172,9 +172,9 @@ impl Cards {
      *
      * Suspends a card so that it is locked from use. The suspension is revertable.
      */
-    pub async fn post_resources_cards_card_id_suspension(
+    pub async fn post_resources_card_suspension(
         &self,
-        body: &crate::types::PostResourcesCardsCardIdSuspensionRequest,
+        body: &crate::types::PostResourcesCardSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
         let url = "/cards/<id>/deferred/suspension".to_string();
         self.client
@@ -192,9 +192,9 @@ impl Cards {
      *
      * Removes a card's suspension so that it may be used again.
      */
-    pub async fn post_resources_cards_card_id_unsuspension(
+    pub async fn post_resources_card_unsuspension(
         &self,
-        body: &crate::types::PostResourcesCardsCardIdSuspensionRequest,
+        body: &crate::types::PostResourcesCardSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
         let url = "/cards/<id>/deferred/unsuspension".to_string();
         self.client
@@ -216,9 +216,9 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_resources_cards_deferred_id(
+    pub async fn get_resources_deferred(
         &self,
-    ) -> Result<crate::types::GetResourcesCardsDeferredIdResponse> {
+    ) -> Result<crate::types::GetResourcesDeferredResponse> {
         let url = "/cards/deferred/status/<id>".to_string();
         self.client.get(&url, None).await
     }

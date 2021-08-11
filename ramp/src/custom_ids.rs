@@ -21,9 +21,7 @@ impl CustomIds {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_custom_id_custom_id_provider(
-        &self,
-    ) -> Result<crate::types::GetCustomIdProviderResponse> {
+    pub async fn get_custom_provider(&self) -> Result<crate::types::GetCustomProviderResponse> {
         let url = "/custom-id-provider".to_string();
         self.client.get(&url, None).await
     }
@@ -39,9 +37,7 @@ impl CustomIds {
      *
      * * `authorization_bearer_111111111111: &str` -- OAuth Access token.
      */
-    pub async fn postcustom_id_provider(
-        &self,
-    ) -> Result<crate::types::PostcustomIdProviderResponse> {
+    pub async fn postcustom_provider(&self) -> Result<crate::types::PostcustomProviderResponse> {
         let url = "/custom-id-provider".to_string();
         self.client.post(&url, None).await
     }
@@ -53,9 +49,9 @@ impl CustomIds {
      *
      * Register an access token with a custom ID provider
      */
-    pub async fn post_custom_id_provider_application_link(
+    pub async fn post_custom_provider_application_link(
         &self,
-        body: &crate::types::GetCustomIdProviderResponse,
+        body: &crate::types::GetCustomProviderResponse,
     ) -> Result<()> {
         let url = "/custom-id-provider/application-link".to_string();
         self.client
@@ -77,9 +73,9 @@ impl CustomIds {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_entity_type_custom_id_ramp_id(
+    pub async fn get_entity_type_custom_ramp(
         &self,
-    ) -> Result<crate::types::GetEntityTypeCustomIdRampResponse> {
+    ) -> Result<crate::types::GetEntityTypeCustomRampResponse> {
         let url = "/custom-id-provider/<entity-type>/<custom-id>/ramp-id".to_string();
         self.client.get(&url, None).await
     }
@@ -93,9 +89,9 @@ impl CustomIds {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_entity_type_ramp_id_custom_id(
+    pub async fn get_entity_type_ramp_custom(
         &self,
-    ) -> Result<crate::types::GetEntityTypeRampIdCustomResponse> {
+    ) -> Result<crate::types::GetEntityTypeRampCustomResponse> {
         let url = "/custom-id-provider/<entity-type>/<ramp-id>/custom-id".to_string();
         self.client.get(&url, None).await
     }
@@ -107,9 +103,9 @@ impl CustomIds {
      *
      * Create a mapping between custom\_id and ramp\_id under the namespace specified by entity\_type.
      */
-    pub async fn post_custom_id_provider_entity_type_custom_id_link(
+    pub async fn post_custom_provider_entity_type_link(
         &self,
-        body: &crate::types::PostCustomIdProviderEntityTypeLinkRequest,
+        body: &crate::types::PostCustomProviderEntityTypeLinkRequest,
     ) -> Result<()> {
         let url = "/custom-id-provider/<entity-type>/custom-id-link".to_string();
         self.client

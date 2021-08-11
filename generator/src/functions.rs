@@ -213,6 +213,13 @@ pub fn generate_files(
                 }
             }
 
+            // Get the function without the function inners.
+            // This is specifically for Ramp.
+            // We do this directly before we print the other function.
+            if !inner_response_type.is_empty() {
+                response_type = inner_response_type;
+            }
+
             let mut fn_name = oid
                 .trim_start_matches(&tag)
                 .trim_start_matches('_')
@@ -226,13 +233,8 @@ pub fn generate_files(
                 // Make sure we don't add an s where we don't need one.
                 // Don't make a function plural where it is not needed.
                 fn_name = fn_name.trim_end_matches('s').to_string();
-            }
-
-            // Get the function without the function inners.
-            // This is specifically for Ramp.
-            // We do this directly before we print the other function.
-            if !inner_response_type.is_empty() {
-                response_type = inner_response_type;
+            } else if response_type.starts_with("Vec<") {
+                fn_name = make_plural(proper_name, &fn_name);
             }
 
             // Print our standard function.
@@ -281,6 +283,10 @@ pub fn generate_files(
                     fn_name = fn_name.replace("get_", "get_all_");
                 } else if fn_name.starts_with("list_") && !fn_name.starts_with("list_all") {
                     fn_name = fn_name.replace("list_", "list_all_");
+                }
+
+                if fn_name != "get_all" && fn_name != "list_all" {
+                    fn_name = make_plural(proper_name, &fn_name);
                 }
 
                 // Now let's print the new function.

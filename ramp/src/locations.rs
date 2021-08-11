@@ -25,7 +25,7 @@ impl Locations {
      * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
-    pub async fn get_location(
+    pub async fn get_locations(
         &self,
         start: &str,
         page_size: f64,
@@ -59,7 +59,7 @@ impl Locations {
      *
      * Retrieves all locations for your business.
      */
-    pub async fn get_all_location(&self) -> Result<Vec<crate::types::Location>> {
+    pub async fn get_all_locations(&self) -> Result<Vec<crate::types::Location>> {
         let url = "/locations".to_string();
         self.client.get_all_pages(&url, None).await
     }
@@ -99,7 +99,7 @@ impl Locations {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_locations_location_id(&self) -> Result<crate::types::Location> {
+    pub async fn get_location(&self) -> Result<crate::types::Location> {
         let url = "/locations/<id>".to_string();
         self.client.get(&url, None).await
     }
@@ -111,9 +111,9 @@ impl Locations {
      *
      * Modifies a specific location.
      */
-    pub async fn patch_locations_location_id(
+    pub async fn patch_location(
         &self,
-        body: &crate::types::PatchLocationsLocationIdRequest,
+        body: &crate::types::PatchLocationRequest,
     ) -> Result<crate::types::Location> {
         let url = "/locations/<id>".to_string();
         self.client

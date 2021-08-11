@@ -39,7 +39,7 @@ impl Transactions {
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      * * `requires_memo: bool` -- Filters for transactions which require a memo, but do not have one. This can only be set to true.
      */
-    pub async fn get_transaction(
+    pub async fn get_transactions(
         &self,
         department_id: &str,
         location_id: &str,
@@ -125,7 +125,7 @@ impl Transactions {
      *
      * Retrieves all transactions for the business. This endpoint supports filtering and ordering. NOTE: only one ordering param is supported.
      */
-    pub async fn get_all_transaction(
+    pub async fn get_all_transactions(
         &self,
         department_id: &str,
         location_id: &str,
@@ -204,7 +204,7 @@ impl Transactions {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_resources_transactions_transaction_id(&self) -> Result<crate::types::Data> {
+    pub async fn get_resources_transaction(&self) -> Result<crate::types::Data> {
         let url = "/transactions/<id>".to_string();
         self.client.get(&url, None).await
     }
