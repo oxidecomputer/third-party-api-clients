@@ -523,7 +523,7 @@ pub fn generate_docs_generic_token(name: &str, version: &str, proper_name: &str)
 //! use {}::Client;
 //!
 //! async fn do_call() {{
-//!     let {} = Client::new_from_env("", "");
+//!     let mut {} = Client::new_from_env("", "");
 //!
 //!     // Get the URL to request consent from the user.
 //!     let user_consent_url = {}.user_consent_url();

@@ -53,7 +53,7 @@
 //! use gusto_api::Client;
 //!
 //! async fn do_call() {
-//!     let gusto = Client::new_from_env("", "");
+//!     let mut gusto = Client::new_from_env("", "");
 //!
 //!     // Get the URL to request consent from the user.
 //!     let user_consent_url = gusto.user_consent_url();
