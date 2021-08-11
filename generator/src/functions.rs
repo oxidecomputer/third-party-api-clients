@@ -355,6 +355,18 @@ fn get_response_type(
             }
 
             if let Some(s) = &mt.schema {
+                if let Ok(item) = s.item() {
+                    // We have an item, we want to check
+                    // if its an ANY kind and empty, then we can ignore it.
+                    if let openapiv3::SchemaKind::Any(any) = &item.schema_kind {
+                        if any.properties.is_empty() && any.format.is_none() && any.items.is_none()
+                        {
+                            // Return empty.
+                            return Ok(("()".to_string(), crate::TypeId(0), "".to_string()));
+                        }
+                    }
+                }
+
                 let object_name = format!("{} response", oid_to_object_name(oid));
                 let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
                 let og_rt = ts.render_type(&tid, false)?;
@@ -427,7 +439,9 @@ fn get_response_type(
         return Ok((og_rt, id, "".to_string()));
     }
 
-    bail!("parsing response got to end with no type");
+    // Basically if we get here, likely its just an empty struct or something.
+    // We never actually hit here before Zoom but then it was just an empty response.
+    Ok(("()".to_string(), crate::TypeId(0), "".to_string()))
 }
 
 fn get_fn_params(
@@ -488,15 +502,12 @@ fn get_fn_params(
             parameter_data: _,
             allow_reserved: _,
             style: openapiv3::QueryStyle::Form,
-            allow_empty_value,
+            // We can ignore the allow empty value, we support this by default and
+            // aren't strict about not allowing empty values on other parameters
+            // merely because specs cannot be trusted.
+            allow_empty_value: _,
         } = item
         {
-            if let Some(aev) = allow_empty_value {
-                if *aev {
-                    bail!("allow empty value is a no go");
-                }
-            }
-
             if nam == "ref" || nam == "type" {
                 query_params.insert(format!("{}_", nam), typ.to_string());
             } else if (!all_pages

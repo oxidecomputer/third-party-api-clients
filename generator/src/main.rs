@@ -205,7 +205,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                             SchemaKind::Type(Type::Array(_at)) => "&[String]".to_string(), /* TODO: make this smarter */
                             SchemaKind::Type(Type::String(st)) => {
                                 use openapiv3::{
-                                    StringFormat::{Date, DateTime},
+                                    StringFormat::{Date, DateTime, Password},
                                     VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                                 };
 
@@ -257,6 +257,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 match &st.format {
                                     Item(DateTime) => "chrono::DateTime<chrono::Utc>".to_string(),
                                     Item(Date) => "chrono::NaiveDate".to_string(),
+                                    Item(Password) => "&str".to_string(),
                                     Empty => "&str".to_string(),
                                     Unknown(f) => match f.as_str() {
                                         "float" => "f64".to_string(),
@@ -264,6 +265,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         "uri-template" => "&str".to_string(),
                                         "email" => "&str".to_string(),
                                         "uuid" => "&str".to_string(),
+                                        "time" => "chrono::NaiveTime".to_string(),
                                         f => {
                                             bail!("XXX unknown string format {}", f)
                                         }
@@ -314,7 +316,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 }
 
                                 if it.maximum.is_some() {
-                                    bail!("XXX maximum");
+                                    println!("XXX maximum is not supported");
                                 }
                                 if !it.enumeration.is_empty() {
                                     bail!("XXX enumeration {}: {:?}", self.name, it);
@@ -326,6 +328,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                 }
                             }
                             openapiv3::SchemaKind::OneOf { one_of: _ } => "&str".to_string(), /* TODO: make this smarter. */
+                            openapiv3::SchemaKind::Any(_) => "&str".to_string(), /* TODO: make this smarter. */
                             x => bail!("unexpected type {:#?}", x),
                         }
                     }
@@ -1368,7 +1371,7 @@ impl TypeSpace {
                         )?;
                         if let Some(sd) = &self.get_schema_data_for_id(&itid) {
                             let schema_data = &(*sd).clone();
-                            // TODO: this is specific to ramp
+                            // TODO: "page" is specific to ramp
                             if schema_data.nullable && name != "page" {
                                 // This is an optional member.
                                 omap.insert(
@@ -1378,7 +1381,7 @@ impl TypeSpace {
                                 continue;
                             }
 
-                            // TODO: this is specific to ramp
+                            // TODO: "page" is specific to ramp
                             if o.required.contains(n) || name == "page" {
                                 omap.insert(n.to_string(), itid.clone());
                             } else {
@@ -1390,7 +1393,7 @@ impl TypeSpace {
                             }
                         }
 
-                        // TODO: this is specific to ramp
+                        // TODO: "page" is specific to ramp
                         if o.required.contains(n) || name == "page" {
                             omap.insert(n.to_string(), itid);
                         } else {
@@ -1405,7 +1408,7 @@ impl TypeSpace {
                 }
                 openapiv3::Type::String(st) => {
                     use openapiv3::{
-                        StringFormat::{Date, DateTime},
+                        StringFormat::{Date, DateTime, Password},
                         VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
 
@@ -1474,6 +1477,10 @@ impl TypeSpace {
                                 s.schema_data.clone(),
                             ),
                         )),
+                        Item(Password) => Ok((
+                            Some(uid.to_string()),
+                            TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                        )),
                         Empty => {
                             // Get the name, we need to find out if its secretly a date.
                             let name = clean_name(match (name, s.schema_data.title.as_deref()) {
@@ -1521,6 +1528,13 @@ impl TypeSpace {
                             "uuid" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            )),
+                            "time" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic(
+                                    "Option<chrono::NaiveTime>".to_string(),
+                                    s.schema_data.clone(),
+                                ),
                             )),
                             f => bail!("XXX unknown string format {}", f),
                         },
@@ -1614,17 +1628,17 @@ impl TypeSpace {
                     bail!("anyof schema kind: {:?} {:?}\n{:?}", name, s, any_of);
                 }
             }
-            openapiv3::SchemaKind::Any(a) => {
+            openapiv3::SchemaKind::Any(any) => {
                 // There is at least one occurance where the github api spec gives "items"
                 // but not a type array. Let's parse for that.
                 // https://github.com/github/rest-api-description/issues/455
-                if let Some(items) = &a.items {
+                if let Some(items) = &any.items {
                     // Determine the type of item that will be in this array.
                     let itid = self.select_box(Some(&clean_name(&nam)), items, parent_name)?;
                     return Ok((None, TypeDetails::Array(itid, s.schema_data.clone())));
                 }
 
-                if let Some(format) = &a.format {
+                if let Some(format) = &any.format {
                     // For some reason, ramp has any types with uuids.
                     if format == "uuid" {
                         return Ok((
@@ -1633,9 +1647,91 @@ impl TypeSpace {
                         ));
                     }
                 }
+
+                if !any.properties.is_empty() && name.is_some() {
+                    // TODO: This is an object but it's messed up.
+                    // Make this more DRY with the above.
+                    // Object types must have a consistent name.
+                    let name = clean_name(match (name, s.schema_data.title.as_deref()) {
+                        (Some(n), None) => n,
+                        (Some(n), Some("")) => n,
+                        (None, Some(t)) => t,
+                        (Some(""), Some(t)) => t,
+                        (Some(n), Some(t)) => {
+                            // Check if we already have a type with this name.
+                            if n == t {
+                                t
+                            } else if self.name_to_id.get(&clean_name(n)).is_some() {
+                                t
+                            } else if self.name_to_id.get(&clean_name(t)).is_some() {
+                                n
+                            } else if n.len() < t.len() {
+                                // Pick the shorter of the names.
+                                n
+                            } else {
+                                t
+                            }
+                        }
+                        (None, None) => {
+                            if !parent_name.is_empty() {
+                                parent_name
+                            } else {
+                                bail!("object types need a name? {:?} {:?}", name, s)
+                            }
+                        }
+                    });
+
+                    let mut omap = BTreeMap::new();
+                    for (n, rb) in any.properties.iter() {
+                        let itid = self.select_box(
+                            Some(n),
+                            rb,
+                            &clean_name(&format!("{} {}", &parent_name, name)),
+                        )?;
+                        if let Some(sd) = &self.get_schema_data_for_id(&itid) {
+                            let schema_data = &(*sd).clone();
+                            // TODO: "page" is specific to ramp
+                            if schema_data.nullable && name != "page" {
+                                // This is an optional member.
+                                omap.insert(
+                                    n.to_string(),
+                                    self.id_for_optional(&itid, schema_data.clone()),
+                                );
+                                continue;
+                            }
+
+                            // TODO: "page" is specific to ramp
+                            if any.required.contains(n) || name == "page" {
+                                omap.insert(n.to_string(), itid.clone());
+                            } else {
+                                // This is an optional member.
+                                omap.insert(
+                                    n.to_string(),
+                                    self.id_for_optional(&itid, schema_data.clone()),
+                                );
+                            }
+                        }
+
+                        // TODO: "page" is specific to ramp
+                        if any.required.contains(n) || name == "page" {
+                            omap.insert(n.to_string(), itid);
+                        } else {
+                            // This is an optional member.
+                            omap.insert(
+                                n.to_string(),
+                                self.id_for_optional(&itid, s.schema_data.clone()),
+                            );
+                        }
+                    }
+                    return Ok((Some(name), TypeDetails::Object(omap, s.schema_data.clone())));
+                }
+
                 // We have no idea what this is.
                 // Then we use the serde_json type.
-                println!("[warn] got ANY kind: {:?} {} {:?}\n", name, parent_name, a);
+                println!(
+                    "[warn] got ANY kind: {:?} {} {:?}\n",
+                    name, parent_name, any
+                );
 
                 Ok((
                     Some(nam),
@@ -2314,6 +2410,20 @@ fn main() -> Result<()> {
             for (ct, mt) in content {
                 if ct == "application/json" {
                     if let Some(s) = &mt.schema {
+                        if let Ok(item) = s.item() {
+                            // We have an item, we want to check
+                            // if its an ANY kind and empty, then we can ignore it.
+                            if let openapiv3::SchemaKind::Any(any) = &item.schema_kind {
+                                if any.properties.is_empty()
+                                    && any.format.is_none()
+                                    && any.items.is_none()
+                                {
+                                    // Continue early here.
+                                    continue;
+                                }
+                            }
+                        }
+
                         let object_name = format!("{} response", name);
                         let id = ts.select(Some(&clean_name(&object_name)), s, "")?;
 
@@ -2422,6 +2532,23 @@ fn main() -> Result<()> {
                             for (ct, mt) in &ri.content {
                                 if ct == "application/json" {
                                     if let Some(s) = &mt.schema {
+                                        if let Ok(item) = s.item() {
+                                            // We have an item, we want to check
+                                            // if its an ANY kind and empty, then we can ignore it.
+                                            if let openapiv3::SchemaKind::Any(any) =
+                                                &item.schema_kind
+                                            {
+                                                if any.properties.is_empty()
+                                                    && any.format.is_none()
+                                                    && any.items.is_none()
+                                                {
+                                                    // Continue early here.
+                                                    continue;
+                                                }
+                                            }
+                                        }
+
+                                        // Otherwise we can parse the object.
                                         let object_name =
                                             format!("{} response", oid_to_object_name(&oid));
                                         let id =
