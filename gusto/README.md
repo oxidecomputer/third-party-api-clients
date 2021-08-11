@@ -9,7 +9,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-gusto_api = "0.2.1"
+gusto_api = "0.2.2"
 ```
 
 ## Basic example
@@ -55,17 +55,19 @@ To start off a fresh client and get a `token` and `refresh_token`, use the follo
 ```
 use gusto_api::Client;
 
-let gusto = Client::new_from_env("", "", "");
+async fn do_call() {
+    let gusto = Client::new_from_env("", "");
 
-// Get the URL to request consent from the user.
-let user_consent_url = gusto.user_consent_url();
+    // Get the URL to request consent from the user.
+    let user_consent_url = gusto.user_consent_url();
 
-// In your redirect URL capture the code sent.
-// Send it along to the request for the token.
-let code = "thing-from-redirect-url";
-let mut access_token = gusto.get_access_token(code).await.unwrap();
+    // In your redirect URL capture the code sent.
+    // Send it along to the request for the token.
+    let code = "thing-from-redirect-url";
+    let mut access_token = gusto.get_access_token(code).await.unwrap();
 
-// You can additionally refresh the access token with the following.
-// You must have a refresh token to be able to call this function.
-access_token = gusto.refresh_access_token().await.unwrap();
+    // You can additionally refresh the access token with the following.
+    // You must have a refresh token to be able to call this function.
+    access_token = gusto.refresh_access_token().await.unwrap();
+}
 ```
