@@ -28,7 +28,7 @@ impl Interactions {
     pub async fn get_restrictions_for_org(
         &self,
         org: &str,
-    ) -> Result<crate::types::InteractionsGetRestrictionsOrgResponseAnyOf> {
+    ) -> Result<crate::types::InteractionsGetRestrictionsResponseAnyOf> {
         let url = format!(
             "/orgs/{}/interaction-limits",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -108,7 +108,7 @@ impl Interactions {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<crate::types::InteractionsGetRestrictionsOrgResponseAnyOf> {
+    ) -> Result<crate::types::InteractionsGetRestrictionsResponseAnyOf> {
         let url = format!(
             "/repos/{}/{}/interaction-limits",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -187,7 +187,7 @@ impl Interactions {
      */
     pub async fn get_restrictions_for_authenticated_user(
         &self,
-    ) -> Result<crate::types::InteractionsGetRestrictionsOrgResponseAnyOf> {
+    ) -> Result<crate::types::InteractionsGetRestrictionsResponseAnyOf> {
         let url = "/user/interaction-limits".to_string();
         self.client.get(&url, None).await
     }

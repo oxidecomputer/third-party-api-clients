@@ -1092,7 +1092,12 @@ impl TypeSpace {
                     } else {
                         "".to_string()
                     };
-                    if details.is_object() || details.is_enum() || details.is_one_of() {
+                    if details.is_object()
+                        || details.is_enum()
+                        || details.is_one_of()
+                        || details.is_any_of()
+                        || details.is_all_of()
+                    {
                         if existing_name == new_name {
                             // Return early.
                             return Ok(tid.clone());
@@ -1112,7 +1117,9 @@ impl TypeSpace {
                                 if (nt.details.is_enum()
                                     || nt.details.is_object()
                                     || nt.details.is_named_type()
-                                    || nt.details.is_one_of())
+                                    || nt.details.is_one_of()
+                                    || details.is_any_of()
+                                    || details.is_all_of())
                                     && nt.details != details
                                 {
                                     // Return early we definitely don't want to do any funny business.
@@ -1428,11 +1435,13 @@ impl TypeSpace {
                         (Some(n), Some(t)) => {
                             // Check if we already have a type with this name.
                             if n == t
-                                || (n.ends_with("response") || n.ends_with("request"))
+                                || n.ends_with("response")
+                                || n.ends_with("request")
                                 || self.name_to_id.get(&clean_name(n)).is_some()
                             {
                                 t
-                            } else if (t.ends_with("response") || t.ends_with("request"))
+                            } else if t.ends_with("response")
+                                || t.ends_with("request")
                                 || self.name_to_id.get(&clean_name(t)).is_some()
                                 || n.len() < t.len()
                             {

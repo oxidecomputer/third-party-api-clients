@@ -63,8 +63,8 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                         a(&desc);
                     }
 
-                    if sn == "Page" {
-                        a("#[derive(Serialize,Default, Deserialize, Debug, Clone, JsonSchema)]");
+                    if sn == "Page" || sn == "PagesSourceHash" || sn == "PagesHttpsCertificate" {
+                        a("#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]");
                     } else {
                         a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
                     }
@@ -244,7 +244,7 @@ fn do_of_type(
     a("");
 
     // Render the implementation to easily unpack these things for the end user.
-    a(&format!("impl {} {{", sn));
+    /*a(&format!("impl {} {{", sn));
     for (fn_name, name) in &name_map {
         a(&format!(
             r#"pub fn {}(&self) -> Option<&{}> {{
@@ -265,13 +265,13 @@ fn do_of_type(
         a("");
     }
     a("}");
-    a("");
+    a("");*/
 
     // TODO: Implement defaults for these then turn on defaults for
     // the objects above.
 
     // Render the implementation to easily unpack these things for the end user.
-    for (fn_name, name) in &name_map {
+    /*for (fn_name, name) in &name_map {
         if name == "i64"
             || name == "i32"
             || name == "f64"
@@ -323,7 +323,7 @@ fn do_of_type(
             ));
         }
         a("");
-    }
+    }*/
 
     out
 }

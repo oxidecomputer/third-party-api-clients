@@ -140,20 +140,11 @@ pub struct SimpleUser {
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum OwnerAllOf {
+pub enum UserAllOf {
     /**
      * Simple User
      */
     SimpleUser(SimpleUser),
-}
-
-impl OwnerAllOf {
-    pub fn simple_user(&self) -> Option<&SimpleUser> {
-        if let OwnerAllOf::SimpleUser(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
 }
 
 /// The set of permissions for the GitHub app
@@ -277,7 +268,7 @@ pub struct GitHubApp {
      *
      */
     #[serde()]
-    pub owner: OwnerAllOf,
+    pub owner: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -377,46 +368,6 @@ pub enum WebhookConfigInsecureSslOneOf {
      */
     String(String),
     F64(f64),
-}
-
-impl WebhookConfigInsecureSslOneOf {
-    pub fn f64(&self) -> Option<&f64> {
-        if let WebhookConfigInsecureSslOneOf::F64(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let WebhookConfigInsecureSslOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<f64> for WebhookConfigInsecureSslOneOf {
-    fn from(f: f64) -> Self {
-        WebhookConfigInsecureSslOneOf::F64(f)
-    }
-}
-
-impl From<String> for WebhookConfigInsecureSslOneOf {
-    fn from(f: String) -> Self {
-        WebhookConfigInsecureSslOneOf::String(f)
-    }
-}
-
-impl From<WebhookConfigInsecureSslOneOf> for f64 {
-    fn from(f: WebhookConfigInsecureSslOneOf) -> Self {
-        *f.f64().unwrap()
-    }
-}
-
-impl From<WebhookConfigInsecureSslOneOf> for String {
-    fn from(f: WebhookConfigInsecureSslOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
 }
 
 /// Configuration object of the webhook
@@ -615,65 +566,6 @@ pub enum ValueOneOf {
     String(String),
     StringVector(Vec<String>),
     I64(i64),
-}
-
-impl ValueOneOf {
-    pub fn i64(&self) -> Option<&i64> {
-        if let ValueOneOf::I64(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let ValueOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let ValueOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<i64> for ValueOneOf {
-    fn from(f: i64) -> Self {
-        ValueOneOf::I64(f)
-    }
-}
-
-impl From<String> for ValueOneOf {
-    fn from(f: String) -> Self {
-        ValueOneOf::String(f)
-    }
-}
-
-impl From<Vec<String>> for ValueOneOf {
-    fn from(f: Vec<String>) -> Self {
-        ValueOneOf::StringVector(f)
-    }
-}
-
-impl From<ValueOneOf> for i64 {
-    fn from(f: ValueOneOf) -> Self {
-        *f.i64().unwrap()
-    }
-}
-
-impl From<ValueOneOf> for String {
-    fn from(f: ValueOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
-impl From<ValueOneOf> for Vec<String> {
-    fn from(f: ValueOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -2329,22 +2221,6 @@ pub enum AccountAnyOf {
     SimpleUser(SimpleUser),
 }
 
-impl AccountAnyOf {
-    pub fn enterprise(&self) -> Option<&Enterprise> {
-        if let AccountAnyOf::Enterprise(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn simple_user(&self) -> Option<&SimpleUser> {
-        if let AccountAnyOf::SimpleUser(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 /**
  * Describe whether all repositories have been selected or there's a selection involved
  */
@@ -2494,7 +2370,7 @@ pub struct Installation {
      *
      */
     #[serde()]
-    pub suspended_by: OwnerAllOf,
+    pub suspended_by: UserAllOf,
     /**
      * The ID of the user or organization this token is being scoped to.
      */
@@ -2571,15 +2447,6 @@ pub enum LicenseAllOf {
      * License Simple
      */
     LicenseSimple(LicenseSimple),
-}
-
-impl LicenseAllOf {
-    pub fn license_simple(&self) -> Option<&LicenseSimple> {
-        if let LicenseAllOf::LicenseSimple(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3616,7 +3483,7 @@ pub struct Repository {
      * A git repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub organization: Option<OwnerAllOf>,
+    pub organization: Option<UserAllOf>,
     /**
      * Simple User
      */
@@ -3925,7 +3792,7 @@ pub struct ApplicationGrant {
      * The authorization associated with an OAuth Access.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<OwnerAllOf>,
+    pub user: Option<UserAllOf>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3975,15 +3842,6 @@ pub struct ScopedInstallation {
 #[serde(untagged)]
 pub enum InstallationAllOf {
     ScopedInstallation(ScopedInstallation),
-}
-
-impl InstallationAllOf {
-    pub fn scoped_installation(&self) -> Option<&ScopedInstallation> {
-        if let InstallationAllOf::ScopedInstallation(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
 }
 
 /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
@@ -4065,7 +3923,7 @@ pub struct Authorization {
      * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<OwnerAllOf>,
+    pub user: Option<UserAllOf>,
 }
 
 /// Code Of Conduct
@@ -5115,7 +4973,7 @@ pub struct Milestone {
      *
      */
     #[serde()]
-    pub creator: OwnerAllOf,
+    pub creator: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5265,15 +5123,6 @@ pub enum MilestoneAllOf {
     Milestone(Milestone),
 }
 
-impl MilestoneAllOf {
-    pub fn milestone(&self) -> Option<&Milestone> {
-        if let MilestoneAllOf::Milestone(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequest {
     #[serde(
@@ -5315,20 +5164,11 @@ pub struct PullRequest {
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum PerformedViaGithubAppAllOf {
+pub enum AppAllOf {
     /**
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     GitHubApp(GitHubApp),
-}
-
-impl PerformedViaGithubAppAllOf {
-    pub fn git_hub_app(&self) -> Option<&GitHubApp> {
-        if let PerformedViaGithubAppAllOf::GitHubApp(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
 }
 
 /// Issue Simple
@@ -5349,7 +5189,7 @@ pub struct IssueSimple {
      *
      */
     #[serde()]
-    pub assignee: OwnerAllOf,
+    pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -5456,7 +5296,7 @@ pub struct IssueSimple {
      * Issue Simple
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
+    pub performed_via_github_app: Option<AppAllOf>,
     /**
      * Issue Simple
      */
@@ -5512,7 +5352,7 @@ pub struct IssueSimple {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5647,7 +5487,7 @@ pub struct IssueComment {
      * Comments provide a way for people to collaborate on an issue.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
+    pub performed_via_github_app: Option<AppAllOf>,
     /**
      * Comments provide a way for people to collaborate on an issue.
      */
@@ -5677,7 +5517,7 @@ pub struct IssueComment {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6005,7 +5845,7 @@ pub struct BaseGist {
      * Base Gist
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<OwnerAllOf>,
+    pub owner: Option<UserAllOf>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6040,7 +5880,7 @@ pub struct BaseGist {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6502,7 +6342,7 @@ pub struct Gist {
      * Gist
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<OwnerAllOf>,
+    pub owner: Option<UserAllOf>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6537,7 +6377,7 @@ pub struct Gist {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /// Gist Simple
@@ -6723,7 +6563,7 @@ pub struct GistComment {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /// Gist Commit
@@ -6752,7 +6592,7 @@ pub struct GistCommit {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6836,34 +6676,6 @@ pub enum LabelsOneOf {
     String(String),
 }
 
-impl LabelsOneOf {
-    pub fn labels_data(&self) -> Option<&LabelsData> {
-        if let LabelsOneOf::LabelsData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let LabelsOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<String> for LabelsOneOf {
-    fn from(f: String) -> Self {
-        LabelsOneOf::String(f)
-    }
-}
-
-impl From<LabelsOneOf> for String {
-    fn from(f: LabelsOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
 /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Issue {
@@ -6882,7 +6694,7 @@ pub struct Issue {
      *
      */
     #[serde()]
-    pub assignee: OwnerAllOf,
+    pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -6921,7 +6733,7 @@ pub struct Issue {
      * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub closed_by: Option<OwnerAllOf>,
+    pub closed_by: Option<UserAllOf>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -7003,7 +6815,7 @@ pub struct Issue {
      * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
+    pub performed_via_github_app: Option<AppAllOf>,
     /**
      * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
@@ -7073,7 +6885,7 @@ pub struct Issue {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /// License
@@ -9290,15 +9102,6 @@ pub enum ParentAllOf {
     TeamSimple(TeamSimple),
 }
 
-impl ParentAllOf {
-    pub fn team_simple(&self) -> Option<&TeamSimple> {
-        if let ParentAllOf::TeamSimple(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 /// Groups of organization members that gives permissions on specified repositories.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Team {
@@ -9517,7 +9320,7 @@ pub struct OrgMembership {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /// A migration.
@@ -9577,7 +9380,7 @@ pub struct Migration {
      *
      */
     #[serde()]
-    pub owner: OwnerAllOf,
+    pub owner: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<Repository>,
     #[serde(
@@ -9696,15 +9499,6 @@ pub enum RepositoryAllOf {
     MinimalRepository(MinimalRepository),
 }
 
-impl RepositoryAllOf {
-    pub fn minimal_repository(&self) -> Option<&MinimalRepository> {
-        if let RepositoryAllOf::MinimalRepository(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 /// A software package
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Package {
@@ -9742,7 +9536,7 @@ pub struct Package {
      * A software package
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<OwnerAllOf>,
+    pub owner: Option<UserAllOf>,
     #[serde(default, skip_serializing_if = "PackageType::is_noop")]
     pub package_type: PackageType,
     /**
@@ -9953,7 +9747,7 @@ pub struct Project {
      *
      */
     #[serde()]
-    pub creator: OwnerAllOf,
+    pub creator: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10263,7 +10057,7 @@ pub struct TeamDiscussion {
      *
      */
     #[serde()]
-    pub author: OwnerAllOf,
+    pub author: UserAllOf,
     /**
      * The main text of the discussion.
      */
@@ -10395,7 +10189,7 @@ pub struct TeamDiscussionComment {
      *
      */
     #[serde()]
-    pub author: OwnerAllOf,
+    pub author: UserAllOf,
     /**
      * The main text of the comment.
      */
@@ -10569,7 +10363,7 @@ pub struct Reaction {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /**
@@ -11197,7 +10991,7 @@ pub struct TeamRepository {
      *
      */
     #[serde()]
-    pub owner: OwnerAllOf,
+    pub owner: UserAllOf,
     /**
      * A team's access to a repository.
      */
@@ -11399,7 +11193,7 @@ pub struct ProjectCard {
      *
      */
     #[serde()]
-    pub creator: OwnerAllOf,
+    pub creator: UserAllOf,
     /**
      * The project card's ID
      */
@@ -11524,7 +11318,7 @@ pub struct RepositoryCollaboratorPermission {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -12074,7 +11868,7 @@ pub struct FullRepository {
      * Full Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub organization: Option<OwnerAllOf>,
+    pub organization: Option<UserAllOf>,
     /**
      * Simple User
      */
@@ -12650,15 +12444,6 @@ pub enum HeadCommitAllOf {
     SimpleCommit(SimpleCommit),
 }
 
-impl HeadCommitAllOf {
-    pub fn simple_commit(&self) -> Option<&SimpleCommit> {
-        if let HeadCommitAllOf::SimpleCommit(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 /// An invocation of a workflow
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WorkflowRun {
@@ -13100,22 +12885,6 @@ pub enum ReviewerAnyOf {
     Team(Team),
 }
 
-impl ReviewerAnyOf {
-    pub fn simple_user(&self) -> Option<&SimpleUser> {
-        if let ReviewerAnyOf::SimpleUser(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn team(&self) -> Option<&Team> {
-        if let ReviewerAnyOf::Team(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Reviewers {
     /**
@@ -13187,34 +12956,6 @@ pub enum PayloadOneOf {
     String(String),
 }
 
-impl PayloadOneOf {
-    pub fn data(&self) -> Option<&Data> {
-        if let PayloadOneOf::Data(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let PayloadOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<String> for PayloadOneOf {
-    fn from(f: String) -> Self {
-        PayloadOneOf::String(f)
-    }
-}
-
-impl From<PayloadOneOf> for String {
-    fn from(f: PayloadOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
 /// A request for a specific ref(branch,sha,tag) to be deployed
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Deployment {
@@ -13233,7 +12974,7 @@ pub struct Deployment {
      *
      */
     #[serde()]
-    pub creator: OwnerAllOf,
+    pub creator: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13285,7 +13026,7 @@ pub struct Deployment {
      * A request for a specific ref(branch,sha,tag) to be deployed
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
+    pub performed_via_github_app: Option<AppAllOf>,
     /**
      * A request for a specific ref(branch,sha,tag) to be deployed
      */
@@ -14257,15 +13998,6 @@ pub enum AuthorAllOf {
     GitUser(GitUser),
 }
 
-impl AuthorAllOf {
-    pub fn git_user(&self) -> Option<&GitUser> {
-        if let AuthorAllOf::GitUser(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitData {
     /**
@@ -14416,7 +14148,7 @@ pub struct CommitDataType {
      *
      */
     #[serde()]
-    pub author: OwnerAllOf,
+    pub author: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14434,7 +14166,7 @@ pub struct CommitDataType {
      *
      */
     #[serde()]
-    pub committer: OwnerAllOf,
+    pub committer: UserAllOf,
     /**
      * Commit
      */
@@ -14732,7 +14464,7 @@ pub struct DeploymentSimple {
      * A deployment created as the result of an Actions check run from a workflow that references an environment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
+    pub performed_via_github_app: Option<AppAllOf>,
     /**
      * A deployment created as the result of an Actions check run from a workflow that references an environment
      */
@@ -14931,7 +14663,7 @@ pub struct CheckRun {
      *
      */
     #[serde()]
-    pub app: PerformedViaGithubAppAllOf,
+    pub app: AppAllOf,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub check_suite: Option<CheckSuite>,
     #[serde(
@@ -15142,7 +14874,7 @@ pub struct CheckSuiteData {
      *
      */
     #[serde()]
-    pub app: PerformedViaGithubAppAllOf,
+    pub app: AppAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -16375,7 +16107,7 @@ pub struct RepositoryInvitation {
      *
      */
     #[serde()]
-    pub invitee: OwnerAllOf,
+    pub invitee: UserAllOf,
     /**
      * All of the following types:
      *  
@@ -16385,7 +16117,7 @@ pub struct RepositoryInvitation {
      *
      */
     #[serde()]
-    pub inviter: OwnerAllOf,
+    pub inviter: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -16504,7 +16236,7 @@ pub struct CommitComment {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /// Branch Short
@@ -16645,7 +16377,7 @@ pub struct Base {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -16712,7 +16444,7 @@ pub struct PullRequestSimple {
      *
      */
     #[serde()]
-    pub assignee: OwnerAllOf,
+    pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -16896,7 +16628,7 @@ pub struct PullRequestSimple {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17110,15 +16842,6 @@ pub enum CodeOfConductAll {
     CodeOfConductSimple(CodeOfConductSimple),
 }
 
-impl CodeOfConductAll {
-    pub fn code_of_conduct_simple(&self) -> Option<&CodeOfConductSimple> {
-        if let CodeOfConductAll::CodeOfConductSimple(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 /// All of the following types:
 ///
 /// - `CommunityHealthFile`
@@ -17126,17 +16849,8 @@ impl CodeOfConductAll {
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum CodeOfConductFileAll {
+pub enum ReadmeAllOf {
     CommunityHealthFile(CommunityHealthFile),
-}
-
-impl CodeOfConductFileAll {
-    pub fn community_health_file(&self) -> Option<&CommunityHealthFile> {
-        if let CodeOfConductFileAll::CommunityHealthFile(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17160,7 +16874,7 @@ pub struct CommunityProfileFiles {
      *
      */
     #[serde()]
-    pub code_of_conduct_file: CodeOfConductFileAll,
+    pub code_of_conduct_file: ReadmeAllOf,
     /**
      * All of the following types:
      *  
@@ -17170,7 +16884,7 @@ pub struct CommunityProfileFiles {
      *
      */
     #[serde()]
-    pub contributing: CodeOfConductFileAll,
+    pub contributing: ReadmeAllOf,
     /**
      * All of the following types:
      *  
@@ -17180,7 +16894,7 @@ pub struct CommunityProfileFiles {
      *
      */
     #[serde()]
-    pub issue_template: CodeOfConductFileAll,
+    pub issue_template: ReadmeAllOf,
     /**
      * All of the following types:
      *  
@@ -17200,7 +16914,7 @@ pub struct CommunityProfileFiles {
      *
      */
     #[serde()]
-    pub pull_request_template: CodeOfConductFileAll,
+    pub pull_request_template: ReadmeAllOf,
     /**
      * All of the following types:
      *  
@@ -17210,7 +16924,7 @@ pub struct CommunityProfileFiles {
      *
      */
     #[serde()]
-    pub readme: CodeOfConductFileAll,
+    pub readme: ReadmeAllOf,
 }
 
 /// Community Profile
@@ -18227,7 +17941,7 @@ pub struct DeploymentStatus {
      *
      */
     #[serde()]
-    pub creator: OwnerAllOf,
+    pub creator: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18286,7 +18000,7 @@ pub struct DeploymentStatus {
      * The status of a deployment.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
+    pub performed_via_github_app: Option<AppAllOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -18438,29 +18152,6 @@ pub enum ProtectionRulesAnyOf {
     ProtectionRules(ProtectionRules),
     ProtectionRulesData(ProtectionRulesData),
     ProtectionRulesDataType(ProtectionRulesDataType),
-}
-
-impl ProtectionRulesAnyOf {
-    pub fn protection_rules(&self) -> Option<&ProtectionRules> {
-        if let ProtectionRulesAnyOf::ProtectionRules(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn protection_rules_data(&self) -> Option<&ProtectionRulesData> {
-        if let ProtectionRulesAnyOf::ProtectionRulesData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn protection_rules_data_type(&self) -> Option<&ProtectionRulesDataType> {
-        if let ProtectionRulesAnyOf::ProtectionRulesDataType(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
 }
 
 /// Details of a deployment environment
@@ -19572,17 +19263,17 @@ pub struct IssueEvent {
      *
      */
     #[serde()]
-    pub actor: OwnerAllOf,
+    pub actor: UserAllOf,
     /**
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assignee: Option<OwnerAllOf>,
+    pub assignee: Option<UserAllOf>,
     /**
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assigner: Option<OwnerAllOf>,
+    pub assigner: Option<UserAllOf>,
     /**
      * Issue Event
      */
@@ -19654,7 +19345,7 @@ pub struct IssueEvent {
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
+    pub performed_via_github_app: Option<AppAllOf>,
     /**
      * Issue Event
      */
@@ -19669,7 +19360,7 @@ pub struct IssueEvent {
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub requested_reviewer: Option<OwnerAllOf>,
+    pub requested_reviewer: Option<UserAllOf>,
     /**
      * Issue Event
      */
@@ -19679,7 +19370,7 @@ pub struct IssueEvent {
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub review_requester: Option<OwnerAllOf>,
+    pub review_requester: Option<UserAllOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20797,113 +20488,6 @@ pub enum IssueEventAnyOf {
     UnlabeledIssueEvent(UnlabeledIssueEvent),
 }
 
-impl IssueEventAnyOf {
-    pub fn added_project_issue_event(&self) -> Option<&AddedProjectIssueEvent> {
-        if let IssueEventAnyOf::AddedProjectIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn assigned_issue_event(&self) -> Option<&AssignedIssueEvent> {
-        if let IssueEventAnyOf::AssignedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn converted_note_issue_event(&self) -> Option<&ConvertedNoteIssueEvent> {
-        if let IssueEventAnyOf::ConvertedNoteIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn demilestoned_issue_event(&self) -> Option<&DemilestonedIssueEvent> {
-        if let IssueEventAnyOf::DemilestonedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn labeled_issue_event(&self) -> Option<&LabeledIssueEvent> {
-        if let IssueEventAnyOf::LabeledIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn locked_issue_event(&self) -> Option<&LockedIssueEvent> {
-        if let IssueEventAnyOf::LockedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn milestoned_issue_event(&self) -> Option<&MilestonedIssueEvent> {
-        if let IssueEventAnyOf::MilestonedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn moved_column_in_project_issue_event(&self) -> Option<&MovedColumnInProjectIssueEvent> {
-        if let IssueEventAnyOf::MovedColumnInProjectIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn removed_from_project_issue_event(&self) -> Option<&RemovedFromProjectIssueEvent> {
-        if let IssueEventAnyOf::RemovedFromProjectIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn renamed_issue_event(&self) -> Option<&RenamedIssueEvent> {
-        if let IssueEventAnyOf::RenamedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn review_dismissed_issue_event(&self) -> Option<&ReviewDismissedIssueEvent> {
-        if let IssueEventAnyOf::ReviewDismissedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn review_request_removed_issue_event(&self) -> Option<&ReviewRequestRemovedIssueEvent> {
-        if let IssueEventAnyOf::ReviewRequestRemovedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn review_requested_issue_event(&self) -> Option<&ReviewRequestedIssueEvent> {
-        if let IssueEventAnyOf::ReviewRequestedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn unassigned_issue_event(&self) -> Option<&UnassignedIssueEvent> {
-        if let IssueEventAnyOf::UnassignedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn unlabeled_issue_event(&self) -> Option<&UnlabeledIssueEvent> {
-        if let IssueEventAnyOf::UnlabeledIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 /// Timeline Comment Event
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineCommentEvent {
@@ -21830,7 +21414,7 @@ pub struct LicenseContent {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PagesSourceHash {
     #[serde(
         default,
@@ -21911,7 +21495,7 @@ impl PagesHttpsCertificateState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PagesHttpsCertificate {
     #[serde(
         default,
@@ -22078,7 +21662,7 @@ pub struct PageBuild {
      *
      */
     #[serde()]
-    pub pusher: OwnerAllOf,
+    pub pusher: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23578,7 +23162,7 @@ pub struct PullRequestData {
      *
      */
     #[serde()]
-    pub assignee: OwnerAllOf,
+    pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -23733,7 +23317,7 @@ pub struct PullRequestData {
      *
      */
     #[serde()]
-    pub merged_by: OwnerAllOf,
+    pub merged_by: UserAllOf,
     /**
      * All of the following types:
      *  
@@ -23836,7 +23420,7 @@ pub struct PullRequestData {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /// Pull Request Merge Result
@@ -23961,7 +23545,7 @@ pub struct PullRequestReviewData {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24164,7 +23748,7 @@ pub struct ReviewComment {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /**
@@ -24285,7 +23869,7 @@ pub struct ReleaseAsset {
      *
      */
     #[serde()]
-    pub uploader: OwnerAllOf,
+    pub uploader: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24629,7 +24213,7 @@ pub struct Stargazer {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /// Commit Activity
@@ -24691,7 +24275,7 @@ pub struct ContributorActivity {
      *
      */
     #[serde()]
-    pub author: OwnerAllOf,
+    pub author: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -25239,53 +24823,6 @@ pub enum ScimUserOperationsValueOneOf {
     StringVector(Vec<String>),
 }
 
-impl ScimUserOperationsValueOneOf {
-    pub fn data(&self) -> Option<&Data> {
-        if let ScimUserOperationsValueOneOf::Data(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let ScimUserOperationsValueOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let ScimUserOperationsValueOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<String> for ScimUserOperationsValueOneOf {
-    fn from(f: String) -> Self {
-        ScimUserOperationsValueOneOf::String(f)
-    }
-}
-
-impl From<Vec<String>> for ScimUserOperationsValueOneOf {
-    fn from(f: Vec<String>) -> Self {
-        ScimUserOperationsValueOneOf::StringVector(f)
-    }
-}
-
-impl From<ScimUserOperationsValueOneOf> for String {
-    fn from(f: ScimUserOperationsValueOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
-impl From<ScimUserOperationsValueOneOf> for Vec<String> {
-    fn from(f: ScimUserOperationsValueOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Operations {
     #[serde(default, skip_serializing_if = "Op::is_noop")]
@@ -25622,7 +25159,7 @@ pub struct CommitSearchResultItemData {
      *
      */
     #[serde()]
-    pub author: OwnerAllOf,
+    pub author: UserAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -25703,7 +25240,7 @@ pub struct IssueSearchResultItem {
      *
      */
     #[serde()]
-    pub assignee: OwnerAllOf,
+    pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -25818,7 +25355,7 @@ pub struct IssueSearchResultItem {
      * Issue Search Result Item
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
+    pub performed_via_github_app: Option<AppAllOf>,
     /**
      * Issue Search Result Item
      */
@@ -25885,7 +25422,7 @@ pub struct IssueSearchResultItem {
      *
      */
     #[serde()]
-    pub user: OwnerAllOf,
+    pub user: UserAllOf,
 }
 
 /// Label Search Result Item
@@ -26320,7 +25857,7 @@ pub struct RepoSearchResultItem {
      *
      */
     #[serde()]
-    pub owner: OwnerAllOf,
+    pub owner: UserAllOf,
     /**
      * Repo Search Result Item
      */
@@ -27745,46 +27282,6 @@ pub enum WorkflowOneOf {
     I64(i64),
 }
 
-impl WorkflowOneOf {
-    pub fn i64(&self) -> Option<&i64> {
-        if let WorkflowOneOf::I64(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let WorkflowOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<i64> for WorkflowOneOf {
-    fn from(f: i64) -> Self {
-        WorkflowOneOf::I64(f)
-    }
-}
-
-impl From<String> for WorkflowOneOf {
-    fn from(f: String) -> Self {
-        WorkflowOneOf::String(f)
-    }
-}
-
-impl From<WorkflowOneOf> for i64 {
-    fn from(f: WorkflowOneOf) -> Self {
-        *f.i64().unwrap()
-    }
-}
-
-impl From<WorkflowOneOf> for String {
-    fn from(f: WorkflowOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
 /**
  * Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
  */
@@ -28210,22 +27707,6 @@ pub enum AppsCreateFromManifestResponseAllOf {
     GitHubApp(GitHubApp),
 }
 
-impl AppsCreateFromManifestResponseAllOf {
-    pub fn apps_create_from_manifest_response(&self) -> Option<&AppsCreateFromManifestResponse> {
-        if let AppsCreateFromManifestResponseAllOf::AppsCreateFromManifestResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn git_hub_app(&self) -> Option<&GitHubApp> {
-        if let AppsCreateFromManifestResponseAllOf::GitHubApp(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsUpdateWebhookConfigAppRequest {
     #[serde(
@@ -28366,15 +27847,6 @@ pub enum AppsCheckAuthorizationResponseAllOf {
      * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
      */
     Authorization(Authorization),
-}
-
-impl AppsCheckAuthorizationResponseAllOf {
-    pub fn authorization(&self) -> Option<&Authorization> {
-        if let AppsCheckAuthorizationResponseAllOf::Authorization(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -28809,34 +28281,6 @@ pub enum PublicOneOf {
      * Flag indicating whether the gist is public
      */
     Bool(bool),
-}
-
-impl PublicOneOf {
-    pub fn bool(&self) -> Option<&bool> {
-        if let PublicOneOf::Bool(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn public(&self) -> Option<&Public> {
-        if let PublicOneOf::Public(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<bool> for PublicOneOf {
-    fn from(f: bool) -> Self {
-        PublicOneOf::Bool(f)
-    }
-}
-
-impl From<PublicOneOf> for bool {
-    fn from(f: PublicOneOf) -> Self {
-        *f.bool().unwrap()
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29409,22 +28853,6 @@ pub enum OrgsUpdateResponseOneOf {
     ValidationErrorSimple(ValidationErrorSimple),
 }
 
-impl OrgsUpdateResponseOneOf {
-    pub fn validation_error(&self) -> Option<&ValidationError> {
-        if let OrgsUpdateResponseOneOf::ValidationError(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn validation_error_simple(&self) -> Option<&ValidationErrorSimple> {
-        if let OrgsUpdateResponseOneOf::ValidationErrorSimple(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsSetGithubPermissionsOrganizationRequest {
     /**
@@ -29902,28 +29330,12 @@ pub struct AppsListInstallationsResponse {
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum InteractionsGetRestrictionsOrgResponseAnyOf {
+pub enum InteractionsGetRestrictionsResponseAnyOf {
     Data(Data),
     /**
      * Interaction limit settings.
      */
     InteractionLimits(InteractionLimits),
-}
-
-impl InteractionsGetRestrictionsOrgResponseAnyOf {
-    pub fn data(&self) -> Option<&Data> {
-        if let InteractionsGetRestrictionsOrgResponseAnyOf::Data(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn interaction_limits(&self) -> Option<&InteractionLimits> {
-        if let InteractionsGetRestrictionsOrgResponseAnyOf::InteractionLimits(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
 }
 
 /**
@@ -31635,22 +31047,6 @@ pub enum ProjectsCreateCardRequestOneOf {
     ProjectsCreateCardRequestData(ProjectsCreateCardRequestData),
 }
 
-impl ProjectsCreateCardRequestOneOf {
-    pub fn projects_create_card_request(&self) -> Option<&ProjectsCreateCardRequest> {
-        if let ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequest(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn projects_create_card_request_data(&self) -> Option<&ProjectsCreateCardRequestData> {
-        if let ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequestData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsMoveColumnRequest {
     /**
@@ -32462,38 +31858,6 @@ pub enum ReposAddStatusCheckContextsRequestOneOf {
     StringVector(Vec<String>),
 }
 
-impl ReposAddStatusCheckContextsRequestOneOf {
-    pub fn repos_add_status_check_contexts_request(
-        &self,
-    ) -> Option<&ReposAddStatusCheckContextsRequest> {
-        if let ReposAddStatusCheckContextsRequestOneOf::ReposAddStatusCheckContextsRequest(ref_) =
-            self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let ReposAddStatusCheckContextsRequestOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<String>> for ReposAddStatusCheckContextsRequestOneOf {
-    fn from(f: Vec<String>) -> Self {
-        ReposAddStatusCheckContextsRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<ReposAddStatusCheckContextsRequestOneOf> for Vec<String> {
-    fn from(f: ReposAddStatusCheckContextsRequestOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddAppAccessRestrictionsRequest {
     /**
@@ -32514,39 +31878,6 @@ pub struct ReposAddAppAccessRestrictionsRequest {
 pub enum ReposAddAppAccessRestrictionsRequestOneOf {
     ReposAddAppAccessRestrictionsRequest(ReposAddAppAccessRestrictionsRequest),
     StringVector(Vec<String>),
-}
-
-impl ReposAddAppAccessRestrictionsRequestOneOf {
-    pub fn repos_add_app_access_restrictions_request(
-        &self,
-    ) -> Option<&ReposAddAppAccessRestrictionsRequest> {
-        if let ReposAddAppAccessRestrictionsRequestOneOf::ReposAddAppAccessRestrictionsRequest(
-            ref_,
-        ) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let ReposAddAppAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<String>> for ReposAddAppAccessRestrictionsRequestOneOf {
-    fn from(f: Vec<String>) -> Self {
-        ReposAddAppAccessRestrictionsRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<ReposAddAppAccessRestrictionsRequestOneOf> for Vec<String> {
-    fn from(f: ReposAddAppAccessRestrictionsRequestOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -32574,39 +31905,6 @@ pub enum ReposAddTeamAccessRestrictionsRequestOneOf {
     StringVector(Vec<String>),
 }
 
-impl ReposAddTeamAccessRestrictionsRequestOneOf {
-    pub fn repos_add_team_access_restrictions_request(
-        &self,
-    ) -> Option<&ReposAddTeamAccessRestrictionsRequest> {
-        if let ReposAddTeamAccessRestrictionsRequestOneOf::ReposAddTeamAccessRestrictionsRequest(
-            ref_,
-        ) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let ReposAddTeamAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<String>> for ReposAddTeamAccessRestrictionsRequestOneOf {
-    fn from(f: Vec<String>) -> Self {
-        ReposAddTeamAccessRestrictionsRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<ReposAddTeamAccessRestrictionsRequestOneOf> for Vec<String> {
-    fn from(f: ReposAddTeamAccessRestrictionsRequestOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddUserAccessRestrictionsRequest {
     /**
@@ -32627,39 +31925,6 @@ pub struct ReposAddUserAccessRestrictionsRequest {
 pub enum ReposAddUserAccessRestrictionsRequestOneOf {
     ReposAddUserAccessRestrictionsRequest(ReposAddUserAccessRestrictionsRequest),
     StringVector(Vec<String>),
-}
-
-impl ReposAddUserAccessRestrictionsRequestOneOf {
-    pub fn repos_add_user_access_restrictions_request(
-        &self,
-    ) -> Option<&ReposAddUserAccessRestrictionsRequest> {
-        if let ReposAddUserAccessRestrictionsRequestOneOf::ReposAddUserAccessRestrictionsRequest(
-            ref_,
-        ) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let ReposAddUserAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<String>> for ReposAddUserAccessRestrictionsRequestOneOf {
-    fn from(f: Vec<String>) -> Self {
-        ReposAddUserAccessRestrictionsRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<ReposAddUserAccessRestrictionsRequestOneOf> for Vec<String> {
-    fn from(f: ReposAddUserAccessRestrictionsRequestOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -33739,48 +33004,6 @@ pub enum ReposGetContentResponseOneOf {
     EntriesVector(Vec<Entries>),
 }
 
-impl ReposGetContentResponseOneOf {
-    pub fn content_file(&self) -> Option<&ContentFile> {
-        if let ReposGetContentResponseOneOf::ContentFile(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn content_submodule(&self) -> Option<&ContentSubmodule> {
-        if let ReposGetContentResponseOneOf::ContentSubmodule(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_entries(&self) -> Option<&Vec<Entries>> {
-        if let ReposGetContentResponseOneOf::EntriesVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn symlink_content(&self) -> Option<&SymlinkContent> {
-        if let ReposGetContentResponseOneOf::SymlinkContent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<Entries>> for ReposGetContentResponseOneOf {
-    fn from(f: Vec<Entries>) -> Self {
-        ReposGetContentResponseOneOf::EntriesVector(f)
-    }
-}
-
-impl From<ReposGetContentResponseOneOf> for Vec<Entries> {
-    fn from(f: ReposGetContentResponseOneOf) -> Self {
-        f.vec_entries().unwrap().clone()
-    }
-}
-
 /// The person that committed the file. Default: the authenticated user.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUpdateFileContentsRequestCommitter {
@@ -33990,34 +33213,6 @@ pub enum ReposCreateDeploymentRequestPayloadOneOf {
      * JSON payload with extra information about the deployment.
      */
     String(String),
-}
-
-impl ReposCreateDeploymentRequestPayloadOneOf {
-    pub fn data(&self) -> Option<&Data> {
-        if let ReposCreateDeploymentRequestPayloadOneOf::Data(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let ReposCreateDeploymentRequestPayloadOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<String> for ReposCreateDeploymentRequestPayloadOneOf {
-    fn from(f: String) -> Self {
-        ReposCreateDeploymentRequestPayloadOneOf::String(f)
-    }
-}
-
-impl From<ReposCreateDeploymentRequestPayloadOneOf> for String {
-    fn from(f: ReposCreateDeploymentRequestPayloadOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -35219,46 +34414,6 @@ pub enum TitleOneOf {
     I64(i64),
 }
 
-impl TitleOneOf {
-    pub fn i64(&self) -> Option<&i64> {
-        if let TitleOneOf::I64(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let TitleOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<i64> for TitleOneOf {
-    fn from(f: i64) -> Self {
-        TitleOneOf::I64(f)
-    }
-}
-
-impl From<String> for TitleOneOf {
-    fn from(f: String) -> Self {
-        TitleOneOf::String(f)
-    }
-}
-
-impl From<TitleOneOf> for i64 {
-    fn from(f: TitleOneOf) -> Self {
-        *f.i64().unwrap()
-    }
-}
-
-impl From<TitleOneOf> for String {
-    fn from(f: TitleOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
 /// One of the following types:
 ///
 /// - `String`
@@ -35273,46 +34428,6 @@ pub enum MilestoneOneOf {
      * The `number` of the milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
      */
     I64(i64),
-}
-
-impl MilestoneOneOf {
-    pub fn i64(&self) -> Option<&i64> {
-        if let MilestoneOneOf::I64(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let MilestoneOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<i64> for MilestoneOneOf {
-    fn from(f: i64) -> Self {
-        MilestoneOneOf::I64(f)
-    }
-}
-
-impl From<String> for MilestoneOneOf {
-    fn from(f: String) -> Self {
-        MilestoneOneOf::String(f)
-    }
-}
-
-impl From<MilestoneOneOf> for i64 {
-    fn from(f: MilestoneOneOf) -> Self {
-        *f.i64().unwrap()
-    }
-}
-
-impl From<MilestoneOneOf> for String {
-    fn from(f: MilestoneOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -35354,34 +34469,6 @@ pub struct LabelsDataType {
 pub enum IssuesCreateRequestLabelsOneOf {
     LabelsDataType(LabelsDataType),
     String(String),
-}
-
-impl IssuesCreateRequestLabelsOneOf {
-    pub fn labels_data_type(&self) -> Option<&LabelsDataType> {
-        if let IssuesCreateRequestLabelsOneOf::LabelsDataType(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let IssuesCreateRequestLabelsOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<String> for IssuesCreateRequestLabelsOneOf {
-    fn from(f: String) -> Self {
-        IssuesCreateRequestLabelsOneOf::String(f)
-    }
-}
-
-impl From<IssuesCreateRequestLabelsOneOf> for String {
-    fn from(f: IssuesCreateRequestLabelsOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -35667,46 +34754,6 @@ pub enum IssuesUpdateRequestMilestoneOneOf {
     I64(i64),
 }
 
-impl IssuesUpdateRequestMilestoneOneOf {
-    pub fn i64(&self) -> Option<&i64> {
-        if let IssuesUpdateRequestMilestoneOneOf::I64(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let IssuesUpdateRequestMilestoneOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<i64> for IssuesUpdateRequestMilestoneOneOf {
-    fn from(f: i64) -> Self {
-        IssuesUpdateRequestMilestoneOneOf::I64(f)
-    }
-}
-
-impl From<String> for IssuesUpdateRequestMilestoneOneOf {
-    fn from(f: String) -> Self {
-        IssuesUpdateRequestMilestoneOneOf::String(f)
-    }
-}
-
-impl From<IssuesUpdateRequestMilestoneOneOf> for i64 {
-    fn from(f: IssuesUpdateRequestMilestoneOneOf) -> Self {
-        *f.i64().unwrap()
-    }
-}
-
-impl From<IssuesUpdateRequestMilestoneOneOf> for String {
-    fn from(f: IssuesUpdateRequestMilestoneOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesUpdateRequest {
     /**
@@ -35828,79 +34875,6 @@ pub enum IssuesAddLabelsRequestOneOf {
     StringVector(Vec<String>),
 }
 
-impl IssuesAddLabelsRequestOneOf {
-    pub fn issues_add_labels_request(&self) -> Option<&IssuesAddLabelsRequest> {
-        if let IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequest(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn issues_add_labels_request_data_type(&self) -> Option<&IssuesAddLabelsRequestDataType> {
-        if let IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataType(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_issues_add_labels_request_data(&self) -> Option<&Vec<IssuesAddLabelsRequestData>> {
-        if let IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let IssuesAddLabelsRequestOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let IssuesAddLabelsRequestOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<IssuesAddLabelsRequestData>> for IssuesAddLabelsRequestOneOf {
-    fn from(f: Vec<IssuesAddLabelsRequestData>) -> Self {
-        IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataVector(f)
-    }
-}
-
-impl From<String> for IssuesAddLabelsRequestOneOf {
-    fn from(f: String) -> Self {
-        IssuesAddLabelsRequestOneOf::String(f)
-    }
-}
-
-impl From<Vec<String>> for IssuesAddLabelsRequestOneOf {
-    fn from(f: Vec<String>) -> Self {
-        IssuesAddLabelsRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<IssuesAddLabelsRequestOneOf> for Vec<IssuesAddLabelsRequestData> {
-    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
-        f.vec_issues_add_labels_request_data().unwrap().clone()
-    }
-}
-
-impl From<IssuesAddLabelsRequestOneOf> for String {
-    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
-impl From<IssuesAddLabelsRequestOneOf> for Vec<String> {
-    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
-}
-
 /// Any of the following types:
 ///
 /// - `IssuesAddLabelsRequest`
@@ -35918,79 +34892,6 @@ pub enum IssuesSetLabelsRequestAnyOf {
     String(String),
     IssuesAddLabelsRequestDataVector(Vec<IssuesAddLabelsRequestData>),
     StringVector(Vec<String>),
-}
-
-impl IssuesSetLabelsRequestAnyOf {
-    pub fn issues_add_labels_request(&self) -> Option<&IssuesAddLabelsRequest> {
-        if let IssuesSetLabelsRequestAnyOf::IssuesAddLabelsRequest(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_issues_add_labels_request_data(&self) -> Option<&Vec<IssuesAddLabelsRequestData>> {
-        if let IssuesSetLabelsRequestAnyOf::IssuesAddLabelsRequestDataVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn issues_set_labels_request(&self) -> Option<&IssuesSetLabelsRequest> {
-        if let IssuesSetLabelsRequestAnyOf::IssuesSetLabelsRequest(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let IssuesSetLabelsRequestAnyOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let IssuesSetLabelsRequestAnyOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<IssuesAddLabelsRequestData>> for IssuesSetLabelsRequestAnyOf {
-    fn from(f: Vec<IssuesAddLabelsRequestData>) -> Self {
-        IssuesSetLabelsRequestAnyOf::IssuesAddLabelsRequestDataVector(f)
-    }
-}
-
-impl From<String> for IssuesSetLabelsRequestAnyOf {
-    fn from(f: String) -> Self {
-        IssuesSetLabelsRequestAnyOf::String(f)
-    }
-}
-
-impl From<Vec<String>> for IssuesSetLabelsRequestAnyOf {
-    fn from(f: Vec<String>) -> Self {
-        IssuesSetLabelsRequestAnyOf::StringVector(f)
-    }
-}
-
-impl From<IssuesSetLabelsRequestAnyOf> for Vec<IssuesAddLabelsRequestData> {
-    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
-        f.vec_issues_add_labels_request_data().unwrap().clone()
-    }
-}
-
-impl From<IssuesSetLabelsRequestAnyOf> for String {
-    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
-impl From<IssuesSetLabelsRequestAnyOf> for Vec<String> {
-    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
 }
 
 /**
@@ -36691,22 +35592,6 @@ pub enum SourceAnyOf {
      * Update the source for the repository. Must include the branch name and path.
      */
     SourceDataType(SourceDataType),
-}
-
-impl SourceAnyOf {
-    pub fn source_data(&self) -> Option<&SourceData> {
-        if let SourceAnyOf::SourceData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn source_data_type(&self) -> Option<&SourceDataType> {
-        if let SourceAnyOf::SourceDataType(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -37924,46 +36809,6 @@ pub enum ActivityListStargazersRepoResponseAnyOf {
     StargazerVector(Vec<Stargazer>),
 }
 
-impl ActivityListStargazersRepoResponseAnyOf {
-    pub fn vec_simple_user(&self) -> Option<&Vec<SimpleUser>> {
-        if let ActivityListStargazersRepoResponseAnyOf::SimpleUserVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_stargazer(&self) -> Option<&Vec<Stargazer>> {
-        if let ActivityListStargazersRepoResponseAnyOf::StargazerVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<SimpleUser>> for ActivityListStargazersRepoResponseAnyOf {
-    fn from(f: Vec<SimpleUser>) -> Self {
-        ActivityListStargazersRepoResponseAnyOf::SimpleUserVector(f)
-    }
-}
-
-impl From<Vec<Stargazer>> for ActivityListStargazersRepoResponseAnyOf {
-    fn from(f: Vec<Stargazer>) -> Self {
-        ActivityListStargazersRepoResponseAnyOf::StargazerVector(f)
-    }
-}
-
-impl From<ActivityListStargazersRepoResponseAnyOf> for Vec<SimpleUser> {
-    fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
-        f.vec_simple_user().unwrap().clone()
-    }
-}
-
-impl From<ActivityListStargazersRepoResponseAnyOf> for Vec<Stargazer> {
-    fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
-        f.vec_stargazer().unwrap().clone()
-    }
-}
-
 /**
  * The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.
  */
@@ -38452,54 +37297,6 @@ pub enum ScimUpdateAttributeUserRequestOperationsValueOneOf {
     String(String),
     Value(Value),
     ScimUserEmailsVector(Vec<ScimUserEmails>),
-}
-
-impl ScimUpdateAttributeUserRequestOperationsValueOneOf {
-    pub fn vec_scim_user_emails(&self) -> Option<&Vec<ScimUserEmails>> {
-        if let ScimUpdateAttributeUserRequestOperationsValueOneOf::ScimUserEmailsVector(ref_) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let ScimUpdateAttributeUserRequestOperationsValueOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn value(&self) -> Option<&Value> {
-        if let ScimUpdateAttributeUserRequestOperationsValueOneOf::Value(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<ScimUserEmails>> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
-    fn from(f: Vec<ScimUserEmails>) -> Self {
-        ScimUpdateAttributeUserRequestOperationsValueOneOf::ScimUserEmailsVector(f)
-    }
-}
-
-impl From<String> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
-    fn from(f: String) -> Self {
-        ScimUpdateAttributeUserRequestOperationsValueOneOf::String(f)
-    }
-}
-
-impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for Vec<ScimUserEmails> {
-    fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
-        f.vec_scim_user_emails().unwrap().clone()
-    }
-}
-
-impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for String {
-    fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -39168,22 +37965,6 @@ pub enum UsersGetByUsernameResponseOneOf {
     PublicUser(PublicUser),
 }
 
-impl UsersGetByUsernameResponseOneOf {
-    pub fn private_user(&self) -> Option<&PrivateUser> {
-        if let UsersGetByUsernameResponseOneOf::PrivateUser(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn public_user(&self) -> Option<&PublicUser> {
-        if let UsersGetByUsernameResponseOneOf::PublicUser(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersUpdateAuthenticatedRequest {
     /**
@@ -39333,57 +38114,6 @@ pub enum UsersAddEmailAuthenticatedRequestOneOf {
     StringVector(Vec<String>),
 }
 
-impl UsersAddEmailAuthenticatedRequestOneOf {
-    pub fn string(&self) -> Option<&String> {
-        if let UsersAddEmailAuthenticatedRequestOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let UsersAddEmailAuthenticatedRequestOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn users_add_email_authenticated_request(
-        &self,
-    ) -> Option<&UsersAddEmailAuthenticatedRequest> {
-        if let UsersAddEmailAuthenticatedRequestOneOf::UsersAddEmailAuthenticatedRequest(ref_) =
-            self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<String> for UsersAddEmailAuthenticatedRequestOneOf {
-    fn from(f: String) -> Self {
-        UsersAddEmailAuthenticatedRequestOneOf::String(f)
-    }
-}
-
-impl From<Vec<String>> for UsersAddEmailAuthenticatedRequestOneOf {
-    fn from(f: Vec<String>) -> Self {
-        UsersAddEmailAuthenticatedRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<UsersAddEmailAuthenticatedRequestOneOf> for String {
-    fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
-impl From<UsersAddEmailAuthenticatedRequestOneOf> for Vec<String> {
-    fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
-}
-
 /// Deletes one or more email addresses from your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersDeleteEmailAuthenticatedRequest {
@@ -39410,58 +38140,6 @@ pub enum UsersDeleteEmailAuthenticatedRequestOneOf {
      */
     UsersDeleteEmailAuthenticatedRequest(UsersDeleteEmailAuthenticatedRequest),
     StringVector(Vec<String>),
-}
-
-impl UsersDeleteEmailAuthenticatedRequestOneOf {
-    pub fn string(&self) -> Option<&String> {
-        if let UsersDeleteEmailAuthenticatedRequestOneOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let UsersDeleteEmailAuthenticatedRequestOneOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn users_delete_email_authenticated_request(
-        &self,
-    ) -> Option<&UsersDeleteEmailAuthenticatedRequest> {
-        if let UsersDeleteEmailAuthenticatedRequestOneOf::UsersDeleteEmailAuthenticatedRequest(
-            ref_,
-        ) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<String> for UsersDeleteEmailAuthenticatedRequestOneOf {
-    fn from(f: String) -> Self {
-        UsersDeleteEmailAuthenticatedRequestOneOf::String(f)
-    }
-}
-
-impl From<Vec<String>> for UsersDeleteEmailAuthenticatedRequestOneOf {
-    fn from(f: Vec<String>) -> Self {
-        UsersDeleteEmailAuthenticatedRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<UsersDeleteEmailAuthenticatedRequestOneOf> for String {
-    fn from(f: UsersDeleteEmailAuthenticatedRequestOneOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
-impl From<UsersDeleteEmailAuthenticatedRequestOneOf> for Vec<String> {
-    fn from(f: UsersDeleteEmailAuthenticatedRequestOneOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -39945,44 +38623,4 @@ impl Default for ReposListUserType {
 pub enum ActivityListReposStarredByUserResponseAnyOf {
     RepositoryVector(Vec<Repository>),
     StarredRepositoryVector(Vec<StarredRepository>),
-}
-
-impl ActivityListReposStarredByUserResponseAnyOf {
-    pub fn vec_repository(&self) -> Option<&Vec<Repository>> {
-        if let ActivityListReposStarredByUserResponseAnyOf::RepositoryVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_starred_repository(&self) -> Option<&Vec<StarredRepository>> {
-        if let ActivityListReposStarredByUserResponseAnyOf::StarredRepositoryVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl From<Vec<Repository>> for ActivityListReposStarredByUserResponseAnyOf {
-    fn from(f: Vec<Repository>) -> Self {
-        ActivityListReposStarredByUserResponseAnyOf::RepositoryVector(f)
-    }
-}
-
-impl From<Vec<StarredRepository>> for ActivityListReposStarredByUserResponseAnyOf {
-    fn from(f: Vec<StarredRepository>) -> Self {
-        ActivityListReposStarredByUserResponseAnyOf::StarredRepositoryVector(f)
-    }
-}
-
-impl From<ActivityListReposStarredByUserResponseAnyOf> for Vec<Repository> {
-    fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
-        f.vec_repository().unwrap().clone()
-    }
-}
-
-impl From<ActivityListReposStarredByUserResponseAnyOf> for Vec<StarredRepository> {
-    fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
-        f.vec_starred_repository().unwrap().clone()
-    }
 }
