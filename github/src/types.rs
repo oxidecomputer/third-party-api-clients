@@ -183,7 +183,11 @@ pub struct GitHubApp {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub client_secret: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -266,7 +270,11 @@ pub struct GitHubApp {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub slug: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -435,7 +443,11 @@ pub struct HookDeliveryItem {
     /**
      * Time when the webhook delivery occurred.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub delivered_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Time spent delivering.
@@ -763,7 +775,11 @@ pub struct HookDelivery {
     /**
      * Time when the delivery was delivered.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub delivered_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Time spent delivering.
@@ -860,7 +876,11 @@ pub struct Enterprise {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub avatar_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * A short description of the enterprise.
@@ -910,7 +930,11 @@ pub struct Enterprise {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub slug: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The enterprise's website URL.
@@ -2328,7 +2352,11 @@ pub struct Installation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contact_email: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub events: Vec<String>,
@@ -2382,7 +2410,11 @@ pub struct Installation {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub single_file_paths: Vec<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -2404,7 +2436,11 @@ pub struct Installation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub target_type: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
@@ -3181,7 +3217,11 @@ pub struct Repository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contributors_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The default branch of the repository.
@@ -3499,7 +3539,11 @@ pub struct Repository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pulls_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -3601,7 +3645,11 @@ pub struct Repository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub trees_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -3745,7 +3793,11 @@ pub struct App {
 pub struct ApplicationGrant {
     #[serde()]
     pub app: App,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -3755,7 +3807,11 @@ pub struct ApplicationGrant {
     pub id: i64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub scopes: Vec<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -3813,7 +3869,11 @@ pub struct ScopedInstallation {
 pub struct Authorization {
     #[serde()]
     pub app: App,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -3867,7 +3927,11 @@ pub struct Authorization {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub token_last_eight: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -4343,7 +4407,11 @@ pub struct AuthenticationToken {
     /**
      * The time this token expires
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Authentication Token
@@ -4898,7 +4966,11 @@ impl Default for State {
 /// A collection of related issues and pull requests.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Milestone {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -4906,7 +4978,11 @@ pub struct Milestone {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub closed_issues: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -4919,7 +4995,11 @@ pub struct Milestone {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub due_on: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -4974,7 +5054,11 @@ pub struct Milestone {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -5054,7 +5138,11 @@ pub struct PullRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -5109,7 +5197,11 @@ pub struct IssueSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body_text: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -5123,7 +5215,11 @@ pub struct IssueSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub comments_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -5212,7 +5308,11 @@ pub struct IssueSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -5322,7 +5422,11 @@ pub struct IssueComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body_text: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -5361,7 +5465,11 @@ pub struct IssueComment {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * URL for the issue comment
@@ -5471,7 +5579,11 @@ pub struct Event {
      */
     #[serde()]
     pub actor: Actor,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -5636,7 +5748,11 @@ pub struct BaseGist {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commits_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -5710,7 +5826,11 @@ pub struct BaseGist {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub truncated: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -5789,7 +5909,11 @@ pub struct PublicUser {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Public User
@@ -5962,7 +6086,11 @@ pub struct PublicUser {
     /**
      * Public User
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Public User
@@ -5986,7 +6114,11 @@ pub struct PublicUser {
         rename = "type"
     )]
     pub type_: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6029,7 +6161,11 @@ pub struct GistHistory {
     /**
      * Gist History
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub committed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6052,7 +6188,11 @@ pub struct GistHistory {
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Forks {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6060,7 +6200,11 @@ pub struct Forks {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6096,7 +6240,11 @@ pub struct Gist {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commits_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6170,7 +6318,11 @@ pub struct Gist {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub truncated: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6329,7 +6481,11 @@ pub struct GistComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6343,7 +6499,11 @@ pub struct GistComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6363,7 +6523,11 @@ pub struct GistComment {
 pub struct GistCommit {
     #[serde()]
     pub change_status: Stats,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub committed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6541,7 +6705,11 @@ pub struct Issue {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body_text: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -6560,7 +6728,11 @@ pub struct Issue {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub comments_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -6666,7 +6838,11 @@ pub struct Issue {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * URL for the issue
@@ -7172,7 +7348,11 @@ pub struct MinimalRepository {
     /**
      * Minimal Repository
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -7482,7 +7662,11 @@ pub struct MinimalRepository {
     /**
      * Minimal Repository
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -7590,7 +7774,11 @@ pub struct MinimalRepository {
     /**
      * Minimal Repository
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -7709,7 +7897,11 @@ pub struct Thread {
 /// Thread Subscription
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ThreadSubscription {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -7817,7 +8009,11 @@ pub struct OrganizationFull {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -8075,7 +8271,11 @@ pub struct OrganizationFull {
         rename = "type"
     )]
     pub type_: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -8259,7 +8459,11 @@ impl Visibility {
 /// Secrets for GitHub Actions for an organization.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct OrganizationActionsSecret {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The name of the secret.
@@ -8276,7 +8480,11 @@ pub struct OrganizationActionsSecret {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub selected_repositories_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Visibility of a secret
@@ -8372,12 +8580,20 @@ pub struct CredentialAuthorization {
     /**
      * Date when the credential was last accessed. May be null if it was never accessed
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub credential_accessed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Date when the credential was authorized for use.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub credential_authorized_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Unique identifier for the credential.
@@ -8539,7 +8755,11 @@ pub struct OrgHook {
     pub active: bool,
     #[serde()]
     pub config: Config,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -8574,7 +8794,11 @@ pub struct OrgHook {
         rename = "type"
     )]
     pub type_: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -8628,7 +8852,11 @@ impl InteractionGroup {
 /// Interaction limit settings.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct InteractionLimits {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect. Can be one of: `existing_users`, `contributors_only`, `collaborators_only`.
@@ -9052,7 +9280,11 @@ pub struct Migration {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub archive_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * A migration.
@@ -9100,7 +9332,11 @@ pub struct Migration {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9195,7 +9431,11 @@ impl PackageVisibility {
 /// A software package
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Package {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9233,7 +9473,11 @@ pub struct Package {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repository: Option<MinimalRepository>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9279,12 +9523,20 @@ pub struct PackageVersionMetadata {
 /// A version of a software package
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PackageVersion {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * A version of a software package
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub deleted_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9333,7 +9585,11 @@ pub struct PackageVersion {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub package_html_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9405,7 +9661,11 @@ pub struct Project {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub columns_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -9473,7 +9733,11 @@ pub struct Project {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9583,7 +9847,11 @@ impl Privacy {
 /// Groups of organization members that gives permissions on specified repositories.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct FullTeam {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9684,7 +9952,11 @@ pub struct FullTeam {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub slug: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * URL for the team
@@ -9741,7 +10013,11 @@ pub struct TeamDiscussion {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub comments_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9749,7 +10025,11 @@ pub struct TeamDiscussion {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub last_edited_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9802,7 +10082,11 @@ pub struct TeamDiscussion {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9844,7 +10128,11 @@ pub struct TeamDiscussionComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body_version: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9858,7 +10146,11 @@ pub struct TeamDiscussionComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub last_edited_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9880,7 +10172,11 @@ pub struct TeamDiscussionComment {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -9954,7 +10250,11 @@ pub struct Reaction {
      */
     #[serde(default, skip_serializing_if = "Content::is_noop")]
     pub content: Content,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -10293,7 +10593,11 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contributors_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The default branch of the repository.
@@ -10606,7 +10910,11 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pulls_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -10705,7 +11013,11 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub trees_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -10765,7 +11077,11 @@ pub struct ProjectCard {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -10805,7 +11121,11 @@ pub struct ProjectCard {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub project_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -10824,7 +11144,11 @@ pub struct ProjectColumn {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub cards_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The unique identifier of the project column
@@ -10856,7 +11180,11 @@ pub struct ProjectColumn {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub project_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -11151,7 +11479,11 @@ pub struct FullRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contributors_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -11447,7 +11779,11 @@ pub struct FullRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pulls_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -11550,7 +11886,11 @@ pub struct FullRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub trees_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -11590,7 +11930,11 @@ pub struct Artifact {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub archive_download_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Whether or not the artifact has expired.
@@ -11600,7 +11944,11 @@ pub struct Artifact {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub expired: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -11632,7 +11980,11 @@ pub struct Artifact {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub size_in_bytes: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -11688,7 +12040,11 @@ pub struct Steps {
     /**
      * The time that the job finished, in ISO 8601 format.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The outcome of the job.
@@ -11717,7 +12073,11 @@ pub struct Steps {
     /**
      * The time that the step started, in ISO 8601 format.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The phase of the lifecycle that the job is currently in.
@@ -11738,7 +12098,11 @@ pub struct Job {
     /**
      * The time that the job finished, in ISO 8601 format.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The outcome of the job.
@@ -11806,7 +12170,11 @@ pub struct Job {
     /**
      * The time that the job started, in ISO 8601 format.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The phase of the lifecycle that the job is currently in.
@@ -11932,7 +12300,11 @@ pub struct SimpleCommit {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -11996,7 +12368,11 @@ pub struct WorkflowRun {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub conclusion: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -12117,7 +12493,11 @@ pub struct WorkflowRun {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub status: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The URL to the workflow run.
@@ -12153,7 +12533,11 @@ pub struct EnvironmentApprovalEnvironments {
     /**
      * The time that the environment was created, in ISO 8601 format.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -12188,7 +12572,11 @@ pub struct EnvironmentApprovalEnvironments {
     /**
      * The time that the environment was last updated, in ISO 8601 format.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -12387,7 +12775,11 @@ pub struct PendingDeployment {
     /**
      * The time that the wait timer began.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub wait_timer_started_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
@@ -12447,7 +12839,11 @@ impl From<PayloadOneOf> for String {
 /// A request for a specific ref(branch,sha,tag) to be deployed
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Deployment {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -12559,7 +12955,11 @@ pub struct Deployment {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub transient_environment: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -12614,7 +13014,11 @@ pub struct WorkflowRunUsage {
 /// Set secrets for GitHub Actions.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ActionsSecret {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The name of the secret.
@@ -12625,7 +13029,11 @@ pub struct ActionsSecret {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
@@ -12682,12 +13090,20 @@ pub struct Workflow {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub badge_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * A GitHub Actions workflow
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub deleted_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -12721,7 +13137,11 @@ pub struct Workflow {
     pub path: String,
     #[serde(default, skip_serializing_if = "WorkflowState::is_noop")]
     pub state: WorkflowState,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -13839,7 +14259,11 @@ pub struct ProtectedBranch {
 /// A deployment created as the result of an Actions check run from a workflow that references an environment
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct DeploymentSimple {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -13919,7 +14343,11 @@ pub struct DeploymentSimple {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub transient_environment: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -14074,7 +14502,11 @@ pub struct CheckRun {
     pub app: Option<GitHubApp>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub check_suite: Option<CheckSuite>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conclusion: Option<Conclusion>,
@@ -14138,7 +14570,11 @@ pub struct CheckRun {
     pub output: Output,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub pull_requests: Vec<PullRequestMinimal>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The phase of the lifecycle that the check is currently in.
@@ -14284,7 +14720,11 @@ pub struct CheckSuiteData {
     pub check_runs_url: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conclusion: Option<Conclusion>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -14333,7 +14773,11 @@ pub struct CheckSuiteData {
     pub repository: MinimalRepository,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<CheckSuiteStatus>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -14741,12 +15185,20 @@ pub struct CodeScanningAlertItems {
     /**
      * The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub dismissed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -14920,12 +15372,20 @@ pub struct CodeScanningAlert {
     /**
      * The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub dismissed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -15058,7 +15518,11 @@ pub struct CodeScanningAnalysis {
     /**
      * The time that the analysis was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -15436,7 +15900,11 @@ impl RepositoryInvitationPermissions {
 /// Repository invitations let you manage who you collaborate with.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct RepositoryInvitation {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Repository invitations let you manage who you collaborate with.
@@ -15521,7 +15989,11 @@ pub struct CommitComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commit_id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -15564,7 +16036,11 @@ pub struct CommitComment {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -15828,7 +16304,11 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -15842,7 +16322,11 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commits_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -15891,7 +16375,11 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub merge_commit_sha: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * A collection of related issues and pull requests.
@@ -15953,7 +16441,11 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -15982,7 +16474,11 @@ pub struct SimpleCommitStatus {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub context: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -16019,7 +16515,11 @@ pub struct SimpleCommitStatus {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub target_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -16212,7 +16712,11 @@ pub struct CommunityProfile {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub health_percentage: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
@@ -17176,7 +17680,11 @@ impl DeploymentStatusState {
 /// The status of a deployment.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct DeploymentStatus {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -17262,7 +17770,11 @@ pub struct DeploymentStatus {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub target_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -17331,7 +17843,11 @@ pub struct EnvironmentData {
     /**
      * The time that the environment was created, in ISO 8601 format.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
@@ -17376,7 +17892,11 @@ pub struct EnvironmentData {
     /**
      * The time that the environment was last updated, in ISO 8601 format.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -17456,7 +17976,11 @@ pub struct GitCommitAuthor {
     /**
      * Timestamp of the commit
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Git email address of the user
@@ -17888,7 +18412,11 @@ pub struct Hook {
     pub active: bool,
     #[serde()]
     pub config: HookConfig,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -17940,7 +18468,11 @@ pub struct Hook {
         rename = "type"
     )]
     pub type_: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -18437,7 +18969,11 @@ pub struct IssueEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commit_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Issue Event
@@ -19580,7 +20116,11 @@ pub struct TimelineCommentEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body_text: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -19625,7 +20165,11 @@ pub struct TimelineCommentEvent {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reactions: Option<ReactionRollup>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * URL for the issue comment
@@ -19667,7 +20211,11 @@ pub struct TimelineCrossReferencedEvent {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub actor: Option<SimpleUser>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -19677,7 +20225,11 @@ pub struct TimelineCrossReferencedEvent {
     pub event: String,
     #[serde()]
     pub source: Source,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
@@ -19844,7 +20396,11 @@ pub struct TimelineReviewedEvent {
     /**
      * Timeline Reviewed Event
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -19963,7 +20519,11 @@ pub struct PullRequestReviewComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commit_id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The diff of the line that the comment refers to.
@@ -20115,7 +20675,11 @@ pub struct PullRequestReviewComment {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_side: Option<StartSide>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * URL for the pull request review comment
@@ -20664,7 +21228,11 @@ pub struct PageBuild {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commit: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -20685,7 +21253,11 @@ pub struct PageBuild {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub status: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -21262,7 +21834,11 @@ pub struct PullRequestHeadRepo {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contributors_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -21514,7 +22090,11 @@ pub struct PullRequestHeadRepo {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pulls_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -21596,7 +22176,11 @@ pub struct PullRequestHeadRepo {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub trees_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -21733,7 +22317,11 @@ pub struct PullRequestBaseRepo {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contributors_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -21988,7 +22576,11 @@ pub struct PullRequestBaseRepo {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pulls_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -22070,7 +22662,11 @@ pub struct PullRequestBaseRepo {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub trees_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -22167,7 +22763,11 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub changed_files: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -22193,7 +22793,11 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commits_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -22272,7 +22876,11 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub merged: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -22355,7 +22963,11 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -22477,7 +23089,11 @@ pub struct PullRequestReviewData {
     /**
      * Pull Request Reviews are reviews on pull requests.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -22539,7 +23155,11 @@ pub struct ReviewComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub commit_id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -22661,7 +23281,11 @@ pub struct ReviewComment {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_side: Option<StartSide>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -22729,7 +23353,11 @@ pub struct ReleaseAsset {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub content_type: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -22775,7 +23403,11 @@ pub struct ReleaseAsset {
      */
     #[serde(default, skip_serializing_if = "ReleaseAssetState::is_noop")]
     pub state: ReleaseAssetState,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -22824,7 +23456,11 @@ pub struct Release {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body_text: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * A release.
@@ -22884,7 +23520,11 @@ pub struct Release {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub prerelease: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub published_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * A release.
@@ -23022,7 +23662,11 @@ pub struct SecretScanningAlert {
     /**
      * The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The GitHub URL of the alert resource.
@@ -23050,7 +23694,11 @@ pub struct SecretScanningAlert {
     /**
      * The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub resolved_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -23094,7 +23742,11 @@ pub struct SecretScanningAlert {
 /// Stargazer
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Stargazer {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub starred_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Simple User
@@ -23179,7 +23831,11 @@ pub struct ParticipationStats {
 /// Repository invitations let you manage who you collaborate with.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct RepositorySubscription {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Determines if all notifications should be blocked from this repository.
@@ -23263,7 +23919,11 @@ pub struct Traffic {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub count: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub timestamp: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -23618,9 +24278,17 @@ pub struct ScimUserEmails {
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct ScimUserMeta {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created: Option<chrono::DateTime<chrono::Utc>>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub last_modified: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -23959,7 +24627,11 @@ pub struct CodeSearchResultItem {
     /**
      * Code Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub last_modified_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Code Search Result Item
@@ -24010,7 +24682,11 @@ pub struct CodeSearchResultItem {
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct CommitSearchResultItemAuthor {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -24163,7 +24839,11 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub body_text: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -24177,7 +24857,11 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub comments_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Issue Search Result Item
@@ -24285,7 +24969,11 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub title: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -24463,7 +25151,11 @@ pub struct RepoSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub contributors_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -24735,7 +25427,11 @@ pub struct RepoSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pulls_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub pushed_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -24831,7 +25527,11 @@ pub struct RepoSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub trees_url: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -24892,7 +25592,11 @@ pub struct Related {
 pub struct TopicSearchResultItem {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub aliases: Vec<Related>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -24968,7 +25672,11 @@ pub struct TopicSearchResultItem {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub text_matches: Vec<SearchResultTextMatches>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
@@ -25002,7 +25710,11 @@ pub struct UserSearchResultItem {
     /**
      * User Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -25164,7 +25876,11 @@ pub struct UserSearchResultItem {
     /**
      * User Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * User Search Result Item
@@ -25181,7 +25897,11 @@ pub struct UserSearchResultItem {
     /**
      * User Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -25232,7 +25952,11 @@ pub struct PrivateUser {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -25402,7 +26126,11 @@ pub struct PrivateUser {
     /**
      * Private User
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -25428,7 +26156,11 @@ pub struct PrivateUser {
         rename = "type"
     )]
     pub type_: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -25573,11 +26305,19 @@ pub struct GpgKey {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub can_sign: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub emails: Vec<GpgKeyEmails>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub expires_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -25616,7 +26356,11 @@ pub struct GpgKey {
 /// Key
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Key {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -25712,9 +26456,17 @@ pub struct UserMarketplacePurchase {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub billing_cycle: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub free_trial_ends_on: Option<chrono::DateTime<chrono::Utc>>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub next_billing_date: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -25732,7 +26484,11 @@ pub struct UserMarketplacePurchase {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub unit_count: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
@@ -25744,7 +26500,11 @@ pub struct StarredRepository {
      */
     #[serde()]
     pub repo: Repository,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub starred_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
@@ -27387,7 +28147,11 @@ pub struct ActivityMarkNotificationsAsReadRequest {
     /**
      * Describes the last point that notifications were checked.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub last_read_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Whether the notification has been read.
@@ -31326,7 +32090,11 @@ pub struct ChecksCreateRequest {
     /**
      * The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
@@ -31378,7 +32146,11 @@ pub struct ChecksCreateRequest {
     /**
      * The time that the check run began. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The current status. Can be one of `queued`, `in_progress`, or `completed`.
@@ -31496,7 +32268,11 @@ pub struct ChecksUpdateRequest {
     /**
      * The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * \*\*Required if you provide `completed_at` or a `status` of `completed`\*\*. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.  
@@ -31539,7 +32315,11 @@ pub struct ChecksUpdateRequest {
     /**
      * This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The current status. Can be one of `queued`, `in_progress`, or `completed`.
@@ -31691,7 +32471,11 @@ pub struct CodeScanningUploadSarifRequest {
     /**
      * The time that the analysis run began. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub started_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The name of the tool used to generate the code scanning analysis. If this parameter is not used, the tool name defaults to "API". If the uploaded SARIF contains a tool GUID, this will be available for filtering using the `tool_guid` parameter of operations such as `GET /repos/{owner}/{repo}/code-scanning/alerts`.
@@ -32752,7 +33536,11 @@ pub struct GitCreateCommitRequestAuthor {
     /**
      * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The email of the author (or committer) of the commit
@@ -32780,7 +33568,11 @@ pub struct GitCreateCommitRequestCommitter {
     /**
      * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
@@ -32942,7 +33734,11 @@ pub struct GitCreateTagRequestTagger {
     /**
      * An object with information about the individual creating the tag.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub date: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The email of the author of the tag
@@ -34715,7 +35511,11 @@ pub struct IssuesCreateMilestoneRequest {
     /**
      * The milestone due date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub due_on: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The state of the milestone. Either `open` or `closed`.
@@ -34747,7 +35547,11 @@ pub struct IssuesUpdateMilestoneRequest {
     /**
      * The milestone due date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub due_on: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The state of the milestone. Either `open` or `closed`.
@@ -34770,7 +35574,11 @@ pub struct ActivityMarkRepoNotificationsAsReadRequest {
     /**
      * Describes the last point that notifications were checked. Anything updated since this time will not be marked as read. If you omit this parameter, all notifications are marked as read. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Default: The current timestamp.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub last_read_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 

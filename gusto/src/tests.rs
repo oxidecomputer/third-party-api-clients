@@ -125,5 +125,5 @@ const EMPLOYEE: &str = r#"{
 #[test]
 fn test_deserialize_employee() {
     let deserialized: crate::types::Employee = serde_json::from_str(EMPLOYEE).unwrap();
-    println!("deserialized = {:?}", deserialized);
+    println!("employee = {:?}", deserialized);
 }

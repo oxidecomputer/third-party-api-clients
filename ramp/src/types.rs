@@ -287,7 +287,11 @@ impl Type {
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct PolicyViolations {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -351,7 +355,11 @@ impl GetTransactionResponseDataDisputesType {
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Disputes {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -454,7 +462,11 @@ pub struct Data {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub user_transaction_time: Option<chrono::DateTime<chrono::Utc>>,
 }
 
@@ -710,7 +722,11 @@ pub struct SpendingRestrictions {
     /**
      * Specifies the spend restrictions on a Ramp card.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub lock_date: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Specifies the spend restrictions on a Ramp card.
@@ -1581,7 +1597,11 @@ pub struct GetDeferredStatusResponseDataType {
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct Receipt {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
@@ -1625,7 +1645,11 @@ pub struct Reimbursement {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub amount: f64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
