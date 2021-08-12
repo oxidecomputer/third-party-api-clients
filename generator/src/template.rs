@@ -302,7 +302,9 @@ pub fn generate_docs_github(
     let info = generate_docs_openapi_info(api, proper_name, spec_link);
 
     format!(
-        r#"{}//! To install the library, add the following to your `Cargo.toml` file.
+        r#"{}
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]
@@ -594,7 +596,9 @@ pub fn generate_docs_generic_token(
 ) -> String {
     let info = generate_docs_openapi_info(api, proper_name, spec_link);
     format!(
-        r#"{}//! To install the library, add the following to your `Cargo.toml` file.
+        r#"{}
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]

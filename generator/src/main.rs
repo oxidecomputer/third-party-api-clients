@@ -2147,7 +2147,9 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&tag.name) && (proper_name == "Zoom" || proper_name == "DocuSign") {
+        if !tags.contains(&to_snake_case(&tag.name))
+            && (proper_name == "Zoom" || proper_name == "DocuSign")
+        {
             // Return early do nothing!
             // This fixes Zoom and DocuSign where they list tags that have no associated functions.
             continue;
@@ -2244,7 +2246,9 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&tag.name) && (proper_name == "Zoom" || proper_name == "DocuSign") {
+        if !tags.contains(&to_snake_case(&tag.name))
+            && (proper_name == "Zoom" || proper_name == "DocuSign")
+        {
             // Return early do nothing!
             // This fixes Zoom and DocuSign where they list tags that have no associated functions.
             continue;
