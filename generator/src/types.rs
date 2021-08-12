@@ -69,6 +69,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                         || sn == "PagesSourceHash"
                         || sn == "PagesHttpsCertificate"
                         || sn == "ErrorDetails"
+                        || sn == "EnvelopeDefinition"
                     {
                         a("#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]");
                     } else {

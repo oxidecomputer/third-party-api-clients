@@ -35555,7 +35555,7 @@ pub struct EnvelopeAuditEventResponse {
 }
 
 /// Envelope object definition.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnvelopeDefinition {
     /**
      * Envelope object definition.
