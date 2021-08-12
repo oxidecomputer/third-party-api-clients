@@ -32,6 +32,11 @@ SENDGRID_SPEC = $(SENDGRID_SPEC_DIR)/sendgrid.json
 SENDGRID_SPEC_REPO = sendgrid/sendgrid-oai
 SENDGRID_SPEC_REMOTE = https://raw.githubusercontent.com/$(SENDGRID_SPEC_REPO)/main/oai.json
 
+SLACK_SPEC_DIR = $(CURDIR)/specs/slack
+SLACK_SPEC = $(SLACK_SPEC_DIR)/slack.json
+SLACK_SPEC_REPO = slackapi/slack-api-specs
+SLACK_SPEC_REMOTE = https://raw.githubusercontent.com/$(SLACK_SPEC_REPO)/master/web-api/slack_web_openapi_v2.json
+
 ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
@@ -194,6 +199,27 @@ sendgrid: target/debug/generator $(SENDGRID_SPEC)
 		--token-endpoint "sendgrid.us/oauth/token" \
 		--user-consent-endpoint "sendgrid.us/oauth/authorize"
 	cargo fmt -p sendgrid-api
+
+$(SLACK_SPEC_DIR):
+	mkdir -p $@
+
+$(SLACK_SPEC): $(SLACK_SPEC_DIR)
+	npx swagger2openapi \
+		--outfile $@ \
+		--patch \
+		$(SLACK_SPEC_REMOTE)
+
+slack: target/debug/generator $(SLACK_SPEC)
+	./target/debug/generator -i $(SLACK_SPEC) -v 0.2.0 \
+		-o slack \
+		-n slack-chat-api \
+		--proper-name Slack \
+		-d "A fully generated & opinionated API client for the Slack API." \
+		--spec-link "$(SLACK_SPEC_REMOTE)" \
+		--host "slack.com/api" \
+		--token-endpoint "slack.com/api/oauth.v2.access" \
+		--user-consent-endpoint "slack.com/oauth/v2/authorize"
+	cargo fmt -p slack-chat-api
 
 $(ZOOM_SPEC_DIR):
 	mkdir -p $@
