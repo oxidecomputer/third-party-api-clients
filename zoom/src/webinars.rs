@@ -262,7 +262,7 @@ impl Webinars {
         webinar_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListWebinarParticipantsResponse> {
+    ) -> Result<Vec<crate::types::Participants>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -283,7 +283,55 @@ impl Webinars {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListWebinarParticipantsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List webinar participants.
+     *
+     * This function performs a `GET` to the `/past_webinars/{webinarId}/participants` endpoint.
+     *
+     * As opposed to `list_webinar_participants`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list all the participants who attended a webinar hosted in the past. <br>
+     *
+     * **Prerequisites:**
+     * * Pro or higher plan with a Webinar Add-on.<br>
+     * **Scopes:** `webinar:read:admin` `webinar:read`<br>
+     * <br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
+     *
+     *
+     *
+     *
+     */
+    pub async fn list_all_webinar_participants(
+        &self,
+        webinar_id: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::Participants>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/past_webinars/{}/participants?{}",
+            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

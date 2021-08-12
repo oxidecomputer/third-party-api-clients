@@ -33,13 +33,13 @@ impl RoomsLocation {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn list_zr_location(
+    pub async fn list_zr_locations(
         &self,
         parent_location_id: &str,
         type_: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListZrLocationsResponseData> {
+    ) -> Result<Vec<crate::types::ListZrLocationsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -62,7 +62,54 @@ impl RoomsLocation {
         }
         let url = format!("/rooms/locations?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListZrLocationsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List Zoom Room locations.
+     *
+     * This function performs a `GET` to the `/rooms/locations` endpoint.
+     *
+     * As opposed to `list_zr_locations`, this function returns all the pages of the request at once.
+     *
+     * A Zoom account owner or a Zoom Room administrator can establish a [location hierarchy](https://support.zoom.us/hc/en-us/articles/115000342983-Zoom-Rooms-Location-Hierarchy) to help manage Zoom Rooms that are spread among a variety of locations. Use this API to list the different location types used for Zoom Rooms in an account.<br><br>
+     * **Prerequisites:**
+     * * Account owner or admin permissions.
+     * * Zoom Rooms Version 4.0 or higher<br><br>
+     * **Scopes:** `room:read:admin`<br>
+     *  
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
+    pub async fn list_all_zr_locations(
+        &self,
+        parent_location_id: &str,
+        type_: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ListZrLocationsResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !parent_location_id.is_empty() {
+            query_args.push(format!("parent_location_id={}", parent_location_id));
+        }
+        if !type_.is_empty() {
+            query_args.push(format!("type={}", type_));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/rooms/locations?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

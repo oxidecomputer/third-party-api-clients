@@ -41,7 +41,7 @@ impl Archiving {
         from: &str,
         to: &str,
         query_date_type: crate::types::ListArchivedFilesQueryDateType,
-    ) -> Result<crate::types::ListArchivedFilesResponse> {
+    ) -> Result<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
@@ -65,7 +65,57 @@ impl Archiving {
         }
         let url = format!("/archive_files?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListArchivedFilesResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List archived files.
+     *
+     * This function performs a `GET` to the `/archive_files` endpoint.
+     *
+     * As opposed to `list_archived_files`, this function returns all the pages of the request at once.
+     *
+     * Zoom’s [archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) allows account administrators to set up an automated mechanism to record, collect and archive meeting data to a 3rd party platform of their choice and hence, satisfy FINRA and/ or other compliance requirements.<br><br>
+     * Use this API to retrieve archived meeting or webinar files of an account.
+     *
+     * **Scope:** `recording:read:admin`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br><br>
+     * **Prerequisites:** <br>
+     * * Enable cloud recording.
+     * * Follow the [enablement process](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data#h_01ENPBD3WR68D7FAKTBY92SG45) to access the archiving feature.
+     */
+    pub async fn list_all_archived_files(
+        &self,
+        next_page_token: &str,
+        from: &str,
+        to: &str,
+        query_date_type: crate::types::ListArchivedFilesQueryDateType,
+    ) -> Result<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !from.is_empty() {
+            query_args.push(format!("from={}", from));
+        }
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("query_date_type={}", query_date_type));
+        if !to.is_empty() {
+            query_args.push(format!("to={}", to));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/archive_files?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

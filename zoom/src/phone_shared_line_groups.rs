@@ -37,7 +37,7 @@ impl PhoneSharedLineGroups {
         &self,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListSharedLineGroupsResponse> {
+    ) -> Result<Vec<crate::types::SharedLineGroups>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -54,7 +54,49 @@ impl PhoneSharedLineGroups {
         }
         let url = format!("/phone/shared_line_groups?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListSharedLineGroupsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List shared line groups.
+     *
+     * This function performs a `GET` to the `/phone/shared_line_groups` endpoint.
+     *
+     * As opposed to `list_shared_line_groups`, this function returns all the pages of the request at once.
+     *
+     * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to list all the Shared Line Groups.
+     *
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * Account owner or admin privileges  <br>
+     *
+     * **Scopes:** `phone:read:admin`, `phone:write:admin`
+     *
+     *  
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
+    pub async fn list_all_shared_line_groups(
+        &self,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::SharedLineGroups>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/shared_line_groups?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

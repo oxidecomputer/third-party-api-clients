@@ -37,7 +37,7 @@ impl PhoneCallQueues {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<crate::types::ListCallQueuesResponse> {
+    ) -> Result<Vec<crate::types::CallQueues>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -54,7 +54,48 @@ impl PhoneCallQueues {
         }
         let url = format!("/phone/call_queues?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List call queues.
+     *
+     * This function performs a `GET` to the `/phone/call_queues` endpoint.
+     *
+     * As opposed to `list_call_queues`, this function returns all the pages of the request at once.
+     *
+     * Call queues allow you to route incoming calls to a group of users. For instance, you can use call queues to route calls to various departments in your organization such as sales, engineering, billing, customer service etc.<br> Use this API to list Call queues.<br><br>
+     * **Prerequisites:**<br>
+     * * Pro, Business, or Education account
+     * * Account owner or admin permissions
+     * * Zoom Phone license<br>
+     * **Scopes:** `phone:read:admin`<br>
+     *
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     */
+    pub async fn list_all_call_queues(
+        &self,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::CallQueues>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/call_queues?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -440,14 +481,14 @@ impl PhoneCallQueues {
      * * `from: chrono::NaiveDate` -- Start date (within a 6 month range).
      * * `to: chrono::NaiveDate` -- End date (within a 6 month range).
      */
-    pub async fn get_call_queue_recording(
+    pub async fn get_call_queue_recordings(
         &self,
         call_queue_id: &str,
         page_size: i64,
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::GetCallQueueRecordingsResponseData> {
+    ) -> Result<Vec<crate::types::GetCallQueueRecordingsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -470,6 +511,55 @@ impl PhoneCallQueues {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetCallQueueRecordingsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get call queue recordings.
+     *
+     * This function performs a `GET` to the `/phone/call_queues/{callQueueId}/recordings` endpoint.
+     *
+     * As opposed to `get_call_queue_recordings`, this function returns all the pages of the request at once.
+     *
+     * Use this API to view [call recordings](https://support.zoom.us/hc/en-us/articles/360038521091#h_cbc9f2a3-e06c-4daa-83d4-ddbceef9c77b) from the call queue.<br><br>
+     * **Prerequisites:**<br>
+     * * Pro or higher account with Zoom Phone license.
+     * * [Automatic call recordings](https://support.zoom.us/hc/en-us/articles/360033511872#h_fcb297bb-14e8-4094-91ca-dc61e1a18734) must be enabled in the Policy Settings for call queues. <br> **Scope:** `phone:read:admin`<br> **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     *
+     *
+     *
+     */
+    pub async fn get_all_call_queue_recordings(
+        &self,
+        call_queue_id: &str,
+        next_page_token: &str,
+        from: chrono::NaiveDate,
+        to: chrono::NaiveDate,
+    ) -> Result<Vec<crate::types::GetCallQueueRecordingsResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("from={}", from));
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("to={}", to));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/phone/call_queues/{}/recordings?{}",
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 }

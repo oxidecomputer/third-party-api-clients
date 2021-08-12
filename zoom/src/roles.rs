@@ -79,14 +79,14 @@ impl Roles {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `page_size: i64` -- The number of records returned within a single API call.
      */
-    pub async fn role_member(
+    pub async fn role_members(
         &self,
         role_id: &str,
         page_count: &str,
         page_number: i64,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<crate::types::RoleMembersList> {
+    ) -> Result<Vec<crate::types::Domains>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -113,7 +113,57 @@ impl Roles {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::RoleMembersList = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List members in a role.
+     *
+     * This function performs a `GET` to the `/roles/{roleId}/members` endpoint.
+     *
+     * As opposed to `role_members`, this function returns all the pages of the request at once.
+     *
+     * User [roles](https://support.zoom.us/hc/en-us/articles/115001078646-Role-Based-Access-Control) can have a set of permissions that allows access only to the pages a user needs to view or edit. Use this API to list all the members that are assigned a specific role.
+     *
+     * **Scope:** `role:read:admin`<br>
+     *  
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>**Prerequisites:**<br>
+     * * A Pro or a higher plan.
+     */
+    pub async fn role_members(
+        &self,
+        role_id: &str,
+        page_count: &str,
+        page_number: i64,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::Domains>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !page_count.is_empty() {
+            query_args.push(format!("page_count={}", page_count));
+        }
+        if page_number > 0 {
+            query_args.push(format!("page_number={}", page_number));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/roles/{}/members?{}",
+            crate::progenitor_support::encode_path(&role_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

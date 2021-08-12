@@ -45,7 +45,7 @@ impl Users {
         page_number: &str,
         include_fields: crate::types::UsersIncludeFields,
         next_page_token: &str,
-    ) -> Result<crate::types::UsersResponse> {
+    ) -> Result<Vec<crate::types::Users>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
@@ -70,7 +70,53 @@ impl Users {
         }
         let url = format!("/users?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::UsersResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List users.
+     *
+     * This function performs a `GET` to the `/users` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list your account's users.
+     *
+     * **Scopes:** `user:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
+    pub async fn get_all(
+        &self,
+        status: crate::types::UsersStatus,
+        role_id: &str,
+        page_number: &str,
+        include_fields: crate::types::UsersIncludeFields,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::Users>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("include_fields={}", include_fields));
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !page_number.is_empty() {
+            query_args.push(format!("page_number={}", page_number));
+        }
+        if !role_id.is_empty() {
+            query_args.push(format!("role_id={}", role_id));
+        }
+        query_args.push(format!("status={}", status));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/users?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

@@ -609,7 +609,7 @@ impl Reports {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ReportSignInOutActivitiesResponse> {
+    ) -> Result<Vec<crate::types::ActivityLogs>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -628,7 +628,49 @@ impl Reports {
         }
         let url = format!("/report/activities?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ReportSignInOutActivitiesResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get sign In / sign out activity report.
+     *
+     * This function performs a `GET` to the `/report/activities` endpoint.
+     *
+     * As opposed to `report_sign_in_out_activities`, this function returns all the pages of the request at once.
+     *
+     * Retrieve a list of sign in / sign out activity logs [report](https://support.zoom.us/hc/en-us/articles/201363213-Getting-Started-with-Reports) of users under a Zoom account.<br>
+     * **Prerequisites**<br>
+     * * Pro or higher plan.<br>
+     * **Scopes:** `report:read:admin`<br>
+     *  
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+     */
+    pub async fn report_sign_in_out_activities(
+        &self,
+        from: chrono::NaiveDate,
+        to: chrono::NaiveDate,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ActivityLogs>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("from={}", from));
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("to={}", to));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/report/activities?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

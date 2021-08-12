@@ -77,7 +77,7 @@ impl Phone {
      * * `pending_numbers: bool` -- Include or exclude pending numbers in the response. The value can be either `true` or `false`.
      * * `site_id: &str` -- Unique identifier of the site. Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by a specific phone site. See [Managing multiple sites](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites) or [Adding a site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites#h_05c88e35-1593-491f-b1a8-b7139a75dc15) for details.
      */
-    pub async fn list_account_number(
+    pub async fn list_account_numbers(
         &self,
         next_page_token: &str,
         type_: crate::types::ListAccountPhoneNumbersType,
@@ -86,7 +86,7 @@ impl Phone {
         number_type: crate::types::Type,
         pending_numbers: bool,
         site_id: &str,
-    ) -> Result<crate::types::ListAccountPhoneNumbersResponseData> {
+    ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("extension_type={}", extension_type));
@@ -112,7 +112,60 @@ impl Phone {
         }
         let url = format!("/phone/numbers?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListAccountPhoneNumbersResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List phone numbers.
+     *
+     * This function performs a `GET` to the `/phone/numbers` endpoint.
+     *
+     * As opposed to `list_account_numbers`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list all Zoom Phone numbers in a Zoom account.
+     *
+     * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **Prerequisites:**
+     * * A Pro or higher account plan
+     * * A Zoom Phone license
+     */
+    pub async fn list_all_account_numbers(
+        &self,
+        next_page_token: &str,
+        type_: crate::types::ListAccountPhoneNumbersType,
+        extension_type: crate::types::ExtensionType,
+        number_type: crate::types::Type,
+        pending_numbers: bool,
+        site_id: &str,
+    ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("extension_type={}", extension_type));
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("number_type={}", number_type));
+        if pending_numbers {
+            query_args.push(format!("pending_numbers={}", pending_numbers));
+        }
+        if !site_id.is_empty() {
+            query_args.push(format!("site_id={}", site_id));
+        }
+        query_args.push(format!("type={}", type_));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/numbers?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -273,7 +326,7 @@ impl Phone {
         page_size: i64,
         next_page_token: &str,
         site_id: &str,
-    ) -> Result<crate::types::ListSettingTemplatesResponse> {
+    ) -> Result<Vec<crate::types::Templates>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -293,7 +346,50 @@ impl Phone {
         }
         let url = format!("/phone/setting_templates?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListSettingTemplatesResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List setting templates.
+     *
+     * This function performs a `GET` to the `/phone/setting_templates` endpoint.
+     *
+     * As opposed to `list_setting_templates`, this function returns all the pages of the request at once.
+     *
+     * Use this API to get a list of all the created phone template settings.
+     *
+     * **Scopes:** `phone:read:admin` or `phone:read`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Prerequisites:**
+     * * A Business or Enterprise account
+     * * A Zoom Phone license
+     */
+    pub async fn list_all_setting_templates(
+        &self,
+        next_page_token: &str,
+        site_id: &str,
+    ) -> Result<Vec<crate::types::Templates>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !site_id.is_empty() {
+            query_args.push(format!("site_id={}", site_id));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/setting_templates?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -360,11 +456,11 @@ impl Phone {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `page_size: i64` -- The number of records returned within a single API call.
      */
-    pub async fn list_location(
+    pub async fn list_locations(
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<crate::types::ListLocationsResponseData> {
+    ) -> Result<Vec<crate::types::ListLocationsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -381,7 +477,46 @@ impl Phone {
         }
         let url = format!("/phone/locations?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListLocationsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List emergency service locations.
+     *
+     * This function performs a `GET` to the `/phone/locations` endpoint.
+     *
+     * As opposed to `list_locations`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list emergency service locations.
+     *
+     * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Prerequisites:**
+     * * Pro or a higher account with Zoom Phone license
+     * * Account owner or admin permissions
+     */
+    pub async fn list_all_locations(
+        &self,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ListLocationsResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/locations?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -518,7 +653,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<crate::types::ListSipGroupsResponse> {
+    ) -> Result<Vec<crate::types::SipGroups>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -535,7 +670,45 @@ impl Phone {
         }
         let url = format!("/phone/sip_groups?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListSipGroupsResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List SIP groups.
+     *
+     * This function performs a `GET` to the `/phone/sip_groups` endpoint.
+     *
+     * As opposed to `list_sip_groups`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list SIP (Session Initiation Protocol) groups.
+     *
+     * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Prerequisites:**
+     * * Pro or a higher account with Zoom Phone license
+     * * Account owner or admin permissions
+     */
+    pub async fn list_all_sip_groups(
+        &self,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::SipGroups>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/sip_groups?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -650,7 +823,7 @@ impl Phone {
         next_page_token: &str,
         phone_number: &str,
         time_type: crate::types::TimeType,
-    ) -> Result<crate::types::PhoneUserCallLogsResponse> {
+    ) -> Result<Vec<crate::types::CallLogs>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -678,7 +851,63 @@ impl Phone {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PhoneUserCallLogsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get user's call logs.
+     *
+     * This function performs a `GET` to the `/phone/users/{userId}/call_logs` endpoint.
+     *
+     * As opposed to `user_call_logs`, this function returns all the pages of the request at once.
+     *
+     * Use this API to get a user's [Zoom phone](https://support.zoom.us/hc/en-us/articles/360001297663-Quickstart-Guide-for-Zoom-Phone-Administrators) call logs. For user-level apps, pass [the `me` value](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter.
+     *
+     * **Scopes:** `phone:read`, `phone:read:admin`, `phone_call_log:read`, `phone_call_log:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+     *
+     * **Prerequisites:**
+     * * A Business or Enterprise account
+     * * A Zoom Phone license
+     */
+    pub async fn user_call_logs(
+        &self,
+        user_id: &str,
+        from: chrono::NaiveDate,
+        to: chrono::NaiveDate,
+        type_: crate::types::PhoneUserCallLogsType,
+        next_page_token: &str,
+        phone_number: &str,
+        time_type: crate::types::TimeType,
+    ) -> Result<Vec<crate::types::CallLogs>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("from={}", from));
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !phone_number.is_empty() {
+            query_args.push(format!("phone_number={}", phone_number));
+        }
+        query_args.push(format!("time_type={}", time_type));
+        query_args.push(format!("to={}", to));
+        query_args.push(format!("type={}", type_));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/phone/users/{}/call_logs?{}",
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -709,7 +938,7 @@ impl Phone {
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::PhoneUserRecordingsResponse> {
+    ) -> Result<Vec<crate::types::Recordings>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -732,7 +961,55 @@ impl Phone {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PhoneUserRecordingsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get user's recordings.
+     *
+     * This function performs a `GET` to the `/phone/users/{userId}/recordings` endpoint.
+     *
+     * As opposed to `user_recordings`, this function returns all the pages of the request at once.
+     *
+     * Use this API to get a user's [Zoom Phone recordings](https://support.zoom.us/hc/en-us/articles/360021336671-Viewing-Call-History-and-Recordings). For user-level apps, pass [the `me` value](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter.
+     *
+     * **Scopes:** `phone:read`, `phone:read:admin`, `phone_recording:read`, `phone_recording:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **Prerequisites:**
+     * * A Business or Enterprise account
+     * * A Zoom Phone license
+     */
+    pub async fn user_recordings(
+        &self,
+        user_id: &str,
+        next_page_token: &str,
+        from: chrono::NaiveDate,
+        to: chrono::NaiveDate,
+    ) -> Result<Vec<crate::types::Recordings>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("from={}", from));
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("to={}", to));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/phone/users/{}/recordings?{}",
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -765,7 +1042,7 @@ impl Phone {
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::PhoneUserVoiceMailsResponse> {
+    ) -> Result<Vec<crate::types::VoiceMails>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -789,7 +1066,57 @@ impl Phone {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PhoneUserVoiceMailsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get user's voicemails.
+     *
+     * This function performs a `GET` to the `/phone/users/{userId}/voice_mails` endpoint.
+     *
+     * As opposed to `user_voice_mails`, this function returns all the pages of the request at once.
+     *
+     * Use this API to get a user's Zoom Phone voicemails. For user-level apps, pass [the `me` value](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter.
+     *
+     * **Scopes:** `phone:read`, `phone:read:admin`, `phone_voicemail:read`, `phone_voicemail:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **Prerequisites:**
+     * * A Business or Enterprise account
+     * * A Zoom Phone license
+     */
+    pub async fn user_voice_mails(
+        &self,
+        user_id: &str,
+        status: crate::types::PhoneUserVoiceMailsStatus,
+        next_page_token: &str,
+        from: chrono::NaiveDate,
+        to: chrono::NaiveDate,
+    ) -> Result<Vec<crate::types::VoiceMails>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("from={}", from));
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("status={}", status));
+        query_args.push(format!("to={}", to));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/phone/users/{}/voice_mails?{}",
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -950,7 +1277,7 @@ impl Phone {
      * * `time_type: crate::types::TimeType` -- Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
      * * `site_id: &str` -- Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites). Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by call logs of a specific phone site.
      */
-    pub async fn account_call_log(
+    pub async fn account_call_logs(
         &self,
         page_size: i64,
         from: &str,
@@ -960,7 +1287,7 @@ impl Phone {
         path: &str,
         time_type: crate::types::TimeType,
         site_id: &str,
-    ) -> Result<crate::types::AccountCallLogsResponseData> {
+    ) -> Result<Vec<crate::types::AccountCallLogsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
@@ -993,7 +1320,69 @@ impl Phone {
         }
         let url = format!("/phone/call_logs?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::AccountCallLogsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get account's call logs.
+     *
+     * This function performs a `GET` to the `/phone/call_logs` endpoint.
+     *
+     * As opposed to `account_call_logs`, this function returns all the pages of the request at once.
+     *
+     * Use this API to return an account's [call logs](https://support.zoom.us/hc/en-us/articles/360021114452-Viewing-Call-Logs).
+     *
+     * **Scopes:** `phone:read:admin`, `phone_call_log:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+     *
+     * **Prerequisites:**
+     * * A Business or Enterprise account
+     * * A Zoom Phone license
+     * * Account owner and a [role](https://support.zoom.us/hc/en-us/articles/115001078646-Role-Based-Access-Control) with Zoom Phone management
+     */
+    pub async fn account_call_logs(
+        &self,
+        from: &str,
+        to: &str,
+        type_: &str,
+        next_page_token: &str,
+        path: &str,
+        time_type: crate::types::TimeType,
+        site_id: &str,
+    ) -> Result<Vec<crate::types::AccountCallLogsResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !from.is_empty() {
+            query_args.push(format!("from={}", from));
+        }
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !path.is_empty() {
+            query_args.push(format!("path={}", path));
+        }
+        if !site_id.is_empty() {
+            query_args.push(format!("site_id={}", site_id));
+        }
+        query_args.push(format!("time_type={}", time_type));
+        if !to.is_empty() {
+            query_args.push(format!("to={}", to));
+        }
+        if !type_.is_empty() {
+            query_args.push(format!("type={}", type_));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/call_logs?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1151,7 +1540,7 @@ impl Phone {
      *  
      *  This value defaults to `start_time`.
      */
-    pub async fn get_recording(
+    pub async fn get_recordings(
         &self,
         page_size: i64,
         next_page_token: &str,
@@ -1161,7 +1550,7 @@ impl Phone {
         recording_type: &str,
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
-    ) -> Result<crate::types::GetPhoneRecordingsResponseData> {
+    ) -> Result<Vec<crate::types::GetPhoneRecordingsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
@@ -1194,7 +1583,69 @@ impl Phone {
         }
         let url = format!("/phone/recordings?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetPhoneRecordingsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get call recordings.
+     *
+     * This function performs a `GET` to the `/phone/recordings` endpoint.
+     *
+     * As opposed to `get_recordings`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list an account's [call recordings](https://support.zoom.us/hc/en-us/articles/360038521091-Accessing-and-sharing-call-recordings)
+     *
+     * **Scopes:** `phone:read:admin`, `phone:write:admin`,`phone_recording:read:admin`
+     *
+     * **Prerequisties:**
+     * * A Pro or higher account plan
+     * * A Zoom Phone license
+     * * Account owner or admin privileges
+     */
+    pub async fn get_all_recordings(
+        &self,
+        next_page_token: &str,
+        from: &str,
+        to: &str,
+        owner_type: &str,
+        recording_type: &str,
+        site_id: &str,
+        query_date_type: crate::types::QueryDateType,
+    ) -> Result<Vec<crate::types::GetPhoneRecordingsResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !from.is_empty() {
+            query_args.push(format!("from={}", from));
+        }
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !owner_type.is_empty() {
+            query_args.push(format!("owner_type={}", owner_type));
+        }
+        query_args.push(format!("query_date_type={}", query_date_type));
+        if !recording_type.is_empty() {
+            query_args.push(format!("recording_type={}", recording_type));
+        }
+        if !site_id.is_empty() {
+            query_args.push(format!("site_id={}", site_id));
+        }
+        if !to.is_empty() {
+            query_args.push(format!("to={}", to));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/recordings?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1218,7 +1669,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<crate::types::ListByocsipTrunkResponse> {
+    ) -> Result<Vec<crate::types::ByocSipTrunk>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -1235,7 +1686,45 @@ impl Phone {
         }
         let url = format!("/phone/sip_trunk/trunks?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListByocsipTrunkResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List BYOC SIP trunks.
+     *
+     * This function performs a `GET` to the `/phone/sip_trunk/trunks` endpoint.
+     *
+     * As opposed to `list_byocsip_trunk`, this function returns all the pages of the request at once.
+     *
+     * Use this API to return a list of an account's assigned [BYOC (Bring Your Own Carrier) SIP (Session Initiation Protocol) trunks](https://zoom.us/docs/doc/Zoom-Bring%20Your%20Own%20Carrier.pdf).
+     *
+     * **Scopes:** `phone:write:admin` or `phone:master`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Prerequisites:**
+     * * A Business or Enterprise account
+     */
+    pub async fn list_all_byocsip_trunk(
+        &self,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ByocSipTrunk>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/sip_trunk/trunks?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1331,7 +1820,7 @@ impl Phone {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<crate::types::ListExternalContactsResponse> {
+    ) -> Result<Vec<crate::types::ExternalContacts>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -1348,7 +1837,46 @@ impl Phone {
         }
         let url = format!("/phone/external_contacts?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListExternalContactsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List external contacts.
+     *
+     * This function performs a `GET` to the `/phone/external_contacts` endpoint.
+     *
+     * As opposed to `list_external_contacts`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list external contacts.
+     *
+     * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Prerequisites:**
+     * * Pro or a higher account with Zoom Phone license
+     * * Account owner or admin permissions
+     */
+    pub async fn list_all_external_contacts(
+        &self,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ExternalContacts>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/external_contacts?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1595,12 +2123,12 @@ impl Phone {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `site_id: &str` -- Unique Identifier of the site. This can be retrieved from the [List Phone Sites](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone-site/listphonesites) API.
      */
-    pub async fn list_user(
+    pub async fn list_users(
         &self,
         page_size: i64,
         next_page_token: &str,
         site_id: &str,
-    ) -> Result<crate::types::ListPhoneUsersResponseData> {
+    ) -> Result<Vec<crate::types::ListPhoneUsersResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -1620,7 +2148,50 @@ impl Phone {
         }
         let url = format!("/phone/users?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListPhoneUsersResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List phone users.
+     *
+     * This function performs a `GET` to the `/phone/users` endpoint.
+     *
+     * As opposed to `list_users`, this function returns all the pages of the request at once.
+     *
+     * Use this API to return a list of all of an account's users who are assigned a Zoom Phone license.
+     *
+     * **Scopes:** `phone:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Prerequisites:**
+     * * A Pro or higher account plan
+     * * A Zoom Phone license
+     */
+    pub async fn list_all_users(
+        &self,
+        next_page_token: &str,
+        site_id: &str,
+    ) -> Result<Vec<crate::types::ListPhoneUsersResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !site_id.is_empty() {
+            query_args.push(format!("site_id={}", site_id));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/users?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

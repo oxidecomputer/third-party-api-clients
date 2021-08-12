@@ -326,7 +326,7 @@ impl SipConnectedAudio {
         account_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListInternalNumbersResponse> {
+    ) -> Result<Vec<crate::types::InternalNumbers>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -347,7 +347,51 @@ impl SipConnectedAudio {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListInternalNumbersResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List internal numbers.
+     *
+     * This function performs a `GET` to the `/accounts/{accountId}/sip_trunk/internal_numbers` endpoint.
+     *
+     * As opposed to `list_internal_numbers`, this function returns all the pages of the request at once.
+     *
+     * This API allows a master account with SIP Connected Audio plan to list internal phone numbers (i.e., numbers that are not provided by Zoom but are owned by the organization consuming the API) assigned to a master account or a sub account.<br><br>To list internal numbers of a sub account, provide the account ID of the sub account in the `accountId` path parameter. To list internal numbers of a  master account, provide `me` as the value of the `accountId` path parameter.
+     * <br><b>Prerequisites:</b><br>
+     * * The account making this API request must be a [master account](https://marketplace.zoom.us/docs/api-reference/master-account-apis) with SIP Connected Audio Plan.<br><br>
+     * **Scope:** `sip_trunk:master`
+     *
+     *
+     *
+     */
+    pub async fn list_all_internal_numbers(
+        &self,
+        account_id: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::InternalNumbers>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/accounts/{}/sip_trunk/internal_numbers?{}",
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

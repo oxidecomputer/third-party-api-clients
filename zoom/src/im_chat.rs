@@ -149,7 +149,7 @@ impl ImChat {
         date: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListimmessagesResponse> {
+    ) -> Result<Vec<crate::types::ListimmessagesResponseMessages>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !channel.is_empty() {
@@ -179,7 +179,61 @@ impl ImChat {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListimmessagesResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get user’s IM messages.
+     *
+     * This function performs a `GET` to the `/im/users/{userId}/chat/messages` endpoint.
+     *
+     * As opposed to `listimmessages`, this function returns all the pages of the request at once.
+     *
+     * Get IM Chat messages for a specified period of time. This API only supports Oauth2.<br>
+     * **Scopes:** `imchat:read`<br>
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     * <br><br>
+     *   <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
+     *
+     */
+    pub async fn listimmessages(
+        &self,
+        user_id: &str,
+        chat_user: &str,
+        channel: &str,
+        date: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ListimmessagesResponseMessages>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !channel.is_empty() {
+            query_args.push(format!("channel={}", channel));
+        }
+        if !chat_user.is_empty() {
+            query_args.push(format!("chat_user={}", chat_user));
+        }
+        if !date.is_empty() {
+            query_args.push(format!("date={}", date));
+        }
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/im/users/{}/chat/messages?{}",
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

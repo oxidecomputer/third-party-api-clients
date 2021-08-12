@@ -184,7 +184,8 @@ pub fn generate_files(
             /*
              * Get the response type.
              */
-            let (mut response_type, tid, inner_response_type) = get_response_type(&od, ts, o)?;
+            let (mut response_type, tid, inner_response_type, pagination_property) =
+                get_response_type(&od, ts, o)?;
             // We shouldn't ever have an optional response type, thats just annoying.
             if response_type.starts_with("Option<") {
                 response_type = response_type
@@ -200,6 +201,7 @@ pub fn generate_files(
                 &body_func,
                 &response_type,
                 &inner_response_type,
+                &pagination_property,
                 false,
             )?;
 
@@ -286,6 +288,7 @@ pub fn generate_files(
                     &body_func,
                     &response_type,
                     &inner_response_type,
+                    &pagination_property,
                     true,
                 )?;
 
@@ -350,13 +353,23 @@ fn get_response_type(
     od: &str,
     ts: &mut TypeSpace,
     o: &openapiv3::Operation,
-) -> Result<(String, crate::TypeId, String)> {
+) -> Result<(
+    String,        // original response type
+    crate::TypeId, // type id
+    String,        // optional vec response type if this struct paginates
+    String,        // optional name of vec response property if this struct paginates
+)> {
     // Get the first response.
     let first = o.responses.responses.first().unwrap();
     if let Ok(i) = first.1.item() {
         if i.content.is_empty() {
             // Return empty.
-            return Ok(("()".to_string(), crate::TypeId(0), "".to_string()));
+            return Ok((
+                "()".to_string(),
+                crate::TypeId(0),
+                "".to_string(),
+                "".to_string(),
+            ));
         }
 
         // Get the json response, if it exists.
@@ -373,7 +386,12 @@ fn get_response_type(
                         if any.properties.is_empty() && any.format.is_none() && any.items.is_none()
                         {
                             // Return empty.
-                            return Ok(("()".to_string(), crate::TypeId(0), "".to_string()));
+                            return Ok((
+                                "()".to_string(),
+                                crate::TypeId(0),
+                                "".to_string(),
+                                "".to_string(),
+                            ));
                         }
                     }
                 }
@@ -390,15 +408,38 @@ fn get_response_type(
                         if rt == "crate::types::Page" {
                             if let Some(did) = p.get("data") {
                                 let rt = ts.render_type(did, false)?;
-                                return Ok((og_rt, did.clone(), rt));
-                            } else {
-                                println!("we have a page: {:?} {}", p, rt);
+                                return Ok((og_rt, did.clone(), rt, "data".to_string()));
+                            } else if p.len() == 2 {
+                                // We know for the Ramp API there will only be two fields in
+                                // these structs. This should help prevent errors.
+                                // Let's find the value of the struct that is the vec!
+                                for (n, id) in p {
+                                    let rt = ts.render_type(id, false)?;
+                                    if rt.starts_with("Vec<") {
+                                        return Ok((og_rt, id.clone(), rt, n.to_string()));
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // For Zoom, the pagination values are passed _in_ the resulting
+                    // struct, so we want to ignore them and just get the data.
+                    if let Some(pid) = p.get("next_page_token") {
+                        let rt = ts.render_type(pid, false)?;
+                        if rt == "String" {
+                            for (n, id) in p {
+                                // Now we must find the property with the vector for this struct.
+                                let rt = ts.render_type(id, false)?;
+                                if rt.starts_with("Vec<") {
+                                    return Ok((og_rt, id.clone(), rt, n.to_string()));
+                                }
                             }
                         }
                     }
                 }
 
-                return Ok((og_rt, tid, "".to_string()));
+                return Ok((og_rt, tid, "".to_string(), "".to_string()));
             }
         }
 
@@ -412,7 +453,7 @@ fn get_response_type(
             if let Some(s) = &mt.schema {
                 let tid = ts.select(None, s, "")?;
                 let rt = ts.render_type(&tid, false)?;
-                return Ok((rt, tid, "".to_string()));
+                return Ok((rt, tid, "".to_string(), "".to_string()));
             }
         } else if ct == "application/scim+json" {
             if !mt.encoding.is_empty() {
@@ -423,7 +464,7 @@ fn get_response_type(
                 let object_name = format!("{} response", oid_to_object_name(od));
                 let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
                 let rt = ts.render_type(&tid, false)?;
-                return Ok((rt, tid, "".to_string()));
+                return Ok((rt, tid, "".to_string(), "".to_string()));
             }
         }
     } else if let openapiv3::ReferenceOr::Reference { reference } = first.1 {
@@ -433,6 +474,8 @@ fn get_response_type(
         let og_rt = ts.render_type(&id, false)?;
         let et = ts.id_to_entry.get(&id).unwrap();
         if let crate::TypeDetails::Object(p, _) = &et.details {
+            // TODO: make this DRY with the above its the same code.
+
             // For Ramp, the pagination values are passed _in_ the resulting
             // struct, so we want to ignore them and just get the data.
             if let Some(pid) = p.get("page") {
@@ -440,19 +483,47 @@ fn get_response_type(
                 if rt == "crate::types::Page" {
                     if let Some(did) = p.get("data") {
                         let rt = ts.render_type(did, false)?;
-                        return Ok((og_rt, did.clone(), rt));
-                    } else {
-                        println!("we have a page: {:?} {}", p, rt);
+                        return Ok((og_rt, did.clone(), rt, "data".to_string()));
+                    } else if p.len() == 2 {
+                        // We know for the Ramp API there will only be two fields in
+                        // these structs. This should help prevent errors.
+                        // Let's find the value of the struct that is the vec!
+                        for (n, id) in p {
+                            let rt = ts.render_type(id, false)?;
+                            if rt.starts_with("Vec<") {
+                                return Ok((og_rt, id.clone(), rt, n.to_string()));
+                            }
+                        }
+                    }
+                }
+            }
+
+            // For Zoom, the pagination values are passed _in_ the resulting
+            // struct, so we want to ignore them and just get the data.
+            if let Some(pid) = p.get("next_page_token") {
+                let rt = ts.render_type(pid, false)?;
+                if rt == "String" {
+                    for (n, id) in p {
+                        // Now we must find the property with the vector for this struct.
+                        let rt = ts.render_type(id, false)?;
+                        if rt.starts_with("Vec<") {
+                            return Ok((og_rt, id.clone(), rt, n.to_string()));
+                        }
                     }
                 }
             }
         }
-        return Ok((og_rt, id, "".to_string()));
+        return Ok((og_rt, id, "".to_string(), "".to_string()));
     }
 
     // Basically if we get here, likely its just an empty struct or something.
     // We never actually hit here before Zoom but then it was just an empty response.
-    Ok(("()".to_string(), crate::TypeId(0), "".to_string()))
+    Ok((
+        "()".to_string(),
+        crate::TypeId(0),
+        "".to_string(),
+        "".to_string(),
+    ))
 }
 
 fn get_fn_params(
@@ -563,6 +634,7 @@ fn get_fn_inner(
     body_func: &Option<String>,
     response_type: &str,
     inner_response_type: &str,
+    pagination_property: &str,
     all_pages: bool,
 ) -> Result<String> {
     let body = if let Some(f) = &body_func {
@@ -582,14 +654,14 @@ fn get_fn_inner(
         let inner = format!(
             r#"let mut resp: {} = self.client.{}(&url, {}).await.unwrap();
 
-            let mut data = resp.data;
+            let mut {} = resp.{};
             let mut page = resp.page.next;
 
             // Paginate if we should.
             while !page.is_empty() {{
                 resp = self.client.{}(page.trim_start_matches(crate::DEFAULT_HOST), {}).await.unwrap();
 
-                data.append(&mut resp.data);
+                {}.append(&mut resp.{});
 
                 if !resp.page.next.is_empty() && resp.page.next != page {{
                     page = resp.page.next.to_string();
@@ -603,8 +675,54 @@ fn get_fn_inner(
             response_type,
             m.to_lowercase(),
             body,
+            pagination_property,
+            pagination_property,
             m.to_lowercase(),
-            body
+            body,
+            pagination_property,
+            pagination_property,
+        );
+
+        return Ok(inner);
+    } else if all_pages && proper_name == "Zoom" {
+        // We will do a custom function here.
+        let inner = format!(
+            r#"let mut resp: {} = self.client.{}(&url, {}).await.unwrap();
+
+            let mut {} = resp.{};
+            let mut page = resp.next_page_token;
+
+            // Paginate if we should.
+            while !page.is_empty() {{
+                // Check if we already have URL params and need to concat the token.
+                if !url.contains("?") {{
+                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", page), {}).await.unwrap();
+                }} else {{
+                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", page), {}).await.unwrap();
+                }}
+
+                {}.append(&mut resp.{});
+
+                if !resp.next_page_token.is_empty() && resp.next_page_token != page {{
+                    page = resp.next_page_token.to_string();
+                }} else {{
+                    page = "".to_string();
+                }}
+            }}
+
+            // Return our response data.
+            Ok(data)"#,
+            response_type,
+            m.to_lowercase(),
+            body,
+            pagination_property,
+            pagination_property,
+            m.to_lowercase(),
+            body,
+            m.to_lowercase(),
+            body,
+            pagination_property,
+            pagination_property,
         );
 
         return Ok(inner);

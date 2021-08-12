@@ -39,7 +39,7 @@ impl SipPhone {
         search_key: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListSipPhonesResponse> {
+    ) -> Result<Vec<crate::types::Phones>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -62,7 +62,52 @@ impl SipPhone {
         }
         let url = format!("/sip_phones?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List SIP phones.
+     *
+     * This function performs a `GET` to the `/sip_phones` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Zoom’s Phone System Integration (PSI), also referred as SIP phones, enables an organization to leverage the Zoom client to complete a softphone registration to supported premise based PBX system. End users will have the ability to have softphone functionality within a single client while maintaining a comparable interface to Zoom Phone. Use this API to list SIP phones on an account.<br><br>
+     * **Prerequisites**:
+     * * Currently only supported on Cisco and Avaya PBX systems.
+     * * User must enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.<br> **Scope:** `sip_phone:read:admin`<br>
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
+     *
+     */
+    pub async fn list_all(
+        &self,
+        page_number: i64,
+        search_key: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::Phones>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if page_number > 0 {
+            query_args.push(format!("page_number={}", page_number));
+        }
+        if !search_key.is_empty() {
+            query_args.push(format!("search_key={}", search_key));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/sip_phones?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

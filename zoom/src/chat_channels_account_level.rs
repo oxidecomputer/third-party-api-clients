@@ -127,13 +127,13 @@ impl ChatChannelsAccountLevel {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `user_id: &str` -- Unique identifier of the user who is the owner of this channel.
      */
-    pub async fn list_channel_member(
+    pub async fn list_channel_members(
         &self,
         user_id: &str,
         channel_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListChannelMembersResponseData> {
+    ) -> Result<Vec<crate::types::ListChannelMembersResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -155,7 +155,51 @@ impl ChatChannelsAccountLevel {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListChannelMembersResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List channel members.
+     *
+     * This function performs a `GET` to the `/chat/users/{userId}/channels/{channelId}/members` endpoint.
+     *
+     * As opposed to `list_channel_members`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list all members of a channel. For user-level apps, pass [the `me` value](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter.
+     *
+     * **Scopes:** `chat_channel:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note:</b> For an<b> account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, this API can only be used on behalf of a user who is assigned with a <a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit."> role</a> that has the <b>View</b> or <b>Edit</b> permission for <b>Chat Channels</b>.</p>
+     */
+    pub async fn list_all_channel_members(
+        &self,
+        user_id: &str,
+        channel_id: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ListChannelMembersResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/chat/users/{}/channels/{}/members?{}",
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&channel_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

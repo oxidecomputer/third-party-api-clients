@@ -1153,7 +1153,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn list_call_logs_metric(
+    pub async fn list_call_logs_metrics(
         &self,
         from: &str,
         to: &str,
@@ -1161,7 +1161,7 @@ impl Dashboards {
         quality_type: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListCallLogsMetricsResponseData> {
+    ) -> Result<Vec<crate::types::ListCallLogsMetricsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
@@ -1190,7 +1190,65 @@ impl Dashboards {
         }
         let url = format!("/phone/metrics/call_logs?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListCallLogsMetricsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List call logs.
+     *
+     * This function performs a `GET` to the `/phone/metrics/call_logs` endpoint.
+     *
+     * As opposed to `list_call_logs_metrics`, this function returns all the pages of the request at once.
+     *
+     * Call logs provide a record of all incoming and outgoing calls over Zoom Phone in an account.
+     *
+     * Use this API to list monthly call logs metrics. You can use query parameters to filter the response by date, site and MOS(Mean Opinion Score) of the call.
+     *
+     * **Prerequisites:**
+     * * Business, or Education account
+     * * Zoom Phone license <br><br>
+     *
+     * **Scopes:** `phone:read:admin`, `phone:write:admin`<br>
+     * **Rate Limit Label:** `Heavy`
+     */
+    pub async fn list_all_call_logs_metrics(
+        &self,
+        from: &str,
+        to: &str,
+        site_id: &str,
+        quality_type: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ListCallLogsMetricsResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !from.is_empty() {
+            query_args.push(format!("from={}", from));
+        }
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !quality_type.is_empty() {
+            query_args.push(format!("quality_type={}", quality_type));
+        }
+        if !site_id.is_empty() {
+            query_args.push(format!("site_id={}", site_id));
+        }
+        if !to.is_empty() {
+            query_args.push(format!("to={}", to));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/metrics/call_logs?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1284,7 +1342,7 @@ impl Dashboards {
         type_: crate::types::DashboardMeetingsType,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<crate::types::ParticipantFeedbackResponse> {
+    ) -> Result<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -1306,7 +1364,55 @@ impl Dashboards {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ParticipantFeedbackResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get post meeting feedback.
+     *
+     * This function performs a `GET` to the `/metrics/meetings/{meetingId}/participants/satisfaction` endpoint.
+     *
+     * As opposed to `participant_feedback`, this function returns all the pages of the request at once.
+     *
+     * When a meeting ends, each attendee will be prompted to share their meeting experience by clicking either thumbs up or thumbs down. Use this API to retrieve the feedback submitted for a specific meeting. Note that this API only works for meetings scheduled after December 20, 2020.
+     *
+     * **Prerequisites:**
+     * * [Feedback to Zoom](https://support.zoom.us/hc/en-us/articles/115005838023) setting must be enabled by the participant prior to the meeting.
+     * * The user making the API request must be enrolled in a Business or a higher plan.
+     *
+     * <br> **Scope:** `dashboard_meetings:read:admiin`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     */
+    pub async fn participant_feedback(
+        &self,
+        meeting_id: &str,
+        type_: crate::types::DashboardMeetingsType,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("type={}", type_));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/metrics/meetings/{}/participants/satisfaction?{}",
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1342,7 +1448,7 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         webinar_id: &str,
-    ) -> Result<crate::types::ParticipantFeedbackResponse> {
+    ) -> Result<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -1364,6 +1470,55 @@ impl Dashboards {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ParticipantFeedbackResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Get post webinar feedback.
+     *
+     * This function performs a `GET` to the `/metrics/webinars/{webinarId}/participants/satisfaction` endpoint.
+     *
+     * As opposed to `participant_webinar_feedback`, this function returns all the pages of the request at once.
+     *
+     * When a Webinar ends, each attendee will be prompted to share their Webinar experience by clicking either thumbs up or thumbs down. Use this API to retrieve the feedback submitted for a specific webinar. Note that this API only works for meetings scheduled after December 20, 2020.
+     *
+     * **Prerequisites:**
+     * * [Feedback to Zoom](https://support.zoom.us/hc/en-us/articles/115005838023) setting must be enabled by the participant prior to the meeting.
+     * * The user making the API request must be enrolled in a Business or a higher plan.
+     *
+     *
+     * <br> **Scope:** `dashboard_webinars:read:admin`
+     *
+     * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
+     */
+    pub async fn participant_webinar_feedback(
+        &self,
+        type_: crate::types::DashboardMeetingsType,
+        next_page_token: &str,
+        webinar_id: &str,
+    ) -> Result<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("type={}", type_));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/metrics/webinars/{}/participants/satisfaction?{}",
+            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 }

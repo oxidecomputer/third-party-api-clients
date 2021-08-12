@@ -34,7 +34,7 @@ impl PhoneSite {
         &self,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListPhoneSitesResponse> {
+    ) -> Result<Vec<crate::types::Sites>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -51,7 +51,42 @@ impl PhoneSite {
         }
         let url = format!("/phone/sites?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListPhoneSitesResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List phone sites.
+     *
+     * This function performs a `GET` to the `/phone/sites` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Sites allow you to organize Zoom Phone users in your organization. Use this API to list all the [sites](https://support.zoom.us/hc/en-us/articles/360020809672) that have been created for an account.<br>
+     * **Prerequisites:**<br>
+     * * Multiple Sites must be [enabled](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites#h_05c88e35-1593-491f-b1a8-b7139a75dc15).
+     * * Pro or a higher account with Zoom Phone enabled.
+     *
+     * **Scope:** `phone:read:admin`<br>
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
+    pub async fn list_all(&self, next_page_token: &str) -> Result<Vec<crate::types::Sites>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/sites?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

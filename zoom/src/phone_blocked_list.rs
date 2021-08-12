@@ -34,7 +34,7 @@ impl PhoneBlockedList {
         &self,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<crate::types::ListBlockedResponse> {
+    ) -> Result<Vec<crate::types::BlockedList>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -51,7 +51,45 @@ impl PhoneBlockedList {
         }
         let url = format!("/phone/blocked_list?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListBlockedResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List blocked lists.
+     *
+     * This function performs a `GET` to the `/phone/blocked_list` endpoint.
+     *
+     * As opposed to `list_blocked`, this function returns all the pages of the request at once.
+     *
+     * A Zoom account owner or a user with admin privilege can block phone numbers for phone users in an account. Blocked numbers can be inbound (numbers will be blocked from calling in) and outbound (phone users in your account won't be able to dial those numbers). Blocked callers will hear a generic message stating that the person they are calling is not available.<br>Use this API to list all the blocked lists in an acccount.<br>
+     * **Prerequisites:**
+     * * Pro or higher account plan with Zoom phone license<br>
+     * **Scope:** `phone:read:admin`<br>
+     *
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
+    pub async fn list_all_blocked(
+        &self,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::BlockedList>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/blocked_list?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

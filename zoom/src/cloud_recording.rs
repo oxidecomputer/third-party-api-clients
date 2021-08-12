@@ -604,7 +604,7 @@ impl CloudRecording {
         next_page_token: &str,
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<crate::types::GetAccountCloudRecordingResponse> {
+    ) -> Result<Vec<crate::types::Meetings>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = from {
@@ -631,6 +631,63 @@ impl CloudRecording {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetAccountCloudRecordingResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List recordings of an account.
+     *
+     * This function performs a `GET` to the `/accounts/{accountId}/recordings` endpoint.
+     *
+     * As opposed to `get_account`, this function returns all the pages of the request at once.
+     *
+     * List [Cloud Recordings](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording) available on an Account.
+     *
+     * > To access a password protected cloud recording, add an "access_token" parameter to the download URL and provide [JWT](https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-jwt-app) as the value of the "access_token".
+     * <br>
+     * **Prerequisites**:<br>
+     * * A Pro or a higher paid plan with Cloud Recording option enabled.<br>
+     * **Scopes**: `recording:read:admin` or `account:read:admin`
+     *
+     * If the scope `recording:read:admin` is used, the Account ID of the Account must be provided in the `accountId` path parameter to list recordings that belong to the Account. This scope only works for sub accounts.
+     *
+     * To list recordings of a master account, the scope must be `account:read:admin` and the value of `accountId` should be `me`.<br>  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
+     *
+     */
+    pub async fn get_all_account(
+        &self,
+        account_id: &str,
+        next_page_token: &str,
+        from: Option<chrono::DateTime<chrono::Utc>>,
+        to: Option<chrono::DateTime<chrono::Utc>>,
+    ) -> Result<Vec<crate::types::Meetings>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if let Some(date) = from {
+            query_args.push(format!("from={}", &date.to_rfc3339()));
+        }
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if let Some(date) = to {
+            query_args.push(format!("to={}", &date.to_rfc3339()));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/accounts/{}/recordings?{}",
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 }

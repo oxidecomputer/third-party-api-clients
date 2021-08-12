@@ -40,7 +40,7 @@ impl Rooms {
         page_size: i64,
         next_page_token: &str,
         location_id: &str,
-    ) -> Result<crate::types::ListZoomRoomsResponseData> {
+    ) -> Result<Vec<crate::types::ListZoomRoomsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !location_id.is_empty() {
@@ -65,7 +65,56 @@ impl Rooms {
         }
         let url = format!("/rooms?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListZoomRoomsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List Zoom Rooms.
+     *
+     * This function performs a `GET` to the `/rooms` endpoint.
+     *
+     * As opposed to `list_zoom`, this function returns all the pages of the request at once.
+     *
+     * Zoom Rooms is a software-based room system that provides an integrated experience for audio conferencing, wireless screen sharing and video conferencing. Use this API to list all the existing [Zoom Rooms](https://support.zoom.us/hc/en-us/articles/207483343-Getting-Started-with-Zoom-Rooms) in a Zoom account.<br><br>
+     * **Prerequisites:**<br>
+     * * Pro or a higher plan with [Zoom Room](https://zoom.us/zoomrooms) license.<br>
+     * **Scopes**: `room:read:admin`<br>
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
+    pub async fn list_all_zoom(
+        &self,
+        status: crate::types::Status,
+        type_: crate::types::ListZoomRoomsType,
+        unassigned_rooms: bool,
+        next_page_token: &str,
+        location_id: &str,
+    ) -> Result<Vec<crate::types::ListZoomRoomsResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !location_id.is_empty() {
+            query_args.push(format!("location_id={}", location_id));
+        }
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("status={}", status));
+        query_args.push(format!("type={}", type_));
+        if unassigned_rooms {
+            query_args.push(format!("unassigned_rooms={}", unassigned_rooms));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/rooms?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -386,7 +435,7 @@ impl Rooms {
         folder_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ListDigitalSignageContentResponse> {
+    ) -> Result<Vec<crate::types::Contents>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !folder_id.is_empty() {
@@ -409,7 +458,55 @@ impl Rooms {
         }
         let url = format!("/rooms/digital_signage?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListDigitalSignageContentResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List digital signage contents.
+     *
+     * This function performs a `GET` to the `/rooms/digital_signage` endpoint.
+     *
+     * As opposed to `list_digital_signage_content`, this function returns all the pages of the request at once.
+     *
+     * List information about existing [Zoom Rooms digital signage](https://support.zoom.us/hc/en-us/articles/360000030683-Zoom-Rooms-digital-signage) content in a Zoom account.<br> You can also access this information by logging into your Zoom account in the Zoom web portal and visiting the [Digital Signage Content](https://zoom.us/digitalsignage#/) page listed under **Room Management**.
+     *
+     * **Prerequisites:**
+     * * Pro or a higher account with Zoom Rooms.
+     * * Existing content files or folder in [Digital Signage Content](https://zoom.us/digitalsignage#/) page.
+     *
+     *
+     *
+     */
+    pub async fn list_all_digital_signage_content(
+        &self,
+        type_: &str,
+        folder_id: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::Contents>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !folder_id.is_empty() {
+            query_args.push(format!("folder_id={}", folder_id));
+        }
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !type_.is_empty() {
+            query_args.push(format!("type={}", type_));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/rooms/digital_signage?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

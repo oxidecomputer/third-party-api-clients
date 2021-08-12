@@ -36,7 +36,7 @@ impl PhoneDevices {
         type_: crate::types::ListPhoneDevicesType,
         next_page_token: &str,
         page_size: i64,
-    ) -> Result<crate::types::ListPhoneDevicesResponseData> {
+    ) -> Result<Vec<crate::types::ListPhoneDevicesResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -54,7 +54,48 @@ impl PhoneDevices {
         }
         let url = format!("/phone/devices?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListPhoneDevicesResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List devices.
+     *
+     * This function performs a `GET` to the `/phone/devices` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * List all the [desk phone devices](https://support.zoom.us/hc/en-us/articles/360021119092) that are configured with Zoom Phone on an account.
+     *
+     * **Scopes:** `phone:read:admin`</br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **Prerequisites:**<br>
+     * * Pro or a higher account with Zoom Phone license
+     * * Account owner or admin permissions
+     */
+    pub async fn list_all(
+        &self,
+        type_: crate::types::ListPhoneDevicesType,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::ListPhoneDevicesResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        query_args.push(format!("type={}", type_));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/phone/devices?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

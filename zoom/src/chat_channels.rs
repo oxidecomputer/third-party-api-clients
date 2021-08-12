@@ -36,7 +36,7 @@ impl ChatChannels {
         user_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::GetChannelsResponse> {
+    ) -> Result<Vec<crate::types::Channels>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -57,7 +57,50 @@ impl ChatChannels {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List user's channels.
+     *
+     * This function performs a `GET` to the `/chat/users/{userId}/channels` endpoint.
+     *
+     * As opposed to `get_channels`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list a user's chat channels. For user-level apps, pass [the `me` value](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter.
+     *
+     * Zoom chat [channels](https://support.zoom.us/hc/en-us/articles/200912909-Getting-Started-With-Channels-Group-Messaging-) allow users to communicate via chat in private or public groups.
+     *
+     * **Scopes:** `chat_channel:read` or `chat_channel:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note:</b> This API supports both user-managed apps and account-level apps. However, in an <b>account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, to list channels of another user in the same Zoom account, the user calling this API must have a <a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit.">role</a> that has the <b>View</b> or <b>Edit</b> permission for the <b>Chat channels</b> feature.</p>
+     */
+    pub async fn get_all_channels(
+        &self,
+        user_id: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::Channels>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/chat/users/{}/channels?{}",
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

@@ -36,7 +36,7 @@ impl Contacts {
         query_presence_status: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::SearchCompanyContactsResponse> {
+    ) -> Result<Vec<crate::types::Contacts>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -59,7 +59,52 @@ impl Contacts {
         }
         let url = format!("/contacts?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::SearchCompanyContactsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Search company contacts.
+     *
+     * This function performs a `GET` to the `/contacts` endpoint.
+     *
+     * As opposed to `search_company`, this function returns all the pages of the request at once.
+     *
+     * A user under an organization's Zoom account has internal users listed under Company Contacts in the Zoom Client. Use this API to search users that are in the company contacts of a Zoom account. Using the `search_key` query parameter, provide either first name, last name or the email address of the user that you would like to search for. Optionally, set `query_presence_status` to `true` in order to include the presence status of a contact. <br><br>
+     *
+     * **Scopes:** `contact:read:admin`, `contact:read`<br>
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
+    pub async fn search_company(
+        &self,
+        search_key: &str,
+        query_presence_status: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::Contacts>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !query_presence_status.is_empty() {
+            query_args.push(format!("query_presence_status={}", query_presence_status));
+        }
+        if !search_key.is_empty() {
+            query_args.push(format!("search_key={}", search_key));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/contacts?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -88,7 +133,7 @@ impl Contacts {
         type_: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::GetUserContactsResponseData> {
+    ) -> Result<Vec<crate::types::GetUserContactsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -108,7 +153,50 @@ impl Contacts {
         }
         let url = format!("/chat/users/me/contacts?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetUserContactsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List user's contacts.
+     *
+     * This function performs a `GET` to the `/chat/users/me/contacts` endpoint.
+     *
+     * As opposed to `get_user`, this function returns all the pages of the request at once.
+     *
+     * A user under an organization’s Zoom account has internal users listed under Company Contacts in the Zoom Client. A Zoom user can also add another Zoom user as a [contact](https://support.zoom.us/hc/en-us/articles/115004055706-Managing-Contacts). Call this API to list all the contacts of a Zoom user. Zoom contacts are categorized into "company contacts" and "external contacts". You must specify the contact type in the `type` query parameter. If you do not specify, by default, the type will be set as company contact.
+     *
+     * <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note: </b> This API only supports <b>user-managed</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>.</p><br>
+     *
+     * **Scope**: `chat_contact:read`<br>
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
+    pub async fn get_all_user(
+        &self,
+        type_: &str,
+        next_page_token: &str,
+    ) -> Result<Vec<crate::types::GetUserContactsResponse>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !type_.is_empty() {
+            query_args.push(format!("type={}", type_));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/chat/users/me/contacts?{}", query);
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**

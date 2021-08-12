@@ -51,7 +51,7 @@ impl ChatMessages {
         page_size: i64,
         next_page_token: &str,
         include_deleted_and_edited_message: &str,
-    ) -> Result<crate::types::GetChatMessagesResponse> {
+    ) -> Result<Vec<crate::types::Messages>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("date={}", date));
@@ -85,7 +85,71 @@ impl ChatMessages {
             query
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetChatMessagesResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List user's chat messages.
+     *
+     * This function performs a `GET` to the `/chat/users/{userId}/messages` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Use this API to list the current user's chat messages between the user and an individual contact or a chat channel. For user-level apps, pass [the `me` value](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter.
+     *
+     * In the query parameter, you must provide one of the following:
+     *
+     * * `to_contact`: The email address of the contact with whom the user conversed by sending or receiving messages.
+     * * `to_channel`: The channel ID of the channel to or from which the user has sent and/or received messages.
+     *
+     * <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note:</b> For an <b>account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, this API can only be used on behalf of a user who is assigned with a <a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit.">role</a> that has the <b>View</b> or <b>Edit</b> permission for <b>Chat Messages</b>.</p>
+     *
+     * **Scopes:** `chat_message:read`, `chat_message:read:admin`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
+    pub async fn get_all(
+        &self,
+        user_id: &str,
+        to_contact: &str,
+        to_channel: &str,
+        date: chrono::NaiveDate,
+        next_page_token: &str,
+        include_deleted_and_edited_message: &str,
+    ) -> Result<Vec<crate::types::Messages>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("date={}", date));
+        if !include_deleted_and_edited_message.is_empty() {
+            query_args.push(format!(
+                "include_deleted_and_edited_message={}",
+                include_deleted_and_edited_message
+            ));
+        }
+        if !next_page_token.is_empty() {
+            query_args.push(format!("next_page_token={}", next_page_token));
+        }
+        if !to_channel.is_empty() {
+            query_args.push(format!("to_channel={}", to_channel));
+        }
+        if !to_contact.is_empty() {
+            query_args.push(format!("to_contact={}", to_contact));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!(
+            "/chat/users/{}/messages?{}",
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            query
+        );
+
+        self.client.get_all_pages(&url, None).await
     }
 
     /**
