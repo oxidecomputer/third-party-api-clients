@@ -777,7 +777,7 @@ impl Webinars {
     pub async fn webinar_poll_create(
         &self,
         webinar_id: i64,
-        body: &crate::types::MeetingPollCreateRequestAllOf,
+        body: &crate::types::Poll,
     ) -> Result<crate::types::MeetingPollGetResponseAllOf> {
         let url = format!(
             "/webinars/{}/polls",
@@ -844,7 +844,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         poll_id: &str,
-        body: &crate::types::MeetingPollCreateRequestAllOf,
+        body: &crate::types::Poll,
     ) -> Result<()> {
         let url = format!(
             "/webinars/{}/polls/{}",
@@ -908,7 +908,7 @@ impl Webinars {
     pub async fn webinar_registrants_questions_get(
         &self,
         webinar_id: i64,
-    ) -> Result<crate::types::WebinarRegistrantsQuestionsGetResponseAllOf> {
+    ) -> Result<crate::types::WebinarRegistrantQuestions> {
         let url = format!(
             "/webinars/{}/registrants/questions",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -939,7 +939,7 @@ impl Webinars {
     pub async fn webinar_registrant_question_update(
         &self,
         webinar_id: i64,
-        body: &crate::types::WebinarRegistrantsQuestionsGetResponseAllOf,
+        body: &crate::types::WebinarRegistrantQuestions,
     ) -> Result<()> {
         let url = format!(
             "/webinars/{}/registrants/questions",
@@ -1336,8 +1336,8 @@ impl Webinars {
     pub async fn webinar_invite_links_create(
         &self,
         webinar_id: i64,
-        body: &crate::types::WebinarInviteLinksCreateRequestAllOf,
-    ) -> Result<crate::types::WebinarInviteLinksCreateResponseAllOf> {
+        body: &crate::types::InviteLink,
+    ) -> Result<crate::types::InviteLinks> {
         let url = format!(
             "/webinars/{}/invite_links",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),

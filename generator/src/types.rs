@@ -42,7 +42,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                 }
                 TypeDetails::OneOf(omap, _) => a(&do_of_type(ts, omap, sn)),
                 TypeDetails::AnyOf(omap, _) => a(&do_of_type(ts, omap, sn)),
-                TypeDetails::AllOf(omap, _) => a(&do_of_type(ts, omap, sn)),
+                TypeDetails::AllOf(omap, _) => a(&do_all_of_type(ts, omap, sn)),
                 TypeDetails::Object(omap, schema_data) => {
                     /*
                      * TODO: This breaks things so ignore for now.
@@ -347,6 +347,69 @@ fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String 
         }
         a("");
     }
+
+    out
+}
+
+fn do_all_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String {
+    let mut out = String::new();
+
+    let mut a = |s: &str| {
+        out.push_str(s);
+        out.push('\n');
+    };
+
+    // Get the description.
+    let mut description =
+        "All of the following types are flattened into one object:\n\n".to_string();
+
+    for itid in omap {
+        let rt = ts.render_type(itid, true).unwrap();
+        description.push_str(&format!("- `{}`\n", rt));
+    }
+    description = format!("/// {}", description.replace('\n', "\n/// "));
+    a(&description);
+
+    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+    a(&format!("pub struct {} {{", sn));
+    let mut name_map: BTreeMap<String, String> = Default::default();
+    // Becasue we have so many defaults set on our serde types these enums
+    // sometimes parse the wrong value. It's better to instead use the functions we
+    // inject that force the value to a specific type.
+    let mut fns: Vec<String> = Default::default();
+    for tid in omap.iter() {
+        let name = ts.render_type(tid, true).unwrap();
+
+        let fn_name = if name.starts_with("Vec<") {
+            format!(
+                "{}Vector",
+                name.trim_start_matches("Vec<")
+                    .trim_end_matches('>')
+                    .replace("serde_json::", "")
+            )
+        } else if name.starts_with("serde_json") {
+            "Value".to_string()
+        } else {
+            struct_name(&name)
+        };
+
+        if !fns.contains(&fn_name) {
+            // Try to render the docs.
+            let p = ts.render_docs(tid);
+            if !p.is_empty() && p != description {
+                a("/**");
+                a(&p);
+                a("*/");
+            }
+
+            a("#[serde(flatten)]");
+            a(&format!("pub {}: {},", to_snake_case(&fn_name), name));
+            name_map.insert(fn_name.to_string(), name.to_string());
+            fns.push(fn_name);
+        }
+    }
+    a("}");
+    a("");
 
     out
 }

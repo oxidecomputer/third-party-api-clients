@@ -556,7 +556,7 @@ impl CloudRecording {
     pub async fn recording_registrant_question_update(
         &self,
         meeting_id: &str,
-        body: &crate::types::RecordingRegistrantQuestionUpdateRequestAllOf,
+        body: &crate::types::RecordingRegistrantQuestionsData,
     ) -> Result<()> {
         let url = format!(
             "/meetings/{}/recordings/registrants/questions",

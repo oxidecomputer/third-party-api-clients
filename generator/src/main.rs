@@ -1699,6 +1699,17 @@ impl TypeSpace {
                         additional_description,
                     )?;
 
+                    // If we only have one value let's just return that
+                    // value.
+                    if all_of.len() == 1 {
+                        if let Some(et) = self.id_to_entry.get(&itid) {
+                            return Ok((
+                                Some(all_of_name.trim_end_matches("all of").trim().to_string()),
+                                et.details.clone(),
+                            ));
+                        }
+                    }
+
                     omap.push(itid);
                 }
                 omap.sort_unstable();
@@ -1728,6 +1739,17 @@ impl TypeSpace {
                         one,
                         additional_description,
                     )?;
+
+                    // If we only have one value let's just return that
+                    // value.
+                    if one_of.len() == 1 {
+                        if let Some(et) = self.id_to_entry.get(&itid) {
+                            return Ok((
+                                Some(one_of_name.trim_end_matches("one of").trim().to_string()),
+                                et.details.clone(),
+                            ));
+                        }
+                    }
 
                     omap.push(itid);
                 }
@@ -1760,6 +1782,17 @@ impl TypeSpace {
                         one,
                         additional_description,
                     )?;
+
+                    // If we only have any value let's just return that
+                    // value.
+                    if any_of.len() == 1 {
+                        if let Some(et) = self.id_to_entry.get(&itid) {
+                            return Ok((
+                                Some(any_of_name.trim_end_matches("any of").trim().to_string()),
+                                et.details.clone(),
+                            ));
+                        }
+                    }
 
                     omap.push(itid);
                 }

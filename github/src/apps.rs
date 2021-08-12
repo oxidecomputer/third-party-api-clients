@@ -647,7 +647,7 @@ impl Apps {
         &self,
         client_id: &str,
         access_token: &str,
-    ) -> Result<crate::types::AppsCheckAuthorizationResponseAllOf> {
+    ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/applications/{}/tokens/{}",
             crate::progenitor_support::encode_path(&client_id.to_string()),

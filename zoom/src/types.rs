@@ -2628,36 +2628,19 @@ pub struct Groups {
     pub id: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Group`
 /// - `Groups`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum GroupsAllOf {
+pub struct GroupsAllOf {
     /**
      * Group object.
      */
-    Group(Group),
-    Groups(Groups),
-}
-
-impl GroupsAllOf {
-    pub fn group(&self) -> Option<&Group> {
-        if let GroupsAllOf::Group(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn groups(&self) -> Option<&Groups> {
-        if let GroupsAllOf::Groups(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub group: Group,
+    #[serde(flatten)]
+    pub groups: Groups,
 }
 
 /// List of Groups.
@@ -4376,45 +4359,22 @@ pub struct Panelists {
     pub join_url: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Groups`
 /// - `Panelist`
 /// - `Panelists`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum PanelistsAllOf {
-    Groups(Groups),
+pub struct PanelistsAllOf {
+    #[serde(flatten)]
+    pub groups: Groups,
     /**
      * Panelist base object.
      */
-    Panelist(Panelist),
-    Panelists(Panelists),
-}
-
-impl PanelistsAllOf {
-    pub fn groups(&self) -> Option<&Groups> {
-        if let PanelistsAllOf::Groups(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn panelist(&self) -> Option<&Panelist> {
-        if let PanelistsAllOf::Panelist(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn panelists(&self) -> Option<&Panelists> {
-        if let PanelistsAllOf::Panelists(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub panelist: Panelist,
+    #[serde(flatten)]
+    pub panelists: Panelists,
 }
 
 /// List of panelists.
@@ -5236,36 +5196,19 @@ pub struct SettingsData {
     pub registrants_confirmation_email: bool,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `MeetingSettings`
 /// - `SettingsData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum SettingsAllOf {
+pub struct SettingsAllOf {
     /**
      * Meeting settings.
      */
-    MeetingSettings(MeetingSettings),
-    SettingsData(SettingsData),
-}
-
-impl SettingsAllOf {
-    pub fn meeting_settings(&self) -> Option<&MeetingSettings> {
-        if let SettingsAllOf::MeetingSettings(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn settings_data(&self) -> Option<&SettingsData> {
-        if let SettingsAllOf::SettingsData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub meeting_settings: MeetingSettings,
+    #[serde(flatten)]
+    pub settings_data: SettingsData,
 }
 
 /// Base object for sessions.
@@ -5953,36 +5896,19 @@ pub struct SessionWebinar {
     pub type_: i64,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `SettingsData`
 /// - `WebinarSettings`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum SessionWebinarUpdateSettingsAllOf {
-    SettingsData(SettingsData),
+pub struct SessionWebinarUpdateSettingsAllOf {
+    #[serde(flatten)]
+    pub settings_data: SettingsData,
     /**
      * Webinar settings.
      */
-    WebinarSettings(WebinarSettings),
-}
-
-impl SessionWebinarUpdateSettingsAllOf {
-    pub fn settings_data(&self) -> Option<&SettingsData> {
-        if let SessionWebinarUpdateSettingsAllOf::SettingsData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn webinar_settings(&self) -> Option<&WebinarSettings> {
-        if let SessionWebinarUpdateSettingsAllOf::WebinarSettings(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub webinar_settings: WebinarSettings,
 }
 
 /// Base webinar object for sessions.
@@ -8025,27 +7951,6 @@ pub struct Webinars {
     pub uuid: String,
 }
 
-/// All of the following types:
-///
-/// - `Panelist`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum WebinarPanelistPanelistsAllOf {
-    /**
-     * Panelist base object.
-     */
-    Panelist(Panelist),
-}
-
-impl WebinarPanelistPanelistsAllOf {
-    pub fn panelist(&self) -> Option<&Panelist> {
-        let WebinarPanelistPanelistsAllOf::Panelist(ref_) = self;
-        Some(ref_)
-    }
-}
-
 /// Webinar panelist.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarPanelist {
@@ -8053,7 +7958,7 @@ pub struct WebinarPanelist {
      * Webinar panelist.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub panelists: Vec<WebinarPanelistPanelistsAllOf>,
+    pub panelists: Vec<Panelist>,
 }
 
 /// Zoom room.
@@ -10851,31 +10756,13 @@ pub struct ArchiveFiles {
     pub status: String,
 }
 
-/// All of the following types:
-///
-/// - `ArchiveFiles`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ArchiveFilesAnyOf {
-    ArchiveFiles(ArchiveFiles),
-}
-
-impl ArchiveFilesAnyOf {
-    pub fn archive_files(&self) -> Option<&ArchiveFiles> {
-        let ArchiveFilesAnyOf::ArchiveFiles(ref_) = self;
-        Some(ref_)
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CloudArchivedFiles {
     /**
      * Information about the archive files.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub archive_files: Vec<ArchiveFilesAnyOf>,
+    pub archive_files: Vec<ArchiveFiles>,
     /**
      * Account seats.
      */
@@ -14532,36 +14419,19 @@ pub struct AccountPlanCreateRequest {
     pub contact: Option<Contact>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `AccountPlans`
 /// - `AccountPlanCreateRequest`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum AccountPlanCreateRequestAllOf {
+pub struct AccountPlanCreateRequestAllOf {
     /**
      * Account Plans object.
      */
-    AccountPlans(AccountPlans),
-    AccountPlanCreateRequest(AccountPlanCreateRequest),
-}
-
-impl AccountPlanCreateRequestAllOf {
-    pub fn account_plan_create_request(&self) -> Option<&AccountPlanCreateRequest> {
-        if let AccountPlanCreateRequestAllOf::AccountPlanCreateRequest(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn account_plans(&self) -> Option<&AccountPlans> {
-        if let AccountPlanCreateRequestAllOf::AccountPlans(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub account_plans: AccountPlans,
+    #[serde(flatten)]
+    pub account_plan_create_request: AccountPlanCreateRequest,
 }
 
 /// Zoom Phone Plan Object
@@ -14858,68 +14728,34 @@ pub struct UpdateGroupMemberRequest {
     pub target_group_id: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Device`
 /// - `Groups`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DeviceCreateResponseAllOf {
+pub struct DeviceCreateResponseAllOf {
     /**
      * The H.323/SIP device object.
      */
-    Device(Device),
-    Groups(Groups),
+    #[serde(flatten)]
+    pub device: Device,
+    #[serde(flatten)]
+    pub groups: Groups,
 }
 
-impl DeviceCreateResponseAllOf {
-    pub fn device(&self) -> Option<&Device> {
-        if let DeviceCreateResponseAllOf::Device(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn groups(&self) -> Option<&Groups> {
-        if let DeviceCreateResponseAllOf::Groups(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Groups`
 /// - `TrackingField`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum TrackingfieldGetResponseAllOf {
-    Groups(Groups),
+pub struct TrackingfieldGetResponseAllOf {
+    #[serde(flatten)]
+    pub groups: Groups,
     /**
      * Tracking Field
      */
-    TrackingField(TrackingField),
-}
-
-impl TrackingfieldGetResponseAllOf {
-    pub fn groups(&self) -> Option<&Groups> {
-        if let TrackingfieldGetResponseAllOf::Groups(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn tracking_field(&self) -> Option<&TrackingField> {
-        if let TrackingfieldGetResponseAllOf::TrackingField(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub tracking_field: TrackingField,
 }
 
 /**
@@ -15043,33 +14879,16 @@ pub struct ImGroupCreateResponse {
     pub total_members: i64,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Domains`
 /// - `Groups`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ImGroupResponseAllOf {
-    Domains(Domains),
-    Groups(Groups),
-}
-
-impl ImGroupResponseAllOf {
-    pub fn domains(&self) -> Option<&Domains> {
-        if let ImGroupResponseAllOf::Domains(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn groups(&self) -> Option<&Groups> {
-        if let ImGroupResponseAllOf::Groups(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+pub struct ImGroupResponseAllOf {
+    #[serde(flatten)]
+    pub domains: Domains,
+    #[serde(flatten)]
+    pub groups: Groups,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15169,45 +14988,22 @@ pub struct ImChatSessionsResponseData {
     pub sessions: Vec<Sessions>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken4ImChat`
 /// - `DashboardImResponse`
 /// - `ImChatSessionsResponseData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ImChatSessionsResponseAllOf {
+pub struct ImChatSessionsResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken4ImChat(PaginationToken4ImChat),
-    DashboardImResponse(DashboardImResponse),
-    ImChatSessionsResponseData(ImChatSessionsResponseData),
-}
-
-impl ImChatSessionsResponseAllOf {
-    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
-        if let ImChatSessionsResponseAllOf::DashboardImResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn im_chat_sessions_response_data(&self) -> Option<&ImChatSessionsResponseData> {
-        if let ImChatSessionsResponseAllOf::ImChatSessionsResponseData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
-        if let ImChatSessionsResponseAllOf::PaginationToken4ImChat(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token_4_im_chat: PaginationToken4ImChat,
+    #[serde(flatten)]
+    pub dashboard_im_response: DashboardImResponse,
+    #[serde(flatten)]
+    pub im_chat_sessions_response_data: ImChatSessionsResponseData,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15291,45 +15087,22 @@ pub struct ImChatMessagesResponseDataType {
     pub messages: Vec<ImChatMessagesResponseData>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken4ImChat`
 /// - `ImChatMessagesResponse`
 /// - `ImChatMessagesResponseDataType`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ImChatMessagesResponseAllOf {
+pub struct ImChatMessagesResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken4ImChat(PaginationToken4ImChat),
-    ImChatMessagesResponse(ImChatMessagesResponse),
-    ImChatMessagesResponseDataType(ImChatMessagesResponseDataType),
-}
-
-impl ImChatMessagesResponseAllOf {
-    pub fn im_chat_messages_response(&self) -> Option<&ImChatMessagesResponse> {
-        if let ImChatMessagesResponseAllOf::ImChatMessagesResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn im_chat_messages_response_data_type(&self) -> Option<&ImChatMessagesResponseDataType> {
-        if let ImChatMessagesResponseAllOf::ImChatMessagesResponseDataType(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
-        if let ImChatMessagesResponseAllOf::PaginationToken4ImChat(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token_4_im_chat: PaginationToken4ImChat,
+    #[serde(flatten)]
+    pub im_chat_messages_response: ImChatMessagesResponse,
+    #[serde(flatten)]
+    pub im_chat_messages_response_data_type: ImChatMessagesResponseDataType,
 }
 
 /**
@@ -15405,36 +15178,19 @@ pub struct MeetingCreateResponse {
     pub registration_url: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `MeetingInfo`
 /// - `MeetingCreateResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingCreateResponseAllOf {
+pub struct MeetingCreateResponseAllOf {
     /**
      * Meeting object
      */
-    MeetingInfo(MeetingInfo),
-    MeetingCreateResponse(MeetingCreateResponse),
-}
-
-impl MeetingCreateResponseAllOf {
-    pub fn meeting_create_response(&self) -> Option<&MeetingCreateResponse> {
-        if let MeetingCreateResponseAllOf::MeetingCreateResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn meeting_info(&self) -> Option<&MeetingInfo> {
-        if let MeetingCreateResponseAllOf::MeetingInfo(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub meeting_info: MeetingInfo,
+    #[serde(flatten)]
+    pub meeting_create_response: MeetingCreateResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15486,36 +15242,19 @@ pub struct MeetingResponse {
     pub uuid: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `MeetingInfoGet`
 /// - `MeetingResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingResponseAllOf {
+pub struct MeetingResponseAllOf {
     /**
      * Meeting object.
      */
-    MeetingInfoGet(MeetingInfoGet),
-    MeetingResponse(MeetingResponse),
-}
-
-impl MeetingResponseAllOf {
-    pub fn meeting_info_get(&self) -> Option<&MeetingInfoGet> {
-        if let MeetingResponseAllOf::MeetingInfoGet(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn meeting_response(&self) -> Option<&MeetingResponse> {
-        if let MeetingResponseAllOf::MeetingResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub meeting_info_get: MeetingInfoGet,
+    #[serde(flatten)]
+    pub meeting_response: MeetingResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15531,33 +15270,16 @@ pub struct MeetingUpdateRequest {
     pub schedule_for: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Domains`
 /// - `MeetingUpdateRequest`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingUpdateRequestAllOf {
-    Domains(Domains),
-    MeetingUpdateRequest(MeetingUpdateRequest),
-}
-
-impl MeetingUpdateRequestAllOf {
-    pub fn domains(&self) -> Option<&Domains> {
-        if let MeetingUpdateRequestAllOf::Domains(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn meeting_update_request(&self) -> Option<&MeetingUpdateRequest> {
-        if let MeetingUpdateRequestAllOf::MeetingUpdateRequest(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+pub struct MeetingUpdateRequestAllOf {
+    #[serde(flatten)]
+    pub domains: Domains,
+    #[serde(flatten)]
+    pub meeting_update_request: MeetingUpdateRequest,
 }
 
 /**
@@ -15846,57 +15568,19 @@ pub struct PastMeetingParticipantsResponse {
     pub participants: Vec<Participants>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `PastMeetingParticipantsResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum PastMeetingParticipantsResponseAllOf {
+pub struct PastMeetingParticipantsResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    PastMeetingParticipantsResponse(PastMeetingParticipantsResponse),
-}
-
-impl PastMeetingParticipantsResponseAllOf {
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let PastMeetingParticipantsResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn past_meeting_participants_response(&self) -> Option<&PastMeetingParticipantsResponse> {
-        if let PastMeetingParticipantsResponseAllOf::PastMeetingParticipantsResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-/// All of the following types:
-///
-/// - `Poll`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingPollCreateRequestAllOf {
-    /**
-     * Poll
-     */
-    Poll(Poll),
-}
-
-impl MeetingPollCreateRequestAllOf {
-    pub fn poll(&self) -> Option<&Poll> {
-        let MeetingPollCreateRequestAllOf::Poll(ref_) = self;
-        Some(ref_)
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub past_meeting_participants_response: PastMeetingParticipantsResponse,
 }
 
 /**
@@ -15961,58 +15645,19 @@ pub struct MeetingPollGetResponse {
     pub status: Option<MeetingPollCreateResponseStatus>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Poll`
 /// - `MeetingPollGetResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingPollGetResponseAllOf {
+pub struct MeetingPollGetResponseAllOf {
     /**
      * Poll
      */
-    Poll(Poll),
-    MeetingPollGetResponse(MeetingPollGetResponse),
-}
-
-impl MeetingPollGetResponseAllOf {
-    pub fn meeting_poll_get_response(&self) -> Option<&MeetingPollGetResponse> {
-        if let MeetingPollGetResponseAllOf::MeetingPollGetResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn poll(&self) -> Option<&Poll> {
-        if let MeetingPollGetResponseAllOf::Poll(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-/// All of the following types:
-///
-/// - `MeetingRegistrantQuestionsData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingRegistrantsQuestionsGetResponseAllOf {
-    /**
-     * Meeting Registrant Questions
-     */
-    MeetingRegistrantQuestionsData(MeetingRegistrantQuestionsData),
-}
-
-impl MeetingRegistrantsQuestionsGetResponseAllOf {
-    pub fn meeting_registrant_questions_data(&self) -> Option<&MeetingRegistrantQuestionsData> {
-        let MeetingRegistrantsQuestionsGetResponseAllOf::MeetingRegistrantQuestionsData(ref_) =
-            self;
-        Some(ref_)
-    }
+    #[serde(flatten)]
+    pub poll: Poll,
+    #[serde(flatten)]
+    pub meeting_poll_get_response: MeetingPollGetResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -16037,33 +15682,16 @@ pub struct RecordingGetResponse {
     pub password: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Domains`
 /// - `RecordingGetResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum RecordingGetResponseAllOf {
-    Domains(Domains),
-    RecordingGetResponse(RecordingGetResponse),
-}
-
-impl RecordingGetResponseAllOf {
-    pub fn domains(&self) -> Option<&Domains> {
-        if let RecordingGetResponseAllOf::Domains(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn recording_get_response(&self) -> Option<&RecordingGetResponse> {
-        if let RecordingGetResponseAllOf::RecordingGetResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+pub struct RecordingGetResponseAllOf {
+    #[serde(flatten)]
+    pub domains: Domains,
+    #[serde(flatten)]
+    pub recording_get_response: RecordingGetResponse,
 }
 
 /**
@@ -16134,28 +15762,6 @@ pub struct MeetingRecordingRegistrantCreateResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub topic: String,
-}
-
-/// All of the following types:
-///
-/// - `RecordingRegistrantQuestionsData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum RecordingRegistrantQuestionUpdateRequestAllOf {
-    /**
-     * Recording Registrant Questions
-     */
-    RecordingRegistrantQuestionsData(RecordingRegistrantQuestionsData),
-}
-
-impl RecordingRegistrantQuestionUpdateRequestAllOf {
-    pub fn recording_registrant_questions_data(&self) -> Option<&RecordingRegistrantQuestionsData> {
-        let RecordingRegistrantQuestionUpdateRequestAllOf::RecordingRegistrantQuestionsData(ref_) =
-            self;
-        Some(ref_)
-    }
 }
 
 /**
@@ -16237,45 +15843,22 @@ pub struct DashboardMeetingsResponse {
     pub meetings: Vec<Metrics>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `DashboardImResponse`
 /// - `DashboardMeetingsResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardMeetingsResponseAllOf {
+pub struct DashboardMeetingsResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    DashboardImResponse(DashboardImResponse),
-    DashboardMeetingsResponse(DashboardMeetingsResponse),
-}
-
-impl DashboardMeetingsResponseAllOf {
-    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
-        if let DashboardMeetingsResponseAllOf::DashboardImResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn dashboard_meetings_response(&self) -> Option<&DashboardMeetingsResponse> {
-        if let DashboardMeetingsResponseAllOf::DashboardMeetingsResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let DashboardMeetingsResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub dashboard_im_response: DashboardImResponse,
+    #[serde(flatten)]
+    pub dashboard_meetings_response: DashboardMeetingsResponse,
 }
 
 /**
@@ -16799,41 +16382,19 @@ pub struct DashboardMeetingParticipantsResponseData {
     pub participants: Vec<DashboardMeetingParticipantsResponse>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `DashboardMeetingParticipantsResponseData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardMeetingParticipantsResponseAllOf {
+pub struct DashboardMeetingParticipantsResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    DashboardMeetingParticipantsResponseData(DashboardMeetingParticipantsResponseData),
-}
-
-impl DashboardMeetingParticipantsResponseAllOf {
-    pub fn dashboard_meeting_participants_response_data(
-        &self,
-    ) -> Option<&DashboardMeetingParticipantsResponseData> {
-        if let DashboardMeetingParticipantsResponseAllOf::DashboardMeetingParticipantsResponseData(
-            ref_,
-        ) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let DashboardMeetingParticipantsResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub dashboard_meeting_participants_response_data: DashboardMeetingParticipantsResponseData,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -16912,38 +16473,19 @@ pub struct DashboardMeetingParticipantShareResponse {
     pub participants: Vec<DashboardMeetingParticipantShareResponseParticipants>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `DashboardMeetingParticipantShareResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardMeetingParticipantShareResponseAllOf {
+pub struct DashboardMeetingParticipantShareResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    DashboardMeetingParticipantShareResponse(DashboardMeetingParticipantShareResponse),
-}
-
-impl DashboardMeetingParticipantShareResponseAllOf {
-    pub fn dashboard_meeting_participant_share_response(
-        &self,
-    ) -> Option<&DashboardMeetingParticipantShareResponse> {
-        if let DashboardMeetingParticipantShareResponseAllOf::DashboardMeetingParticipantShareResponse(ref_) = self {
-                                return Some(ref_);
-                            }
-        None
-    }
-
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let DashboardMeetingParticipantShareResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub dashboard_meeting_participant_share_response: DashboardMeetingParticipantShareResponse,
 }
 
 /**
@@ -16985,45 +16527,22 @@ pub struct DashboardWebinarsResponse {
     pub webinars: Vec<Webinars>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `DashboardImResponse`
 /// - `DashboardWebinarsResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardWebinarsResponseAllOf {
+pub struct DashboardWebinarsResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    DashboardImResponse(DashboardImResponse),
-    DashboardWebinarsResponse(DashboardWebinarsResponse),
-}
-
-impl DashboardWebinarsResponseAllOf {
-    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
-        if let DashboardWebinarsResponseAllOf::DashboardImResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn dashboard_webinars_response(&self) -> Option<&DashboardWebinarsResponse> {
-        if let DashboardWebinarsResponseAllOf::DashboardWebinarsResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let DashboardWebinarsResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub dashboard_im_response: DashboardImResponse,
+    #[serde(flatten)]
+    pub dashboard_webinars_response: DashboardWebinarsResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17290,41 +16809,19 @@ pub struct DashboardWebinarParticipantsResponseData {
     pub participants: Vec<DashboardWebinarParticipantsResponse>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `DashboardWebinarParticipantsResponseData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardWebinarParticipantsResponseAllOf {
+pub struct DashboardWebinarParticipantsResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    DashboardWebinarParticipantsResponseData(DashboardWebinarParticipantsResponseData),
-}
-
-impl DashboardWebinarParticipantsResponseAllOf {
-    pub fn dashboard_webinar_participants_response_data(
-        &self,
-    ) -> Option<&DashboardWebinarParticipantsResponseData> {
-        if let DashboardWebinarParticipantsResponseAllOf::DashboardWebinarParticipantsResponseData(
-            ref_,
-        ) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let DashboardWebinarParticipantsResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub dashboard_webinar_participants_response_data: DashboardWebinarParticipantsResponseData,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17508,45 +17005,22 @@ pub struct DashboardImResponseData {
     pub users: Vec<Users>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `DashboardImResponse`
 /// - `DashboardImResponseData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardImResponseAllOf {
+pub struct DashboardImResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    DashboardImResponse(DashboardImResponse),
-    DashboardImResponseData(DashboardImResponseData),
-}
-
-impl DashboardImResponseAllOf {
-    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
-        if let DashboardImResponseAllOf::DashboardImResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn dashboard_im_response_data(&self) -> Option<&DashboardImResponseData> {
-        if let DashboardImResponseAllOf::DashboardImResponseData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let DashboardImResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub dashboard_im_response: DashboardImResponse,
+    #[serde(flatten)]
+    pub dashboard_im_response_data: DashboardImResponseData,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17708,33 +17182,16 @@ pub struct DashboardChatResponseData {
     pub users: Vec<DashboardChatResponseUsers>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `DashboardChatResponse`
 /// - `DashboardChatResponseData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardChatResponseAllOf {
-    DashboardChatResponse(DashboardChatResponse),
-    DashboardChatResponseData(DashboardChatResponseData),
-}
-
-impl DashboardChatResponseAllOf {
-    pub fn dashboard_chat_response(&self) -> Option<&DashboardChatResponse> {
-        if let DashboardChatResponseAllOf::DashboardChatResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn dashboard_chat_response_data(&self) -> Option<&DashboardChatResponseData> {
-        if let DashboardChatResponseAllOf::DashboardChatResponseData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+pub struct DashboardChatResponseAllOf {
+    #[serde(flatten)]
+    pub dashboard_chat_response: DashboardChatResponse,
+    #[serde(flatten)]
+    pub dashboard_chat_response_data: DashboardChatResponseData,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17828,36 +17285,16 @@ pub struct DashboardIssueZoomRoomResponseData {
     pub zoom_rooms: Vec<String>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `DashboardIssueZoomRoomResponse`
 /// - `DashboardIssueZoomRoomResponseData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardIssueZoomRoomResponseAllOf {
-    DashboardIssueZoomRoomResponse(DashboardIssueZoomRoomResponse),
-    DashboardIssueZoomRoomResponseData(DashboardIssueZoomRoomResponseData),
-}
-
-impl DashboardIssueZoomRoomResponseAllOf {
-    pub fn dashboard_issue_zoom_room_response(&self) -> Option<&DashboardIssueZoomRoomResponse> {
-        if let DashboardIssueZoomRoomResponseAllOf::DashboardIssueZoomRoomResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn dashboard_issue_zoom_room_response_data(
-        &self,
-    ) -> Option<&DashboardIssueZoomRoomResponseData> {
-        if let DashboardIssueZoomRoomResponseAllOf::DashboardIssueZoomRoomResponseData(ref_) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
+pub struct DashboardIssueZoomRoomResponseAllOf {
+    #[serde(flatten)]
+    pub dashboard_issue_zoom_room_response: DashboardIssueZoomRoomResponse,
+    #[serde(flatten)]
+    pub dashboard_issue_zoom_room_response_data: DashboardIssueZoomRoomResponseData,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17888,50 +17325,22 @@ pub struct DashboardIssueDetailZoomRoomResponse {
     pub issue_details: Vec<IssueDetails>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `DashboardImResponse`
 /// - `DashboardIssueDetailZoomRoomResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardIssueDetailZoomRoomResponseAllOf {
+pub struct DashboardIssueDetailZoomRoomResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    DashboardImResponse(DashboardImResponse),
-    DashboardIssueDetailZoomRoomResponse(DashboardIssueDetailZoomRoomResponse),
-}
-
-impl DashboardIssueDetailZoomRoomResponseAllOf {
-    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
-        if let DashboardIssueDetailZoomRoomResponseAllOf::DashboardImResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn dashboard_issue_detail_zoom_room_response(
-        &self,
-    ) -> Option<&DashboardIssueDetailZoomRoomResponse> {
-        if let DashboardIssueDetailZoomRoomResponseAllOf::DashboardIssueDetailZoomRoomResponse(
-            ref_,
-        ) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let DashboardIssueDetailZoomRoomResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub dashboard_im_response: DashboardImResponse,
+    #[serde(flatten)]
+    pub dashboard_issue_detail_zoom_room_response: DashboardIssueDetailZoomRoomResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -18220,36 +17629,19 @@ pub struct ReportMeetingsResponse {
     pub to: Option<chrono::NaiveDate>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Pagination`
 /// - `ReportMeetingsResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ReportMeetingsResponseAllOf {
+pub struct ReportMeetingsResponseAllOf {
     /**
      * Pagination Object.
      */
-    Pagination(Pagination),
-    ReportMeetingsResponse(ReportMeetingsResponse),
-}
-
-impl ReportMeetingsResponseAllOf {
-    pub fn pagination(&self) -> Option<&Pagination> {
-        if let ReportMeetingsResponseAllOf::Pagination(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn report_meetings_response(&self) -> Option<&ReportMeetingsResponse> {
-        if let ReportMeetingsResponseAllOf::ReportMeetingsResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination: Pagination,
+    #[serde(flatten)]
+    pub report_meetings_response: ReportMeetingsResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -18479,40 +17871,19 @@ pub struct ReportMeetingParticipantsResponseData {
     pub participants: Vec<ReportMeetingParticipantsResponse>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `ReportMeetingParticipantsResponseData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ReportMeetingParticipantsResponseAllOf {
+pub struct ReportMeetingParticipantsResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    ReportMeetingParticipantsResponseData(ReportMeetingParticipantsResponseData),
-}
-
-impl ReportMeetingParticipantsResponseAllOf {
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let ReportMeetingParticipantsResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn report_meeting_participants_response_data(
-        &self,
-    ) -> Option<&ReportMeetingParticipantsResponseData> {
-        if let ReportMeetingParticipantsResponseAllOf::ReportMeetingParticipantsResponseData(ref_) =
-            self
-        {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub report_meeting_participants_response_data: ReportMeetingParticipantsResponseData,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -18713,40 +18084,19 @@ pub struct ReportWebinarParticipantsResponseData {
     pub participants: Vec<ReportWebinarParticipantsResponse>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken`
 /// - `ReportWebinarParticipantsResponseData`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ReportWebinarParticipantsResponseAllOf {
+pub struct ReportWebinarParticipantsResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken(PaginationToken),
-    ReportWebinarParticipantsResponseData(ReportWebinarParticipantsResponseData),
-}
-
-impl ReportWebinarParticipantsResponseAllOf {
-    pub fn pagination_token(&self) -> Option<&PaginationToken> {
-        if let ReportWebinarParticipantsResponseAllOf::PaginationToken(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn report_webinar_participants_response_data(
-        &self,
-    ) -> Option<&ReportWebinarParticipantsResponseData> {
-        if let ReportWebinarParticipantsResponseAllOf::ReportWebinarParticipantsResponseData(ref_) =
-            self
-        {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token: PaginationToken,
+    #[serde(flatten)]
+    pub report_webinar_participants_response_data: ReportWebinarParticipantsResponseData,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -18876,33 +18226,16 @@ pub struct ReportCloudRecordingResponse {
     pub cloud_recording_storage: Vec<String>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `DashboardImResponse`
 /// - `ReportCloudRecordingResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ReportCloudRecordingResponseAllOf {
-    DashboardImResponse(DashboardImResponse),
-    ReportCloudRecordingResponse(ReportCloudRecordingResponse),
-}
-
-impl ReportCloudRecordingResponseAllOf {
-    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
-        if let ReportCloudRecordingResponseAllOf::DashboardImResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn report_cloud_recording_response(&self) -> Option<&ReportCloudRecordingResponse> {
-        if let ReportCloudRecordingResponseAllOf::ReportCloudRecordingResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+pub struct ReportCloudRecordingResponseAllOf {
+    #[serde(flatten)]
+    pub dashboard_im_response: DashboardImResponse,
+    #[serde(flatten)]
+    pub report_cloud_recording_response: ReportCloudRecordingResponse,
 }
 
 /**
@@ -19033,36 +18366,19 @@ pub struct ReportOperationLogsResponse {
     pub operation_logs: Vec<OperationLogs>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken4ImChat`
 /// - `ReportOperationLogsResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ReportOperationLogsResponseAllOf {
+pub struct ReportOperationLogsResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken4ImChat(PaginationToken4ImChat),
-    ReportOperationLogsResponse(ReportOperationLogsResponse),
-}
-
-impl ReportOperationLogsResponseAllOf {
-    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
-        if let ReportOperationLogsResponseAllOf::PaginationToken4ImChat(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn report_operation_logs_response(&self) -> Option<&ReportOperationLogsResponse> {
-        if let ReportOperationLogsResponseAllOf::ReportOperationLogsResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token_4_im_chat: PaginationToken4ImChat,
+    #[serde(flatten)]
+    pub report_operation_logs_response: ReportOperationLogsResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20112,45 +19428,22 @@ pub struct UserResponse {
     pub verified: i64,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Groups`
 /// - `User`
 /// - `UserResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum UserResponseAllOf {
-    Groups(Groups),
+pub struct UserResponseAllOf {
+    #[serde(flatten)]
+    pub groups: Groups,
     /**
      * The user object represents a specific user on Zoom.
      */
-    User(User),
-    UserResponse(UserResponse),
-}
-
-impl UserResponseAllOf {
-    pub fn groups(&self) -> Option<&Groups> {
-        if let UserResponseAllOf::Groups(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn user(&self) -> Option<&User> {
-        if let UserResponseAllOf::User(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn user_response(&self) -> Option<&UserResponse> {
-        if let UserResponseAllOf::UserResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub user: User,
+    #[serde(flatten)]
+    pub user_response: UserResponse,
 }
 
 /**
@@ -20660,36 +19953,19 @@ pub struct WebinarCreateResponse {
     pub uuid: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `WebinarInfo`
 /// - `WebinarCreateResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum WebinarCreateResponseAllOf {
+pub struct WebinarCreateResponseAllOf {
     /**
      * Webinar object.
      */
-    WebinarInfo(WebinarInfo),
-    WebinarCreateResponse(WebinarCreateResponse),
-}
-
-impl WebinarCreateResponseAllOf {
-    pub fn webinar_create_response(&self) -> Option<&WebinarCreateResponse> {
-        if let WebinarCreateResponseAllOf::WebinarCreateResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn webinar_info(&self) -> Option<&WebinarInfo> {
-        if let WebinarCreateResponseAllOf::WebinarInfo(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub webinar_info: WebinarInfo,
+    #[serde(flatten)]
+    pub webinar_create_response: WebinarCreateResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20732,36 +20008,19 @@ pub struct WebinarResponse {
     pub uuid: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `WebinarInfo`
 /// - `WebinarResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum WebinarResponseAllOf {
+pub struct WebinarResponseAllOf {
     /**
      * Webinar object.
      */
-    WebinarInfo(WebinarInfo),
-    WebinarResponse(WebinarResponse),
-}
-
-impl WebinarResponseAllOf {
-    pub fn webinar_info(&self) -> Option<&WebinarInfo> {
-        if let WebinarResponseAllOf::WebinarInfo(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn webinar_response(&self) -> Option<&WebinarResponse> {
-        if let WebinarResponseAllOf::WebinarResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub webinar_info: WebinarInfo,
+    #[serde(flatten)]
+    pub webinar_response: WebinarResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20995,27 +20254,6 @@ pub struct AddBatchWebinarRegistrantsResponse {
 pub struct AddBatchRegistrantsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub registrants: Vec<AddBatchWebinarRegistrantsResponse>,
-}
-
-/// All of the following types:
-///
-/// - `WebinarRegistrantQuestions`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum WebinarRegistrantsQuestionsGetResponseAllOf {
-    /**
-     * Webinar Registrant Questions
-     */
-    WebinarRegistrantQuestions(WebinarRegistrantQuestions),
-}
-
-impl WebinarRegistrantsQuestionsGetResponseAllOf {
-    pub fn webinar_registrant_questions(&self) -> Option<&WebinarRegistrantQuestions> {
-        let WebinarRegistrantsQuestionsGetResponseAllOf::WebinarRegistrantQuestions(ref_) = self;
-        Some(ref_)
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -21318,50 +20556,22 @@ pub struct DashboardClientFeedbackDetailResponse {
     pub client_feedback_details: Vec<ClientFeedbackDetails>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `PaginationToken4ImChat`
 /// - `DashboardImResponse`
 /// - `DashboardClientFeedbackDetailResponse`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum DashboardClientFeedbackDetailResponseAllOf {
+pub struct DashboardClientFeedbackDetailResponseAllOf {
     /**
      * Pagination object.
      */
-    PaginationToken4ImChat(PaginationToken4ImChat),
-    DashboardImResponse(DashboardImResponse),
-    DashboardClientFeedbackDetailResponse(DashboardClientFeedbackDetailResponse),
-}
-
-impl DashboardClientFeedbackDetailResponseAllOf {
-    pub fn dashboard_client_feedback_detail_response(
-        &self,
-    ) -> Option<&DashboardClientFeedbackDetailResponse> {
-        if let DashboardClientFeedbackDetailResponseAllOf::DashboardClientFeedbackDetailResponse(
-            ref_,
-        ) = self
-        {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
-        if let DashboardClientFeedbackDetailResponseAllOf::DashboardImResponse(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
-        if let DashboardClientFeedbackDetailResponseAllOf::PaginationToken4ImChat(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub pagination_token_4_im_chat: PaginationToken4ImChat,
+    #[serde(flatten)]
+    pub dashboard_im_response: DashboardImResponse,
+    #[serde(flatten)]
+    pub dashboard_client_feedback_detail_response: DashboardClientFeedbackDetailResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -33263,48 +32473,6 @@ pub struct ListWebinarTemplatesResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_records: i64,
-}
-
-/// All of the following types:
-///
-/// - `InviteLink`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum WebinarInviteLinksCreateRequestAllOf {
-    /**
-     * Invite Links
-     */
-    InviteLink(InviteLink),
-}
-
-impl WebinarInviteLinksCreateRequestAllOf {
-    pub fn invite_link(&self) -> Option<&InviteLink> {
-        let WebinarInviteLinksCreateRequestAllOf::InviteLink(ref_) = self;
-        Some(ref_)
-    }
-}
-
-/// All of the following types:
-///
-/// - `InviteLinks`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum WebinarInviteLinksCreateResponseAllOf {
-    /**
-     * Invite links response.
-     */
-    InviteLinks(InviteLinks),
-}
-
-impl WebinarInviteLinksCreateResponseAllOf {
-    pub fn invite_links(&self) -> Option<&InviteLinks> {
-        let WebinarInviteLinksCreateResponseAllOf::InviteLinks(ref_) = self;
-        Some(ref_)
-    }
 }
 
 /**
