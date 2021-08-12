@@ -8,6 +8,12 @@ GITHUB_SPEC = $(GITHUB_SPEC_DIR)/api.github.com.json
 GITHUB_SPEC_REPO = github/rest-api-description
 GITHUB_SPEC_REMOTE = https://raw.githubusercontent.com/$(GITHUB_SPEC_REPO)/main/descriptions/api.github.com/api.github.com.json
 
+GOOGLE_SPEC_DIR = $(CURDIR)/specs/google
+
+GOOGLE_ADMIN_SPEC_DIR = $(GOOGLE_SPEC_DIR)/admin
+GOOGLE_ADMIN_SPEC = $(GOOGLE_ADMIN_SPEC_DIR)/admin.yaml
+GOOGLE_ADMIN_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/admin/directory_v1/openapi.yaml
+
 GUSTO_SPEC_DIR = $(CURDIR)/specs/gusto
 GUSTO_SPEC = $(GUSTO_SPEC_DIR)/gusto.v1.yaml
 GUSTO_SPEC_REPO = Gusto-API/api.gusto.dev
@@ -60,6 +66,7 @@ update: update-specs
 update-specs:
 	$(RM) -r $(DOCUSIGN_SPEC_DIR) \
 		$(GITHUB_SPEC_DIR) \
+		$(GOOGLE_ADMIN_SPEC_DIR) \
 		$(GUSTO_SPEC_DIR) \
 		$(MAILCHIMP_SPEC_DIR) \
 		$(OKTA_SPEC_DIR) \
@@ -68,6 +75,7 @@ update-specs:
 		$(ZOOM_SPEC_DIR)
 	make $(DOCUSIGN_SPEC) \
 		$(GITHUB_SPEC) \
+		$(GOOGLE_ADMIN_SPEC) \
 		$(GUSTO_SPEC) \
 		$(MAILCHIMP_SPEC) \
 		$(OKTA_SPEC) \
@@ -111,6 +119,22 @@ github: target/debug/generator $(GITHUB_SPEC)
 		--spec-link "https://github.com/$(GITHUB_SPEC_REPO)" \
 		--host "api.github.com" $(EXTRA_ARGS)
 	cargo fmt -p octorust
+
+$(GOOGLE_ADMIN_SPEC_DIR):
+	mkdir -p $@
+
+$(GOOGLE_ADMIN_SPEC): $(GOOGLE_ADMIN_SPEC_DIR)
+	curl -sSL $(GOOGLE_ADMIN_SPEC_REMOTE) -o $@
+
+google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
+	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.2.0 \
+		-o google/admin \
+		-n gsuite-api \
+		--proper-name "Google Admin" \
+		-d "A fully generated & opinionated API client for the Google Admin API." \
+		--spec-link "https://admin.googleapis.com/$discovery/rest?version=directory_v1" \
+		--host "www.googleapis.com/admin/directory/v1"
+	cargo fmt -p gsuite-api
 
 $(GUSTO_SPEC_DIR):
 	mkdir -p $@
