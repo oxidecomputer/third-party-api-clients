@@ -27,6 +27,11 @@ RAMP_SPEC = $(RAMP_SPEC_DIR)/ramp.v1.json
 RAMP_SPEC_REPO = sumatokado/ramp-developer
 RAMP_SPEC_REFERENCE = $(RAMP_SPEC_DIR)/reference/Ramp-developer.v1.yaml
 
+SENDGRID_SPEC_DIR = $(CURDIR)/specs/sendgrid
+SENDGRID_SPEC = $(SENDGRID_SPEC_DIR)/sendgrid.json
+SENDGRID_SPEC_REPO = sendgrid/sendgrid-oai
+SENDGRID_SPEC_REMOTE = https://raw.githubusercontent.com/$(SENDGRID_SPEC_REPO)/main/oai.json
+
 ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
@@ -168,6 +173,27 @@ ramp: target/debug/generator $(RAMP_SPEC)
 		--token-endpoint "api.ramp.com/v1/public/customer/token" \
 		--user-consent-endpoint "app.ramp.com/v1/authorize"
 	cargo fmt -p ramp-api
+
+$(SENDGRID_SPEC_DIR):
+	mkdir -p $@
+
+$(SENDGRID_SPEC): $(SENDGRID_SPEC_DIR)
+	npx swagger2openapi \
+		--outfile $@ \
+		--patch \
+		$(SENDGRID_SPEC_REMOTE)
+
+sendgrid: target/debug/generator $(SENDGRID_SPEC)
+	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.2.0 \
+		-o sendgrid \
+		-n sendgrid-api \
+		--proper-name SendGrid \
+		-d "A fully generated & opinionated API client for the SendGrid API." \
+		--spec-link "$(SENDGRID_SPEC_REMOTE)" \
+		--host "api.sendgrid.us/v2" \
+		--token-endpoint "sendgrid.us/oauth/token" \
+		--user-consent-endpoint "sendgrid.us/oauth/authorize"
+	cargo fmt -p sendgrid-api
 
 $(ZOOM_SPEC_DIR):
 	mkdir -p $@
