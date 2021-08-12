@@ -195,7 +195,7 @@ impl ChatChannelsAccountLevel {
         // Paginate if we should.
         while !page.is_empty() {
             // Check if we already have URL params and need to concat the token.
-            if !url.contains("?") {
+            if !url.contains('?') {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
