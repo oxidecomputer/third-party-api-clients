@@ -207,7 +207,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                             SchemaKind::Type(Type::Array(_at)) => "&[String]".to_string(), /* TODO: make this smarter */
                             SchemaKind::Type(Type::String(st)) => {
                                 use openapiv3::{
-                                    StringFormat::{Date, DateTime, Password},
+                                    StringFormat::{Byte, Date, DateTime, Password},
                                     VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                                 };
 
@@ -263,9 +263,17 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     Item(DateTime) => "chrono::DateTime<chrono::Utc>".to_string(),
                                     Item(Date) => "chrono::NaiveDate".to_string(),
                                     Item(Password) => "&str".to_string(),
+                                    // TODO: as per the spec this is base64 encoded chars.
+                                    Item(Byte) => "&str".to_string(),
                                     Empty => "&str".to_string(),
                                     Unknown(f) => match f.as_str() {
                                         "float" => "f64".to_string(),
+                                        "int64" => "i64".to_string(),
+                                        "uint64" => "u64".to_string(),
+                                        "google-fieldmask" => "&str".to_string(),
+                                        "google-datetime" => {
+                                            "chrono::DateTime<chrono::Utc>".to_string()
+                                        }
                                         "uri" => "&str".to_string(),
                                         "uri-template" => "&str".to_string(),
                                         "email" => "&str".to_string(),
@@ -1419,7 +1427,7 @@ impl TypeSpace {
                 }
                 openapiv3::Type::String(st) => {
                     use openapiv3::{
-                        StringFormat::{Date, DateTime, Password},
+                        StringFormat::{Byte, Date, DateTime, Password},
                         VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
 
@@ -1496,6 +1504,11 @@ impl TypeSpace {
                             Some(uid.to_string()),
                             TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
                         )),
+                        // TODO: as per the spec this is base64 encoded chars.
+                        Item(Byte) => Ok((
+                            Some(uid.to_string()),
+                            TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                        )),
                         Empty => {
                             // Get the name, we need to find out if its secretly a date.
                             let name = clean_name(match (name, s.schema_data.title.as_deref()) {
@@ -1527,6 +1540,25 @@ impl TypeSpace {
                             "float" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic("f64".to_string(), s.schema_data.clone()),
+                            )),
+                            "int64" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("i64".to_string(), s.schema_data.clone()),
+                            )),
+                            "uint64" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("u64".to_string(), s.schema_data.clone()),
+                            )),
+                            "google-fieldmask" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            )),
+                            "google-datetime" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic(
+                                    "Option<chrono::DateTime<chrono::Utc>>".to_string(),
+                                    s.schema_data.clone(),
+                                ),
                             )),
                             "uri" => Ok((
                                 Some(uid.to_string()),

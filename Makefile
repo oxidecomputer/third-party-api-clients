@@ -14,6 +14,10 @@ GOOGLE_ADMIN_SPEC_DIR = $(GOOGLE_SPEC_DIR)/admin
 GOOGLE_ADMIN_SPEC = $(GOOGLE_ADMIN_SPEC_DIR)/admin.yaml
 GOOGLE_ADMIN_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/admin/directory_v1/openapi.yaml
 
+GOOGLE_CALENDAR_SPEC_DIR = $(GOOGLE_SPEC_DIR)/calendar
+GOOGLE_CALENDAR_SPEC = $(GOOGLE_CALENDAR_SPEC_DIR)/calendar.yaml
+GOOGLE_CALENDAR_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/calendar/v3/openapi.yaml
+
 GUSTO_SPEC_DIR = $(CURDIR)/specs/gusto
 GUSTO_SPEC = $(GUSTO_SPEC_DIR)/gusto.v1.yaml
 GUSTO_SPEC_REPO = Gusto-API/api.gusto.dev
@@ -67,6 +71,7 @@ update-specs:
 	$(RM) -r $(DOCUSIGN_SPEC_DIR) \
 		$(GITHUB_SPEC_DIR) \
 		$(GOOGLE_ADMIN_SPEC_DIR) \
+		$(GOOGLE_CALENDAR_SPEC_DIR) \
 		$(GUSTO_SPEC_DIR) \
 		$(MAILCHIMP_SPEC_DIR) \
 		$(OKTA_SPEC_DIR) \
@@ -76,6 +81,7 @@ update-specs:
 	make $(DOCUSIGN_SPEC) \
 		$(GITHUB_SPEC) \
 		$(GOOGLE_ADMIN_SPEC) \
+		$(GOOGLE_CALENDAR_SPEC) \
 		$(GUSTO_SPEC) \
 		$(MAILCHIMP_SPEC) \
 		$(OKTA_SPEC) \
@@ -135,6 +141,22 @@ google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
 		--spec-link "https://admin.googleapis.com/$discovery/rest?version=directory_v1" \
 		--host "www.googleapis.com/admin/directory/v1"
 	cargo fmt -p gsuite-api
+
+$(GOOGLE_CALENDAR_SPEC_DIR):
+	mkdir -p $@
+
+$(GOOGLE_CALENDAR_SPEC): $(GOOGLE_CALENDAR_SPEC_DIR)
+	curl -sSL $(GOOGLE_CALENDAR_SPEC_REMOTE) -o $@
+
+google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
+	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.1.0 \
+		-o google/calendar \
+		-n google-calendar \
+		--proper-name "Google Calendar" \
+		-d "A fully generated & opinionated API client for the Google Calendar API." \
+		--spec-link "https://calendar-json.googleapis.com/$discovery/rest?version=v3" \
+		--host "www.googleapis.com/calendar/directory/v1"
+	cargo fmt -p google-calendar
 
 $(GUSTO_SPEC_DIR):
 	mkdir -p $@
