@@ -8041,10 +8041,8 @@ pub enum WebinarPanelistPanelistsAllOf {
 
 impl WebinarPanelistPanelistsAllOf {
     pub fn panelist(&self) -> Option<&Panelist> {
-        if let WebinarPanelistPanelistsAllOf::Panelist(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let WebinarPanelistPanelistsAllOf::Panelist(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -10866,10 +10864,8 @@ pub enum ArchiveFilesAnyOf {
 
 impl ArchiveFilesAnyOf {
     pub fn archive_files(&self) -> Option<&ArchiveFiles> {
-        if let ArchiveFilesAnyOf::ArchiveFiles(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let ArchiveFilesAnyOf::ArchiveFiles(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -15898,10 +15894,8 @@ pub enum MeetingPollCreateRequestAllOf {
 
 impl MeetingPollCreateRequestAllOf {
     pub fn poll(&self) -> Option<&Poll> {
-        if let MeetingPollCreateRequestAllOf::Poll(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let MeetingPollCreateRequestAllOf::Poll(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -16015,12 +16009,9 @@ pub enum MeetingRegistrantsQuestionsGetResponseAllOf {
 
 impl MeetingRegistrantsQuestionsGetResponseAllOf {
     pub fn meeting_registrant_questions_data(&self) -> Option<&MeetingRegistrantQuestionsData> {
-        if let MeetingRegistrantsQuestionsGetResponseAllOf::MeetingRegistrantQuestionsData(ref_) =
-            self
-        {
-            return Some(ref_);
-        }
-        None
+        let MeetingRegistrantsQuestionsGetResponseAllOf::MeetingRegistrantQuestionsData(ref_) =
+            self;
+        Some(ref_)
     }
 }
 
@@ -16161,13 +16152,9 @@ pub enum RecordingRegistrantQuestionUpdateRequestAllOf {
 
 impl RecordingRegistrantQuestionUpdateRequestAllOf {
     pub fn recording_registrant_questions_data(&self) -> Option<&RecordingRegistrantQuestionsData> {
-        if let RecordingRegistrantQuestionUpdateRequestAllOf::RecordingRegistrantQuestionsData(
-            ref_,
-        ) = self
-        {
-            return Some(ref_);
-        }
-        None
+        let RecordingRegistrantQuestionUpdateRequestAllOf::RecordingRegistrantQuestionsData(ref_) =
+            self;
+        Some(ref_)
     }
 }
 
@@ -21026,11 +21013,8 @@ pub enum WebinarRegistrantsQuestionsGetResponseAllOf {
 
 impl WebinarRegistrantsQuestionsGetResponseAllOf {
     pub fn webinar_registrant_questions(&self) -> Option<&WebinarRegistrantQuestions> {
-        if let WebinarRegistrantsQuestionsGetResponseAllOf::WebinarRegistrantQuestions(ref_) = self
-        {
-            return Some(ref_);
-        }
-        None
+        let WebinarRegistrantsQuestionsGetResponseAllOf::WebinarRegistrantQuestions(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -33297,10 +33281,8 @@ pub enum WebinarInviteLinksCreateRequestAllOf {
 
 impl WebinarInviteLinksCreateRequestAllOf {
     pub fn invite_link(&self) -> Option<&InviteLink> {
-        if let WebinarInviteLinksCreateRequestAllOf::InviteLink(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let WebinarInviteLinksCreateRequestAllOf::InviteLink(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -33320,10 +33302,8 @@ pub enum WebinarInviteLinksCreateResponseAllOf {
 
 impl WebinarInviteLinksCreateResponseAllOf {
     pub fn invite_links(&self) -> Option<&InviteLinks> {
-        if let WebinarInviteLinksCreateResponseAllOf::InviteLinks(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let WebinarInviteLinksCreateResponseAllOf::InviteLinks(ref_) = self;
+        Some(ref_)
     }
 }
 

@@ -251,22 +251,40 @@ fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String 
     // Render the implementation to easily unpack these things for the end user.
     a(&format!("impl {} {{", sn));
     for (fn_name, name) in &name_map {
-        a(&format!(
-            r#"pub fn {}(&self) -> Option<&{}> {{
+        if name_map.len() > 1 {
+            a(&format!(
+                r#"pub fn {}(&self) -> Option<&{}> {{
                             if let {}::{}(ref_) = self {{
                                 return Some(ref_);
                             }}
                             None
                         }}"#,
-            to_snake_case(name)
-                .replace("f_64", "f64")
-                .replace("f_32", "f32")
-                .replace("i_64", "i64")
-                .replace("i_32", "i32"),
-            name,
-            sn,
-            fn_name,
-        ));
+                to_snake_case(name)
+                    .replace("f_64", "f64")
+                    .replace("f_32", "f32")
+                    .replace("i_64", "i64")
+                    .replace("i_32", "i32"),
+                name,
+                sn,
+                fn_name,
+            ));
+        } else {
+            a(&format!(
+                r#"pub fn {}(&self) -> Option<&{}> {{
+                            let {}::{}(ref_) = self;
+                            Some(ref_)
+
+                        }}"#,
+                to_snake_case(name)
+                    .replace("f_64", "f64")
+                    .replace("f_32", "f32")
+                    .replace("i_64", "i64")
+                    .replace("i_32", "i32"),
+                name,
+                sn,
+                fn_name,
+            ));
+        }
         a("");
     }
     a("}");

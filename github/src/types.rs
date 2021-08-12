@@ -149,10 +149,8 @@ pub enum UserAllOf {
 
 impl UserAllOf {
     pub fn simple_user(&self) -> Option<&SimpleUser> {
-        if let UserAllOf::SimpleUser(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let UserAllOf::SimpleUser(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -1400,10 +1398,8 @@ pub enum LicenseAllOf {
 
 impl LicenseAllOf {
     pub fn license_simple(&self) -> Option<&LicenseSimple> {
-        if let LicenseAllOf::LicenseSimple(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let LicenseAllOf::LicenseSimple(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -2731,10 +2727,8 @@ pub enum InstallationAllOf {
 
 impl InstallationAllOf {
     pub fn scoped_installation(&self) -> Option<&ScopedInstallation> {
-        if let InstallationAllOf::ScopedInstallation(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let InstallationAllOf::ScopedInstallation(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -3891,10 +3885,8 @@ pub enum MilestoneAllOf {
 
 impl MilestoneAllOf {
     pub fn milestone(&self) -> Option<&Milestone> {
-        if let MilestoneAllOf::Milestone(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let MilestoneAllOf::Milestone(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -3948,10 +3940,8 @@ pub enum AppAllOf {
 
 impl AppAllOf {
     pub fn git_hub_app(&self) -> Option<&GitHubApp> {
-        if let AppAllOf::GitHubApp(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let AppAllOf::GitHubApp(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -7708,10 +7698,8 @@ pub enum ParentAllOf {
 
 impl ParentAllOf {
     pub fn team_simple(&self) -> Option<&TeamSimple> {
-        if let ParentAllOf::TeamSimple(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let ParentAllOf::TeamSimple(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -8090,10 +8078,8 @@ pub enum RepositoryAllOf {
 
 impl RepositoryAllOf {
     pub fn minimal_repository(&self) -> Option<&MinimalRepository> {
-        if let RepositoryAllOf::MinimalRepository(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let RepositoryAllOf::MinimalRepository(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -10757,10 +10743,8 @@ pub enum HeadCommitAllOf {
 
 impl HeadCommitAllOf {
     pub fn simple_commit(&self) -> Option<&SimpleCommit> {
-        if let HeadCommitAllOf::SimpleCommit(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let HeadCommitAllOf::SimpleCommit(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -12220,10 +12204,8 @@ pub enum AuthorAllOf {
 
 impl AuthorAllOf {
     pub fn tagger(&self) -> Option<&Tagger> {
-        if let AuthorAllOf::Tagger(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let AuthorAllOf::Tagger(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -14735,10 +14717,8 @@ pub enum CodeOfConductAll {
 
 impl CodeOfConductAll {
     pub fn code_of_conduct_simple(&self) -> Option<&CodeOfConductSimple> {
-        if let CodeOfConductAll::CodeOfConductSimple(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let CodeOfConductAll::CodeOfConductSimple(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -14755,10 +14735,8 @@ pub enum ReadmeAllOf {
 
 impl ReadmeAllOf {
     pub fn community_health_file(&self) -> Option<&CommunityHealthFile> {
-        if let ReadmeAllOf::CommunityHealthFile(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let ReadmeAllOf::CommunityHealthFile(ref_) = self;
+        Some(ref_)
     }
 }
 
@@ -24778,10 +24756,8 @@ pub enum AppsCheckAuthorizationResponseAllOf {
 
 impl AppsCheckAuthorizationResponseAllOf {
     pub fn authorization(&self) -> Option<&Authorization> {
-        if let AppsCheckAuthorizationResponseAllOf::Authorization(ref_) = self {
-            return Some(ref_);
-        }
-        None
+        let AppsCheckAuthorizationResponseAllOf::Authorization(ref_) = self;
+        Some(ref_)
     }
 }
 
