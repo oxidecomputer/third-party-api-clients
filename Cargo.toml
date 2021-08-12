@@ -1,6 +1,7 @@
 [workspace]
 members = [
 	"generator",
+	"giphy",
 	"github",
 	"google/calendar",
 	"google/groups-settings",
