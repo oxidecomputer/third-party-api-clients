@@ -13,6 +13,10 @@ GUSTO_SPEC = $(GUSTO_SPEC_DIR)/gusto.v1.yaml
 GUSTO_SPEC_REPO = Gusto-API/api.gusto.dev
 GUSTO_SPEC_REMOTE = https://raw.githubusercontent.com/$(GUSTO_SPEC_REPO)/master/reference/Gusto-API.v1.yaml
 
+MAILCHIMP_SPEC_DIR = $(CURDIR)/specs/mailchimp
+MAILCHIMP_SPEC = $(MAILCHIMP_SPEC_DIR)/mailchimp.json
+MAILCHIMP_SPEC_REMOTE = https://api.mailchimp.com/schema/3.0/Swagger.json?expand
+
 RAMP_SPEC_DIR = $(CURDIR)/specs/ramp
 RAMP_SPEC = $(RAMP_SPEC_DIR)/ramp.v1.json
 RAMP_SPEC_REPO = sumatokado/ramp-developer
@@ -61,7 +65,7 @@ docusign: target/debug/generator $(DOCUSIGN_SPEC)
 		--host "na4.docusign.net" \
 		--token-endpoint "account.docusign.com/oauth/token" \
 		--user-consent-endpoint "account.docusign.com/oauth/auth"
-	cargo fmt -p docusign-api
+	cargo fmt -p docusign
 
 $(GITHUB_SPEC_DIR):
 	mkdir -p $@
@@ -96,6 +100,27 @@ gusto: target/debug/generator $(GUSTO_SPEC)
 		--token-endpoint "api.gusto.com/oauth/token" \
 		--user-consent-endpoint "api.gusto.com/oauth/authorize"
 	cargo fmt -p gusto-api
+
+$(MAILCHIMP_SPEC_DIR):
+	mkdir -p $@
+
+$(MAILCHIMP_SPEC): $(MAILCHIMP_SPEC_DIR)
+	npx swagger2openapi \
+		--outfile $@ \
+		--patch \
+		$(MAILCHIMP_SPEC_REMOTE)
+
+mailchimp: target/debug/generator $(MAILCHIMP_SPEC)
+	./target/debug/generator -i $(MAILCHIMP_SPEC) -v 0.2.0 \
+		-o mailchimp \
+		-n mailchimp-api \
+		--proper-name MailChimp \
+		-d "A fully generated & opinionated API client for the MailChimp API." \
+		--spec-link "$(MAILCHIMP_SPEC_REMOTE)" \
+		--host "us1.api.mailchimp.com" \
+		--token-endpoint "login.mailchimp.com/oauth2/token" \
+		--user-consent-endpoint "login.mailchimp.com/oauth2/authorize"
+	cargo fmt -p mailchimp-api
 
 $(RAMP_SPEC_REFERENCE):
 	git clone git@github.com:$(RAMP_SPEC_REPO).git $(RAMP_SPEC_DIR)
