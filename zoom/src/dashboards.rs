@@ -1194,7 +1194,7 @@ impl Dashboards {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.call_logs)
     }
 
     /**
@@ -1221,15 +1221,11 @@ impl Dashboards {
         to: &str,
         site_id: &str,
         quality_type: &str,
-        next_page_token: &str,
     ) -> Result<Vec<crate::types::ListCallLogsMetricsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
-        }
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
         }
         if !quality_type.is_empty() {
             query_args.push(format!("quality_type={}", quality_type));
@@ -1248,7 +1244,40 @@ impl Dashboards {
         }
         let url = format!("/phone/metrics/call_logs?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ListCallLogsMetricsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut call_logs = resp.call_logs;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            call_logs.append(&mut resp.call_logs);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1368,7 +1397,7 @@ impl Dashboards {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.participants)
     }
 
     /**
@@ -1392,13 +1421,9 @@ impl Dashboards {
         &self,
         meeting_id: &str,
         type_: crate::types::DashboardMeetingsType,
-        next_page_token: &str,
     ) -> Result<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -1412,7 +1437,40 @@ impl Dashboards {
             query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ParticipantFeedbackResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut participants = resp.participants;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            participants.append(&mut resp.participants);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1474,7 +1532,7 @@ impl Dashboards {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.participants)
     }
 
     /**
@@ -1498,14 +1556,10 @@ impl Dashboards {
     pub async fn participant_webinar_feedback(
         &self,
         type_: crate::types::DashboardMeetingsType,
-        next_page_token: &str,
         webinar_id: &str,
     ) -> Result<Vec<crate::types::ParticipantFeedbackResponseParticipants>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -1519,6 +1573,39 @@ impl Dashboards {
             query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ParticipantFeedbackResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut participants = resp.participants;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            participants.append(&mut resp.participants);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 }

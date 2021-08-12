@@ -60,7 +60,7 @@ impl ChatChannels {
         let resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.channels)
     }
 
     /**
@@ -78,29 +78,46 @@ impl ChatChannels {
      *
      * <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note:</b> This API supports both user-managed apps and account-level apps. However, in an <b>account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, to list channels of another user in the same Zoom account, the user calling this API must have a <a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit.">role</a> that has the <b>View</b> or <b>Edit</b> permission for the <b>Chat channels</b> feature.</p>
      */
-    pub async fn get_all_channels(
-        &self,
-        user_id: &str,
-        next_page_token: &str,
-    ) -> Result<Vec<crate::types::Channels>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
+    pub async fn get_all_channels(&self, user_id: &str) -> Result<Vec<crate::types::Channels>> {
         let url = format!(
-            "/chat/users/{}/channels?{}",
+            "/chat/users/{}/channels",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::GetChannelsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut channels = resp.channels;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            channels.append(&mut resp.channels);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

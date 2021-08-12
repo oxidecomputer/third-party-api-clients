@@ -69,7 +69,7 @@ impl Archiving {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.meetings)
     }
 
     /**
@@ -90,7 +90,6 @@ impl Archiving {
      */
     pub async fn list_all_archived_files(
         &self,
-        next_page_token: &str,
         from: &str,
         to: &str,
         query_date_type: crate::types::ListArchivedFilesQueryDateType,
@@ -99,9 +98,6 @@ impl Archiving {
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
-        }
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
         }
         query_args.push(format!("query_date_type={}", query_date_type));
         if !to.is_empty() {
@@ -115,7 +111,40 @@ impl Archiving {
         }
         let url = format!("/archive_files?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ListArchivedFilesResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut meetings = resp.meetings;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            meetings.append(&mut resp.meetings);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

@@ -65,7 +65,7 @@ impl SipPhone {
         let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.phones)
     }
 
     /**
@@ -86,13 +86,9 @@ impl SipPhone {
         &self,
         page_number: i64,
         search_key: &str,
-        next_page_token: &str,
     ) -> Result<Vec<crate::types::Phones>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         if page_number > 0 {
             query_args.push(format!("page_number={}", page_number));
         }
@@ -107,7 +103,40 @@ impl SipPhone {
         }
         let url = format!("/sip_phones?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ListSipPhonesResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut phones = resp.phones;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            phones.append(&mut resp.phones);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

@@ -58,7 +58,7 @@ impl PhoneDevices {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.devices)
     }
 
     /**
@@ -79,13 +79,9 @@ impl PhoneDevices {
     pub async fn list_all(
         &self,
         type_: crate::types::ListPhoneDevicesType,
-        next_page_token: &str,
     ) -> Result<Vec<crate::types::ListPhoneDevicesResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -95,7 +91,40 @@ impl PhoneDevices {
         }
         let url = format!("/phone/devices?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ListPhoneDevicesResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut devices = resp.devices;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            devices.append(&mut resp.devices);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

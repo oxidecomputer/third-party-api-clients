@@ -287,7 +287,7 @@ impl Webinars {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.participants)
     }
 
     /**
@@ -312,26 +312,46 @@ impl Webinars {
     pub async fn list_all_webinar_participants(
         &self,
         webinar_id: &str,
-        next_page_token: &str,
     ) -> Result<Vec<crate::types::Participants>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
         let url = format!(
-            "/past_webinars/{}/participants?{}",
+            "/past_webinars/{}/participants",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ListWebinarParticipantsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut participants = resp.participants;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            participants.append(&mut resp.participants);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

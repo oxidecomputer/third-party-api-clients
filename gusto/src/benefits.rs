@@ -21,7 +21,7 @@ impl Benefits {
      *
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
-    pub async fn get(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
+    pub async fn get_page(&self) -> Result<Vec<crate::types::SupportedBenefit>> {
         let url = "/v1/benefits".to_string();
         self.client.get(&url, None).await
     }

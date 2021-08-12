@@ -54,7 +54,7 @@ impl PhoneBlockedList {
         let resp: crate::types::ListBlockedResponse = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.blocked_list)
     }
 
     /**
@@ -72,24 +72,42 @@ impl PhoneBlockedList {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn list_all_blocked(
-        &self,
-        next_page_token: &str,
-    ) -> Result<Vec<crate::types::BlockedList>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
-        let url = format!("/phone/blocked_list?{}", query);
+    pub async fn list_all_blocked(&self) -> Result<Vec<crate::types::BlockedList>> {
+        let url = "/phone/blocked_list".to_string();
+        let mut resp: crate::types::ListBlockedResponse =
+            self.client.get(&url, None).await.unwrap();
 
-        self.client.get_all_pages(&url, None).await
+        let mut blocked_list = resp.blocked_list;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            blocked_list.append(&mut resp.blocked_list);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

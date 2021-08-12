@@ -571,6 +571,7 @@ fn get_fn_params(
                 && nam != "per_page"
                 && nam != "per"
                 && nam != "page_size"
+                && nam != "next_page_token"
                 && nam != "start"))
             && nam != "authorization"
             && !nam.starts_with("authorization_bearer")
@@ -606,6 +607,7 @@ fn get_fn_params(
                     && nam != "per_page"
                     && nam != "per"
                     && nam != "page_size"
+                    && nam != "next_page_token"
                     && nam != "start"))
                 && nam != "authorization"
                 && !nam.starts_with("authorization_bearer")
@@ -649,7 +651,7 @@ fn get_fn_inner(
         "None"
     };
 
-    if all_pages && proper_name != "Ramp" {
+    if all_pages && proper_name != "Ramp" && proper_name != "Zoom" {
         return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
     } else if all_pages && proper_name == "Ramp" {
         // We will do a custom function here.
@@ -750,10 +752,11 @@ fn get_fn_inner(
             r#"let resp: {} = self.client.{}(&url, {}).await.unwrap();
 
                 // Return our response data.
-                Ok(resp.data)"#,
+                Ok(resp.{})"#,
             response_type,
             m.to_lowercase(),
-            body
+            body,
+            pagination_property
         ));
     }
 

@@ -632,7 +632,7 @@ impl Reports {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.activity_logs)
     }
 
     /**
@@ -653,14 +653,10 @@ impl Reports {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-        next_page_token: &str,
     ) -> Result<Vec<crate::types::ActivityLogs>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -670,7 +666,40 @@ impl Reports {
         }
         let url = format!("/report/activities?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ReportSignInOutActivitiesResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut activity_logs = resp.activity_logs;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            activity_logs.append(&mut resp.activity_logs);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

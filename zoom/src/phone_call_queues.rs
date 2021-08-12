@@ -57,7 +57,7 @@ impl PhoneCallQueues {
         let resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.call_queues)
     }
 
     /**
@@ -78,24 +78,42 @@ impl PhoneCallQueues {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      */
-    pub async fn list_all_call_queues(
-        &self,
-        next_page_token: &str,
-    ) -> Result<Vec<crate::types::CallQueues>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
-        let url = format!("/phone/call_queues?{}", query);
+    pub async fn list_all_call_queues(&self) -> Result<Vec<crate::types::CallQueues>> {
+        let url = "/phone/call_queues".to_string();
+        let mut resp: crate::types::ListCallQueuesResponse =
+            self.client.get(&url, None).await.unwrap();
 
-        self.client.get_all_pages(&url, None).await
+        let mut call_queues = resp.call_queues;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            call_queues.append(&mut resp.call_queues);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -515,7 +533,7 @@ impl PhoneCallQueues {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.recordings)
     }
 
     /**
@@ -537,16 +555,12 @@ impl PhoneCallQueues {
     pub async fn get_all_call_queue_recordings(
         &self,
         call_queue_id: &str,
-        next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::GetCallQueueRecordingsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -560,6 +574,39 @@ impl PhoneCallQueues {
             query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::GetCallQueueRecordingsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut recordings = resp.recordings;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            recordings.append(&mut resp.recordings);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 }

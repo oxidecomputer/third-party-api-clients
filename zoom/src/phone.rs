@@ -116,7 +116,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.phone_numbers)
     }
 
     /**
@@ -136,7 +136,6 @@ impl Phone {
      */
     pub async fn list_all_account_numbers(
         &self,
-        next_page_token: &str,
         type_: crate::types::ListAccountPhoneNumbersType,
         extension_type: crate::types::ExtensionType,
         number_type: crate::types::Type,
@@ -146,9 +145,6 @@ impl Phone {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("extension_type={}", extension_type));
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         query_args.push(format!("number_type={}", number_type));
         if pending_numbers {
             query_args.push(format!("pending_numbers={}", pending_numbers));
@@ -165,7 +161,40 @@ impl Phone {
         }
         let url = format!("/phone/numbers?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ListAccountPhoneNumbersResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut phone_numbers = resp.phone_numbers;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            phone_numbers.append(&mut resp.phone_numbers);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -350,7 +379,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.templates)
     }
 
     /**
@@ -370,14 +399,10 @@ impl Phone {
      */
     pub async fn list_all_setting_templates(
         &self,
-        next_page_token: &str,
         site_id: &str,
     ) -> Result<Vec<crate::types::Templates>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         if !site_id.is_empty() {
             query_args.push(format!("site_id={}", site_id));
         }
@@ -389,7 +414,40 @@ impl Phone {
         }
         let url = format!("/phone/setting_templates?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ListSettingTemplatesResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut templates = resp.templates;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            templates.append(&mut resp.templates);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -481,7 +539,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.locations)
     }
 
     /**
@@ -499,24 +557,42 @@ impl Phone {
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
-    pub async fn list_all_locations(
-        &self,
-        next_page_token: &str,
-    ) -> Result<Vec<crate::types::ListLocationsResponse>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
-        let url = format!("/phone/locations?{}", query);
+    pub async fn list_all_locations(&self) -> Result<Vec<crate::types::ListLocationsResponse>> {
+        let url = "/phone/locations".to_string();
+        let mut resp: crate::types::ListLocationsResponseData =
+            self.client.get(&url, None).await.unwrap();
 
-        self.client.get_all_pages(&url, None).await
+        let mut locations = resp.locations;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            locations.append(&mut resp.locations);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -673,7 +749,7 @@ impl Phone {
         let resp: crate::types::ListSipGroupsResponse = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.sip_groups)
     }
 
     /**
@@ -691,24 +767,42 @@ impl Phone {
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
-    pub async fn list_all_sip_groups(
-        &self,
-        next_page_token: &str,
-    ) -> Result<Vec<crate::types::SipGroups>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
-        let url = format!("/phone/sip_groups?{}", query);
+    pub async fn list_all_sip_groups(&self) -> Result<Vec<crate::types::SipGroups>> {
+        let url = "/phone/sip_groups".to_string();
+        let mut resp: crate::types::ListSipGroupsResponse =
+            self.client.get(&url, None).await.unwrap();
 
-        self.client.get_all_pages(&url, None).await
+        let mut sip_groups = resp.sip_groups;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            sip_groups.append(&mut resp.sip_groups);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -855,7 +949,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.call_logs)
     }
 
     /**
@@ -879,16 +973,12 @@ impl Phone {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
         type_: crate::types::PhoneUserCallLogsType,
-        next_page_token: &str,
         phone_number: &str,
         time_type: crate::types::TimeType,
     ) -> Result<Vec<crate::types::CallLogs>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         if !phone_number.is_empty() {
             query_args.push(format!("phone_number={}", phone_number));
         }
@@ -907,7 +997,40 @@ impl Phone {
             query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::PhoneUserCallLogsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut call_logs = resp.call_logs;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            call_logs.append(&mut resp.call_logs);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -965,7 +1088,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.recordings)
     }
 
     /**
@@ -986,16 +1109,12 @@ impl Phone {
     pub async fn user_recordings(
         &self,
         user_id: &str,
-        next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::Recordings>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -1009,7 +1128,40 @@ impl Phone {
             query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::PhoneUserRecordingsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut recordings = resp.recordings;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            recordings.append(&mut resp.recordings);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1070,7 +1222,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.voice_mails)
     }
 
     /**
@@ -1092,16 +1244,12 @@ impl Phone {
         &self,
         user_id: &str,
         status: crate::types::PhoneUserVoiceMailsStatus,
-        next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::VoiceMails>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         query_args.push(format!("status={}", status));
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
@@ -1116,7 +1264,40 @@ impl Phone {
             query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::PhoneUserVoiceMailsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut voice_mails = resp.voice_mails;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            voice_mails.append(&mut resp.voice_mails);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1324,7 +1505,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.call_logs)
     }
 
     /**
@@ -1348,7 +1529,6 @@ impl Phone {
         from: &str,
         to: &str,
         type_: &str,
-        next_page_token: &str,
         path: &str,
         time_type: crate::types::TimeType,
         site_id: &str,
@@ -1357,9 +1537,6 @@ impl Phone {
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
-        }
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
         }
         if !path.is_empty() {
             query_args.push(format!("path={}", path));
@@ -1382,7 +1559,40 @@ impl Phone {
         }
         let url = format!("/phone/call_logs?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::AccountCallLogsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut call_logs = resp.call_logs;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            call_logs.append(&mut resp.call_logs);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1587,7 +1797,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.recordings)
     }
 
     /**
@@ -1608,7 +1818,6 @@ impl Phone {
      */
     pub async fn get_all_recordings(
         &self,
-        next_page_token: &str,
         from: &str,
         to: &str,
         owner_type: &str,
@@ -1620,9 +1829,6 @@ impl Phone {
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
-        }
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
         }
         if !owner_type.is_empty() {
             query_args.push(format!("owner_type={}", owner_type));
@@ -1645,7 +1851,40 @@ impl Phone {
         }
         let url = format!("/phone/recordings?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::GetPhoneRecordingsResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut recordings = resp.recordings;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            recordings.append(&mut resp.recordings);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1690,7 +1929,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.byoc_sip_trunk)
     }
 
     /**
@@ -1707,24 +1946,42 @@ impl Phone {
      * **Prerequisites:**
      * * A Business or Enterprise account
      */
-    pub async fn list_all_byocsip_trunk(
-        &self,
-        next_page_token: &str,
-    ) -> Result<Vec<crate::types::ByocSipTrunk>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
-        let url = format!("/phone/sip_trunk/trunks?{}", query);
+    pub async fn list_all_byocsip_trunk(&self) -> Result<Vec<crate::types::ByocSipTrunk>> {
+        let url = "/phone/sip_trunk/trunks".to_string();
+        let mut resp: crate::types::ListByocsipTrunkResponse =
+            self.client.get(&url, None).await.unwrap();
 
-        self.client.get_all_pages(&url, None).await
+        let mut byoc_sip_trunk = resp.byoc_sip_trunk;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            byoc_sip_trunk.append(&mut resp.byoc_sip_trunk);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1841,7 +2098,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.external_contacts)
     }
 
     /**
@@ -1859,24 +2116,42 @@ impl Phone {
      * * Pro or a higher account with Zoom Phone license
      * * Account owner or admin permissions
      */
-    pub async fn list_all_external_contacts(
-        &self,
-        next_page_token: &str,
-    ) -> Result<Vec<crate::types::ExternalContacts>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
-        let url = format!("/phone/external_contacts?{}", query);
+    pub async fn list_all_external_contacts(&self) -> Result<Vec<crate::types::ExternalContacts>> {
+        let url = "/phone/external_contacts".to_string();
+        let mut resp: crate::types::ListExternalContactsResponse =
+            self.client.get(&url, None).await.unwrap();
 
-        self.client.get_all_pages(&url, None).await
+        let mut external_contacts = resp.external_contacts;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            external_contacts.append(&mut resp.external_contacts);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2152,7 +2427,7 @@ impl Phone {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.users)
     }
 
     /**
@@ -2172,14 +2447,10 @@ impl Phone {
      */
     pub async fn list_all_users(
         &self,
-        next_page_token: &str,
         site_id: &str,
     ) -> Result<Vec<crate::types::ListPhoneUsersResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
-        }
         if !site_id.is_empty() {
             query_args.push(format!("site_id={}", site_id));
         }
@@ -2191,7 +2462,40 @@ impl Phone {
         }
         let url = format!("/phone/users?{}", query);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ListPhoneUsersResponseData =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut users = resp.users;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            users.append(&mut resp.users);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

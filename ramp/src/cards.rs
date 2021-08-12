@@ -57,7 +57,7 @@ impl Cards {
         let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.cards)
     }
 
     /**

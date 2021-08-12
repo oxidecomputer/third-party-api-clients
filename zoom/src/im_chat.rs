@@ -182,7 +182,7 @@ impl ImChat {
         let resp: crate::types::ListimmessagesResponse = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.messages)
     }
 
     /**
@@ -205,7 +205,6 @@ impl ImChat {
         chat_user: &str,
         channel: &str,
         date: &str,
-        next_page_token: &str,
     ) -> Result<Vec<crate::types::ListimmessagesResponseMessages>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -217,9 +216,6 @@ impl ImChat {
         }
         if !date.is_empty() {
             query_args.push(format!("date={}", date));
-        }
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -233,7 +229,40 @@ impl ImChat {
             query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::ListimmessagesResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut messages = resp.messages;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            messages.append(&mut resp.messages);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

@@ -48,7 +48,7 @@ impl CardPrograms {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.card_programs)
     }
 
     /**

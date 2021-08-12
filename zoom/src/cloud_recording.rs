@@ -635,7 +635,7 @@ impl CloudRecording {
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.meetings)
     }
 
     /**
@@ -661,7 +661,6 @@ impl CloudRecording {
     pub async fn get_all_account(
         &self,
         account_id: &str,
-        next_page_token: &str,
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Meetings>> {
@@ -669,9 +668,6 @@ impl CloudRecording {
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = from {
             query_args.push(format!("from={}", &date.to_rfc3339()));
-        }
-        if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
         }
         if let Some(date) = to {
             query_args.push(format!("to={}", &date.to_rfc3339()));
@@ -688,6 +684,39 @@ impl CloudRecording {
             query
         );
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::GetAccountCloudRecordingResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut meetings = resp.meetings;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            // Check if we already have URL params and need to concat the token.
+            if !url.contains("?") {
+                resp = self
+                    .client
+                    .get(&format!("{}?next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&next_page_token={}", page), None)
+                    .await
+                    .unwrap();
+            }
+
+            meetings.append(&mut resp.meetings);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 }
