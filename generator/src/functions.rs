@@ -19,6 +19,7 @@ pub fn generate_files(
 ) -> Result<BTreeMap<String, String>> {
     let mut tag_files: BTreeMap<String, String> = Default::default();
 
+    let mut fn_names: Vec<String> = Default::default();
     for (pn, p) in api.paths.iter() {
         let op = p.item()?;
 
@@ -255,6 +256,13 @@ pub fn generate_files(
                 fn_name = "get_page".to_string()
             }
 
+            // Do this right before printing. Check if we already have this function name.
+            // This will ensure we don't have any duplicates.
+            if fn_names.contains(&(fn_name.clone() + &tag)) {
+                fn_name = format!("{}_{}", fn_name, tag);
+            }
+            fn_names.push(fn_name.clone() + &tag);
+
             // Print our standard function.
             print_fn(
                 &docs,
@@ -309,6 +317,12 @@ pub fn generate_files(
                     fn_name = fn_name.replace("get_", "get_all_");
                 } else if fn_name.starts_with("list_") && !fn_name.starts_with("list_all") {
                     fn_name = fn_name.replace("list_", "list_all_");
+                } else if !fn_name.contains("get")
+                    && !fn_name.contains("get_all")
+                    && !fn_name.contains("list")
+                    && !fn_name.contains("list_all")
+                {
+                    fn_name = format!("get_all_{}", fn_name);
                 }
 
                 if fn_name != "get_all"
@@ -318,6 +332,13 @@ pub fn generate_files(
                 {
                     fn_name = make_plural(proper_name, &fn_name);
                 }
+
+                // Do this right before printing. Check if we already have this function name.
+                // This will ensure we don't have any duplicates.
+                if fn_names.contains(&(fn_name.clone() + &tag)) {
+                    fn_name = format!("{}_{}", fn_name, tag);
+                }
+                fn_names.push(fn_name.clone() + &tag);
 
                 // Now let's print the new function.
                 print_fn(

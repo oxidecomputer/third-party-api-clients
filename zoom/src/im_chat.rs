@@ -199,7 +199,7 @@ impl ImChat {
      *   <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
      *
      */
-    pub async fn listimmessages(
+    pub async fn listimmessages_im_chat(
         &self,
         user_id: &str,
         chat_user: &str,

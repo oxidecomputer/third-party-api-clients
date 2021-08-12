@@ -684,7 +684,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_zoom_room(
+    pub async fn dashboard_zoom_room_dashboards(
         &self,
         zoomroom_id: &str,
         from: chrono::NaiveDate,
@@ -1417,7 +1417,7 @@ impl Dashboards {
      *
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      */
-    pub async fn participant_feedback(
+    pub async fn get_all_participant_feedback(
         &self,
         meeting_id: &str,
         type_: crate::types::DashboardMeetingsType,
@@ -1553,7 +1553,7 @@ impl Dashboards {
      *
      * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`<br>
      */
-    pub async fn participant_webinar_feedback(
+    pub async fn get_all_participant_webinar_feedback(
         &self,
         type_: crate::types::DashboardMeetingsType,
         webinar_id: &str,

@@ -133,7 +133,7 @@ impl Roles {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>**Prerequisites:**<br>
      * * A Pro or a higher plan.
      */
-    pub async fn role_members(
+    pub async fn get_all_role_members(
         &self,
         role_id: &str,
         page_count: &str,

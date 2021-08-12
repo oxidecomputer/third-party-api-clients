@@ -252,7 +252,7 @@ impl CalendarList {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn get(
+    pub async fn get_calendar_list(
         &self,
         alt: crate::types::Alt,
         fields: &str,

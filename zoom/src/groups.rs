@@ -213,7 +213,7 @@ impl Groups {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn group_members(
+    pub async fn get_all_group_members(
         &self,
         group_id: &str,
         page_number: i64,

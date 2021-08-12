@@ -967,7 +967,7 @@ impl Phone {
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
-    pub async fn user_call_logs(
+    pub async fn get_all_user_call_logs(
         &self,
         user_id: &str,
         from: chrono::NaiveDate,
@@ -1106,7 +1106,7 @@ impl Phone {
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
-    pub async fn user_recordings(
+    pub async fn get_all_user_recordings(
         &self,
         user_id: &str,
         from: chrono::NaiveDate,
@@ -1240,7 +1240,7 @@ impl Phone {
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
-    pub async fn user_voice_mails(
+    pub async fn get_all_user_voice_mails(
         &self,
         user_id: &str,
         status: crate::types::PhoneUserVoiceMailsStatus,
@@ -1524,7 +1524,7 @@ impl Phone {
      * * A Zoom Phone license
      * * Account owner and a [role](https://support.zoom.us/hc/en-us/articles/115001078646-Role-Based-Access-Control) with Zoom Phone management
      */
-    pub async fn account_call_logs(
+    pub async fn get_all_account_call_logs(
         &self,
         from: &str,
         to: &str,

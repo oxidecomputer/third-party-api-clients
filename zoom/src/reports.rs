@@ -649,7 +649,7 @@ impl Reports {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      */
-    pub async fn report_sign_in_out_activities(
+    pub async fn get_all_report_sign_in_out_activities(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,

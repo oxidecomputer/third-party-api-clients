@@ -79,7 +79,7 @@ impl Contacts {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn search_company(
+    pub async fn get_all_search_company(
         &self,
         search_key: &str,
         query_presence_status: &str,
