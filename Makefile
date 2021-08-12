@@ -44,7 +44,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.20 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.21 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \
@@ -60,7 +60,7 @@ $(GUSTO_SPEC): $(GUSTO_SPEC_DIR)
 	curl -sSL $(GUSTO_SPEC_REMOTE) -o $@
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.9 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.10 \
 		-o gusto \
 		-n gusto-api \
 		--proper-name Gusto \

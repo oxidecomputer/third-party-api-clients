@@ -33,7 +33,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-octorust = "0.1.20"
+octorust = "0.1.21"
 ```
 
 ## Basic example
@@ -53,7 +53,7 @@ let github = Client::new(
 ```
 
 If you are a GitHub enterprise customer, you will want to create a client with the
-[Client#host](https://docs.rs/octorust/0.1.20/octorust/struct.Client.html#method.host) method.
+[Client#host](https://docs.rs/octorust/0.1.21/octorust/struct.Client.html#method.host) method.
 
 ## Feature flags
 
@@ -67,7 +67,7 @@ To enable this, add the following to your `Cargo.toml` file:
 
 ```toml
 [dependencies]
-octorust = { version = "0.1.20", features = ["httpcache"] }
+octorust = { version = "0.1.21", features = ["httpcache"] }
 ```
 
 Then use the `Client::custom` constructor to provide a cache implementation.

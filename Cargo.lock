@@ -304,7 +304,7 @@ checksum = "0e4075386626662786ddb0ec9081e7c7eeb1ba31951f447ca780ef9f5d568189"
 
 [[package]]
 name = "gusto-api"
-version = "0.2.9"
+version = "0.2.10"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -702,7 +702,7 @@ dependencies = [
 
 [[package]]
 name = "octorust"
-version = "0.1.20"
+version = "0.1.21"
 dependencies = [
  "anyhow",
  "async-recursion",
