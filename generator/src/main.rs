@@ -1984,7 +1984,7 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&tag.name) {
+        if !tags.contains(&tag.name) && proper_name == "Zoom" {
             // Return early do nothing!
             // This fixes Zoom where they list tags that have no associated functions.
             continue;
@@ -2081,7 +2081,7 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&tag.name) {
+        if !tags.contains(&tag.name) && proper_name == "Zoom" {
             // Return early do nothing!
             // This fixes Zoom where they list tags that have no associated functions.
             continue;
@@ -2199,6 +2199,24 @@ fn clean_name(t: &str) -> String {
             .replace("/", " ")
             .replace("-", " "),
     )
+    .replace("v_1_", "")
+    .replace("s_uuid", "")
+    .replace("_id_or_uuid", "")
+    .replace("_uuid", "")
+    .replace("_id_", "_")
+    .replace("companies_company_", "company_")
+    .replace("employees_employee_", "employee_")
+    .replace("benefits_benefit_", "benefit_")
+    .replace("compensations_compensation_", "compensation_")
+    .replace("garnishments_garnishment_", "garnishment_")
+    .replace("types_type_", "type_")
+    .replace("contractors_contractor_", "comntractor_")
+    .replace("jobs_job_", "job_")
+    .replace("payrolls_payroll_", "payroll_")
+    .replace("locations_location_", "location_")
+    .replace("applicants_applicant_", "applicant_")
+    .trim_start_matches('_')
+    .trim_end_matches('_')
     .replace("_", " ")
     .trim()
     .to_string();
@@ -2260,6 +2278,8 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
     f.replace(&tag, "")
         .replace("__", "_")
         .trim_end_matches('_')
+        .trim_end_matches("_s")
+        .replace("_s_", "_")
         .to_string()
 }
 

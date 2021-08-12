@@ -30,7 +30,7 @@ impl PhoneSite {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn list_s(
+    pub async fn list(
         &self,
         page_size: i64,
         next_page_token: &str,

@@ -55,7 +55,7 @@ impl Users {
      *
      * Modify information about a user.
      */
-    pub async fn patch(&self, id: &str, body: &crate::types::PatchUsersIdRequest) -> Result<()> {
+    pub async fn patch(&self, id: &str, body: &crate::types::PatchUsersRequest) -> Result<()> {
         let url = format!(
             "/users/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -84,7 +84,7 @@ impl Users {
      * * `department_id: &str`
      * * `location_id: &str`
      */
-    pub async fn gets(
+    pub async fn get(
         &self,
         start: &str,
         page_size: f64,
@@ -203,7 +203,7 @@ impl Users {
     pub async fn get_deferred_status(
         &self,
         id: &str,
-    ) -> Result<crate::types::GetUsersDeferredStatusIdResponse> {
+    ) -> Result<crate::types::GetUsersDeferredStatusResponse> {
         let url = format!(
             "/users/deferred/status/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

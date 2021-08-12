@@ -161,7 +161,7 @@ pub struct User {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PatchUsersIdRequest {
+pub struct PatchUsersRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -530,7 +530,7 @@ pub struct GetUsersResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PatchLocationsLocationIdRequest {
+pub struct PatchLocationRequest {
     /**
      * New name of location
      */
@@ -574,7 +574,7 @@ pub struct GetDepartmentsResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PatchDepartmentIdRequest {
+pub struct PatchDepartmentRequest {
     /**
      * New department name
      */
@@ -833,7 +833,7 @@ pub struct GetCardsResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PatchResourcesCardsCardIdRequest {
+pub struct PatchResourcesCardsCardRequest {
     /**
      * Set to link card with a card program, or set to null to detach a card from a card program. If the card is already linked with a card program, it will detach from original card program before linking with the new one.
      */
@@ -865,7 +865,7 @@ pub struct PatchResourcesCardsCardIdRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetCustomIdProviderResponse {
+pub struct GetCustomProviderResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -875,7 +875,7 @@ pub struct GetCustomIdProviderResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostcustomIdProviderResponse {
+pub struct PostcustomProviderResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1214,7 +1214,7 @@ pub struct BusinessCurrentStatus {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostResourcesCardsCardIdSuspensionRequest {
+pub struct PostResourcesCardsCardSuspensionRequest {
     /**
      * Idempotency key
      */
@@ -1227,7 +1227,7 @@ pub struct PostResourcesCardsCardIdSuspensionRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetEntityTypeCustomIdRampResponse {
+pub struct GetEntityTypeCustomRampResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1237,7 +1237,7 @@ pub struct GetEntityTypeCustomIdRampResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetEntityTypeRampIdCustomResponse {
+pub struct GetEntityTypeRampCustomResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1247,7 +1247,7 @@ pub struct GetEntityTypeRampIdCustomResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetResourcesCardsDeferredIdResponseData {
+pub struct GetResourcesCardsDeferredResponseData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1276,7 +1276,7 @@ pub struct GetResourcesCardsDeferredIdResponseData {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetResourcesCardsDeferredIdResponseStatus {
+pub enum GetResourcesCardsDeferredResponseStatus {
     #[serde(rename = "ERROR")]
     Error,
     #[serde(rename = "IN_PROGRESS")]
@@ -1290,35 +1290,35 @@ pub enum GetResourcesCardsDeferredIdResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetResourcesCardsDeferredIdResponseStatus {
+impl std::fmt::Display for GetResourcesCardsDeferredResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetResourcesCardsDeferredIdResponseStatus::Error => "ERROR",
-            GetResourcesCardsDeferredIdResponseStatus::InProgress => "IN_PROGRESS",
-            GetResourcesCardsDeferredIdResponseStatus::Started => "STARTED",
-            GetResourcesCardsDeferredIdResponseStatus::Success => "SUCCESS",
-            GetResourcesCardsDeferredIdResponseStatus::Noop => "",
-            GetResourcesCardsDeferredIdResponseStatus::FallthroughString(s) => s,
+            GetResourcesCardsDeferredResponseStatus::Error => "ERROR",
+            GetResourcesCardsDeferredResponseStatus::InProgress => "IN_PROGRESS",
+            GetResourcesCardsDeferredResponseStatus::Started => "STARTED",
+            GetResourcesCardsDeferredResponseStatus::Success => "SUCCESS",
+            GetResourcesCardsDeferredResponseStatus::Noop => "",
+            GetResourcesCardsDeferredResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetResourcesCardsDeferredIdResponseStatus {
-    fn default() -> GetResourcesCardsDeferredIdResponseStatus {
-        GetResourcesCardsDeferredIdResponseStatus::Noop
+impl Default for GetResourcesCardsDeferredResponseStatus {
+    fn default() -> GetResourcesCardsDeferredResponseStatus {
+        GetResourcesCardsDeferredResponseStatus::Noop
     }
 }
-impl GetResourcesCardsDeferredIdResponseStatus {
+impl GetResourcesCardsDeferredResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetResourcesCardsDeferredIdResponseStatus::Noop)
+        matches!(self, GetResourcesCardsDeferredResponseStatus::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetResourcesCardsDeferredIdResponse {
+pub struct GetResourcesCardsDeferredResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub data: Option<GetResourcesCardsDeferredIdResponseData>,
+    pub data: Option<GetResourcesCardsDeferredResponseData>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1326,7 +1326,7 @@ pub struct GetResourcesCardsDeferredIdResponse {
     )]
     pub id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetResourcesCardsDeferredIdResponseStatus>,
+    pub status: Option<GetResourcesCardsDeferredResponseStatus>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -1530,7 +1530,7 @@ pub struct PostUsersDeferredRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetUsersDeferredStatusIdResponseData {
+pub struct GetUsersDeferredStatusResponseData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1559,12 +1559,12 @@ pub struct GetUsersDeferredStatusIdResponseData {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetUsersDeferredStatusIdResponse {
+pub struct GetUsersDeferredStatusResponse {
     /**
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub data: Option<GetUsersDeferredStatusIdResponseData>,
+    pub data: Option<GetUsersDeferredStatusResponseData>,
     /**
      *
      */
@@ -1587,7 +1587,7 @@ pub struct GetUsersDeferredStatusIdResponse {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetUsersDeferredStatusIdResponseDataType {
+pub struct GetUsersDeferredStatusResponseDataType {
     /**
      *
      */
@@ -1690,7 +1690,7 @@ pub struct GetReimbursementsResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostCustomIdProviderEntityTypeLinkRequest {
+pub struct PostCustomProviderEntityTypeLinkRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",

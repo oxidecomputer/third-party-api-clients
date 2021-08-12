@@ -26824,7 +26824,7 @@ impl WorkflowRunStatus {
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum WorkflowIdOneOf {
+pub enum WorkflowOneOf {
     /**
      * The ID of the workflow. You can also pass the workflow file name as a string.
      */
@@ -26835,42 +26835,42 @@ pub enum WorkflowIdOneOf {
     I64(i64),
 }
 
-impl WorkflowIdOneOf {
+impl WorkflowOneOf {
     pub fn i64(&self) -> Option<&i64> {
-        if let WorkflowIdOneOf::I64(ref_) = self {
+        if let WorkflowOneOf::I64(ref_) = self {
             return Some(ref_);
         }
         None
     }
 
     pub fn string(&self) -> Option<&String> {
-        if let WorkflowIdOneOf::String(ref_) = self {
+        if let WorkflowOneOf::String(ref_) = self {
             return Some(ref_);
         }
         None
     }
 }
 
-impl From<i64> for WorkflowIdOneOf {
+impl From<i64> for WorkflowOneOf {
     fn from(f: i64) -> Self {
-        WorkflowIdOneOf::I64(f)
+        WorkflowOneOf::I64(f)
     }
 }
 
-impl From<String> for WorkflowIdOneOf {
+impl From<String> for WorkflowOneOf {
     fn from(f: String) -> Self {
-        WorkflowIdOneOf::String(f)
+        WorkflowOneOf::String(f)
     }
 }
 
-impl From<WorkflowIdOneOf> for i64 {
-    fn from(f: WorkflowIdOneOf) -> Self {
+impl From<WorkflowOneOf> for i64 {
+    fn from(f: WorkflowOneOf) -> Self {
         *f.i64().unwrap()
     }
 }
 
-impl From<WorkflowIdOneOf> for String {
-    fn from(f: WorkflowIdOneOf) -> Self {
+impl From<WorkflowOneOf> for String {
+    fn from(f: WorkflowOneOf) -> Self {
         f.string().unwrap().clone()
     }
 }

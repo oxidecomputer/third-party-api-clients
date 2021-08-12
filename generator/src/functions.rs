@@ -247,7 +247,7 @@ pub fn generate_files(
                 // Make sure we don't add an s where we don't need one.
                 // Don't make a function plural where it is not needed.
                 fn_name = fn_name.trim_end_matches('s').to_string();
-            } else if frt.starts_with("Vec<") {
+            } else if frt.starts_with("Vec<") && fn_name != "get" && fn_name != "list" {
                 fn_name = make_plural(proper_name, &fn_name);
             }
 
@@ -306,7 +306,11 @@ pub fn generate_files(
                     fn_name = fn_name.replace("list_", "list_all_");
                 }
 
-                if fn_name != "get_all" && fn_name != "list_all" {
+                if fn_name != "get_all"
+                    && fn_name != "list_all"
+                    && fn_name != "get"
+                    && fn_name != "list"
+                {
                     fn_name = make_plural(proper_name, &fn_name);
                 }
 

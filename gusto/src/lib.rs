@@ -93,8 +93,27 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+pub mod admins_beta;
+pub mod benefits;
+pub mod companies;
+pub mod company_bank_accounts_beta;
+pub mod compensations;
+pub mod contractor_payments;
+pub mod contractors;
+pub mod current_user;
+pub mod custom_fields;
+pub mod earning_type;
+pub mod employees;
+pub mod garnishments;
+pub mod job_applicants_beta;
+pub mod jobs;
+pub mod locations;
+pub mod pay_schedules;
+pub mod payroll;
+pub mod terminations;
 #[cfg(test)]
 mod tests;
+pub mod time_off_requests;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;
@@ -496,5 +515,102 @@ impl Client {
             message,
         )
         .await
+    }
+
+    /// Return a reference to an interface that provides access to Current User operations.
+    pub fn current_user(&self) -> current_user::CurrentUser {
+        current_user::CurrentUser::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Companies operations.
+    pub fn companies(&self) -> companies::Companies {
+        companies::Companies::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Employees operations.
+    pub fn employees(&self) -> employees::Employees {
+        employees::Employees::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Contractors operations.
+    pub fn contractors(&self) -> contractors::Contractors {
+        contractors::Contractors::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Payroll operations.
+    pub fn payroll(&self) -> payroll::Payroll {
+        payroll::Payroll::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Contractor Payments operations.
+    pub fn contractor_payments(&self) -> contractor_payments::ContractorPayments {
+        contractor_payments::ContractorPayments::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Company Bank Accounts (Beta) operations.
+    pub fn company_bank_accounts_beta(
+        &self,
+    ) -> company_bank_accounts_beta::CompanyBankAccountsBeta {
+        company_bank_accounts_beta::CompanyBankAccountsBeta::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Benefits operations.
+    pub fn benefits(&self) -> benefits::Benefits {
+        benefits::Benefits::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Locations operations.
+    pub fn locations(&self) -> locations::Locations {
+        locations::Locations::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Jobs operations.
+    pub fn jobs(&self) -> jobs::Jobs {
+        jobs::Jobs::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Job Applicants (Beta) operations.
+    pub fn job_applicants_beta(&self) -> job_applicants_beta::JobApplicantsBeta {
+        job_applicants_beta::JobApplicantsBeta::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Compensations operations.
+    pub fn compensations(&self) -> compensations::Compensations {
+        compensations::Compensations::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Pay Schedules operations.
+    pub fn pay_schedules(&self) -> pay_schedules::PaySchedules {
+        pay_schedules::PaySchedules::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Garnishments operations.
+    pub fn garnishments(&self) -> garnishments::Garnishments {
+        garnishments::Garnishments::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Time Off Requests operations.
+    pub fn time_off_requests(&self) -> time_off_requests::TimeOffRequests {
+        time_off_requests::TimeOffRequests::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Earning Type operations.
+    pub fn earning_type(&self) -> earning_type::EarningType {
+        earning_type::EarningType::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Terminations operations.
+    pub fn terminations(&self) -> terminations::Terminations {
+        terminations::Terminations::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Custom Fields operations.
+    pub fn custom_fields(&self) -> custom_fields::CustomFields {
+        custom_fields::CustomFields::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Admins (Beta) operations.
+    pub fn admins_beta(&self) -> admins_beta::AdminsBeta {
+        admins_beta::AdminsBeta::new(self.clone())
     }
 }

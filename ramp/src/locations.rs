@@ -142,7 +142,7 @@ impl Locations {
     pub async fn patch_location(
         &self,
         id: &str,
-        body: &crate::types::PatchLocationsLocationIdRequest,
+        body: &crate::types::PatchLocationRequest,
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/locations/{}",

@@ -1243,7 +1243,7 @@ impl Dashboards {
      *
      * * `call_id: &str` -- Unique identifier of the call.
      */
-    pub async fn get_call_qo_s(&self, call_id: &str) -> Result<crate::types::GetCallQoSResponse> {
+    pub async fn get_call_qo(&self, call_id: &str) -> Result<crate::types::GetCallQoSResponse> {
         let url = format!(
             "/phone/metrics/call_logs/{}/qos",
             crate::progenitor_support::encode_path(&call_id.to_string()),

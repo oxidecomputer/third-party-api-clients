@@ -510,7 +510,7 @@ impl Meetings {
      *
      * **Parameters:**
      *
-     * * `meeting_uuid: &str` -- The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
+     * * `meeting: &str` -- The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
      *  
      *  If the meeting UUID begins with a `/` character or contains a `//` character, you \*\*must\*\* double-encode the meeting UUID when using the meeting UUID for other API calls.
      */
@@ -543,7 +543,7 @@ impl Meetings {
      *
      * **Parameters:**
      *
-     * * `meeting_uuid: &str` -- The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
+     * * `meeting: &str` -- The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
      *  
      *  If the meeting UUID begins with a `/` character or contains a `//` character, you \*\*must\*\* double-encode the meeting UUID when using the meeting UUID for other API calls.
      * * `page_size: i64` -- The number of records returned within a single API call.
