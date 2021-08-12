@@ -1,40 +1,31 @@
-//! A fully generated, opinionated API client library for Zoom.
+//! A fully generated, opinionated API client library for DocuSign.
 //!
 //! ## API Details
 //!
-//! The Zoom API allows developers to access information from Zoom. You can use this API to build private services or public applications on the [Zoom App Marketplace](http://marketplace.zoom.us). To learn how to get your credentials and create private/public applications, read our [Authorization Guide](https://marketplace.zoom.us/docs/guides/authorization/credentials).
-//! All endpoints are available via `https` and are located at `api.zoom.us/v2/`.
+//! The DocuSign REST API provides you with a powerful, convenient, and simple Web services API for interacting with DocuSign.
 //!
-//! For instance you can list all users on an account via `https://api.zoom.us/v2/users/`.
-//!
-//! [API Terms of Service](https://zoom.us/docs/en-us/zoom_api_license_and_tou.html)
+//! [API Terms of Service](https://www.docusign.com/company/terms-and-conditions/web)
 //!
 //! ### Contact
 //!
 //!
 //! | name | url | email |
 //! |----|----|----|
-//! | Zoom Developers | <https://developer.zoom.us/> | developersupport@zoom.us |
+//! | DocuSign Developer Center | <https://developers.docusign.com/> | devcenter@docusign.com |
 //!
-//! ### License
-//!
-//!
-//! | name | url |
-//! |----|----|
-//! | MIT for OAS 2.0 | <https://opensource.org/licenses/MIT> |
 //!
 //!
 //! ## Client Details
 //!
-//! This client is generated from the [Zoom OpenAPI
-//! specs](https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json) based on API spec version `2.0.0`. This way it will remain
+//! This client is generated from the [DocuSign OpenAPI
+//! specs](https://github.com/docusign/OpenAPI-Specifications) based on API spec version `v2.1`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //! //! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]
-//! zoom_api = "0.2.2"
+//! docusign = "0.2.0"
 //! ```
 //!
 //! ## Basic example
@@ -43,9 +34,9 @@
 //! a user agent string and set of credentials.
 //!
 //! ```
-//! use zoom_api::Client;
+//! use docusign::Client;
 //!
-//! let zoom = Client::new(
+//! let docusign = Client::new(
 //!     String::from("client-id"),
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
@@ -57,16 +48,16 @@
 //! Alternatively, the library can search for most of the variables required for
 //! the client in the environment:
 //!
-//! - `ZOOM_CLIENT_ID`
-//! - `ZOOM_CLIENT_SECRET`
-//! - `ZOOM_REDIRECT_URI`
+//! - `DOCUSIGN_CLIENT_ID`
+//! - `DOCUSIGN_CLIENT_SECRET`
+//! - `DOCUSIGN_REDIRECT_URI`
 //!
 //! And then you can create a client from the environment.
 //!
 //! ```
-//! use zoom_api::Client;
+//! use docusign::Client;
 //!
-//! let zoom = Client::new_from_env(String::from("token"), String::from("refresh-token"));
+//! let docusign = Client::new_from_env(String::from("token"), String::from("refresh-token"));
 //! ```
 //!
 //! It is okay to pass empty values for `token` and `refresh_token`. In
@@ -75,25 +66,25 @@
 //! To start off a fresh client and get a `token` and `refresh_token`, use the following.
 //!
 //! ```
-//! use zoom_api::Client;
+//! use docusign::Client;
 //!
 //! async fn do_call() {
-//!     let mut zoom = Client::new_from_env("", "");
+//!     let mut docusign = Client::new_from_env("", "");
 //!
 //!     // Get the URL to request consent from the user.
 //!     // You can optionally pass in scopes. If none are provided, then the
 //!     // resulting URL will not have any scopes.
-//!     let user_consent_url = zoom.user_consent_url(&["some-scope".to_string()]);
+//!     let user_consent_url = docusign.user_consent_url(&["some-scope".to_string()]);
 //!
 //!     // In your redirect URL capture the code sent and our state.
 //!     // Send it along to the request for the token.
 //!     let code = "thing-from-redirect-url";
 //!     let state = "state-from-redirect-url";
-//!     let mut access_token = zoom.get_access_token(code, state).await.unwrap();
+//!     let mut access_token = docusign.get_access_token(code, state).await.unwrap();
 //!
 //!     // You can additionally refresh the access token with the following.
 //!     // You must have a refresh token to be able to call this function.
-//!     access_token = zoom.refresh_access_token().await.unwrap();
+//!     access_token = docusign.refresh_access_token().await.unwrap();
 //! }
 //! ```
 #![feature(async_stream)]
@@ -103,53 +94,15 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-pub mod accounts;
-pub mod archiving;
-pub mod billing;
-pub mod chat_channels;
-pub mod chat_channels_account_level;
-pub mod chat_messages;
-pub mod chatbot_messages;
-pub mod cloud_recording;
-pub mod common_area_phones;
-pub mod contacts;
-pub mod dashboards;
-pub mod deprecated_api_endpoints;
-pub mod devices;
-pub mod groups;
-pub mod im_chat;
-pub mod im_groups;
-pub mod meetings;
-pub mod pac;
-pub mod phone;
-pub mod phone_auto_receptionists;
-pub mod phone_blocked_list;
-pub mod phone_call_queues;
-pub mod phone_devices;
-pub mod phone_reports;
-pub mod phone_shared_line_groups;
-pub mod phone_site;
-pub mod reports;
-pub mod roles;
-pub mod rooms;
-pub mod rooms_account;
-pub mod rooms_devices;
-pub mod rooms_location;
-pub mod sip_connected_audio;
-pub mod sip_phone;
 #[cfg(test)]
 mod tests;
-pub mod tracking_field;
-pub mod tsp;
 pub mod types;
-pub mod users;
 #[doc(hidden)]
 pub mod utils;
-pub mod webinars;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://api.zoom.us/v2";
+pub const DEFAULT_HOST: &str = "https://na4.docusign.net";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
@@ -176,8 +129,8 @@ use std::env;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-const TOKEN_ENDPOINT: &str = "https://zoom.us/oauth/token";
-const USER_CONSENT_ENDPOINT: &str = "https://zoom.us/oauth/authorize";
+const TOKEN_ENDPOINT: &str = "https://account.docusign.com/oauth/token";
+const USER_CONSENT_ENDPOINT: &str = "https://account.docusign.com/oauth/auth";
 
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
@@ -279,9 +232,9 @@ impl Client {
         T: ToString,
         R: ToString,
     {
-        let client_id = env::var("ZOOM_CLIENT_ID").unwrap();
-        let client_secret = env::var("ZOOM_CLIENT_SECRET").unwrap();
-        let redirect_uri = env::var("ZOOM_REDIRECT_URI").unwrap();
+        let client_id = env::var("DOCUSIGN_CLIENT_ID").unwrap();
+        let client_secret = env::var("DOCUSIGN_CLIENT_SECRET").unwrap();
+        let redirect_uri = env::var("DOCUSIGN_REDIRECT_URI").unwrap();
 
         Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
     }
@@ -544,159 +497,5 @@ impl Client {
             message,
         )
         .await
-    }
-
-    pub fn accounts(&self) -> accounts::Accounts {
-        accounts::Accounts::new(self.clone())
-    }
-
-    pub fn archiving(&self) -> archiving::Archiving {
-        archiving::Archiving::new(self.clone())
-    }
-
-    pub fn billing(&self) -> billing::Billing {
-        billing::Billing::new(self.clone())
-    }
-
-    pub fn chat_channels(&self) -> chat_channels::ChatChannels {
-        chat_channels::ChatChannels::new(self.clone())
-    }
-
-    pub fn chat_channels_account_level(
-        &self,
-    ) -> chat_channels_account_level::ChatChannelsAccountLevel {
-        chat_channels_account_level::ChatChannelsAccountLevel::new(self.clone())
-    }
-
-    pub fn chat_messages(&self) -> chat_messages::ChatMessages {
-        chat_messages::ChatMessages::new(self.clone())
-    }
-
-    pub fn chatbot_messages(&self) -> chatbot_messages::ChatbotMessages {
-        chatbot_messages::ChatbotMessages::new(self.clone())
-    }
-
-    pub fn cloud_recording(&self) -> cloud_recording::CloudRecording {
-        cloud_recording::CloudRecording::new(self.clone())
-    }
-
-    pub fn common_area_phones(&self) -> common_area_phones::CommonAreaPhones {
-        common_area_phones::CommonAreaPhones::new(self.clone())
-    }
-
-    pub fn contacts(&self) -> contacts::Contacts {
-        contacts::Contacts::new(self.clone())
-    }
-
-    pub fn dashboards(&self) -> dashboards::Dashboards {
-        dashboards::Dashboards::new(self.clone())
-    }
-
-    pub fn deprecated_api_endpoints(&self) -> deprecated_api_endpoints::DeprecatedApiEndpoints {
-        deprecated_api_endpoints::DeprecatedApiEndpoints::new(self.clone())
-    }
-
-    pub fn devices(&self) -> devices::Devices {
-        devices::Devices::new(self.clone())
-    }
-
-    pub fn groups(&self) -> groups::Groups {
-        groups::Groups::new(self.clone())
-    }
-
-    pub fn im_chat(&self) -> im_chat::ImChat {
-        im_chat::ImChat::new(self.clone())
-    }
-
-    pub fn im_groups(&self) -> im_groups::ImGroups {
-        im_groups::ImGroups::new(self.clone())
-    }
-
-    pub fn meetings(&self) -> meetings::Meetings {
-        meetings::Meetings::new(self.clone())
-    }
-
-    pub fn pac(&self) -> pac::Pac {
-        pac::Pac::new(self.clone())
-    }
-
-    pub fn phone(&self) -> phone::Phone {
-        phone::Phone::new(self.clone())
-    }
-
-    pub fn phone_auto_receptionists(&self) -> phone_auto_receptionists::PhoneAutoReceptionists {
-        phone_auto_receptionists::PhoneAutoReceptionists::new(self.clone())
-    }
-
-    pub fn phone_blocked_list(&self) -> phone_blocked_list::PhoneBlockedList {
-        phone_blocked_list::PhoneBlockedList::new(self.clone())
-    }
-
-    pub fn phone_call_queues(&self) -> phone_call_queues::PhoneCallQueues {
-        phone_call_queues::PhoneCallQueues::new(self.clone())
-    }
-
-    pub fn phone_devices(&self) -> phone_devices::PhoneDevices {
-        phone_devices::PhoneDevices::new(self.clone())
-    }
-
-    pub fn phone_reports(&self) -> phone_reports::PhoneReports {
-        phone_reports::PhoneReports::new(self.clone())
-    }
-
-    pub fn phone_shared_line_groups(&self) -> phone_shared_line_groups::PhoneSharedLineGroups {
-        phone_shared_line_groups::PhoneSharedLineGroups::new(self.clone())
-    }
-
-    pub fn phone_site(&self) -> phone_site::PhoneSite {
-        phone_site::PhoneSite::new(self.clone())
-    }
-
-    pub fn reports(&self) -> reports::Reports {
-        reports::Reports::new(self.clone())
-    }
-
-    pub fn roles(&self) -> roles::Roles {
-        roles::Roles::new(self.clone())
-    }
-
-    pub fn rooms(&self) -> rooms::Rooms {
-        rooms::Rooms::new(self.clone())
-    }
-
-    pub fn rooms_account(&self) -> rooms_account::RoomsAccount {
-        rooms_account::RoomsAccount::new(self.clone())
-    }
-
-    pub fn rooms_devices(&self) -> rooms_devices::RoomsDevices {
-        rooms_devices::RoomsDevices::new(self.clone())
-    }
-
-    pub fn rooms_location(&self) -> rooms_location::RoomsLocation {
-        rooms_location::RoomsLocation::new(self.clone())
-    }
-
-    pub fn sip_connected_audio(&self) -> sip_connected_audio::SipConnectedAudio {
-        sip_connected_audio::SipConnectedAudio::new(self.clone())
-    }
-
-    pub fn sip_phone(&self) -> sip_phone::SipPhone {
-        sip_phone::SipPhone::new(self.clone())
-    }
-
-    pub fn tracking_field(&self) -> tracking_field::TrackingField {
-        tracking_field::TrackingField::new(self.clone())
-    }
-
-    pub fn tsp(&self) -> tsp::Tsp {
-        tsp::Tsp::new(self.clone())
-    }
-
-    pub fn users(&self) -> users::Users {
-        users::Users::new(self.clone())
-    }
-
-    pub fn webinars(&self) -> webinars::Webinars {
-        webinars::Webinars::new(self.clone())
     }
 }

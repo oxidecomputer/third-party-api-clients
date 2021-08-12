@@ -202,7 +202,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                             SchemaKind::Type(Type::Array(_at)) => "&[String]".to_string(), /* TODO: make this smarter */
                             SchemaKind::Type(Type::String(st)) => {
                                 use openapiv3::{
-                                    StringFormat::{Byte, Date, DateTime, Password},
+                                    StringFormat::{Binary, Byte, Date, DateTime, Password},
                                     VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                                 };
 
@@ -260,6 +260,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     Item(Password) => "&str".to_string(),
                                     // TODO: as per the spec this is base64 encoded chars.
                                     Item(Byte) => "&str".to_string(),
+                                    Item(Binary) => "&[u8]".to_string(),
                                     Empty => "&str".to_string(),
                                     Unknown(f) => match f.as_str() {
                                         "float" => "f64".to_string(),
@@ -278,9 +279,6 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                             bail!("XXX unknown string format {}", f)
                                         }
                                     },
-                                    x => {
-                                        bail!("XXX string format {:?}", x);
-                                    }
                                 }
                             }
                             SchemaKind::Type(openapiv3::Type::Number(_)) => "f64".to_string(), /* TODO: make this more exhaustive. */
@@ -1509,7 +1507,7 @@ impl TypeSpace {
                 }
                 openapiv3::Type::String(st) => {
                     use openapiv3::{
-                        StringFormat::{Byte, Date, DateTime, Password},
+                        StringFormat::{Binary, Byte, Date, DateTime, Password},
                         VariantOrUnknownOrEmpty::{Empty, Item, Unknown},
                     };
 
@@ -1583,6 +1581,10 @@ impl TypeSpace {
                         Item(Byte) => Ok((
                             Some(uid.to_string()),
                             TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                        )),
+                        Item(Binary) => Ok((
+                            Some(uid.to_string()),
+                            TypeDetails::Basic("Vec<u8>".to_string(), s.schema_data.clone()),
                         )),
                         Empty => {
                             // Get the name, we need to find out if its secretly a date.
@@ -1660,9 +1662,6 @@ impl TypeSpace {
                             )),
                             f => bail!("XXX unknown string format {}", f),
                         },
-                        x => {
-                            bail!("XXX string format {:?}", x);
-                        }
                     }
                 }
                 openapiv3::Type::Boolean {} => Ok((
@@ -2148,9 +2147,9 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&tag.name) && proper_name == "Zoom" {
+        if !tags.contains(&tag.name) && (proper_name == "Zoom" || proper_name == "DocuSign") {
             // Return early do nothing!
-            // This fixes Zoom where they list tags that have no associated functions.
+            // This fixes Zoom and DocuSign where they list tags that have no associated functions.
             continue;
         }
 
@@ -2245,9 +2244,9 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&tag.name) && proper_name == "Zoom" {
+        if !tags.contains(&tag.name) && (proper_name == "Zoom" || proper_name == "DocuSign") {
             // Return early do nothing!
-            // This fixes Zoom where they list tags that have no associated functions.
+            // This fixes Zoom and DocuSign where they list tags that have no associated functions.
             continue;
         }
 

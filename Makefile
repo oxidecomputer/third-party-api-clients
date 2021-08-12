@@ -1,7 +1,7 @@
 DOCUSIGN_SPEC_DIR = $(CURDIR)/specs/docusign
-DOCUSIGN_SPEC = $(DOCUSIGN_SPEC_DIR)/docusign.json
+DOCUSIGN_SPEC = $(DOCUSIGN_SPEC_DIR)/docusign.yaml
 DOCUSIGN_SPEC_REPO = docusign/OpenAPI-Specifications
-DOCUSIGN_SPEC_REMOTE = https://raw.githubusercontent.com/$(DOCUSIGN_SPEC_REPO)/master/esignature.rest.swagger-v2.1.json
+DOCUSIGN_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/docusign.net/v2.1/openapi.yaml
 
 GIPHY_SPEC_DIR = $(CURDIR)/specs/giphy
 GIPHY_SPEC = $(GIPHY_SPEC_DIR)/giphy.yaml
@@ -111,10 +111,7 @@ $(DOCUSIGN_SPEC_DIR):
 	mkdir -p $@
 
 $(DOCUSIGN_SPEC): $(DOCUSIGN_SPEC_DIR)
-	npx swagger2openapi \
-		--outfile $@ \
-		--patch \
-		$(DOCUSIGN_SPEC_REMOTE)
+	curl -sSL $(DOCUSIGN_SPEC_REMOTE) -o $@
 
 docusign: target/debug/generator $(DOCUSIGN_SPEC)
 	./target/debug/generator -i $(DOCUSIGN_SPEC) -v 0.2.0 \
