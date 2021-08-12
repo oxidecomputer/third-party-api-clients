@@ -137,7 +137,7 @@ where
                             }
 
                             if o.responses.default.is_some() {
-                                bail!("op {}: has response default", oid);
+                                println!("op {}: has response default", oid);
                             }
                         } else {
                             bail!("path {} is missing operation ID", p.0);
