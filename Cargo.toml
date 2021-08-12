@@ -4,4 +4,5 @@ members = [
 	"github",
 	"gusto",
 	"ramp",
+	"zoom"
 ]

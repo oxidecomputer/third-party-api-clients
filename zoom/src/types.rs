@@ -11627,6 +11627,18 @@ skip_serializing_if = "Option::is_none",
 pub action: Option<RecordingStatusUpdateBodyRequestAction>,
 }
 
+#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+pub struct UploadVbRequest {
+/**
+* Provide the file's path here.
+*/
+#[serde(default,
+skip_serializing_if = "String::is_empty",
+                                        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+)]
+pub file: String,
+}
+
 /// Specify emergency address for the account.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct EmergencyAddress {

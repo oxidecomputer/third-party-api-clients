@@ -41,7 +41,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: github gusto ramp
+generate: github gusto ramp zoom
 
 target/debug/generator: generator/src/*.rs generator/Cargo.toml
 	cargo build --bin generator

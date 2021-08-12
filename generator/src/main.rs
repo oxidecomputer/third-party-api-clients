@@ -2387,7 +2387,8 @@ fn main() -> Result<()> {
             let content = &r.item().unwrap().content;
 
             for (ct, mt) in content {
-                if ct == "application/json" {
+                // TODO: have a better way of handling multipart/form-data
+                if ct == "application/json" || ct == "multipart/form-data" {
                     if let Some(s) = &mt.schema {
                         let object_name = format!("{} request", name);
                         let id = ts.select(Some(&clean_name(&object_name)), s, "")?;
@@ -2709,7 +2710,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                     host.trim_start_matches("https://"),
                     &spec_link,
                 );
-            } else if proper_name == "Gusto" || proper_name == "Ramp" {
+            } else {
                 docs = template::generate_docs_generic_token(
                     &api,
                     &to_snake_case(&name),
