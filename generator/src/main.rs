@@ -314,11 +314,13 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     if min == 0 {
                                         uint = true;
                                     } else {
-                                        bail!("XXX invalid minimum: {}", min);
+                                        // TODO: handle this later
+                                        println!("XXX invalid minimum: {}", min);
                                     }
                                 }
 
                                 if it.maximum.is_some() {
+                                    // TODO: handle this later
                                     println!("XXX maximum is not supported");
                                 }
                                 if !it.enumeration.is_empty() {

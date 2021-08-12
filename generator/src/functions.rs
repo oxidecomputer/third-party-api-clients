@@ -139,6 +139,11 @@ pub fn generate_files(
                             } else {
                                 (None, None)
                             }
+                        } else if ct == "multipart/form-data" {
+                            println!("got multipart/formdata for {}", oid);
+                            // Skip it for now.
+                            // TODO: fix this later.
+                            (None, None)
                         } else if let Some(s) = &mt.schema {
                             let tid = ts.select(None, s, "")?;
                             let rt = ts.render_type(&tid, false)?;

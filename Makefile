@@ -93,7 +93,7 @@ docusign: target/debug/generator $(DOCUSIGN_SPEC)
 		--spec-link "https://github.com/$(DOCUSIGN_SPEC_REPO)" \
 		--host "na4.docusign.net" \
 		--token-endpoint "account.docusign.com/oauth/token" \
-		--user-consent-endpoint "account.docusign.com/oauth/auth"
+		--user-consent-endpoint "account.docusign.com/oauth/auth" $(EXTRA_ARGS)
 	cargo fmt -p docusign
 
 $(GITHUB_SPEC_DIR):
@@ -109,7 +109,7 @@ github: target/debug/generator $(GITHUB_SPEC)
 		--proper-name GitHub \
 		-d "A fully generated & opinionated API client for the GitHub API." \
 		--spec-link "https://github.com/$(GITHUB_SPEC_REPO)" \
-		--host "api.github.com"
+		--host "api.github.com" $(EXTRA_ARGS)
 	cargo fmt -p octorust
 
 $(GUSTO_SPEC_DIR):
@@ -127,7 +127,7 @@ gusto: target/debug/generator $(GUSTO_SPEC)
 		--spec-link "https://github.com/$(GUSTO_SPEC_REPO)" \
 		--host "api.gusto.com" \
 		--token-endpoint "api.gusto.com/oauth/token" \
-		--user-consent-endpoint "api.gusto.com/oauth/authorize"
+		--user-consent-endpoint "api.gusto.com/oauth/authorize" $(EXTRA_ARGS)
 	cargo fmt -p gusto-api
 
 $(MAILCHIMP_SPEC_DIR):
@@ -148,7 +148,7 @@ mailchimp: target/debug/generator $(MAILCHIMP_SPEC)
 		--spec-link "$(MAILCHIMP_SPEC_REMOTE)" \
 		--host "us1.api.mailchimp.com" \
 		--token-endpoint "login.mailchimp.com/oauth2/token" \
-		--user-consent-endpoint "login.mailchimp.com/oauth2/authorize"
+		--user-consent-endpoint "login.mailchimp.com/oauth2/authorize" $(EXTRA_ARGS)
 	cargo fmt -p mailchimp-api
 
 $(OKTA_SPEC_DIR):
@@ -169,7 +169,7 @@ okta: target/debug/generator $(OKTA_SPEC)
 		--spec-link "https://github.com/$(OKTA_SPEC_REPO)" \
 		--host "na4.okta.net" \
 		--token-endpoint "account.okta.com/oauth/token" \
-		--user-consent-endpoint "account.okta.com/oauth/auth"
+		--user-consent-endpoint "account.okta.com/oauth/auth" $(EXTRA_ARGS)
 	cargo fmt -p okta
 
 $(RAMP_SPEC_REFERENCE):
@@ -190,7 +190,7 @@ ramp: target/debug/generator $(RAMP_SPEC)
 		--spec-link "https://github.com/$(RAMP_SPEC_REPO)" \
 		--host "api.ramp.com/developer/v1" \
 		--token-endpoint "api.ramp.com/v1/public/customer/token" \
-		--user-consent-endpoint "app.ramp.com/v1/authorize"
+		--user-consent-endpoint "app.ramp.com/v1/authorize" $(EXTRA_ARGS)
 	cargo fmt -p ramp-api
 
 $(SENDGRID_SPEC_DIR):
@@ -211,7 +211,7 @@ sendgrid: target/debug/generator $(SENDGRID_SPEC)
 		--spec-link "$(SENDGRID_SPEC_REMOTE)" \
 		--host "api.sendgrid.us/v2" \
 		--token-endpoint "sendgrid.us/oauth/token" \
-		--user-consent-endpoint "sendgrid.us/oauth/authorize"
+		--user-consent-endpoint "sendgrid.us/oauth/authorize" $(EXTRA_ARGS)
 	cargo fmt -p sendgrid-api
 
 $(SLACK_SPEC_DIR):
@@ -232,7 +232,7 @@ slack: target/debug/generator $(SLACK_SPEC)
 		--spec-link "$(SLACK_SPEC_REMOTE)" \
 		--host "slack.com/api" \
 		--token-endpoint "slack.com/api/oauth.v2.access" \
-		--user-consent-endpoint "slack.com/oauth/v2/authorize"
+		--user-consent-endpoint "slack.com/oauth/v2/authorize" $(EXTRA_ARGS)
 	cargo fmt -p slack-chat-api
 
 $(ZOOM_SPEC_DIR):
@@ -253,5 +253,5 @@ zoom: target/debug/generator $(ZOOM_SPEC)
 		--spec-link "$(ZOOM_SPEC_REMOTE)" \
 		--host "api.zoom.us/v2" \
 		--token-endpoint "zoom.us/oauth/token" \
-		--user-consent-endpoint "zoom.us/oauth/authorize"
+		--user-consent-endpoint "zoom.us/oauth/authorize" $(EXTRA_ARGS)
 	cargo fmt -p zoom-api
